@@ -1,0 +1,38 @@
+<div class="modal_open-project">
+    <ul class="open-project--tabs">
+        <li ng-class="{'modal--project--tab':true, 'selected--tab':selectedTab === 0}" ng-click="selectedTab = 0">{{"my-projects" | translate}} ({{ filteredProjects.length || 0}})</li>
+    </ul>
+    <div class="modal--projects--actions">
+        <div class="modal--projects--action">
+            <common-dropdown options="orderOptions" options-click="sortProjects" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        </div>
+        <div class="modal--projects--action">
+            <span class="form--input">
+                    <svg class="svg-icon--search">
+                        <use xlink:href="#lupa"></use>
+                    </svg>
+                    <input type="search" name="search--normal" id="search--normal" ng-model="searchText" placeholder="{{'find'|translate}}">
+                </span>
+        </div>
+    </div>
+    <div class="modal--open--tab" ng-show="selectedTab === 0">
+        <ul class="modal--project--list">
+            <li ng-repeat="project in filteredProjects = ( projects | filter:{name: searchText} | orderBy:userProjectsOrderBy:userProjectsReverseOrder ) " ng-dblclick="confirmAction()" ng-click="selectedProject.project = project" ng-class="{'modal--project--item':true, 'selected--item':selectedProject.project === project}">
+                <div>
+                    <span class="modal--project--name">{{project.name}}</span>
+                    <time class="modal--project--date">{{ project._updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="modal--open--tab" ng-show="selectedTab === 1">
+        <ul class="modal--project--list">
+            <li ng-repeat="project in filteredSharedProjects = (sharedProjects | filter:{name: searchText} | orderBy:userProjectsOrderBy:userProjectsReverseOrder )" ng-click="selectedProject.project = project" ng-class="{'modal--project--item':true, 'selected--item':selectedProject.project === project}">
+                <div>
+                    <span class="modal--project--name">{{project.name}}</span>
+                    <time class="modal--project--date">{{ project._updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

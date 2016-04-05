@@ -1,0 +1,133 @@
+<div class="explore-view section-with-header-and-subheader" data-element="explore-scroll">
+    <div ng-class="{'loading--content':common.isLoading}"></div>
+    <div class="section-header">
+        <h1 class="h2">{{ 'explore' | translate}}</h1>
+        <span class="explore--project--count" data-element="explore-count-projects">{{ projectCount }}</span>
+    </div>
+    <div class="explore__container">
+        <div class="explore__toolbar">
+            <div class="explore__toolbar__container">
+                <!-- <div class="explore__tool explore--action--sort invisible">
+                    <common-dropdown options="sortOptions" options-click="sort" pre-heading="'explore-sortby'" heading-option="sortOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+                </div> -->
+                <div class="explore__tool grid-list">
+                    <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--explore--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
+                        <svg class="svg-icon">
+                            <use xlink:href="#cuadricula"></use>
+                        </svg>
+                    </button>
+                    <button ng-click="itemsLayout = 'list'" ng-class="{btn:true, 'btn--explore--actions':true, 'btn--selected':itemsLayout === 'list', 'grid--right':true}">
+                        <svg class="svg-icon">
+                            <use xlink:href="#listado"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="explore__tool search-action">
+                    <h3 class="invisible">{{ 'searcher-search-form' | translate }}</h3>
+                    <span class="form--input" ng-class="{'input--focused':focus === 'exploresearch'}">
+                        <svg class="svg-icon--search">
+                            <use xlink:href="#lupa"></use>
+                        </svg>
+                        <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="searchText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-element="explore-find" data-ng-focus="focus = 'exploresearch'" data-ng-blur="focus = false">
+                    </span>
+                </div>
+                <div class="explore__tool filter-action">
+                    <div ng-class="{'explore__actions__filtered--filter':true, 'filter--dropdown--before':componentDropdown}" data-element="explore-filter-dropdown">
+                        <h3 class="invisible">{{'explore-filters-by' | translate}}</h3>
+                        <button class="btn btn--dropdown" data-ng-click="componentDropdown=!componentDropdown">{{ 'explore-filter-by' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="explore__filter__dropdown" data-ng-show="componentDropdown">
+                <ul class="explore__filter__list">
+                    <li class="explore__filter__item explore__actions__filtered--generics">
+                        <ul>
+                            <h4 class="filter__title">{{'projects' | translate}}</h4>
+                            <li class="filter__option" data-ng-repeat="gFilter in genericFilterOptions">
+                                <span class="input input--checkbox" data-ng-click="genericFilter(gFilter.option)">
+                                    <!-- <input type="checkbox" name="sample--checkbox" id="{{'genericFilterCheckbox'+gFilter.option}}" data-ng-model="genericFilterOptions[$index].value">
+                                    <label for="{{'genericFilterCheckbox'+gFilter.option}}">
+                                        <span>{{'explore_label_filter-'+gFilter.option | translate}}</span>
+                                    </label> -->
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'genericFilterCheckbox'+gFilter.option}}" data-ng-model="genericFilterOptions[$index].value"><span>{{'explore_label_filter-'+gFilter.option | translate}}</span></label>
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="explore__filter__item explore__actions__filtered--boards">
+                        <ul>
+                            <h4 class="filter__title">{{'boards_and_robots' | translate}}</h4>
+                            <li class="filter__option component__filter__item" data-ng-repeat="board in boardsFilterOptions">
+                                <span class="input input--checkbox" data-ng-click="boardFilter(board.option)">
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+board.option}}" data-ng-model="boardsFilterOptions[$index].value"><span>{{board.option | translate}}</span></label>
+                                    <!-- <label for="{{'tagCheckbox'+board.option}}">
+                                        <span>{{board.option | translate}}</span>
+                                    </label> -->
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="explore__filter__item explore__actions__filtered--components">
+                        <ul>
+                            <h4 class="filter__title">{{'components' | translate}}</h4>
+                            <li class="filter__option component__filter__item" data-ng-repeat="compFilter in componentsFilterOptions">
+                                <span class="input input--checkbox" data-ng-click="componentFilter(compFilter.option)">
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+compFilter.option}}" data-ng-model="componentsFilterOptions[$index].value"><span>{{compFilter.option | translate}}</span></label>
+                                    <!-- <label for="{{'tagCheckbox'+compFilter.option}}">
+                                        <span>{{compFilter.option | translate}}</span>
+                                    </label>-->
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-class="{'explore__projects__container':true, 'container--filtered':componentDropdown, 'explore__projects__container--wide':itemsLayout === 'list'}">
+            <h2 class="invisible">project list</h2>
+            <ol data-ng-class="{'projects__project-list':true, 'project--item--wide':itemsLayout === 'list'}">
+                <div ng-show="exploraProjects.length === 0" class="project-shared--empty">
+                    <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
+                </div>
+                <li ng-class="{'project-list__item':true, 'project--item--wide':itemsLayout === 'list'}" data-ng-repeat="project in exploraProjects track by project._id" data-element="explora-project-elem">
+                    <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}" class="project--item">
+                        <div class="img-container">
+                            <a class="btn btn--secondary btn--small more-info" data-ng-href="#/project/{{project._id}}" data-element="explora-project-moreinfo">{{ 'more-info' | translate }}</a>
+                            <img alt="Project image" ng-src="{{project.imageUrl? project.imageUrl: '../images/common/default-project.png' }}"/>
+                        </div>
+                        <div class="project__info__footer">
+                            <h3 data-element="explore-project-name">{{project.name}}</h3>
+
+                            <div ng-show="itemsLayout === 'list'" class="description">
+                                {{project.description}}
+                            </div>
+                            <p>{{ 'explore-created-by' | translate }}
+                                <span>{{project.creatorUsername}}</span>
+                            </p>
+
+                            <div class="stats">
+                                <span class="explore__project-item__icon">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#vistas"></use>
+                                    </svg>
+                                    <span>{{stats[project._id].timesViewed}}</span>
+                                </span>
+                                <span class="explore__project-item__icon">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#mas"></use>
+                                    </svg>
+                                    <span>{{stats[project._id].timesAdded}}</span>
+                                </span>
+                            </div>
+                            <span ng-if="project.codeProject" class="project--item--code" placeholder="{{'my-project_placeholder_code-project' | translate }}">
+                                <svg class="svg-icon">
+                                    <use xlink:href="#codigo"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

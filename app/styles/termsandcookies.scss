@@ -1,0 +1,26 @@
+.main--terms,
+.main--cookies {
+    .main--terms--title {
+        height: 60px;
+        line-height: 60px;
+        margin: 1em;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
+    }
+
+    section {
+        padding-left: 2em;
+        padding-right: 2em;
+        margin-bottom: 2em;
+    }
+
+    p {
+        padding: 0.5em;
+    }
+
+    a {
+      color: #82ad3a;
+    }
+}

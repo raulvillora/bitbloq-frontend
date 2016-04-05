@@ -1,0 +1,18 @@
+<div class="clearfix">
+    <a class="btn btn--secondary btn--small btn--admin" href="#/help/forum/">{{'forum_button_returnForum' | translate}}</a>
+
+    <h1 class="banned-user__title">{{'AdminForum_title_BannedUsers' | translate}}</h1>
+</div>
+<div class="banned-user__content">
+    <div dir-paginate="user in forum.bannedUsers | itemsPerPage: forum.bannedUserPerPage">
+        <span class="banned-user__username">{{user.username}}</span>
+        <span class="banned-user__email">{{user.email}}</span>
+        <button class="btn--allow-user" ng-click="forum.allowUser(user._id)">{{'button_allowUser' | translate}}</button>
+    </div>
+    <div ng-if="forum.bannedUsers.length===0">
+        <h2>{{'forumAdmin_info_BannedUserEmpty' | translate}}</h2>
+    </div>
+</div>
+<div class="forum__paginator">
+    <dir-pagination-controls boundary-links="true" on-page-change="forum.pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+</div>

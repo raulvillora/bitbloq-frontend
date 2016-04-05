@@ -1,0 +1,89 @@
+<div ng-class="{'landing--ru':translate.use() === 'ru-RU', 'landing--de':translate.use() === 'de-DE'}" ng-click="closeMenu($event)" class="view view--landing view--landing--help">
+    <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible, 'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
+    <div class="help--masthead">
+        <div class="max-width">
+            <svg class="svg-icon">
+                <use xlink:href="#helpsymbol"></use>
+            </svg>
+            <h1 class="h1">{{ 'do-you-need-help' | translate }}</h1>
+
+            <p>{{ 'landing_help_masthead_subtitle' | translate }}</p>
+
+            <div class="contact__container">
+                <div class="contact-by-phone">
+                    <svg class="svg-icon">
+                        <use xlink:href="#phone"></use>
+                    </svg>
+                    <div>
+                        <h2>{{ 'landing_help_contact_byphone' | translate }}</h2>
+                        <span>{{ 'call-us-to' | translate }}
+                            <a href="tel:+34911420682"></a>+34 91 142 06 82</span>
+                    </div>
+                </div>
+                <div class="contact-by-email">
+                    <svg class="svg-icon">
+                        <use xlink:href="#envelope"></use>
+                    </svg>
+                    <div>
+                        <h2>{{ 'by-mail' | translate }}</h2>
+                        <span>{{ 'write-us-an-email' | translate }}
+                            <span ng-if="common.user" data-ng-click="commonModals.sendCommentsModal()" class="contact-us-link" data-element="help-contact-us-link"><a href="">{{ 'from-here' | translate }}</a></span>
+                            <a ng-if="!common.user" href="mailto:{{'support_email' | translate}}" target="_blank">{{ 'from-here' | translate }}</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="landing--section">
+        <div class="max-width">
+            <div class="landing--section__heading">
+                <h2 class="h1">{{ 'landing_ask-the-community' | translate }}</h1>
+                    <p>{{ 'landing_help_section_subheader' | translate }}</p>
+            </div>
+            <div class="landing--section__cards">
+                <div class="row landing--section row--inline">
+                    <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--section__forum sec">
+                        <div class="landing--section__item">
+                            <svg class="svg-icon">
+                                <use xlink:href="#forumdark"></use>
+                            </svg>
+                            <h2 class="h2">{{ 'bitbloq_forum' | translate }}</h2>
+
+                            <p>{{ 'landing_help_bitbloq-forum-text' | translate }}</p>
+                            <a href="#/help/forum">{{ 'goto-bitbloq-forum' | translate }}</a>
+                        </div>
+                    </div>
+                    <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--section__help sec">
+                        <div class="landing--section__item">
+                            <svg class="svg-icon">
+                                <use xlink:href="#Ayuda"></use>
+                            </svg>
+                            <h2 class="h2">{{ 'help_faqs' | translate }}</h2>
+
+                            <p>{{ 'landing_help_faqs_text' | translate }}</p>
+                            <a href="#/help/faq">{{ 'goto_faqs' | translate }}</a>
+                        </div>
+                    </div>
+                    <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--section__diwo sec">
+                        <div class="landing--section__item">
+                            <img src="images/common/diwo.png" alt="">
+
+                            <h2 class="h2">DIWO</h2>
+
+                            <p>{{ 'landing_help_diwo_text' | translate }}</p>
+                            <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]]}}" target="_blank">{{ 'goto-diwo' | translate }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="landing--call-to-action">
+        <div class="cta--container">
+            <h1 class="landing--heading--white">{{'landing-main-title' | translate}}</h1>
+            <a href="#/bloqsproject" class="btn btn--call--test-it-now">{{'landing_link_testItNow' | translate}}</a>
+            <a href="#/register" class="btn btn--call--register">{{'general_button_register' | translate}}</a>
+        </div>
+    </div>
+    <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
+</div>

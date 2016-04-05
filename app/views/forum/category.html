@@ -1,0 +1,79 @@
+<div ng-include="'views/forum/forumHeader.html'"></div>
+<div class="forum__category" ng-if="!forum.results.show">
+    <div class="forum__table-title">
+        <div class="col-vsmall-6">
+            <span>{{'forum_column_theme' | translate}}</span>
+        </div>
+        <div class="col-vsmall-2">
+            <span>{{'forum_column_answers' | translate}}</span>
+        </div>
+        <div class="col-vsmall-2">
+            <span>{{'forum_column_views' | translate}}</span>
+        </div>
+        <div class="col-vsmall-2">
+            <span>{{'forum_column_lastAnswer' | translate}}</span>
+        </div>
+    </div>
+    <div class="forum__block">
+        <div dir-paginate="theme in forum.categoryThemes | filter:q | itemsPerPage: forum.categoryThemesPerPage" class="row">
+            <div class="col-vsmall-6">
+                <ul class="forum__block__list">
+                    <li class="forum__block__item">
+                        <a ng-href="{{'#/help/forum/' + forum.currentCategory + '/' + theme._id}}">
+                            <h2 class="block__item__title" data-element="forum-category-theme-title">{{theme.title}}</h2>
+                        </a>
+                        <span class="block__item__description">{{'by' | translate}}
+                            <span class="block__item__owner">{{theme.creator.name}}</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-vsmall-2">
+                <ul class="forum__block__list">
+                    <li class="forum__block__item">
+                        <span>{{theme.numberOfAnswers}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-vsmall-2">
+                <ul class="forum__block__list">
+                    <li class="forum__block__item">
+                        <span>{{theme.numberOfViews}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-vsmall-2">
+                <ul class="forum__block__list" ng-if="theme.numberOfAnswers !== 0">
+                    <li class="forum__block__item">
+                        <span class="block__username">{{'by' | translate}} <span class="block__username__link">{{theme.lastAnswer.owner.username}}</span></span>
+                        <time>{{theme.lastAnswer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="forum__paginator">
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
+</div>
+<div class="forum__categories" ng-if="forum.results.show">
+    <div class="forum__block">
+        <div dir-paginate="result in forum.results.data | filter:{title: forum.searchText} | itemsPerPage: '10' track by $index">
+            <ul class="forum__block__list">
+                <li class="forum__search__item">
+                    <a ng-href="{{'#/help/forum/' + result.categoryName + '/' + result._id}}">
+                        <h2 class="block__item__title">{{result.title}}</h2>
+                    </a>
+                <span class="block__item__description">{{'by' | translate}}
+                    <span class="block__item__owner">{{result.owner}}</span>
+                    en
+                    <span>{{result.categoryName}}</span>
+                </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="forum__paginator">
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
+</div>

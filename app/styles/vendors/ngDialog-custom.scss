@@ -1,0 +1,20 @@
+.ngdialog-overlay,
+.ngdialog-content {
+    -webkit-animation-duration: 120ms;
+    animation-duration        : 120ms;
+}
+
+.ngdialog-content {
+    position: relative;
+}
+
+.ngdialog-close {
+    top        : 10px;
+    position   : absolute;
+    right      : 20px;
+    font-size  : 25px;
+    color      : #939499;
+    font-weight: 700;
+    width      : 13px;
+    height     : 13px;
+}

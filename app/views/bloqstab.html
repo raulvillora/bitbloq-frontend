@@ -1,0 +1,48 @@
+<div class="bloqs-tab" ng-mousedown="hideBloqsMenu($event)" data-ng-controller="BloqstabCtrl" data-ng-keyup="onFieldKeyUp($event)" data-ng-keydown="onFieldKeyDown($event)" ng-init="setScrollHeight()">
+    <div class="tabs--title">
+        <ul class="bloq--field--list text-strong">
+            <li data-element="bloqs-tab" ng-click="setSoftwareTab('bloqs')" ng-class="{'active':softTab==='bloqs'}">{{ 'bloqs' | translate }}</li>
+            <li data-element="code-tab" ng-click="setSoftwareTab('code')" ng-class="{'active':softTab==='code'}">{{ 'code' | translate }}</li>
+        </ul>
+    </div>
+    <div ng-show="showScroll && softTab==='bloqs'" class="make--scrollbar">
+        <div class="scrollbar--small"></div>
+    </div>
+    <div ng-show="showHorizontalScroll && softTab==='bloqs'" id="make--horizontal-scrollbar">
+        <div id="scrollbar--horizontal-small"></div>
+    </div>
+    <div class="software--tab" ng-init="softTab = 'bloqs'" ng-show="softTab==='bloqs'">
+        <div id="bloqs--field" ng-class="{'theme-colors':project.defaultTheme === 'infotab_option_colorTheme', 'theme-basic':project.defaultTheme === 'infotab_option_grayTheme' || !project.defaultTheme}" class="field" tabindex="0">
+            <div data-ng-class="{'toolbox--main':true,'navbar--collapsed':collapsedHeader}" data-ng-include="'views/softwareToolbox.html'"></div>
+        </div>
+        <div id="empty"></div>
+        <div id="bloqs-context-menu">
+            <ul>
+                <li>
+                    <button data-ng-click="duplicateBloqFromContextMenu(contextMenuBloq)">{{ 'bloqstab-duplicate-bloq' | translate }}</button>
+                </li>
+                <li>
+                    <button data-ng-show="!contextMenuBloq.itsEnabled() && !contextMenuBloq.itsFree()" data-ng-click="enableBloqFromContextMenu(contextMenuBloq)">{{ 'bloqstab-enable-bloq' | translate }}</button>
+                </li>
+                <li>
+                    <button data-ng-show="contextMenuBloq.itsEnabled()" data-ng-click="disableBloqFromContextMenu(contextMenuBloq)">{{ 'bloqstab-disable-bloq' | translate }}</button>
+                </li>
+                <li class="dropdown__item--separator"></li>
+                <li>
+                    <button data-ng-click="removeBloqFromContextMenu(contextMenuBloq)">{{ 'bloqstab-remove-bloq' | translate }}</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="software--tab" ng-show="softTab==='code'">
+        <button class="software__edit-code" data-ng-click="goToCodeModal()" data-element="software-edit-code">
+            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#edit"></use>
+            </svg>
+            {{'bloqsTab_button_editCode' | translate }}
+        </button>
+        <div class="console--main">
+            <beauty-code class="console--content" data-code="code"></beauty-code>
+        </div>
+    </div>
+</div>

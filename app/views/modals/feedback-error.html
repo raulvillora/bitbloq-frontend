@@ -1,0 +1,22 @@
+<div class="modal__feedback-error">
+    <p>{{ 'modal-inform-error-maintext' | translate }}</p>
+
+    <form>
+        <span class="form--input common--textarea" data-ng-class="{'input--focused':focus === 'message'}">
+            <textarea ng-model="comments.message" rows="5" class="msd-elastic" ng-model="comments.message" placeholder="{{ 'modal-inform-error-textarea-placeholder' | translate }}" data-ng-focus="focus = 'message'" data-ng-blur="focus = false" data-element="modal-notify-error-textarea"></textarea>
+        </span>
+
+        <div class="row">
+            <div class="col-mobile-6 nopadding">
+                <span class="form--input" data-ng-class="{'input--focused':focus === 'os'}">
+                    <input type="text" name="os" id="os" ng-model="comments.os" placeholder="{{ 'modal-inform-error-os-version-placeholder' | translate }}" data-ng-focus="focus = 'os'" data-ng-blur="focus = false" data-element="modal-notify-error-so">
+                </span>
+            </div>
+            <div class="col-mobile-6 nopadding">
+                <span class="form--input" data-ng-class="{'input--focused':focus === 'browser'}">
+                    <input type="text" name="browser" id="browser" ng-model="comments.browser" placeholder="{{ 'modal-inform-error-browser-version-placeholder' | translate }}" data-ng-focus="focus = 'browser'" data-ng-blur="focus = false" data-element="modal-notify-error-browser">
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

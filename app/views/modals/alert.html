@@ -1,0 +1,18 @@
+<div class="modal_alert">
+    <button ng-click="closeThisDialog(); rejectAction()" class="btn btn__modal--close--no-title">
+        <svg class="svg-icon svg-icon__modal--close--no-title">
+            <use xlink:href="#cierre"></use>
+        </svg>
+    </button>
+    <svg class="modal--not-logged--image">
+        <use xlink:href="#warning"></use>
+    </svg>
+    <span class="modal--not-logged-alert">{{ 'atention' | translate }}</span>
+</div>
+<div class="modal--not-logged--text">
+    <p>{{ text | translate }}</p>
+</div>
+<div class="modal--not-logged--buttons">
+    <button ng-click="confirmAction()" class="btn btn--primary" data-element="modal-alert-ok">{{ confirmText | translate }}</button>
+    <button ng-if="cancelButton" ng-click="rejectAction()" class="btn btn--secondary" data-element="atention-continue-guest">{{ cancelText | translate }}</button>
+</div>

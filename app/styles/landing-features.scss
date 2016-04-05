@@ -1,0 +1,519 @@
+.view--landing--features {
+    .features--masthead {
+        @include landingMasthead('../images/landing/features_bg.jpg');
+        height: 510px;
+
+        .masthead--info {
+            position: absolute;
+            width   : 800px;
+            bottom  : 0;
+            left    : 0;
+            right   : 0;
+            margin  : auto;
+            height  : 380px;
+
+            img {
+                width   : 876px;
+                margin  : 0 auto;
+                position: absolute;
+                bottom  : 0;
+                left    : 0;
+                right   : 0;
+            }
+
+            h1 {
+                @include textGenerator(40px, 400, white, 50px, 350px, false);
+                right   : -50px;
+                position: absolute;
+            }
+
+            p {
+                max-width: 350px;
+                opacity  : .7;
+                position : absolute;
+                right    : -50px;
+                top      : 150px;
+            }
+        }
+    }
+
+    .features--container {
+        &:after {
+            content: "";
+            display: block;
+            clear  : both;
+        }
+
+        .feature {
+
+          width: 100%;
+          margin   : 0 auto;
+          height   : 375px;
+          position : relative;
+          border-bottom: 1px solid #dcdfe5;
+
+            &:after:not(:last-child) {
+                content      : "";
+                position     : absolute;
+                width        : 100vw;
+                border-bottom: 1px solid #dcdfe5;
+                left         : -110px;
+            }
+
+            &:nth-child(2) {
+                height: 450px;
+
+                .feature--left {
+                    img {
+                        top: 70px;
+                    }
+                }
+            }
+
+            &:nth-child(3) {
+                height: 350px;
+            }
+
+            &:nth-child(1) {
+                img {
+                    bottom  : 0;
+                    position: absolute;
+                }
+            }
+
+            &:nth-child(3) {
+                img {
+                    position: absolute;
+                    bottom  : 0;
+                    left    : -100px;
+                }
+            }
+
+            &:last-child {
+                padding-top   : 100px;
+                padding-bottom: 100px;
+                border-bottom : 0;
+                height        : auto;
+                overflow      : hidden;
+
+                .feature--content {
+                    max-width    : 550px;
+                    margin-left  : 50px;
+                    margin-right: 50px;
+                    border-bottom: 0;
+                    margin       : 0 auto;
+                    text-align   : center;
+                    position     : relative;
+                    z-index      : 2;
+
+                    // background-color: white;
+                    & > * {
+                        flex: 1;
+                    }
+
+                    h2,
+                    p {
+                        display      : block;
+                        margin-bottom: 20px;
+                    }
+
+                    h2 {
+                        @include textGenerator(30px, 400, #373b44, 30px, 100%, false);
+                    }
+
+                    img {
+                        display: block;
+                        margin : 0 auto;
+                        margin-bottom: 30px;
+                    }
+
+                    p {
+                        font-size: 16px;
+                        color    : #8c919b;
+                    }
+                }
+            }
+
+            .feature--data {
+                position: absolute;
+                top     : 0;
+                bottom  : 0;
+                margin  : auto;
+                display : block;
+                width   : 390px;
+                height  : 200px;
+
+                p {
+                    color: #8c919b;
+                }
+            }
+
+            .feature--left,
+            .feature--right {
+                width   : 50%;
+                position: relative;
+                height  : 100%;
+
+                h2,
+                p {
+                    display      : block;
+                    width        : 390px;
+                    margin-bottom: 20px;
+                }
+
+                h2 {
+                    @include textGenerator(30px, 400, #373b44, 30px, 100%, false);
+                }
+
+                p {
+                    @include textGenerator(16px, 300, #8c919b, auto, 100%, false);
+                }
+            }
+
+            .feature--right {
+                float: right;
+
+                h2,
+                p,
+                a {
+                    left        : 0;
+                }
+            }
+
+            .feature--left {
+                .feature--data {
+                    right: 0;
+                }
+
+                img {
+                    right   : 0;
+                    position: absolute;
+                    top     : 30px;
+                }
+                float: left;
+
+                h2,
+                p,
+                a {
+                    right        : 0;
+                }
+            }
+
+            &:after {
+                content: "";
+                display: block;
+                clear  : both;
+            }
+        }
+    }
+
+    .features--imagination {
+        padding-top   : 50px;
+        padding-bottom: 50px;
+        display       : block;
+        text-align    : center;
+
+        .image--left {
+            width: 25%;
+            float: left;
+
+            img {
+                float: left;
+            }
+        }
+
+        .image--right {
+            width: 25%;
+            float: right;
+
+            img {
+                float: right;
+            }
+        }
+
+        .imagination--container {
+            width : 50%;
+            margin: 0 auto;
+            float : left;
+
+            .imagination--content {
+                max-width  : 490px;
+                margin     : 0 auto;
+                padding-top: 50px;
+
+                h2 {
+                    color      : #373b44;
+                    font-size  : 30px;
+                    font-weight: 400;
+                }
+
+                p {
+                    color         : #8c919b;
+                    font-size     : 16px;
+                    font-weight   : 300;
+                    padding-top   : 20px;
+                    padding-bottom: 20px;
+                }
+            }
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            clear  : both;
+        }
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        clear  : both;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .view--landing--features {
+        .features--masthead {
+            height: auto;
+
+            .masthead--info {
+                width        : auto;
+                padding-top  : 90px;
+                max-width    : 750px;
+                margin-bottom: 0;
+                top          : 0;
+                height       : 100%;
+                position     : relative;
+                padding-left : 50px;
+                padding-right: 50px;
+
+                img,
+                h1,
+                p {
+                    top   : auto!important;
+                    bottom: auto!important;
+                    left  : auto!important;
+                    right : auto!important;
+                }
+
+                img {
+                    width   : auto;
+                    position: relative;
+                }
+
+                h1 {
+                    width      : auto;
+                    font-size  : 30px;
+                    left       : 50px;
+                    line-height: 35px;
+                    left       : 50px;
+                    position   : relative;
+                }
+
+                p {
+                    position      : relative;
+                    max-width     : 100%;
+                    width         : auto;
+                    left          : 50px;
+                    top           : 170px;
+                    padding-top   : 20px;
+                    padding-bottom: 20px;
+                }
+            }
+        }
+
+        .features--container {
+            .feature {
+                height: auto;
+
+                &:nth-child(1),
+                &:nth-child(3) {
+                    .feature--right {
+                        display: none;
+                    }
+
+                    .feature--left {
+                        width: 100%;
+
+                        .feature--data {
+                            position: relative;
+                            margin  : 0;
+                            display : block;
+                            width   : 100%;
+                            height  : auto;
+                            padding : 50px;
+
+                            h2,
+                            p {
+                                width: 100%;
+                            }
+
+                            h2 {
+                                font-size: 25px;
+                            }
+
+                            p {
+                                font-size: 14px;
+                                color    : #8c919b;
+                            }
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    .feature--left {
+                        display: none;
+                    }
+
+                    .feature--right {
+                        width: 100%;
+
+                        .feature--data {
+                            position: relative;
+                            margin  : 0;
+                            display : block;
+                            width   : 100%;
+                            height  : auto;
+                            padding : 50px;
+
+                            h2,
+                            p,
+                            a {
+                                width       : 100%;
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .features--imagination {
+            border-top: 1px solid #dcdfe5;
+
+            .image--left,
+            .image--right {
+                display: none;
+            }
+
+            .imagination--container {
+                width: 100%;
+
+                .imagination--content {
+                    padding-top: 0 !important;
+                }
+            }
+        }
+    }
+}
+
+.bloqs--rain {
+    position: relative;
+    z-index : 1;
+
+    .layer0 {
+        transform                : translate3d(0, -100px, 0);
+        animation                : rain 3s infinite;
+        animation-timing-function: linear;
+    }
+
+    .layer1 {
+        transform                : translate3d(0, -100px, 0);
+        animation                : rain 2.5s infinite;
+        animation-timing-function: linear;
+
+        .bloq {
+            transform: scale(0.5, 0.5);
+        }
+    }
+
+    .layer3 {
+        transform                : translate3d(0, -100px, 0);
+        animation                : rain 2s infinite;
+        animation-timing-function: linear;
+
+        .bloq {
+            transform: scale(0.25, 0.25);
+        }
+    }
+
+    .bloq0 {
+        top : -380px;
+        left: 70%;
+    }
+
+    .bloq1 {
+        top : -300px;
+        left: 10%;
+    }
+
+    .bloq2 {
+        top : -140px;
+        left: 30%;
+    }
+
+    .bloq3 {
+        top : -392px;
+        left: 20%;
+    }
+
+    .bloq4 {
+        top : -50px;
+        left: 80%;
+    }
+
+    .bloq5 {
+        top : -100px;
+        left: 72%;
+    }
+
+    .bloq6 {
+        top : -220px;
+        left: 60%;
+    }
+
+    .bloq7 {
+        top : -300px;
+        left: 45%;
+    }
+
+    .bloq8 {
+        top : -400px;
+        left: 25%;
+    }
+
+    .bloq9 {
+        top : -50px;
+        left: 5%;
+    }
+
+    .bloq10 {
+        top : -400px;
+        left: 15%;
+    }
+
+    .bloq11 {
+        top : -400px;
+        left: 45%;
+    }
+
+    .bloq12 {
+        top : -200px;
+        left: 32%;
+    }
+
+    .bloq13 {
+        top : -150px;
+        left: 25%;
+    }
+}
+
+@keyframes rain {
+    25% {
+        transform: translate3d(-5px, 200px, 0);
+    }
+
+    100% {
+        transform: translate3d(5px, 800px, 0);
+    }
+}

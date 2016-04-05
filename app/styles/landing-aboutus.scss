@@ -1,0 +1,130 @@
+.view--landing--aboutus {
+    .max-width {
+        position: relative;
+    }
+
+    .background-gray {
+        position        : fixed;
+        top             : 3px;
+        width           : 99.2%;
+        height          : 63px;
+        background-color: #373b44;
+        z-index         : 1;
+    }
+
+    .landing--masthead {
+        @include landingMasthead('../images/landing/aboutus_bg.jpg');
+        height             : 700px;
+        background-position: center 70px;
+        background-size    : 100%;
+        background-color   : #fcfcfc;
+
+        .masthead--content {
+            max-width: 460px;
+            right    : 50px;
+            position : absolute;
+            bottom   : 50px;
+
+            h1 {
+                @include textGenerator(40px, 400, #373b44, auto, 100%, false);
+                padding-top   : 90px;
+                padding-bottom: 20px;
+            }
+
+            p {
+                max-width: 460px;
+                opacity  : .7;
+                right    : 50px;
+                color    : #373b44;
+            }
+        }
+    }
+
+    .landing--team {
+        text-align: center;
+
+        h2 {
+            padding: 50px 50px 20px;
+        }
+
+        p {
+            max-width     : 780px;
+            margin        : 0 auto;
+            padding-bottom: 50px;
+        }
+
+        ul {
+            text-align: center;
+
+            li {
+                margin-top   : 20px;
+                margin-bottom: 20px;
+
+                span {
+                    color: #8c919b;
+                    cursor: default;
+                }
+            }
+        }
+    }
+
+    .contributors {
+        text-align: center;
+        padding   : 50px;
+        color     : #8c919b;
+
+        h2 {
+            padding-bottom: 20px;
+        }
+
+        p {
+            padding-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .invest {
+        text-align: center;
+        padding: 50px;
+
+        p,h4{
+            margin: 5px;
+        }
+        p{
+            margin-top: 35px;
+        }
+        h5 {
+            padding-bottom: 35px;
+        }
+        img {
+            max-width: 600px;
+            max-height: 60px;
+        }
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .view--landing--aboutus {
+        .landing--masthead {
+            .masthead--content {
+                max-width: 460px;
+                right    : auto;
+                bottom   : auto;
+                position : relative;
+                padding  : 90px 50px 50px;
+                margin   : 0 auto;
+            }
+        }
+
+        .landing--team {
+            marign-top: 50px;
+        }
+    }
+}

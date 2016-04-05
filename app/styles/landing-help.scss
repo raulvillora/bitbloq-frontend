@@ -1,0 +1,184 @@
+.view--landing--help {
+    .help--masthead {
+        height          : 650px;
+        background-image: url("../images/landing/home_background.jpg");
+        background-size : cover;
+        padding-top     : 100px;
+        text-align      : center;
+        border-top      : 3px solid #82ad3a;
+
+        .max-width {
+            & > .svg-icon {
+                cursor: default;
+                height: 112px;
+                width : 96px;
+            }
+        }
+
+        h1 {
+            margin-top : 20px;
+            color      : white;
+            font-size  : 40px;
+            font-weight: 400;
+        }
+
+        p {
+            width      : 500px;
+            opacity    : .7;
+            color      : #c0c3c9;
+            font-size  : 16px;
+            font-weight: 400;
+            margin     : auto;
+            margin-top: 20px;
+        }
+
+        .contact__container {
+            display: table;
+            height : 100px;
+            margin : 0 auto;
+            cursor : default;
+
+            & > * {
+                width           : 380px;
+                background-color: #f1f1f1;
+                border-radius   : 4px;
+                float           : left;
+                margin          : 5px;
+                margin-top: 40px;
+                height          : 100px;
+                padding-top     : 15px;
+                text-align      : left;
+
+                .svg-icon {
+                    float       : left;
+                    margin-left : 20px;
+                    margin-right: 20px;
+                }
+
+                div {
+                    display: inline-block;
+
+                    h2 {
+                        color      : #373b44;
+                        font-size  : 25px;
+                        font-weight: 400;
+                    }
+
+                    span {
+                        font-size      : 16px;
+                        font-weight    : 400;
+                        color          : #73757c;
+                        text-decoration: none;
+
+                        a {
+                            color          : #82ad3a;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+
+            .contact-by-email {
+                .svg-icon {
+                    height: 50px;
+                    width : 43px;
+                }
+
+                a:hover {
+                  text-decoration: underline;
+                }
+            }
+
+            .contact-by-phone {
+                .svg-icon {
+                    width : 40px;
+                    height: 58px;
+                }
+            }
+        }
+    }
+
+    .landing--section__heading {
+        & > h2 {
+            margin-top   : 60px;
+            margin-bottom: 30px;
+        }
+
+        & > p {
+            width      : 500px;
+            opacity    : .7;
+            color      : #373b44;
+            font-size  : 16px;
+            font-weight: 400;
+            margin     : 0 auto;
+            margin-bottom: 40px;
+        }
+    }
+
+    .landing--section {
+        margin-bottom: 80px;
+        text-align   : center;
+
+        .sec {
+            display: inline-table;
+        }
+
+        .landing--section__item {
+            background-color: #f1f1f1;
+            border-radius   : 4px;
+            padding         : 40px 20px 30px 30px;
+            margin-bottom   : 30px;
+
+            .svg-icon {
+                cursor       : default;
+                width        : 45px;
+                height       : 45px;
+                fill         : #373b44;
+                margin-bottom: 20px;
+            }
+
+            img {
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                margin-bottom: 15px;
+                color        : #373b44;
+                font-size    : 25px;
+                font-weight  : 400;
+            }
+
+            p {
+                margin-bottom: 15px;
+                color        : #73757c;
+                font-size    : 16px;
+                font-weight  : 400;
+            }
+
+            span {
+                font-size      : 16px;
+                font-weight    : 400;
+                text-decoration: none;
+
+                a {
+                    text-decoration: none;
+                }
+            }
+
+            .contact-us-link {
+                text-decoration: none;
+            }
+
+            a {
+                text-decoration: none;
+                color          : #82ad3a;
+                font-size      : 16px;
+                font-weight    : 400;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+            }
+        }
+    }
+}

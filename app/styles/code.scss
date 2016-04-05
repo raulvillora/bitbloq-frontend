@@ -1,0 +1,31 @@
+.code-project {
+    background-color: #EBEBEB;
+    height: 100%;
+    overflow: hidden;
+    .tab-code {
+        padding-top: 20px;
+    }
+    .code-ide {
+        height: 100% !important;
+    }
+    .fieldset--left, .fieldset--right {
+        padding-top: 0;
+    }
+    .content--main {
+        height: calc(100% - 110px);
+        background-color: #ebebeb;
+        position: relative;
+    }
+    .content--main.content--main--collapse {
+        height: calc(100% - 40px);
+    }
+}
+
+.code-ide {
+    background-color: #EBEBEB !important;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

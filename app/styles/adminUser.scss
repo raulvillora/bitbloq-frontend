@@ -1,0 +1,92 @@
+.btn--ban-user {
+    background-color: #ffffff;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.btn--delete-answer {
+    background-color: #b31120;
+    width: 52px;
+    border-radius: 4px;
+    padding-left: 19px;
+    .svg-icon {
+        width: 15px;
+        height: 15px;
+        fill: white;
+    }
+}
+
+.btn--admin {
+    background-color: white;
+    color: black;
+    float: left;
+}
+
+.forum__admin {
+    .forum__admin__action {
+        position: absolute;
+        top: 1px;
+        padding: 5px;
+        &.forum__delete-answer, &.forum__ban-user--main {
+            right: 5px;
+        }
+        &.forum__ban-user {
+            right: 80px;
+        }
+        &.forum__delete-theme {
+            top: -65px;
+            right: 0;
+            padding: 0;
+        }
+        &.forum__move-theme {
+            top: -65px;
+            right: 80px;
+            padding: 0;
+            .svg-icon{
+                fill: black;
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+}
+
+.banned-user__title {
+    float: left;
+    margin-left: 25px;
+    width: 151px;
+    height: 15px;
+    color: #8c919b;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.banned-user__content {
+    background-color: #ffffff;
+    margin: 25px 0;
+    div {
+        padding: 0 20px;
+        height: 40px;
+        line-height: 45px;
+        text-align: center;
+        clear: both;
+        .banned-user__username {
+            color: #373b44;
+            font-weight: bold;
+            float: left;
+        }
+        .banned-user__email {
+            line-height: inherit;
+        }
+        .btn--allow-user {
+            float: right;
+            line-height: inherit;
+            color: #b31120;
+            font-weight: bold;
+        }
+    }
+    div:nth-child(2n) {
+        background-color: #f6f6f6;
+    }
+}

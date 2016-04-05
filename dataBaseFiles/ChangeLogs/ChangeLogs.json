@@ -1,0 +1,790 @@
+[
+    {
+        "version": {
+            "ca-ES": "Bitbloq beta v2",
+            "de-DE": "Bitbloq beta v2",
+            "en-GB": "Bitbloq beta v2",
+            "es-ES": "Beta v2",
+            "eu-ES": "Bitbloq beta v2",
+            "fr-FR": "Bitbloq beta v2",
+            "gl": "Bitbloq beta v2",
+            "it-IT": "Bitbloq beta v2",
+            "nl-NL": "Bitbloq beta v2",
+            "pt-PT": "Bitbloq beta v2",
+            "ru-RU": "Bitbloq beta v2",
+            "zh-CN": "Bitbloq beta v2"
+        },
+        "content": [
+            {
+                "ca-ES": "Substituïm blockly per la nostra pròpia llibreria \"Bloqs\"",
+                "en-GB": "We have replaced Blockly with our very own “Bloqs” library.",
+                "es-ES": "Sustituimos blockly por nuestra propia librería \"Bloqs\"",
+                "eu-ES": "blockly gure \"Bloqs\" liburutegiarekin ordezkatu dugu.",
+                "gl": "Sustituimos blockly por nosa propia libraría \"Bloqs\"",
+                "it-IT": "Abbiamo sostituito blockly con la nostra libreria \"Bloqs\"",
+                "nl-NL": "We hebben Blockly vervangen door onze eigen “Bloqs”-bibliotheek.",
+                "pt-PT": "Substituímos o blockly pela nossa própria biblioteca “Bloqs”.",
+                "ru-RU": "Мы заменили блокли на нашу собственную библиотеку «Bloqs».",
+                "zh-CN": "我们把Blocky更换成\"Bloqs\""
+            },
+            {
+                "ca-ES": "Substituïm Chrome App amb la nostra aplicació nativa Web2board",
+                "en-GB": "We have replaced the Chrome App with our own native Web2Board app.",
+                "es-ES": "Sustituimos la Chrome App con nuestra aplicación nativa Web2board",
+                "eu-ES": "Chrome App gure Web2board aplikazio natiboarekin ordezkatu dugu.",
+                "gl": "Substituímos a Chrome App coa nosa aplicación nativa Web2board",
+                "it-IT": "Abbiamo sostituito la Chrome App con la nostra applicazione nativa Web2board",
+                "nl-NL": "We hebben de Chrome-app vervangen door de Web2Board-app.",
+                "pt-PT": "Substituímos a Chrome App pela nossa aplicação nativa Web2board.",
+                "ru-RU": "Мы заменили приложение Chrome на наше собственное приложение Web2board.",
+                "zh-CN": "我们把Chrome App更换成我们的本机Web2board 应用程序"
+            },
+            {
+                "ca-ES": "Millores d'ús",
+                "en-GB": "Improved usability.",
+                "es-ES": "Mejoras de usabilidad",
+                "eu-ES": "Erabilgarritasun hobekuntzak",
+                "gl": "Melloras de usabilidade",
+                "it-IT": "Usabilità migliorata",
+                "nl-NL": "Gebruiksvriendelijker.",
+                "pt-PT": "Melhorias na utilização.",
+                "ru-RU": "Улучшения удобства и простоты использования",
+                "zh-CN": "改进可用性"
+            },
+            {
+                "ca-ES": "Substituïm backbone i marionette.js per AngularJS",
+                "en-GB": "We have replaced backbone and marionette.js with AngularJS",
+                "es-ES": "Sustituimos backbone y marionette.js por AngularJS",
+                "eu-ES": "backbone eta marionette.js AngularJS-rekin ordezkatu dugu.",
+                "gl": "Substituímos backbone e marionette.js por AngularJS",
+                "it-IT": "Abbiamo sostituito backbone e marionette.js con AngularJS.",
+                "nl-NL": "We hebben backbone en marionette.js vervangen door AngularJS",
+                "pt-PT": "Substituímos backbone e marionette.js por AngularJS.",
+                "ru-RU": "Мы заменили backbone и marionette.js на AngularJS.",
+                "zh-CN": "我们把backbone和marionette.js更换成AngularJS "
+            },
+            {
+                "ca-ES": "Compilació del codi en client",
+                "en-GB": "Code compilation in client mode",
+                "es-ES": "Compilación del código en cliente",
+                "eu-ES": "Kodearen konpilazioa bezeroan.",
+                "gl": "Compilación do código en cliente",
+                "it-IT": "Compilazione del codice in cliente.",
+                "nl-NL": "Codecompilatie in clientmodus",
+                "pt-PT": "Compilação do código no cliente.",
+                "ru-RU": "Компиляция кода на клиенте.",
+                "zh-CN": "编译客户端代码"
+            },
+            {
+                "ca-ES": "Detecció automàtica del port",
+                "en-GB": "Automatic port detection",
+                "es-ES": "Detección automática de puerto",
+                "eu-ES": "Atakaren detekzio automatikoa.",
+                "gl": "Detección automática de porto",
+                "it-IT": "Rilevamento automatico della porta.",
+                "nl-NL": "Automatische poortdetectie",
+                "pt-PT": "Deteção automática da porta.",
+                "ru-RU": "Автоматическое определение порта.",
+                "zh-CN": "自动检测端口"
+            },
+            {
+                "ca-ES": "Consola",
+                "en-GB": "Serial monitor",
+                "es-ES": "Monitor serie",
+                "eu-ES": "Serieko monitorea.",
+                "gl": "Monitor serie",
+                "it-IT": "Monitor serie.",
+                "nl-NL": "Seriële monitor",
+                "pt-PT": "Monitor de série.",
+                "ru-RU": "Монитор последовательного интерфейса.",
+                "zh-CN": "显示器系列"
+            },
+            {
+                "ca-ES": "Introduïda secció d'ajuda",
+                "en-GB": "Help section added",
+                "es-ES": "Introducida sección de ayuda",
+                "eu-ES": "Laguntza atala gehitu dugu.",
+                "gl": "Introducida sección de axuda",
+                "it-IT": "Introduzione della sezione di aiuto.",
+                "nl-NL": "Helpsectie toegevoegd",
+                "pt-PT": "Introduzida secção de ajuda.",
+                "ru-RU": "Был создан раздел «Помощь».",
+                "zh-CN": "已经加入帮忙部门"
+            },
+            {
+                "ca-ES": "Secció de Hardware visual gràcies a ProtoBoLa.js",
+                "en-GB": "Visual hardware section thanks to ProtoBoLa.js",
+                "es-ES": "Sección de Hardware visual gracias a ProtoBoLa.js",
+                "eu-ES": "Hardware bisual atala ProtoBoLa.js-ri esker.",
+                "gl": "Sección de Hardware visual grazas a ProtoBoLa.js",
+                "it-IT": "Sezione hardware visiva grazie a ProtoBoLa.js.",
+                "nl-NL": "Visuele hardwaresectie met dank aan ProtoBoLa.js",
+                "pt-PT": "Secção de Hardware visual graças ao ProtoBoLa.js.",
+                "ru-RU": "Раздел визуального аппаратного обеспечения с помощью ProtoBoLa.js.",
+                "zh-CN": "硬件视觉部门谢谢ProtoBoLa.js"
+            },
+            {
+                "ca-ES": "Millora del login",
+                "en-GB": "Improved login",
+                "es-ES": "Mejora del login",
+                "eu-ES": "Saioa hasteko atalaren hobekuntza.",
+                "gl": "Mellora do login",
+                "it-IT": "Login migliorato.",
+                "nl-NL": "Verbeterde login",
+                "pt-PT": "Melhoria do login.",
+                "ru-RU": "Улучшение логина.",
+                "zh-CN": "改进登录"
+            }
+        ],
+        "order": 1
+    },
+    {
+        "version": {
+            "ca-ES": "Bitbloq beta v2.0.7",
+            "de-DE": "Bitbloq beta v2.0.7",
+            "en-GB": "Bitbloq beta v2.0.7",
+            "es-ES": "Beta v2.0.7",
+            "eu-ES": "Bitbloq beta v2.0.7",
+            "fr-FR": "Bitbloq beta v2.0.7",
+            "gl": "Bitbloq beta v2.0.7",
+            "it-IT": "Bitbloq beta v2.0.7",
+            "nl-NL": "Bitbloq beta v2.0.7",
+            "pt-PT": "Bitbloq beta v2.0.7",
+            "ru-RU": "Bitbloq beta v2.0.7",
+            "zh-CN": "Bitbloq beta v2.0.7"
+        },
+        "content": [
+            {
+                "ca-ES": "Millores de maquetació",
+                "en-GB": "Layout reworked",
+                "es-ES": "Arreglos de maquetación",
+                "eu-ES": "Maketazio konponketak.",
+                "gl": "Arranxos de maquetación",
+                "it-IT": "Impaginazione modificata.",
+                "nl-NL": "Lay-out gewijzigd",
+                "pt-PT": "Arranjos na maquetagem.",
+                "ru-RU": "Улучшение компоновки.",
+                "zh-CN": "安排布局"
+            },
+            {
+                "ca-ES": "Revisar recuperació de contrasenya",
+                "en-GB": "Revised password recovery",
+                "es-ES": "Revisar recuperación de contraseña",
+                "eu-ES": "Pasahitza-berreskuratzea berrikustea",
+                "gl": "Revisar recuperación do contrasinal",
+                "it-IT": "Controllo del recupero password",
+                "nl-NL": "Wachtwoord herstellen gewijzigd",
+                "pt-PT": "Rever recuperação de palavra-passe",
+                "ru-RU": "Проверить восстановление пароля",
+                "zh-CN": "密码恢复修改"
+            },
+            {
+                "ca-ES": "Actualitzar PFs",
+                "en-GB": "FAQs updated",
+                "es-ES": "Actualizar FAQ's",
+                "eu-ES": "Maiz egiten diren galderen eguneratzea",
+                "gl": "Actualizar FAQ's ",
+                "it-IT": "Aggiornamento FAQ",
+                "nl-NL": "FAQ's geüpdatet",
+                "pt-PT": "Atualizar FAQ",
+                "ru-RU": "Обновить «Часто задаваемые вопросы»",
+                "zh-CN": "更新常见问题解答"
+            },
+            {
+                "ca-ES": "Resolts problemes al actualitzar Web2board a Mac OS",
+                "en-GB": "Problems on updating Web2Board on Mac OS X resolved",
+                "es-ES": "Resueltos problemas al actualizar web2board en Mac OS X",
+                "eu-ES": "Mac OS X-en web2board eguneratzeko arazoak konpondu dira.",
+                "gl": "Resoltos problemas ao actualizar web2board en Mac OS X",
+                "it-IT": "Risolti i problemi di aggiornamento di web2board su Mac OS X.",
+                "nl-NL": "Problemen met het updaten van Web2Board op Mac OS X verholpen",
+                "pt-PT": "Resolvidos problemas na atualização do Web2board no Mac OS X.",
+                "ru-RU": "Решенные проблемы при обновлении web2board на Mac OS X.",
+                "zh-CN": "已经解决web2board 更新到Mac OS X 问题了"
+            },
+            {
+                "ca-ES": "Millores a les alertes",
+                "en-GB": "Improved alerts",
+                "es-ES": "Mejoras en las alertas",
+                "eu-ES": "Hobekuntzak alertetan.",
+                "gl": "Melloras nas alertas",
+                "it-IT": "Avvisi migliorati.",
+                "nl-NL": "Verbeterde waarschuwingen",
+                "pt-PT": "Melhorias nos alertas.",
+                "ru-RU": "Улучшения предупреждений и извещений.",
+                "zh-CN": "警报改进"
+            },
+            {
+                "ca-ES": "Nous blocs com classes",
+                "en-GB": "New blocks with classes",
+                "es-ES": "Nuevos bloques con clases",
+                "eu-ES": "Klaseak dituzten bloke berriak.",
+                "gl": "Novos bloques con clases",
+                "it-IT": "Nuovi blocchi con classi.",
+                "nl-NL": "Nieuwe blokken met klassen",
+                "pt-PT": "Novos blocos com classes atribuídas.",
+                "ru-RU": "Новые блоки с классами.",
+                "zh-CN": "与类新块"
+            },
+            {
+                "ca-ES": "Pàgina de navegador o dispositiu no compatible detectat",
+                "en-GB": "Device or browser page not detected",
+                "es-ES": "Página de navegador o dispositivo no compatible detectado",
+                "eu-ES": "Arakatzailearen orri edo gailu ez bateragarria aurkitu da.",
+                "gl": "Páxina de navegador ou dispositivo non compatible detectado",
+                "it-IT": "Browser o dispositivo non compatibile rilevato",
+                "nl-NL": "Device of browserpagina niet gedetecteerd",
+                "pt-PT": "Página de navegador ou dispositivo não compatível detetado.",
+                "ru-RU": "Обнаружено несовместимое устройство или страница веб-браузера.",
+                "zh-CN": "未检测到页面浏览器或设备"
+            },
+            {
+                "ca-ES": "Temes: ara els usuaris poden triar tema de colors per bloqs",
+                "en-GB": "Themes: users can now select colour themes for the bloqs",
+                "es-ES": "Temas: ahora los usuarios pueden elegir tema de colores para bloqs",
+                "eu-ES": "Gaiak: orain erabiltzaileek bloqs-entzako kolore-gaiak aukera ditzakete.",
+                "gl": "Temas: agora os usuarios poden elixir tema de cores para bloqs",
+                "it-IT": "Temi: ora gli utenti possono scegliere il tema di colori per bloqs.",
+                "nl-NL": "Thema's: gebruikers kunnen nu kleurenthema's selecteren voor de bloqs",
+                "pt-PT": "Temas: agora os utilizadores podem selecionar temas de cores para os bloqs.",
+                "ru-RU": "Темы: теперь пользователи могут выбирать цветовую тему для блоков",
+                "zh-CN": "主题：现在用户可以选择bloqs颜色"
+            }
+        ],
+        "order": 2
+    },
+    {
+        "version": {
+            "ca-ES": "Bitbloq beta v2.0.8",
+            "de-DE": "Bitbloq beta v2.0.8",
+            "en-GB": "Bitbloq beta v2.0.8",
+            "es-ES": "Beta v2.0.8",
+            "eu-ES": "Bitbloq beta v2.0.8",
+            "fr-FR": "Bitbloq beta v2.0.8",
+            "gl": "Bitbloq beta v2.0.8",
+            "it-IT": "Bitbloq beta v2.0.8",
+            "nl-NL": "Bitbloq beta v2.0.8",
+            "pt-PT": "Bitbloq beta v2.0.8",
+            "ru-RU": "Bitbloq beta v2.0.8",
+            "zh-CN": "Bitbloq beta v2.0.8"
+        },
+        "content": [
+            {
+                "ca-ES": "Compartir amb usuaris ! Ja pots compartir els teus projectes a determinats usuaris escrivint el seu email.",
+                "en-GB": "Share with other users! You can now share your projects with specific users by entering their email address.",
+                "es-ES": "¡ Compartir con usuarios ! Ya puedes compartir tus proyectos a determinados usuarios escribiendo su email.",
+                "eu-ES": "Erabiltzaileekin partekatu! Partekatu zure proiektuak erabiltzaile zehatzekin haien email helbidea idatziz.",
+                "gl": "¡Compartir con usuarios! Xa podes compartir os teus proxectos a determinados usuarios escribindo o seu email.",
+                "it-IT": "Condivisione con gli utenti! Ora puoi condividere i tuoi progetti con determinati utenti scrivendo la loro mail.",
+                "nl-NL": "Deel met andere gebruikers! Je kunt vanaf nu je projecten delen met specifieke gebruikers door hun e-mailadressen in te voeren.",
+                "pt-PT": "Partilhar com utilizadores! Já podes partilhar os teus projetos com utilizadores específicos ao introduzir os respetivos e-mails.",
+                "ru-RU": "Пусть другие пользователи тоже участвуют! Теперь вы можете привлекать определенных пользователей, указавших свой email, к участию в ваших проектах.",
+                "zh-CN": "与用户分享！从现在开事你可以共享你的项目给特定用户通过输入他们的电子邮件。"
+            },
+            {
+                "ca-ES": "Nou entorn de desenvolupament ! Ja pots, des d'un projecte de blocs, programar en un entorn de desenvolupament per Arduino amb auto completar, dreceres de teclat i altres millores que et faran més fàcil programar el codi.",
+                "en-GB": "New development environment! Using a blocks project, you can now program an environment for Arduino with autocomplete, keyboard shortcuts and other improvements that will make it easier to program the code.",
+                "es-ES": "¡ Nuevo entorno de desarrollo ! Ya puedes, desde un proyecto de bloques, programar en un entorno de desarrollo para Arduino con autocompletado, atajos de teclado y otras mejoras que te harán más fácil programar el código.",
+                "eu-ES": "Garapen ingurune berria! Bloke proiektu batetik, betetze automatikoa, teklatu lasterbideak eta kodea programatzea erraztuko duten beste hobekuntzak dituen Arduino-rentzako garapen ingurune batean programatzeko aukera duzu.",
+                "gl": "¡Nova contorna de desenvolvemento! Xa podes, desde un proxecto de bloques, programar nunha contorna de desenvolvemento para Arduino con autocompletado, atallos de teclado e outras melloras que che harán máis fácil programar o código.",
+                "it-IT": "Nuovo ambiente di sviluppo! Puoi già, a partire da un progetto a blocchi, programmare in un ambiente di sviluppo per Arduino con autocompletamento, scorciatoie da tastiera e altri miglioramenti che renderanno più facile la programmazione del codice.",
+                "nl-NL": "Nieuwe ontwikkelomgeving! Met behulp van een blokkenproject kun je nu een omgeving voor Arduino programmeren met autocomplete, snelkoppelingen en andere verbeteringen die het makkelijker maken code te programmeren.",
+                "pt-PT": "Novo ambiente de programação! Já podes, a partir de um projeto de blocos, programar num ambiente de programação para Arduino com conclusão automática, atalhos de teclado e outras melhorias que facilitarão a programação do código.",
+                "ru-RU": "Новая среда разработки! Теперь вы можете, из проекта блоков, программировать в среде разработки для Arduino с автозаполнением, «горячими» клавишами и другими улучшениями, позволяющими программировать код с большей легкостью.",
+                "zh-CN": "新的开发环境！你可以在Arduino的程序开发环境更容易对代码进行编程, 运用自动完成，快捷键和其它改进。"
+            },
+            {
+                "ca-ES": "Web2board actualitzat, corregits errors en la instal·lació i consola ja disponible en MAC.",
+                "en-GB": "Web2board updates, installation errors corrected and serial monitor is now available for Mac.",
+                "es-ES": "Web2board actualizado, corregidos errores en la instalación y serial monitor ya esta disponible en MAC.",
+                "eu-ES": "Web2board eguneratu da. Instalazioaren erroreak konpondu ditugu eta badago serieko monitorea MAC-erako eskuragarri.",
+                "gl": "Web2board actualizado, corrixidos erros na instalación e serial monitor xa esta dispoñible en MAC.",
+                "it-IT": "Web2board aggiornato. Abbiamo corretto errori nell'installazione, e il monitor di serie è già disponibile su MAC.",
+                "nl-NL": "Web2board-updates, installatiefouten gecorrigeerd en seriële monitor is nu beschikbaar voor Mac.",
+                "pt-PT": "Web2board atualizado. Corrigimos erros na instalação e o monitor de série já está disponível em MAC.",
+                "ru-RU": "Обновлено приложение Web2board. Мы исправили ошибки при установке, и монитор последовательного интерфейса теперь доступен на MAC.",
+                "zh-CN": "已经更新Web2board, 纠正安装错误和在Mac上加入系列显示器。"
+            },
+            {
+                "ca-ES": "Millora en la cerca de l'explora amb la inclusió de filtres.",
+                "en-GB": "Improved Explora search with filters now included.",
+                "es-ES": "Mejora en la búsqueda del explora con la inclusión de filtros.",
+                "eu-ES": "Explora-ren bilaketaren hobekuntza iragazkiak gehituz.",
+                "gl": "Mellora na busca do Explora coa inclusión de filtros.",
+                "it-IT": "Miglioramenti nella ricerca di Esplora grazie all'inclusione di filtri.",
+                "nl-NL": "Verbeterde Explore-zoekfunctie met filters.",
+                "pt-PT": "Melhoria na pesquisa do explorador com a inclusão de filtros.",
+                "ru-RU": "Улучшения при поиске с помощью Explora с включением фильтров.",
+                "zh-CN": "因为列入过滤器,所以改进搜索。"
+            }
+        ],
+        "order": 3
+    },
+    {
+        "version": {
+            "ca-ES": "Bitbloq v2.1.0",
+            "de-DE": "Bitbloq v2.1.0",
+            "en-GB": "Bitbloq v2.1.0",
+            "es-ES": "v2.1.0",
+            "eu-ES": "Bitbloq v2.1.0",
+            "fr-FR": "Bitbloq v2.1.0",
+            "gl": "Bitbloq v2.1.0",
+            "it-IT": "Bitbloq v2.1.0",
+            "nl-NL": "Bitbloq v2.1.0",
+            "pt-PT": "Bitbloq v2.1.0",
+            "ru-RU": "Bitbloq v2.1.0",
+            "zh-CN": "Bitbloq v2.1.0"
+        },
+        "content": [
+            {
+                "ca-ES": "Acaba la fase Beta de la nova versió de Bitbloq. Ara que ja és estable, arriba per quedar-se.",
+                "en-GB": "The beta phase of the new version of Bitbloq is over. It´s now stable and it´s here to stay.",
+                "es-ES": "Acaba la fase Beta de la nueva versión de Bitbloq. Ahora que ya es estable, llega para quedarse.",
+                "eu-ES": "Bitbloq bertsio berriaren Beta fasea amaitu da. Jada egonkorra izanik, hemen gelditzeko heldu da.",
+                "gl": "Acaba a fase Beta da nova versión de Bitbloq. Agora que xa é estable, chega para quedar.",
+                "it-IT": "Si è conclusa la fase Beta della nuova versione di Bitbloq. Ora che è stabile, è pronta per restare.",
+                "nl-NL": "De bètafase van de nieuwe versie van Bitbloq is voorbij. Het is nu stabiel en definitief.",
+                "pt-PT": "Fim da fase Beta da nova versão do Bitbloq. Agora que está estável, chegou para ficar.",
+                "ru-RU": "Завершился Beta этап новой версии Bitbloq. Теперь эта версия стабильно работает.",
+                "zh-CN": "完成Bitbloq新版本测试阶段。现在它是稳定的。"
+            },
+            {
+                "ca-ES": "Hem millorat molts coses, sobretot gràcies a les vostres respostes i comentaris. A poc a poc estem intentat ser 100% compatible amb Firefox, esperem que aviat puguem assegurar que està certificat amb Firefox.",
+                "en-GB": "We have improved many things, mostly thanks to your feedback. We are gradually trying to become fully compatible with Firefox, and we hope to be able to guarantee this soon.",
+                "es-ES": "Hemos mejorado muchos cosas, sobre todo gracias a vuestras respuestas y comentarios. Poco a poco estamos intentado ser 100% compatible con Firefox, esperamos que pronto podamos asegurar que está certificado con Firefox.",
+                "eu-ES": "Gauza asko hobetu dugu, batez ere zuen erantzun eta iruzkinei esker. Aldiro-aldiro Firefoxekin guztiz bateragarri izaten saiatzen ari gara, eta laster lortzea espero dugu.",
+                "gl": "Melloramos moitas cousas, sobre todo grazas ás vosas respostas e comentarios. Aos poucos estamos tentado ser 100% compatible con Firefox, esperamos que pronto podamos asegurar que está certificado con Firefox.",
+                "it-IT": "Abbiamo migliorato molte cose, soprattutto grazie alle vostre risposte e ai vostri commenti. Poco a poco, stiamo cercando di essere compatibili al 100% con Firefox: contiamo di farcela in tempi brevi.",
+                "nl-NL": "We hebben veel dingen verbeterd, vooral dankzij jullie feedback. We proberen geleidelijk volledig compatibel te worden met Firefox en hopen dit snel te realiseren.",
+                "pt-PT": "Melhorámos muitas coisas, sobretudo graças às vossas respostas e comentários. Pouco a pouco, estamos a tentar ser 100% compatíveis com o Firefox, esperamos poder sê-lo em breve.",
+                "ru-RU": "Мы усовершенствовали многие разделы, прежде всего, благодаря вашим отзывам и комментариям. Понемногу мы стараемся добиться 100%-ной совместимости с Firefox и надеемся, что это случится довольно скоро.",
+                "zh-CN": "我们已经改善很多东西了,感谢你的答案和评论。渐渐地我们会与Firefox100％兼容,我们希望不久我们能确保与Firefox浏览器该证书。"
+            },
+            {
+                "ca-ES": "Noves traduccions. Volem que Bitbloq sigui una eina global, i per a això estem traduint l'aplicació a Anglès, Alemany, Francès, Portuguès, Rus, Català, Basc, Italià i Neerlandès",
+                "en-GB": "New translations. We want Bitbloq to be a global tool, which is why we are translating the app to English, German, French, Portuguese, Russian, Catalan, Basque, Italian and Dutch.",
+                "es-ES": "Nuevas traducciones. Queremos que Bitbloq sea una herramienta global, y para ello estamos traduciendo la aplicación a Inglés, Alemán, Francés, Portugués, Ruso, Catalán, Euskera, Italiano y Neerlandés",
+                "eu-ES": "Itzulpen berriak. Bitbloq tresna globala izatea nahi dugu; beraz, aplikazioa hurrengo hizkuntzetara itzultzen ari gara: ingelesa, alemana, frantsesa, portugesa, errusiera, katalana, euskara, italiera eta nederlandera",
+                "gl": "Novas traducións. Queremos que Bitbloq sexa unha ferramenta global, e para iso estamos a traducir a aplicación a Inglés, Alemán, Francés, Portugués, Ruso, Catalán, Euskero, italiano e Neerlandés",
+                "it-IT": "Nuove traduzioni. Vogliamo che Bitbloq sia uno strumento globale, e per tale motivo stiamo traducendo l'applicazione in inglese, tedesco, francese, portoghese, russo, catalano, euskera, italiano e olandese.",
+                "nl-NL": "Nieuwe vertalingen. We willen dat Bitbloq een wereldwijd hulpmiddel wordt en daarom hebben we de app vertaald in het Engels, Duits, Frans, Portugees, Russisch, Catalaans, Baskisch, Italiaans en Nederlands.",
+                "pt-PT": "Novas traduções. Queremos que o Bitbloq seja uma ferramenta global e, para isso, estamos a traduzir a aplicação para inglês, francês, português, russo, catalão, basco, italiano e holandês.",
+                "ru-RU": "Новые традиции. Мы хотим, чтобы Bitbloq стал всемирным инструментом, и для этого мы переводим это приложение на различные языки – английский, немецкий, французский, португальский, русский, каталонский, баскский, итальянский и голландский",
+                "zh-CN": "新翻译。我们希望Bitbloq是一个全球性的工具。因此，我们正在翻译到英语，德语，法语，葡萄牙语，俄语，加泰罗尼亚语，巴斯克语，意大利语和荷兰语"
+            }
+        ],
+        "order": 4
+    },
+    {
+        "version": {
+            "ca-ES": "Bitbloq v2.1.1",
+            "en-GB": "Bitbloq v2.1.1",
+            "es-ES": "v2.1.1",
+            "eu-ES": "v2.1.1",
+            "gl": "Bitbloq v2.1.1",
+            "it-IT": "v2.1.1",
+            "nl-NL": "Bitbloq v2.1.1",
+            "pt-PT": "v2.1.1",
+            "ru-RU": "v2.1.1",
+            "zh-CN": "Bitbloq v2.1.1"
+        },
+        "content": [
+            {
+                "ca-ES": "Tenim un nou botó per descarregar tots els teus projectes. El trobaràs a l'apartat \"Els meus projectes\"",
+                "en-GB": "We have added a new button for downloading all your projects. You will find it under “My projects”.",
+                "es-ES": "Tenemos un nuevo botón para descargar todos tus proyectos. Lo encontrarás en el apartado de \"Mis proyectos\".",
+                "eu-ES": "Zure proiektu guztiak deskargatzeko aukera ematen dizun botoi berria dugu. \"Nire proiektuak\" atalean aurkituko duzu.",
+                "gl": "Temos un novo botón para descargar todos os teus proxectos. Atoparalo no apartado dos meus proxectos.",
+                "it-IT": "È disponibile un nuovo pulsante per scaricare tutti i tuoi progetti. Puoi trovarlo nella sezione \"I miei progetti\".",
+                "nl-NL": "We hebben een nieuwe knop toegevoegd voor het downloaden van je projecten. Die vind je onder “Mijn projecten”.",
+                "pt-PT": "Temos um novo botão para descarregares todos os teus projetos. Podes encontrá-lo na secção “Meus projetos”.",
+                "ru-RU": "Появилась новая кнопка для загрузки всех ваших проектов. Вы найдете ее в разделе «Мои проекты».",
+                "zh-CN": "我们有一个下载所有项目的新按钮。它在“我的项目”。"
+            },
+            {
+                "ca-ES": "Hem solucionat l'error que provocava que de vegades els blocs no es volguessin moure.",
+                "en-GB": "We have resolved the error that sometimes prevented blocks from moving.",
+                "es-ES": "Hemos solucionado el error que provocaba que a veces los bloques no se quisieran mover.",
+                "eu-ES": "Batzutan blokeak mugitu nahi ez izatea egiten zuen errorea konpondu dugu.",
+                "gl": "Solucionamos o erro que provocaba que ás veces os bloques non se quixesen mover.",
+                "it-IT": "Abbiamo risolto l'errore che a volte impediva ai blocchi di muoversi.",
+                "nl-NL": "We hebben de fout opgelost die er soms voor zorgde dat blokken niet verplaatst konden worden.",
+                "pt-PT": "Resolvemos o erro que por vezes impedia que os blocos se movessem.",
+                "ru-RU": "Мы исправили ошибку, которая приводила к тому, что иногда блоки не хотели перемещаться.",
+                "zh-CN": "我们已经解决有时会导致块不动的错误。"
+            },
+            {
+                "ca-ES": "Ara quan et comparteixen un projecte de codi, des del IDE podràs fer-te una còpia per poder modificar-ho i guardar-ho.",
+                "en-GB": "When a code project is shared with you via the IDE, you can now make a copy, modify it and save it.",
+                "es-ES": "Ahora cuando te comparten un proyecto de código, desde el IDE podrás hacerte una copia para poder modificarlo y guardarlo.",
+                "eu-ES": "Orain, zurekin kode-proiektu bat partekatzen dutenean, IDE-tik kopia bat egin ahal duzu, hura aldatzeko eta gordetzeko.",
+                "gl": "Agora cando compártenche un proxecto de código, desde o IDE podrás facerche unha copia para poder modificalo e gardalo.",
+                "it-IT": "Ora quando qualcuno condivide un progetto di codice con te, dall'IDE potrai fare una copia per modificarlo e salvarlo.",
+                "nl-NL": "Als een codeproject via de IDE met je gedeeld is, kun je voortaan een kopie maken, wijzigen en opslaan.",
+                "pt-PT": "Agora, quando partilham contigo um projeto de código, a partir do IDE, podes fazer uma cópia para modificá-lo e guardá-lo.",
+                "ru-RU": "Теперь, когда вы будете принимать с кем-либо совместное участие в проекте кода, из IDE вы сможете делать его копии, чтобы изменять и хранить его.",
+                "zh-CN": "从现在开始当您从IDE中共享项目的代码，你可以编辑和存储一个副本。"
+            },
+            {
+                "ca-ES": "Arreglat l'error del bloc avançat de components, que provocava que no reflectís els canvis realitzats després de col·locar-ho a l'entorn de treball.",
+                "en-GB": "The advanced components block error where changes were not applied after placing it in the work area has been fixed.",
+                "es-ES": "Arreglado el error del bloque avanzado de componentes, que provocaba que no reflejara los cambios realizados después de colocarlo en el entorno de trabajo.",
+                "eu-ES": "Osagaien bloke aurreratuaren errorea konpondu dugu, lan-ingurunean kokatu ondoren burututako aldaketak ez islatzea egiten zuena.",
+                "gl": "Arranxado o erro do bloque avanzado de compoñentes, que provocaba que non reflectise os cambios realizados despois de colocalo na contorna de traballo.",
+                "it-IT": "Sistemato l'errore del blocco avanzato dei componenti, che impediva la visibilità delle modifiche realizzate dopo aver collocato il blocco nell'ambiente di lavoro.",
+                "nl-NL": "De fout met gevorderde componentenblokken verholpen waarbij wijzigingen na verplaatsing in het project niet werden doorgevoerd.",
+                "pt-PT": "Resolvido o erro do bloco avançado de componentes que fazia com que as alterações não fossem aplicadas após colocá-lo no ambiente de trabalho.",
+                "ru-RU": "Была исправлена ошибка, связанная с продвинутым блоком компонентов, которая приводила к тому, что в нем не отображались изменения, сделанные после его размещения в рабочей среде.",
+                "zh-CN": "修正块先进元器件的错误,从而导致不能反映放置在工作环境中后所做的更改。"
+            },
+            {
+                "ca-ES": "Ja tenim els nous idiomes disponibles. Estem preparant encara més perquè l'idioma no sigui un problema per apropar-te a la tecnologia.",
+                "en-GB": "New languages are now available. We are preparing even more so that language won´t be a barrier to getting to grips with technology.",
+                "es-ES": "Ya tenemos los nuevos idiomas disponibles. Estamos preparando aún más para que el idioma no sea un problema para acercarte a la tecnología.",
+                "eu-ES": "Jadanik daude eskuragarri hizkuntza berriak. Teknologia erabiltzeko hizkuntza arazo bat izan ez dadin, gehiago prestatzen ari gara.",
+                "gl": "Xa temos os novos idiomas dispoñibles. Estamos a preparar aún máis para que o idioma non sexa un problema para achegarche á tecnoloxía.",
+                "it-IT": "Sono già disponibili le nuove lingue. Stiamo apportando ulteriori miglioramenti per far sì che la lingua non sia un ostacolo per il tuo rapporto con la tecnologia.",
+                "nl-NL": "Er zijn nieuwe talen beschikbaar. We gaan er nog meer toevoegen, zodat taal geen barrière is om grip te krijgen op technologie.",
+                "pt-PT": "Já temos os novos idiomas disponíveis. Estamos a preparar ainda mais para que o idioma não se apresente como um problema à aproximação à tecnologia.",
+                "ru-RU": "Теперь у нас доступны новые языки. В настоящее время мы занимаемся дальнейшей работой в этой области для того, чтобы язык не являлся для вас проблемой при изучении новых технологий.",
+                "zh-CN": "我们已经有新的语言。为了让语言不是接近技术的问题,我们正在准备更多语言。"
+            },
+            {
+                "ca-ES": "L'enllaç de Web2Board en Mac de la pàgina de descàrregues ja està arreglat.",
+                "en-GB": "The Web2Board link to the downloads page on Mac OS has been fixed.",
+                "es-ES": "El enlace de Web2Board en Mac de la página de descargas ya está arreglado.",
+                "eu-ES": "Konpondu dugu deskarga orriaren Web2Board-en esteka Mac-en.",
+                "gl": "O enlace de Web2Board en Mac da páxina de descargas xa está arranxado.",
+                "it-IT": "Il link di Web2Board sul Mac della pagina di download è stato già sistemato.",
+                "nl-NL": "De Web2Board-link op de downloadpagina op Mac OS is hersteld.",
+                "pt-PT": "Foi corrigido o link para o Web2Board para Mac na página de transferências.",
+                "ru-RU": "Была исправлена ссылка на Web2Board в ОС Mac на странице загрузок.",
+                "zh-CN": "在Mac的Web2Board下载页面链接已经解决了。"
+            },
+            {
+                "ca-ES": "Hem canviat el color dels desplegables perquè siguin més fàcils de llegir.",
+                "en-GB": "We have changed the colour of the drop-down menus to make them easier to read.",
+                "es-ES": "Hemos cambiado el color de los desplegables para que sean más fáciles de leer.",
+                "eu-ES": "Goitibeherako osagaien kolorea aldatu dugu, irakurtzeko errazagoak izan daitezen.",
+                "gl": "Cambiamos a cor dos desplegables para que sexan máis fáciles de ler.",
+                "it-IT": "Abbiamo cambiato il colore dei pop-up per consentirne una più facile lettura.",
+                "nl-NL": "We hebben de kleur van de vervolgkeuzelijsten gewijzigd om ze beter leesbaar te maken.",
+                "pt-PT": "Alterámos a cor dos desdobráveis para que sejam mais fáceis de ler.",
+                "ru-RU": "Мы поменяли цвет выпадающих окон, чтобы их было проще читать.",
+                "zh-CN": "为了更容易阅读下拉列表,我们已经改变他的颜色。"
+            }
+        ],
+        "order": 5
+    },
+    {
+        "version": {
+            "ca-ES": "Bitbloq v2.1.2",
+            "de-DE": "Bitbloq v2.1.2",
+            "en-GB": "Bitbloq v2.1.2",
+            "es-ES": "v2.1.2",
+            "eu-ES": "Bitbloq v2.1.2",
+            "fr-FR": "Bitbloq v2.1.2",
+            "gl": "Bitbloq v2.1.2",
+            "it-IT": "Bitbloq v2.1.2",
+            "nl-NL": "Bitbloq v2.1.2",
+            "pt-PT": "Bitbloq v2.1.2",
+            "ru-RU": "Bitbloq v2.1.2",
+            "zh-CN": "Bitbloq v2.1.2"
+        },
+        "content": [
+            {
+                "ca-ES": "Hem actualitzat Web2Board en Windows perquè funcioni correctament en les versions de 32 i 64 bits.",
+                "en-GB": "We have updated Web2Board on Windows so that it functions correctly in the 32-bit and 64-bit versions.",
+                "es-ES": "Hemos actualizado Web2Board en Windows para que funcione correctamente en las versiones de 32 y 64 bits.",
+                "eu-ES": "Windows-en Web2Board eguneratu dugu, 32 eta 64 bit bertsioetan ondo ibil dadin.",
+                "gl": "Actualizamos Web2Board en Windows para que funcione correctamente nas versións de 32 e 64 bits.",
+                "it-IT": "Abbiamo aggiornato Web2Board su Windows affinché funzioni correttamente nelle versioni da 32 e 64 bit.",
+                "nl-NL": "We hebben Web2Board voor Windows geüpdatet zodat die correct functioneert in de 32-bit en de 64-bit versies.",
+                "pt-PT": "Atualizámos o Web2Board no Windows para que funcione corretamente nas versões de 32 e 64 bits.",
+                "ru-RU": "Мы обновили Web2Board для Windows, чтобы приложение корректно работало в 32- и 64-битных версиях."
+            },
+            {
+                "ca-ES": "Nou modal de professor, en el qual preguntem el rol que exerceix l'usuari.",
+                "en-GB": "New teacher mode, where we ask the user to state their role.",
+                "es-ES": "Nuevo modal de profesor, en el cual preguntamos el rol que desempeña el usuario.",
+                "eu-ES": "Irakasle modal berria, bertan erabiltzailearen zeregina zein den galdetzen dugularik.",
+                "gl": "Novo modal de profesor, no cal preguntamos o rol que desempeña o usuario.",
+                "nl-NL": "Nieuwe docentenmodus, waar we de gebruiker vragen naar zijn of haar rol."
+            },
+            {
+                "ca-ES": "Nou apartat en registre per saber si l'usuari és un professor.",
+                "en-GB": "New registration section to determine whether the user is a teacher.",
+                "es-ES": "Nuevo apartado en registro para saber si el usuario es un profesor.",
+                "eu-ES": "Izena ematerakoan, atal berria gehitu dugu erabiltzailea irakaslea den jakiteko.",
+                "gl": "Novo apartado en rexistro para saber si o usuario é un profesor.",
+                "it-IT": "Nuova sezione nel registro, per sapere se l'utente è un professore.",
+                "nl-NL": "Nieuwe registratiesectie om te bepalen of de gebruiker een docent is.",
+                "pt-PT": "Nova secção no registo para saber se o utilizador é professor.",
+                "ru-RU": "Новый раздел в реестре, позволяющий знать, является ли пользователь специалистом."
+            },
+            {
+                "ca-ES": "La cerca d'explora ara es realitzarà segons el nom del projecte i el nom de l'usuari.",
+                "en-GB": "Explore now searches by username and project name.",
+                "es-ES": "La búsqueda de explora ahora se realizará según el nombre del proyecto y el nombre del usuario.",
+                "eu-ES": "Explora-ren bilaketa orain proiektuaren izenari eta erabiltzailearen izenari jarraiki egingo da.",
+                "gl": "A busca de Explora agora se realizarán según o nome do proxecto e o nome do usuario.",
+                "it-IT": "Ora le ricerche con Esplora verranno realizzate secondo il nome del progetto e il nome dell'utente.",
+                "nl-NL": "Explore zoekt vanaf nu op gebruikersnaam en projectnaam.",
+                "pt-PT": "A pesquisa com o Explora agora efetua-se através do nome do projeto e do nome do utilizador.",
+                "ru-RU": "Поиск с помощью Explora теперь осуществляется в соответствии с названием проекта и именем пользователя."
+            },
+            {
+                "ca-ES": "Millora dels filtres en explora perquè un usuari pugui compartir la seva cerca.",
+                "en-GB": "Improved filters in Explore so that the user can share their search.",
+                "es-ES": "Mejora de los filtros en explora para que un usuario pueda compartir su búsqueda.",
+                "eu-ES": "Explora-ren iragazkien hobekuntza erabiltzaileak bere bilaketa partekatzeko aukera izan dezan.",
+                "gl": "Mellora dos filtros en Explora para que un usuario poida compartir a sua busca.",
+                "it-IT": "Miglioramenti ai filtri di Esplora per consentire a un utente di condividere la propria ricerca.",
+                "nl-NL": "Verbeterde filters in Explore zodat de gebruiker zijn zoekopdracht kan delen.",
+                "pt-PT": "Melhoria dos filtros do Explora para que um utilizador possa partilhar a sua pesquisa.",
+                "ru-RU": "Улучшение фильтров Explora для того, чтобы пользователь мог делиться результатами своего поиска."
+            },
+            {
+                "ca-ES": "Millores a l'hora d'importar un projecte.",
+                "en-GB": "Improvements to importing of projects.",
+                "es-ES": "Mejoras a la hora de importar un proyecto.",
+                "eu-ES": "Proiektuak inportatzeko hobekuntzak.",
+                "gl": "Melloras á hora de importar un proxecto.",
+                "it-IT": "Miglioramenti nell'importazione dei progetti.",
+                "nl-NL": "Verbeteringen voor het importeren van projecten.",
+                "pt-PT": "Melhorias na importação de um projeto.",
+                "ru-RU": "Улучшения в связи со временем импорта проекта."
+            }
+        ],
+        "order": 6
+    },
+    {
+        "version": {
+            "ca-ES": "Bitbloq v2.1.3",
+            "en-GB": "Bitbloq v2.1.3",
+            "es-ES": "v2.1.3",
+            "eu-ES": "v2.1.3",
+            "gl": "Bitbloq v2.1.3",
+            "it-IT": "v2.1.3",
+            "nl-NL": "Bitbloq v2.1.3",
+            "pt-PT": "v2.1.3",
+            "ru-RU": "v2.1.3"
+        },
+        "content": [
+            {
+                "ca-ES": "Arreglat l'error que provocava que no es guardés en els desplegables una variable re nomenada.",
+                "en-GB": "Error resolved that was preventing renamed variables from being saved in the drop-downs menus.",
+                "es-ES": "Arreglado el error que provocaba que no se guardase en los desplegables una variable renombrada.",
+                "eu-ES": "Izena aldatutako aldagai bat goitibeherako osagaietan ez gordetzea egiten zuen errorea konpondu dugu.",
+                "gl": "Arranxado o erro que provocaba que non se gardase nos desplegables unha variable renombrada.",
+                "it-IT": "Sistemato l'errore che impediva di salvare nei pop-up una variabile rinominata.",
+                "nl-NL": "Fout opgelost waardoor variabelen waarvan de naam was veranderd, niet konden worden opgeslagen in de vervolgkeuzelijsten..",
+                "pt-PT": "Corrigido o erro que fazia com que não fosse possível guardar nos desdobráveis uma variável cujo nome tinha sido alterado.",
+                "ru-RU": "Была исправлена ошибка, которая приводила к тому, что в выпадающих окнах не сохранялась отмеченная переменная."
+            },
+            {
+                "ca-ES": "Ara des de la secció de \"El teu compte\" pots indicar si ets un professor o si vols rebre totes les notificacions que enviem des de Bitbloq.",
+                "en-GB": "In “Your account”, you can now indicate that you are a teacher and whether you want to receive all notifications sent from Bitbloq.",
+                "es-ES": "Ahora desde la sección de \"Tu cuenta\" puedes indicar si eres un profesor o si quieres recibir todas las notificaciones que enviemos desde Bitbloq.",
+                "eu-ES": "Orain, “Zure kontua” atalean irakaslea zarela edo Bitbloq-etik bidaltzen ditugun jakinarazpen guztiak jaso nahi dituzula adieraz dezakezu.",
+                "gl": "Agora desde a sección da túa conta podes indicar si es un profesor ou si queres recibir todas as notificacións que enviemos desde Bitbloq.",
+                "it-IT": "Adesso, dalla sezione \"Il tuo account\", puoi indicare se sei un professore o se desideri ricevere tutte le notifiche che inviamo da Bitbloq.",
+                "nl-NL": "In “Jouw account” kun je nu aangeven of je een docent bent en of je alle notificaties van Bitbloq wilt ontvangen.",
+                "pt-PT": "Agora, a partir da secção “Tua conta”, podes indicar se és um professor ou se queres receber todas as notificações que enviamos a partir do Bitbloq.",
+                "ru-RU": "Теперь в разделе «Ваша учетная запись» вы можете указать, являетесь ли вы специалистом и хотите ли вы получать все уведомления, которые мы отправляем касательно Bitbloq."
+            },
+            {
+                "ca-ES": "Arreglat l'error que provocava que en carregar un projecte de vegades no carregués bé els desplegables de components maquinari.",
+                "en-GB": "Error resolved that was causing projects to load incorrectly in the hardware components drop-down menus.",
+                "es-ES": "Arreglado el error que provocaba que al cargar un proyecto a veces no cargase bien los desplegables de componentes hardware.",
+                "eu-ES": "Proiektu bat kargatzerakoan, batzuetan hardwarearen osagaien goitibeherako osagaiak ondo ez kargatzea egiten zuen errorea konpondu dugu.",
+                "gl": "Arranxado o erro que provocaba que ao cargar un proxecto ás veces non cargase ben os desplegables de compoñentes hardware.",
+                "it-IT": "Sistemato l'errore che impediva il caricamento, durante il caricamento di un progetto, dei pop-up di componenti hardware.",
+                "nl-NL": "Fout opgelost die ervoor zorgde dat projecten niet correct werden geladen in de hardwarecomponenten van de vervolgkeuzelijsten.",
+                "pt-PT": "Corrigido o erro que fazia com que os desdobráveis de componentes hardware não fossem bem carregados ao carregar um projeto.",
+                "ru-RU": "Была исправлена ошибка, которая приводила к тому, что при загрузке проекта иногда случались неполадки с загрузкой выпадающих окон компонентов аппаратного обеспечения."
+            },
+            {
+                "ca-ES": "Zowi està aquí ! Selecciona-ho en la pestanya de maquinari, a l'apartat de \"Robots\" i utilitza els nous blocs per donar-li vida, que es marqui un ball o programar-ho directament amb codi Arduino.",
+                "en-GB": "Zowi has arrived! Select it under “Robots” in the hardware tab and use the new blocks to create it to life, make it dance or program it directly with Arduino code.",
+                "es-ES": "¡ Zowi está aquí ! Selecciónalo en la pestaña de hardware, en el apartado de \"Robots\" y utiliza los nuevos bloques para darle vida, que se marque un baile o programarlo directamente con código Arduino.",
+                "eu-ES": "Zowi hemen dago! Hauta ezazu hardwarearen erlaitzean, “Robotak” atalean, eta erabili bloke berriak hari bizitza emateko, dantza egin dezan edo zuzenean Arduino kodea erabiliz programatzeko.",
+                "gl": "¡Zowi está aquí! Seleccinalo na pestana de hardware, no apartado de Robots e utiliza os novos bloques para darlle vida, que se marque un baile ou programalo directamente con código Arduino.",
+                "it-IT": "Zowi è qui! Selezionalo nella scheda dell'hardware, nella sezione \"Robot\", e utilizza i nuovi blocchi per dargli vita, farlo ballare o programmarlo direttamente con il codice Arduino.",
+                "nl-NL": "Zowi is gearriveerd! Selecteer hem onder “Robots” op het tabblad hardware en gebruik de nieuwe blokken om hem tot leven te wekken, hem te laten dansen of hem direct met Arduino-code te programmeren.",
+                "pt-PT": "O Zowi está aqui! Seleciona-o no separador de hardware, na secção “Robots”, e utiliza os novos blocos para dar-lhe vida, fazer com que dance ou programá-lo diretamente com código Arduino.",
+                "ru-RU": "Zowi уже здесь! Выберите его во вкладке аппаратного обеспечения в разделе «Роботы» и используйте новые блоки, чтобы вдохнуть в него жизнь, чтобы он начал двигаться, или запрограммируйте его напрямую с помощью кода Arduino."
+            },
+            {
+                "ca-ES": "Nous components del Zum Extension Kit afegits. Ara teniu disponibles el Rellotge de Temps Real per obtenir la data i hora actuals, el Led RGB per poder canviar els colors mitjançant codi del teu led, el Encoder per mesurar angles, el sensor d'Humitat i Temperatura per crear la teva primera estació mediambiental , el Final de Carrera per detectar col·lisions i el sensor de so per detectar sorolls.\n\nAfegeix-los al teu robot o projecte!",
+                "en-GB": "New components of the Zum Extension Kit added. You now have the Real Time Clock for obtaining the current time and date, the RGB LED for changing colours via your LED, Encoder for measuring angles, the humidity and temperature sensor for creating your first environmental monitoring centre, the Endstop for detecting collisions and the sound sensor for detecting noise.\n\nAdd them to your robot or project!",
+                "es-ES": "Nuevos componentes del Zum Extension Kit añadidos. Ahora tenéis disponibles el Reloj de Tiempo Real para obtener la fecha y hora actuales, el Led RGB para poder cambiar los colores mediante código de tu led, el Encoder para medir ángulos, el sensor de Humedad y Temperatura para crear tu primera estación medioambiental , el Final de Carrera para detectar colisiones y el sensor de sonido para detectar ruidos.\n\n¡Añádelos a tu robot o proyecto!",
+                "eu-ES": "Zum Extension Kit-arean osagai berriak gehitu ditugu. Orain badaukazue eskuragarri eguneko data eta ordua jasotzeko denbora errealeko erlojua, zure led-aren kodea erabiliz koloreak aldatzeko RGB led-a, angeluak neurtzeko encoder-a, zure lehen estazio meteorologikoa sortzeko hezetasun eta tenperatura sentsorea, talkak detektatzeko ibilbitartearen muga eta soinuak detektatzeko soinu-sentsorea.\n\nGehitu iezazkiozu zure robot edo proiektuari!",
+                "gl": "Novos compoñentes do Zum Extension Kit engadidos. Agora tedes dispoñibles o Reloxo de Tempo Real para obter a data e hora actuais, o Led RGB para poder cambiar as cores mediante código no teu led, o Encoder para medir ángulos, o sensor de Humidade e Temperatura para crear a túa primeira estación ambiental , o Final de Carreira para detectar colisións e o sensor de son para detectar ruídos.\n\n¡Engadelos ao teu robot ou proxecto!",
+                "it-IT": "Aggiunti nuovi componenti del Zum Extension Kit. Adesso sono disponibili l'Orologio in tempo reale, per ottenere la data e l'orario attuali, il led RGB, per poter cambiare i colori tramite il codice del tuo led, l'encoder, per misurare gli angoli, il sensore di umidità e temperatura per creare la tua prima stazione ambientale, il sensore di fine corsa, per rilevare urti, e il sensore audio per rilevare rumori.\n\nAggiungili al tuo robot o progetto!",
+                "nl-NL": "Nieuwe componenten van de Zum-uitbreidingskit toegevoegd. Je kunt nu de Realtimeklok selecteren om de huidige tijd en datum te verkrijgen, de RGB LED om kleuren te wijzigen via je LED, Encoder om hoeken te meten, de vochtigheids- en temperatuursensor om je eerste weerstation te maken, de Eindstop om botsingen waar te nemen en de geluidssensor om geluid waar te nemen.\n\nVoeg ze toe aan je robot of project!",
+                "pt-PT": "Novos componentes do Zum Extension Kit adicionados. Agora tens disponíveis o Relógio em Tempo Real para obter a data e hora atuais e o led RGB para poderes alterar as cores segundo o código do teu led, o encoder para medir ângulos, o sensor de humidade e temperatura para criares a tua primeira estação meteorológica, o final de percurso para que sejam detetadas colisões e o sensor de som para detetar ruídos.\n\nAdiciona-os ao teu robot ou projeto.",
+                "ru-RU": "Новые добавленные компоненты набора Zum Extension Kit. Теперь вам доступны часы реального времени, позволяющие узнавать текущую дату и время, светодиоды RGB, с помощью которых можно изменять цвета, используя код ваших светодиодов, энкодер для измерения углов, датчик влажности и температуры для создания вашей первой оценки состояния окружающей среды, концевой выключатель для определения столкновений и датчик звука для выявления шумов.\n\nДобавьте эти функции своему роботу или проекту!"
+            }
+        ],
+        "order": 7
+    },
+    {
+        "version": {
+            "ca-ES": "v2.1.4",
+            "en-GB": "v2.1.4",
+            "es-ES": "v2.1.4",
+            "eu-ES": "v2.1.4",
+            "gl": "v2.1.4",
+            "it-IT": "v2.1.4",
+            "nl-NL": "v2.1.4",
+            "pt-PT": "v2.1.4",
+            "ru-RU": "v2.1.4"
+        },
+        "content": [
+            {
+                "ca-ES": "Ja funciona l’enllaç de la pàgina de descàrregues d’Ubuntu.",
+                "en-GB": "Link to Ubuntu downloads page fixed.",
+                "es-ES": "Arreglado el enlace de la página de descargas de Ubuntu.",
+                "eu-ES": "Ubunturen deskarga orriaren esteka konpondu dugu.",
+                "gl": "Arranxada a ligazón da páxina de descargas de Ubuntu.",
+                "it-IT": "Sistemato il collegamento della pagina di download di Ubuntu.",
+                "nl-NL": "Link naar Ubuntu-downloadpagina hersteld.",
+                "pt-PT": "Corrigido o link da página de transferências de Ubuntu.",
+                "ru-RU": "Была исправлена ссылка на странице загрузок Ubuntu."
+            }
+        ],
+        "order": 8
+    },
+    {
+        "version": {
+            "ca-ES": "v2.1.5",
+            "en-GB": "v2.1.5",
+            "es-ES": "v2.1.5",
+            "eu-ES": "v2.1.5",
+            "gl": "v2.1.5",
+            "it-IT": "v2.1.5",
+            "nl-NL": "v2.1.5",
+            "pt-PT": "v2.1.5",
+            "ru-RU": "v2.1.5"
+        },
+        "content": [
+            {
+                "ca-ES": "Solucionat l’error que feia que, en generar codi amb diversos bloqs en un bloqInput amb un dropdown, posés sempre el símbol del primer combo.",
+                "en-GB": "Error fixed that always displayed the first combo symbol on generating code with various blocks in a bloqInput with a drop-down.",
+                "es-ES": "Arreglado el error que hacía que, al generar código con varios bloques en un bloqInput con un dropdown, pusiera siempre el símbolo del primer combo.",
+                "eu-ES": "Dropdown bat erabiliz bloqInput batean bloke anitzeko kodea sortzean, beti lehen konboaren sinboloa jartzea egiten zuen errorea konpondu dugu.",
+                "gl": "Arranxado o error que facía que, ao xerar código con varios bloques nun bloqInput cun dropdown, puxese sempre o símbolo do primeiro combo.",
+                "it-IT": "Sistemato l'errore per cui veniva posizionato sempre il simbolo della prima combo durante la generazione di codice con vari blocchi in un bloqInput con un dropdown.",
+                "nl-NL": "Fout opgelost die altijd het eerste combosymbool weergaf bij het genereren van code met verschillende blokken in een bloqInput met een vervolgkeuze.",
+                "pt-PT": "Corrigido o erro que fazia com que, ao gerar código com vários blocos num bloqInput com um dropdown, fosse sempre apresentado o primeiro símbolo da combinação.",
+                "ru-RU": "Была исправлена ошибка, которая приводила к тому, что при генерации кода с различными блоками в bloqInput с выпадающим окном всегда ставился значок первого блока выпадающего меню."
+            },
+            {
+                "ca-ES": "Solucionat l’error que retornava malament el tipus de funció quan un bloc de funció amb paràmetres tenia connectats diversos blocs interns de selecció de variables.",
+                "en-GB": "Error fixed that returned the wrong type of function when a function block with parameters had various internal blocks connected for selecting variables.",
+                "es-ES": "Arreglado el error que devolvía mal el tipo de la función cuando un bloque de función con parámetros tenía conectados varios bloques internos de selección de variables.",
+                "eu-ES": "Parametrodun funtzio-bloke batek aldagaien hautaketako hainbat barne-bloke konektatuta zituenean funtzio mota gaizki ematen zuen errorea konpondu dugu.",
+                "gl": "Arranxado o error que devolvía mal o tipo da función cando un bloque de función con parámetros tiña conectados varios bloques internos de selección de variables.",
+                "it-IT": "Sistemato l'errore per cui, quando un blocco di funzione con parametri aveva vari blocchi interni di selezione di variabili, veniva indicato male il tipo di comunicazione.",
+                "nl-NL": "Fout opgelost die een verkeerd functietype teruggaf indien een functieblok met parameters verschillende interne blokken verbond voor het selecteren van variabelen.",
+                "pt-PT": "Corrigido o erro que devolvia mal o tipo de função quando um bloco de função com parâmetros tinha ligados vários blocos internos de seleção de variáveis.",
+                "ru-RU": "Была исправлена ошибка, связанная с некорректным возвратом типа функции, когда блок функции с параметрами подсоединял различные внутренние блоки выбора переменных."
+            },
+            {
+                "ca-ES": "Ara al bloc d’argument permet seleccionar el tipus “int”.",
+                "en-GB": "The argument block now allows the “int” type to be selected.",
+                "es-ES": "Ahora el bloque de argumento permite seleccionar el tipo \"int\".",
+                "eu-ES": "Orain, argumentu blokeak “int” mota hautatzeko aukera ematen du.",
+                "gl": "Agora o bloque de argumento permite seleccionar o tipo \"int\".",
+                "it-IT": "Adesso il blocco dell'argomento consente di selezionare il tipo \"int\".",
+                "nl-NL": "Het argument blok staat toe type “int” te selecteren.",
+                "pt-PT": "Agora, o bloco de argumento permite selecionar o tipo “int”.",
+                "ru-RU": "Теперь блок аргумента позволяет выбирать тип «int»."
+            },
+            {
+                "ca-ES": "El bloc d’operacions bàsiques ara posa l’operació entre parèntesi.",
+                "en-GB": "The calculation is now placed in brackets in the basic calculations block.",
+                "es-ES": "El bloque de operaciones básicas ahora pone la operación entre paréntesis.",
+                "eu-ES": "Oinarrizko eragiketen blokeak orain eragiketa parentesi artean jartzen du.",
+                "gl": "O bloque de operacións básicas agora pon a operación entre paréntese.",
+                "it-IT": "Il blocco di operazioni di base mette adesso l'operazione tra parentesi.",
+                "nl-NL": "De calculatie is tussen haakjes geplaatst in het basiscalculatieblok.",
+                "pt-PT": "O bloco de operações básicas agora coloca a operação entre parênteses.",
+                "ru-RU": "Блок основных операций теперь осуществляет операции в скобках."
+            }
+        ],
+        "order": 9
+    },
+    {
+        "version": {
+            "ca-ES": "v2.1.6",
+            "en-GB": "v2.1.6",
+            "es-ES": "v2.1.6",
+            "eu-ES": "v2.1.6",
+            "gl": "v2.1.6",
+            "it-IT": "v2.1.6",
+            "nl-NL": "v2.1.6",
+            "pt-PT": "v2.1.6",
+            "ru-RU": "v2.1.6"
+        },
+        "content": [
+            {
+                "ca-ES": "S’han modificat diversos textos del registre.",
+                "en-GB": "Errors corrected in the texts that appear during registration.",
+                "es-ES": "Arreglados algunos textos en el registro.",
+                "eu-ES": "Erregistroan hainbat testu konpondu dugu.",
+                "gl": "Arranxados algúns textos no rexistro.",
+                "it-IT": "Sistemati alcuni testi nel registro.",
+                "nl-NL": "Fouten gecorrigeerd die in de tekst stonden die tijdens de registratie werd weergegeven.",
+                "pt-PT": "Corrigidos alguns textos no registo.",
+                "ru-RU": "Были исправлены некоторые тексты в реестре."
+            }
+        ],
+        "order": 10
+    },
+    {
+        "version": {
+            "ca-ES": "v2.1.7",
+            "en-GB": "v2.1.7",
+            "es-ES": "v2.1.7",
+            "eu-ES": "v2.1.7",
+            "gl": "v2.1.7",
+            "it-IT": "v2.1.7",
+            "nl-NL": "v2.1.7",
+            "pt-PT": "v2.1.7",
+            "ru-RU": "v2.1.7"
+        },
+        "content": [
+            {
+                "ca-ES": "Nou fòrum! Tens dubtes? Suggeriments? Vols posar-te en contacte amb gent que està aprenent igual que tu? Accedeix al nou Fòrum de Bitbloq des de la secció d’Ajuda. No et tallis!",
+                "en-GB": "Translations updated. Largely English and German.",
+                "es-ES": "Actualización de las traducciones. Sobre todo inglés y alemán.",
+                "eu-ES": "Itzulpenen eguneratzea. Batez ere, ingelesa eta alemana.",
+                "nl-NL": "Nieuw forum! Heb je nog vragen? Suggesties? Wil je in contact komen met mensen die net als jij leren? Krijg toegang tot het nieuwe Bitbloq Forum via de Helpsectie en wees niet verlegen!",
+                "pt-PT": "Novo Fórum! Tens questões? Sugestões? Queres entrar em contacto com pessoas que estão a aprender como tu? Acede ao novo Fórum do Bitbloq a partir da secção de Ajuda. Não tenhas medo!",
+                "ru-RU": "Новый форум! У вас есть вопросы? Предложения? Вы хотели бы пообщаться с людьми, которые тоже обучаются, как и вы? Заходите на новый форум Bitbloq из раздела «Помощь». Не ограничивайте себя!"
+            }
+        ],
+        "order": 11
+    },
+    {
+        "version": {
+            "ca-ES": "v2.1.8",
+            "en-GB": "v2.1.8",
+            "es-ES": "v2.1.8",
+            "eu-ES": "v2.1.8"
+        },
+        "content": [
+            {
+                "ca-ES": "Nou fòrum! Tens dubtes? Suggeriments? Vols posar-te en contacte amb gent que està aprenent igual que tu? Accedeix al nou Fòrum de Bitbloq des de la secció d’Ajuda. No et tallis!",
+                "en-GB": "New forum! Got any queries? Suggestions? Want to connect with people who are learning just like you? Access the new Bitbloq Forum via the Help section. Don´t be shy?",
+                "es-ES": "¡Nuevo Foro! ¿Tienes dudas? ¿Sugerencias? ¿Quieres entrar en contacto con gente que está aprendiendo como tú? Accede al nuevo Foro de Bitbloq desde la sección de Ayuda. ¡No te cortes!",
+                "eu-ES": "Foro berria! Zalantzarik? Iradokizunik? Zure moduan ikasten ari den jendearekin harremanetan jartzeko nahia duzu? Sar zaitez Bitbloq foro berrian Laguntza ataletik. Ez izan lotsati!",
+                "gl": "Novo Foro! Tes dúbidas? Suxestións? Queres entrar en contacto con xente que está a aprender coma ti ? Accede ao novo Foro de Bitbloq dende a sección de Axuda. Non te cortes!",
+                "it-IT": "Nuovo forum! Hai dei dubbi? Consigli? Vuoi conoscere altri che come te stanno imparando? Accedi al nuovo Forum di Bitbloq tramite la sezione Aiuto. Cosa aspetti?"
+            }
+        ],
+        "order": 12
+    }
+]

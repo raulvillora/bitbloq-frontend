@@ -1,0 +1,82 @@
+// /*------------------------------------*\
+//     #GLOBAL VALUES
+// \*------------------------------------*/
+@font-face {
+  font-family: 'Roboto';
+  src: url('../styles/fonts/roboto.eot'); /* IE9 Compat Modes */
+  src: url('../styles/fonts/roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../styles/fonts/roboto.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../styles/fonts/roboto.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../styles/fonts/roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../styles/fonts/roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+$viewportHeight: 100vh;
+$sectionHeaderHeight: 70px;
+$sectionSubHeaderHeight: 70px;
+$tabsLayout-headerHeight: 70px;
+$tabsLayout-asideHeight: 60px;
+$font-size-h1: 24px;
+$font-size-h2: 20px;
+$font-size-h3: 16px;
+
+$font-color-heading: #373b44;
+$font-color-base: #5d6069;
+$font-color-secondary: #8c919b;
+$font-color-disabled: #c0c3c9;
+
+// Brand colors
+$brand-primary            : #82ad3a;
+$brand-primary-text       : $font-color-base;
+$brand-secondary          : #dddddd;
+$brand-secondary-text     : $brand-secondary;
+
+// Links
+$link-color               : $brand-primary;
+$link-hover-color         : false;
+$link-active-color        : false;
+$link-visited-color       : false;
+$link-focus-color         : false;
+
+// Text
+$selection-text-color-bg  : $brand-secondary;
+$selection-text-color     : invert($brand-primary);
+
+// Typography
+$font-family-base         : "Roboto", sans-serif;
+$font-size-small          : 12px;
+$font-size-base           : 14;
+$font-size-medium         : 18;
+$font-size-large          : 20;
+$line-height-base         : 22;
+
+// Scaffolding
+$body-font-size           : $font-size-base;
+$body-bg                  : white;
+$body-color               : $brand-primary-text;
+
+// Print
+$print-text-color         : $brand-primary-text;
+$print-link-visited-color : $brand-primary ;
+$print-border-color       : $brand-secondary;
+$print-page-margin        : 0.5cm;
+
+// Breakpoints
+$slicer-breakpoints       : 0    480px    768px    1024px    1224px;
+$slicer-breakpoint-names  : 'vsmall'    'small'    'medium'    'large'    'vlarge';
+
+// Grid
+$grid-system              : true;
+$grid-columns             : 12;
+$grid-gutter              : 30;
+
+// Responsive
+$responsive-visibility    : true;
+
+// Utils
+$utils-classes            : true;
+
+// Animations
+$animation-effects        : true;
+$transition-duration      : 0.5s;
+$transition-timing        : linear;
+$transition-delay         : 0;

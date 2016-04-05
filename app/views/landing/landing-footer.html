@@ -1,0 +1,37 @@
+<footer class="landing--footer">
+    <div class="footer--top">
+        <i class="fa fa-globe"></i>
+        <ul class="left">
+            <li ng-repeat="language in envData.config.supportedLanguages" ng-class="{'active':translate.use() === language}">
+                <span data-element="landing-language-{{ language }}" data-ng-click="translate.use(language)">{{ language | translate }}</span>
+            </li>
+        </ul>
+        <div class="right">
+            <span>{{ 'landing_text_footer' | translate }}</span>
+            <a ng-href="{{'http://bq.com/' + common.langToBQ[translate.use().split('-')[0]]}}" target="_blank">
+                <img src="../images/landing/logothumbs.png" alt="bq logo">
+            </a>
+        </div>
+    </div>
+    <div class="footer--bottom">
+        <i class="fa fa-paper-plane"></i>
+        <ul class="left">
+            <li ng-if="common.user">
+                <button data-element="landing-contact-button" ng-click="commonModals.sendCommentsModal()">{{ 'landing_link_contact' | translate }}
+                    <button>
+            </li>
+            <li ng-if="!common.user">
+                <a data-element="landing-contact-button" href="mailto:{{'support_email' | translate}}" target="_blank">{{'landing_link_contact' | translate}}</a>
+            </li>
+            <li>
+                <a data-element="landing-cookies-button" href="#/cookies">{{ 'landing-main-footer-link-cookies' | translate }}</a>
+            </li>
+            <li>
+                <a data-element="landig-terms-button" href="#/terms">{{ 'landing-main-footer-link-tos' | translate }}</a>
+            </li>
+        </ul>
+        <div class="right">
+            <span>{{ 'landing-main-copyright' | translate }}</span>
+        </div>
+    </div>
+</footer>

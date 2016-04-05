@@ -1,0 +1,112 @@
+$headerHeight: 70px;
+
+* {
+    &:focus {
+        outline: 0;
+    }
+}
+
+html {
+    width : 100%;
+    height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+small,
+legend {
+    cursor: default;
+}
+
+a > * {
+    cursor: pointer;
+}
+
+label > span {
+    cursor: pointer;
+}
+
+span > img {
+    cursor: pointer;
+}
+
+body {
+    width   : 100%;
+    height  : 100%;
+    overflow: hidden;
+
+    .main {
+        height: 100%;
+        width : 100%;
+    }
+
+    &.show--header {
+        .main {
+            height: calc( 100% - #{$headerHeight});
+        }
+
+        .header {
+            height    : $headerHeight;
+            max-height: $headerHeight;
+        }
+
+        .header--general {
+            min-height: $headerHeight;
+        }
+    }
+}
+// .main--header {
+//     height: calc(100% - 70px);
+// }
+// .main--collapsed {
+//     height: calc(100% + 70px);
+// }
+/** Search section
+*
+* Example:
+*  <form>
+*      <fieldset>
+*          <legend class="invisible">Searcher title</legend>
+*          <div class="form-control--searcher">
+*              <label class="invisible">Search</label>
+*              <span class="input input--icon">
+*                  <input type="text" name="text" class="form-control--searcher__input">
+*                  <button class="form-control--searcher__btn fa fa-search"/>
+*              </span>
+*          </div>
+*      </fieldset>
+*  </form>
+*/
+.form-control--searcher__input {
+    border            : 1px solid #CBCACA;
+    padding           : .3em 4em .3em .7em;
+    font-size         : .875em;
+    background        : #fdfdfd;
+    border-radius     : .4em;
+    color             : #555;
+    -webkit-transition: all .6s;
+    transition        : all .6s;
+}
+
+.form-control--searcher__btn {
+    padding         : 0 1em;
+    background-color: #E0DFDF;
+    border-radius   : 0 .4em .4em 0;
+    border          : 1px solid #CBCACA;
+    position        : absolute;
+    right           : 0;
+    height          : 100%;
+}
+/**
+*
+*/
+.dropdown {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

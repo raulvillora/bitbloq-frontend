@@ -1,0 +1,31 @@
+<div class="form form--login" style="min-width: 500px">
+    <div class="form">
+        <form name="form" autocomplete="on" novalidate>
+            <fieldset style="margin:10px">
+                <!-- User name o email -->
+                <div class="form-control">
+                        <span style="display: flex; width:100%"
+                              class="input input--default form-input}">
+                            <input style="flex-grow: 1"
+                                   type="text"
+                                   data-ng-model="serial.input"
+                                   placeholder="Send text to board" autocorrect="off"
+                                   autocomplete="on" required data-element="login-emailusername-intput">
+                            <button class="btn btn--secondary btn--small" ng-click="loginSubmit()">Send</button>
+                        </span>
+                </div>
+                <div class="form-control">
+                    <textarea data-ng-model="serial.dataReceived" style="resize:none; width:100%; height: calc(100vh - 140px)" readonly></textarea>
+                </div>
+                <!-- Submit Form -->
+                <div>
+                    <button class="btn btn--secondary btn--small">Pause</button>
+                    <button class="btn btn--secondary btn--small">Clear</button>
+                    <common-dropdown options="baudrateOptions" class="projects--sort-dropdown right" style="width:150px"
+                                     heading-option="baudrateOptions[0]"></common-dropdown>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>

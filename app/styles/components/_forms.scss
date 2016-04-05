@@ -1,0 +1,188 @@
+.icon--form--validating {
+    width   : 13px;
+    right   : .9em;
+    display : block;
+    top     : 9px;
+    height  : 13px;
+    position: absolute;
+}
+
+.form-icon--username {
+    left: .9em;
+    top : 9px;
+}
+
+.form--input,
+.form--select {
+    border-radius: .3em;
+    border       : 1px solid #cfcfcf;
+    min-height   : 34px;
+    max-height   : 34px;
+    color        : $font-color-secondary;
+    display      : flex;
+}
+
+.form--input {
+    position: relative;
+
+    input {
+        border-radius: .3em;
+        padding-left : .7em;
+        width        : 100%;
+    }
+
+    input[disabled] {
+        background-color: #ebebeb;
+    }
+
+    input[type=search] {
+        padding-left: 2em;
+
+        &::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+        }
+
+        &::-webkit-search-cancel-button:after {
+            content            : '';
+            display            : block;
+            width              : 20px;
+            height             : 14px;
+            background-image   : url('../images/icons/icon-close.svg');
+            background-repeat  : no-repeat;
+            background-size    : 14px;
+            background-position: center;
+        }
+    }
+
+    &:focus {
+        border: 1px solid $font-color-base;
+        color : $font-color-base;
+    }
+
+    .icon--form--loading {
+        fill: $font-color-base;
+    }
+
+    .icon--form--validated {
+        fill: #83ae3a;
+    }
+}
+
+.form--select {
+    background-color: white;
+
+    select {
+        padding-left    : .7em;
+        border-radius   : .3em;
+        width           : 100%;
+        height          : 32px;
+        background-color: transparent;
+
+        &:first-child {
+            font-style: italic;
+            color     : $font-color-secondary;
+        }
+    }
+}
+
+.input--focused {
+    border: 1px solid $font-color-base!important;
+    color : $font-color-base;
+}
+
+input[type="radio"] {
+    cursor            : pointer;
+    -webkit-appearance: none;
+    width             : 16px !important;
+    height            : 17px;
+    background-color  : white;
+    border            : 2px solid $font-color-disabled;
+    border-radius     : 100%;
+    vertical-align    : sub;
+
+    &:hover {
+        border: 2px solid $font-color-base;
+    }
+
+    &:checked {
+        background-color: white;
+        position        : relative;
+        border          : 1px solid $font-color-base;
+
+        &:before {
+            content         : '';
+            width           : 10px;
+            height          : 11px;
+            background-color: white;
+            border-radius   : 100%;
+            background-color: $font-color-base;
+            position        : absolute;
+            top             : 2px;
+            left            : 2px;
+        }
+    }
+
+    &:disabled {
+        border: 1px solid $font-color-disabled;
+
+        &:before {
+            background-color: $font-color-disabled;
+        }
+    }
+}
+
+.input--default {
+    background-color: white;
+    border-radius   : .2em;
+    border          : 1px solid #dadada;
+    width           : 220px;
+    display         : flex;
+    height          : 35px;
+
+    & .svg-icon {
+        float       : left;
+        margin-right: 1em;
+        width       : 15px;
+        height      : 15px;
+        position    : relative;
+        left        : 10px;
+        top         : 9px;
+    }
+
+    & .svg-icon--fine {
+        fill: #84aa3b;
+    }
+
+    & input {
+        &::-webkit-input-placeholder {
+            font-style: italic;
+        }
+background-color: transparent;
+        float           : left;
+    }
+}
+
+.input--error {
+    border            : 1px solid white;
+    background-color  : rgba(255, 51, 51, 0.2);
+    -webkit-box-shadow: 0 0 5px 2px rgba(255, 51, 51, 0.79);
+    -moz-box-shadow   : 0 0 5px 2px rgba(255, 51, 51, 0.79);
+    box-shadow        : 0 0 2px 2px rgba(255, 51, 51, 0.7);
+
+    input {
+        color           : #cc0001;
+        background-color: transparent;
+        @include placeholder(rgba(203, 15, 16, 1));
+    }
+
+    .svg-icon {
+        fill: #cc0001;
+    }
+}
+
+.form--error {
+    color     : #cc0001;
+    font-style: italic;
+    display   : block;
+    margin-top: .5em;
+}

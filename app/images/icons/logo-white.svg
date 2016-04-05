@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Avocode 2.4.2-d618096 - http://avocode.com -->
+<svg height="1024" width="1440" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1024">
+    <defs>
+        <radialGradient y2="100%" y1="0%" x2="0%" x1="0%" id="gradient-1">
+            <stop stop-color="#96c840" offset="0%" />
+            <stop stop-color="#5e8320" offset="100%" />
+        </radialGradient>
+    </defs>
+    <path fill="url(#gradient-1)" d="M 0 0 L 1440 0 L 1440 1024 L 0 1024 L 0 0 Z M 0 0" />
+</svg>

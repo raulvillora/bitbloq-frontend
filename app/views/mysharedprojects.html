@@ -1,0 +1,85 @@
+<div class="projects--actions">
+    <div class="projects--action projects--action--sort">
+        <common-dropdown options="orderOptions" options-click="sortProjects" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+    </div>
+    <!-- <div class="projects--action">
+        <common-dropdown options="filterOptions" pre-heading="'see:'" pre-heading-class="'test'" heading-option="filterOptions[0] | translate" options-click="filterProjects" class="projects--filter-dropdown"></common-dropdown>
+    </div> -->
+    <div class="projects--action grid-list">
+        <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
+            <svg class="svg-icon">
+                <use xlink:href="#cuadricula"></use>
+            </svg>
+        </button>
+        <button ng-click="itemsLayout = 'list'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'list', 'grid--right':true}">
+            <svg class="svg-icon">
+                <use xlink:href="#listado"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="projects--action">
+        <span class="form--input" ng-class="{'input--focused':focus === 'sharedprojectssearch'}">
+            <svg class="svg-icon--search">
+                <use xlink:href="#lupa"></use>
+            </svg>
+            <input type="search" name="search--normal" id="search--normal" ng-model="searchText" placeholder="{{'find'|translate}}" data-element="projects-shared-find" data-ng-focus="focus = 'sharedprojectssearch'" data-ng-blur="focus = false">
+        </span>
+    </div>
+</div>
+<ol class="projects__project-list">
+    <!-- <h2 class="ng-hide">Lista de proyectos</h2> -->
+    <div ng-show="sharedProjects.length === 0" class="project-shared--empty">
+        <svg class="svg-icon">
+            <use xlink:href="#releases"></use>
+        </svg>
+        <p class="empty__info">{{'myProjectShare_text_empty ' | translate}}
+
+        <p>
+    </div>
+    <li data-ng-repeat="project in sharedProjects | filter:{name: searchText} | filter:userProjectsFilterFunction(userProjectsFilter) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}">
+        <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
+            <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
+                <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
+                    <img data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-default-image="../images/common/default-project.png" corbel-image-type="project.imageType">
+                </a>
+            </div>
+            <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
+                <div ng-class="{'project__footer':true, 'project__footer--wide':itemsLayout === 'list'}">
+                    <div class="footer__addtomyprojects">
+                        <div ng-click="createCopy(project)" class="project--footer--icon">
+                            <svg class="svg-icon">
+                                <use xlink:href="#mas"></use>
+                            </svg>
+                            <span>{{ 'project-addto-myprojects' | translate }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
+                    <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
+                        <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name}}</h3>
+                    </a>
+
+                    <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>
+                    <div class="project__info__header__data">
+                        <time class="text--secondary project__info--time">{{ project._updatedAt | amDateFormat:'DD/MM/YY - HH:mm[h]' }}</time>
+                        <div class="project__info__header__icons">
+                            <svg class="svg-icon" ng-if="project._acl.ALL">
+                                <use xlink:href="#Compartir_publicarEnExplora"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<span class="project--item--trash" ng-click="removeProject(project)">
+                <svg class="svg-icon"  data-element="eliminate-myproject">
+                    <use xlink:href="#remove"></use>
+                </svg>
+            </span>-->
+            <span ng-if="project.codeProject" class="project--item--code" data-tooltip-position="right" data-tooltip="{{ 'my-project_placeholder_code-project' | translate }}">
+                <svg class="svg-icon">
+                    <use xlink:href="#codigo"></use>
+                </svg>
+            </span>
+        </div>
+    </li>
+</ol>

@@ -1,0 +1,74 @@
+<div class="form form--login">
+    <div ng-class="{'form--container':true}">
+        <a href="#/">
+            <svg class="form--login__image">
+                <use xlink:href="#Logo"></use>
+            </svg>
+        </a>
+
+        <div ng-show="!isSocialRegister" data-ng-include="'views/loginForm.html'"></div>
+        <div ng-show="!isSocialRegister" data-ng-include="'views/registerForm.html'"></div>
+        <div ng-show="isSocialRegister" ng-class="{'form--login__container':true}" data-effect="shake">
+            <h1 class="h3">{{ 'login-username-create' | translate }}</h1>
+            <span class="form--subtitle">{{ 'login-username-explanation' | translate }}</span>
+
+            <div class="form">
+                <form name="formSocial" autocomplete="off" novalidate>
+                    <fieldset class="form--data--center">
+                        <legend class="invisible">Login Form</legend>
+                        <!-- User social name -->
+                        <div class="form-control">
+                            <span class="form--input input--default" data-ng-class="{'input--error':formSocial.submitted && (formSocial.usernameSocial.$error.required || username.invalid || (username.search && !username.free)), 'input--focused':focus === 'usernameSocial'}">
+                                <svg class="svg-icon form-icon--username icon--form--validating">
+                                    <use xlink:href="#usuario"></use>
+                                </svg>
+                                <input data-element="login-social-username-input" ng-class="{'input--login--username':true}" ng-model="user.username" ng-focus="formSocial.submitted = false; focusHandler($event)" ng-blur="focus = false" id="usernameSocial" name="usernameSocial" type="text" maxlength="50" placeholder="{{'user-name' | translate}}" autocorrect="off" autocomplete="off" required>
+                                <svg ng-show="username.searching" class="svg-icon icon--form--loading icon--form--validating icon--animated--spin">
+                                    <use xlink:href="#loading"></use>
+                                </svg>
+                                <svg ng-show="username.search && username.free" class="svg-icon icon--form--validating icon--form--validated ">
+                                    <use xlink:href="#ok"></use>
+                                </svg>
+                            </span>
+                            <span class="form--error" ng-show="formSocial.submitted && formSocial.usernameSocial.$error.required">
+                                <small>{{ 'login-username-empty' | translate }}</small>
+                            </span>
+                            <span class="form--error" ng-show="formSocial.submitted && username.search && !username.free">
+                                <small>{{ 'login-username-in-use' | translate }}</small>
+                            </span>
+                            <span class="form--error" ng-show="formSocial.submitted && username.invalid">
+                                <small>{{ 'login-alphanumeric-numeric-error' | translate }}</small>
+                            </span>
+                        </div>
+                        <button data-element="login-social-check-user-button" class="btn btn--default btn--check-user" ng-click="formSocial.submitted = true; checkUserName()">{{'login-check-username' | translate }}</button>
+                    </fieldset>
+                    <!-- Service terms -->
+                    <div class="form-control service-terms">
+                        <span data-ng-class="{'input input--checkbox':!formSocial.readServiceTerm.submitted || user.properties.term, 'input--checkbox--error':formSocial.readServiceTerm.submitted && !user.properties.term}">
+                            <input data-element="login-social-term-checkbox" ng-model="user.properties.term" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="formSocial.readServiceTerm.submitted=false;" required>
+                            <label for="readServiceTerm">
+                                {{ 'register-read-service-term' | translate }}
+                                <a href="#/terms" target="_blank">{{ 'register-read-general-conditions' | translate
+                                    }}</a> {{ 'text-join' | translate }}
+                                <a href="#/cookies" target="_blank">{{ 'register-read-policies-privacy' |
+                                    translate }}</a>
+                            </label>
+                        </span>
+                        <span class="form--error" ng-show="formSocial.readServiceTerm.submitted && !user.properties.term" data-element="show-no-check">
+                            <small>{{ 'login-conditions' | translate }}</small>
+                        </span>
+                    </div>
+                    <!-- Submit Form -->
+                    <div class="form-control form--data--center">
+                        <input data-element="login-social-enter-button" type="submit" ng-click="formSocial.submitted = true; formSocial.readServiceTerm.submitted = true; registerSocial(formSocial)" name="submitform" class="btn btn--primary btn__login--submit" value="{{ 'enter' | translate }}" ng-init="">
+                    </div>
+                </form>
+            </div>
+            <div class="form--login__footer">
+                <p class="form-control text-center">
+                    <a ng-click="isLogin=false; isSocialRegister=false">{{'login-return-to-register' | translate }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

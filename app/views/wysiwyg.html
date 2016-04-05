@@ -1,0 +1,13 @@
+<div class="wysiwyg__container">
+    <div class="wysiwyg__header">
+        <ul>
+            <li ng-repeat="button in buttons">
+                <button ng-click="buttonAction(button.name)">
+                    <i class="{{button.icon}}"></i>
+                    <span class="wysiwyg__button__text">{{button.text}}</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="wysiwyg__content" contenteditable="true"></div>
+</div>

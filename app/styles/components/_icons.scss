@@ -1,0 +1,55 @@
+.icon--preicon {
+    margin-right: 1em;
+}
+
+.icon--postIcon {
+    margin-left: 1em;
+}
+
+.icon--absolute {
+    position: absolute;
+    left    : 1em;
+    top     : .3em;
+}
+
+.icon-text {
+    padding-left: 1.5em;
+}
+
+.icon--dropdown {
+    width       : 10px;
+    height      : 10px;
+    fill        : $font-color-secondary;
+    margin-right: .5em;
+    margin-left : 1em;
+}
+
+.svg-icon--search {
+    fill    : #c0c3c9;
+    left    : 8px;
+    width   : 15px;
+    position: absolute;
+    top     : 6px;
+    height  : 21px;
+}
+
+.svg-icon {
+    fill  : #b9bdc8;
+    width : 22px;
+    height: 22px;
+}
+
+.svg-icon--text {
+    float       : left;
+    margin-right: 1em;
+}
+
+
+
+.icon--animated--spin {
+    -webkit-animation-name           : spin;
+    -webkit-animation-duration       : 800ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-transform-origin         : 50% 50%;
+    -webkit-animation-timing-function: linear;
+}

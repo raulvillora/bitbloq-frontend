@@ -1,0 +1,163 @@
+<div id="registerContainer" class="login-container" ng-class="{'hide-container': isLogin}">
+    <div ng-class="{'form--login__container':true}" data-effect="shake">
+        <h1 class="h3">{{ 'enter' | translate }}</h1>
+        <span class="form--subtitle">{{ 'login-profiles' | translate }}</span>
+
+        <div class="social--buttons__container">
+            <ul class="row row--collapse">
+                <li class="social--button__container">
+                    <button class="btn btn--social btn__login--facebook" ng-click="authenticate('facebook')">
+                        {{ 'facebook' | translate }}
+                    </button>
+                </li>
+                <li class="social--button__container">
+                    <button class="btn btn--social btn__login--google" ng-click="authenticate('google')">
+                        {{ 'google+' | translate }}
+                    </button>
+                </li>
+            </ul>
+        <span class="form-control form--error" data-ng-show="errors.register.socialEmail">
+            <small>{{ 'login-registered-email' | translate }}</small>
+            <button data-ng-click="setForgotPasswordFromRegister(); isForgotPassword=true" class="btn btn--forgot btn--forgot-error">
+                <small> {{ 'login-forgot-password' | translate }}</small>
+            </button>
+        </span>
+        </div>
+        <div class="separator">
+            <span>{{ 'or' | translate }}</span>
+        </div>
+        <div class="form">
+            <form name="form" autocomplete="on" novalidate>
+                <fieldset class="form--data--center">
+                    <legend class="invisible">Login Form</legend>
+                    <ul class="alert-container" ng-show="form.$submitted">
+                        <li class="form__span--error" ng-show="errors.disconnect">
+                            {{ 'login-error-disconnect' | translate }}
+                        </li>
+                    </ul>
+                    <!-- User name -->
+                    <div class="form-control">
+                        <label for="username">{{ 'login-username' | translate }}</label>
+                    <span class="form--input input--default" ng-class="{'input--error':form.username.submitted && (!username.free || username.invalid || form.username.$error.required), 'input--focused':focus === 'username'}">
+                        <svg class="svg-icon form-icon--username icon--form--validating">
+                            <use xlink:href="#usuario"></use>
+                        </svg>
+                        <input ng-class="{'input--login--username':true}" ng-model="user.username" ng-focus="form.username.submitted = false; focus = 'username'" ng-blur="form.username.submitted = true; checkUserName(); focus = false" id="username" name="username" type="text" maxlength="50" placeholder="{{'user-name' | translate}}" autocorrect="off" autocomplete="off" required>
+                        <svg ng-show="form.username.submitted && username.searching" class="svg-icon icon--form--loading icon--form--validating icon--animated--spin">
+                            <use xlink:href="#loading"></use>
+                        </svg>
+                        <svg ng-show="form.username.submitted && username.search && username.free" class="svg-icon icon--form--validating icon--form--validated ">
+                            <use xlink:href="#ok"></use>
+                        </svg>
+                    </span>
+                    <span class="form--error" data-ng-show="form.username.submitted && form.username.$error.required" data-element="show-nouser">
+                        <small>{{ 'login-username-empty' | translate }}</small>
+                    </span>
+                    <span class="form--error" data-ng-show="form.username.submitted && username.search && !username.free" data-element="show-inuse">
+                        <small>{{ 'login-username-in-use' | translate }}</small>
+                    </span>
+                    <span class="form--error" data-ng-show="form.username.submitted && username.invalid" data-element="show-invalid-user">
+                        <small>{{ 'login-alphanumeric-numeric-error' | translate }}</small>
+                    </span>
+                    </div>
+                    <!-- Email -->
+                    <div class="form-control" ng-init="emailFocus=false">
+                        <label for="email">{{ 'email' | translate }}</label>
+                    <span ng-class="{'input input--form--login input--default':true, 'input--focused':focus === 'email', 'input--error':form.email.submitted && (form.email.$invalid || form.email.$error.required || errors.register.email)}">
+                        <svg class="svg-icon">
+                            <use xlink:href="#email"></use>
+                        </svg>
+                        <input data-ng-model="user.email" data-ng-focus="form.email.submitted=false; focus = 'email'" data-ng-blur="focus = false" id="email" name="email" type="email" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required>
+                    </span>
+                    <span class="form--error" data-ng-show="form.email.submitted && form.email.$error.required" data-element="register-show-noemail">
+                        <small>{{ 'login-email-empty' | translate }}</small>
+                    </span>
+                    <span class="form--error" data-ng-show="form.email.submitted && (form.email.$error.email || form.email.$error.pattern)" data-element="register-invalid-email">
+                        <small>{{ 'login-valid-email' | translate }}</small>
+                    </span>
+                    <span class="form--error" data-ng-show="form.email.submitted && errors.register.email" data-element="login-duplicated-email">
+                        <small>{{ 'login-registered-email' | translate }}</small>
+                    </span>
+                    </div>
+                    <!-- Password -->
+                    <input type="password" class="ng-hide">
+
+                    <div class="form-control">
+                        <label for="password">{{ 'password' | translate }}</label>
+                    <span data-ng-class="{'input input--form--login input--default':true, 'input--focused':focus === 'password', 'input--error':form.password.submitted && (form.password.$error.required || form.password.$error.minlength || errors.login.password)}">
+                        <svg class="svg-icon">
+                            <use xlink:href="#candado"></use>
+                        </svg>
+                        <input id="registerPassword" type="password" name="password" autocomplete="off" data-ng-model="user.password" data-ng-focus="form.password.submitted=false; focus = 'password'" data-ng-blur="focus = false" id="password" data-ng-minlength="6" maxlength="50" placeholder="{{'password' | translate}}" autocorrect="off" required data-element="register-password-input">
+                    </span>
+                    <span class="form--error" data-ng-show="form.password.submitted && form.password.$error.required" data-element="register-show-no-pass">
+                        <small>{{ 'login-enter-password' | translate }}</small>
+                    </span>
+                    <span class="form--error" data-ng-show="form.password.submitted && form.password.$error.minlength" data-element="register-show-more-six-pass">
+                        <small>{{ 'login-min-length-password' | translate }}</small>
+                    </span>
+                    <span class="form--error" data-ng-show="form.password.submitted &&  errors.login.password" data-element="show-incorrect-password">
+                        <small>{{ 'login-incorrect-password' | translate }}</small>
+                    </span>
+                    </div>
+                    <!-- Age -->
+                    <div class="form-control">
+                        <label for="birthday">{{ 'login-birth-day' | translate }}</label>
+                    <span id="birthday" data-ng-class="{'input input--date':true, 'input--focused':focus === 'birthday'}">
+                        <div class="input--group--date">
+                            <input data-element="login-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="form.birthday.day" data-ng-focus="form.birthday.submitted=false; focusHandler($event)" data-ng-blur="focus = false" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (form.birthday.$error.required || errors.birthday || errors.emptyBirthday)}" required>
+                            <input data-element="login-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="form.birthday.month" data-ng-focus="form.birthday.submitted=false; focusHandler($event)" data-ng-blur="focus = false" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (form.birthday.$error.required || errors.birthday || errors.emptyBirthday)}" required>
+                            <input data-element="login-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="form.birthday.year" data-ng-focus="form.birthday.submitted=false; focusHandler($event)" data-ng-blur="focus = false" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (form.birthday.$error.required || errors.birthday || errors.emptyBirthday)}" required>
+                        </div>
+                    </span>
+                    <span class="form--error" ng-show="form.birthday.submitted && (form.birthday.$error.required || errors.emptyBirthday)" data-element="show-no-birthdate">
+                        <small>{{ 'login-introduce-birth-day' | translate }}</small>
+                    </span>
+                    <span class="form--error" ng-show="form.birthday.submitted && errors.birthday" data-element="show-no-fourteen">
+                        <small>{{ 'login-14-years' | translate }}</small>
+                    </span>
+                    </div>
+                    <!-- Newsletter -->
+                    <div class="form-control">
+                    <span class="input input--checkbox">
+                        <input data-element="register-newsletter-teacher-input" ng-model="user.properties.newsletter" type="checkbox" name="newsletter" id="newsletter">
+                        <label for="newsletter">
+                            {{ 'newsletter' | translate }}
+                        </label>
+                    </span>
+                    </div>
+                    <!-- Service terms -->
+                    <div class="form-control">
+                    <span data-ng-class="{'input input--checkbox':!form.readServiceTerm.submitted || user.properties.term, 'input--checkbox--error':form.readServiceTerm.submitted && !user.properties.term}">
+                        <input data-ng-model="user.properties.term" data-element="register-terms-input" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-blur="focus = false">
+                        <label for="readServiceTerm">
+                            {{ 'register-read-service-term' | translate }}
+                            <a href="#/terms" target="_blank">{{ 'register-read-general-conditions' | translate
+                                }}</a> {{ 'text-join' | translate }}
+                            <a href="#/cookies" target="_blank">{{ 'register-read-policies-privacy' |
+                                translate }}</a>
+                        </label>
+                    </span>
+                    <span class="form--error" ng-show="form.readServiceTerm.submitted && !user.properties.term" data-element="show-no-check">
+                        <small>{{ 'login-conditions' | translate }}</small>
+                    </span>
+                    </div>
+                    <!-- Submit Form -->
+                    <div class="form-control">
+                        <input type="submit" data-ng-click="form.username.submitted=true; form.password.submitted=true; form.email.submitted=true; form.readServiceTerm.submitted=true; form.birthday.submitted=true; register(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'general_button_register' | translate}}" ng-disabled="login.password.$dirty && login.password.$invalid || login.email.$dirty && login.email.$invalid" data-element="enter-register">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="form-control form--login__footer">
+        </div>
+    </div>
+    <p class="text-center">
+
+    <div class="form--login__register">
+        <a ng-show="!isSocialRegister && !isForgotPassword" ng-click="form.password.submitted=false; setLoginFromRegister()">
+            <strong>{{'login-already-registered' | translate }}</strong>
+        </a>
+    </div>
+    </p>
+</div>

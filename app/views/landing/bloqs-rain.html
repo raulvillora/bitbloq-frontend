@@ -1,0 +1,110 @@
+<div id="bloqs--field" class="field theme-colors">
+    <div class="layer0">
+        <!-- Declare variable: true -->
+        <div class="bloq bloq--statement bloq-declare-variable inside-bloq bloq0">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first">{{'featureProgramming-bloqs-declareVariable' | translate }}</span>
+                <input type="text" class="var--input">
+                <span>=</span>
+
+                <div class="bloqinput connector connector--input bloq__inner--last">
+                    <div class="bloq bloq--output bloq-boolean nested-bloq">
+                        <select name="" class="bloq__inner--first bloq__inner--last">
+                            <option value="true">{{'featureProgramming-boolean-true' | translate }}</option>
+                            <option value="false">{{'featureProgramming-boolean-false' | translate }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Run function -->
+        <div class="bloq bloq--statement bloq-invoke-function inside-bloq bloq1">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first">{{'featureProgramming-bloq-exec' | translate }}</span>
+                <select name="" class="bloq__inner--last"></select>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Stop loop -->
+        <div class="bloq bloq--statement bloq-break bloq3">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first bloq__inner--last">{{'featureProgramming-bloqs-breakStopLoop' | translate }}</span>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Maths -->
+        <div class="bloq bloq--output bloq-basic-operations bloq4">
+            <div class="bloqinput connector connector--input bloq__inner--first"></div>
+            <select name="">
+                <option value="+" data-i18n="+">+</option>
+            </select>
+        </div>
+    </div>
+    <!-- END -->
+    <div class="layer1">
+        <!-- Declare variable: true -->
+        <div class="bloq bloq--statement bloq-declare-variable inside-bloq bloq5">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first">{{'featureProgramming-bloqs-declareVariable' | translate }}</span>
+                <input type="text" class="var--input">
+                <span>=</span>
+
+                <div class="bloqinput connector connector--input bloq__inner--last">
+                    <div class="bloq bloq--output bloq-boolean nested-bloq">
+                        <select name="" class="bloq__inner--first bloq__inner--last">
+                            <option value="true">{{'featureProgramming-boolean-true' | translate }}</option>
+                            <option value="false">{{'featureProgramming-boolean-false' | translate }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Stop servo -->
+        <div class="bloq bloq--statement bloq-continuous-servo-stop inside-bloq bloq7">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first">{{'featureProgramming-bloqs-servoStop' | translate }}</span>
+                <select name="" class="bloq__inner--last">
+                    <option value="ServoContinuo_1">{{'featureProgramming-bloqs-servoName' | translate }}</option>
+                </select>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Stop loop -->
+        <div class="bloq bloq--statement bloq-break bloq8">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first bloq__inner--last">{{'featureProgramming-bloqs-breakStopLoop' | translate }}</span>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Maths -->
+        <div class="bloq bloq--output bloq-basic-operations bloq9">
+            <div class="bloqinput connector connector--input bloq__inner--first"></div>
+            <select name="">
+                <option value="+" data-i18n="+">+</option>
+            </select>
+        </div>
+        <!-- END -->
+    </div>
+    <div class="layer2">
+        <!-- Stop servo -->
+        <div class="bloq bloq--statement bloq-continuous-servo-stop inside-bloq bloq11">
+            <div class="bloq--fixed">
+                <span class="bloq__inner--first">{{'featureProgramming-bloqs-servoStop' | translate }}</span>
+                <select name="" class="bloq__inner--last">
+                    <option value="ServoContinuo_1">{{'featureProgramming-bloqs-servoName' | translate }}</option>
+                </select>
+            </div>
+        </div>
+        <!-- END -->
+        <!-- Maths -->
+        <div class="bloq bloq--output bloq-basic-operations bloq13">
+            <div class="bloqinput connector connector--input bloq__inner--first"></div>
+            <select name="">
+                <option value="+" data-i18n="+">+</option>
+            </select>
+        </div>
+        <!-- END -->
+    </div>
+</div>

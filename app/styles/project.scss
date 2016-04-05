@@ -1,0 +1,224 @@
+.project--view {
+    background-color: #eee;
+    display: block;
+    overflow: auto;
+    
+    .project--header {
+        max-width       : 100vw;
+        height          : 97px;
+        background-color: white;
+        display         : block;
+        padding         : 2em 3em 1em;
+
+        h1 {
+            max-width    : 100%;
+            overflow     : hidden;
+            text-overflow: ellipsis;
+            white-space  : nowrap;
+        }
+
+        .project--subheader {
+            margin-top: .5em;
+            display   : block;
+
+            .subheader--left,
+            .subheader--right {
+                display: inline-block;
+            }
+
+            .subheader--left {
+                float : left;
+                cursor: default;
+            }
+
+            .subheader--right {
+                float : right;
+                cursor: default;
+            }
+
+            .subheader--item {
+                float         : left;
+                padding-right : 10px;
+                color         : #8c919b;
+                font-size     : 12px;
+                vertical-align: text-top;
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                .svg-icon {
+                    width         : 13px;
+                    height        : 13px;
+                    fill          : #c0c3c9;
+                    vertical-align: text-top;
+                }
+            }
+
+            .project--header--username {
+                font-size  : 14px;
+                line-height: 14px;
+
+                .project--header--username__link {
+                  color          : #82ad3a;
+                  font-weight    : 700;
+                }
+
+                a {
+                    text-decoration: none;
+                    color          : #82ad3a;
+                    font-weight    : 700;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .project--content {
+        display  : block;
+        padding  : 1.5em 3em 0;
+        max-width: 1200px;
+        margin   : 0 auto;
+
+        .content--left,
+        .content--right {
+            display: inline-block;
+        }
+
+        .content--left {
+            float        : left;
+            width        : 70%;
+            padding-right: .5em;
+        }
+
+        .content--right {
+            width       : 30%;
+            float       : right;
+            padding-left: .5em;
+
+            .project--actions {
+                button {
+                    width        : 100%;
+                    text-align   : left;
+                    margin-bottom: .5em;
+                }
+
+                .svg-icon {
+                    width       : 13px;
+                    height      : 13px;
+                    margin-right: 1em;
+                }
+
+                .btn--project--action {
+                    text-align                : left;
+                    width                     : 100%;
+                    height                    : 50px;
+                    background-color          : white;
+                    border                    : 1px solid #cfcfcf;
+                    border-bottom-right-radius: .3em;
+                    border-bottom-left-radius : .3em;
+                    padding-left              : 1em;
+                    font-weight               : bold;
+                    color                     : #5c6069;
+                    align-items               : center;
+                    transition                : background-color 250ms;
+
+                    &:hover {
+                        background-color: #ebebeb;
+                    }
+
+                    &:active {
+                        background-color: #e0e0e0;
+                    }
+
+                    .svg-icon {
+                        fill: #5c6069;
+                    }
+                }
+
+                 :nth-last-child(2) {
+                    margin-bottom             : 0;
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius : 0;
+                    border-bottom             : 0;
+                }
+            }
+        }
+
+        .project--image--container {
+            width           : 100%;
+            height          : 411px;
+            max-height      : 411px;
+            background-color: white;
+            position        : relative;
+
+            img {
+                width     : 100%;
+                height    : 100%;
+                object-fit: cover;
+            }
+        }
+
+        .project--description {
+            background-color: white;
+            min-height      : 50px;
+            padding         : 1em;
+        }
+
+        .project--tags {
+            background-color: white;
+            padding         : 1em;
+            border-top      : 1px solid #eee;
+            font-size       : 14px;
+            color           : #686b73;
+            display         : block;
+            cursor          : default;
+
+            span {
+                color       : #373b44;
+                font-weight : 700;
+                display     : inline-block;
+                float       : left;
+                margin-right: 1em;
+            }
+
+
+            ul {
+                display: inline-block;
+
+                li {
+                    float: left;
+
+                    &:after {
+                        content: ",\00a0\00a0";
+                    }
+
+                    &:last-child {
+                        &:after {
+                            content: none;
+                        }
+                    }
+                }
+
+                &.hardware--tags{
+                  li {
+                      float: left;
+
+                      &:after {
+                          content: ",\00a0\00a0";
+                      }
+
+                      &:last-child {
+                          &:after {
+                              content: ",\00a0\00a0";
+                          }
+                      }
+                  }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+.old-version__masthead {
+    height          : 130px;
+    background-color: #82ad3a;
+    color           : white;
+    position        : relative;
+
+    .masthead--container {
+        vertical-align: middle;
+        display       : block;
+        padding-top   : 25px;
+        padding-left  : 54px;
+
+        h1 {
+            font-size  : 30px;
+            font-weight: 400;
+        }
+
+        span {
+            opacity: .6;
+        }
+
+        a {
+            color: white;
+        }
+    }
+
+    .close--masthead {
+        height  : 40px;
+        top     : 0;
+        bottom  : 0;
+        margin  : auto;
+        position: absolute;
+        right   : 54px;
+
+        button {
+            border       : 1px solid white;
+            border-radius: 50%;
+            width        : 40px;
+            height       : 40px;
+            color        : white;
+            font-size    : 25px;
+            padding      : 0 0 1px 1px;
+            font-weight  : normal;
+        }
+    }
+}

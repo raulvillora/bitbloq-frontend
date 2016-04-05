@@ -1,0 +1,106 @@
+<div class="form--infotab" data-ng-controller="InfoTabCtrl">
+    <form id="form-infotab" name="form" class="form-infotab">
+        <fieldset class="fieldset--left" data-ng-init="focus = false">
+            <div class="field--title">
+                <legend class="h3">{{ 'info' | translate }}</legend>
+            </div>
+            <div class="form--section">
+                <!-- input type="text"-->
+                <div class="form-control">
+                    <label for="projectname">{{ 'name' | translate }}*</label>
+                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname'}">
+                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="project.name" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="common.user">
+                    </span>
+                </div>
+                <!-- textarea -->
+                <div class="form-control">
+                    <label for="textarea">{{ 'description' | translate }}*</label>
+                    <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea'}">
+                        <textarea id="texarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="project.description" data-ng-focus="focus = 'textarea'" data-ng-blur="focus = false" data-ng-disabled="common.user" data-element="infotab-description"></textarea>
+                    </span>
+                </div>
+            </div>
+            <div class="form--section">
+                <!-- input type="text"-->
+                <div class="form-control">
+                    <label for="videourl">{{ 'video' | translate }}</label>
+                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'videourl'}">
+                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="project.videoUrl" value="{{project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-blur="focus = false" data-ng-disabled="common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
+                    </span>
+                </div>
+            </div>
+            <div class="form--section">
+                <!-- input type="file"-->
+                <div class="form-control">
+                    <div class="labelcontainer">
+                        <label for="projectimage">{{ 'info-tab-first-image' | translate }}*</label>
+                        <small>{{ 'info-tab-image-requisites' | translate }}</small>
+                    </div>
+                    <div class="imagecontainer">
+                        <div class="main--project--image" id="main-image">
+                            <img id="projectImage" data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-image-type="project.imageType" data-corbel-default-image="../images/common/default-project.png" data-ng-disabled="common.user" data-element="infotab-projectimage" corbel-force-reset="imageForceReset">
+                        </div>
+                        <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" data-element="infotab-fileinput" data-ng-blur="focus = false" tabindex="-1"/>
+                        <button ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':common.user}" data-element="infotab-uploadimage" data-ng-click="uploadImageTrigger('main')" data-ng-disabled="focus!=false">{{ 'upload-image' | translate }}</button>
+                    </div>
+                </div>
+                <!-- input type="file"-->
+                <!-- <div class="form-control">
+                    <div class="labelcontainer">
+                        <label for="otherimages">{{ 'info-tab-others-image' | translate }}</label>
+                        <small>{{ 'info-tab-image-requisites' | translate }}</small>
+                    </div>
+                    <div class="other-images--container">
+                        <div class="image--container" data-ng-repeat="image in projectImages | limitTo: 3">
+                            <img src="../images/common/default-project.png" alt="">
+                            <button ng-if="$last" class="btn btn--primary btn--small" data-ng-click="uploadImageTrigger()" data-ng-disabled="!common.user">{{ 'upload-image' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+                <input class="other-image--input" type="file" multiple id="otherimages" name="otherimages" placeholder="" data-ng-focus="focus = 'otherimages'" data-ng-blur="focus = false" data-ng-disabled="!common.user">-->
+            </div>
+            <div class="form--section">
+                <div class="form-control  form--tags">
+                    <label for="tagsinput">{{ 'tags' | translate }}</label>
+                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
+                        <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
+                        <button class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="common.user" data-ng-click="addTag(form.tag)" data-element="infotab-taginput-button" tabindex="1">{{ 'add' | translate }}</button>
+                    </span>
+                </div>
+                <div class="tags">
+                    <div class="tags__item" data-ng-repeat="tag in project.hardwareTags">
+                        <span>{{tag | translate}}</span>
+                    </div>
+                    <div class="tags__item" data-ng-repeat="tag in project.userTags">
+                        <span class="tags__item--text">{{tag}}</span>
+                        <span class="tags__item--trash">
+                            <svg class="svg-icon" data-element="infotab-remove-tag" data-ng-click="removeTag(tag)">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#remove"></use>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <small class="form--infotab--mandatory">{{ 'infotab-mandatory' | translate }}</small>
+        </fieldset>
+        <fieldset ng-if="!project.codeProject" class="fieldset--right">
+            <div class="field--title">
+                <legend class="h3">{{ 'infotab_title_theme' | translate }}</legend>
+            </div>
+            <div class="form--section choose--theme">
+                <common-dropdown options="availableThemes" heading-option="project.defaultTheme | translate" options-click="setTheme" element-data="'infotab-choosetheme'"></common-dropdown>
+                <img ng-show="project.defaultTheme === 'infotab_option_grayTheme' || !project.defaultTheme" src="../images/gray-theme.jpg" alt=""/>
+                <img ng-show="project.defaultTheme === 'infotab_option_colorTheme'" src="../images/color-theme.jpg" alt=""/>
+            </div>
+        </fieldset>
+        <fieldset ng-if="project.codeProject" class="fieldset--right" data-ng-init="focus = false">
+            <div class="field--title">
+                <legend class="h3">{{ 'Board' | translate }}</legend>
+            </div>
+            <div class="form--section choose--theme">
+                <common-dropdown options="boardNameList" heading-option="project.hardware.board" options-click="setBoard" ng-model="project.hardware.board" element-data="'infotab-chooseboard'"></common-dropdown>
+                <img ng-src="/images/boards/{{boardImage}}.svg"/>
+            </div>
+        </fieldset>
+    </form>
+</div>

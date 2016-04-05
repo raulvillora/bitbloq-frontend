@@ -1,0 +1,76 @@
+<div class="unsupported--view">
+    <div ng-if="device === 'desktop'" class="unsupported--desktop">
+        <div class="unsupported--row">
+            <div class="unsupported--first">
+                <svg class="svg-logo--white">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Logo"></use>
+                </svg>
+                <div>
+                    <span>{{ 'atention' | translate }}</span>
+
+                    <p>{{ 'unsupported-first' | translate}}</p>
+
+                    <p>{{ 'unsupported-second' | translate }}</p>
+                    <a data-element="unsupported-continue-button" href="" ng-click="continueToBitbloq()">{{ 'unsupported-link' | translate }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="unsupported--row">
+            <div class="unsupported--second">
+                <img src="../../images/common/chrome-screen.png" alt="">
+
+                <div>
+                    <h1 class="unsupported-chrome--title">{{ 'unsupported-download-chrome-title' | translate }}</h1>
+
+                    <p>{{ 'unsupported-download-chrome-text' | translate }}</p>
+                    <a data-element="unsupported-chrome-button" href="https://www.google.com/chrome/browser/" target="_blank" class="btn btn--small btn--download-chrome">
+                        {{ 'unsupported-download-chrome-button' | translate }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="device === 'tablet'" class="unsupported--tablet">
+        <header class="unsupported--tablet--header">
+            <svg class="svg-logo--white--tablet">
+                <use xmlns:xlink="svghttp://www.w3.org/1999/xlink" xlink:href="#Logo"></use>
+            </svg>
+        </header>
+        <div class="unsupported--tablet--centered">
+            <div class="unsupported--images--container">
+                <img src="../../images/common/bitbloqui.png" alt="">
+            </div>
+            <h1 class="h1">{{ 'unsupported-tablet-title' | translate }}</h1>
+
+            <p>{{ 'unsupported-tablet-text-first' | translate }}</p>
+
+            <p>{{ 'unsupported-tablet-text-second' | translate }}</p>
+
+            <div>
+                <a href="" class="btn btn--primary" ng-click="continueToBitbloq()">{{ 'unsupported-action-goToWeb' | translate }}</a>
+                <a href="#/explore" class="btn btn--primary btn--green">{{ 'unsupported-tablet-button-second' | translate }}</a>
+            </div>
+        </div>
+    </div>
+    <div ng-if="device === 'phone'" class="unsupported--phone">
+        <header class="unsupported--phone--header">
+            <svg class="svg-logo--white--phone">
+                <use xmlns:xlink="svghttp://www.w3.org/1999/xlink" xlink:href="#Logo"></use>
+            </svg>
+        </header>
+        <div class="unsupported--phone--container">
+            <div class="unsupported--phone--centered">
+                <img src="../../images/common/bitbloqui.png" alt="">
+
+                <h1 class="h1">{{ 'unsupported-tablet-title' | translate }}</h1>
+
+                <p>{{ 'unsupported-phone-text-first' | translate }}</p>
+
+                <p>{{ 'unsupported-phone-text-second' | translate }}</p>
+            </div>
+            <div>
+                <a href="" class="btn btn--primary" ng-click="continueToBitbloq()">{{ 'unsupported-action-goToWeb' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</div>

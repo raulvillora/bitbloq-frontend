@@ -1,0 +1,13 @@
+<div class="modal_input">
+    <p>{{ mainText | translate }}</p>
+
+    <form id="inputForm" ng-if="modalInput">
+        <span class="form--input">
+            <input ng-if="!changeName" type="text" id="{{input.id}}" name="{{input.name}}" placeholder="{{input.placeholder | translate }}" data-ng-model="input.value" autofocus>
+            <input ng-if="changeName" type="text" name="os" id="os" ng-model="project.name" ng-pattern="/[^\s\\]/" placeholder="{{ 'modal-change-project-name-placeholder' | translate }}" data-ng-focus="focus = 'changeName'" data-ng-class="{'input--focused':focus === 'changeName'}" data-ng-blur="focus = false" data-element="modal-change-name-input" required autofocus>
+        </span>
+    </form>
+    <common-dropdown ng-if="modalDropdown" options="modaloptions" options-click="optionsClick" heading-option="headingOptions | translate" data-element="{{dropdown.dataElement}}"></common-dropdown>
+
+
+</div>

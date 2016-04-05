@@ -1,0 +1,134 @@
+<div ng-class="{'account--ru':translate.use() === 'ru-RU', 'account--de':translate.use() === 'de-DE'}" class="view view--account">
+    <div class="account__header">
+        <h1 class="h2 account__heading">{{ 'account-config' | translate }}</h1>
+    </div>
+    <div class="account__content">
+        <form class="form--account" id="form--account">
+            <div class="first-column">
+                <div class="form--section">
+                    <fieldset>
+                        <legend>
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#usuario"></use>
+                            </svg>
+                            <span>{{ 'user-profile' | translate }}</span>
+                        </legend>
+                        <!-- Name -->
+                        <div class="form-control">
+                            <label for="name">{{ 'name' | translate }}</label>
+                            <span data-ng-class="{'form--input':true, 'input--focused':focus === 'name'}" class="form--input">
+                                <input type="text" id="name" name="name" placeholder="{{'name' | translate}}" data-ng-model="common.user.firstName" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-focus="focus = 'name'" data-ng-blur="focus = false" tabindex="0" aria-invalid="false" data-element="firstname">
+                            </span>
+                        </div>
+                        <!-- Surname -->
+                        <div class="form-control">
+                            <label for="surname">{{ 'surname' | translate }}</label>
+                            <span data-ng-class="{'form--input':true, 'input--focused':focus === 'surname'}" class="form--input">
+                                <input type="text" id="surname" name="surname" placeholder="{{'surname' | translate}}" data-ng-model="common.user.lastName" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-focus="focus = 'surname'" data-ng-blur="focus = false" tabindex="0" aria-invalid="false" data-element="lastname">
+                            </span>
+                        </div>
+                        <!-- Username -->
+                        <div class="form-control">
+                            <label for="username">{{ 'user-name' | translate }}</label>
+                            <span data-ng-class="{'form--input':true, 'input--focused':focus === 'username'}" class="form--input">
+                                <input type="text" id="username" name="username" placeholder="{{'user-name' || translate}}" data-ng-model="common.user.username" data-ng-focus="focus = 'username'" data-ng-blur="focus = false" tabindex="0" aria-invalid="false" disabled data-element="username">
+                            </span>
+                        </div>
+                        <!-- Email -->
+                        <div class="form-control">
+                            <label for="email">{{ 'email' | translate }}</label>
+                            <span data-ng-class="{'form--input':true, 'input--focused':focus === 'email'}" class="form--input">
+                                <input type="email" id="email" name="email" placeholder="mail@mail.com" data-ng-model="common.user.email" data-ng-focus="focus = 'email'" data-ng-blur="focus = false" tabindex="0" aria-invalid="false" disabled data-element="email">
+                            </span>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#candado"></use>
+                            </svg>
+                            <span>{{ 'password' | translate }}</span>
+                        </legend>
+                        <div class="form-control">
+                            <label>{{ 'account-change-password' | translate }}</label>
+                            <input ng-if="common.user.provider === 'social'" data-element="account-reset-password-button" type="button" id="password" class="btn btn--secondary btn--small btn--account--password" data-ng-click="turnToLocal($event)" value="{{ 'account-restore-password' | translate }}"/>
+                            <input ng-if="common.user.provider === 'local'" data-element="account-reset-password-button" type="button" id="password" class="btn btn--secondary btn--small btn--account--password" data-ng-click="changePassword($event)" value="{{ 'account-restore-password' | translate }}"/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#redesSociales"></use>
+                            </svg>
+                            <span>{{ 'account-connect-to-social-network' | translate }}</span>
+                        </legend>
+                        <div class="account__connect">
+                            <div ng-show="userProviders.google">
+                                <span>{{ 'account-connect-to' | translate }}</span>
+                                <span class="connect-to-SN"> Google +</span>
+                            </div>
+                            <div ng-show="userProviders.facebook">
+                                <span>{{ 'account-connect-to' | translate }}</span>
+                                <span class="connect-to-SN"> Facebook</span>
+                            </div>
+                        </div>
+                        <div class="form-control">
+                            <input type="button" data-element="account-social-google-button" ng-show="common.user.googleEmail === ''" class="btn btn--social btn__login--google" ng-click="authenticate('google')" value="{{ 'google+' | translate }}"/>
+                            <input type="button" data-element="account-social-facebook-button" ng-show="common.user.facebookEmail === ''" class="btn btn--social btn__login--facebook" ng-click="authenticate('facebook')" value="{{ 'facebook' | translate }}"/>
+                        </div>
+                    </fieldset>
+                </div>
+                <fieldset class="teacher-checkbox">
+                    <span class="input input--checkbox">
+                        <input ng-checked="common.user.properties.newsletter === true" ng-model="common.user.properties.newsletter" value="common.user.properties.isTeacher" type="checkbox" name="teacherCheckbox" id="teacherCheckbox" data-element="teacher-checkbox">
+                        <label for="teacherCheckbox">{{'account-checkbox-teacher' | translate}}</label>
+                    </span>
+                </fieldset>
+                <p class="account__delete">{{'account-link-deleteAccount' | translate}}<a href="mailto:{{'support_email' | translate}}">{{'support_email' | translate}}</a>
+                </p>
+            </div>
+        </form>
+        <form class="form--account" id="form--account__second-column">
+            <div class="second-column">
+                <div class="form--section">
+                    <fieldset>
+                        <legend>
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#imageDefault"></use>
+                            </svg>
+                            <span>{{ 'profile-avatar' | translate }}</span>
+                        </legend>
+                        <!-- input type="file"-->
+                        <div class="form-control">
+                            <div>
+                                <div class="main--user--image" id="main-image" ng-click="uploadImageTrigger('main')">
+                                    <img id="avatarUser" data-corbel-src="common.user.username" data-corbel-collection="Avatar" data-corbel-image-type="common.user.properties.imageType" data-corbel-default-image="../images/common/avatar.png" data-corbel-force-reset="avatarUpdate" data-element="account-image">
+                                </div>
+
+                                <input class="btn btn--primary btn--small hidden main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="" name="projectimage" placeholder="" data-ng-focus="focus='projectimage'" data-ng-blur="focus = false" data-element="account-fileinput"/>
+                                <input type="button" class="btn btn--secondary btn--small btn--account-upload-image" data-ng-click="uploadImageTrigger('main')" value="{{ 'upload-image' | translate }}"/>
+
+                                <div>
+                                    <small>{{ 'account-avatar-requisites' | translate }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="form--section">
+                    <fieldset class="last--fieldset">
+                        <legend>
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#Archivo_CambiarIdioma"></use>
+                            </svg>
+                            <span>{{ 'language' | translate }}</span>
+                        </legend>
+                        <div class="form-control">
+                            <common-dropdown class="dropdown--small" data-options="test" data-options-click="changeLanguage" data-heading-option="common.user.properties.language | translate"/>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

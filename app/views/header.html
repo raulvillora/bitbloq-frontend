@@ -1,0 +1,104 @@
+<header role="banner" ng-class="{'header--ru':translate.use() === 'ru-RU', 'header--de':translate.use() === 'de-DE', header:true, 'header--relative':!common.headerAbsolute}" ng-controller="HeaderCtrl">
+    <h1 class="invisible">Bitbloq</h1>
+
+    <div class="nav nav--bar nav--main">
+        <nav class="menu" role="navigation">
+            <h1 class="invisible">Bitbloq Navigation</h1>
+            <ul class="nav__menu">
+                <li class="nav--logo" data-element="nav-logo">
+                    <a data-ng-href="#/{{common.user?'projects':''}}" class="nav__menu__link">
+                        <svg class="svg-icon svg-icon-logo">
+                            <use xlink:href="#logoBibtloq_webTool"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li ng-if="!common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
+                    <a href="#/bloqsproject" class="nav__menu__link">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Construye"></use>
+                        </svg>
+                        <span>{{ 'make' | translate }}</span>
+                    </a>
+                </li>
+                <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'projects'}" data-element="nav-projects">
+                    <a href="#/projects" class="nav__menu__link">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Mis_proyectos"></use>
+                        </svg>
+                        <span>{{ 'projects' | translate }}</span>
+                    </a>
+                </li>
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'explore'}" data-element="nav-explore">
+                    <a href="#/explore" class="nav__menu__link">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Explora"></use>
+                        </svg>
+                        <span>{{ 'explore' | translate }}</span>
+                    </a>
+                </li>
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'learn'}">
+                    <a href="{{diwoURLCourse}}" target="_blank" class="nav__menu__link" data-element="nav-learn">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Aprende"></use>
+                        </svg>
+                        <span data-element="header-menu-learn">{{ 'learn' | translate }}</span>
+                    </a>
+                </li>
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'help'}" data-element="nav-help">
+                    <a href="#/help" class="nav__menu__link">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Ayuda"></use>
+                        </svg>
+                        <span>{{ 'help' | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div ng-show="!common.user" class="menu--user">
+            <div class="menu--user__header">
+                <button class="btn btn--secondary btn--small" ng-click="common.goToLogin()" data-element="header-enterbutton">{{ 'enter' | translate }}</button>
+            </div>
+        </div>
+        <div ng-show="common.user" class="menu--user">
+            <div class="menu--user__header">
+                <span ng-click="openMenu($event)" class="menu--user__avatar">
+                    <img class="img--avatar" corbel-src="common.user.username" data-corbel-collection="Avatar" data-corbel-image-type="common.user.properties.imageType" data-corbel-watch="common.oldTempAvatar" data-corbel-default-image="../images/common/avatar.png" data-element="open-header-menu">
+                </span>
+            </div>
+            <ul class="menu--user__content" ng-show="showHeader">
+                <li>
+                    <span>
+                        {{ 'welcome' | translate }} {{common.user.username}}
+                    </span>
+                </li>
+                <li>
+                    <a href="/#/account">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#preferencias"></use>
+                        </svg>
+                        {{ 'header-account-config' | translate }}
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Archivo_CambiarIdioma"></use>
+                        </svg>
+                        {{ 'header-change-language' | translate }}
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="logout();" data-element="header-menu-logout">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#cerrarsesion"></use>
+                        </svg>
+                        {{ 'header-close-session' | translate }}
+                    </a>
+                </li>
+                <li>
+                    <a href="http://bitbloq1.bq.com/" target="_blank">{{ 'header-previous-version' | translate }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>

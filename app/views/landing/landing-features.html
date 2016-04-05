@@ -1,0 +1,89 @@
+<div ng-class="{'landing--ru':translate.use() === 'ru-RU', 'landing--de':translate.use() === 'de-DE'}" ng-click="closeMenu($event)" class="view view--landing view--landing--features">
+    <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible, 'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
+    <div class="features--masthead">
+        <div class="masthead--info">
+            <h1>{{ 'landing_title_mastheadInfo' | translate }}</h1>
+
+            <p class="landing--text--big--dark">{{ 'landing_subtitle_mastheadInfo' | translate }}
+                <br/> {{ 'landing_text_mastheadInfo' | translate }}</p>
+            <img src="../images/landing/features-masthead-laptop.png" alt="">
+        </div>
+    </div>
+    <div class="features--container">
+        <div class="feature">
+            <div class="feature--left">
+                <div class="feature--data">
+                    <h2 class="h1">{{ 'landing-secondary-section-easy' | translate }}</h2>
+
+                    <p>{{ 'landing-secondary-section-easy-text' | translate }}</p>
+                    <a class="landing--link" href="#/bloqsproject">{{ 'landing_link_testItNow' | translate }}</a>
+                </div>
+            </div>
+            <div class="feature--right">
+                <img src="../images/landing/learn-laptop.png" alt="">
+            </div>
+        </div>
+        <div class="feature">
+            <div class="feature--left">
+                <img src="../images/landing/create-kit.png" alt="">
+            </div>
+            <div class="feature--right">
+                <div class="feature--data">
+                    <h2 class="h1">{{ 'landing-secondary-section-robot ' | translate }}</h2>
+
+                    <p>{{ 'landing_text_featureCreate' | translate }}</p>
+                    <a class="landing--link" target="_blank" ng-href="{{'http://www.bq.com/' + common.langToBQ[translate.use().split('-')[0]] + '/zum-kit'}}">{{ 'landing_link_featureCreate' | translate }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="feature--left">
+                <div class="feature--data">
+                    <h2 class="h1">{{ 'landing-secondary-section-share ' | translate }}</h2>
+
+                    <p>{{ 'landing-secondary-section-share-text ' | translate }}</p>
+                    <a class="landing--link" href="#/explore">{{ 'landing_link_viewExplore' | translate }} </a>
+                </div>
+            </div>
+            <div class="feature--right">
+                <img src="../images/landing/share-laptop.png" alt="">
+            </div>
+        </div>
+        <div class="feature">
+            <div class="bloqs--rain" ng-include="'views/landing/bloqs-rain.html'"></div>
+            <div class="feature--content">
+                <h2>{{ 'landing-secondary-section-learn ' | translate }}</h2>
+
+                <p class="" landing--text--big>{{ 'landing_text_featureBloqs_first' | translate }}</p>
+
+                <p class="" landing--text--big>{{ 'landing_text_featureBloqs_second' | translate }}</p>
+                <img src="../images/landing/logo-bloqs.png" alt="">
+                <a class="landing--link" target="_blank" href="https://github.com/bq/bloqs">{{ 'landing_link_featureBloqs' | translate }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="landing--call-to-action">
+        <div class="cta--container">
+            <h1 class="landing--heading--white">{{'landing-main-title' | translate}}</h1>
+            <a href="#/bloqsproject" class="btn btn--call--test-it-now">{{'landing_link_testItNow' | translate}}</a>
+            <a href="#/register" class="btn btn--call--register">{{'general_button_register' | translate}}</a>
+        </div>
+    </div>
+    <div class="features--imagination">
+        <div class="image--left">
+            <img src="../images/landing/prusa.jpg" alt="">
+        </div>
+        <div class="imagination--container">
+            <div class="imagination--content">
+                <h2>{{ 'landing-third-title ' | translate }}</h2>
+
+                <p>{{ 'landing_text_imagination' | translate }}</p>
+                <a class="landing--link" target="_blank" ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]]}}">{{ 'landing_link_imagination' | translate }}</a>
+            </div>
+        </div>
+        <div class="image--right">
+            <img src="../images/landing/robot.jpg" alt="">
+        </div>
+    </div>
+    <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
+</div>

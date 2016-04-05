@@ -1,0 +1,12 @@
+<form ng-submit="confirmAction()">
+    <h1 class="h1">{{ 'login_modal_teacher_title' | translate }}</h1>
+
+    <p>{{ 'login_modal_teacher_text' | translate }}</p>
+<span>
+<input type="radio" name="teacher" value="teacher" id="teacher" ng-model="radioTeacher.model" data-element="modal-login-teacher" ng-click="enableConfirm = true"><label for="teacher">{{ 'login_modal_teacher_option_1' | translate }}</label>
+</span>
+<span>
+<input type="radio" name="teacher" value="not-teacher" id="not-teacher" ng-model="radioTeacher.model" data-element="modal-login-not-teacher" ng-click="enableConfirm = true"><label for="not-teacher">{{ 'login_modal_teacher_option_2' | translate }}</label>
+</span>
+    <button type="submit" class="btn btn--primary" ng-class="{'btn--disabled':!enableConfirm}">{{ 'continue' | translate }}</button>
+</form>

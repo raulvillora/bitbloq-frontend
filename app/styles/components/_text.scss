@@ -1,0 +1,72 @@
+@mixin textGenerator($fontSize, $fontWeight, $color, $lineHeight, $maxWidth, $wrap) {
+    color      : $color;
+    font-size  : $fontSize;
+    line-height: $lineHeight;
+    max-width  : $maxWidth;
+    font-weight: $fontWeight;
+
+    @if ($wrap) {
+        display      : block;
+        overflow     : hidden;
+        text-overflow: ellipsis;
+        white-space  : nowrap;
+    }
+}
+
+@mixin link($color, $fontSize, $underline, $hoverUnderline) {
+    color    : $color;
+    font-size: $fontSize;
+
+    @if ($underline) {
+        text-decoration: $underline;
+
+        &:hover {
+            text-decoration: $hoverUnderline;
+        }
+    }
+
+    @else {
+        text-decoration: none;
+    }
+
+    @if ($hoverUnderline) {
+        &:hover {
+            text-decoration: $underline;
+        }
+    }
+}
+
+small {
+    font-size: $font-size-small;
+}
+
+.h1 {
+    font-size: $font-size-h1;
+    color    : $font-color-heading;
+}
+
+.h2 {
+    font-size: $font-size-h2;
+    color    : $font-color-heading;
+}
+
+.h3 {
+    font-size: $font-size-h3;
+    color    : $font-color-heading;
+}
+
+.text--disabled {
+    color: $font-color-disabled;
+}
+
+.text--secondary {
+    color: $font-color-secondary;
+}
+
+.text--strong {
+    font-weight: bold;
+}
+
+.link--default {
+    @include link(#82ad3a, 14px, true, underline);
+}

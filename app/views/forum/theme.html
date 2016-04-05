@@ -1,0 +1,104 @@
+<div ng-include="'views/forum/forumHeader.html'"></div>
+<div class="forum__theme">
+    <div class="forum__theme__item">
+        <div class="theme__header">
+            <div class="theme__owner-avatar">
+                <img class="img--avatar" data-corbel-src="forum.firstAnswer.owner.id" data-corbel-collection="Avatar" data-corbel-image-type="forum.firstAnswer.owner.properties.imageType" data-corbel-default-image="../images/common/avatar.png" data-element="open-header-menu">
+            </div>
+            <div class="theme__header-info">
+                <h1 class="theme__title" data-element="forum-theme-theme-title">{{forum.currentTheme.title}}</h1>
+                <span class="theme-by-user">{{'by' | translate }}
+                    <span class="block__username__link">{{forum.firstAnswer.owner.username}}</span> |
+                    <time>{{forum.firstAnswer._createdAt | amDateFormat:'DD MMM YYYY, HH:mm' }}</time>
+                </span>
+            </div>
+        </div>
+        <div class="forum__admin" ng-if="forum.isAdmin()">
+            <div class="forum__admin__action forum__delete-theme" data-tooltips="true" data-tooltip="{{ 'delete-theme' | translate }}" data-tooltip-position="bottom">
+                <button class="btn btn--small btn--delete-answer" ng-click="forum.deleteTheme(forum.firstAnswer.themeId)">
+                    <svg class="svg-icon svg-icon--text">
+                        <use xlink:href="#remove"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="forum__admin__action forum__move-theme">
+                <button class="btn btn--secondary btn--small btn--admin" ng-click="forum.moveTheme(forum.firstAnswer.themeId)">
+                    <svg class="svg-icon svg-icon--text">
+                        <use xlink:href="#deshacer"></use>
+                    </svg>
+                    <span>{{'forumAdmin_buton_moveTheme' | translate }}</span>
+                </button>
+            </div>
+            <div class="forum__admin__action forum__ban-user--main" ng-if="forum.firstAnswer.owner._id !== common.user._id && forum.firstAnswer.owner.scopes[0]!=='bitbloq:user:banned'">
+                <button class="btn btn--secondary btn--small" ng-click="forum.banUser(forum.firstAnswer.owner)">
+                    <span>{{'button_banUser' | translate}}</span>
+                </button>
+            </div>
+        </div>
+        <div class="forun__theme__content" ta-bind name="testValidation" data-element="forum-theme-theme-content" ng-model="forum.firstAnswer.content" placeholder="test placeholder" required ng-model-options="{debounce: 1000}"></div>
+    </div>
+</div>
+<div ng-init="forum.currentPage=1">
+    <div class="theme__answer" dir-paginate="answer in forum.themeAnswers | filter:q | itemsPerPage: forum.categoryThemesPerPage" current-page="forum.currentPage">
+        <div class="forum__theme__item">
+            <span class="forum__answer-number">#{{(forum.currentPage-1)*10 + ($index +1)}}</span>
+
+            <div class="forum__admin" ng-if="forum.isAdmin()">
+                <div class="forum__admin__action forum__delete-answer" data-tooltips="true" data-tooltip="{{ 'delete-answer' | translate }}" data-tooltip-position="bottom">
+                    <button class="btn btn--small btn--delete-answer" ng-click="forum.deleteAnswer(answer)">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#remove"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="forum__admin__action forum__ban-user" ng-if="answer.owner._id !== common.user._id && !answer.owner.bannedInForum">
+                    <button class="btn btn--secondary btn--small" ng-click="forum.banUser(answer.owner._id)">
+                        <span>{{'button_banUser' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+            <div class="theme__header">
+                <div class="theme__owner-avatar small">
+                    <img class="img--avatar" data-corbel-src="answer.owner.id" data-corbel-collection="Avatar" data-corbel-image-type="answer.owner.properties.imageType" data-corbel-default-image="../images/common/avatar.png" data-element="open-header-menu">
+                </div>
+            </div>
+            <div class="answer__header">
+                <h2>{{answer.owner.username}}</h2>
+                <time>{{answer._updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
+            </div>
+            <div class="answer__content">
+                <div ta-bind name="testValidation" data-element="forum-theme-answer" ng-model="answer.content" placeholder="test placeholder" required ng-model-options="{debounce: 1000}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="forum__answer-form" ng-if="common.user && common.user.scopes[0]!=='bitbloq:user:banned'">
+        <div class="forum__theme__item">
+            <form>
+                <div class="theme__header">
+                    <div class="theme__owner-avatar small">
+                        <img class="img--avatar" data-corbel-src="common.user.id" data-corbel-collection="Avatar" data-corbel-image-type="common.user.properties.imageType" data-corbel-default-image="../images/common/avatar.png" data-element="open-header-menu">
+                    </div>
+                    <h2 class="theme__answer--title">{{'forum_action_answer' | translate}}</h2>
+                </div>
+                <text-angular name="themeeditor" ng-mouseenter="forum.setFocusToEditor('themeeditor')" ng-model="forum.textEditorContent.htmlContent" data-element="forum-theme-answer-theme" ta-toolbar="[['h1','h2','h3','p'], ['bold','italics','underline','ul','ol','undo','redo','clear'], ['uploadImage','insertLink','insertVideo']]"></text-angular>
+                <button ng-class="{'btn--disabled':forum.textEditorContent.htmlContent===''}" data-element="forum-theme-publish-answer-button" class="btn btn--primary btn--small" type="submit" ng-disabled="forum.textEditorContent.htmlContent===''" ng-click="forum.submitNewAnswer()">{{'forum_button_publishAnswer' | translate}}</button>
+                <input class="btn btn--primary btn--small main-image--input invisible" onchange="angular.element(this).scope().forum.addImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" data-element="infotab-fileinput" data-ng-blur="focus = false" tabindex="-1"/>
+            </form>
+        </div>
+    </div>
+    <div class="forum__answer__not-logged" ng-if="!common.user">
+        <div class="forum__theme__item">
+            <div class="theme__header">
+                <div class="theme__owner-avatar small">
+                    <img class="img--avatar" src="../images/common/avatar.png">
+                </div>
+            </div>
+            <h2>{{'info_enterOrCreateAccount' | translate}}</h2>
+            <button ng-click="common.goToLogin()" class="btn btn--secondary btn--small">{{'enter' | translate}}</button>
+            <button ng-click="common.goToRegister()" class="btn btn--primary btn--small">{{'button_createAccount' | translate}}</button>
+        </div>
+    </div>
+    <div class="forum__paginator">
+        <dir-pagination-controls boundary-links="true" on-page-change="forum.pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
+</div>

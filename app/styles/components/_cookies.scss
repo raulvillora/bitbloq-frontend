@@ -1,0 +1,47 @@
+.bitbloq--cookies {
+    display         : none;
+    position        : fixed;
+    bottom          : 0;
+    width           : 100%;
+    padding         : 1em 1em 1em 3em;
+    font-size       : 12px;
+    background-color: #82ad3a;
+    color           : white;
+    z-index         : 8;
+    height          : 100px;
+    text-align      : center;
+
+    p {
+        display: block;
+
+        a {
+            font-weight: bold;
+            color      : white;
+        }
+    }
+
+    .btn--close--cookies {
+        padding       : 7px 20px;
+        font-weight   : bold;
+        border        : 1px solid white;
+        border-radius : 4px;
+        color         : white;
+        text-transform: capitalize;
+        display       : block;
+        left          : 0;
+        right         : 0;
+        margin        : 5px auto;
+
+        .svg-icon {
+            width         : 1.5em;
+            height        : 1.5em;
+            fill          : white;
+            vertical-align: middle;
+        }
+    }
+
+    a {
+        color         : white;
+        text-transform: capitalize;
+    }
+}

@@ -1,0 +1,7 @@
+<div class="modal_publish">
+    <p ng-if="publish">{{'modalPublish_text_publish'| translate}}</p>
+
+    <p ng-if="!publish">{{'modalPublish_text_private'| translate}}</p>
+    <button data-element="publish-button" ng-if="publish" class="btn btn--primary btn--publish" data-ng-click="confirmAction()">{{ 'to-explore' | translate}}</button>
+    <button data-element="private-button" ng-if="!publish" class="btn btn--primary btn--publish" data-ng-click="confirmAction()">{{ 'modalPublish_button_makePrivate' | translate}}</button>
+</div>

@@ -1,0 +1,121 @@
+<div data-element="landing" ng-class="{'landing--ru':translate.use() === 'ru-RU', 'landing--home--ru':translate.use() === 'de-DE'}" ng-click="closeMenu($event)" class="view view--landing view--landing--home">
+    <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible, 'fixed':windowScroll}" data-ng-include="'views/landing/landing-header.html'"></div>
+    <div class="landing--masthead">
+        <div class="max-width">
+            <h1 class="h1">{{'landing_title_program' | translate}}</h1>
+            <span class="landing--text--big--dark">{{'landing_text_mastheadSubtitle' | translate}}</span>
+            <a href="#/bloqsproject" class="btn btn--landing">{{'landing_link_testItNow' | translate}}</a>
+            <img src="../images/landing/home_computer.png" alt="">
+        </div>
+    </div>
+    <div class="row row--inline landing--section for--who--section">
+        <div class="max-width">
+            <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--for-who">
+                <img src="../images/landing/bombilla.jpg" alt="">
+
+                <h2 class="h2">{{'landing-secondary-section-little ' | translate}}</h2>
+
+                <p>{{'landing-secondary-section-little-text ' | translate}}</p>
+                <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]]}}" target="_blank" class="landing--link--small">{{'landing_link_enterDiwo' | translate}}</a>
+            </div>
+            <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--for-who">
+                <img src="../images/landing/casa.jpg" alt="">
+
+                <h2 class="h2">{{'landing-secondary-section-family' | translate}}</h2>
+
+                <p>{{'landing-secondary-section-family-text' | translate}}</p>
+                <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]] + '/course/aprende-robotica-y-programacion-con-bitbloq-2/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningCourse' | translate}}</a>
+            </div>
+            <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--for-who">
+                <img src="../images/landing/aula.jpg" alt="">
+
+                <h2 class="h2">{{'landing-secondary-section-classroom' | translate}}</h2>
+
+                <p>{{'landing_text_forWho' | translate}}</p>
+                <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]] + '/cam15/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningPlan ' | translate}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="landing--school-or-teacher">
+        <h2 class="h1 landing--heading">{{'landing_title_schoolOrTeacher' | translate}}</h2>
+        <span class="landing--text--big">{{'landing_subtitle_schoolOrTeacher' | translate}}<a class="landing--link" href="mailto:educacion@bq.com">educacion@bq.com</a></span>
+    </div>
+    <!-- <div class="landing--testimonials">
+    <img src="../images/landing/comillas.png" alt="">
+    <div class="testimonials--container">
+        <ul class="testimonials--list">
+            <li ng-repeat="testimonial in testimonials" ng-class="{'testimonials--item':true, active:currentTestimonial === $index}">
+                <span>{{testimonial}}</span>
+            </li>
+        </ul>
+        <div class="testimonials--nav">
+            <button ng-click="setTestimonial($index)" ng-repeat="testimonial in testimonials" ng-class="{'btn':true, 'btn--testimonials':true, active:currentTestimonial === $index}"></button>
+        </div>
+        <div class="testimonials--people" ng-show="currentTestimonial === 0">
+            <h2 class="h4 landing--text--big--dark">Nombre Apellido</h2>
+            <span>Fuente, colegio, web</span>
+        </div>
+        <div class="testimonials--people" ng-show="currentTestimonial === 1">
+            <h2 class="h4 landing--text--big--dark">Posi Apellido</h2>
+            <span>Fuente, colegio, web</span>
+        </div>
+        <div class="testimonials--people" ng-show="currentTestimonial === 2">
+            <h2 class="h4 landing--text--big--dark">Amarosa Apellido</h2>
+            <span>Fuente, colegio, web</span>
+        </div>
+        <div class="testimonials--people" ng-show="currentTestimonial === 3">
+            <h2 class="h4 landing--text--big--dark">AMPARO!! Apellido</h2>
+            <span>Fuente, colegio, web</span>
+        </div>
+    </div>
+</div> -->
+    <div class="landing--call-to-action">
+        <div class="cta--container">
+            <h1 class="landing--heading--white">{{'landing-main-title' | translate}}</h1>
+            <a href="#/bloqsproject" class="btn btn--call--test-it-now">{{'landing_link_testItNow' | translate}}</a>
+            <a href="#/register" class="btn btn--call--register">{{'general_button_register' | translate}}</a>
+        </div>
+    </div>
+    <div class="landing--explore">
+        <div class="max-width">
+            <h1 class="landing--heading">{{'landing_title_explore' | translate}}</h1>
+            <span class="landing--text--big">{{'landing_subtitle_explore' | translate}}</span>
+            <ul class="row row--inline landing--section">
+                <li class="col-vsmall-12 col-small-6 col-medium-4 col-large-4" data-ng-repeat="project in projects track by project._id">
+                    <a class="project--item" data-ng-href="#/project/{{project._id}}" target="_blank">
+                        <div class="project--header">
+                            <img data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-default-image="../images/common/default-project.png" corbel-image-type="project.imageType">
+                        </div>
+                        <div class="project--data">
+                            <h2>{{project.name}}</h2>
+
+                            <div class="project--footer">
+                                <div class="left">
+                                    {{'explore-created-by' | translate}} {{project.creatorUsername}}
+                                </div>
+                                <div class="right">
+                                    <span>
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#mas"></use>
+                                        </svg>
+                                        {{projectStats[project._id].timesAdded || 0}}
+                                    </span>
+                                    <span>
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#vistas"></use>
+                                        </svg>
+                                        {{projectStats[project._id].timesViewed || 0}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="landing--link">
+                <a href="#/explore">{{'landing_link_explore' | translate}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
+</div>

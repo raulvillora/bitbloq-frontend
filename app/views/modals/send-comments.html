@@ -1,0 +1,12 @@
+<div class="modal_send-comments">
+    <p>{{ content | translate }}</p>
+
+    <form>
+		<span class="form--input short--input" data-ng-class="{'input--focused':focus === 'name'}">
+			<input type="text" name="name" id="name" ng-model="comments.name" placeholder="{{ 'modal-send-comments-input-placeholder' | translate }}" data-ng-focus="focus = 'name'" data-ng-blur="focus = false" data-element="modal-send-comments-name">
+		</span>
+		<span class="form--input common--textarea" data-ng-class="{'input--focused':focus === 'message'}">
+			<textarea rows="5" class="msd-elastic" ng-model="comments.message" placeholder="{{ 'modal-send-comments-textarea-placeholder' | translate }}" data-ng-focus="focus = 'message'" data-ng-blur="focus = false" data-element="modal-send-comments-textarea"></textarea>
+		</span>
+    </form>
+</div>

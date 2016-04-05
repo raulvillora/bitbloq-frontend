@@ -1,0 +1,34 @@
+<h1 class="h2 modal--web2board-errors--title">{{ 'web2boardErrorsModal_title' | translate }}</h1>
+<div class="modal--web2board-errors--content">
+    <p class="modal--web2board-errors--text">{{ 'web2boardErrorsModal_firstParagraph' | translate }}</p>
+    <ul class="modal--web2board-errors--list">
+        <li class="modal--web2board-errors--item">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#verificar"></use>
+            </svg>
+            <span>{{ 'web2boardErrorsModal_firstItem' | translate }}</span>
+        </li>
+        <li class="modal--web2board-errors--item">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#verificar"></use>
+            </svg>
+            <span>{{ 'web2boardErrorsModal_secondItem' | translate }}</span>
+        </li>
+        <li class="modal--web2board-errors--item">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#verificar"></use>
+            </svg>
+            <span>{{ 'web2boardErrorsModal_thirdItem' | translate }}</span>
+        </li>
+    </ul>
+    <p class="modal--web2board-errors--text">{{ 'web2boardErrorsModal_secondParagraph' | translate }}</p>
+
+    <p class="modal--web2board-errors--phone">(+34) 91 142 06 82</p>
+
+    <p class="modal--web2board-errors--text">
+        {{ 'web2boardErrorsModal_thirdParagraph' | translate }}
+        <button class="link--default" ng-click="sendCommentsModal()">{{ 'web2boardErrorsModal_link_thirdParagraph' | translate }}</button>
+    </p>
+
+    <button class="link--default" ng-click="backAction()">{{ 'web2boardErrorsModal_back' | translate }}</button>
+</div>

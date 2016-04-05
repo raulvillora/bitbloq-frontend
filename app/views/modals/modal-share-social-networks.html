@@ -1,0 +1,45 @@
+<div class="modal-share-social--container">
+    <p ng-if="isOwner">{{ 'modal-share-social-networks-maintext' | translate }}</p>
+
+    <div class="clearfix social-networks">
+        <!-- Facebook -->
+        <a href="" ng-click="addCount($event)" ng-class="{'social-share-icon':true, 'social--empty':stats.facebookCount === 0, facebook:true }" id="facebook" data-element="modals-fb-button">
+            <svg class="svg-icon">
+                <use xlink:href="#facebook"></use>
+            </svg>
+            <span class="social--info-text">{{ 'share' | translate }}</span>
+            <span class="social--count" ng-if="stats.facebookCount > 0">
+                {{stats.facebookCount}}
+            </span>
+        </a>
+        <!-- Twitter -->
+        <a href="" ng-click="addCount($event)" ng-class="{'social-share-icon':true, 'social--empty':stats.twitterCount === 0, twitter:true }" id="twitter" data-element="modals-tw-button">
+            <svg class="svg-icon">
+                <use xlink:href="#tweeter"></use>
+            </svg>
+            <span class="social--info-text"> Tweet</span>
+            <span class="social--count" ng-if="stats.twitterCount > 0">
+                {{stats.twitterCount}}
+            </span>
+        </a>
+        <!-- Google plus -->
+        <a href="" ng-click="addCount($event)" ng-class="{'social-share-icon':true, 'social--empty':stats.googleCount === 0, googleplus:true }" id="googleplus" data-element="modals-g-button">
+            <svg class="svg-icon">
+                <use xlink:href="#googleplus"></use>
+            </svg>
+            <span class="social--info-text">{{ 'share' | translate }}</span>
+            <span class="social--count" ng-if="stats.googleCount > 0">
+                {{stats.googleCount}}
+            </span>
+        </a>
+        <!-- Short url -->
+        <span class="social-share-icon modal-share--short-url-input" ng-click="simplePublish()" data-element="modals-shortURL-button">
+            <input type="text" ng-model="shortUrl" value="{{shortUrl}}" readonly="readonly" data-element="modals-shortURL">
+            <span class="copy-selected-text" ng-click="copyAction(shortUrl)">{{'copy' | translate}}</span>
+        </span>
+    </div>
+    <p ng-if="isOwner">
+        <span>{{ 'modal-share-social-networks-footer' | translate }}</span>
+        <button class="link--default" data-ng-click="shareWithBitbloqUsers()">{{ 'modal-share-social-networks-footer-link' | translate }}</button>
+    </p>
+</div>

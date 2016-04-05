@@ -1,0 +1,111 @@
+{
+  "components": [
+    "buzzer",
+    "continuousServoStart",
+    "continuousServoStop",
+    "lcdTurnOnOff",
+    "lcdWrite",
+    "led",
+    "oscillator",
+    "oscillatorStart",
+    "oscillatorStop",
+    "readSensor",
+    "servo"
+  ],
+  "advancedComponents": [
+    "buzzerAdvanced",
+    "continuousServoStartAdvanced",
+    "continuousServoStopAdvanced",
+    "lcdTurnOnOffAdvanced",
+    "lcdWriteAdvanced",
+    "ledAdvanced",
+    "oscillatorAdvanced",
+    "oscillatorStartAdvanced",
+    "oscillatorStopAdvanced",
+    "pinReadAdvanced",
+    "pinWriteAdvanced",
+    "readAdvanced",
+    "servoAdvanced",
+    "turnOnOffAdvanced"
+  ],
+
+  "functions": [
+    "voidFunction",
+    "voidFunctionWithArguments",
+    "invokeFunction",
+    "returnFunction",
+    "returnFunctionWithArguments",
+    "invokeReturnFunction",
+    "return",
+    "arguments",
+    "argument"
+  ],
+
+  "variables": [
+    "declareVariable",
+    "selectVariable",
+    "setVariable",
+    "arrayVariable",
+    "setArrayVariable"
+  ],
+  "advancedVariables": [
+    "hwVariable",
+    "swVariable"
+  ],
+
+  "codes": [
+    "code",
+    "comment"
+  ],
+
+  "mathematics": [
+    "basicOperations",
+    "map",
+    "mapAdvanced",
+    "mathOperations",
+    "number",
+    "random",
+    "numberArray"
+  ],
+  "advancedMathematics": [
+    "numberArrayAdvanced"
+  ],
+
+  "texts": [
+    "length",
+    "string",
+    "stringCreate",
+    "stringArray"
+  ],
+  "advancedText": [
+    "stringArrayAdvanced"
+  ],
+
+  "controls": [
+    "switch",
+    "case",
+    "caseDefault",
+    "for",
+    "if",
+    "elseif",
+    "else",
+    "while",
+    "continue",
+    "break",
+    "wait"
+  ],
+
+  "logics": [
+    "boolean",
+    "equalityOperations",
+    "logicOperations",
+    "not",
+    "boolArray"
+  ],
+
+  "communications": [
+    "serialReceive",
+    "serialSend",
+    "convert"
+  ]
+}

@@ -1,0 +1,40 @@
+<h1 class="h2 modal--download--webtoboard--title">{{ modalTitle | translate }}</h1>
+<p class="modal--download--webtoboard--text">{{ modalText | translate }}</p>
+<div class="row">
+    <div ng-if="os === 'Windows'">
+        <div class="modal--download--webtoboard--block-container">
+            <div class="modal--download--webtoboard--image--container">
+                <img src="../images/os/windows_logo.jpg" alt="" class="modal--download--webtoboard--image">
+            </div>
+            <div class="modal--download--webtoboard--text-container">
+                <span>Windows 7 {{ 'or-higher' | translate }}</span>
+                <a class="btn btn--primary btn--webtoboard" data-ng-href="{{envData.config.web2boardLinkWindows}}">{{ 'download' | translate }}</a>
+                <a class="webtoboard-view-all-link" ng-click="viewAllLink()">{{ 'view-all-os-availables' | translate }}</a>
+            </div>
+        </div>
+    </div>
+    <div ng-if="os === 'Mac'">
+        <div class="modal--download--webtoboard--block-container">
+            <div class="modal--download--webtoboard--image--container">
+                <img src="../images/os/OSX_logo.jpg" alt="" class="modal--download--webtoboard--image">
+            </div>
+            <div class="modal--download--webtoboard--text-container">
+                <span>Mac OS 10 {{ 'or-higher' | translate }}</span>
+                <a class="btn btn--primary btn--webtoboard" data-ng-href="{{envData.config.web2boardLinkMac}}">{{ 'download' | translate }}</a>
+                <a class="webtoboard-view-all-link" ng-click="viewAllLink()">{{ 'view-all-os-availables' | translate }}</a>
+            </div>
+        </div>
+    </div>
+    <div ng-if="os === 'Linux'">
+        <div class="modal--download--webtoboard--block-container">
+            <div class="modal--download--webtoboard--image--container">
+                <img src="../images/os/ubuntu_logo.jpg" alt="" class="modal--download--webtoboard--image">
+            </div>
+            <div class="modal--download--webtoboard--text-container">
+                <span>Ubuntu 14.04</span>
+                <a class="btn btn--primary btn--webtoboard" data-ng-href="{{envData.config.web2boardLinkLinux}}">{{ 'download' | translate }}</a>
+                <a class="webtoboard-view-all-link" ng-click="viewAllLink()">{{ 'view-all-os-availables' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</div>

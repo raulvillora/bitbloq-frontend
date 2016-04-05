@@ -1,0 +1,118 @@
+<div class="explore-view">
+    <div class="header--projects">
+        <h1 class="h2 projects--heading">{{user.firstName}} {{user.lastName}}
+            <small>{{user.username}}</small>
+        </h1>
+        <span class="explore--project--count">{{ projectCount }} {{ 'projects' | translate }}</span>
+    </div>
+    <div class="explore__content">
+        <div class="explore__actions">
+            <div class="actions--left">
+                <div class="explore--action">
+                    <common-dropdown options="sortOptions" options-click="sort" pre-heading="'explore-sortby'" heading-option="sortOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+                </div>
+                <div class="explore--action">
+                    <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--explore--actions':true, 'btn--projects--selected':itemsLayout === 'grid'}">
+                        <svg class="svg-icon">
+                            <use xlink:href="#cuadricula"></use>
+                        </svg>
+                    </button>
+                    <button ng-click="itemsLayout = 'list'" ng-class="{btn:true, 'btn--explore--actions':true, 'btn--projects--selected':itemsLayout === 'list'}">
+                        <svg class="svg-icon">
+                            <use xlink:href="#listado"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="actions--right">
+                <div class="explore--action">
+                    <div ng-class="{'explore__actions__filtered--filter':true, 'filter--dropdown--before':componentDropdown}">
+                        <h3 class="invisible">{{'explore-filters-by' | translate}}</h3>
+                        <button class="btn btn--dropdown" data-ng-click="componentDropdown=!componentDropdown">{{ 'explore-filter-by' | translate}}</button>
+                    </div>
+                </div>
+                <div class="explore--action">
+                    <h3 class="invisible">{{ 'searcher-search-form' | translate }}</h3>
+                    <span class="form--input">
+                        <svg class="svg-icon--search">
+                            <use xlink:href="#lupa"></use>
+                        </svg>
+                        <input type="search" name="search--normal" id="search--normal" placeholder="Buscar..." data-ng-keyup="searcher($event)" data-ng-model="searchText">
+                    </span>
+                </div>
+            </div>
+        </div>
+        <ul data-ng-class="{dropdown:true, visible:componentDropdown, 'filter--dropdown':true}">
+            <li>
+                <ul class="explore__actions__filtered--generics">
+                    <h4 class="invisible">{{'explore-filters-by-compile' | translate}}</h4>
+                    <li data-ng-repeat="gFilter in genericFilterOptions">
+                        <span class="input input--checkbox" data-ng-click="genericFilter(gFilter.option)">
+                            <input type="checkbox" name="sample--checkbox" id="{{'genericFilterCheckbox'+gFilter.option}}" data-ng-model="genericFilterOptions[$index].value">
+                            <label for="{{'genericFilterCheckbox'+gFilter.option}}"><span>{{'explore-filter-'+gFilter.option | translate}}</span></label>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <div class="explore__actions__filtered--components">
+                        <h4 class="invisible">{{'explore-filters-by-components' | translate}}</h4>
+                        <li data-ng-repeat="compFilter in defaultComponentsFilters">
+                            <span class="input input--checkbox" data-ng-click="componentFilter(compFilter.option)">
+                                <input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+compFilter.option}}" data-ng-model="defaultComponentsFilters[$index].value">
+                                <label for="{{'tagCheckbox'+compFilter.option}}"><span>{{'tag-'+compFilter.option | translate}}</span></label>
+                            </span>
+                        </li>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+        <div class="explore__container explore__projects">
+            <h2 class="invisible">project list</h2>
+            <ol class="projects__project-list">
+                <li ng-class="{'projects__item':true, 'projects__item--explore':true, 'project__item--wide':itemsLayout === 'list'}" data-ng-repeat="project in userProjects">
+                    <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
+                        <div ng-class="{'project__image--container':true, 'project__image--container--wide':itemsLayout === 'list'}">
+                            <button class="btn btn--secondary btn--small more-info--button" ng-click="openPublicProject(project._id)">{{ 'more-info' | translate }}</button>
+                            <img class="explore__project-item__project-image" alt="Project image" href="#data" data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-default-image="../images/common/default-project.png"/>
+                        </div>
+                        <div class="explore__project-item__info">
+                            <div class="explore__project-item__icons--left">
+                                <h3 class="h3 project__info--title ng-binding">{{project.name}}</h3>
+
+                                <div class="explore__project-item__author">
+                                    <span class="explore__project-item__author-name">{{ 'explore-created-by' | translate }} {{users[project.creatorId].username}}</span>
+                                </div>
+                            </div>
+                            <div class="explore__project-item__icons--right">
+                                <span class="explore__project-item__icon">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#vistas"></use>
+                                    </svg>
+                                    <span>
+                                        {{project.timesViewed}}
+                                    </span>
+                                </span>
+                                <span class="explore__project-item__icon">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#mas"></use>
+                                    </svg>
+                                    <span>
+                                        {{project.timesAdded}}
+                                    </span>
+                                </span>
+                                <span class="explore__project-item__icon" ng-if="project.compiled"> | </span>
+                                <span class="explore__project-item__icon" ng-if="project.compiled">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#ok"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

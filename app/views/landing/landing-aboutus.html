@@ -1,0 +1,110 @@
+<div ng-class="{'landing--ru':translate.use() === 'ru-RU', 'landing--de':translate.use() === 'de-DE'}" class="view view--landing view--landing--aboutus" ng-click="closeMenu($event)">
+    <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible, 'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
+    <div class="background-gray"></div>
+    <div class="landing--masthead">
+        <div class="max-width">
+            <div class="masthead--content">
+                <h1>{{ 'landing_title_aboutUs' | translate }}</h1>
+
+                <p>{{ 'landing_subtitle_aboutUs' | translate }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="landing--team max-width">
+        <h2 class="landing--heading">{{ 'landing_title_team' | translate }}</h2>
+
+        <p class="landing--text--big">{{ 'landing_text_team' | translate }}</p>
+        <ul class="row row--inline">
+            <li class="col-medium-3">
+                <img src="../images/landing/diego-segura.jpg" alt="">
+
+                <h3>Diego Segura</h3>
+                <span>{{ 'abousUs_text_developerMale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/irene-sanz.jpg" alt="">
+
+                <h3>Irene Sanz</h3>
+                <span>{{ 'abousUs_text_developerFemale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/javi.jpg" alt="">
+
+                <h3>Javier Heredia</h3>
+                <span>{{ 'abousUs_text_developerMale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/joseluisgonzalez.jpg" alt="">
+
+                <h3>Jose Luis González</h3>
+                <span>UX/UI</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/julian-caro.jpg" alt="">
+
+                <h3>Julián Caro</h3>
+                <span>{{ 'abousUs_text_developerMale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/laura-del-rio.jpg" alt="">
+
+                <h3>Laura del Río</h3>
+                <span>{{ 'abousUs_text_developerFemale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/luis-antonio-gonzalez-martin.jpg" alt="">
+
+                <h3>Luis Antonio González</h3>
+                <span>{{ 'abousUs_text_developerMale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/natalia-gomez.jpg" alt="">
+
+                <h3>Natalia Gómez</h3>
+                <span>{{ 'abousUs_text_developerFemale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/sergio-morcuende.jpg" alt="">
+
+                <h3>Sergio Morcuende</h3>
+                <span>{{ 'abousUs_text_developerMale' | translate }}</span>
+            </li>
+            <li class="col-medium-3">
+                <img src="../images/landing/tomas-calvo.jpg" alt="">
+
+                <h3>Tomás Calvo</h3>
+                <span>{{ 'abousUs_text_developerMale' | translate }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="contributors">
+        <h2 class="landing--heading">{{ 'landing_title_contributors' | translate }}</h2>
+
+        <p class="landing--text--big">
+            <span>{{ 'landing_text_contributors' | translate }}</span>
+            <a class="landing--link" target="_blank" href="http://www.corbel.io">Corbel</a>
+            <a class="landing--link" target="_blank" href="https://angularjs.org/">AngularJS</a>
+            <a class="landing--link" target="_blank" href="http://penguin.docs.bqws.io/">Penguin</a>
+            <a class="landing--link" target="_blank" href="http://gruntjs.com/">Grunt</a>
+            <a class="landing--link" target="_blank" href="http://bower.io/">Bower</a>
+            <a class="landing--link" target="_blank" href="http://sass-lang.com/">Sass</a>
+        </p>
+    </div>
+    <div class="landing--call-to-action">
+        <div class="cta--container">
+            <h1 class="landing--heading--white">{{'landing-main-title' | translate}}</h1>
+            <a href="#/bloqsproject" class="btn btn--call--test-it-now">{{'landing_link_testItNow' | translate}}</a>
+            <a href="#/register" class="btn btn--call--register">{{'general_button_register' | translate}}</a>
+        </div>
+    </div>
+    <div class="invest">
+        <h2 class="landing--heading">{{ 'cdti-title' | translate }}</h2>
+
+        <p>{{ 'cdti-record' | translate }} IDI-20150289</p>
+        <h4>{{ 'cdti-coinvest' | translate }} 2014-2020</h4>
+        <h5>{{ 'cdti-projectname' | translate }} BOTBLOQ</h5>
+        <img src="images/CDTI.jpg">
+        <img src="images/FEDER.jpg">
+    </div>
+    <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
+</div>

@@ -1,0 +1,275 @@
+.landing--header {
+    background-color: transparent;
+    height          : 66px;
+    position        : relative;
+    top             : 0;
+    width           : 100%;
+    z-index         : 9;
+    transition      : background-color 250ms;
+
+    &.opaque {
+        transition      : background-color 250ms;
+        background-color: #373b44;
+        border-top      : 3px solid #82ad3a;
+    }
+
+    &.fixed {
+        position: fixed!important;
+        top     : 0;
+    }
+
+    .icon-wrapper {
+        display: none;
+    }
+
+    header {
+        height: 66px;
+
+        .nav__menu--landing {
+            max-width     : 1200px;
+            margin        : 0 auto;
+            height        : 66px;
+            display       : block;
+            line-height   : 66px;
+            text-transform: uppercase;
+            position      : relative;
+            margin-top    : 3px;
+            
+            .logo--icon--link {
+                margin-left   : 20px;
+                display       : inline-block;
+                width         : 46px;
+                height        : 45px;
+                vertical-align: middle;
+
+                .logo--icon {
+                    width     : 46px;
+                    height    : 45px;
+                    fill      : white;
+                    transition: fill 250ms;
+                }
+
+                &:hover {
+                    .logo--icon {
+                        fill      : #82ad3a;
+                        transition: fill 250ms;
+                    }
+                }
+            }
+
+            ul {
+                &.left {
+                    margin-left: 20px;
+                }
+
+                &.right {
+                    position    : absolute;
+                    right       : 0;
+                    top         : 12px;
+                    font-weight : 500;
+                    margin-right: 20px;
+
+                    .register {
+                        color: #82ad3a;
+
+                        &:hover {
+                            color: #96cb3c;
+                        }
+                    }
+
+                    .login {
+                        color: #c0c3c9;
+
+                        &:hover {
+                            color: white;
+                        }
+                    }
+                }
+                height        : 45px;
+                vertical-align: middle;
+                display       : inline-block;
+
+                li {
+                    height      : 100%;
+                    float       : left;
+                    line-height : 45px;
+                    font-size   : 12px;
+
+                    &.active {
+                        a {
+                            color      : white;
+                            font-size  : 12px;
+                            font-weight: 500;
+                        }
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color          : #8c919b;
+                        font-size      : 12px;
+                        transition     : color 250ms;
+
+                        &:hover {
+                            color     : white;
+                            transition: color 250ms;
+                        }
+                    }
+                    margin-right: 30px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .landing--header {
+        header {
+            .icon-wrapper {
+                display : inline-block;
+                position: absolute;
+                right   : 20px;
+                top     : 19px;
+            }
+
+            .nav__menu--landing {
+                .logo--icon--link {
+                    margin-left: 20px;
+                }
+
+                ul {
+                    &.left {
+                        li {
+                            display   : none;
+                            opacity   : 0;
+                            transition: opacity 250ms;
+                        }
+
+                        a {
+
+                        }
+
+                        .logo--icon {
+
+                        }
+                    }
+
+                    &.right {
+                        margin-right: 20px;
+
+                        li {
+                            display   : none;
+                            opacity   : 0;
+                            transition: opacity 250ms;
+                        }
+
+                        .register {
+
+                        }
+
+                        .login {
+
+                        }
+                    }
+
+                    li {
+                        a {
+
+                        }
+
+                        &:last-child {
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .responsive__menu--on {
+            .nav__menu--landing {
+                ul {
+                    display         : block;
+                    margin-left     : 0 !important;
+                    background-color: transparent;
+                    height          : auto;
+                    float           : none;
+
+                    li {
+                        display         : block;
+                        float           : none;
+                        background-color: #373b44;
+                        margin-right    : 0;
+                        text-align      : center;
+                        border-bottom   : 1px solid #797c81;
+
+                        a {
+                            width  : 100%;
+                            height : 100%;
+                            display: block;
+                        }
+
+                        &:hover {
+                            background-color: #26292f;
+                        }
+                    }
+
+                    &.left {
+                        li {
+                            &:first-child {
+                                border-top: 1px solid #797c81;
+                            }
+                            opacity: 1;
+                            float  : none;
+                            display: block;
+                        }
+
+                        .logo--icon {
+
+                        }
+                    }
+
+                    &.right {
+                        margin-right: 0;
+                        position    : initial;
+
+                        li {
+                            opacity: 1;
+                            float  : none;
+                            display: block;
+
+                            &:last-child {
+                                border-bottom   : 0;
+                                background-color: #262930;
+
+                                &:hover {
+                                    background-color: #26292f;
+                                }
+                            }
+                        }
+
+                        .register {
+
+                        }
+
+                        .login {
+
+                        }
+                    }
+
+                    li {
+                        a {
+
+                        }
+
+                        &:last-child {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
