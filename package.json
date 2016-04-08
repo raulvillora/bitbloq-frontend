@@ -63,7 +63,7 @@
         "grunt-usemin": "^3.0.0",
         "grunt-wiredep": "^2.0.0",
         "jasmine-core": "^2.3.4",
-        "jshint-stylish": "2.1.0",
+        "jshint-stylish": "2.1.0",reso
         "karma": "^0.13.0",
         "karma-jasmine": "^0.3.5",
         "karma-phantomjs-launcher": "^0.2.1",
@@ -78,7 +78,7 @@
     "scripts": {
         "clean": "rm -rf node_modules app/bower_components",
         "reinstall": "npm run clean && npm install",
-        "postinstall": "bower install --allow-root",
+        "postinstall": "bower install --allow-root --force-latest",
         "getbloqs": "bower uninstall bloqs --save && bower install bloqs#dev --save && grunt getbloqs"
     },
     "dependencies": { },
