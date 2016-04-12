@@ -583,7 +583,7 @@ module.exports = function(grunt) {
         grunt.task.run(['serve:' + target]);
     });
 
-    grunt.registerTask('dist', function(env) {
+    grunt.registerTask('generateConfig', 'Configure data files', function(env) {
         var environment = env || 'local';
 
         var configData = grunt.file.readJSON('app/res/config/' + environment + '/config.json');
@@ -593,11 +593,15 @@ module.exports = function(grunt) {
         grunt.config.set('ngconstant.' + environment + '.constants.envData.config', configData);
         grunt.config.set('ngconstant.' + environment + '.constants.envData.facebook', facebookData);
         grunt.config.set('ngconstant.' + environment + '.constants.envData.google', googleData);
+    });
+
+    grunt.registerTask('dist', function(env) {
+        var environment = env || 'local';
 
         var ngConst = 'ngconstant:' + environment;
         // grunt.task.run('ngconstant:' + environment);
         grunt.task.run([
-            'clean:dist',
+            'generateConfig:' + environment,
             'wiredep',
             ngConst,
             'useminPrepare',
