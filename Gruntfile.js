@@ -602,6 +602,7 @@ module.exports = function(grunt) {
         // grunt.task.run('ngconstant:' + environment);
         grunt.task.run([
             'generateConfig:' + environment,
+            'clean:dist',
             'wiredep',
             ngConst,
             'useminPrepare',
