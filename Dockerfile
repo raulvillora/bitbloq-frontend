@@ -1,5 +1,6 @@
-FROM nginx:1.9
-COPY dist /usr/share/nginx/html
-EXPOSE 80
-CMD /bin/bash -c "sed -i 's@API_URL@'"$API_URL"'@g' /usr/share/nginx/html/res/config/local/*.config* && sed -i 's@API_URL@'"$API_URL"'@g' /usr/share/nginx/html/scripts/main.* && nginx -g 'daemon off;'"
-
+FROM node:4.4.2
+RUN apt-get update && apt-get install -y git
+COPY bitbloq-backend /usr/bitbloq-backend
+WORKDIR /usr/bitbloq-backend
+RUN npm cache clean && npm install
+CMD node index.js
