@@ -583,7 +583,84 @@ module.exports = function(grunt) {
         grunt.task.run(['serve:' + target]);
     });
 
+    grunt.registerTask('generateConfigFiles', 'Configure data files', function(env) {
+        var environment = env || 'local';
+
+        grunt.task.run([
+            'generateConfig:'+environment,
+            'generateGoogle:'+environment,
+            'generateFacebook:'+environment
+        ]);
+    });
+
     grunt.registerTask('generateConfig', 'Configure data files', function(env) {
+
+        var environment = env || 'local',
+            configJSON;
+
+        switch (environment){
+            case 'production':
+                configJSON = process.env.BITBLOQ_PROD_CONFIG;
+                break;
+            case 'qa':
+                configJSON = process.env.BITBLOQ_QA_CONFIG;
+                break;
+            default:
+                configJSON = process.env.BITBLOQ_LOCAL_CONFIG;
+
+        }
+
+        var file = 'app/res/config/' + environment + '/config.json';
+
+        grunt.file.write(file, configJSON);
+    });
+
+    grunt.registerTask('generateFacebook', 'Configure data files', function(env) {
+
+        var environment = env || 'local',
+            configJSON;
+
+        switch (environment){
+            case 'production':
+                configJSON = process.env.BITBLOQ_PROD_FACEBOOK;
+                break;
+            case 'qa':
+                configJSON = process.env.BITBLOQ_QA_FACEBOOK;
+                break;
+            default:
+                configJSON = process.env.BITBLOQ_LOCAL_FACEBOOK;
+
+        }
+
+        var file = 'app/res/config/' + environment + '/facebook.json';
+
+        grunt.file.write(file, configJSON);
+    });
+
+    grunt.registerTask('generateGoogle', 'Configure data files', function(env) {
+
+        var environment = env || 'local',
+            configJSON;
+
+        switch (environment){
+            case 'production':
+                configJSON = process.env.BITBLOQ_PROD_GOOGLE;
+                break;
+            case 'qa':
+                configJSON = process.env.BITBLOQ_QA_GOOGLE;
+                break;
+            default:
+                configJSON = process.env.BITBLOQ_LOCAL_GOOGLE;
+
+        }
+
+        var file = 'app/res/config/' + environment + '/google.json';
+
+        grunt.file.write(file, configJSON);
+    });
+
+    grunt.registerTask('dist', function(env) {
+
         var environment = env || 'local';
 
         var configData = grunt.file.readJSON('app/res/config/' + environment + '/config.json');
@@ -593,15 +670,10 @@ module.exports = function(grunt) {
         grunt.config.set('ngconstant.' + environment + '.constants.envData.config', configData);
         grunt.config.set('ngconstant.' + environment + '.constants.envData.facebook', facebookData);
         grunt.config.set('ngconstant.' + environment + '.constants.envData.google', googleData);
-    });
-
-    grunt.registerTask('dist', function(env) {
-        var environment = env || 'local';
 
         var ngConst = 'ngconstant:' + environment;
         // grunt.task.run('ngconstant:' + environment);
         grunt.task.run([
-            'generateConfig:' + environment,
             'clean:dist',
             'wiredep',
             ngConst,
