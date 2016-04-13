@@ -587,9 +587,9 @@ module.exports = function(grunt) {
         var environment = env || 'local';
 
         grunt.task.run([
-            'generateConfig:'+environment,
-            'generateGoogle:'+environment,
-            'generateFacebook:'+environment
+            'generateConfig:' + environment,
+            'generateGoogle:' + environment,
+            'generateFacebook:' + environment
         ]);
     });
 
@@ -598,7 +598,7 @@ module.exports = function(grunt) {
         var environment = env || 'local',
             configJSON;
 
-        switch (environment){
+        switch (environment) {
             case 'production':
                 configJSON = process.env.BITBLOQ_PROD_CONFIG;
                 break;
@@ -620,7 +620,7 @@ module.exports = function(grunt) {
         var environment = env || 'local',
             configJSON;
 
-        switch (environment){
+        switch (environment) {
             case 'production':
                 configJSON = process.env.BITBLOQ_PROD_FACEBOOK;
                 break;
@@ -642,7 +642,7 @@ module.exports = function(grunt) {
         var environment = env || 'local',
             configJSON;
 
-        switch (environment){
+        switch (environment) {
             case 'production':
                 configJSON = process.env.BITBLOQ_PROD_GOOGLE;
                 break;
