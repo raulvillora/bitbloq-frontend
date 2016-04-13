@@ -76,9 +76,7 @@ angular.module('bitbloqApp')
 
                 if ($scope.project._id) {
                     if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
-                        if ($scope.tempImage.blob && $scope.tempImage.blob.size) {
-
-                            console.log('tengo imagen :) *************');
+                        if ($scope.tempImage.blob) {
                             if (currentProject.imageType !== $scope.tempImage.blob.type) {
                                 imageApi.delete($scope.project._id, currentProject.imageType);
                             }
@@ -118,9 +116,7 @@ angular.module('bitbloqApp')
                 } else {
                     if ($scope.common.user) {
                         currentProject.creatorId = $scope.project.creatorId = $scope.common.user._id;
-                        if ($scope.tempImage.blob && $scope.tempImage.blob.size) {
-
-                            console.log('tengo imagen :) *************');
+                        if ($scope.tempImage.blob) {
                             currentProject.imageType = $scope.tempImage.blob.type;
                         }
                         projectApi.save(currentProject).then(function(response) {
@@ -568,7 +564,7 @@ angular.module('bitbloqApp')
 
         $scope.projectHasChanged = function(currentProject, oldProject) {
             var identicalProjectObject = _.isEqual(currentProject, oldProject);
-            return !identicalProjectObject ||  ($scope.tempImage.blob && $scope.tempImage.blob.size);
+            return !identicalProjectObject || $scope.tempImage.blob;
         };
 
         $scope.updateBloqs = function() {
