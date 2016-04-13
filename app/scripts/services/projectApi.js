@@ -18,7 +18,13 @@ angular.module('bitbloqApp')
             return $http({
                 method: 'GET',
                 url: envData.config.gCloudEndpoint + 'project/' + id,
-                params: params
+                //params: params
+
+
+                skipAuthorization: true,
+                responseType: undefined
+                //responseType: 'blob'
+
             });
         };
 
@@ -78,7 +84,70 @@ angular.module('bitbloqApp')
         };
 
 
-        exports.save = function(dataproject) {
+
+
+        exports.save = function(dataproject, file) {
+            /*return $http.post(envData.config.gCloudEndpoint + 'project', file, {
+             transformRequest: angular.identity,
+             headers: {'Content-Type': undefined}
+             });*/
+
+            return $http.post(envData.config.gCloudEndpoint + 'project', file, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                transformRequest: function(data, headersGetter) {
+                    var formData = new FormData();
+                    angular.forEach(data, function(value, key) {
+                        formData.append(key, value);
+                    });
+
+                    var headers = headersGetter();
+                    delete headers['Content-Type'];
+
+                    return formData;
+                }
+            });
+
+
+            /*return $http({
+             method: 'POST',
+             url: envData.config.gCloudEndpoint + 'project',
+             headers: {
+             'Content-Type': 'multipart/form-data'
+             },
+             transformRequest: function (data, headersGetter) {
+             var formData = new FormData();
+             angular.forEach(data, function (value, key) {
+             formData.append(key, value);
+             });
+
+             var headers = headersGetter();
+             delete headers['Content-Type'];
+
+             return formData;
+             },
+             data: {
+             file: file
+             }
+             });*/
+
+        };
+
+
+        exports.save2 = function(dataproject, file) {
+            return $http({
+                method: 'POST',
+                url: envData.config.gCloudEndpoint + 'project',
+                headers: {
+                    'Content-Type': 'image/jpeg'
+                },
+                data: file
+            });
+        };
+
+
+        exports.saveDefault = function(dataproject) {
             return $http({
                 method: 'POST',
                 url: envData.config.gCloudEndpoint + 'project',
