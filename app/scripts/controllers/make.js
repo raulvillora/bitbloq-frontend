@@ -531,6 +531,20 @@ angular.module('bitbloqApp')
             }
         };
 
+        $scope.chartMonitor = function() {
+            if ($scope.project.hardware.board) {
+                web2board.chartMonitor(getBoardMetaData());
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add('alert-web2board-no-board-serial', 'serialmonitor', 'warning');
+            }
+        };
+
+        $scope.showWeb2boardSettings = function() {
+            web2board.showSettings();
+        };
+
         $scope.getCode = function() {
             $scope.updateBloqs();
             return bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);

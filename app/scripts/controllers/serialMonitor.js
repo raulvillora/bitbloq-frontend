@@ -1,3 +1,4 @@
+
 /*jshint camelcase: false */
 'use strict';
 
@@ -11,9 +12,16 @@
 angular.module('bitbloqApp')
     .controller('SerialMonitorCtrl', function($scope, _, web2board2) {
         var serialHub = web2board2.api.SerialMonitorHub;
+        $scope.baudrateOptions = [9600, 115200];
         $scope.serial = {
             dataReceived: '',
-            input: ''
+            input: '',
+            port: '',
+            baudrate: 9600
+        };
+
+        web2board2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
+            console.error(hub, func);
         };
 
         serialHub.client.received = function(port, data) {
@@ -21,7 +29,17 @@ angular.module('bitbloqApp')
             $scope.serial.dataReceived += data;
         };
 
-        $scope.baudrateOptions = [9600, 115200];
+        serialHub.client.written = function (message) {
+            $scope.serial.dataReceived += message;
+        };
+
+        $scope.send = function () {
+            serialHub.server.write($scope.serial.port, $scope.serial.input);
+        };
+
+        $scope.onBaudrateChanged = function (baudrate) {
+            $scope.serial.baudrate = baudrate;
+            serialHub.server.changeBaudrate($scope.serial.port, baudrate);
         $scope.loginSubmit = function() {
             web2board2.openCommunication(function() {
                 serialHub.server.subscribeToHub().done(function() {

@@ -34,7 +34,8 @@ angular
         'ui.ace',
         'textAngular',
         'angular-clipboard',
-        'angularUtils.directives.dirPagination'
+        'angularUtils.directives.dirPagination',
+        'chart.js'
     ]).config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
 
@@ -147,6 +148,11 @@ angular
                 .when('/serialMonitor/', {
                     templateUrl: 'views/serialMonitor.html',
                     controller: 'SerialMonitorCtrl',
+                    islogin: true
+                })
+                .when('/chartMonitor/', {
+                    templateUrl: 'views/chartMonitor.html',
+                    controller: 'ChartMonitorCtrl',
                     islogin: true
                 })
                 .otherwise({

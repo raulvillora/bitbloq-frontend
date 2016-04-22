@@ -84,7 +84,6 @@ angular.module('bitbloqApp')
                 orderOptions: ['explore-sortby-recent', 'explore-sortby-old', 'explore-sortby-name-az', 'explore-sortby-name-za'],
                 userProjectsFilter: 'all',
                 sortProjects: sortProjects(modalScope)
-
             });
 
             projectApi.getMyProjects().then(function(projects) {

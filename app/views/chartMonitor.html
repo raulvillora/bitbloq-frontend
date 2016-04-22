@@ -15,7 +15,10 @@
                         </span>
                 </div>
                 <div class="form-control">
-                    <textarea data-ng-model="serial.dataReceived" style="resize:none; width:100%; height: calc(100vh - 140px)" readonly></textarea>
+                    <canvas id="line" class="chart chart-line" chart-data="data"
+                            chart-labels="labels" chart-legend="true" chart-series="series"
+                            chart-click="onClick" chart-options="chartOptions">
+                    </canvas>
                 </div>
                 <!-- Submit Form -->
                 <div>

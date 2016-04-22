@@ -31,7 +31,9 @@ angular.module('bitbloqApp')
             web2board.verify = web2board2.verify;
             web2board.upload = web2board2.upload;
             web2board.serialMonitor = web2board2.serialMonitor;
+            web2board.chartMonitor = web2board2.chartMonitor;
             web2board.version = web2board2.version;
+            web2board.showSettings = web2board2.showSettings;
         }
 
         var web2board = this,
@@ -369,6 +371,17 @@ angular.module('bitbloqApp')
             });
         };
 
+        web2board.chartMonitor = function(board) {
+            if (isWeb2board2Flag === null) {
+                firstFunctionCalled.name = 'chartMonitor';
+                firstFunctionCalled.args = [board];
+                firstFunctionCalled.alertServiceTag = 'chartMonitor';
+            }
+            web2board._openCommunication(function() {
+                console.error('We should never enter here');
+            });
+        };
+
         web2board.version = function() {
             if (isWeb2board2Flag === null) {
                 firstFunctionCalled.name = 'verify';
@@ -390,6 +403,17 @@ angular.module('bitbloqApp')
 
         web2board.setInProcess = function(value) {
             inProgress = value;
+        };
+
+        web2board.showSettings = function (){
+            if (isWeb2board2Flag === null) {
+                firstFunctionCalled.name = 'showSettings';
+                firstFunctionCalled.args = [];
+                firstFunctionCalled.alertServiceTag = 'showSettings';
+            }
+            web2board._openCommunication(function() {
+                console.error('ERRORRRRRRRR');
+            });
         };
 
         return web2board;

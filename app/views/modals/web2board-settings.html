@@ -1,0 +1,32 @@
+<div class="modal_open-project">
+    <div class="modal--projects--action">
+        <span class="form--input">
+                <!--<svg class="svg-icon&#45;&#45;search">-->
+            <!--<use xlink:href="#lupa"></use>-->
+            <!--</svg>-->
+                <input type="text" ng-model="settings.webSocketIP" placeholder="WebSocket IP (default localhost)">
+            </span>
+    </div>
+    <div class="modal--projects--action">
+        <span class="form--input">
+                <input type="text" ng-model="settings.webSocketPort" placeholder="WebSocket port">
+            </span>
+    </div>
+    <div class="modal--projects--action">
+        <span class="form--input">
+                <input type="text" ng-model="settings.proxy" placeholder="Proxy (default None)">
+            </span>
+    </div>
+    <div class="modal--projects--action">
+        <span class="form--input">
+                <input type="text" ng-model="settings.librariesPath" placeholder="Libraries path" ng-blur="onLibrariesPathChanged()">
+            </span>
+    </div>
+
+    <div class="modal--projects--action">
+        <label>
+            <input type="checkbox" ng-model="settings.checkOnlineUpdates">
+            Check online updates
+        </label>
+    </div>
+</div>
