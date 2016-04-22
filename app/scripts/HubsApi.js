@@ -3,7 +3,7 @@
 'use strict';
 // test
 (function(WSHubsAPI) {
-
+    
     function HubsAPI(url, serverTimeout, wsClientClass) {
         'use strict';
 
