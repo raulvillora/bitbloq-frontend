@@ -7,25 +7,25 @@
             <div class="form--section">
                 <!-- input type="text"-->
                 <div class="form-control">
-                    <label for="projectname">{{ 'name' | translate }}*</label>
+                    <label>{{ 'name' | translate }}*</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname'}">
-                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="project.name" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="common.user">
+                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="project.name" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user">
                     </span>
                 </div>
                 <!-- textarea -->
                 <div class="form-control">
-                    <label for="textarea">{{ 'description' | translate }}*</label>
+                    <label>{{ 'description' | translate }}*</label>
                     <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea'}">
-                        <textarea id="texarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="project.description" data-ng-focus="focus = 'textarea'" data-ng-blur="focus = false" data-ng-disabled="common.user" data-element="infotab-description"></textarea>
+                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="project.description" data-ng-focus="focus = 'textarea'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-element="infotab-description"></textarea>
                     </span>
                 </div>
             </div>
             <div class="form--section">
                 <!-- input type="text"-->
                 <div class="form-control">
-                    <label for="videourl">{{ 'video' | translate }}</label>
+                    <label>{{ 'video' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'videourl'}">
-                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="project.videoUrl" value="{{project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-blur="focus = false" data-ng-disabled="common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
+                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="project.videoUrl" value="{{project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
                     </span>
                 </div>
             </div>
@@ -33,15 +33,15 @@
                 <!-- input type="file"-->
                 <div class="form-control">
                     <div class="labelcontainer">
-                        <label for="projectimage">{{ 'info-tab-first-image' | translate }}*</label>
+                        <label>{{ 'info-tab-first-image' | translate }}*</label>
                         <small>{{ 'info-tab-image-requisites' | translate }}</small>
                     </div>
                     <div class="imagecontainer">
                         <div class="main--project--image" id="main-image">
-                            <img id="projectImage" data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-image-type="project.imageType" data-corbel-default-image="../images/common/default-project.png" data-ng-disabled="common.user" data-element="infotab-projectimage" corbel-force-reset="imageForceReset">
+                            <img data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-image-type="project.imageType" data-corbel-default-image="../images/common/default-project.png" data-ng-disabled="!common.user" data-element="infotab-projectimage" corbel-force-reset="imageForceReset">
                         </div>
                         <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" data-element="infotab-fileinput" data-ng-blur="focus = false" tabindex="-1"/>
-                        <button ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':common.user}" data-element="infotab-uploadimage" data-ng-click="uploadImageTrigger('main')" data-ng-disabled="focus!=false">{{ 'upload-image' | translate }}</button>
+                        <button ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-element="infotab-uploadimage" data-ng-click="uploadImageTrigger('main')" data-ng-disabled="focus!=false">{{ 'upload-image' | translate }}</button>
                     </div>
                 </div>
                 <!-- input type="file"-->
@@ -61,10 +61,10 @@
             </div>
             <div class="form--section">
                 <div class="form-control  form--tags">
-                    <label for="tagsinput">{{ 'tags' | translate }}</label>
+                    <label>{{ 'tags' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
-                        <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
-                        <button class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="common.user" data-ng-click="addTag(form.tag)" data-element="infotab-taginput-button" tabindex="1">{{ 'add' | translate }}</button>
+                        <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
+                        <button class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" data-element="infotab-taginput-button" tabindex="1">{{ 'add' | translate }}</button>
                     </span>
                 </div>
                 <div class="tags">
