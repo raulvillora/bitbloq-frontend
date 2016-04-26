@@ -51,7 +51,7 @@ angular.module('bitbloqApp')
             return loadedBloqsPromise.promise;
         };
 
-        requestBloqs(50, 0);
+        requestBloqs(90, 0);
 
         return exports;
     });
