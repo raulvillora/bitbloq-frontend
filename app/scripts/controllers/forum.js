@@ -132,6 +132,7 @@
                     };
 
                     forumApi.createThread(thread, answer).then(function(threadId) {
+                        $log.debug('theme: ' + threadId);
                         // forum.goForumSection(forum.textEditorContent.category + '/' + threadId);
                         alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
                     }).catch(function(err) {

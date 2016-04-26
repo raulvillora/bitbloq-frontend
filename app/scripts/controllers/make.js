@@ -76,12 +76,6 @@ angular.module('bitbloqApp')
 
                 if ($scope.project._id) {
                     if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
-                        if ($scope.tempImage.blob) {
-                            if (currentProject.imageType !== $scope.tempImage.blob.type) {
-                                imageApi.delete($scope.project._id, currentProject.imageType);
-                            }
-                            currentProject.imageType = $scope.tempImage.blob.type;
-                        }
 
                         projectApi.update($scope.project._id, currentProject).then(function() {
 
@@ -91,8 +85,8 @@ angular.module('bitbloqApp')
 
                             $localStorage.projectsChange = true;
 
-                            if ($scope.tempImage.blob) {
-                                imageApi.save($scope.project._id, $scope.tempImage.blob).then(function() {
+                            if ($scope.tempImage.file) {
+                                imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
                                     $scope.project.imageType = currentProject.imageType;
                                     $scope.imageForceReset = !$scope.imageForceReset;
@@ -116,9 +110,7 @@ angular.module('bitbloqApp')
                 } else {
                     if ($scope.common.user) {
                         currentProject.creatorId = $scope.project.creatorId = $scope.common.user._id;
-                        if ($scope.tempImage.blob) {
-                            currentProject.imageType = $scope.tempImage.blob.type;
-                        }
+
                         projectApi.save(currentProject).then(function(response) {
                             var idProject = response.data;
                             $scope.project._id = idProject;
@@ -134,8 +126,8 @@ angular.module('bitbloqApp')
                             $localStorage.projectsChange = !$localStorage.projectsChange;
                             $scope.saveOldProject();
 
-                            if ($scope.tempImage.blob) {
-                                imageApi.save(idProject, $scope.tempImage.blob).then(function() {
+                            if ($scope.tempImage.file) {
+                                imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
                                     $scope.project.imageType = currentProject.imageType;
                                     $scope.imageForceReset = !$scope.imageForceReset;
@@ -301,7 +293,7 @@ angular.module('bitbloqApp')
             }
 
             project.hardware = $scope.getHardwareSchema();
-            $scope.project.code = bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);
+            //$scope.project.code = bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);
             project.code = $scope.project.code;
 
             return project;
@@ -578,7 +570,7 @@ angular.module('bitbloqApp')
 
         $scope.projectHasChanged = function(currentProject, oldProject) {
             var identicalProjectObject = _.isEqual(currentProject, oldProject);
-            return !identicalProjectObject || $scope.tempImage.blob;
+            return !identicalProjectObject || ($scope.tempImage.file);
         };
 
         $scope.updateBloqs = function() {

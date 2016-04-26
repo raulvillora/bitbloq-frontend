@@ -13,47 +13,63 @@ angular.module('bitbloqApp')
 
         var data = {};
 
-        //data.save = function(idImage, data, collection) {
-        //    collection = collection || 'Angularproject';
-        //    return $http({
-        //        method: 'PUT',
-        //        url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
-        //        headers: {
-        //            Accept: data.type
-        //        },
-        //        data: data
-        //    });
-        //};
-        //
-        //data.get = function(idImage, dataType, collection, params) {
-        //    dataType = dataType || 'image/jpeg';
-        //    collection = collection || 'Angularproject';
-        //    var data = {
-        //        method: 'GET',
-        //        url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
-        //        headers: {
-        //            Accept: dataType
-        //        },
-        //        responseType: 'blob'
-        //    };
-        //    if (params) {
-        //        data.params = params;
-        //    }
-        //
-        //    return $http(data);
-        //};
-        //
-        //data.delete = function(idImage, dataType, collection) {
-        //    dataType = dataType || 'image/jpeg';
-        //    collection = collection || 'Angularproject';
-        //    return $http({
-        //        method: 'DELETE',
-        //        url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
-        //        headers: {
-        //            Accept: dataType
-        //        }
-        //    });
-        //};
+        data.save = function(idImage, file, collection) {
+            collection = collection || 'project';
+
+            file.lau= collection;
+            var formData = new FormData();
+            formData.append("file", file);
+
+            return $http.post(envData.config.gCloudEndpoint + 'image/' + collection + '/' + idImage, formData, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+                .success(function() {
+                    console.log("success!!");
+                })
+                .error(function() {
+                    console.log("error!!");
+                });
+        };
+
+
+
+
+        data.get = function(idImage, dataType, collection, params) {
+            dataType = dataType || 'image/jpeg';
+            collection = collection || 'project';
+            var data = {
+                method: 'GET',
+                url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
+                headers: {
+                    Accept: dataType
+                },
+                responseType: 'blob'
+            };
+            if (params) {
+                data.params = params;
+            }
+
+            return $http(data);
+        };
+
+        data.delete = function(idImage, dataType, collection) {
+            dataType = dataType || 'image/jpeg';
+            collection = collection || 'project';
+            return $http({
+                method: 'DELETE',
+                url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
+                headers: {
+                    Accept: dataType
+                }
+            });
+        };
+
+
+
+
+
+
 
         data.createImageUrl = function(blob) {
             var reader = new FileReader();
