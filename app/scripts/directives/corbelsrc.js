@@ -2,20 +2,20 @@
 
 /**
  * @ngdoc directive
- * @name bitbloqApp.directive:corbelSrc
+ * @name bitbloqApp.directive:imageSrc
  * @description
- * # corbelSrc
+ * # imageSrc
  */
 angular.module('bitbloqApp')
-    .directive('corbelSrc', function(imageApi, $log, $window, $q, _, $timeout, common) {
+    .directive('imageSrc', function(imageApi, $log, $window, $q, _, $timeout, common) {
         return {
             restrict: 'A',
             scope: {
-                corbelSrc: '=',
-                corbelImageType: '=',
-                corbelCollection: '=',
-                corbelWatch: '=',
-                corbelForceReset: '='
+                imageSrc: '=',
+                imageImageType: '=',
+                imageCollection: '=',
+                imageWatch: '=',
+                imageForceReset: '='
             },
 
             link: function postLink(scope, element, attrs) {
@@ -42,16 +42,30 @@ angular.module('bitbloqApp')
                 function loadImage() {
                     attrs.$set('src', 'images/icons/loadr.svg');
                     element.addClass('spin');
-                    if (scope.corbelImageType) {
+                    imageApi.get(scope.imageSrc, scope.imageImageType, attrs.imageCollection, params).success(function(response) {
+                        var reader = new FileReader();
+
+                        reader.onloadend = function(e) {
+                            element.removeClass('spin');
+                            attrs.$set('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(response);
+                    }).error(function() {
+                        $log.debug('image not found');
+                        element.removeClass('spin');
+                        attrs.$set('src', attrs.imageDefaultImage);
+                    });
+                    /*if (scope.imageImageType) {
                         var height = getWindowDimensions().h;
                         var width = getWindowDimensions().w;
                         if (width && height) {
-                            $log.debug('loadImage', scope.corbelSrc);
+                            $log.debug('loadImage', scope.imageSrc);
                             var params = {
                                 'image:operations': 'resizeHeight=' + height + '; cropFromCenter=(' + width + ',' + height + ')'
                             };
 
-                            imageApi.get(scope.corbelSrc, scope.corbelImageType, attrs.corbelCollection, params).success(function(response) {
+                            imageApi.get(scope.imageSrc, scope.imageImageType, attrs.imageCollection, params).success(function(response) {
                                 var reader = new FileReader();
 
                                 reader.onloadend = function(e) {
@@ -63,43 +77,43 @@ angular.module('bitbloqApp')
                             }).error(function() {
                                 $log.debug('image not found');
                                 element.removeClass('spin');
-                                attrs.$set('src', attrs.corbelDefaultImage);
+                                attrs.$set('src', attrs.imageDefaultImage);
                             });
                         } else {
                             $log.debug('image not width and height');
                             element.removeClass('spin');
-                            attrs.$set('src', attrs.corbelDefaultImage);
+                            attrs.$set('src', attrs.imageDefaultImage);
                         }
 
                     } else {
-                        if (attrs.corbelCollection === 'Avatar' && attrs.corbelSrc) {
-                            if (common.user && scope.corbelSrc === common.user.username) {
+                        if (attrs.imageCollection === 'Avatar' && attrs.imageSrc) {
+                            if (common.user && scope.imageSrc === common.user.username) {
                                 if (common.user.properties.avatar !== '') {
                                     attrs.$set('src', common.user.properties.avatar);
                                 } else {
-                                    attrs.$set('src', attrs.corbelDefaultImage);
+                                    attrs.$set('src', attrs.imageDefaultImage);
                                 }
                                 element.removeClass('spin');
 
                             } else {
                                 //todo if SN -> getIdentity && getSocialNetworkData with diferent user
                                 element.removeClass('spin');
-                                attrs.$set('src', attrs.corbelDefaultImage);
+                                attrs.$set('src', attrs.imageDefaultImage);
                             }
                         } else {
                             element.removeClass('spin');
-                            attrs.$set('src', attrs.corbelDefaultImage);
+                            attrs.$set('src', attrs.imageDefaultImage);
                         }
-                    }
+                    }*/
                 }
 
-                scope.$watch('corbelSrc', function(newValue, oldValue) {
+                scope.$watch('imageSrc', function(newValue, oldValue) {
                     if (newValue !== oldValue) {
                         startLoadImage();
                     }
                 });
 
-                scope.$watch('corbelForceReset', function(newValue, oldValue) {
+                scope.$watch('imageForceReset', function(newValue, oldValue) {
                     if (newValue !== oldValue) {
                         startLoadImage();
                     }
@@ -111,14 +125,14 @@ angular.module('bitbloqApp')
                     }
                 }, true);
 
-                if (attrs.corbelWatch) {
-                    scope.$watch('corbelWatch', function(newValue, oldValue) {
+                if (attrs.imageWatch) {
+                    scope.$watch('imageWatch', function(newValue, oldValue) {
                         if (newValue !== oldValue) {
                             startLoadImage();
                         }
                     });
                 }
-                if (scope.corbelSrc) {
+                if (scope.imageSrc) {
                     startLoadImage();
                 }
             }

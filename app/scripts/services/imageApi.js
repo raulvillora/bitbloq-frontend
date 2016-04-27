@@ -40,7 +40,7 @@ angular.module('bitbloqApp')
             collection = collection || 'project';
             var data = {
                 method: 'GET',
-                url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
+                url: envData.config.gCloudEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
                 headers: {
                     Accept: dataType
                 },
