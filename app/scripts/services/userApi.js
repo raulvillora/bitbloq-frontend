@@ -335,17 +335,17 @@ angular.module('bitbloqApp')
         //    return _setUser(user);
         //};
         //
-        //exports.changePassword = function(newPassword, callback) {
-        //    return User.changePassword({
-        //        id: 'me'
-        //    }, {
-        //        newPassword: newPassword
-        //    }, function() {
-        //        return utils.safeCb(callback)(null);
-        //    }, function(err) {
-        //        return utils.safeCb(callback)(err);
-        //    }).$promise;
-        //};
+        exports.changePasswordAuthenticated = function(newPassword, callback) {
+            return User.changePasswordAuthenticated({
+                id: 'me'
+            }, {
+                newPassword: newPassword
+            }, function() {
+                return utils.safeCb(callback)(null);
+            }, function(err) {
+                return utils.safeCb(callback)(err);
+            }).$promise;
+        };
         //
         //function _setUser(user) {
         //    return $http({

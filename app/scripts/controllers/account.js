@@ -176,7 +176,7 @@ angular.module('bitbloqApp')
                     modalScope.errorPassword = false;
                     if (_.isEmpty(form.$error)) {
                         if (form.passwordMain.$modelValue === form.passwordRepeat.$modelValue) {
-                            userApi.turnSocialToLocal(form.passwordMain.$modelValue).then(function() {
+                            userApi.changePasswordAuthenticated(form.passwordMain.$modelValue).then(function() {
                                 dialog.close();
                             });
                         } else {

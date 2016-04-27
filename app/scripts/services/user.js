@@ -11,6 +11,13 @@ function UserResource($resource, envData) {
                 controller: 'password'
             }
         },
+        changePasswordAuthenticated: {
+            method: 'PUT',
+            params: {
+                id: 'me',
+                controller: 'password'
+            }
+        },
         turnToLocal: {
             method: 'PUT',
             params: {
