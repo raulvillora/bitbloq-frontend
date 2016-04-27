@@ -35,6 +35,8 @@ angular.module('bitbloqApp')
             };
             utils.uploadImage(e, properties).then(function(response) {
                 $scope.tempImage.blob = response.blob;
+                $scope.tempImage.file = response.file;
+                $scope.tempImage.img = response.img;
                 $scope.startAutosave();
             }).catch(function(response) {
                 switch (response.error) {

@@ -444,7 +444,7 @@ angular.module('bitbloqApp')
                                         var dest = document.getElementById(properties.containerDest);
                                         $(dest)[0].src = img.src;
                                     }
-                                    defered.resolve({blob: blob, img: img});
+                                    defered.resolve({blob: blob, img: img, file:file});
                                 }
                             };
                         };

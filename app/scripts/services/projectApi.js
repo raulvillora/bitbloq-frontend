@@ -77,7 +77,6 @@ angular.module('bitbloqApp')
             return resource.getAll('project/shared', params, myProjectArray);
         };
 
-
         exports.save = function(dataproject) {
             return $http({
                 method: 'POST',

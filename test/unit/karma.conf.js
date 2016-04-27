@@ -63,6 +63,8 @@ module.exports = function(config) {
             '../bower_components/autogrow/autogrow.js',
             '../bower_components/bloqs/dist/bloqs.min.js',
             '../bower_components/angular-google-analytics/dist/angular-google-analytics.min.js',
+            '../bower_components/Chart.js/Chart.js',
+            '../bower_components/angular-chart.js/dist/angular-chart.js',
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
             '../app/scripts/**/*.js',
