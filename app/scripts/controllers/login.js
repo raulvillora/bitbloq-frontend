@@ -364,6 +364,26 @@ angular.module('bitbloqApp')
                 console.log('Error loggin in', error);
                 fireShakeEffect();
                 if (error) {
+                    switch (error.status) {
+                        case 401:
+                            $scope.errors.login.emailUserName = false;
+                            $scope.errors.login.password = true;
+                            $scope.errors.disconnect = false;
+                            break;
+                        case 404:
+                            $scope.errors.login.emailUserName = true;
+                            $scope.errors.login.password = false;
+                            $scope.errors.disconnect = false;
+                            break;
+                        case 500:
+                            $scope.errors.login.emailUserName = false;
+                            $scope.errors.login.password = false;
+                            $scope.errors.disconnect = true;
+                            break;
+                        default:
+
+                    }
+
                     //     //{error: "no_such_principal", errorDescription: "Unknown basic user credentials."}
                     //     if ($scope.user.username) {
                     //         userApi.validateUserName($scope.user.username.toLowerCase()).success(function () {
@@ -387,6 +407,7 @@ angular.module('bitbloqApp')
                     //     $scope.errors.login.emailUserName = false;
                     //     $scope.errors.login.password = false;
                     //     $scope.errors.disconnect = true;
+
                 }
             });
         }

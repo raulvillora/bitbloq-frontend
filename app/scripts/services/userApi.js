@@ -116,7 +116,7 @@ angular.module('bitbloqApp')
             }).catch(function(err) {
                 exports.logout();
                 utils.safeCb(callback)(null, err.data);
-                return $q.reject(err.data);
+                return $q.reject(err);
             });
         };
 
