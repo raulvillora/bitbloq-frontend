@@ -287,30 +287,23 @@ angular.module('bitbloqApp')
         };
 
         $scope.forgotPassword = function(formForgot) {
-          console.log("forgotPassword");
             $scope.recovery.emailError = false;
             if (_.isEmpty(formForgot.$error)) {
-              console.log("errrewrer????");
-              console.log(formForgot.emailToSend.$modelValue);
                 userApi.getUserId(formForgot.emailToSend.$modelValue).then(function() {
                     userApi.forgottenPassword(formForgot.emailToSend.$modelValue).then(function() {
                         $scope.recovery.success = true;
                         $scope.recovery.error = false;
                         alertsService.add('email-recovery-password-ok', 'recovery-password', 'ok', 5000);
                     }, function() {
-
-                      console.log("alla");
                         fireShakeEffect();
                         $scope.recovery.success = false;
                         $scope.recovery.error = true;
                     });
                 }, function() {
-                    console.log("aquiiiiiiiiiii");
                     fireShakeEffect();
                     $scope.recovery.emailError = true;
                 });
             } else {
-              console.log("elseeeee");
                 fireShakeEffect();
             }
         };
