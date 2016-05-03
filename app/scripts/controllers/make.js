@@ -173,26 +173,9 @@ angular.module('bitbloqApp')
             $scope.refreshComponentsArray();
         };
 
-        function _emptyComponentsArray() {
-            return {
-                leds: [],
-                rgbs: [],
-                sensors: [],
-                buzzers: [],
-                servos: [],
-                continuousServos: [],
-                oscillators: [],
-                lcds: [],
-                serialElements: [],
-                clocks: [],
-                hts221: [],
-                robot: []
-            };
-        }
-
         $scope.refreshComponentsArray = function() {
 
-            var newComponentsArray = _emptyComponentsArray();
+            var newComponentsArray = bloqsUtils.getEmptyComponentsArray();
             var newHardwareTags = [];
             var readyToSave = false;
 
@@ -250,6 +233,7 @@ angular.module('bitbloqApp')
             }
 
             $scope.componentsArray = newComponentsArray;
+            bloqs.componentsArray = newComponentsArray;
             $scope.updateBloqs();
 
             if ((!$scope.hardware.firstLoad || !$scope.common.user) && readyToSave) {
@@ -262,7 +246,7 @@ angular.module('bitbloqApp')
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
-            if (_.isEqual($scope.componentsArray, _emptyComponentsArray())) {
+            if (_.isEqual($scope.componentsArray, bloqsUtils.getEmptyComponentsArray())) {
                 return false;
             }
             var compCategories = _.pick($scope.componentsArray, function(item) {
@@ -276,7 +260,7 @@ angular.module('bitbloqApp')
             return (Object.keys(tmpCompCategories).length > 0);
         };
         $scope.anyAdvancedComponent = function() {
-            return !_.isEqual($scope.componentsArray, _emptyComponentsArray());
+            return !_.isEqual($scope.componentsArray, bloqsUtils.getEmptyComponentsArray());
         };
         $scope.anySerialComponent = function() {
             return $scope.componentsArray.serialElements.length > 0;
@@ -440,7 +424,6 @@ angular.module('bitbloqApp')
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
-                alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
             }
         }
@@ -1105,7 +1088,7 @@ angular.module('bitbloqApp')
             loopBloq: null
         };
 
-        $scope.componentsArray = _emptyComponentsArray();
+        $scope.componentsArray = bloqsUtils.getEmptyComponentsArray();
 
         $scope.projectApi = projectApi;
 
