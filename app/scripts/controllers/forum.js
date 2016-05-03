@@ -220,35 +220,28 @@
 
             function goForumTheme(themeId, themeCategory) {
                 forumApi.getTheme(themeId).then(function(response) {
-                    forum.currentTheme = response.data;
+                    forum.currentTheme = response.data.thread;
                     forum.themeCategory = themeCategory;
-                    forumApi.getAnswers(themeId).then(function(response) {
-                        // if (response.data.length > 0) {
-                        var answers = response.data,
-                            container;
-                        answers.forEach(function(answer) {
-                            if (answer.content.indexOf('<img') > -1) {
-                                container = document.createElement('div');
-                                container.innerHTML = answer.content;
-                                // var images = container.querySelectorAll('img.BitbloqImg');
-                                // for (var i = 0; i < images.length; i++) {
-                                // var img = images[i],
-                                //     imgId = answer.id + '-' + img.className.split(' ')[0].split('answerImg')[1],
-                                //     imgType = _.find(answer.images, {
-                                //         id: imgId
-                                //     }).type;
-                                // _getImages(imgId, imgType, container, answer);
-                                // }
-                            }
-                        });
-                        forum.firstAnswer = answers.shift();
-                        forum.themeAnswers = answers;
-
-                    }).catch(function(err) {
-                        $location.path('/404');
-                        $log.debug('Error: Answers is empty');
-                        $log.debug('Error:', err);
+                    // if (response.data.length > 0) {
+                    var answers = response.data.answers,
+                        container;
+                    answers.forEach(function(answer) {
+                        if (answer.content.indexOf('<img') > -1) {
+                            container = document.createElement('div');
+                            container.innerHTML = answer.content;
+                            // var images = container.querySelectorAll('img.BitbloqImg');
+                            // for (var i = 0; i < images.length; i++) {
+                            // var img = images[i],
+                            //     imgId = answer.id + '-' + img.className.split(' ')[0].split('answerImg')[1],
+                            //     imgType = _.find(answer.images, {
+                            //         id: imgId
+                            //     }).type;
+                            // _getImages(imgId, imgType, container, answer);
+                            // }
+                        }
                     });
+                    forum.firstAnswer = answers.shift();
+                    forum.themeAnswers = answers;
                 }).catch(function(err) {
                     $location.path('/404');
                     $log.debug('Error:', err);
@@ -258,7 +251,7 @@
             function goForumCategory(category) {
                 forum.displayedView = 'category';
                 forum.currentCategory = category;
-                forumApi.getThemesInCategory(category, '/name').then(function(response) {
+                forumApi.getThemesInCategory(category).then(function(response) {
                     forum.categoryThemes = response.data;
                     forum.categoryPages = forum.categoryThemes.length / 5;
                 }, function(err) {
