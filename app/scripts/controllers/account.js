@@ -134,9 +134,8 @@ angular.module('bitbloqApp')
                     modalScope.errorPassword = false;
                     if (_.isEmpty(form.$error)) {
                         if (form.passwordMain.$modelValue === form.passwordRepeat.$modelValue) {
-                            var newPassword = form.passwordMain.$modelValue,
-                                oldPassword = form.oldPassword.$modelValue;
-                            userApi.changePassword(oldPassword, newPassword).then(function() {
+                            var newPassword = form.passwordMain.$modelValue;
+                            userApi.changePasswordAuthenticated(newPassword).then(function() {
                                 dialog.close();
                             }, function(err) {
                                 console.log('PASSWORD NOT CHANGED!', err);
