@@ -450,7 +450,7 @@ angular.module('bitbloqApp')
         }
 
         function verifyW2b2() {
-            web2board.verify($scope.project.code);
+            web2board.verify($scope.getCode());
         }
 
         function serialMonitorW2b1() {

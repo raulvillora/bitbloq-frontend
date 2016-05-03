@@ -68,14 +68,14 @@ angular.module('bitbloqApp')
         }
 
         function onOpenConnectionTrigger(callback) {
-            api.VersionsHandlerHub.server.getVersion().done(function(version) {
+            return api.VersionsHandlerHub.server.getVersion().then(function(version) {
                 if (!isWeb2boardUpToDate(version)) {
                     removeInProgressFlag();
                     showUpdateModal();
                 } else {
                     // var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
                     var libVersion = '0.1.1';
-                    api.VersionsHandlerHub.server.setLibVersion(libVersion).done(function() {
+                    return api.VersionsHandlerHub.server.setLibVersion(libVersion).then(function() {
                         callback();
                     }, function(error) {
                         $log.error('Unable to update libraries due to: ' + error);
@@ -93,15 +93,13 @@ angular.module('bitbloqApp')
                 w2bToast = alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
             }
             showUpdateModalFlag = showUpdateModalFlag === true && tryCount >= TIMES_TRY_TO_START_W2B;
-            callback = callback || angular.noop;
+            callback = callback || new Promise();
             if (isWSNotConnected(api.wsClient)) {
-                api.connect().done(
+                api.connect().then(
                     function() { //on success
                         api.wsClient.couldSuccessfullyConnect = true;
                         alertsService.close(w2bToast);
-                        api.UtilsAPIHub.server.setId('Bitbloq').done(function() {
-                            onOpenConnectionTrigger(callback);
-                        });
+                        onOpenConnectionTrigger(callback);
                     },
                     function() { //on error
                         if (showUpdateModalFlag) {
@@ -120,7 +118,7 @@ angular.module('bitbloqApp')
                     }
                 );
             } else {
-                callback();
+                return callback();
             }
         }
 
@@ -171,7 +169,7 @@ angular.module('bitbloqApp')
             }
         }
 
-        api = WSHubsAPI.construct('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort, 45, webSocketWrapper);
+        api = WSHubsAPI.construct(45000, webSocketWrapper);
 
         api.defaultErrorHandler = function(error) {
             $log.error('Error receiving message: ' + error);
@@ -209,7 +207,7 @@ angular.module('bitbloqApp')
             if (!inProgress) {
                 inProgress = true;
                 openCommunication(function() {
-                    api.CodeHub.server.compile(code).done(function() {
+                    return api.CodeHub.server.compile(code).then(function() {
                         alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
                     }, function(error) {
                         alertsService.add('alert-web2board-compile-error', 'web2board', 'warning', undefined, error);
@@ -227,7 +225,7 @@ angular.module('bitbloqApp')
                 inProgress = true;
                 openCommunication(function() {
                     alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                    api.CodeHub.server.upload(code, board.mcu).done(function() {
+                    return api.CodeHub.server.upload(code, board.mcu).then(function() {
                         alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000);
                     }, handleUploadError).finally(removeInProgressFlag);
                 });
@@ -237,7 +235,6 @@ angular.module('bitbloqApp')
         web2board.serialMonitor = function(board) {
             openSerialWindow('http://localhost:9000/#/serialMonitor', 'Serial monitor', board);
         };
-                inProgress = true;
 
         web2board.chartMonitor = function (board) {
             openSerialWindow('http://localhost:9000/#/chartMonitor', 'Chart monitor', board);
@@ -287,7 +284,7 @@ angular.module('bitbloqApp')
         web2board.uploadHex = function(boardMcu, hexText) {
             openCommunication(function() {
                 alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                api.CodeHub.server.uploadHex(hexText, boardMcu).done(function(port) {
+                api.CodeHub.server.uploadHex(hexText, boardMcu).then(function(port) {
                     alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
                 }, handleUploadError).finally(removeInProgressFlag);
             });
@@ -296,13 +293,16 @@ angular.module('bitbloqApp')
         web2board.showApp = function() {
             openCommunication(function() {
                 alertsService.add('web2board_toast_showingApp', 'web2board', 'loading');
-                api.WindowHub.server.showApp().done(function() {
+                return api.WindowHub.server.showApp().then(function() {
                     alertsService.add('web2board_toast_successfullyOpened', 'web2board', 'ok', 3000);
                 });
             });
         };
 
         return {
+            connect: function () {
+                return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
+            },
             verify: web2board.verify,
             upload: web2board.upload,
             serialMonitor: web2board.serialMonitor,

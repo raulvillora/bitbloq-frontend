@@ -24,9 +24,10 @@ angular.module('bitbloqApp')
 
         function rootWeb2boardToNewVersion() {
             ws.close(true);
+            web2board2.connect().then(function () {
+                web2board2.callFunction(firstFunctionCalled);
+            });
             isWeb2board2Flag = true;
-            web2board2.callFunction(firstFunctionCalled);
-            web2board2.setInProcess(true);
 
             web2board.verify = web2board2.verify;
             web2board.upload = web2board2.upload;
