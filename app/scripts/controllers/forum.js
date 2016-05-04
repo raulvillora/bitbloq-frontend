@@ -220,6 +220,7 @@
 
             function goForumTheme(themeId, themeCategory) {
                 forumApi.getTheme(themeId).then(function(response) {
+                    console.log(response.data);
                     forum.currentTheme = response.data.thread;
                     forum.themeCategory = themeCategory;
                     // if (response.data.length > 0) {
@@ -252,7 +253,7 @@
                 forum.displayedView = 'category';
                 forum.currentCategory = category;
                 forumApi.getThemesInCategory(category).then(function(response) {
-                    forum.categoryThemes = response.data;
+                    forum.categoryThemes = response.data.threads;
                     forum.categoryPages = forum.categoryThemes.length / 5;
                 }, function(err) {
                     $log.error('ERROR: ', err);
