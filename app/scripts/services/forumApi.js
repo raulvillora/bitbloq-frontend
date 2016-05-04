@@ -1,15 +1,11 @@
-(function() {
-    'use strict';
-    angular
-        .module('bitbloqApp')
-        .factory('forumApi', forumFactory);
-
-    function forumFactory($http, envData) {
+'use strict';
+angular
+    .module('bitbloqApp')
+    .service('forumApi', function($http, envData) {
 
         var forumApi = {
             getForumIndex: getForumIndex,
             getTheme: getTheme,
-            getAnswers: getAnswers,
             getThemesInCategory: getThemesInCategory,
             addViewer: addViewer,
             createThread: createThread,
@@ -36,16 +32,11 @@
         }
 
         function getTheme(themeId) {
-            return getData('/threads/' + themeId);
+            return getData('/thread/' + themeId);
         }
 
-        function getAnswers(themeId) {
-            return getData('/answers/' + themeId);
-        }
-
-        function getThemesInCategory(categoryName, by) {
-            by = by || '';
-            return getData('/categories/' + categoryName + by);
+        function getThemesInCategory(categoryName) {
+            return getData('/category/' + categoryName);
         }
 
         function addViewer(threadId) {
@@ -73,5 +64,4 @@
                 data: answer
             });
         }
-    }
-})();
+    });
