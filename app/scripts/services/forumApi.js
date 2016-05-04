@@ -1,10 +1,7 @@
-(function() {
-    'use strict';
-    angular
-        .module('bitbloqApp')
-        .factory('forumApi', forumFactory);
-
-    function forumFactory($http, envData) {
+'use strict';
+angular
+    .module('bitbloqApp')
+    .service('forumApi', function($http, envData) {
 
         var forumApi = {
             getForumIndex: getForumIndex,
@@ -67,5 +64,4 @@
                 data: answer
             });
         }
-    }
-})();
+    });

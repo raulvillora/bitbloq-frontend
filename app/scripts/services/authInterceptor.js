@@ -1,6 +1,6 @@
 'use strict';
 angular.module('bitbloqApp')
-    .factory('authInterceptor', function($cookieStore, $routeParams) {
+    .service('authInterceptor', function($cookieStore, $routeParams) {
         return {
             // Add authorization token to headers
             request: function(config) {
