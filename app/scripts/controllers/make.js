@@ -420,7 +420,7 @@ angular.module('bitbloqApp')
                 settingBoardAlert = alertsService.add('alert-web2board-settingBoard', 'upload', 'loading');
                 web2board.setInProcess(true);
 
-                web2board.upload(boardReference, bloqsUtils.getCode($scope.componentsArray, $scope.bloqs));
+                web2board.upload(boardReference, $scope.getCode());
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
@@ -430,7 +430,7 @@ angular.module('bitbloqApp')
 
         function uploadW2b2() {
             if ($scope.project.hardware.board) {
-                web2board.upload(getBoardMetaData().mcu, $scope.project.code);
+                web2board.upload(getBoardMetaData().mcu, $scope.getCode());
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
