@@ -344,7 +344,7 @@ module.exports = function(grunt) {
     grunt.registerTask('poeditor2ChangeLogs', 'changelog po to json', function() {
         var fs = require('fs'),
             originPath = 'i18n/',
-            destinationPath = 'dataBaseFiles/ChangeLogs/ChangeLogs.json',
+            destinationPath = 'dataBaseFiles/changelog/changelog.json',
             hiddenFilePattern = /^\./;
 
         var folders = fs.readdirSync(originPath);
@@ -400,7 +400,7 @@ module.exports = function(grunt) {
     grunt.registerTask('poeditor2faqs', 'bloqs po to json', function() {
         var fs = require('fs'),
             originPath = 'i18n/',
-            destinationPath = 'dataBaseFiles/Faqs/Faqs.json',
+            destinationPath = 'dataBaseFiles/faq/faq.json',
             hiddenFilePattern = /^\./;
 
         var folders = fs.readdirSync(originPath);

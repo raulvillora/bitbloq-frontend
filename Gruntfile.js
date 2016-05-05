@@ -778,7 +778,7 @@ module.exports = function(grunt) {
             response.on('end', function() {
                 if (body.length) {
                     grunt.log.oklns('get Bloqs done!');
-                    grunt.file.write('dataBaseFiles/Bloqs/Bloqs.json', body);
+                    grunt.file.write('dataBaseFiles/bloq/bloq.json', body);
                 } else {
                     grunt.log.error('No se han conseguido bloques');
                 }
@@ -789,7 +789,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('getbloqs', function() {
         var bloqsFile = grunt.file.readJSON('./bower_components/bloqs/dist/list.json');
-        grunt.file.write('dataBaseFiles/Bloqs/Bloqs.json', JSON.stringify(bloqsFile));
+        grunt.file.write('dataBaseFiles/bloq/bloq.json', JSON.stringify(bloqsFile));
     });
 
     grunt.registerTask('prepareversion', function(version) {
