@@ -76,10 +76,16 @@ module.exports = function(grunt) {
     };
 
     function deleteCollection(collectionName, env, callback) {
+        if (collectionName === 'forumcategory') {
+            collectionName = 'forum/category';
+        }
         adminRequestToServer(env, 'DELETE', collectionName + '/all', {}, callback);
     };
 
     function insertCollection(collectionName, items, env, callback) {
+        if (collectionName === 'forumcategory') {
+            collectionName = 'forum/category';
+        }
         adminRequestToServer(env, 'POST', collectionName + '/all', items, callback);
     };
 
