@@ -2,7 +2,7 @@
 'use strict';
 
 function UserResource($resource, envData) {
-    return $resource(envData.config.gCloudEndpoint + 'user/:id/:controller/', {
+    return $resource(envData.config.serverUrl + 'user/:id/:controller/', {
         id: '@_id'
     }, {
         changePassword: {

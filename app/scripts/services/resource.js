@@ -43,7 +43,7 @@
 
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + endpoint,
+                url: envData.config.serverUrl + endpoint,
                 params: queryParams
             });
 
@@ -70,4 +70,3 @@
     }
 
 })();
-

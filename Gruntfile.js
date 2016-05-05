@@ -314,11 +314,11 @@ module.exports = function(grunt) {
                 options: {
                     collapseWhitespace: true,
                     removeComments: true
-                    // preserveLineBreaks:true,
-                    // conservativeCollapse: true,
-                    // collapseBooleanAttributes: true,
-                    // removeCommentsFromCDATA: true,
-                    // removeOptionalTags: true
+                        // preserveLineBreaks:true,
+                        // conservativeCollapse: true,
+                        // collapseBooleanAttributes: true,
+                        // removeCommentsFromCDATA: true,
+                        // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
@@ -538,7 +538,7 @@ module.exports = function(grunt) {
             },
             files: {
                 src: ['app/index.html']
-                //src: ['app/**/*.html']
+                    //src: ['app/**/*.html']
             }
         },
         addTimestampToFiles: {
@@ -896,5 +896,16 @@ module.exports = function(grunt) {
             fs.renameSync(staticFiles[i].path + '/' + staticFiles[i].name, staticFiles[i].path + '/' + newName);
             replaceFileName(staticFiles[i].name, newName, this.data.replaceStaticFiles);
         }
+    });
+
+    grunt.registerTask('updateAllCollections', function(env) {
+        env = env || 'qa';
+        grunt.task.run([
+            'updateCollection:Bloqs:' + env,
+            'updateCollection:Faqs:' + env,
+            'updateCollection:ChangeLogs:' + env,
+            'updateCollection:Properties:' + env,
+            'updateCollection:ForumCategories:' + env + ':true'
+        ]);
     });
 };

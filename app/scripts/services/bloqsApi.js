@@ -22,7 +22,7 @@ angular.module('bitbloqApp')
 
             $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'bloq',
+                url: envData.config.serverUrl + 'bloq',
                 params: {
                     'pageSize': pageSize,
                     'page': page

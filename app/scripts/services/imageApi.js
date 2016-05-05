@@ -16,14 +16,16 @@ angular.module('bitbloqApp')
         data.save = function(idImage, file, collection) {
             collection = collection || 'project';
 
-            file.lau= collection;
+            file.lau = collection;
             var formData = new FormData();
             formData.append("file", file);
 
-            return $http.post(envData.config.gCloudEndpoint + 'image/' + collection + '/' + idImage, formData, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
+            return $http.post(envData.config.serverUrl + 'image/' + collection + '/' + idImage, formData, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                })
                 .success(function() {
                     console.log("success!!");
                 })
@@ -32,15 +34,12 @@ angular.module('bitbloqApp')
                 });
         };
 
-
-
-
         data.get = function(idImage, dataType, collection, params) {
             dataType = dataType || 'image/jpeg';
             collection = collection || 'project';
             var data = {
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
+                url: envData.config.serverUrl + 'resource/bitbloq:' + collection + '/' + idImage,
                 headers: {
                     Accept: dataType
                 },
@@ -65,12 +64,6 @@ angular.module('bitbloqApp')
             });
         };
 
-
-
-
-
-
-
         data.createImageUrl = function(blob) {
             var reader = new FileReader();
             var def = $q.defer();
@@ -94,7 +87,9 @@ angular.module('bitbloqApp')
                 $http.get('https://www.googleapis.com/plus/v1/people/' + userId + '?fields=image&key=' + envData.google.apikey).then(function(socialData) {
                     var picture = socialData.data.image.url.split('?sz=')[0];
                     //deferred.resolve(picture + '?sz=200');
-                    deferred.resolve({url: picture});
+                    deferred.resolve({
+                        url: picture
+                    });
                 }).catch(function(error) {
                     deferred.reject(error);
                 });
@@ -109,7 +104,10 @@ angular.module('bitbloqApp')
                     var reader = new FileReader();
 
                     reader.onloadend = function(e) {
-                        deferred.resolve({blob: response.data, url: e.target.result});
+                        deferred.resolve({
+                            blob: response.data,
+                            url: e.target.result
+                        });
                     };
 
                     reader.readAsDataURL(response.data);

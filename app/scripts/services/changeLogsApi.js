@@ -20,7 +20,7 @@ angular.module('bitbloqApp')
             exports.items = [];
             $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'changeLogs',
+                url: envData.config.serverUrl + 'changeLogs',
                 params: {
                     'api:pageSize': pageSize,
                     'api:page': page,

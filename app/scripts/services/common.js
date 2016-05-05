@@ -174,7 +174,7 @@ angular.module('bitbloqApp')
         }
 
         function getProperties() {
-            $http.get(envData.config.gCloudEndpoint + 'property').success(function(items) {
+            $http.get(envData.config.serverUrl + 'property').success(function(items) {
                 $log.debug('properties', items);
                 exports.properties = items[0];
             });

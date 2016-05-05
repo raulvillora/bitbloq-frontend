@@ -10,7 +10,7 @@ angular.module('bitbloqApp')
         var exports = {};
 
         exports.send = function(item) {
-            return $http.post(envData.config.gCloudEndpoint + 'feedback', item);
+            return $http.post(envData.config.serverUrl + 'feedback', item);
         };
 
         return exports;
