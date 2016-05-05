@@ -64,7 +64,6 @@
 
                         default:
                             _goToSection(section);
-                            throw 'Not a section';
                     }
                 } else {
                     $location.url('/help/forum/');
@@ -131,9 +130,9 @@
                         main: true
                     };
 
-                    forumApi.createThread(thread, answer).then(function(threadId) {
-                        $log.debug('theme: ' + threadId);
-                        // forum.goForumSection(forum.textEditorContent.category + '/' + threadId);
+                    forumApi.createThread(thread, answer).then(function(response) {
+                        $log.debug('theme: ' + response.data);
+                        forum.goForumSection(forum.textEditorContent.category + '/' + response.data);
                         alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
                     }).catch(function(err) {
                         $log.debug('Error creating post:', err);
