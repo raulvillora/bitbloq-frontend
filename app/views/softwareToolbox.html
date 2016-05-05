@@ -20,7 +20,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'zowi', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'zowi'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-zowi' | translate }}</h1>
                 </li>
@@ -37,7 +36,6 @@
                         </svg>
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'zowi', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'zowi'}">
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedZowi' | translate }}</h1>
                         </li>
@@ -53,7 +51,7 @@
             </ul>
         </li>
         <!-- Evolution -->
-        <!-- <li ng-if="project.hardware.robot==='evolution'" data-element="toolbox-evolution">
+        <li ng-if="project.hardware.robot==='evolution'" data-element="toolbox-evolution">
             <button class="btn btn--toolbox btn--evolution" ng-click="toolbox.level = 2; toolbox.section = 'evolution'">
                 <span class="toolbox toolbox-evolution"></span> {{ 'make-swtoolbox-evolution' | translate }}
                 <svg class="svg-icon svg-icon--right">
@@ -61,7 +59,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'evolution', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'evolution'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-evolution' | translate }}</h1>
                 </li>
@@ -78,21 +75,20 @@
                         </svg>
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'evolution', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'evolution'}">
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advanced-evolution' | translate }}</h1>
-                        </li> -->
-        <!-- ADVANCED -->
-        <!-- <li>
-            <ul class="toolbox--bloqs--container--full">
-                <li id="{{'bloq' + advancedEvolution.name}}" data-ng-class="advancedEvolution.addClass" data-ng-repeat="advancedEvolution in common.properties.bloqsSortTree.advancedEvolution" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedEvolution[$index].name]" data-components-array="componentsArray"></li>
+                        </li>
+                        <!-- ADVANCED -->
+                        <li>
+                            <ul class="toolbox--bloqs--container--full">
+                                <li id="{{'bloq' + advancedEvolution.name}}" data-ng-class="advancedEvolution.addClass" data-ng-repeat="advancedEvolution in common.properties.bloqsSortTree.advancedEvolution" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedEvolution[$index].name]" data-components-array="componentsArray"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
             </ul>
         </li>
-    </ul>
-</li>
-<div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-</ul>
-</li> -->
         <!-- END CODE -->
         <!-- COMPONENTS -->
         <li data-walkthrough="components" data-element="toolbox-components">
@@ -103,7 +99,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'components', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'components'}" data-walkthrough="components-container">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'components' | translate }}</h1>
                 </li>
@@ -121,7 +116,6 @@
                         </svg>
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'components', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'components'}">
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedComponents' | translate }}</h1>
                         </li>
@@ -146,7 +140,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'functions', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'functions'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-functions' | translate }}</h1>
                 </li>
@@ -165,7 +158,6 @@
                     </button>
                     <!-- ADVANCED -->
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'functions', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'functions'}">
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'functions-swtoolbox-advancedFunctions' | translate }}</h1>
                         </li>
@@ -189,7 +181,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'variables', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'variables'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-variables' | translate }}</h1>
                 </li>
@@ -207,7 +198,6 @@
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'variables', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'variables'}">
                         <!-- ADVANCED -->
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedVariables' | translate }}</h1>
                         </li>
@@ -231,7 +221,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'code', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'code'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-code' | translate }}</h1>
                 </li>
@@ -253,7 +242,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'math', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'math'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-mathematics' | translate }}</h1>
                 </li>
@@ -271,7 +259,6 @@
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'math', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'math'}">
                         <!-- ADVANCED -->
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedMathematics' | translate }}</h1>
                         </li>
@@ -295,7 +282,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'text', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'text'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-text' | translate }}</h1>
                 </li>
@@ -313,7 +299,6 @@
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'text', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'text'}">
                         <!-- ADVANCED -->
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-text-advanced' | translate }}</h1>
                         </li>
@@ -337,7 +322,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'control', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'control'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-control' | translate }}</h1>
                 </li>
@@ -355,7 +339,6 @@
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'control', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'control'}">
                         <!-- ADVANCED -->
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedControls' | translate }}</h1>
                         </li>
@@ -379,7 +362,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'logic', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'logic'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-logic' | translate }}</h1>
                 </li>
@@ -423,7 +405,6 @@
                 </svg>
             </button>
             <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'classes', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'classes'}">
-
                 <li>
                     <h1 class="h3 submenu__title">{{ 'make-swtoolbox-classes' | translate }}</h1>
                 </li>
@@ -441,7 +422,6 @@
                     </button>
                     <ul ng-class="{'level':true, 'level--3':toolbox.section === 'classes', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'classes'}">
                         <!-- ADVANCED -->
-
                         <li>
                             <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedClasses' | translate }}</h1>
                         </li>
