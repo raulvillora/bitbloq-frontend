@@ -49,5 +49,5 @@ angular.module('bitbloqApp')
                     });
                 });
             };
-        }
+        };
     });

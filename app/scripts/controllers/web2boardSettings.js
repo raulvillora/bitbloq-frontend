@@ -12,9 +12,9 @@ angular.module('bitbloqApp')
     .controller('Web2boardSettings', function ($scope, _, web2board2) {
         var configHub = web2board2.api.ConfigHub;
         $scope.settings = {
-            webSocketIP: '',
-            webSocketPort: 0,
-            librariesPath: '',
+            web_socket_ip: '',
+            web_socket_port: 0,
+            libraries_path: '',
             proxy: ''
         };
 
@@ -22,17 +22,16 @@ angular.module('bitbloqApp')
             console.error(hub, func);
         };
 
-        web2board2.api.connect().done(function () {
-            configHub.server.getConfig().done(function(config){
-                $scope.settings = config;
-            });
+        configHub.server.getConfig().then(function (config) {
+            $scope.settings = config;
         });
-        
-        $scope.onLibrariesPathChanged = function(){
-            configHub.server.isLibrariesPathPossible($scope.settings.librariesPath)
-                .done(function (isPossible){
-                console.log(isPossible ? 'GOOD': 'BAD');
-            });
+
+
+        $scope.onLibrariesPathChanged = function () {
+            configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
+                .then(function (isPossible) {
+                    console.log(isPossible ? 'GOOD' : 'BAD');
+                });
         };
 
         $scope.confirmAction = function () {

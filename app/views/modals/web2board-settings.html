@@ -4,12 +4,12 @@
                 <!--<svg class="svg-icon&#45;&#45;search">-->
             <!--<use xlink:href="#lupa"></use>-->
             <!--</svg>-->
-                <input type="text" ng-model="settings.webSocketIP" placeholder="WebSocket IP (default localhost)">
+                <input type="text" ng-model="settings.web_socket_ip" placeholder="WebSocket IP (default localhost)">
             </span>
     </div>
     <div class="modal--projects--action">
         <span class="form--input">
-                <input type="text" ng-model="settings.webSocketPort" placeholder="WebSocket port">
+                <input type="text" ng-model="settings.web_socket_port" placeholder="WebSocket port">
             </span>
     </div>
     <div class="modal--projects--action">
@@ -19,13 +19,13 @@
     </div>
     <div class="modal--projects--action">
         <span class="form--input">
-                <input type="text" ng-model="settings.librariesPath" placeholder="Libraries path" ng-blur="onLibrariesPathChanged()">
+                <input type="text" ng-model="settings.libraries_path" placeholder="Libraries path" ng-blur="onLibrariesPathChanged()">
             </span>
     </div>
 
     <div class="modal--projects--action">
         <label>
-            <input type="checkbox" ng-model="settings.checkOnlineUpdates">
+            <input type="checkbox" ng-model="settings.check_online_updates">
             Check online updates
         </label>
     </div>

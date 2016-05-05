@@ -3,7 +3,7 @@
 'use strict';
 // test
 (function(WSHubsAPI) {
-    
+
     function HubsAPI(url, serverTimeout, wsClientClass) {
         'use strict';
 
@@ -213,14 +213,15 @@
         this.CodeHub.server = {
             __HUB_NAME : 'CodeHub',
 
-            uploadHexFile : function (hexFilePath, board, port){
+          uploadHexFile : function (hexFilePath, board, port){
                 arguments[0] = hexFilePath === undefined ? null : hexFilePath;
                 return constructMessage('CodeHub', 'uploadHexFile', arguments);
+
             },
 
             uploadHex : function (hexText, board, port){
                 arguments[0] = hexText === undefined ? null : hexText;
-                return constructMessage('CodeHub', 'uploadHex', arguments);
+                return constructMessage('CodeHub', 'upload_hex', arguments);
             },
 
             getSubscribedClientsToHub : function (){
@@ -264,7 +265,6 @@
             __HUB_NAME : 'VersionsHandlerHub',
 
             setLibVersion : function (version){
-
                 return constructMessage('VersionsHandlerHub', 'setLibVersion', arguments);
             },
 
@@ -278,18 +278,18 @@
                 return constructMessage('VersionsHandlerHub', 'unsubscribeFromHub', arguments);
             },
 
-            subscribeToHub : function (){
-
-                return constructMessage('VersionsHandlerHub', 'subscribeToHub', arguments);
-            },
-
-            getVersion : function (){
-
-                return constructMessage('VersionsHandlerHub', 'getVersion', arguments);
-            },
-
             setWeb2boardVersion : function (version){
 
+                return constructMessage('VersionsHandlerHub', 'subscribeToHub', arguments);
+
+            },
+
+            getSubscribedClientsToHub : function (){
+
+                return constructMessage('VersionsHandlerHub', 'get_subscribed_clients_to_hub', arguments);
+            },
+
+            subscribeToHub : function (){
                 return constructMessage('VersionsHandlerHub', 'setWeb2boardVersion', arguments);
             }
         };
@@ -453,29 +453,34 @@
         this.ConfigHub.server = {
             __HUB_NAME : 'ConfigHub',
 
-            restorePlatformioIniFile : function (){
+            changePlatformioIniFile : function (content){
 
-                return constructMessage('ConfigHub', 'restorePlatformioIniFile', arguments);
+                return constructMessage('ConfigHub', 'change_platformio_ini_file', arguments);
+            },
+
+            setLibrariesPath : function (libDir){
+
+                return constructMessage('ConfigHub', 'set_libraries_path', arguments);
             },
 
             testProxy : function (proxyUrl){
 
-                return constructMessage('ConfigHub', 'testProxy', arguments);
+                return constructMessage('ConfigHub', 'test_proxy', arguments);
             },
 
             setWebSocketInfo : function (IP, port){
 
-                return constructMessage('ConfigHub', 'setWebSocketInfo', arguments);
+                return constructMessage('ConfigHub', 'set_proxy', arguments);
             },
 
-            getLibrariesPath : function (){
+            setWebSocketInfo : function (iP, port){
 
-                return constructMessage('ConfigHub', 'getLibrariesPath', arguments);
+                return constructMessage('ConfigHub', 'set_web_socket_info', arguments);
             },
 
             setLogLevel : function (logLevel){
 
-                return constructMessage('ConfigHub', 'setLogLevel', arguments);
+                return constructMessage('ConfigHub', 'set_log_level', arguments);
             },
 
             getSubscribedClientsToHub : function (){
@@ -495,7 +500,7 @@
 
             isPossibleLibrariesPath : function (path){
 
-                return constructMessage('ConfigHub', 'isPossibleLibrariesPath', arguments);
+                return constructMessage('ConfigHub', 'get_config', arguments);
             },
 
             subscribeToHub : function (){
@@ -505,17 +510,18 @@
 
             getConfig : function (){
 
-                return constructMessage('ConfigHub', 'getConfig', arguments);
+
+                return constructMessage('ConfigHub', 'unsubscribe_from_hub', arguments);
             },
 
-            setProxy : function (proxyUrl){
+            getLibrariesPath : function (){
 
-                return constructMessage('ConfigHub', 'setProxy', arguments);
+                return constructMessage('ConfigHub', 'get_libraries_path', arguments);
             },
 
-            setLibrariesPath : function (libDir){
+            isPossibleLibrariesPath : function (path){
 
-                return constructMessage('ConfigHub', 'setLibrariesPath', arguments);
+                return constructMessage('ConfigHub', 'is_possible_libraries_path', arguments);
             },
 
             setValues : function (configDic){
