@@ -79,7 +79,7 @@ angular.module('bitbloqApp')
         };
 
         exports.loginBySocialNetwork = function(options) {
-            return $http.post(envData.config.gCloudEndpoint + 'user/social', options).then(function(response) {
+            return $http.post(envData.config.serverUrl + 'user/social', options).then(function(response) {
                 var data = response.data;
                 return data;
             }, function(err) {
@@ -101,7 +101,7 @@ angular.module('bitbloqApp')
         };
 
         exports.loginUser = function(options, callback) {
-            return $http.post(envData.config.gCloudEndpoint + 'auth/local', {
+            return $http.post(envData.config.serverUrl + 'auth/local', {
                 email: options.email,
                 password: options.password
             }).then(function(res) {
@@ -126,13 +126,13 @@ angular.module('bitbloqApp')
         };
 
         exports.validateUserName = function(username) {
-            return $http.head(envData.config.gCloudEndpoint + 'user/' + username);
+            return $http.head(envData.config.serverUrl + 'user/' + username);
         };
 
         exports.update = function(dataUser) {
             return $http({
                 method: 'PUT',
-                url: envData.config.gCloudEndpoint + 'user/me',
+                url: envData.config.serverUrl + 'user/me',
                 data: dataUser
             });
         };
@@ -140,7 +140,7 @@ angular.module('bitbloqApp')
         exports.updateProperties = function(dataUser) {
             return $http({
                 method: 'PUT',
-                url: envData.config.gCloudEndpoint + 'user/me/properties',
+                url: envData.config.serverUrl + 'user/me/properties',
                 data: dataUser
             });
         };
@@ -171,7 +171,7 @@ angular.module('bitbloqApp')
         exports.resetPassword = function(email) {
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'user/reset',
+                url: envData.config.serverUrl + 'user/reset',
                 params: {
                     email: email
                 }
@@ -181,7 +181,7 @@ angular.module('bitbloqApp')
         exports.forgottenPassword = function(email) {
             return $http({
                 method: 'POST',
-                url: envData.config.gCloudEndpoint + 'user/forgot',
+                url: envData.config.serverUrl + 'user/forgot',
                 data: {
                     email: email
                 }
@@ -191,7 +191,7 @@ angular.module('bitbloqApp')
         exports.getUserId = function(email) {
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'user/email/' + encodeURIComponent(email)
+                url: envData.config.serverUrl + 'user/email/' + encodeURIComponent(email)
             });
         };
 
@@ -277,7 +277,7 @@ angular.module('bitbloqApp')
             //     'api:pageSize': 50
             // };
             // return _getAllProfiles(queryParams, []);
-            return $http.get(envData.config.gCloudEndpoint + 'user/');
+            return $http.get(envData.config.serverUrl + 'user/');
         };
 
         /*
@@ -286,21 +286,21 @@ angular.module('bitbloqApp')
         exports.banUser = function(userId) {
             return $http({
                 method: 'HEAD',
-                url: envData.config.gCloudEndpoint + 'user/' + userId + '/ban'
+                url: envData.config.serverUrl + 'user/' + userId + '/ban'
             });
         };
 
         exports.unbanUser = function(userId) {
             return $http({
                 method: 'HEAD',
-                url: envData.config.gCloudEndpoint + 'user/' + userId + '/unban'
+                url: envData.config.serverUrl + 'user/' + userId + '/unban'
             });
         };
 
         exports.getBannedUsers = function() {
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'user/banned'
+                url: envData.config.serverUrl + 'user/banned'
             });
         };
 

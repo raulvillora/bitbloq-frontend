@@ -17,7 +17,7 @@ angular.module('bitbloqApp')
             params = params || {};
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'project/' + id,
+                url: envData.config.serverUrl + 'project/' + id,
                 params: params
             });
         };
@@ -29,7 +29,7 @@ angular.module('bitbloqApp')
 
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'project',
+                url: envData.config.serverUrl + 'project',
                 params: queryParams
             });
 
@@ -41,7 +41,6 @@ angular.module('bitbloqApp')
             });
             return exports.getPublic(queryParams, queryParams2);
         };
-
 
         exports.getMyProjects = function(queryParams) {
 
@@ -80,7 +79,7 @@ angular.module('bitbloqApp')
         exports.save = function(dataproject) {
             return $http({
                 method: 'POST',
-                url: envData.config.gCloudEndpoint + 'project',
+                url: envData.config.serverUrl + 'project',
                 data: dataproject
             });
         };
@@ -88,7 +87,7 @@ angular.module('bitbloqApp')
         exports.update = function(idProject, dataproject) {
             return $http({
                 method: 'PUT',
-                url: envData.config.gCloudEndpoint + 'project/' + idProject,
+                url: envData.config.serverUrl + 'project/' + idProject,
                 data: dataproject
             });
         };
@@ -96,21 +95,21 @@ angular.module('bitbloqApp')
         exports.publish = function(idProject) {
             return $http({
                 method: 'PUT',
-                url: envData.config.gCloudEndpoint + 'project/' + idProject + '/publish'
+                url: envData.config.serverUrl + 'project/' + idProject + '/publish'
             });
         };
 
         exports.private = function(idProject) {
             return $http({
                 method: 'PUT',
-                url: envData.config.gCloudEndpoint + 'project/' + idProject + '/private'
+                url: envData.config.serverUrl + 'project/' + idProject + '/private'
             });
         };
 
         exports.shareWithUsers = function(idProject, userEmails) {
             return $http({
                 method: 'PUT',
-                url: envData.config.gCloudEndpoint + 'project/' + idProject + '/share',
+                url: envData.config.serverUrl + 'project/' + idProject + '/share',
                 data: userEmails
             });
         };
@@ -118,17 +117,15 @@ angular.module('bitbloqApp')
         exports.delete = function(idProject) {
             return $http({
                 method: 'DELETE',
-                url: envData.config.gCloudEndpoint + 'project/' + idProject
+                url: envData.config.serverUrl + 'project/' + idProject
             });
         };
 
-
-//---------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------
-
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
 
         exports.getShortURL = function(longUrl) {
             // Request short url

@@ -22,7 +22,7 @@ angular
 
             return $http({
                 method: 'GET',
-                url: envData.config.gCloudEndpoint + 'forum' + resource,
+                url: envData.config.serverUrl + 'forum' + resource,
                 params: options
             });
         }
@@ -42,14 +42,14 @@ angular
         function addViewer(threadId) {
             return $http({
                 method: 'HEAD',
-                url: envData.config.gCloudEndpoint + 'forum/threadStats/views/' + threadId
+                url: envData.config.serverUrl + 'forum/threadStats/views/' + threadId
             });
         }
 
         function createThread(thread, answer) {
             return $http({
                 method: 'POST',
-                url: envData.config.gCloudEndpoint + 'forum/thread',
+                url: envData.config.serverUrl + 'forum/thread',
                 data: {
                     thread: thread,
                     answer: answer
@@ -60,7 +60,7 @@ angular
         function createAnswer(answer) {
             return $http({
                 method: 'POST',
-                url: envData.config.gCloudEndpoint + 'forum/answer',
+                url: envData.config.serverUrl + 'forum/answer',
                 data: answer
             });
         }
