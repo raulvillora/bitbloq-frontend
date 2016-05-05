@@ -89,7 +89,7 @@ module.exports = function(grunt) {
         adminRequestToServer(env, 'POST', collectionName + '/all', items, callback);
     };
 
-    function refreshServerCollection(collectionName, items, env, setId, callback) {
+    function refreshServerCollection(collectionName, items, env, callback) {
         console.log('refresh collection on ' + env);
         deleteCollection(collectionName, env, function(err) {
             if (err) {
@@ -101,11 +101,11 @@ module.exports = function(grunt) {
         });
     };
 
-    grunt.registerTask('updateCollection', function(collectionName, env, setId) {
-        grunt.log.writeln('Updating= ' + collectionName + ' on ' + env + ' setting the ID:' + setId);
+    grunt.registerTask('updateCollection', function(collectionName, env) {
+        grunt.log.writeln('Updating= ' + collectionName + ' on ' + env);
         var done = this.async(),
             items = grunt.file.readJSON('dataBaseFiles/' + collectionName + '/' + collectionName + '.json');
-        refreshServerCollection(collectionName, items, env, setId, function(err, res) {
+        refreshServerCollection(collectionName, items, env, function(err, res) {
             if (err) {
                 console.log('err updating ', collectionName, 'on', env, ':', err);
                 done();
