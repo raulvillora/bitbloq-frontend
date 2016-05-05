@@ -901,11 +901,11 @@ module.exports = function(grunt) {
     grunt.registerTask('updateAllCollections', function(env) {
         env = env || 'qa';
         grunt.task.run([
-            'updateCollection:Bloqs:' + env,
-            'updateCollection:Faqs:' + env,
-            'updateCollection:ChangeLogs:' + env,
-            'updateCollection:Properties:' + env,
-            'updateCollection:ForumCategories:' + env + ':true'
+            'updateCollection:bloq:' + env,
+            'updateCollection:faq:' + env,
+            'updateCollection:changelog:' + env,
+            'updateCollection:property:' + env,
+            'updateCollection:forumcategory:' + env
         ]);
     });
 };
