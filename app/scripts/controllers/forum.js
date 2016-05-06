@@ -267,8 +267,7 @@
             }
 
             function groupCategoriesBySection() {
-                return _.chain(forumCategories)
-                    .groupBy('section').value();
+                return _.chain(forumCategories).sortBy('section').groupBy('section').value();
             }
 
             function addRouteListener() {
