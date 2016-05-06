@@ -600,7 +600,7 @@ module.exports = function(grunt) {
 
         }
 
-        var file = 'app/res/config/' + environment + '/config.json';
+        var file = 'app/res/config/config.json';
 
         grunt.file.write(file, configJSON);
     });
@@ -622,7 +622,7 @@ module.exports = function(grunt) {
 
         }
 
-        var file = 'app/res/config/' + environment + '/facebook.json';
+        var file = 'app/res/config/facebook.json';
 
         grunt.file.write(file, configJSON);
     });
@@ -644,7 +644,7 @@ module.exports = function(grunt) {
 
         }
 
-        var file = 'app/res/config/' + environment + '/google.json';
+        var file = 'app/res/config/google.json';
 
         grunt.file.write(file, configJSON);
     });
