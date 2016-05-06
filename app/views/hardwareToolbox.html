@@ -32,9 +32,7 @@
                     </svg>
                 </div>
                 <div class="submenu-level" ng-class="{'submenu-level--closed':levelOne !== 'boards','submenu--inactive':levelTwo}">
-
                     <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
-
                     <div class="bloqs--toolbox--main">
                         <div class="boards-list">
                             <div class="board-container" ng-repeat="board in hardware.boardList track by board.id">
@@ -57,9 +55,7 @@
                     </svg>
                 </div>
                 <div class="submenu-level" ng-class="{'submenu-level--closed':levelOne !== 'hwcomponents','submenu--inactive':levelTwo}">
-
                     <h1 class="h3 submenu__title">{{'components' | translate}}</h1>
-
                     <div class="bloqs--toolbox--main">
                         <div class="components-list">
                             <div class="component-container" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
@@ -83,12 +79,11 @@
                 </div>
                 <div class="submenu-level" ng-class="{'submenu-level--closed':levelOne !== 'robots'}">
                     <h1 class="h3 submenu__title">{{'robots' | translate}}</h1>
-
                     <div class="bloqs--toolbox--main">
                         <div class="robots-list">
                             <div class="robot-container" ng-repeat="robot in hardware.robotList">
-                                <h1 ng-if="robot.name !== 'Evolution'" class="robot-name name">{{robot.name}}</h1>
-                                <img ng-if="robot.name !== 'Evolution'" class="robot-image" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
+                                <h1 class="robot-name name">{{robot.name}}</h1>
+                                <img class="robot-image" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
                             </div>
                         </div>
                     </div>
@@ -108,7 +103,7 @@
         <ul>
             <li ng-repeat="item in allHwElements | filter:filterSearch(searchText)" class="sidebar-filter-element">
                 <h1 class="component-name name" translate>{{item.id}}</h1>
-                <img class="component-image" draggable dragid="{{item.id}}" dragtype="{{item.dragtype}}" ng-src="{{'/images/' + item.dragtype + '/' + item.id + '.svg'}}" ng-style="{width:item.width + 'px'}"/>
+                <img class="component-image" draggable dragid="{{item.id}}" dragtype="{{item.dragtype}}" ng-src="{{'/images/' + item.dragtype + '/' + item.id + '.svg'}}" ng-style="{width:item.width + 'px'}" />
             </li>
         </ul>
     </div>

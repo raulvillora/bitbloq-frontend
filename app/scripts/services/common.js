@@ -194,10 +194,8 @@ angular.module('bitbloqApp')
                     exports.setUser(null);
                 }
             }, function(err) {
-                if (err.status === 401) {
-                    userApi.logout();
-                    $location.path('/login');
-                }
+                exports.userIsLoaded = true;
+                exports.setUser(null);
             });
 
         }

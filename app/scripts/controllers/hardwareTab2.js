@@ -208,6 +208,7 @@ function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloq
             return r.id === robot.id;
         });
         $scope.project.hardware.robot = robot.id;
+        hw2Bloqs.removeRobot(robotReference);
         hw2Bloqs.addRobot(robotReference);
 
         $scope.project.hardware.board = 'Arduino UNO';
@@ -222,6 +223,10 @@ function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloq
         $scope.project.hardware.robot = null;
         $scope.project.hardware.board = null;
         $scope.robotSelected = false;
+        for (var i = 0; i < Things.length; i++) {
+            Things[i]
+
+        };
         $scope.refreshComponentsArray();
         $scope.startAutosave();
     };
@@ -668,20 +673,20 @@ function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloq
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {

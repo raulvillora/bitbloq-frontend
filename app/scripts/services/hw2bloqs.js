@@ -54,7 +54,8 @@
             robotDOMElement = null,
             componentDragging = null;
 
-        var board = null;
+        var board = null,
+            robot = null;
 
         var connectionEvent = new CustomEvent('connectionEvent');
 
@@ -138,6 +139,15 @@
             robotDOMElement.classList.add('opaque');
             boardDOMElement = document.getElementById(boardContainerId);
             boardDOMElement.classList.remove('opaque');
+            robot = newRobot;
+        };
+
+        exports.removeRobot = function() {
+            if (jsPlumbInstance && robot && robotDOMElement) {
+                robotDOMElement.classList.remove(robot.id);
+                jsPlumbInstance.removeAllEndpoints(robotDOMElement);
+            }
+            robot = null;
         };
 
         exports.addBoard = function(newBoard) {
@@ -572,13 +582,13 @@
             function _getConnections() {
                 return jsPlumbInstance.getAllConnections().map(function(connection) {
 
-                        var connectionParams = connection.getParameters();
-                        return ({
-                            pinSourceUid: connectionParams.pinSourceUid,
-                            pinTargetUid: connectionParams.pinTargetUid
-                        });
+                    var connectionParams = connection.getParameters();
+                    return ({
+                        pinSourceUid: connectionParams.pinSourceUid,
+                        pinTargetUid: connectionParams.pinTargetUid
+                    });
 
-                    }) || [];
+                }) || [];
             }
 
             //Store connections data
