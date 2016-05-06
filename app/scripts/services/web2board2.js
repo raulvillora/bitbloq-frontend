@@ -1,4 +1,4 @@
-* @ngdoc service
+/* @ngdoc service
  * @name bitbloqApp.web2board
  * @description
  * # web2board
@@ -6,7 +6,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board2', function($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                    alertsService, WSHubsAPI, OpenWindow) {
+        alertsService, WSHubsAPI, OpenWindow) {
 
         /** Variables */
 
@@ -22,7 +22,8 @@ angular.module('bitbloqApp')
             wsPort: 9876,
             serialPort: ''
         };
-        function connect(){
+
+        function connect() {
             return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
         }
 
@@ -159,9 +160,9 @@ angular.module('bitbloqApp')
                     url: url,
                     title: title
                 };
-                openCommunication(function () {
-                    OpenWindow.open(windowArguments, function () {
-                        window.setTimeout(function () {
+                openCommunication(function() {
+                    OpenWindow.open(windowArguments, function() {
+                        window.setTimeout(function() {
                             api.SerialMonitorHub.server.closeAllConnections();
                             api.SerialMonitorHub.server.unsubscribeFromHub();
                         }, 100);
@@ -237,13 +238,13 @@ angular.module('bitbloqApp')
         web2board.serialMonitor = function(board) {
             openSerialWindow('http://localhost:9000/#/serialMonitor', 'Serial monitor', board);
         };
-                inProgress = true;
+        inProgress = true;
 
-        web2board.chartMonitor = function (board) {
+        web2board.chartMonitor = function(board) {
             openSerialWindow('http://localhost:9000/#/chartMonitor', 'Chart monitor', board);
         };
 
-        web2board.showSettings = function () {
+        web2board.showSettings = function() {
             if (!inProgress) {
                 openCommunication(function() {
                     var dialog,
@@ -256,7 +257,7 @@ angular.module('bitbloqApp')
                         confirmButton: 'save',
                         rejectButton: 'cancel',
                         modalButtons: true,
-                        closeDialog: function () {
+                        closeDialog: function() {
                             dialog.close();
                         }
                     });
