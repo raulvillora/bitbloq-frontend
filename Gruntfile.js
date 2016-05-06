@@ -875,14 +875,13 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('updateAllCollections', function(env) {
-        env = env || 'qa';
+    grunt.registerTask('updateAllCollections', function() {
         grunt.task.run([
-            'updateCollection:bloq:' + env,
-            'updateCollection:faq:' + env,
-            'updateCollection:changelog:' + env,
-            'updateCollection:property:' + env,
-            'updateCollection:forumcategory:' + env
+            'updateCollection:bloq',
+            'updateCollection:faq',
+            'updateCollection:changelog',
+            'updateCollection:property',
+            'updateCollection:forumcategory'
         ]);
     });
 

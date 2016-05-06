@@ -11,14 +11,17 @@ module.exports = function(grunt) {
         return true;
     }
 
-    function requestToServer(env, method, endPoint, headers, data, callback) {
-        var configFile = grunt.file.readJSON('./app/res/config/' + env + '/config.json'),
+    function requestToServer(method, endPoint, headers, data, callback) {
+        var configFile = grunt.file.readJSON('./app/res/config/config.json'),
+            urlRegExp = /((http[s]?|ftp):\/)?\/?([^:\/\s]+):?(\d+)?((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?/g,
+            match = urlRegExp.exec(configFile.serverUrl),
             options = {
-                hostname: configFile.serverHost,
-                port: configFile.serverPort,
-                path: configFile.serverPath + endPoint,
+                hostname: match[3],
+                port: match[4],
+                path: match[5] + match[7] + endPoint,
                 method: method
             };
+        //console.log(options);
         data = JSON.stringify(data);
         options.headers = headers || {};
         options.headers['Content-Type'] = 'application/json';
@@ -52,8 +55,8 @@ module.exports = function(grunt) {
         postRequest.end();
     };
 
-    function adminRequestToServer(env, method, endPoint, data, callback) {
-        getToken(env, function(err, res) {
+    function adminRequestToServer(method, endPoint, data, callback) {
+        getToken(function(err, res) {
             if (err) {
                 callback(err);
             } else {
@@ -61,56 +64,56 @@ module.exports = function(grunt) {
                 var headers = {
                     'Authorization': 'Bearer ' + res.token
                 }
-                requestToServer(env, method, endPoint, headers, data, callback);
+                requestToServer(method, endPoint, headers, data, callback);
             }
         });
     };
 
-    function getToken(env, callback) {
-        var configFile = grunt.file.readJSON('./app/res/config/' + env + '/config.json'),
+    function getToken(callback) {
+        var configFile = grunt.file.readJSON('./app/res/config/config.json'),
             data = {
                 email: configFile.adminUser,
                 password: configFile.adminPassword
             };
-        requestToServer(env, 'POST', 'auth/local', null, data, callback);
+        requestToServer('POST', 'auth/local', null, data, callback);
     };
 
-    function deleteCollection(collectionName, env, callback) {
+    function deleteCollection(collectionName, callback) {
         if (collectionName === 'forumcategory') {
             collectionName = 'forum/category';
         }
-        adminRequestToServer(env, 'DELETE', collectionName + '/all', {}, callback);
+        adminRequestToServer('DELETE', collectionName + '/all', {}, callback);
     };
 
-    function insertCollection(collectionName, items, env, callback) {
+    function insertCollection(collectionName, items, callback) {
         if (collectionName === 'forumcategory') {
             collectionName = 'forum/category';
         }
-        adminRequestToServer(env, 'POST', collectionName + '/all', items, callback);
+        adminRequestToServer('POST', collectionName + '/all', items, callback);
     };
 
-    function refreshServerCollection(collectionName, items, env, callback) {
-        console.log('refresh collection on ' + env);
-        deleteCollection(collectionName, env, function(err) {
+    function refreshServerCollection(collectionName, items, callback) {
+        console.log('refresh collection');
+        deleteCollection(collectionName, function(err) {
             if (err) {
                 callback(err);
             } else {
                 console.log('deleted now start to insert');
-                insertCollection(collectionName, items, env, callback);
+                insertCollection(collectionName, items, callback);
             }
         });
     };
 
-    grunt.registerTask('updateCollection', function(collectionName, env) {
-        grunt.log.writeln('Updating= ' + collectionName + ' on ' + env);
+    grunt.registerTask('updateCollection', function(collectionName) {
+        grunt.log.writeln('Updating= ' + collectionName);
         var done = this.async(),
             items = grunt.file.readJSON('dataBaseFiles/' + collectionName + '/' + collectionName + '.json');
-        refreshServerCollection(collectionName, items, env, function(err, res) {
+        refreshServerCollection(collectionName, items, function(err, res) {
             if (err) {
-                console.log('err updating ', collectionName, 'on', env, ':', err);
+                console.log('err updating ', collectionName, ':', err);
                 done();
             } else {
-                console.log(collectionName, 'on', env, 'update OK');
+                console.log(collectionName, 'on', 'update OK');
                 done();
             }
         });
