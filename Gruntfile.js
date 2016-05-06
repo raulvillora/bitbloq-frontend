@@ -674,7 +674,7 @@ module.exports = function(grunt) {
 
         var environment = env || 'integration';
 
-        var configFile = grunt.option('config') || 'app/res/config/' + environment + '/config.json';
+        var configFile = grunt.option('config') || 'app/res/config/config.json';
         var configData = grunt.file.readJSON(configFile);
 
         grunt.config.set('aws_s3.deploy.options.bucket', configData.bucket);

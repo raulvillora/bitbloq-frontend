@@ -19,7 +19,8 @@ module.exports = function(grunt) {
         var querystring = require('querystring'),
             https = require('https');
 
-        params.api_token = 'my_api_token';
+        var configData = grunt.file.readJSON('app/res/config/config.json');
+        params.api_token = configData.poeditorApiToken;
 
         var postData = querystring.stringify(params);
 
