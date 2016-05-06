@@ -211,7 +211,7 @@ function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloq
         hw2Bloqs.removeRobot(robotReference);
         hw2Bloqs.addRobot(robotReference);
 
-        $scope.project.hardware.board = 'Arduino UNO';
+        $scope.project.hardware.board = robotReference.board;
 
         $scope.componentSelected = null;
         $scope.project.hardware.components = [];
