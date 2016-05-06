@@ -440,16 +440,6 @@ module.exports = function(grunt) {
                     packageData: '<%= yeoman %>'
                 },
                 dest: 'app/scripts/config.js'
-            },
-            // Environment targets
-            local: {
-                constants: {
-                    envData: {
-                        config: grunt.file.readJSON('app/res/config/local/config.json'),
-                        facebook: grunt.file.readJSON('app/res/config/local/facebook.json'),
-                        google: grunt.file.readJSON('app/res/config/local/google.json')
-                    }
-                }
             }
         },
 
@@ -559,7 +549,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('prepareServer', 'Prepare dev web server', [
         'clean:server',
-        'ngconstant:local',
+        'generateConstantsFileWithConfig',
         'wiredep:app'
     ]);
 
@@ -659,24 +649,11 @@ module.exports = function(grunt) {
         grunt.file.write(file, configJSON);
     });
 
-    grunt.registerTask('dist', function(env) {
-
-        var environment = env || 'local';
-
-        var configData = grunt.file.readJSON('app/res/config/' + environment + '/config.json');
-        var facebookData = grunt.file.readJSON('app/res/config/' + environment + '/facebook.json');
-        var googleData = grunt.file.readJSON('app/res/config/' + environment + '/google.json');
-
-        grunt.config.set('ngconstant.' + environment + '.constants.envData.config', configData);
-        grunt.config.set('ngconstant.' + environment + '.constants.envData.facebook', facebookData);
-        grunt.config.set('ngconstant.' + environment + '.constants.envData.google', googleData);
-
-        var ngConst = 'ngconstant:' + environment;
-        // grunt.task.run('ngconstant:' + environment);
+    grunt.registerTask('dist', function() {
         grunt.task.run([
             'clean:dist',
             'wiredep',
-            ngConst,
+            'generateConstantsFileWithConfig',
             'useminPrepare',
             'concurrent:dist',
             'postcss:dist',
@@ -710,15 +687,15 @@ module.exports = function(grunt) {
 
     /* Test tasks */
 
-    grunt.registerTask('test', [
-        'clean:server',
-        'wiredep:test',
-        'ngconstant:local',
-        'concurrent:test',
-        'postcss:dist',
-        'connect:test',
-        'karma'
-    ]);
+    // grunt.registerTask('test', [
+    //     'clean:server',
+    //     'wiredep:test',
+    //     'ngconstant:local',
+    //     'concurrent:test',
+    //     'postcss:dist',
+    //     'connect:test',
+    //     'karma'
+    // ]);
 
     /**
      * To export to bq translaters:
@@ -906,6 +883,22 @@ module.exports = function(grunt) {
             'updateCollection:changelog:' + env,
             'updateCollection:property:' + env,
             'updateCollection:forumcategory:' + env
+        ]);
+    });
+
+    grunt.registerTask('generateConstantsFileWithConfig', function() {
+        var configFile = grunt.file.readJSON('app/res/config/config.json'),
+            facebookFile = grunt.file.readJSON('app/res/config/facebook.json'),
+            googleFile = grunt.file.readJSON('app/res/config/google.json');
+
+        grunt.config('ngconstant.local.constants.envData', {
+            config: configFile,
+            facebook: facebookFile,
+            google: googleFile
+        });
+
+        grunt.task.run([
+            'ngconstant:local'
         ]);
     });
 };
