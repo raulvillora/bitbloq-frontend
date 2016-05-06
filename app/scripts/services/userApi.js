@@ -10,7 +10,12 @@
 angular.module('bitbloqApp')
     .service('userApi', function($http, $cookieStore, $localStorage, $q, User, envData, _, utils) {
         // AngularJS will instantiate a singleton by calling "new" on this function
-        var exports = {};
+        var exports = {},
+            userRoles = ['admin', 'user', 'guest'];
+
+        function hasUserRole(r, h) {
+            return userRoles.indexOf(r) >= userRoles.indexOf(h);
+        }
 
         exports.currentUser = {};
 
@@ -46,19 +51,15 @@ angular.module('bitbloqApp')
         };
 
         exports.hasRole = function hasRole(role, callback) {
-            var userRoles = ['admin', 'user', 'guest'];
-            var hasRole = function(r, h) {
-                return userRoles.indexOf(r) >= userRoles.indexOf(h);
-            };
 
             if (arguments.length < 2) {
-                return hasRole(exports.currentUser.role, role);
+                return hasUserRole(exports.currentUser.role, role);
             }
 
             return exports.getCurrentUser(null)
                 .then(function(user) {
                     var has = (user.hasOwnProperty('role')) ?
-                        hasRole(user.role, role) : false;
+                        hasUserRole(user.role, role) : false;
                     utils.safeCb(callback)(has);
                     return has;
                 });

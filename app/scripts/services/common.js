@@ -193,7 +193,7 @@ angular.module('bitbloqApp')
                     exports.userIsLoaded = true;
                     exports.setUser(null);
                 }
-            }, function(err) {
+            }, function() {
                 exports.userIsLoaded = true;
                 exports.setUser(null);
             });

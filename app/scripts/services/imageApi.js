@@ -18,19 +18,13 @@ angular.module('bitbloqApp')
 
             file.lau = collection;
             var formData = new FormData();
-            formData.append("file", file);
+            formData.append('file', file);
 
             return $http.post(envData.config.serverUrl + 'image/' + collection + '/' + idImage, formData, {
                     transformRequest: angular.identity,
                     headers: {
                         'Content-Type': undefined
                     }
-                })
-                .success(function() {
-                    console.log("success!!");
-                })
-                .error(function() {
-                    console.log("error!!");
                 });
         };
 
