@@ -69,6 +69,9 @@
             "name": "serialReceive",
             "addClass": "submenu__item submenu__item--component"
         }, {
+            "name": "serialReceiveInt",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
             "name": "serialSend-v1",
             "addClass": "submenu__item submenu__item--component"
         }],
@@ -184,6 +187,9 @@
             "name": "arrayVariable",
             "addClass": "submenu__item submenu__item--component"
         }, {
+            "name": "declareArray",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
             "name": "setArrayVariable",
             "addClass": "submenu__item submenu__item--component"
         }],
@@ -195,6 +201,9 @@
             "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "declareVariableAdvanced",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "declareArrayAdvanced",
             "addClass": "submenu__item submenu__item--component"
         }],
         "codes": [{
