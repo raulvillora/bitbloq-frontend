@@ -58,8 +58,6 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.selectedFaq = 0;
-
         $scope.faqHandler = function(id) {
             if (id === $scope.selectedFaq) {
                 $scope.selectedFaq = null;
@@ -79,7 +77,7 @@ angular.module('bitbloqApp')
         $scope.commonModals = commonModals;
         $scope.faqsApi = faqsApi;
         $scope.changeLogsApi = changeLogsApi;
-        $log.debug($scope.faqs);
+        $scope.selectedFaq = 0;
 
         $scope.diwoURL = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]];
 

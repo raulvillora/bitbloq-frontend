@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('faqsApi', function(envData, $q, $http, _, common) {
+    .service('faqsApi', function(envData, $q, $http, common) {
 
         var exports = {};
 
@@ -16,25 +16,15 @@ angular.module('bitbloqApp')
 
         exports.items = [];
 
-        var request = function(pageSize, page) {
+        var request = function() {
             exports.items = [];
             $http({
                 method: 'GET',
-                url: envData.config.resourcesEndpoint + 'resource/bitbloq:Faqs',
-                params: {
-                    'api:pageSize': pageSize,
-                    'api:page': page
-                }
+                url: envData.config.serverUrl + 'faq'
             }).success(function(response) {
-                exports.items = _.union(exports.items, response);
-
-                if (response.length < pageSize) {
-                    loadedPromise.resolve();
-                } else {
-                    request(pageSize, ++page);
-                }
-
+                exports.items = response;
                 common.isLoading = false;
+                loadedPromise.resolve();
             }).error(function(error) {
                 common.isLoading = false;
                 loadedPromise.reject(error);
@@ -45,7 +35,7 @@ angular.module('bitbloqApp')
             return loadedPromise.promise;
         };
 
-        // request(50, 0);
+         request();
 
         return exports;
     });
