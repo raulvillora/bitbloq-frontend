@@ -375,10 +375,10 @@
             "name": "forAdvanced-v1",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "switchAdvanced",
+            "name": "switchAdvanced-v2",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "case",
+            "name": "caseAdvanced-v1",
             "addClass": "submenu__item submenu__item--component indent-1"
         }, {
             "name": "caseDefault",
