@@ -9,10 +9,10 @@
         <button ng-class="{'actions__menu__button':true, 'actions__menu--selected':dropdown === 'file'}" ng-click="dropdownHandler('file')" data-element="menu-file">{{'file' | translate}}</button>
         <ul ng-class="{actions__menu__dropdown:true, hidden:dropdown !== 'file', 'actions__menu--selected':dropdown === 'file'}">
             <li ng-if="common.section === 'bloqsproject'" class="dropdown__item">
-                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                    <use xlink:href="#nuevoProyecto"></use>
-                </svg>
-                <a href="#/bloqsproject/" target="_blank" data-element="menu-newproject">{{'create-new-project' | translate}}</a>
+                <a href="#/bloqsproject/" target="_blank" data-element="menu-newproject">
+                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                        <use xlink:href="#nuevoProyecto"></use>
+                    </svg>{{'create-new-project' | translate}}</a>
             </li>
             <li data-tooltips="{{!common.user}}" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltip-position="right">
                 <div class="dropdown__item" data-ng-disabled="!common.user" data-ng-click="openProject()" data-element="menu-openproject">
@@ -261,4 +261,4 @@
         </button>
     </li>
 </ul>
-<input id="uploadProject" class="hide" type="file" name="uploadProject" onchange="angular.element(this).scope().uploadProjectSelected(this.files)" data-element="makeactions-input-upload-file"/>
+<input id="uploadProject" class="hide" type="file" name="uploadProject" onchange="angular.element(this).scope().uploadProjectSelected(this.files)" data-element="makeactions-input-upload-file" />
