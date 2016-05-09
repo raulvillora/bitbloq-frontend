@@ -32,13 +32,12 @@ angular.module('bitbloqApp')
                 confirmButton: 'send',
                 modalButtons: true,
                 confirmAction: confirmAction,
-                contentTemplate: '/views/modals/send-comments.html',
+                contentTemplate: '/views/modals/sendComments.html',
 
                 condition: function() {
                     return this.comments.name.length > 0 && this.comments.message.length > 0;
                 },
                 comments: {
-                    name: '',
                     message: '',
                     userAgent: $window.navigator.userAgent,
                     userInfo: common.user
@@ -75,13 +74,12 @@ angular.module('bitbloqApp')
                 confirmButton: 'send',
                 modalButtons: true,
                 confirmAction: confirmAction,
-                contentTemplate: '/views/modals/send-comments.html',
+                contentTemplate: '/views/modals/sendComments.html',
 
                 condition: function() {
                     return this.comments.name.length > 0 && this.comments.message.length > 0;
                 },
                 comments: {
-                    name: '',
                     message: '',
                     userAgent: $window.navigator.userAgent,
                     userInfo: common.user
