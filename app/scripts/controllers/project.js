@@ -25,7 +25,9 @@ angular.module('bitbloqApp')
         };
 
         if ($routeParams.id) {
-            projectApi.get($routeParams.id, {profile: true}).then(function(response) {
+            projectApi.get($routeParams.id, {
+                profile: true
+            }).then(function(response) {
                 $scope.project = response.data;
                 if ($scope.project.videoUrl) {
                     $scope.videoID = utils.isYoutubeURL($scope.project.videoUrl);
