@@ -345,6 +345,9 @@ angular.module('bitbloqApp')
         }, {
             option: 'Zowi',
             value: false
+        }, {
+            option: 'Evolution',
+            value: false
         }];
         $scope.componentsFilters = [];
         $scope.componentsFilterOptions = [{
