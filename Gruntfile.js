@@ -776,9 +776,9 @@ module.exports = function(grunt) {
                 'getbloqs'
             ]);
 
-            var productionConfigFile = grunt.file.readJSON('app/res/config/production/config.json');
+            var productionConfigFile = grunt.file.readJSON('app/res/config/config.json');
             productionConfigFile.version = version;
-            grunt.file.write('app/res/config/production/config.json', JSON.stringify(productionConfigFile, null, 4));
+            grunt.file.write('app/res/config/config.json', JSON.stringify(productionConfigFile, null, 4));
             console.log('Production version file changed');
 
             var bowerFile = grunt.file.readJSON('bower.json');
