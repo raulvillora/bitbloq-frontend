@@ -1,0 +1,111 @@
+<div ng-class="{'landing--ru':translate.use() === 'ru-RU'}" ng-click="closeMenu()" class="view view--landing view--landing--downloads">
+    <div ng-controller="LandingCtrl" ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible,'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
+    <div class="landing--masthead">
+        <h1>Bitbloq Offline</h1>
+        <p class="landing--text--big--dark">{{ 'landing_offline_title' | translate }}</p>
+        <div class="masthead__buttons mediumoff">
+            <a ng-if="operatingSystem === 'Windows'" class="btn btn--masthead" href="https://github.com/bq/bitbloq-offline/releases/download/latest/windows.zip">
+                <i class="fa fa-chevron-circle-down"></i>
+                <span>Descargar Bitbloq offline para Windows</span>
+            </a>
+            <a ng-if="operatingSystem === 'Linux'" class="btn btn--masthead" href="https://github.com/bq/bitbloq-offline/releases/download/latest/linux.zip">
+                <i class="fa fa-chevron-circle-down"></i>
+                <span>Descargar Bitbloq offline para Linux</span>
+            </a>
+            <a ng-if="operatingSystem === 'Mac'" class="btn btn--masthead" href="https://github.com/bq/bitbloq-offline/releases/download/latest/mac.zip">
+                <i class="fa fa-chevron-circle-down"></i>
+                <span>Descargar Bitbloq offline para Mac os X</span>
+            </a>
+        </div>
+        <div class="masthead__images">
+            <img class="medium arrow" src="../images/landing/download.png" alt="">
+            <img class="medium computer" src="../images/landing/mastheadoffline.png" alt="">
+        </div>
+    </div>
+    <div class="row row--inline landing--section medium max-width">
+        <div class="offline__table medium">
+            <header class="offline_table__header row">
+                <div class="col-medium-4 col-medium-push-4">
+                    <span>Bitbloq Offline</span>
+                </div>
+                <div class="col-medium-4 col-medium-push-4">
+                    <span>Online</span>
+                </div>
+            </header>
+            <div class="row offline__table__row" ng-repeat="element in offlineList track by $index">
+                <div class="col-medium-4 first__column">
+                    <span>{{element.text | translate}}</span>
+                </div>
+                <div class="col-medium-4">
+                    <i ng-show="element.offlineStatus" class="fa fa-check"></i>
+                </div>
+                <div class="col-medium-4">
+                    <i ng-show="element.onlineStatus === true" class="fa fa-check"></i>
+                    <span ng-show="isString(element.onlineStatus)">{{ element.onlineStatus | translate }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="masthead__buttons mediumoff">
+            <a ng-if="operatingSystem === 'Windows'" class="btn btn--masthead" href="https://github.com/bq/bitbloq-offline/releases/download/latest/windows.zip">
+                <i class="fa fa-chevron-circle-down"></i>
+                <span>Descargar Bitbloq offline para Windows</span>
+            </a>
+            <a ng-if="operatingSystem === 'Linux'" class="btn btn--masthead" href="https://github.com/bq/bitbloq-offline/releases/download/latest/linux.zip">
+                <i class="fa fa-chevron-circle-down"></i>
+                <span>Descargar Bitbloq offline para Linux</span>
+            </a>
+            <a ng-if="operatingSystem === 'Mac'" class="btn btn--masthead" href="https://github.com/bq/bitbloq-offline/releases/download/latest/mac.zip">
+                <i class="fa fa-chevron-circle-down"></i>
+                <span>Descargar Bitbloq offline para Mac os X</span>
+            </a>
+        </div>
+    </div>
+    <div class="row offline__participate medium">
+        <div class="col-medium-4 participate__image">
+            <img src="../images/landing/colabora.png" alt="">
+        </div>
+        <div class="col-medium-8 participate__text">
+            <div class="landing__offline__participate">
+                <h2>Colabora con el proyecto</h2>
+                <span>Bitbloq es un proyecto open source, puedes colaborar en él a traves de la web:</span>
+                <a href="https://github.com/bq/bitbloq-offline">https://github.com/bq/bitbloq-offline</a>
+            </div>
+        </div>
+    </div>
+    <div class="landing--downloads max-width">
+        <h2 class="medium">{{ 'offline_available_for_os' | translate }}</h2>
+        <ul class="row row--inline landing--section">
+            <li class="col-medium-4">
+                <i class="fa fa-windows"></i>
+                <h3>Windows</h3>
+                <div class="download--link">
+                    <a class="landing--link--small" href="https://github.com/bq/bitbloq-offline/releases/download/latest/windows.zip">{{ 'download' | translate }} Bitbloq Offline</a>
+                </div>
+            </li>
+            <li class="col-medium-4">
+                <i class="fa fa-linux"></i>
+                <h3>Linux</h3>
+                <div class="download--link">
+                    <a class="landing--link--small" href="https://github.com/bq/bitbloq-offline/releases/download/latest/linux.zip">{{ 'download' | translate }} Bitbloq Offline</a>
+                    <a class="landing--link--small" href="https://github.com/bq/bitbloq-offline/releases/download/latest/linux32.zip">{{ 'download' | translate }} Bitbloq Offline 32</a>
+                </div>
+            </li>
+            <li class="col-medium-4">
+                <i class="fa fa-apple"></i>
+                <h3>Mac OS 10.10</h3>
+                <div class="download--link">
+                    <a class="landing--link--small" href="https://github.com/bq/bitbloq-offline/releases/download/latest/mac.zip">{{ 'download' | translate }} Bitbloq Offline</a>
+                </div>
+            </li>
+        </ul>
+        <div class="landing--requirements">
+            <span class="h3">
+                {{ 'landing_requirements' | translate }}
+            </span>
+            <span class="text--secondary">
+                Linux (Ubuntu 12.04+, Fedora 21, Debian 8), Mac OS X 10.9+, Windows 7+ (32 & 64 bit).
+            </span>
+        </div>
+    </div>
+    <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
+</div>

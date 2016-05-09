@@ -72,10 +72,10 @@ angular
                     controller: 'LoginCtrl',
                     islogin: false
                 })
-                // .when('/bloqsdesign', {
-                //     templateUrl: 'views/bloqsdesign.html',
-                //     controller: 'BloqsdesignCtrl'
-                // })
+                .when('/offline', {
+                    templateUrl: 'views/landing/landing-offline.html',
+                    controller: 'LandingCtrl'
+                })
                 .when('/projects', {
                     templateUrl: 'views/projects.html',
                     controller: 'ProjectsCtrl'

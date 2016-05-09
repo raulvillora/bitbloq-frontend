@@ -24,7 +24,8 @@ angular.module('bitbloqApp')
                 'unsupported',
                 'register',
                 'serialMonitor',
-                'chartMonitor'
+                'chartMonitor',
+                'offline'
             ];
 
             return (!common.user && (common.section === 'bloqsproject' || common.section === 'codeproject')) || !_.contains(notInSections, common.section);

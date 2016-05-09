@@ -2,19 +2,16 @@
     .small {
         display: none;
     }
-
     .landing--masthead {
         @include landingMasthead('../images/landing/home_background.jpg');
         // height: 650px;
         text-align: center;
-
         h1 {
             @include textGenerator(40px, 400, white, auto, 584px, false);
             padding-top: 90px;
             margin: 0 auto;
             padding-bottom: 20px;
         }
-
         p {
             max-width: 570px;
             padding-top: 20px;
@@ -22,7 +19,6 @@
             margin: 0 auto;
             padding-bottom: 50px;
         }
-
         .masthead__buttons.medium {
             padding-bottom: 50px;
             cursor: default;
@@ -39,35 +35,28 @@
                 font-weight: 700;
                 transition: background-color 250ms;
                 line-height: 41px;
-
                 a {
                     color: white;
                     text-decoration: none;
                     padding-bottom: 20px;
-
                     &:hover {
                         text-decoration: none;
                     }
                 }
-
                 &:link {
                     text-decoration: none;
                 }
-
                 &:visited {
                     text-decoration: none;
                 }
-
                 &:hover {
                     background-color: #6a8d2f;
                     text-decoration: none;
                 }
-
                 &:active {
                     background-color: #587527;
                     text-decoration: none;
                 }
-
                 i {
                     vertical-align: baseline;
                     padding-right: 10px;
@@ -76,7 +65,6 @@
             }
         }
     }
-
     .downloads--step {
         text-align: center;
         padding-top: 50px;
@@ -84,19 +72,16 @@
         padding-left: 30px;
         padding-right: 30px;
         display: block;
-
         h2 {
             @include textGenerator(20px, 700, #373b44, auto, 100%, false);
             padding-top: 30px;
             padding-bottom: 30px;
             display: block;
         }
-
         span {
             @include textGenerator(14px, 300, #5d6069, auto, 100%, false);
             cursor: default;
         }
-
         .image--container {
             background-image: url("../images/landing/step_bg.png");
             background-repeat: no-repeat;
@@ -105,7 +90,6 @@
             position: relative;
             background-size: cover;
             background-position: center center fixed;
-
             img {
                 position: absolute;
                 top: 0;
@@ -117,26 +101,21 @@
             }
         }
     }
-
     .landing--downloads {
         text-align: center;
         margin-bottom: 30px;
         cursor: default;
-
         .landing--requirements {
-          padding-top: 70px;
-          padding-bottom: 40px;
-          max-width: 1000px;
-          margin-left: 85px;
-          font-size: 13px;
-
-          .h3  {
+            padding-top: 70px;
+            padding-bottom: 40px;
+            max-width: 1000px;
+            margin-left: 85px;
             font-size: 13px;
-            font-weight: bold;
-          }
-
+            .h3 {
+                font-size: 13px;
+                font-weight: bold;
+            }
         }
-
         h2 {
             color: #373b44;
             font-size: 30px;
@@ -144,20 +123,17 @@
             padding-top: 70px;
             padding-bottom: 70px;
         }
-
         li {
             margin-bottom: 20px;
             &:not(:first-child):not(:last-child) {
                 border-right: 1px solid #f1f1f1;
                 border-left: 1px solid #f1f1f1;
             }
-
             i {
                 font-size: 35px;
                 font-weight: 400;
                 color: #8c919b;
             }
-
             h3 {
                 color: #373b44;
                 font-size: 20px;
@@ -165,25 +141,27 @@
                 padding-top: 10px;
                 padding-bottom: 10px;
             }
-
             .download--link {
-
                 display: flex;
                 flex-flow: wrap;
                 justify-content: center;
-
                 span {
-                    @include textGenerator(12px, 400, #c0c3c9, 24px, 100%, false);
+                    @include textGenerator(12px,
+                    400,
+                    #c0c3c9,
+                    24px,
+                    100%,
+                    false);
                     float: left;
                 }
-
                 a {
                     float: left;
                     color: #82ad3a;
                     font-weight: 400;
                     text-align: center;
+                    display: block;
+                    width: 100%;
                 }
-
                 &:after {
                     content: " ";
                     display: block;
@@ -194,32 +172,34 @@
     }
 }
 
+@media only screen and (max-width: 468px) {
+    .view--landing--downloads {
+        .vsmall-hide {
+            display: none;
+        }
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .view--landing--downloads {
         .small {
             display: block;
         }
-
         .medium {
             display: none !important;
         }
-
         .landing--masthead {
             height: auto;
             padding-left: 50px;
             padding-right: 50px;
-
             h1 {
                 width: auto;
             }
-
             p {
                 width: auto;
             }
         }
-
         .landing--downloads {
-
             li {
                 padding-top: 50px;
             }

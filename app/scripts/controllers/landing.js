@@ -71,6 +71,52 @@ angular.module('bitbloqApp')
             $scope.menuVisible = !$scope.menuVisible;
         };
 
+        $scope.isString = function(value) {
+            return angular.isString(value);
+        };
+
+        $scope.offlineList = [{
+            text: 'landing_offline_list_withoutconnection',
+            offlineStatus: true,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_noinstall',
+            offlineStatus: true,
+            onlineStatus: 'landing_offline_list_needweb2board'
+        }, {
+            text: 'landing_offline_list_lastupdates',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_updatedlibraries',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_projectsync',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_explore',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_share',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_sharesocial',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_editcode',
+            offlineStatus: false,
+            onlineStatus: true
+        }, {
+            text: 'landing_offline_list_projectinfo',
+            offlineStatus: false,
+            onlineStatus: true
+        }];
+
         //$scope.testimonials = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non urna non libero porttitor mollis. Vivamus ac lacus eu libero mollis pulvinar quis in lorem.Nam sollicitudin ligula facilisis, sagittis metus. Elit nunc non', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, accusamus cumque iure exercitationem, dicta velit. Nostrum quod recusandae, fugit maiores?', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, maxime.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, illo. Laudantium nemo, porro magnam corporis ad!'];
         $scope.currentTestimonial = 0;
         $scope.windowScroll = false;

@@ -1,0 +1,123 @@
+.masthead__images {
+    margin-top: 60px;
+    position: relative;
+    .arrow {
+        position: absolute;
+        top: -60px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .computer {
+        margin-left: -70px;
+        margin-bottom: -6px;
+    }
+}
+
+.offline__table {
+    margin-bottom: 50px;
+}
+
+.participate__image {
+    text-align: right;
+    height: 100%;
+    margin-top: 15px;
+}
+
+.participate__text {
+    text-align: left;
+}
+
+.offline__participate {
+    padding: 30px;
+    background-image: url("../images/landing/participate.png")
+}
+
+.landing__offline__participate {
+    h2 {
+        color: #373b44;
+        font-size: 30px;
+        font-weight: 500;
+    }
+    span {
+        display: block;
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+}
+
+.offline_table__header {
+    span {
+        color: #373b44;
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: 500;
+    }
+    border-bottom: 5px solid #f1f1f1;
+    padding-top: 58px;
+    padding-bottom: 10px;
+}
+
+.offline__table__row {
+    padding: 15px;
+    border-bottom: 1px solid #f1f1f1;
+    span {
+        color: #8c919b;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    i {
+        color: #82ad3a;
+        font-size: 20px;
+    }
+}
+
+.first__column {
+    text-align: left;
+}
+
+.mediumoff {
+    padding-bottom: 50px;
+    cursor: default;
+    .btn--masthead {
+        height: 41px;
+        background-color: #82ad3a;
+        border-radius: 4px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+        transition: background-color 250ms;
+        line-height: 41px;
+        a {
+            color: white;
+            text-decoration: none;
+            padding-bottom: 20px;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        &:link {
+            text-decoration: none;
+        }
+        &:visited {
+            text-decoration: none;
+        }
+        &:hover {
+            background-color: #6a8d2f;
+            text-decoration: none;
+        }
+        &:active {
+            background-color: #587527;
+            text-decoration: none;
+        }
+        i {
+            vertical-align: baseline;
+            padding-right: 10px;
+            font-size: 15px;
+        }
+    }
+}
