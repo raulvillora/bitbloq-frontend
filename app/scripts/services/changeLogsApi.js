@@ -16,27 +16,15 @@ angular.module('bitbloqApp')
 
         exports.items = [];
 
-        var request = function(pageSize, page) {
+        var request = function() {
             exports.items = [];
             $http({
                 method: 'GET',
-                url: envData.config.serverUrl + 'changeLogs',
-                params: {
-                    'api:pageSize': pageSize,
-                    'api:page': page,
-                    'api:sort': {
-                        'version.es-ES': 'asc'
-                    }
-                }
+                url: envData.config.serverUrl + 'changelog'
             }).then(function(response) {
-                exports.items = _.union(exports.items, response.data);
-                if (response.data.length < pageSize) {
-                    loadedPromise.resolve();
-                } else if (response.data.length > 0) {
-                    request(pageSize, ++page);
-                }
-
+                exports.items = response.data;
                 common.isLoading = false;
+                loadedPromise.resolve();
             }, function(error) {
                 common.isLoading = false;
                 loadedPromise.reject(error);
@@ -47,7 +35,7 @@ angular.module('bitbloqApp')
             return loadedPromise.promise;
         };
 
-        request(50, 0);
+        request();
 
         return exports;
     });
