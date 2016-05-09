@@ -182,6 +182,8 @@ angular.module('bitbloqApp')
             var plainComponentListTemporal = [];
             var plainComponentList = [];
 
+            $scope.startAutosave();
+
             $scope.project.hardware.components.forEach(function(comp) {
                 if (!!comp.connected) {
                     if (comp.oscillator === true || comp.oscillator === 'true') {
