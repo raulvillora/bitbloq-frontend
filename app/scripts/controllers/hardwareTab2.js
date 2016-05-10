@@ -9,7 +9,7 @@
 angular.module('bitbloqApp')
     .controller('hardwareTab2Ctrl', hardwareTab2Ctrl);
 
-function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout) {
+function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils) {
 
     var container = utils.getDOMElement('.protocanvas');
     var $componentContextMenu = $('#component-context-menu');
@@ -527,6 +527,7 @@ function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloq
                 $scope.hardware.firstLoad = false;
                 //Fix components dimensions
                 _.forEach($scope.project.hardware.components, function(item) {
+                    item = bloqsUtils.checkPins(item);
                     _fixComponentsDimension(item);
                 });
             } else {
