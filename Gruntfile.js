@@ -437,7 +437,8 @@ module.exports = function(grunt) {
                 wrap: '/* jshint ignore:start */\'use strict\';\n\n {%= __ngModule %}/* jshint ignore:end */',
                 name: 'config',
                 constants: {
-                    packageData: '<%= yeoman %>'
+                    packageData: '<%= yeoman %>',
+                    bowerData: grunt.file.readJSON('bower.json')
                 },
                 dest: 'app/scripts/config.js'
             }

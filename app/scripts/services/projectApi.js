@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectApi', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource) {
+    .service('projectApi', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var exports = {};
@@ -147,12 +147,15 @@ angular.module('bitbloqApp')
             delete cleanProject._createdAt;
             delete cleanProject._updatedAt;
             delete cleanProject.links;
-
+            delete cleanProject.exportedFromBitbloqOffline;
+            delete cleanProject.bitbloqOfflineVersion;
             return cleanProject;
         };
 
         exports.download = function(projectRef) {
             var project = exports.getCleanProject(projectRef);
+            project.bloqsVersion = bowerData.dependencies.bloqs;
+
             var filename = utils.removeDiacritics(projectRef.name, undefined, $translate.instant('new-project'));
 
             utils.downloadFile(filename.substring(0, 30) + '.json', JSON.stringify(project), 'application/json');
