@@ -24,34 +24,16 @@ angular.module('bitbloqApp')
         }
 
         function getLandingExampleProjects() {
-            var params = {
-                'api:query': [{
-                    '_acl.ALL.permission': 'READ'
-                }, {
-                    '_acl.user:561fc9c4e4b0ef5f4cedf162.permission': 'ADMIN'
-                }],
-                'api:aggregation': {
-                    '$count': '*'
+
+            projectApi.getPublic({
+                perPage: 3,
+                page: 0,
+                sort: {
+                    _createdAt: 'desc'
                 }
-            };
-
-            projectApi.getPublic(params).then(function(response) {
-                $log.debug('diy account have ' + response.data.count + ' projects');
-                delete params['api:aggregation'];
-                params['api:pageSize'] = 3;
-                var maxNumber = Math.floor(response.data.count / params['api:pageSize']);
-                params['api:page'] = Math.floor(Math.random() * maxNumber);
-
-                projectApi.getPublic(params).then(function(response) {
-                    $log.debug('final response');
-                    $scope.projects = response.data;
-                    $scope.projectStats = {};
-                    $log.debug(response);
-                }, function(error) {
-                    $log.debug('Dont work :( remove field');
-                    $log.debug(error);
-                });
-
+            }).then(function(response) {
+                $log.debug('diy account have ' + response.data.length + ' projects', response.data);
+                $scope.projects = response.data;
             }, function(error) {
                 $log.debug('Dont work :( remove field');
                 $log.debug(error);

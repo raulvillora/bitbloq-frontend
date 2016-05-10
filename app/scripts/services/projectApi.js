@@ -25,7 +25,7 @@ angular.module('bitbloqApp')
         exports.getPublic = function(queryParams, queryParams2) {
 
             //Todo queryParams2 -> search by username
-            console.log(queryParams2);
+            $log.debug(queryParams2);
 
             return $http({
                 method: 'GET',
