@@ -121,14 +121,7 @@
                 exports.repaint();
             }, false);
 
-            document.addEventListener('mouseup', function() {
-                if (componentDragging) {
-                    //Transforms absolute coordinates to relative coordinates
-                    componentDragging.style.left = ((componentDragging.offsetLeft * 100) / containerDefault.offsetWidth) + '%';
-                    componentDragging.style.top = ((componentDragging.offsetTop * 100) / containerDefault.offsetHeight) + '%';
-                    componentDragging = null;
-                }
-            });
+            document.addEventListener('mouseup', _onMouseUpHandler);
 
         };
 
@@ -268,26 +261,7 @@
 
             $('.component_ep').removeClass('selected');
 
-            DOMComponent.addEventListener('mousedown', function() {
-                var comp = this;
-                componentDragging = comp;
-
-                exports.unselectAllConnections();
-
-                var connectionsArray = jsPlumbInstance.getConnections().filter(function(el) {
-                    return el.sourceId === comp.id;
-                });
-
-                $('.component_ep').removeClass('selected');
-                jsPlumbInstance.selectEndpoints({
-                    source: this
-                }).addClass('selected');
-
-                connectionsArray.forEach(function(c) {
-                    _selectConnection(c);
-                });
-
-            });
+            DOMComponent.addEventListener('mousedown', _onMouseDownHandler);
 
             _loadComponent(DOMComponent);
             exports.repaint();
@@ -462,9 +436,40 @@
             jsPlumbInstance.detachAllConnections(boardDOMElement);
         };
 
+        function _onMouseDownHandler() {
+
+            var comp = this;
+            componentDragging = comp;
+
+            exports.unselectAllConnections();
+
+            var connectionsArray = jsPlumbInstance.getConnections().filter(function(el) {
+                return el.sourceId === comp.id;
+            });
+
+            $('.component_ep').removeClass('selected');
+            jsPlumbInstance.selectEndpoints({
+                source: this
+            }).addClass('selected');
+
+            connectionsArray.forEach(function(c) {
+                _selectConnection(c);
+            });
+        }
+
+        function _onMouseUpHandler() {
+            if (componentDragging) {
+                //Transforms absolute coordinates to relative coordinates
+                componentDragging.style.left = ((componentDragging.offsetLeft * 100) / containerDefault.offsetWidth) + '%';
+                componentDragging.style.top = ((componentDragging.offsetTop * 100) / containerDefault.offsetHeight) + '%';
+                componentDragging = null;
+            }
+        }
+
         exports.removeComponent = function(component) {
-            component.removeEventListener('mousedown');
-            component.removeEventListener('mouseup');
+            component.removeEventListener('mousedown', _onMouseDownHandler);
+            component.removeEventListener('mouseup', _onMouseUpHandler);
+
             jsPlumbInstance.getConnections(component).forEach(function(conn) {
                 conn.setType('removing');
             });
@@ -476,8 +481,9 @@
             jsPlumbInstance.deleteEveryEndpoint();
             var nodeList = containerDefault.querySelectorAll('.component');
             [].forEach.call(nodeList, function(el) {
-                el.removeEventListener('mousedown');
-                el.removeEventListener('mouseup');
+                el.removeEventListener('mousedown', _onMouseDownHandler);
+                el.removeEventListener('mouseup', _onMouseUpHandler);
+
                 jsPlumb.remove(el);
             });
         };
