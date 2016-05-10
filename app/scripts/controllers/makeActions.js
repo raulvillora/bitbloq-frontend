@@ -46,6 +46,10 @@ angular.module('bitbloqApp')
                     if (!$scope.common.user) {
                         $scope.common.session.save = true;
                         $scope.common.session.project = fileParsed;
+                        //to avoid reload
+                        $route.current.pathParams.id = undefined;
+                        $location.url('/bloqsproject/');
+
                     }
 
                 } else {
