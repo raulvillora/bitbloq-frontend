@@ -350,6 +350,9 @@ angular.module('bitbloqApp')
                         if (!response.data.codeProject) {
                             editInfo = alertsService.add('code-project_alert_edit-code', 'edit-project', 'warning', 7000, undefined, undefined, undefined, 'undo', _goToBloqs);
                         }
+                        if (!$scope.project.codeProject) {
+                            $scope.project.hardwareTags = [];
+                        }
                         $scope.project.codeProject = true;
 
                         $scope.setBoard($scope.project.hardware.board);
