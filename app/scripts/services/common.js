@@ -100,9 +100,9 @@ angular.module('bitbloqApp')
                 loadedUserPromise = $q.defer();
             }
             if (user !== null && typeof user === 'object') {
-                var lng = user.properties.language || navigatorLang || 'es-ES';
+                var lng = user.language || navigatorLang || 'es-ES';
                 $translate.use(lng);
-                if (user.properties.cookiePolicyAccepted) {
+                if (user.cookiePolicyAccepted) {
                     $sessionStorage.cookiesAccepted = true;
                     exports.cookiesAccepted = true;
                 }
@@ -125,9 +125,7 @@ angular.module('bitbloqApp')
         exports.acceptCookies = function() {
             if (exports.user) {
                 userApi.update({
-                    properties: {
-                        cookiePolicyAccepted: true
-                    }
+                    cookiePolicyAccepted: true
                 });
             }
             $sessionStorage.cookiesAccepted = true;

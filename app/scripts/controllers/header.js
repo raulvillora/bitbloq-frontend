@@ -42,7 +42,7 @@ angular.module('bitbloqApp')
             $document.off('click', clickDocumentHandler);
         });
 
-        // $scope.$watch('common.user.properties.language', function(newValue, oldValue) {
+        // $scope.$watch('common.user.language', function(newValue, oldValue) {
         //     if (newValue && newValue !== oldValue) {
         //         $scope.diwoURLCourse = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]] + '/course/aprende-robotica-y-programacion-con-bitbloq-2/';
         //     }

@@ -98,10 +98,10 @@ angular.module('bitbloqApp')
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
                 $scope.errors.emptyBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
                 if (!$scope.errors.emptyBirthday) {
-                    $scope.user.properties.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
+                    $scope.user.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
                     var older = new Date();
                     older.setYear(older.getFullYear() - 14);
-                    $scope.errors.birthday = $scope.user.properties.birthday >= older;
+                    $scope.errors.birthday = $scope.user.birthday >= older;
                 } else {
                     fireShakeEffect();
                 }
@@ -112,13 +112,13 @@ angular.module('bitbloqApp')
             }
 
             function _validateRegister() {
-                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required && $scope.username.free && $scope.user.properties.term && !$scope.errors.birthday && !$scope.errors.emptyBirthday;
+                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required && $scope.username.free && $scope.user.term && !$scope.errors.birthday && !$scope.errors.emptyBirthday;
             }
 
             if (_validateRegister()) {
                 $scope.user.username = $scope.user.username.toLowerCase();
-                $scope.user.properties.hasBeenAskedIfTeacher = true;
-                $scope.user.properties.language = $translate.use();
+                $scope.user.hasBeenAskedIfTeacher = true;
+                $scope.user.language = $translate.use();
                 userApi.registerUser($scope.user, function(err) {
                     if (err) {
                         throw err;
@@ -146,14 +146,14 @@ angular.module('bitbloqApp')
                 if ($scope.username.search && $scope.username.free && !$scope.username.invalid && !form.readServiceTerm.$error.required && !form.usernameSocial.$error.required) {
                     var user = $scope.common.user || {};
                     user.username = form.usernameSocial.$modelValue;
-                    user.properties.hasBeenAskedIfTeacher = true;
+                    user.hasBeenAskedIfTeacher = true;
                     userApi.update(user).then(function() {
                         userApi.currentUser = User.get();
                         userApi.currentUser.$promise.then(function(user) {
                             delete user.$promise;
                             delete user.$resolved;
                             $scope.common.setUser(user);
-                            if ($scope.common.user.properties.hasBeenAskedIfTeacher || $scope.common.user.properties.newsletter) {
+                            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.properties.newsletter) {
                                 $location.path('/projects');
                             } else {
                                 teacherModal();
@@ -310,11 +310,11 @@ angular.module('bitbloqApp')
 
         function teacherModal() {
             var confirmAction = function() {
-                    $scope.common.user.properties.hasBeenAskedIfTeacher = true;
+                    $scope.common.user.hasBeenAskedIfTeacher = true;
                     if ($scope.radioTeacher.model === 'teacher') {
-                        $scope.common.user.properties.isTeacher = true;
+                        $scope.common.user.isTeacher = true;
                     } else {
-                        $scope.common.user.properties.isTeacher = false;
+                        $scope.common.user.isTeacher = false;
                     }
                     userApi.update($scope.common.user).then(function() {
                         $scope.common.setUser($scope.common.user);
@@ -355,7 +355,7 @@ angular.module('bitbloqApp')
             };
             userApi.loginUser(options).then(function(user) {
                 $scope.common.setUser(user);
-                if (user.properties.hasBeenAskedIfTeacher || user.properties.newsletter || register) {
+                if (user.hasBeenAskedIfTeacher || user.properties.newsletter || register) {
                     $location.path('/projects');
                 } else {
                     teacherModal();
@@ -440,12 +440,10 @@ angular.module('bitbloqApp')
             firstName: '',
             lastName: '',
             password: '',
-            properties: {
-                birthday: null,
-                term: false,
-                newsletter: false,
-                language: 'es-ES'
-            }
+            birthday: null,
+            term: false,
+            newsletter: false,
+            language: 'es-ES'
         };
         $scope.username = {
             invalid: false,
@@ -478,7 +476,7 @@ angular.module('bitbloqApp')
         }
 
         // $scope.common.itsUserLoaded().then(function() {
-        //     if ($scope.common.user.properties.hasBeenAskedIfTeacher || $scope.common.user.properties.newsletter) {
+        //     if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.properties.newsletter) {
         //         _goToHome();
         //     } else {
         //         teacherModal();

@@ -82,7 +82,7 @@
                 </div>
                 <fieldset class="teacher-checkbox">
                     <span class="input input--checkbox">
-                        <input data-element="teacher-checkbox" id="teacherCheckbox" name="teacherCheckbox" ng-checked="common.user.properties.newsletter === true" ng-model="common.user.properties.newsletter" type="checkbox" value="common.user.properties.isTeacher">
+                        <input data-element="teacher-checkbox" id="teacherCheckbox" name="teacherCheckbox" ng-checked="common.user.newsletter === true" ng-model="common.user.properties.newsletter" type="checkbox" value="common.user.properties.isTeacher">
                         <label for="teacherCheckbox">{{'account-checkbox-teacher' | translate}}</label>
                     </span>
                 </fieldset>
@@ -105,7 +105,7 @@
                         <div class="form-control">
                             <div>
                                 <div class="main--user--image" id="main-image" ng-click="uploadImageTrigger('main')">
-                                    <img data-corbel-collection="Avatar" data-corbel-default-image="../images/common/avatar.png" data-corbel-force-reset="avatarUpdate" data-corbel-image-type="common.user.properties.imageType" data-corbel-src="common.user.username" data-element="account-image" id="avatarUser">
+                                    <img data-corbel-collection="Avatar" data-corbel-default-image="../images/common/avatar.png" data-corbel-force-reset="avatarUpdate" data-corbel-image-type="common.user.imageType" data-corbel-src="common.user.username" data-element="account-image" id="avatarUser">
                                 </div>
 
                                 <input class="btn btn--primary btn--small hidden main-image--input" data-element="account-fileinput" data-ng-blur="focus = false" data-ng-focus="focus='projectimage'" id="" name="projectimage" onchange="angular.element(this).scope().uploadImage(this.files)" placeholder="" type="file"/>
@@ -127,7 +127,7 @@
                             <span>{{ 'language' | translate }}</span>
                         </legend>
                         <div class="form-control">
-                            <common-dropdown class="dropdown--small" data-heading-option="common.user.properties.language | translate" data-options-click="changeLanguage" data-options="test"/>
+                            <common-dropdown class="dropdown--small" data-heading-option="common.user.language | translate" data-options-click="changeLanguage" data-options="test"/>
                         </div>
                     </fieldset>
                 </div>

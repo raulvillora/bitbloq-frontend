@@ -688,11 +688,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -979,9 +979,7 @@ angular.module('bitbloqApp')
             $scope.tourCurrentStep = null;
             if ($scope.common.user) {
                 userApi.update({
-                    properties: {
-                        tour: true
-                    }
+                    tour: true
                 });
             }
         };
@@ -1116,7 +1114,7 @@ angular.module('bitbloqApp')
                     $scope.setProject($scope.common.session.project);
                     $scope.startAutosave();
                 }
-                if ($scope.common.user.properties && !$scope.common.user.properties.tour) {
+                if (!$scope.common.user.tour) {
                     launchModalTour();
                 }
             }

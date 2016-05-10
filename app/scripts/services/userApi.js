@@ -138,25 +138,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.updateProperties = function(dataUser) {
-            return $http({
-                method: 'PUT',
-                url: envData.config.serverUrl + 'user/me/properties',
-                data: dataUser
-            });
-        };
-        // exports.updateByToken = function (dataUser, token) {
-        // return $http({
-        //     method: 'PUT',
-        //     url: envData.config.iamEndpoint + 'user/me',
-        //     data: dataUser,
-        //     skipAuthorization: true,
-        //     headers: {
-        //         authorization: 'Bearer ' + token
-        //     }
-        // });
-        // };
-
         exports.getSocialProfile = function(provider, token) {
             if (provider === 'google') {
                 return $http.get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + token);

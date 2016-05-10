@@ -88,8 +88,8 @@ angular.module('bitbloqApp')
                     } else {
                         if (attrs.imageCollection === 'Avatar' && attrs.imageSrc) {
                             if (common.user && scope.imageSrc === common.user.username) {
-                                if (common.user.properties.avatar !== '') {
-                                    attrs.$set('src', common.user.properties.avatar);
+                                if (common.user.avatar !== '') {
+                                    attrs.$set('src', common.user.avatar);
                                 } else {
                                     attrs.$set('src', attrs.imageDefaultImage);
                                 }

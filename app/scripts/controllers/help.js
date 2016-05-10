@@ -81,7 +81,7 @@ angular.module('bitbloqApp')
 
         $scope.diwoURL = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]];
 
-        $scope.$watch('common.user.properties.language', function(newValue, oldValue) {
+        $scope.$watch('common.user.language', function(newValue, oldValue) {
             if (newValue && newValue !== oldValue) {
                 $scope.diwoURL = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]];
             }
