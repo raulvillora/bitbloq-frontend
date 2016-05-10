@@ -371,6 +371,8 @@ angular.module('bitbloqApp')
 
         function setScrollHeight() {
             $timeout(function() {
+                var realScrollbarHeight = bloqsTab.height() + 50;
+
                 if ($scope.$field.height() < realScrollbarHeight) {
                     $scope.showScroll = true;
                     scrollBar.css('height', field[0].scrollHeight);
@@ -429,8 +431,8 @@ angular.module('bitbloqApp')
             field = angular.element('#bloqs--field'),
             scrollBarContainer = angular.element('.make--scrollbar'),
             scrollBar = angular.element('.scrollbar--small'),
-            bloqsTab = angular.element('.bloqs-tab'),
-            realScrollbarHeight = bloqsTab.height() + 50;
+            bloqsTab = angular.element('.bloqs-tab');
+
         $scope.lastPosition = 0;
         $scope.$field = $('#bloqs--field').last();
 
