@@ -154,30 +154,22 @@ angular.module('bitbloqApp')
             switch ($scope.sortSelected) {
                 case 'explore-sortby-views':
                     queryParams = {
-                        'api:sort': {
-                            'timesViewed': 'desc'
-                        }
+                        'timesViewed': 'desc'
                     };
                     break;
                 case 'explore-sortby-downloads':
                     queryParams = {
-                        'api:sort': {
-                            'timesDownloaded': 'desc'
-                        }
+                        'timesDownloaded': 'desc'
                     };
                     break;
                 case 'explore-sortby-adds':
                     queryParams = {
-                        'api:sort': {
-                            'timesAdded': 'desc'
-                        }
+                        'timesAdded': 'desc'
                     };
                     break;
                 default:
                     queryParams = {
-                        'api:sort': {
-                            '_createdAt': 'desc'
-                        }
+                        '_createdAt': 'desc'
                     };
             }
 
