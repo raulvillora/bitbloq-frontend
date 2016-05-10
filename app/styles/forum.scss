@@ -85,7 +85,7 @@
                 margin-bottom: 20px;
                 display: block;
                 cursor: default;
-                &:not(: first-child) {
+                &:not(:first-child) {
                     margin-top: 20px;
                 }
             }
