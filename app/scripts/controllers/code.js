@@ -433,7 +433,7 @@ angular.module('bitbloqApp')
             mode: 'c_cpp',
             useWrapMode: false,
             showGutter: true,
-            theme: 'bitbloq',
+            theme: 'chrome',
             advanced: {
                 enableSnippets: true,
                 enableBasicAutocompletion: true,
