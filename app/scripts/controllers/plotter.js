@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ChartMonitorCtrl', function ($scope, _, web2board2) {
+    .controller('PlotterCtrl', function ($scope, _, web2board2) {
         // todo: create a serialHandler service to remove duplicated code
         var serialHub = web2board2.api.SerialMonitorHub;
         $scope.baudrateOptions = [9600, 115200];

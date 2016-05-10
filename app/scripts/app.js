@@ -152,7 +152,7 @@ angular
                 })
                 .when('/chartMonitor/', {
                     templateUrl: 'views/chartMonitor.html',
-                    controller: 'ChartMonitorCtrl',
+                    controller: 'PlotterCtrl',
                     islogin: true
                 })
                 .otherwise({
