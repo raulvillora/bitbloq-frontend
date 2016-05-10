@@ -68,9 +68,7 @@ angular.module('bitbloqApp')
             var currentProject = $scope.getCurrentProject();
             if ($scope.projectHasChanged(currentProject, $scope.oldProject)) {
 
-                if ($scope.project.name === '') {
-                    $scope.project.name = $scope.common.translate('new-project');
-                }
+                $scope.project.name = $scope.project.name || $scope.common.translate('new-project');
 
                 $log.debug('Auto saving project...');
 
