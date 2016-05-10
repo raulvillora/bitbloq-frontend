@@ -15,7 +15,7 @@ angular.module('bitbloqApp')
             if ($scope.common.session.save) {
                 $scope.project.code = $scope.code;
             }
-            if (!$scope.common.user || !$scope.common.user.code) {
+            if (!$scope.common.user || !$scope.common.user.hasBeenWarnedAboutChangeBloqsToCode) {
                 var modalCode = $rootScope.$new();
                 _.extend(modalCode, {
                     contentTemplate: '/views/modals/alert.html',
@@ -391,9 +391,9 @@ angular.module('bitbloqApp')
         function goToCode() {
             ngDialog.closeAll();
             if ($scope.common.user) {
-                $scope.common.user.code = true;
+                $scope.common.user.hasBeenWarnedAboutChangeBloqsToCode = true;
                 userApi.update({
-                    code: true
+                    hasBeenWarnedAboutChangeBloqsToCode: true
                 });
                 if ($scope.project._id) {
                     $scope.saveProject().then(function() {
