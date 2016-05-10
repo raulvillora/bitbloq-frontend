@@ -509,7 +509,7 @@ angular.module('bitbloqApp')
             }, 0);
         });
         $scope.$field.on('scroll', scrollField);
-        scrollBarContainer.on('scroll', scrollField);
+        scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
         $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
         $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
 
