@@ -153,7 +153,7 @@ angular.module('bitbloqApp')
                             delete user.$promise;
                             delete user.$resolved;
                             $scope.common.setUser(user);
-                            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.properties.newsletter) {
+                            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
                                 $location.path('/projects');
                             } else {
                                 teacherModal();
@@ -355,7 +355,7 @@ angular.module('bitbloqApp')
             };
             userApi.loginUser(options).then(function(user) {
                 $scope.common.setUser(user);
-                if (user.hasBeenAskedIfTeacher || user.properties.newsletter || register) {
+                if (user.hasBeenAskedIfTeacher || user.newsletter || register) {
                     $location.path('/projects');
                 } else {
                     teacherModal();
@@ -476,7 +476,7 @@ angular.module('bitbloqApp')
         }
 
         // $scope.common.itsUserLoaded().then(function() {
-        //     if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.properties.newsletter) {
+        //     if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
         //         _goToHome();
         //     } else {
         //         teacherModal();
