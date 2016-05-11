@@ -1,43 +1,7 @@
-/* global jsPlumbUtil */
-(function() {
-    'use strict';
-
-    var throttle = function(type, name, obj) {
-        obj = obj || window;
-        var running = false;
-        var func = function() {
-            if (running) {
-                return;
-            }
-            running = true;
-            requestAnimationFrame(function() {
-                obj.dispatchEvent(new CustomEvent(name));
-                running = false;
-            });
-        };
-        obj.addEventListener(type, func);
-    };
-
-    /* init - you can init any event */
-    throttle('resize', 'optimizedResize');
-
-    var app = angular.module('bitbloqApp');
-
-    // I provide an injectable (and exteded) version of the jsPlumb lib.
-    app.factory('jsPlumb', function($window) {
-        // Get a local handle on the global lodash reference.
-        // Return the [formerly global] reference so that it can be injected into other aspects of the AngularJS application.
-        return $window.jsPlumb;
-    });
-
-    /**
-     * @ngdoc service
-     * @name bitbloqApp.protoBoLa
-     * @description
-     * # protoBoLa
-     * Service in the bitbloqApp.
-     */
-    app.service('hw2Bloqs', function($rootScope, jsPlumb, $log) {
+'use strict';
+angular
+    .module('bitbloqApp')
+    .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window) {
         var exports = {};
 
         var jsPlumbInstance = null;
@@ -771,8 +735,25 @@
             });
         }
 
+        // var throttle = function(type, name, obj) {
+        //     obj = obj || window;
+        //     var running = false;
+        //     var func = function() {
+        //         if (running) {
+        //             return;
+        //         }
+        //         running = true;
+        //         requestAnimationFrame(function() {
+        //             obj.dispatchEvent(new CustomEvent(name));
+        //             running = false;
+        //         });
+        //     };
+        //     obj.addEventListener(type, func);
+        // };
+
+        // /* init - you can init any event */
+        // throttle('resize', 'optimizedResize');
+
         return exports;
 
     });
-
-})();

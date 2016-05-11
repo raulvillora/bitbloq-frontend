@@ -1,18 +1,18 @@
 'use strict';
 angular.module('bitbloqApp')
 
-.service('bloqs', function($window) {
+.factory('bloqs', function($window) {
     return $window.bloqs;
 });
 
 angular.module('bitbloqApp')
 
-.service('bloqsUtils', function($window) {
+.factory('bloqsUtils', function($window) {
     return $window.bloqsUtils;
 });
 
 angular.module('bitbloqApp')
 
-.service('bloqsLanguages', function($window) {
+.factory('bloqsLanguages', function($window) {
     return $window.bloqsLanguages;
 });
