@@ -53,7 +53,7 @@ angular
                     controller: 'AccountCtrl'
                 })
                 .when('/bloqsproject/:id?', {
-                    templateUrl: 'views/make.html',
+                    templateUrl: 'views/bloqsproject/bloqsproject.html',
                     controller: 'MakeCtrl',
                     reloadOnSearch: false
                 })

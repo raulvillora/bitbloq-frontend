@@ -1,7 +1,5 @@
 <div class="hardware-tab tab--make" ng-controller="hardwareTab2Ctrl">
-
     <div class="protocanvas" droppable drop="drop" drop-offset-left="70" drop-offset-top="offsetTop" ng-click="detectElement($event)" data-ng-keydown="onKeyPress($event)">
-
         <div class="name--container">
             <div class="component-name__container" ng-class="{opaque:componentSelected}">
                 <span class="form--input form--input--reset">
@@ -13,26 +11,20 @@
                     </span>
                     <span ng-if="componentSelected.baudRate" class="form--input--reset baudrate__container">
                         <label for="componentBaudRate" class="component-name__label">{{'make-hardware-component-baudrate' | translate}}</label>
-                        <common-dropdown class="baudrate__dropdown form--input--reset" options="baudRates" options-click="setBaudRate" shown-option="componentSelected.baudRate"/>
+                        <common-dropdown class="baudrate__dropdown form--input--reset" options="baudRates" options-click="setBaudRate" shown-option="componentSelected.baudRate" />
                     </span>
                 </span>
             </div>
         </div>
-
         <div class="component__container" ng-class="{'component__container--visible':(project.hardware.components.length === 0 && project.hardware.board) && !project.hardware.robot ,'component__container--pseudovisible':(project.hardware.components.length !== 0) && project.hardware.board && !project.hardware.robot}">
             <p class="component__message">{{'make-hardware-component-container' | translate}}</p>
         </div>
-
         <div id="boardSchema" class="board" ng-class="{'board--present':project.hardware.board, 'board--selected':boardSelected, 'opaque':!project.hardware.robot}">
             <p class="board__message">{{'make-hardware-board-container' | translate}}</p>
         </div>
-
         <div id="robotSchema" class="robot" ng-class="{'robot--present':project.hardware.robot , 'robot--selected':robotSelected, 'opaque':project.hardware.robot}"></div>
-
     </div>
-
-    <div class="hw-toolbox-container tab--make__block" data-ng-include="'views/hardwareToolbox.html'"></div>
-
+    <div class="hw-toolbox-container tab--make__block" data-ng-include="'views/bloqsproject/hardwareToolbox.html'"></div>
     <div id="component-context-menu" class="hw-context-menu">
         <ul class="menu">
             <li class="menu__item">
@@ -47,7 +39,6 @@
             </li>
         </ul>
     </div>
-
     <div id="board-context-menu" class="hw-context-menu">
         <ul class="menu">
             <li class="menu__item">
@@ -59,7 +50,6 @@
             </li>
         </ul>
     </div>
-
     <div id="robot-context-menu" class="hw-context-menu">
         <ul class="menu">
             <li class="menu__item">
@@ -67,5 +57,4 @@
             </li>
         </ul>
     </div>
-
 </div>
