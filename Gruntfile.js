@@ -542,7 +542,7 @@ module.exports = function(grunt) {
                 replaceHtmlFiles: ['dist/**/*.{html,js}'],
                 replaceLocaleFiles: ['dist/**/*.js'],
                 replaceConfigFiles: ['dist/**/*.js'],
-                replaceImageFiles: ['dist/**/*.{svg,png,jpg,ico}'],
+                replaceImageFiles: ['dist/**/*.{html,js,scss,css}'],
                 replaceStaticFiles: ['dist/**/*.js']
             }
         }
