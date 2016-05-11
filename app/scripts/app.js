@@ -54,7 +54,7 @@ angular
                 })
                 .when('/bloqsproject/:id?', {
                     templateUrl: 'views/bloqsproject/bloqsproject.html',
-                    controller: 'MakeCtrl',
+                    controller: 'BloqsprojectCtrl',
                     reloadOnSearch: false
                 })
                 .when('/explore:params?', {

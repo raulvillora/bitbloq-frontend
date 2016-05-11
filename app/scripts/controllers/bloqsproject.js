@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc function
- * @name bitbloqApp.controller:MakeCtrl
+ * @name bitbloqApp.controller:BloqsprojectCtrl
  * @description
- * # MakeCtrl
+ * # BloqsprojectCtrl
  * Controller of the bitbloqApp
  */
 
 angular.module('bitbloqApp')
-    .controller('MakeCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs) {
 
         /*************************************************
          Project save / edit
@@ -688,11 +688,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 

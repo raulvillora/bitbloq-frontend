@@ -7,9 +7,9 @@
  * Controller of the components list
  */
 angular.module('bitbloqApp')
-    .controller('hardwareTab2Ctrl', hardwareTab2Ctrl);
+    .controller('hardwareTabCtrl', hardwareTabCtrl);
 
-function hardwareTab2Ctrl($rootScope, $scope, $document, resource, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils) {
+function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils) {
 
     var container = utils.getDOMElement('.protocanvas');
     var $componentContextMenu = $('#component-context-menu');
