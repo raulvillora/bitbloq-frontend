@@ -55,7 +55,7 @@
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
-                    <img data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-default-image="../images/common/default-project.png" corbel-image-type="project.imageType">
+                    <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../images/common/default-project.png">
                 </a>
                 <span class="project--item--trash" ng-click="removeProject(project)" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
                     <svg class="svg-icon" data-element="eliminate-myproject">

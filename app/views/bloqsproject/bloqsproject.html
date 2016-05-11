@@ -91,7 +91,7 @@
             <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/infotab.html'"></div>
             <div data-ng-repeat="project in projects">
                 <p data-ng-click="test()">test</p>
-                <img corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-image-type="project.imageType" data-corbel-default-image="../images/common/default-project.png" />
+                <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../../images/common/default-project.png"/>
             </div>
         </div>
     </div>

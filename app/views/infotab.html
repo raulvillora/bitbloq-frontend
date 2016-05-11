@@ -38,7 +38,7 @@
                     </div>
                     <div class="imagecontainer">
                         <div class="main--project--image" id="main-image">
-                            <img id="projectImage"  data-image-src="project._id" data-image-collection="project" data-image-default-image="../images/common/default-project.png" data-ng-disabled="!common.user" data-element="infotab-projectimage" image-force-reset="imageForceReset">
+                            <img id="projectImage"  data-ng-disabled="!common.user" data-element="infotab-projectimage" ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../images/common/default-project.png">
                         </div>
                         <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" data-element="infotab-fileinput" data-ng-blur="focus = false" tabindex="-1"/>
                         <button ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-element="infotab-uploadimage" data-ng-click="uploadImageTrigger('main')" data-ng-disabled="focus!=false">{{ 'upload-image' | translate }}</button>

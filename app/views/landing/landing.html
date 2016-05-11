@@ -78,7 +78,7 @@
                 <li class="col-vsmall-12 col-small-6 col-medium-4 col-large-4" data-ng-repeat="project in projects track by project._id">
                     <a class="project--item" data-ng-href="#/project/{{project._id}}" target="_blank">
                         <div class="project--header">
-                            <img data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-default-image="../images/common/default-project.png" corbel-image-type="project.imageType">
+                            <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../../images/common/default-project.png">
                         </div>
                         <div class="project--data">
                             <h2>{{project.name}}</h2>

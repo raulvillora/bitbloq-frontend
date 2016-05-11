@@ -105,7 +105,7 @@
                         <div class="form-control">
                             <div>
                                 <div class="main--user--image" id="main-image" ng-click="uploadImageTrigger('main')">
-                                    <img data-corbel-collection="Avatar" data-corbel-default-image="../images/common/avatar.png" data-corbel-force-reset="avatarUpdate" data-corbel-image-type="common.user.imageType" data-corbel-src="common.user.username" data-element="account-image" id="avatarUser">
+                                    <img data-element="account-image" id="avatarUser" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png">
                                 </div>
 
                                 <input class="btn btn--primary btn--small hidden main-image--input" data-element="account-fileinput" data-ng-blur="focus = false" data-ng-focus="focus='projectimage'" id="" name="projectimage" onchange="angular.element(this).scope().uploadImage(this.files)" placeholder="" type="file"/>

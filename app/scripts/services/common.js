@@ -50,6 +50,8 @@ angular.module('bitbloqApp')
 
         exports.oldVersionMasthead = false;
 
+        exports.urlImage = envData.config.s3Url + '/' + envData.config.bucket + '/api-images/';
+
         exports.langToBQ = {
             ca: 'es',
             de: 'de',

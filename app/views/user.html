@@ -75,7 +75,7 @@
                     <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
                         <div ng-class="{'project__image--container':true, 'project__image--container--wide':itemsLayout === 'list'}">
                             <button class="btn btn--secondary btn--small more-info--button" ng-click="openPublicProject(project._id)">{{ 'more-info' | translate }}</button>
-                            <img class="explore__project-item__project-image" alt="Project image" href="#data" data-corbel-src="project._id" data-corbel-collection="Angularproject" data-corbel-default-image="../images/common/default-project.png"/>
+                            <img class="explore__project-item__project-image" alt="Project image" href="#data" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png"/>
                         </div>
                         <div class="explore__project-item__info">
                             <div class="explore__project-item__icons--left">
