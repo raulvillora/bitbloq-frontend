@@ -26,20 +26,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
             hwBasicsLoaded.resolve();
             $scope.hardware.sortToolbox($scope.hardware.componentList);
             generateFullComponentList(resources);
+
+            hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
+
+            if ($scope.project.hardware.board || $scope.project.hardware.robot) {
+                _loadHardwareProjec($scope.project.hardware);
+            }
+
+            container.addEventListener('mousedown', _mouseDownHandler, true);
+
+            $document.on('contextmenu', _contextMenuDocumentHandler);
+            $document.on('click', _clickDocumentHandler);
+
+            container.addEventListener('connectionEvent', connectionEventHandler);
         });
-
-        hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
-
-        if ($scope.project.hardware.board || $scope.project.hardware.robot) {
-            _loadHardwareProjec($scope.project.hardware);
-        }
-
-        container.addEventListener('mousedown', _mouseDownHandler, true);
-
-        $document.on('contextmenu', _contextMenuDocumentHandler);
-        $document.on('click', _clickDocumentHandler);
-
-        container.addEventListener('connectionEvent', connectionEventHandler);
     };
 
     function generateFullComponentList(resources) {

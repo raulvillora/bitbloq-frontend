@@ -175,12 +175,9 @@ angular.module('bitbloqApp')
 
             var newComponentsArray = bloqsUtils.getEmptyComponentsArray();
             var newHardwareTags = [];
-            var readyToSave = false;
 
             var plainComponentListTemporal = [];
             var plainComponentList = [];
-
-            $scope.startAutosave();
 
             $scope.project.hardware.components.forEach(function(comp) {
                 if (!!comp.connected) {
@@ -197,15 +194,8 @@ angular.module('bitbloqApp')
                 }
             });
 
-            $scope.project.hardwareTags = _.uniq(newHardwareTags); //Regenerate hw tags
-
             if ($scope.project.hardware.robot) {
                 newComponentsArray.robot.push($scope.project.hardware.robot);
-                $scope.project.hardwareTags.push($scope.project.hardware.robot);
-            }
-
-            if ($scope.project.hardware.board) {
-                $scope.project.hardwareTags.push($scope.project.hardware.board);
             }
 
             if ($scope.componentsArray.robot.length > 0) {
@@ -224,22 +214,28 @@ angular.module('bitbloqApp')
                 });
             }
 
-            //Has changed componentsArray?
-            if (plainComponentListTemporal.length > 0 || (plainComponentList.length > 0 && plainComponentList.indexOf('zowi') === -1)) {
-                if (!_.isEqual(_.sortBy(plainComponentList, 'name'), _.sortBy(plainComponentListTemporal, 'name')) && (!$scope.hardware.firstLoad || !$scope.common.user)) {
-                    $log.debug('componentsArray has changed');
-                    readyToSave = true;
+            // console.log('Old components array');
+            // console.log($scope.componentsArray);
+            // console.log('New components array');
+            // console.log(newComponentsArray);
+            // console.log('its equal?', _.isEqual($scope.componentsArray, newComponentsArray));
+
+            if (!_.isEqual($scope.componentsArray, newComponentsArray)) {
+                //Regenerate hw tags
+                $scope.project.hardwareTags = _.uniq(newHardwareTags);
+                if ($scope.project.hardware.robot) {
+                    $scope.project.hardwareTags.push($scope.project.hardware.robot);
+                } else if ($scope.project.hardware.board) {
+                    $scope.project.hardwareTags.push($scope.project.hardware.board);
+                }
+                //update
+                $scope.componentsArray = newComponentsArray;
+                bloqs.componentsArray = newComponentsArray;
+                $scope.updateBloqs();
+                if (!$scope.hardware.firstLoad) {
+                    $scope.startAutosave();
                 }
             }
-
-            $scope.componentsArray = newComponentsArray;
-            bloqs.componentsArray = newComponentsArray;
-            $scope.updateBloqs();
-
-            if ((!$scope.hardware.firstLoad || !$scope.common.user) && readyToSave) {
-                $scope.startAutosave();
-            }
-
         };
 
         $scope.anyComponent = function(forceCheck) {
@@ -646,7 +642,6 @@ angular.module('bitbloqApp')
                 if ($scope.toolbox.level !== 1) {
                     $scope.toolbox.level = 1;
                 }
-                $scope.refreshComponentsArray();
                 $scope.setCode($scope.getCode());
                 $rootScope.$emit('currenttab:bloqstab');
             }
