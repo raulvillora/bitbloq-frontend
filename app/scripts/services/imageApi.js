@@ -28,18 +28,6 @@ angular.module('bitbloqApp')
                 });
         };
 
-        data.delete = function(idImage, dataType, collection) {
-            dataType = dataType || 'image/jpeg';
-            collection = collection || 'project';
-            return $http({
-                method: 'DELETE',
-                url: envData.config.resourcesEndpoint + 'resource/bitbloq:' + collection + '/' + idImage,
-                headers: {
-                    Accept: dataType
-                }
-            });
-        };
-
         data.createImageUrl = function(blob) {
             var reader = new FileReader();
             var def = $q.defer();
