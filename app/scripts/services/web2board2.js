@@ -1,4 +1,3 @@
-                    
 'use strict';
 /**
  * @ngdoc service
@@ -8,8 +7,8 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .factory('web2board2', function($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                    alertsService, WSHubsAPI, OpenWindow) {
+    .factory('web2board2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
+                                     alertsService, WSHubsAPI, OpenWindow) {
 
         /** Variables */
 
@@ -18,14 +17,15 @@ angular.module('bitbloqApp')
             inProgress = false,
             TIME_FOR_WEB2BOARD_TO_START = 700, //ms
             TIMES_TRY_TO_START_W2B = 20,
-            w2bToast = null;
+            w2bToast = null,
+            web2boarTimeOutResponse = 45000; //45 seconds
 
         web2board.config = {
             wsHost: 'localhost',
             wsPort: 9876,
             serialPort: ''
         };
-        function connect(){
+        function connect() {
             return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
         }
 
@@ -38,7 +38,7 @@ angular.module('bitbloqApp')
         }
 
         function removeInProgressFlag() {
-            $rootScope.$apply(function() {
+            $rootScope.$apply(function () {
                 inProgress = false;
             });
         }
@@ -71,20 +71,19 @@ angular.module('bitbloqApp')
         }
 
         function onOpenConnectionTrigger(callback) {
-            return api.VersionsHandlerHub.server.getVersion().then(function(version) {
+            return api.VersionsHandlerHub.server.getVersion().then(function (version) {
                 if (!isWeb2boardUpToDate(version)) {
                     removeInProgressFlag();
                     showUpdateModal();
                 } else {
-                    // var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
-                    var libVersion = '0.1.1';
-                    return api.VersionsHandlerHub.server.setLibVersion(libVersion).then(function() {
+                    var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
+                    return api.VersionsHandlerHub.server.setLibVersion(libVersion).then(function () {
                         callback();
-                    }, function(error) {
+                    }, function (error) {
                         $log.error('Unable to update libraries due to: ' + JSON.stringify(error));
                     });
                 }
-            }, function(error) {
+            }, function (error) {
                 $log.error('unable to get version due to : ' + error);
             });
         }
@@ -94,18 +93,19 @@ angular.module('bitbloqApp')
             tryCount++;
 
             showUpdateModalFlag = showUpdateModalFlag === true && tryCount >= TIMES_TRY_TO_START_W2B;
+            //noinspection JSUnresolvedFunction
             callback = callback || new Promise();
             if (isWSNotConnected(api.wsClient)) {
                 if (tryCount === 1) {
                     w2bToast = alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
                 }
                 connect().then(
-                    function() { //on success
+                    function () { //on success
                         api.wsClient.couldSuccessfullyConnect = true;
                         alertsService.close(w2bToast);
                         onOpenConnectionTrigger(callback);
                     },
-                    function() { //on error
+                    function () { //on error
                         if (showUpdateModalFlag) {
                             inProgress = false;
                             alertsService.close(w2bToast);
@@ -115,7 +115,7 @@ angular.module('bitbloqApp')
                                 // we only need to start web2board once
                                 startWeb2board();
                             }
-                            $timeout(function() {
+                            $timeout(function () {
                                 openCommunication(callback, true, tryCount);
                             }, TIME_FOR_WEB2BOARD_TO_START);
                         }
@@ -139,13 +139,13 @@ angular.module('bitbloqApp')
 
         function webSocketWrapper(url) {
             var ws = $websocket(url);
-            ws.onMessage(function(ev) {
+            ws.onMessage(function (ev) {
                 ws.onmessage(ev);
             });
-            ws.onOpen(function(ev) {
+            ws.onOpen(function (ev) {
                 ws.onopen(ev);
             });
-            ws.onClose(function(ev) {
+            ws.onClose(function (ev) {
                 ws.onclose(ev);
             });
             return ws;
@@ -173,13 +173,13 @@ angular.module('bitbloqApp')
             }
         }
 
-        api = WSHubsAPI.construct(45000, webSocketWrapper);
+        api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper);
 
-        api.defaultErrorHandler = function(error) {
+        api.defaultErrorHandler = function (error) {
             $log.error('Error receiving message: ' + error);
         };
 
-        api.callbacks.onClose = function(error) {
+        api.callbacks.onClose = function (error) {
             $log.error('web2board disconnected with error: ' + error.reason);
             api.clearTriggers();
             inProgress = false;
@@ -188,55 +188,55 @@ angular.module('bitbloqApp')
             }
         };
 
-        api.callbacks.onMessageError = function(error) {
+        api.callbacks.onMessageError = function (error) {
             $log.error('Error receiving message: ' + error);
             api.wsClient.close();
         };
 
-        api.CodeHub.client.isCompiling = function() {
+        api.CodeHub.client.isCompiling = function () {
             alertsService.add('alert-web2board-compiling', 'web2board', 'loading', undefined);
         };
 
-        api.CodeHub.client.isUploading = function(port) {
+        api.CodeHub.client.isUploading = function (port) {
             alertsService.add('alert-web2board-uploading', 'web2board', 'loading', undefined, port);
         };
 
-        api.CodeHub.client.isSettingPort = function(port) {
+        api.CodeHub.client.isSettingPort = function (port) {
             $log.debug('is setting port in: ' + port);
             web2board.serialPort = port;
         };
 
-        web2board.verify = function(code) {
+        web2board.verify = function (code) {
             //It is not mandatory to have a board connected to verify the code
             if (!inProgress) {
                 inProgress = true;
-                openCommunication(function() {
-                    return api.CodeHub.server.compile(code).then(function() {
+                openCommunication(function () {
+                    return api.CodeHub.server.compile(code).then(function () {
                         alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
-                    }, function(error) {
+                    }, function (error) {
                         alertsService.add('alert-web2board-compile-error', 'web2board', 'warning', undefined, error);
                     }).finally(removeInProgressFlag);
                 });
             }
         };
 
-        web2board.upload = function(boardMcu, code) {
+        web2board.upload = function (boardMcu, code) {
             if (!inProgress) {
                 if (!code || !boardMcu) {
                     alertsService.add('alert-web2board-boardNotReady', 'web2board', 'warning');
                     return;
                 }
                 inProgress = true;
-                openCommunication(function() {
+                openCommunication(function () {
                     alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                    return api.CodeHub.server.upload(code, boardMcu).then(function() {
+                    return api.CodeHub.server.upload(code, boardMcu).then(function () {
                         alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000);
                     }, handleUploadError).finally(removeInProgressFlag);
                 });
             }
         };
 
-        web2board.serialMonitor = function(board) {
+        web2board.serialMonitor = function (board) {
             openSerialWindow('http://localhost:9000/#/serialMonitor', 'Serial monitor', board);
         };
 
@@ -246,7 +246,7 @@ angular.module('bitbloqApp')
 
         web2board.showSettings = function () {
             if (!inProgress) {
-                openCommunication(function() {
+                openCommunication(function () {
                     var dialog,
                         parent = $rootScope,
                         modalOptions = parent.$new();
@@ -274,23 +274,23 @@ angular.module('bitbloqApp')
             }
         };
 
-        web2board.version = function() {
+        web2board.version = function () {
             openCommunication();
         };
 
-        web2board.uploadHex = function(boardMcu, hexText) {
-            openCommunication(function() {
+        web2board.uploadHex = function (boardMcu, hexText) {
+            openCommunication(function () {
                 alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                api.CodeHub.server.uploadHex(hexText, boardMcu).then(function(port) {
+                api.CodeHub.server.uploadHex(hexText, boardMcu).then(function (port) {
                     alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
                 }, handleUploadError).finally(removeInProgressFlag);
             });
         };
 
-        web2board.showApp = function() {
-            openCommunication(function() {
+        web2board.showApp = function () {
+            openCommunication(function () {
                 alertsService.add('web2board_toast_showingApp', 'web2board', 'loading');
-                return api.WindowHub.server.showApp().then(function() {
+                return api.WindowHub.server.showApp().then(function () {
                     alertsService.add('web2board_toast_successfullyOpened', 'web2board', 'ok', 3000);
                 });
             });
@@ -307,13 +307,13 @@ angular.module('bitbloqApp')
             showWeb2board: web2board.showApp,
             showSettings: web2board.showSettings,
             openSettings: showUpdateModal,
-            isInProcess: function() {
+            isInProcess: function () {
                 return inProgress;
             },
-            setInProcess: function(value) {
+            setInProcess: function (value) {
                 inProgress = value;
             },
-            callFunction: function(called) {
+            callFunction: function (called) {
                 alertsService.closeByTag(called.alertServiceTag);
                 web2board[called.name].apply(web2board[called.name], called.args);
             },
