@@ -539,11 +539,12 @@ module.exports = function(grunt) {
                 configFiles: ['dist/res/config/**/*.json'],
                 imageFiles: ['dist/images/**/*.{svg,png,jpg,ico}'],
                 staticFiles: ['dist/static/*.json'],
-                replaceHtmlFiles: ['dist/**/*.{html,js}'],
-                replaceLocaleFiles: ['dist/**/*.js'],
-                replaceConfigFiles: ['dist/**/*.js'],
-                replaceImageFiles: ['dist/**/*.{html,js,scss,css}'],
-                replaceStaticFiles: ['dist/**/*.js']
+                replaceHtmlNames: ['dist/**/*.{html,js}'],
+                replaceLocaleNames: ['dist/**/*.js'],
+                replaceConfigNames: ['dist/**/*.js'],
+                replaceImageNames: ['dist/**/*.{html,js,scss,css}'],
+                replaceStaticNames: ['dist/**/*.js'],
+                replaceAngularHTMLFiles: ['dist/**/*.html']
             }
         }
     });
@@ -827,6 +828,27 @@ module.exports = function(grunt) {
         });
     };
 
+    var replaceAngularHTMLFile = function(timestamp, sources) {
+        var fileContent = '';
+        grunt.file.expand(sources).forEach(function(file) {
+            console.log('forEach!!!');
+            if (grunt.file.isDir(file)) {
+                grunt.file.recurse(file, function(f) {
+                    replaceFileName(oldName, newName, f);
+                });
+            } else {
+                grunt.log.writeln('Replacing Force with ' + timestamp + ' in ' + file);
+                var regExp = new RegExp('ng-src="[A-Za-z/]*{{[A-Za-z/.]*}}.(svg|png|jpg|ico)', 'g');
+                fileContent = grunt.file.read(file);
+                grunt.file.write(file, fileContent.replace(regExp, function(stringReplace){
+                    var stringArray = stringReplace.split('{{');
+                    return stringArray[0] + timestamp + '{{' + stringArray[1];
+                }));
+            }
+        });
+    };
+
+
     grunt.task.registerMultiTask('addTimestampToFiles', 'Add timestamps to html, locale, config, image and static files', function() {
         grunt.log.writeln(this.target + ': ' + this.data);
         var timestamp = Date.now(),
@@ -843,34 +865,37 @@ module.exports = function(grunt) {
         console.log(staticFiles);
         var newName = '';
         var i;
+
+
         for (i = 0; i < htmlFiles.length; i++) {
             newName = timestamp + '.' + htmlFiles[i].name;
             fs.renameSync(htmlFiles[i].path + '/' + htmlFiles[i].name, htmlFiles[i].path + '/' + newName);
-            replaceFileName(htmlFiles[i].name, newName, this.data.replaceHtmlFiles);
+            replaceFileName(htmlFiles[i].name, newName, this.data.replaceHtmlNames);
         }
+        replaceAngularHTMLFile(timestamp, this.data.replaceAngularHTMLFiles);
 
         for (i = 0; i < localeFiles.length; i++) {
             newName = timestamp + '.' + localeFiles[i].name;
             fs.renameSync(localeFiles[i].path + '/' + localeFiles[i].name, localeFiles[i].path + '/' + newName);
         }
-        replaceFileName('res/locales/', 'res/locales/' + timestamp + '.', this.data.replaceLocaleFiles);
+        replaceFileName('res/locales/', 'res/locales/' + timestamp + '.', this.data.replaceLocaleNames);
 
         for (i = 0; i < configFiles.length; i++) {
             newName = timestamp + '.' + configFiles[i].name;
             fs.renameSync(configFiles[i].path + '/' + configFiles[i].name, configFiles[i].path + '/' + newName);
-            replaceFileName(configFiles[i].name, newName, this.data.replaceConfigFiles);
+            replaceFileName(configFiles[i].name, newName, this.data.replaceConfigNames);
         }
 
         for (i = 0; i < imageFiles.length; i++) {
             newName = timestamp + '.' + imageFiles[i].name;
             fs.renameSync(imageFiles[i].path + '/' + imageFiles[i].name, imageFiles[i].path + '/' + newName);
-            replaceFileName(imageFiles[i].name, newName, this.data.replaceImageFiles);
+            replaceFileName(imageFiles[i].name, newName, this.data.replaceImageNames);
         }
 
         for (i = 0; i < staticFiles.length; i++) {
             newName = timestamp + '.' + staticFiles[i].name;
             fs.renameSync(staticFiles[i].path + '/' + staticFiles[i].name, staticFiles[i].path + '/' + newName);
-            replaceFileName(staticFiles[i].name, newName, this.data.replaceStaticFiles);
+            replaceFileName(staticFiles[i].name, newName, this.data.replaceStaticNames);
         }
     });
 
