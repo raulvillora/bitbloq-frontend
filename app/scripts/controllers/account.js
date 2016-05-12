@@ -59,9 +59,6 @@ angular.module('bitbloqApp')
 
             alertsService.add('account-saving', 'saved-user', 'info', 5000);
             if ($scope.tempAvatar.size && $scope.tempAvatar.type !== 'google' && $scope.tempAvatar.type !== 'facebook') {
-                if ($scope.common.user && $scope.tempAvatar.type !== $scope.common.user.imageType) {
-                    imageApi.delete($scope.common.user.id, $scope.common.user.imageType, 'Avatar');
-                }
                 $scope.common.user.imageType = $scope.tempAvatar.type;
             }
             userApi.update($scope.common.user).then(function() {
