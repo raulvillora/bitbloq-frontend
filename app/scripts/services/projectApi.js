@@ -92,18 +92,37 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.publish = function(idProject) {
-            return $http({
+        exports.publish = function(project) {
+            var defered = $q.defer();
+            $http({
                 method: 'PUT',
-                url: envData.config.serverUrl + 'project/' + idProject + '/publish'
+                url: envData.config.serverUrl + 'project/' + project._id + '/publish'
+            }).then(function(response) {
+                project._acl.ALL = {
+                    permission: 'READ',
+                    properties: {
+                        date: Date.now()
+                    }
+                };
+                defered.resolve(response);
+            }, function(error) {
+                defered.reject(error);
             });
+            return defered.promise;
         };
 
-        exports.private = function(idProject) {
-            return $http({
+        exports.private = function(project) {
+            var defered = $q.defer();
+            $http({
                 method: 'PUT',
-                url: envData.config.serverUrl + 'project/' + idProject + '/private'
+                url: envData.config.serverUrl + 'project/' + project._id + '/private'
+            }).then(function(response) {
+                delete project._acl.ALL;
+                defered.resolve(response);
+            }, function(error) {
+                defered.reject(error);
             });
+            return defered.promise;
         };
 
         exports.shareWithUsers = function(idProject, userEmails) {

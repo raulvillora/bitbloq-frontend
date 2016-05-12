@@ -28,24 +28,24 @@ angular.module('bitbloqApp')
                 shownOption: '='
             },
 
-            link: function (scope, el, attrs) {
+            link: function(scope, el, attrs) {
                 scope.collapsed = true;
                 if (scope.selectedOption) {
                     scope.selected = common.translate(scope.selectedOption);
                     scope.optionsClick(scope.selectedOption);
                 }
-                scope.dropdownMenuClass = "dropdown__menu__down";
-                if(attrs.direction === "up"){
-                    scope.dropdownMenuClass = "dropdown__menu__up";
+                scope.dropdownMenuClass = 'dropdown__menu__down';
+                if (attrs.direction === 'up') {
+                    scope.dropdownMenuClass = 'dropdown__menu__up';
                     var dropdownMenu = el.find('.dropwdown__menu');
-                    dropdownMenu.css('bottom', (el.height()-2) + 'px');
+                    dropdownMenu.css('bottom', (el.height() - 2) + 'px');
                 }
 
-                scope.triggerSelect = function () {
+                scope.triggerSelect = function() {
                     scope.collapsed = !scope.collapsed;
                 };
 
-                scope.selectOption = function (indexItem) {
+                scope.selectOption = function(indexItem) {
                     scope.selected = common.translate(scope.options[indexItem]);
                     scope.collapsed = true;
                     scope.optionsClick(scope.options[indexItem]);

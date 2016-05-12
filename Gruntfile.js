@@ -673,8 +673,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('deploy', 'Deploy app to s3', function(env) {
 
-        var environment = env || 'integration';
-
         var configFile = grunt.option('config') || 'app/res/config/config.json';
         var configData = grunt.file.readJSON(configFile);
 
