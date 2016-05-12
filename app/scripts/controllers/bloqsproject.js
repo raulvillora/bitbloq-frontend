@@ -683,11 +683,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -779,14 +779,9 @@ angular.module('bitbloqApp')
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
                         alertsService.add('validate-videourl', 'save-project', 'warning');
+                        $scope.startAutosave();
                     } else {
-                        imageApi.checkVideoID($scope.videoId).then(function(response) {
-                            if (response.data.items.length > 0) {
-                                $scope.startAutosave();
-                            } else {
-                                alertsService.add('error-videourl', 'save-project', 'warning');
-                            }
-                        });
+                        alertsService.add('error-videourl', 'save-project', 'warning');
                     }
                 }
             });

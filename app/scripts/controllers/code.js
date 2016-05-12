@@ -285,14 +285,9 @@ angular.module('bitbloqApp')
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
                         alertsService.add('validate-videourl', 'save-project', 'warning');
+                        $scope.startAutosave();
                     } else {
-                        imageApi.checkVideoID($scope.videoId).then(function(response) {
-                            if (response.data.items.length > 0) {
-                                $scope.startAutosave();
-                            } else {
-                                alertsService.add('error-videourl', 'save-project', 'warning');
-                            }
-                        });
+                        alertsService.add('error-videourl', 'save-project', 'warning');
                     }
                 }
             });
@@ -428,7 +423,7 @@ angular.module('bitbloqApp')
         $scope.projectApi = projectApi;
         $scope.tempImage = {};
 
-        // The ui-ace option
+// The ui-ace option
         $scope.aceOptions = {
             mode: 'c_cpp',
             useWrapMode: false,
@@ -566,4 +561,5 @@ angular.module('bitbloqApp')
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
-    });
+    })
+;
