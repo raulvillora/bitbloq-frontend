@@ -1,7 +1,7 @@
 'use strict';
 angular
     .module('bitbloqApp')
-    .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window) {
+    .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window, jsPlumbUtil) {
         var exports = {};
 
         var jsPlumbInstance = null;
@@ -76,12 +76,12 @@ angular
             _connectionListeners();
 
             // window.removeEventListener('optimizedResize');
-            window.addEventListener('optimizedResize', function() {
+            $window.addEventListener('optimizedResize', function() {
                 exports.repaint();
             }, false);
 
             // window.removeEventListener('focus');
-            window.addEventListener('focus', function() {
+            $window.addEventListener('focus', function() {
                 exports.repaint();
             }, false);
 
@@ -736,7 +736,7 @@ angular
         }
 
         function throttle(type, name, obj) {
-            obj = obj || window;
+            obj = obj || $window;
             var running = false;
             var func = function() {
                 if (running) {
@@ -749,7 +749,7 @@ angular
                 });
             };
             obj.addEventListener(type, func);
-        };
+        }
 
         /* init - you can init any event */
         throttle('resize', 'optimizedResize');

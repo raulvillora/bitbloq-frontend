@@ -18,6 +18,7 @@ common-dropdown {
     flex       : 1;
     flex-flow  : row wrap;
     align-items: center;
+    position   :relative;
 }
 
 .dropwdown__menu {
@@ -27,17 +28,32 @@ common-dropdown {
     flex-flow                         : row wrap;
     border-right                      : 1px solid #cfcfcf;
     border-left                       : 1px solid #cfcfcf;
-    border-bottom                     : 1px solid #cfcfcf;
-    -webkit-border-bottom-right-radius: .3em;
-    -webkit-border-bottom-left-radius : .3em;
-    -moz-border-radius-bottomright    : .3em;
-    -moz-border-radius-bottomleft     : .3em;
-    border-bottom-right-radius        : .3em;
-    border-bottom-left-radius         : .3em;
     background-color                  : white;
-    max-height: 275px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    max-height                        : 275px;
+    overflow-y                        : scroll;
+    overflow-x                        : hidden;
+}
+
+.dropdown__menu__down {
+  border-bottom                     : 1px solid #cfcfcf;
+  -webkit-border-bottom-right-radius: .3em;
+  -webkit-border-bottom-left-radius : .3em;
+  -moz-border-radius-bottomright    : .3em;
+  -moz-border-radius-bottomleft     : .3em;
+  border-bottom-right-radius        : .3em;
+  border-bottom-left-radius         : .3em;
+}
+
+.dropdown__menu__up {
+  border-top                        : 1px solid #cfcfcf;
+  -webkit-border-top-right-radius   : .3em;
+  -webkit-border-top-left-radius    : .3em;
+  -moz-border-radius-topright       : .3em;
+  -moz-border-radius-topleft        : .3em;
+  border-top-right-radius           : .3em;
+  border-top-left-radius            : .3em;
+  position                          : absolute;
+  left                              : 0px;
 }
 
 .dropdown__menu__item {

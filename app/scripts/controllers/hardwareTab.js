@@ -223,10 +223,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
         $scope.project.hardware.robot = null;
         $scope.project.hardware.board = null;
         $scope.robotSelected = false;
-        for (var i = 0; i < Things.length; i++) {
-            Things[i]
-
-        };
         $scope.refreshComponentsArray();
         $scope.startAutosave();
     };

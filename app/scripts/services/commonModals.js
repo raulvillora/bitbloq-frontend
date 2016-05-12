@@ -203,7 +203,7 @@ angular.module('bitbloqApp')
             }
             var confirmAction = function() {
                     publishModal.close();
-                    projectApi.publish(project._id).then(function() {
+                    projectApi.publish(project).then(function() {
                         alertsService.add('publish-project-done', 'publishing-project', 'ok', 5000);
                     }, function() {
                         alertsService.add('publish-project-error', 'publishing-project', 'warning');
@@ -231,7 +231,7 @@ angular.module('bitbloqApp')
         exports.doPrivateProject = function(project) {
             var confirmAction = function() {
                     privateModal.close();
-                    projectApi.private(project._id).then(function() {
+                    projectApi.private(project).then(function() {
                         alertsService.add('private-project-done', 'publishing-project', 'ok', 5000);
                     }, function() {
                         alertsService.add('private-project-error', 'publishing-project', 'warning');
@@ -335,7 +335,7 @@ angular.module('bitbloqApp')
                             throw 'unknown social network';
                     }
                     if (!project._acl.ALL || project._acl.ALL.permission !== 'READ') {
-                        projectApi.publish(project._id).then(function() {
+                        projectApi.publish(project).then(function() {
                             shareModal.close();
                             alertsService.add('publish-project-done', 'publishing-project', 'ok', 7000);
                         }, function() {
@@ -352,7 +352,7 @@ angular.module('bitbloqApp')
                 },
                 simplePublish: function() {
                     if (!project._acl.ALL) {
-                        projectApi.publish(project._id).then(function() {
+                        projectApi.publish(project).then(function() {
                             alertsService.add('publish-project-done', 'publishing-project', 'ok', 7000);
                         }, function() {
                             alertsService.add('publish-project-error', 'publishing-project', 'warning');
@@ -469,10 +469,10 @@ angular.module('bitbloqApp')
                 project.name = modalOptions.project.name || $translate.instant('new-project');
                 if (project._id) {
                     projectApi.update(project._id, {
-                        name: project.name
-                    }).success(function() {
-                        deferred.resolve();
-                    })
+                            name: project.name
+                        }).success(function() {
+                            deferred.resolve();
+                        })
                         .catch(function(error) {
                             $log.debug('Error updating project', error);
                             deferred.reject();
