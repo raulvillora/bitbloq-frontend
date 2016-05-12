@@ -314,11 +314,11 @@ module.exports = function(grunt) {
                 options: {
                     collapseWhitespace: true,
                     removeComments: true
-                        // preserveLineBreaks:true,
-                        // conservativeCollapse: true,
-                        // collapseBooleanAttributes: true,
-                        // removeCommentsFromCDATA: true,
-                        // removeOptionalTags: true
+                    // preserveLineBreaks:true,
+                    // conservativeCollapse: true,
+                    // collapseBooleanAttributes: true,
+                    // removeCommentsFromCDATA: true,
+                    // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
@@ -529,7 +529,7 @@ module.exports = function(grunt) {
             },
             files: {
                 src: ['app/index.html']
-                    //src: ['app/**/*.html']
+                //src: ['app/**/*.html']
             }
         },
         addTimestampToFiles: {
@@ -840,9 +840,9 @@ module.exports = function(grunt) {
                 grunt.log.writeln('Replacing Force with ' + timestamp + ' in ' + file);
                 var regExp = new RegExp('ng-src="[A-Za-z/]*{{[A-Za-z/.]*}}.(svg|png|jpg|ico)', 'g');
                 fileContent = grunt.file.read(file);
-                grunt.file.write(file, fileContent.replace(regExp, function(stringReplace){
+                grunt.file.write(file, fileContent.replace(regExp, function(stringReplace) {
                     var stringArray = stringReplace.split('{{');
-                    return stringArray[0] + timestamp + '{{' + stringArray[1];
+                    return stringArray[0] + timestamp + '.{{' + stringArray[1];
                 }));
             }
         });
