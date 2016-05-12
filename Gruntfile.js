@@ -834,7 +834,7 @@ module.exports = function(grunt) {
             console.log('forEach!!!');
             if (grunt.file.isDir(file)) {
                 grunt.file.recurse(file, function(f) {
-                    replaceFileName(oldName, newName, f);
+                    replaceFileName(timestamp, f);
                 });
             } else {
                 grunt.log.writeln('Replacing Force with ' + timestamp + ' in ' + file);
