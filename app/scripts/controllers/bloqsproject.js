@@ -398,9 +398,7 @@ angular.module('bitbloqApp')
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
-
-        $scope.blockingHwActions = false;
-
+        
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
 
         function uploadW2b1() {
