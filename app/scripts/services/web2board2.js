@@ -25,6 +25,8 @@ angular.module('bitbloqApp')
             wsPort: 9876,
             serialPort: ''
         };
+        
+        /*Private functions*/
         function connect() {
             return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
         }
@@ -173,6 +175,8 @@ angular.module('bitbloqApp')
                 });
             }
         }
+        
+        /* Set up api*/
 
         api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper);
 
@@ -206,6 +210,8 @@ angular.module('bitbloqApp')
             $log.debug('is setting port in: ' + port);
             web2board.serialPort = port;
         };
+        
+        /*Public functions */
 
         web2board.verify = function (code) {
             //It is not mandatory to have a board connected to verify the code
