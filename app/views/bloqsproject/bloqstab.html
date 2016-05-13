@@ -3,6 +3,13 @@
         <ul class="bloq--field--list text-strong">
             <li data-element="bloqs-tab" ng-click="setSoftwareTab('bloqs')" ng-class="{'active':softTab==='bloqs'}">{{ 'bloqs' | translate }}</li>
             <li data-element="code-tab" ng-click="setSoftwareTab('code')" ng-class="{'active':softTab==='code'}">{{ 'code' | translate }}</li>
+            <li ng-if="project.hardware.robot==='zowi'" class="btn btn--zowi-firmware" ng-click="resetProgramToOriginal()">
+                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                    <use xlink:href="images/sprite.svg#factoryReset"></use>
+                </svg>
+                <span>{{'button_zowi_rest' | translate}}</span>
+
+            </li>
         </ul>
     </div>
     <div ng-show="showScroll && softTab==='bloqs'" class="make--scrollbar">

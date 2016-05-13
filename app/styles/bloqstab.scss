@@ -8,6 +8,30 @@ $toolboxWidthClosed: 210px;
     .tabs--title {
         height: $tabsTitleHeight;
 
+        .btn--zowi-firmware {
+                background-color: white;
+                border-radius: 3px;
+                height: 30px;
+                padding-left: 10px;
+                padding-right: 10px;
+                position: absolute;
+                right: 206px;
+                top: 10px;
+                transition: background-color 250ms;
+                &:hover {
+                  background-color: #fbfbfb ;
+            }
+            & > * {
+                display: inline-block;
+                vertical-align: -webkit-baseline-middle;
+                margin-top: 4px;
+                color: #373b44 ;
+                font-size: 14px;
+                font-weight: 700;
+                cursor: pointer;
+            }
+        }
+
         .bloq--field--list {
             padding    : 1em;
             font-weight: bold;

@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                     alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
+                                     alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $http) {
 
         /** Variables */
 
@@ -317,10 +317,16 @@ angular.module('bitbloqApp')
 
         web2board.uploadHex = function (boardMcu, hexText) {
             openCommunication(function () {
-                alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                api.CodeHub.server.uploadHex(hexText, boardMcu).then(function (port) {
-                    alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
-                }, handleUploadError).finally(removeInProgressFlag);
+                $http({
+                    method: 'GET',
+                    url: envData.config.serverUrl + 'robotsFirmware/zowi/1.0.0'
+                }).then(function(response) {
+                    console.log(response);
+                    alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
+                    api.CodeHub.server.uploadHex(response.data, boardMcu).then(function (port) {
+                        alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
+                    }, handleUploadError).finally(removeInProgressFlag);
+                });
             });
         };
 
@@ -332,6 +338,7 @@ angular.module('bitbloqApp')
                 });
             });
         };
+
 
         return {
             connect: connect,

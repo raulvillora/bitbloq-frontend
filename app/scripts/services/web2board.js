@@ -432,5 +432,14 @@ angular.module('bitbloqApp')
             web2board._openCommunication(showUpdateModal);
         };
 
+        web2board.uploadHex = function (hex, boardMcu){
+            if (isWeb2board2Flag === null) {
+                firstFunctionCalled.name = 'uploadHex';
+                firstFunctionCalled.args = [hex, boardMcu];
+                firstFunctionCalled.alertServiceTag = '';
+            }
+            web2board._openCommunication(showUpdateModal);
+        };
+
         return web2board;
     });
