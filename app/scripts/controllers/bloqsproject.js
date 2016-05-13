@@ -811,7 +811,7 @@ angular.module('bitbloqApp')
                 modalTourInit;
             _.extend(modalTour, {
                 contentTemplate: '/views/modals/modal-tour.html',
-                confirmAction: $scope.handleTour(1),
+                confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });
             modalTourInit = ngDialog.open({
@@ -890,6 +890,7 @@ angular.module('bitbloqApp')
 
         $scope.handleTour = function(step) {
 
+            step = step || 1;
             switch (step) {
                 case 1:
                     if (!$scope.tourCurrentStep) {
