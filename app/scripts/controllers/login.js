@@ -112,7 +112,7 @@ angular.module('bitbloqApp')
             }
 
             function _validateRegister() {
-                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required && $scope.username.free && $scope.user.term && !$scope.errors.birthday && !$scope.errors.emptyBirthday;
+                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required && $scope.username.free && $scope.user.cookiePolicyAccepted && !$scope.errors.birthday && !$scope.errors.emptyBirthday;
             }
 
             if (_validateRegister()) {
@@ -441,8 +441,9 @@ angular.module('bitbloqApp')
             lastName: '',
             password: '',
             birthday: null,
-            term: false,
+            cookiePolicyAccepted: false,
             newsletter: false,
+            takeTour: true,
             language: 'es-ES'
         };
         $scope.username = {

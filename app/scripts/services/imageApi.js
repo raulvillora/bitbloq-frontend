@@ -27,6 +27,5 @@ angular.module('bitbloqApp')
                 });
         };
 
-
         return data;
     });

@@ -273,7 +273,7 @@ angular.module('bitbloqApp')
             }
 
             project.hardware = $scope.getHardwareSchema();
-            //$scope.project.code = bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);
+            $scope.project.code = bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);
             project.code = $scope.project.code;
 
             return project;
@@ -398,7 +398,7 @@ angular.module('bitbloqApp')
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
-        
+
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
 
         function uploadW2b1() {
@@ -811,7 +811,7 @@ angular.module('bitbloqApp')
                 modalTourInit;
             _.extend(modalTour, {
                 contentTemplate: '/views/modals/modal-tour.html',
-                confirmAction: launchTour,
+                confirmAction: $scope.handleTour(1),
                 rejectAction: $scope.tourDone
             });
             modalTourInit = ngDialog.open({
@@ -821,10 +821,6 @@ angular.module('bitbloqApp')
                 showClose: false,
                 closeByDocument: false
             });
-        }
-
-        function launchTour() {
-            $scope.handleTour(1);
         }
 
         function launchModalAlert() {
@@ -966,8 +962,9 @@ angular.module('bitbloqApp')
             ngDialog.closeAll();
             $scope.tourCurrentStep = null;
             if ($scope.common.user) {
+                $scope.common.user.takeTour = true;
                 userApi.update({
-                    tour: true
+                    takeTour: true
                 });
             }
         };
@@ -1102,7 +1099,7 @@ angular.module('bitbloqApp')
                     $scope.setProject($scope.common.session.project);
                     $scope.startAutosave();
                 }
-                if (!$scope.common.user.tour) {
+                if (!$scope.common.user.takeTour) {
                     launchModalTour();
                 }
             }
