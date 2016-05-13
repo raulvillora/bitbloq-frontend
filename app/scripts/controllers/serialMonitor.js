@@ -39,15 +39,12 @@ angular.module('bitbloqApp')
         $scope.onBaudrateChanged = function (baudrate) {
             $scope.serial.baudrate = baudrate;
             serialHub.server.changeBaudrate($scope.serial.port, baudrate);
-            $scope.loginSubmit = function () {
-                web2board2.openCommunication(function () {
-                    serialHub.server.subscribeToHub().done(function () {
-                        web2board2.api.UtilsAPIHub.server.setId('SerialMonitor' + Math.random());
-                    });
-                    serialHub.server.getAvailablePorts().done(function (ports) {
-                        serialHub.server.startConnection(ports[0], 9600);
-                    });
-                });
-            };
         };
+        
+        serialHub.server.subscribeToHub().done(function () {
+            web2board2.api.UtilsAPIHub.server.setId('SerialMonitor' + Math.random());
+        });
+        serialHub.server.getAvailablePorts().done(function (ports) {
+            serialHub.server.startConnection(ports[0], 9600);
+        });
     });

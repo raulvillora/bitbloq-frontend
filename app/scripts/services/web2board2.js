@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                     alertsService, WSHubsAPI, OpenWindow) {
+                                     alertsService, WSHubsAPI, OpenWindow, $compile) {
 
         /** Variables */
 
@@ -237,7 +237,20 @@ angular.module('bitbloqApp')
         };
 
         web2board.serialMonitor = function (board) {
-            openSerialWindow('http://localhost:9000/#/serialMonitor', 'Serial monitor', board);
+            openCommunication(function () {
+                $.jsPanel({
+                    position: 'center',
+                    size: {width: 500, height: 600},
+                    load: {
+                        url: 'views/serialMonitor.html',
+                        complete: function () {
+                            var scope = $rootScope.$new();
+                            scope.board = board;
+                            this.html($compile(this.html())(scope));
+                        }
+                    }
+                });
+            });
         };
 
         web2board.chartMonitor = function (board) {
