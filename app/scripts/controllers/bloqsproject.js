@@ -777,9 +777,8 @@ angular.module('bitbloqApp')
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
                         alertsService.add('validate-videourl', 'save-project', 'warning');
-                        $scope.startAutosave();
                     } else {
-                        alertsService.add('error-videourl', 'save-project', 'warning');
+                        $scope.startAutosave();
                     }
                 }
             });
