@@ -70,6 +70,7 @@ angular.module('bitbloqApp')
             $scope.pause = !$scope.pause;
             if($scope.pause) {
                 $scope.serial.dataReceived += '\n\nSerial Monitor paused\n\n';
+                scrollTextAreaToBottom();
             }
             $scope.pauseText = $scope.pause ? $translate.instant('serial-play') : $translate.instant('serial-pause');
         };
