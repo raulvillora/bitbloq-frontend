@@ -273,7 +273,7 @@ angular.module('bitbloqApp')
             }
 
             project.hardware = $scope.getHardwareSchema();
-            //$scope.project.code = bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);
+            $scope.project.code = bloqsUtils.getCode($scope.componentsArray, $scope.bloqs);
             project.code = $scope.project.code;
 
             return project;
@@ -398,7 +398,7 @@ angular.module('bitbloqApp')
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
-        
+
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
 
         function uploadW2b1() {
