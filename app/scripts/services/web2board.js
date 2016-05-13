@@ -12,30 +12,6 @@ angular.module('bitbloqApp')
 
         /** Variables */
 
-        function isEvtForNewVersionJson(str) {
-            try {
-                JSON.parse(str);
-            } catch (e) {
-                return false;
-            }
-            return true;
-        }
-
-
-        function rootWeb2boardToNewVersion() {
-            ws.close(true);
-            isWeb2board2Flag = true;
-            web2board2.callFunction(firstFunctionCalled);
-            web2board2.setInProcess(true);
-
-            web2board.verify = web2board2.verify;
-            web2board.upload = web2board2.upload;
-            web2board.serialMonitor = web2board2.serialMonitor;
-            web2board.chartMonitor = web2board2.chartMonitor;
-            web2board.version = web2board2.version;
-            web2board.showSettings = web2board2.showSettings;
-        }
-
         var web2board = this,
             ws, modalObj,
             boardReadyPromise = null,
@@ -51,6 +27,48 @@ angular.module('bitbloqApp')
             serialPort: ''
         };
 
+        function isEvtForNewVersionJson(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+
+        function rootWeb2boardToNewVersion() {
+            ws.close(true);
+            isWeb2board2Flag = true;
+            web2board2.callFunction(firstFunctionCalled);
+            web2board2.setInProcess(true);
+
+            web2board.verify = web2board2.verify;
+            web2board.upload = web2board2.upload;
+            web2board.serialMonitor = web2board2.serialMonitor;
+            web2board.chartMonitor = web2board2.chartMonitor;
+            web2board.version = web2board2.version;
+            web2board.showSettings = web2board2.showSettings;
+        }
+
+        function showUpdateModal() {
+            var parent = $rootScope,
+                modalOptions = parent.$new();
+            _.extend(modalOptions, {
+                contentTemplate: '/views/modals/download-web2board.html',
+                modalTitle: 'modal-download-web2board-title',
+                modalText: 'modal-download-web2board-text'
+            });
+            modalOptions.envData = envData;
+            if (!modalObj || !ngDialog.isOpen(modalObj.id)) {
+                modalObj = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--download-web2board',
+                    scope: modalOptions,
+                    showClose: true
+                });
+            }
+        }
+        
         /**
          * [connect ws connecting]
          * @param  {[object]} config [{port:myport,host:myhost}]
@@ -411,9 +429,7 @@ angular.module('bitbloqApp')
                 firstFunctionCalled.args = [];
                 firstFunctionCalled.alertServiceTag = 'showSettings';
             }
-            web2board._openCommunication(function() {
-                console.error('ERRORRRRRRRR');
-            });
+            web2board._openCommunication(showUpdateModal);
         };
 
         return web2board;

@@ -26,7 +26,6 @@ angular.module('bitbloqApp')
             $scope.settings = config;
         });
 
-
         $scope.onLibrariesPathChanged = function () {
             configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
                 .then(function (isPossible) {
@@ -35,13 +34,13 @@ angular.module('bitbloqApp')
         };
 
         $scope.confirmAction = function () {
-            configHub.server.setValues($scope.settings).done(function () {
-                console.log('Successfully saved settings');
-                $scope.closeDialog();
-            }, function (error) {
-                console.error('unable to save settings due to: ', error);
-            });
+            configHub.server.setValues($scope.settings)
+                .then(function () {
+                    console.log('Successfully saved settings');
+                    $scope.closeDialog();
+                }, function (error) {
+                    console.error('unable to save settings due to: ', error);
+                });
         };
-
 
     });

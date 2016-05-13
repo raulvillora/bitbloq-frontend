@@ -34,8 +34,7 @@ angular
         'ui.ace',
         'textAngular',
         'angular-clipboard',
-        'angularUtils.directives.dirPagination',
-        'chart.js'
+        'angularUtils.directives.dirPagination'
     ]).config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
 
@@ -144,16 +143,6 @@ angular
                 .when('/bitbloq-help/', {
                     templateUrl: 'views/landing/landing-help.html',
                     controller: 'LandingCtrl'
-                })
-                .when('/serialMonitor/', {
-                    templateUrl: 'views/serialMonitor.html',
-                    controller: 'SerialMonitorCtrl',
-                    islogin: true
-                })
-                .when('/chartMonitor/', {
-                    templateUrl: 'views/chartMonitor.html',
-                    controller: 'PlotterCtrl',
-                    islogin: true
                 })
                 .otherwise({
                     redirectTo: '/404'

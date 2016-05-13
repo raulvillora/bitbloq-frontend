@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                     alertsService, WSHubsAPI, OpenWindow, $compile) {
+                                     alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
 
         /** Variables */
 
@@ -25,6 +25,8 @@ angular.module('bitbloqApp')
             wsPort: 9876,
             serialPort: ''
         };
+        
+        /*Private functions*/
         function connect() {
             return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
         }
@@ -135,6 +137,7 @@ angular.module('bitbloqApp')
                 var errorTag = 'alert-web2board-upload-error';
                 alertsService.add(errorTag, 'web2board', 'warning', undefined, error);
             }
+            console.error(error);
         }
 
         function webSocketWrapper(url) {
@@ -172,6 +175,8 @@ angular.module('bitbloqApp')
                 });
             }
         }
+        
+        /* Set up api*/
 
         api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper);
 
@@ -205,6 +210,8 @@ angular.module('bitbloqApp')
             $log.debug('is setting port in: ' + port);
             web2board.serialPort = port;
         };
+        
+        /*Public functions */
 
         web2board.verify = function (code) {
             //It is not mandatory to have a board connected to verify the code
@@ -238,18 +245,35 @@ angular.module('bitbloqApp')
 
         web2board.serialMonitor = function (board) {
             openCommunication(function () {
-                $.jsPanel({
-                    position: 'center',
-                    size: {width: 500, height: 600},
-                    load: {
-                        url: 'views/serialMonitor.html',
-                        complete: function () {
-                            var scope = $rootScope.$new();
-                            scope.board = board;
-                            this.html($compile(this.html())(scope));
-                        }
-                    }
-                });
+                inProgress = true;
+                var toast = alertsService.add('alert-web2board-openSerialMonitor', 'web2board', 'loading');
+                api.SerialMonitorHub.server.findBoardPort(board.mcu)
+                    .then(function (port) {
+                        alertsService.close(toast);
+                        var scope = $rootScope.$new();
+                        $.jsPanel({
+                            position: 'center',
+                            size: {width: 500, height: 600},
+                            onclosed: function () {
+                                scope.$destroy();
+                            },
+                            title: $translate.instant('serial'),
+                            load: {
+                                url: 'views/serialMonitor.html',
+                                complete: function () {
+                                    scope.port = port;
+                                    this.html($compile(this.html())(scope));
+                                }
+                            }
+                        });
+
+                    }, function (error) {
+                        alertsService.add('alert-web2board-no-port-found', 'web2board', 'warning');
+                        console.error(error);
+                    })
+                    .finally(function () {
+                        inProgress = false;
+                    });
             });
         };
 
