@@ -1,25 +1,25 @@
-<div data-ng-controller="SerialMonitorCtrl" class="form" style="height: 100%; display: flex; flex-direction: column; padding: 10px; background: #CECDCD;">
+<div data-ng-controller="SerialMonitorCtrl" class="form serial--panel">
 
     <div class="form-control">
-        <span style="display: flex; width:100%"
-              class="input input--default form-input}">
-            <input style="flex-grow: 1"
+        <span class="serial--send--content">
+            <input class="serial--send--input"
                    type="text"
                    data-ng-model="serial.input"
                    placeholder="Send text to board" autocorrect="off"
                    autocomplete="on" required data-element="login-emailusername-intput">
-            <button class="btn btn--secondary btn--small" ng-click="send()">Send</button>
+            <button class="btn btn--secondary btn--small" ng-click="send()">{{'serial-send' | translate}}</button>
         </span>
     </div>
     <div class="form-control" style="flex: auto; position: relative">
-                <textarea data-ng-model="serial.dataReceived"
+                <textarea id="serialData" data-ng-model="serial.dataReceived"
                           style="resize:none; width:100%; position: absolute; height: 100%" readonly></textarea>
     </div>
     <!-- Submit Form -->
     <div>
-        <button class="btn btn--secondary btn--small">Pause</button>
-        <button class="btn btn--secondary btn--small">Clear</button>
-        <common-dropdown options="baudrateOptions" class="projects--sort-dropdown right" style="width:150px" direction="up"
+        <button class="btn btn--secondary btn--small" ng-click="onPause()">{{pauseText}}</button>
+        <button class="btn btn--secondary btn--small" ng-click="onClear()">{{'serial-clear' | translate}}</button>
+        <common-dropdown options="baudrateOptions" class="projects--sort-dropdown right" style="width:150px"
+                         direction="up"
                          heading-option="serial.baudrate" options-click="onBaudrateChanged"></common-dropdown>
     </div>
 </div>
