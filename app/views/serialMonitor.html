@@ -5,8 +5,9 @@
             <input class="serial--send--input"
                    type="text"
                    data-ng-model="serial.input"
-                   placeholder="Send text to board" autocorrect="off"
-                   autocomplete="on" required data-element="login-emailusername-intput">
+                   placeholder="Send text to board"
+                   data-element="login-emailusername-intput"
+                   ng-keypress="onKeyPressedInInput($event)">
             <button class="btn btn--secondary btn--small" ng-click="send()">{{'serial-send' | translate}}</button>
         </span>
     </div>

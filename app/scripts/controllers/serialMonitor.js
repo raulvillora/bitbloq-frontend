@@ -61,6 +61,12 @@ angular.module('bitbloqApp')
             $scope.serial.input = '';
         };
 
+        $scope.onKeyPressedInInput = function (event) {
+            if (event.which === 13){
+                $scope.send();
+            }
+        };
+
         $scope.onBaudrateChanged = function (baudrate) {
             $scope.serial.baudrate = baudrate;
             serialHub.server.changeBaudrate($scope.port, baudrate);
