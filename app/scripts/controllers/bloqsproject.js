@@ -777,9 +777,8 @@ angular.module('bitbloqApp')
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
                         alertsService.add('validate-videourl', 'save-project', 'warning');
-                        $scope.startAutosave();
                     } else {
-                        alertsService.add('error-videourl', 'save-project', 'warning');
+                        $scope.startAutosave();
                     }
                 }
             });
@@ -811,7 +810,7 @@ angular.module('bitbloqApp')
                 modalTourInit;
             _.extend(modalTour, {
                 contentTemplate: '/views/modals/modal-tour.html',
-                confirmAction: $scope.handleTour(1),
+                confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });
             modalTourInit = ngDialog.open({
@@ -890,6 +889,7 @@ angular.module('bitbloqApp')
 
         $scope.handleTour = function(step) {
 
+            step = step || 1;
             switch (step) {
                 case 1:
                     if (!$scope.tourCurrentStep) {
@@ -1122,7 +1122,7 @@ angular.module('bitbloqApp')
             $log.debug('cargando projecto');
             return projectApi.get(id).then(function(response) {
                 if (response.data.codeProject) {
-                    $location.path('/codeproject/' + response.data.id);
+                    $location.path('/codeproject/' + response.data._id);
                 } else {
                     //set freebloqs object
                     if (response.data.software) {

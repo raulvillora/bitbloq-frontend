@@ -443,7 +443,7 @@ angular.module('bitbloqApp')
             birthday: null,
             cookiePolicyAccepted: false,
             newsletter: false,
-            takeTour: true,
+            takeTour: false,
             language: 'es-ES'
         };
         $scope.username = {
