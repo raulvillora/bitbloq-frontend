@@ -44,8 +44,8 @@
                     </fieldset>
                     <!-- Service terms -->
                     <div class="form-control service-terms">
-                        <span data-ng-class="{'input input--checkbox':!formSocial.readServiceTerm.submitted || user.term, 'input--checkbox--error':formSocial.readServiceTerm.submitted && !user.properties.term}">
-                            <input data-element="login-social-term-checkbox" ng-model="user.term" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="formSocial.readServiceTerm.submitted=false;" required>
+                        <span data-ng-class="{'input input--checkbox':!formSocial.readServiceTerm.submitted || user.cookiePolicyAccepted, 'input--checkbox--error':formSocial.readServiceTerm.submitted && !user.properties.term}">
+                            <input data-element="login-social-term-checkbox" ng-model="user.cookiePolicyAccepted" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="formSocial.readServiceTerm.submitted=false;" required>
                             <label for="readServiceTerm">
                                 {{ 'register-read-service-term' | translate }}
                                 <a href="#/terms" target="_blank">{{ 'register-read-general-conditions' | translate
@@ -54,7 +54,7 @@
                                     translate }}</a>
                             </label>
                         </span>
-                        <span class="form--error" ng-show="formSocial.readServiceTerm.submitted && !user.term" data-element="show-no-check">
+                        <span class="form--error" ng-show="formSocial.readServiceTerm.submitted && !user.cookiePolicyAccepted" data-element="show-no-check">
                             <small>{{ 'login-conditions' | translate }}</small>
                         </span>
                     </div>
