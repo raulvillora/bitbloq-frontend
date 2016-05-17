@@ -205,10 +205,6 @@ angular.module('bitbloqApp')
         $scope.test = envData.config.supportedLanguages;
         $scope.translate = $translate;
         $scope.tempAvatar = {};
-        $scope.userProviders = {
-            google: false,
-            facebook: false
-        };
         $scope.avatarUpdate = false;
 
         $scope.common.itsUserLoaded().then(function() {
@@ -217,6 +213,7 @@ angular.module('bitbloqApp')
                     $scope.saveProfile();
                 }
             });
+
 
             $scope.$watch('common.user.newsletter', function(newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {

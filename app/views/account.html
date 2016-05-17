@@ -63,12 +63,12 @@
                             <span>{{ 'account-connect-to-social-network' | translate }}</span>
                         </legend>
                         <div class="account__connect">
-                            <div ng-show="userProviders.google">
+                            <div ng-show="common.user.social.google.email !== ''">
                                 <span>{{ 'account-connect-to' | translate }}</span>
                                 <span class="connect-to-SN">
                                     Google +</span>
                             </div>
-                            <div ng-show="userProviders.facebook">
+                            <div ng-show="common.user.social.facebook.email !== ''">
                                 <span>{{ 'account-connect-to' | translate }}</span>
                                 <span class="connect-to-SN">
                                     Facebook</span>

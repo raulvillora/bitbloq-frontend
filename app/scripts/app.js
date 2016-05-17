@@ -168,7 +168,6 @@ angular
             // Facebook
             $authProvider.facebook({
                 clientId: envData.facebook.clientId,
-                url: '/auth/facebook',
                 authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
                 scope: envData.facebook.scope,
                 responseType: 'token',
