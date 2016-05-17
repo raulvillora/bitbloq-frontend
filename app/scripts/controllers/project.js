@@ -39,7 +39,6 @@ angular.module('bitbloqApp')
                     $scope.project.shortUrl = data.data.id;
                 });
             }, function(response) {
-                console.log('CATCH');
                 switch (response.status) {
                     case 404:
                         alertsService.add('no-project', 'error-project', 'warning');

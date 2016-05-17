@@ -36,7 +36,7 @@ angular.module('bitbloqApp')
 
                         });
                     }, function(err) {
-                        console.log('ERROR AL PILLAR EL USUARIO: ', err);
+                        console.log('error getting the user: ', err);
                     });
 
                 } else {

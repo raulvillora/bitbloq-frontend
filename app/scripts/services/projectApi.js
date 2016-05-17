@@ -194,7 +194,7 @@ angular.module('bitbloqApp')
                 method: 'POST',
                 url: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyA4NIAP4k3TA0kpo6POxWcS_2-Rpj_JaoE',
                 headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
+                    'Content-Type': 'application/json; charset=utf-8',
                 },
                 data: {
                     longUrl: longUrl
