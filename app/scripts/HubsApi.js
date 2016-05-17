@@ -103,38 +103,38 @@
                     try {
                         var promiseHandler,
                             msgObj = JSON.parse(ev.data);
-                        if (msgObj.hasOwnProperty('replay')) {
+                        if (msgObj.hasOwnProperty('reply')) {
                             promiseHandler = promisesHandler[msgObj.ID];
-                            msgObj.success ? promiseHandler.resolve(msgObj.replay) : promiseHandler.reject(msgObj.replay);
+                            msgObj.success ? promiseHandler.resolve(msgObj.reply) : promiseHandler.reject(msgObj.reply);
                         } else {
                             msgObj.function = toCamelCase(msgObj.function);
                             var executor = thisApi[msgObj.hub].client[msgObj.function];
                             if (executor !== undefined) {
                                 var replayMessage = {ID: msgObj.ID};
                                 try {
-                                    replayMessage.replay = executor.apply(executor, msgObj.args);
+                                    replayMessage.reply = executor.apply(executor, msgObj.args);
                                     replayMessage.success = true;
                                 } catch (e) {
                                     replayMessage.success = false;
-                                    replayMessage.replay = e.toString();
+                                    replayMessage.reply = e.toString();
                                 } finally {
-                                    if (replayMessage.replay instanceof PromiseClass) {
-                                        replayMessage.replay.then(function (result) {
+                                    if (replayMessage.reply instanceof PromiseClass) {
+                                        replayMessage.reply.then(function (result) {
                                             replayMessage.success = true;
-                                            replayMessage.replay = result;
+                                            replayMessage.reply = result;
                                             thisApi.wsClient.send(JSON.stringify(replayMessage));
                                         }, function (error) {
                                             replayMessage.success = false;
-                                            replayMessage.replay = error;
+                                            replayMessage.reply = error;
                                             thisApi.wsClient.send(JSON.stringify(replayMessage));
                                         });
                                     } else {
-                                        replayMessage.replay = replayMessage.replay === undefined ? null : replayMessage.replay;
+                                        replayMessage.reply = replayMessage.reply === undefined ? null : replayMessage.reply;
                                         thisApi.wsClient.send(JSON.stringify(replayMessage));
                                     }
                                 }
                             } else {
-                                thisApi.onClientFunctionNotFound(msgObj.hub, msgObj.function);
+                                thisApi.callbacks.onClientFunctionNotFound(msgObj.hub, msgObj.function);
                             }
                         }
                     } catch (err) {
@@ -198,12 +198,12 @@
             },
 
             uploadHex : function (hexText, board, port){
-                arguments[0] = hexText === undefined ? null : hexText;
+                arguments[2] = port === undefined ? null : port;
                 return constructMessage('CodeHub', 'upload_hex', arguments);
             },
 
             upload : function (code, board, port){
-                arguments[0] = code === undefined ? null : code;
+                arguments[2] = port === undefined ? null : port;
                 return constructMessage('CodeHub', 'upload', arguments);
             },
 
@@ -223,7 +223,7 @@
             },
 
             uploadHexFile : function (hexFilePath, board, port){
-                arguments[0] = hexFilePath === undefined ? null : hexFilePath;
+                arguments[2] = port === undefined ? null : port;
                 return constructMessage('CodeHub', 'upload_hex_file', arguments);
             },
 
@@ -393,7 +393,7 @@
             },
 
             startConnection : function (port, baudrate){
-                arguments[0] = port === undefined ? 9600 : port;
+                arguments[1] = baudrate === undefined ? 9600 : baudrate;
                 return constructMessage('SerialMonitorHub', 'start_connection', arguments);
             },
 
@@ -499,6 +499,7 @@
         };
         this.ConfigHub.client = {};
     }
+
 
     WSHubsAPI.construct = function(url, serverTimeout, wsClientClass) {
         return new HubsAPI(url, serverTimeout, wsClientClass);

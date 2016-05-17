@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                     alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $http) {
+                                     alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
 
         /** Variables */
 
@@ -63,6 +63,21 @@ angular.module('bitbloqApp')
             });
         }
 
+        function showUpgradeModal() {
+            var scope = $rootScope.$new();
+            // scope.version = common.properties.web2boardVersion;
+            $.jsPanel({
+                position: 'center',
+                title: $translate.instant('serial'),
+                load: {
+                    url: 'views/web2boardUpgrade.html',
+                    complete: function () {
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+        }
+
         function startWeb2board() {
             console.log('starting Web2board...');
             var tempA = document.createElement('a');
@@ -73,21 +88,23 @@ angular.module('bitbloqApp')
         }
 
         function onOpenConnectionTrigger(callback) {
-            return api.VersionsHandlerHub.server.getVersion().then(function (version) {
-                if (!isWeb2boardUpToDate(version)) {
-                    removeInProgressFlag();
-                    showUpdateModal();
-                } else {
-                    var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
-                    return api.VersionsHandlerHub.server.setLibVersion(libVersion).then(function () {
-                        callback();
-                    }, function (error) {
-                        $log.error('Unable to update libraries due to: ' + JSON.stringify(error));
-                    });
-                }
-            }, function (error) {
-                $log.error('unable to get version due to : ' + error);
-            });
+            return api.VersionsHandlerHub.server.getVersion()
+                .then(function (version) {
+                    if (!isWeb2boardUpToDate(version)) {
+                        removeInProgressFlag();
+                        showUpgradeModal();
+                    } else {
+                        var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
+                        return api.VersionsHandlerHub.server.setLibVersion(libVersion)
+                            .then(function () {
+                                callback();
+                            }, function (error) {
+                                $log.error('Unable to update libraries due to: ' + JSON.stringify(error));
+                            });
+                    }
+                }, function (error) {
+                    $log.error('unable to get version due to : ' + error);
+                });
         }
 
         function openCommunication(callback, showUpdateModalFlag, tryCount) {
@@ -253,7 +270,7 @@ angular.module('bitbloqApp')
                         var scope = $rootScope.$new();
                         $.jsPanel({
                             position: 'center',
-                            size: {width: 500, height: 600},
+                            size: {width: 500, height: 500},
                             onclosed: function () {
                                 scope.$destroy();
                             },
@@ -320,9 +337,8 @@ angular.module('bitbloqApp')
                 alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
                 api.CodeHub.server.uploadHex(hexText, boardMcu)
                     .then(function (port) {
-                    alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
-                }, handleUploadError).
-                finally(removeInProgressFlag);
+                        alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
+                    }, handleUploadError).finally(removeInProgressFlag);
             });
         };
 
