@@ -25,7 +25,7 @@ angular.module('bitbloqApp')
             wsPort: 9876,
             serialPort: ''
         };
-        
+
         /*Private functions*/
         function connect() {
             return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
@@ -175,7 +175,7 @@ angular.module('bitbloqApp')
                 });
             }
         }
-        
+
         /* Set up api*/
 
         api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper);
@@ -210,7 +210,7 @@ angular.module('bitbloqApp')
             $log.debug('is setting port in: ' + port);
             web2board.serialPort = port;
         };
-        
+
         /*Public functions */
 
         web2board.verify = function (code) {
@@ -317,16 +317,12 @@ angular.module('bitbloqApp')
 
         web2board.uploadHex = function (boardMcu, hexText) {
             openCommunication(function () {
-                $http({
-                    method: 'GET',
-                    url: envData.config.serverUrl + 'robotsFirmware/zowi/1.0.0'
-                }).then(function(response) {
-                    console.log(response);
-                    alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                    api.CodeHub.server.uploadHex(response.data, boardMcu).then(function (port) {
-                        alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
-                    }, handleUploadError).finally(removeInProgressFlag);
-                });
+                alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
+                api.CodeHub.server.uploadHex(hexText, boardMcu)
+                    .then(function (port) {
+                    alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
+                }, handleUploadError).
+                finally(removeInProgressFlag);
             });
         };
 

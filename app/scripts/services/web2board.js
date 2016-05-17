@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .factory('web2board', function($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData, web2board2) {
+    .factory('web2board', function($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData, web2board2, alertsService) {
 
         /** Variables */
 
@@ -429,6 +429,7 @@ angular.module('bitbloqApp')
                 firstFunctionCalled.args = [];
                 firstFunctionCalled.alertServiceTag = 'showSettings';
             }
+            alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
             web2board._openCommunication(showUpdateModal);
         };
 
@@ -438,6 +439,7 @@ angular.module('bitbloqApp')
                 firstFunctionCalled.args = [hex, boardMcu];
                 firstFunctionCalled.alertServiceTag = '';
             }
+            alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
             web2board._openCommunication(showUpdateModal);
         };
 
