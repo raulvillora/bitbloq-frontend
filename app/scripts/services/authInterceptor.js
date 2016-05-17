@@ -6,7 +6,9 @@ angular.module('bitbloqApp')
             request: function(config) {
                 config.headers = config.headers || {};
                 if ($cookieStore.get('token') || $routeParams.token) {
-                    config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+                    if (!config.skipAuthorization) {
+                        config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+                    }
                 }
                 return config;
             }

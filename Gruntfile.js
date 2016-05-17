@@ -731,8 +731,6 @@ module.exports = function(grunt) {
     grunt.registerTask('poeditorbackup', 'backup all poeditor projects', function() {
         var date = new Date();
         var dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
-        console.log('Date');
-        console.log(dateFormat);
         grunt.task.run([
             'poeditorprojectbackup:38967:' + dateFormat,
             'poeditorprojectbackup:38968:' + dateFormat,

@@ -12,6 +12,7 @@ angular.module('bitbloqApp')
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var exports = {};
+        var shortUrl;
 
         exports.contactModal = function() {
             var dialog,
@@ -299,7 +300,6 @@ angular.module('bitbloqApp')
         };
 
         exports.shareSocialModal = function(project) {
-
             var parent = $rootScope,
                 shareModal,
                 modalOptions = parent.$new();
@@ -315,21 +315,21 @@ angular.module('bitbloqApp')
                 isOwner: utils.userIsOwner(project, common.user._id),
                 addCount: function(e) {
                     var link;
-                    switch (e.currentTarget._id) {
+                    switch (e.currentTarget.id) {
                         case 'facebook':
                             //projectApi.addProjectStats(project._id, 'facebookCount');
                             modalOptions.stats.facebookCount += 1;
-                            link = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent($location.protocol() + '://' + $location.host() + '/#/project/' + project._id);
+                            link = 'https://www.facebook.com/sharer/sharer.php?u=' + shortUrl;
                             break;
                         case 'twitter':
                             //projectApi.addProjectStats(project._id, 'twitterCount');
                             modalOptions.stats.twitterCount += 1;
-                            link = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent($location.protocol() + '://' + $location.host() + '/#/project/' + project._id);
+                            link = 'https://twitter.com/intent/tweet?url=' + shortUrl;
                             break;
                         case 'googleplus':
                             //projectApi.addProjectStats(project._id, 'googleCount');
                             modalOptions.stats.googleCount += 1;
-                            link = 'https://plus.google.com/share?url=' + encodeURIComponent($location.protocol() + '://' + $location.host() + '/#/project/' + project._id);
+                            link = 'https://plus.google.com/share?url=' + shortUrl;
                             break;
                         default:
                             throw 'unknown social network';
@@ -362,8 +362,9 @@ angular.module('bitbloqApp')
             });
 
             projectApi.generateShortUrl($location.protocol() + '://' + $location.host() + '/#/project/' + project._id).success(function(response) {
+                shortUrl = response.id;
                 _.extend(modalOptions, {
-                    shortUrl: response._id,
+                    shortUrl: shortUrl,
                     copyAction: function(shortLink) {
                         clipboard.copyText(shortLink);
                     }
@@ -490,7 +491,7 @@ angular.module('bitbloqApp')
                 }
             });
 
-            renameModal= ngDialog.open({
+            renameModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
                 scope: modalOptions,
