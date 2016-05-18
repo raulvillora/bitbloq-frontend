@@ -199,6 +199,8 @@ angular
         };
 
         exports.addComponent = function(newComponent) {
+            console.log("newComponent");
+            console.log(newComponent);
 
             if (!newComponent) {
                 throw new Error('You need provide a component element :: addComponent');

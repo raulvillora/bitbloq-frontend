@@ -463,15 +463,16 @@ angular.module('bitbloqApp')
         };
 
         exports.renameProject = function(project) {
+            var defered = $q.defer();
 
             var renameModal, confirmAction = function() {
                 project.name = modalOptions.project.name || $translate.instant('new-project');
                 renameModal.close();
+                defered.resolve();
             };
 
             var currentProjectName = project.name,
                 modalOptions = $rootScope.$new();
-
             _.extend(modalOptions, {
                 title: 'modal-change-project-name-title',
                 modalButtons: true,
@@ -497,6 +498,7 @@ angular.module('bitbloqApp')
                 scope: modalOptions,
                 showClose: false
             });
+            return defered.promise;
         };
 
         function _shareUserInfoModal(noUsers, usersLength) {
