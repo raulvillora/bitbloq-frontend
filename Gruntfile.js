@@ -829,7 +829,6 @@ module.exports = function(grunt) {
     var replaceAngularHTMLFile = function(timestamp, sources) {
         var fileContent = '';
         grunt.file.expand(sources).forEach(function(file) {
-            console.log('forEach!!!');
             if (grunt.file.isDir(file)) {
                 grunt.file.recurse(file, function(f) {
                     replaceFileName(timestamp, f);
@@ -841,6 +840,25 @@ module.exports = function(grunt) {
                 grunt.file.write(file, fileContent.replace(regExp, function(stringReplace) {
                     var stringArray = stringReplace.split('{{');
                     return stringArray[0] + timestamp + '.{{' + stringArray[1];
+                }));
+            }
+        });
+    };
+
+var replaceForceComponent = function(timestamp, sources) {
+        var fileContent = '';
+        grunt.file.expand(sources).forEach(function(file) {
+            if (grunt.file.isDir(file)) {
+                grunt.file.recurse(file, function(f) {
+                    replaceFileName(timestamp, f);
+                });
+            } else { // /images/components/
+                grunt.log.writeln('Replacing Force with ' + timestamp + ' in ' + file);
+                var regExp = new RegExp('/images/components/[A-Za-z.+\'\" ]*.(svg|png|jpg|ico)', 'g');
+                fileContent = grunt.file.read(file);
+                grunt.file.write(file, fileContent.replace(regExp, function(stringReplace) {
+                    var stringArray = stringReplace.split('components/');
+                    return stringArray[0] + 'components/' + timestamp + '.' + stringArray[1];
                 }));
             }
         });
@@ -895,6 +913,7 @@ module.exports = function(grunt) {
             fs.renameSync(staticFiles[i].path + '/' + staticFiles[i].name, staticFiles[i].path + '/' + newName);
             replaceFileName(staticFiles[i].name, newName, this.data.replaceStaticNames);
         }
+        replaceForceComponent(timestamp, this.data.replaceStaticNames);
     });
 
     grunt.registerTask('updateAllCollections', function() {
