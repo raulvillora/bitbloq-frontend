@@ -278,36 +278,6 @@ angular.module('bitbloqApp')
                 diacriticsMap[letters[j]] = defaultDiacriticsRemovalap[i].base;
             }
         }
-        exports.serializeData = function(data) {
-
-            // If this is not an object, defer to native stringification.
-            if (!angular.isObject(data)) {
-                return ((data === null) ? '' : data.toString());
-            }
-
-            var buffer = [];
-
-            // Serialize each key in the object.
-            for (var name in data) {
-                if (!data.hasOwnProperty(name)) {
-                    continue;
-                }
-
-                var value = data[name];
-
-                if (typeof (value) === 'object') {
-                    value = JSON.stringify(value);
-                }
-
-                buffer.push(
-                    encodeURIComponent(name) + '=' + encodeURIComponent((value === null) ? '' : value)
-                );
-            }
-
-            // Serialize the buffer and clean it up for transportation.
-            var source = buffer.join('&').replace(/%20/g, '+');
-            return (source);
-        };
 
         exports.removeDiacritics = function(str, config, defaultName) {
             var configDefault = config || {
@@ -357,10 +327,6 @@ angular.module('bitbloqApp')
         exports.isYoutubeURL = function(url) {
             var REGEXP = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
             return (url.match(REGEXP)) ? RegExp.$1 : false;
-        };
-
-        exports.isDescendant = function(parent, child) {
-            return (child === parent) ? false : parent.contains(child);
         };
 
         exports.userIsOwner = function(object, userId) {
@@ -444,7 +410,7 @@ angular.module('bitbloqApp')
                                         var dest = document.getElementById(properties.containerDest);
                                         $(dest)[0].src = img.src;
                                     }
-                                    defered.resolve({blob: blob, img: img, file:file});
+                                    defered.resolve({blob: blob, img: img, file: file});
                                 }
                             };
                         };
