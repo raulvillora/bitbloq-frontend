@@ -194,9 +194,10 @@ angular.module('bitbloqApp')
         };
         $scope.renameProject = function(project) {
             commonModals.renameProject(project).then(function() {
-                refreshProjects();
+                projectApi.update(project._id, project).then(function() {
+                    refreshProjects();
+                });
             });
-
         };
 
         // Get projects
@@ -208,6 +209,4 @@ angular.module('bitbloqApp')
             }
         };
 
-    }
-)
-;
+    });
