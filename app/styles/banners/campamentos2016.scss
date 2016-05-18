@@ -1,0 +1,69 @@
+// VARS
+$margin-left:55px;
+//
+//SCSS
+#banner-top {
+    overflow: auto;
+    position: relative;
+    &.campamentos2016 {
+        background-color: #fefdfb;
+        img {
+            float: right;
+        }
+        .text {
+            position: absolute;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        h3 {
+            margin-top: 35px;
+            margin-left: $margin-left;
+            font-family: 'AkkuratMonoProRegular', 'Roboto', Arial, Sans-Serif;
+            font-size: 35px;
+            font-weight: 400;
+            line-height: 35px;
+        }
+        p {
+            margin-top: 15px;
+            color: rgba(46, 56, 57, 0.7);
+            margin-left: $margin-left;
+            max-width: 487px;
+            font-family: 'AkkuratProRegular', 'Roboto', Arial, Sans-Serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 30px;
+        }
+        a {
+            margin-top: 20px;
+            margin-left: $margin-left;
+            font-family: 'AkkuratMonoProRegular', 'Roboto', Arial, Sans-Serif;
+            display: inline-block;
+            padding: 0.4em 1em 0.4em;
+            color: #3C3C3E;
+            border: 2px solid #3C3C3E;
+            border-radius: 0;
+            cursor: pointer;
+            text-decoration: none !important;
+            line-height: 1.5em;
+        }
+        @media only screen and (max-width: 1120px) {
+            img {
+                display: none;
+            }
+            .text {
+                position: relative;
+                margin: 30px 0;
+                overflow: auto;
+            }
+        }
+        @media only screen and (max-width: 735px) {
+            h3,
+            p,
+            a {
+                float: left;
+                margin: 5px;
+                margin: 10px 60px;
+            }
+        }
+    }
+}

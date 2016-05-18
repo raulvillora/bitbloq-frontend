@@ -10,6 +10,34 @@
        url('../styles/fonts/roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
        url('../styles/fonts/roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
+
+/*
+ * Legal Disclaimer
+ *
+ * These Fonts are licensed only for use on these domains and their subdomains:
+ * bq.com
+ *
+ * It is illegal to download or use them on other websites.
+ *
+ * While the @font-face statements below may be modified by the client, this
+ * disclaimer may not be removed.
+ *
+ * Lineto.com, 2015
+ */
+
+@font-face {
+    font-family: 'AkkuratMonoProRegular';
+    src: url("../styles/fonts/akkurat/lineto-akkuratmono-pro-regular.eot");
+    src: url("../styles/fonts/akkurat/lineto-akkuratmono-pro-regular.eot?#iefix") format("embedded-opentype"), url("../styles/fonts/akkurat/lineto-akkuratmono-pro-regular.woff") format("woff"), url("../styles/fonts/akkurat/lineto-akkuratmono-pro-regular.ttf") format("truetype"), url("../styles/fonts/akkurat/lineto-akkuratmono-pro-regular.svg#bqreaders_icofont") format("svg");
+}
+
+@font-face {
+    font-family: 'AkkuratProRegular';
+    src: url("../styles/fonts/akkurat/lineto-akkurat-pro-regular.eot");
+    src: url("../styles/fonts/akkurat/lineto-akkurat-pro-regular.eot?#iefix") format("embedded-opentype"), url("../styles/fonts/akkurat/lineto-akkurat-pro-regular.woff") format("woff"), url("../styles/fonts/akkurat/lineto-akkurat-pro-regular.ttf") format("truetype"), url("../styles/fonts/akkurat/lineto-akkurat-pro-regular.svg#bqreaders_icofont") format("svg");
+}
+
+
 $viewportHeight: 100vh;
 $sectionHeaderHeight: 70px;
 $sectionSubHeaderHeight: 70px;

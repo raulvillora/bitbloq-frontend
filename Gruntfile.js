@@ -542,7 +542,7 @@ module.exports = function(grunt) {
                 replaceHtmlNames: ['dist/**/*.{html,js}'],
                 replaceLocaleNames: ['dist/**/*.js'],
                 replaceConfigNames: ['dist/**/*.js'],
-                replaceImageNames: ['dist/**/*.{html,js,scss,css}'],
+                replaceImageNames: ['dist/**/*.{html,js,scss,css, json}'],
                 replaceStaticNames: ['dist/**/*.js'],
                 replaceAngularHTMLFiles: ['dist/**/*.html']
             }
