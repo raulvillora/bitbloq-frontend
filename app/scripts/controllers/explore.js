@@ -200,14 +200,14 @@ angular.module('bitbloqApp')
 
         function getBoardFilterRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.boardFilters) {
                 if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi') {
-                    queryParams.query['hardware.robot']= $scope.boardFilters.toLowerCase();
+                    queryParams.query['hardware.robot'] = $scope.boardFilters.toLowerCase();
                 } else {
-                    queryParams.query['hardware.board']=$scope.boardFilters;
+                    queryParams.query['hardware.board'] = $scope.boardFilters;
                 }
             }
 
@@ -216,12 +216,12 @@ angular.module('bitbloqApp')
 
         function getGenericFilterRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.genericFilterOptions[0].value) {
                 if ($scope.genericFilters.indexOf('bq') > -1) {
-                    queryParams.query.creatorId= envData.config.bqUserId;
+                    queryParams.query.creatorId = envData.config.bqUserId;
                 }
             }
             return queryParams;
@@ -229,16 +229,16 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.searchText !== '') {
-                queryParams.query.$or= [{
+                queryParams.query.$or = [{
                     name: {
                         $regex: $scope.searchText
                     }
                 }, {
-                    creatorUsername: {
+                    creatorId: {
                         $regex: $scope.searchText
                     }
                 }];
@@ -250,11 +250,11 @@ angular.module('bitbloqApp')
             var queryParams = {
                     'query': {}
                 },
-                sortParams = getSortRequest(),
-                queryParams = getComponentFilterRequest(queryParams),
-                queryParams = getGenericFilterRequest(queryParams),
-                queryParams = getBoardFilterRequest(queryParams),
-                queryParams = getSearchRequest(queryParams);
+                sortParams = getSortRequest();
+            queryParams = getComponentFilterRequest(queryParams);
+            queryParams = getGenericFilterRequest(queryParams);
+            queryParams = getBoardFilterRequest(queryParams);
+            queryParams = getSearchRequest(queryParams);
 
             $log.debug(sortParams);
             //angular.extend(queryParams, sortParams);
