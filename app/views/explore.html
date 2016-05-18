@@ -44,12 +44,12 @@
                         <ul>
                             <h4 class="filter__title">{{'projects' | translate}}</h4>
                             <li class="filter__option" data-ng-repeat="gFilter in genericFilterOptions">
-                                <span class="input input--checkbox" data-ng-click="genericFilter(gFilter.option)">
+                                <span class="input input--checkbox">
                                     <!-- <input type="checkbox" name="sample--checkbox" id="{{'genericFilterCheckbox'+gFilter.option}}" data-ng-model="genericFilterOptions[$index].value">
                                     <label for="{{'genericFilterCheckbox'+gFilter.option}}">
                                         <span>{{'explore_label_filter-'+gFilter.option | translate}}</span>
                                     </label> -->
-                                    <label><input type="checkbox" name="sample--checkbox" id="{{'genericFilterCheckbox'+gFilter.option}}" data-ng-model="genericFilterOptions[$index].value"><span>{{'explore_label_filter-'+gFilter.option | translate}}</span></label>
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'genericFilterCheckbox'+gFilter.option}}" data-ng-model="genericFilterOptions[$index].value" data-ng-click="genericFilter(gFilter.option)"><span>{{'explore_label_filter-'+gFilter.option | translate}}</span></label>
                                 </span>
                             </li>
                         </ul>
@@ -58,8 +58,8 @@
                         <ul>
                             <h4 class="filter__title">{{'boards_and_robots' | translate}}</h4>
                             <li class="filter__option component__filter__item" data-ng-repeat="board in boardsFilterOptions">
-                                <span class="input input--checkbox" data-ng-click="boardFilter(board.option)">
-                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+board.option}}" data-ng-model="boardsFilterOptions[$index].value"><span>{{board.option | translate}}</span></label>
+                                <span class="input input--checkbox">
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+board.option}}" data-ng-model="boardsFilterOptions[$index].value" data-ng-click="boardFilter(board.option)"><span>{{board.option | translate}}</span></label>
                                     <!-- <label for="{{'tagCheckbox'+board.option}}">
                                         <span>{{board.option | translate}}</span>
                                     </label> -->
@@ -71,8 +71,8 @@
                         <ul>
                             <h4 class="filter__title">{{'components' | translate}}</h4>
                             <li class="filter__option component__filter__item" data-ng-repeat="compFilter in componentsFilterOptions">
-                                <span class="input input--checkbox" data-ng-click="componentFilter(compFilter.option)">
-                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+compFilter.option}}" data-ng-model="componentsFilterOptions[$index].value"><span>{{compFilter.option | translate}}</span></label>
+                                <span class="input input--checkbox">
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+compFilter.option}}" data-ng-model="componentsFilterOptions[$index].value" data-ng-click="componentFilter(compFilter.option)" ><span>{{compFilter.option | translate}}</span></label>
                                     <!-- <label for="{{'tagCheckbox'+compFilter.option}}">
                                         <span>{{compFilter.option | translate}}</span>
                                     </label>-->

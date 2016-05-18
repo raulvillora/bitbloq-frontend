@@ -89,7 +89,7 @@ angular.module('bitbloqApp')
 
         $scope.getPublicProjects = function() {
             var queryParamsArray = getRequest(),
-                queryParams = queryParamsArray[0] || {};
+                queryParams = queryParamsArray || {};
 
             if (!queryParams.page) {
                 var pageParams = {
@@ -98,8 +98,8 @@ angular.module('bitbloqApp')
                 angular.extend(queryParams, pageParams);
             }
             $log.debug('getPublicProjects', queryParams);
-            projectApi.getPublic(queryParams, queryParamsArray[1]).then(function(response) {
-                projectApi.getPublicCounter(queryParams, queryParamsArray[1]).then(function(data) {
+            projectApi.getPublic(queryParams).then(function(response) {
+                projectApi.getPublicCounter(queryParams).then(function(data) {
                     $scope.projectCount = $scope.exploraProjects.length + '/' + data.data.count;
                     $scope.common.isLoading = false;
                 });
@@ -176,118 +176,89 @@ angular.module('bitbloqApp')
             return queryParams;
         }
 
-        function getComponentFilterRequest() {
-            var queryParams = {
-                'query': []
-            };
+        function getComponentFilterRequest(queryParams) {
+            queryParams = queryParams || {
+                    'query': {}
+                };
 
             if ($scope.componentsFilterOptions[0].value) {
                 var componentsArray = _.pluck($scope.componentsFilterOptions, 'option');
                 componentsArray.splice(0, 1);
-                queryParams.query = [{
-                    hardwareTags: {
-                        '$nin': componentsArray
-                    }
-                }];
+                queryParams.query.hardwareTags = {
+                    '$nin': componentsArray
+                };
             } else {
                 if ($scope.componentsFilters.length > 0) {
-                    queryParams.query = [{
-                        hardwareTags: {
-                            '$all': $scope.componentsFilters
-                        }
-                    }];
+                    queryParams.query.hardwareTags = {
+                        '$all': $scope.componentsFilters
+                    };
                 }
             }
 
             return queryParams;
         }
 
-        function getBoardFilterRequest() {
-            var queryParams = {
-                'query': []
+        function getBoardFilterRequest(queryParams) {
+            queryParams = queryParams || {
+                'query': {}
             };
 
             if ($scope.boardFilters) {
                 if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi') {
-                    queryParams.query = [{
-                        'hardware.robot': $scope.boardFilters.toLowerCase()
-                    }];
+                    queryParams.query['hardware.robot']= $scope.boardFilters.toLowerCase();
                 } else {
-                    queryParams.query = [{
-                        'hardware.board': $scope.boardFilters
-                    }];
+                    queryParams.query['hardware.board']=$scope.boardFilters;
                 }
             }
 
             return queryParams;
         }
 
-        function getGenericFilterRequest() {
-            var queryParams = {
-                'query': []
+        function getGenericFilterRequest(queryParams) {
+            queryParams = queryParams || {
+                'query': {}
             };
 
             if ($scope.genericFilterOptions[0].value) {
                 if ($scope.genericFilters.indexOf('bq') > -1) {
-                    queryParams.query = [{
-                        creatorId: envData.config.bqUserId
-                    }];
+                    queryParams.query.creatorId= envData.config.bqUserId;
                 }
             }
             return queryParams;
         }
 
-        function getSearchRequest() {
-            var queryParams = {
-                'query': []
+        function getSearchRequest(queryParams) {
+            queryParams = queryParams || {
+                'query': {}
             };
-            var queryParams2;
 
             if ($scope.searchText !== '') {
-                queryParams.query = [{
+                queryParams.query.$or= [{
                     name: {
                         $regex: $scope.searchText
                     }
+                }, {
+                    creatorUsername: {
+                        $regex: $scope.searchText
+                    }
                 }];
-
-                queryParams2 = {
-                    'query': [{
-                        creatorUsername: {
-                            $regex: $scope.searchText
-                        }
-                    }]
-                };
             }
-            return [queryParams, queryParams2];
+            return queryParams;
         }
 
         function getRequest() {
             var queryParams = {
-                    'query': []
+                    'query': {}
                 },
-                queryParams2 = null,
                 sortParams = getSortRequest(),
-                componentParams = getComponentFilterRequest(),
-                genericFilterParams = getGenericFilterRequest(),
-                boardParams = getBoardFilterRequest(),
-                searchParamsArray = getSearchRequest();
+                queryParams = getComponentFilterRequest(queryParams),
+                queryParams = getGenericFilterRequest(queryParams),
+                queryParams = getBoardFilterRequest(queryParams),
+                queryParams = getSearchRequest(queryParams);
 
             $log.debug(sortParams);
             //angular.extend(queryParams, sortParams);
-            angular.extend(queryParams, searchParamsArray[0]);
-            queryParams.query = _.union(componentParams.query, genericFilterParams.query, boardParams.query, queryParams.query);
-            if (searchParamsArray[1]) {
-                queryParams2 = {
-                    'query': []
-                };
-                angular.extend(queryParams2, searchParamsArray[1]);
-                queryParams2.query = _.union(componentParams.query, genericFilterParams.query, boardParams.query, queryParams2.query);
-            }
-            if (_.isEmpty(queryParams.query)) {
-                queryParams = null;
-            }
-
-            return [queryParams, queryParams2];
+            return queryParams;
         }
 
         $scope.userApi = userApi;

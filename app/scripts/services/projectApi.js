@@ -22,11 +22,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getPublic = function(queryParams, queryParams2) {
-
-            //Todo queryParams2 -> search by username
-            $log.debug(queryParams2);
-
+        exports.getPublic = function(queryParams) {
             return $http({
                 method: 'GET',
                 url: envData.config.serverUrl + 'project',
@@ -35,11 +31,11 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.getPublicCounter = function(queryParams, queryParams2) {
+        exports.getPublicCounter = function(queryParams) {
             angular.extend(queryParams, {
                 'count': '*'
             });
-            return exports.getPublic(queryParams, queryParams2);
+            return exports.getPublic(queryParams);
         };
 
         exports.getMyProjects = function(queryParams) {
