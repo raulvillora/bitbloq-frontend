@@ -399,11 +399,12 @@ angular.module('bitbloqApp')
                 },
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
 
+
             function confirmAction(newName) {
                 alertsService.add('make-cloning-project', 'clone-project', 'ok', 5000);
                 newProject.name = newName;
                 projectApi.save(newProject).then(function(newProjectId) {
-                    newProject._id = newProjectId;
+                    newProject._id = newProjectId.data;
                     if (newProject.imageType) {
                         imageApi.get(project._id, newProject.imageType).then(function(response) {
                             imageApi.save(newProjectId, response.data).then(function() {
