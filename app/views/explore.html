@@ -72,7 +72,7 @@
                             <h4 class="filter__title">{{'components' | translate}}</h4>
                             <li class="filter__option component__filter__item" data-ng-repeat="compFilter in componentsFilterOptions">
                                 <span class="input input--checkbox">
-                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+compFilter.option}}" data-ng-model="componentsFilterOptions[$index].value" data-ng-click="componentFilter(compFilter.option)" ><span>{{compFilter.option | translate}}</span></label>
+                                    <label><input type="checkbox" name="sample--checkbox" id="{{'tagCheckbox'+compFilter.option}}" data-ng-model="componentsFilterOptions[$index].value" data-ng-click="componentFilter(compFilter.option)"><span>{{compFilter.option | translate}}</span></label>
                                     <!-- <label for="{{'tagCheckbox'+compFilter.option}}">
                                         <span>{{compFilter.option | translate}}</span>
                                     </label>-->
@@ -110,13 +110,13 @@
                                     <svg class="svg-icon">
                                         <use xlink:href="#vistas"></use>
                                     </svg>
-                                    <span>{{stats[project._id].timesViewed}}</span>
+                                    <span>{{project.timesViewed}}</span>
                                 </span>
                                 <span class="explore__project-item__icon">
                                     <svg class="svg-icon">
                                         <use xlink:href="#mas"></use>
                                     </svg>
-                                    <span>{{stats[project._id].timesAdded}}</span>
+                                    <span>{{project.timesAdded}}</span>
                                 </span>
                             </div>
                             <span ng-if="project.codeProject" class="project--item--code" placeholder="{{'my-project_placeholder_code-project' | translate }}">

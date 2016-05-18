@@ -267,7 +267,6 @@ angular.module('bitbloqApp')
         $scope.exploraProjects = [];
         $scope.searchText = '';
         $scope.users = [];
-        $scope.stats = [];
         $scope.itemsLayout = 'grid';
         $scope.pageProjects = 0;
         $scope.sortSelected = 'explore-sortby-recent';
