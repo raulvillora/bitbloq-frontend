@@ -330,7 +330,7 @@ angular.module('bitbloqApp')
         };
 
         exports.userIsOwner = function(object, userId) {
-            return userId && (!object.id || (object._acl && object._acl['user:' + userId] && object._acl['user:' + userId].permission === 'ADMIN'));
+            return userId && (!object._id || (object._acl && object._acl['user:' + userId] && object._acl['user:' + userId].permission === 'ADMIN'));
         };
 
         exports.getDOMElement = function(selector) {

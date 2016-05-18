@@ -12,7 +12,7 @@ angular.module('bitbloqApp')
 
         $scope.countAdded = function() {
             //model updated in projectApi
-            $scope.projectStats.timesAdded = $scope.projectStats.timesAdded + 1;
+            $scope.project.timesAdded = $scope.project.timesAdded + 1;
         };
 
         $scope.countViewer = function(project) {
