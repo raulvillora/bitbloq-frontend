@@ -195,7 +195,7 @@ angular.module('bitbloqApp')
 
         /* Set up api*/
 
-        api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper);
+        api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper, $q);
 
         api.defaultErrorHandler = function (error) {
             $log.error('Error receiving message: ' + error);
@@ -322,7 +322,7 @@ angular.module('bitbloqApp')
                         className: 'modal--container modal--download-web2board',
                         scope: modalOptions,
                         showClose: false,
-                        controller: 'Web2boardSettings'
+                        controller: 'Web2boardSettingsCtrl'
                     });
                 });
             }

@@ -59,7 +59,7 @@
                 function reconnect(error) {
                     if (reconnectTimeout !== -1) {
                         window.setTimeout(function () {
-                            thisApi.connect(reconnectTimeout);
+                            thisApi.connect(url, reconnectTimeout);
                             thisApi.callbacks.onReconnecting(error);
                         }, reconnectTimeout * 1000);
                     }
@@ -242,9 +242,9 @@
                 return constructMessage('VersionsHandlerHub', 'set_lib_version', arguments);
             },
 
-            getVersion : function (){
+            getLibVersion : function (){
 
-                return constructMessage('VersionsHandlerHub', 'get_version', arguments);
+                return constructMessage('VersionsHandlerHub', 'get_lib_version', arguments);
             },
 
             setWeb2boardVersion : function (version){
@@ -260,6 +260,11 @@
             subscribeToHub : function (){
 
                 return constructMessage('VersionsHandlerHub', 'subscribe_to_hub', arguments);
+            },
+
+            getVersion : function (){
+
+                return constructMessage('VersionsHandlerHub', 'get_version', arguments);
             },
 
             unsubscribeFromHub : function (){
@@ -501,8 +506,8 @@
     }
 
 
-    WSHubsAPI.construct = function(url, serverTimeout, wsClientClass) {
-        return new HubsAPI(url, serverTimeout, wsClientClass);
+    WSHubsAPI.construct = function(serverTimeout, wsClientClass, promiseClass) {
+        return new HubsAPI(serverTimeout, wsClientClass, promiseClass);
     };
     // return WSHubsAPI;
 })(window.WSHubsAPI = window.WSHubsAPI || {}, undefined);

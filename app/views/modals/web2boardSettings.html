@@ -1,32 +1,36 @@
 <div class="modal_open-project">
-    <div class="modal--projects--action">
-        <span class="form--input">
-                <!--<svg class="svg-icon&#45;&#45;search">-->
-            <!--<use xlink:href="#lupa"></use>-->
-            <!--</svg>-->
-                <input type="text" ng-model="settings.web_socket_ip" placeholder="WebSocket IP (default localhost)">
-            </span>
-    </div>
-    <div class="modal--projects--action">
-        <span class="form--input">
-                <input type="text" ng-model="settings.web_socket_port" placeholder="WebSocket port">
-            </span>
-    </div>
-    <div class="modal--projects--action">
-        <span class="form--input">
-                <input type="text" ng-model="settings.proxy" placeholder="Proxy (default None)">
-            </span>
-    </div>
-    <div class="modal--projects--action">
-        <span class="form--input">
-                <input type="text" ng-model="settings.libraries_path" placeholder="Libraries path" ng-blur="onLibrariesPathChanged()">
-            </span>
-    </div>
+    <div>
+        <div>
+            <span>Web2board version: {{version.web2board}}</span>
+        </div>
+        <div>
+            <span>BitbloqLibs version: {{version.bitbloqLibs}}</span>
+        </div>
+        <!-- input type="text"-->
+        <div>
+            <label>Proxy:</label>
+                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname'}">
+                        <input type="text"
+                               placeholder="Proxy (default None)"
+                               data-ng-model="settings.proxy">
+                    </span>
+        </div>
+        <!-- textarea -->
+        <div>
+            <label>Arduino libraries path:</label>
+                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname'}">
+                        <input type="text"
+                               data-ng-model="settings.libraries_path"
+                               ng-blur="onLibrariesPathChanged()">
+                    </span>
+        </div>
 
-    <div class="modal--projects--action">
-        <label>
-            <input type="checkbox" ng-model="settings.check_online_updates">
-            Check online updates
-        </label>
+        <div class="modal--projects--action">
+            <span class="input input--checkbox">
+                <input ng-model="settings.check_online_updates" type="checkbox" id="newsletter">
+                <label for="newsletter">
+                    Check for updates
+                </label>
+        </div>
     </div>
 </div>

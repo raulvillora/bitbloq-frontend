@@ -9,13 +9,19 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('Web2boardSettings', function ($scope, _, web2boardV2) {
-        var configHub = web2boardV2.api.ConfigHub;
+    .controller('Web2boardSettingsCtrl', function ($scope, _, web2boardV2) {
+        var configHub = web2boardV2.api.ConfigHub,
+            versionHub = web2boardV2.api.VersionsHandlerHub;
         $scope.settings = {
             web_socket_ip: '',
             web_socket_port: 0,
             libraries_path: '',
-            proxy: ''
+            proxy: '',
+            check_online_updates: false
+        };
+        $scope.version = {
+            web2board: '',
+            bitbloqLibs: ''
         };
 
         web2boardV2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
@@ -24,6 +30,12 @@ angular.module('bitbloqApp')
 
         configHub.server.getConfig().then(function (config) {
             $scope.settings = config;
+            return versionHub.server.getLibVersion();
+        }).then(function(version){
+            $scope.version.bitbloqLibs = version;
+            return versionHub.server.getVersion();
+        }).then(function(version){
+            $scope.version.web2board = version;
         });
 
         $scope.onLibrariesPathChanged = function () {
