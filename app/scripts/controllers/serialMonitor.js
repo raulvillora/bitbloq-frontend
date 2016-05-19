@@ -9,9 +9,9 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SerialMonitorCtrl', function ($scope, _, web2board2, $translate, $timeout, $element) {
+    .controller('SerialMonitorCtrl', function ($scope, _, web2boardV2, $translate, $timeout, $element) {
         /*Private vars*/
-        var serialHub = web2board2.api.SerialMonitorHub,
+        var serialHub = web2boardV2.api.SerialMonitorHub,
             textArea = $element.find('#serialData'),
             textAreaMaxLength = 20000;
 
@@ -25,7 +25,7 @@ angular.module('bitbloqApp')
 
         /*Set up web2board api*/
         //when web2board tries to call a client function but it is not defined
-        web2board2.api.onClientFunctionNotFound = function (hub, func) {
+        web2boardV2.api.onClientFunctionNotFound = function (hub, func) {
             console.error(hub, func);
         };
 
@@ -96,7 +96,7 @@ angular.module('bitbloqApp')
             });
 
         $scope.$on('$destroy', function () {
-            web2board2.api.SerialMonitorHub.server.closeAllConnections();
-            web2board2.api.SerialMonitorHub.server.unsubscribeFromHub();
+            web2boardV2.api.SerialMonitorHub.server.closeAllConnections();
+            web2boardV2.api.SerialMonitorHub.server.unsubscribeFromHub();
         });
     });

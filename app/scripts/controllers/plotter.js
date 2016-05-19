@@ -9,9 +9,9 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('PlotterCtrl', function ($scope, _, web2board2) {
+    .controller('PlotterCtrl', function ($scope, _, web2boardV2) {
         // todo: create a serialHandler service to remove duplicated code
-        var serialHub = web2board2.api.SerialMonitorHub;
+        var serialHub = web2boardV2.api.SerialMonitorHub;
         $scope.baudrateOptions = [9600, 115200];
         $scope.serial = {
             dataReceived: '',
@@ -35,14 +35,14 @@ angular.module('bitbloqApp')
             console.log(points, evt);
         };
 
-        web2board2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
+        web2boardV2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
             console.error(hub, func);
         };
 
-        web2board2.api.connect().done(function () {
+        web2boardV2.api.connect().done(function () {
             serialHub.server.subscribeToHub().done(function () {
                 console.log('subscribed');
-                web2board2.api.UtilsAPIHub.server.setId('ChartMonitor' + Math.random());
+                web2boardV2.api.UtilsAPIHub.server.setId('ChartMonitor' + Math.random());
             });
             serialHub.server.getAvailablePorts().done(function (ports) {
                 console.log('ports', ports);

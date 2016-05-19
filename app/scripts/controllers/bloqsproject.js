@@ -477,7 +477,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if (web2board.isWeb2board2()) {
+            if (web2board.isWeb2boardV2()) {
                 verifyW2b2();
             } else {
                 verifyW2b1();
@@ -485,7 +485,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (web2board.isWeb2board2()) {
+            if (web2board.isWeb2boardV2()) {
                 uploadW2b2();
             } else {
                 uploadW2b1();
@@ -493,7 +493,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.serialMonitor = function() {
-            if (web2board.isWeb2board2()) {
+            if (web2board.isWeb2boardV2()) {
                 serialMonitorW2b2();
             } else {
                 serialMonitorW2b1();

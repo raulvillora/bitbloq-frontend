@@ -9,9 +9,9 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('web2boardUpgradeCtrl', function ($scope, _, web2board2) {
+    .controller('web2boardUpgradeCtrl', function ($scope, _, web2boardV2) {
         /*Private vars*/
-        var versionHub = web2board2.api.VersionsHandlerHub;
+        var versionHub = web2boardV2.api.VersionsHandlerHub;
         $scope.baudrateOptions = [300, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200];
 
         $scope.progress = {
@@ -20,7 +20,7 @@ angular.module('bitbloqApp')
             percentage: 0
         };
 
-        web2board2.api.onClientFunctionNotFound = function () {
+        web2boardV2.api.onClientFunctionNotFound = function () {
             console.log(arguments);
         };
 

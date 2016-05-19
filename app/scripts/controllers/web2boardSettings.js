@@ -9,8 +9,8 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('Web2boardSettings', function ($scope, _, web2board2) {
-        var configHub = web2board2.api.ConfigHub;
+    .controller('Web2boardSettings', function ($scope, _, web2boardV2) {
+        var configHub = web2boardV2.api.ConfigHub;
         $scope.settings = {
             web_socket_ip: '',
             web_socket_port: 0,
@@ -18,7 +18,7 @@ angular.module('bitbloqApp')
             proxy: ''
         };
 
-        web2board2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
+        web2boardV2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
             console.error(hub, func);
         };
 

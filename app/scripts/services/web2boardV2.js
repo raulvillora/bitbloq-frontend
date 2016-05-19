@@ -7,7 +7,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .factory('web2board2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
+    .factory('web2boardV2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
 
         /** Variables */

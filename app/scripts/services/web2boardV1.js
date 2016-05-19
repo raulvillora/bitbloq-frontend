@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .factory('web2board', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData, web2board2, alertsService) {
+    .factory('web2board', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData, web2boardV2, alertsService) {
 
         /** Variables */
 
@@ -17,7 +17,7 @@ angular.module('bitbloqApp')
             boardReadyPromise = null,
             versionPromise = $q.defer(),
             libVersionPromise = $q.defer(),
-            isWeb2board2Flag = null,
+            isWeb2boardV2Flag = null,
             firstFunctionCalled = {name: '', args: [], alertServiceTag: ''},
             inProgress,
             TIME_FOR_WEB2BOARD_TO_START = 700, //ms
@@ -40,16 +40,16 @@ angular.module('bitbloqApp')
 
         function rootWeb2boardToNewVersion() {
             ws.close(true);
-            isWeb2board2Flag = true;
-            web2board2.callFunction(firstFunctionCalled);
-            web2board2.setInProcess(true);
+            isWeb2boardV2Flag = true;
+            web2boardV2.callFunction(firstFunctionCalled);
+            web2boardV2.setInProcess(true);
 
-            web2board.verify = web2board2.verify;
-            web2board.upload = web2board2.upload;
-            web2board.serialMonitor = web2board2.serialMonitor;
-            web2board.chartMonitor = web2board2.chartMonitor;
-            web2board.version = web2board2.version;
-            web2board.showSettings = web2board2.showSettings;
+            web2board.verify = web2boardV2.verify;
+            web2board.upload = web2boardV2.upload;
+            web2board.serialMonitor = web2boardV2.serialMonitor;
+            web2board.chartMonitor = web2boardV2.chartMonitor;
+            web2board.version = web2boardV2.version;
+            web2board.showSettings = web2boardV2.showSettings;
         }
 
         function showUpdateModal() {
@@ -107,12 +107,12 @@ angular.module('bitbloqApp')
                     web2board._notify(evt);
                 });
                 ws.onMessage(function (evt) {
-                    if (isWeb2board2Flag === null) {
+                    if (isWeb2boardV2Flag === null) {
                         if (isEvtForNewVersionJson(evt.data)) {
                             rootWeb2boardToNewVersion();
                             return;
                         } else {
-                            isWeb2board2Flag = false;
+                            isWeb2boardV2Flag = false;
                         }
                     }
 
@@ -335,7 +335,7 @@ angular.module('bitbloqApp')
         /** Public functions */
 
         web2board.verify = function (code) {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'verify';
                 firstFunctionCalled.args = [code];
                 firstFunctionCalled.alertServiceTag = 'compile';
@@ -347,7 +347,7 @@ angular.module('bitbloqApp')
         };
 
         web2board.upload = function (board, code) {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'upload';
                 firstFunctionCalled.args = [board.mcu, code];
                 firstFunctionCalled.alertServiceTag = 'upload';
@@ -365,7 +365,7 @@ angular.module('bitbloqApp')
         };
 
         web2board.serialMonitor = function (board) {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'serialMonitor';
                 firstFunctionCalled.args = [board];
                 firstFunctionCalled.alertServiceTag = 'serialmonitor';
@@ -378,7 +378,7 @@ angular.module('bitbloqApp')
         };
 
         web2board.chartMonitor = function (board) {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'chartMonitor';
                 firstFunctionCalled.args = [board];
                 firstFunctionCalled.alertServiceTag = 'chartMonitor';
@@ -389,20 +389,20 @@ angular.module('bitbloqApp')
         };
 
         web2board.version = function () {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'verify';
                 firstFunctionCalled.args = [];
             }
             web2board._openCommunication();
         };
 
-        web2board.isWeb2board2 = function () {
-            return isWeb2board2Flag;
+        web2board.isWeb2boardV2 = function () {
+            return isWeb2boardV2Flag;
         };
 
         web2board.isInProcess = function () {
-            if (isWeb2board2Flag) {
-                return web2board2.isInProcess();
+            if (isWeb2boardV2Flag) {
+                return web2boardV2.isInProcess();
             }
             return inProgress;
         };
@@ -412,7 +412,7 @@ angular.module('bitbloqApp')
         };
 
         web2board.showSettings = function () {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'showSettings';
                 firstFunctionCalled.args = [];
                 firstFunctionCalled.alertServiceTag = 'showSettings';
@@ -422,7 +422,7 @@ angular.module('bitbloqApp')
         };
 
         web2board.uploadHex = function (hex, boardMcu) {
-            if (isWeb2board2Flag === null) {
+            if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'uploadHex';
                 firstFunctionCalled.args = [hex, boardMcu];
                 firstFunctionCalled.alertServiceTag = '';
