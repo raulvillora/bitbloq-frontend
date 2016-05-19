@@ -28,7 +28,7 @@ angular.module('bitbloqApp')
                     userApi.currentUser = User.get();
                     userApi.currentUser.$promise.then(function(user) {
                         if (user.username) {
-                            $location.path('/projects');
+                            _goToHome();
                         } else {
                             // register the user;
                             $scope.isSocialRegister = true;
@@ -308,6 +308,14 @@ angular.module('bitbloqApp')
             }
         };
 
+        function _goToHome() {
+            if ($routeParams.init) {
+                $location.url(decodeURIComponent($routeParams.init));
+            } else {
+                $location.path('projects');
+            }
+        }
+
         function teacherModal() {
             var confirmAction = function() {
                     $scope.common.user.hasBeenAskedIfTeacher = true;
@@ -319,8 +327,7 @@ angular.module('bitbloqApp')
                     userApi.update($scope.common.user).then(function() {
                         $scope.common.setUser($scope.common.user);
                         modalTeacher.close();
-                        $location.path('/projects');
-                        // _goToHome();
+                        _goToHome();
                     }, function(err) {
                         $log.log('Error', err);
                     });
