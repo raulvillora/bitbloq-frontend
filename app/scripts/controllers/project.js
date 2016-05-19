@@ -15,8 +15,7 @@ angular.module('bitbloqApp')
             $scope.project.timesAdded = $scope.project.timesAdded + 1;
         };
 
-        $scope.countViewer = function(project) {
-            //todo delete function
+        $scope.openProject = function(project) {
             if (project.codeProject) {
                 $window.open('#/codeproject/' + project._id);
             } else {
