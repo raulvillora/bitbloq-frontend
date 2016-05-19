@@ -31,10 +31,10 @@ angular.module('bitbloqApp')
         configHub.server.getConfig().then(function (config) {
             $scope.settings = config;
             return versionHub.server.getLibVersion();
-        }).then(function(version){
+        }).then(function (version) {
             $scope.version.bitbloqLibs = version;
             return versionHub.server.getVersion();
-        }).then(function(version){
+        }).then(function (version) {
             $scope.version.web2board = version;
         });
 
@@ -45,11 +45,21 @@ angular.module('bitbloqApp')
                 });
         };
 
+        $scope.testProxy = function () {
+            configHub.server.testProxy($scope.settings.proxy)
+                .then(function () {
+                    console.log('GOOD');
+                })
+                .catch(function () {
+                    console.log('BAD');
+                });
+        };
+
         $scope.confirmAction = function () {
             configHub.server.setValues($scope.settings)
                 .then(function () {
                     console.log('Successfully saved settings');
-                    $scope.closeDialog();
+                    $scope.closeThisDialog();
                 }, function (error) {
                     console.error('unable to save settings due to: ', error);
                 });
