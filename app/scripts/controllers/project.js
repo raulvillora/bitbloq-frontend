@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ProjectCtrl', function($routeParams, $scope, $location, projectApi, alertsService, utils, _, $window, commonModals) {
+    .controller('ProjectCtrl', function($routeParams, $scope, $location, projectApi, alertsService, utils, _, $window, common, commonModals) {
 
         $scope.countAdded = function() {
             //model updated in projectApi
@@ -16,6 +16,9 @@ angular.module('bitbloqApp')
         };
 
         $scope.openProject = function(project) {
+            if (common.user && !project._acl['user:' + common.user._id]) {
+                project.timesViewed++;
+            }
             if (project.codeProject) {
                 $window.open('#/codeproject/' + project._id);
             } else {
