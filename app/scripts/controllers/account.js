@@ -133,9 +133,10 @@ angular.module('bitbloqApp')
                         if (form.passwordMain.$modelValue === form.passwordRepeat.$modelValue) {
                             var newPassword = form.passwordMain.$modelValue;
                             userApi.changePasswordAuthenticated(newPassword).then(function() {
+                                alertsService.add('reset-password-saved', 'saved-password', 'ok', 5000);
                                 dialog.close();
-                            }, function(err) {
-                                console.log('PASSWORD NOT CHANGED!', err);
+                            }, function() {
+                                alertsService.add('reset-password-saved-error', 'error-password', 'warning');
                             });
                         } else {
                             modalScope.errorPassword = true;
@@ -143,43 +144,6 @@ angular.module('bitbloqApp')
                     }
                 };
 
-            _.extend(modalScope, {
-                title: 'modal-reset-password-title',
-                confirmButton: 'modal-reset-password-button-ok',
-                contentTemplate: 'views/modals/resetPassword.html',
-                confirmAction: confirmAction,
-                submitted: false,
-                errorPassword: false,
-                changePassword: true
-            });
-
-            dialog = ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container password-reset--modal',
-                scope: modalScope,
-                showClose: false
-            });
-
-            $('textarea.msd-elastic').autogrow({
-                onInitialize: true
-            });
-        };
-
-        $scope.turnToLocal = function() {
-            var dialog,
-                modalScope = $rootScope.$new(),
-                confirmAction = function(form) {
-                    modalScope.errorPassword = false;
-                    if (_.isEmpty(form.$error)) {
-                        if (form.passwordMain.$modelValue === form.passwordRepeat.$modelValue) {
-                            userApi.changePasswordAuthenticated(form.passwordMain.$modelValue).then(function() {
-                                dialog.close();
-                            });
-                        } else {
-                            modalScope.errorPassword = true;
-                        }
-                    }
-                };
             _.extend(modalScope, {
                 title: 'modal-reset-password-title',
                 confirmButton: 'modal-reset-password-button-ok',

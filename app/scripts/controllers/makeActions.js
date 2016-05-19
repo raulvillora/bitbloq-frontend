@@ -143,8 +143,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.clone = function() {
-            console.log("cloneeee");
-            console.log($scope.getCurrentProject());
             commonModals.clone($scope.getCurrentProject(), true);
         };
 

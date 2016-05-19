@@ -51,8 +51,7 @@
                         </legend>
                         <div class="form-control">
                             <label>{{ 'account-change-password' | translate }}</label>
-                            <input class="btn btn--secondary btn--small btn--account--password" data-element="account-reset-password-button" data-ng-click="turnToLocal($event)" id="password" ng-if="common.user.provider === 'social'" type="button" value="{{ 'account-restore-password' | translate }}"/>
-                            <input class="btn btn--secondary btn--small btn--account--password" data-element="account-reset-password-button" data-ng-click="changePassword($event)" id="password" ng-if="common.user.provider === 'local'" type="button" value="{{ 'account-restore-password' | translate }}"/>
+                            <input class="btn btn--secondary btn--small btn--account--password" data-element="account-reset-password-button" data-ng-click="changePassword($event)" id="password" type="button" value="{{ 'account-restore-password' | translate }}"/>
                         </div>
                     </fieldset>
                     <fieldset>
