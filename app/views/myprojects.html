@@ -51,7 +51,7 @@
 
         <p>
     </div>
-    <li data-ng-repeat="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) |filter:{name: searchText} | filter:userProjectsFilterFunction(userProjectsFilter)) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
+    <li data-ng-repeat="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) |filter:{name: checkSearch(searchText)} | filter:userProjectsFilterFunction(userProjectsFilter)) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">

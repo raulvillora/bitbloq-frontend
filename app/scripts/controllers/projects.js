@@ -143,6 +143,15 @@ angular.module('bitbloqApp')
             });
         };
 
+        $scope.checkSearch = function(textSearch) {
+            if (textSearch) {
+                while (textSearch[0] === '!') {
+                    textSearch = textSearch.substr(1);
+                }
+            }
+            return textSearch;
+        };
+
         function _deleteProject(project) {
             if ($scope.common.removeProjects[project._id]) {
                 projectApi.delete(project._id).then(function() {
