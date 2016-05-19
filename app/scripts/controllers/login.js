@@ -154,7 +154,7 @@ angular.module('bitbloqApp')
                             delete user.$resolved;
                             $scope.common.setUser(user);
                             if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                                $location.path('/projects');
+                                _goToHome();
                             } else {
                                 teacherModal();
                             }
@@ -363,7 +363,7 @@ angular.module('bitbloqApp')
             userApi.loginUser(options).then(function(user) {
                 $scope.common.setUser(user);
                 if (user.hasBeenAskedIfTeacher || user.newsletter || register) {
-                    $location.path('/projects');
+                    _goToHome();
                 } else {
                     teacherModal();
                 }
