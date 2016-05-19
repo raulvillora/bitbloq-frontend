@@ -45,7 +45,7 @@ angular.module('bitbloqApp')
 
             _.extend(modalOptions, {
                 title: 'hola que ase',
-                contentTemplate: 'views/modals/password-reset.html',
+                contentTemplate: 'views/modals/resetPassword.html',
                 confirmButton: 'modal-reset-password-button-ok'
             });
 

@@ -173,7 +173,7 @@ angular.module('bitbloqApp')
                 confirmButton: 'send',
                 modalButtons: true,
                 confirmAction: confirmAction,
-                contentTemplate: '/views/modals/feedback-error.html',
+                contentTemplate: '/views/modals/feedbackError.html',
                 comments: {
                     message: '',
                     os: '',
@@ -290,7 +290,7 @@ angular.module('bitbloqApp')
                 modalButtons: true,
                 confirmButton: 'modal-button-ok',
                 confirmAction: confirmAction,
-                contentTemplate: '/views/modals/share-with-users.html',
+                contentTemplate: '/views/modals/shareWithUsers.html',
                 shareWithUserModel: emailsShared
             });
 
@@ -308,7 +308,7 @@ angular.module('bitbloqApp')
                 modalOptions = parent.$new();
             _.extend(modalOptions, {
                 title: 'share-social-networks',
-                contentTemplate: '/views/modals/modal-share-social-networks.html',
+                contentTemplate: '/views/modals/shareSocialNetworks.html',
                 stats: {
                     twitterCount: 0,
                     facebookCount: 0,

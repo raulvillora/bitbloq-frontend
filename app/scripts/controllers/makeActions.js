@@ -69,7 +69,7 @@ angular.module('bitbloqApp')
             var dialog, modalScope = $rootScope.$new();
             _.extend(modalScope, {
                 title: 'explore-open-project',
-                contentTemplate: '/views/modals/open-project.html',
+                contentTemplate: '/views/modals/openProject.html',
                 modalButtons: true,
                 selectedTab: 0,
                 confirmButton: 'explore-open-project',

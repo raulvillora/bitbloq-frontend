@@ -533,7 +533,7 @@ angular.module('bitbloqApp')
                 title: 'make-actions-share-with-users',
                 confirmOnly: true,
                 buttonConfirm: 'make-actions-share-with-users-confirm',
-                contentTemplate: '/views/modals/share-with-users.html',
+                contentTemplate: '/views/modals/shareWithUsers.html',
                 confirmAction: confirmAction
             });
 
@@ -809,7 +809,7 @@ angular.module('bitbloqApp')
             var modalTour = $rootScope.$new(),
                 modalTourInit;
             _.extend(modalTour, {
-                contentTemplate: '/views/modals/modal-tour.html',
+                contentTemplate: '/views/modals/infoTour.html',
                 confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });

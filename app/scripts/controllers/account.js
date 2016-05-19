@@ -146,7 +146,7 @@ angular.module('bitbloqApp')
             _.extend(modalScope, {
                 title: 'modal-reset-password-title',
                 confirmButton: 'modal-reset-password-button-ok',
-                contentTemplate: 'views/modals/password-reset.html',
+                contentTemplate: 'views/modals/resetPassword.html',
                 confirmAction: confirmAction,
                 submitted: false,
                 errorPassword: false,
@@ -183,7 +183,7 @@ angular.module('bitbloqApp')
             _.extend(modalScope, {
                 title: 'modal-reset-password-title',
                 confirmButton: 'modal-reset-password-button-ok',
-                contentTemplate: 'views/modals/password-reset.html',
+                contentTemplate: 'views/modals/resetPassword.html',
                 confirmAction: confirmAction,
                 submitted: false,
                 errorPassword: false

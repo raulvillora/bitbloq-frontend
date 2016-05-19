@@ -49,7 +49,7 @@ angular.module('bitbloqApp')
             var parent = $rootScope,
                 modalOptions = parent.$new();
             _.extend(modalOptions, {
-                contentTemplate: '/views/modals/download-web2board.html',
+                contentTemplate: '/views/modals/downloadWeb2board.html',
                 modalTitle: 'modal-update-web2board-title',
                 modalText: 'modal-download-web2board-text'
             });
@@ -305,7 +305,7 @@ angular.module('bitbloqApp')
                         parent = $rootScope,
                         modalOptions = parent.$new();
                     _.extend(modalOptions, {
-                        contentTemplate: '/views/modals/web2board-settings.html',
+                        contentTemplate: '/views/modals/web2boardSettings.html',
                         modalTitle: 'modal-update-web2board-title',
                         modalText: 'modal-download-web2board-text',
                         confirmButton: 'save',
