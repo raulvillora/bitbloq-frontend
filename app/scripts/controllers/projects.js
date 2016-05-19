@@ -75,7 +75,7 @@ angular.module('bitbloqApp')
 
         $scope.createCopy = function(project) {
             commonModals.clone(project).then(function() {
-                refreshProjects();
+                $scope.refreshProjects();
             });
         };
 
@@ -119,20 +119,7 @@ angular.module('bitbloqApp')
             utils.downloadFile('Bitbloq_' + moment().format('YYYY_MM_DD-HH_mm') + '.zip', blob, 'data:application/zip;base64');
         };
 
-        $scope.refreshProjects = refreshProjects;
-
-        function _deleteProject(project) {
-            if ($scope.common.removeProjects[project._id]) {
-                projectApi.delete(project._id).then(function() {
-                    $log.log('we delete this project');
-                }, function(error) {
-                    $log.log('Delete error: ', error);
-                    alertsService.add('make-delete-project-error', 'deleted-project', 'warning');
-                });
-            }
-        }
-
-        function refreshProjects(refresh) {
+        $scope.refreshProjects = function(refresh) {
             $scope.common.isLoading = refresh;
             $scope.common.itsUserLoaded().then(function() {
                 $scope.tempUserProjects = [];
@@ -154,6 +141,17 @@ angular.module('bitbloqApp')
                 alertsService.add('projects-need-tobe-logged', 'projects-need-tobe-logged', 'error');
                 $location.path('/login');
             });
+        };
+
+        function _deleteProject(project) {
+            if ($scope.common.removeProjects[project._id]) {
+                projectApi.delete(project._id).then(function() {
+                    $log.log('we delete this project');
+                }, function(error) {
+                    $log.log('Delete error: ', error);
+                    alertsService.add('make-delete-project-error', 'deleted-project', 'warning');
+                });
+            }
         }
 
         function _getProjects() {
@@ -195,17 +193,17 @@ angular.module('bitbloqApp')
         $scope.renameProject = function(project) {
             commonModals.renameProject(project).then(function() {
                 projectApi.update(project._id, project).then(function() {
-                    refreshProjects();
+                    $scope.refreshProjects();
                 });
             });
         };
 
         // Get projects
-        refreshProjects(true);
+        $scope.refreshProjects(true);
         $window.onfocus = function() {
             if ($localStorage.projectsChange && $scope.common.itsUserLoaded()) {
                 $localStorage.projectsChange = false;
-                refreshProjects();
+                $scope.refreshProjects();
             }
         };
 

@@ -267,10 +267,13 @@ angular.module('bitbloqApp')
                         users.splice(userIndex, 1);
                     }
                     projectApi.shareWithUsers(project._id, users).then(function(response) {
-                        if (response.data.noUsers.length > 0) {
-                            _shareUserInfoModal(response.data.noUsers, response.data.users.length);
-                        } else {
-                            alertsService.add('modalShare_alert_shareWithUser', 'private-project', 'ok', 5000, response.data.users.length);
+                        if (response) {
+                            project._acl = response.data.project._acl;
+                            if (response.data.noUsers.length > 0) {
+                                _shareUserInfoModal(response.data.noUsers, response.data.users.length);
+                            } else {
+                                alertsService.add('modalShare_alert_shareWithUser', 'private-project', 'ok', 5000, response.data.users.length);
+                            }
                         }
                     }).catch(function() {
                         alertsService.add('make-share-with-users-error', 'private-project', 'warning');
