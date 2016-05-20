@@ -118,4 +118,19 @@ module.exports = function(grunt) {
             }
         });
     });
+
+    grunt.registerTask('restoreCollection', function(collectionName, timestamp) {
+        grunt.log.writeln('Updating= ' + collectionName + ' timestamp:' + timestamp);
+        var done = this.async(),
+            items = grunt.file.readJSON('backupsDB/' + timestamp + '/' + collectionName + '.json');
+        refreshServerCollection(collectionName, items, function(err, res) {
+            if (err) {
+                console.log('err updating ', collectionName, ':', err);
+                done();
+            } else {
+                console.log(collectionName, 'on', 'update OK');
+                done();
+            }
+        });
+    });
 };
