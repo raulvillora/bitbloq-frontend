@@ -402,7 +402,6 @@ angular.module('bitbloqApp')
                 },
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
 
-
             function confirmAction(newName) {
                 alertsService.add('make-cloning-project', 'clone-project', 'ok', 5000);
                 newProject.name = newName;

@@ -1,3 +1,3 @@
 <p>{{ 'modal-share-with-users-main-1' | translate }}</p>
 <p>{{ 'modal-share-with-users-main-2' | translate }}</p>
-<tags-input ng-model="shareWithUserModel" data-element="modals-share-with-users-input" placeholder="{{'modal-share-with-users-placeholder' | translate}}"></tags-input>
+<tags-input allowed-tags-pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b" ng-model="shareWithUserModel" data-element="modals-share-with-users-input" placeholder="{{'modal-share-with-users-placeholder' | translate}}"></tags-input>
