@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
 
-    var http = require('http');
+    var http = require('http'),
+        async = require('async');
+
+    var sharedToken;
 
     function IsJsonString(str) {
         try {
@@ -70,12 +73,23 @@ module.exports = function(grunt) {
     };
 
     function getToken(callback) {
-        var configFile = grunt.file.readJSON('./app/res/config/config.json'),
-            data = {
-                email: configFile.adminUser,
-                password: configFile.adminPassword
-            };
-        requestToServer('POST', 'auth/local', null, data, callback);
+        if (sharedToken) {
+            callback(null, {
+                token: sharedToken
+            });
+        } else {
+            var configFile = grunt.file.readJSON('./app/res/config/config.json'),
+                data = {
+                    email: configFile.adminUser,
+                    password: configFile.adminPassword
+                };
+            requestToServer('POST', 'auth/local', null, data, function(err, res) {
+                if (!err) {
+                    sharedToken = res.token;
+                }
+                callback(err, res);
+            });
+        }
     };
 
     function deleteCollection(collectionName, callback) {
@@ -89,7 +103,18 @@ module.exports = function(grunt) {
         if (collectionName === 'forumcategory') {
             collectionName = 'forum/category';
         }
-        adminRequestToServer('POST', collectionName + '/all', items, callback);
+
+        var splicedArray = [];
+        //console.log('items.length', items.length);
+        //chunk all items to upload in max 50 items per request
+        while (items.length) {
+            //console.log('items.length', items.length);
+            //console.log(splicedArray.length);
+            splicedArray.push(items.splice(0, 50));
+        }
+        async.each(splicedArray, function(chunk, callback) {
+            adminRequestToServer('POST', collectionName + '/all', chunk, callback);
+        }, callback);
     };
 
     function refreshServerCollection(collectionName, items, callback) {

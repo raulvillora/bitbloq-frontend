@@ -43,116 +43,6 @@ module.exports = function(grunt) {
         });
     }
 
-    var tempCollections = {},
-        tempPageNumber = {};
-
-    function getCorbelCollection(collectionName, env, callback) {
-        grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env);
-        if (!tempPageNumber[collectionName]) {
-            tempCollections[collectionName] = [];
-            tempPageNumber[collectionName] = 0;
-        }
-        getAdminToken(env).then(function(response) {
-            grunt.log.writeln('Getting Collection');
-            cd.resources.collection('bitbloq:' + collectionName)
-                .page(tempPageNumber[collectionName])
-                .pageSize(50)
-                .get().then(function(response) {
-                    grunt.log.writeln(collectionName);
-                    grunt.log.writeln(response.data.length);
-                    if (response.data.length === 0) {
-                        tempPageNumber[collectionName] = undefined;
-                        callback(null, tempCollections[collectionName]);
-                    } else {
-                        tempCollections[collectionName] = tempCollections[collectionName].concat(response.data);
-                        tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
-                        getCorbelCollection(collectionName, env, callback);
-                    }
-
-                }).catch(function(error) {
-                    console.log('error');
-                    console.log(error);
-                    callback(error);
-                });
-        }).catch(function(err) {
-            grunt.log.error('create token error');
-            callback(err);
-        });
-    }
-
-    grunt.registerTask('exportCollectionFromCorbel', function(collectionName, env, timestamp) {
-        var done = this.async();
-        switch (collectionName) {
-            case 'projects':
-                migrateProjectsFromCorbelToBitbloq(env, timestamp, done);
-                break;
-            default:
-                grunt.error.writeln('Unknow Collection, nothing to do  ¯\\_(ツ)_/¯');
-                done();
-        }
-
-    });
-
-    function migrateProjectsFromCorbelToBitbloq(env, timestamp, callback) {
-        var async = require('async'),
-            _ = require('lodash');
-        async.parallel([
-            getCorbelCollection.bind(null, 'Angularproject', env),
-            getCorbelCollection.bind(null, 'ProjectStats', env)
-        ], function(err, result) {
-            if (err) {
-                console.log('err');
-                callback(err);
-            } else {
-                console.log('ok');
-                console.log(result[0].length);
-                console.log(result[1].length);
-
-                var projects = result[0],
-                    stats = result[1],
-                    tempStat;
-                grunt.file.write('./backupsDB/' + timestamp + '/tempprojects.json', JSON.stringify(projects));
-                grunt.file.write('./backupsDB/' + timestamp + '/stats.json', JSON.stringify(stats));
-
-                for (var i = 0; i < projects.length; i++) {
-                    tempStat = _.find(stats, ['id', projects[i].id]);
-                    if (tempStat) {
-                        projects[i].timesViewed = tempStat.timesViewed;
-                        projects[i].timesAdded = tempStat.timesAdded;
-                    }
-                }
-                grunt.file.write('./backupsDB/' + timestamp + '/projects.json', JSON.stringify(projects));
-                callback();
-            }
-        })
-    }
-    // grunt.registerTask('testmigrationprojects', function(env) {
-    //     var _ = require('lodash'),
-    //         projects = grunt.file.readJSON('./backupsDB/1463494185736/projects.json'),
-    //         stats = grunt.file.readJSON('./backupsDB/1463494185736/stats.json'),
-    //         tempStat;
-    //     var temp = [];
-    //     for (var i = 0; i < projects.length; i++) {
-    //         tempStat = _.find(stats, ['id', projects[i].id]);
-    //         if (tempStat) {
-    //             projects[i].timesViewed = tempStat.timesViewed;
-    //             projects[i].timesAdded = tempStat.timesAdded;
-    //             temp.push(projects[i]);
-    //         }
-    //     }
-    //     console.log(temp.length);
-    //     grunt.file.write('./backupsDB/1463494185736/projectsFinal.json', JSON.stringify(temp));
-    // });
-    grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
-        var fs = require('fs'),
-            timestamp = Date.now();
-        fs.mkdirSync('./backupsDB/' + timestamp);
-        grunt.task.run([
-            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp
-            //'importCollection:projects:' + backEnv + ':' + timestamp
-        ]);
-    });
-
     grunt.task.registerTask('searchBloq', 'search bloq on corbel', function(bloqName, env) {
 
         var done = this.async();
@@ -236,4 +126,107 @@ module.exports = function(grunt) {
             done(err);
         });
     }
+
+    var tempCollections = {},
+        tempPageNumber = {};
+
+    function getCorbelCollection(collectionName, env, callback) {
+        grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env);
+        if (!tempPageNumber[collectionName]) {
+            tempCollections[collectionName] = [];
+            tempPageNumber[collectionName] = 0;
+        }
+        getAdminToken(env).then(function(response) {
+            grunt.log.writeln('Getting Collection');
+            cd.resources.collection('bitbloq:' + collectionName)
+                .page(tempPageNumber[collectionName])
+                .pageSize(50)
+                .get().then(function(response) {
+                    grunt.log.writeln(collectionName);
+                    grunt.log.writeln(response.data.length);
+                    if (response.data.length === 0) {
+                        tempPageNumber[collectionName] = undefined;
+                        callback(null, tempCollections[collectionName]);
+                    } else {
+                        tempCollections[collectionName] = tempCollections[collectionName].concat(response.data);
+                        tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
+                        getCorbelCollection(collectionName, env, callback);
+                    }
+
+                }).catch(function(error) {
+                    console.log('error');
+                    console.log(error);
+                    callback(error);
+                });
+        }).catch(function(err) {
+            grunt.log.error('create token error');
+            callback(err);
+        });
+    }
+
+    grunt.registerTask('exportCollectionFromCorbel', function(collectionName, env, timestamp) {
+        var done = this.async();
+        switch (collectionName) {
+            case 'project':
+                migrateProjectsFromCorbelToBitbloq(env, timestamp, done);
+                break;
+            default:
+                console.log('Unknow Collection, nothing to do  ¯\\_(ツ)_/¯');
+                done();
+        }
+
+    });
+
+    function migrateProjectsFromCorbelToBitbloq(env, timestamp, callback) {
+        var async = require('async'),
+            _ = require('lodash');
+        async.parallel([
+            getCorbelCollection.bind(null, 'Angularproject', env),
+            getCorbelCollection.bind(null, 'ProjectStats', env)
+        ], function(err, result) {
+            if (err) {
+                console.log('err');
+                callback(err);
+            } else {
+                console.log('ok');
+                console.log(result[0].length);
+                console.log(result[1].length);
+
+                var projects = result[0],
+                    stats = result[1],
+                    tempStat;
+                grunt.file.write('./backupsDB/' + timestamp + '/tempprojects.json', JSON.stringify(projects));
+                grunt.file.write('./backupsDB/' + timestamp + '/stats.json', JSON.stringify(stats));
+
+                for (var i = 0; i < projects.length; i++) {
+                    projects[i]._id = projects[i].id;
+                    delete projects[i].id;
+                    delete projects[i].creatorUsername;
+                    delete projects[i].links;
+                    delete projects[i].imageType;
+                    tempStat = _.find(stats, ['id', projects[i].id]);
+                    if (tempStat) {
+                        projects[i].timesViewed = tempStat.timesViewed;
+                        projects[i].timesAdded = tempStat.timesAdded;
+                    }
+                }
+
+                grunt.file.write('./backupsDB/' + timestamp + '/project.json', JSON.stringify(projects));
+                callback();
+            }
+        })
+    }
+
+    // grunt importCollectionsFromCorbel:next:qa
+    grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
+        var fs = require('fs'),
+            timestamp = Date.now();
+        fs.mkdirSync('./backupsDB/' + timestamp);
+        grunt.task.run([
+            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
+            'restoreCollection:project:' + timestamp
+            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+        ]);
+    });
+
 };
