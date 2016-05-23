@@ -1,0 +1,27 @@
+.w2b__settings__param {
+  display: flex;
+}
+
+.w2b__settings__param__input {
+  flex: auto;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.w2b__settings__icon {
+  max-height: 34px;
+  max-width: 34px;
+  margin-left: 5px;
+}
+
+.w2b__settings_ok {
+  fill: limegreen;
+}
+
+.w2b__settings_error {
+  fill: red;
+}
+
+.w2b__settings_loading {
+  fill: gray;
+}
