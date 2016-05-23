@@ -164,11 +164,48 @@ module.exports = function(grunt) {
         });
     }
 
+    function getCorbelUsers(env, callback) {
+        grunt.log.writeln('Get Corbel Users from ' + env);
+        var collectionName = 'users'
+        if (!tempPageNumber[collectionName]) {
+            tempCollections[collectionName] = [];
+            tempPageNumber[collectionName] = 0;
+        }
+        getAdminToken(env).then(function(response) {
+            grunt.log.writeln('Getting Collection');
+            cd.iam.users().get({
+                pagination: {
+                    page: tempPageNumber[collectionName],
+                    pageSize: 50
+                }
+            }).then(function(response) {
+                if (response.data.length === 0) {
+                    tempPageNumber[collectionName] = undefined;
+                    callback(null, tempCollections[collectionName]);
+                } else {
+                    tempCollections[collectionName] = tempCollections[collectionName].concat(response.data);
+                    tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
+                    getCorbelUsers(env, callback);
+                }
+            }).catch(function(error) {
+                console.log('error');
+                console.log(error);
+                callback(error);
+            });
+        }).catch(function(err) {
+            grunt.log.error('create token error');
+            callback(err);
+        });
+    }
+
     grunt.registerTask('exportCollectionFromCorbel', function(collectionName, env, timestamp) {
         var done = this.async();
         switch (collectionName) {
             case 'project':
                 migrateProjectsFromCorbelToBitbloq(env, timestamp, done);
+                break;
+            case 'user':
+                migrateUsersFromCorbelToBitbloq(env, timestamp, done);
                 break;
             default:
                 console.log('Unknow Collection, nothing to do  ¯\\_(ツ)_/¯');
@@ -217,15 +254,55 @@ module.exports = function(grunt) {
         })
     }
 
+    function migrateUsersFromCorbelToBitbloq(env, timestamp, callback) {
+        getCorbelUsers(env, function(err, users) {
+            if (err) {
+                console.log('err getting users');
+                callback(err);
+            } else {
+                console.log('We have users, now transform it to Bitbloq and save on backupsDB', users.length);
+                for (var i = 0; i < users.length; i++) {
+                    users[i]._id = users[i].id;
+                    //users[i].salt = users[i].;
+                    users[i].provider = 'local';
+                    //users[i].password = users[i].;
+                    users[i].birthday = users[i].properties.birthday;
+                    users[i].cookiePolicyAccepted = false;
+                    users[i].hasBeenWarnedAboutChangeBloqsToCode = false;
+                    users[i].hasBeenAskedIfTeacher = users[i].properties.hasBeenAskedIfTeacher || false;
+                    users[i].takeTour = users[i].properties.tour || false;
+                    users[i].language = users[i].properties.language || false;
+                    users[i].newsletter = users[i].properties.newsletter || false;
+                    users[i].role = 'user';
+                    // users[i].social = {
+                    //     facebook: ,
+                    //     google:
+                    // }
+                    users[i].bannedInForum = false;
+
+                    delete users[i].id;
+                    delete users[i].scopes;
+                    delete users[i].createdBy;
+                    delete users[i].domain;
+                    delete users[i].properties;
+                    delete users[i].groups;
+                }
+
+                grunt.file.write('./backupsDB/' + timestamp + '/user.json', JSON.stringify(users));
+                callback(null);
+            }
+        });
+    }
+
     // grunt importCollectionsFromCorbel:next:qa
     grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
         var fs = require('fs'),
             timestamp = Date.now();
         fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
-            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            'restoreCollection:project:' + timestamp
-            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
+            //'restoreCollection:project:' + timestamp
+            'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
         ]);
     });
 
