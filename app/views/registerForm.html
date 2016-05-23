@@ -144,7 +144,7 @@
                     </div>
                     <!-- Submit Form -->
                     <div class="form-control">
-                        <input type="submit" data-ng-click="form.username.submitted=true; form.password.submitted=true; form.email.submitted=true; form.readServiceTerm.submitted=true; form.birthday.submitted=true; register(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'general_button_register' | translate}}" ng-disabled="login.password.$dirty && login.password.$invalid || login.email.$dirty && login.email.$invalid" data-element="enter-register">
+                        <input type="submit" data-ng-click="form.username.submitted=true; form.password.submitted=true; form.email.submitted=true; form.readServiceTerm.submitted=false; form.birthday.submitted=true; register(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'general_button_register' | translate}}" ng-disabled="login.password.$dirty && login.password.$invalid || login.email.$dirty && login.email.$invalid" data-element="enter-register">
                     </div>
                 </fieldset>
             </form>
