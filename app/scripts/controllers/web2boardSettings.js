@@ -21,6 +21,10 @@ angular.module('bitbloqApp')
             web2board: '',
             bitbloqLibs: ''
         };
+        $scope.proxyTestIcon = null;
+        $scope.proxyTestClass = null;
+        $scope.libsPathIcon = null;
+        $scope.libsPathClass = null;
 
         web2boardV2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
             console.error(hub, func);
@@ -37,19 +41,31 @@ angular.module('bitbloqApp')
         });
 
         $scope.onLibrariesPathChanged = function () {
+            $scope.libsPathIcon = '#loading';
+            $scope.libsPathClass = 'w2b__settings_w2b__settings_loading';
             configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
                 .then(function (isPossible) {
-                    console.log(isPossible ? 'GOOD' : 'BAD');
+                    if(isPossible) {
+                        $scope.libsPathIcon = '#ok';
+                        $scope.libsPathClass = 'w2b__settings_ok';
+                    }else {
+                        $scope.libsPathIcon = '#error';
+                        $scope.libsPathClass = 'w2b__settings_error';
+                    }
                 });
         };
 
         $scope.testProxy = function () {
+            $scope.proxyTestIcon = '#loading';
+            $scope.proxyTestClass = 'w2b__settings_w2b__settings_loading';
             configHub.server.testProxy($scope.settings.proxy)
                 .then(function () {
-                    console.log('GOOD');
+                    $scope.proxyTestIcon = '#ok';
+                    $scope.proxyTestClass = 'w2b__settings_ok';
                 })
                 .catch(function () {
-                    console.log('BAD');
+                    $scope.proxyTestIcon = '#error';
+                    $scope.proxyTestClass = 'w2b__settings_error';
                 });
         };
 

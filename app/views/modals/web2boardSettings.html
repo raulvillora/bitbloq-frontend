@@ -7,25 +7,29 @@
             <span>BitbloqLibs version: {{version.bitbloqLibs}}</span>
         </div>
         <!-- input type="text"-->
-        <div>
+        <div class="w2b__settings__param">
             <label>Proxy:</label>
-                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname'}">
+                    <span class="form--input w2b__settings__param__input">
                         <input type="text"
                                placeholder="Proxy (default None)"
-                               data-ng-model="settings.proxy">
+                               data-ng-model="settings.proxy"
+                               ng-blur="testProxy()">
                     </span>
-                <button ng-click="testProxy()" class="btn btn--primary">
-                    Test proxy
-                </button>
+            <svg ng-if="proxyTestClass" class="logo--icon w2b__settings__icon" ng-class="proxyTestClass">
+                <use xlink:href="{{proxyTestIcon}}"></use>
+            </svg>
         </div>
         <!-- textarea -->
-        <div>
+        <div class="w2b__settings__param">
             <label>Arduino libraries path:</label>
-                    <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname'}">
+                    <span class="form--input w2b__settings__param__input" >
                         <input type="text"
                                data-ng-model="settings.libraries_path"
                                ng-blur="onLibrariesPathChanged()">
                     </span>
+            <svg ng-if="libsPathClass" class="logo--icon w2b__settings__icon" ng-class="libsPathClass">
+                <use xlink:href="{{libsPathIcon}}"></use>
+            </svg>
         </div>
 
         <div class="modal--projects--action">
