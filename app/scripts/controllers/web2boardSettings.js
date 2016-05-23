@@ -13,8 +13,6 @@ angular.module('bitbloqApp')
         var configHub = web2boardV2.api.ConfigHub,
             versionHub = web2boardV2.api.VersionsHandlerHub;
         $scope.settings = {
-            web_socket_ip: '',
-            web_socket_port: 0,
             libraries_path: '',
             proxy: '',
             check_online_updates: false

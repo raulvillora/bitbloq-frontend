@@ -50,6 +50,7 @@ angular.module('bitbloqApp')
             web2board.chartMonitor = web2boardV2.chartMonitor;
             web2board.version = web2boardV2.version;
             web2board.showSettings = web2boardV2.showSettings;
+            web2board.uploadHex = web2boardV2.uploadHex;
         }
 
         function showUpdateModal() {
@@ -70,6 +71,14 @@ angular.module('bitbloqApp')
                     showClose: true
                 });
             }
+        }
+
+        function showNecessaryToUpdate() {
+            var startingAlert = alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
+            web2board._openCommunication(function () {
+                showUpdateModal();
+                alertsService.close(startingAlert);
+            });
         }
 
         function startWeb2board() {
@@ -383,9 +392,7 @@ angular.module('bitbloqApp')
                 firstFunctionCalled.args = [board];
                 firstFunctionCalled.alertServiceTag = 'chartMonitor';
             }
-            web2board._openCommunication(function () {
-                console.error('We should never enter here');
-            });
+            showNecessaryToUpdate();
         };
 
         web2board.version = function () {
@@ -417,8 +424,7 @@ angular.module('bitbloqApp')
                 firstFunctionCalled.args = [];
                 firstFunctionCalled.alertServiceTag = 'showSettings';
             }
-            alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
-            web2board._openCommunication(showUpdateModal);
+            showNecessaryToUpdate();
         };
 
         web2board.uploadHex = function (hex, boardMcu) {
@@ -427,8 +433,7 @@ angular.module('bitbloqApp')
                 firstFunctionCalled.args = [hex, boardMcu];
                 firstFunctionCalled.alertServiceTag = '';
             }
-            alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
-            web2board._openCommunication(showUpdateModal);
+            showNecessaryToUpdate();
         };
 
         return web2board;

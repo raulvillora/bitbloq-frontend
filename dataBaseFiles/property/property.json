@@ -1,6 +1,9 @@
 [{
     "web2boardVersion": "1.0.0",
     "bitbloqLibsVersion": "0.1.2",
+    "robotsFirmwareVersion": {
+        "zowi": "1.0.0"
+    },
     "bloqsSortTree": {
         "components": [{
             "name": "hts221Temperature",

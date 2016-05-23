@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2boardV2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                     alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
+                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
 
         /** Variables */
 
@@ -40,9 +40,7 @@ angular.module('bitbloqApp')
         }
 
         function removeInProgressFlag() {
-            $rootScope.$apply(function () {
-                inProgress = false;
-            });
+            inProgress = false;
         }
 
         function showUpdateModal() {
@@ -253,9 +251,11 @@ angular.module('bitbloqApp')
                 inProgress = true;
                 openCommunication(function () {
                     alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                    return api.CodeHub.server.upload(code, boardMcu).then(function () {
-                        alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000);
-                    }, handleUploadError).finally(removeInProgressFlag);
+                    return api.CodeHub.server.upload(code, boardMcu)
+                        .then(function () {
+                            alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000);
+                        }, handleUploadError)
+                        .finally(removeInProgressFlag);
                 });
             }
         };
