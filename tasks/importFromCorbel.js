@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             var configFile = grunt.file.readJSON('./app/res/config/config.json'),
                 corbelEnvUrl;
             if (env === 'production') {
-                corbelEnvUrl = '';
+                corbelEnvUrl = 'lololololololo';
             } else if (env === 'mvp') {
                 corbelEnvUrl = '-current';
             } else {
