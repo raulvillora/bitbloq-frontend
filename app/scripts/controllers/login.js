@@ -83,7 +83,7 @@ angular.module('bitbloqApp')
                 }
                 login();
             } else {
-                fireShakeEffect();
+              fireShakeEffect();
             }
         };
 
@@ -430,9 +430,6 @@ angular.module('bitbloqApp')
 
         function fireShakeEffect() {
             angular.element('[data-effect="shake"]').addClass('shake');
-            setTimeout(function() {
-                angular.element('[data-effect="shake"]').removeClass('shake');
-            }, 250);
         }
 
         $scope.envData = envData;
