@@ -388,45 +388,17 @@ angular.module('bitbloqApp')
 
         exports.clone = function(project, openInTab) {
             var defered = $q.defer(),
-                cloneToAvoidReferences = _.cloneDeep(project),
-                newProject = {
-                    description: cloneToAvoidReferences.description,
-                    software: cloneToAvoidReferences.software,
-                    hardwareTags: cloneToAvoidReferences.hardwareTags,
-                    videoUrl: cloneToAvoidReferences.videoUrl,
-                    userTags: cloneToAvoidReferences.userTags,
-                    hardware: cloneToAvoidReferences.hardware,
-                    code: cloneToAvoidReferences.code,
-                    codeProject: cloneToAvoidReferences.codeProject,
-                    defaultTheme: cloneToAvoidReferences.defaultTheme
-                },
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
 
             function confirmAction(newName) {
                 alertsService.add('make-cloning-project', 'clone-project', 'ok', 5000);
-                newProject.name = newName;
-                projectApi.save(newProject).then(function(newProjectId) {
-                    newProject._id = newProjectId.data;
-                    if (newProject.imageType) {
-                        imageApi.get(project._id, newProject.imageType).then(function(response) {
-                            imageApi.save(newProjectId, response.data).then(function() {
-                                alertsService.add('make-cloned-project', 'make-cloned-project', 'ok', 5000);
-                                defered.resolve(newProjectId);
-                            }, function() {
-                                defered.reject();
-                            });
-                        }, function() {
-                            defered.reject();
-                        });
-                    } else {
-                        alertsService.add('make-cloned-project', 'clone-project', 'ok', 5000);
-                        defered.resolve(newProjectId);
-                    }
-                }).finally(function() {
-                    if (newProject._id && openInTab) {
+                projectApi.clone(project._id, newName).then(function(newProjectId) {
+                    alertsService.add('make-cloned-project', 'clone-project', 'ok', 5000);
+                    if (newProjectId.data && openInTab) {
                         var newtab = $window.open('', '_blank');
-                        newtab.location = '#/bloqsproject/' + newProject._id;
+                        newtab.location = '#/bloqsproject/' + newProjectId.data;
                     }
+                    defered.resolve(newProjectId.data);
                 });
                 return true;
             }

@@ -88,6 +88,17 @@ angular.module('bitbloqApp')
             });
         };
 
+
+        exports.clone = function(idProject, name) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'project/' + idProject + '/clone',
+                data: {
+                    name: name
+                }
+            });
+        };
+
         exports.publish = function(project) {
             var defered = $q.defer();
             $http({
