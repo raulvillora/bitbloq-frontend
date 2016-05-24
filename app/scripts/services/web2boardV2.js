@@ -302,8 +302,7 @@ angular.module('bitbloqApp')
             if (!inProgress) {
                 openCommunication(function () {
                     inProgress = false;
-                    var dialog,
-                        parent = $rootScope,
+                    var parent = $rootScope,
                         modalOptions = parent.$new();
                     _.extend(modalOptions, {
                         contentTemplate: '/views/modals/web2boardSettings.html',
@@ -311,7 +310,7 @@ angular.module('bitbloqApp')
                         modalText: 'modal-download-web2board-text',
                         confirmButton: 'save',
                         rejectButton: 'cancel',
-                        modalButtons: true,
+                        modalButtons: true
                     });
                     modalOptions.envData = envData;
                     ngDialog.closeAll();
