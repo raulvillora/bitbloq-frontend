@@ -15,16 +15,19 @@ angular.module('bitbloqApp')
         $scope.settings = {
             libraries_path: '',
             proxy: '',
-            check_online_updates: false
+            check_online_updates: false,
+            check_libraries_updates: false
         };
         $scope.version = {
             web2board: '',
             bitbloqLibs: ''
         };
+        $scope.version = {version: "testing"};
         $scope.proxyTestIcon = null;
-        $scope.proxyTestClass = null;
+        $scope.proxyError = false;
         $scope.libsPathIcon = null;
-        $scope.libsPathClass = null;
+        $scope.libsError = null;
+        $scope.focus = false;
 
         web2boardV2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
             console.error(hub, func);
@@ -40,42 +43,42 @@ angular.module('bitbloqApp')
             $scope.version.web2board = version;
         });
 
-        $scope.onLibrariesPathChanged = function () {
+        $scope.testLibrariesPath = function () {
             $scope.libsPathIcon = '#loading';
             $scope.libsPathClass = 'w2b__settings_w2b__settings_loading';
-            configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
+            return configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
                 .then(function (isPossible) {
-                    if(isPossible) {
-                        $scope.libsPathIcon = '#ok';
-                        $scope.libsPathClass = 'w2b__settings_ok';
-                    }else {
-                        $scope.libsPathIcon = '#error';
-                        $scope.libsPathClass = 'w2b__settings_error';
-                    }
+                    $scope.libsPathIcon = isPossible ? '#ok' : '#error';
+                    $scope.libsError = !isPossible;
                 });
         };
 
         $scope.testProxy = function () {
             $scope.proxyTestIcon = '#loading';
             $scope.proxyTestClass = 'w2b__settings_w2b__settings_loading';
-            configHub.server.testProxy($scope.settings.proxy)
+            return configHub.server.testProxy($scope.settings.proxy)
                 .then(function () {
                     $scope.proxyTestIcon = '#ok';
-                    $scope.proxyTestClass = 'w2b__settings_ok';
+                    $scope.proxyError = false;
                 })
                 .catch(function () {
                     $scope.proxyTestIcon = '#error';
-                    $scope.proxyTestClass = 'w2b__settings_error';
+                    $scope.proxyError = true;
                 });
         };
 
         $scope.confirmAction = function () {
-            configHub.server.setValues($scope.settings)
+            $scope.testProxy()
                 .then(function () {
-                    console.log('Successfully saved settings');
-                    $scope.closeThisDialog();
-                }, function (error) {
-                    console.error('unable to save settings due to: ', error);
+                    return $scope.testLibrariesPath();
+                })
+                .then(function () {
+                    if (!$scope.proxyError && !$scope.libsError) {
+                        console.log('Successfully saved settings');
+                        $scope.closeThisDialog();
+                    } else {
+                        console.error('unable to save settings');
+                    }
                 });
         };
 
