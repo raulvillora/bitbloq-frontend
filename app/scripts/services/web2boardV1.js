@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .factory('web2board', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData, web2boardV2, alertsService) {
+    .factory('web2board', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData, web2boardV2, alertsService, $location, commonModals) {
 
         /** Variables */
 
@@ -53,30 +53,83 @@ angular.module('bitbloqApp')
             web2board.uploadHex = web2boardV2.uploadHex;
         }
 
-        function showUpdateModal() {
-            $rootScope.$emit('web2board:no-web2board');
+        function showWeb2BoardModal(options) {
+            if (modalObj) {
+                modalObj.close();
+            }
             var parent = $rootScope,
-                modalOptions = parent.$new();
+                modalOptions = parent.$new(),
+                viewAllLink = function() {
+                    modalObj.close();
+                    $location.path('/downloads');
+                };
+            _.extend(modalOptions, options);
+
             _.extend(modalOptions, {
                 contentTemplate: '/views/modals/downloadWeb2board.html',
-                modalTitle: 'modal-download-web2board-title',
-                modalText: 'modal-download-web2board-text'
+                modalButtons: true,
+                modalText: 'modal-download-web2board-text',
+                os: common.os,
+                viewAllLink: viewAllLink
             });
+
             modalOptions.envData = envData;
-            if (!modalObj || !ngDialog.isOpen(modalObj.id)) {
-                modalObj = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--download-web2board',
-                    scope: modalOptions,
-                    showClose: true
-                });
-            }
+            modalObj = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--download-web2board',
+                scope: modalOptions,
+                showClose: true
+            });
+        }
+
+        function showWeb2BoardDownloadModal () {
+            var modalOptions = {
+                contentTemplate: '/views/modals/downloadWeb2board.html',
+                modalTitle: 'modal-download-web2board-title',
+                footerText: 'web2board-alreadyInstalled',
+                footerLink: showWeb2BoardErrorModal
+            };
+            return showWeb2BoardModal(modalOptions);
+        }
+
+        function showWeb2BoardUploadModal () {
+            var modalOptions = {
+                contentTemplate: '/views/modals/downloadWeb2board.html',
+                modalTitle: 'modal-update-web2board-title',
+                modalText: 'modal-download-web2board-text'
+            };
+            return showWeb2BoardModal(modalOptions);
+        }
+
+        function showWeb2BoardErrorModal() {
+            modalObj.close();
+            var parent = $rootScope,
+                modalOptions = parent.$new();
+
+            _.extend(modalOptions, {
+                contentTemplate: '/views/modals/web2boardErrors.html',
+                backAction: showWeb2BoardDownloadModal,
+                sendCommentsModal: function() {
+                    modalObj.close();
+                    commonModals.sendCommentsModal();
+                }
+            });
+
+            modalOptions.envData = envData;
+
+
+            modalObj = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--web2board-errors',
+                scope: modalOptions,
+                showClose: true
+            });
         }
 
         function showNecessaryToUpdate() {
             var startingAlert = alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
             web2board._openCommunication(function () {
-                showUpdateModal();
+                showWeb2BoardUploadModal();
                 alertsService.close(startingAlert);
             });
         }
@@ -265,7 +318,7 @@ angular.module('bitbloqApp')
                 .catch(function () {
                     if (showUpdateModalFlag) {
                         inProgress = false;
-                        showUpdateModal();
+                        showWeb2BoardDownloadModal();
                     } else {
                         if (tryCount === 1) {
                             // we only need to start web2board once

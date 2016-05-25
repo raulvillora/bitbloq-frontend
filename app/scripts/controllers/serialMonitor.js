@@ -62,7 +62,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.onKeyPressedInInput = function (event) {
-            if (event.which === 13){
+            if (event.which === 13) {
                 $scope.send();
             }
         };
@@ -74,7 +74,7 @@ angular.module('bitbloqApp')
 
         $scope.onPause = function () {
             $scope.pause = !$scope.pause;
-            if($scope.pause) {
+            if ($scope.pause) {
                 $scope.serial.dataReceived += '\n\nSerial Monitor paused\n\n';
                 scrollTextAreaToBottom();
             }
@@ -86,7 +86,7 @@ angular.module('bitbloqApp')
         };
 
         /*Init functions*/
-        serialHub.server.subscribeToHub();
+        serialHub.server.subscribeToPort($scope.port);
 
         serialHub.server.startConnection($scope.port, 9600)
             .catch(function (error) {
@@ -96,7 +96,9 @@ angular.module('bitbloqApp')
             });
 
         $scope.$on('$destroy', function () {
-            web2boardV2.api.SerialMonitorHub.server.closeAllConnections();
-            web2boardV2.api.SerialMonitorHub.server.unsubscribeFromHub();
+            serialHub.server.unsubscribeFromPort($scope.port)
+                .then(function () {
+                    return serialHub.server.closeUnusedConnections();
+                });
         });
     });

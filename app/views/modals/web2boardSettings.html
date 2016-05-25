@@ -43,7 +43,7 @@
             <span class="input input--checkbox">
                 <input ng-model="settings.check_online_updates" type="checkbox" id="checkOnlineUpdates">
                 <label for="checkOnlineUpdates">
-                    {{ 'web2board-checkForUpdates' | translate }}
+                    {{ 'web2board-checkForUpdates' | translate: web2boardVersion }}
                 </label>
             </span>
         </div>
@@ -51,7 +51,7 @@
             <span class="input input--checkbox">
                 <input ng-model="settings.check_libraries_updates" type="checkbox" id="checkLibsUpdates">
                 <label for="checkLibsUpdates">
-                    {{ 'web2board-checkLibrariesUpdates' | translate: version }}
+                    {{ 'web2board-checkLibrariesUpdates' | translate: libsVersion }}
                 </label>
             </span>
         </div>

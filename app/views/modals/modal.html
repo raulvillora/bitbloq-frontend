@@ -19,7 +19,7 @@
                     <button ng-if="rejectButton" type="button" ng-click="rejectAction(); closeThisDialog()" class="btn btn--secondary btn__modal--footer btn--reject" data-element="modal-cancel-dialog">{{rejectButton | translate}}</button>
                 </div>
                 <div class="modal__footer--text" ng-if="footerText">
-                    <button class="link--default link--modal" ng-click="footerLink()">Ya tengo instalado Web2Board</button>
+                    <button class="link--default link--modal" ng-click="footerLink()">{{footerText | translate}}</button>
                 </div>
             </div>
         </div>
