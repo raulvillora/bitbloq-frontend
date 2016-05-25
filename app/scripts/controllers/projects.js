@@ -178,6 +178,7 @@ angular.module('bitbloqApp')
             $scope.common.removeProjects[projectId] = false;
         }
 
+        $scope.timestamp = new Date().getTime();
         $scope.commonModals = commonModals;
         $scope.projectApi = projectApi;
         $scope.selectedTab = 'projects';
@@ -210,6 +211,9 @@ angular.module('bitbloqApp')
         // Get projects
         $scope.refreshProjects(true);
         $window.onfocus = function() {
+            $scope.$apply(function() {
+                $scope.timestamp = Date.now();
+            });
             if ($localStorage.projectsChange && $scope.common.itsUserLoaded()) {
                 $localStorage.projectsChange = false;
                 $scope.refreshProjects();
