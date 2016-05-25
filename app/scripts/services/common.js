@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function ($filter, $log, envData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window) {
+    .service('common', function($filter, $log, envData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -66,10 +66,10 @@ angular.module('bitbloqApp')
 
         exports.oldVersionMasthead = false;
 
-        exports.urlImage = envData.config.s3Url + '/' + envData.config.bucket + '/api-images/';
-        
-        exports.os = getOsName();
+        exports.urlImage = envData.config.gCloudUrl + '/images/';
 
+        exports.os = getOsName();
+        
         exports.langToBQ = {
             ca: 'es',
             de: 'de',
@@ -115,7 +115,7 @@ angular.module('bitbloqApp')
             zh: 'en-GB'
         };
 
-        exports.setUser = function (user) {
+        exports.setUser = function(user) {
             if (loadedUserPromise.promise.$$state.status !== 0) {
                 loadedUserPromise = $q.defer();
             }
@@ -135,14 +135,14 @@ angular.module('bitbloqApp')
             exports.user = user;
         };
 
-        exports.itsUserLoaded = function () {
+        exports.itsUserLoaded = function() {
             // loadedUserPromise.resolve();
             return loadedUserPromise.promise;
         };
 
         var md = new MobileDetect(window.navigator.userAgent);
 
-        exports.acceptCookies = function () {
+        exports.acceptCookies = function() {
             if (exports.user) {
                 userApi.update({
                     cookiePolicyAccepted: true
@@ -152,14 +152,14 @@ angular.module('bitbloqApp')
             exports.cookiesAccepted = true;
         };
 
-        exports.goToLogin = function () {
+        exports.goToLogin = function() {
             var url = $location.url();
             $location.path('login').search({
                 init: url
             });
         };
 
-        exports.goToRegister = function () {
+        exports.goToRegister = function() {
             var url = $location.url();
             $location.path('register').search({
                 init: url
@@ -192,7 +192,7 @@ angular.module('bitbloqApp')
         }
 
         function getProperties() {
-            $http.get(envData.config.serverUrl + 'property').success(function (items) {
+            $http.get(envData.config.serverUrl + 'property').success(function(items) {
                 $log.debug('properties', items);
                 exports.properties = items[0];
             });
@@ -201,7 +201,7 @@ angular.module('bitbloqApp')
         var loadedUserPromise = $q.defer();
 
         if (!exports.user) {
-            User.get().$promise.then(function (user) {
+            User.get().$promise.then(function(user) {
                 if (user.username) {
                     delete user.$promise;
                     delete user.$resolved;
@@ -211,7 +211,7 @@ angular.module('bitbloqApp')
                     exports.userIsLoaded = true;
                     exports.setUser(null);
                 }
-            }, function () {
+            }, function() {
                 exports.userIsLoaded = true;
                 exports.setUser(null);
             });
@@ -228,15 +228,15 @@ angular.module('bitbloqApp')
 
         processRoute();
 
-        exports.itsUserLoaded().finally(function () {
+        exports.itsUserLoaded().finally(function() {
             getProperties();
         });
 
-        $rootScope.$on('$locationChangeSuccess', function () {
+        $rootScope.$on('$locationChangeSuccess', function() {
             processRoute();
         });
 
-        $rootScope.$on('$translateChangeEnd', function (evt, newLang) {
+        $rootScope.$on('$translateChangeEnd', function(evt, newLang) {
             amMoment.changeLocale(newLang.language);
         });
 

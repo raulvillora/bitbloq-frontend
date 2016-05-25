@@ -18,10 +18,6 @@ angular.module('bitbloqApp')
             check_online_updates: false,
             check_libraries_updates: false
         };
-        $scope.version = {
-            web2board: '',
-            bitbloqLibs: ''
-        };
         $scope.proxyTestIcon = null;
         $scope.proxyError = false;
         $scope.libsPathIcon = null;
