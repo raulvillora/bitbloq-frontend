@@ -8,7 +8,7 @@
             <div class="theme__header-info">
                 <h1 class="theme__title" data-element="forum-theme-theme-title">{{forum.currentTheme.title}}</h1>
                 <span class="theme-by-user">{{'by' | translate }}
-                    <span class="block__username__link">{{forum.firstAnswer.owner.username}}</span> |
+                    <span class="block__username__link">{{forum.firstAnswer.creatorUsername}}</span>
                     <time>{{forum.firstAnswer._createdAt | amDateFormat:'DD MMM YYYY, HH:mm' }}</time>
                 </span>
             </div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="answer__header">
-                <h2>{{answer.owner.username}}</h2>
+                <h2>{{answer.creatorUsername}}</h2>
                 <time>{{answer._updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
             </div>
             <div class="answer__content">

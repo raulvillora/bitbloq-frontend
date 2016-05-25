@@ -22,7 +22,7 @@ angular.module('bitbloqApp')
             web2board: '',
             bitbloqLibs: ''
         };
-        $scope.version = {version: "testing"};
+        $scope.version = {version: 'testing'};
         $scope.proxyTestIcon = null;
         $scope.proxyError = false;
         $scope.libsPathIcon = null;

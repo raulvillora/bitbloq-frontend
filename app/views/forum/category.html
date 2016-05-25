@@ -23,7 +23,7 @@
                             <h2 class="block__item__title" data-element="forum-category-theme-title">{{theme.title}}</h2>
                         </a>
                         <span class="block__item__description">{{'by' | translate}}
-                            <span class="block__item__owner">{{theme.creator.name}}</span>
+                            <span class="block__item__owner">{{theme.creatorUsername}}</span>
                         </span>
                     </li>
                 </ul>
@@ -45,7 +45,7 @@
             <div class="col-vsmall-2">
                 <ul class="forum__block__list" ng-if="theme.numberOfAnswers !== 0">
                     <li class="forum__block__item">
-                        <span class="block__username">{{'by' | translate}} <span class="block__username__link">{{theme.lastAnswer.owner.username}}</span></span>
+                        <span class="block__username">{{'by' | translate}} <span class="block__username__link">{{theme.lastAnswer.creatorUsername}}</span></span>
                         <time>{{theme.lastAnswer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
                     </li>
                 </ul>

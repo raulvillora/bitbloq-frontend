@@ -78,11 +78,7 @@
             forum.submitNewAnswer = function(threadId) {
                 var answer = {
                     threadId: threadId || forum.currentTheme._id,
-                    content: '<p>' + forum.textEditorContent.htmlContent + '</p>',
-                    owner: {
-                        _id: common.user._id,
-                        username: common.user.username
-                    }
+                    content: '<p>' + forum.textEditorContent.htmlContent + '</p>'
                 };
 
                 if (threadId) {
@@ -114,19 +110,11 @@
 
                     var thread = {
                         title: forum.textEditorContent.title,
-                        categoryId: chosenCategory.uuid,
-                        creator: {
-                            _id: common.user._id,
-                            name: common.user.username
-                        }
+                        categoryId: chosenCategory.uuid
                     };
 
                     var answer = {
                         content: '<p>' + forum.textEditorContent.htmlContent + '</p>',
-                        owner: {
-                            _id: common.user._id,
-                            username: common.user.username
-                        },
                         main: true
                     };
 
