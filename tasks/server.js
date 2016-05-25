@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                 token: sharedToken
             });
         } else {
-            var configFile = grunt.file.readJSON('./app/res/config/config.json'),
+            var configFile = grunt.file.readJSON('gruntconfig.json'),
                 data = {
                     email: configFile.adminUser,
                     password: configFile.adminPassword
@@ -119,14 +119,19 @@ module.exports = function(grunt) {
 
     function refreshServerCollection(collectionName, items, callback) {
         console.log('refresh collection');
-        deleteCollection(collectionName, function(err) {
-            if (err) {
-                callback(err);
-            } else {
-                console.log('deleted now start to insert');
-                insertCollection(collectionName, items, callback);
-            }
-        });
+        if (collectionName === 'user') {
+            insertCollection(collectionName, items, callback);
+        } else {
+            deleteCollection(collectionName, function(err) {
+                if (err) {
+                    callback(err);
+                } else {
+                    console.log('deleted now start to insert');
+                    insertCollection(collectionName, items, callback);
+                }
+            });
+        }
+
     };
 
     grunt.registerTask('updateCollection', function(collectionName) {
