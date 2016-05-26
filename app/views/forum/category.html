@@ -15,15 +15,15 @@
         </div>
     </div>
     <div class="forum__block">
-        <div dir-paginate="theme in forum.categoryThemes | filter:q | itemsPerPage: forum.categoryThemesPerPage" class="row">
+        <div dir-paginate="thread in forum.categoryThemes | filter:q | itemsPerPage: forum.categoryThemesPerPage" class="row">
             <div class="col-vsmall-6">
                 <ul class="forum__block__list">
                     <li class="forum__block__item">
-                        <a ng-href="{{'#/help/forum/' + forum.currentCategory + '/' + theme._id}}">
-                            <h2 class="block__item__title" data-element="forum-category-theme-title">{{theme.title}}</h2>
+                        <a ng-href="{{'#/help/forum/' + forum.currentCategory + '/' + thread._id}}">
+                            <h2 class="block__item__title" data-element="forum-category-theme-title">{{thread.title}}</h2>
                         </a>
                         <span class="block__item__description">{{'by' | translate}}
-                            <span class="block__item__owner">{{theme.creatorUsername}}</span>
+                            <span class="block__item__owner">{{thread.creatorUsername}}</span>
                         </span>
                     </li>
                 </ul>
@@ -31,22 +31,22 @@
             <div class="col-vsmall-2">
                 <ul class="forum__block__list">
                     <li class="forum__block__item">
-                        <span>{{theme.numberOfAnswers}}</span>
+                        <span>{{thread.numberOfAnswers}}</span>
                     </li>
                 </ul>
             </div>
             <div class="col-vsmall-2">
                 <ul class="forum__block__list">
                     <li class="forum__block__item">
-                        <span>{{theme.numberOfViews}}</span>
+                        <span>{{thread.numberOfViews}}</span>
                     </li>
                 </ul>
             </div>
             <div class="col-vsmall-2">
-                <ul class="forum__block__list" ng-if="theme.numberOfAnswers !== 0">
+                <ul class="forum__block__list" ng-if="thread.numberOfAnswers !== 0">
                     <li class="forum__block__item">
-                        <span class="block__username">{{'by' | translate}} <span class="block__username__link">{{theme.lastAnswer.creatorUsername}}</span></span>
-                        <time>{{theme.lastAnswer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
+                        <span class="block__username">{{'by' | translate}} <span class="block__username__link">{{thread.lastAnswer.creatorUsername}}</span></span>
+                        <time>{{thread.lastAnswer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
                     </li>
                 </ul>
             </div>
@@ -65,7 +65,7 @@
                         <h2 class="block__item__title">{{result.title}}</h2>
                     </a>
                 <span class="block__item__description">{{'by' | translate}}
-                    <span class="block__item__owner">{{result.owner}}</span>
+                    <span class="block__item__owner">{{result.creatorUsername}}</span>
                     en
                     <span>{{result.categoryName}}</span>
                 </span>

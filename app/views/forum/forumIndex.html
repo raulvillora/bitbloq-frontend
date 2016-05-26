@@ -42,7 +42,7 @@
                 </ul>
             </div>
             <div class="col-vsmall-4">
-                <ul class="forum__block__list" ng-if="category.numberOfAnswers !== 0">
+                <ul class="forum__block__list" ng-if="category.numberOfThreads !== 0">
                     <li class="forum__block__item">
                         <a href="#/help/forum/{{category.name | encode}}/{{category.lastThread._id}}">
                             <h3 class="block__last-theme__title">{{category.lastThread.title}}</h3>
@@ -50,7 +50,7 @@
                         <span class="block__username">{{'by' | translate}}
                             <span class="block__username__link">{{category.lastThread.creatorUsername}}</span>
                         </span>
-                        <time>{{category.lastThread.lastAnswerDate | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
+                        <time>{{category.lastThread.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
                     </li>
                 </ul>
             </div>
