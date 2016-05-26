@@ -86,6 +86,7 @@ angular.module('bitbloqApp')
                             if ($scope.tempImage.file) {
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
+                                    $localStorage.projectsChange = true;
                                     $scope.project.imageType = currentProject.imageType;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};
@@ -127,6 +128,7 @@ angular.module('bitbloqApp')
                             if ($scope.tempImage.file) {
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
+                                    $localStorage.projectsChange = true;
                                     $scope.project.imageType = currentProject.imageType;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};

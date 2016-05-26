@@ -13,6 +13,22 @@ angular.module('bitbloqApp')
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
+
+        function getOsName() {
+            if (navigator.appVersion.indexOf('Win') !== -1) {
+                return 'Windows';
+            }
+            else if (navigator.appVersion.indexOf('Mac') !== -1) {
+                return 'MacOS';
+            }
+            else if (navigator.appVersion.indexOf('X11') !== -1) {
+                return 'Linux';
+            }
+            else if (navigator.appVersion.indexOf('Linux') !== -1) {
+                return 'Linux';
+            }
+        }
+
         $log.log('Bitbloq version:', envData.config.version);
 
         //See drag directives
@@ -50,8 +66,10 @@ angular.module('bitbloqApp')
 
         exports.oldVersionMasthead = false;
 
-        exports.urlImage = envData.config.s3Url + '/' + envData.config.bucket + '/api-images/';
+        exports.urlImage = envData.config.gCloudUrl + '/images/';
 
+        exports.os = getOsName();
+        
         exports.langToBQ = {
             ca: 'es',
             de: 'de',

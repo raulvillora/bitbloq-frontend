@@ -20,11 +20,12 @@ angular.module('bitbloqApp')
             formData.append('file', file);
 
             return $http.post(envData.config.serverUrl + 'image/' + collection + '/' + idImage, formData, {
-                    transformRequest: angular.identity,
-                    headers: {
-                        'Content-Type': undefined
-                    }
-                });
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined,
+                    'Cache-Control': 'private'
+                }
+            });
         };
 
         return data;

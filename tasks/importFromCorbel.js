@@ -1,10 +1,11 @@
+'use strict';
 module.exports = function(grunt) {
     var cd = null;
 
     function getCorbelDriver(env) {
         if (!cd) {
             env = env || 'next';
-            var configFile = grunt.file.readJSON('./app/res/config/config.json'),
+            var configFile = grunt.file.readJSON('gruntconfig.json'),
                 corbelEnvUrl;
             if (env === 'production') {
                 corbelEnvUrl = 'lololololololo';
@@ -15,8 +16,7 @@ module.exports = function(grunt) {
             }
             grunt.log.oklns('Get Corbel Driver in enviroment = ' + env);
 
-            var corbel = require('../node_modules/corbel-js/dist/corbel.js'),
-                async = require('async');
+            var corbel = require('../node_modules/corbel-js/dist/corbel.js');
 
             var options = {
                 'clientId': configFile['corbelAdminClientId_' + env],
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
     function getAdminToken(env) {
         var cd = getCorbelDriver(env),
-            configFile = grunt.file.readJSON('./app/res/config/config.json');
+            configFile = grunt.file.readJSON('gruntconfig.json');
         grunt.log.oklns('Get Corbel Admin Token');
         return cd.iam.token().create({
             claims: {
@@ -164,40 +164,6 @@ module.exports = function(grunt) {
         });
     }
 
-    function getCorbelUsers(env, callback) {
-        grunt.log.writeln('Get Corbel Users from ' + env);
-        var collectionName = 'users'
-        if (!tempPageNumber[collectionName]) {
-            tempCollections[collectionName] = [];
-            tempPageNumber[collectionName] = 0;
-        }
-        getAdminToken(env).then(function(response) {
-            grunt.log.writeln('Getting Collection');
-            cd.iam.users().get({
-                pagination: {
-                    page: tempPageNumber[collectionName],
-                    pageSize: 50
-                }
-            }).then(function(response) {
-                if (response.data.length === 0) {
-                    tempPageNumber[collectionName] = undefined;
-                    callback(null, tempCollections[collectionName]);
-                } else {
-                    tempCollections[collectionName] = tempCollections[collectionName].concat(response.data);
-                    tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
-                    getCorbelUsers(env, callback);
-                }
-            }).catch(function(error) {
-                console.log('error');
-                console.log(error);
-                callback(error);
-            });
-        }).catch(function(err) {
-            grunt.log.error('create token error');
-            callback(err);
-        });
-    }
-
     grunt.registerTask('exportCollectionFromCorbel', function(collectionName, env, timestamp) {
         var done = this.async();
         switch (collectionName) {
@@ -206,6 +172,9 @@ module.exports = function(grunt) {
                 break;
             case 'user':
                 migrateUsersFromCorbelToBitbloq(env, timestamp, done);
+                break;
+            case 'forum':
+                migrateForumFromCorbelToBitbloq(env, timestamp, done);
                 break;
             default:
                 console.log('Unknow Collection, nothing to do  ¯\\_(ツ)_/¯');
@@ -251,48 +220,93 @@ module.exports = function(grunt) {
                 grunt.file.write('./backupsDB/' + timestamp + '/project.json', JSON.stringify(projects));
                 callback();
             }
-        })
+        });
+    }
+
+    function parseFalse(value) {
+        return !(!value || (value === 'false'));
     }
 
     function migrateUsersFromCorbelToBitbloq(env, timestamp, callback) {
-        getCorbelUsers(env, function(err, users) {
+        var users = grunt.file.readJSON('./../temp/users_bitbloq.json');
+
+        console.log('We have users, now transform it to Bitbloq and save on backupsDB', timestamp, users.length);
+        for (var i = 0; i < users.length; i++) {
+            users[i]._id = users[i].id;
+            //users[i].salt = users[i].;
+            users[i].provider = 'local';
+            //users[i].password = users[i].;
+            users[i].birthday = users[i]['properties.birthday'];
+            users[i].cookiePolicyAccepted = false;
+            users[i].hasBeenWarnedAboutChangeBloqsToCode = false;
+            users[i].hasBeenAskedIfTeacher = parseFalse(users[i]['properties.hasBeenAskedIfTeacher']);
+            users[i].takeTour = parseFalse(users[i]['properties.tour']);
+            users[i].language = users[i]['properties.language'];
+            users[i].newsletter = parseFalse(users[i]['properties.newsletter']);
+            users[i].role = 'user';
+            // users[i].social = {
+            //     facebook: ,
+            //     google:
+            // }
+            users[i].bannedInForum = false;
+            var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups',
+                'properties.hasBeenAskedIfTeacher', 'properties.birthday', 'properties.code', 'properties.language', 'properties.cookiePolicyAccepted', 'properties.connected',
+                'properties.tour', 'properties.term', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
+            ];
+
+            for (var j = 0; j < deleteFields.length; j++) {
+                delete users[i][deleteFields[j]]
+            }
+        }
+        //users = users.splice(0, 50);
+        grunt.file.write('./backupsDB/' + timestamp + '/user.json', JSON.stringify(users));
+        callback();
+
+    }
+
+    function migrateForumFromCorbelToBitbloq(env, timestamp, callback) {
+        var async = require('async'),
+            _ = require('lodash');
+        async.parallel([
+            getCorbelCollection.bind(null, 'ForumAnswers', env),
+            getCorbelCollection.bind(null, 'ForumCategories', env),
+            getCorbelCollection.bind(null, 'ForumStats', env),
+            getCorbelCollection.bind(null, 'ForumThemes', env)
+        ], function(err, result) {
             if (err) {
-                console.log('err getting users');
+                console.log('err');
                 callback(err);
             } else {
-                console.log('We have users, now transform it to Bitbloq and save on backupsDB', users.length);
-                for (var i = 0; i < users.length; i++) {
-                    users[i]._id = users[i].id;
-                    //users[i].salt = users[i].;
-                    users[i].provider = 'local';
-                    //users[i].password = users[i].;
-                    users[i].birthday = users[i].properties.birthday;
-                    users[i].cookiePolicyAccepted = false;
-                    users[i].hasBeenWarnedAboutChangeBloqsToCode = false;
-                    users[i].hasBeenAskedIfTeacher = users[i].properties.hasBeenAskedIfTeacher || false;
-                    users[i].takeTour = users[i].properties.tour || false;
-                    users[i].language = users[i].properties.language || false;
-                    users[i].newsletter = users[i].properties.newsletter || false;
-                    users[i].role = 'user';
-                    // users[i].social = {
-                    //     facebook: ,
-                    //     google:
-                    // }
-                    users[i].bannedInForum = false;
+                console.log('ok');
+                console.log(result[0].length);
+                console.log(result[1].length);
+                console.log(result[2].length);
+                console.log(result[3].length);
 
-                    delete users[i].id;
-                    delete users[i].scopes;
-                    delete users[i].createdBy;
-                    delete users[i].domain;
-                    delete users[i].properties;
-                    delete users[i].groups;
+                var projects = result[0],
+                    stats = result[1],
+                    tempStat;
+                grunt.file.write('./backupsDB/' + timestamp + '/tempprojects.json', JSON.stringify(projects));
+                grunt.file.write('./backupsDB/' + timestamp + '/stats.json', JSON.stringify(stats));
+
+                for (var i = 0; i < projects.length; i++) {
+                    projects[i]._id = projects[i].id;
+                    delete projects[i].id;
+                    delete projects[i].creatorUsername;
+                    delete projects[i].links;
+                    delete projects[i].imageType;
+                    tempStat = _.find(stats, ['id', projects[i].id]);
+                    if (tempStat) {
+                        projects[i].timesViewed = tempStat.timesViewed;
+                        projects[i].timesAdded = tempStat.timesAdded;
+                    }
                 }
 
-                grunt.file.write('./backupsDB/' + timestamp + '/user.json', JSON.stringify(users));
-                callback(null);
+                grunt.file.write('./backupsDB/' + timestamp + '/project.json', JSON.stringify(projects));
+                callback();
             }
         });
-    }
+    };
 
     // grunt importCollectionsFromCorbel:next:qa
     grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
@@ -300,9 +314,11 @@ module.exports = function(grunt) {
             timestamp = Date.now();
         fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
-            //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            //'restoreCollection:project:' + timestamp
-            'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
+            'restoreCollection:project:' + timestamp
+            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            //'restoreCollection:user:' + timestamp
+            //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp
         ]);
     });
 
