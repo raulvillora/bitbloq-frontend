@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             var configFile = grunt.file.readJSON('gruntconfig.json'),
                 corbelEnvUrl;
             if (env === 'production') {
-                corbelEnvUrl = 'lololololololo';
+                corbelEnvUrl = '';
             } else if (env === 'mvp') {
                 corbelEnvUrl = '-current';
             } else {
@@ -129,39 +129,50 @@ module.exports = function(grunt) {
 
     var tempCollections = {},
         tempPageNumber = {};
+    var needToken = true;
 
     function getCorbelCollection(collectionName, env, callback) {
-        grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env);
+        grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env + ' pageNumber' + tempPageNumber[collectionName]);
         if (!tempPageNumber[collectionName]) {
             tempCollections[collectionName] = [];
             tempPageNumber[collectionName] = 0;
         }
-        getAdminToken(env).then(function(response) {
-            grunt.log.writeln('Getting Collection');
-            cd.resources.collection('bitbloq:' + collectionName)
-                .page(tempPageNumber[collectionName])
-                .pageSize(50)
-                .get().then(function(response) {
-                    grunt.log.writeln(collectionName);
-                    grunt.log.writeln(response.data.length);
-                    if (response.data.length === 0) {
-                        tempPageNumber[collectionName] = undefined;
-                        callback(null, tempCollections[collectionName]);
-                    } else {
-                        tempCollections[collectionName] = tempCollections[collectionName].concat(response.data);
-                        tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
-                        getCorbelCollection(collectionName, env, callback);
-                    }
+        if (needToken) {
+            needToken = false;
+            getAdminToken(env).then(function(response) {
+                getCollection(collectionName, env, callback);
+            }).catch(function(err) {
+                grunt.log.error('create token error');
+                callback(err);
+            });
+        } else {
+            getCollection(collectionName, env, callback);
+        }
 
-                }).catch(function(error) {
-                    console.log('error');
-                    console.log(error);
-                    callback(error);
-                });
-        }).catch(function(err) {
-            grunt.log.error('create token error');
-            callback(err);
-        });
+    }
+
+    function getCollection(collectionName, env, callback) {
+        grunt.log.writeln('Getting Collection');
+        cd.resources.collection('bitbloq:' + collectionName)
+            .page(tempPageNumber[collectionName])
+            .pageSize(50)
+            .get().then(function(response) {
+                grunt.log.writeln(collectionName);
+                grunt.log.writeln(response.data.length);
+                if (response.data.length === 0) {
+                    tempPageNumber[collectionName] = undefined;
+                    callback(null, tempCollections[collectionName]);
+                } else {
+                    tempCollections[collectionName] = tempCollections[collectionName].concat(response.data);
+                    tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
+                    getCorbelCollection(collectionName, env, callback);
+                }
+
+            }).catch(function(error) {
+                console.log('error');
+                console.log(error);
+                callback(error);
+            });
     }
 
     grunt.registerTask('exportCollectionFromCorbel', function(collectionName, env, timestamp) {
