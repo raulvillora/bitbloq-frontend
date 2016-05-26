@@ -98,6 +98,7 @@ module.exports = function(grunt) {
         }
         adminRequestToServer('DELETE', collectionName + '/all', {}, callback);
     };
+    var timer = 0;
 
     function insertCollection(collectionName, items, callback) {
         if (collectionName === 'forumcategory') {
@@ -110,8 +111,9 @@ module.exports = function(grunt) {
         while (items.length) {
             //console.log('items.length', items.length);
             //console.log(splicedArray.length);
-            splicedArray.push(items.splice(0, 50));
+            splicedArray.push(items.splice(0, 25));
         }
+
         async.each(splicedArray, function(chunk, callback) {
             adminRequestToServer('POST', collectionName + '/all', chunk, callback);
         }, callback);
