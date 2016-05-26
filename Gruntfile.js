@@ -587,7 +587,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('generateConfig', 'Configure data files', function(env) {
 
-        var environment = env || 'local',
+        var environment = env || 'qa',
             configJSON;
 
         switch (environment) {
@@ -595,10 +595,8 @@ module.exports = function(grunt) {
                 configJSON = process.env.BITBLOQ_PROD_CONFIG;
                 break;
             case 'qa':
-                configJSON = process.env.BITBLOQ_QA_CONFIG;
-                break;
             default:
-                configJSON = process.env.BITBLOQ_LOCAL_CONFIG;
+                configJSON = process.env.BITBLOQ_QA_CONFIG;
 
         }
 
@@ -609,7 +607,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('generateFacebook', 'Configure data files', function(env) {
 
-        var environment = env || 'local',
+        var environment = env || 'qa',
             configJSON;
 
         switch (environment) {
@@ -617,10 +615,8 @@ module.exports = function(grunt) {
                 configJSON = process.env.BITBLOQ_PROD_FACEBOOK;
                 break;
             case 'qa':
-                configJSON = process.env.BITBLOQ_QA_FACEBOOK;
-                break;
             default:
-                configJSON = process.env.BITBLOQ_LOCAL_FACEBOOK;
+                configJSON = process.env.BITBLOQ_QA_FACEBOOK;
 
         }
 
@@ -631,7 +627,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('generateGoogle', 'Configure data files', function(env) {
 
-        var environment = env || 'local',
+        var environment = env || 'qa',
             configJSON;
 
         switch (environment) {
@@ -639,10 +635,8 @@ module.exports = function(grunt) {
                 configJSON = process.env.BITBLOQ_PROD_GOOGLE;
                 break;
             case 'qa':
-                configJSON = process.env.BITBLOQ_QA_GOOGLE;
-                break;
             default:
-                configJSON = process.env.BITBLOQ_LOCAL_GOOGLE;
+                configJSON = process.env.BITBLOQ_QA_GOOGLE;
 
         }
 
@@ -845,7 +839,7 @@ module.exports = function(grunt) {
         });
     };
 
-var replaceForceComponent = function(timestamp, sources) {
+    var replaceForceComponent = function(timestamp, sources) {
         var fileContent = '';
         grunt.file.expand(sources).forEach(function(file) {
             if (grunt.file.isDir(file)) {
