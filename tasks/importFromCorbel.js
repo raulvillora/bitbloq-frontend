@@ -205,7 +205,7 @@ module.exports = function(grunt) {
                 grunt.file.write('./backupsDB/' + timestamp + '/stats.json', JSON.stringify(stats));
 
                 for (var i = 0; i < projects.length; i++) {
-                    projects[i]._id = projects[i].id;
+                    projects[i].corbelId = projects[i].id;
                     delete projects[i].id;
                     delete projects[i].creatorUsername;
                     delete projects[i].links;
