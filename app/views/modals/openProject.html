@@ -20,7 +20,7 @@
             <li ng-repeat="project in filteredProjects = ( projects | filter:{name: searchText} | orderBy:userProjectsOrderBy:userProjectsReverseOrder ) " ng-dblclick="confirmAction()" ng-click="selectedProject.project = project" ng-class="{'modal--project--item':true, 'selected--item':selectedProject.project === project}">
                 <div>
                     <span class="modal--project--name">{{project.name}}</span>
-                    <time class="modal--project--date">{{ project._updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>
+                    <time class="modal--project--date">{{ project.updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>
                 </div>
             </li>
         </ul>
@@ -30,7 +30,7 @@
             <li ng-repeat="project in filteredSharedProjects = (sharedProjects | filter:{name: searchText} | orderBy:userProjectsOrderBy:userProjectsReverseOrder )" ng-click="selectedProject.project = project" ng-class="{'modal--project--item':true, 'selected--item':selectedProject.project === project}">
                 <div>
                     <span class="modal--project--name">{{project.name}}</span>
-                    <time class="modal--project--date">{{ project._updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>
+                    <time class="modal--project--date">{{ project.updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>
                 </div>
             </li>
         </ul>

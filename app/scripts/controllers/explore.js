@@ -170,7 +170,7 @@ angular.module('bitbloqApp')
                     break;
                 default:
                     queryParams = {
-                        '_createdAt': 'desc'
+                        'createdAt': 'desc'
                     };
             }
 

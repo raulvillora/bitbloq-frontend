@@ -251,14 +251,6 @@ angular.module('bitbloqApp')
         };
 
         exports.getAllUsers = function() {
-            // var queryParams = {
-            //     'api:sort': {
-            //         '_createdAt': 'desc'
-            //     },
-            //     'api:page': 0,
-            //     'api:pageSize': 50
-            // };
-            // return _getAllProfiles(queryParams, []);
             return $http.get(envData.config.serverUrl + 'user/');
         };
 
@@ -301,7 +293,7 @@ angular.module('bitbloqApp')
         //            }
         //        }],
         //        'api:sort': {
-        //            '_updatedAt': 'asc'
+        //            'updatedAt': 'asc'
         //        }
         //    };
         //

@@ -117,7 +117,7 @@
 
                     <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>
                     <div class="project__info__header__data">
-                        <time class="text--secondary project__info--time" data-element="myprojects-time-tag">{{ project._updatedAt | amDateFormat:'DD/MM/YY - HH:mm[h]' }}</time>
+                        <time class="text--secondary project__info--time" data-element="myprojects-time-tag">{{ project.updatedAt | amDateFormat:'DD/MM/YY - HH:mm[h]' }}</time>
                         <div class="project__info__header__icons">
                             <svg class="svg-icon" ng-if="project._acl.ALL">
                                 <use xlink:href="#Compartir_publicarEnExplora"></use>

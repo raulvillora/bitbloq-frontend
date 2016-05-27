@@ -14,11 +14,11 @@ angular.module('bitbloqApp')
             $log.debug('sortProject', type);
             switch (type) {
                 case 'explore-sortby-recent':
-                    $scope.userProjectsOrderBy = '_updatedAt';
+                    $scope.userProjectsOrderBy = 'updatedAt';
                     $scope.userProjectsReverseOrder = true;
                     break;
                 case 'explore-sortby-old':
-                    $scope.userProjectsOrderBy = '_updatedAt';
+                    $scope.userProjectsOrderBy = 'updatedAt';
                     $scope.userProjectsReverseOrder = false;
                     break;
                 case 'explore-sortby-name-az':
@@ -186,7 +186,7 @@ angular.module('bitbloqApp')
         $scope.orderOptions = ['explore-sortby-recent', 'explore-sortby-old', 'explore-sortby-name-az', 'explore-sortby-name-za'];
         $scope.filterOptions = ['filter-by-all', 'filter-by-not-published', 'filter-by-published', 'filter-by-shared', 'filter-by-compile', 'filter-by-not-compile'];
 
-        $scope.userProjectsOrderBy = '_updatedAt';
+        $scope.userProjectsOrderBy = 'updatedAt';
         $scope.userProjectsReverseOrder = true;
 
         $scope.userProjectsFilter = 'all';

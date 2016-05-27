@@ -29,7 +29,7 @@ angular.module('bitbloqApp')
                 perPage: 3,
                 page: 0,
                 sort: {
-                    _createdAt: 'desc'
+                    createdAt: 'desc'
                 }
             }).then(function(response) {
                 $log.debug('diy account have ' + response.data.length + ' projects', response.data);

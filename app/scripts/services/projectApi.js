@@ -45,9 +45,6 @@ angular.module('bitbloqApp')
                     'page': 0,
                     'pageSize': 30
                 };
-            //    'sort': {
-            //        '_updatedAt': 'desc'
-            //    },
 
             queryParams = queryParams || {};
             _.extend(params, queryParams);
@@ -62,9 +59,6 @@ angular.module('bitbloqApp')
                     'page': 0,
                     'pageSize': 30
                 };
-            //'sort': {
-            //    '_updatedAt': 'desc'
-            //},
 
             queryParams = queryParams || {};
             _.extend(params, queryParams);
@@ -170,8 +164,8 @@ angular.module('bitbloqApp')
             delete cleanProject._acl;
             delete cleanProject.creatorId;
             delete cleanProject.creatorUsername;
-            delete cleanProject._createdAt;
-            delete cleanProject._updatedAt;
+            delete cleanProject.createdAt;
+            delete cleanProject.updatedAt;
             delete cleanProject.links;
             delete cleanProject.exportedFromBitbloqOffline;
             delete cleanProject.bitbloqOfflineVersion;
