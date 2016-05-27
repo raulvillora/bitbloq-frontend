@@ -666,6 +666,27 @@ module.exports = function(grunt) {
         ]);
     });
 
+
+    grunt.registerTask('distGCS', function() {
+        grunt.task.run([
+            'clean:dist',
+            'wiredep',
+            'useminPrepare',
+            'concurrent:dist',
+            'postcss:dist',
+            'concat',
+            'ngAnnotate:dist',
+            'copy:dist',
+            // 'cdnify',
+            'cssmin',
+            'uglify',
+            'filerev',
+            'usemin',
+            'htmlmin',
+            'addTimestampToFiles'
+        ]);
+    });
+
     grunt.registerTask('deploy', 'Deploy app to s3', function(env) {
 
         var configFile = grunt.option('config') || 'app/res/config/config.json';
@@ -813,6 +834,7 @@ module.exports = function(grunt) {
                 });
             } else {
                 grunt.log.writeln('Replacing ' + oldName + ' to ' + newName + ' in ' + file);
+                console.log("oldName", oldName);
                 var regExp = new RegExp('([\'|/|"])' + oldName, 'g');
                 fileContent = grunt.file.read(file);
                 grunt.file.write(file, fileContent.replace(regExp, '$1' + newName));
