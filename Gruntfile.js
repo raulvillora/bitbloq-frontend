@@ -440,7 +440,7 @@ module.exports = function(grunt) {
                     packageData: '<%= yeoman %>',
                     bowerData: grunt.file.readJSON('bower.json')
                 },
-                dest: 'app/scripts/config.js'
+                dest: 'app/res/config/config.js'
             }
         },
 
