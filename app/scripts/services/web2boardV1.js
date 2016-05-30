@@ -53,6 +53,16 @@ angular.module('bitbloqApp')
             web2board.uploadHex = web2boardV2.uploadHex;
         }
 
+        function getDownloadUrl() {
+            if(common.os === 'Linux'){
+                return envData.config.web2boardLinkLinux;
+            }else if(common.os === 'Mac') {
+                return envData.config.web2boardLinkLinux;
+            }else if(common.os === 'Windows') {
+                return envData.config.web2boardLinkLinux;
+            }
+        }
+
         function showWeb2BoardModal(options) {
             if (modalObj) {
                 modalObj.close();
@@ -309,10 +319,10 @@ angular.module('bitbloqApp')
             //It is not mandatory to have a board connected to verify the code
             web2board._connect()
                 .then(function () {
-                    web2board._checkVersion().then(function () {
-                        web2board._checkLibVersion().then(function () {
-                            instructions();
-                        });
+                    web2board._checkLibVersion().then(function () {
+                        alertsService.add('alert-web2board-exitsNewVersion', 'web2board', 'warning', 5000,
+                        undefined, undefined, undefined, 'download', getDownloadUrl());
+                        instructions();
                     });
                 })
                 .catch(function () {
