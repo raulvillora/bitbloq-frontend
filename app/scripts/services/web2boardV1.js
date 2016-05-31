@@ -13,7 +13,7 @@ angular.module('bitbloqApp')
         /** Variables */
 
         var web2board = this,
-            ws, modalObj,
+            ws, modalObj, alertUpdate,
             boardReadyPromise = null,
             versionPromise = $q.defer(),
             libVersionPromise = $q.defer(),
@@ -103,6 +103,9 @@ angular.module('bitbloqApp')
         }
 
         function showWeb2BoardUploadModal () {
+            if(alertUpdate) {
+                alertsService.close(alertUpdate);
+            }
             var modalOptions = {
                 contentTemplate: '/views/modals/downloadWeb2board.html',
                 modalTitle: 'modal-update-web2board-title',
@@ -184,6 +187,8 @@ angular.module('bitbloqApp')
                             rootWeb2boardToNewVersion();
                             return;
                         } else {
+                            alertUpdate = alertsService.add('alert-web2board-exitsNewVersion', 'web2board', 'warning', 5000,
+                                undefined, undefined, undefined, 'download', showWeb2BoardUploadModal);
                             isWeb2boardV2Flag = false;
                         }
                     }
@@ -320,8 +325,6 @@ angular.module('bitbloqApp')
             web2board._connect()
                 .then(function () {
                     web2board._checkLibVersion().then(function () {
-                        alertsService.add('alert-web2board-exitsNewVersion', 'web2board', 'warning', 5000,
-                        undefined, undefined, undefined, 'download', getDownloadUrl());
                         instructions();
                     });
                 })
@@ -498,6 +501,9 @@ angular.module('bitbloqApp')
             }
             showNecessaryToUpdate();
         };
+
+        web2board.showWeb2BoardUploadModal = showWeb2BoardUploadModal;
+
 
         return web2board;
     });

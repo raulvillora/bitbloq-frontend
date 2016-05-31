@@ -8,11 +8,12 @@
  */
 angular.module('bitbloqApp')
     .factory('web2boardV2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate) {
+                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $location) {
 
         /** Variables */
 
         var web2board = this,
+            modalObj,
             api,
             inProgress = false,
             TIME_FOR_WEB2BOARD_TO_START = 700, //ms
@@ -32,6 +33,7 @@ angular.module('bitbloqApp')
         }
 
         function isWeb2boardUpToDate(version) {
+            // todo: this has to be improved
             return parseInt(version.replace(/\./g, ''), 10) >= parseInt(common.properties.web2boardVersion.replace(/\./g, ''), 10);
         }
 
@@ -43,36 +45,76 @@ angular.module('bitbloqApp')
             inProgress = false;
         }
 
-        function showUpdateModal() {
+        function showWeb2BoardModal(options) {
+            if (modalObj) {
+                modalObj.close();
+            }
             var parent = $rootScope,
-                modalOptions = parent.$new();
+                modalOptions = parent.$new(),
+                viewAllLink = function() {
+                    modalObj.close();
+                    $location.path('/downloads');
+                };
+            _.extend(modalOptions, options);
+
             _.extend(modalOptions, {
                 contentTemplate: '/views/modals/downloadWeb2board.html',
-                modalTitle: 'modal-update-web2board-title',
-                modalText: 'modal-download-web2board-text'
+                modalButtons: true,
+                modalText: 'modal-download-web2board-text',
+                os: common.os,
+                viewAllLink: viewAllLink
             });
+
             modalOptions.envData = envData;
-            ngDialog.closeAll();
-            ngDialog.open({
+            modalObj = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--download-web2board',
                 scope: modalOptions,
-                showClose: false
+                showClose: true
             });
         }
 
-        function showUpgradeModal() {
-            var scope = $rootScope.$new();
-            // scope.version = common.properties.web2boardVersion;
-            $.jsPanel({
-                position: 'center',
-                title: $translate.instant('serial'),
-                load: {
-                    url: 'views/web2boardUpgrade.html',
-                    complete: function () {
-                        this.html($compile(this.html())(scope));
-                    }
+        function showWeb2BoardDownloadModal () {
+            var modalOptions = {
+                contentTemplate: '/views/modals/downloadWeb2board.html',
+                modalTitle: 'modal-download-web2board-title',
+                footerText: 'web2board-alreadyInstalled',
+                footerLink: showWeb2BoardErrorModal
+            };
+            return showWeb2BoardModal(modalOptions);
+        }
+
+        function showWeb2BoardUploadModal () {
+            var modalOptions = {
+                contentTemplate: '/views/modals/downloadWeb2board.html',
+                modalTitle: 'modal-update-web2board-title',
+                modalText: 'modal-download-web2board-text'
+            };
+            return showWeb2BoardModal(modalOptions);
+        }
+
+        function showWeb2BoardErrorModal() {
+            modalObj.close();
+            var parent = $rootScope,
+                modalOptions = parent.$new();
+
+            _.extend(modalOptions, {
+                contentTemplate: '/views/modals/web2boardErrors.html',
+                backAction: showWeb2BoardDownloadModal,
+                sendCommentsModal: function() {
+                    modalObj.close();
+                    commonModals.sendCommentsModal();
                 }
+            });
+
+            modalOptions.envData = envData;
+
+
+            modalObj = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--web2board-errors',
+                scope: modalOptions,
+                showClose: true
             });
         }
 
@@ -90,7 +132,8 @@ angular.module('bitbloqApp')
                 .then(function (version) {
                     if (!isWeb2boardUpToDate(version)) {
                         removeInProgressFlag();
-                        showUpgradeModal();
+                        alertsService.add('alert-web2board-exitsNewVersion', 'web2board', 'warning', 5000,
+                            undefined, undefined, undefined, 'download', showWeb2BoardUploadModal);
                     } else {
                         var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
                         return api.VersionsHandlerHub.server.setLibVersion(libVersion)
@@ -126,7 +169,7 @@ angular.module('bitbloqApp')
                         if (showUpdateModalFlag) {
                             inProgress = false;
                             alertsService.close(w2bToast);
-                            showUpdateModal();
+                            showWeb2BoardDownloadModal();
                         } else {
                             if (tryCount === 1) {
                                 // we only need to start web2board once
@@ -339,15 +382,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        web2board.showApp = function () {
-            openCommunication(function () {
-                alertsService.add('web2board_toast_showingApp', 'web2board', 'loading');
-                return api.WindowHub.server.showApp().then(function () {
-                    alertsService.add('web2board_toast_successfullyOpened', 'web2board', 'ok', 3000);
-                });
-            });
-        };
-
 
         return {
             connect: connect,
@@ -357,9 +391,7 @@ angular.module('bitbloqApp')
             chartMonitor: web2board.chartMonitor,
             version: web2board.version,
             uploadHex: web2board.uploadHex,
-            showWeb2board: web2board.showApp,
             showSettings: web2board.showSettings,
-            openSettings: showUpdateModal,
             isInProcess: function () {
                 return inProgress;
             },
