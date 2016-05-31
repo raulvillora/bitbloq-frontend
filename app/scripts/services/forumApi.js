@@ -9,7 +9,8 @@ angular
             getThemesInCategory: getThemesInCategory,
             addViewer: addViewer,
             createThread: createThread,
-            createAnswer: createAnswer
+            createAnswer: createAnswer,
+            updateAnswer: updateAnswer
         };
 
         return forumApi;
@@ -61,6 +62,14 @@ angular
             return $http({
                 method: 'POST',
                 url: envData.config.serverUrl + 'forum/answer',
+                data: answer
+            });
+        }
+
+        function updateAnswer(answer) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'forum/answer/' + answer._id,
                 data: answer
             });
         }

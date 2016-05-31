@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _) {
+        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi) {
             var forum = this;
             forum.displayedView = 'main';
             forum.bannedUserPerPage = 10;
@@ -18,6 +18,11 @@
             forum.textEditorContent = {
                 htmlContent: ''
             };
+            forum.answer = {
+                imageCounter: 0,
+                images: []
+            };
+
 
             forum.isAdmin = function() {
                 if (common.user) {
@@ -85,8 +90,29 @@
                     answer.main = true;
                 }
 
-                forumApi.createAnswer(answer).then(function() {
+                forumApi.createAnswer(answer).then(function(response) {
+                    forum.textEditorContent.htmlContent = '';
+                    answer._id = response.data;
+                    if (forum.answer.images.length > 0) {
+                        var images = [],
+                            imageId;
+                        forum.answer.images.forEach(function(value, index) {
+                            imageId = answer._id + '-' + index;
+                            images.push(imageId);
+                            imageApi.save(imageId, value, 'forum');
+                            if (index === forum.answer.images.length - 1) {
+                                answer.images = images;
+                                forumApi.updateAnswer(answer).then(function() {
+                                    forum.answer.imageCounter = 0;
+                                });
+                            }
+                        });
+                    } else {
+                        forum.answer.imageCounter = 0;
+                    }
                     forum.themeAnswers.push(answer);
+                    forum.answer.images = [];
+
                     var lastPage = parseInt(forum.themeAnswers.length / forum.categoryThemesPerPage);
                     if ((forum.themeAnswers.length % forum.categoryThemesPerPage) > 0) {
                         lastPage += 1;
@@ -130,6 +156,37 @@
                     $log.debug('fill inputs');
                 }
             };
+
+
+            forum.addImage = function(e) {
+                utils.uploadImage(e, {}).then(function(response) {
+                    var image = document.createElement('img');
+                    image.src = response.img.src;
+                    image.className = 'answerImg' + forum.answer.imageCounter + ' BitbloqImg';
+                    var tmp = document.createElement('div');
+                    tmp.appendChild(image);
+                    if (forum.textEditorContent.htmlContent === '') {
+                        forum.textEditorContent.htmlContent = '<p>' + tmp.innerHTML + '<br/></p>';
+                    } else {
+                        forum.textEditorContent.htmlContent += tmp.innerHTML;
+                    }
+                    forum.answer.imageCounter++;
+                    forum.answer.images.push(response.file);
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }).catch(function(response) {
+                    switch (response.error) {
+                        case 'heavy':
+                            alertsService.add('info-tab-image-heavy-error', 'info-tab-image', 'warning');
+                            break;
+                        case 'no-image':
+                            alertsService.add('info-tab-image-read-error', 'info-tab-image', 'warning');
+                            break;
+                    }
+                });
+            };
+
 
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
@@ -210,22 +267,22 @@
                     console.log(response.data);
                     forum.currentTheme = response.data.thread;
                     forum.themeCategory = themeCategory;
-                    // if (response.data.length > 0) {
                     var answers = response.data.answers,
                         container;
                     answers.forEach(function(answer) {
                         if (answer.content.indexOf('<img') > -1) {
                             container = document.createElement('div');
                             container.innerHTML = answer.content;
-                            // var images = container.querySelectorAll('img.BitbloqImg');
-                            // for (var i = 0; i < images.length; i++) {
-                            // var img = images[i],
-                            //     imgId = answer.id + '-' + img.className.split(' ')[0].split('answerImg')[1],
-                            //     imgType = _.find(answer.images, {
-                            //         id: imgId
-                            //     }).type;
-                            // _getImages(imgId, imgType, container, answer);
-                            // }
+                            var images = container.querySelectorAll('img.BitbloqImg');
+                            for (var i = 0; i < images.length; i++) {
+                            var img = images[i],
+                                imgIndex = img.className.split(' ')[0].split('answerImg')[1];
+                                var answerImage = container.getElementsByClassName('answerImg' + imgIndex)[0];
+                                if (answerImage) {
+                                    answerImage.src = common.urlImage+ 'forum/' + answer._id+'-'+imgIndex;
+                                }
+                                answer.content = container.innerHTML;
+                            }
                         }
                     });
                     forum.firstAnswer = answers.shift();
@@ -235,6 +292,7 @@
                     $log.debug('Error:', err);
                 });
             }
+
 
             function goForumCategory(category) {
                 forum.displayedView = 'category';
