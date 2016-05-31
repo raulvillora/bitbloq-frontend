@@ -136,11 +136,16 @@ angular.module('bitbloqApp')
                             undefined, undefined, undefined, 'download', showWeb2BoardUploadModal);
                     } else {
                         var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
+                        var librariesAlert = alertsService.add('alert-web2board-updatingLibraries', 'web2board', 'loading');
                         return api.VersionsHandlerHub.server.setLibVersion(libVersion)
                             .then(function () {
                                 callback();
                             }, function (error) {
+                                alertsService.add('alert-web2board-updatingLibraries-error', 'web2board', 'warning');
+                                removeInProgressFlag();
                                 $log.error('Unable to update libraries due to: ' + JSON.stringify(error));
+                            }).finally(function () {
+                                alertsService.close(librariesAlert);
                             });
                     }
                 }, function (error) {
