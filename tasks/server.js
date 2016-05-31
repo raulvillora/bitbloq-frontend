@@ -165,4 +165,33 @@ module.exports = function(grunt) {
             }
         });
     });
+    //grunt importProjectFromCorbel:1464279964116
+
+    grunt.registerTask('importProjectFromCorbel', function(timestamp) {
+        var done = this.async(),
+            numItems = Number(grunt.file.read('./backupsDB/' + timestamp + '/Angularproject_tempPageNumber.txt'));
+        grunt.log.writeln('importProjectFromCorbel timestamp:' + timestamp, numItems);
+
+        //deleteCollection('project', function(err) {
+        //  if (err) {
+        //    callback(err);
+        //} else {
+        var timer = 1000;
+        //console.log('deleted now start to insert', typeof(numItems));
+        async.times(numItems, function(n, callback) {
+            timer = timer + 2000;
+            console.log('read', n);
+            setTimeout(function() {
+                var items = grunt.file.readJSON('backupsDB/' + timestamp + '/Angularproject_' + n + '.json');
+                insertCollection('project', items, callback);
+            }, timer)
+        }, function(err, res) {
+            console.log('end');
+            console.log(err);
+            console.log(res);
+            done();
+        });
+        //   }
+        //});
+    });
 };
