@@ -199,7 +199,7 @@ angular
         };
 
         exports.addComponent = function(newComponent) {
-            console.log("newComponent");
+            console.log('newComponent');
             console.log(newComponent);
 
             if (!newComponent) {

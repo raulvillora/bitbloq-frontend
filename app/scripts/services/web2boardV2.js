@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2boardV2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $location) {
+                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $location, commonModals) {
 
         /** Variables */
 

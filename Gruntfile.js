@@ -595,6 +595,8 @@ module.exports = function(grunt) {
                 configJSON = process.env.BITBLOQ_PROD_CONFIG;
                 break;
             case 'qa':
+                configJSON = process.env.BITBLOQ_QA_CONFIG;
+                break;
             default:
                 configJSON = process.env.BITBLOQ_QA_CONFIG;
 
@@ -615,6 +617,8 @@ module.exports = function(grunt) {
                 configJSON = process.env.BITBLOQ_PROD_FACEBOOK;
                 break;
             case 'qa':
+                configJSON = process.env.BITBLOQ_QA_FACEBOOK;
+                break;
             default:
                 configJSON = process.env.BITBLOQ_QA_FACEBOOK;
 
@@ -635,6 +639,8 @@ module.exports = function(grunt) {
                 configJSON = process.env.BITBLOQ_PROD_GOOGLE;
                 break;
             case 'qa':
+                configJSON = process.env.BITBLOQ_QA_GOOGLE;
+                break;
             default:
                 configJSON = process.env.BITBLOQ_QA_GOOGLE;
 
@@ -834,7 +840,6 @@ module.exports = function(grunt) {
                 });
             } else {
                 grunt.log.writeln('Replacing ' + oldName + ' to ' + newName + ' in ' + file);
-                console.log("oldName", oldName);
                 var regExp = new RegExp('([\'|/|"])' + oldName, 'g');
                 fileContent = grunt.file.read(file);
                 grunt.file.write(file, fileContent.replace(regExp, '$1' + newName));

@@ -53,16 +53,6 @@ angular.module('bitbloqApp')
             web2board.uploadHex = web2boardV2.uploadHex;
         }
 
-        function getDownloadUrl() {
-            if(common.os === 'Linux'){
-                return envData.config.web2boardLinkLinux;
-            }else if(common.os === 'Mac') {
-                return envData.config.web2boardLinkLinux;
-            }else if(common.os === 'Windows') {
-                return envData.config.web2boardLinkLinux;
-            }
-        }
-
         function showWeb2BoardModal(options) {
             if (modalObj) {
                 modalObj.close();
