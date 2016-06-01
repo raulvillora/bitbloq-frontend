@@ -69,7 +69,7 @@ angular.module('bitbloqApp')
         exports.urlImage = envData.config.gCloudUrl + '/images/';
 
         exports.os = getOsName();
-        
+
         exports.langToBQ = {
             ca: 'es',
             de: 'de',
@@ -168,9 +168,18 @@ angular.module('bitbloqApp')
 
         function processRoute() {
             ngDialog.closeAll();
-            var firstPathItem = $location.path().split('/')[1];
-            $log.debug('section', firstPathItem);
-            exports.section = firstPathItem;
+            var pathArray = $location.path().split('/'),
+                firstPathItem = pathArray[1],
+                secondPathItem = pathArray[2];
+
+            if(firstPathItem==='help' && secondPathItem && secondPathItem ==='forum'){
+                $log.debug('section', secondPathItem);
+                exports.section = secondPathItem;
+            } else {
+                $log.debug('section', firstPathItem);
+                exports.section = firstPathItem;
+            }
+
             checkForCompatibility($location.path());
         }
 

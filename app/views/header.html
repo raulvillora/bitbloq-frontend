@@ -52,6 +52,14 @@
                         <span>{{ 'help' | translate }}</span>
                     </a>
                 </li>
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'forum'}" data-element="nav-forum">
+                    <a href="#/help/forum" class="nav__menu__link">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Forum"></use>
+                        </svg>
+                        <span>{{ 'help_title_forum' | translate }}</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <div ng-show="!common.user" class="menu--user">
