@@ -483,11 +483,11 @@ angular.module('bitbloqApp')
             $scope.isLogin = false;
         }
 
-        // $scope.common.itsUserLoaded().then(function() {
-        //     if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-        //         _goToHome();
-        //     } else {
-        //         teacherModal();
-        //     }
-        // });
+        $scope.common.itsUserLoaded().then(function() {
+            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                _goToHome();
+            } else {
+                teacherModal();
+            }
+        });
     });
