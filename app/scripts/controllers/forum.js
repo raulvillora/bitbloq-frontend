@@ -48,6 +48,15 @@
                 });
             };
 
+            forum.deleteThread = function(themeId) {
+                forumApi.deleteThread(themeId).then(function() {
+                    alertsService.add('forumAdmin_alert_deletedTheme', 'deleteThread', 'warning', 5000);
+                    $location.url('/help/forum/' + forum.themeCategory);
+                }).catch(function() {
+                    alertsService.add('forumAdmin_alert_deletedThemeError', 'deleteThread', 'error');
+                });
+            };
+
             //**************************************
 
 
@@ -99,7 +108,7 @@
 
             forum.submitNewAnswer = function(threadId) {
                 var answer = {
-                    threadId: threadId || forum.currentTheme._id,
+                    threadId: threadId || forum.currentThread._id,
                     content: '<p>' + forum.textEditorContent.htmlContent + '</p>'
                 };
 
@@ -282,7 +291,7 @@
             function goForumTheme(themeId, themeCategory) {
                 forumApi.getTheme(themeId).then(function(response) {
                     console.log(response.data);
-                    forum.currentTheme = response.data.thread;
+                    forum.currentThread = response.data.thread;
                     forum.themeCategory = themeCategory;
                     var answers = response.data.answers,
                         container;
@@ -343,11 +352,11 @@
                 return forumApi.getForumIndex().then(function(response) {
                     forumCategories = response.data;
                     forum.sections = groupCategoriesBySection();
-                    setCategoryNames(forumCategories);
+                    getCategoryNames(forumCategories);
                 });
             }
 
-            function setCategoryNames(categories) {
+            function getCategoryNames(categories) {
                 if (categories) {
                     forum.categories = categories.map(function(category) {
                         return category.name;
@@ -364,7 +373,7 @@
             function init() {
                 if (!forum.categories) {
                     getMainForum().then(function() {
-                        setCategoryNames();
+                        getCategoryNames();
                     });
                     setForumRoute();
                     addRouteListener();

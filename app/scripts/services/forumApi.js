@@ -9,6 +9,7 @@ angular
             getThemesInCategory: getThemesInCategory,
             addViewer: addViewer,
             createThread: createThread,
+            deleteThread: deleteThread,
             createAnswer: createAnswer,
             updateAnswer: updateAnswer,
             deleteAnswer: deleteAnswer
@@ -74,11 +75,20 @@ angular
                 data: answer
             });
         }
-        
+
         function deleteAnswer(answer) {
             return $http({
                 method: 'DELETE',
                 url: envData.config.serverUrl + 'forum/answer/' + answer._id
             });
         }
+
+        function deleteThread(themeId) {
+            console.log('detete thread', themeId);
+            return $http({
+                method: 'DELETE',
+                url: envData.config.serverUrl + 'forum/thread/' + themeId
+            });
+        }
+
     });

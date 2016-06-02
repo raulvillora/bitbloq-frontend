@@ -6,7 +6,7 @@
                 <img class="img--avatar" ng-src="{{common.urlImage + 'avatar/' + forum.firstAnswer.owner._id}}" err-src="../../images/common/avatar.png" data-element="open-header-menu">
             </div>
             <div class="theme__header-info">
-                <h1 class="theme__title" data-element="forum-theme-theme-title">{{forum.currentTheme.title}}</h1>
+                <h1 class="theme__title" data-element="forum-theme-theme-title">{{forum.currentThread.title}}</h1>
                 <span class="theme-by-user">{{'by' | translate }}
                     <span class="block__username__link">{{forum.firstAnswer.creatorUsername}}</span>
                     <time>{{forum.firstAnswer.createdAt | amDateFormat:'DD MMM YYYY, HH:mm' }}</time>
@@ -15,7 +15,7 @@
         </div>
         <div class="forum__admin" ng-if="forum.isAdmin()">
             <div class="forum__admin__action forum__delete-theme" data-tooltips="true" data-tooltip="{{ 'delete-theme' | translate }}" data-tooltip-position="bottom">
-                <button class="btn btn--small btn--delete-answer" ng-click="forum.deleteTheme(forum.firstAnswer.themeId)">
+                <button class="btn btn--small btn--delete-answer" ng-click="forum.deleteThread(forum.currentThread._id)">
                     <svg class="svg-icon svg-icon--text">
                         <use xlink:href="#remove"></use>
                     </svg>
