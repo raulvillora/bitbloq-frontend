@@ -10,7 +10,8 @@ angular
             addViewer: addViewer,
             createThread: createThread,
             createAnswer: createAnswer,
-            updateAnswer: updateAnswer
+            updateAnswer: updateAnswer,
+            deleteAnswer: deleteAnswer
         };
 
         return forumApi;
@@ -71,6 +72,13 @@ angular
                 method: 'PUT',
                 url: envData.config.serverUrl + 'forum/answer/' + answer._id,
                 data: answer
+            });
+        }
+        
+        function deleteAnswer(answer) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.serverUrl + 'forum/answer/' + answer._id
             });
         }
     });

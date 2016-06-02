@@ -23,6 +23,7 @@
                 images: []
             };
 
+            init();
 
             forum.isAdmin = function() {
                 if (common.user) {
@@ -32,7 +33,23 @@
                 }
             };
 
-            init();
+
+            // *************************************
+            // only admin user
+            // *************************************
+            forum.deleteAnswer = function(answer) {
+                forumApi.deleteAnswer(answer).then(function() {
+                    var index = forum.themeAnswers.indexOf(answer);
+                    if (index > -1) {
+                        forum.themeAnswers.splice(index, 1);
+                    }
+                }, function() {
+                    alertsService.add('forumAdmin_alert_deletedAnswerError', 'deleteAnswer', 'error');
+                });
+            };
+
+            //**************************************
+
 
             forum.goForumSection = function(section) {
                 if (section) {

@@ -1,4 +1,4 @@
-<div id="loginContainer" class="login-container" ng-class="{'hide-container': !isLogin}">
+<div id="loginContainer" class="login-container" ng-class="{'hide-container': !isLogin || isForgotPassword}">
     <div ng-class="{'form--login__container':true}"  data-effect="shake">
         <h1 class="h3">{{ 'enter' | translate }}</h1>
         <span class="form--subtitle">{{ 'login-profiles' | translate }}</span>
@@ -159,7 +159,7 @@
     </div>
     <div class="form--login__footer">
         <p class="form-control text-center">
-            <a ng-click="setLoginFromForgotPassword();">
+            <a ng-click="isForgotPassword=!isForgotPassword; setLoginFromForgotPassword();">
                 <span ng-show="!isForgotPassword">{{'login-return-to-login' | translate }}</span>
                 <span ng-show="isForgotPassword">{{'recovery-got-to-init' | translate }}</span>
             </a>
