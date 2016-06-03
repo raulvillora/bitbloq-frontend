@@ -128,7 +128,7 @@
                     </div>
                     <!-- Service terms -->
                     <div class="form-control">
-                    <span data-ng-class="{'input input--checkbox':!form.readServiceTerm.submitted || user.cookiePolicyAccepted, 'input--checkbox--error':form.readServiceTerm.submitted && !user.properties.term}">
+                    <span data-ng-class="{'input input--checkbox':!form.readServiceTerm.submitted || user.cookiePolicyAccepted, 'input--checkbox--error':form.readServiceTerm.submitted && !user.cookiePolicyAccepted}">
                         <input data-ng-model="user.cookiePolicyAccepted" data-element="register-terms-input" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-blur="focus = false">
                         <label for="readServiceTerm">
                             {{ 'register-read-service-term' | translate }}
@@ -144,7 +144,7 @@
                     </div>
                     <!-- Submit Form -->
                     <div class="form-control">
-                        <input type="submit" data-ng-click="form.username.submitted=true; form.password.submitted=true; form.email.submitted=true; form.readServiceTerm.submitted=false; form.birthday.submitted=true; register(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'general_button_register' | translate}}" ng-disabled="login.password.$dirty && login.password.$invalid || login.email.$dirty && login.email.$invalid" data-element="enter-register">
+                        <input type="submit" data-ng-click="form.username.submitted=true; form.password.submitted=true; form.email.submitted=true; form.readServiceTerm.submitted=true; form.birthday.submitted=true; register(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'general_button_register' | translate}}" ng-disabled="login.password.$dirty && login.password.$invalid || login.email.$dirty && login.email.$invalid" data-element="enter-register">
                     </div>
                 </fieldset>
             </form>
