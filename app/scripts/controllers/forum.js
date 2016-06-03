@@ -13,7 +13,6 @@
             forum.displayedView = 'main';
             forum.bannedUserPerPage = 10;
             forum.categoryThemesPerPage = 10;
-            forum.allowUser = userApi.unbanUser;
             forum.banUser = userApi.banUser;
             forum.textEditorContent = {
                 htmlContent: ''
@@ -210,6 +209,15 @@
                             alertsService.add('info-tab-image-read-error', 'info-tab-image', 'warning');
                             break;
                     }
+                });
+            };
+
+            forum.allowUser = function(user) {
+                userApi.unbanUser(user._id).then(function() {
+                    alertsService.add('forumAdmin_alert_allowUser', 'banUser', 'ok', 5000);
+                    _.remove(forum.bannedUsers, user);
+                }).catch(function() {
+                    alertsService.add('forumAdmin_alert_allowUserError', 'banUser', 'error');
                 });
             };
 
