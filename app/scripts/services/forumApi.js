@@ -10,6 +10,7 @@ angular
             addViewer: addViewer,
             createThread: createThread,
             deleteThread: deleteThread,
+            moveTheme: moveTheme,
             createAnswer: createAnswer,
             updateAnswer: updateAnswer,
             deleteAnswer: deleteAnswer
@@ -84,11 +85,29 @@ angular
         }
 
         function deleteThread(themeId) {
-            console.log('detete thread', themeId);
             return $http({
                 method: 'DELETE',
                 url: envData.config.serverUrl + 'forum/thread/' + themeId
             });
+        }
+
+        function moveTheme(themeId, categoryName) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'forum/thread/' + themeId + '/moveTo/' + categoryName
+            });
+
+            return getCategoryId(categoryName).then(function(category) {
+                return getTheme(themeId).then(function(theme) {
+                    if (theme.data.categoryId !== category.data[0].id) {
+                        theme.data.categoryId = category.data[0].id;
+                        return _updateTheme(theme.data);
+                    } else {
+                        return true;
+                    }
+                });
+            });
+
         }
 
     });

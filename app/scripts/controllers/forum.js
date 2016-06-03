@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi) {
+        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog) {
             var forum = this;
             forum.displayedView = 'main';
             forum.bannedUserPerPage = 10;
@@ -53,6 +53,51 @@
                     $location.url('/help/forum/' + forum.themeCategory);
                 }).catch(function() {
                     alertsService.add('forumAdmin_alert_deletedThemeError', 'deleteThread', 'error');
+                });
+            };
+
+            forum.moveTheme = function(themeId) {
+
+                var confirmAction = function() {
+                        adminmodal.close();
+                        if (modalOptions.dropdown.option) {
+                            forumApi.moveTheme(themeId, modalOptions.dropdown.option).then(function() {
+                                forum.themeCategory = modalOptions.dropdown.option;
+                                $route.current.pathParams.forumsection = modalOptions.dropdown.option;
+                                $location.url('/help/forum/' + $route.current.pathParams.forumsection + '/' + $route.current.pathParams.forumresource);
+                                alertsService.add($scope.common.translate('forumAdmin_alert_MoveThemeTo') + ' "' + modalOptions.dropdown.option + '"', 'moveTheme', 'ok', 5000);
+                            }).catch(function() {
+                                alertsService.add('forumAdmin_alert_MoveThemeToError', 'moveTheme', 'error');
+                            });
+                        }
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new();
+
+                _.extend(modalOptions, {
+                    title: 'forumAdmin_buton_moveTheme',
+                    confirmButton: 'forumAdmin_buton_moveTheme',
+                    rejectButton: 'modal-button-cancel',
+                    confirmAction: confirmAction,
+                    contentTemplate: '/views/modals/input.html',
+                    modalButtons: true,
+                    modalDropdown: true,
+                    headingOptions: forum.themeCategory,
+                    modaloptions: forum.categories,
+                    optionsClick: function(category) {
+                        modalOptions.dropdown.option = category;
+                    },
+                    dropdown: {
+                        option: '',
+                        dataElement: 'categories-dropdown-button'
+                    }
+                });
+
+                var adminmodal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
                 });
             };
 
@@ -309,11 +354,11 @@
                             container.innerHTML = answer.content;
                             var images = container.querySelectorAll('img.BitbloqImg');
                             for (var i = 0; i < images.length; i++) {
-                            var img = images[i],
-                                imgIndex = img.className.split(' ')[0].split('answerImg')[1];
+                                var img = images[i],
+                                    imgIndex = img.className.split(' ')[0].split('answerImg')[1];
                                 var answerImage = container.getElementsByClassName('answerImg' + imgIndex)[0];
                                 if (answerImage) {
-                                    answerImage.src = common.urlImage+ 'forum/' + answer._id+'-'+imgIndex;
+                                    answerImage.src = common.urlImage + 'forum/' + answer._id + '-' + imgIndex;
                                 }
                                 answer.content = container.innerHTML;
                             }
