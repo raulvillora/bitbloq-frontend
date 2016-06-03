@@ -10,7 +10,7 @@ angular
             addViewer: addViewer,
             createThread: createThread,
             deleteThread: deleteThread,
-            moveTheme: moveTheme,
+            moveThread: moveThread,
             createAnswer: createAnswer,
             updateAnswer: updateAnswer,
             deleteAnswer: deleteAnswer
@@ -91,23 +91,10 @@ angular
             });
         }
 
-        function moveTheme(themeId, categoryName) {
+        function moveThread(themeId, categoryName) {
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'forum/thread/' + themeId + '/moveTo/' + categoryName
             });
-
-            return getCategoryId(categoryName).then(function(category) {
-                return getTheme(themeId).then(function(theme) {
-                    if (theme.data.categoryId !== category.data[0].id) {
-                        theme.data.categoryId = category.data[0].id;
-                        return _updateTheme(theme.data);
-                    } else {
-                        return true;
-                    }
-                });
-            });
-
         }
-
     });

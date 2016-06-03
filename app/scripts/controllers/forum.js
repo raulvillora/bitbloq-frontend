@@ -56,12 +56,12 @@
                 });
             };
 
-            forum.moveTheme = function(themeId) {
+            forum.moveThread = function(themeId) {
 
                 var confirmAction = function() {
                         adminmodal.close();
                         if (modalOptions.dropdown.option) {
-                            forumApi.moveTheme(themeId, modalOptions.dropdown.option).then(function() {
+                            forumApi.moveThread(themeId, modalOptions.dropdown.option).then(function() {
                                 forum.themeCategory = modalOptions.dropdown.option;
                                 $route.current.pathParams.forumsection = modalOptions.dropdown.option;
                                 $location.url('/help/forum/' + $route.current.pathParams.forumsection + '/' + $route.current.pathParams.forumresource);
