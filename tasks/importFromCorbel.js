@@ -252,38 +252,91 @@ module.exports = function(grunt) {
     }
 
     function migrateUsersFromCorbelToBitbloq(timestamp, callback) {
-        var users = grunt.file.readJSON('./backupsDB/user.json');
-
+        var users = grunt.file.readJSON('./backupsDB/user_iam.json'),
+            identities = grunt.file.readJSON('./backupsDB/identity.json'),
+            finalUsers = [],
+            duplicatedUsername = [],
+            usernames = {},
+            _ = require('lodash'),
+            found, k, identity;
         console.log('We have users, now transform it to Bitbloq and save on backupsDB', timestamp, users.length);
         for (var i = 0; i < users.length; i++) {
-            users[i]._id = users[i].id;
-            //users[i].salt = users[i].;
-            users[i].provider = 'local';
-            //users[i].password = users[i].;
-            users[i].birthday = users[i]['properties.birthday'];
-            users[i].cookiePolicyAccepted = false;
-            users[i].hasBeenWarnedAboutChangeBloqsToCode = false;
-            users[i].hasBeenAskedIfTeacher = parseFalse(users[i]['properties.hasBeenAskedIfTeacher']);
-            users[i].takeTour = parseFalse(users[i]['properties.tour']);
-            users[i].language = users[i]['properties.language'];
-            users[i].newsletter = parseFalse(users[i]['properties.newsletter']);
-            users[i].role = 'user';
-            // users[i].social = {
-            //     facebook: ,
-            //     google:
-            // }
-            users[i].bannedInForum = false;
-            var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups',
-                'properties.hasBeenAskedIfTeacher', 'properties.birthday', 'properties.code', 'properties.language', 'properties.cookiePolicyAccepted', 'properties.connected',
-                'properties.tour', 'properties.term', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
-            ];
-
-            for (var j = 0; j < deleteFields.length; j++) {
-                delete users[i][deleteFields[j]]
+            users[i]._id = users[i]._id.$oid;
+            if (!usernames[users[i].username.toLowerCase()]) {
+                usernames[users[i].username.toLowerCase()] = true;
+            } else {
+                console.log('duplicated Username');
+                duplicatedUsername.push(users[i]);
+                while (usernames[users[i].username.toLowerCase()]) {
+                    users[i].username = users[i].username + (Math.random() * 6);
+                }
+                usernames[users[i].username.toLowerCase()] = true;
             }
+
+            if (users[i].email && (users[i]._id !== 'bitbloqadmin')) {
+
+                users[i].birthday = users[i]['properties.birthday'];
+                users[i].cookiePolicyAccepted = false;
+                users[i].hasBeenWarnedAboutChangeBloqsToCode = false;
+                users[i].hasBeenAskedIfTeacher = parseFalse(users[i].properties.hasBeenAskedIfTeacher);
+                users[i].takeTour = parseFalse(users[i].properties.tour);
+                users[i].language = users[i].properties.language;
+                users[i].newsletter = parseFalse(users[i].properties.newsletter);
+                users[i].role = 'user';
+                users[i].corbelHash = true;
+
+                /*if (users[i].createdDate) {
+                    users[i].createdAt = users[i].createdDate.$date;
+                }
+*/
+                users[i].bannedInForum = false;
+                var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups', '_createdAt', '_updatedAt', 'createdDate',
+                    'properties.hasBeenAskedIfTeacher', 'properties.birthday', 'properties.code', 'properties.language', 'properties.cookiePolicyAccepted', 'properties.connected',
+                    'properties.tour', 'properties.term', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
+                ];
+
+                for (var j = 0; j < deleteFields.length; j++) {
+                    delete users[i][deleteFields[j]]
+                }
+                found = false;
+                k = 0;
+                identity = _.find(identities, function(item) {
+                    return item.userId === users[i]._id;
+                });
+                if (identity && (identity.oauthService !== 'silkroad')) {
+                    //console.log('identity found')
+                    users[i].social = {};
+                    users[i].social[identity.oauthService] = {
+                        id: identity.oauthId
+                    };
+                }
+
+                /*while (!found && (k < identities.length)) {
+                    if (identities[k].userId === users[i]._id) {
+                        console.log('found!');
+                        users[i].social = {};
+                        users[i].social[identities[k].oauthService] = {
+                            oauthId: identities[k].oauthId
+                        }
+                        found = true;
+                    } else {
+                        k++;
+                    }
+                }*/
+                // if (!users[i].salt || !users[i].password) {
+                //     users[i].salt = timestamp + i + (Math.random() * 6);
+                //     users[i].password = timestamp + i + (Math.random() * 6);
+                // }
+                finalUsers.push(users[i]);
+
+            } else {
+                console.log('wrongUser', users[i]);
+            }
+
         }
-        //users = users.splice(0, 50);
-        grunt.file.write('./backupsDB/' + timestamp + '/user.json', JSON.stringify(users));
+        console.log('duplicated', duplicatedUsername.length);
+        grunt.file.write('./backupsDB/' + timestamp + '/user.json', JSON.stringify(finalUsers));
+        grunt.file.write('./backupsDB/' + timestamp + '/duplicatedUsername.json', JSON.stringify(duplicatedUsername));
         callback();
 
     }
@@ -293,7 +346,7 @@ module.exports = function(grunt) {
             _ = require('lodash');
         async.parallel([
             getCorbelCollection.bind(null, 'ForumAnswers', env),
-            getCorbelCollection.bind(null, 'ForumCategories', env),
+            //getCorbelCollection.bind(null, 'ForumCategories', env),
             getCorbelCollection.bind(null, 'ForumStats', env),
             getCorbelCollection.bind(null, 'ForumThemes', env)
         ], function(err, result) {
@@ -305,46 +358,74 @@ module.exports = function(grunt) {
                 console.log(result[0].length);
                 console.log(result[1].length);
                 console.log(result[2].length);
-                console.log(result[3].length);
+                //console.log(result[3].length);
 
-                var projects = result[0],
-                    stats = result[1],
-                    tempStat;
-                grunt.file.write('./backupsDB/' + timestamp + '/tempprojects.json', JSON.stringify(projects));
-                grunt.file.write('./backupsDB/' + timestamp + '/stats.json', JSON.stringify(stats));
+                var threads,
+                    stats,
+                    answers;
 
-                for (var i = 0; i < projects.length; i++) {
-                    projects[i]._id = projects[i].id;
-                    delete projects[i].id;
-                    delete projects[i].creatorUsername;
-                    delete projects[i].links;
-                    delete projects[i].imageType;
-                    tempStat = _.find(stats, ['id', projects[i].id]);
-                    if (tempStat) {
-                        projects[i].timesViewed = tempStat.timesViewed;
-                        projects[i].timesAdded = tempStat.timesAdded;
-                    }
+                for (var i = 0; i < tempPageNumber['ForumStats']; i++) {
+                    stats = stats.concat(grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumStats_' + i + '.json'));
                 }
+                console.log('tempPageNumber[ForumThemes]', tempPageNumber['ForumThemes']);
+                for (var i = 0; i < tempPageNumber['ForumThemes']; i++) {
+                    console.log('process', i);
+                    threads = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumThemes_' + i + '.json')
 
-                grunt.file.write('./backupsDB/' + timestamp + '/project.json', JSON.stringify(projects));
+                    processThreads(threads, stats);
+                    grunt.file.write('./backupsDB/' + timestamp + '/ForumThemes_' + i + '.json', JSON.stringify(threads));
+                }
+                grunt.file.write('./backupsDB/' + timestamp + '/ForumThemes_tempPageNumber.txt', tempPageNumber['ForumThemes']);
+
+                console.log('tempPageNumber[ForumAnswers]', tempPageNumber['ForumAnswers']);
+                for (var i = 0; i < tempPageNumber['ForumAnswers']; i++) {
+                    console.log('process', i);
+                    answers = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json')
+
+                    processAnswers(answers, stats);
+                    grunt.file.write('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json', JSON.stringify(answers));
+                }
+                grunt.file.write('./backupsDB/' + timestamp + '/ForumAnswers_tempPageNumber.txt', tempPageNumber['ForumAnswers']);
                 callback();
             }
         });
     };
 
+    //TODO
+    function processThreads(threads, stats) {
+        var tempStat,
+            _ = require('lodash');
+        for (var i = 0; i < projects.length; i++) {
+            tempStat = _.find(stats, ['id', threads[i].id]);
+            if (tempStat) {
+                threads[i].timesViewed = tempStat.timesViewed;
+                threads[i].timesAdded = tempStat.timesAdded;
+            }
+
+            threads[i].corbelId = threads[i].id;
+            threads[i].createdAt = threads[i]._createdAt;
+            threads[i].updatedAt = threads[i]._updatedAt;
+
+            delete threads[i].id;
+            delete threads[i].creatorUsername;
+            delete threads[i].links;
+            delete threads[i].imageType;
+            delete threads[i]._createdAt;
+            delete threads[i]._updatedAt;
+        }
+    }
+
     // grunt importCollectionsFromCorbel:next:qa
     grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
         var fs = require('fs'),
-            timestamp = Date.now();
-        fs.mkdirSync('./backupsDB/' + timestamp);
+            timestamp = 1464279964116; //Date.now();
+        //fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
-            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            'importProjectFromCorbel:' + timestamp
+            //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
+            //'importProjectFromCorbel:' + timestamp,
             //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
-            //'restoreCollection:user:' + timestamp
-            //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp
+            'importUsersFromCorbel:' + timestamp
         ]);
-        console.log('tempPageNumber[ngularproject]', tempPageNumber['Angularproject']);
     });
 
 };

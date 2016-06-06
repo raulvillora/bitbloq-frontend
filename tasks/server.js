@@ -113,9 +113,14 @@ module.exports = function(grunt) {
             //console.log(splicedArray.length);
             splicedArray.push(items.splice(0, 25));
         }
+        var timer = 1000;
 
-        async.each(splicedArray, function(chunk, callback) {
-            adminRequestToServer('POST', collectionName + '/all', chunk, callback);
+        async.each(splicedArray, function(chunk, callbackEach) {
+            timer = timer + 2000;
+            setTimeout(function() {
+                adminRequestToServer('POST', collectionName + '/all', chunk, callbackEach);
+            }, timer)
+
         }, callback);
     };
 
@@ -194,4 +199,14 @@ module.exports = function(grunt) {
         //   }
         //});
     });
+
+    grunt.registerTask('importUsersFromCorbel', function(timestamp) {
+        var done = this.async();
+        grunt.log.writeln('importusers timestamp:' + timestamp);
+
+        var items = grunt.file.readJSON('backupsDB/' + timestamp + '/user.json');
+        insertCollection('user', items, done);
+
+    });
+
 };
