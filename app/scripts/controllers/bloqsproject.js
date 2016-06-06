@@ -15,6 +15,55 @@ angular.module('bitbloqApp')
          Project save / edit
          *************************************************/
 
+        function getDefaultProject() {
+            var project = {
+                creatorId: '',
+                name: '',
+                description: '',
+                userTags: [],
+                hardwareTags: [],
+                compiled: false,
+                videoUrl: '',
+                defaultTheme: 'infotab_option_colorTheme',
+                software: {
+                    vars: {
+                        enable: true,
+                        name: 'varsBloq',
+                        childs: [],
+                        content: [
+                            []
+                        ]
+                    },
+                    setup: {
+                        enable: true,
+                        name: 'setupBloq',
+                        childs: [],
+                        content: [
+                            []
+                        ]
+                    },
+                    loop: {
+                        enable: true,
+                        name: 'loopBloq',
+                        childs: [],
+                        content: [
+                            []
+                        ]
+                    },
+                    freeBloqs: []
+                },
+
+                hardware: {
+                    board: null,
+                    robot: null,
+                    components: [],
+                    connections: []
+                }
+            };
+
+            return _.cloneDeep(project);
+        }
+
         function getBoardMetaData() {
             return _.find($scope.hardware.boardList, function(b) {
                 return b.name === $scope.project.hardware.board;
@@ -169,18 +218,16 @@ angular.module('bitbloqApp')
             if ($scope.hardware.cleanSchema) {
                 $scope.hardware.cleanSchema();
             }
-            $scope.project = project;
+            $scope.project = _.extend(getDefaultProject(), project);
             $scope.refreshComponentsArray();
         };
 
         $scope.refreshComponentsArray = function() {
-
             var newComponentsArray = bloqsUtils.getEmptyComponentsArray();
             var newHardwareTags = [];
 
             var plainComponentListTemporal = [];
             var plainComponentList = [];
-
             $scope.project.hardware.components.forEach(function(comp) {
                 if (!!comp.connected) {
                     if (comp.oscillator === true || comp.oscillator === 'true') {
@@ -215,12 +262,6 @@ angular.module('bitbloqApp')
                     }
                 });
             }
-
-            // console.log('Old components array');
-            // console.log($scope.componentsArray);
-            // console.log('New components array');
-            // console.log(newComponentsArray);
-            // console.log('its equal?', _.isEqual($scope.componentsArray, newComponentsArray));
 
             if (!_.isEqual($scope.componentsArray, newComponentsArray)) {
                 //Regenerate hw tags
@@ -1013,50 +1054,7 @@ angular.module('bitbloqApp')
         $scope.tempImage = {};
         $scope.oldProject = {};
         $scope.oldTempImage = {};
-        $scope.project = {
-            creatorId: '',
-            name: '',
-            description: '',
-            userTags: [],
-            hardwareTags: [],
-            compiled: false,
-            videoUrl: '',
-            defaultTheme: 'infotab_option_colorTheme',
-            software: {
-                vars: {
-                    enable: true,
-                    name: 'varsBloq',
-                    childs: [],
-                    content: [
-                        []
-                    ]
-                },
-                setup: {
-                    enable: true,
-                    name: 'setupBloq',
-                    childs: [],
-                    content: [
-                        []
-                    ]
-                },
-                loop: {
-                    enable: true,
-                    name: 'loopBloq',
-                    childs: [],
-                    content: [
-                        []
-                    ]
-                },
-                freeBloqs: []
-            },
-
-            hardware: {
-                board: null,
-                robot: null,
-                components: [],
-                connections: []
-            }
-        };
+        $scope.project = getDefaultProject();
 
         $scope.hardware = {
             boardList: null,

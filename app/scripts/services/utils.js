@@ -325,6 +325,7 @@ angular.module('bitbloqApp')
         };
 
         exports.isYoutubeURL = function(url) {
+            url = url || '';
             var REGEXP = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
             return (url.match(REGEXP)) ? RegExp.$1 : false;
         };
