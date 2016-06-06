@@ -194,7 +194,11 @@
                     $log.debug('POSTING ANSWER: OK');
                 }).catch(function(err) {
                     $log.debug('Error:', err);
-                    alertsService.add('forum_alert_NewAnswerError', 'creatingAnswer', 'ok', 5000);
+                    if(err.status === 401){
+                        alertsService.add('forum_alert_accessBannedUser', 'creatingAnswer', 'error');
+                    } else {
+                        alertsService.add('forum_alert_NewAnswerError', 'creatingAnswer', 'error');
+                    }
                 });
             };
 
