@@ -155,13 +155,13 @@
                     threadId: threadId || forum.currentThread._id,
                     content: '<p>' + forum.textEditorContent.htmlContent + '</p>'
                 };
+                forum.textEditorContent.htmlContent = '';
 
                 if (threadId) {
                     answer.main = true;
                 }
 
                 forumApi.createAnswer(answer).then(function(response) {
-                    forum.textEditorContent.htmlContent = '';
                     answer._id = response.data;
                     if (forum.answer.images.length > 0) {
                         var images = [],
@@ -217,6 +217,7 @@
                         content: '<p>' + forum.textEditorContent.htmlContent + '</p>',
                         main: true
                     };
+                    forum.textEditorContent.htmlContent = '';
 
                     forumApi.createThread(thread, answer).then(function(response) {
                         $log.debug('theme: ' + response.data);
