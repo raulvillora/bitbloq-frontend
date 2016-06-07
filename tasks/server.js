@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 
         postRequest.write(data);
         postRequest.end();
-    };
+    }
 
     function adminRequestToServer(method, endPoint, data, callback) {
         getToken(function(err, res) {
@@ -66,11 +66,11 @@ module.exports = function(grunt) {
                 //console.log(res.token);
                 var headers = {
                     'Authorization': 'Bearer ' + res.token
-                }
+                };
                 requestToServer(method, endPoint, headers, data, callback);
             }
         });
-    };
+    }
 
     function getToken(callback) {
         if (sharedToken) {
@@ -90,15 +90,14 @@ module.exports = function(grunt) {
                 callback(err, res);
             });
         }
-    };
+    }
 
     function deleteCollection(collectionName, callback) {
         if (collectionName === 'forumcategory') {
             collectionName = 'forum/category';
         }
         adminRequestToServer('DELETE', collectionName + '/all', {}, callback);
-    };
-    var timer = 0;
+    }
 
     function insertCollection(collectionName, items, callback) {
         if (collectionName === 'forumcategory') {
@@ -122,7 +121,7 @@ module.exports = function(grunt) {
             }, timer)
 
         }, callback);
-    };
+    }
 
     function refreshServerCollection(collectionName, items, callback) {
         console.log('refresh collection');
@@ -139,7 +138,7 @@ module.exports = function(grunt) {
             });
         }
 
-    };
+    }
 
     grunt.registerTask('updateCollection', function(collectionName) {
         grunt.log.writeln('Updating= ' + collectionName);
