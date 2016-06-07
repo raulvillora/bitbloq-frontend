@@ -62,20 +62,20 @@
                             <span>{{ 'account-connect-to-social-network' | translate }}</span>
                         </legend>
                         <div class="account__connect">
-                            <div ng-show="common.user.social.google.email !== ''">
+                            <div ng-show="common.user.social.google.id !== ''">
                                 <span>{{ 'account-connect-to' | translate }}</span>
                                 <span class="connect-to-SN">
                                     Google +</span>
                             </div>
-                            <div ng-show="common.user.social.facebook.email !== ''">
+                            <div ng-show="common.user.social.facebook.id !== ''">
                                 <span>{{ 'account-connect-to' | translate }}</span>
                                 <span class="connect-to-SN">
                                     Facebook</span>
                             </div>
                         </div>
                         <div class="form-control">
-                            <input class="btn btn--social btn__login--google" data-element="account-social-google-button" ng-click="authenticate('google')" ng-if="common.user && !common.user.social.google.email" type="button" value="{{ 'google+' | translate }}"/>
-                            <input class="btn btn--social btn__login--facebook" data-element="account-social-facebook-button" ng-click="authenticate('facebook')" ng-if="common.user && !common.user.social.facebook.email" type="button" value="{{ 'facebook' | translate }}"/>
+                            <input class="btn btn--social btn__login--google" data-element="account-social-google-button" ng-click="authenticate('google')" ng-if="common.user && !common.user.social.google.id" type="button" value="{{ 'google+' | translate }}"/>
+                            <input class="btn btn--social btn__login--facebook" data-element="account-social-facebook-button" ng-click="authenticate('facebook')" ng-if="common.user && !common.user.social.facebook.id" type="button" value="{{ 'facebook' | translate }}"/>
                         </div>
                     </fieldset>
                 </div>
