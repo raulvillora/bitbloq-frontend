@@ -335,23 +335,23 @@ module.exports = function(grunt) {
         var async = require('async'),
             _ = require('lodash');
         async.parallel([
-            getCorbelCollection.bind(null, 'ForumAnswers', env),
-            //getCorbelCollection.bind(null, 'ForumCategories', env),
-            getCorbelCollection.bind(null, 'ForumStats', env),
-            getCorbelCollection.bind(null, 'ForumThemes', env)
+            getCorbelCollection.bind(null, 'ForumAnswers', env, timestamp),
+            getCorbelCollection.bind(null, 'ForumStats', env, timestamp),
+            getCorbelCollection.bind(null, 'ForumThemes', env, timestamp)
         ], function(err, result) {
             if (err) {
                 console.log('err');
                 callback(err);
             } else {
-                console.log('ok');
+                console.log('All collections');
                 console.log(result[0].length);
                 console.log(result[1].length);
                 console.log(result[2].length);
-                //console.log(result[3].length);
 
                 var threads,
-                    stats,
+                    allThreads = [],
+                    allAnswers = [],
+                    stats = [],
                     answers;
 
                 for (var i = 0; i < tempPageNumber['ForumStats']; i++) {
@@ -363,19 +363,23 @@ module.exports = function(grunt) {
                     threads = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumThemes_' + i + '.json')
 
                     processThreads(threads, stats);
+                    allThreads = allThreads.concat(threads);
                     grunt.file.write('./backupsDB/' + timestamp + '/ForumThemes_' + i + '.json', JSON.stringify(threads));
                 }
                 grunt.file.write('./backupsDB/' + timestamp + '/ForumThemes_tempPageNumber.txt', tempPageNumber['ForumThemes']);
+                grunt.file.write('./backupsDB/' + timestamp + '/ForumThreads.json', JSON.stringify(allThreads));
 
                 console.log('tempPageNumber[ForumAnswers]', tempPageNumber['ForumAnswers']);
                 for (var i = 0; i < tempPageNumber['ForumAnswers']; i++) {
                     console.log('process', i);
                     answers = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json')
 
-                    processAnswers(answers, stats);
+                    processAnswers(answers, allThreads);
+                    allAnswers = allAnswers.concat(answers);
                     grunt.file.write('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json', JSON.stringify(answers));
                 }
                 grunt.file.write('./backupsDB/' + timestamp + '/ForumAnswers_tempPageNumber.txt', tempPageNumber['ForumAnswers']);
+                grunt.file.write('./backupsDB/' + timestamp + '/ForumAnswers.json', JSON.stringify(allAnswers));
                 callback();
             }
         });
@@ -385,12 +389,13 @@ module.exports = function(grunt) {
         var tempStat,
             _ = require('lodash'),
             deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'creator'];
-        for (var i = 0; i < projects.length; i++) {
+        for (var i = 0; i < threads.length; i++) {
             tempStat = _.find(stats, ['id', threads[i].id]);
             if (tempStat) {
                 threads[i].numberOfViews = tempStat.timesViewed;
             }
             //check if creator its _id or id
+            threads[i]._id = threads[i].id;
             threads[i].creatorId = threads[i].creator._id;
             threads[i].createdAt = threads[i]._createdAt;
             threads[i].updatedAt = threads[i]._updatedAt;
@@ -401,25 +406,27 @@ module.exports = function(grunt) {
         }
     }
 
-    function processAnswers(answers, stats) {
+    function processAnswers(answers, threads) {
         var tempStat,
             _ = require('lodash'),
-            deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'creator'];
-        for (var i = 0; i < projects.length; i++) {
-            tempStat = _.find(stats, ['id', answers[i].id]);
-            if (tempStat) {
-                answers[i].numberOfViews = tempStat.timesViewed;
-            }
+            tempThread,
+            deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'owner', 'main'];
+        for (var i = 0; i < answers.length; i++) {
             //check if creator its _id or id
-            answers[i].creatorId = answers[i].owner._id;
+            answers[i].creatorId = answers[i].owner.id;
             answers[i].createdAt = answers[i]._createdAt;
             answers[i].updatedAt = answers[i]._updatedAt;
             answers[i].threadId = answers[i].themeId;
+            //add category on answers
+            tempThread = _.find(threads, ['_id', answers[i].threadId]);
+            answers[i].categoryId = tempThread.categoryId;
             var tempArray = [];
-            for (var k = 0; k < answers[i].images.length; k++) {
-                tempArray.push(answers[i].images[k]._id);
+            if (answers[i].images) {
+                for (var k = 0; k < answers[i].images.length; k++) {
+                    tempArray.push(answers[i].images[k].id);
+                }
+                answers[i].images = tempArray;
             }
-            answers[i].images = tempArray;
 
             for (var j = 0; j < deleteFields.length; j++) {
                 delete answers[i][deleteFields[j]]
@@ -436,8 +443,10 @@ module.exports = function(grunt) {
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
             //'importProjectFromCorbel:' + timestamp,
-            'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
-            'importUsersFromCorbel:' + timestamp
+            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            //'importUsersFromCorbel:' + timestamp
+            'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
+            'importForumFromCorbel:' + timestamp
         ]);
     });
 

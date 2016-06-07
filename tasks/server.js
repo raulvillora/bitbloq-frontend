@@ -207,5 +207,15 @@ module.exports = function(grunt) {
         insertCollection('user', items, done);
 
     });
+    grunt.registerTask('importForumFromCorbel', function(timestamp) {
+        var done = this.async();
+        grunt.log.writeln('importForum timestamp:' + timestamp);
+
+        var items = grunt.file.readJSON('backupsDB/' + timestamp + '/ForumThreads.json');
+        insertCollection('forum/thread', items, function() {
+            var answers = grunt.file.readJSON('backupsDB/' + timestamp + '/ForumAnswers.json');
+            insertCollection('forum/answer', answers, done);
+        });
+    });
 
 };
