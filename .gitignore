@@ -24,3 +24,4 @@ contentScripts
 app/scripts/config.js
 .gitconfig
 gruntconfig.json
+backupsDB

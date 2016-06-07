@@ -305,7 +305,7 @@ module.exports = function(grunt) {
                 });
                 if (identity && (identity.oauthService !== 'silkroad')) {
                     //console.log('identity found')
-                    users[i].social = {};
+                    users[i].social = users[i].social || {};
                     users[i].social[identity.oauthService] = {
                         id: identity.oauthId
                     };
@@ -423,7 +423,7 @@ module.exports = function(grunt) {
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
             //'importProjectFromCorbel:' + timestamp,
-            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
             'importUsersFromCorbel:' + timestamp
         ]);
     });
