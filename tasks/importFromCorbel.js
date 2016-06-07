@@ -187,6 +187,7 @@ module.exports = function(grunt) {
             }
         }).catch(function(err) {
             grunt.log.error('create token error');
+            grunt.log.error(JSON.stringify(err));
             done(err);
         });
 
@@ -258,9 +259,10 @@ module.exports = function(grunt) {
             duplicatedUsername = [],
             usernames = {},
             _ = require('lodash'),
-            found, k, identity;
+            found, k, itemIdentities;
         console.log('We have users, now transform it to Bitbloq and save on backupsDB', timestamp, users.length);
         for (var i = 0; i < users.length; i++) {
+
             users[i]._id = users[i]._id.$oid;
             if (!usernames[users[i].username.toLowerCase()]) {
                 usernames[users[i].username.toLowerCase()] = true;
@@ -298,35 +300,23 @@ module.exports = function(grunt) {
                 for (var j = 0; j < deleteFields.length; j++) {
                     delete users[i][deleteFields[j]]
                 }
-                found = false;
-                k = 0;
-                identity = _.find(identities, function(item) {
+
+                itemIdentities = _.filter(identities, function(item) {
                     return item.userId === users[i]._id;
                 });
-                if (identity && (identity.oauthService !== 'silkroad')) {
-                    //console.log('identity found')
-                    users[i].social = users[i].social || {};
-                    users[i].social[identity.oauthService] = {
-                        id: identity.oauthId
-                    };
+                if (itemIdentities.length > 2) {
+                    console.log('two identities');
+                    users[i].social = {};
+                    for (var k = 0; k < itemIdentities.length; k++) {
+                        if (itemIdentities[k].oauthService !== 'silkroad') {
+                            users[i].social[itemIdentities[k].oauthService] = {
+                                id: itemIdentities[k].oauthId
+                            };
+                        }
+                    }
+                    console.log(users[i]);
                 }
 
-                /*while (!found && (k < identities.length)) {
-                    if (identities[k].userId === users[i]._id) {
-                        console.log('found!');
-                        users[i].social = {};
-                        users[i].social[identities[k].oauthService] = {
-                            oauthId: identities[k].oauthId
-                        }
-                        found = true;
-                    } else {
-                        k++;
-                    }
-                }*/
-                // if (!users[i].salt || !users[i].password) {
-                //     users[i].salt = timestamp + i + (Math.random() * 6);
-                //     users[i].password = timestamp + i + (Math.random() * 6);
-                // }
                 finalUsers.push(users[i]);
 
             } else {
@@ -391,35 +381,58 @@ module.exports = function(grunt) {
         });
     };
 
-    //TODO
     function processThreads(threads, stats) {
         var tempStat,
-            _ = require('lodash');
+            _ = require('lodash'),
+            deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'creator'];
         for (var i = 0; i < projects.length; i++) {
             tempStat = _.find(stats, ['id', threads[i].id]);
             if (tempStat) {
-                threads[i].timesViewed = tempStat.timesViewed;
-                threads[i].timesAdded = tempStat.timesAdded;
+                threads[i].numberOfViews = tempStat.timesViewed;
             }
-
-            threads[i].corbelId = threads[i].id;
+            //check if creator its _id or id
+            threads[i].creatorId = threads[i].creator._id;
             threads[i].createdAt = threads[i]._createdAt;
             threads[i].updatedAt = threads[i]._updatedAt;
 
-            delete threads[i].id;
-            delete threads[i].creatorUsername;
-            delete threads[i].links;
-            delete threads[i].imageType;
-            delete threads[i]._createdAt;
-            delete threads[i]._updatedAt;
+            for (var j = 0; j < deleteFields.length; j++) {
+                delete threads[i][deleteFields[j]]
+            }
+        }
+    }
+
+    function processAnswers(answers, stats) {
+        var tempStat,
+            _ = require('lodash'),
+            deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'creator'];
+        for (var i = 0; i < projects.length; i++) {
+            tempStat = _.find(stats, ['id', answers[i].id]);
+            if (tempStat) {
+                answers[i].numberOfViews = tempStat.timesViewed;
+            }
+            //check if creator its _id or id
+            answers[i].creatorId = answers[i].owner._id;
+            answers[i].createdAt = answers[i]._createdAt;
+            answers[i].updatedAt = answers[i]._updatedAt;
+            answers[i].threadId = answers[i].themeId;
+            var tempArray = [];
+            for (var k = 0; k < answers[i].images.length; k++) {
+                tempArray.push(answers[i].images[k]._id);
+            }
+            answers[i].images = tempArray;
+
+            for (var j = 0; j < deleteFields.length; j++) {
+                delete answers[i][deleteFields[j]]
+            }
         }
     }
 
     // grunt importCollectionsFromCorbel:next:qa
+    // grunt importCollectionsFromCorbel:production:qa
     grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
         var fs = require('fs'),
-            timestamp = 1464279964116; //Date.now();
-        //fs.mkdirSync('./backupsDB/' + timestamp);
+            timestamp = Date.now(); //1464279964116 
+        fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
             //'importProjectFromCorbel:' + timestamp,
