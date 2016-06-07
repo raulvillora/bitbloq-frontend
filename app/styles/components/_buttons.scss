@@ -48,6 +48,22 @@
         background-color: #d1d1d1;
     }
 }
+.btn--tertiary{
+    color: black;
+    border: 1px solid #cfcfcf;
+    font-family: $font-family-base;
+    font-size: 14px;
+    font-weight: 700;
+    @include button(#fff);
+
+    &:hover {
+        background-color: #e8e8e8;
+    }
+
+    &:active {
+        background-color: #ddd;
+    }
+}
 
 .btn--disabled {
     color: $font-color-disabled;

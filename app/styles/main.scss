@@ -36,65 +36,41 @@
 @import "components/_serial.scss";
 //components
 @import "components/_tabs-layout";
-// View: Style Guide
 @import "styleguide";
-// View: Style Guide
 @import "notFound";
-// View: Landing
 @import "landing";
-// View: Landing header
 @import "landing-header";
-// View: Landing features
 @import "landing-features";
-// View: Landing downloads
 @import "landing-downloads";
-// View: Landing about us
 @import "landing-aboutus";
-// View: Landing help
 @import "landing-help";
-// View: Landing offline
 @import "landing-offline";
-// Banners
-@import "banners/campamentos2016";
-// View: Explore
+@import "landing-howitworks";
 @import "explore";
-// View: Login
 @import "login";
-// View: Recovery Password
 @import "resetPassword";
-// View: Make -- Info tab
 @import "infotab";
-// View: Make
 @import "bloqsproject";
 @import "bloqstab";
-// View: Header
 @import "header";
-// View: Projects
 @import "projects";
-// View: account
 @import "account";
-// View: project
 @import "project";
-// View: help
 @import "help";
-// View: unsupported
 @import "unsupported";
-// View: toolbox
 @import "toolbox";
-// View: termsandcookies
 @import "statictexts";
-// View: forum
 @import "forum";
-// View: web2board-settings
 @import "web2board-settings";
 // Components: hwTab
 @import "hardwaretab";
 // Components: Draggable
 @import "components/_draggable";
-// View: codeproject
 @import "code";
 @import "old-version-masthead";
 // Override vendors
 @import "vendors/_bloqs";
 // admin user
 @import "adminUser";
+// Banners
+@import "banners/campamentos2016";

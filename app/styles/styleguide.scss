@@ -3,9 +3,12 @@
     padding: .5em;
     display: inline-flex;
 }
-
+.styleguide-view{
+    overflow:auto;
+    height: 100%;
+}
 .sample--container {
-    padding: 1em;	
+    padding: 1em;
 }
 
 .sample--label {

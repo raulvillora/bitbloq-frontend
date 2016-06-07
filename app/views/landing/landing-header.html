@@ -8,11 +8,11 @@
             </svg>
         </a>
         <ul class="left">
+            <li ng-click="landing.section = 0" ng-class="{'active':common.section === 'howitworks'}">
+                <a href="#/howitworks" data-element="landing-howitworks-button">{{ 'general_howitworks' | translate }}</a>
+            </li>
             <li ng-click="landing.section = 0" ng-class="{'active':common.section === 'features'}">
                 <a href="#/features" data-element="landing-features-button">{{ 'general_features' | translate }}</a>
-            </li>
-            <li ng-click="landing.section = 1" ng-class="{'active':common.section === 'downloads'}">
-                <a href="#/downloads" data-element="landing-downloads-button">{{ 'general_download' | translate }}</a>
             </li>
             <li ng-click="landing.section = 2" ng-class="{'active':common.section === 'aboutus'}">
                 <a href="#/aboutus" data-element="landing-aboutus-button">{{ 'general_aboutUs' | translate }}</a>

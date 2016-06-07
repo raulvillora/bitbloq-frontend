@@ -1,0 +1,71 @@
+<div ng-class="{'landing--ru':translate.use() === 'ru-RU'}" ng-click="closeMenu($event)" class="view view--landing view--landing--howitworks">
+    <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible,'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
+    <div class="landing--masthead">
+        <h1 class="medium">{{ 'landing_howitworks_title' | translate }}</h1>
+        <div class="masthead__buttons medium">
+            <div class="landing--howitworks-oval first">
+                <img src="../images/landing/landing-howitworks-oval-1.png" alt="">
+                <h2>{{ 'landing_howitworks_oval_1' | translate }}</h2>
+            </div>
+            <div class="landing--howitworks-oval second">
+                <img src="../images/landing/landing-howitworks-oval-2.png" alt="">
+                <h2>{{ 'landing_howitworks_oval_2' | translate }}</h2>
+            </div>
+            <div class="landing--howitworks-oval third">
+                <img src="../images/landing/landing-howitworks-oval-3.png" alt="">
+                <h2>{{ 'landing_howitworks_oval_3' | translate }}</h2>
+            </div>
+        </div>
+        <a ng-if="operatingSystem === 'Mac'" data-ng-href="{{envData.config.web2boardLinkMac}}">
+            <button class="btn btn--tertiary btn--small">
+                {{ 'landing_link_download' | translate }} Mac OS X
+            </button>
+        </a>
+    </div>
+    <div class="landing--downloads max-width">
+        <h2 class="medium">{{ 'landing_title_availableForAllOS' | translate }}</h2>
+        <ul class="row row--inline landing--section">
+            <li class="col-medium-4">
+                <i class="fa fa-windows"></i>
+                <h3>Windows</h3>
+                <div class="download--link medium">
+                    <a class="landing--link--small" data-ng-href="{{envData.config.web2boardLinkWindows}}">{{ 'download' | translate }} Web2Board 32/64 bits</a>
+                </div>
+            </li>
+            <li class="col-medium-4">
+                <i class="fa fa-linux"></i>
+                <h3>Linux</h3>
+                <div class="download--link medium">
+                    <a class="landing--link--small" data-ng-href="{{envData.config.web2boardLinkLinux}}">{{ 'download' | translate }} Web2Board 64-bits</a>
+                    <a class="landing--link--small" data-ng-href="{{envData.config.web2boardLinkLinux32}}">{{ 'download' | translate }} Web2Board 32-bits</a>
+                </div>
+            </li>
+            <li class="col-medium-4">
+                <i class="fa fa-apple"></i>
+                <h3>Mac OS 10.10</h3>
+                <div class="download--link medium">
+                    <a class="landing--link--small" data-ng-href="{{envData.config.web2boardLinkMac}}">{{ 'download' | translate }} Web2Board</a>
+                </div>
+            </li>
+        </ul>
+        <div class="landing--requirements">
+            <span class="h3">
+                {{ 'landing_requirements' | translate }}
+            </span>
+            <span class="text--secondary">
+                {{ 'landing_requirements_text' | translate }}
+            </span>
+        </div>
+    </div>
+    <div class="landing--call-to-action">
+        <div class="cta--container">
+            <h1 class="landing--heading--white">{{'landing-main-title' | translate}}</h1>
+            <a href="#/bloqsproject" class="btn btn--call--test-it-now">{{'landing_link_testItNow' | translate}}</a>
+            <a href="#/register" class="btn btn--call--register">{{'general_button_register' | translate}}</a>
+        </div>
+    </div>
+    <div class="landing--offline max-width">
+        <p>offline</p>
+    </div>
+    <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
+</div>

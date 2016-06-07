@@ -135,6 +135,10 @@ angular
                     templateUrl: 'views/landing/landing-aboutus.html',
                     controller: 'LandingCtrl'
                 })
+                .when('/howitworks', {
+                    templateUrl: 'views/landing/landing-howitworks.html',
+                    controller: 'LandingCtrl'
+                })
                 .when('/codeproject/:id?', {
                     templateUrl: 'views/code.html',
                     controller: 'CodeCtrl',
