@@ -2,7 +2,7 @@
     <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible,'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
     <div class="landing--masthead">
         <h1 class="medium">{{ 'landing_howitworks_title' | translate }}</h1>
-        <div class="masthead__buttons medium">
+        <div class="masthead__buttons">
             <div class="landing--howitworks-oval first">
                 <img src="../images/landing/landing-howitworks-oval-1.png" alt="">
                 <h2>{{ 'landing_howitworks_oval_1' | translate }}</h2>
@@ -16,9 +16,24 @@
                 <h2>{{ 'landing_howitworks_oval_3' | translate }}</h2>
             </div>
         </div>
-        <a ng-if="operatingSystem === 'Mac'" data-ng-href="{{envData.config.web2boardLinkMac}}">
-            <button class="btn btn--tertiary btn--small">
+        <a class="download-button" ng-if="operatingSystem === 'Mac'" data-ng-href="{{envData.config.web2boardLinkMac}}">
+            <button class="btn btn--tertiary btn--medium">
                 {{ 'landing_link_download' | translate }} Mac OS X
+            </button>
+        </a>
+        <a class="download-button" ng-if="operatingSystem === 'Windows'" data-ng-href="{{envData.config.web2boardLinkWindows}}">
+            <button class="btn btn--tertiary btn--medium">
+                {{ 'landing_link_download' | translate }} Windows 32/64 bits
+            </button>
+        </a>
+        <a class="download-button" ng-if="operatingSystem === 'Linux'" data-ng-href="{{envData.config.web2boardLinkLinux}}">
+            <button class="btn btn--tertiary btn--medium">
+                {{ 'landing_link_download' | translate }} Linux 64-bits
+            </button>
+        </a>
+        <a class="download-button" ng-if="operatingSystem === 'Linux'" data-ng-href="{{envData.config.web2boardLinkLinux32}}">
+            <button class="btn btn--tertiary btn--medium">
+                {{ 'landing_link_download' | translate }} Linux 32-bits
             </button>
         </a>
     </div>
@@ -65,7 +80,11 @@
         </div>
     </div>
     <div class="landing--offline max-width">
-        <p>offline</p>
+        <img src="../images/landing/nowifi.png" alt="">
+        <h2>{{ 'landing_howitworks_nowifi_title' | translate }}</h2>
+        <br>
+        <p>{{ 'landing_howitworks_nowifi_text' | translate }}</p>
+        <a href="/#/offline">{{ 'more-info' | translate }}</a>
     </div>
     <div class="footer" data-ng-include="'views/landing/landing-footer.html'"></div>
 </div>

@@ -60,7 +60,7 @@ angular.module('bitbloqApp')
         $scope.offlineList = [{
             text: 'landing_offline_list_withoutconnection',
             offlineStatus: true,
-            onlineStatus: true
+            onlineStatus: false
         }, {
             text: 'landing_offline_list_noinstall',
             offlineStatus: true,

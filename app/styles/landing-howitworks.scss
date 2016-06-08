@@ -5,27 +5,43 @@
         text-align: center;
         h1 {
             @include textGenerator(40px, 400, white, auto, 584px, false);
-            padding-top: 90px;
+            padding-top: 100px;
             margin: 0 auto;
             padding-bottom: 20px;
         }
     }
+    .masthead__buttons{
+        margin-top: 35px;
+        max-width: 1200px;
+        margin: 35px auto 0 auto;
+        text-align: justify;
+        &:after{
+            content: '';
+            width: 100%;
+            display: inline-block;
+        }
+    }
     .landing--howitworks-oval {
         display: inline-block;
+        text-align: center;
+        margin: 0 20px;
         h2{
             font-size: 24px;
+            margin-top: 25px;
             font-family: $font-family-base;
             color: white;
         }
-        .first{
-
+        &.first, &.third{
+            max-width: 200px;
         }
-        .second{
-
+        &.second{
+            max-width: 300px;
         }
-        .third{
+    }
 
-        }
+    .download-button{
+        margin-top: 55px;
+        display:block;
     }
     .landing--downloads {
         text-align: center;
@@ -91,4 +107,31 @@
             }
         }
     }
+    .landing--offline {
+        text-align: center;
+        padding: 70px 0;
+        h2 {
+            font-size: 30px;
+        }
+        p {
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 40px;
+        }
+        a {
+            margin-top: 5px;
+            display: block;
+        }
+    }
+
+    @media only screen and (max-width:845px){
+    .masthead__buttons {
+        text-align: center;
+    }
+    .landing--howitworks-oval {
+        margin: 25px auto;
+        display: block;
+    }
 }
+}
+

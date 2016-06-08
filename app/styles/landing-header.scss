@@ -1,16 +1,15 @@
 .landing--header {
     background-color: transparent;
-    height          : 66px;
     position        : relative;
     top             : 0;
     width           : 100%;
     z-index         : 9;
     transition      : background-color 250ms;
+    border-top: 3px solid $brand-primary;
 
     &.opaque {
         transition      : background-color 250ms;
         background-color: #373b44;
-        border-top      : 3px solid #82ad3a;
     }
 
     &.fixed {
@@ -34,7 +33,7 @@
             text-transform: uppercase;
             position      : relative;
             margin-top    : 3px;
-            
+
             .logo--icon--link {
                 margin-left   : 20px;
                 display       : inline-block;

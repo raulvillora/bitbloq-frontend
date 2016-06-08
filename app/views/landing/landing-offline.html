@@ -38,10 +38,12 @@
                 </div>
                 <div class="col-medium-4">
                     <i ng-show="element.offlineStatus" class="fa fa-check"></i>
+                    <span ng-show="!element.offlineStatus">-</span>
                 </div>
                 <div class="col-medium-4">
                     <i ng-show="element.onlineStatus === true" class="fa fa-check"></i>
                     <span ng-show="isString(element.onlineStatus)">{{ element.onlineStatus | translate }}</span>
+                    <span ng-show="!element.onlineStatus">-</span>
                 </div>
             </div>
         </div>
@@ -103,7 +105,7 @@
                 {{ 'landing_requirements' | translate }}
             </span>
             <span class="text--secondary">
-                Linux (Ubuntu 12.04+, Fedora 21, Debian 8), Mac OS X 10.9+, Windows 7+ (32 & 64 bit).
+                Linux (Ubuntu 12.04+, MAX 7.5+, Fedora 21, Debian 8), Mac OS X 10.9+, Windows 7+ (32 & 64 bit).
             </span>
         </div>
     </div>
