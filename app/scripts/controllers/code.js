@@ -44,7 +44,7 @@ angular.module('bitbloqApp')
                 settingBoardAlert = alertsService.add('alert-web2board-settingBoard', 'upload', 'loading');
                 web2board.setInProcess(true);
 
-                web2board.upload(boardMetadata, utils.getPrettyCode($scope.project.code));
+                web2board.upload(boardMetadata, utils.prettyCode($scope.project.code));
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
@@ -53,7 +53,7 @@ angular.module('bitbloqApp')
 
         function uploadW2b2() {
             if ($scope.project.hardware.board) {
-                web2board.upload(getBoardMetaData().mcu, utils.getPrettyCode($scope.project.code));
+                web2board.upload(getBoardMetaData().mcu, utils.prettyCode($scope.project.code));
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
@@ -69,11 +69,11 @@ angular.module('bitbloqApp')
             compilingAlert = alertsService.add('alert-web2board-compiling', 'compile', 'loading');
             web2board.setInProcess(true);
 
-            web2board.verify(utils.getPrettyCode($scope.project.code));
+            web2board.verify(utils.prettyCode($scope.project.code));
         }
 
         function verifyW2b2() {
-            web2board.verify(utils.getPrettyCode($scope.project.code));
+            web2board.verify(utils.prettyCode($scope.project.code));
         }
 
         function serialMonitorW2b1() {
