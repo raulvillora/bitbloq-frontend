@@ -12,15 +12,11 @@ angular.module('bitbloqApp')
     .controller('AccountCtrl', function($scope, $rootScope, $localStorage, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils) {
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
-              console.log("response");
-              console.log(response);
                 var options = {
                     provider: prov,
                     accessToken: response.access_token
                 };
-               userApi.loginBySocialNetwork(options).then(function(response) {
-                 console.log("response login");
-                 console.log(response);
+               userApi.loginBySocialNetwork(options).then(function() {
                     // Set user data
                     userApi.currentUser = User.get();
                     userApi.currentUser.$promise.then(function(user) {
@@ -32,7 +28,7 @@ angular.module('bitbloqApp')
                     alertsService.add('social-networks-error-has-identity', 'social-network-user', 'warning');
                     console.log('ERROR ADDING SOCIAL NETWORK: ', err);
                 });
-              }).catch(function(err){
+              }).catch(function(){
               });
             //     userApi.getSocialProfile(provider, response.access_token).success(function(userData) {
             //         userApi.addSocialNetwork({...}).then(function() {
