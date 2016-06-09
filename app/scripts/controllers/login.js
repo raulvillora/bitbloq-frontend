@@ -34,7 +34,11 @@ angular.module('bitbloqApp')
                             userApi.currentUser = User.get();
                             userApi.currentUser.$promise.then(function(user) {
                                 $scope.common.setUser(user);
-                                _goToHome();
+                                if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                    _goToHome();
+                                } else {
+                                    teacherModal();
+                                }
                             });
                         }
                     },
@@ -133,17 +137,18 @@ angular.module('bitbloqApp')
                     });
 
                     userApi.loginBySocialNetwork($scope.providerOptions).then(function(response) {
-                      $cookieStore.put('token', response.data.token);
-                      userApi.currentUser = User.get();
-                      userApi.currentUser.$promise.then(function(user) {
-                          $scope.common.setUser(user);
-                          if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                              _goToHome();
-                          } else {
-                              teacherModal();
-                          }
-                      });
-                    }).catch(function() {});
+                        $cookieStore.put('token', response.data.token);
+                        userApi.currentUser = User.get();
+                        userApi.currentUser.$promise.then(function(user) {
+                            $scope.common.setUser(user);
+                            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                _goToHome();
+                            } else {
+                                teacherModal();
+                            }
+                        });
+                    }).catch(function() {
+                    });
                 } else {
                     fireShakeEffect();
                 }
