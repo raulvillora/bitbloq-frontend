@@ -80,16 +80,8 @@ angular.module('bitbloqApp')
         };
 
         exports.loginBySocialNetwork = function(options) {
-          var deferedMain = $q.defer();
-             $http.post(envData.config.serverUrl + 'user/social', options).then(function(response) {
-                var data = response.data;
-                deferedMain.resolve(data);
-            }, function(err) {
-                deferedMain.reject(err);
-            });
-            return deferedMain.promise;
+            return $http.post(envData.config.serverUrl + 'user/social', options);
         };
-
         exports.turnSocialToLocal = function(password, callback) {
             return User.turnToLocal({
                 id: 'me'

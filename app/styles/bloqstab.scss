@@ -3,37 +3,43 @@ $toolboxWidthClosed: 210px;
 
 .bloqs-tab {
     height: 100%;
-    width : 100%;
+    width: 100%;
 
     .tabs--title {
         height: $tabsTitleHeight;
 
         .btn--zowi-firmware {
-                background-color: white;
-                border-radius: 3px;
-                height: 30px;
-                padding-left: 10px;
-                padding-right: 10px;
-                position: absolute;
-                right: 206px;
-                top: 10px;
-                transition: background-color 250ms;
-                &:hover {
-                  background-color: #fbfbfb ;
+            background-color: white;
+            border-radius: 3px;
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
+            position: absolute;
+            right: 206px;
+            top: 10px;
+            transition: background-color 250ms;
+            &:hover {
+                background-color: #fbfbfb;
             }
             & > * {
                 display: inline-block;
                 vertical-align: -webkit-baseline-middle;
                 margin-top: 4px;
-                color: #373b44 ;
+                color: #373b44;
                 font-size: 14px;
                 font-weight: 700;
                 cursor: pointer;
             }
+            .svg-icon {
+                margin-right: 7px;
+                fill: #373b44;
+                width: 15px;
+                height: 15px;
+            }
         }
 
         .bloq--field--list {
-            padding    : 1em;
+            padding: 1em;
             font-weight: bold;
 
             .active {
@@ -41,67 +47,67 @@ $toolboxWidthClosed: 210px;
             }
 
             li {
-                display     : inline-block;
+                display: inline-block;
                 margin-right: 2em;
-                color       : #b6bbbe;
-                cursor      : pointer;
-                float       : left;
+                color: #b6bbbe;
+                cursor: pointer;
+                float: left;
             }
         }
     }
 
     .software--tab {
-        color  : #cfcfcf;
-        height : calc(100% - #{$tabsTitleHeight});
+        color: #cfcfcf;
+        height: calc(100% - #{$tabsTitleHeight});
         z-index: 0;
     }
 
     .console--main {
-        margin          : 0 1em;
+        margin: 0 1em;
         background-color: white;
-        border-radius   : .4em;
-        height          : 100%;
-        overflow        : auto;
+        border-radius: .4em;
+        height: 100%;
+        overflow: auto;
     }
 
     #bloqs--field {
-        height          : calc(100% - 20px);
-        overflow        : hidden;
-        overflow-y      : auto;
-        position        : relative;
+        height: calc(100% - 20px);
+        overflow: hidden;
+        overflow-y: auto;
+        position: relative;
         background-color: #EBEBEB;
-        padding-bottom  : 100px;
+        padding-bottom: 100px;
     }
 
     #empty {
         position: absolute;
-        top     : 0;
-        height  : 1px;
-        width   : 1px;
+        top: 0;
+        height: 1px;
+        width: 1px;
     }
     //Bloqs specific css to bitbloq
     .bloq--group {
         //20px margin
-        width        : calc(100% - #{$toolboxWidthClosed} - 24px);
-        cursor       : initial;
-        margin       : 0 1em 1em;
+        width: calc(100% - #{$toolboxWidthClosed} - 24px);
+        cursor: initial;
+        margin: 0 1em 1em;
         border-radius: .4em;
-        table-layout : fixed;
+        table-layout: fixed;
 
         .field--header {
-            overflow     : hidden;
+            overflow: hidden;
             border-bottom: 1px solid #ebebeb;
         }
     }
 
     .software__edit-code {
-        z-index        : 1;
-        line-height    : initial;
-        position       : absolute;
-        right          : 50px;
-        top            : 65px;
-        color          : #b6bbbe;
-        cursor         : pointer;
+        z-index: 1;
+        line-height: initial;
+        position: absolute;
+        right: 50px;
+        top: 65px;
+        color: #b6bbbe;
+        cursor: pointer;
         text-decoration: initial;
 
         .svg-icon {
@@ -112,7 +118,7 @@ $toolboxWidthClosed: 210px;
 
 .components--container {
     max-height: calc(100% - 140px);
-    overflow  : hidden;
+    overflow: hidden;
     overflow-y: auto;
 }
 
@@ -121,27 +127,27 @@ $toolboxWidthClosed: 210px;
 }
 
 .make--scrollbar {
-    width     : 17px;
-    display   : block;
-    position  : absolute;
-    left      : calc(100% - #{$toolboxWidthClosed} - 20px);
-    z-index   : 1;
-    overflow  : hidden;
+    width: 17px;
+    display: block;
+    position: absolute;
+    left: calc(100% - #{$toolboxWidthClosed} - 20px);
+    z-index: 1;
+    overflow: hidden;
     overflow-y: auto;
     max-height: 100%;
-    top       : 0;
+    top: 0;
 }
 
 #make--horizontal-scrollbar {
-    height    : 17px;
-    display   : block;
-    position  : absolute;
-    left      : 70px;
-    z-index   : 3;
-    overflow  : hidden;
+    height: 17px;
+    display: block;
+    position: absolute;
+    left: 70px;
+    z-index: 3;
+    overflow: hidden;
     overflow-x: auto;
-    max-width : calc(100% - 300px);
-    bottom    : 0;
+    max-width: calc(100% - 300px);
+    bottom: 0;
 
     & > div {
         height: 17px;
@@ -153,44 +159,44 @@ $toolboxWidthClosed: 210px;
 }
 
 .make--overline {
-    position        : absolute;
-    width           : 30px;
-    right           : 225px;
-    bottom          : 0;
-    height          : 100%;
+    position: absolute;
+    width: 30px;
+    right: 225px;
+    bottom: 0;
+    height: 100%;
     background-color: transparent;
 }
 
 .toolbox--overline {
-    position        : absolute;
-    width           : 210px;
-    right           : 0;
-    bottom          : 0;
-    height          : 100%;
+    position: absolute;
+    width: 210px;
+    right: 0;
+    bottom: 0;
+    height: 100%;
     background-color: white;
-    transition      : opacity 250ms;
-    opacity         : 0;
-    pointer-events  : none;
+    transition: opacity 250ms;
+    opacity: 0;
+    pointer-events: none;
 
     &.active {
-        opacity       : 1;
+        opacity: 1;
         pointer-events: all;
     }
 }
 
 .make__trash {
     position: absolute;
-    top     : 0;
-    bottom  : 0;
-    right   : 0;
-    left    : 0;
-    margin  : auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
 }
 
 .bloq--shadow {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .bloq:not(.bloq--group) {
-   z-index: 9;
+    z-index: 9;
 }
