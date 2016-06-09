@@ -174,6 +174,10 @@ angular.module('bitbloqApp')
             }
         };
 
+        $scope.showWeb2boardSettings = function() {
+            web2board.showSettings();
+        };
+
         function _saveProject() {
             var defered = $q.defer();
 

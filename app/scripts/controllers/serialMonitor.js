@@ -88,12 +88,18 @@ angular.module('bitbloqApp')
         /*Init functions*/
         serialHub.server.subscribeToPort($scope.port);
 
-        serialHub.server.startConnection($scope.port, 9600)
+        serialHub.server.startConnection($scope.port, $scope.serial.baudrate)
             .catch(function (error) {
                 if (error.error.indexOf('already in use') > -1) {
-                    $scope.onBaudrateChanged(9600);
+                    $scope.onBaudrateChanged($scope.serial.baudrate);
+                } else {
+                    console.error(error);
                 }
             });
+
+        $scope.setOnUploadFinished(function () {
+            $scope.onBaudrateChanged($scope.serial.baudrate);
+        });
 
         $scope.$on('$destroy', function () {
             serialHub.server.unsubscribeFromPort($scope.port)

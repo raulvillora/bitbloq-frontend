@@ -20,7 +20,8 @@ angular.module('bitbloqApp')
             TIME_FOR_WEB2BOARD_TO_START = 700, //ms
             TIMES_TRY_TO_START_W2B = 20,
             w2bToast = null,
-            web2boarTimeOutResponse = 45000; //45 seconds
+            web2boarTimeOutResponse = 45000, //45 seconds
+            serialMonitorPanel = null;
 
         web2board.config = {
             wsHost: 'localhost',
@@ -262,6 +263,13 @@ angular.module('bitbloqApp')
             }
         }
 
+        function updateSuccessfullyFinished(port) {
+            alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
+            if (serialMonitorPanel) {
+                serialMonitorPanel.scope.uploadFinished();
+            }
+        }
+
         /* Set up api*/
 
         api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper, $q);
@@ -323,15 +331,18 @@ angular.module('bitbloqApp')
                 openCommunication(function () {
                     alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
                     return api.CodeHub.server.upload(code, boardMcu)
-                        .then(function () {
-                            alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000);
-                        }, handleUploadError)
+                        .then(updateSuccessfullyFinished, handleUploadError)
                         .finally(removeInProgressFlag);
                 });
             }
         };
 
         web2board.serialMonitor = function (board) {
+            if (serialMonitorPanel) {
+                serialMonitorPanel.normalize();
+                serialMonitorPanel.reposition("center");
+                return;
+            }
             openCommunication(function () {
                 inProgress = true;
                 var toast = alertsService.add('alert-web2board-openSerialMonitor', 'web2board', 'loading');
@@ -339,21 +350,26 @@ angular.module('bitbloqApp')
                     .then(function (port) {
                         alertsService.close(toast);
                         var scope = $rootScope.$new();
-                        $.jsPanel({
+                        scope.setOnUploadFinished = function (callback) {
+                            scope.uploadFinished = callback;
+                        };
+                        serialMonitorPanel = $.jsPanel({
                             position: 'center',
                             size: {width: 500, height: 500},
                             onclosed: function () {
                                 scope.$destroy();
+                                serialMonitorPanel = null;
                             },
                             title: $translate.instant('serial'),
-                            load: {
+                            ajax: {
                                 url: 'views/serialMonitor.html',
-                                complete: function () {
+                                done: function () {
                                     scope.port = port;
                                     this.html($compile(this.html())(scope));
                                 }
                             }
                         });
+                        serialMonitorPanel.scope = scope;
 
                     }, function (error) {
                         alertsService.add('alert-web2board-no-port-found', 'web2board', 'warning');
@@ -404,9 +420,8 @@ angular.module('bitbloqApp')
             openCommunication(function () {
                 alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
                 api.CodeHub.server.uploadHex(hexText, boardMcu)
-                    .then(function (port) {
-                        alertsService.add('alert-web2board-code-uploaded', 'web2board', 'ok', 5000, port);
-                    }, handleUploadError).finally(removeInProgressFlag);
+                    .then(updateSuccessfullyFinished, handleUploadError
+                    ).finally(removeInProgressFlag);
             });
         };
 
