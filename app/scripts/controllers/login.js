@@ -136,31 +136,14 @@ angular.module('bitbloqApp')
                       $cookieStore.put('token', response.data.token);
                       userApi.currentUser = User.get();
                       userApi.currentUser.$promise.then(function(user) {
-                        console.log("user");
-                        console.log(user);
                           $scope.common.setUser(user);
-                          _goToHome();
+                          if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                              _goToHome();
+                          } else {
+                              teacherModal();
+                          }
                       });
-                    }).catch(function() {
-                        console.log("no se puede");
-                    });
-
-                    /*    userApi.update(user).then(function() {
-                            userApi.currentUser = User.get();
-                            userApi.currentUser.$promise.then(function(user) {
-                                delete user.$promise;
-                                delete user.$resolved;
-                                $scope.common.setUser(user);
-                                if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                                    _goToHome();
-                                } else {
-                                    teacherModal();
-                                }
-                            });
-                        }, function(error) {
-                            fireShakeEffect();
-                            $log.debug('Register error:', error);
-                        });*/
+                    }).catch(function() {});
                 } else {
                     fireShakeEffect();
                 }
