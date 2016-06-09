@@ -8,7 +8,8 @@
  */
 angular.module('bitbloqApp')
     .factory('web2boardV2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $location, commonModals) {
+                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $location,
+                                      commonModals) {
 
         /** Variables */
 
@@ -51,7 +52,7 @@ angular.module('bitbloqApp')
             }
             var parent = $rootScope,
                 modalOptions = parent.$new(),
-                viewAllLink = function() {
+                viewAllLink = function () {
                     modalObj.close();
                     $location.path('/downloads');
                 };
@@ -74,7 +75,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        function showWeb2BoardDownloadModal () {
+        function showWeb2BoardDownloadModal() {
             var modalOptions = {
                 contentTemplate: '/views/modals/downloadWeb2board.html',
                 modalTitle: 'modal-download-web2board-title',
@@ -84,7 +85,7 @@ angular.module('bitbloqApp')
             return showWeb2BoardModal(modalOptions);
         }
 
-        function showWeb2BoardUploadModal () {
+        function showWeb2BoardUploadModal() {
             var modalOptions = {
                 contentTemplate: '/views/modals/downloadWeb2board.html',
                 modalTitle: 'modal-update-web2board-title',
@@ -101,7 +102,7 @@ angular.module('bitbloqApp')
             _.extend(modalOptions, {
                 contentTemplate: '/views/modals/web2boardErrors.html',
                 backAction: showWeb2BoardDownloadModal,
-                sendCommentsModal: function() {
+                sendCommentsModal: function () {
                     modalObj.close();
                     commonModals.sendCommentsModal();
                 }
@@ -191,9 +192,31 @@ angular.module('bitbloqApp')
             }
         }
 
+        function handleCompileError(error) {
+            var errorStr = error,
+                alertParams = {
+                    id: 'web2board',
+                    type: 'warning'
+                };
+            if (typeof error === 'object') {
+                var errorLines = [];
+                error.forEach(function (errorLine) {
+                    errorLines.push($translate.instant('alert-web2board-compile-line-error ', errorLine));
+                });
+                errorStr = errorLines.join('<br>');
+
+                alertParams.translatedText = $translate.instant('alert-web2board-compile-error', {value: '<br>' + errorStr});
+            } else {
+                alertParams.text = 'alert-web2board-compile-error';
+                alertParams.value = error;
+            }
+
+            alertsService.add(alertParams);
+        }
+
         function handleUploadError(error) {
             if (error.title === 'COMPILE_ERROR') {
-                alertsService.add('alert-web2board-compile-error', 'web2board', 'warning', undefined, error.stdErr);
+                handleCompileError(error);
             } else if (error.title === 'BOARD_NOT_READY') {
                 alertsService.add('alert-web2board-no-port-found', 'web2board', 'warning');
             } else {
@@ -284,7 +307,7 @@ angular.module('bitbloqApp')
                     return api.CodeHub.server.compile(code).then(function () {
                         alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
                     }, function (error) {
-                        alertsService.add('alert-web2board-compile-error', 'web2board', 'warning', undefined, error);
+                        handleCompileError(error);
                     }).finally(removeInProgressFlag);
                 });
             }

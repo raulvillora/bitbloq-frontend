@@ -3,7 +3,12 @@
         <use data-element="alert-svg-icon" xlink:href="{{generateSvgUrl(alert.type)}}" data-type="{{alert.type}}"/>
     </svg>
     <span data-element="alert-text-toast">
-        {{alert.text | translate:alert }}
+        <div ng-if="alert.translatedText" ng-bind-html="alert.translatedText">
+        </div>
+        <div ng-if="alert.translatedText === undefined" >
+            {{alert.text | translate:alert }}
+        </div>
+
         <button class="text--strong" ng-if="alert.linkText" data-element="alert-undo-button" ng-click="alert.linkAction(alert.linkParams)">{{alert.linkText | translate:alert }}</button>
     </span>
     <svg class="svg-icon icon--postIcon" ng-if="alert.postIcon">

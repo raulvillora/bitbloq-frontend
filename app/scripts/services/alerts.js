@@ -61,13 +61,12 @@ angular.module('bitbloqApp')
 
         /**
          * [alert create alert message]
-         * @param  {[string]} text  [text to show] required;
+         * @param  {[string, object]} text  [text to show] or object with parameters required;
          * @param  {[string]} type [type of the alert (info, confirm, error, warning)] not required;
          * @param  {[number]} time  [time in ms to close the alert] not required
          * @param  {[string]} id  [Alert id] required
          */
-        exports.add = function(text, id, type, time, data, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams) {
-
+        exports.add = function(text, id, type, time, data, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams, translatedText) {
             i += 1;
 
             var domClass,
@@ -87,8 +86,14 @@ angular.module('bitbloqApp')
                     linkParams: linkParams,
                     close: exports.close,
                     closeFunction: closeFunction,
-                    closeParams: closeParams
+                    closeParams: closeParams,
+                    translatedText: translatedText
                 };
+            //extend alert object with text if text is an object with the parameters
+            if(angular.isObject(text)) {
+                delete alert.text;
+                _.extend(alert, text);
+            }
 
             switch (type) {
                 case 'info':
