@@ -21,53 +21,29 @@ angular.module('bitbloqApp')
                     provider: prov,
                     accessToken: response.access_token
                 };
-                userApi.loginBySocialNetwork(options).then(function(loginResponse) {
-                    // Set user data
-                    $cookieStore.remove('token');
-                    $cookieStore.put('token', loginResponse.token);
-                    userApi.currentUser = User.get();
-                    userApi.currentUser.$promise.then(function(user) {
-                        if (user.username) {
-                            _goToHome();
-                        } else {
-                            // register the user;
+
+                $scope.providerOptions = options;
+
+                userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
+                        // Set user data
+                        $cookieStore.remove('token');
+                        if (loginResponse.status === 204) {
                             $scope.isSocialRegister = true;
+                        } else {
+                            $cookieStore.put('token', loginResponse.data.token);
+                            userApi.currentUser = User.get();
+                            userApi.currentUser.$promise.then(function(user) {
+                                $scope.common.setUser(user);
+                                _goToHome();
+                            });
                         }
-                        delete user.$promise;
-                        delete user.$resolved;
-                        $scope.common.setUser(loginResponse.user);
+                    },
+                    function(err) {
+                        console.log('LOGIN ERROR: ', err);
                     });
-                }, function(err) {
-                    console.log('LOGIN ERROR: ', err);
-                });
+
             });
-            //
-            //     }).error(function(error) {
-            //         $log.debug('Login error: ', error);
-            //         if (error.error === 'no_such_principal') {
-            //             provider = prov;
-            //             access_token = response.access_token;
-            //             userApi.getSocialProfile(provider, access_token).success(function(userData) {
-            //                 userSocialData = userData;
-            //                 userApi.getUserId(userData.email).success(function() {
-            //                     fireShakeEffect();
-            //                     $scope.errors.register.socialEmail = true;
-            //                 }).error(function() {
-            //                     $scope.isSocialRegister = true;
-            //                 });
-            //             }).error(function(error) {
-            //                 $log.debug('Social login error (', provider, '): ', error);
-            //             });
-            //         } else if (error.error === 'unauthorized') {
-            //             alertsService.add('login_alert_errorConnectSocialNetwork', 'login-error', 'error');
-            //         } else if (error.error !== 'invalid_time') {
-            //             alertsService.add('login_text_errorAlert', 'login-error', 'error');
-            //         }
-            //     });
-            // }, function(error) {
-            //     alertsService.add('login_text_socialErrorAlert', 'login-error', 'error');
-            //     $log.debug('Social Network error:', error);
-            // });
+
         };
 
         $scope.loginSubmit = function(form) {
@@ -83,7 +59,7 @@ angular.module('bitbloqApp')
                 }
                 login();
             } else {
-              fireShakeEffect();
+                fireShakeEffect();
             }
         };
 
@@ -147,22 +123,44 @@ angular.module('bitbloqApp')
                     var user = $scope.common.user || {};
                     user.username = form.usernameSocial.$modelValue;
                     user.hasBeenAskedIfTeacher = true;
-                    userApi.update(user).then(function() {
-                        userApi.currentUser = User.get();
-                        userApi.currentUser.$promise.then(function(user) {
-                            delete user.$promise;
-                            delete user.$resolved;
-                            $scope.common.setUser(user);
-                            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                                _goToHome();
-                            } else {
-                                teacherModal();
-                            }
-                        });
-                    }, function(error) {
-                        fireShakeEffect();
-                        $log.debug('Register error:', error);
+
+                    _.extend($scope.providerOptions, {
+                        'register': true
+                    }, {
+                        'username': user.username
+                    }, {
+                        'hasBeenAskedIfTeacher': user.hasBeenAskedIfTeacher
                     });
+
+                    userApi.loginBySocialNetwork($scope.providerOptions).then(function(response) {
+                      $cookieStore.put('token', response.data.token);
+                      userApi.currentUser = User.get();
+                      userApi.currentUser.$promise.then(function(user) {
+                        console.log("user");
+                        console.log(user);
+                          $scope.common.setUser(user);
+                          _goToHome();
+                      });
+                    }).catch(function() {
+                        console.log("no se puede");
+                    });
+
+                    /*    userApi.update(user).then(function() {
+                            userApi.currentUser = User.get();
+                            userApi.currentUser.$promise.then(function(user) {
+                                delete user.$promise;
+                                delete user.$resolved;
+                                $scope.common.setUser(user);
+                                if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                    _goToHome();
+                                } else {
+                                    teacherModal();
+                                }
+                            });
+                        }, function(error) {
+                            fireShakeEffect();
+                            $log.debug('Register error:', error);
+                        });*/
                 } else {
                     fireShakeEffect();
                 }
@@ -477,6 +475,7 @@ angular.module('bitbloqApp')
             success: false,
             error: false
         };
+        $scope.providerOptions = {};
         var userName;
 
         if ($location.path() === '/register') {
