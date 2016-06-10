@@ -192,10 +192,9 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        $scope.setLoginFromRegister = function() {
-            var $registerContainer = angular.element('#registerContainer');
-            $registerContainer.addClass('form--login__container--transition-down');
-            $registerContainer.bind('webkitAnimationEnd', function() {
+        function transitionForm(item){
+            item.addClass('form--login__container--transition-down');
+            item.bind('webkitAnimationEnd', function() {
                 $(this).addClass('hide-container');
                 $(this).removeClass('form--login__container--transition-down');
             });
@@ -206,70 +205,32 @@ angular.module('bitbloqApp')
                 $(this).removeClass('form--login__container--transition-up');
                 $(this).removeClass('hide-container');
             });
+        }
+        $scope.setLoginFromRegister = function() {
+            $scope.isLogin=true;
+            var $registerContainer = angular.element('#registerContainer');
+            transitionForm($registerContainer);
         };
 
         $scope.setLoginFromForgotPassword = function() {
             var $forgotPasswordContainer = angular.element('#isForgotPassword');
-            $forgotPasswordContainer.addClass('form--login__container--transition-down');
-            $forgotPasswordContainer.bind('webkitAnimationEnd', function() {
-                $(this).addClass('hide-container');
-                $(this).removeClass('form--login__container--transition-down');
-            });
-            var $loginContainer = angular.element('#loginContainer');
-            $loginContainer.addClass('form--login__container--transition-up');
-            $loginContainer.removeClass('hide-container');
-            $loginContainer.bind('webkitAnimationEnd', function() {
-                $(this).removeClass('form--login__container--transition-up');
-                $(this).removeClass('hide-container');
-            });
+            transitionForm($forgotPasswordContainer);
         };
 
         $scope.setForgotPassword = function() {
             var $loginContainer = angular.element('#loginContainer');
-            $loginContainer.addClass('form--login__container--transition-down');
-            $loginContainer.bind('webkitAnimationEnd', function() {
-                $(this).addClass('hide-container');
-                $(this).removeClass('form--login__container--transition-down');
-            });
-            var $forgotPasswordContainer = angular.element('#isForgotPassword');
-            $forgotPasswordContainer.addClass('form--login__container--transition-up');
-            $forgotPasswordContainer.removeClass('hide-container');
-            $forgotPasswordContainer.bind('webkitAnimationEnd', function() {
-                $(this).removeClass('form--login__container--transition-up');
-                $(this).removeClass('hide-container');
-            });
+            transitionForm($loginContainer);
         };
 
         $scope.setForgotPasswordFromRegister = function() {
             var $registerContainer = angular.element('#registerContainer');
-            $registerContainer.addClass('form--login__container--transition-down');
-            $registerContainer.bind('webkitAnimationEnd', function() {
-                $(this).addClass('hide-container');
-                $(this).removeClass('form--login__container--transition-down');
-            });
-            var $forgotPasswordContainer = angular.element('#isForgotPassword');
-            $forgotPasswordContainer.addClass('form--login__container--transition-up');
-            $forgotPasswordContainer.removeClass('hide-container');
-            $forgotPasswordContainer.bind('webkitAnimationEnd', function() {
-                $(this).removeClass('form--login__container--transition-up');
-                $(this).removeClass('hide-container');
-            });
+            transitionForm($registerContainer);
         };
 
         $scope.setRegister = function() {
+            $scope.isLogin=false;
             var $loginContainer = angular.element('#loginContainer');
-            $loginContainer.addClass('form--login__container--transition-down');
-            $loginContainer.bind('webkitAnimationEnd', function() {
-                $(this).addClass('hide-container');
-                $(this).removeClass('form--login__container--transition-down');
-            });
-            var $registerContainer = angular.element('#registerContainer');
-            $registerContainer.addClass('form--login__container--transition-up');
-            $registerContainer.removeClass('hide-container');
-            $registerContainer.bind('webkitAnimationEnd', function() {
-                $(this).removeClass('form--login__container--transition-up');
-                $(this).removeClass('hide-container');
-            });
+            transitionForm($loginContainer);
         };
 
         $scope.forgotPassword = function(formForgot) {
