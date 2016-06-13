@@ -200,16 +200,6 @@
         .row {
             border-bottom: 1px solid #eee;
         }
-        a {
-            .block__last-theme__title {}
-            &:hover {
-                .block__last-theme__title {}
-            }
-        }
-        time {}
-        .block__username {
-            .block__username__link {}
-        }
         .forum__block__list {
             .forum__block__item {
                 padding-top: 25px;
@@ -268,7 +258,7 @@
     }
     .answer__header {
         margin-bottom: 20px;
-        time {
+        time, .forum__date {
             cursor: default;
             color: #8c9191;
         }

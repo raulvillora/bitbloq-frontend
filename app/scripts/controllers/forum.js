@@ -32,7 +32,6 @@
                 }
             };
 
-
             // *************************************
             // only admin user
             // *************************************
@@ -103,7 +102,6 @@
 
             //**************************************
 
-
             forum.goForumSection = function(section) {
                 if (section) {
                     switch (section) {
@@ -163,6 +161,9 @@
 
                 forumApi.createAnswer(answer).then(function(response) {
                     answer._id = response.data;
+                    answer.creatorId = common.user._id;
+                    answer.creatorUsername = common.user.username;
+
                     if (forum.answer.images.length > 0) {
                         var images = [],
                             imageId;
@@ -194,7 +195,7 @@
                     $log.debug('POSTING ANSWER: OK');
                 }).catch(function(err) {
                     $log.debug('Error:', err);
-                    if(err.status === 401){
+                    if (err.status === 401) {
                         alertsService.add('forum_alert_accessBannedUser', 'creatingAnswer', 'error');
                     } else {
                         alertsService.add('forum_alert_NewAnswerError', 'creatingAnswer', 'error');
@@ -220,18 +221,33 @@
                     forum.textEditorContent.htmlContent = '';
 
                     forumApi.createThread(thread, answer).then(function(response) {
+                     answer._id = response.data.answer;
                         $log.debug('theme: ' + response.data);
-                        forum.goForumSection(forum.textEditorContent.category + '/' + response.data);
-                        alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
+                        if (forum.answer.images.length > 0) {
+                            var images = [],
+                                imageId;
+                            forum.answer.images.forEach(function(value, index) {
+                                imageId = answer._id + '-' + index;
+                                images.push(imageId);
+                                imageApi.save(imageId, value, 'forum').then(function(){
+                                   alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
+                                   forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread);
+
+                                });
+                            });
+                        }else{
+                          alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
+                          forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread);
+                        }
+
                     }).catch(function(err) {
                         $log.debug('Error creating post:', err);
-                        alertsService.add('forum_alert_NewThemeError', 'creatingTheme', 'ok', 5000);
+                        alertsService.add('forum_alert_NewThemeError', 'creatingTheme', 'error', 5000);
                     });
                 } else {
                     $log.debug('fill inputs');
                 }
             };
-
 
             forum.addImage = function(e) {
                 utils.uploadImage(e, {}).then(function(response) {
@@ -270,7 +286,6 @@
                     alertsService.add('forumAdmin_alert_allowUserError', 'banUser', 'error');
                 });
             };
-
 
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
@@ -376,7 +391,6 @@
                     $log.debug('Error:', err);
                 });
             }
-
 
             function goForumCategory(category) {
                 forum.displayedView = 'category';

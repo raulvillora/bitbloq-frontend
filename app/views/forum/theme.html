@@ -3,7 +3,7 @@
     <div class="forum__theme__item">
         <div class="theme__header">
             <div class="theme__owner-avatar">
-                <img class="img--avatar" ng-src="{{common.urlImage + 'avatar/' + forum.firstAnswer.owner._id}}" err-src="../../images/common/avatar.png" data-element="open-header-menu">
+                <img class="img--avatar" ng-src="{{common.urlImage + 'avatar/' + forum.firstAnswer.creatorId}}" err-src="../../images/common/avatar.png" data-element="open-header-menu">
             </div>
             <div class="theme__header-info">
                 <h1 class="theme__title" data-element="forum-theme-theme-title">{{forum.currentThread.title}}</h1>
@@ -59,12 +59,13 @@
             </div>
             <div class="theme__header">
                 <div class="theme__owner-avatar small">
-                    <img class="img--avatar" ng-src="{{common.urlImage + 'avatar/' + answer.owner._id}}" err-src="../../images/common/avatar.png" data-element="open-header-menu">
+                    <img class="img--avatar" ng-src="{{common.urlImage + 'avatar/' + answer.creatorId}}" err-src="../../images/common/avatar.png" data-element="open-header-menu">
                 </div>
             </div>
             <div class="answer__header">
                 <h2>{{answer.creatorUsername}}</h2>
-                <time>{{answer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
+                <time ng-if="answer.updatedAt">{{answer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
+                <span class="forum__date" ng-if="!answer.updatedAt">{{'forumAnswer_text_recent' | translate}}</span>
             </div>
             <div class="answer__content">
                 <div ta-bind name="testValidation" data-element="forum-theme-answer" ng-model="answer.content" placeholder="test placeholder" required ng-model-options="{debounce: 1000}"></div>
