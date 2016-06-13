@@ -211,7 +211,7 @@
 
                     var thread = {
                         title: forum.textEditorContent.title,
-                        categoryId: chosenCategory.uuid
+                        categoryId: chosenCategory._id
                     };
 
                     var answer = {
@@ -436,7 +436,7 @@
                     forum.categoriesData = categories.map(function(category) {
                         return {
                             name: category.name,
-                            uuid: category.uuid
+                            _id: category._id
                         };
                     });
                 }

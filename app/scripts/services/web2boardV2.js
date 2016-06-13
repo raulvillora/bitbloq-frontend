@@ -340,7 +340,7 @@ angular.module('bitbloqApp')
         web2board.serialMonitor = function (board) {
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
-                serialMonitorPanel.reposition("center");
+                serialMonitorPanel.reposition('center');
                 return;
             }
             openCommunication(function () {
