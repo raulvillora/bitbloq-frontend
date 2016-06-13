@@ -4,33 +4,33 @@
             <div class="section">
                 <h3>{{ 'project' | translate}}</h3>
                 <ul>
-                    <li>{{ 'footer_aboutus' | translate}}</li>
-                    <li>{{ 'footer_bqeducation' | translate}}</li>
-                    <li>{{ 'footer_inschools' | translate}}</li>
-                    <li>{{ 'footer_bitbloqoffline' | translate}}</li>
+                    <li><a href="/#/aboutus" target="_blank">{{ 'footer_aboutus' | translate}}</a></li>
+                    <li><a href="https://www.bq.com/es/bq-educa" target="_blank">{{ 'footer_bqeducation' | translate}}</a></li>
+                    <!--<li><a href="" target="_blank">{{ 'footer_inschools' | translate}}</a></li>-->
+                    <li><a href="/#/offline" target="_blank">{{ 'footer_bitbloqoffline' | translate}}</a></li>
                 </ul>
             </div>
             <div class="section">
                 <h3>{{ 'community' | translate}}</h3>
                 <ul>
-                    <li>{{ 'forum' | translate}}</li>
-                    <li>{{ 'explore' | translate}}</li>
-                    <li>DIWO</li>
-                    <li>{{ 'footer_bitbloqongithub' | translate}}</li>
+                    <li><a href="/#/help/forum" target="_blank">{{ 'forum' | translate}}</a></li>
+                    <li><a href="/#/explore" target="_blank">{{ 'explore' | translate}}</a></li>
+                    <li><a href="http://diwo.bq.com" target="_blank">DIWO</a></li>
+                    <li><a href="https://github.com/bq/?utf8=%E2%9C%93&query=bitbloq-" target="_blank">{{ 'footer_bitbloqongithub' | translate}}</a></li>
                 </ul>
             </div>
             <div class="section">
                 <h3>{{ 'help' | translate}}</h3>
                 <ul>
-                    <li>{{ 'contact' | translate}}</li>
-                    <li>{{ 'help_faqs' | translate}}</li>
-                    <li>{{ 'tutorials' | translate}}</li>
+                    <li><a href="/#/bitbloq-help" target="_blank">{{ 'contact' | translate}}</a></li>
+                    <li><a href="/#/help/faqs" target="_blank">{{ 'help_faqs' | translate}}</a></li>
+                    <li><a href="/#/help/tutorial" target="_blank">{{ 'tutorials' | translate}}</a></li>
                 </ul>
             </div>
         </div>
         <div class="language">
             <div class="dropdown_box num-items-{{envData.config.supportedLanguages.length}}" data-ng-class="{'open': showDropdown}">
-                <ul class="dropdown_list" >
+                <ul class="dropdown_list" data-ng-click="showDropdown = false">
                     <li data-ng-repeat="language in envData.config.supportedLanguages" data-ng-click="translate.use(language)">
                         <svg class="svg-icon">
                             <use xlink:href="" ng-attr-xlink:href="{{'#flag_' + language}}"></use>
@@ -48,58 +48,21 @@
         </div>
         <div class="followus">
             <span>{{'follow-us' | translate}}</span>
-            <i class="fa fa-google-plus"></i>
-            <i class="fa fa-twitter"></i>
-            <i class="fa fa-github-alt"></i>
+            <a class="fa fa-google-plus" href="https://plus.google.com/communities/110778922976735717392" target="_blank"></a>
+            <a class="fa fa-twitter" href="https://twitter.com/bitbloq" target="_blank"></a>
+            <a class="fa fa-github-alt" href="https://github.com/bq/?utf8=%E2%9C%93&query=bitbloq-" target="_blank"></a>
         </div>
         <hr>
-        <ul class="links">
-            <li><a data-element="landing-cookies-button" href="#/cookies">{{ 'landing-main-footer-link-cookies' | translate }}</a></li>
-            <li><a data-element="landig-terms-button" href="#/terms">{{ 'landing-main-footer-link-tos' | translate }}</a></li>
-        </ul>
-        <span>{{ 'landing-main-copyright' | translate }}</span>
-        <div class="bqproject">
-            <span>{{ 'landing_text_footer' | translate }}</span>
-            <a ng-href="{{'http://bq.com/' + common.langToBQ[translate.use().split('-')[0]]}}" target="_blank">
+        <div class="footer-down">
+            <ul class="links">
+                <li><a data-element="landing-cookies-button" href="#/cookies" target="_blank">{{ 'landing-main-footer-link-cookies' | translate }}</a></li>
+                <li><a data-element="landig-terms-button" href="#/terms" target="_blank">{{ 'landing-main-footer-link-tos' | translate }}</a></li>
+            </ul>
+            <span class="copyright">{{ 'landing-main-copyright' | translate }}</span>
+            <span class="bqproject">{{ 'landing_text_footer' | translate }}</span>
+            <a class="bq-logo" ng-href="{{'http://bq.com/' + common.langToBQ[translate.use().split('-')[0]]}}" target="_blank">
                 <img src="../images/landing/logothumbs.png" alt="bq logo">
             </a>
         </div>
     </div>
-
-
-    <!--<div class="footer&#45;&#45;top">
-        <i class="fa fa-globe"></i>
-        <ul class="left">
-            <li ng-repeat="language in envData.config.supportedLanguages" ng-class="{'active':translate.use() === language}">
-                <span data-element="landing-language-{{ language }}" data-ng-click="translate.use(language)">{{ language | translate }}</span>
-            </li>
-        </ul>
-        <div class="right">
-            <span>{{ 'landing_text_footer' | translate }}</span>
-            <a ng-href="{{'http://bq.com/' + common.langToBQ[translate.use().split('-')[0]]}}" target="_blank">
-                <img src="../images/landing/logothumbs.png" alt="bq logo">
-            </a>
-        </div>
-    </div>
-    <div class="footer--bottom">
-        <i class="fa fa-paper-plane"></i>
-        <ul class="left">
-            <li ng-if="common.user">
-                <button data-element="landing-contact-button" ng-click="commonModals.sendCommentsModal()">{{ 'landing_link_contact' | translate }}
-                    <button>
-            </li>
-            <li ng-if="!common.user">
-                <a data-element="landing-contact-button" href="mailto:{{'support_email' | translate}}" target="_blank">{{'landing_link_contact' | translate}}</a>
-            </li>
-            <li>
-                <a data-element="landing-cookies-button" href="#/cookies">{{ 'landing-main-footer-link-cookies' | translate }}</a>
-            </li>
-            <li>
-                <a data-element="landig-terms-button" href="#/terms">{{ 'landing-main-footer-link-tos' | translate }}</a>
-            </li>
-        </ul>
-        <div class="right">
-            <span>{{ 'landing-main-copyright' | translate }}</span>
-        </div>
-    </div>-->
 </footer>
