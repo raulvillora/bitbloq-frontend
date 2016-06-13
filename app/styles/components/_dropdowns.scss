@@ -89,3 +89,73 @@ common-dropdown {
     background-color: #ebebeb;
     pointer-events  : none;
 }
+
+.dropdown_box{
+    $box-height : 40px;
+    cursor: pointer;
+    cursor: hand;
+    position: relative;
+
+
+    .dropdown_list{
+        position:absolute;
+        bottom: $box-height;
+        top: 0;
+        background-color: #FFFFFF;
+        overflow: hidden;
+        border: 1px solid #d7dae0;
+        border-bottom: none;
+        width:100%;
+        transition: top 0.5s ease-in-out;
+        li{
+            margin: 0 auto;
+            width: 90%;
+            border-bottom: 1px solid #d7dae0;
+            height: $box-height;
+        }
+    }
+    .svg-icon{
+        width: 20px;
+        height: 11px;
+        margin-left: 14px;
+        margin-right: 10px;
+        margin-top: 12px;
+    }
+    .dropdown_selected{
+        background-color: #FFFFFF;
+        width: 200px;
+        height: 40px;
+        border: 1px solid #d7dae0;
+        line-height: $box-height;
+
+
+        .language--name{
+            @include textGenerator(14px, 400, $font-color-heading, auto, 100%, false);
+        }
+        .arrow{
+            color: $font-color-base;
+            font-size: 23px;
+            font-weight: 700;
+            float: right;
+            margin-right: 15px;
+            margin-top: 7px;
+            transition: all 0.5s ease;
+        }
+    }
+    /*
+    *   To create the effect i need the number of elements
+    *
+    */
+    &.open{
+        @for $i from 0 through 25 {
+            &.num-items-#{$i} {
+                .dropdown_list {
+                    top: -($box-height * $i);
+                }
+            }
+        }
+        .arrow{
+            transform: rotate(180deg);
+        }
+    }
+}
