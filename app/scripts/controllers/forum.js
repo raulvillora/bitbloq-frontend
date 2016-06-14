@@ -237,7 +237,7 @@
                             });
                         }else{
                           alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
-                          forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread);
+                          forum.goForumSection(forum.textEditorContent.category + '/' + response.data);
                         }
 
                     }).catch(function(err) {

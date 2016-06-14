@@ -2,7 +2,6 @@
     {
         "_id": "forum_category_expo",
         "name": "Exposición",
-        "uuid": "forum_category_expo",
         "section": "forum_section_2_projects",
         "description": "Enséñanos tus mejores proyectos.",
         "order": 2
@@ -10,7 +9,6 @@
     {
         "_id": "forum_category_disaster",
         "name": "Otros",
-        "uuid": "forum_category_disaster",
         "section": "forum_section_2_projects",
         "description": "¿No sabes donde escribir? Aquí tienes un sitio donde poner lo que quieras.",
         "order": 4
@@ -18,7 +16,6 @@
     {
         "_id": "forum_category_suggestions",
         "name": "Sugerencias",
-        "uuid": "forum_category_suggestions",
         "description": "¿Te gustaría alguna funcionalidad que no esté? ¡Cuéntanosla!",
         "section": "forum_section_3_bitbloq",
         "order": 2
@@ -26,7 +23,6 @@
     {
         "_id": "forum_category_lab",
         "name": "Laboratorio de ideas",
-        "uuid": "forum_category_lab",
         "description": "Aquí podrás contar tus ideas o coger inspiración para tus proyectos.",
         "section": "forum_section_2_projects",
         "order": 3
@@ -34,7 +30,6 @@
     {
         "_id": "forum_category_errors",
         "name": "Errores y fallos en la web",
-        "uuid": "forum_category_errors",
         "description": "¿Encontraste algún error? ¿No funciona algo? Aquí puedes darnos un toque.",
         "section": "forum_section_3_bitbloq",
         "order": 3
@@ -42,7 +37,6 @@
     {
         "_id": "forum_category_news",
         "name": "Noticias",
-        "uuid": "forum_category_news",
         "description": "Últimas noticias y actualizaciones de Bitbloq",
         "section": "forum_section_1_main",
         "order": 1
@@ -50,7 +44,6 @@
     {
         "_id": "forum_category_welcome",
         "name": "Bienvenida",
-        "uuid": "forum_category_welcome",
         "description": "Bienvenidos a la comunidad a todos los nuevos Makers.",
         "section": "forum_section_1_main",
         "order": 2
@@ -58,7 +51,6 @@
     {
         "_id": "forum_category_questions",
         "name": "Preguntas",
-        "uuid": "forum_category_questions",
         "description": "Aquí puedes aclarar todas tus dudas.",
         "section": "forum_section_3_bitbloq",
         "order": 1
@@ -66,7 +58,6 @@
     {
         "_id": "forum_category_help",
         "name": "¡Ayuda!",
-        "uuid": "forum_category_help",
         "description": "¿Necesitas ayuda con algún proyecto? ¡Pregunta aquí!",
         "section": "forum_section_2_projects",
         "order": 1
@@ -74,7 +65,6 @@
     {
         "_id": "forum_category_en-GB",
         "name": "English",
-        "uuid": "forum_category_en-GB",
         "description": "",
         "section": "forum_section_4_language",
         "order": 1
@@ -82,7 +72,6 @@
     {
         "_id": "forum_category_nl-NL",
         "name": "Netherlands",
-        "uuid": "forum_category_nl-NL",
         "description": "",
         "section": "forum_section_4_language",
         "order": 2
@@ -90,7 +79,6 @@
     {
         "_id": "forum_category_ru-RU",
         "name": "Pусский",
-        "uuid": "forum_category_ru-RU",
         "description": "",
         "section": "forum_section_4_language",
         "order": 3
@@ -98,7 +86,6 @@
     {
         "_id": "forum_category_it-IT",
         "name": "Italiano",
-        "uuid": "forum_category_it-IT",
         "description": "",
         "section": "forum_section_4_language",
         "order": 4
@@ -106,7 +93,6 @@
     {
         "_id": "forum_category_eu-ES",
         "name": "Euskara",
-        "uuid": "forum_category_eu-ES",
         "description": "",
         "section": "forum_section_4_language",
         "order": 5
@@ -114,7 +100,6 @@
     {
         "_id": "forum_category_ca-ES",
         "name": "Català",
-        "uuid": "forum_category_ca-ES",
         "description": "",
         "section": "forum_section_4_language",
         "order": 6
@@ -122,7 +107,6 @@
     {
         "_id": "forum_category_fr-FR",
         "name": "Français",
-        "uuid": "forum_category_fr-FR",
         "description": "",
         "section": "forum_section_4_language",
         "order": 7
@@ -130,7 +114,6 @@
     {
         "_id": "forum_category_de-DE",
         "name": "Deutsch",
-        "uuid": "forum_category_de-DE",
         "description": "",
         "section": "forum_section_4_language",
         "order": 8
@@ -138,7 +121,6 @@
     {
         "_id": "forum_category_pt-PT",
         "name": "Português",
-        "uuid": "forum_category_pt-PT",
         "description": "",
         "section": "forum_section_4_language",
         "order": 9
@@ -146,7 +128,6 @@
     {
         "_id": "forum_category_gl",
         "name": "Galego",
-        "uuid": "forum_category_gl",
         "description": "",
         "section": "forum_section_4_language",
         "order": 10
@@ -154,7 +135,6 @@
     {
         "_id": "forum_category_zh-CN",
         "name": "简体中文",
-        "uuid": "forum_category_zh-CN",
         "description": "",
         "section": "forum_section_4_language",
         "order": 11
