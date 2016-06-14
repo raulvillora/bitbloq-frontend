@@ -211,7 +211,7 @@
 
                     var thread = {
                         title: forum.textEditorContent.title,
-                        categoryId: chosenCategory._id
+                        category: chosenCategory._id
                     };
 
                     var answer = {

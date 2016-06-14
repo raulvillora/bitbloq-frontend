@@ -46,7 +46,7 @@
                 <div ng-show="imageShown === videoID" class="embed-responsive embed-responsive-16by9">
                     <youtube-video class="embed-responsive-item" video-id="videoID"></youtube-video>
                 </div>
-                <img ng-show="imageShown !== videoID" alt="Project image" ng-src="{{project.imageUrl? project.imageUrl: '../images/common/default-project.png' }}"/>
+                <img ng-show="imageShown !== videoID" alt="Project image" ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
             </div>
             <div class="project--description">
                 <p>{{project.description || 'project-without-description' | translate}}</p>
