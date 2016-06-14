@@ -26,7 +26,7 @@
                         <h2>{{ 'by-mail' | translate }}</h2>
                         <span>{{ 'write-us-an-email' | translate }}
                             <span ng-if="common.user" data-ng-click="commonModals.sendCommentsModal()" class="contact-us-link" data-element="help-contact-us-link"><a href="">{{ 'from-here' | translate }}</a></span>
-                            <a ng-if="!common.user" href="mailto:{{'support_email' | translate}}" target="_blank">{{ 'from-here' | translate }}</a></span>
+                            <a ng-if="!common.user" href="mailto:{{'support_email' | translate}}" target="_blank" data-element="help-contact-us-email">{{ 'from-here' | translate }}</a></span>
                     </div>
                 </div>
             </div>
