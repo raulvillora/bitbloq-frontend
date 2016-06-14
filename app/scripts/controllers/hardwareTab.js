@@ -547,6 +547,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
             $scope.componentSelected.name += '_copy';
         }
         var nameFixed = _validName($scope.componentSelected.name);
+        nameFixed = utils.removeDiacritics(nameFixed);
         if (nameFixed !== $scope.componentSelected.name) {
             $scope.componentSelected.name = nameFixed;
         }
