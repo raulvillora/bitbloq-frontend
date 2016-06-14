@@ -416,6 +416,20 @@ textarea:disabled {
     display: block !important;
 }
 
+.h1 {
+    font-size: $font-size-h1;
+    color    : $font-color-heading;
+}
+
+.h2 {
+    font-size: $font-size-h2;
+    color    : $font-color-heading;
+}
+
+.h3 {
+    font-size: $font-size-h3;
+    color    : $font-color-heading;
+}
 
 .clearfix:after {
     visibility: hidden;
