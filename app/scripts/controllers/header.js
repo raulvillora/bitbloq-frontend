@@ -21,7 +21,7 @@ angular.module('bitbloqApp')
         $scope.translate = $translate;
         $scope.commonModals = commonModals;
         $scope.showHeader = false;
-        $scope.diwoURLCourse = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]] + '/course/aprende-robotica-y-programacion-con-bitbloq-2/';
+        $scope.diwoURLCourse = 'http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/';
         $scope.common.session.save = false;
 
         $scope.logout = function() {

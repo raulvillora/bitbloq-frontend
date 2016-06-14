@@ -85,21 +85,6 @@ angular.module('bitbloqApp')
             zh: 'uk'
         };
 
-        exports.langToDiwo = {
-            ca: '',
-            de: 'de',
-            en: 'en',
-            es: '',
-            eu: 'eu',
-            fr: 'fr',
-            gl: '',
-            it: 'it',
-            nl: 'en',
-            pt: 'pt-pt',
-            ru: 'en',
-            zh: 'en'
-        };
-
         var langToAngularLng = {
             ca: 'ca-ES',
             de: 'de-De',

@@ -55,8 +55,6 @@
                 <span>{{ 'tags' | translate}}:</span>
                 <ul ng-class="{'hardware--tags':project.userTags.length > 0}">
                     <li data-ng-repeat="tag in project.hardwareTags">{{tag | translate}}</li>
-                </ul>
-                <ul>
                     <li data-ng-repeat="tag in project.userTags">{{tag}}</li>
                 </ul>
             </div>
