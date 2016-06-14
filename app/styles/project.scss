@@ -2,7 +2,7 @@
     background-color: #eee;
     display: block;
     overflow: auto;
-    
+
     .project--header {
         max-width       : 100vw;
         height          : 97px;
@@ -192,7 +192,7 @@
                 li {
                     float: left;
 
-                    &:after {
+                    &:not(:last-child):after {
                         content: ",\00a0\00a0";
                     }
 
@@ -206,15 +206,8 @@
                 &.hardware--tags{
                   li {
                       float: left;
-
-                      &:after {
+                      &:not(:last-child):after{
                           content: ",\00a0\00a0";
-                      }
-
-                      &:last-child {
-                          &:after {
-                              content: ",\00a0\00a0";
-                          }
                       }
                   }
                 }

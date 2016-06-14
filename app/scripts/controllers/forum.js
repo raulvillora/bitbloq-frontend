@@ -162,7 +162,6 @@
                 forumApi.createAnswer(answer).then(function(response) {
                     answer._id = response.data;
                     answer.creatorId = common.user._id;
-                    answer.creatorUsername = common.user.username;
 
                     if (forum.answer.images.length > 0) {
                         var images = [],
@@ -211,7 +210,7 @@
 
                     var thread = {
                         title: forum.textEditorContent.title,
-                        categoryId: chosenCategory._id
+                        category: chosenCategory._id
                     };
 
                     var answer = {
@@ -237,7 +236,7 @@
                             });
                         }else{
                           alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
-                          forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread);
+                          forum.goForumSection(forum.textEditorContent.category + '/' + response.data);
                         }
 
                     }).catch(function(err) {

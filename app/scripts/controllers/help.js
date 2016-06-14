@@ -79,11 +79,11 @@ angular.module('bitbloqApp')
         $scope.changeLogsApi = changeLogsApi;
         $scope.selectedFaq = 0;
 
-        $scope.diwoURL = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]];
+        $scope.diwoURL = 'http://diwo.bq.com/';
 
         $scope.$watch('common.user.language', function(newValue, oldValue) {
             if (newValue && newValue !== oldValue) {
-                $scope.diwoURL = 'http://diwo.bq.com/' + $scope.common.langToDiwo[$translate.use().split('-')[0]];
+                $scope.diwoURL = 'http://diwo.bq.com/';
             }
         });
 

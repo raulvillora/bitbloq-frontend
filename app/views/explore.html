@@ -93,7 +93,7 @@
                     <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}" class="project--item">
                         <div class="img-container">
                             <a class="btn btn--secondary btn--small more-info" data-ng-href="#/project/{{project._id}}" data-element="explora-project-moreinfo">{{ 'more-info' | translate }}</a>
-                            <img alt="Project image" ng-src="{{project.imageUrl? project.imageUrl: '../images/common/default-project.png' }}"/>
+                            <img alt="Project image" ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
                         </div>
                         <div class="project__info__footer">
                             <h3 data-element="explore-project-name">{{project.name}}</h3>
@@ -102,7 +102,7 @@
                                 {{project.description}}
                             </div>
                             <p>{{ 'explore-created-by' | translate }}
-                                <span>{{project.creatorUsername}}</span>
+                                <span>{{project.creator.username}}</span>
                             </p>
 
                             <div class="stats">

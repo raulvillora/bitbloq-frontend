@@ -7,7 +7,7 @@
             <div class="subheader--left">
                 <div class="subheader--item">
                     <span class="project--header--username">{{ 'project-username-from' | translate }}
-                      <span class="project--header--username__link"> {{project.creatorUsername}}
+                      <span class="project--header--username__link"> {{project.creator.username}}
                       </span>
                     </span>
                 </div>
@@ -46,7 +46,7 @@
                 <div ng-show="imageShown === videoID" class="embed-responsive embed-responsive-16by9">
                     <youtube-video class="embed-responsive-item" video-id="videoID"></youtube-video>
                 </div>
-                <img ng-show="imageShown !== videoID" alt="Project image" ng-src="{{project.imageUrl? project.imageUrl: '../images/common/default-project.png' }}"/>
+                <img ng-show="imageShown !== videoID" alt="Project image" ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
             </div>
             <div class="project--description">
                 <p>{{project.description || 'project-without-description' | translate}}</p>
@@ -55,8 +55,6 @@
                 <span>{{ 'tags' | translate}}:</span>
                 <ul ng-class="{'hardware--tags':project.userTags.length > 0}">
                     <li data-ng-repeat="tag in project.hardwareTags">{{tag | translate}}</li>
-                </ul>
-                <ul>
                     <li data-ng-repeat="tag in project.userTags">{{tag}}</li>
                 </ul>
             </div>

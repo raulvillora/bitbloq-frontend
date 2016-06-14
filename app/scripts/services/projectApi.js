@@ -204,7 +204,6 @@ angular.module('bitbloqApp')
             delete cleanProject._id;
             delete cleanProject._acl;
             delete cleanProject.creatorId;
-            delete cleanProject.creatorUsername;
             delete cleanProject.createdAt;
             delete cleanProject.updatedAt;
             delete cleanProject.links;

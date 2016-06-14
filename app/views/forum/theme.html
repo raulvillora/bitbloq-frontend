@@ -8,7 +8,7 @@
             <div class="theme__header-info">
                 <h1 class="theme__title" data-element="forum-theme-theme-title">{{forum.currentThread.title}}</h1>
                 <span class="theme-by-user">{{'by' | translate }}
-                    <span class="block__username__link">{{forum.firstAnswer.creatorUsername}}</span>
+                    <span class="block__username__link">{{forum.firstAnswer.creator.username}}</span>
                     <time>{{forum.firstAnswer.createdAt | amDateFormat:'DD MMM YYYY, HH:mm' }}</time>
                 </span>
             </div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="answer__header">
-                <h2>{{answer.creatorUsername}}</h2>
+                <h2>{{answer.creator.username}}</h2>
                 <time ng-if="answer.updatedAt">{{answer.updatedAt | amDateFormat:'DD MMM YYYY, HH:mm'}}</time>
                 <span class="forum__date" ng-if="!answer.updatedAt">{{'forumAnswer_text_recent' | translate}}</span>
             </div>

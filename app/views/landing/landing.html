@@ -15,19 +15,19 @@
                 <img src="../images/landing/bombilla.jpg" alt="">
                 <h2 class="h2">{{'landing-secondary-section-little ' | translate}}</h2>
                 <p>{{'landing-secondary-section-little-text ' | translate}}</p>
-                <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]]}}" target="_blank" class="landing--link--small">{{'landing_link_enterDiwo' | translate}}</a>
+                <a ng-href="{{'http://diwo.bq.com/'}}" target="_blank" class="landing--link--small">{{'landing_link_enterDiwo' | translate}}</a>
             </div>
             <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--for-who">
                 <img src="../images/landing/casa.jpg" alt="">
                 <h2 class="h2">{{'landing-secondary-section-family' | translate}}</h2>
                 <p>{{'landing-secondary-section-family-text' | translate}}</p>
-                <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]] + '/course/aprende-robotica-y-programacion-con-bitbloq-2/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningCourse' | translate}}</a>
+                <a ng-href="{{'http://diwo.bq.com/course/aprende-robotica-y-programacion-con-bitbloq-2/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningCourse' | translate}}</a>
             </div>
             <div class="col-vsmall-12 col-small-6 col-medium-4 col-large-4 landing--for-who">
                 <img src="../images/landing/aula.jpg" alt="">
                 <h2 class="h2">{{'landing-secondary-section-classroom' | translate}}</h2>
                 <p>{{'landing_text_forWho' | translate}}</p>
-                <a ng-href="{{'http://diwo.bq.com/' + common.langToDiwo[translate.use().split('-')[0]] + '/cam15/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningPlan ' | translate}}</a>
+                <a ng-href="{{'http://diwo.bq.com/cam15/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningPlan ' | translate}}</a>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@
                             <h2>{{project.name}}</h2>
                             <div class="project--footer">
                                 <div class="left">
-                                    {{'explore-created-by' | translate}} {{project.creatorUsername}}
+                                    {{'explore-created-by' | translate}} {{project.creator.username}}
                                 </div>
                                 <div class="right">
                                     <span>

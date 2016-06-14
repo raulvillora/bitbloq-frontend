@@ -25,8 +25,8 @@ pre[class*="language-"] {
         background-color: #fefefe;
     }
     &::selection {
-        color: #000;
-        background-color: #fefefe;
+        color: #fff !important;
+        background-color: #8c919b !important;
     }
 }
 
@@ -146,7 +146,7 @@ pre.line-numbers > code {
     left: -3.8em;
     width: 3em;
     /* works for line-numbers below 1000 lines */
-    
+
     letter-spacing: -1px;
     // border-right: 1px solid #999;
     -webkit-user-select: none;
