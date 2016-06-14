@@ -71,14 +71,10 @@ angular.module('bitbloqApp')
         }
 
         $scope.startAutosave = function() {
+            projectApi.startAutosave(saveProject);
             if ($scope.common.user) {
-                $scope.saveStatus = 1;
                 $scope.hardware.firstLoad = false;
-                if (!autoSaveTimer || (autoSaveTimer.$$state.status !== 0)) {
-                    autoSaveTimer = $timeout(saveProject, envData.config.saveTime || 10000);
-                }
             } else {
-                $scope.common.session.save = true;
                 $scope.common.session.project = $scope.getCurrentProject();
             }
         };
@@ -124,13 +120,9 @@ angular.module('bitbloqApp')
                 if ($scope.project._id) {
                     if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
 
-                        projectApi.update($scope.project._id, currentProject).then(function() {
-
-                            $scope.saveStatus = 2;
-
+                        return projectApi.update($scope.project._id, currentProject).then(function() {
                             $scope.saveOldProject();
-
-                            $localStorage.projectsChange = true;
+                            $localStorage.projfalseectsChange = true;
 
                             if ($scope.tempImage.file) {
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
@@ -143,23 +135,15 @@ angular.module('bitbloqApp')
                                     $log.debug('imageSave error', error);
                                 });
                             }
-                            defered.resolve();
-                        }, function(error) {
-                            $log.debug('Update error: ', error);
-                            if (error.status === 405 || error.status === 401) {
-                                alertsService.add('session-expired', 'session', 'warning');
-                            }
-                            $scope.saveStatus = 3;
-                            defered.reject(error);
                         });
                     } else {
-                        $scope.saveStatus = 4;
+                        projectApi.saveStatus = 4;
                     }
                 } else {
                     if ($scope.common.user) {
                         currentProject.creatorId = $scope.project.creatorId = $scope.common.user._id;
 
-                        projectApi.save(currentProject).then(function(response) {
+                        return projectApi.save(currentProject).then(function(response) {
                             var idProject = response.data;
                             $scope.project._id = idProject;
                             projectApi.get(idProject).success(function(response) {
@@ -168,7 +152,7 @@ angular.module('bitbloqApp')
                             //to avoid reload
                             $route.current.pathParams.id = idProject;
                             $location.url('/bloqsproject/' + idProject);
-                            $scope.saveStatus = 2;
+                            projectApi.saveStatus = 2;
                             $scope.common.isLoading = false;
 
                             $localStorage.projectsChange = !$localStorage.projectsChange;
@@ -185,26 +169,16 @@ angular.module('bitbloqApp')
                                     $log.debug('imageSave error', error);
                                 });
                             }
-                            defered.resolve();
-
-                        }, function(error) {
-                            $log.debug('Save error: ', error);
-                            if (error.status === 405 || error.status === 401) {
-                                alertsService.add('session-expired', 'session', 'warning');
-                            }
-                            $scope.saveStatus = 3;
-
-                            defered.reject(error);
                         });
                     } else {
-                        $scope.saveStatus = 0;
+                        projectApi.saveStatus = 0;
                         $log.debug('why we start to save if the user its not logged??, check startAutoSave');
                         defered.reject();
                     }
                 }
             } else {
                 $log.debug('we cant save Project if there is no changes');
-                $scope.saveStatus = 0;
+                projectApi.saveStatus = 0;
                 defered.resolve();
             }
 
@@ -361,6 +335,8 @@ angular.module('bitbloqApp')
             $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
             $scope.$apply();
         };
+        
+        $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
 
         /*************************************************
          web2board communication
@@ -893,7 +869,7 @@ angular.module('bitbloqApp')
 
         function confirmExit() {
             var closeMessage;
-            if ($scope.saveStatus === 1 && !$scope.common.connectedWeb2Board) {
+            if (projectApi.saveStatus === 1 && !$scope.common.connectedWeb2Board) {
                 closeMessage = $scope.common.translate('leave-without-save');
             }
             return closeMessage;
@@ -1042,17 +1018,6 @@ angular.module('bitbloqApp')
 
         $scope.shareWithUserTags = [];
 
-        /**
-         * Status of save project
-         * 0 = Nothing
-         * 1 = AutoSaving in progress
-         * 2 = Save correct
-         * 3 = Saved Error
-         * 4 = Dont Allowed to do Save
-         * @type {Number}
-         */
-        $scope.saveStatus = 0;
-
         $scope.code = '';
 
         $scope.tempImage = {};
@@ -1153,16 +1118,16 @@ angular.module('bitbloqApp')
         };
 
         $document.on('keydown', checkBackspaceKey);
-        $window.onbeforeunload = confirmExit;
+        // $window.onbeforeunload = confirmExit;
 
-        $scope.$on('$locationChangeStart', function(event) {
-            if ($scope.saveStatus === 1) {
-                var answer = $window.confirm($scope.common.translate('leave-without-save') + '\n\n' + $scope.common.translate('leave-page-question'));
-                if (!answer) {
-                    event.preventDefault();
-                }
-            }
-        });
+        // $scope.$on('$locationChangeStart', function(event) {
+        //     if ($scope.saveStatus === 1) {
+        //         var answer = $window.confirm($scope.common.translate('leave-without-save') + '\n\n' + $scope.common.translate('leave-page-question'));
+        //         if (!answer) {
+        //             event.preventDefault();
+        //         }
+        //     }
+        // });
 
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);

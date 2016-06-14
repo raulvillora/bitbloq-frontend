@@ -20,10 +20,7 @@
                 <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="commonModals.renameProject(project)">{{project.name || 'new-project' | translate}}
                     <span></span>
                 </h1>
-                <span class="make--saving" data-ng-show="saveStatus===1">{{ 'make-saving' | translate }}</span>
-                <span class="make--saving" data-ng-show="saveStatus===2" data-element="project-saved">{{ 'make-project-saved-ok' | translate }}</span>
-                <span class="make--saving" data-ng-show="saveStatus===3">{{ 'make-project-saved-ko' | translate }}</span>
-                <span class="make--saving" data-ng-show="saveStatus===4" data-element="project-not-allow-save">{{ 'make-project-not-allow-to-save' | translate }}</span>
+                <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}" >{{ getSavingStatusIdLabel() | translate }}</span>
             </li>
             <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ 'verify' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
