@@ -162,7 +162,6 @@
                 forumApi.createAnswer(answer).then(function(response) {
                     answer._id = response.data;
                     answer.creatorId = common.user._id;
-                    answer.creatorUsername = common.user.username;
 
                     if (forum.answer.images.length > 0) {
                         var images = [],
