@@ -26,7 +26,7 @@ angular.module('bitbloqApp')
             return projectApi.getPublic().then(function(publicProjects) {
                 publicProjects = publicProjects.data;
                 $scope.userProjects = _.filter(publicProjects, _.matches({
-                    'creatorId': $scope.userId
+                    'creator': $scope.userId
                 }));
                 $scope.projectCount = $scope.userProjects.length;
             });

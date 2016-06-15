@@ -150,7 +150,7 @@
 
             forum.submitNewAnswer = function(threadId) {
                 var answer = {
-                    threadId: threadId || forum.currentThread._id,
+                    thread: threadId || forum.currentThread._id,
                     content: '<p>' + forum.textEditorContent.htmlContent + '</p>'
                 };
                 forum.textEditorContent.htmlContent = '';
@@ -161,7 +161,10 @@
 
                 forumApi.createAnswer(answer).then(function(response) {
                     answer._id = response.data;
-                    answer.creatorId = common.user._id;
+                    answer.creator = {
+                        _id: common.user._id,
+                        username: common.user.username
+                    };
 
                     if (forum.answer.images.length > 0) {
                         var images = [],

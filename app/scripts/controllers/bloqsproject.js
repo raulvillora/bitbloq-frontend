@@ -17,7 +17,7 @@ angular.module('bitbloqApp')
 
         function getDefaultProject() {
             var project = {
-                creatorId: '',
+                creator: '',
                 name: '',
                 description: '',
                 userTags: [],
@@ -141,7 +141,7 @@ angular.module('bitbloqApp')
                     }
                 } else {
                     if ($scope.common.user) {
-                        currentProject.creatorId = $scope.project.creatorId = $scope.common.user._id;
+                        currentProject.creator = $scope.project.creator = $scope.common.user._id;
 
                         return projectApi.save(currentProject).then(function(response) {
                             var idProject = response.data;

@@ -222,7 +222,7 @@ angular.module('bitbloqApp')
 
             if ($scope.genericFilterOptions[0].value) {
                 if ($scope.genericFilters.indexOf('bq') > -1) {
-                    queryParams.query.creatorId = envData.config.bqUserId;
+                    queryParams.query.creator = envData.config.bqUserId;
                 }
             }
             return queryParams;
@@ -239,7 +239,7 @@ angular.module('bitbloqApp')
                         $regex: $scope.searchText
                     }
                 }, {
-                    creatorId: {
+                    creator: {
                         $regex: $scope.searchText
                     }
                 }];

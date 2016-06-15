@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectApi', function ($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
+    .service('projectApi', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var exports = {},
@@ -23,19 +23,21 @@ angular.module('bitbloqApp')
 
         function saveRequest(params) {
             return $http(params)
-                .then(function () {
+                .then(function(response) {
                     exports.saveStatus = 2;
-                }, function (error) {
+                    return response;
+                }, function(error) {
                     $log.debug('Save error: ', error);
                     if (error.status === 405 || error.status === 401) {
                         alertsService.add('session-expired', 'session', 'warning');
                     }
                     exports.saveStatus = 3;
+                    return error;
                 });
         }
 
         //Public functions
-        exports.get = function (id, params) {
+        exports.get = function(id, params) {
             params = params || {};
             return $http({
                 method: 'GET',
@@ -44,7 +46,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getPublic = function (queryParams) {
+        exports.getPublic = function(queryParams) {
             return $http({
                 method: 'GET',
                 url: envData.config.serverUrl + 'project',
@@ -53,14 +55,14 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.getPublicCounter = function (queryParams) {
+        exports.getPublicCounter = function(queryParams) {
             angular.extend(queryParams, {
                 'count': '*'
             });
             return exports.getPublic(queryParams);
         };
 
-        exports.getMyProjects = function (queryParams) {
+        exports.getMyProjects = function(queryParams) {
 
             var myProjectArray = [],
                 params = {
@@ -74,7 +76,7 @@ angular.module('bitbloqApp')
             return resource.getAll('project/me', params, myProjectArray);
         };
 
-        exports.getMySharedProjects = function (queryParams) {
+        exports.getMySharedProjects = function(queryParams) {
 
             var myProjectArray = [],
                 params = {
@@ -88,7 +90,7 @@ angular.module('bitbloqApp')
             return resource.getAll('project/shared', params, myProjectArray);
         };
 
-        exports.startAutosave = function (saveProject) {
+        exports.startAutosave = function(saveProject) {
             if (common.user) {
                 exports.saveStatus = 1;
                 if (!savePromise || (savePromise.$$state.status !== 0)) {
@@ -100,7 +102,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        exports.save = function (dataProject) {
+        exports.save = function(dataProject) {
             return saveRequest({
                 method: 'POST',
                 url: envData.config.serverUrl + 'project',
@@ -108,15 +110,15 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getSavePromise = function () {
+        exports.getSavePromise = function() {
             return savePromise;
         };
 
-        exports.getSavingStatusIdLabel = function () {
+        exports.getSavingStatusIdLabel = function() {
             return exports.savingStatusIdLabels[exports.saveStatus];
         };
 
-        exports.update = function (idProject, dataProject) {
+        exports.update = function(idProject, dataProject) {
             return saveRequest({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + idProject,
@@ -124,7 +126,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.clone = function (idProject, name) {
+        exports.clone = function(idProject, name) {
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + idProject + '/clone',
@@ -134,12 +136,12 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.publish = function (project) {
+        exports.publish = function(project) {
             var defered = $q.defer();
             $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + project._id + '/publish'
-            }).then(function (response) {
+            }).then(function(response) {
                 project._acl.ALL = {
                     permission: 'READ',
                     properties: {
@@ -147,27 +149,27 @@ angular.module('bitbloqApp')
                     }
                 };
                 defered.resolve(response);
-            }, function (error) {
+            }, function(error) {
                 defered.reject(error);
             });
             return defered.promise;
         };
 
-        exports.private = function (project) {
+        exports.private = function(project) {
             var defered = $q.defer();
             $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + project._id + '/private'
-            }).then(function (response) {
+            }).then(function(response) {
                 delete project._acl.ALL;
                 defered.resolve(response);
-            }, function (error) {
+            }, function(error) {
                 defered.reject(error);
             });
             return defered.promise;
         };
 
-        exports.shareWithUsers = function (idProject, userEmails) {
+        exports.shareWithUsers = function(idProject, userEmails) {
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + idProject + '/share',
@@ -175,7 +177,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.delete = function (idProject) {
+        exports.delete = function(idProject) {
             return $http({
                 method: 'DELETE',
                 url: envData.config.serverUrl + 'project/' + idProject
@@ -188,22 +190,22 @@ angular.module('bitbloqApp')
         //---------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------
 
-        exports.getShortURL = function (longUrl) {
+        exports.getShortURL = function(longUrl) {
             // Request short url
             return $http.post('https://www.googleapis.com/urlshortener/v1/url?key=' + envData.google.apikey, {
                 longUrl: longUrl
-            }).success(function (response) {
+            }).success(function(response) {
                 return response.id;
-            }).error(function (error) {
+            }).error(function(error) {
                 return error.error.message;
             });
         };
 
-        exports.getCleanProject = function (projectRef) {
+        exports.getCleanProject = function(projectRef) {
             var cleanProject = _.cloneDeep(projectRef);
             delete cleanProject._id;
             delete cleanProject._acl;
-            delete cleanProject.creatorId;
+            delete cleanProject.creator;
             delete cleanProject.createdAt;
             delete cleanProject.updatedAt;
             delete cleanProject.links;
@@ -212,16 +214,22 @@ angular.module('bitbloqApp')
             return cleanProject;
         };
 
-        exports.download = function (projectRef) {
-            var project = exports.getCleanProject(projectRef);
-            project.bloqsVersion = bowerData.dependencies.bloqs;
+        exports.download = function(projectRef) {
 
-            var filename = utils.removeDiacritics(projectRef.name, undefined, $translate.instant('new-project'));
+            exports.get(projectRef._id, {
+                download: true
+            }).then(function(response) {
+                var project = exports.getCleanProject(response.data);
+                project.bloqsVersion = bowerData.dependencies.bloqs;
 
-            utils.downloadFile(filename.substring(0, 30) + '.json', JSON.stringify(project), 'application/json');
+                var filename = utils.removeDiacritics(projectRef.name, undefined, $translate.instant('new-project'));
+
+                utils.downloadFile(filename.substring(0, 30) + '.json', JSON.stringify(project), 'application/json');
+            });
         };
 
-        exports.downloadIno = function (project, code) {
+        exports.downloadIno = function(project, code) {
+            //todo subir descarga pero no bajarme proyecto
             code = code || project.code;
             var name = project.name;
             //Remove all diacritics
@@ -230,7 +238,7 @@ angular.module('bitbloqApp')
             utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
         };
 
-        exports.generateShortUrl = function (longUrl) {
+        exports.generateShortUrl = function(longUrl) {
             return $http({
                 method: 'POST',
                 url: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyA4NIAP4k3TA0kpo6POxWcS_2-Rpj_JaoE',
@@ -244,7 +252,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.isShared = function (project) {
+        exports.isShared = function(project) {
             var found = false,
                 i = 0,
                 propertyNames = Object.getOwnPropertyNames(project._acl);
@@ -279,7 +287,7 @@ angular.module('bitbloqApp')
         //Init functions
         startSavePromise();
 
-        $rootScope.$on('$locationChangeStart', function (event) {
+        $rootScope.$on('$locationChangeStart', function(event) {
             if (exports.saveStatus === 1) {
                 var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
                 if (!answer) {
@@ -288,7 +296,7 @@ angular.module('bitbloqApp')
             }
         });
 
-        $window.onbeforeunload = function (event) {
+        $window.onbeforeunload = function(event) {
             if (exports.saveStatus === 1) {
                 var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
                 if (!answer) {

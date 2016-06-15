@@ -201,7 +201,7 @@ angular.module('bitbloqApp')
                 }
             } else {
                 if ($scope.common.user) {
-                    $scope.project.creatorId = $scope.common.user._id;
+                    $scope.project.creator = $scope.common.user._id;
                     if ($scope.tempImage.blob) {
                         $scope.project.imageType = $scope.tempImage.blob.type;
                     }
@@ -433,7 +433,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.project = {
-            creatorId: '',
+            creator: '',
             name: $scope.common.translate('new-project'),
             description: '',
             userTags: [],

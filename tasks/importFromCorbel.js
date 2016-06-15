@@ -396,7 +396,7 @@ module.exports = function(grunt) {
             }
             //check if creator its _id or id
             threads[i]._id = threads[i].id;
-            threads[i].creatorId = threads[i].creator._id;
+            threads[i].creator = threads[i].creator._id;
             threads[i].createdAt = threads[i]._createdAt;
             threads[i].updatedAt = threads[i]._updatedAt;
 
@@ -413,7 +413,7 @@ module.exports = function(grunt) {
             deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'owner', 'main'];
         for (var i = 0; i < answers.length; i++) {
             //check if creator its _id or id
-            answers[i].creatorId = answers[i].owner.id;
+            answers[i].creator = answers[i].owner.id;
             answers[i].createdAt = answers[i]._createdAt;
             answers[i].updatedAt = answers[i]._updatedAt;
             answers[i].threadId = answers[i].themeId;
