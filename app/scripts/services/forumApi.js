@@ -6,6 +6,7 @@ angular
         var forumApi = {
             getForumIndex: getForumIndex,
             getTheme: getTheme,
+            searchThreads: searchThreads,
             getThemesInCategory: getThemesInCategory,
             addViewer: addViewer,
             createThread: createThread,
@@ -37,6 +38,10 @@ angular
 
         function getTheme(themeId) {
             return getData('/thread/' + themeId);
+        }
+
+        function searchThreads(partialTitle, pageNum) {
+            return getData('/thread/search', {partialTitle: partialTitle, page:pageNum});
         }
 
         function getThemesInCategory(categoryName) {

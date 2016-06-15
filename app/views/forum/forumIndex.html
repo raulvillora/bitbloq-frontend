@@ -59,22 +59,22 @@
 </div>
 <div class="forum__categories" ng-if="forum.results.show">
     <div class="forum__block">
-        <div dir-paginate="result in forum.results.data | filter:{title: forum.searchText} | itemsPerPage: 10 track by $index">
+        <div dir-paginate="result in forum.results.data | itemsPerPage: forum.itemsPerPage track by $index" current-page="forum.currentPage" total-items="forum.results.totalSize">
             <ul class="forum__block__list">
                 <li class="forum__search__item">
-                    <a ng-href="{{'#/help/forum/' + result.categoryName + '/' + result.id}}">
+                    <a ng-href="{{'#/help/forum/' + result.category._id + '/' + result._id}}">
                         <h2 class="block__item__title">{{result.title}}</h2>
                     </a>
                 <span class="block__item__description">{{'by' | translate}}
-                    <span class="block__item__owner">{{result.owner}}</span>
+                    <span class="block__item__owner">{{result.creator.username}}</span>
                     {{'forum__searcher__into' | translate}}
-                    <span>{{result.categoryName}}</span>
+                    <span>{{result.category.name}}</span>
                 </span>
                 </li>
             </ul>
         </div>
     </div>
     <div class="forum__paginator">
-        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+        <dir-pagination-controls boundary-links="true" on-page-change="forum.pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
