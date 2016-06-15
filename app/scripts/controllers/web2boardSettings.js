@@ -73,6 +73,7 @@ angular.module('bitbloqApp')
 
         configHub.server.getConfig().then(function (config) {
             $scope.settings = config;
+            $scope.settings.proxy = $scope.settings.proxy || ''; //if null use empty string (w2b will consider it as no proxy)
             return versionHub.server.getLibVersion();
         }).then(function (version) {
             $scope.libsVersion = {version: version};
