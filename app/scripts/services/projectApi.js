@@ -36,6 +36,14 @@ angular.module('bitbloqApp')
                 });
         }
 
+        function addDownload(idProject) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'project/' + idProject + '/download'
+            });
+        }
+
+
         //Public functions
         exports.get = function(id, params) {
             params = params || {};
@@ -201,42 +209,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getCleanProject = function(projectRef) {
-            var cleanProject = _.cloneDeep(projectRef);
-            delete cleanProject._id;
-            delete cleanProject._acl;
-            delete cleanProject.creator;
-            delete cleanProject.createdAt;
-            delete cleanProject.updatedAt;
-            delete cleanProject.links;
-            delete cleanProject.exportedFromBitbloqOffline;
-            delete cleanProject.bitbloqOfflineVersion;
-            return cleanProject;
-        };
-
-        exports.download = function(projectRef) {
-
-            exports.get(projectRef._id, {
-                download: true
-            }).then(function(response) {
-                var project = exports.getCleanProject(response.data);
-                project.bloqsVersion = bowerData.dependencies.bloqs;
-
-                var filename = utils.removeDiacritics(projectRef.name, undefined, $translate.instant('new-project'));
-
-                utils.downloadFile(filename.substring(0, 30) + '.json', JSON.stringify(project), 'application/json');
-            });
-        };
-
-        exports.downloadIno = function(project, code) {
-            //todo subir descarga pero no bajarme proyecto
-            code = code || project.code;
-            var name = project.name;
-            //Remove all diacritics
-            name = utils.removeDiacritics(name, undefined, $translate.instant('new-project'));
-
-            utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
-        };
 
         exports.generateShortUrl = function(longUrl) {
             return $http({
@@ -264,6 +236,57 @@ angular.module('bitbloqApp')
             }
             return found;
         };
+
+        exports.getCleanProject = function(projectRef) {
+            var cleanProject = _.cloneDeep(projectRef);
+            delete cleanProject._id;
+            delete cleanProject._acl;
+            delete cleanProject.creator;
+            delete cleanProject.createdAt;
+            delete cleanProject.updatedAt;
+            delete cleanProject.links;
+            delete cleanProject.exportedFromBitbloqOffline;
+            delete cleanProject.bitbloqOfflineVersion;
+            return cleanProject;
+        };
+
+        exports.download = function(project, type, force) {
+            type = type || 'json';
+            if (common.user || force) {
+                addDownload(project._id).then(function(response) {
+                    if(type==='arduino'){
+                        downloadIno(response.data);
+                    } else {
+                        downloadJSON(response.data);
+                    }
+                });
+            } else {
+                if(type==='arduino'){
+                    exports.downloadIno(project);
+                } else {
+                    exports.downloadJSON(project);
+                }
+            }
+        };
+
+        function downloadJSON (projectRef) {
+            var project = exports.getCleanProject(projectRef);
+            project.bloqsVersion = bowerData.dependencies.bloqs;
+
+            var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
+
+            utils.downloadFile(filename.substring(0, 30) + '.json', JSON.stringify(project), 'application/json');
+        }
+
+        function downloadIno (project, code) {
+            code = code || project.code;
+            var name = project.name;
+            //Remove all diacritics
+            name = utils.removeDiacritics(name, undefined, $translate.instant('new-project'));
+
+            utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
+        }
+
 
         /**
          * Status of save project

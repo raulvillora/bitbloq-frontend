@@ -79,13 +79,13 @@
                     </svg>
                     {{ 'project-watch' | translate }}
                 </button>
-                <button class="btn btn--project--action" data-ng-if="project && !project.codeProject" data-ng-click="projectApi.download(project)" data-element="explora-project-download">
+                <button class="btn btn--project--action" data-ng-if="project && !project.codeProject" data-ng-click="projectApi.download(project, 'json', true)" data-element="explora-project-download">
                     <svg class="svg-icon">
                         <use xlink:href="#descargar"></use>
                     </svg>
                     {{ 'download' | translate }}
                 </button>
-                <button class="btn btn--project--action" data-ng-if="project.codeProject" data-ng-click="projectApi.downloadIno(project)" data-element="explora-project-download">
+                <button class="btn btn--project--action" data-ng-if="project.codeProject" data-ng-click="projectApi.download(project, 'arduino', true)" data-element="explora-project-download">
                     <svg class="svg-icon">
                         <use xlink:href="#descargar"></use>
                     </svg>
