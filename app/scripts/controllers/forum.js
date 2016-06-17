@@ -229,7 +229,7 @@
                     forum.textEditorContent.htmlContent = '';
 
                     forumApi.createThread(thread, answer).then(function(response) {
-                     answer._id = response.data.answer;
+                        answer._id = response.data.answer._id;
                         $log.debug('theme: ' + response.data);
                         if (forum.answer.images.length > 0) {
                             var images = [],
@@ -237,15 +237,15 @@
                             forum.answer.images.forEach(function(value, index) {
                                 imageId = answer._id + '-' + index;
                                 images.push(imageId);
-                                imageApi.save(imageId, value, 'forum').then(function(){
-                                   alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
-                                   forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread);
+                                imageApi.save(imageId, value, 'forum').then(function() {
+                                    alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
+                                    forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread._id);
 
                                 });
                             });
-                        }else{
-                          alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
-                          forum.goForumSection(forum.textEditorContent.category + '/' + response.data);
+                        } else {
+                            alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
+                            forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread._id);
                         }
 
                     }).catch(function(err) {
@@ -375,7 +375,6 @@
 
             function goForumTheme(themeId, themeCategory) {
                 forumApi.getTheme(themeId).then(function(response) {
-                    console.log(response.data);
                     forum.currentThread = response.data.thread;
                     forum.themeCategory = themeCategory;
                     var answers = response.data.answers,
@@ -457,7 +456,7 @@
             function refreshSearchLayout() {
                 forum.results.show = forum.searchText !== '' && forum.searchText !== undefined;
                 if (forum.results.show) {
-                    forumApi.searchThreads(forum.searchText,forum.currentPage).then(function (result) {
+                    forumApi.searchThreads(forum.searchText, forum.currentPage).then(function(result) {
                         debugger;
                         forum.results.data = result.data.threads;
                         forum.results.totalSize = result.data.count;
