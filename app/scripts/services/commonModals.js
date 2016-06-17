@@ -41,7 +41,7 @@ angular.module('bitbloqApp')
                 comments: {
                     message: '',
                     userAgent: $window.navigator.userAgent,
-                    userInfo: common.user
+                    creator: common.user
                 }
             });
 
@@ -83,7 +83,7 @@ angular.module('bitbloqApp')
                 comments: {
                     message: '',
                     userAgent: $window.navigator.userAgent,
-                    userInfo: common.user
+                    creator: common.user
                 }
             });
 
@@ -179,7 +179,7 @@ angular.module('bitbloqApp')
                     os: '',
                     browser: '',
                     userAgent: $window.navigator.userAgent,
-                    userInfo: common.user
+                    creator: common.user
                 },
                 condition: function() {
                     return this.comments.message.length > 0 && this.comments.os.length > 0 && this.comments.browser.length > 0;
