@@ -207,14 +207,15 @@ module.exports = function(grunt) {
                 console.log(result[1].length);
 
                 var projects,
-                    stats = [];
-                for (var i = 0; i < tempPageNumber['ProjectStats']; i++) {
+                    stats = [],
+                    i;
+                for (i = 0; i < tempPageNumber['ProjectStats']; i++) {
                     stats = stats.concat(grunt.file.readJSON('./backupsDB/' + timestamp + '/ProjectStats_' + i + '.json'));
                 }
                 console.log('tempPageNumber[ngularproject]', tempPageNumber['Angularproject']);
-                for (var i = 0; i < tempPageNumber['Angularproject']; i++) {
+                for (i = 0; i < tempPageNumber['Angularproject']; i++) {
                     console.log('process', i);
-                    projects = grunt.file.readJSON('./backupsDB/' + timestamp + '/Angularproject_' + i + '.json')
+                    projects = grunt.file.readJSON('./backupsDB/' + timestamp + '/Angularproject_' + i + '.json');
 
                     processProjects(projects, stats);
                     grunt.file.write('./backupsDB/' + timestamp + '/Angularproject_' + i + '.json', JSON.stringify(projects));
@@ -236,10 +237,12 @@ module.exports = function(grunt) {
             }
 
             projects[i].corbelId = projects[i].id;
+            projects[i].creator = projects[i].creatorId;
             projects[i].createdAt = projects[i]._createdAt;
             projects[i].updatedAt = projects[i]._updatedAt;
 
             delete projects[i].id;
+            delete projects[i].creatorId;
             delete projects[i].creatorUsername;
             delete projects[i].links;
             delete projects[i].imageType;
@@ -354,13 +357,14 @@ module.exports = function(grunt) {
                     stats = [],
                     answers;
 
-                for (var i = 0; i < tempPageNumber['ForumStats']; i++) {
+                var i;
+                for (i = 0; i < tempPageNumber['ForumStats']; i++) {
                     stats = stats.concat(grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumStats_' + i + '.json'));
                 }
                 console.log('tempPageNumber[ForumThemes]', tempPageNumber['ForumThemes']);
-                for (var i = 0; i < tempPageNumber['ForumThemes']; i++) {
+                for (i = 0; i < tempPageNumber['ForumThemes']; i++) {
                     console.log('process', i);
-                    threads = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumThemes_' + i + '.json')
+                    threads = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumThemes_' + i + '.json');
 
                     processThreads(threads, stats);
                     allThreads = allThreads.concat(threads);
@@ -370,11 +374,11 @@ module.exports = function(grunt) {
                 grunt.file.write('./backupsDB/' + timestamp + '/ForumThreads.json', JSON.stringify(allThreads));
 
                 console.log('tempPageNumber[ForumAnswers]', tempPageNumber['ForumAnswers']);
-                for (var i = 0; i < tempPageNumber['ForumAnswers']; i++) {
+                for (i = 0; i < tempPageNumber['ForumAnswers']; i++) {
                     console.log('process', i);
-                    answers = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json')
+                    answers = grunt.file.readJSON('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json');
 
-                    processAnswers(answers, allThreads);
+                    processAnswers(answers);
                     allAnswers = allAnswers.concat(answers);
                     grunt.file.write('./backupsDB/' + timestamp + '/ForumAnswers_' + i + '.json', JSON.stringify(answers));
                 }
@@ -383,12 +387,12 @@ module.exports = function(grunt) {
                 callback();
             }
         });
-    };
+    }
 
     function processThreads(threads, stats) {
         var tempStat,
             _ = require('lodash'),
-            deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'creator'];
+            deleteFields = ['id', 'links', '_createdAt', '_updatedAt', 'creator', 'categoryId', 'lastAnswerDate'];
         for (var i = 0; i < threads.length; i++) {
             tempStat = _.find(stats, ['id', threads[i].id]);
             if (tempStat) {
@@ -397,6 +401,7 @@ module.exports = function(grunt) {
             //check if creator its _id or id
             threads[i]._id = threads[i].id;
             threads[i].creator = threads[i].creator._id;
+            threads[i].category = threads[i].categoryId;
             threads[i].createdAt = threads[i]._createdAt;
             threads[i].updatedAt = threads[i]._updatedAt;
 
@@ -406,20 +411,17 @@ module.exports = function(grunt) {
         }
     }
 
-    function processAnswers(answers, threads) {
+    function processAnswers(answers) {
         var tempStat,
             _ = require('lodash'),
             tempThread,
-            deleteFields = ['id', 'creatorUsername', 'links', 'imageType', 'groups', '_createdAt', '_updatedAt', 'owner', 'main'];
+            deleteFields = ['id', 'links', '_createdAt', '_updatedAt', 'owner', 'themeId'];
         for (var i = 0; i < answers.length; i++) {
             //check if creator its _id or id
             answers[i].creator = answers[i].owner.id;
             answers[i].createdAt = answers[i]._createdAt;
             answers[i].updatedAt = answers[i]._updatedAt;
-            answers[i].threadId = answers[i].themeId;
-            //add category on answers
-            tempThread = _.find(threads, ['_id', answers[i].threadId]);
-            answers[i].categoryId = tempThread.categoryId;
+            answers[i].thread = answers[i].themeId;
             var tempArray = [];
             if (answers[i].images) {
                 for (var k = 0; k < answers[i].images.length; k++) {
