@@ -75,6 +75,10 @@ angular.module('bitbloqApp')
                 disconnect: false
             };
 
+            $scope.errors.login.emailUserName = false;
+            $scope.errors.login.password = true;
+            $scope.errors.disconnect = false;
+            
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
                 $scope.errors.emptyBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
                 if (!$scope.errors.emptyBirthday) {
