@@ -262,9 +262,9 @@ angular.module('bitbloqApp')
                 });
             } else {
                 if(type==='arduino'){
-                    exports.downloadIno(project);
+                    downloadIno(project);
                 } else {
-                    exports.downloadJSON(project);
+                    downloadJSON(project);
                 }
             }
         };
