@@ -335,7 +335,7 @@ angular.module('bitbloqApp')
             $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
             $scope.$apply();
         };
-        
+
         $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
 
         /*************************************************
@@ -867,14 +867,6 @@ angular.module('bitbloqApp')
             $scope.tourCurrentStep = 5;
         }
 
-        function confirmExit() {
-            var closeMessage;
-            if (projectApi.saveStatus === 1 && !$scope.common.connectedWeb2Board) {
-                closeMessage = $scope.common.translate('leave-without-save');
-            }
-            return closeMessage;
-        }
-
         function launchModalGuest() {
             var modalGuest = $rootScope.$new(),
                 modalGuestInit;
@@ -1011,8 +1003,7 @@ angular.module('bitbloqApp')
          Project settings
          *************************************************/
 
-        var autoSaveTimer = null,
-            compilingAlert,
+        var compilingAlert,
             settingBoardAlert,
             serialMonitorAlert;
 
@@ -1118,16 +1109,7 @@ angular.module('bitbloqApp')
         };
 
         $document.on('keydown', checkBackspaceKey);
-        // $window.onbeforeunload = confirmExit;
 
-        // $scope.$on('$locationChangeStart', function(event) {
-        //     if ($scope.saveStatus === 1) {
-        //         var answer = $window.confirm($scope.common.translate('leave-without-save') + '\n\n' + $scope.common.translate('leave-page-question'));
-        //         if (!answer) {
-        //             event.preventDefault();
-        //         }
-        //     }
-        // });
 
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);
