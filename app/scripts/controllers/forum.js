@@ -295,9 +295,17 @@
                 });
             };
 
-            forum.pageChangeHandler = function(newPage) {
-                refreshSearchLayout();
+            forum.refreshSearchLayout = function() {
+                forum.results.show = forum.searchText !== '' && forum.searchText !== undefined;
+                if (forum.results.show) {
+                    forumApi.searchThreads(forum.searchText, forum.currentPage).then(function(result) {
+                        forum.results.data = result.data.threads;
+                        forum.results.totalSize = result.data.count;
+                        forum.itemsPerPage = result.data.itemsPerPage;
+                    });
+                }
             };
+
 
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
@@ -453,18 +461,6 @@
                 }
             }
 
-            function refreshSearchLayout() {
-                forum.results.show = forum.searchText !== '' && forum.searchText !== undefined;
-                if (forum.results.show) {
-                    forumApi.searchThreads(forum.searchText, forum.currentPage).then(function(result) {
-                        debugger;
-                        forum.results.data = result.data.threads;
-                        forum.results.totalSize = result.data.count;
-                        forum.itemsPerPage = result.data.itemsPerPage;
-                    });
-                }
-            }
-
             function init() {
                 if (!forum.categories) {
                     getMainForum().then(function() {
@@ -475,7 +471,7 @@
 
                     $scope.$watch(angular.bind(forum, function() {
                         return forum.searchText;
-                    }), refreshSearchLayout);
+                    }), forum.refreshSearchLayout);
                 }
             }
 

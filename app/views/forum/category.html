@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="forum__paginator">
-        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+        <dir-pagination-controls boundary-links="true" on-page-change="forum.refreshSearchLayout()" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
 <div class="forum__categories" ng-if="forum.results.show">
@@ -74,6 +74,6 @@
         </div>
     </div>
     <div class="forum__paginator">
-        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+        <dir-pagination-controls boundary-links="true" on-page-change="forum.refreshSearchLayout()" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
