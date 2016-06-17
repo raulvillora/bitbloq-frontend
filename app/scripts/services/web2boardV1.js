@@ -171,6 +171,7 @@ angular.module('bitbloqApp')
                 //Socket events handlers
                 ws.onClose(function (evt) {
                     web2board._notify(evt);
+                    isWeb2boardV2Flag = null;
                 });
                 ws.onMessage(function (evt) {
                     if (isWeb2boardV2Flag === null) {
