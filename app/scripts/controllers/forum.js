@@ -305,8 +305,7 @@
                     });
                 }
             };
-
-
+            
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
                     forum.bannedUsers = response.data;
@@ -468,10 +467,6 @@
                     });
                     setForumRoute();
                     addRouteListener();
-
-                    $scope.$watch(angular.bind(forum, function() {
-                        return forum.searchText;
-                    }), forum.refreshSearchLayout);
                 }
             }
 
