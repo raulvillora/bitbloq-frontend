@@ -740,11 +740,8 @@ $leftBarWidth: 70px;
 }
 
 &.btn--evolution {
-    background-color: #BABFC3;
-    border-left: 10px solid #94999C;
+    background-color: #9a0768;
     color: white;
-    font-weight: bold;
-    padding-left: 17px !important;
 }
 
 .toolbox {
@@ -786,6 +783,9 @@ $leftBarWidth: 70px;
     }
     &.toolbox-classes {
         background-color: #e30b9a;
+    }
+    &.toolbox-evolution{
+        background-color: #7b0754;
     }
 }
 
