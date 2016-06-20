@@ -78,7 +78,6 @@
         animation-duration: 200ms;
     }
     span {
-        width: 90%;
         margin-right: .5em;
         display: inline-block;
         button{
@@ -111,6 +110,9 @@
             fill: #f23333;
         }
     }
+    .alert--content{
+      width: 90%;
+    }
     .alert--close {
         display: inline-block;
         float: right;
@@ -127,5 +129,13 @@
                 cursor: pointer;
             }
         }
+    }
+
+    .alert--action {
+      display: inline-block;
+      line-height: inherit;
+      margin-left: 5px;
+      color: white;
+      text-decoration: underline;
     }
 }
