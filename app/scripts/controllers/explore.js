@@ -34,7 +34,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.genericFilter = function(newFilter, preventSearch) {
-            if (newFilter && (newFilter!='bq' && $scope.genericFilterOptions[0].value) || (!$scope.genericFilterOptions[0].value)) {
+            if (newFilter && (newFilter!=='bq' && $scope.genericFilterOptions[0].value) || (!$scope.genericFilterOptions[0].value)) {
 
                 $scope.genericFilterOptions.forEach(function(item) {
                     item.value = false;

@@ -16,6 +16,7 @@ angular.module('bitbloqApp')
 
         $scope.authenticate = function(prov) {
             localStorage.removeItem('satellizer_token');
+            $cookieStore.remove('token');
             $auth.authenticate(prov).then(function(response) {
                 var options = {
                     provider: prov,
@@ -26,7 +27,6 @@ angular.module('bitbloqApp')
 
                 userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
                         // Set user data
-                        $cookieStore.remove('token');
                         if (loginResponse.status === 204) {
                             $scope.isSocialRegister = true;
                         } else {
