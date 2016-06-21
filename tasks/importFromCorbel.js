@@ -440,15 +440,15 @@ module.exports = function(grunt) {
     // grunt importCollectionsFromCorbel:production:qa
     grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
         var fs = require('fs'),
-            timestamp = Date.now(); //1464279964116 
-        fs.mkdirSync('./backupsDB/' + timestamp);
+            timestamp = 1466490615454;// Date.now(); //1464279964116 
+        //fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            //'importProjectFromCorbel:' + timestamp,
+            'importProjectFromCorbel:' + timestamp,
             //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
             //'importUsersFromCorbel:' + timestamp
-            'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
-            'importForumFromCorbel:' + timestamp
+            //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
+            //'importForumFromCorbel:' + timestamp
         ]);
     });
 
