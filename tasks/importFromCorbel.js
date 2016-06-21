@@ -128,13 +128,15 @@ module.exports = function(grunt) {
     }
 
     var tempPageNumber = {};
-
+    /*var maxItems = 0;
+     maxItems === 25 ||
+     maxItems++;
+     */
     function getCorbelCollection(collectionName, env, timestamp, callback) {
         grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env + ' pageNumber' + tempPageNumber[collectionName]);
         if (!tempPageNumber[collectionName]) {
             tempPageNumber[collectionName] = 0;
         }
-
         cd.resources.collection('bitbloq:' + collectionName)
             .page(tempPageNumber[collectionName])
             .pageSize(50)
@@ -142,18 +144,7 @@ module.exports = function(grunt) {
                 grunt.log.writeln(collectionName);
                 grunt.log.writeln(response.data.length);
                 if (response.data.length === 0) {
-                    // if (tempPageNumber[collectionName] <= 500) {
-                    //     //read all files
-                    //     var allItems = [];
-                    //     for (var i = 0; i < tempPageNumber[collectionName]; i++) {
-                    //         allItems = allItems.concat(grunt.file.readJSON('./backupsDB/' + timestamp + '/' + collectionName + '_' + i + '.json'));
-                    //     }
-                    //     tempPageNumber[collectionName] = undefined;
-                    //     console.log('total', allItems.length);
-                    //     callback(null, allItems);
-                    // } else {
                     callback(null, [-1]);
-                    //}
                 } else {
                     grunt.file.write('./backupsDB/' + timestamp + '/' + collectionName + '_' + tempPageNumber[collectionName] + '.json', JSON.stringify(response.data));
                     tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
@@ -214,7 +205,7 @@ module.exports = function(grunt) {
                 }
                 console.log('tempPageNumber[ngularproject]', tempPageNumber['Angularproject']);
                 for (i = 0; i < tempPageNumber['Angularproject']; i++) {
-                    console.log('process', i);
+                    //console.log('process', i);
                     projects = grunt.file.readJSON('./backupsDB/' + timestamp + '/Angularproject_' + i + '.json');
 
                     processProjects(projects, stats);
@@ -234,6 +225,25 @@ module.exports = function(grunt) {
             if (tempStat) {
                 projects[i].timesViewed = tempStat.timesViewed;
                 projects[i].timesAdded = tempStat.timesAdded;
+            }
+            if(!projects[i].creatorId){
+                console.log('not creator ID');
+                if(projects[i].id && projects[i].id !== 'undefined'){
+                    console.log(projects[i].id);
+                    console.log(typeof(projects[i].id));
+                    projects[i].creatorId = projects[i].id.split(':')[0];
+                } else{
+                    console.log('not id');
+                    for(var propertyName in projects[i]._acl) {
+                        console.log(propertyName);
+                        if(propertyName){
+                            projects[i].creatorId = propertyName.split(':')[1];
+                        }
+                    }
+                }
+                console.log(projects[i].creatorId);
+                console.log(projects[i].id);
+                console.log(projects[i]._acl);
             }
 
             projects[i].corbelId = projects[i].id;
@@ -440,11 +450,11 @@ module.exports = function(grunt) {
     // grunt importCollectionsFromCorbel:production:qa
     grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
         var fs = require('fs'),
-            timestamp = 1466490615454;// Date.now(); //1464279964116 
-        //fs.mkdirSync('./backupsDB/' + timestamp);
+            timestamp = Date.now();
+        fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-           // 'importProjectFromCorbel:' + timestamp,
+            'importProjectFromCorbel:' + timestamp,
             //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
             //'importUsersFromCorbel:' + timestamp
             'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,

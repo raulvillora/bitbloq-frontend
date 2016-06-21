@@ -412,6 +412,11 @@ module.exports = function(grunt) {
                     cwd: '.tmp/styles',
                     dest: 'dist/styles/',
                     src: '{,*/}*.{css,gif}'
+                }, {
+                    expand: true,
+                    cwd: 'bower_components/jspanel/source/fonts',
+                    dest: 'dist/styles/fonts/',
+                    src: '*.*'
                 }]
             }
         },
