@@ -262,7 +262,7 @@ module.exports = function(grunt) {
             duplicatedUsername = [],
             usernames = {},
             _ = require('lodash'),
-            found, k, itemIdentities;
+            itemIdentities;
         console.log('We have users, now transform it to Bitbloq and save on backupsDB', timestamp, users.length);
         for (var i = 0; i < users.length; i++) {
 
@@ -392,7 +392,7 @@ module.exports = function(grunt) {
     function processThreads(threads, stats) {
         var tempStat,
             _ = require('lodash'),
-            deleteFields = ['id', 'links', '_createdAt', '_updatedAt', 'creator', 'categoryId', 'lastAnswerDate'];
+            deleteFields = ['id', 'links', '_createdAt', '_updatedAt', 'categoryId', 'lastAnswerDate'];
         for (var i = 0; i < threads.length; i++) {
             tempStat = _.find(stats, ['id', threads[i].id]);
             if (tempStat) {
@@ -400,7 +400,7 @@ module.exports = function(grunt) {
             }
             //check if creator its _id or id
             threads[i]._id = threads[i].id;
-            threads[i].creator = threads[i].creator._id;
+            threads[i].creator = threads[i].creator.id;
             threads[i].category = threads[i].categoryId;
             threads[i].createdAt = threads[i]._createdAt;
             threads[i].updatedAt = threads[i]._updatedAt;
@@ -444,11 +444,11 @@ module.exports = function(grunt) {
         //fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            'importProjectFromCorbel:' + timestamp,
+           // 'importProjectFromCorbel:' + timestamp,
             //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
             //'importUsersFromCorbel:' + timestamp
-            //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
-            //'importForumFromCorbel:' + timestamp
+            'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
+            'importForumFromCorbel:' + timestamp
         ]);
     });
 

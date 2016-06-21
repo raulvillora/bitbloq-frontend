@@ -99,6 +99,7 @@ module.exports = function(grunt) {
         adminRequestToServer('DELETE', collectionName + '/all', {}, callback);
     }
 
+
     function insertCollection(collectionName, items, callback) {
         if (collectionName === 'forumcategory') {
             collectionName = 'forum/category';
@@ -118,6 +119,34 @@ module.exports = function(grunt) {
             timer = timer + 2000;
             setTimeout(function() {
                 adminRequestToServer('POST', collectionName + '/all', chunk, callbackEach);
+            }, timer)
+
+        }, callback);
+    }
+
+    var threadIds = [];
+
+    function insertCollectionForum(collectionName, items, callback) {
+        var timer = 1000;
+
+        async.each(items, function(item, callbackEach) {
+            setTimeout(function() {
+                if (collectionName === 'forum/answer') {
+                    var threadId = item.thread;
+                    console.log(threadId, ' to ', threadIds[threadId]);
+                    item.thread = threadIds[threadId];
+                }
+                adminRequestToServer('POST', collectionName + '/force', item, function(err, response) {
+                    console.log(collectionName + ' create ' + response);
+                    if (collectionName === 'forum/thread') {
+                        threadIds[item._id] = response;
+                        callbackEach(err, threadIds);
+                    } else {
+                        callbackEach(err, response);
+                    }
+
+
+                });
             }, timer)
 
         }, callback);
@@ -212,9 +241,9 @@ module.exports = function(grunt) {
         grunt.log.writeln('importForum timestamp:' + timestamp);
 
         var items = grunt.file.readJSON('backupsDB/' + timestamp + '/ForumThreads.json');
-        insertCollection('forum/thread', items, function() {
+        insertCollectionForum('forum/thread', items, function() {
             var answers = grunt.file.readJSON('backupsDB/' + timestamp + '/ForumAnswers.json');
-            insertCollection('forum/answer', answers, done);
+            insertCollectionForum('forum/answer', answers, done);
         });
     });
 
