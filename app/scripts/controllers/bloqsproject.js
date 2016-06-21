@@ -441,7 +441,7 @@ angular.module('bitbloqApp')
             }
         }
 
-        function grunt () {
+        function uploadW2b2 () {
             if ($scope.project.hardware.board) {
                 web2board.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
             } else {
@@ -505,7 +505,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if (web2board.isWeb2boardV2()) {
-                grunt ();
+                uploadW2b2 ();
             } else {
                 uploadW2b1();
             }
