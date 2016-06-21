@@ -180,6 +180,18 @@ angular.module('bitbloqApp')
                 }
             });
 
+            $scope.$watch('common.user.username', function(oldValue, newValue) {
+                if (oldValue && newValue && oldValue !== newValue) {
+                    userApi.validateUserName(newValue.toLowerCase()).then(function(res) {
+                        if (res.status === 200) {
+                            alertsService.add('account-change-username-repeated', 'saved-user', 'error');
+                        } else {
+                            $scope.saveProfile();
+                        }
+                    });
+                }
+            });
+
 
             $scope.$watch('common.user.newsletter', function(newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
