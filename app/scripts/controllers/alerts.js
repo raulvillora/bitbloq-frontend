@@ -11,7 +11,6 @@ angular.module('bitbloqApp')
     .controller('AlertsCtrl', function($scope, alertsService) {
         $scope.alerts = alertsService.getInstance();
         $scope.generateSvgUrl = function(id) {
-            console.log("generateSvgUrl");
             return 'images/sprite.svg#' + id;
         };
     });

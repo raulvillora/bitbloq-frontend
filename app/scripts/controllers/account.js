@@ -180,7 +180,7 @@ angular.module('bitbloqApp')
                 }
             });
 
-            $scope.$watch('common.user.username', function(oldValue, newValue) {
+            $scope.$watch('common.user.username', function(newValue, oldValue) {
                 if (oldValue && newValue && oldValue !== newValue) {
                     userApi.validateUserName(newValue.toLowerCase()).then(function(res) {
                         if (res.status === 200) {
