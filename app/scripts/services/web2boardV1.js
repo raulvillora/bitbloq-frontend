@@ -60,7 +60,7 @@ angular.module('bitbloqApp')
             }
             var parent = $rootScope,
                 modalOptions = parent.$new(),
-                viewAllLink = function() {
+                viewAllLink = function () {
                     modalObj.close();
                     $location.path('/downloads');
                 };
@@ -83,7 +83,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        function showWeb2BoardDownloadModal () {
+        function showWeb2BoardDownloadModal() {
             var modalOptions = {
                 contentTemplate: '/views/modals/downloadWeb2board.html',
                 modalTitle: 'modal-download-web2board-title',
@@ -93,8 +93,8 @@ angular.module('bitbloqApp')
             return showWeb2BoardModal(modalOptions);
         }
 
-        function showWeb2BoardUploadModal () {
-            if(alertUpdate) {
+        function showWeb2BoardUploadModal() {
+            if (alertUpdate) {
                 alertsService.close(alertUpdate);
             }
             var modalOptions = {
@@ -113,7 +113,7 @@ angular.module('bitbloqApp')
             _.extend(modalOptions, {
                 contentTemplate: '/views/modals/web2boardErrors.html',
                 backAction: showWeb2BoardDownloadModal,
-                sendCommentsModal: function() {
+                sendCommentsModal: function () {
                     modalObj.close();
                     commonModals.sendCommentsModal();
                 }
@@ -171,7 +171,10 @@ angular.module('bitbloqApp')
                 //Socket events handlers
                 ws.onClose(function (evt) {
                     web2board._notify(evt);
-                    isWeb2boardV2Flag = null;
+                    // clear V2 flag if closed due to external reason not due to version changing
+                    if (!isWeb2boardV2Flag) {
+                        isWeb2boardV2Flag = null;
+                    }
                 });
                 ws.onMessage(function (evt) {
                     if (isWeb2boardV2Flag === null) {
