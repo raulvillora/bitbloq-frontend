@@ -113,6 +113,7 @@ angular.module('bitbloqApp')
             var currentProject = $scope.getCurrentProject();
             if ($scope.projectHasChanged(currentProject, $scope.oldProject)) {
 
+                $scope.project = currentProject;
                 $scope.project.name = $scope.project.name || $scope.common.translate('new-project');
 
                 $log.debug('Auto saving project...');
@@ -120,7 +121,7 @@ angular.module('bitbloqApp')
                 if ($scope.project._id) {
                     if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
 
-                        return projectApi.update($scope.project._id, currentProject).then(function() {
+                        return projectApi.update($scope.project._id, $scope.project).then(function() {
                             $scope.saveOldProject();
                             $localStorage.projfalseectsChange = true;
 
@@ -128,7 +129,6 @@ angular.module('bitbloqApp')
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
                                     $localStorage.projectsChange = true;
-                                    $scope.project.imageType = currentProject.imageType;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};
                                 }, function(error) {
@@ -141,9 +141,9 @@ angular.module('bitbloqApp')
                     }
                 } else {
                     if ($scope.common.user) {
-                        currentProject.creator = $scope.project.creator = $scope.common.user._id;
+                        $scope.project.creator = $scope.project.creator = $scope.common.user._id;
 
-                        return projectApi.save(currentProject).then(function(response) {
+                        return projectApi.save($scope.project).then(function(response) {
                             var idProject = response.data;
                             $scope.project._id = idProject;
                             projectApi.get(idProject).success(function(response) {
@@ -162,7 +162,6 @@ angular.module('bitbloqApp')
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
                                     $localStorage.projectsChange = true;
-                                    $scope.project.imageType = currentProject.imageType;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};
                                 }, function(error) {
@@ -1079,7 +1078,6 @@ angular.module('bitbloqApp')
         });
 
         var loadProject = function(id) {
-            $log.debug('cargando projecto');
             return projectApi.get(id).then(function(response) {
                 if (response.data.codeProject) {
                     $location.path('/codeproject/' + response.data._id);
