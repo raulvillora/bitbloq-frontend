@@ -124,7 +124,8 @@ module.exports = function(grunt) {
         }, callback);
     }
 
-    var threadIds = [];
+    var threadIds = [],
+        answerIds = [];
 
     function insertCollectionForum(collectionName, items, callback) {
         var timer = 1000;
@@ -140,10 +141,10 @@ module.exports = function(grunt) {
                     console.log(collectionName + ' create ' + response);
                     if (collectionName === 'forum/thread') {
                         threadIds[item._id] = response;
-                        callbackEach(err, threadIds);
                     } else {
-                        callbackEach(err, response);
+                        answerIds[item.id] = response;
                     }
+                    callbackEach(err, response);
 
 
                 });
@@ -243,7 +244,11 @@ module.exports = function(grunt) {
         var items = grunt.file.readJSON('backupsDB/' + timestamp + '/ForumThreads.json');
         insertCollectionForum('forum/thread', items, function() {
             var answers = grunt.file.readJSON('backupsDB/' + timestamp + '/ForumAnswers.json');
-            insertCollectionForum('forum/answer', answers, done);
+            insertCollectionForum('forum/answer', answers, function() {
+                console.log('Answers -------------------------------\n   oldId  :  newId \n ----------------------------------------------------');
+                console.log(answerIds);
+                done();
+            });
         });
     });
 

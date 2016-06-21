@@ -425,7 +425,7 @@ module.exports = function(grunt) {
         var tempStat,
             _ = require('lodash'),
             tempThread,
-            deleteFields = ['id', 'links', '_createdAt', '_updatedAt', 'owner', 'themeId'];
+            deleteFields = ['links', '_createdAt', '_updatedAt', 'owner', 'themeId'];
         for (var i = 0; i < answers.length; i++) {
             //check if creator its _id or id
             answers[i].creator = answers[i].owner.id;
