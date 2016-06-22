@@ -61,6 +61,9 @@
 
                     <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>
                     <div class="project__info__header__data">
+                        <p>{{ 'explore-created-by' | translate }}
+                            <span>{{project.creator.username}}</span>
+                        </p>
                         <time class="text--secondary project__info--time">{{ project.updatedAt | amDateFormat:'DD/MM/YY - HH:mm[h]' }}</time>
                         <div class="project__info__header__icons">
                             <svg class="svg-icon" ng-if="project._acl.ALL">

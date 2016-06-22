@@ -205,7 +205,8 @@
 
             .project__info__header__data {
                 transition : opacity 250ms;
-                padding    : .5em;
+                padding: 0 .5em;
+                overflow: auto;
 
                 time {
                     color       : #8c919b;
@@ -213,6 +214,21 @@
                     font-weight : 400;
                     display     : inline-block;
                     float       : left;
+                }
+                p{
+                    display: inline-block;
+                    float: left;
+                    font-size: 12px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 50%;
+                    overflow: hidden;
+                    margin-right: 10px;
+                    span{
+                        color:$brand-primary;
+                        font-size: 12px;
+                        text-transform: capitalize;
+                    }
                 }
             }
 
