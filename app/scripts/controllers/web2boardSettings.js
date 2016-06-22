@@ -9,9 +9,10 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('Web2boardSettingsCtrl', function ($scope, _, web2boardV2, alertsService) {
+    .controller('Web2boardSettingsCtrl', function ($scope, _, web2boardV2, alertsService, common) {
         var configHub = web2boardV2.api.ConfigHub,
             versionHub = web2boardV2.api.VersionsHandlerHub;
+
         $scope.settings = {
             libraries_path: '',
             proxy: '',
@@ -53,21 +54,31 @@ angular.module('bitbloqApp')
         };
 
         $scope.confirmAction = function () {
+            $scope.settings.proxy = $scope.settings.proxy === '' ? null : $scope.settings.proxy;
             $scope.testProxy()
                 .then(function () {
                     return $scope.testLibrariesPath();
                 })
                 .then(function () {
                     if (!$scope.proxyError && !$scope.libsError) {
-                        return configHub.server.setValues($scope.settings)
-                            .then(function () {
-                                alertsService.add('web2board-settings-confirmSaved', 'web2board', 'ok', 2000);
-                                $scope.closeThisDialog();
-                            });
+                        return configHub.server.setValues($scope.settings);
+                    } else {
+                        throw 'format error';
                     }
                 })
-                .catch(function () {
-                    alertsService.add('web2board-settings-savingError ', 'web2board', 'error');
+                .then(function() {
+                    var libVersion = common.properties.bitbloqLibsVersion || '0.0.1';
+                    alertsService.add('alert-web2board-updatingLibraries', 'web2board', 'loading');
+                    return versionHub.server.setLibVersion(libVersion);
+                })
+                .then(function () {
+                    alertsService.add('web2board-settings-confirmSaved', 'web2board', 'ok', 2000);
+                    $scope.closeThisDialog();
+                })
+                .catch(function (error) {
+                    if(error !== 'format error') {
+                        alertsService.add('web2board-settings-savingError ', 'web2board', 'error');
+                    }
                 });
         };
 
