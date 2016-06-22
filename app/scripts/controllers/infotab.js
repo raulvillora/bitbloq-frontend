@@ -37,6 +37,7 @@ angular.module('bitbloqApp')
                 $scope.tempImage.blob = response.blob;
                 $scope.tempImage.file = response.file;
                 $scope.tempImage.img = response.img;
+                $scope.tempImage.generate = false;
                 $scope.startAutosave();
             }).catch(function(response) {
                 switch (response.error) {
@@ -85,8 +86,8 @@ angular.module('bitbloqApp')
             var context = canvas.getContext('2d');
             $log.debug('context', context);
             var imageObj = new Image();
-            canvas.width = 285;
-            canvas.height = 190;
+            canvas.width = 775;
+            canvas.height = 411;
             if ($scope.project.hardware.board) {
                 if ($scope.project.hardware.robot) {
                     var robotRef = _.find($scope.hardware.robotList, function(b) {
@@ -136,22 +137,19 @@ angular.module('bitbloqApp')
             var renderableHeight, renderableWidth, xStart, yStart;
 
             if (componentPosition > 0) {
-                xStart = 55 + (componentPosition * 50);
+                xStart = 105 + (componentPosition * 125);
             } else {
-                xStart = 55;
+                xStart = 105;
             }
-
+            renderableHeight = 120;
+            renderableWidth = 120;
             if (imageAspectRatio < 1) {
-                renderableHeight = 40;
                 renderableWidth = imageObj.width * (renderableHeight / imageObj.height);
-                yStart = canvas.height - renderableHeight - 10;
+                yStart = canvas.height - renderableHeight - 25;
             } else if (imageAspectRatio > 1) {
-                renderableWidth = 40;
                 renderableHeight = imageObj.height * (renderableWidth / imageObj.width);
-                yStart = canvas.height - renderableHeight - 10;
+                yStart = canvas.height - renderableHeight - 25;
             } else {
-                renderableHeight = 40;
-                renderableWidth = 40;
                 yStart = canvas.height - renderableHeight;
             }
             context.drawImage(imageObj, xStart, yStart, renderableWidth, renderableHeight);
@@ -161,13 +159,13 @@ angular.module('bitbloqApp')
         function setMainImage(canvas, context, imageObj, robot) {
 
             $log.debug('Set board Image');
-            var xStart = (canvas.width - 242) / 2;
+            var xStart = (canvas.width - 442) / 2;
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
             if (robot) {
                 context.drawImage(imageObj, xStart, 0, 242, 181);
             } else {
-                context.drawImage(imageObj, xStart, -50, 242, 181);
+                context.drawImage(imageObj, xStart, -150, 442, 381);
             }
             generateImage(canvas);
 
@@ -206,6 +204,8 @@ angular.module('bitbloqApp')
             $('#projectImage').attr('src', pngUrl);
 
             $scope.tempImage.blob = b64toBlob(base64String, 'image/png');
+            $scope.tempImage.file = $scope.tempImage.blob;
+            $scope.tempImage.generate = true;
 
             $scope.startAutosave();
         }

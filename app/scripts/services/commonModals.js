@@ -199,7 +199,7 @@ angular.module('bitbloqApp')
         };
 
         exports.publishModal = function(project) {
-            if (project.imageType === '') {
+            if (!project.image || project.image === 'default') {
                 $rootScope.$emit('generate:image');
             }
             var confirmAction = function() {

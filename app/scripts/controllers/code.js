@@ -180,10 +180,14 @@ angular.module('bitbloqApp')
 
             $scope.project.name = $scope.project.name || $scope.common.translate('new-project');
 
+            if ($scope.tempImage.file && !$scope.tempImage.generate) {
+                $scope.project.image = 'custom';
+            }
+            
             if ($scope.project._id) {
                 if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
-                    if ($scope.tempImage.blob) {
-                        $scope.project.imageType = $scope.tempImage.blob.type;
+                    if ($scope.tempImage.file && !$scope.tempImage.generate) {
+                        $scope.project.image = 'custom';
                     }
                     return projectApi.update($scope.project._id, $scope.project).then(function() {
 
@@ -202,8 +206,8 @@ angular.module('bitbloqApp')
             } else {
                 if ($scope.common.user) {
                     $scope.project.creator = $scope.common.user._id;
-                    if ($scope.tempImage.blob) {
-                        $scope.project.imageType = $scope.tempImage.blob.type;
+                    if ($scope.tempImage.file && !$scope.tempImage.generate) {
+                        $scope.project.image = 'custom';
                     }
                     return projectApi.save($scope.project).then(function(response) {
                         var idProject = response.data;

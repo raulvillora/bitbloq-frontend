@@ -89,7 +89,7 @@ angular.module('bitbloqApp')
                     var newElem = _.find($scope.project.hardware.components, {
                         uid: elem.uid
                     });
-                    if(newElem) {
+                    if (newElem) {
                         newElem.connected = elem.connected;
                     }
                     return newElem;
@@ -113,7 +113,7 @@ angular.module('bitbloqApp')
         function saveProject() {
             var defered = $q.defer();
             var currentProject = $scope.getCurrentProject();
-            if ($scope.projectHasChanged(currentProject, $scope.oldProject)) {
+            if ($scope.projectHasChanged(currentProject, $scope.oldProject) || $scope.tempImage.file) {
 
                 currentProject.name = $scope.project.name || $scope.common.translate('new-project');
 
@@ -121,7 +121,9 @@ angular.module('bitbloqApp')
 
                 if ($scope.project._id) {
                     if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
-
+                        if ($scope.tempImage.file && !$scope.tempImage.generate) {
+                            currentProject.image = 'custom';
+                        }
                         return projectApi.update($scope.project._id, currentProject).then(function() {
                             $scope.saveOldProject();
                             $localStorage.projfalseectsChange = true;
@@ -143,7 +145,9 @@ angular.module('bitbloqApp')
                 } else {
                     if ($scope.common.user) {
                         currentProject.creator = $scope.project.creator = $scope.common.user._id;
-
+                        if ($scope.tempImage.file && !$scope.tempImage.generate) {
+                            currentProject.image = 'custom';
+                        }
                         return projectApi.save(currentProject).then(function(response) {
                             var idProject = response.data;
                             $scope.project._id = idProject;
@@ -441,7 +445,7 @@ angular.module('bitbloqApp')
             }
         }
 
-        function uploadW2b2 () {
+        function uploadW2b2() {
             if ($scope.project.hardware.board) {
                 web2board.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
             } else {
@@ -505,7 +509,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if (web2board.isWeb2boardV2()) {
-                uploadW2b2 ();
+                uploadW2b2();
             } else {
                 uploadW2b1();
             }
