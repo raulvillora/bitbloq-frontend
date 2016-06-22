@@ -89,7 +89,9 @@ angular.module('bitbloqApp')
                     var newElem = _.find($scope.project.hardware.components, {
                         uid: elem.uid
                     });
-                    newElem.connected = elem.connected;
+                    if(newElem) {
+                        newElem.connected = elem.connected;
+                    }
                     return newElem;
                 });
 
@@ -113,15 +115,14 @@ angular.module('bitbloqApp')
             var currentProject = $scope.getCurrentProject();
             if ($scope.projectHasChanged(currentProject, $scope.oldProject)) {
 
-                $scope.project = currentProject;
-                $scope.project.name = $scope.project.name || $scope.common.translate('new-project');
+                currentProject.name = $scope.project.name || $scope.common.translate('new-project');
 
                 $log.debug('Auto saving project...');
 
                 if ($scope.project._id) {
                     if (!$scope.project._acl || ($scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'ADMIN')) {
 
-                        return projectApi.update($scope.project._id, $scope.project).then(function() {
+                        return projectApi.update($scope.project._id, currentProject).then(function() {
                             $scope.saveOldProject();
                             $localStorage.projfalseectsChange = true;
 
@@ -141,9 +142,9 @@ angular.module('bitbloqApp')
                     }
                 } else {
                     if ($scope.common.user) {
-                        $scope.project.creator = $scope.project.creator = $scope.common.user._id;
+                        currentProject.creator = $scope.project.creator = $scope.common.user._id;
 
-                        return projectApi.save($scope.project).then(function(response) {
+                        return projectApi.save(currentProject).then(function(response) {
                             var idProject = response.data;
                             $scope.project._id = idProject;
                             projectApi.get(idProject).success(function(response) {
