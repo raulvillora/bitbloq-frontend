@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore) {
+    .service('common', function($filter, $log, envData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -233,6 +233,16 @@ angular.module('bitbloqApp')
 
         $rootScope.$on('$translateChangeEnd', function(evt, newLang) {
             amMoment.changeLocale(newLang.language);
+            if( exports.user && (exports.user.language !== newLang.language) ){
+                exports.user.language = newLang.language;
+                userApi.update({
+                    language: newLang.language
+                }).then(function() {
+                        alertsService.add('account-saved', 'saved-user', 'ok', 5000);
+                }, function(error) {
+                    alertsService.add('account-saved-error', 'saved-user', 'warning');
+                });
+            }
         });
 
         return exports;

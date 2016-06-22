@@ -87,8 +87,6 @@ angular.module('bitbloqApp')
 
         $scope.changeLanguage = function(language) {
             $translate.use(language);
-            $scope.common.user.language = language;
-            $scope.saveProfile();
         };
 
         $scope.uploadImageTrigger = function(type) {

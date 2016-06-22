@@ -234,6 +234,8 @@ module.exports = function(grunt) {
         grunt.log.writeln('importusers timestamp:' + timestamp);
 
         var items = grunt.file.readJSON('backupsDB/' + timestamp + '/user.json');
+        var extraUsers = grunt.file.readJSON('backupsDB/extraUsers.json');
+        items = items.concat(extraUsers);
         insertCollection('user', items, done);
 
     });
