@@ -259,7 +259,7 @@ height          : 190px;
                         }
 
                         .project__info__footer {
-                            height          : 70px;
+                            overflow: auto;
                             background-color: white;
 
                             [data-element="explore-project-name"] {
