@@ -273,19 +273,21 @@ module.exports = function(grunt) {
             usernames = {},
             _ = require('lodash'),
             itemIdentities;
+
         console.log('We have users, now transform it to Bitbloq and save on backupsDB', timestamp, users.length);
         for (var i = 0; i < users.length; i++) {
 
             users[i]._id = users[i]._id.$oid;
-            if (!usernames[users[i].username.toLowerCase()]) {
-                usernames[users[i].username.toLowerCase()] = true;
+            users[i].username = users[i].username.toLowerCase().trim();
+            if (!usernames[users[i].username]) {
+                usernames[users[i].username] = true;
             } else {
                 console.log('duplicated Username');
                 duplicatedUsername.push(users[i]);
-                while (usernames[users[i].username.toLowerCase()]) {
-                    users[i].username = users[i].username + (Math.random() * 6);
+                while (usernames[users[i].username]) {
+                    users[i].username = users[i].username + (Math.random() * 6 * 10000000).toFixed(0);
                 }
-                usernames[users[i].username.toLowerCase()] = true;
+                usernames[users[i].username] = true;
             }
 
             if (users[i].email && (users[i]._id !== 'bitbloqadmin')) {
@@ -307,7 +309,7 @@ module.exports = function(grunt) {
                 users[i].bannedInForum = false;
                 var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups', '_createdAt', '_updatedAt', 'createdDate',
                     'properties.hasBeenAskedIfTeacher', 'properties.birthday', 'properties.code', 'properties.language', 'properties.cookiePolicyAccepted', 'properties.connected',
-                    'properties.tour', 'properties.term', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
+                    'properties.tour', 'properties.term', '__v', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
                 ];
 
                 for (var j = 0; j < deleteFields.length; j++) {
@@ -317,7 +319,8 @@ module.exports = function(grunt) {
                 itemIdentities = _.filter(identities, function(item) {
                     return item.userId === users[i]._id;
                 });
-                if (itemIdentities.length > 2) {
+
+                if (itemIdentities.length > 0) {
                     console.log('two identities');
                     users[i].social = {};
                     for (var k = 0; k < itemIdentities.length; k++) {
@@ -327,7 +330,10 @@ module.exports = function(grunt) {
                             };
                         }
                     }
-                    console.log(users[i]);
+                    //console.log(users[i]);
+                }
+                if(users[i]._id === '57681359e4b0ca2d53dd3d1e'){
+                    console.log( users[i]);
                 }
 
                 finalUsers.push(users[i]);
@@ -340,6 +346,7 @@ module.exports = function(grunt) {
         console.log('duplicated', duplicatedUsername.length);
         grunt.file.write('./backupsDB/' + timestamp + '/user.json', JSON.stringify(finalUsers));
         grunt.file.write('./backupsDB/' + timestamp + '/duplicatedUsername.json', JSON.stringify(duplicatedUsername));
+
         callback();
 
     }
@@ -454,11 +461,11 @@ module.exports = function(grunt) {
         fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
             //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            'importProjectFromCorbel:' + timestamp,
-            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
-            //'importUsersFromCorbel:' + timestamp
-            'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
-            'importForumFromCorbel:' + timestamp
+            //'importProjectFromCorbel:' + timestamp,
+            'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            'importUsersFromCorbel:' + timestamp
+            //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
+            //'importForumFromCorbel:' + timestamp
         ]);
     });
 
