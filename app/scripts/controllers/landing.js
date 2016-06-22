@@ -26,7 +26,7 @@ angular.module('bitbloqApp')
         function getLandingExampleProjects() {
 
             projectApi.getPublic({
-                perPage: 3,
+                pageSize: 3,
                 page: 0,
                 sort: {
                     createdAt: 'desc'
