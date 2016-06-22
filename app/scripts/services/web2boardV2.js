@@ -31,7 +31,7 @@ angular.module('bitbloqApp')
 
         /*Private functions*/
         function connect() {
-            return api.connect('ws://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
+            return api.connect('wss://' + web2board.config.wsHost + ':' + web2board.config.wsPort + '/bitbloq');
         }
 
         function isWeb2boardUpToDate(version) {
