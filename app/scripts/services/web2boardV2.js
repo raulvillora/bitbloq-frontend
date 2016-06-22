@@ -17,8 +17,8 @@ angular.module('bitbloqApp')
             modalObj,
             api,
             inProgress = false,
-            TIME_FOR_WEB2BOARD_TO_START = 700, //ms
-            TIMES_TRY_TO_START_W2B = 20,
+            TIME_FOR_WEB2BOARD_TO_START = 1500, //ms
+            TIMES_TRY_TO_START_W2B = 7,
             w2bToast = null,
             web2boarTimeOutResponse = 45000, //45 seconds
             serialMonitorPanel = null;

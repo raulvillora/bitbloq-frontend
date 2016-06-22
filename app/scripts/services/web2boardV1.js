@@ -21,8 +21,8 @@ angular.module('bitbloqApp')
             isWeb2boardV2Flag = null,
             firstFunctionCalled = {name: '', args: [], alertServiceTag: ''},
             inProgress,
-            TIME_FOR_WEB2BOARD_TO_START = 700, //ms
-            TIMES_TRY_TO_START_W2B = 15;
+            TIME_FOR_WEB2BOARD_TO_START = 1500, //ms
+            TIMES_TRY_TO_START_W2B = 7;
 
         web2board.config = {
             wsHost: 'localhost',
@@ -81,6 +81,8 @@ angular.module('bitbloqApp')
                 scope: modalOptions,
                 showClose: true
             });
+            alertsService.closeByTag('web2board');
+            alertsService.closeByTag(firstFunctionCalled.alertServiceTag);
         }
 
         function showWeb2BoardDownloadModal() {
