@@ -56,6 +56,21 @@ angular.module('bitbloqApp')
             // });
         };
 
+        $scope.validateProfile =  function(){
+            if(usernameBackup !== $scope.common.user.username){
+                userApi.validateUserName($scope.common.user.username).then(function(res) {
+                    if (res.status === 200) {
+                        alertsService.add('account-change-username-repeated', 'saved-user', 'error');
+                    } else {
+                        $scope.saveProfile();
+                    }
+                });
+            }else{
+                $scope.saveProfile();
+            }
+
+        };
+
         $scope.saveProfile = function() {
             var defered = $q.defer();
 
@@ -63,8 +78,10 @@ angular.module('bitbloqApp')
             if ($scope.tempAvatar.size && $scope.tempAvatar.type !== 'google' && $scope.tempAvatar.type !== 'facebook') {
                 $scope.common.user.imageType = $scope.tempAvatar.type;
             }
+
             userApi.update($scope.common.user).then(function() {
                 $scope.common.setUser($scope.common.user);
+                usernameBackup = $scope.common.user.username;
                 if ($scope.tempAvatar.size && $scope.tempAvatar.type !== 'google' && $scope.tempAvatar.type !== 'facebook') {
                     imageApi.save($scope.common.user._id, $scope.tempAvatar, 'avatar').success(function() {
                         $scope.common.oldTempAvatar = $scope.tempAvatar;
@@ -170,36 +187,32 @@ angular.module('bitbloqApp')
         $scope.translate = $translate;
         $scope.tempAvatar = {};
         $scope.avatarUpdate = false;
+        var usernameBackup = null;
 
         $scope.common.itsUserLoaded().then(function() {
+            usernameBackup = $scope.common.user.username;
             $scope.$watch('common.user.firstName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
-                    $scope.saveProfile();
+                    $scope.validateProfile();
                 }
             });
 
             $scope.$watch('common.user.username', function(newValue, oldValue) {
                 if (oldValue && newValue && oldValue !== newValue) {
-                    userApi.validateUserName(newValue.toLowerCase()).then(function(res) {
-                        if (res.status === 200) {
-                            alertsService.add('account-change-username-repeated', 'saved-user', 'error');
-                        } else {
-                            $scope.saveProfile();
-                        }
-                    });
+                    $scope.validateProfile();
                 }
             });
 
 
             $scope.$watch('common.user.newsletter', function(newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
-                    $scope.saveProfile();
+                    $scope.validateProfile();
                 }
             });
 
             $scope.$watch('common.user.lastName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
-                    $scope.saveProfile();
+                    $scope.validateProfile();
                 }
             });
 
