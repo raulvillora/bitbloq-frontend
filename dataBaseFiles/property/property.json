@@ -48,9 +48,6 @@
             "name": "clockRTCInit",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "clockRTC",
-            "addClass": "submenu__item submenu__item--component"
-        }, {
             "name": "clockRTCAdvanced",
             "addClass": "submenu__item submenu__item--component"
         }, {
