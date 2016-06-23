@@ -212,7 +212,7 @@
                                 transition: background-color 250ms;
                                 z-index   : 2;
                             }
-height          : 190px;
+                            height          : 190px;
                             overflow        : hidden;
                             position        : relative;
 
@@ -351,6 +351,17 @@ height          : 190px;
                         height       : 133px;
                         padding-left : 10px;
                         padding-right: 10px;
+                    }
+
+                    .project--item {
+                        .project__info__footer {
+                            p{
+                                padding:0;
+                            }
+                            .stats{
+                                padding:0;
+                            }
+                        }
                     }
                 }
             }
