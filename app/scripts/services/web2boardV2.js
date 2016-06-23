@@ -24,7 +24,7 @@ angular.module('bitbloqApp')
             serialMonitorPanel = null;
 
         web2board.config = {
-            wsHost: 'localhost',
+            wsHost: '127.0.0.1',
             wsPort: 9876,
             serialPort: ''
         };
