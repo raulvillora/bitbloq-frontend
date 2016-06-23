@@ -114,11 +114,11 @@ angular.module('bitbloqApp')
                 exports.user = user;
                 loadedUserPromise.resolve();
             } else {
+                exports.user = null;
                 $translate.use(navigatorLang);
                 $cookieStore.remove('token');
                 loadedUserPromise.reject();
             }
-            exports.user = user;
         };
 
         exports.itsUserLoaded = function() {
