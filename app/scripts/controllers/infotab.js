@@ -159,13 +159,13 @@ angular.module('bitbloqApp')
         function setMainImage(canvas, context, imageObj, robot) {
 
             $log.debug('Set board Image');
-            var xStart = (canvas.width - 442) / 2;
+            var xStart = (canvas.width - 530) / 2;
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
             if (robot) {
                 context.drawImage(imageObj, xStart, 0, 242, 181);
             } else {
-                context.drawImage(imageObj, xStart, -150, 442, 381);
+                context.drawImage(imageObj, xStart, -120, 530, 380);
             }
             generateImage(canvas);
 

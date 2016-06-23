@@ -239,7 +239,7 @@ angular.module('bitbloqApp')
                     language: newLang.language
                 }).then(function() {
                         alertsService.add('account-saved', 'saved-user', 'ok', 5000);
-                }, function(error) {
+                }, function() {
                     alertsService.add('account-saved-error', 'saved-user', 'warning');
                 });
             }
