@@ -37,7 +37,7 @@
                 </button>
             </li>
             <li class="nav__menu__item nav__item--white right" data-ng-if="!project._acl.ALL && utils.userIsOwner(project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="commonModals.publishModal(project)" data-ng-class="{'btn--make--disabled':!project._id || !utils.userIsOwner(project, common.user._id)}" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!project._id || !utils.userIsOwner(project, common.user._id)}" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
                     <svg class="svg-icon">
                         <use xlink:href="#publicar"></use>
                     </svg>

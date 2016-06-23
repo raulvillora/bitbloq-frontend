@@ -169,7 +169,7 @@ background-color: transparent;
     -moz-box-shadow   : 0 0 5px 2px rgba(255, 51, 51, 0.79);
     box-shadow        : 0 0 2px 2px rgba(255, 51, 51, 0.7);
 
-    input {
+    input, textarea {
         color           : #cc0001;
         background-color: transparent;
         @include placeholder(rgba(203, 15, 16, 1));

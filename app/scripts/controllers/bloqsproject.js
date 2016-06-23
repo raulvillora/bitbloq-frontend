@@ -674,34 +674,6 @@ angular.module('bitbloqApp')
             $scope.currentTab = index;
         };
 
-        /*************************************************
-         UNDO / REDO
-         *************************************************/
-
-        //Stores one step in the history
-        function saveStep(step, options) {
-            options.history = _.take(options.history, options.pointer);
-            options.history.push(_.cloneDeep(step));
-            options.pointer++;
-        }
-
-        function undo(options, callback) {
-            if (options.pointer > 1) {
-                options.pointer--;
-                callback(options.history[options.pointer - 1]);
-                $log.debug('actual position', options.pointer);
-                $scope.startAutosave();
-            }
-        }
-
-        function redo(options, callback) {
-            if (options.pointer < options.history.length) {
-                callback(options.history[options.pointer]);
-                options.pointer++;
-                $log.debug('actual position', options.pointer);
-                $scope.startAutosave();
-            }
-        }
 
         $scope.saveBloqStep = function(step) {
             //$log.debug('Guardamos Estado de Bloqs');
@@ -740,6 +712,7 @@ angular.module('bitbloqApp')
             }
             return condition;
         };
+
         $scope.disableRedo = function() {
             var condition = false;
             switch ($scope.currentTab) {
@@ -779,6 +752,56 @@ angular.module('bitbloqApp')
             $scope.collapsedHeader = !$scope.collapsedHeader;
             hw2Bloqs.repaint();
         };
+
+        $scope.publishProject = function() {
+            var projectEmptyName = $scope.common.translate('new-project');
+            if (!$scope.project.name || $scope.project.name === projectEmptyName) {
+                if(!$scope.project.description) {
+                    alertsService.add('publishProject__alert__nameDescriptionError', 'publish', 'warning');
+                } else {
+                    alertsService.add('publishProject__alert__nameError', 'publish', 'warning');
+                }
+                $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
+                $scope.publishProjectError = true;
+                $scope.setTab(2);
+            } else if(!$scope.project.description) {
+                alertsService.add('publishProject__alert__descriptionError', 'publish', 'warning');
+                $scope.publishProjectError = true;
+                $scope.setTab(2);
+            } else {
+                $scope.publishProjectError = false;
+                commonModals.publishModal($scope.project);
+            }
+        };
+
+        /*************************************************
+         UNDO / REDO
+         *************************************************/
+
+        //Stores one step in the history
+        function saveStep(step, options) {
+            options.history = _.take(options.history, options.pointer);
+            options.history.push(_.cloneDeep(step));
+            options.pointer++;
+        }
+
+        function undo(options, callback) {
+            if (options.pointer > 1) {
+                options.pointer--;
+                callback(options.history[options.pointer - 1]);
+                $log.debug('actual position', options.pointer);
+                $scope.startAutosave();
+            }
+        }
+
+        function redo(options, callback) {
+            if (options.pointer < options.history.length) {
+                callback(options.history[options.pointer]);
+                options.pointer++;
+                $log.debug('actual position', options.pointer);
+                $scope.startAutosave();
+            }
+        }
 
         function addProjectWatchersAndListener() {
             $scope.$watch('code', function(newVal, oldVal) {
