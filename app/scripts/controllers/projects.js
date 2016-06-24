@@ -152,6 +152,22 @@ angular.module('bitbloqApp')
             return textSearch;
         };
 
+        $scope.publishProject = function(project, type) {
+            type = type || '';
+            var projectEmptyName = $scope.common.translate('new-project');
+            if (!project.name || project.name === projectEmptyName) {
+                if (!project.description) {
+                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publish', 'warning');
+                } else {
+                    alertsService.add('publishProject__alert__nameError' + type, 'publish', 'warning');
+                }
+            } else if (!project.description) {
+                alertsService.add('publishProject__alert__descriptionError' + type, 'publish', 'warning');
+            } else {
+                commonModals.publishModal(project);
+            }
+        };
+
         function _deleteProject(project) {
             if ($scope.common.removeProjects[project._id]) {
                 projectApi.delete(project._id).then(function() {

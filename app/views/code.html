@@ -30,7 +30,7 @@
                 </button>
             </li>
             <li class="nav__menu__item nav__item--white right" data-ng-if="!project._acl.ALL && !disablePublish" data-tooltips="true" data-tooltip="{{ 'to-explore' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="commonModals.publishModal(project)" data-ng-disabled="!project._id || disablePublish" data-ng-class="{'btn--make--disabled':!project._id || disablePublish}">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-disabled="!project._id || disablePublish" data-ng-class="{'btn--make--disabled':!project._id || disablePublish}">
                     <svg class="svg-icon">
                         <use xlink:href="#publicar"></use>
                     </svg>

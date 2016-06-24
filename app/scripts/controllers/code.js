@@ -175,21 +175,22 @@ angular.module('bitbloqApp')
             web2board.showSettings();
         };
 
-        $scope.publishProject = function() {
+        $scope.publishProject = function(type) {
+            type = type || '';
             var projectEmptyName = $scope.common.translate('new-project');
             if (!$scope.project.name || $scope.project.name === projectEmptyName) {
-                if(!$scope.project.description) {
-                    alertsService.add('publishProject__alert__nameDescriptionError', 'publish', 'warning');
+                if (!$scope.project.description) {
+                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publish', 'warning');
                 } else {
-                    alertsService.add('publishProject__alert__nameError', 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameError' + type, 'publish', 'warning');
                 }
                 $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
                 $scope.publishProjectError = true;
-                $scope.currentTab='info';
-            } else if(!$scope.project.description) {
-                alertsService.add('publishProject__alert__descriptionError', 'publish', 'warning');
+                $scope.currentTab = 'info';
+            } else if (!$scope.project.description) {
+                alertsService.add('publishProject__alert__descriptionError' + type, 'publish', 'warning');
                 $scope.publishProjectError = true;
-                $scope.currentTab='info';
+                $scope.currentTab = 'info';
             } else {
                 $scope.publishProjectError = false;
                 commonModals.publishModal($scope.project);

@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="footer__icons--right">
-                        <div data-ng-click="commonModals.publishModal(project)" class="project--footer--icon" data-ng-if="!project._acl.ALL" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'publish-project' | translate }}" data-element="myprojects-footer-publish">
+                        <div data-ng-click="publishProject(project)" class="project--footer--icon" data-ng-if="!project._acl.ALL" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'publish-project' | translate }}" data-element="myprojects-footer-publish">
                             <svg class="svg-icon">
                                 <use xlink:href="#Compartir_publicarEnExplora"></use>
                             </svg>
@@ -103,7 +103,7 @@
                                 <use xlink:href="#usuario"></use>
                             </svg>
                         </div>
-                        <div class="project--footer--icon" data-ng-click="commonModals.shareSocialModal(project)" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-social-networks' | translate }}">
+                        <div class="project--footer--icon" data-ng-click="publishProject(project, 'Social')" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-social-networks' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#redesSociales"></use>
                             </svg>

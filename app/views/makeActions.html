@@ -174,7 +174,7 @@
             </li>
             <li class="dropdown__item--separator"></li>
             <li data-tooltips="{{!common.user || !project._id || (!utils.userIsOwner(project, common.user._id) && !project._acl.ALL)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':(!utils.userIsOwner(project, common.user._id) && !project._acl.ALL)?'projectActions__text_privateProjectAndNoAdmin':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-disabled="!common.user || !project._id || (!utils.userIsOwner(project, common.user._id) && !project._acl.ALL)" data-ng-click="commonModals.shareSocialModal(project)" data-element="makeactions-menushare-share-social">
+                <div class="dropdown__item" data-ng-disabled="!common.user || !project._id || (!utils.userIsOwner(project, common.user._id) && !project._acl.ALL)" data-ng-click="publishProject('Social')" data-element="makeactions-menushare-share-social">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#redesSociales"></use>
                     </svg>
