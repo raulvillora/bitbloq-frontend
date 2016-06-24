@@ -3,8 +3,8 @@
         <use data-element="alert-svg-icon" data-type="{{alert.type}}" xlink:href="{{generateSvgUrl(alert.type)}}"/>
     </svg>
     <div class="alert--content" data-element="alert-text-toast">
-        <span ng-bind-html="alert.translatedText" ng-if="alert.translatedText"></span>
-        <span ng-if="!alert.translatedText">
+        <span class="alert--text" ng-bind-html="alert.translatedText" ng-if="alert.translatedText"></span>
+        <span class="alert--text" ng-if="!alert.translatedText">
             {{alert.text | translate:alert }}
         </span>
         <button class="text--strong alert--action" data-element="alert-undo-button" ng-click="alert.linkAction(alert.linkParams)" ng-if="alert.linkText">{{alert.linkText | translate:alert }}</button>

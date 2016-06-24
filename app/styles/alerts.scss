@@ -112,6 +112,10 @@
     }
     .alert--content{
       width: 90%;
+      .alert--text {
+        with:100%;
+        word-break: break-all;
+      }
     }
     .alert--close {
         display: inline-block;
