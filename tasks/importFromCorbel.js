@@ -290,7 +290,7 @@ module.exports = function(grunt) {
                 usernames[users[i].username] = true;
             }
 
-            if (users[i].email && (users[i]._id !== 'bitbloqadmin')) {
+            if (users[i].email && (users[i]._id)) {
 
                 users[i].birthday = users[i]['properties.birthday'];
                 users[i].cookiePolicyAccepted = false;
@@ -306,8 +306,8 @@ module.exports = function(grunt) {
                     users[i].createdAt = users[i].createdDate.$date;
                 }
 */
-                users[i].bannedInForum = false;
-                var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups', '_createdAt', '_updatedAt', 'createdDate',
+                
+                var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups', '_createdAt', '_updatedAt', 'createdDate', 'properties',
                     'properties.hasBeenAskedIfTeacher', 'properties.birthday', 'properties.code', 'properties.language', 'properties.cookiePolicyAccepted', 'properties.connected',
                     'properties.tour', 'properties.term', '__v', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
                 ];

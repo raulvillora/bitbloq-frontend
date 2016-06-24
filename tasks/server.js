@@ -110,14 +110,17 @@ module.exports = function(grunt) {
         //chunk all items to upload in max 50 items per request
         while (items.length) {
             //console.log('items.length', items.length);
-            //console.log(splicedArray.length);
+
             splicedArray.push(items.splice(0, 25));
         }
-        var timer = 1000;
-
+        console.log(splicedArray.length);
+        var timer = 250;
+        //console.log(splicedArray[1031].length);
+        //adminRequestToServer('POST', collectionName + '/all', splicedArray[1031], callback);
         async.each(splicedArray, function(chunk, callbackEach) {
             timer = timer + 2000;
             setTimeout(function() {
+                //console.log(chunk[0]);
                 adminRequestToServer('POST', collectionName + '/all', chunk, callbackEach);
             }, timer)
 
