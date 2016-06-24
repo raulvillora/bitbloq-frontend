@@ -22,7 +22,6 @@ angular.module('bitbloqApp')
                 description: '',
                 userTags: [],
                 hardwareTags: [],
-                compiled: false,
                 videoUrl: '',
                 defaultTheme: 'infotab_option_colorTheme',
                 software: {
@@ -758,20 +757,29 @@ angular.module('bitbloqApp')
             var projectEmptyName = $scope.common.translate('new-project');
             if (!$scope.project.name || $scope.project.name === projectEmptyName) {
                 if (!$scope.project.description) {
-                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publishing-project', 'warning');
                 } else {
-                    alertsService.add('publishProject__alert__nameError' + type, 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameError' + type, 'publishing-project', 'warning');
                 }
                 $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
                 $scope.publishProjectError = true;
                 $scope.setTab(2);
             } else if (!$scope.project.description) {
-                alertsService.add('publishProject__alert__descriptionError' + type, 'publish', 'warning');
+                alertsService.add('publishProject__alert__descriptionError' + type, 'publishing-project', 'warning');
                 $scope.publishProjectError = true;
                 $scope.setTab(2);
             } else {
-                $scope.publishProjectError = false;
-                commonModals.publishModal($scope.project);
+                var projectDefault = getDefaultProject(),
+                    project = $scope.getCurrentProject();
+                delete projectDefault.software.freeBloqs;
+                var identicalHardware = _.isEqual(projectDefault.hardware, project.hardware),
+                    identicalSoftware = _.isEqual(projectDefault.software, project.software);
+                if (identicalHardware && identicalSoftware) {
+                    alertsService.add('publishProject__alert__bloqsProjectEmpty' + type, 'publishing-project', 'warning');
+                } else {
+                    $scope.publishProjectError = false;
+                    commonModals.publishModal($scope.project);
+                }
             }
         };
 

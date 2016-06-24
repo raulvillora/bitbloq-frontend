@@ -157,12 +157,21 @@ angular.module('bitbloqApp')
             var projectEmptyName = $scope.common.translate('new-project');
             if (!project.name || project.name === projectEmptyName) {
                 if (!project.description) {
-                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publishing-project', 'warning');
                 } else {
-                    alertsService.add('publishProject__alert__nameError' + type, 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameError' + type, 'publishing-project', 'warning');
                 }
             } else if (!project.description) {
-                alertsService.add('publishProject__alert__descriptionError' + type, 'publish', 'warning');
+                alertsService.add('publishProject__alert__descriptionError' + type, 'publishing-project', 'warning');
+            } else if (!project.codeProject) {
+                var identicalHardware = _.isEqual(hardwareProjectDefault, project.hardware),
+                    identicalSoftware = _.isEqual(softwareProjectDefault, project.software);
+                if (identicalHardware && identicalSoftware) {
+                    alertsService.add('publishProject__alert__bloqsProjectEmpty' + type, 'publishing-project', 'warning');
+                } else {
+                    $scope.publishProjectError = false;
+                    commonModals.publishModal(project);
+                }
             } else {
                 commonModals.publishModal(project);
             }
@@ -216,6 +225,42 @@ angular.module('bitbloqApp')
         $scope.filtered = {
             projects: []
         };
+
+        var softwareProjectDefault = {
+            vars: {
+                enable: true,
+                name: 'varsBloq',
+                childs: [],
+                content: [
+                    []
+                ]
+            },
+            setup: {
+                enable: true,
+                name: 'setupBloq',
+                childs: [],
+                content: [
+                    []
+                ]
+            },
+            loop: {
+                enable: true,
+                name: 'loopBloq',
+                childs: [],
+                content: [
+                    []
+                ]
+            }
+        };
+
+        var hardwareProjectDefault = {
+            board: null,
+            robot: null,
+            components: [],
+            connections: []
+        };
+
+
         $scope.renameProject = function(project) {
             commonModals.renameProject(project).then(function() {
                 projectApi.update(project._id, project).then(function() {

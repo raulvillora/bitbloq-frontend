@@ -180,15 +180,15 @@ angular.module('bitbloqApp')
             var projectEmptyName = $scope.common.translate('new-project');
             if (!$scope.project.name || $scope.project.name === projectEmptyName) {
                 if (!$scope.project.description) {
-                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publishing-project', 'warning');
                 } else {
-                    alertsService.add('publishProject__alert__nameError' + type, 'publish', 'warning');
+                    alertsService.add('publishProject__alert__nameError' + type, 'publishing-project', 'warning');
                 }
                 $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
                 $scope.publishProjectError = true;
                 $scope.currentTab = 'info';
             } else if (!$scope.project.description) {
-                alertsService.add('publishProject__alert__descriptionError' + type, 'publish', 'warning');
+                alertsService.add('publishProject__alert__descriptionError' + type, 'publishing-project', 'warning');
                 $scope.publishProjectError = true;
                 $scope.currentTab = 'info';
             } else {
