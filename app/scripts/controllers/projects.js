@@ -164,9 +164,7 @@ angular.module('bitbloqApp')
             } else if (!project.description) {
                 alertsService.add('publishProject__alert__descriptionError' + type, 'publishing-project', 'warning');
             } else if (!project.codeProject) {
-                var identicalHardware = _.isEqual(hardwareProjectDefault, project.hardware),
-                    identicalSoftware = _.isEqual(softwareProjectDefault, project.software);
-                if (identicalHardware && identicalSoftware) {
+                if (_.isEqual(softwareProjectDefault, project.software)) {
                     alertsService.add('publishProject__alert__bloqsProjectEmpty' + type, 'publishing-project', 'warning');
                 } else {
                     $scope.publishProjectError = false;
@@ -251,13 +249,6 @@ angular.module('bitbloqApp')
                     []
                 ]
             }
-        };
-
-        var hardwareProjectDefault = {
-            board: null,
-            robot: null,
-            components: [],
-            connections: []
         };
 
 

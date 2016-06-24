@@ -772,9 +772,7 @@ angular.module('bitbloqApp')
                 var projectDefault = getDefaultProject(),
                     project = $scope.getCurrentProject();
                 delete projectDefault.software.freeBloqs;
-                var identicalHardware = _.isEqual(projectDefault.hardware, project.hardware),
-                    identicalSoftware = _.isEqual(projectDefault.software, project.software);
-                if (identicalHardware && identicalSoftware) {
+                if (_.isEqual(projectDefault.software, project.software)) {
                     alertsService.add('publishProject__alert__bloqsProjectEmpty' + type, 'publishing-project', 'warning');
                 } else {
                     $scope.publishProjectError = false;
