@@ -881,11 +881,12 @@ module.exports = function(grunt) {
                 });
             } else { // /images/components/
                 grunt.log.writeln('Replacing Force with ' + timestamp + ' in ' + file);
-                var regExp = new RegExp('/images/components/[A-Za-z.+\'\" ]*.(svg|png|jpg|ico)', 'g');
+                var regExp = new RegExp('/images/(components|boards|robots)/[A-Za-z.+\'\" ]*.(svg|png|jpg|ico)', 'g');
                 fileContent = grunt.file.read(file);
                 grunt.file.write(file, fileContent.replace(regExp, function(stringReplace) {
-                    var stringArray = stringReplace.split('components/');
-                    return stringArray[0] + 'components/' + timestamp + '.' + stringArray[1];
+                    var splitString = stringReplace.split('images/')[1].split('/')[0],
+                        stringArray = stringReplace.split(splitString+'/');
+                    return stringArray[0] + splitString +'/' + timestamp + '.' + stringArray[1];
                 }));
             }
         });
