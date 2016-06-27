@@ -193,7 +193,11 @@ angular.module('bitbloqApp')
                 $scope.currentTab = 'info';
             } else {
                 $scope.publishProjectError = false;
-                commonModals.publishModal($scope.project);
+                if (type === 'Social') {
+                    commonModals.shareSocialModal($scope.project);
+                } else {
+                    commonModals.publishModal($scope.project);
+                }
             }
         };
 

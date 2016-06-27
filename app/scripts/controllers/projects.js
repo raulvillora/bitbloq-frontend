@@ -168,10 +168,18 @@ angular.module('bitbloqApp')
                     alertsService.add('publishProject__alert__bloqsProjectEmpty' + type, 'publishing-project', 'warning');
                 } else {
                     $scope.publishProjectError = false;
-                    commonModals.publishModal(project);
+                    if (type === 'Social') {
+                        commonModals.shareSocialModal(project);
+                    } else {
+                        commonModals.publishModal(project);
+                    }
                 }
             } else {
-                commonModals.publishModal(project);
+                if (type === 'Social') {
+                    commonModals.shareSocialModal(project);
+                } else {
+                    commonModals.publishModal(project);
+                }
             }
         };
 
