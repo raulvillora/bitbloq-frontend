@@ -11,7 +11,7 @@
 angular.module('bitbloqApp')
     .controller('ResetPasswordCtrl', function($scope, $cookieStore, $routeParams, User, alertsService, $location, _, common) {
 
-
+        var tryAgainToastId;
         $scope.createPassword = function(form) {
 
             var password = form.passwordMain.$modelValue,
@@ -29,12 +29,15 @@ angular.module('bitbloqApp')
                             alertsService.add('recovery-create-password-ok', 'password', 'ok', 5000);
                             $location.path('login');
                         }, function() {
-                            alertsService.add('recovery-create-password-error', 'password', 'warning');
-
+                            common.setUser(null);
+                            tryAgainToastId = alertsService.add('recovery-create-password-error', 'password', 'warning', null,
+                                undefined, undefined, undefined, 'from-here', goToResetPassword);
                         });
                     }, function(err) {
-                        alertsService.add('reset-password-saved-error', 'password', 'warning');
+                        tryAgainToastId = alertsService.add('reset-password-saved-error', 'password', 'warning', null,
+                            undefined, undefined, undefined, 'from-here', goToResetPassword);
                         console.log('error getting the user: ', err);
+                        common.setUser(null);
                     });
 
                 } else {
@@ -43,12 +46,19 @@ angular.module('bitbloqApp')
             }
         };
 
+        function goToResetPassword(){
+            if(tryAgainToastId){
+                alertsService.close(tryAgainToastId);
+            }
+            $location.path('/resetpassword');
+        };
+
         $scope.errorPassword = false;
         $scope.common.section = 'recovery';
 
         common.itsUserLoaded().finally(function() {
             var token = $routeParams.token;
-            $cookieStore.remove('token');
+            common.setUser(null);
             $cookieStore.put('token', token);
 
         });

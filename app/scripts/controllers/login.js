@@ -431,8 +431,13 @@ angular.module('bitbloqApp')
         $scope.providerOptions = {};
         var userName;
 
-        if ($location.path() === '/register') {
-            $scope.isLogin = false;
+        switch($location.path()){
+            case '/register':
+                $scope.isLogin = false;
+                break;
+            case '/resetpassword':
+                $scope.isForgotPassword = true;
+                break;
         }
 
         $scope.common.itsUserLoaded().then(function() {

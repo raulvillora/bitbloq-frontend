@@ -71,6 +71,11 @@ angular
                     controller: 'LoginCtrl',
                     islogin: false
                 })
+                .when('/resetpassword', {
+                    templateUrl: 'views/login.html',
+                    controller: 'LoginCtrl',
+                    islogin: false
+                })
                 .when('/offline', {
                     templateUrl: 'views/landing/landing-offline.html',
                     controller: 'LandingCtrl'

@@ -20,6 +20,7 @@ angular.module('bitbloqApp')
                 'bitbloq-help',
                 'aboutus',
                 'login',
+                'resetpassword',
                 'recovery',
                 'unsupported',
                 'register',
