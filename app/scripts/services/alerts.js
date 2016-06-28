@@ -68,6 +68,21 @@ angular.module('bitbloqApp')
          */
         exports.add = function(text, id, type, time, data, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams, translatedText) {
             i += 1;
+            if(typeof(text)==='object'){
+                id = text.id;
+                type = text.type;
+                time = text.time;
+                data = text.data;
+                preIcon = text.preIcon;
+                postIcon = text.postIcon;
+                linkText = text.linkText;
+                link = text.link;
+                linkParams = text.linkParams;
+                closeFunction = text.closeFunction;
+                closeParams = text.closeParams;
+                translatedText = text.translatedText;
+                text = text.text;
+            }
 
             var domClass,
                 alert = {

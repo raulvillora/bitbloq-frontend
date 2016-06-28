@@ -30,12 +30,22 @@ angular.module('bitbloqApp')
                             $location.path('login');
                         }, function() {
                             common.setUser(null);
-                            tryAgainToastId = alertsService.add('recovery-create-password-error', 'password', 'warning', null,
-                                undefined, undefined, undefined, 'from-here', goToResetPassword);
+                            tryAgainToastId = alertsService.add({
+                                text: 'recovery-create-password-error',
+                                id: 'password',
+                                type: 'warning',
+                                linkText: 'from-here',
+                                link: goToResetPassword
+                            });
                         });
                     }, function(err) {
-                        tryAgainToastId = alertsService.add('reset-password-saved-error', 'password', 'warning', null,
-                            undefined, undefined, undefined, 'from-here', goToResetPassword);
+                        tryAgainToastId = alertsService.add({
+                            text: 'recovery-create-password-error',
+                            id: 'password',
+                            type: 'warning',
+                            linkText: 'from-here',
+                            link: goToResetPassword
+                        });
                         console.log('error getting the user: ', err);
                         common.setUser(null);
                     });
