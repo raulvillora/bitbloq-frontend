@@ -9,11 +9,8 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ResetPasswordCtrl', function($scope, $cookieStore, $routeParams, User, alertsService, $location, _) {
-        var token = $routeParams.token;
+    .controller('ResetPasswordCtrl', function($scope, $cookieStore, $routeParams, User, alertsService, $location, _, common) {
 
-        $cookieStore.remove('token');
-        $cookieStore.put('token', token);
 
         $scope.createPassword = function(form) {
 
@@ -36,6 +33,7 @@ angular.module('bitbloqApp')
 
                         });
                     }, function(err) {
+                        alertsService.add('reset-password-saved-error', 'password', 'warning');
                         console.log('error getting the user: ', err);
                     });
 
@@ -47,4 +45,11 @@ angular.module('bitbloqApp')
 
         $scope.errorPassword = false;
         $scope.common.section = 'recovery';
+
+        common.itsUserLoaded().finally(function() {
+            var token = $routeParams.token;
+            $cookieStore.remove('token');
+            $cookieStore.put('token', token);
+
+        });
     });
