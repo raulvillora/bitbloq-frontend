@@ -209,12 +209,8 @@ module.exports = function(grunt) {
             numItems = Number(grunt.file.read('./backupsDB/' + timestamp + '/Angularproject_tempPageNumber.txt'));
         grunt.log.writeln('importProjectFromCorbel timestamp:' + timestamp, numItems);
 
-        //deleteCollection('project', function(err) {
-        //  if (err) {
-        //    callback(err);
-        //} else {
         var timer = 1000;
-        //console.log('deleted now start to insert', typeof(numItems));
+
         async.times(numItems, function(n, callback) {
             timer = timer + 2000;
             console.log('read', n);
@@ -225,11 +221,9 @@ module.exports = function(grunt) {
         }, function(err, res) {
             console.log('end');
             console.log(err);
-            console.log(res);
+            //console.log(res);
             done();
         });
-        //   }
-        //});
     });
 
     grunt.registerTask('importUsersFromCorbel', function(timestamp) {
@@ -255,6 +249,40 @@ module.exports = function(grunt) {
                 done();
             });
         });
+    });
+
+    grunt.registerTask('searchProject', function(timestamp) {
+        var done = this.async(),
+            _ = require('lodash'),
+            numItems = Number(grunt.file.read('./backupsDB/' + timestamp + '/Angularproject_tempPageNumber.txt'));
+        grunt.log.writeln('importProjectFromCorbel timestamp:' + timestamp, numItems);
+
+
+        var timer = 1000;
+
+        async.times(numItems, function(n, callback) {
+            timer = timer + 2000;
+            //console.log('read', n);
+
+            var items = grunt.file.readJSON('backupsDB/' + timestamp + '/Angularproject_' + n + '.json');
+            var result = _.find(items,function(item){
+                //console.log(item);
+                //return (item.creator === null || item.creator === '576c581f1a0555f302158c66')
+                return item.corbelId === '57586c17e4b07fb8123aa16d:f71ec9c2-50a2-44b6-9353-65ce3183031c';
+            });
+            if(result){
+                console.log('result');
+                console.log(result);
+            }
+            callback();
+
+        }, function(err, res) {
+            console.log('end');
+            console.log(err);
+            //console.log(res);
+            done();
+        });
+
     });
 
 };
