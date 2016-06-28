@@ -129,9 +129,9 @@ module.exports = function(grunt) {
 
     var tempPageNumber = {};
     /*var maxItems = 0;
-     maxItems === 25 ||
-     maxItems++;
-     */
+    maxItems === 25 ||
+    maxItems++;
+    */
     function getCorbelCollection(collectionName, env, timestamp, callback) {
         grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env + ' pageNumber' + tempPageNumber[collectionName]);
         if (!tempPageNumber[collectionName]) {
@@ -146,6 +146,7 @@ module.exports = function(grunt) {
                 if (response.data.length === 0) {
                     callback(null, [-1]);
                 } else {
+
                     grunt.file.write('./backupsDB/' + timestamp + '/' + collectionName + '_' + tempPageNumber[collectionName] + '.json', JSON.stringify(response.data));
                     tempPageNumber[collectionName] = tempPageNumber[collectionName] + 1;
                     getCorbelCollection(collectionName, env, timestamp, callback);
@@ -186,6 +187,7 @@ module.exports = function(grunt) {
 
     function migrateProjectsFromCorbelToBitbloq(env, timestamp, callback) {
         var async = require('async');
+        grunt.file.write('./backupsDB/projects_imageTypes.json', '');
         async.parallel([
             getCorbelCollection.bind(null, 'Angularproject', env, timestamp),
             getCorbelCollection.bind(null, 'ProjectStats', env, timestamp)
@@ -199,6 +201,7 @@ module.exports = function(grunt) {
 
                 var projects,
                     stats = [],
+                    imageTypesRelation= [],
                     i;
                 for (i = 0; i < tempPageNumber['ProjectStats']; i++) {
                     stats = stats.concat(grunt.file.readJSON('./backupsDB/' + timestamp + '/ProjectStats_' + i + '.json'));
@@ -208,10 +211,11 @@ module.exports = function(grunt) {
                     //console.log('process', i);
                     projects = grunt.file.readJSON('./backupsDB/' + timestamp + '/Angularproject_' + i + '.json');
 
-                    processProjects(projects, stats);
+                    imageTypesRelation = imageTypesRelation.concat(processProjects(projects, stats));
                     grunt.file.write('./backupsDB/' + timestamp + '/Angularproject_' + i + '.json', JSON.stringify(projects));
                 }
                 grunt.file.write('./backupsDB/' + timestamp + '/Angularproject_tempPageNumber.txt', tempPageNumber['Angularproject']);
+                grunt.file.write('./backupsDB/' + timestamp +'/projects_imageTypes.json', JSON.stringify(imageTypesRelation));
                 callback();
             }
         });
@@ -219,7 +223,9 @@ module.exports = function(grunt) {
 
     function processProjects(projects, stats) {
         var tempStat,
-            _ = require('lodash');
+            _ = require('lodash'),
+            tempSplit,
+            imageTypes = [];
         for (var i = 0; i < projects.length; i++) {
             tempStat = _.find(stats, ['id', projects[i].id]);
             if (tempStat) {
@@ -237,7 +243,10 @@ module.exports = function(grunt) {
                     for(var propertyName in projects[i]._acl) {
                         console.log(propertyName);
                         if(propertyName){
-                            projects[i].creatorId = propertyName.split(':')[1];
+                            tempSplit = propertyName.split(':');
+                            if(tempSplit[0]=== 'user'){
+                                projects[i].creatorId = propertyName.split(':')[1];
+                            }
                         }
                     }
                 }
@@ -246,10 +255,18 @@ module.exports = function(grunt) {
                 console.log(projects[i]._acl);
             }
 
+
             projects[i].corbelId = projects[i].id;
             projects[i].creator = projects[i].creatorId;
             projects[i].createdAt = projects[i]._createdAt;
             projects[i].updatedAt = projects[i]._updatedAt;
+            if(projects[i].imageType){
+                imageTypes.push({
+                    corbelId:projects[i].corbelId,
+                    imageType:projects[i].imageType
+                });
+            }
+
 
             delete projects[i].id;
             delete projects[i].creatorId;
@@ -258,7 +275,12 @@ module.exports = function(grunt) {
             delete projects[i].imageType;
             delete projects[i]._createdAt;
             delete projects[i]._updatedAt;
+
+            if(!projects[i].creator){
+                throw "creator?";
+            }
         }
+        return imageTypes;
     }
 
     function parseFalse(value) {
@@ -306,7 +328,7 @@ module.exports = function(grunt) {
                     users[i].createdAt = users[i].createdDate.$date;
                 }
 */
-                
+
                 var deleteFields = ['id', 'scopes', 'createdBy', 'domain', 'groups', '_createdAt', '_updatedAt', 'createdDate', 'properties',
                     'properties.hasBeenAskedIfTeacher', 'properties.birthday', 'properties.code', 'properties.language', 'properties.cookiePolicyAccepted', 'properties.connected',
                     'properties.tour', 'properties.term', '__v', 'properties.remindSupportModal', 'properties.isTeacher', 'properties.newsletter', 'properties.imageType'
@@ -460,13 +482,12 @@ module.exports = function(grunt) {
             timestamp = Date.now();
         fs.mkdirSync('./backupsDB/' + timestamp);
         grunt.task.run([
-            //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            //'importProjectFromCorbel:' + timestamp,
-            'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
-            'importUsersFromCorbel:' + timestamp
+            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
+            'importProjectFromCorbel:' + timestamp,
+            //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp,
+            //'importUsersFromCorbel:' + timestamp
             //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
             //'importForumFromCorbel:' + timestamp
         ]);
     });
-
 };

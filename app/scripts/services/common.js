@@ -9,25 +9,10 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService) {
+    .service('common', function($filter, $log, envData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
-
-        function getOsName() {
-            if (navigator.appVersion.indexOf('Win') !== -1) {
-                return 'Windows';
-            }
-            else if (navigator.appVersion.indexOf('Mac') !== -1) {
-                return 'MacOS';
-            }
-            else if (navigator.appVersion.indexOf('X11') !== -1) {
-                return 'Linux';
-            }
-            else if (navigator.appVersion.indexOf('Linux') !== -1) {
-                return 'Linux';
-            }
-        }
 
         $log.log('Bitbloq version:', envData.config.version);
 
@@ -68,7 +53,7 @@ angular.module('bitbloqApp')
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
 
-        exports.os = getOsName();
+        exports.os = utils.getOs();
 
         exports.langToBQ = {
             ca: 'es',

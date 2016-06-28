@@ -440,5 +440,18 @@ angular.module('bitbloqApp')
             return pretty;
         };
 
+        exports.getOs = function(){
+
+            if (navigator.platform.indexOf('Win') !== -1) {
+                return 'Windows';
+            } else if (navigator.platform.indexOf('Mac') !== -1) {
+                return 'Mac';
+            } else if (navigator.platform.indexOf('Linux') !== -1) {
+                return 'Linux';
+            } else {
+                return 'Linux';
+            }
+        };
+
         return exports;
     });

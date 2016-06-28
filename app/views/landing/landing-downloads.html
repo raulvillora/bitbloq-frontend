@@ -1,11 +1,11 @@
 <div ng-class="{'landing--ru':translate.use() === 'ru-RU'}" ng-click="closeMenu($event)" class="view view--landing view--landing--downloads">
     <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible,'fixed':true}" data-ng-include="'views/landing/landing-header.html'"></div>
     <div class="landing--masthead">
-        <h1 ng-if="operatingSystem === 'Windows'" class="medium">{{ 'landing_title_download' | translate }}Windows</h1>
+        <h1 ng-if="common.os === 'Windows'" class="medium">{{ 'landing_title_download' | translate }}Windows</h1>
 
-        <h1 ng-if="operatingSystem === 'Linux'" class="medium">{{ 'landing_title_download' | translate }}Linux</h1>
+        <h1 ng-if="common.os === 'Linux'" class="medium">{{ 'landing_title_download' | translate }}Linux</h1>
 
-        <h1 ng-if="operatingSystem === 'Mac'" class="medium">{{ 'landing_title_download' | translate }}Mac OS 10.10</h1>
+        <h1 ng-if="common.os === 'Mac'" class="medium">{{ 'landing_title_download' | translate }}Mac OS 10.10</h1>
 
         <h1 class="small">{{ 'landing_title_availableForAllOS' | translate }}</h1>
         <img class="medium" src="../images/landing/download.png" alt="">
@@ -13,19 +13,19 @@
         <p class="landing--text--big--dark">{{ 'landing_text_download' | translate }}</p>
 
         <div class="masthead__buttons medium">
-            <a ng-if="operatingSystem === 'Mac'" class="btn btn--masthead" data-ng-href="{{envData.config.web2boardLinkMac}}">
+            <a ng-if="common.os === 'Mac'" class="btn btn--masthead" data-ng-href="{{envData.config.web2boardLinkMac}}">
                 <i class="fa fa-chevron-circle-down"></i>
                 <span>{{ 'landing_link_download' | translate }} Mac OS X</span>
             </a>
-            <a ng-if="operatingSystem === 'Windows'" class="btn btn--masthead" data-ng-href="{{envData.config.web2boardLinkWindows}}">
+            <a ng-if="common.os === 'Windows'" class="btn btn--masthead" data-ng-href="{{envData.config.web2boardLinkWindows}}">
                 <i class="fa fa-chevron-circle-down"></i>
                 <span>{{ 'landing_link_download' | translate }} Windows 32/64 bits</span>
             </a>
-            <a ng-if="operatingSystem === 'Linux'" class="btn btn--masthead" href="{{envData.config.web2boardLinkLinux}}">
+            <a ng-if="common.os === 'Linux'" class="btn btn--masthead" href="{{envData.config.web2boardLinkLinux}}">
                 <i class="fa fa-chevron-circle-down"></i>
                 <span>Web2Board Linux 64-bits</span>
             </a>
-            <a ng-if="operatingSystem === 'Linux'" class="btn btn--masthead" href="{{envData.config.web2boardLinkLinux32}}">
+            <a ng-if="common.os === 'Linux'" class="btn btn--masthead" href="{{envData.config.web2boardLinkLinux32}}">
                 <i class="fa fa-chevron-circle-down"></i>
                 <span>Web2Board Linux 32-bits</span>
             </a>

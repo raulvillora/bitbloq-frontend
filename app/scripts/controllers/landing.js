@@ -11,18 +11,6 @@
 angular.module('bitbloqApp')
     .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common) {
 
-        function getOs() {
-            if (navigator.platform.indexOf('Win') !== -1) {
-                return 'Windows';
-            } else if (navigator.platform.indexOf('Mac') !== -1) {
-                return 'Mac';
-            } else if (navigator.platform.indexOf('Linux') !== -1) {
-                return 'Linux';
-            } else {
-                return 'Linux';
-            }
-        }
-
         function getLandingExampleProjects() {
 
             projectApi.getPublic({
@@ -104,7 +92,7 @@ angular.module('bitbloqApp')
         $scope.windowScroll = false;
         $scope.menuVisible = false;
         $scope.envData = envData;
-        $scope.operatingSystem = getOs();
+        $scope.common = common;
         $scope.commonModals = commonModals;
         $scope.projects = [];
         $scope.translate = $translate;
