@@ -163,7 +163,7 @@ angular.module('bitbloqApp')
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
             if (robot) {
-                context.drawImage(imageObj, xStart, 0, 242, 181);
+                context.drawImage(imageObj, xStart, -60, 542, 542);
             } else {
                 context.drawImage(imageObj, xStart, -120, 530, 380);
             }
