@@ -38,6 +38,7 @@ angular.module('bitbloqApp')
                 $scope.tempImage.file = response.file;
                 $scope.tempImage.img = response.img;
                 $scope.tempImage.generate = false;
+                $scope.project.image = 'custom';
                 $scope.startAutosave();
             }).catch(function(response) {
                 switch (response.error) {
