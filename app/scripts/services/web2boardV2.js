@@ -278,7 +278,7 @@ angular.module('bitbloqApp')
             $log.error('Error receiving message: ' + error);
         };
 
-        api.callbacks.onClose = function (error) {
+        api.onClose = function (error) {
             $log.error('web2board disconnected with error: ' + error.reason);
             api.clearTriggers();
             inProgress = false;
@@ -287,7 +287,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        api.callbacks.onMessageError = function (error) {
+        api.onMessageError = function (error) {
             $log.error('Error receiving message: ' + error);
             api.wsClient.close();
         };

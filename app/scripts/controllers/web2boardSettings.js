@@ -25,7 +25,7 @@ angular.module('bitbloqApp')
         $scope.libsError = null;
         $scope.focus = false;
 
-        web2boardV2.api.callbacks.onClientFunctionNotFound = function (hub, func) {
+        web2boardV2.api.onClientFunctionNotFound = function (hub, func) {
             console.error(hub, func);
         };
 
