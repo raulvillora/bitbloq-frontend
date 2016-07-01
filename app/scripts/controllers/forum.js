@@ -239,8 +239,13 @@
                                 images.push(imageId);
                                 imageApi.save(imageId, value, 'forum').then(function() {
                                     alertsService.add('forum_alert_NewTheme', 'createdTheme', 'ok', 5000);
-                                    forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread._id);
-
+                                    if (index === forum.answer.images.length - 1) {
+                                        answer.images = images;
+                                        forumApi.updateAnswer(answer).then(function() {
+                                            forum.answer.imageCounter = 0;
+                                            forum.goForumSection(forum.textEditorContent.category + '/' + response.data.thread._id);
+                                        });
+                                    }
                                 });
                             });
                         } else {
@@ -305,7 +310,7 @@
                     });
                 }
             };
-            
+
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
                     forum.bannedUsers = response.data;

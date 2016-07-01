@@ -56,12 +56,12 @@ angular.module('bitbloqApp')
             }
         };
 
-        function goToResetPassword(){
-            if(tryAgainToastId){
+        function goToResetPassword() {
+            if (tryAgainToastId) {
                 alertsService.close(tryAgainToastId);
             }
             $location.path('/resetpassword');
-        };
+        }
 
         $scope.errorPassword = false;
         $scope.common.section = 'recovery';
