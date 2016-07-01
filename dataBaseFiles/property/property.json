@@ -304,6 +304,9 @@
         }, {
             "name": "numConversion",
             "addClass": "submenu__item submenu__item--component"
+        },{
+             "name": "round-v1",
+             "addClass": "submenu__item submenu__item--component"
         }],
         "texts": [{
             "name": "string",
