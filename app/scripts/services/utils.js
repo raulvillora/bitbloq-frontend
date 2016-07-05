@@ -304,24 +304,27 @@ angular.module('bitbloqApp')
             blob = new Blob([data], {
                 type: type
             });
+            if(window.navigator.msSaveOrOpenBlob){
+                window.navigator.msSaveOrOpenBlob(blob, fileName);
+            }else{
+                // Read blob.
+                url = window.URL.createObjectURL(blob);
 
-            // Read blob.
-            url = window.URL.createObjectURL(blob);
+                // Create link.
+                tempA = document.createElement('a');
+                // Set link on DOM.
+                document.body.appendChild(tempA);
+                // Set href on link.
+                tempA.href = url;
+                // Set file name on link.
+                tempA.download = fileName;
 
-            // Create link.
-            tempA = document.createElement('a');
-            // Set link on DOM.
-            document.body.appendChild(tempA);
-            // Set href on link.
-            tempA.href = url;
-            // Set file name on link.
-            tempA.download = fileName;
+                // Trigger click of link.
+                tempA.click();
 
-            // Trigger click of link.
-            tempA.click();
-
-            // Clear.
-            window.URL.revokeObjectURL(url);
+                // Clear.
+                window.URL.revokeObjectURL(url);
+            }
         };
 
         exports.isYoutubeURL = function(url) {
