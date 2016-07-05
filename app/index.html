@@ -68,7 +68,7 @@
     <div data-ng-view="" class="main">
     </div>
     <div ng-hide="common.cookiesAccepted" class="bitbloq--cookies" ng-class="{visible:common.userIsLoaded || common.user && !common.user.cookiePolicyAccepted}">
-        <p>{{ 'policies-cookies-info' | translate }} <a href="/#/cookies" data-element="cookies-link">{{ 'policies-cookies' | translate }}</a></p>
+        <p>{{ 'policies-cookies-info' | translate }} <a href="/#/cookies" data-element="cookies-link" target="_blank">{{ 'policies-cookies' | translate }}</a></p>
         <button data-element="cookies" class="btn btn--close--cookies" ng-click="common.acceptCookies()">
             {{'accept' | translate}}
         </button>
