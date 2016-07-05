@@ -15,8 +15,15 @@
 
             el.draggable = true;
 
-            el.addEventListener('dragstart', function(e) {
+            el.addEventListener('dragstart', dragstart, false);
+            el.addEventListener('ondragstart', dragstart, false);
 
+            el.addEventListener('dragend', function() {
+                this.classList.remove('dragging');
+                return false;
+            }, false);
+
+            function dragstart(e){
                 e.dataTransfer.effectAllowed = 'move';
 
                 e.dataTransfer.setData('mouseOffsetX', e.offsetX);
@@ -30,13 +37,7 @@
                 this.classList.add('dragging');
 
                 return false;
-
-            }, false);
-
-            el.addEventListener('dragend', function() {
-                this.classList.remove('dragging');
-                return false;
-            }, false);
+            }
 
         };
     }

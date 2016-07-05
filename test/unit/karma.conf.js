@@ -66,6 +66,7 @@ module.exports = function(config) {
             '../bower_components/autogrow/autogrow.js',
             '../bower_components/bloqs/dist/bloqs.min.js',
             '../bower_components/fastclick/lib/fastclick.js',
+            '../bower_components/ng-dialog/js/ngDialog.js',
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
             '../app/scripts/**/*.js',
