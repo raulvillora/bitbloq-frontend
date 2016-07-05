@@ -121,6 +121,9 @@
             "name": "digitalWrite",
             "addClass": "submenu__item submenu__item--component"
         }, {
+            "name": "pinLevels",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
             "name": "readAdvanced",
             "addClass": "submenu__item submenu__item--component"
         }, {

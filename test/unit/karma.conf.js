@@ -61,11 +61,11 @@ module.exports = function(config) {
             '../bower_components/angular-google-analytics/dist/angular-google-analytics.min.js',
             '../bower_components/jquery-ui/jquery-ui.js',
             '../bower_components/jspanel/source/jquery.jspanel.js',
+            '../bower_components/fastclick/lib/fastclick.js',
+            '../bower_components/ng-dialog/js/ngDialog.js',
             '../bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js',
             '../bower_components/autogrow/autogrow.js',
             '../bower_components/bloqs/dist/bloqs.min.js',
-            '../bower_components/fastclick/lib/fastclick.js',
-            '../bower_components/ng-dialog/js/ngDialog.js',
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
             '../app/scripts/**/*.js',
