@@ -45,7 +45,6 @@
     "lodash": "~3.10.0",
     "mobile-detect": "hgoebl/mobile-detect.js#~1.2.1",
     "ng-tags-input": "~2.3.0",
-    "ngDialog": "~0.4.0",
     "ngstorage": "~0.3.6",
     "penguin": "0.0.1",
     "satellizer": "~0.14.0",

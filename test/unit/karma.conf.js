@@ -43,7 +43,6 @@ module.exports = function(config) {
             '../bower_components/lodash/lodash.js',
             '../bower_components/mobile-detect/mobile-detect.js',
             '../bower_components/ng-tags-input/ng-tags-input.min.js',
-            '../bower_components/ngDialog/js/ngDialog.js',
             '../bower_components/ngstorage/ngStorage.js',
             '../bower_components/penguin/lib/js/penguin.min.js',
             '../bower_components/satellizer/satellizer.js',
