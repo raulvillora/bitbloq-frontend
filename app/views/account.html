@@ -31,7 +31,7 @@
                         <div class="form-control">
                             <label for="username">{{ 'user-name' | translate }}</label>
                             <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'username'}">
-                                <input aria-invalid="false" data-element="username" data-ng-blur="focus = false" data-ng-focus="focus = 'username'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="common.user.username" id="username" name="username" placeholder="{{'user-name' || translate}}" tabindex="0" type="text">
+                                <input aria-invalid="false" data-element="username" data-ng-blur="focus = false" data-ng-focus="focus = 'username'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="common.user.username" id="username" name="username" placeholder="{{'user-name' || translate}}" tabindex="0" type="text" maxlength="50">
                             </span>
                         </div>
                         <!-- Email -->
