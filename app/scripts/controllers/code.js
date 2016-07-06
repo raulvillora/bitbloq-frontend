@@ -324,7 +324,8 @@ angular.module('bitbloqApp')
         }
 
         function _prettyCode() {
-            var defered = $q.defer(),
+            var currentCursor = editorRef.getCursorPosition(),
+                defered = $q.defer(),
                 tmpCode = '';
 
             // Options
@@ -340,7 +341,11 @@ angular.module('bitbloqApp')
             tmpCode = js_beautify($scope.project.code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores)).replace(/(\/\* (beautify)+ .*? \*\/)/gm, ''); // jshint ignore:line
 
             $timeout(function() {
+
                 $scope.project.code = tmpCode;
+                $timeout(function() {
+                    editorRef.moveCursorTo(currentCursor.row, currentCursor.column, true);
+                });
                 defered.resolve();
             });
 
