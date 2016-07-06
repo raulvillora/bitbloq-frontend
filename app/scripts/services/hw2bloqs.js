@@ -4,24 +4,21 @@ angular
     .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window, jsPlumbUtil) {
         var exports = {};
 
-        var jsPlumbInstance = null;
-
-        var config = {
-            color: '#F1C933',
-            colorHover: '#F19833'
-        };
-
-        var containerDefault = null,
+        var jsPlumbInstance = null,
+            config = {
+                color: '#F1C933',
+                colorHover: '#F19833'
+            },
+            containerDefault = null,
             boardContainerId = null,
             robotContainerId = null,
             boardDOMElement = null,
             robotDOMElement = null,
-            componentDragging = null;
-
-        var board = null,
-            robot = null;
-
-        var connectionEvent = new CustomEvent('connectionEvent');
+            componentDragging = null,
+            oldConnections = [],
+            board = null,
+            robot = null,
+            connectionEvent = new CustomEvent('connectionEvent');
 
         /*jshint validthis:true */
         exports.initialize = function(container, boardContainerIdRef, robotContainerIdRef) {
@@ -119,79 +116,80 @@ angular
             robotDOMElement = document.getElementById(robotContainerId);
             robotDOMElement.classList.remove('opaque');
 
-            var _addBoardEndpoints = function() {
+            function addEP(pin) {
 
-                function addEP(pin) {
+                var overLayLocation = [];
+                if (type === 'digital') {
+                    overLayLocation = [0.5, 1.5];
+                } else if (type === 'analog') {
+                    overLayLocation = [0.5, -0.5];
+                } else {
+                    overLayLocation = [0.5, -0.5];
+                }
 
-                    var overLayLocation = [];
-                    if (type === 'digital') {
-                        overLayLocation = [0.5, 1.5];
-                    } else if (type === 'analog') {
-                        overLayLocation = [0.5, -0.5];
-                    } else {
-                        overLayLocation = [0.5, -0.5];
+                //Create a 'basic' endpoint
+                var epBoard = jsPlumbInstance.addEndpoint(boardDOMElement, {
+                    anchor: [pin.x, pin.y, 0, -1, 0, 0],
+                    endpoint: ['Rectangle', {
+                        width: board.pinSize[type].w,
+                        height: board.pinSize[type].h
+                    }],
+                    overlays: [
+                        ['Label', {
+                            label: 'Pin ' + pin.name,
+                            labelStyle: {
+                                color: 'black'
+                            },
+                            location: overLayLocation
+                        }]
+                    ],
+                    parameters: {
+                        pinBoard: pin.name
+                    },
+                    cssClass: 'board_ep board_ep-' + type + ' pin-' + pin.name.toLowerCase(),
+                    isTarget: true,
+                    isSource: false,
+                    scope: type,
+                    uuid: pin.uid
+                });
+
+                epBoard.unbind('click');
+                epBoard.bind('click', function(ep) {
+                    if (ep.hasType('selected')) {
+                        return false;
                     }
-
-                    //Create a 'basic' endpoint
-                    var epBoard = jsPlumbInstance.addEndpoint(boardDOMElement, {
-                        anchor: [pin.x, pin.y, 0, -1, 0, 0],
-                        endpoint: ['Rectangle', {
-                            width: board.pinSize[type].w,
-                            height: board.pinSize[type].h
-                        }],
-                        overlays: [
-                            ['Label', {
-                                label: 'Pin ' + pin.name,
-                                labelStyle: {
-                                    color: 'black'
-                                },
-                                location: overLayLocation
-                            }]
-                        ],
-                        parameters: {
-                            pinBoard: pin.name
-                        },
-                        cssClass: 'board_ep board_ep-' + type + ' pin-' + pin.name.toLowerCase(),
-                        isTarget: true,
-                        isSource: false,
-                        scope: type,
-                        uuid: pin.uid
-                    });
-
-                    epBoard.unbind('click');
-                    epBoard.bind('click', function(ep) {
-                        if (ep.hasType('selected')) {
-                            return false;
-                        }
-                        //Remove other connections & ep selected
-                        jsPlumbInstance.getAllConnections().forEach(function(con) {
-                            con.removeType('selected');
-                            con.endpoints.forEach(function(elem) {
-                                elem.removeType('selected');
-                            });
-                        });
-                        ep.connections.forEach(function(con) {
-                            con.setType('selected');
-                            con.endpoints.forEach(function(epAdjacent) {
-                                epAdjacent.setType('selected');
-                            });
+                    //Remove other connections & ep selected
+                    jsPlumbInstance.getAllConnections().forEach(function(con) {
+                        con.removeType('selected');
+                        con.endpoints.forEach(function(elem) {
+                            elem.removeType('selected');
                         });
                     });
+                    ep.connections.forEach(function(con) {
+                        con.setType('selected');
+                        con.endpoints.forEach(function(epAdjacent) {
+                            epAdjacent.setType('selected');
+                        });
+                    });
+                });
 
-                }
+            }
 
-                for (var type in board.pins) {
-                    board.pins[type].forEach(addEP);
-                }
+            //_addBoardEndpoints
+            for (var type in board.pins) {
+                board.pins[type].forEach(addEP);
+            }
 
-            };
-
-            _addBoardEndpoints();
-
+            _autoConnect();
         };
 
         exports.removeBoard = function() {
             if (jsPlumbInstance && board && boardDOMElement) {
+                oldConnections = [];
+                var connections = jsPlumbInstance.getConnections();
+                connections.forEach(function(connection) {
+                    oldConnections.push(connection.getParameters());
+                });
                 boardDOMElement.classList.remove(board.id);
                 jsPlumbInstance.removeAllEndpoints(boardDOMElement);
             }
@@ -554,13 +552,13 @@ angular
             function _getConnections() {
                 return jsPlumbInstance.getAllConnections().map(function(connection) {
 
-                    var connectionParams = connection.getParameters();
-                    return ({
-                        pinSourceUid: connectionParams.pinSourceUid,
-                        pinTargetUid: connectionParams.pinTargetUid
-                    });
+                        var connectionParams = connection.getParameters();
+                        return ({
+                            pinSourceUid: connectionParams.pinSourceUid,
+                            pinTargetUid: connectionParams.pinTargetUid
+                        });
 
-                }) || [];
+                    }) || [];
             }
 
             //Store connections data
@@ -568,6 +566,19 @@ angular
 
             return schema;
         };
+
+        function _autoConnect() {
+            if (oldConnections.length > 0) {
+                oldConnections.forEach(function(connection) {
+                    var pins = Object.keys(connection.pinNames);
+                    jsPlumbInstance.connect({
+                        uuids: [connection.pinSourceUid, document.querySelector('.pin-' + connection.pinNames[pins[0]].toLowerCase())._jsPlumb.getUuid()],
+                        type: 'automatic'
+                    });
+                });
+                oldConnections = [];
+            }
+        }
 
         function _connectionListeners() {
 
@@ -580,12 +591,15 @@ angular
                 connection.targetEndpoint.setType('connected');
                 connection.sourceEndpoint.setType('connected');
 
-                connection.connection.setParameters({
-                    pinSourceUid: connection.sourceEndpoint.getUuid(),
-                    pinTargetUid: connection.targetEndpoint.getUuid()
-                });
+
                 var pinAssignation = {};
                 pinAssignation[connection.sourceEndpoint.getParameter('pinComponent')] = connection.targetEndpoint.getParameter('pinBoard');
+
+                connection.connection.setParameters({
+                    pinSourceUid: connection.sourceEndpoint.getUuid(),
+                    pinTargetUid: connection.targetEndpoint.getUuid(),
+                    pinNames: pinAssignation
+                });
 
                 var componentData = {
                     uid: connection.source.dataset.uid,
