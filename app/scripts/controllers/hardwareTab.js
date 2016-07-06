@@ -482,7 +482,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
                 alertsService.add('bloqs-project_alert_no-board', 'error_noboard', 'error');
                 return false;
             } else if ($scope.project.hardware.robot) {
-                alertsService.add('Actualmente no puedes añadir componentes a un robot', 'error_noboard', 'error');
+                alertsService.add('bloqs-project_alert_only-robot', 'error_noboard', 'error');
                 return false;
             }
             _addComponent(data);
