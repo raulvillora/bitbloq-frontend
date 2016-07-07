@@ -132,14 +132,18 @@ module.exports = function(grunt) {
     maxItems === 25 ||
     maxItems++;
     */
+    var _updatedAt = 0;
     function getCorbelCollection(collectionName, env, timestamp, callback) {
         grunt.log.writeln('getCorbelCollection= ' + collectionName + ' on ' + env + ' pageNumber' + tempPageNumber[collectionName]);
         if (!tempPageNumber[collectionName]) {
             tempPageNumber[collectionName] = 0;
         }
+        console.log('_updatedAt', _updatedAt);
+
         cd.resources.collection('bitbloq:' + collectionName)
             .page(tempPageNumber[collectionName])
             .pageSize(50)
+            .gte('_updatedAt', _updatedAt)
             .get().then(function(response) {
                 grunt.log.writeln(collectionName);
                 grunt.log.writeln(response.data.length);
@@ -188,6 +192,7 @@ module.exports = function(grunt) {
     function migrateProjectsFromCorbelToBitbloq(env, timestamp, callback) {
         var async = require('async');
         grunt.file.write('./backupsDB/projects_imageTypes.json', '');
+
         async.parallel([
             getCorbelCollection.bind(null, 'Angularproject', env, timestamp),
             getCorbelCollection.bind(null, 'ProjectStats', env, timestamp)
@@ -288,8 +293,8 @@ module.exports = function(grunt) {
     }
 
     function migrateUsersFromCorbelToBitbloq(timestamp, callback) {
-        var users = grunt.file.readJSON('./backupsDB/user_iam.json'),
-            identities = grunt.file.readJSON('./backupsDB/identity.json'),
+        var users = grunt.file.readJSON('./backupsDB/iam-user.json'),
+            identities = grunt.file.readJSON('./backupsDB/iam-identity.json'),
             finalUsers = [],
             duplicatedUsername = [],
             usernames = {},
@@ -343,7 +348,7 @@ module.exports = function(grunt) {
                 });
 
                 if (itemIdentities.length > 0) {
-                    console.log('two identities');
+                    //console.log('two identities');
                     users[i].social = {};
                     for (var k = 0; k < itemIdentities.length; k++) {
                         if (itemIdentities[k].oauthService !== 'silkroad') {
@@ -476,11 +481,14 @@ module.exports = function(grunt) {
     }
 
     // grunt importCollectionsFromCorbel:next:qa
-    // grunt importCollectionsFromCorbel:production:qa
-    grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, backEnv) {
+    // grunt importCollectionsFromCorbel:production[:timestamp updated at]
+    grunt.registerTask('importCollectionsFromCorbel', function(corbelEnv, updatedAt ) {
         var fs = require('fs'),
             timestamp = Date.now();
         fs.mkdirSync('./backupsDB/' + timestamp);
+        if(updatedAt){
+            _updatedAt = Number(updatedAt);
+        }
         grunt.task.run([
             'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
             'importProjectFromCorbel:' + timestamp,
