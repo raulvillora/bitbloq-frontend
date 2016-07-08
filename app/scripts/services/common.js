@@ -14,7 +14,7 @@ angular.module('bitbloqApp')
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
 
-        $log.log('Bitbloq version:', envData.config.version);
+        $log.log('Bitbloq version:', packageData.config.version);
 
         //See drag directives
         exports.draggingElement = {};
