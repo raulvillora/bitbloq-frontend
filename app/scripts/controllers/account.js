@@ -80,6 +80,8 @@ angular.module('bitbloqApp')
             }
 
             userApi.update($scope.common.user).then(function() {
+              console.log("common.user");
+              console.log($scope.common.user);
                 $scope.common.setUser($scope.common.user);
                 usernameBackup = $scope.common.user.username;
                 if ($scope.tempAvatar.size && $scope.tempAvatar.type !== 'google' && $scope.tempAvatar.type !== 'facebook') {
