@@ -119,39 +119,52 @@ angular
             function addEP(pin) {
 
                 var overLayLocation = [];
-                if (type === 'digital') {
-                    overLayLocation = [0.5, 1.5];
-                } else if (type === 'analog') {
-                    overLayLocation = [0.5, -0.5];
-                } else {
-                    overLayLocation = [0.5, -0.5];
+                switch (type) {
+                    case 'digital':
+                        overLayLocation = [0.5, 1.5];
+                        break;
+                    case 'analog':
+                        overLayLocation = [0.5, -0.5];
+                        break;
+                    case 'i2c':
+                        overLayLocation = [0.5, -2];
+                        break;
+                    default:
+                        overLayLocation = [0.5, -0.5];
+                }
+                var pinName = pin.name.split('-')[0],
+                    options = {
+                        anchor: [pin.x, pin.y, 0, -1, 0, 0],
+                        endpoint: ['Rectangle', {
+                            width: board.pinSize[type].w,
+                            height: board.pinSize[type].h
+                        }],
+                        overlays: [
+                            ['Label', {
+                                label: 'Pin ' + pinName,
+                                labelStyle: {
+                                    color: 'black'
+                                },
+                                location: overLayLocation
+                            }]
+                        ],
+                        parameters: {
+                            pinBoard: pin.name
+                        },
+                        cssClass: 'board_ep board_ep-' + type + ' pin-' + pin.name.toLowerCase(),
+                        isTarget: true,
+                        isSource: false,
+                        scope: type,
+                        uuid: pin.uid
+                    };
+
+                if (type === 'i2c' && pin.name.split('-')[1] === 'H') {
+                    options.maxConnections = -1;
                 }
 
+
                 //Create a 'basic' endpoint
-                var epBoard = jsPlumbInstance.addEndpoint(boardDOMElement, {
-                    anchor: [pin.x, pin.y, 0, -1, 0, 0],
-                    endpoint: ['Rectangle', {
-                        width: board.pinSize[type].w,
-                        height: board.pinSize[type].h
-                    }],
-                    overlays: [
-                        ['Label', {
-                            label: 'Pin ' + pin.name,
-                            labelStyle: {
-                                color: 'black'
-                            },
-                            location: overLayLocation
-                        }]
-                    ],
-                    parameters: {
-                        pinBoard: pin.name
-                    },
-                    cssClass: 'board_ep board_ep-' + type + ' pin-' + pin.name.toLowerCase(),
-                    isTarget: true,
-                    isSource: false,
-                    scope: type,
-                    uuid: pin.uid
-                });
+                var epBoard = jsPlumbInstance.addEndpoint(boardDOMElement, options);
 
                 epBoard.unbind('click');
                 epBoard.bind('click', function(ep) {
@@ -246,6 +259,10 @@ angular
                             x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
                             y: 1
                         },
+                        i2c: {
+                            x: newComponent.pins.i2c && newComponent.width / (newComponent.pins.i2c.length + 1) / newComponent.width,
+                            y: 0
+                        },
                         serial: {
                             x: 1,
                             y: 0.5
@@ -259,6 +276,10 @@ angular
                         },
                         analog: {
                             x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
+                            y: 0
+                        },
+                        i2c: {
+                            x: newComponent.pins.i2c && newComponent.width / (newComponent.pins.i2c.length + 1) / newComponent.width,
                             y: 0
                         },
                         serial: {
@@ -353,17 +374,29 @@ angular
                     //Connect automaticaly these pins
                     if (isMandatoryPin) {
                         if (mandatoryPins[type][element]) {
-                            var epBoardDOM = document.querySelector('.pin-' + mandatoryPins[type][element].toLowerCase());
+                            var epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase());
 
                             if (epBoardDOM) {
-                                var epBoardReference = epBoardDOM._jsPlumb;
-                                epBoardReference.detachAll();
-                                var uidEPBoard = epBoardReference.getUuid();
-                                var uidEPComponent = epComponent.getUuid();
-                                jsPlumbInstance.connect({
-                                    uuids: [uidEPComponent, uidEPBoard],
-                                    type: 'automatic'
-                                });
+                                var epBoardReference = epBoardDOM._jsPlumb,
+                                    eqBoardError;
+                                if (epBoardReference.connections.length > 0 && (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5')) {
+                                    epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
+                                    if (epBoardDOM) {
+                                        epBoardReference = epBoardDOM._jsPlumb;
+                                    }
+                                    else {
+                                        eqBoardError=true;
+                                        $log.debug('Unable to recover board endpoints');
+                                    }
+                                }
+                                if(!eqBoardError) {
+                                    var uidEPBoard = epBoardReference.getUuid(),
+                                        uidEPComponent = epComponent.getUuid();
+                                    jsPlumbInstance.connect({
+                                        uuids: [uidEPComponent, uidEPBoard],
+                                        type: 'automatic'
+                                    });
+                                }
                             } else {
                                 $log.debug('Unable to recover board endpoints');
                             }
