@@ -157,28 +157,28 @@
                 ],
                 "i2c": [
                     {
-                        "x": 0.562,
-                        "y": 0.913,
-                        "name": "V5",
+                        "x": 0.844,
+                        "y": 0.734,
+                        "name": "A5",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba00"
                     },
                     {
-                        "x": 0.596,
-                        "y": 0.913,
-                        "name": "GND",
-                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba01"
-                    },
-                    {
-                        "x": 0.869,
-                        "y": 0.913,
+                        "x": 0.81,
+                        "y": 0.734,
                         "name": "A4",
-                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba04"
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba01"
                     },
                     {
                         "x": 0.903,
                         "y": 0.913,
-                        "name": "A5",
-                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba05"
+                        "name": "A5-H",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba04"
+                    },
+                    {
+                        "x": 0.869,
+                        "y": 0.913,
+                        "name": "A4-H",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba03"
                     }
                 ]
             }
@@ -663,7 +663,7 @@
                     "scl": "a5"
                 },
                 "pins": {
-                    "analog": [
+                    "i2c": [
                         "sda",
                         "scl"
                     ]
@@ -681,7 +681,7 @@
                     "scl": "a5"
                 },
                 "pins": {
-                    "analog": [
+                    "i2c": [
                         "sda",
                         "scl"
                     ]
@@ -739,7 +739,7 @@
                     "scl": "a5"
                 },
                 "pins": {
-                    "analog": [
+                    "i2c": [
                         "sda",
                         "scl"
                     ]
