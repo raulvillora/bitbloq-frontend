@@ -143,7 +143,7 @@ angular.module('bitbloqApp')
                 firstPathItem = pathArray[1],
                 secondPathItem = pathArray[2];
 
-            if(firstPathItem==='help' && secondPathItem && secondPathItem ==='forum'){
+            if (firstPathItem === 'help' && secondPathItem && secondPathItem === 'forum') {
                 $log.debug('section', secondPathItem);
                 exports.section = secondPathItem;
             } else {
@@ -216,19 +216,19 @@ angular.module('bitbloqApp')
             processRoute();
         });
 
-        $rootScope.$on('$translateChangeEnd', function(evt, newLang) {
+        exports.saveUserLanguage = function(newLang) {
             amMoment.changeLocale(newLang.language);
-            if( exports.user && (exports.user.language !== newLang.language) ){
+            if (exports.user && (exports.user.language !== newLang.language)) {
                 exports.user.language = newLang.language;
                 userApi.update({
                     language: newLang.language
                 }).then(function() {
-                        alertsService.add('account-saved', 'saved-user', 'ok', 5000);
+                    alertsService.add('account-saved', 'saved-user', 'ok', 5000);
                 }, function() {
                     alertsService.add('account-saved-error', 'saved-user', 'warning');
                 });
             }
-        });
+        };
 
         return exports;
 

@@ -106,6 +106,7 @@ angular.module('bitbloqApp')
                     // Apply changes
                     if (common.user) {
                         common.user.language = $translate.use();
+                        common.saveUserLanguage(common.user.language);
                         userApi.update(common.user);
                     }
                     $translate.use(modalOptions.lang);

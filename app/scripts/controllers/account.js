@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('AccountCtrl', function($scope, $rootScope, $localStorage, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils) {
+    .controller('AccountCtrl', function($scope, $rootScope, $localStorage, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common) {
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
                 var options = {
@@ -106,6 +106,7 @@ angular.module('bitbloqApp')
 
         $scope.changeLanguage = function(language) {
             $translate.use(language);
+            common.saveUserLanguage(language);
         };
 
         $scope.uploadImageTrigger = function(type) {
@@ -222,4 +223,7 @@ angular.module('bitbloqApp')
             alertsService.add('view-need-tobe-logged', 'login', 'warning');
             $location.path('/login');
         });
+
+
+
     });
