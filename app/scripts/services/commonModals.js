@@ -36,7 +36,7 @@ angular.module('bitbloqApp')
                 contentTemplate: '/views/modals/sendComments.html',
 
                 condition: function() {
-                    return this.comments.name.length > 0 && this.comments.message.length > 0;
+                    return this.comments.message.length > 0;
                 },
                 comments: {
                     message: '',
