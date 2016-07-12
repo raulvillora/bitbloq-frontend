@@ -843,6 +843,9 @@ angular.module('bitbloqApp')
                 }
             });
             $scope.$watch('project.description', function(newVal, oldVal) {
+                if (!newVal) {
+                    $scope.project.description='';
+                }
                 if (newVal !== oldVal) {
                     $scope.startAutosave();
                 }
