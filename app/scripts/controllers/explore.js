@@ -236,11 +236,13 @@ angular.module('bitbloqApp')
             if ($scope.searchText !== '') {
                 queryParams.query.$or = [{
                     name: {
-                        $regex: $scope.searchText
+                        $regex: $scope.searchText,
+                        $options: 'i'
                     }
                 }, {
                     creator: {
-                        $regex: $scope.searchText
+                        $regex: $scope.searchText,
+                        $options: 'i'
                     }
                 }];
             }
