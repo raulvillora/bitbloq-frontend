@@ -673,17 +673,16 @@ angular.module('bitbloqApp')
             $scope.currentTab = index;
         };
 
-
         $scope.saveBloqStep = function(step) {
             //$log.debug('Guardamos Estado de Bloqs');
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -1145,8 +1144,16 @@ angular.module('bitbloqApp')
             });
         };
 
-        $document.on('keydown', checkBackspaceKey);
+        function confirmExit() {
+            var closeMessage;
+            if (projectApi.saveStatus === 1) {
+                closeMessage = $scope.common.translate('leave-without-save');
+            }
+            return closeMessage;
+        }
 
+        $document.on('keydown', checkBackspaceKey);
+        $window.onbeforeunload = confirmExit;
 
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);
