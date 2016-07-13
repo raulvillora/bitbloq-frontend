@@ -385,20 +385,31 @@ angular
                                         epBoardReference = epBoardDOM._jsPlumb;
                                     }
                                     else {
-                                        eqBoardError=true;
+                                        eqBoardError = true;
                                         $log.debug('Unable to recover board endpoints');
                                     }
                                 }
-                                if(!eqBoardError) {
-                                    var uidEPBoard = epBoardReference.getUuid(),
-                                        uidEPComponent = epComponent.getUuid();
-                                    jsPlumbInstance.connect({
-                                        uuids: [uidEPComponent, uidEPBoard],
-                                        type: 'automatic'
-                                    });
+                            } else if (board.id === 'ArduinoUNO') {
+                                epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
+                                if (epBoardDOM) {
+                                    var epBoardReference = epBoardDOM._jsPlumb;
+                                }
+                                else {
+                                    eqBoardError = true;
+                                    $log.debug('Unable to recover board endpoints');
                                 }
                             } else {
+                                eqBoardError = true;
                                 $log.debug('Unable to recover board endpoints');
+                            }
+
+                            if (!eqBoardError) {
+                                var uidEPBoard = epBoardReference.getUuid(),
+                                    uidEPComponent = epComponent.getUuid();
+                                jsPlumbInstance.connect({
+                                    uuids: [uidEPComponent, uidEPBoard],
+                                    type: 'automatic'
+                                });
                             }
 
                         } else {
