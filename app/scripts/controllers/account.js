@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('AccountCtrl', function($scope, $rootScope, $localStorage, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils) {
+    .controller('AccountCtrl', function($scope, $rootScope, $localStorage, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common) {
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
                 var options = {
@@ -80,6 +80,8 @@ angular.module('bitbloqApp')
             }
 
             userApi.update($scope.common.user).then(function() {
+              console.log("common.user");
+              console.log($scope.common.user);
                 $scope.common.setUser($scope.common.user);
                 usernameBackup = $scope.common.user.username;
                 if ($scope.tempAvatar.size && $scope.tempAvatar.type !== 'google' && $scope.tempAvatar.type !== 'facebook') {
@@ -104,6 +106,7 @@ angular.module('bitbloqApp')
 
         $scope.changeLanguage = function(language) {
             $translate.use(language);
+            common.saveUserLanguage(language);
         };
 
         $scope.uploadImageTrigger = function(type) {
@@ -220,4 +223,7 @@ angular.module('bitbloqApp')
             alertsService.add('view-need-tobe-logged', 'login', 'warning');
             $location.path('/login');
         });
+
+
+
     });

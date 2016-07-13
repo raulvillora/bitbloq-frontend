@@ -20,7 +20,6 @@ angular.module('bitbloqApp')
             if (type === 'main') {
                 $log.debug($('.main-image--input'));
                 $('.main-image--input').click();
-
             } else {
                 $('.other-image--input').click();
             }

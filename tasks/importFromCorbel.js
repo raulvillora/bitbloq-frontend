@@ -489,12 +489,12 @@ module.exports = function(grunt) {
         if(updatedAt){
             _updatedAt = Number(updatedAt);
         }
-        
+
         grunt.task.run([
-            //'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
-            //'importProjectFromCorbel:' + timestamp,
+            'exportCollectionFromCorbel:project:' + corbelEnv + ':' + timestamp,
+            'importProjectFromCorbel:' + timestamp,
             //'exportCollectionFromCorbel:user:' + corbelEnv + ':' + timestamp, //1467959427544
-            'importUsersFromCorbel:' + timestamp
+            //'importUsersFromCorbel:' + timestamp
             //'exportCollectionFromCorbel:forum:' + corbelEnv + ':' + timestamp,
             //'importForumFromCorbel:' + timestamp
         ]);

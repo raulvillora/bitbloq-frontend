@@ -36,7 +36,7 @@ angular.module('bitbloqApp')
                 contentTemplate: '/views/modals/sendComments.html',
 
                 condition: function() {
-                    return this.comments.name.length > 0 && this.comments.message.length > 0;
+                    return this.comments.message.length > 0;
                 },
                 comments: {
                     message: '',
@@ -106,6 +106,7 @@ angular.module('bitbloqApp')
                     // Apply changes
                     if (common.user) {
                         common.user.language = $translate.use();
+                        common.saveUserLanguage(common.user.language);
                         userApi.update(common.user);
                     }
                     $translate.use(modalOptions.lang);

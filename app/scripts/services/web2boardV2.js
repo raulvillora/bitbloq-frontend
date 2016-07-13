@@ -216,7 +216,7 @@ angular.module('bitbloqApp')
         }
 
         function handleUploadError(error) {
-            if (error.title === 'COMPILE_ERROR') {
+            if (!error.title) {
                 handleCompileError(error);
             } else if (error.title === 'BOARD_NOT_READY') {
                 alertsService.add('alert-web2board-no-port-found', 'web2board', 'warning');
@@ -413,7 +413,9 @@ angular.module('bitbloqApp')
         };
 
         web2board.version = function () {
-            openCommunication();
+            openCommunication(function () {
+                return api.VersionsHandlerHub.server.getVersion;
+            });
         };
 
         web2board.uploadHex = function (boardMcu, hexText) {
