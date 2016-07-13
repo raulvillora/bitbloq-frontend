@@ -199,6 +199,10 @@
                 "serial": {
                     "w": 25,
                     "h": 37
+                },
+                "i2c": {
+                    "w": 9,
+                    "h": 9
                 }
             },
             "pins": {
@@ -290,37 +294,37 @@
                 ],
                 "analog": [
                     {
-                        "x": 0.658,
+                        "x": 0.661,
                         "y": 0.79,
                         "name": "A0",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fa00"
                     },
                     {
-                        "x": 0.69,
+                        "x": 0.692,
                         "y": 0.79,
                         "name": "A1",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fa01"
                     },
                     {
-                        "x": 0.725,
+                        "x": 0.728,
                         "y": 0.79,
                         "name": "A2",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fa02"
                     },
                     {
-                        "x": 0.755,
+                        "x": 0.76,
                         "y": 0.79,
                         "name": "A3",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fa03"
                     },
                     {
-                        "x": 0.787,
+                        "x": 0.793,
                         "y": 0.79,
                         "name": "A4",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fa04"
                     },
                     {
-                        "x": 0.82,
+                        "x": 0.825,
                         "y": 0.79,
                         "name": "A5",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fa05"
@@ -332,6 +336,32 @@
                         "y": 0.218,
                         "name": "serial",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53fc05"
+                    }
+                ],
+                "i2c": [
+                    {
+                        "x": 0.825,
+                        "y": 0.734,
+                        "name": "A5",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba00"
+                    },
+                    {
+                        "x": 0.793,
+                        "y": 0.734,
+                        "name": "A4",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba01"
+                    },
+                    {
+                        "x": 0.913,
+                        "y": 0.923,
+                        "name": "A5-H",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba04"
+                    },
+                    {
+                        "x": 0.879,
+                        "y": 0.923,
+                        "name": "A4-H",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba03"
                     }
                 ]
             }
@@ -352,6 +382,10 @@
                 "serial": {
                     "w": 33,
                     "h": 66
+                },
+                "i2c": {
+                    "w": 9,
+                    "h": 9
                 }
             },
             "pins": {
@@ -485,6 +519,20 @@
                         "y": 0.315,
                         "name": "serial",
                         "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                    }
+                ],
+                "i2c": [
+                    {
+                        "x": 0.903,
+                        "y": 0.925,
+                        "name": "A5-H",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba04"
+                    },
+                    {
+                        "x": 0.869,
+                        "y": 0.925,
+                        "name": "A4-H",
+                        "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ba03"
                     }
                 ]
             }

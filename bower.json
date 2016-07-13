@@ -40,7 +40,7 @@
         "angular-websocket": "1.0.13",
         "angular-youtube-mb": "~1.0.2",
         "js-beautify": "~1.5.10",
-        "jsplumb": "~2.1.4",
+        "jsplumb": "2.0.5",
         "jsrsasign": "4.8.3",
         "lodash": "~3.10.0",
         "mobile-detect": "hgoebl/mobile-detect.js#~1.2.1",
