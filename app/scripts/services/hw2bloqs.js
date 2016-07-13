@@ -374,11 +374,13 @@ angular
                     //Connect automaticaly these pins
                     if (isMandatoryPin) {
                         if (mandatoryPins[type][element]) {
-                            var epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase());
+                            var epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase()),
+                                epBoardReference,
+                                eqBoardError;
 
                             if (epBoardDOM) {
-                                var epBoardReference = epBoardDOM._jsPlumb,
-                                    eqBoardError;
+                                epBoardReference = epBoardDOM._jsPlumb;
+
                                 if (epBoardReference.connections.length > 0 && (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5')) {
                                     epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                                     if (epBoardDOM) {
@@ -389,10 +391,10 @@ angular
                                         $log.debug('Unable to recover board endpoints');
                                     }
                                 }
-                            } else if (board.id === 'ArduinoUNO') {
+                            } else if (board.id==='ArduinoUNO') {
                                 epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                                 if (epBoardDOM) {
-                                    var epBoardReference = epBoardDOM._jsPlumb;
+                                    epBoardReference = epBoardDOM._jsPlumb;
                                 }
                                 else {
                                     eqBoardError = true;
