@@ -16,7 +16,7 @@ angular.module('bitbloqApp')
                     provider: prov,
                     accessToken: response.access_token
                 };
-               userApi.loginBySocialNetwork(options).then(function() {
+                userApi.loginBySocialNetwork(options).then(function() {
                     // Set user data
                     userApi.currentUser = User.get();
                     userApi.currentUser.$promise.then(function(user) {
@@ -28,8 +28,7 @@ angular.module('bitbloqApp')
                     alertsService.add('social-networks-error-has-identity', 'social-network-user', 'warning');
                     console.log('ERROR ADDING SOCIAL NETWORK: ', err);
                 });
-              }).catch(function(){
-              });
+            }).catch(function() {});
             //     userApi.getSocialProfile(provider, response.access_token).success(function(userData) {
             //         userApi.addSocialNetwork({...}).then(function() {
             //             alertsService.add('social-networks-add', 'social-network-user', 'ok', 5000);
@@ -56,8 +55,8 @@ angular.module('bitbloqApp')
             // });
         };
 
-        $scope.validateProfile =  function(){
-            if(usernameBackup !== $scope.common.user.username){
+        $scope.validateProfile = function() {
+            if (usernameBackup !== $scope.common.user.username) {
                 userApi.validateUserName($scope.common.user.username).then(function(res) {
                     if (res.status === 200) {
                         alertsService.add('account-change-username-repeated', 'saved-user', 'error');
@@ -65,7 +64,7 @@ angular.module('bitbloqApp')
                         $scope.saveProfile();
                     }
                 });
-            }else{
+            } else {
                 $scope.saveProfile();
             }
 
@@ -103,6 +102,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.changeLanguage = function(language) {
+            console.log("language");
+            console.log(language);
             $translate.use(language);
             common.saveUserLanguage(language);
         };
@@ -204,7 +205,6 @@ angular.module('bitbloqApp')
                 }
             });
 
-
             $scope.$watch('common.user.newsletter', function(newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
                     $scope.validateProfile();
@@ -221,7 +221,5 @@ angular.module('bitbloqApp')
             alertsService.add('view-need-tobe-logged', 'login', 'warning');
             $location.path('/login');
         });
-
-
 
     });

@@ -217,11 +217,11 @@ angular.module('bitbloqApp')
         });
 
         exports.saveUserLanguage = function(newLang) {
-            amMoment.changeLocale(newLang.language);
-            if (exports.user && (exports.user.language !== newLang.language)) {
-                exports.user.language = newLang.language;
+            amMoment.changeLocale(newLang);
+            if (exports.user && (exports.user.language !== newLang)) {
+                exports.user.language = newLang;
                 userApi.update({
-                    language: newLang.language
+                    language: newLang
                 }).then(function() {
                     alertsService.add('account-saved', 'saved-user', 'ok', 5000);
                 }, function() {

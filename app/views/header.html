@@ -1,4 +1,4 @@
-<header role="banner" ng-class="{'header--ru':translate.use() === 'ru-RU', 'header--de':translate.use() === 'de-DE', header:true, 'header--relative':!common.headerAbsolute}" ng-controller="HeaderCtrl">
+<header ng-class="{'header--ru':translate.use() === 'ru-RU', 'header--de':translate.use() === 'de-DE', header:true, 'header--relative':!common.headerAbsolute}" ng-controller="HeaderCtrl" role="banner">
     <h1 class="invisible">Bitbloq</h1>
 
     <div class="nav nav--bar nav--main">
@@ -6,30 +6,30 @@
             <h1 class="invisible">Bitbloq Navigation</h1>
             <ul class="nav__menu">
                 <li class="nav--logo" data-element="nav-logo">
-                    <a data-ng-href="#/{{common.user?'projects':''}}" class="nav__menu__link">
+                    <a class="nav__menu__link" data-ng-href="#/{{common.user?'projects':''}}">
                         <svg class="svg-icon svg-icon-logo">
                             <use xlink:href="#logoBibtloq_webTool"></use>
                         </svg>
                     </a>
                 </li>
-                <li ng-if="!common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
-                    <a href="#/bloqsproject" class="nav__menu__link">
+                <li data-element="nav-make" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" ng-if="!common.user">
+                    <a class="nav__menu__link" href="#/bloqsproject">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Construye"></use>
                         </svg>
                         <span>{{ 'make' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'projects'}" data-element="nav-projects">
-                    <a href="#/projects" class="nav__menu__link">
+                <li data-element="nav-projects" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'projects'}" ng-if="common.user">
+                    <a class="nav__menu__link" href="#/projects">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Mis_proyectos"></use>
                         </svg>
                         <span>{{ 'projects' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'explore'}" data-element="nav-explore">
-                    <a href="#/explore" class="nav__menu__link">
+                <li data-element="nav-explore" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'explore'}">
+                    <a class="nav__menu__link" href="#/explore">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Explora"></use>
                         </svg>
@@ -37,23 +37,23 @@
                     </a>
                 </li>
                 <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'learn'}">
-                    <a href="{{diwoURLCourse}}" target="_blank" class="nav__menu__link" data-element="nav-learn">
+                    <a class="nav__menu__link" data-element="nav-learn" href="{{diwoURLCourse}}" target="_blank">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Aprende"></use>
                         </svg>
                         <span data-element="header-menu-learn">{{ 'learn' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'help'}" data-element="nav-help">
-                    <a href="#/help" class="nav__menu__link">
+                <li data-element="nav-help" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'help'}">
+                    <a class="nav__menu__link" href="#/help">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Ayuda"></use>
                         </svg>
                         <span>{{ 'help' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'forum'}" data-element="nav-forum">
-                    <a href="#/help/forum" class="nav__menu__link">
+                <li data-element="nav-forum" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'forum'}">
+                    <a class="nav__menu__link" href="#/help/forum">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Forum"></use>
                         </svg>
@@ -62,21 +62,22 @@
                 </li>
             </ul>
         </nav>
-        <div ng-show="!common.user" class="menu--user">
+        <div class="menu--user" ng-show="!common.user">
             <div class="menu--user__header">
-                <button class="btn btn--secondary btn--small" ng-click="common.goToLogin()" data-element="header-enterbutton">{{ 'enter' | translate }}</button>
+                <button class="btn btn--secondary btn--small" data-element="header-enterbutton" ng-click="common.goToLogin()">{{ 'enter' | translate }}</button>
             </div>
         </div>
-        <div ng-show="common.user" class="menu--user">
+        <div class="menu--user" ng-show="common.user">
             <div class="menu--user__header">
-                <span ng-click="openMenu($event)" class="menu--user__avatar">
-                    <img class="img--avatar" data-element="open-header-menu" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png">
+                <span class="menu--user__avatar" ng-click="openMenu($event)">
+                    <img class="img--avatar" data-element="open-header-menu" err-src="../images/common/avatar.png" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}">
                 </span>
             </div>
             <ul class="menu--user__content" ng-show="showHeader">
                 <li>
                     <span>
-                        {{ 'welcome-male' | translate }} {{common.user.username}}
+                        {{ 'welcome-male' | translate }}
+                        {{common.user.username}}
                     </span>
                 </li>
                 <li>
@@ -88,7 +89,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
+                    <a data-element="header-change-language" href ng-click="commonModals.launchChangeLanguageModal()">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Archivo_CambiarIdioma"></use>
                         </svg>
@@ -96,7 +97,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href ng-click="logout();" data-element="header-menu-logout">
+                    <a data-element="header-menu-logout" href ng-click="logout();">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#cerrarsesion"></use>
                         </svg>

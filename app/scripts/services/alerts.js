@@ -68,7 +68,7 @@ angular.module('bitbloqApp')
          */
         exports.add = function(text, id, type, time, data, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams, translatedText) {
             i += 1;
-            if(typeof(text)==='object'){
+            if (typeof(text) === 'object') {
                 id = text.id;
                 type = text.type;
                 time = text.time;
@@ -105,7 +105,7 @@ angular.module('bitbloqApp')
                     translatedText: translatedText
                 };
             //extend alert object with text if text is an object with the parameters
-            if(angular.isObject(text)) {
+            if (angular.isObject(text)) {
                 delete alert.text;
                 _.extend(alert, text);
             }
@@ -143,10 +143,6 @@ angular.module('bitbloqApp')
             }
 
             alerts.unshift(alert);
-
-            if (!$rootScope.$$phase) {
-                $rootScope.$digest();
-            }
 
             return alert.uid;
 
