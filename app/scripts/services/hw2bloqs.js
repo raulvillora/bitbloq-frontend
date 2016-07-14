@@ -391,7 +391,7 @@ angular
                                         $log.debug('Unable to recover board endpoints');
                                     }
                                 }
-                            } else if (board.id==='ArduinoUNO') {
+                            } else if (board.id === 'ArduinoUNO') {
                                 epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                                 if (epBoardDOM) {
                                     epBoardReference = epBoardDOM._jsPlumb;
@@ -412,6 +412,19 @@ angular
                                     uuids: [uidEPComponent, uidEPBoard],
                                     type: 'automatic'
                                 });
+                                if (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5') {
+                                    var pinType;
+                                    if(type === 'i2c'){
+                                        pinType ='analog';
+                                    } else {
+                                        pinType = 'i2c';
+                                    }
+                                    var pinDigitalBoardDOM = document.querySelector('.board_ep-'+pinType+'.pin-' + mandatoryPins[type][element].toLowerCase());
+                                    if (pinDigitalBoardDOM) {
+                                        var pinDigitalBoardReference = pinDigitalBoardDOM._jsPlumb;
+                                        pinDigitalBoardReference.setVisible(false);
+                                    }
+                                }
                             }
 
                         } else {
@@ -670,7 +683,6 @@ angular
             });
 
             jsPlumbInstance.bind('connectionDetached', function(connection) {
-
                 connection.targetEndpoint.removeType('connected');
                 connection.sourceEndpoint.removeType('connected');
 
@@ -696,6 +708,19 @@ angular
 
                 if (connection.target.classList.contains('board')) {
                     containerDefault.dispatchEvent(connectionEvent);
+                }
+                if (connection.targetEndpoint.scope === 'i2c' && (connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a4' || connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a5')) {
+                    var type;
+                    if(connection.targetEndpoint.scope === 'i2c'){
+                        type ='analog';
+                    } else {
+                        type = 'i2c';
+                    }
+                    var pinDigitalBoardDOM = document.querySelector('.board_ep-'+type+'.pin-' + connection.targetEndpoint.getParameter('pinBoard').toLowerCase());
+                    if(pinDigitalBoardDOM) {
+                        var pinDigitalBoardReference = pinDigitalBoardDOM._jsPlumb;
+                        pinDigitalBoardReference.setVisible(true);
+                    }
                 }
 
             });
