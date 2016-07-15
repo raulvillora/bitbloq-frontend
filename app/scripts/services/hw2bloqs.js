@@ -406,7 +406,7 @@ angular
                             }
 
                             if (!eqBoardError) {
-                                _detachAllByPin(epBoardReference, mandatoryPins[type][element].toLowerCase());
+                                _detachAllByPin(mandatoryPins[type][element].toLowerCase());
                                 var uidEPBoard = epBoardReference.getUuid(),
                                     uidEPComponent = epComponent.getUuid();
                                 jsPlumbInstance.connect({
@@ -435,8 +435,7 @@ angular
 
         };
 
-        function _detachAllByPin(mainEpBoard, pinBoard){
-            mainEpBoard.detachAll();
+        function _detachAllByPin(pinBoard){
             var analogPinDOM = document.querySelector('.board_ep-analog.pin-' + pinBoard);
             if(analogPinDOM){
                 var analogPinBoard = analogPinDOM._jsPlumb;
@@ -717,7 +716,7 @@ angular
                 if (connection.target.classList.contains('board')) {
                     containerDefault.dispatchEvent(connectionEvent);
                 }
-                if (connection.targetEndpoint.scope === 'i2c' && (connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a4' || connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a5')) {
+                if (connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a4' || connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a5') {
                     var type;
                     if (connection.targetEndpoint.scope === 'i2c') {
                         type = 'analog';
