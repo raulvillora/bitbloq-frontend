@@ -412,26 +412,12 @@ angular
                                     uuids: [uidEPComponent, uidEPBoard],
                                     type: 'automatic'
                                 });
-                                if (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5') {
-                                    var pinType;
-                                    if(type === 'i2c'){
-                                        pinType ='analog';
-                                    } else {
-                                        pinType = 'i2c';
-                                    }
-                                    var pinDigitalBoardDOM = document.querySelector('.board_ep-'+pinType+'.pin-' + mandatoryPins[type][element].toLowerCase());
-                                    if (pinDigitalBoardDOM) {
-                                        var pinDigitalBoardReference = pinDigitalBoardDOM._jsPlumb;
-                                        pinDigitalBoardReference.setVisible(false);
-                                    }
-                                }
                             }
 
                         } else {
                             $log.debug('mandatoryPins. Some reference lost', mandatoryPins);
                         }
                     }
-
                 }
 
                 for (var type in newComponent.pins) {
@@ -679,6 +665,18 @@ angular
                 if (connection.target.classList.contains('board')) {
                     containerDefault.dispatchEvent(connectionEvent);
                 }
+                var pinName = connection.targetEndpoint.getParameter('pinBoard').toLowerCase();
+                if (pinName === 'a4' || pinName === 'a5') {
+                    var pinType = 'i2c';
+                    if (connection.targetEndpoint.scope === 'i2c') {
+                        pinType = 'analog';
+                    }
+                    var pinDigitalBoardDOM = document.querySelector('.board_ep-' + pinType + '.pin-' + pinName);
+                    if (pinDigitalBoardDOM) {
+                        var pinDigitalBoardReference = pinDigitalBoardDOM._jsPlumb;
+                        pinDigitalBoardReference.setVisible(false);
+                    }
+                }
 
             });
 
@@ -711,13 +709,13 @@ angular
                 }
                 if (connection.targetEndpoint.scope === 'i2c' && (connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a4' || connection.targetEndpoint.getParameter('pinBoard').toLowerCase() === 'a5')) {
                     var type;
-                    if(connection.targetEndpoint.scope === 'i2c'){
-                        type ='analog';
+                    if (connection.targetEndpoint.scope === 'i2c') {
+                        type = 'analog';
                     } else {
                         type = 'i2c';
                     }
-                    var pinDigitalBoardDOM = document.querySelector('.board_ep-'+type+'.pin-' + connection.targetEndpoint.getParameter('pinBoard').toLowerCase());
-                    if(pinDigitalBoardDOM) {
+                    var pinDigitalBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + connection.targetEndpoint.getParameter('pinBoard').toLowerCase());
+                    if (pinDigitalBoardDOM) {
                         var pinDigitalBoardReference = pinDigitalBoardDOM._jsPlumb;
                         pinDigitalBoardReference.setVisible(true);
                     }
