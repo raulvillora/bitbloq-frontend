@@ -2,9 +2,9 @@
 angular
     .module('bitbloqApp')
     .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window, jsPlumbUtil) {
-        var exports = {};
+        var exports = {},
 
-        var jsPlumbInstance = null,
+            jsPlumbInstance = null,
             config = {
                 color: '#F1C933',
                 colorHover: '#F19833'
@@ -406,6 +406,7 @@ angular
                             }
 
                             if (!eqBoardError) {
+                                _detachAllByPin(epBoardReference, mandatoryPins[type][element].toLowerCase());
                                 var uidEPBoard = epBoardReference.getUuid(),
                                     uidEPComponent = epComponent.getUuid();
                                 jsPlumbInstance.connect({
@@ -433,6 +434,15 @@ angular
             }
 
         };
+
+        function _detachAllByPin(mainEpBoard, pinBoard){
+            mainEpBoard.detachAll();
+            var analogPinDOM = document.querySelector('.board_ep-analog.pin-' + pinBoard);
+            if(analogPinDOM){
+                var analogPinBoard = analogPinDOM._jsPlumb;
+                analogPinBoard.detachAll();
+            }
+        }
 
         exports.disconnectComponent = function(component) {
             var el = document.querySelector('[data-uid="' + component.uid + '"]');
