@@ -3,7 +3,7 @@ angular
     .module('bitbloqApp')
     .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window, jsPlumbUtil) {
         var exports = {},
-
+            
             jsPlumbInstance = null,
             config = {
                 color: '#F1C933',
@@ -193,7 +193,7 @@ angular
                 board.pins[type].forEach(addEP);
             }
 
-            _autoConnect();
+            _autoConnect(board.name);
         };
 
         exports.removeBoard = function() {
@@ -435,9 +435,9 @@ angular
 
         };
 
-        function _detachAllByPin(pinBoard){
+        function _detachAllByPin(pinBoard) {
             var analogPinDOM = document.querySelector('.board_ep-analog.pin-' + pinBoard);
-            if(analogPinDOM){
+            if (analogPinDOM) {
                 var analogPinBoard = analogPinDOM._jsPlumb;
                 analogPinBoard.detachAll();
             }
@@ -621,12 +621,16 @@ angular
             return schema;
         };
 
-        function _autoConnect() {
+        function _autoConnect(board) {
             if (oldConnections.length > 0) {
+                var i2cToFemale = (board === 'Arduino UNO');
                 oldConnections.forEach(function(connection) {
-                    var pins = Object.keys(connection.pinNames);
+                    var pin = connection.pinNames[Object.keys(connection.pinNames)[0]].toLowerCase();
+                    if (i2cToFemale && (pin === 'a4' || pin === 'a5')) {
+                        pin = pin + '-h';
+                    }
                     jsPlumbInstance.connect({
-                        uuids: [connection.pinSourceUid, document.querySelector('.pin-' + connection.pinNames[pins[0]].toLowerCase())._jsPlumb.getUuid()],
+                        uuids: [connection.pinSourceUid, document.querySelector('.board_ep-' + connection.type + '.pin-' + pin)._jsPlumb.getUuid()],
                         type: 'automatic'
                     });
                 });
@@ -652,7 +656,8 @@ angular
                 connection.connection.setParameters({
                     pinSourceUid: connection.sourceEndpoint.getUuid(),
                     pinTargetUid: connection.targetEndpoint.getUuid(),
-                    pinNames: pinAssignation
+                    pinNames: pinAssignation,
+                    type: connection.targetEndpoint.scope
                 });
 
                 var componentData = {
