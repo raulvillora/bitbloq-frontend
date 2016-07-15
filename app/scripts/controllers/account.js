@@ -28,7 +28,8 @@ angular.module('bitbloqApp')
                     alertsService.add('social-networks-error-has-identity', 'social-network-user', 'warning');
                     console.log('ERROR ADDING SOCIAL NETWORK: ', err);
                 });
-            }).catch(function() {});
+            }).catch(function() {
+            });
             //     userApi.getSocialProfile(provider, response.access_token).success(function(userData) {
             //         userApi.addSocialNetwork({...}).then(function() {
             //             alertsService.add('social-networks-add', 'social-network-user', 'ok', 5000);
@@ -102,8 +103,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.changeLanguage = function(language) {
-            console.log("language");
-            console.log(language);
             $translate.use(language);
             common.saveUserLanguage(language);
         };
