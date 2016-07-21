@@ -342,10 +342,14 @@ angular
                     if (i2cToFemale && (pin === 'a4' || pin === 'a5')) {
                         pin = pin + '-h';
                     }
-                    jsPlumbInstance.connect({
-                        uuids: [connection.pinSourceUid, document.querySelector('.board_ep-' + connection.type + '.pin-' + pin)._jsPlumb.getUuid()],
-                        type: 'automatic'
-                    });
+
+                    var epBoardReference = _getPinBoardReference('.board_ep-' + connection.type + '.pin-' + pin);
+                    if (epBoardReference) {
+                        jsPlumbInstance.connect({
+                            uuids: [connection.pinSourceUid, epBoardReference.getUuid()],
+                            type: 'automatic'
+                        });
+                    }
                 });
                 oldConnections = [];
             }
@@ -477,9 +481,8 @@ angular
         }
 
         function _detachAllByAnalogPin(pinBoard) {
-            var analogPinDOM = document.querySelector('.board_ep-analog.pin-' + pinBoard);
-            if (analogPinDOM) {
-                var analogPinBoard = analogPinDOM._jsPlumb;
+            var analogPinBoard = _getPinBoardReference('.board_ep-analog.pin-' + pinBoard);
+            if (analogPinBoard) {
                 analogPinBoard.detachAll();
             }
         }
@@ -711,52 +714,33 @@ angular
                 });
 
                 //Connect automaticaly these pins
-                if (isMandatoryPin) {
-                    if (mandatoryPins[type][element]) {
-                        var epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase()),
-                            epBoardReference,
-                            eqBoardError;
+                if (isMandatoryPin && mandatoryPins[type][element]) {
+                    var epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase()),
+                        eqBoardError;
 
-                        if (epBoardDOM) {
-                            epBoardReference = epBoardDOM._jsPlumb;
-
-                            if (epBoardReference.connections.length > 0 && (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5')) {
-                                epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
-                                if (epBoardDOM) {
-                                    epBoardReference = epBoardDOM._jsPlumb;
-                                }
-                                else {
-                                    eqBoardError = true;
-                                    $log.debug('Unable to recover board endpoints');
-                                }
-                            }
-                        } else if (board.id === 'ArduinoUNO') {
-                            epBoardDOM = document.querySelector('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
-                            if (epBoardDOM) {
-                                epBoardReference = epBoardDOM._jsPlumb;
-                            }
-                            else {
-                                eqBoardError = true;
-                                $log.debug('Unable to recover board endpoints');
-                            }
-                        } else {
-                            eqBoardError = true;
-                            $log.debug('Unable to recover board endpoints');
+                    if (epBoardReference) {
+                        if (epBoardReference.connections.length > 0 && (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5')) {
+                            epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h') || epBoardReference;
                         }
-
-                        if (!eqBoardError) {
-                            _detachAllByAnalogPin(mandatoryPins[type][element].toLowerCase());
-                            var uidEPBoard = epBoardReference.getUuid(),
-                                uidEPComponent = epComponent.getUuid();
-                            jsPlumbInstance.connect({
-                                uuids: [uidEPComponent, uidEPBoard],
-                                type: 'automatic'
-                            });
-                        }
-
-                    } else {
-                        $log.debug('mandatoryPins. Some reference lost', mandatoryPins);
+                    } else if (board.id === 'ArduinoUNO') {
+                        epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                     }
+
+                    if (!epBoardReference) {
+                        eqBoardError = true;
+                        $log.debug('Unable to recover board endpoints');
+                    } else {
+                        _detachAllByAnalogPin(mandatoryPins[type][element].toLowerCase());
+                        var uidEPBoard = epBoardReference.getUuid(),
+                            uidEPComponent = epComponent.getUuid();
+                        jsPlumbInstance.connect({
+                            uuids: [uidEPComponent, uidEPBoard],
+                            type: 'automatic'
+                        });
+                    }
+
+                } else {
+                    $log.debug('mandatoryPins. Some reference lost', mandatoryPins);
                 }
             }
 
@@ -857,11 +841,11 @@ angular
         }
 
         function _setVisiblePins(type, visible) {
-            var pinA4BoardDOM = document.querySelector('.board_ep-' + type + '.pin-a4'),
-                pinA5BoardDOM = document.querySelector('.board_ep-' + type + '.pin-a5');
-            if (pinA4BoardDOM && pinA5BoardDOM) {
-                pinA4BoardDOM._jsPlumb.setVisible(visible);
-                pinA5BoardDOM._jsPlumb.setVisible(visible);
+            var pinA4BoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-a4'),
+                pinA5BoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-a5');
+            if (pinA4BoardReference && pinA5BoardReference) {
+                pinA4BoardReference.setVisible(visible);
+                pinA5BoardReference.setVisible(visible);
             }
         }
 

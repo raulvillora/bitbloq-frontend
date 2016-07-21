@@ -130,11 +130,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
             return c.uid === componentUid;
         });
         var connections = 0;
-        _.forEach(component.pin, function(value) {
-            if (!_.isNull(value) && !_.isUndefined(value)) {
-                connections++;
-            }
-        });
+        if(component) {
+            _.forEach(component.pin, function(value) {
+                if (!_.isNull(value) && !_.isUndefined(value)) {
+                    connections++;
+                }
+            });
+        }
         if (connections === 0) {
             component.connected = false;
         }
