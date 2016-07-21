@@ -123,6 +123,7 @@ angular.module('bitbloqApp')
                         if ($scope.tempImage.file && !$scope.tempImage.generate) {
                             currentProject.image = 'custom';
                         }
+
                         return projectApi.update($scope.project._id, currentProject).then(function() {
                             $scope.saveOldProject();
                             $localStorage.projfalseectsChange = true;
@@ -147,6 +148,7 @@ angular.module('bitbloqApp')
                         if ($scope.tempImage.file && !$scope.tempImage.generate) {
                             currentProject.image = 'custom';
                         }
+
                         return projectApi.save(currentProject).then(function(response) {
                             var idProject = response.data;
                             $scope.project._id = idProject;
@@ -678,11 +680,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -844,7 +846,7 @@ angular.module('bitbloqApp')
             });
             $scope.$watch('project.description', function(newVal, oldVal) {
                 if (!newVal) {
-                    $scope.project.description='';
+                    $scope.project.description = '';
                 }
                 if (newVal !== oldVal) {
                     $scope.startAutosave();

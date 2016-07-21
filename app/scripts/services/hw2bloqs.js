@@ -589,7 +589,6 @@ angular
 
         //Adds a raw svg for a component
         function _loadComponent(DOMComponent, newComponent) {
-
             var spaceInterPin;
             if (newComponent.pins.digital && newComponent.pins.analog) {
                 spaceInterPin = {
@@ -642,9 +641,7 @@ angular
                 if (!(element in newComponent.pin)) {
                     newComponent.pin[element] = null;
                 } else {
-                    if (!mandatoryPins[type]) {
-                        mandatoryPins[type] = {};
-                    }
+                    mandatoryPins[type] = mandatoryPins[type] || {};
                     mandatoryPins[type][element] = newComponent.pin[element];
                     isMandatoryPin = true;
                 }

@@ -38,6 +38,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
             $document.on('click', _clickDocumentHandler);
 
             container.addEventListener('connectionEvent', connectionEventHandler);
+
+            $scope.$watch('project.hardware', function(newVal, oldVal) {
+                if (newVal && (newVal !== oldVal || newVal.anonymousTransient)) {
+                    _loadHardwareProjec(newVal);
+                }
+            });
         });
     }
 
@@ -130,7 +136,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
             return c.uid === componentUid;
         });
         var connections = 0;
-        if(component) {
+        if (component) {
             _.forEach(component.pin, function(value) {
                 if (!_.isNull(value) && !_.isUndefined(value)) {
                     connections++;
@@ -533,12 +539,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
 
         });
     }
-
-    $scope.$watch('project.hardware', function(newVal, oldVal) {
-        if (newVal && (newVal !== oldVal || newVal.anonymousTransient)) {
-            _loadHardwareProjec(newVal);
-        }
-    });
 
     $scope.checkName = function() {
         var isNameDuplicated = _.filter($scope.project.hardware.components, {
