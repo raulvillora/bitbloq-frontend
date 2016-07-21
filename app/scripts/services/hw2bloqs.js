@@ -20,11 +20,9 @@ angular
             },
             connectionEvent = new CustomEvent('connectionEvent'),
             jsPlumbInstance = null,
-            oppositeVars = {
+            oppositeI2cPin = {
                 a4: 'a5',
-                a5: 'a4',
-                i2c: 'analog',
-                analog: 'i2c'
+                a5: 'a4'
             };
 
         /*jshint validthis:true */
@@ -353,29 +351,38 @@ angular
             }
         }
 
-        function _setVisiblePins(type, visible) {
-            var pinA4BoardDOM = document.querySelector('.board_ep-' + type + '.pin-a4'),
-                pinA5BoardDOM = document.querySelector('.board_ep-' + type + '.pin-a5');
-            if (pinA4BoardDOM && pinA5BoardDOM) {
-                pinA4BoardDOM._jsPlumb.setVisible(visible);
-                pinA5BoardDOM._jsPlumb.setVisible(visible);
-            }
-        }
-
-
         function _checkPinsI2C(connection, connecting) {
             var endpoint = connection.targetEndpoint || connection.originalTargetEndpoint,
                 currentPin = endpoint.getParameter('pinBoard').toLowerCase();
-            if (currentPin === 'a4' || currentPin === 'a5') {
+            if (endpoint.scope === 'i2c' && (currentPin === 'a4' || currentPin === 'a5' || currentPin === 'a4-h' || currentPin === 'a5-h')) {
                 if (connecting) {
-                    _setVisiblePins(oppositeVars[endpoint.scope], false);
+                    _detachAllByAnalogPin('a4');
+                    _detachAllByAnalogPin('a5');
+                    _setVisiblePins('analog', false);
+
                 } else {
                     //Check for connections with pin type=endpoint.scope
-                    var oppositePinBoardDOM = document.querySelector('.board_ep-' + endpoint.scope + '.pin-' + oppositeVars[currentPin]);
-                    if (oppositePinBoardDOM) {
-                        var oppositePinBoardReference = oppositePinBoardDOM._jsPlumb;
-                        if (oppositePinBoardReference.connections.length === 0) {
-                            _setVisiblePins(oppositeVars[endpoint.scope], true);
+                    var pin4hBoardReference = _getPinBoardReference('.board_ep-i2c.pin-a4-h'),
+                        pin5hBoardReference = _getPinBoardReference('.board_ep-i2c.pin-a5-h');
+
+                    if (pin4hBoardReference && pin5hBoardReference && pin4hBoardReference.connections.length === 0 && pin5hBoardReference.connections.length === 0) {
+                        if (oppositeI2cPin[currentPin]) {
+                            // currentPin is a4 or a5
+                            var oppositePinBoardReference = _getPinBoardReference('.board_ep-i2c.pin-' + oppositeI2cPin[currentPin]);
+                            if (oppositePinBoardReference && oppositePinBoardReference.connections.length === 0) {
+                                _setVisiblePins('analog', true);
+                            }
+                        } else {
+                            // currentPint is a4-h or a5-h
+                            var pin4BoardReference = _getPinBoardReference('.board_ep-i2c.pin-a4'),
+                                pin5BoardReference = _getPinBoardReference('.board_ep-i2c.pin-a5');
+                            if (pin4BoardReference && pin5BoardReference) {
+                                if (pin4BoardReference.connections.length === 0 && pin5BoardReference.connections.length === 0) {
+                                    _setVisiblePins('analog', true);
+                                }
+                            } else {
+                                _setVisiblePins('analog', true);
+                            }
                         }
                     }
                 }
@@ -487,6 +494,15 @@ angular
                     });
 
                 }) || [];
+        }
+
+        function _getPinBoardReference(selector) {
+            var pinBoardReference,
+                pinBoardDOM = document.querySelector(selector);
+            if (pinBoardDOM) {
+                pinBoardReference = pinBoardDOM._jsPlumb;
+            }
+            return pinBoardReference;
         }
 
         function _loadBoard(board, boardDOMElement) {
@@ -838,6 +854,15 @@ angular
                 ep.setType('selected');
                 ep.canvas.classList.add('selected');
             });
+        }
+
+        function _setVisiblePins(type, visible) {
+            var pinA4BoardDOM = document.querySelector('.board_ep-' + type + '.pin-a4'),
+                pinA5BoardDOM = document.querySelector('.board_ep-' + type + '.pin-a5');
+            if (pinA4BoardDOM && pinA5BoardDOM) {
+                pinA4BoardDOM._jsPlumb.setVisible(visible);
+                pinA5BoardDOM._jsPlumb.setVisible(visible);
+            }
         }
 
         function _throttle(type, name, obj) {
