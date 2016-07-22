@@ -56,15 +56,28 @@ angular.module('bitbloqApp')
             // });
         };
 
+        function _isUserName(username) {
+            var regexp = /^[0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/;
+            if (username.search(regexp) === -1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
         $scope.validateProfile = function() {
             if (usernameBackup !== $scope.common.user.username) {
-                userApi.validateUserName($scope.common.user.username).then(function(res) {
-                    if (res.status === 200) {
-                        alertsService.add('account-change-username-repeated', 'saved-user', 'error');
-                    } else {
-                        $scope.saveProfile();
-                    }
-                });
+                if (!_isUserName($scope.common.user.username)) {
+                    alertsService.add('account-change-username-alphanumeric-numeric-error', 'saved-user', 'error');
+                } else {
+                    userApi.validateUserName($scope.common.user.username).then(function(res) {
+                        if (res.status === 200) {
+                            alertsService.add('account-change-username-repeated', 'saved-user', 'error');
+                        } else {
+                            $scope.saveProfile();
+                        }
+                    });
+                }
             } else {
                 $scope.saveProfile();
             }
