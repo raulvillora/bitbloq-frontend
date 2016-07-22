@@ -358,7 +358,8 @@ angular
         function _checkPinsI2C(connection, connecting) {
             var endpoint = connection.targetEndpoint || connection.originalTargetEndpoint,
                 currentPin = endpoint.getParameter('pinBoard').toLowerCase();
-            if (endpoint.scope === 'i2c' && (currentPin === 'a4' || currentPin === 'a5' || currentPin === 'a4-h' || currentPin === 'a5-h')) {
+            var typePin = endpoint.scope.split('-')[0] || endpoint.scope;
+            if (typePin === 'i2c' && (currentPin === 'a4' || currentPin === 'a5' || currentPin === 'a4-h' || currentPin === 'a5-h')) {
                 if (connecting) {
                     _detachAllByAnalogPin('a4');
                     _detachAllByAnalogPin('a5');
@@ -367,9 +368,13 @@ angular
                 } else {
                     //Check for connections with pin type=endpoint.scope
                     var pin4hBoardReference = _getPinBoardReference('.board_ep-i2c.pin-a4-h'),
-                        pin5hBoardReference = _getPinBoardReference('.board_ep-i2c.pin-a5-h');
-
-                    if (pin4hBoardReference && pin5hBoardReference && pin4hBoardReference.connections.length === 0 && pin5hBoardReference.connections.length === 0) {
+                        pin5hBoardReference = _getPinBoardReference('.board_ep-i2c.pin-a5-h'),
+                        lengthPins = {
+                            'a4-h': 0,
+                            'a5-h': 0
+                        };
+                    lengthPins[currentPin] = 1;
+                    if (pin4hBoardReference && pin5hBoardReference && pin4hBoardReference.connections.length === lengthPins['a4-h'] && pin5hBoardReference.connections.length === lengthPins['a5-h']) {
                         if (oppositeI2cPin[currentPin]) {
                             // currentPin is a4 or a5
                             var oppositePinBoardReference = _getPinBoardReference('.board_ep-i2c.pin-' + oppositeI2cPin[currentPin]);
@@ -525,6 +530,10 @@ angular
                     default:
                         overLayLocation = [0.5, -0.5];
                 }
+                var typeClass = 'board_ep board_ep-' + type;
+                if (type.split('-').length > 1) {
+                    typeClass = 'board_ep board_ep-' + type.split('-')[0] + ' board_ep board_ep-' + type;
+                }
                 var pinName = pin.name.split('-')[0],
                     options = {
                         anchor: [pin.x, pin.y, 0, -1, 0, 0],
@@ -544,14 +553,14 @@ angular
                         parameters: {
                             pinBoard: pin.name
                         },
-                        cssClass: 'board_ep board_ep-' + type + ' pin-' + pin.name.toLowerCase(),
+                        cssClass: typeClass + ' pin-' + pin.name.toLowerCase(),
                         isTarget: true,
                         isSource: false,
                         scope: type,
                         uuid: pin.uid
                     };
 
-                if (type === 'i2c' && pin.name.split('-')[1] === 'H') {
+                if (type.split('-')[0] === 'i2c' && pin.name.split('-')[1] === 'H') {
                     options.maxConnections = -1;
                 }
 
@@ -587,7 +596,7 @@ angular
             }
         }
 
-        //Adds a raw svg for a component
+//Adds a raw svg for a component
         function _loadComponent(DOMComponent, newComponent) {
             var spaceInterPin;
             if (newComponent.pins.digital && newComponent.pins.analog) {
@@ -600,8 +609,13 @@ angular
                         x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
                         y: 1
                     },
-                    i2c: {
-                        x: newComponent.pins.i2c && newComponent.width / (newComponent.pins.i2c.length + 1) / newComponent.width,
+                    'i2c-4': {
+                        x: newComponent.pins['i2c-4'] && newComponent.width / (newComponent.pins['i2c-4'].length + newComponent.pins.i2c5.length + 1) / newComponent.width,
+                        y: 0
+                    },
+
+                    'i2c-5': {
+                        x: newComponent.pins['i2c-5'] && (newComponent.width / (newComponent.pins.i2c5.length + newComponent.pins['i2c-4'].length + 1) / newComponent.width) * 2,
                         y: 0
                     },
                     serial: {
@@ -619,8 +633,13 @@ angular
                         x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
                         y: 0
                     },
-                    i2c: {
-                        x: newComponent.pins.i2c && newComponent.width / (newComponent.pins.i2c.length + 1) / newComponent.width,
+                    'i2c-4': {
+                        x: newComponent.pins['i2c-4'] && newComponent.width / (newComponent.pins['i2c-4'].length + newComponent.pins['i2c-5'].length + 1) / newComponent.width,
+                        y: 0
+                    },
+
+                    'i2c-5': {
+                        x: newComponent.pins['i2c-5'] && (newComponent.width / (newComponent.pins['i2c-5'].length + newComponent.pins['i2c-4'].length + 1) / newComponent.width) * 2,
                         y: 0
                     },
                     serial: {
@@ -878,4 +897,5 @@ angular
 
         return exports;
 
-    });
+    })
+;
