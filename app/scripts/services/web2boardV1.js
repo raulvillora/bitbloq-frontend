@@ -9,7 +9,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                    web2boardV2, alertsService, $location, commonModals, projectApi) {
+                                    web2boardV2, alertsService, $location, commonModals, projectApi, web2boardRequests) {
 
         /** Variables */
 
@@ -52,6 +52,16 @@ angular.module('bitbloqApp')
             web2board.version = web2boardV2.version;
             web2board.showSettings = web2boardV2.showSettings;
             web2board.uploadHex = web2boardV2.uploadHex;
+        }
+
+        function rootWeb2boardToHttpRequestHandler() {
+            web2board.verify = web2boardRequests.verify;
+            web2board.upload = web2boardRequests.upload;
+            web2board.serialMonitor = web2boardRequests.serialMonitor;
+            web2board.chartMonitor = web2boardRequests.chartMonitor;
+            web2board.version = web2boardRequests.version;
+            web2board.showSettings = web2boardRequests.showSettings;
+            web2board.uploadHex = web2boardRequests.uploadHex;
         }
 
         function showWeb2BoardModal(options) {
@@ -501,6 +511,10 @@ angular.module('bitbloqApp')
 
         web2board.showWeb2BoardUploadModal = showWeb2BoardUploadModal;
 
+        web2boardRequests.version()
+            .then(function () {
+                rootWeb2boardToHttpRequestHandler();
+            });
 
         return web2board;
     });
