@@ -346,7 +346,7 @@ module.exports = function(grunt) {
                 svg: {
                     viewBox: '0 0 100 100',
                     xmlns: 'http://www.w3.org/2000/svg',
-                    'xmlns:xlink':'http://www.w3.org/1999/xlink'
+                    'xmlns:xlink': 'http://www.w3.org/1999/xlink'
                 },
                 includedemo: true,
                 formatting: {
@@ -733,16 +733,7 @@ module.exports = function(grunt) {
         grunt.task.run([
             'clean:i18n',
             'getpoeditorfiles:38967',
-            'poeditor2bitbloq',
-            'faqs'
-        ]);
-    });
-
-    grunt.registerTask('faqs', 'generate faqs', function() {
-        grunt.task.run([
-            'clean:i18n',
-            'getpoeditorfiles:38968',
-            'poeditor2faqs'
+            'poeditor2bitbloq'
         ]);
     });
 
@@ -876,8 +867,8 @@ module.exports = function(grunt) {
                 fileContent = grunt.file.read(file);
                 grunt.file.write(file, fileContent.replace(regExp, function(stringReplace) {
                     var splitString = stringReplace.split('images/')[1].split('/')[0],
-                        stringArray = stringReplace.split(splitString+'/');
-                    return stringArray[0] + splitString +'/' + timestamp + '.' + stringArray[1];
+                        stringArray = stringReplace.split(splitString + '/');
+                    return stringArray[0] + splitString + '/' + timestamp + '.' + stringArray[1];
                 }));
             }
         });
@@ -938,7 +929,6 @@ module.exports = function(grunt) {
     grunt.registerTask('updateAllCollections', function() {
         grunt.task.run([
             'updateCollection:bloq',
-            'updateCollection:faq',
             'updateCollection:property',
             'updateCollection:forumcategory'
         ]);
