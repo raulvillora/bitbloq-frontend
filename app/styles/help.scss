@@ -15,36 +15,36 @@ $changeLogsAsideWidth: 228px;
 .help--view {
     .faqs {
         .faq--list {
-            width  : calc(100% - #{$faqlistWidth});
+            width: calc(100% - #{$faqlistWidth});
             display: block;
-            float  : left;
+            float: left;
             padding: 30px 20px 30px 30px;
 
             .faq--item {
                 background-color: white;
-                margin-bottom   : 10px;
-                border-radius   : 4px;
-                overflow        : hidden;
+                margin-bottom: 10px;
+                border-radius: 4px;
+                overflow: hidden;
 
                 .item--container {
-                    height       : 50px;
-                    line-height  : 50px;
-                    padding-left : 20px;
+                    height: 50px;
+                    line-height: 50px;
+                    padding-left: 20px;
                     padding-right: 20px;
                     border-bottom: 1px solid #eee;
-                    font-weight  : 700;
-                    font-size    : 16px;
-                    cursor       : default;
+                    font-weight: 700;
+                    font-size: 16px;
+                    cursor: default;
 
                     .svg-icon {
-                        width       : 11px;
-                        height      : 11px;
+                        width: 11px;
+                        height: 11px;
                         margin-right: 10px;
                     }
                 }
 
                 .faq--answer {
-                    cursor : default;
+                    cursor: default;
                     padding: 20px;
                 }
 
@@ -55,17 +55,17 @@ $changeLogsAsideWidth: 228px;
         }
 
         .faq__aside {
-            display      : block;
-            width        : $faqlistWidth;
-            float        : right;
+            display: block;
+            width: $faqlistWidth;
+            float: right;
             padding-right: 30px;
 
             .faq--feedback {
                 background-color: white;
-                border-radius   : 4px;
-                overflow        : hidden;
-                padding         : 10px 20px 20px;
-                margin-top      : 30px;
+                border-radius: 4px;
+                overflow: hidden;
+                padding: 10px 20px 20px;
+                margin-top: 30px;
 
                 .faq--feedback--title {
                     cursor: default;
@@ -77,85 +77,13 @@ $changeLogsAsideWidth: 228px;
             }
 
             span {
-                font-size  : 16px;
+                font-size: 16px;
                 font-weight: 700;
             }
 
             p {
-                margin-top   : 20px;
+                margin-top: 20px;
                 margin-bottom: 20px;
-            }
-        }
-    }
-
-    .tutorials {
-        padding: 30px;
-
-        .tutorials--level {
-            color      : $font-color-base;
-            font-size  : 16px;
-            font-weight: 700;
-            cursor     : default;
-        }
-
-        .tutorial--list {
-            .tutorial--item {
-                background-color: white;
-                border-radius   : 4px;
-                overflow        : hidden;
-                box-shadow      : 0 2px 2px 0 rgba(50,50,50,.35);
-                margin-top      : 20px;
-                position        : relative;
-
-                .contact-us {
-                    width   : 100%;
-                    height  : 133px;
-                    position: absolute;
-                }
-
-                .tutorial--image--container {
-                    width  : 160px;
-                    height : 133px;
-                    display: block;
-                    float  : left;
-
-                    img {
-                        width     : 100%;
-                        height    : 100%;
-                        object-fit: cover;
-                    }
-                }
-
-                .tutorial--short--info {
-                    display: block;
-                    width  : calc(100% - 160px);
-                    float  : right;
-                    height : 133px;
-                    padding: 20px;
-
-                    .tutorial--item--heading {
-                        color        : #373b44;
-                        font-size    : 16px;
-                        font-weight  : 700;
-                        max-width    : 100%;
-                        text-overflow: ellipsis;
-                        overflow     : hidden;
-                        white-space  : nowrap;
-                        width        : 100%;
-                        display      : block;
-                    }
-
-                    .tutorial--item--text {
-                        color             : #8c919b;
-                        font-size         : 12px;
-                        font-weight       : 400;
-                        margin-top        : 10px;
-                        display           : -webkit-box;
-                        -webkit-line-clamp: 3;
-                        -webkit-box-orient: vertical;
-                        overflow          : hidden;
-                    }
-                }
             }
         }
     }
@@ -164,11 +92,11 @@ $changeLogsAsideWidth: 228px;
         line-height: 28px;
 
         .changelogs__versions {
-            height          : 100%;
-            width           : $changeLogsAsideWidth;
-            float           : left;
+            height: 100%;
+            width: $changeLogsAsideWidth;
+            float: left;
             background-color: #ddd;
-            padding         : 20px;
+            padding: 20px;
 
             .bugs--list {
                 li {
@@ -178,23 +106,23 @@ $changeLogsAsideWidth: 228px;
         }
 
         .changelogs__items__container {
-            width  : calc(100% - #{$changeLogsAsideWidth});
-            float  : right;
+            width: calc(100% - #{$changeLogsAsideWidth});
+            float: right;
             padding: 20px;
 
             .changelogs__item {
                 &:before {
-                    content      : '-';
+                    content: '-';
                     padding-right: 5px;
                 }
-cursor: default;
+                cursor: default;
             }
 
             .changelogs__item__title {
-                color      : #6a6d75;
-                font-size  : 16px;
+                color: #6a6d75;
+                font-size: 16px;
                 font-weight: 700;
-                cursor     : default;
+                cursor: default;
             }
         }
     }
@@ -202,7 +130,7 @@ cursor: default;
 
 .contact-us-link {
     text-decoration: underline;
-    color          : $font-color-base;
+    color: $font-color-base;
 
     &:hover {
         cursor: pointer;
