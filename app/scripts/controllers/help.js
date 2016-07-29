@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HelpCtrl', function($scope, $routeParams, $location, $route, faqsApi, $translate, $log, commonModals, changeLogsApi) {
+    .controller('HelpCtrl', function($scope, $routeParams, $location, $route, faqsApi, $translate, $log, commonModals) {
 
         switch ($routeParams.section) {
             case 'forum':
@@ -50,17 +50,10 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.setChangeLogItem = function(index) {
-            $log.debug(index);
-            $scope.currentItem.changeLog = index;
-        };
-
         $scope.currentItem = {};
-        $scope.currentItem.changeLog = 0;
         $scope.$translate = $translate;
         $scope.commonModals = commonModals;
         $scope.faqsApi = faqsApi;
-        $scope.changeLogsApi = changeLogsApi;
         $scope.selectedFaq = 0;
 
         $scope.diwoURL = 'http://diwo.bq.com/';

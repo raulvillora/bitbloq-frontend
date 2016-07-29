@@ -734,8 +734,7 @@ module.exports = function(grunt) {
             'clean:i18n',
             'getpoeditorfiles:38967',
             'poeditor2bitbloq',
-            'faqs',
-            'changelog'
+            'faqs'
         ]);
     });
 
@@ -744,14 +743,6 @@ module.exports = function(grunt) {
             'clean:i18n',
             'getpoeditorfiles:38968',
             'poeditor2faqs'
-        ]);
-    });
-
-    grunt.registerTask('changelog', 'generate changelog script', function() {
-        grunt.task.run([
-            'clean:i18n',
-            'getpoeditorfiles:39968',
-            'poeditor2ChangeLogs'
         ]);
     });
 
@@ -948,7 +939,6 @@ module.exports = function(grunt) {
         grunt.task.run([
             'updateCollection:bloq',
             'updateCollection:faq',
-            'updateCollection:changelog',
             'updateCollection:property',
             'updateCollection:forumcategory'
         ]);

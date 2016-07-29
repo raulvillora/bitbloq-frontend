@@ -109,6 +109,11 @@ angular
                     templateUrl: 'views/learn.html',
                     controller: 'LearnCtrl'
                 })
+                .when('/forum/:forumsection?/:forumresource?', {
+                    templateUrl: 'views/forum/forum.html',
+                    controller: 'ForumCtrl',
+                    reloadOnSearch: false
+                })
                 .when('/help/:section?/:forumsection?/:forumresource?', {
                     templateUrl: 'views/help/help.html',
                     controller: 'HelpCtrl',

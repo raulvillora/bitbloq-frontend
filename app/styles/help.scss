@@ -1,5 +1,4 @@
 $faqlistWidth: 300px;
-$changeLogsAsideWidth: 228px;
 
 .help--ru {
     .faq__aside {
@@ -84,45 +83,6 @@ $changeLogsAsideWidth: 228px;
             p {
                 margin-top: 20px;
                 margin-bottom: 20px;
-            }
-        }
-    }
-
-    .changelogs {
-        line-height: 28px;
-
-        .changelogs__versions {
-            height: 100%;
-            width: $changeLogsAsideWidth;
-            float: left;
-            background-color: #ddd;
-            padding: 20px;
-
-            .bugs--list {
-                li {
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .changelogs__items__container {
-            width: calc(100% - #{$changeLogsAsideWidth});
-            float: right;
-            padding: 20px;
-
-            .changelogs__item {
-                &:before {
-                    content: '-';
-                    padding-right: 5px;
-                }
-                cursor: default;
-            }
-
-            .changelogs__item__title {
-                color: #6a6d75;
-                font-size: 16px;
-                font-weight: 700;
-                cursor: default;
             }
         }
     }
