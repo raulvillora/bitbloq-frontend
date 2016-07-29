@@ -10,3 +10,11 @@
 .need-help {
     font-weight: bold;
 }
+
+.help__title-tab {
+    color: #8c919b;
+    &:hover, &:focus {
+        text-decoration: none;
+        color: #373b44;
+    }
+}
