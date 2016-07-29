@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc function
- * @name bitbloqApp.controller:TutorialsCtrl
+ * @name bitbloqApp.controller:LearnCtrl
  * @description
- * # TutorialsCtrl
+ * # LearnCtrl
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')

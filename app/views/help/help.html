@@ -13,9 +13,6 @@
                 <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':currentTab === 0}" ng-click="setTab(0)" role="button" tabindex="0" data-element="help-faqnav">
                     <span class="menu__item__span ng-binding">{{'faq'| translate}}</span>
                 </li>
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':currentTab === 1}" ng-click="setTab(1)" role="button" tabindex="0" data-element="help-tutorialnav">
-                    <span class="menu__item__span ng-binding">{{'tutorials'| translate}}</span>
-                </li>
                 <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':currentTab === 2}" ng-click="setTab(2)" role="button" tabindex="0" data-element="help-foronav">
                     <span class="menu__item__span ng-binding">
                         {{'help_title_forum' | translate}}
@@ -25,7 +22,6 @@
         </aside>
         <div class="tabs-layout__content">
             <div ng-include="'views/help/faq.html'" class="tab faqs" data-ng-show="currentTab===0"></div>
-            <div ng-include="'views/help/tutorials.html'" class="tab tutorials" data-ng-show="currentTab===1"></div>
 
             <div ng-include="'views/forum/forum.html'" class="tab forum__view" data-ng-show="currentTab===2" ng-controller="ForumCtrl as forum" data-element="forum-scroll"></div>
         </div>

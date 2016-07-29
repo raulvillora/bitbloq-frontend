@@ -11,19 +11,9 @@ angular.module('bitbloqApp')
     .controller('HelpCtrl', function($scope, $routeParams, $location, $route, faqsApi, $translate, $log, commonModals, changeLogsApi) {
 
         switch ($routeParams.section) {
-            case 'tutorial':
-            case 'tuto':
-            case 'Tutorial':
-            case 'Tuto':
-                $scope.currentTab = 1;
-                break;
             case 'forum':
             case 'Forum':
                 $scope.currentTab = 2;
-                break;
-            case 'updates':
-            case 'Updates':
-                $scope.currentTab = 3;
                 break;
             case 'faq':
             case 'Faq':
@@ -40,14 +30,8 @@ angular.module('bitbloqApp')
                     case 0:
                         section = 'faq';
                         break;
-                    case 1:
-                        section = 'tutorial';
-                        break;
                     case 2:
                         section = 'forum';
-                        break;
-                    case 3:
-                        section = 'updates';
                         break;
                 }
                 $route.current.pathParams.section = section;
