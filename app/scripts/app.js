@@ -110,8 +110,8 @@ angular
                     controller: 'LearnCtrl'
                 })
                 .when('/forum/:forumsection?/:forumresource?', {
-                    templateUrl: 'views/forum/forum.html',
-                    controller: 'ForumCtrl',
+                    templateUrl: 'views/help/help.html',
+                    controller: 'HelpCtrl',
                     reloadOnSearch: false
                 })
                 .when('/help/:section?/:forumsection?/:forumresource?', {
