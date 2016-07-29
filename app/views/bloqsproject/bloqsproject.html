@@ -22,6 +22,13 @@
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}" >{{ getSavingStatusIdLabel() | translate }}</span>
             </li>
+            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ 'load' | translate }}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="sendHex()">
+                    <svg class="svg-icon">
+                        <use xlink:href="#chrome"></use>
+                    </svg>
+                </button>
+            </li>
             <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ 'verify' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
                     <svg class="svg-icon">
