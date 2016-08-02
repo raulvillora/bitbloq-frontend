@@ -31,7 +31,7 @@
         <div class="language">
             <div class="dropdown_box num-items-{{envData.config.supportedLanguages.length}}" data-ng-class="{'open': showDropdown}" data-element="landing-language-dropdown">
                 <ul class="dropdown_list" data-ng-click="showDropdown = false">
-                    <li data-ng-repeat="language in envData.config.supportedLanguages" data-ng-click="translate.use(language)" data-element="landing-language-{{language}}">
+                    <li data-ng-repeat="language in envData.config.supportedLanguages" data-ng-click="translate.use(language);common.saveUserLanguage(language)" data-element="landing-language-{{language}}">
                         <svg class="svg-icon">
                             <use xlink:href="" ng-attr-xlink:href="{{'#flag_' + language}}"></use>
                         </svg>{{ language | translate }}

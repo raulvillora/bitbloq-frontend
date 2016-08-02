@@ -231,8 +231,8 @@ module.exports = function(grunt) {
         grunt.log.writeln('importusers timestamp:' + timestamp);
 
         var items = grunt.file.readJSON('backupsDB/' + timestamp + '/user.json');
-        var extraUsers = grunt.file.readJSON('backupsDB/extraUsers.json');
-        items = items.concat(extraUsers);
+    //    var extraUsers = grunt.file.readJSON('backupsDB/extraUsers.json');
+      //  items = items.concat(extraUsers);
         if(startOn){
             items.splice(0, startOn*25);
         }

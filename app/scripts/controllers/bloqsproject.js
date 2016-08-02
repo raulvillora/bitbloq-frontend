@@ -9,9 +9,13 @@
  */
 
 angular.module('bitbloqApp')
+<<<<<<< Updated upstream
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window,
         $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog,
         _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi) {
+=======
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, web2boardApi, commonModals, hw2Bloqs) {
+>>>>>>> Stashed changes
 
         /*************************************************
          Project save / edit
@@ -345,6 +349,19 @@ angular.module('bitbloqApp')
 
         $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
 
+        $scope.serverCompile = function() {
+            var data = {
+                board: getBoardMetaData().mcu,
+                code: $scope.getPrettyCode()
+            };
+            web2boardApi.compile(data).then(function(response) {
+                console.log('response');
+                console.log(response);
+                $scope.sendHex(data.board, response.data);
+            });
+
+        };
+
         /*************************************************
          web2board communication
          *************************************************/
@@ -474,7 +491,6 @@ angular.module('bitbloqApp')
         }
 
         function verifyW2b2() {
-            console.log("entro al verify!!!!");
             web2board.verify($scope.getPrettyCode());
         }
 

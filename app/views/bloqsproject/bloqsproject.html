@@ -1,63 +1,63 @@
 <!-- <div ng-class="{'container--main':true, 'header--collapsed':collapsedHeader, 'header--anonymous':!common.user}"> -->
-<div ng-class="{'make-view':true, 'main--collapsed':collapsedHeader || !common.user, 'walkthrough':tourCurrentStep}" class="step-{{tourCurrentStep}}">
+<div class="step-{{tourCurrentStep}}" ng-class="{'make-view':true, 'main--collapsed':collapsedHeader || !common.user, 'walkthrough':tourCurrentStep}">
     <!-- Navigation -->
-    <div ng-show="common.user && common.section === 'bloqsproject'" ng-class="{'nav':true, 'nav--bar':true, 'nav--make':true, 'header--collapsed':collapsedHeader}">
+    <div ng-class="{'nav':true, 'nav--bar':true, 'nav--make':true, 'header--collapsed':collapsedHeader}" ng-show="common.user && common.section === 'bloqsproject'">
         <div class="tour-steps">
-            <div ng-show="tourCurrentStep === 7 && common.user" class="tour-step--seventh--logged tour-step--right">
+            <div class="tour-step--seventh--logged tour-step--right" ng-show="tourCurrentStep === 7 && common.user">
                 <small>{{ 'tour-step-seven' | translate }}</small>
                 <span>{{ 'tour-step-seven-text' | translate }}</span>
             </div>
         </div>
         <ul class="nav__menu">
             <li class="nav--logo" data-element="nav-logo">
-                <a data-ng-href="#/{{common.user?'projects':''}}" class="nav__menu__link">
+                <a class="nav__menu__link" data-ng-href="#/{{common.user?'projects':''}}">
                     <svg class="svg-icon svg-icon-logo">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logoBibtloq_webTool"></use>
+                        <use xlink:href="#logoBibtloq_webTool" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
                     </svg>
                 </a>
             </li>
             <li class="nav__menu__item project--title">
-                <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="commonModals.renameProject(project)">{{project.name || 'new-project' | translate}}
+                <h1 class="h3 make__project--name" data-element="project-name" id="currentproject" ng-click="commonModals.renameProject(project)">{{project.name || 'new-project' | translate}}
                     <span></span>
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}">{{ getSavingStatusIdLabel() | translate }}</span>
             </li>
-            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ 'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="chromeAppApi.sendHexDemoUno()">
+            <li class="nav__menu__item nav__item--white right--last" data-tooltip-position="bottom" data-tooltip="{{ 'load' | translate }}" data-tooltips="true">
+                <button class="nav__menu__btn btn" data-ng-click="serverCompile()">
                     <svg class="svg-icon">
                         <use xlink:href="#chrome"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ 'verify' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
+            <li class="nav__menu__item nav__item--white right--last" data-tooltip-position="bottom" data-tooltip="{{ 'verify' | translate }}" data-tooltips="true">
+                <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()">
                     <svg class="svg-icon">
                         <use xlink:href="#verificar"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ 'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="upload()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-walkthrough="upload">
+            <li class="nav__menu__item nav__item--white right" data-tooltip-position="bottom" data-tooltip="{{ 'load' | translate }}" data-tooltips="true">
+                <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="upload()" data-ng-disabled="isWeb2BoardInProgress()" data-walkthrough="upload">
                     <svg class="svg-icon">
                         <use xlink:href="#cargar"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="!project._acl.ALL && utils.userIsOwner(project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!project._id || !utils.userIsOwner(project, common.user._id)}" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="!project._acl.ALL && utils.userIsOwner(project, common.user._id)" data-tooltip-position="bottom" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}">
+                <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':!project._id || !utils.userIsOwner(project, common.user._id)}" data-ng-click="publishProject()" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
                     <svg class="svg-icon">
                         <use xlink:href="#publicar"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl.ALL && project._id && utils.userIsOwner(project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}" data-tooltip-position="bottom">
-                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(project)" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl.ALL && project._id && utils.userIsOwner(project, common.user._id)" data-tooltip-position="bottom" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}">
+                <button data-ng-click="commonModals.doPrivateProject(project)" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(project, common.user._id)}">
                     <svg class="svg-icon">
                         <use xlink:href="#privado"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl['user:' + common.user._id].permission === 'READ' || project._acl.ALL && project._id && !utils.userIsOwner(project, common.user._id)" data-tooltips="true" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltip-position="bottom">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl['user:' + common.user._id].permission === 'READ' || project._acl.ALL && project._id && !utils.userIsOwner(project, common.user._id)" data-tooltip-position="bottom" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltips="true">
                 <button class="nav__menu__btn btn" data-ng-click="commonModals.clone(project, true)">
                     <svg class="svg-icon">
                         <use xlink:href="#mas"></use>
@@ -67,22 +67,22 @@
         </ul>
     </div>
     <!-- Actions Menu -->
-    <div class="actions--make" data-ng-include="'views/makeActions.html'" data-ng-controller="MakeActionsCtrl"></div>
+    <div class="actions--make" data-ng-controller="MakeActionsCtrl" data-ng-include="'views/makeActions.html'"></div>
     <!-- Left Bar -->
     <div data-ng-class="{'content--main':true, 'content--main--collapse':collapsedHeader}" data-ng-click="dropdown = false">
         <aside data-ng-class="{'tabs--make--left':true, 'content--main--collapse':collapsedHeader}">
             <ul class="tabs__menu">
-                <li data-element="hardware-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===0}" data-ng-click="setTab(0)" data-tooltips="true" data-tooltip="{{ 'hardware' | translate }}" data-tooltip-position="right">
+                <li data-element="hardware-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===0}" data-ng-click="setTab(0)" data-tooltip-position="right" data-tooltip="{{ 'hardware' | translate }}" data-tooltips="true">
                     <svg class="svg-icon">
                         <use xlink:href="#hardware"></use>
                     </svg>
                 </li>
-                <li data-walkthrough="software-tab" data-element="software-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===1}" data-ng-click="setTab(1); handleTour(5)" data-tooltips="true" data-tooltip="{{ 'software' | translate }}" data-tooltip-position="right">
+                <li data-element="software-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===1}" data-ng-click="setTab(1); handleTour(5)" data-tooltip-position="right" data-tooltip="{{ 'software' | translate }}" data-tooltips="true" data-walkthrough="software-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#software"></use>
                     </svg>
                 </li>
-                <li data-element="info-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltips="true" data-tooltip="{{ 'project-info' | translate }}" data-tooltip-position="right">
+                <li data-element="info-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltip-position="right" data-tooltip="{{ 'project-info' | translate }}" data-tooltips="true">
                     <svg class="svg-icon">
                         <use xlink:href="#info"></use>
                     </svg>
@@ -90,12 +90,12 @@
             </ul>
         </aside>
         <div class="tab--container">
-            <div class="tab--make" data-ng-show="currentTab===0" data-ng-include="'views/bloqsproject/hardwareTab.html'"></div>
-            <div class="tab--make" data-ng-show="currentTab===1" data-ng-include="'views/bloqsproject/bloqstab.html'"></div>
-            <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/infotab.html'"></div>
+            <div class="tab--make" data-ng-include="'views/bloqsproject/hardwareTab.html'" data-ng-show="currentTab===0"></div>
+            <div class="tab--make" data-ng-include="'views/bloqsproject/bloqstab.html'" data-ng-show="currentTab===1"></div>
+            <div class="tab--make" data-ng-include="'views/infotab.html'" data-ng-show="currentTab===2"></div>
             <div data-ng-repeat="project in projects">
                 <p data-ng-click="test()">test</p>
-                <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../../images/common/default-project.png" />
+                <img err-src="../../images/common/default-project.png" ng-src="{{common.urlImage + 'project/' + project._id}}"/>
             </div>
         </div>
     </div>
