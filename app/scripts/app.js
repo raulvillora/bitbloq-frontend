@@ -105,6 +105,15 @@ angular
                     templateUrl: 'views/project.html',
                     controller: 'ProjectCtrl'
                 })
+                .when('/learn', {
+                    templateUrl: 'views/learn.html',
+                    controller: 'LearnCtrl'
+                })
+                .when('/forum/:forumsection?/:forumresource?', {
+                    templateUrl: 'views/help/help.html',
+                    controller: 'HelpCtrl',
+                    reloadOnSearch: false
+                })
                 .when('/help/:section?/:forumsection?/:forumresource?', {
                     templateUrl: 'views/help/help.html',
                     controller: 'HelpCtrl',

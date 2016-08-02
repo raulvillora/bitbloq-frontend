@@ -2,19 +2,15 @@
 
 /**
  * @ngdoc function
- * @name bitbloqApp.controller:HelpCtrl
+ * @name bitbloqApp.controller:LearnCtrl
  * @description
- * # HelpCtrl
+ * # LearnCtrl
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HelpCtrl', function($scope, $routeParams, $location, $route, $translate, $log, commonModals) {
+    .controller('LearnCtrl', function($scope, commonModals) {
 
-        $scope.currentItem = {};
-        $scope.$translate = $translate;
         $scope.commonModals = commonModals;
-        $scope.currentTab = 2;
-
         $scope.diwoURL = 'http://diwo.bq.com/';
 
         $scope.$watch('common.user.language', function(newValue, oldValue) {
