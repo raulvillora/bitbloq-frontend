@@ -130,10 +130,10 @@
                     {{'show-console' | translate}}
                 </div>
                 <!--<div class="dropdown__item" data-ng-click="chartMonitor()" data-ng-disabled="isWeb2BoardInProgress()" data-element="makeactions-menuview-console">-->
-                    <!--<svg class="svg-icon svg-icon&#45;&#45;text svg-icon&#45;&#45;menu">-->
-                        <!--<use xlink:href="#Ver_verSerialMonitor"></use>-->
-                    <!--</svg>-->
-                    <!--Chart monitor-->
+                <!--<svg class="svg-icon svg-icon&#45;&#45;text svg-icon&#45;&#45;menu">-->
+                <!--<use xlink:href="#Ver_verSerialMonitor"></use>-->
+                <!--</svg>-->
+                <!--Chart monitor-->
                 <!--</div>-->
                 <div class="dropdown__item" data-ng-click="showWeb2boardSettings()" data-ng-disabled="isWeb2BoardInProgress()" data-element="makeactions-menuview-console">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
@@ -243,6 +243,13 @@
         <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user}" data-ng-click="commonModals.clone(project)">
             <svg class="svg-icon">
                 <use xlink:href="#mas"></use>
+            </svg>
+        </button>
+    </li>
+    <li class="nav__menu__item right">
+        <button class="nav__menu__btn btn" data-ng-click="chromeAppApi.sendHexDemoUno()">
+            <svg class="svg-icon">
+                <use xlink:href="#chrome"></use>
             </svg>
         </button>
     </li>

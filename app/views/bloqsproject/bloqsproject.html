@@ -20,10 +20,10 @@
                 <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="commonModals.renameProject(project)">{{project.name || 'new-project' | translate}}
                     <span></span>
                 </h1>
-                <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}" >{{ getSavingStatusIdLabel() | translate }}</span>
+                <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}">{{ getSavingStatusIdLabel() | translate }}</span>
             </li>
             <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ 'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="sendHex()">
+                <button class="nav__menu__btn btn" data-ng-click="chromeAppApi.sendHexDemoUno()">
                     <svg class="svg-icon">
                         <use xlink:href="#chrome"></use>
                     </svg>
@@ -95,7 +95,7 @@
             <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/infotab.html'"></div>
             <div data-ng-repeat="project in projects">
                 <p data-ng-click="test()">test</p>
-                <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../../images/common/default-project.png"/>
+                <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../../images/common/default-project.png" />
             </div>
         </div>
     </div>
