@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('chromeAppApi', function($window, $q, envData, alertsService) {
+    .service('chromeAppApi', function($window, $q, envData, alertsService, $http) {
         var exports = {};
 
         var openPort,
@@ -24,11 +24,11 @@ angular.module('bitbloqApp')
 
                     try {
                         var connectedPort = chrome.runtime.connect(envData.config.chromeAppId);
-                        connectedPort.onConnect.addListener(function(port) {
-                            console.log('port connected', d);
-                            openPort = connectedPort;
-                            itsConnectedPromise.resolve();
-                        });
+                        /*    connectedPort.onConnect.addListener(function(port) {
+                                console.log('port connected', d);
+                                openPort = connectedPort;
+                                itsConnectedPromise.resolve();
+                            });*/
                         connectedPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
 
@@ -42,6 +42,9 @@ angular.module('bitbloqApp')
                             }
                             console.log('avrgirl is done:', msg);
                         });
+
+                        openPort = connectedPort;
+                        itsConnectedPromise.resolve();
 
                     } catch (exp) {
                         console.log('cant connect to plugin', exp);
@@ -71,6 +74,14 @@ angular.module('bitbloqApp')
             connect().then(function() {
                 console.log('send message');
                 openPort.postMessage(message);
+            });
+        };
+
+        exports.compile = function(data) {
+            return $http({
+                method: 'POST',
+                url: envData.config.web2boardUrl + 'compile',
+                data: data
             });
         };
 
