@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, $routeParams, _, alertsService, envData, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, $localStorage) {
+    .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, chromeAppApi, $routeParams, _, alertsService, envData, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, $localStorage) {
 
         $window.onbeforeunload = confirmExit;
 
@@ -113,6 +113,26 @@ angular.module('bitbloqApp')
 
         $scope.startAutosave = function() {
             projectApi.startAutosave(_saveProject);
+        };
+
+
+        $scope.serverCompile = function() {
+            var data = {
+                board: getBoardMetaData().mcu,
+                code: utils.prettyCode($scope.project.code)
+            };
+
+            chromeAppApi.compile(data).then(function(response) {
+                console.log('response');
+                console.log(response);
+                var message = {
+                    board: data.board,
+                    file: response.data
+                };
+                chromeAppApi.sendHex(message);
+
+            });
+
         };
 
         $scope.verify = function() {
