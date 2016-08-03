@@ -24,7 +24,14 @@ angular.module('bitbloqApp')
 
                     try {
                         console.log('create port');
-                        openPort = chrome.runtime.connect('envData.config.chromeAppId');
+
+                        var timeoutId = setTimeout(function() {
+                            itsConnectedPromise.reject({
+                                error: 'CONNECTION_TIMEOUT'
+                            });
+                        }, 5000);
+
+                        openPort = chrome.runtime.connect('ddpdpmibfdhifigignfdiggfbcmfblfj');
 
                         openPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
@@ -36,21 +43,26 @@ angular.module('bitbloqApp')
 
                         openPort.onMessage.addListener(function(msg) {
                             console.log('onMessage', msg);
+                            if (msg === 'connected') {
+                                console.log('chromeapp connected');
+                                clearTimeout(timeoutId);
+                                itsConnectedPromise.resolve();
+                            }
+
                             if (msg.error) {
                                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
                             }
                         });
-                        itsConnectedPromise.resolve();
 
                     } catch (exp) {
                         console.log('cant connect to plugin', exp);
                         itsConnectedPromise.reject({
-                            error: 'cant connecto plugin'
+                            error: 'CANT_CONNECT_WITH_PLUGIN'
                         });
                     }
                 } else {
                     itsConnectedPromise.reject({
-                        error: 'Only works on chrome'
+                        error: 'CHROME_NOT_DETECTED'
                     });
                 }
             }
@@ -67,10 +79,15 @@ angular.module('bitbloqApp')
         };
 
         exports.sendHex = function(message) {
-            connect().then(function() {
-                console.log('send message');
+            exports.itsConnected().then(function() {
+                console.log('send hex');
+                message.type = 'upload';
                 openPort.postMessage(message);
             });
+        };
+
+        exports.itsConnected = function(message) {
+            return connect();
         };
 
         return exports;
