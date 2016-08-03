@@ -8,7 +8,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2boardV2', function ($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-                                      alertsService, WSHubsAPI, OpenWindow, $compile, $translate, $location,
+                                      alertsService, WSHubsAPI, WSHubsAPIRequests, OpenWindow, $compile, $translate, $location,
                                       commonModals) {
 
         /** Variables */
@@ -162,7 +162,7 @@ angular.module('bitbloqApp')
             showUpdateModalFlag = showUpdateModalFlag === true && tryCount >= TIMES_TRY_TO_START_W2B;
             //noinspection JSUnresolvedFunction
             callback = callback || new Promise();
-            if (isWSNotConnected(api.wsClient)) {
+            if (envData.config.serviceType === 'ws' && isWSNotConnected(api.wsClient)) {
                 if (tryCount === 1) {
                     w2bToast = alertsService.add('web2board_toast_startApp', 'web2board', 'loading');
                 }
@@ -272,7 +272,12 @@ angular.module('bitbloqApp')
 
         /* Set up api*/
 
-        api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper, $q);
+        if(envData.config.serviceType==='http'){
+            api = WSHubsAPIRequests.construct();
+        } else if (envData.config.serviceType==='ws') {
+            api = WSHubsAPI.construct(web2boarTimeOutResponse, webSocketWrapper, $q);
+        }
+
 
         api.defaultErrorHandler = function (error) {
             $log.error('Error receiving message: ' + error);
@@ -314,27 +319,42 @@ angular.module('bitbloqApp')
                 openCommunication(function () {
                     return api.CodeHub.server.compile(code).then(function () {
                         alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
-                    }, function (error) {
-                        handleCompileError(error);
+                    }).catch(handleCompileError)
                     }).finally(removeInProgressFlag);
-                });
             }
         };
 
         web2board.upload = function (boardMcu, code) {
-            if (!inProgress) {
-                if (!code || !boardMcu) {
-                    alertsService.add('alert-web2board-boardNotReady', 'web2board', 'warning');
-                    return;
-                }
-                inProgress = true;
-                openCommunication(function () {
-                    alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
-                    return api.CodeHub.server.upload(code, boardMcu)
-                        .then(updateSuccessfullyFinished, handleUploadError)
-                        .finally(removeInProgressFlag);
-                });
+
+            if (envData.config.serviceType === "http"){
+                return api.CodeHub.server.getHexData(code, boardMcu)
+                    .then(function(result){
+                            updateSuccessfullyFinished(result);
+                            console.log("HEX: ");
+                            console.log(result['py/tuple'][1]);
+                        })
+                    .catch(handleUploadError)
+                    .finally(removeInProgressFlag);
             }
+
+            else{
+                if (!inProgress) {
+                    if (!code || !boardMcu) {
+                        alertsService.add('alert-web2board-boardNotReady', 'web2board', 'warning');
+                        return;
+                    }
+                    inProgress = true;
+                    openCommunication(function () {
+                        alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
+                        return api.CodeHub.server.upload(code, boardMcu)
+                            .then(updateSuccessfullyFinished)
+                            .catch(handleUploadError)
+                            .finally(removeInProgressFlag);
+                    });
+                }
+
+            }
+
         };
 
         web2board.serialMonitor = function (board) {
@@ -413,15 +433,18 @@ angular.module('bitbloqApp')
         };
 
         web2board.version = function () {
-            openCommunication();
+            openCommunication(function () {
+                return api.VersionsHandlerHub.server.getVersion;
+            });
         };
 
         web2board.uploadHex = function (boardMcu, hexText) {
             openCommunication(function () {
                 alertsService.add('alert-web2board-settingBoard', 'web2board', 'loading');
                 api.CodeHub.server.uploadHex(hexText, boardMcu)
-                    .then(updateSuccessfullyFinished, handleUploadError
-                    ).finally(removeInProgressFlag);
+                    .then(updateSuccessfullyFinished)
+                    .catch(handleUploadError)
+                    .finally(removeInProgressFlag);
             });
         };
 

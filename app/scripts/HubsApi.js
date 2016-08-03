@@ -190,7 +190,7 @@
         this.CodeHub.server = {
             __HUB_NAME : 'CodeHub',
 
-            getHexData : function (code){
+            getHexData : function (code, board){
 
                 return constructMessage('CodeHub', 'get_hex_data', arguments);
             },
@@ -606,6 +606,7 @@
             }
         };
     }
+
 
 
     WSHubsAPI.construct = function(serverTimeout, wsClientClass, promiseClass) {

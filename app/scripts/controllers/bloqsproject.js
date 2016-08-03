@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, web2boardV2, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs) {
 
         /*************************************************
          Project save / edit
@@ -446,7 +446,7 @@ angular.module('bitbloqApp')
 
         function uploadW2b2() {
             if ($scope.project.hardware.board) {
-                web2board.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
+                web2boardV2.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
@@ -466,7 +466,7 @@ angular.module('bitbloqApp')
         }
 
         function verifyW2b2() {
-            web2board.verify($scope.getPrettyCode());
+            web2boardV2.verify($scope.getPrettyCode());
         }
 
         function serialMonitorW2b1() {

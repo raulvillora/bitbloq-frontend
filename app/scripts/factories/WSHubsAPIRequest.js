@@ -2,6 +2,9 @@
 
 angular.module('bitbloqApp')
     .factory('WSHubsAPIRequests', function ($window, $q, $http) {
+        var exports = {},
+            api;
+
         function ConnectionWrapper() {
             this.send = function (message) {
                 var messageObj = JSON.parse(message),
@@ -26,10 +29,14 @@ angular.module('bitbloqApp')
             };
         }
 
-        var api = new $window.WSHubsAPI.construct(40000, ConnectionWrapper, $q);
-        api.connect();
-        api.wsClient.onopen();
-        api.wsClient.readyState = WebSocket.OPEN;
+        exports.construct = function () {
+            api = $window.WSHubsAPI.construct(40000, ConnectionWrapper, $q);
+            api.connect();
+            api.wsClient.onopen();
+            api.wsClient.readyState = WebSocket.OPEN;
+            return api;
+        };
 
-        return api;
+        return exports;
+
     });
