@@ -12,13 +12,13 @@ angular.module('bitbloqApp')
         var exports = {};
 
         var openPort,
-            itsConnectedPromise;
+            isConnectedPromise;
 
         console.debug('chromeAppId', envData.config.chromeAppId);
 
         function connect() {
-            if (!itsConnectedPromise || itsConnectedPromise.promise.$$state.status === 2) {
-                itsConnectedPromise = $q.defer();
+            if (!isConnectedPromise || isConnectedPromise.promise.$$state.status === 2) {
+                isConnectedPromise = $q.defer();
 
                 if ($window.chrome) {
 
@@ -26,18 +26,18 @@ angular.module('bitbloqApp')
                         console.log('create port');
 
                         var timeoutId = setTimeout(function() {
-                            itsConnectedPromise.reject({
+                            isConnectedPromise.reject({
                                 error: 'CONNECTION_TIMEOUT'
                             });
                         }, 5000);
 
-                        openPort = chrome.runtime.connect('ddpdpmibfdhifigignfdiggfbcmfblfj');
+                        openPort = chrome.runtime.connect(envData.config.chromeAppId);
 
                         openPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
                             //se desconecta todo el rato? usa 127.0.0.1 y no localhost
 
-                            itsConnectedPromise = null;
+                            isConnectedPromise = null;
                             openPort = null;
                         });
 
@@ -46,7 +46,7 @@ angular.module('bitbloqApp')
                             if (msg === 'connected') {
                                 console.log('chromeapp connected');
                                 clearTimeout(timeoutId);
-                                itsConnectedPromise.resolve();
+                                isConnectedPromise.resolve();
                             }
 
                             if (msg.error) {
@@ -56,18 +56,18 @@ angular.module('bitbloqApp')
 
                     } catch (exp) {
                         console.log('cant connect to plugin', exp);
-                        itsConnectedPromise.reject({
+                        isConnectedPromise.reject({
                             error: 'CANT_CONNECT_WITH_PLUGIN'
                         });
                     }
                 } else {
-                    itsConnectedPromise.reject({
+                    isConnectedPromise.reject({
                         error: 'CHROME_NOT_DETECTED'
                     });
                 }
             }
 
-            return itsConnectedPromise.promise;
+            return isConnectedPromise.promise;
         }
 
         exports.sendHexDemoUno = function() {
@@ -79,14 +79,14 @@ angular.module('bitbloqApp')
         };
 
         exports.sendHex = function(message) {
-            exports.itsConnected().then(function() {
+            exports.isConnected().then(function() {
                 console.log('send hex');
                 message.type = 'upload';
                 openPort.postMessage(message);
             });
         };
 
-        exports.itsConnected = function(message) {
+        exports.isConnected = function(message) {
             return connect();
         };
 

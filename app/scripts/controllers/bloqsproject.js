@@ -9,7 +9,9 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q,
+        $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
+        utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, compilerApi) {
 
         /*************************************************
          Project save / edit
@@ -501,18 +503,70 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if (web2board.isWeb2boardV2()) {
-                verifyW2b2();
+            //if (common.os === 'ChromeOS') {
+            if (common.os === 'Mac') {
+                var board = getBoardMetaData();
+                if (!board) {
+                    board = 'bt328';
+                } else {
+                    board = board.mcu;
+                }
+                compilerApi.compile({
+                    board: board,
+                    code: $scope.getPrettyCode()
+                }).then(function(response) {
+                    console.log('response');
+                    console.log(response);
+                }).catch(function(error) {
+                    console.log('error');
+                    console.log(error);
+                });
             } else {
-                verifyW2b1();
+                if (web2board.isWeb2boardV2()) {
+                    verifyW2b2();
+                } else {
+                    verifyW2b1();
+                }
             }
         };
 
         $scope.upload = function() {
-            if (web2board.isWeb2boardV2()) {
-                uploadW2b2();
+            //if (common.os === 'ChromeOS') {
+            if (common.os === 'Mac') {
+                chromeAppApi.isConnected().then(function() {
+                    var board = getBoardMetaData();
+                    if (!board) {
+                        board = 'bt328';
+                    } else {
+                        board = board.mcu;
+                    }
+                    compilerApi.compile({
+                        board: board,
+                        code: $scope.getPrettyCode()
+                    }).then(function(response) {
+                        chromeAppApi.sendHex({
+                            board: board,
+                            file: response.data
+                        });
+                    }).catch(function(error) {
+                        console.log('error');
+                        console.log(error);
+                    });
+                }).catch(function() {
+                    chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
+                        console.log('response', response);
+                        $scope.upload();
+                    }, function(error) {
+                        console.log('install error');
+                        console.log('error', error);
+                    });
+                });
             } else {
-                uploadW2b1();
+                if (web2board.isWeb2boardV2()) {
+                    uploadW2b2();
+                } else {
+                    uploadW2b1();
+                }
             }
         };
 
@@ -680,11 +734,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 
