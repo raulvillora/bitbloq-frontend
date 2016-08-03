@@ -281,8 +281,8 @@ angular.module('bitbloqApp')
 
         exports.removeDiacritics = function(str, config, defaultName) {
             var configDefault = config || {
-                        spaces: true
-                    },
+                    spaces: true
+                },
                 newStr;
             newStr = str.replace(/[^\u0000-\u007E]/g, function(a) {
                 return diacriticsMap[a] || a;
@@ -304,9 +304,9 @@ angular.module('bitbloqApp')
             blob = new Blob([data], {
                 type: type
             });
-            if(window.navigator.msSaveOrOpenBlob){
+            if (window.navigator.msSaveOrOpenBlob) {
                 window.navigator.msSaveOrOpenBlob(blob, fileName);
-            }else{
+            } else {
                 // Read blob.
                 url = window.URL.createObjectURL(blob);
 
@@ -390,10 +390,14 @@ angular.module('bitbloqApp')
 
             if (file.type.match(/image.*/)) {
                 if (properties.without && file.type.match(properties.without)) {
-                    defered.reject({error: 'no-image'});
+                    defered.reject({
+                        error: 'no-image'
+                    });
                 } else {
                     if (fileSize > 1000000) {
-                        defered.reject({error: 'heavy'});
+                        defered.reject({
+                            error: 'heavy'
+                        });
                     } else {
                         var reader = new FileReader();
 
@@ -408,13 +412,19 @@ angular.module('bitbloqApp')
                             img.onload = function() {
                                 // access image size here
                                 if ((properties.minWidth && properties.minHeight) && (this.width < properties.minWidth || this.height < properties.minHeight)) {
-                                    defered.reject({error: 'small'});
+                                    defered.reject({
+                                        error: 'small'
+                                    });
                                 } else {
                                     if (properties.containerDest) {
                                         var dest = document.getElementById(properties.containerDest);
                                         $(dest)[0].src = img.src;
                                     }
-                                    defered.resolve({blob: blob, img: img, file: file});
+                                    defered.resolve({
+                                        blob: blob,
+                                        img: img,
+                                        file: file
+                                    });
                                 }
                             };
                         };
@@ -422,7 +432,9 @@ angular.module('bitbloqApp')
                     }
                 }
             } else {
-                defered.reject({error: 'no-image'});
+                defered.reject({
+                    error: 'no-image'
+                });
             }
             angular.element('.main-image--input').val(null);
 
@@ -443,14 +455,14 @@ angular.module('bitbloqApp')
             return pretty;
         };
 
-        exports.getOs = function(){
+        exports.getOs = function() {
 
-            if (navigator.platform.indexOf('Win') !== -1) {
+            if ($window.navigator.platform.indexOf('Win') !== -1) {
                 return 'Windows';
-            } else if (navigator.platform.indexOf('Mac') !== -1) {
+            } else if ($window.navigator.platform.indexOf('Mac') !== -1) {
                 return 'Mac';
-            } else if (navigator.platform.indexOf('Linux') !== -1) {
-                return 'Linux';
+            } else if ($window.navigator.userAgent.indexOf('CrOS') !== -1) {
+                return 'ChromeOS';
             } else {
                 return 'Linux';
             }
