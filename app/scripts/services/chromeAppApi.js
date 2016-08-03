@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('chromeAppApi', function($window, $q, envData, alertsService, $http) {
+    .service('chromeAppApi', function($window, $q, envData, alertsService) {
         var exports = {};
 
         var openPort,
@@ -23,20 +23,22 @@ angular.module('bitbloqApp')
                 if ($window.chrome) {
 
                     try {
-                        openPort = chrome.runtime.connect(envData.config.chromeAppId);
+                        console.log('create port');
+                        openPort = chrome.runtime.connect('envData.config.chromeAppId');
 
                         openPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
+                            //se desconecta todo el rato? usa 127.0.0.1 y no localhost
 
                             itsConnectedPromise = null;
                             openPort = null;
                         });
 
                         openPort.onMessage.addListener(function(msg) {
+                            console.log('onMessage', msg);
                             if (msg.error) {
                                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
                             }
-                            console.log('avrgirl is done:', msg);
                         });
                         itsConnectedPromise.resolve();
 
@@ -68,14 +70,6 @@ angular.module('bitbloqApp')
             connect().then(function() {
                 console.log('send message');
                 openPort.postMessage(message);
-            });
-        };
-
-        exports.compile = function(data) {
-            return $http({
-                method: 'POST',
-                url: envData.config.web2boardUrl + 'compile',
-                data: data
             });
         };
 

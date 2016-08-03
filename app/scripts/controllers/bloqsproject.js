@@ -9,7 +9,9 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, chromeAppApi, commonModals, hw2Bloqs) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q,
+        $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
+        utils, userApi, chromeAppApi, commonModals, hw2Bloqs, compilerApi, common) {
 
         /*************************************************
          Project save / edit
@@ -466,9 +468,9 @@ angular.module('bitbloqApp')
         }
 
         function uploadW2b2() {
-            console.log("boardMetadata");
+            console.log('boardMetadata');
             console.log(getBoardMetaData());
-            console.log("scope");
+            console.log('scope');
             console.log($scope.getPrettyCode());
             if ($scope.project.hardware.board) {
                 web2board.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
@@ -524,10 +526,35 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if (web2board.isWeb2boardV2()) {
-                verifyW2b2();
+            chrome.webstore.install('https://chrome.google.com/webstore/detail/ddpdpmibfdhifigignfdiggfbcmfblfj', function(response) {
+                console.log('response', response);
+            }, function(error) {
+                console.log('error', error);
+            });
+            //if (common.os === 'ChromeOS') {
+            if (common.os === 'Mac') {
+                var board = getBoardMetaData();
+                if (!board) {
+                    board = 'bt328';
+                } else {
+                    board = board.mcu;
+                }
+                compilerApi.compile({
+                    board: board,
+                    code: $scope.getPrettyCode()
+                }).then(function(response) {
+                    console.log('response');
+                    console.log(response);
+                }).catch(function(error) {
+                    console.log('error');
+                    console.log(error);
+                });
             } else {
-                verifyW2b1();
+                if (web2board.isWeb2boardV2()) {
+                    verifyW2b2();
+                } else {
+                    verifyW2b1();
+                }
             }
         };
 
