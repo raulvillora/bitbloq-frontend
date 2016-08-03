@@ -23,27 +23,21 @@ angular.module('bitbloqApp')
                 if ($window.chrome) {
 
                     try {
-                        var connectedPort = chrome.runtime.connect(envData.config.chromeAppId);
-                        /*    connectedPort.onConnect.addListener(function(port) {
-                                console.log('port connected', d);
-                                openPort = connectedPort;
-                                itsConnectedPromise.resolve();
-                            });*/
-                        connectedPort.onDisconnect.addListener(function(d) {
+                        openPort = chrome.runtime.connect(envData.config.chromeAppId);
+
+                        openPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
 
                             itsConnectedPromise = null;
                             openPort = null;
                         });
 
-                        connectedPort.onMessage.addListener(function(msg) {
+                        openPort.onMessage.addListener(function(msg) {
                             if (msg.error) {
                                 alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
                             }
                             console.log('avrgirl is done:', msg);
                         });
-
-                        openPort = connectedPort;
                         itsConnectedPromise.resolve();
 
                     } catch (exp) {
