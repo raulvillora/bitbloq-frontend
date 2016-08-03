@@ -504,7 +504,7 @@ angular.module('bitbloqApp')
 
         $scope.verify = function() {
             //if (common.os === 'ChromeOS') {
-            if (common.os === 'Mac') {
+            if (common.os === 'Linux') {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
@@ -517,6 +517,15 @@ angular.module('bitbloqApp')
                 }).then(function(response) {
                     console.log('response');
                     console.log(response);
+                    if(response.data.error){
+                        console.log('compilation error');
+                        console.log(response.data.error);
+                        //TODO: parse errors correctly
+                        alert('ERROR:'+ response.data.error[0].error);
+                    }else {
+                        console.log('successful compilation');
+                        console.log(response.data.hex);
+                    }
                 }).catch(function(error) {
                     console.log('error');
                     console.log(error);
@@ -532,7 +541,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             //if (common.os === 'ChromeOS') {
-            if (common.os === 'Mac') {
+            if (common.os === 'Linux') {
                 chromeAppApi.isConnected().then(function() {
                     var board = getBoardMetaData();
                     if (!board) {
@@ -544,10 +553,16 @@ angular.module('bitbloqApp')
                         board: board,
                         code: $scope.getPrettyCode()
                     }).then(function(response) {
-                        chromeAppApi.sendHex({
-                            board: board,
-                            file: response.data
-                        });
+                        if(response.data.error){
+                            console.log('compilation error');
+                            console.log(response.data.error);
+
+                        }else {
+                            chromeAppApi.sendHex({
+                                board: board,
+                                file: response.data.hex
+                            });
+                        }
                     }).catch(function(error) {
                         console.log('error');
                         console.log(error);
