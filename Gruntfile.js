@@ -540,7 +540,7 @@ module.exports = function(grunt) {
         },
         addTimestampToFiles: {
             dist: {
-                htmlFiles: ['dist/**/*.html', '!dist/index.html'],
+                htmlFiles: ['dist/**/*.html', '!dist/index.html', '!dist/google0e0d0e0b7164c58a.html'],
                 localeFiles: ['dist/res/locales/*.json'],
                 configFiles: ['dist/res/config/**/*.json'],
                 imageFiles: ['dist/images/**/*.{svg,png,jpg,ico}'],
