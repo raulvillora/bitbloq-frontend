@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('utils', function(_, $q, $window) {
+    .service('utils', function(_, $q, $window, $translate) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {};
         var defaultDiacriticsRemovalap = [{
@@ -466,6 +466,26 @@ angular.module('bitbloqApp')
             } else {
                 return 'Linux';
             }
+        };
+
+
+        exports.parseCompileError = function(errors) {
+            var translatedErrors = [],
+                line = $translate.instant('line').toUpperCase(),
+                column = $translate.instant('column').toUpperCase(),
+                error = $translate.instant('error').toUpperCase(),
+                translatedError;
+
+            for(var i=0; i < errors.length; i++){
+                translatedError = error + ': '+ errors[i].error + ' ' +
+                                  line + ': '+ errors[i].line + ' ';
+                if (errors[i].column){
+                    translatedError += column + ': '+ errors[i].column;
+                }
+                translatedErrors.push(translatedError);
+            }
+
+            return translatedErrors.join('<br>');
         };
 
         return exports;

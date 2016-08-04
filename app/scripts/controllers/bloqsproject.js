@@ -503,8 +503,8 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            //if (common.os === 'ChromeOS') {
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
+            //if (common.os === 'Linux') {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
@@ -520,8 +520,11 @@ angular.module('bitbloqApp')
                     if(response.data.error){
                         console.log('compilation error');
                         console.log(response.data.error);
-                        //TODO: parse errors correctly
-                        alert('ERROR:'+ response.data.error[0].error);
+                        alertsService.add({
+                            id: 'web2board',
+                            type: 'warning',
+                            translatedText: utils.parseCompileError(response.data.error)
+                        });
                     }else {
                         console.log('successful compilation');
                         console.log(response.data.hex);
@@ -540,8 +543,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            //if (common.os === 'ChromeOS') {
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
+            //if (common.os === 'Linux') {
                 chromeAppApi.isConnected().then(function() {
                     var board = getBoardMetaData();
                     if (!board) {
