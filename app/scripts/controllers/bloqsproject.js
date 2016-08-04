@@ -503,8 +503,8 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            //if (common.os === 'ChromeOS') {
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
+            //if (common.os === 'Linux') {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
