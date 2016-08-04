@@ -517,13 +517,13 @@ angular.module('bitbloqApp')
                 }).then(function(response) {
                     console.log('response');
                     console.log(response);
-                    if(response.data.error){
+                    if (response.data.error) {
                         alertsService.add({
                             id: 'web2board',
                             type: 'warning',
                             translatedText: utils.parseCompileError(response.data.error)
                         });
-                    }else {
+                    } else {
                         alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
                     }
                 }).catch(function(error) {
@@ -540,8 +540,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (common.os === 'ChromeOS') {
-            //if (common.os === 'Linux') {
+            if (true) {
+                //if (common.os === 'ChromeOS') {
                 chromeAppApi.isConnected().then(function() {
                     var board = getBoardMetaData();
                     if (!board) {
@@ -553,13 +553,13 @@ angular.module('bitbloqApp')
                         board: board,
                         code: $scope.getPrettyCode()
                     }).then(function(response) {
-                        if(response.data.error){
+                        if (response.data.error) {
                             alertsService.add({
                                 id: 'web2board',
                                 type: 'warning',
                                 translatedText: utils.parseCompileError(response.data.error)
                             });
-                        }else {
+                        } else {
                             chromeAppApi.sendHex({
                                 board: board,
                                 file: response.data.hex
@@ -570,13 +570,14 @@ angular.module('bitbloqApp')
                         console.log(error);
                     });
                 }).catch(function() {
-                    chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
-                        console.log('response', response);
-                        $scope.upload();
-                    }, function(error) {
-                        console.log('install error');
-                        console.log('error', error);
+                    alertsService.add({
+                        text: 'instala chrome app',
+                        id: 'chromeapp-install',
+                        type: 'warning',
+                        linkText: 'aqui',
+                        link: installChromeApp
                     });
+
                 });
             } else {
                 if (web2board.isWeb2boardV2()) {
@@ -586,6 +587,16 @@ angular.module('bitbloqApp')
                 }
             }
         };
+
+        function installChromeApp() {
+            chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
+                console.log('response', response);
+                $scope.upload();
+            }, function(error) {
+                console.log('install error');
+                console.log('error', error);
+            });
+        }
 
         $scope.serialMonitor = function() {
             if (web2board.isWeb2boardV2()) {
