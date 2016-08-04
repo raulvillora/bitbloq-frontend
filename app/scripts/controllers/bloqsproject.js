@@ -503,8 +503,8 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if (common.os === 'ChromeOS') {
-            //if (common.os === 'Linux') {
+            //if (common.os === 'ChromeOS') {
+            if (common.os === 'Linux') {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
@@ -518,16 +518,13 @@ angular.module('bitbloqApp')
                     console.log('response');
                     console.log(response);
                     if(response.data.error){
-                        console.log('compilation error');
-                        console.log(response.data.error);
                         alertsService.add({
                             id: 'web2board',
                             type: 'warning',
                             translatedText: utils.parseCompileError(response.data.error)
                         });
                     }else {
-                        console.log('successful compilation');
-                        console.log(response.data.hex);
+                        alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
                     }
                 }).catch(function(error) {
                     console.log('error');
@@ -557,9 +554,11 @@ angular.module('bitbloqApp')
                         code: $scope.getPrettyCode()
                     }).then(function(response) {
                         if(response.data.error){
-                            console.log('compilation error');
-                            console.log(response.data.error);
-
+                            alertsService.add({
+                                id: 'web2board',
+                                type: 'warning',
+                                translatedText: utils.parseCompileError(response.data.error)
+                            });
                         }else {
                             chromeAppApi.sendHex({
                                 board: board,
