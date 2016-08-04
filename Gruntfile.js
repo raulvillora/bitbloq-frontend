@@ -314,16 +314,16 @@ module.exports = function(grunt) {
                 options: {
                     collapseWhitespace: true,
                     removeComments: true
-                    // preserveLineBreaks:true,
-                    // conservativeCollapse: true,
-                    // collapseBooleanAttributes: true,
-                    // removeCommentsFromCDATA: true,
-                    // removeOptionalTags: true
+                        // preserveLineBreaks:true,
+                        // conservativeCollapse: true,
+                        // collapseBooleanAttributes: true,
+                        // removeCommentsFromCDATA: true,
+                        // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
                     cwd: 'dist',
-                    src: ['*.html', 'views/**/*.html'],
+                    src: ['*.html', 'views/**/*.html', '!google0e0d0e0b7164c58a.html'],
                     dest: 'dist'
                 }]
             }
@@ -535,7 +535,7 @@ module.exports = function(grunt) {
             },
             files: {
                 src: ['app/index.html']
-                //src: ['app/**/*.html']
+                    //src: ['app/**/*.html']
             }
         },
         addTimestampToFiles: {
@@ -677,7 +677,6 @@ module.exports = function(grunt) {
             'addTimestampToFiles'
         ]);
     });
-
 
     grunt.registerTask('distGCS', function() {
         grunt.task.run([
@@ -874,7 +873,6 @@ module.exports = function(grunt) {
         });
     };
 
-
     grunt.task.registerMultiTask('addTimestampToFiles', 'Add timestamps to html, locale, config, image and static files', function() {
         grunt.log.writeln(this.target + ': ' + this.data);
         var timestamp = Date.now(),
@@ -891,7 +889,6 @@ module.exports = function(grunt) {
         console.log(staticFiles);
         var newName = '';
         var i;
-
 
         for (i = 0; i < htmlFiles.length; i++) {
             newName = timestamp + '.' + htmlFiles[i].name;
