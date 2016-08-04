@@ -36,8 +36,6 @@ angular.module('bitbloqApp')
                         openPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
                             //se desconecta todo el rato? usa 127.0.0.1 y no localhost
-
-                            isConnectedPromise = null;
                             openPort = null;
                         });
 
