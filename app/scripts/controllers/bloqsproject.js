@@ -541,7 +541,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if (true) {
-                //if (common.os === 'ChromeOS') {
+            //if (common.os === 'ChromeOS') {
                 chromeAppApi.isConnected().then(function() {
                     var board = getBoardMetaData();
                     if (!board) {
