@@ -47,8 +47,6 @@ angular.module('bitbloqApp')
 
         exports.removeProjects = [];
 
-        exports.refreshTokenPromise = null;
-
         exports.oldVersionMasthead = false;
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';

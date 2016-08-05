@@ -92,5 +92,21 @@ angular.module('bitbloqApp')
             return connect();
         };
 
+        exports.installChromeApp = function(callback) {
+            alertsService.add({
+                text: 'instalando la chrome, acepta el mensaje y sigue los pasos indicados',
+                id: 'web2board',
+                type: 'loading'
+            });
+            chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
+                console.log('response', response);
+                callback();
+            }, function(error) {
+                console.log('install error');
+                console.log('error', error);
+                callback(error);
+            });
+        }
+
         return exports;
     });

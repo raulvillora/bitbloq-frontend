@@ -60,11 +60,20 @@ angular.module('bitbloqApp')
         };
 
         /**
-         * [alert create alert message]
-         * @param  {[string, object]} text  [text to show] or object with parameters required;
-         * @param  {[string]} type [type of the alert (info, confirm, error, warning)] not required;
-         * @param  {[number]} time  [time in ms to close the alert] not required
-         * @param  {[string]} id  [Alert id] required
+         * Params
+         * @param {[type]} text           Key of translated text to show
+         * @param {[type]} id             Alert ID
+         * @param {[type]} type           Type of alert Default "info"
+         * @param {[type]} time           Time : time to autoclose the alert, default "infinite"
+         * @param {[type]} value          Value: data extra
+         * @param {[type]} preIcon
+         * @param {[type]} postIcon
+         * @param {[type]} linkText       Text in the end of the alert with link
+         * @param {[type]} link           Function to execute when click the link
+         * @param {[type]} linkParams     Params for the function in the link
+         * @param {[type]} closeFunction  Function to launch on close
+         * @param {[type]} closeParams    Params for the function in the link
+         * @param {[type]} translatedText ??
          */
         //exports.add = function(text, id, type, time, value, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams, translatedText) {
         exports.add = function(params) {
@@ -124,6 +133,9 @@ angular.module('bitbloqApp')
             }
 
             alerts.unshift(alert);
+            if (!$rootScope.$$phase) {
+                $rootScope.$apply();
+            }
 
             return alert.uid;
 

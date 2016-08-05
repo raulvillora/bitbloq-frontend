@@ -11,7 +11,7 @@
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q,
         $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
-        utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, compilerApi) {
+        utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -584,41 +584,9 @@ angular.module('bitbloqApp')
 
         $scope.verify = function() {
             if (common.os === 'ChromeOS') {
-                var board = getBoardMetaData();
-                if (!board) {
-                    board = 'bt328';
-                } else {
-                    board = board.mcu;
-                }
-                compilerApi.compile({
-                    board: board,
+                web2boardOnline.compile({
+                    board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
-                }).then(function(response) {
-                    console.log('response');
-                    console.log(response);
-                    if (response.data.error) {
-                        alertsService.add({
-                            id: 'web2board',
-                            type: 'warning',
-                            translatedText: utils.parseCompileError(response.data.error)
-                        });
-                    } else {
-                        alertsService.add({
-                            text: 'alert-web2board-compile-verified',
-                            id: 'web2board',
-                            type: 'ok',
-                            time: 5000
-                        });
-                    }
-                }).catch(function(error) {
-                    console.log('error');
-                    console.log(error);
-                    alertsService.add({
-                        text: 'alert-web2board-compile-verified',
-                        id: 'web2board',
-                        type: 'ok',
-                        time: 5000
-                    });
                 });
             } else {
                 if (web2board.isWeb2boardV2()) {
@@ -632,42 +600,9 @@ angular.module('bitbloqApp')
         $scope.upload = function() {
 
             if (common.os === 'ChromeOS') {
-                chromeAppApi.isConnected().then(function() {
-                    var board = getBoardMetaData();
-                    if (!board) {
-                        board = 'bt328';
-                    } else {
-                        board = board.mcu;
-                    }
-                    compilerApi.compile({
-                        board: board,
-                        code: $scope.getPrettyCode()
-                    }).then(function(response) {
-                        if (response.data.error) {
-                            alertsService.add({
-                                id: 'web2board',
-                                type: 'warning',
-                                translatedText: utils.parseCompileError(response.data.error)
-                            });
-                        } else {
-                            chromeAppApi.sendHex({
-                                board: board,
-                                file: response.data.hex
-                            });
-                        }
-                    }).catch(function(error) {
-                        console.log('error');
-                        console.log(error);
-                    });
-                }).catch(function() {
-                    alertsService.add({
-                        text: 'instala chrome app',
-                        id: 'chromeapp-install',
-                        type: 'warning',
-                        linkText: 'aqui',
-                        link: installChromeApp
-                    });
-
+                web2boardOnline.upload({
+                    board: getBoardMetaData(),
+                    code: $scope.getPrettyCode()
                 });
             } else {
                 if (web2board.isWeb2boardV2()) {
@@ -677,16 +612,6 @@ angular.module('bitbloqApp')
                 }
             }
         };
-
-        function installChromeApp() {
-            chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
-                console.log('response', response);
-                $scope.upload();
-            }, function(error) {
-                console.log('install error');
-                console.log('error', error);
-            });
-        }
 
         $scope.serialMonitor = function() {
             if (web2board.isWeb2boardV2()) {
