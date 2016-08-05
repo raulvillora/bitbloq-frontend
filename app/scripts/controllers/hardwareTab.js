@@ -487,10 +487,18 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
         } else if (data.type === 'components') {
             if (!$scope.project.hardware.board) {
                 $scope.subMenuHandler('boards', 'open', 1);
-                alertsService.add('bloqs-project_alert_no-board', 'error_noboard', 'error');
+                alertsService.add({
+                    text: 'bloqs-project_alert_no-board',
+                    id: 'error_noboard',
+                    type: 'error'
+                });
                 return false;
             } else if ($scope.project.hardware.robot) {
-                alertsService.add('bloqs-project_alert_only-robot', 'error_noboard', 'error');
+                alertsService.add({
+                    text: 'bloqs-project_alert_only-robot',
+                    id: 'error_noboard',
+                    type: 'error'
+                });
                 return false;
             }
             _addComponent(data);
@@ -672,20 +680,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {

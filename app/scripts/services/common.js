@@ -223,9 +223,18 @@ angular.module('bitbloqApp')
                 userApi.update({
                     language: newLang
                 }).then(function() {
-                    alertsService.add('account-saved', 'saved-user', 'ok', 5000);
+                    alertsService.add({
+                        text: 'account-saved',
+                        id: 'saved-user',
+                        type: 'ok',
+                        time: 5000
+                    });
                 }, function() {
-                    alertsService.add('account-saved-error', 'saved-user', 'warning');
+                    alertsService.add({
+                        text: 'account-saved-error',
+                        id: 'saved-user',
+                        type: 'warning'
+                    });
                 });
             }
         };

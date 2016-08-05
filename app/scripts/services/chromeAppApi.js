@@ -48,7 +48,11 @@ angular.module('bitbloqApp')
                             }
 
                             if (msg.error) {
-                                alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
+                                alertsService.add({
+                                    text: 'alert-web2board-boardNotReady',
+                                    id: 'upload',
+                                    type: 'warning'
+                                });
                             }
                         });
 

@@ -460,14 +460,13 @@ angular.module('bitbloqApp')
             if ($window.navigator.platform.indexOf('Win') !== -1) {
                 return 'Windows';
             } else if ($window.navigator.platform.indexOf('Mac') !== -1) {
-                return 'Mac';
+                return 'ChromeOS';
             } else if ($window.navigator.userAgent.indexOf('CrOS') !== -1) {
                 return 'ChromeOS';
             } else {
                 return 'Linux';
             }
         };
-
 
         exports.parseCompileError = function(errors) {
             var translatedErrors = [],
@@ -476,11 +475,11 @@ angular.module('bitbloqApp')
                 error = $translate.instant('error').toUpperCase(),
                 translatedError;
 
-            for(var i=0; i < errors.length; i++){
-                translatedError = error + ': '+ errors[i].error + ' ' +
-                                  line + ': '+ errors[i].line + ' ';
-                if (errors[i].column){
-                    translatedError += column + ': '+ errors[i].column;
+            for (var i = 0; i < errors.length; i++) {
+                translatedError = error + ': ' + errors[i].error + ' ' +
+                    line + ': ' + errors[i].line + ' ';
+                if (errors[i].column) {
+                    translatedError += column + ': ' + errors[i].column;
                 }
                 translatedErrors.push(translatedError);
             }

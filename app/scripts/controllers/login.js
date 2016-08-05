@@ -151,8 +151,7 @@ angular.module('bitbloqApp')
                                 teacherModal();
                             }
                         });
-                    }).catch(function() {
-                    });
+                    }).catch(function() {});
                 } else {
                     fireShakeEffect();
                 }
@@ -196,7 +195,7 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        function transitionForm(item){
+        function transitionForm(item) {
             item.addClass('form--login__container--transition-down');
             item.bind('webkitAnimationEnd', function() {
                 $(this).addClass('hide-container');
@@ -211,7 +210,7 @@ angular.module('bitbloqApp')
             });
         }
         $scope.setLoginFromRegister = function() {
-            $scope.isLogin=true;
+            $scope.isLogin = true;
             var $registerContainer = angular.element('#registerContainer');
             transitionForm($registerContainer);
         };
@@ -232,7 +231,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.setRegister = function() {
-            $scope.isLogin=false;
+            $scope.isLogin = false;
             var $loginContainer = angular.element('#loginContainer');
             transitionForm($loginContainer);
         };
@@ -244,7 +243,12 @@ angular.module('bitbloqApp')
                     userApi.forgottenPassword(formForgot.emailToSend.$modelValue).then(function() {
                         $scope.recovery.success = true;
                         $scope.recovery.error = false;
-                        alertsService.add('email-recovery-password-ok', 'recovery-password', 'ok', 5000);
+                        alertsService.add({
+                            text: 'email-recovery-password-ok',
+                            id: 'recovery-password',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }, function() {
                         fireShakeEffect();
                         $scope.recovery.success = false;
@@ -431,7 +435,7 @@ angular.module('bitbloqApp')
         $scope.providerOptions = {};
         var userName;
 
-        switch($location.path()){
+        switch ($location.path()) {
             case '/register':
                 $scope.isLogin = false;
                 break;

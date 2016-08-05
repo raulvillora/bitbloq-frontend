@@ -20,9 +20,18 @@ angular.module('bitbloqApp')
                 confirmAction = function() {
                     dialog.close();
                     feedbackApi.send(modalScope.comments).success(function() {
-                        alertsService.add('modal-comments-done', 'modal-comments', 'ok', 5000);
+                        alertsService.add({
+                            text: 'modal-comments-done',
+                            id: 'modal-comments',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }).error(function() {
-                        alertsService.add('modal-comments-error', 'modal-comments', 'warning');
+                        alertsService.add({
+                            text: 'modal-comments-error',
+                            id: 'modal-comments',
+                            type: 'warning'
+                        });
                     });
                 };
 
@@ -62,9 +71,18 @@ angular.module('bitbloqApp')
                 confirmAction = function() {
                     dialog.close();
                     feedbackApi.send(modalScope.comments).success(function() {
-                        alertsService.add('modal-comments-done', 'modal-comments', 'ok', 5000);
+                        alertsService.add({
+                            text: 'modal-comments-done',
+                            id: 'modal-comments',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }).error(function() {
-                        alertsService.add('modal-comments-error', 'modal-comments', 'warning');
+                        alertsService.add({
+                            text: 'modal-comments-error',
+                            id: 'modal-comments',
+                            type: 'warning'
+                        });
                     });
                 };
 
@@ -160,9 +178,18 @@ angular.module('bitbloqApp')
                 confirmAction = function() {
                     dialog.close();
                     feedbackApi.send(modalScope.comments).success(function() {
-                        alertsService.add('modal-send-error-done', 'modal-send-error', 'ok', 5000);
+                        alertsService.add({
+                            text: 'modal-send-error-done',
+                            id: 'modal-send-error',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }).error(function() {
-                        alertsService.add('modal-send-error-error', 'modal-send-error', 'warning');
+                        alertsService.add({
+                            text: 'modal-send-error-error',
+                            id: 'modal-send-error',
+                            type: 'warning'
+                        });
                     });
                 };
 
@@ -204,9 +231,18 @@ angular.module('bitbloqApp')
             var confirmAction = function() {
                     publishModal.close();
                     projectApi.publish(project).then(function() {
-                        alertsService.add('publish-project-done', 'publishing-project', 'ok', 5000);
+                        alertsService.add({
+                            text: 'publish-project-done',
+                            id: 'publishing-project',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }, function() {
-                        alertsService.add('publish-project-error', 'publishing-project', 'warning');
+                        alertsService.add({
+                            text: 'publish-project-error',
+                            id: 'publishing-project',
+                            type: 'warning'
+                        });
                     });
                 },
 
@@ -232,9 +268,18 @@ angular.module('bitbloqApp')
             var confirmAction = function() {
                     privateModal.close();
                     projectApi.private(project).then(function() {
-                        alertsService.add('private-project-done', 'publishing-project', 'ok', 5000);
+                        alertsService.add({
+                            text: 'private-project-done',
+                            id: 'publishing-project',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }, function() {
-                        alertsService.add('private-project-error', 'publishing-project', 'warning');
+                        alertsService.add({
+                            text: 'private-project-error',
+                            id: 'publishing-project',
+                            type: 'warning'
+                        });
                     });
                 },
                 modalScope = $rootScope.$new(),
@@ -271,11 +316,21 @@ angular.module('bitbloqApp')
                             if (response.data.noUsers.length > 0) {
                                 _shareUserInfoModal(response.data.noUsers, response.data.users.length);
                             } else {
-                                alertsService.add('modalShare_alert_shareWithUser', 'private-project', 'ok', 5000, response.data.users.length);
+                                alertsService.add({
+                                    text: 'modalShare_alert_shareWithUser',
+                                    id: 'private-project',
+                                    type: 'ok',
+                                    time: 5000,
+                                    value: response.data.users.length
+                                });
                             }
                         }
                     }).catch(function() {
-                        alertsService.add('make-share-with-users-error', 'private-project', 'warning');
+                        alertsService.add({
+                            text: 'make-share-with-users-error',
+                            id: 'private-project',
+                            type: 'warning'
+                        });
                     }).finally(function() {
                         dialog.close();
                     });
@@ -339,9 +394,18 @@ angular.module('bitbloqApp')
                     if (!project._acl.ALL || project._acl.ALL.permission !== 'READ') {
                         projectApi.publish(project).then(function() {
                             shareModal.close();
-                            alertsService.add('publish-project-done', 'publishing-project', 'ok', 7000);
+                            alertsService.add({
+                                text: 'publish-project-done',
+                                id: 'publishing-project',
+                                type: 'ok',
+                                time: 7000
+                            });
                         }, function() {
-                            alertsService.add('publish-project-error', 'publishing-project', 'warning');
+                            alertsService.add({
+                                text: 'publish-project-error',
+                                id: 'publishing-project',
+                                type: 'warning'
+                            });
                         });
                     } else {
                         shareModal.close();
@@ -355,9 +419,18 @@ angular.module('bitbloqApp')
                 simplePublish: function() {
                     if (!project._acl.ALL) {
                         projectApi.publish(project).then(function() {
-                            alertsService.add('publish-project-done', 'publishing-project', 'ok', 7000);
+                            alertsService.add({
+                                text: 'publish-project-done',
+                                id: 'publishing-project',
+                                type: 'ok',
+                                time: 7000
+                            });
                         }, function() {
-                            alertsService.add('publish-project-error', 'publishing-project', 'warning');
+                            alertsService.add({
+                                text: 'publish-project-error',
+                                id: 'publishing-project',
+                                type: 'warning'
+                            });
                         });
                     }
                 }
@@ -390,9 +463,19 @@ angular.module('bitbloqApp')
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
 
             function confirmAction(newName) {
-                alertsService.add('make-cloning-project', 'clone-project', 'ok', 5000);
+                alertsService.add({
+                    text: 'make-cloning-project',
+                    id: 'clone-project',
+                    type: 'ok',
+                    time: 5000
+                });
                 projectApi.clone(project._id, newName).then(function(newProjectId) {
-                    alertsService.add('make-cloned-project', 'clone-project', 'ok', 5000);
+                    alertsService.add({
+                        text: 'make-cloned-project',
+                        id: 'clone-project',
+                        type: 'ok',
+                        time: 5000
+                    });
                     if (newProjectId.data && openInTab) {
                         var newtab = $window.open('', '_blank');
                         newtab.location = '#/bloqsproject/' + newProjectId.data;
@@ -478,7 +561,13 @@ angular.module('bitbloqApp')
         function _shareUserInfoModal(noUsers, usersLength) {
             var noShareModal, confirmAction = function() {
                     noShareModal.close();
-                    alertsService.add('modalShare_alert_shareWithUser', 'private-project', 'ok', 5000, usersLength);
+                    alertsService.add({
+                        text: 'modalShare_alert_shareWithUser',
+                        id: 'private-project',
+                        type: 'ok',
+                        time: 5000,
+                        value: usersLength
+                    });
                 },
                 modalScope = $rootScope.$new();
 

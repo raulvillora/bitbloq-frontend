@@ -316,16 +316,15 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.performFactoryReset = function () {
+        $scope.performFactoryReset = function() {
             var robot = $scope.project.hardware.robot,
-                version  = common.properties.robotsFirmwareVersion[robot];
-            robotFirmwareApi.getFirmware(robot, version).then(function (result){
+                version = common.properties.robotsFirmwareVersion[robot];
+            robotFirmwareApi.getFirmware(robot, version).then(function(result) {
                 web2board.uploadHex('uno', result.data);
-            }, function () {
+            }, function() {
                 // alert("Error"); todo: add toast
             });
         };
-
 
         function checkInputLength() {
             setScrollsDimension();
@@ -493,7 +492,11 @@ angular.module('bitbloqApp')
                     if (bloqsLoadTimes < 2) {
                         loadBloqs();
                     } else {
-                        alertsService.add('make_infoError_bloqsLoadError', 'loadBloqs', 'warning');
+                        alertsService.add({
+                            text: 'make_infoError_bloqsLoadError',
+                            id: 'loadBloqs',
+                            type: 'warning'
+                        });
                     }
                 });
         }

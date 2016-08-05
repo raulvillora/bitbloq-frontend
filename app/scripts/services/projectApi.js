@@ -29,7 +29,11 @@ angular.module('bitbloqApp')
                 }, function(error) {
                     $log.debug('Save error: ', error);
                     if (error.status === 405 || error.status === 401) {
-                        alertsService.add('session-expired', 'session', 'warning');
+                        alertsService.add({
+                            text: 'session-expired',
+                            id: 'session',
+                            type: 'warning'
+                        });
                     }
                     exports.saveStatus = 3;
                     return error;
@@ -42,7 +46,6 @@ angular.module('bitbloqApp')
                 url: envData.config.serverUrl + 'project/' + idProject + '/download'
             });
         }
-
 
         //Public functions
         exports.get = function(id, params) {
@@ -209,7 +212,6 @@ angular.module('bitbloqApp')
             });
         };
 
-
         exports.generateShortUrl = function(longUrl) {
             return $http({
                 method: 'POST',
@@ -286,7 +288,6 @@ angular.module('bitbloqApp')
 
             utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
         }
-
 
         /**
          * Status of save project

@@ -66,65 +66,46 @@ angular.module('bitbloqApp')
          * @param  {[number]} time  [time in ms to close the alert] not required
          * @param  {[string]} id  [Alert id] required
          */
-        exports.add = function(text, id, type, time, data, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams, translatedText) {
+        //exports.add = function(text, id, type, time, value, preIcon, postIcon, linkText, link, linkParams, closeFunction, closeParams, translatedText) {
+        exports.add = function(params) {
+
             i += 1;
-            if (typeof(text) === 'object') {
-                id = text.id;
-                type = text.type;
-                time = text.time;
-                data = text.data;
-                preIcon = text.preIcon;
-                postIcon = text.postIcon;
-                linkText = text.linkText;
-                link = text.link;
-                linkParams = text.linkParams;
-                closeFunction = text.closeFunction;
-                closeParams = text.closeParams;
-                translatedText = text.translatedText;
-                text = text.text;
-            }
 
-            var domClass,
-                alert = {
-                    text: text,
-                    id: id,
-                    uid: Date.now(),
-                    type: type || 'info',
-                    time: time || 'infinite',
-                    domClass: domClass,
-                    preIcon: preIcon || false,
-                    postIcon: postIcon || false,
-                    value: data,
-                    index: i,
-                    linkText: linkText,
-                    linkAction: link,
-                    linkParams: linkParams,
-                    close: exports.close,
-                    closeFunction: closeFunction,
-                    closeParams: closeParams,
-                    translatedText: translatedText
-                };
-            //extend alert object with text if text is an object with the parameters
-            if (angular.isObject(text)) {
-                delete alert.text;
-                _.extend(alert, text);
-            }
+            var alert = {
+                id: params.id,
+                text: params.text,
+                uid: Date.now(),
+                type: params.type || 'info',
+                time: params.time || 'infinite',
+                domClass: null,
+                preIcon: params.preIcon || false,
+                postIcon: params.postIcon || false,
+                value: params.value,
+                index: i,
+                linkText: params.linkText,
+                linkAction: params.link,
+                linkParams: params.linkParams,
+                close: exports.close,
+                closeFunction: params.closeFunction,
+                closeParams: params.closeParams,
+                translatedText: params.translatedText
+            };
 
-            switch (type) {
+            switch (params.type) {
                 case 'info':
-                    domClass = 'alert--info';
+                    alert.domClass = 'alert--info';
                     break;
                 case 'confirm':
-                    domClass = 'alert--confirm';
+                    alert.domClass = 'alert--confirm';
                     break;
                 case 'error':
-                    domClass = 'alert--error';
+                    alert.domClass = 'alert--error';
                     break;
                 case 'warning':
-                    domClass = 'alert--warning';
+                    alert.domClass = 'alert--warning';
                     break;
                 default:
-                    domClass = 'alert--info';
+                    alert.domClass = 'alert--info';
             }
 
             _removeAlert('id', alert.id);

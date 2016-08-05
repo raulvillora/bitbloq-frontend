@@ -365,12 +365,22 @@ angular.module('bitbloqApp')
 
         $rootScope.$on('web2board:compile-error', function(event, error) {
             error = JSON.parse(error);
-            alertsService.add('alert-web2board-compile-error', 'compile', 'warning', undefined, error.stdErr);
+            alertsService.add({
+                text: 'alert-web2board-compile-error',
+                id: 'compile',
+                type: 'warning',
+                value: error.stdErr
+            });
             web2board.setInProcess(false);
         });
 
         $rootScope.$on('web2board:compile-verified', function() {
-            alertsService.add('alert-web2board-compile-verified', 'compile', 'ok', 5000);
+            alertsService.add({
+                text: 'alert-web2board-compile-verified',
+                id: 'compile',
+                type: 'ok',
+                time: 5000
+            });
             web2board.setInProcess(false);
         });
 
@@ -378,36 +388,74 @@ angular.module('bitbloqApp')
             data = JSON.parse(data);
             if (data.length > 0) {
                 if (!alertsService.isVisible('uid', serialMonitorAlert)) {
-                    alertsService.add('alert-web2board-boardReady', 'upload', 'ok', 5000, data[0]);
+                    alertsService.add({
+                        text: 'alert-web2board-boardReady',
+                        id: 'upload',
+                        type: 'ok',
+                        time: 5000,
+                        value: data[0]
+                    });
                 }
             } else {
-                alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-boardNotReady',
+                    id: 'upload',
+                    type: 'warning'
+                });
             }
         });
 
         $rootScope.$on('web2board: boardNotReady', function() {
-            alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
+            alertsService.add({
+                text: 'alert-web2board-boardNotReady',
+                id: 'upload',
+                type: 'warning'
+            });
             web2board.setInProcess(false);
         });
 
         $rootScope.$on('web2board:uploading', function(evt, port) {
-            alertsService.add('alert-web2board-uploading', 'upload', 'loading', undefined, port);
+            alertsService.add({
+                text: 'alert-web2board-uploading',
+                id: 'upload',
+                type: 'loading',
+                value: port
+            });
             web2board.setInProcess(true);
         });
 
         $rootScope.$on('web2board:code-uploaded', function() {
-            alertsService.add('alert-web2board-code-uploaded', 'upload', 'ok', 5000);
+            alertsService.add({
+                text: 'alert-web2board-code-uploaded',
+                id: 'upload',
+                type: 'ok',
+                time: 5000
+            });
             web2board.setInProcess(false);
         });
 
         $rootScope.$on('web2board:upload-error', function(evt, data) {
             data = JSON.parse(data);
             if (!data.error) {
-                alertsService.add('alert-web2board-upload-error', 'upload', 'warning', undefined, data.stdErr);
+                alertsService.add({
+                    text: 'alert-web2board-upload-error',
+                    id: 'upload',
+                    type: 'warning',
+                    value: data.stdErr
+                });
             } else if (data.error === 'no port') {
-                alertsService.add('alert-web2board-upload-error', 'upload', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-upload-error',
+                    id: 'upload',
+                    type: 'warning'
+                });
             } else {
-                alertsService.add('alert-web2board-upload-error', 'upload', 'warning', undefined, data.error);
+                alertsService.add({
+                    text: 'alert-web2board-upload-error',
+                    id: 'upload',
+                    type: 'warning',
+                    value: data.error
+                });
             }
             web2board.setInProcess(false);
         });
@@ -417,7 +465,11 @@ angular.module('bitbloqApp')
             $scope.levelOne = 'boards';
             web2board.setInProcess(false);
             alertsService.close(serialMonitorAlert);
-            alertsService.add('alert-web2board-no-port-found', 'upload', 'warning');
+            alertsService.add({
+                text: 'alert-web2board-no-port-found',
+                id: 'upload',
+                type: 'warning'
+            });
         });
 
         $rootScope.$on('web2board:serial-monitor-opened', function() {
@@ -437,14 +489,22 @@ angular.module('bitbloqApp')
                 var boardReference = _.find($scope.hardware.boardList, function(b) {
                     return b.name === $scope.project.hardware.board;
                 });
-                settingBoardAlert = alertsService.add('alert-web2board-settingBoard', 'upload', 'loading');
+                settingBoardAlert = alertsService.add({
+                    text: 'alert-web2board-settingBoard',
+                    id: 'upload',
+                    type: 'loading'
+                });
                 web2board.setInProcess(true);
 
                 web2board.upload(boardReference, $scope.getPrettyCode());
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
-                alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-boardNotReady',
+                    id: 'upload',
+                    type: 'warning'
+                });
             }
         }
 
@@ -453,7 +513,11 @@ angular.module('bitbloqApp')
                 web2board.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
             } else {
                 $scope.currentTab = 'info';
-                alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-boardNotReady',
+                    id: 'upload',
+                    type: 'warning'
+                });
             }
         }
 
@@ -463,7 +527,11 @@ angular.module('bitbloqApp')
             }
             web2board.setInProcess(true);
 
-            compilingAlert = alertsService.add('alert-web2board-compiling', 'compile', 'loading');
+            compilingAlert = alertsService.add({
+                text: 'alert-web2board-compiling',
+                id: 'compile',
+                type: 'loading'
+            });
             web2board.setInProcess(true);
 
             web2board.verify($scope.getPrettyCode());
@@ -479,7 +547,11 @@ angular.module('bitbloqApp')
             }
             if ($scope.project.hardware.board) {
                 web2board.setInProcess(true);
-                serialMonitorAlert = alertsService.add('alert-web2board-openSerialMonitor', 'serialmonitor', 'loading');
+                serialMonitorAlert = alertsService.add({
+                    text: 'alert-web2board-openSerialMonitor',
+                    id: 'serialmonitor',
+                    type: 'loading'
+                });
                 var boardReference = _.find($scope.hardware.boardList, function(b) {
                     return b.name === $scope.project.hardware.board;
                 });
@@ -487,7 +559,11 @@ angular.module('bitbloqApp')
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
-                alertsService.add('alert-web2board-no-board-serial', 'serialmonitor', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
 
             }
         }
@@ -498,13 +574,16 @@ angular.module('bitbloqApp')
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
-                alertsService.add('alert-web2board-no-board-serial', 'serialmonitor', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
             }
         }
 
         $scope.verify = function() {
-            //if (common.os === 'ChromeOS') {
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
@@ -524,11 +603,22 @@ angular.module('bitbloqApp')
                             translatedText: utils.parseCompileError(response.data.error)
                         });
                     } else {
-                        alertsService.add('alert-web2board-compile-verified', 'web2board', 'ok', 5000);
+                        alertsService.add({
+                            text: 'alert-web2board-compile-verified',
+                            id: 'web2board',
+                            type: 'ok',
+                            time: 5000
+                        });
                     }
                 }).catch(function(error) {
                     console.log('error');
                     console.log(error);
+                    alertsService.add({
+                        text: 'alert-web2board-compile-verified',
+                        id: 'web2board',
+                        type: 'ok',
+                        time: 5000
+                    });
                 });
             } else {
                 if (web2board.isWeb2boardV2()) {
@@ -540,8 +630,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (true) {
-            //if (common.os === 'ChromeOS') {
+
+            if (common.os === 'ChromeOS') {
                 chromeAppApi.isConnected().then(function() {
                     var board = getBoardMetaData();
                     if (!board) {
@@ -612,7 +702,11 @@ angular.module('bitbloqApp')
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
-                alertsService.add('alert-web2board-no-board-serial', 'serialmonitor', 'warning');
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
             }
         };
 
@@ -840,15 +934,27 @@ angular.module('bitbloqApp')
             var projectEmptyName = $scope.common.translate('new-project');
             if (!$scope.project.name || $scope.project.name === projectEmptyName) {
                 if (!$scope.project.description) {
-                    alertsService.add('publishProject__alert__nameDescriptionError' + type, 'publishing-project', 'warning');
+                    alertsService.add({
+                        text: 'publishProject__alert__nameDescriptionError' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
                 } else {
-                    alertsService.add('publishProject__alert__nameError' + type, 'publishing-project', 'warning');
+                    alertsService.add({
+                        text: 'publishProject__alert__nameError' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
                 }
                 $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
                 $scope.publishProjectError = true;
                 $scope.setTab(2);
             } else if (!$scope.project.description) {
-                alertsService.add('publishProject__alert__descriptionError' + type, 'publishing-project', 'warning');
+                alertsService.add({
+                    text: 'publishProject__alert__descriptionError' + type,
+                    id: 'publishing-project',
+                    type: 'warning'
+                });
                 $scope.publishProjectError = true;
                 $scope.setTab(2);
             } else {
@@ -856,7 +962,11 @@ angular.module('bitbloqApp')
                     project = $scope.getCurrentProject();
                 delete projectDefault.software.freeBloqs;
                 if (_.isEqual(projectDefault.software, project.software)) {
-                    alertsService.add('publishProject__alert__bloqsProjectEmpty' + type, 'publishing-project', 'warning');
+                    alertsService.add({
+                        text: 'publishProject__alert__bloqsProjectEmpty' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
                 } else {
                     $scope.publishProjectError = false;
                     if (type === 'Social') {
@@ -920,7 +1030,11 @@ angular.module('bitbloqApp')
                 if (newVal !== oldVal) {
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
-                        alertsService.add('validate-videourl', 'save-project', 'warning');
+                        alertsService.add({
+                            text: 'validate-videourl',
+                            id: 'save-project',
+                            type: 'warning'
+                        });
                     } else {
                         $scope.startAutosave();
                     }
@@ -1219,14 +1333,26 @@ angular.module('bitbloqApp')
             }, function(error) {
                 switch (error.status) {
                     case 404: //not_found
-                        alertsService.add('no-project', 'load-project', 'warning');
+                        alertsService.add({
+                            text: 'no-project',
+                            id: 'load-project',
+                            type: 'warning'
+                        });
                         break;
                     case 401: //unauthorized
                         $location.path('/bloqsproject/');
-                        alertsService.add('alert_text_errorProjectUnauthorized', 'load-project', 'warning');
+                        alertsService.add({
+                            text: 'alert_text_errorProjectUnauthorized',
+                            id: 'load-project',
+                            type: 'warning'
+                        });
                         break;
                     default:
-                        alertsService.add('alert_text_errorProjectUndefined', 'load-project', 'warning');
+                        alertsService.add({
+                            text: 'alert_text_errorProjectUndefined',
+                            id: 'load-project',
+                            type: 'warning'
+                        });
                 }
             });
         };
