@@ -9,15 +9,17 @@
  */
 angular.module('bitbloqApp')
     .service('compilerApi', function(envData, $http) {
-        var exports = {};
+        var exports = {
+            compile:compile
+        };
 
-        exports.compile = function(data) {
+        function compile(data) {
             return $http({
                 method: 'POST',
                 url: envData.config.compilerUrl + 'compile',
                 data: data
             });
-        };
+        }
 
         return exports;
     });
