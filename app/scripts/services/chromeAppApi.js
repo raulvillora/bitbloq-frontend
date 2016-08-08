@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('chromeAppApi', function($window, $q, envData, alertsService) {
+    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope) {
         var exports = {};
 
         var openPort,
@@ -21,7 +21,6 @@ angular.module('bitbloqApp')
                 isConnectedPromise = $q.defer();
 
                 if ($window.chrome) {
-
                     try {
                         console.log('create port');
 
@@ -32,27 +31,25 @@ angular.module('bitbloqApp')
                         }, 5000);
 
                         openPort = chrome.runtime.connect(envData.config.chromeAppId);
-
                         openPort.onDisconnect.addListener(function(d) {
                             console.log('port disconnected', d);
                             //se desconecta todo el rato? usa 127.0.0.1 y no localhost
+                            isConnectedPromise = null;
                             openPort = null;
                         });
 
                         openPort.onMessage.addListener(function(msg) {
-                            console.log('onMessage', msg);
+                            //        console.log('onMessage', msg);
                             if (msg === 'connected') {
                                 console.log('chromeapp connected');
                                 clearTimeout(timeoutId);
                                 isConnectedPromise.resolve();
+                            } else {
+                                $rootScope.$emit('serial', msg);
                             }
 
                             if (msg.error) {
-                                alertsService.add({
-                                    text: 'alert-web2board-boardNotReady',
-                                    id: 'upload',
-                                    type: 'warning'
-                                });
+                                alertsService.add('alert-web2board-boardNotReady', 'upload', 'warning');
                             }
                         });
 
@@ -88,7 +85,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.isConnected = function(message) {
+        exports.isConnected = function() {
             return connect();
         };
 
@@ -106,7 +103,30 @@ angular.module('bitbloqApp')
                 console.log('error', error);
                 callback(error);
             });
-        }
+        };
+
+        exports.stopSerialCommunication = function() {
+            var message = {};
+            message.type = 'serial-disconnect';
+            openPort.postMessage(message);
+        };
+
+        exports.getSerialData = function() {
+            exports.isConnected().then(function() {
+                var message = {};
+                message.type = 'serial-connect';
+                openPort.postMessage(message);
+            });
+        };
+
+        exports.sendSerialData = function(data) {
+            exports.isConnected().then(function() {
+                var message = {};
+                message.type = 'serial-connect-send';
+                message.data = data;
+                openPort.postMessage(message);
+            });
+        };
 
         return exports;
     });

@@ -400,59 +400,69 @@ angular.module('bitbloqApp')
             }
         };
 
+        function generateSerialWindow(port) {
+            var scope = $rootScope.$new();
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+            serialMonitorPanel = $.jsPanel({
+                position: 'center',
+                size: {
+                    width: 500,
+                    height: 500
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    serialMonitorPanel = null;
+                },
+                title: $translate.instant('serial'),
+                ajax: {
+                    url: 'views/serialMonitor.html',
+                    done: function() {
+                        if (port) {
+                            scope.port = port;
+                        }
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            serialMonitorPanel.scope = scope;
+        }
+
         web2board.serialMonitor = function(board) {
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
                 serialMonitorPanel.reposition('center');
                 return;
             }
-            openCommunication(function() {
-                inProgress = true;
-                var toast = alertsService.add({
-                    text: 'alert-web2board-openSerialMonitor',
-                    id: 'web2board',
-                    type: 'loading'
-                });
-                api.SerialMonitorHub.server.findBoardPort(board.mcu)
-                    .then(function(port) {
-                        alertsService.close(toast);
-                        var scope = $rootScope.$new();
-                        scope.setOnUploadFinished = function(callback) {
-                            scope.uploadFinished = callback;
-                        };
-                        serialMonitorPanel = $.jsPanel({
-                            position: 'center',
-                            size: {
-                                width: 500,
-                                height: 500
-                            },
-                            onclosed: function() {
-                                scope.$destroy();
-                                serialMonitorPanel = null;
-                            },
-                            title: $translate.instant('serial'),
-                            ajax: {
-                                url: 'views/serialMonitor.html',
-                                done: function() {
-                                    scope.port = port;
-                                    this.html($compile(this.html())(scope));
-                                }
-                            }
-                        });
-                        serialMonitorPanel.scope = scope;
-
-                    }, function(error) {
-                        alertsService.add({
-                            text: 'alert-web2board-no-port-found',
-                            id: 'web2board',
-                            type: 'warning'
-                        });
-                        console.error(error);
-                    })
-                    .finally(function() {
-                        inProgress = false;
+            if (common.os === 'Linux') {
+                generateSerialWindow();
+            } else {
+                openCommunication(function() {
+                    inProgress = true;
+                    var toast = alertsService.add({
+                        text: 'alert-web2board-openSerialMonitor',
+                        id: 'web2board',
+                        type: 'loading'
                     });
-            });
+
+                    api.SerialMonitorHub.server.findBoardPort(board.mcu)
+                        .then(function(port) {
+                            alertsService.close(toast);
+                            generateSerialWindow(port);
+                        }, function(error) {
+                            alertsService.add({
+                                text: 'alert-web2board-no-port-found',
+                                id: 'web2board',
+                                type: 'warning'
+                            });
+                            console.error(error);
+                        })
+                        .finally(function() {
+                            inProgress = false;
+                        });
+                });
+            }
         };
 
         web2board.chartMonitor = function(board) {
