@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $log, $translate, userApi, envData, _, imageApi, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $log, $translate, $compile,userApi, envData, _, imageApi, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var exports = {};
@@ -556,6 +556,38 @@ angular.module('bitbloqApp')
                 showClose: false
             });
             return defered.promise;
+        };
+
+        exports.launchSerialWindow = function() {
+            var serialMonitorPanel;
+            if (serialMonitorPanel) {
+                serialMonitorPanel.normalize();
+                serialMonitorPanel.reposition('center');
+                return;
+            }
+            var scope = $rootScope.$new();
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+            serialMonitorPanel = $.jsPanel({
+                position: 'center',
+                size: {
+                    width: 500,
+                    height: 500
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    serialMonitorPanel = null;
+                },
+                title: $translate.instant('serial'),
+                ajax: {
+                    url: 'views/serialMonitor.html',
+                    done: function() {
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            serialMonitorPanel.scope = scope;
         };
 
         function _shareUserInfoModal(noUsers, usersLength) {
