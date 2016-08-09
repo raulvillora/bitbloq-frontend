@@ -593,7 +593,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
                 web2boardOnline.compile({
                     board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -608,17 +608,27 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (common.os === 'Linux') {
-                web2boardOnline.upload({
-                    board: getBoardMetaData(),
-                    code: $scope.getPrettyCode()
-                });
-            } else {
-                if (web2board.isWeb2boardV2()) {
-                    uploadW2b2();
+            if ($scope.project.hardware.board) {
+                if (common.os === 'ChromeOS') {
+                    web2boardOnline.upload({
+                        board: getBoardMetaData(),
+                        code: $scope.getPrettyCode()
+                    });
                 } else {
-                    uploadW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        uploadW2b2();
+                    } else {
+                        uploadW2b1();
+                    }
                 }
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-boardNotReady',
+                    id: 'upload',
+                    type: 'warning'
+                });
             }
         };
 

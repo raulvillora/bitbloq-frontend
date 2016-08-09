@@ -460,11 +460,11 @@ angular.module('bitbloqApp')
             if ($window.navigator.platform.indexOf('Win') !== -1) {
                 return 'Windows';
             } else if ($window.navigator.platform.indexOf('Mac') !== -1) {
-                return 'ChromeOS';
+                return 'ChromeOS'; //Mac
             } else if ($window.navigator.userAgent.indexOf('CrOS') !== -1) {
                 return 'ChromeOS';
             } else {
-                return 'Linux';
+                return 'ChromeOS'; //Linux
             }
         };
 

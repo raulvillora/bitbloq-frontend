@@ -82,8 +82,19 @@ angular.module('bitbloqApp')
                             board: params.board,
                             file: response.data.hex
                         }).then(function(uploadHexResponse) {
+                            alertsService.add({
+                                text: 'alert-web2board-code-uploaded',
+                                id: 'web2board',
+                                type: 'ok',
+                                time: 5000
+                            });
                             uploadDefer.resolve(uploadHexResponse);
                         }).catch(function(error) {
+                            alertsService.add({
+                                text: $translate.instant('modal-inform-error-textarea-placeholder') + ': ' + JSON.stringify(error),
+                                id: 'web2board',
+                                type: 'error'
+                            });
                             uploadDefer.reject(error);
                         });
                     }).catch(function() {
@@ -97,7 +108,7 @@ angular.module('bitbloqApp')
                             linkParams: function(err, response) {
                                 if (err) {
                                     alertsService.add({
-                                        text: $translate.instant('error-chromeapp-install') + ': ' +  err,
+                                        text: $translate.instant('error-chromeapp-install') + ': ' + err,
                                         id: 'web2board',
                                         type: 'error'
                                     });
@@ -109,7 +120,8 @@ angular.module('bitbloqApp')
                                     alertsService.add({
                                         text: $translate.instant('chromeapp-installed'),
                                         id: 'web2board',
-                                        type: 'ok'
+                                        type: 'ok',
+                                        time: 5000
                                     });
                                     upload(params);
                                 }
