@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q) {
+    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate) {
         var exports = {
             compile: compile,
             upload: upload
@@ -88,16 +88,16 @@ angular.module('bitbloqApp')
                         });
                     }).catch(function() {
                         alertsService.add({
-                            text: 'instala chrome app',
+                            text: $translate.instant('landing_howitworks_oval_2_chromeos'),
                             id: 'web2board',
                             type: 'warning',
                             time: 20000,
-                            linkText: 'aqui',
+                            linkText: $translate.instant('from-here'),
                             link: chromeAppApi.installChromeApp,
                             linkParams: function(err, response) {
                                 if (err) {
                                     alertsService.add({
-                                        text: 'error instalando la chromeapp ' + err,
+                                        text: $translate.instant('error-chromeapp-install') + ': ' +  err,
                                         id: 'web2board',
                                         type: 'error'
                                     });
@@ -107,7 +107,7 @@ angular.module('bitbloqApp')
                                     });
                                 } else {
                                     alertsService.add({
-                                        text: 'Instalada correctamente',
+                                        text: $translate.instant('chromeapp-installed'),
                                         id: 'web2board',
                                         type: 'ok'
                                     });

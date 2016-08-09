@@ -107,6 +107,16 @@ angular.module('bitbloqApp')
 
         };
 
+        $scope.isChromebook = function() {
+            var chromebook;
+            if (common.os === 'Linux') {
+                chromebook = true;
+            } else {
+                chromebook = false;
+            }
+            return chromebook;
+        };
+
         $scope.setCode = function(code) {
             $scope.code = code;
         };
@@ -583,7 +593,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if (common.os === 'ChromeOS') {
+            if (common.os === 'Linux') {
                 web2boardOnline.compile({
                     board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -598,8 +608,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-
-            if (common.os === 'ChromeOS') {
+            if (common.os === 'Linux') {
                 web2boardOnline.upload({
                     board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -614,10 +623,14 @@ angular.module('bitbloqApp')
         };
 
         $scope.serialMonitor = function() {
-            if (web2board.isWeb2boardV2()) {
-                serialMonitorW2b2();
+            if (common.os === 'Linux') {
+                commonModals.launchSerialWindow();
             } else {
-                serialMonitorW2b1();
+                if (web2board.isWeb2boardV2()) {
+                    serialMonitorW2b2();
+                } else {
+                    serialMonitorW2b1();
+                }
             }
         };
 

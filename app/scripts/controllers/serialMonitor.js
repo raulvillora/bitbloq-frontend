@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope) {
+    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board) {
         /*Private vars*/
         var serialHub = web2boardV2.api.SerialMonitorHub,
             textArea = $element.find('#serialData'),
@@ -57,7 +57,7 @@ angular.module('bitbloqApp')
         /*Public functions*/
         $scope.send = function() {
             if (common.os === 'Linux') {
-              chromeAppApi.sendSerialData($scope.serial.input);
+                chromeAppApi.sendSerialData($scope.serial.input);
             } else {
                 serialHub.server.write($scope.port, $scope.serial.input);
             }
@@ -72,7 +72,11 @@ angular.module('bitbloqApp')
 
         $scope.onBaudrateChanged = function(baudrate) {
             $scope.serial.baudrate = baudrate;
-            serialHub.server.changeBaudrate($scope.port, baudrate);
+            if (common.os === 'Linux') {
+                chromeAppApi.changeBaudrate(baudrate);
+            } else {
+                serialHub.server.changeBaudrate($scope.port, baudrate);
+            }
         };
 
         $scope.onPause = function() {
@@ -123,6 +127,7 @@ angular.module('bitbloqApp')
         $scope.$on('$destroy', function() {
             if (common.os === 'Linux') {
                 chromeAppApi.stopSerialCommunication();
+                web2board.setInProcess(false);
             } else {
                 serialHub.server.unsubscribeFromPort($scope.port)
                     .then(function() {
@@ -131,5 +136,4 @@ angular.module('bitbloqApp')
             }
 
         });
-
     });

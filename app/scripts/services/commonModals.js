@@ -13,6 +13,7 @@ angular.module('bitbloqApp')
 
         var exports = {};
         var shortUrl;
+        var serialMonitorPanel;
 
         exports.contactModal = function() {
             var dialog,
@@ -559,7 +560,6 @@ angular.module('bitbloqApp')
         };
 
         exports.launchSerialWindow = function() {
-            var serialMonitorPanel;
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
                 serialMonitorPanel.reposition('center');

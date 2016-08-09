@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope) {
+    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope, $translate) {
         var exports = {};
 
         var openPort,
@@ -91,7 +91,7 @@ angular.module('bitbloqApp')
 
         exports.installChromeApp = function(callback) {
             alertsService.add({
-                text: 'instalando la chrome, acepta el mensaje y sigue los pasos indicados',
+                text: $translate.instant('chromeapp-installing'),
                 id: 'web2board',
                 type: 'loading'
             });
@@ -126,6 +126,14 @@ angular.module('bitbloqApp')
                 message.data = data;
                 openPort.postMessage(message);
             });
+        };
+
+        exports.changeBaudrate= function(baudrate){
+          exports.isConnected().then(function(){
+            var message = {};
+            message.type = 'change-baudrate';
+            message.data = baudrate;
+          });
         };
 
         return exports;
