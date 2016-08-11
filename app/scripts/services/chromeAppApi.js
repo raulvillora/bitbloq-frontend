@@ -94,7 +94,7 @@ angular.module('bitbloqApp')
                     console.log('send hex');
                     message.type = 'upload';
                     if (message.board === 'bt328') {
-                        message.board = 'bqZum'
+                        message.board = 'bqZum';
                     }
                     openPort.postMessage(message);
                 }).catch(function(error) {

@@ -109,7 +109,7 @@ angular.module('bitbloqApp')
 
         $scope.isChromebook = function() {
             var chromebook;
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
                 chromebook = true;
             } else {
                 chromebook = false;
@@ -633,7 +633,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.serialMonitor = function() {
-            if (common.os === 'Linux') {
+            if (common.os === 'ChromeOS') {
                 commonModals.launchSerialWindow();
             } else {
                 if (web2board.isWeb2boardV2()) {
