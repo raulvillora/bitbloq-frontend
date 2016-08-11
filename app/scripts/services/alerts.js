@@ -127,7 +127,7 @@ angular.module('bitbloqApp')
                 alertTimeout = $timeout(function() {
                     _removeAlert('uid', alert.uid);
                     if (alert.closeFunction) {
-                        alert.closeFunction(closeParams);
+                        alert.closeFunction(params.closeParams);
                     }
                 }, alert.time);
             }

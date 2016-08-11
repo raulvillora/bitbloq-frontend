@@ -111,7 +111,7 @@ angular.module('bitbloqApp')
                             time: 20000,
                             linkText: $translate.instant('from-here'),
                             link: chromeAppApi.installChromeApp,
-                            linkParams: function(err, response) {
+                            linkParams: function(err) {
                                 if (err) {
                                     alertsService.add({
                                         text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
