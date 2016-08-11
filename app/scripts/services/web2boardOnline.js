@@ -68,7 +68,7 @@ angular.module('bitbloqApp')
         function upload(params) {
             var uploadDefer = $q.defer();
 
-            compile(params).then(function(response) {
+            compile(utils.clone(params)).then(function(response) {
                 if (response.data.error) {
                     uploadDefer.reject(response);
                 } else {
@@ -79,7 +79,7 @@ angular.module('bitbloqApp')
                     });
                     chromeAppApi.isConnected().then(function() {
                         chromeAppApi.sendHex({
-                            board: params.board,
+                            board: params.board.mcu,
                             file: response.data.hex
                         }).then(function(uploadHexResponse) {
                             alertsService.add({
