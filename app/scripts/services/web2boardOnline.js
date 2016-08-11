@@ -90,8 +90,14 @@ angular.module('bitbloqApp')
                             });
                             uploadDefer.resolve(uploadHexResponse);
                         }).catch(function(error) {
+                            var text;
+                            if (error.error.search('no Arduino') !== -1) {
+                                text = 'alert-web2board-no-port-found';
+                            } else {
+                                text = $translate.instant('modal-inform-error-textarea-placeholder') + ': ' + $translate.instant(JSON.stringify(error));
+                            }
                             alertsService.add({
-                                text: $translate.instant('modal-inform-error-textarea-placeholder') + ': ' + JSON.stringify(error),
+                                text: text,
                                 id: 'web2board',
                                 type: 'error'
                             });
@@ -108,14 +114,11 @@ angular.module('bitbloqApp')
                             linkParams: function(err, response) {
                                 if (err) {
                                     alertsService.add({
-                                        text: $translate.instant('error-chromeapp-install') + ': ' + err,
+                                        text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
                                         id: 'web2board',
                                         type: 'error'
                                     });
-                                    uploadDefer.reject({
-                                        msg: 'error on chromeapp installation',
-                                        data: err
-                                    });
+                                    uploadDefer.reject(err);
                                 } else {
                                     alertsService.add({
                                         text: $translate.instant('chromeapp-installed'),

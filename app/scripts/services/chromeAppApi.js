@@ -27,6 +27,7 @@ angular.module('bitbloqApp')
                         console.log('create port');
 
                         var timeoutId = setTimeout(function() {
+                            timeoutId = null;
                             isConnectedPromise.reject({
                                 error: 'CONNECTION_TIMEOUT'
                             });
@@ -34,8 +35,15 @@ angular.module('bitbloqApp')
 
                         openPort = chrome.runtime.connect(envData.config.chromeAppId);
                         openPort.onDisconnect.addListener(function(d) {
-                            console.log('port disconnected', d);
                             //se desconecta todo el rato? usa 127.0.0.1 y no localhost
+                            console.log('port disconnected', d);
+
+                            if (timeoutId) {
+                                clearTimeout(timeoutId);
+                                isConnectedPromise.reject({
+                                    error: 'CONNECTION_TIMEOUT'
+                                });
+                            }
                             isConnectedPromise = null;
                             openPort = null;
                         });
@@ -107,6 +115,11 @@ angular.module('bitbloqApp')
         };
 
         exports.installChromeApp = function(callback) {
+            var timeout = setTimeout(function() {
+                callback({
+                    error: 'CHROMEAPP_INSTALLATION_TIMEOUT'
+                });
+            }, 30000);
             alertsService.add({
                 text: $translate.instant('chromeapp-installing'),
                 id: 'web2board',
@@ -114,10 +127,12 @@ angular.module('bitbloqApp')
             });
             chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
                 console.log('response', response);
+                clearTimeout(timeout);
                 callback();
             }, function(error) {
                 console.log('install error');
                 console.log('error', error);
+                clearTimeout(timeout);
                 callback(error);
             });
         };

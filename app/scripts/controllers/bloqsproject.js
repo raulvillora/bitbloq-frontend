@@ -626,7 +626,7 @@ angular.module('bitbloqApp')
                 $scope.levelOne = 'boards';
                 alertsService.add({
                     text: 'alert-web2board-boardNotReady',
-                    id: 'upload',
+                    id: 'web2board',
                     type: 'warning'
                 });
             }
