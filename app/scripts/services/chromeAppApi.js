@@ -167,6 +167,7 @@ angular.module('bitbloqApp')
                 var message = {};
                 message.type = 'change-baudrate';
                 message.data = baudrate;
+                openPort.postMessage(message);
             });
         };
 
