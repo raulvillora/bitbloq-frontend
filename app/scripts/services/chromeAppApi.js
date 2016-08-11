@@ -133,7 +133,9 @@ angular.module('bitbloqApp')
                 console.log('install error');
                 console.log('error', error);
                 clearTimeout(timeout);
-                callback(error);
+                callback({
+                    error: error
+                });
             });
         };
 
