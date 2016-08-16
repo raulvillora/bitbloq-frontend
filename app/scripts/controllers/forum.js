@@ -64,7 +64,7 @@
                         type: 'warning',
                         time: 5000
                     });
-                    $location.url('/help/forum/' + forum.themeCategory);
+                    $location.url('/forum/' + forum.themeCategory);
                 }).catch(function() {
                     alertsService.add({
                         text: 'forumAdmin_alert_deletedThemeError',
@@ -82,7 +82,7 @@
                             forumApi.moveThread(themeId, modalOptions.dropdown.option).then(function() {
                                 forum.themeCategory = modalOptions.dropdown.option;
                                 $route.current.pathParams.forumsection = modalOptions.dropdown.option;
-                                $location.url('/help/forum/' + $route.current.pathParams.forumsection + '/' + $route.current.pathParams.forumresource);
+                                $location.url('/forum/' + $route.current.pathParams.forumsection + '/' + $route.current.pathParams.forumresource);
                                 alertsService.add({
                                     text: $scope.common.translate('forumAdmin_alert_MoveThemeTo') + ' "' + modalOptions.dropdown.option + '"',
                                     id: 'moveTheme',
@@ -171,7 +171,7 @@
                             _goToSection(section);
                     }
                 } else {
-                    $location.url('/help/forum/');
+                    $location.url('/forum/');
                     forum.displayedView = 'main';
                 }
             };
@@ -385,7 +385,7 @@
 
             function setForumRoute() {
                 if ($routeParams.forumresource !== '"undefined"' && $routeParams.forumresource) {
-                    $location.url('/help/forum/' + $routeParams.forumsection + '/' + $routeParams.forumresource);
+                    $location.url('/forum/' + $routeParams.forumsection + '/' + $routeParams.forumresource);
                     forum.displayedView = 'theme';
                     goForumTheme($routeParams.forumresource, $routeParams.forumsection);
                 } else if ($routeParams.forumsection !== '"undefined"' && $routeParams.forumsection) {
@@ -411,7 +411,7 @@
                     }
 
                     $route.current.pathParams.forumsection = section;
-                    $location.url('/help/forum/' + section);
+                    $location.url('/forum/' + section);
                 }
             }
 
@@ -499,7 +499,7 @@
 
             function _goToSection(section) {
                 $route.current.pathParams.forumsection = section;
-                $location.url('/help/forum/' + section);
+                $location.url('/forum/' + section);
                 forum.displayedView = section;
             }
 
