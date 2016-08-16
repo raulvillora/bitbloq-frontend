@@ -8,9 +8,10 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog) {
+        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals) {
             var forum = this;
             forum.displayedView = 'main';
+            forum.commonModals = commonModals;
             forum.bannedUserPerPage = 10;
             forum.categoryThemesPerPage = 10;
             forum.banUser = userApi.banUser;

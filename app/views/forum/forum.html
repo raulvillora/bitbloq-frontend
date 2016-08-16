@@ -5,4 +5,5 @@
     <div class="forum__main" ng-include="'views/forum/category.html'" ng-if="forum.displayedView === 'category'"></div>
     <div class="forum__main" ng-include="'views/forum/theme.html'" ng-if="forum.displayedView === 'theme'"></div>
     <div class="forum__main" ng-include="'views/forum/bannedUsers.html'" ng-if="forum.displayedView === 'banned-users'"></div>
+    <span class="forum__footer">{{'forum__footer_contactUs' | translate }} <button class="link--default" ng-click="forum.commonModals.contactModal()" data-element="forum-contact-us-link">{{'forum__footer_contactUs-ClickHere' | translate}}</button> {{'forum__footer_contactUsByEmail' | translate}} <b>soporte.bitbloq@bq.com</b></span>
 </div>
