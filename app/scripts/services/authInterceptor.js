@@ -1,6 +1,6 @@
 'use strict';
 angular.module('bitbloqApp')
-    .service('authInterceptor', function($log, $cookieStore, $routeParams, alertsService) {
+    .service('authInterceptor', function($log, $cookieStore, $q, $routeParams, alertsService) {
         return {
             // Add authorization token to headers
             'request': function(config) {
