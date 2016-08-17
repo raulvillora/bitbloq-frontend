@@ -9,7 +9,7 @@
  */
 angular.module('bitbloqApp')
     .service('userApi', function($http, $cookieStore, $localStorage, $q, User, envData, _, utils) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+
         var exports = {},
             userRoles = ['admin', 'user', 'guest'];
 
@@ -170,42 +170,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        // exports.getProfile = function(id) {
-        //     var query = {
-        //         'api:query': JSON.stringify([{
-        //             $eq: {
-        //                 id: id
-        //             }
-        //         }])
-        //     };
-        //     return _getProfiles(query);
-        // };
-
-        // exports.getProfilesByACL = function (options) {
-        //     var users = [],
-        //         promises = [],
-        //         deferedMain = $q.defer();
-        //     options.forEach(function (acl) {
-        //         var id = acl;
-        //         if (id) {
-        //             var defered = $q.defer();
-        //             promises.push(defered.promise);
-        //             _getProfile(id).then(function (response) {
-        //                 users.push(response.data);
-        //                 defered.resolve(response.data);
-        //             }).catch(function () {
-        //                 defered.resolve();
-        //             });
-        //         }
-        //     });
-
-        //     $q.all(promises).then(function () {
-        //         deferedMain.resolve(users);
-        //     });
-
-        //     return deferedMain.promise;
-        // };
-
         exports.getAliasByACL = function(acl) {
             var users = [];
             for (var item in acl) {
@@ -271,37 +235,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        //
-        //exports.disconnectUser = function(userId) {
-        //    return $http({
-        //        method: 'PUT',
-        //        url: envData.config.iamEndpoint + 'user/' + userId + '/disconnect'
-        //    });
-        //};
-        //exports.getBannedUsers = function() {
-        //    var params = {
-        //        'api:query': [{
-        //            '$in': {
-        //                'scopes': ['bitbloq:user:banned']
-        //            }
-        //        }],
-        //        'api:sort': {
-        //            'updatedAt': 'asc'
-        //        }
-        //    };
-        //
-        //    return resources.getAll(envData.config.iamEndpoint, 'user', params);
-        //};
-        //
-        //exports.setUserBanned = function(user, banned) {
-        //    if (banned) {
-        //        user.scopes = ['bitbloq:user:banned'];
-        //    } else {
-        //        user.scopes = ['bitbloq:user'];
-        //    }
-        //    return _setUser(user);
-        //};
-        //
         exports.changePasswordAuthenticated = function(newPassword, callback) {
             return User.changePasswordAuthenticated({
                 id: 'me'
@@ -313,49 +246,8 @@ angular.module('bitbloqApp')
                 return utils.safeCb(callback)(err);
             }).$promise;
         };
-        //
-        //function _setUser(user) {
-        //    return $http({
-        //        method: 'PUT',
-        //        url: envData.config.iamEndpoint + 'user/' + user.id,
-        //        data: user
-        //    });
-        //}
 
         //***********************
-
-        // function _getProfile(userId) {
-        //     return $http({
-        //         method: 'GET',
-        //         url: envData.config.iamEndpoint + 'user/' + userId + '/profile'
-        //     });
-        // }
-
-        // function _getProfiles(params) {
-        //     return $http({
-        //         method: 'GET',
-        //         url: envData.config.iamEndpoint + 'user/profile',
-        //         params: params
-        //     });
-        // }
-
-        // function _getAllProfiles(queryParams, resultArray, promise) {
-        //     var dfd = promise || $q.defer();
-
-        //     _getProfiles(queryParams).then(function (response) {
-        //         resultArray = resultArray.concat(response.data);
-        //         if (response.data.length === queryParams['api:pageSize']) {
-        //             queryParams['api:page']++;
-        //             _getAllProfiles(queryParams, resultArray, dfd);
-        //         } else {
-        //             dfd.resolve(resultArray);
-        //         }
-        //     }, function (error) {
-        //         dfd.reject(error);
-        //     });
-
-        //     return dfd.promise;
-        // }
 
         return exports;
     });

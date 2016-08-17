@@ -174,9 +174,6 @@ angular.module('bitbloqApp')
                             time: 5000
                         });
                     }
-                }).catch(function(error) {
-                    console.log('error');
-                    console.log(error);
                 });
             } else {
                 if (web2board.isWeb2boardV2()) {
@@ -213,9 +210,6 @@ angular.module('bitbloqApp')
                                 file: response.data.hex
                             });
                         }
-                    }).catch(function(error) {
-                        console.log('error');
-                        console.log(error);
                     });
                 }).catch(function() {
                     alertsService.add({

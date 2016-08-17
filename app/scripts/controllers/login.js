@@ -151,7 +151,7 @@ angular.module('bitbloqApp')
                                 teacherModal();
                             }
                         });
-                    }).catch(function() {});
+                    });
                 } else {
                     fireShakeEffect();
                 }
@@ -209,6 +209,7 @@ angular.module('bitbloqApp')
                 $(this).removeClass('hide-container');
             });
         }
+
         $scope.setLoginFromRegister = function() {
             $scope.isLogin = true;
             var $registerContainer = angular.element('#registerContainer');
