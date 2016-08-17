@@ -9,11 +9,14 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board) {
+    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board, hardwareConstants,
+        utils) {
         /*Private vars*/
         var serialHub = web2boardV2.api.SerialMonitorHub,
             textArea = $element.find('#serialData'),
             textAreaMaxLength = 20000;
+        //its setted when the windows its open
+        //$scope.board
 
         /*Private functions*/
         function scrollTextAreaToBottom() {
@@ -51,6 +54,10 @@ angular.module('bitbloqApp')
             input: '',
             baudrate: 9600
         };
+        $scope.portNames = [];
+        $scope.ports = [];
+
+        $scope.selectedPort = null;
         $scope.pause = false;
         $scope.pauseText = $translate.instant('serial-pause');
 
@@ -92,10 +99,56 @@ angular.module('bitbloqApp')
             $scope.serial.dataReceived = '';
         };
 
+        $scope.getPorts = function() {
+            chromeAppApi.getPorts().then(function(response) {
+                console.log('ports SerialMonitorCtrl', response);
+                $scope.ports = filterPortsByOS(response.ports);
+                utils.getPortsPrettyNames($scope.ports, hardwareConstants.boards);
+                $scope.portNames = [];
+
+                for (var i = 0; i < $scope.ports.length; i++) {
+                    $scope.portNames.push($scope.ports[i].portName);
+                }
+
+                var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
+                if (portWithUserSelectedBoard) {
+                    $scope.setPort(portWithUserSelectedBoard.portName);
+                }
+
+            }).catch(function(error) {
+                console.log('error SerialMonitorCtrl', error);
+            });
+        };
+
+        $scope.setPort = function(portName) {
+            var port = _.find($scope.ports, {
+                portName: portName
+            });
+
+            $scope.selectedPort = port;
+
+            chromeAppApi.getSerialData($scope.selectedPort);
+        };
+
+        function filterPortsByOS(ports) {
+            var result = [];
+            if (common.os === 'Mac') {
+                for (var i = 0; i < ports.length; i++) {
+                    if (ports[i].comName.indexOf('/dev/cu') !== -1) {
+                        result.push(ports[i]);
+                    }
+                }
+            } else {
+                result = ports;
+            }
+            return result;
+        }
+
         /*Init functions*/
 
         if (common.os === 'ChromeOS') {
-            chromeAppApi.getSerialData();
+            console.log($scope.board);
+            $scope.getPorts();
         } else {
             serialHub.server.subscribeToPort($scope.port);
 

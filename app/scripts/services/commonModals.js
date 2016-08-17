@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $log, $translate, $compile,userApi, envData, _, imageApi, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $log, $translate, $compile, userApi, envData, _, imageApi, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var exports = {};
@@ -559,13 +559,14 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.launchSerialWindow = function() {
+        exports.launchSerialWindow = function(board) {
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
                 serialMonitorPanel.reposition('center');
                 return;
             }
             var scope = $rootScope.$new();
+            scope.board = board;
             scope.setOnUploadFinished = function(callback) {
                 scope.uploadFinished = callback;
             };

@@ -491,5 +491,65 @@ angular.module('bitbloqApp')
             return JSON.parse(JSON.stringify(object));
         };
 
+        exports.getPortsPrettyNames = function(ports, boards) {
+            var boardFound = -1,
+                j;
+            for (var i = 0; i < ports.length; i++) {
+                j = 0;
+                boardFound = exports.getBoardByPort(ports[i], boards);
+
+                if (boardFound) {
+                    ports[i].portName = boardFound.name.toUpperCase() + '(' + ports[i].comName + ')';
+                } else {
+                    ports[i].portName = ports[i].comName;
+                }
+            }
+            return ports;
+        };
+
+        exports.getBoardByPort = function(port, boards) {
+            var boardFound,
+                board,
+                j = 0;
+            while (!board && (j < boards.length)) {
+                boardFound = exports.portOwnBoard(port, boards[j]);
+                if (boardFound !== -1) {
+                    board = boards[j];
+                }
+                j++;
+            }
+            return board;
+        };
+
+        exports.getPortByBoard = function(ports, board) {
+            var portFound,
+                port,
+                i = 0;
+            while (!port && (i < ports.length)) {
+                portFound = exports.portOwnBoard(ports[i], board);
+                if (portFound !== -1) {
+                    port = ports[i];
+                }
+                i++;
+            }
+            return port;
+        };
+
+        exports.portOwnBoard = function(port, board) {
+            console.log('portOwnBoard');
+            console.log(port.comName, port.productId, port.vendorId);
+            console.log(board.name, board.productIds, board.vendorIds);
+            var result;
+            result = board.vendorIds.indexOf(port.vendorId);
+            console.log('result', result);
+
+            if (result !== -1) {
+                result = board.productIds.indexOf(port.productId);
+            }
+
+            console.log('result', result);
+            return result;
+        };
+
         return exports;
     });

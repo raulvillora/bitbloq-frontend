@@ -633,14 +633,24 @@ angular.module('bitbloqApp')
         };
 
         $scope.serialMonitor = function() {
-            if (common.os === 'ChromeOS') {
-                commonModals.launchSerialWindow();
-            } else {
-                if (web2board.isWeb2boardV2()) {
-                    serialMonitorW2b2();
+            if ($scope.project.hardware.board) {
+                if (common.os === 'ChromeOS') {
+                    commonModals.launchSerialWindow(getBoardMetaData());
                 } else {
-                    serialMonitorW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        serialMonitorW2b2();
+                    } else {
+                        serialMonitorW2b1();
+                    }
                 }
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
             }
         };
 

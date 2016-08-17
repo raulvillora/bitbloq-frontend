@@ -11,7 +11,7 @@
 angular.module('bitbloqApp')
     .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, $routeParams, _, alertsService, envData,
         $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, $localStorage, chromeAppApi,
-        common, compilerApi) {
+        common, compilerApi, hardwareConstants) {
 
         $window.onbeforeunload = confirmExit;
 
@@ -478,105 +478,103 @@ angular.module('bitbloqApp')
         }
 
         function _loadProject() {
-            hwBasicsLoaded.promise.then(function() {
-                if ($routeParams.id) {
-                    projectApi.get($routeParams.id).then(function(response) {
-                        $scope.project = response.data;
-                        if ($scope.common.user && $scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
-                            $scope.disablePublish = true;
-                        }
-                        if (!response.data.codeProject) {
-                            editInfo = alertsService.add({
-                                text: 'code-project_alert_edit-code',
-                                id: 'edit-project',
-                                type: 'warning',
-                                time: 7000,
-                                linkText: 'undo',
-                                link: _goToBloqs
-                            });
-                        }
-                        if (!$scope.project.codeProject) {
-                            $scope.project.hardwareTags = [];
-                        }
-                        $scope.project.codeProject = true;
 
-                        $scope.setBoard($scope.project.hardware.board);
-
-                        _prettyCode().then(function() {
-                            $scope.common.itsUserLoaded().then(function() {
-                                _addWatchersAndListener();
-                            }).catch(function() {
-                                _addWatchersAndListenerGuest();
-                            });
-                        });
-
-                    }, function(response) {
-                        switch (response.status) {
-                            case 404: //not_found
-                                alertsService.add({
-                                    text: 'no-project',
-                                    id: 'load-project',
-                                    type: 'warning'
-                                });
-                                break;
-                            case 401: //unauthorized
-                                $route.current.pathParams.id = '';
-                                $location.url('/codeproject/');
-                                alertsService.add({
-                                    text: 'alert_text_errorProjectUnauthorized',
-                                    id: 'load-project',
-                                    type: 'warning'
-                                });
-                                break;
-                            default:
-                                alertsService.add({
-                                    text: 'alert_text_errorProjectUndefined',
-                                    id: 'load-project',
-                                    type: 'warning'
-                                });
-                        }
-                    });
-                } else {
-
-                    if ($scope.common.session.bloqTab) {
+            if ($routeParams.id) {
+                projectApi.get($routeParams.id).then(function(response) {
+                    $scope.project = response.data;
+                    if ($scope.common.user && $scope.project._acl['user:' + $scope.common.user._id] && $scope.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
+                        $scope.disablePublish = true;
+                    }
+                    if (!response.data.codeProject) {
                         editInfo = alertsService.add({
                             text: 'code-project_alert_edit-code',
                             id: 'edit-project',
-                            type: 'warning'
+                            type: 'warning',
+                            time: 7000,
+                            linkText: 'undo',
+                            link: _goToBloqs
                         });
                     }
+                    if (!$scope.project.codeProject) {
+                        $scope.project.hardwareTags = [];
+                    }
+                    $scope.project.codeProject = true;
 
-                    $scope.common.itsUserLoaded().then(function() {
-                        if ($scope.common.session.save) {
-                            $scope.project = $scope.common.session.project;
-                            $scope.common.session.save = false;
-                            $scope.startAutosave();
-                        }
-                        $scope.setBoard($scope.project.hardware.board);
-                        _prettyCode().then(function() {
+                    $scope.setBoard($scope.project.hardware.board);
+
+                    _prettyCode().then(function() {
+                        $scope.common.itsUserLoaded().then(function() {
                             _addWatchersAndListener();
-                        });
-                    }).catch(function() {
-                        //$scope.setBoard($scope.common.session.project.hardware.board);
-                        if ($scope.common.session.project.code) {
-                            $scope.project = $scope.common.session.project;
-                            _prettyCode().then(function() {
-                                _addWatchersAndListenerGuest();
-                            });
-                        }
-                        if ($scope.common.session.project.hardware.board) {
-                            $scope.setBoard($scope.common.session.project.hardware.board);
-                            _prettyCode().then(function() {
-                                _addWatchersAndListenerGuest();
-                            });
-                        } else {
-                            $scope.setBoard();
+                        }).catch(function() {
                             _addWatchersAndListenerGuest();
-                        }
+                        });
+                    });
+
+                }, function(response) {
+                    switch (response.status) {
+                        case 404: //not_found
+                            alertsService.add({
+                                text: 'no-project',
+                                id: 'load-project',
+                                type: 'warning'
+                            });
+                            break;
+                        case 401: //unauthorized
+                            $route.current.pathParams.id = '';
+                            $location.url('/codeproject/');
+                            alertsService.add({
+                                text: 'alert_text_errorProjectUnauthorized',
+                                id: 'load-project',
+                                type: 'warning'
+                            });
+                            break;
+                        default:
+                            alertsService.add({
+                                text: 'alert_text_errorProjectUndefined',
+                                id: 'load-project',
+                                type: 'warning'
+                            });
+                    }
+                });
+            } else {
+
+                if ($scope.common.session.bloqTab) {
+                    editInfo = alertsService.add({
+                        text: 'code-project_alert_edit-code',
+                        id: 'edit-project',
+                        type: 'warning'
                     });
                 }
-            });
 
+                $scope.common.itsUserLoaded().then(function() {
+                    if ($scope.common.session.save) {
+                        $scope.project = $scope.common.session.project;
+                        $scope.common.session.save = false;
+                        $scope.startAutosave();
+                    }
+                    $scope.setBoard($scope.project.hardware.board);
+                    _prettyCode().then(function() {
+                        _addWatchersAndListener();
+                    });
+                }).catch(function() {
+                    //$scope.setBoard($scope.common.session.project.hardware.board);
+                    if ($scope.common.session.project.code) {
+                        $scope.project = $scope.common.session.project;
+                        _prettyCode().then(function() {
+                            _addWatchersAndListenerGuest();
+                        });
+                    }
+                    if ($scope.common.session.project.hardware.board) {
+                        $scope.setBoard($scope.common.session.project.hardware.board);
+                        _prettyCode().then(function() {
+                            _addWatchersAndListenerGuest();
+                        });
+                    } else {
+                        $scope.setBoard();
+                        _addWatchersAndListenerGuest();
+                    }
+                });
+            }
         }
 
         var editInfo, editorRef,
@@ -587,6 +585,29 @@ angular.module('bitbloqApp')
         $scope.utils = utils;
         $scope.projectApi = projectApi;
         $scope.tempImage = {};
+
+        $scope.project = {
+            creator: '',
+            name: $scope.common.translate('new-project'),
+            description: '',
+            userTags: [],
+            hardwareTags: [],
+            hardware: {
+                board: 'bq ZUM'
+            },
+            imageType: '',
+            videoUrl: '',
+            code: '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/void setup(){}\n\n/***   Loop  ***/void loop(){}',
+            codeProject: true
+        };
+
+        $scope.boards = [];
+        $scope.boardNameList = [];
+        $scope.commonModals = commonModals;
+        $scope.common.isLoading = true;
+
+        $scope.boards = hardwareConstants.boards;
+        $scope.boardNameList = _.pluck($scope.boards, 'name');
 
         // The ui-ace option
         $scope.aceOptions = {
@@ -613,34 +634,6 @@ angular.module('bitbloqApp')
                 });
             }
         };
-
-        $scope.project = {
-            creator: '',
-            name: $scope.common.translate('new-project'),
-            description: '',
-            userTags: [],
-            hardwareTags: [],
-            hardware: {
-                board: 'bq ZUM'
-            },
-            imageType: '',
-            videoUrl: '',
-            code: '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/void setup(){}\n\n/***   Loop  ***/void loop(){}',
-            codeProject: true
-        };
-
-        $scope.boards = [];
-        $scope.boardNameList = [];
-        $scope.commonModals = commonModals;
-        $scope.common.isLoading = true;
-
-        var hwBasicsLoaded = $q.defer();
-
-        resource.getFile('/static/hardware.json').then(function(resources) {
-            $scope.boards = resources.boards;
-            $scope.boardNameList = _.pluck($scope.boards, 'name');
-            hwBasicsLoaded.resolve();
-        });
 
         $scope.$watch('common.session.save', function(newVal, oldVal) {
             if (newVal && newVal !== oldVal) {

@@ -13,7 +13,8 @@ angular.module('bitbloqApp')
 
         var openPort,
             isConnectedPromise,
-            uploadPromise;
+            uploadPromise,
+            getPortsPromise;
 
         console.debug('chromeAppId', envData.config.chromeAppId);
 
@@ -55,16 +56,25 @@ angular.module('bitbloqApp')
                                 clearTimeout(timeoutId);
                                 isConnectedPromise.resolve();
                             } else if (typeof(msg) === 'object') {
+                                var promise;
                                 switch (msg.type) {
                                     case 'upload':
-                                        if (msg.success) {
-                                            uploadPromise.resolve(msg);
-                                        } else {
-                                            uploadPromise.reject(msg);
-                                        }
+                                        promise = uploadPromise;
+                                        break;
+                                    case 'get-ports':
+                                        promise = getPortsPromise;
                                         break;
                                     default:
                                         $log.log('unexpected msg type');
+                                }
+                                if (promise) {
+                                    if (msg.success) {
+                                        promise.resolve(msg);
+                                    } else {
+                                        promise.reject(msg);
+                                    }
+                                } else {
+                                    $log.log('no promise prepared');
                                 }
                             } else {
                                 $rootScope.$emit('serial', msg);
@@ -145,10 +155,11 @@ angular.module('bitbloqApp')
             openPort.postMessage(message);
         };
 
-        exports.getSerialData = function() {
+        exports.getSerialData = function(port) {
             exports.isConnected().then(function() {
                 var message = {};
                 message.type = 'serial-connect';
+                message.port = port;
                 openPort.postMessage(message);
             });
         };
@@ -169,6 +180,22 @@ angular.module('bitbloqApp')
                 message.data = baudrate;
                 openPort.postMessage(message);
             });
+        };
+
+        exports.getPorts = function() {
+            if (!getPortsPromise || (getPortsPromise.promise.$$state.status !== 0)) {
+                getPortsPromise = $q.defer();
+                exports.isConnected().then(function() {
+                    var message = {};
+                    message.type = 'get-ports';
+                    openPort.postMessage(message);
+                }).catch(function(error) {
+                    getPortsPromise.reject(error);
+                });
+                return getPortsPromise.promise;
+            } else {
+                return getPortsPromise.promise;
+            }
         };
 
         return exports;
