@@ -407,7 +407,8 @@ angular.module('bitbloqApp')
             cookiePolicyAccepted: false,
             newsletter: false,
             takeTour: false,
-            language: 'es-ES'
+            language: 'es-ES',
+            hasFirstComponent: false
         };
         $scope.username = {
             invalid: false,

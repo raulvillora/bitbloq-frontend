@@ -9,14 +9,14 @@
 angular.module('bitbloqApp')
     .controller('hardwareTabCtrl', hardwareTabCtrl);
 
-function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils,
-    hardwareConstants) {
+function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi) {
 
     var container = utils.getDOMElement('.protocanvas'),
         $componentContextMenu = $('#component-context-menu'),
         $boardContextMenu = $('#board-context-menu'),
         $robotContextMenu = $('#robot-context-menu'),
         hwBasicsLoaded = $q.defer();
+
 
     function _initialize() {
 
@@ -150,6 +150,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
     }
 
     var connectionEventHandler = function(e) {
+        $scope.closeComponentInteraction();
         var componentReference, pinKey;
         /* HW Connection listeners */
 
@@ -236,6 +237,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
     };
 
     function _addComponent(data) {
+        $scope.firstComponent = ($scope.firstComponent === undefined || $scope.common.user.hasFirstComponent) ? true: $scope.firstComponent;
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
@@ -318,6 +320,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
             var componentUid = hw2Bloqs.removeSelectedConnection();
             checkComponentConnections(componentUid);
         }
+    };
+
+    $scope.closeComponentInteraction = function() {
+        $scope.firstComponent = false;
+        $scope.common.user.hasFirstComponent = true;
+        userApi.update({
+            hasFirstComponent : true
+        });
+
     };
 
     $scope.setBaudRate = function(baudRate) {
@@ -604,6 +615,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
         }
         return name;
     }
+
     var _getClonComponent = function() {
         $scope.hardware.clonComponent = $scope.componentSelected;
     };
@@ -642,20 +654,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
                     $event.preventDefault();
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if ($event.ctrlKey) {
-                //         $scope.undo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if ($event.ctrlKey) {
-                //         $scope.redo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if ($event.ctrlKey) {
+            //         $scope.undo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if ($event.ctrlKey) {
+            //         $scope.redo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
@@ -699,6 +711,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, resource, $log, hw2Bloqs
     $scope.inputFocus = false;
 
     $scope.offsetTop = ['header', 'nav--make', 'actions--make', 'tabs--title'];
+    $scope.firstComponent = undefined;
+
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {
             $scope.refreshComponentsArray();
