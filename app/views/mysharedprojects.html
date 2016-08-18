@@ -58,14 +58,13 @@
                     <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
                         <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name}}</h3>
                     </a>
-
                     <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>
                     <div class="project__info__header__data shared-project">
                         <p class="shared-project__into__username">{{ 'explore-created-by' | translate }}
                             <span>{{project.creator.username}}</span>
                         </p>
-                        <p class="shared-project__into__intro-date" ng-class="{'shared-project__into__intro-without-date': !project._acl['user:'+ common.user._id].properties.date}">
-                            {{project._acl['user:'+ common.user._id].properties.date ? 'sharedProject_date_shareAt' : 'sharedProject_date_withoutDate' | translate}}
+                        <p class="shared-project__into__intro-date">
+                            {{project._acl['user:'+ common.user._id].properties.date ? 'sharedProject_date_shareAt' : '' | translate}}
                         </p>
                         <time class="text--secondary project__info--time">{{ project._acl['user:'+ common.user._id].properties.date | amDateFormat:'DD/MM/YY - HH:mm[h]' }}</time>
                         <div class="project__info__header__icons">
