@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common) {
+    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common, $localStorage) {
 
         function getLandingExampleProjects() {
 
@@ -27,6 +27,11 @@ angular.module('bitbloqApp')
                 $log.debug(error);
             });
         }
+
+        $scope.translateGuest = function(language){
+            $translate.use(language);
+            $localStorage.guestLanguage = language;
+        };
 
         $scope.closeMenu = function($event) {
             if ($scope.menuVisible && !angular.element($event.target).hasClass('icon-wrapper')) {
