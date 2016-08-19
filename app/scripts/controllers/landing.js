@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common, $localStorage) {
+    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common) {
 
         function getLandingExampleProjects() {
 
@@ -30,7 +30,7 @@ angular.module('bitbloqApp')
 
         $scope.translateGuest = function(language){
             $translate.use(language);
-            $localStorage.guestLanguage = language;
+            localStorage.guestLanguage = language;
         };
 
         $scope.closeMenu = function($event) {

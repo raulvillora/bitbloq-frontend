@@ -10,7 +10,7 @@
  */
 angular.module('bitbloqApp')
     .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, $routeParams, _, alertsService, envData,
-        $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, $localStorage, chromeAppApi,
+        $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, chromeAppApi,
         common, compilerApi, hardwareConstants) {
 
         $window.onbeforeunload = confirmExit;
@@ -338,7 +338,7 @@ angular.module('bitbloqApp')
                     }
                     return projectApi.update($scope.project._id, $scope.project).then(function() {
 
-                        $localStorage.projectsChange = true;
+                        localStorage.projectsChange = true;
 
                         if ($scope.tempImage.blob) {
                             imageApi.save($scope.project._id, $scope.tempImage.blob).then(function() {
@@ -366,7 +366,7 @@ angular.module('bitbloqApp')
                         $route.current.pathParams.id = idProject;
                         $location.url('/codeproject/' + idProject);
                         $scope.common.isLoading = false;
-                        $localStorage.projectsChange = !$localStorage.projectsChange;
+                        localStorage.projectsChange = !localStorage.projectsChange;
                         if ($scope.tempImage.blob) {
                             imageApi.save(idProject, $scope.tempImage.blob).then(function() {
                                 $scope.imageForceReset = !$scope.imageForceReset;

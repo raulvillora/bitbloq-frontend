@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('userApi', function($http, $cookieStore, $localStorage, $q, User, envData, _, utils) {
+    .service('userApi', function($http, $cookieStore, $q, User, envData, _, utils) {
 
         var exports = {},
             userRoles = ['admin', 'user', 'guest'];

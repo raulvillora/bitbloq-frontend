@@ -10,7 +10,7 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q,
-        $translate, $localStorage, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
+        $translate, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
         utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, web2boardOnline) {
 
         /*************************************************
@@ -138,12 +138,12 @@ angular.module('bitbloqApp')
 
                         return projectApi.update($scope.project._id, currentProject).then(function() {
                             $scope.saveOldProject();
-                            $localStorage.projfalseectsChange = true;
+                            localStorage.projfalseectsChange = true;
 
                             if ($scope.tempImage.file) {
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
-                                    $localStorage.projectsChange = true;
+                                    localStorage.projectsChange = true;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};
                                 }, function(error) {
@@ -173,13 +173,13 @@ angular.module('bitbloqApp')
                             projectApi.saveStatus = 2;
                             $scope.common.isLoading = false;
 
-                            $localStorage.projectsChange = !$localStorage.projectsChange;
+                            localStorage.projectsChange = !localStorage.projectsChange;
                             $scope.saveOldProject();
 
                             if ($scope.tempImage.file) {
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
-                                    $localStorage.projectsChange = true;
+                                    localStorage.projectsChange = true;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};
                                 }, function(error) {

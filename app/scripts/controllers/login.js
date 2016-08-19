@@ -9,13 +9,13 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, $localStorage, userApi, _, $cookieStore, $http, $auth, $location, $q, $rootScope, moment, alertsService, ngDialog, $routeParams, $translate) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $http, $auth, $location, $q, $rootScope, moment, alertsService, ngDialog, $routeParams, $translate) {
         $scope.focusHandler = function(evt) {
             $scope.focus = evt.currentTarget.name;
         };
 
         $scope.authenticate = function(prov) {
-            $localStorage.removeItem('satellizer_token');
+            localStorage.removeItem('satellizer_token');
             $cookieStore.remove('token');
             $auth.authenticate(prov).then(function(response) {
                 var options = {

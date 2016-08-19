@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $localStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
+    .service('common', function($filter, $log, envData, packageData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -88,7 +88,7 @@ angular.module('bitbloqApp')
                 loadedUserPromise = $q.defer();
             }
             if (user !== null && typeof user === 'object') {
-                var lng = user.language || $localStorage.guestLanguage || navigatorLang || 'es-ES';
+                var lng = user.language || localStorage.guestLanguage || navigatorLang || 'es-ES';
                 $translate.use(lng);
                 if (user.cookiePolicyAccepted) {
                     $sessionStorage.cookiesAccepted = true;
@@ -98,7 +98,7 @@ angular.module('bitbloqApp')
                 loadedUserPromise.resolve();
             } else {
                 exports.user = null;
-                $translate.use($localStorage.guestLanguage || navigatorLang);
+                $translate.use(localStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
                 loadedUserPromise.reject();
             }

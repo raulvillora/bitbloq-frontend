@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils, bloqs, bloqsApi, $http, envData, $log, $document, _, $localStorage, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi) {
+    .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils, bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi) {
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
@@ -85,7 +85,7 @@ angular.module('bitbloqApp')
                         bloq = bloqs.bloqs[$document[0].activeElement.attributes['data-bloq-id'].value];
                         var position = bloq.$bloq[0].getBoundingClientRect();
                         if (bloq.bloqData.type !== 'group') {
-                            $localStorage.bloqInClipboard = angular.toJson({
+                            localStorage.bloqInClipboard = angular.toJson({
                                 structure: bloq.getBloqsStructure(),
                                 top: position.top,
                                 left: position.left
@@ -95,8 +95,8 @@ angular.module('bitbloqApp')
                     break;
                 case 86:
                     //$log.debug('ctrl + v');
-                    if (event.ctrlKey && $localStorage.bloqInClipboard) {
-                        copyBloq(JSON.parse($localStorage.bloqInClipboard));
+                    if (event.ctrlKey && localStorage.bloqInClipboard) {
+                        copyBloq(JSON.parse(localStorage.bloqInClipboard));
                     }
                     break;
                 case 89:

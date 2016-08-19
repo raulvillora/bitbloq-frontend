@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, alertsService, $localStorage, $window, $timeout, ngDialog, commonModals, utils, _, moment) {
+    .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, alertsService, $window, $timeout, ngDialog, commonModals, utils, _, moment) {
 
         $scope.sortProjects = function(type) {
             $log.debug('sortProject', type);
@@ -311,8 +311,8 @@ angular.module('bitbloqApp')
             $scope.$apply(function() {
                 $scope.timestamp = Date.now();
             });
-            if ($localStorage.projectsChange && $scope.common.itsUserLoaded()) {
-                $localStorage.projectsChange = false;
+            if (localStorage.projectsChange && $scope.common.itsUserLoaded()) {
+                localStorage.projectsChange = false;
                 $scope.refreshProjects();
             }
         };

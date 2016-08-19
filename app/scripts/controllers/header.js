@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, userApi, commonModals, $document, $translate, $localStorage) {
+    .controller('HeaderCtrl', function($scope, $location, userApi, commonModals, $document, $translate) {
         $scope.userApi = userApi;
 
         function clickDocumentHandler() {
@@ -26,7 +26,7 @@ angular.module('bitbloqApp')
         $scope.logout = function() {
             userApi.logout();
             $scope.common.setUser(null);
-            $localStorage.projectsChange = false;
+            localStorage.projectsChange = false;
             $location.path('/');
         };
 
