@@ -237,7 +237,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _addComponent(data) {
-        $scope.firstComponent = ($scope.firstComponent === undefined || $scope.common.user.hasFirstComponent) ? true: $scope.firstComponent;
+        $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
@@ -324,11 +324,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.closeComponentInteraction = function() {
         $scope.firstComponent = false;
-        $scope.common.user.hasFirstComponent = true;
-        userApi.update({
-            hasFirstComponent : true
-        });
-
+        if ($scope.common.user) {
+            $scope.common.user.hasFirstComponent = true;
+            userApi.update({
+                hasFirstComponent: true
+            });
+        }
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
     };
 
     $scope.setBaudRate = function(baudRate) {
