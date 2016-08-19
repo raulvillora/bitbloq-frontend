@@ -21,7 +21,7 @@
                 <ul class="forum__block__list">
                     <li class="forum__block__item">
                         <a ng-href="{{'#/forum/' + category.name}}">
-                            <h2 class="block__item__title" data-element="forum-category-button">{{category.name}}</h2>
+                            <h2 class="block__item__title" data-element="{{'forum-category-' + category.name}}">{{category.name}}</h2>
                         </a>
                         <span class="block__item__description">{{category.description}}</span>
                     </li>
