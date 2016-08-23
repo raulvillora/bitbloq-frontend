@@ -597,7 +597,7 @@ angular.module('bitbloqApp')
             },
             imageType: '',
             videoUrl: '',
-            code: '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/void setup(){}\n\n/***   Loop  ***/void loop(){}',
+            code: '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/\n\nvoid setup(){\n\n}\n\n/***   Loop  ***/\n\nvoid loop(){\n\n}',
             codeProject: true
         };
 
