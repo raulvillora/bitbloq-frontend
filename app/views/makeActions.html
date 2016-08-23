@@ -34,7 +34,7 @@
                 </svg>
                 {{'open-project-from-file' | translate}}
             </li>
-            <li ng-if="common.section === 'bloqsproject'" class="dropdown__item--separator"></li>
+            <li class="dropdown__item--separator"></li>
             <li data-tooltips="{{!common.user}}" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltip-position="right">
                 <div class="dropdown__item" data-ng-disabled="!common.user" data-ng-click="commonModals.renameProject(project)" data-element="menu-changename">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
