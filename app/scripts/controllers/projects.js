@@ -8,7 +8,8 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, alertsService, $window, $timeout, ngDialog, commonModals, utils, _, moment) {
+    .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, alertsService, $window,
+        $timeout, ngDialog, commonModals, utils, _, moment, JSZip) {
 
         $scope.sortProjects = function(type) {
             $log.debug('sortProject', type);
@@ -107,7 +108,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.downloadAllProjects = function() {
-            /*global JSZip:false */
             var zip = new JSZip(),
                 currentProject,
                 currentProjectName,

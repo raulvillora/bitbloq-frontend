@@ -83,7 +83,7 @@ angular.module('bitbloqApp')
             var alert = {
                 id: params.id,
                 text: params.text,
-                uid: Date.now(),
+                uid: Date.now() * Math.floor(Math.random() * (1000 - 1 + 1)) + 1,
                 type: params.type || 'info',
                 time: params.time || 'infinite',
                 domClass: null,
