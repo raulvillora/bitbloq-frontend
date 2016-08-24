@@ -52,6 +52,12 @@ angular.module('bitbloqApp')
                         time: 5000
                     });
                 }
+            }).catch(function(response) {
+                alertsService.add({
+                    id: 'web2board',
+                    type: 'error',
+                    translatedText: response.data
+                });
             });
 
             return compilerPromise;
@@ -75,8 +81,10 @@ angular.module('bitbloqApp')
                     alertsService.add({
                         text: 'alert-web2board-uploading',
                         id: 'web2board',
-                        type: 'loading'
+                        type: 'loading',
+                        time: 'infinite'
                     });
+
                     chromeAppApi.isConnected().then(function() {
                         chromeAppApi.sendHex({
                             board: params.board.mcu,
