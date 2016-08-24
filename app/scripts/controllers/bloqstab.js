@@ -8,7 +8,9 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils, bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi) {
+    .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
+        bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+        robotFirmwareApi, web2boardOnline) {
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
@@ -320,7 +322,16 @@ angular.module('bitbloqApp')
             var robot = $scope.project.hardware.robot,
                 version = common.properties.robotsFirmwareVersion[robot];
             robotFirmwareApi.getFirmware(robot, version).then(function(result) {
-                web2board.uploadHex('uno', result.data);
+                if (common.os === 'ChromeOS') {
+                    web2boardOnline.upload({
+                        hex: result.data,
+                        board: {
+                            mcu: 'uno'
+                        }
+                    });
+                } else {
+                    web2board.uploadHex('uno', result.data);
+                }
             }, function() {
                 // alert("Error"); todo: add toast
             });

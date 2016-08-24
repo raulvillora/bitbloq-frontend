@@ -610,7 +610,7 @@ angular.module('bitbloqApp')
         $scope.upload = function() {
             if ($scope.project.hardware.board) {
                 if (common.os === 'ChromeOS') {
-                    web2boardOnline.upload({
+                    web2boardOnline.compileAndUpload({
                         board: getBoardMetaData(),
                         code: $scope.getPrettyCode()
                     });
