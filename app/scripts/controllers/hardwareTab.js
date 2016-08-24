@@ -150,7 +150,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     var connectionEventHandler = function(e) {
-        $scope.closeComponentInteraction();
         var componentReference, pinKey;
         /* HW Connection listeners */
 
@@ -164,8 +163,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         componentReference = _.find($scope.project.hardware.components, {
             'uid': e.componentData.uid
         });
-        if (componentReference) {
 
+        $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
+
+        if (componentReference) {
             if (e.protoBoLaAction === 'attach') {
 
                 pinKey = Object.keys(e.componentData.pin)[0];
@@ -322,16 +323,33 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
-    $scope.closeComponentInteraction = function() {
-        $scope.firstComponent = false;
-        if ($scope.common.user) {
-            $scope.common.user.hasFirstComponent = true;
-            userApi.update({
-                hasFirstComponent: true
-            });
-        }
-        if (!$scope.$$phase) {
-            $scope.$apply();
+    var _isUserConnect = function(componentPins) {
+        var userConnect = false;
+        _.forEach(componentPins, function(item) {
+            console.log(item);
+            if (item === undefined || item === null) {
+                userConnect = true;
+            }
+        });
+        return userConnect;
+    };
+
+    $scope.closeComponentInteraction = function(pins, connectedPin) {
+        if (pins[Object.keys(connectedPin)[0]]) {
+            if (!_isUserConnect(pins)) {
+                $scope.firstComponent = undefined;
+            }
+        } else {
+            $scope.firstComponent = false;
+            if ($scope.common.user) {
+                $scope.common.user.hasFirstComponent = true;
+                userApi.update({
+                    hasFirstComponent: true
+                });
+            }
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
         }
     };
 
