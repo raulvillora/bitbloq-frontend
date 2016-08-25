@@ -143,16 +143,6 @@ angular.module('bitbloqApp')
             return exports.update(dataProvider);
         };
 
-        exports.resetPassword = function(email) {
-            return $http({
-                method: 'GET',
-                url: envData.config.serverUrl + 'user/reset',
-                params: {
-                    email: email
-                }
-            });
-        };
-
         exports.forgottenPassword = function(email) {
             return $http({
                 method: 'POST',
