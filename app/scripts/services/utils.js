@@ -464,7 +464,7 @@ angular.module('bitbloqApp')
             } else if ($window.navigator.userAgent.indexOf('CrOS') !== -1) {
                 return 'ChromeOS';
             } else {
-                return 'ChromeOS'; //Linux
+                return 'Linux'; //Linux
             }
         };
 

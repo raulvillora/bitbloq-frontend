@@ -80,6 +80,8 @@
     }
     .forum__main {
         padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
         & > h1 {
             padding-bottom: 30px;
             color: #8c919b;

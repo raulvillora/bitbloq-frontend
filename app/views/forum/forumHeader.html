@@ -1,18 +1,16 @@
-<div class="forum__breadcrumb" data-element="forum-header-breadcrumb"
-     ng-class="{'in-category':forum.currentCategory, 'in-theme':forum.themeCategory}">
-    <h2><a href="#/forum">{{'help_title_forum' | translate}}</a></h2>
-    <span ng-if="!forum.themeCategory">{{forum.currentCategory}}</span>
-    <a ng-if="forum.themeCategory"
-       ng-href="#/forum/{{forum.themeCategory | encode}}">{{forum.themeCategory}}</a>
+<div class="forum__main forum__header">
+    <div class="forum__breadcrumb" data-element="forum-header-breadcrumb" ng-class="{'in-category':forum.currentCategory, 'in-theme':forum.themeCategory}">
+        <h2><a href="#/forum">{{'help_title_forum' | translate}}</a></h2>
+        <span ng-if="!forum.themeCategory">{{forum.currentCategory}}</span>
+        <a ng-if="forum.themeCategory" ng-href="#/forum/{{forum.themeCategory | encode}}">{{forum.themeCategory}}</a>
+    </div>
+    <button ng-if="!forum.themeCategory" data-element="forum-new-topic-button" class="btn btn--primary btn--small" ng-click="forum.goForumSection('new-theme')">
+        <svg class="svg-icon">
+            <use xlink:href="#plus"></use>
+        </svg>
+        <span>{{'forum_button_newTheme' | translate}}</span>
+    </button>
+    <button ng-if="!forum.themeCategory && forum.isAdmin()" data-element="forum-new-topic-button" class="btn btn--secondary btn--small btn--ban-user" ng-click="forum.goForumSection('banned-users')">
+        <span>{{'forum_button_bannedUsers' | translate}}</span>
+    </button>
 </div>
-<button ng-if="!forum.themeCategory" data-element="forum-new-topic-button" class="btn btn--primary btn--small"
-        ng-click="forum.goForumSection('new-theme')">
-    <svg class="svg-icon">
-        <use xlink:href="#plus"></use>
-    </svg>
-    <span>{{'forum_button_newTheme' | translate}}</span>
-</button>
-<button ng-if="!forum.themeCategory && forum.isAdmin()" data-element="forum-new-topic-button"
-        class="btn btn--secondary btn--small btn--ban-user" ng-click="forum.goForumSection('banned-users')">
-    <span>{{'forum_button_bannedUsers' | translate}}</span>
-</button>
