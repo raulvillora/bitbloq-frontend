@@ -28,6 +28,7 @@
                 totalSize: 0
             };
 
+            forum.disabledNewTopic = false;
             forum.currentPage = 1;
             forum.itemsPerPage = 10; //might be modified by the server
 
@@ -261,7 +262,9 @@
                         content: '<p>' + forum.textEditorContent.htmlContent + '</p>',
                         main: true
                     };
-                    forum.textEditorContent.htmlContent = '';
+                    //forum.textEditorContent.htmlContent = '';
+
+                    forum.disabledNewTopic = true;
 
                     forumApi.createThread(thread, answer).then(function(response) {
                         answer._id = response.data.answer._id;
@@ -306,6 +309,8 @@
                             type: 'error',
                             time: 5000
                         });
+                    }).finally(function() {
+                        forum.disabledNewTopic = false;
                     });
                 } else {
                     $log.debug('fill inputs');
