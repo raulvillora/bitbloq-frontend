@@ -82,7 +82,6 @@
     "scripts": {
         "clean": "rm -rf node_modules app/bower_components",
         "reinstall": "npm run clean && npm install",
-        "postinstall": "bower install --allow-root --force-latest",
         "getbloqs": "bower uninstall bloqs --save && bower install bloqs --save && grunt getbloqs"
     },
     "dependencies": {},
