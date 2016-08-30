@@ -28,6 +28,7 @@ angular
         'satellizer',
         'ngDialog',
         'angularMoment',
+        'btford.socket-io',
         'ngTagsInput',
         'puElasticInput',
         'youtube-embed',
