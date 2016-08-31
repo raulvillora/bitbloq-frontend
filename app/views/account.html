@@ -85,6 +85,12 @@
                         <label for="teacherCheckbox">{{'account-checkbox-teacher' | translate}}</label>
                     </span>
                 </fieldset>
+                <fieldset class="chromeapp-checkbox">
+                    <span class="input input--checkbox">
+                        <input data-element="chromeapp-checkbox" id="chromeappCheckbox" name="chromeappCheckbox" ng-checked="common.user.chromeapp === true" ng-model="common.user.chromeapp" type="checkbox" value="common.user.chromeapp">
+                        <label for="chromeappCheckbox">{{'account-checkbox-chromeapp' | translate}}</label>
+                    </span>
+                </fieldset>
                 <p class="account__delete">{{'account-link-deleteAccount' | translate}}
                     <a href="mailto:{{'support_email' | translate}}">{{'support_email' | translate}}</a>
                 </p>

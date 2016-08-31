@@ -28,7 +28,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        $scope.translateGuest = function(language){
+        $scope.translateGuest = function(language) {
             $translate.use(language);
             localStorage.guestLanguage = language;
         };
