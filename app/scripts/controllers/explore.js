@@ -99,8 +99,6 @@ angular.module('bitbloqApp')
             }
             $log.debug('getPublicProjects', queryParams);
             projectApi.getPublic(queryParams).then(function(response) {
-                console.log("proyectos de explora");
-                console.log(response);
                 projectApi.getPublicCounter(queryParams).then(function(data) {
                     $scope.projectCount = $scope.exploraProjects.length + '/' + data.data.count;
                     $scope.common.isLoading = false;
