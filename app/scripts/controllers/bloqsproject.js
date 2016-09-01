@@ -10,8 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q,
-        $translate, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
-        utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, web2boardOnline) {
+                                             $translate, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
+                                             utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -73,9 +73,8 @@ angular.module('bitbloqApp')
 
         $scope.startAutosave = function() {
             projectApi.startAutosave(saveProject);
-            if ($scope.common.user) {
-                $scope.hardware.firstLoad = false;
-            } else {
+            $scope.hardware.firstLoad = false;
+            if (!$scope.common.user) {
                 $scope.common.session.project = $scope.getCurrentProject();
             }
         };
@@ -814,11 +813,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
