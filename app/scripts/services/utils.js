@@ -456,11 +456,10 @@ angular.module('bitbloqApp')
         };
 
         exports.getOs = function() {
-
             if ($window.navigator.platform.indexOf('Win') !== -1) {
                 return 'Windows';
             } else if ($window.navigator.platform.indexOf('Mac') !== -1) {
-                return 'ChromeOS'; //Mac
+                return 'Mac'; //Mac
             } else if ($window.navigator.userAgent.indexOf('CrOS') !== -1) {
                 return 'ChromeOS';
             } else {
