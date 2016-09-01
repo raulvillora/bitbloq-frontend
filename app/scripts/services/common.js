@@ -136,7 +136,6 @@ angular.module('bitbloqApp')
         };
 
         function processRoute() {
-            ngDialog.closeAll();
             var pathArray = $location.path().split('/'),
                 firstPathItem = pathArray[1],
                 secondPathItem = pathArray[2];
