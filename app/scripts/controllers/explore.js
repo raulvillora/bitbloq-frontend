@@ -34,7 +34,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.genericFilter = function(newFilter, preventSearch) {
-            if (newFilter && (newFilter!=='bq' && $scope.genericFilterOptions[0].value) || (!$scope.genericFilterOptions[0].value)) {
+            if (newFilter && (newFilter !== 'bq' && $scope.genericFilterOptions[0].value) || (!$scope.genericFilterOptions[0].value)) {
 
                 $scope.genericFilterOptions.forEach(function(item) {
                     item.value = false;
@@ -99,7 +99,6 @@ angular.module('bitbloqApp')
             }
             $log.debug('getPublicProjects', queryParams);
             projectApi.getPublic(queryParams).then(function(response) {
-              console.log(response);
                 projectApi.getPublicCounter(queryParams).then(function(data) {
                     $scope.projectCount = $scope.exploraProjects.length + '/' + data.data.count;
                     $scope.common.isLoading = false;
@@ -179,8 +178,8 @@ angular.module('bitbloqApp')
 
         function getComponentFilterRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.componentsFilterOptions[0].value) {
                 var componentsArray = _.pluck($scope.componentsFilterOptions, 'option');
@@ -201,8 +200,8 @@ angular.module('bitbloqApp')
 
         function getBoardFilterRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.boardFilters) {
                 if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi') {
@@ -217,8 +216,8 @@ angular.module('bitbloqApp')
 
         function getGenericFilterRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.genericFilterOptions[0].value) {
                 if ($scope.genericFilters.indexOf('bq') > -1) {
@@ -230,8 +229,8 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.searchText !== '') {
                 queryParams.query.$or = [{

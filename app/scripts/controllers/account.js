@@ -70,7 +70,6 @@ angular.module('bitbloqApp')
             }
 
         };
-
         $scope.saveProfile = function() {
             var defered = $q.defer();
 
@@ -249,6 +248,12 @@ angular.module('bitbloqApp')
             });
 
             $scope.$watch('common.user.newsletter', function(newVal, oldVal) {
+                if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
+                    $scope.validateProfile();
+                }
+            });
+
+            $scope.$watch('common.user.chromeapp', function(newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
                     $scope.validateProfile();
                 }

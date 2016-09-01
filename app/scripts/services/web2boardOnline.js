@@ -8,15 +8,49 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate) {
+    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData) {
         var exports = {
             compile: compile,
             upload: upload,
             compileAndUpload: compileAndUpload
         };
 
-        var compileAndUploadDefer;
+        var compileAndUploadDefer,
+            completed,
+            alertCompile;
 
+        function alertServerTimeout(alertCounter) {
+            alertCounter = alertCounter || 0;
+            if (!completed) {
+                var alertText;
+                switch (alertCounter) {
+                    case 0:
+                        alertText = 'compiler-traffic-warning';
+                        break;
+                    case 1:
+                        alertText = 'compiler-inprogress';
+                        break;
+                    case 2:
+                        alertText = 'compiler-still-inprogress';
+                        break;
+                }
+                setTimeout(function() {
+                    if (!completed) {
+                        alertCompile = alertsService.add({
+                            text: alertText,
+                            id: 'compiler-timeout',
+                            type: 'warning'
+                        });
+                        if (alertCounter >= 2) {
+                            alertCounter = 1;
+                        } else {
+                            alertCounter = alertCounter + 1;
+                        }
+                        alertServerTimeout(alertCounter);
+                    }
+                }, envData.config.compileErrorTime);
+            }
+        }
         /**
          * [compile description]
          * @param  {object} params {
@@ -37,6 +71,11 @@ angular.module('bitbloqApp')
                 id: 'web2board',
                 type: 'loading'
             });
+
+            alertCompile = null;
+            completed = false;
+
+            alertServerTimeout();
 
             var compilerPromise = compilerApi.compile(params);
 
@@ -61,6 +100,9 @@ angular.module('bitbloqApp')
                     type: 'error',
                     translatedText: response.data
                 });
+            }).finally(function() {
+                completed = true;
+                alertsService.close(alertCompile);
             });
 
             return compilerPromise;

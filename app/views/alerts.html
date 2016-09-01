@@ -1,4 +1,4 @@
-<div class="alert text--strong" data-id="{{alert.id}}" ng-class="alert.domClass" ng-repeat="alert in alerts track by alert.uid" ng-style="{'margin-top': 50*$index+'px','z-index':alert.index}">
+<div class="alert text--strong" data-id="{{alert.id}}" ng-class="alert.domClass" ng-repeat="alert in alerts track by alert.uid" ng-style="{'margin-top': 55*$index+'px','z-index':alert.index}">
     <svg class="svg-icon icon--preicon {{alert.type}}">
         <use data-element="alert-svg-icon" data-type="{{alert.type}}" xlink:href="{{generateSvgUrl(alert.type)}}"/>
     </svg>
