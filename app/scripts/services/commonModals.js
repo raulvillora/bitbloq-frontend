@@ -118,17 +118,21 @@ angular.module('bitbloqApp')
         };
 
         exports.launchChangeLanguageModal = function() {
-            var oldLanguage = $translate.use();
+            var oldLanguage = $translate.use(),
+                newLanguage;
 
             var confirmAction = function() {
                     languageModal.close();
                     // Apply changes
                     if (common.user) {
-                        common.saveUserLanguage($translate.use());
+                        common.saveUserLanguage(newLanguage);
+                    } else {
+                        localStorage.guestLanguage = newLanguage;
                     }
-                    $translate.use(modalOptions.lang);
+                    $translate.use(newLanguage);
                 },
                 translateLanguage = function(language) {
+                    newLanguage=language;
                     $translate.use(language);
                 },
                 rejectAction = function() {

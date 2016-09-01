@@ -9,10 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q,
-        $translate, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData,
-        utils, userApi, commonModals, hw2Bloqs, chromeAppApi, web2boardOnline) {
-
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -74,9 +71,8 @@ angular.module('bitbloqApp')
 
         $scope.startAutosave = function() {
             projectApi.startAutosave(saveProject);
-            if ($scope.common.user) {
-                $scope.hardware.firstLoad = false;
-            } else {
+            $scope.hardware.firstLoad = false;
+            if (!$scope.common.user) {
                 $scope.common.session.project = $scope.getCurrentProject();
             }
         };
@@ -594,7 +590,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if ($scope.common.os === 'ChromeOS'|| $scope.common.user.chromeapp) {
+            if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
                 web2boardOnline.compile({
                     board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -610,7 +606,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if ($scope.project.hardware.board) {
-                if ($scope.common.os === 'ChromeOS'|| $scope.common.user.chromeapp) {
+                if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
                     web2boardOnline.compileAndUpload({
                         board: getBoardMetaData(),
                         code: $scope.getPrettyCode()
@@ -635,7 +631,7 @@ angular.module('bitbloqApp')
 
         $scope.serialMonitor = function() {
             if ($scope.project.hardware.board) {
-                if ($scope.common.os === 'ChromeOS'|| $scope.common.user.chromeapp) {
+                if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
                     commonModals.launchSerialWindow(getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
