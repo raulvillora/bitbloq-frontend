@@ -11,7 +11,7 @@ angular.module('bitbloqApp')
     .service('alertsService', function($timeout, _, $rootScope) {
         var exports = {},
             alerts = [],
-            alertTimeout,
+            alertTimeout = [],
             i = 0,
             options = {
                 maxSimultaneousAlerts: 5
@@ -36,13 +36,14 @@ angular.module('bitbloqApp')
 
         };
 
-        var _handlePreCloseAlert = function(evt) {
+        var _handlePreCloseAlert = function(uid, evt) {
             if (evt) {
                 var $element = $(evt.currentTarget).parent();
                 $element.addClass('alert--removed');
             }
-            if (alertTimeout) {
-                $timeout.cancel(alertTimeout);
+            if (alertTimeout[uid]) {
+                $timeout.cancel(alertTimeout[uid]);
+                delete alertTimeout[uid];
             }
         };
 
@@ -124,7 +125,7 @@ angular.module('bitbloqApp')
             }
 
             if (alert.time !== 'infinite') {
-                alertTimeout = $timeout(function() {
+                alertTimeout[alert.uid] = $timeout(function() {
                     _removeAlert('uid', alert.uid);
                     if (alert.closeFunction) {
                         alert.closeFunction(params.closeParams);
@@ -146,8 +147,10 @@ angular.module('bitbloqApp')
          * @param  {[object]} evt  [event triggered when clicking the close button]
          */
         exports.close = function(uid, evt) {
-            _handlePreCloseAlert(evt);
-            _removeAlert('uid', uid);
+            if (uid) {
+                _handlePreCloseAlert(uid, evt);
+                _removeAlert('uid', uid);
+            }
         };
 
         /**
@@ -156,7 +159,7 @@ angular.module('bitbloqApp')
          * @param  {[object]} evt  [event triggered when clicking the close button]
          */
         exports.closeByTag = function(tag, evt) {
-            _handlePreCloseAlert(evt);
+            _handlePreCloseAlert(tag, evt);
             _removeAlert('id', tag);
         };
 
