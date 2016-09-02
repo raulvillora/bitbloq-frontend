@@ -51,6 +51,12 @@
                     {{'create-copy' | translate}}
                 </div>
             </li>
+            <li class="dropdown__item" data-ng-click="loadRTTL()" data-element="menu-loadrttl">
+                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                    <use xlink:href="#Archivo_CambiarIdioma"></use>
+                </svg>
+                {{'load-rttl' | translate}}
+            </li>
             <li class="dropdown__item--separator"></li>
             <li ng-if="common.section === 'bloqsproject'" class="dropdown__item" data-ng-click="downloadProject()" data-element="menu-download">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">

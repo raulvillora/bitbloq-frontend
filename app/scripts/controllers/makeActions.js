@@ -9,7 +9,9 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $timeout, $location, $http, $window, $document, alertsService, bloqs, ngDialog, projectApi, imageApi, _, $q, $route, $routeParams, utils, bloqsUtils, feedbackApi, commonModals, clipboard) {
+    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $timeout, $location, $http, $window,
+        $document, alertsService, bloqs, ngDialog, projectApi, imageApi, _, $q, $route, $routeParams, utils,
+        bloqsUtils, feedbackApi, commonModals, clipboard, rttl, bloqsApi) {
 
         $scope.uploadProjectSelected = function(fileList) {
 
@@ -139,6 +141,32 @@ angular.module('bitbloqApp')
             var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : $scope.project.code;
             $scope.project.code = code;
             projectApi.download($scope.project, 'arduino');
+        };
+
+        $scope.loadRTTL = function() {
+            var song = 'Indiana:d=4,o=5,b=250:e,8p,8f,8g,8p,1c6,8p.,d,8p,8e,1f,p.,g,8p,8a,8b,8p,1f6,p,a,8p,8b,2c6,2d6,2e6,e,8p,8f,8g,8p,1c6,p,d6,8p,8e6,1f.6,g,8p,8g,e.6,8p,d6,8p,8g,e.6,8p,d6,8p,8g,f.6,8p,e6,8p,8d6,2c6';
+            var functionBloq = rttl.rttl2Bitbloq(song);
+            console.log(functionBloq);
+            //devuelve una funcion
+
+            var newBloq = bloqs.buildBloqWithContent(functionBloq, $scope.componentsArray, bloqsApi.schemas);
+
+            newBloq.doConnectable();
+            newBloq.disable();
+
+            newBloq.$bloq[0].style.transform = 'translate(10px, 10px)';
+
+            var field = $('#bloqs--field').last();
+
+            field.append(newBloq.$bloq);
+
+            var i = 0;
+            if (newBloq.varInputs) {
+                for (i = 0; i < newBloq.varInputs.length; i++) {
+                    newBloq.varInputs[i].keyup();
+                }
+            }
+
         };
 
         $scope.removeProject = function(project) {
