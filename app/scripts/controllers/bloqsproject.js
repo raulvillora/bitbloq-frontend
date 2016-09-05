@@ -889,6 +889,7 @@ angular.module('bitbloqApp')
             var projectEmptyName = $scope.common.translate('new-project');
             if (!$scope.project.name || $scope.project.name === projectEmptyName) {
                 if (!$scope.project.description) {
+                    $scope.publishProjectErrorDescription = true;
                     alertsService.add({
                         text: 'publishProject__alert__nameDescriptionError' + type,
                         id: 'publishing-project',
@@ -903,16 +904,24 @@ angular.module('bitbloqApp')
                 }
                 $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
                 $scope.publishProjectError = true;
+                $scope.publishProjectErrorName = true;
                 $scope.setTab(2);
             } else if (!$scope.project.description) {
+                if (!$scope.project.name || $scope.project.name === projectEmptyName) {
+                    $scope.publishProjectErrorName = true;
+                }
+
                 alertsService.add({
                     text: 'publishProject__alert__descriptionError' + type,
                     id: 'publishing-project',
                     type: 'warning'
                 });
+                $scope.publishProjectErrorDescription = true;
                 $scope.publishProjectError = true;
                 $scope.setTab(2);
             } else {
+                $scope.publishProjectErrorName = true;
+                $scope.publishProjectErrorDescription = true;
                 var projectDefault = getDefaultProject(),
                     project = $scope.getCurrentProject();
                 delete projectDefault.software.freeBloqs;

@@ -9,9 +9,9 @@
                 <div class="form-control">
                     <label>{{ 'name' | translate }}*</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname', 'input--error': form.projectname.$error.required && publishProjectError}">
-                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="project.name" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user" required>
+                        <input type="text" id="projectname" name="projectname" ng-change="project.name === '' ? publishProjectErrorName = true : publishProjectErrorName = false" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="project.name" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user">
                     </span>
-                    <span class="form--error" ng-show="form.projectname.$error.required && publishProjectError">
+                    <span class="form--error" ng-show="publishProjectErrorName && publishProjectError">
                         <small>{{ 'infotab-project-nameError' | translate }}</small>
                     </span>
                 </div>
@@ -19,9 +19,9 @@
                 <div class="form-control project__description">
                     <label>{{ 'description' | translate }}*</label>
                     <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
-                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="project.description" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description" required></textarea>
+                        <textarea id="textarea" name="textarea" ng-change="project.description === '' ? publishProjectErrorDescription = true : publishProjectErrorDescription = false" rows="6" cols="53" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"  placeholder="{{'infotab-project-description' | translate}}" data-ng-model="project.description" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description"></textarea>
                     </span>
-                    <span class="form--error" ng-show="form.textarea.$error.required && publishProjectError">
+                    <span class="form--error" ng-show="publishProjectErrorDescription && publishProjectError">
                         <small>{{ 'infotab-project-descriptionError' | translate }}</small>
                     </span>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="form-control">
                     <label>{{ 'video' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'videourl'}">
-                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="project.videoUrl" value="{{project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-disabled="!common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
+                        <input type="text" ng-keypress="" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="project.videoUrl" value="{{project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-disabled="!common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
                     </span>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <label>{{ 'tags' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
                         <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
-                        <button class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" data-element="infotab-taginput-button" tabindex="1">{{ 'add' | translate }}</button>
+                        <button type="button" class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" data-element="infotab-taginput-button" tabindex="1">{{ 'add' | translate }}</button>
                     </span>
                 </div>
                 <div class="tags">
@@ -94,7 +94,7 @@
                 <legend class="h3">{{ 'infotab_title_theme' | translate }}</legend>
             </div>
             <div class="form--section choose--theme">
-                <common-dropdown options="availableThemes" heading-option="project.defaultTheme | translate" options-click="setTheme" element-data="'infotab-choosetheme'"></common-dropdown>
+                <common-dropdown type="button" options="availableThemes" heading-option="project.defaultTheme | translate" options-click="setTheme" element-data="'infotab-choosetheme'"></common-dropdown>
                 <img ng-show="project.defaultTheme === 'infotab_option_grayTheme' || !project.defaultTheme" src="../images/gray-theme.jpg" alt=""/>
                 <img ng-show="project.defaultTheme === 'infotab_option_colorTheme'" src="../images/color-theme.jpg" alt=""/>
             </div>

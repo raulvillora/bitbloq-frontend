@@ -85,6 +85,7 @@ angular.module('bitbloqApp')
                 }
             }
         };
+
         $scope.removeTag = function(tag) {
             var indexTag = $scope.project.userTags.indexOf(tag);
             if (indexTag > -1) {
