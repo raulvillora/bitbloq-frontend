@@ -89,8 +89,8 @@ angular.module('bitbloqApp')
             form.tutorName.submitted = true;
             form.tutorSurname.submitted = true;
             form.tutorEmail.submitted = true;
-            $scope.register(form)
-        }
+            $scope.register(form);
+        };
 
         $scope.register = function(form) {
             $scope.errors.register = {
