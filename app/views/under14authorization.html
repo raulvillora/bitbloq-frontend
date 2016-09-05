@@ -46,14 +46,14 @@
         <div class="form-control">
             <label for="tutorName">{{ 'login-tutor-name' | translate }}</label>
             <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'tutorName'}">
-                <input aria-invalid="false" data-element="tutorName" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorName'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.name" id="tutorName" name="tutorName" placeholder="{{'name' | translate}}" tabindex="0" type="text">
+                <input aria-invalid="false" data-element="tutorName" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorName'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.firstName" id="tutorName" name="tutorName" placeholder="{{'name' | translate}}" tabindex="0" type="text">
             </span>
         </div>
         <!-- Surname -->
         <div class="form-control">
             <label for="tutorSurname">{{ 'login-tutor-surname' | translate }}</label>
             <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'tutorSurname'}">
-                <input aria-invalid="false" data-element="tutorSurname" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorSurname'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.surname" id="tutorSurname" name="tutorSurname" placeholder="{{'surname' | translate}}" tabindex="0" type="text">
+                <input aria-invalid="false" data-element="tutorSurname" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorSurname'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.lastName" id="tutorSurname" name="tutorSurname" placeholder="{{'surname' | translate}}" tabindex="0" type="text">
             </span>
         </div>
         <div class="form-control">
