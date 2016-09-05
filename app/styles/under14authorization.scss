@@ -1,0 +1,23 @@
+.under14authorization-view {
+    height: 100%;
+    overflow: auto;
+    form {
+        max-width: 1024px;
+        width: 90%;
+        margin: 100px auto;
+        .form-control {
+            &:last-child {
+                text-align: left;
+            }
+            &.submit {
+                &:last-child {
+                    text-align: center;
+                }
+                text-align: center;
+                input {
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
