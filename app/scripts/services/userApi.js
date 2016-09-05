@@ -237,6 +237,24 @@ angular.module('bitbloqApp')
             }).$promise;
         };
 
+        exports.getUnder14User = function(token) {
+            return $http({
+                method: 'GET',
+                url: envData.config.serverUrl + 'user/under14authorization/' + token
+            });
+        };
+
+        exports.authorizeUnder14User = function(token, userData) {
+            return $http({
+                method: 'POST',
+                url: envData.config.serverUrl + 'user/under14authorization/',
+                data: {
+                    token: token,
+                    userData: userData
+                }
+            });
+        };
+
         //***********************
 
         return exports;
