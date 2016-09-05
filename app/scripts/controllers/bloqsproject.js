@@ -9,7 +9,9 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $location, imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common, web2boardOnline) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $location,
+        imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
+        web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -102,16 +104,6 @@ angular.module('bitbloqApp')
                 return _.cloneDeep($scope.project.hardware);
             }
 
-        };
-
-        $scope.isChromebook = function() {
-            var chromebook;
-            if ($scope.common.os === 'ChromeOS' || ($scope.common.user && $scope.common.user.chromeapp)) {
-                chromebook = true;
-            } else {
-                chromebook = false;
-            }
-            return chromebook;
         };
 
         $scope.setCode = function(code) {
@@ -590,7 +582,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if ($scope.isChromebook()) {
+            if (common.useChromeExtension()) {
                 web2boardOnline.compile({
                     board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -606,7 +598,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if ($scope.project.hardware.board) {
-                if ($scope.isChromebook()) {
+                if (common.useChromeExtension()) {
                     web2boardOnline.compileAndUpload({
                         board: getBoardMetaData(),
                         code: $scope.getPrettyCode()
@@ -631,7 +623,7 @@ angular.module('bitbloqApp')
 
         $scope.serialMonitor = function() {
             if ($scope.project.hardware.board) {
-                if ($scope.isChromebook()) {
+                if (common.useChromeExtension()) {
                     commonModals.launchSerialWindow(getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {

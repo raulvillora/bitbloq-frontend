@@ -146,8 +146,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            //if (common.os === 'ChromeOS') {
-            if (true) {
+            if (common.useChromeExtension()) {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
@@ -185,8 +184,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (true) {
-                //if (common.os === 'ChromeOS') {
+            if (common.useChromeExtension()) {
                 chromeAppApi.isConnected().then(function() {
                     var board = getBoardMetaData();
                     if (!board) {
