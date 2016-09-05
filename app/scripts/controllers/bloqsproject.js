@@ -106,7 +106,7 @@ angular.module('bitbloqApp')
 
         $scope.isChromebook = function() {
             var chromebook;
-            if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
+            if ($scope.common.os === 'ChromeOS' || ($scope.common.user && $scope.common.user.chromeapp)) {
                 chromebook = true;
             } else {
                 chromebook = false;
@@ -590,7 +590,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
+            if ($scope.isChromebook()) {
                 web2boardOnline.compile({
                     board: getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -606,7 +606,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if ($scope.project.hardware.board) {
-                if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
+                if ($scope.isChromebook()) {
                     web2boardOnline.compileAndUpload({
                         board: getBoardMetaData(),
                         code: $scope.getPrettyCode()
@@ -631,7 +631,7 @@ angular.module('bitbloqApp')
 
         $scope.serialMonitor = function() {
             if ($scope.project.hardware.board) {
-                if ($scope.common.os === 'ChromeOS' || $scope.common.user.chromeapp) {
+                if ($scope.isChromebook()) {
                     commonModals.launchSerialWindow(getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
