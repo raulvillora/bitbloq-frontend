@@ -42,18 +42,25 @@
         <legend>
             <span>{{ 'tutor-profile' | translate }}</span>
         </legend>
+        <!-- DNI -->
+        <div class="form-control">
+            <label for="tutorDNI">{{ 'login-tutor-dni' | translate }}</label>
+            <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'tutorDNI'}">
+                <input aria-invalid="false" data-element="tutorDNI" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorDNI'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.dni" id="tutorDNI" name="tutorDNI" placeholder="{{'dni' | translate}}" tabindex="0" type="text" required>
+            </span>
+        </div>
         <!-- Name -->
         <div class="form-control">
             <label for="tutorName">{{ 'login-tutor-name' | translate }}</label>
             <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'tutorName'}">
-                <input aria-invalid="false" data-element="tutorName" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorName'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.firstName" id="tutorName" name="tutorName" placeholder="{{'name' | translate}}" tabindex="0" type="text">
+                <input aria-invalid="false" data-element="tutorName" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorName'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.firstName" id="tutorName" name="tutorName" placeholder="{{'name' | translate}}" tabindex="0" type="text" required>
             </span>
         </div>
         <!-- Surname -->
         <div class="form-control">
             <label for="tutorSurname">{{ 'login-tutor-surname' | translate }}</label>
             <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'tutorSurname'}">
-                <input aria-invalid="false" data-element="tutorSurname" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorSurname'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.lastName" id="tutorSurname" name="tutorSurname" placeholder="{{'surname' | translate}}" tabindex="0" type="text">
+                <input aria-invalid="false" data-element="tutorSurname" data-ng-blur="focus = false" data-ng-focus="focus = 'tutorSurname'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="user.tutor.lastName" id="tutorSurname" name="tutorSurname" placeholder="{{'surname' | translate}}" tabindex="0" type="text" required>
             </span>
         </div>
         <div class="form-control">
@@ -65,7 +72,7 @@
         <!-- Service terms -->
         <div class="form-control">
             <span data-ng-class="{'input input--checkbox':!form.readServiceTerm.submitted || user.cookiePolicyAccepted, 'input--checkbox--error':form.readServiceTerm.submitted && !user.cookiePolicyAccepted}">
-                <input data-ng-model="user.cookiePolicyAccepted" data-element="register-terms-input" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-blur="focus = false">
+                <input data-ng-model="user.cookiePolicyAccepted" data-element="register-terms-input" type="checkbox" name="readServiceTerm" id="readServiceTerm" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-blur="focus = false" required>
                 <label for="readServiceTerm">
                     {{ 'register-read-service-term' | translate }}
                     <a href="#/terms" target="_blank">{{ 'register-read-general-conditions' | translate
