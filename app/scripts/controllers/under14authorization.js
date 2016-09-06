@@ -20,13 +20,15 @@ angular.module('bitbloqApp')
         }
 
         $scope.acceptSubmit = function(form) {
-            if (!form.$error && $scope.user.cookiePolicyAccepted) {
+            if (_.isEmpty(form.$error) && $scope.user.cookiePolicyAccepted) {
                 alertsService.add({
                     text: 'under14-saving-data',
                     id: 'under14-auth',
                     type: 'loading'
                 });
-                $scope.user.tutor.validation.result = true;
+                $scope.user.tutor.validation = {
+                    result: true
+                };
                 userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function(response) {
                     console.log(response);
                     alertsService.add({
