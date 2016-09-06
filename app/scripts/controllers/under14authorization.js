@@ -49,8 +49,14 @@ angular.module('bitbloqApp')
 
         $scope.cancelSubmit = function() {
             console.log('cancel');
-            $scope.user.hasBeenValidated = false;
-            userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function(response) {
+            var user = {
+                tutor: {
+                    validation: {
+                        result: false
+                    }
+                }
+            };
+            userApi.authorizeUnder14User(updateUserToken, user).then(function(response) {
                 alertsService.add({
                     text: 'under14-auth-cancelbyuser',
                     id: 'under14-auth',
