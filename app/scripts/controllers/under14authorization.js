@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('Under14AuthorizationCtrl', function($scope, $routeParams, userApi, alertsService, $translate, $location) {
+    .controller('Under14AuthorizationCtrl', function($scope, $routeParams, _, userApi, alertsService, $translate, $location) {
         console.log('Under14AuthorizationCtrl');
 
         function goToSupport() {
@@ -59,7 +59,7 @@ angular.module('bitbloqApp')
                     }
                 }
             };
-            userApi.authorizeUnder14User(updateUserToken, user).then(function(response) {
+            userApi.authorizeUnder14User(updateUserToken, user).then(function() {
                 alertsService.add({
                     text: 'under14-auth-cancelbyuser',
                     id: 'under14-auth',
