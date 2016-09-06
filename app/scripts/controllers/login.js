@@ -140,6 +140,9 @@ angular.module('bitbloqApp')
             }
 
             if (_validateRegister()) {
+                if ($scope.userUnder14Years) {
+                    $scope.user.needValidation = true;
+                }
                 $scope.user.username = $scope.user.username.toLowerCase();
                 $scope.user.hasBeenAskedIfTeacher = true;
                 $scope.user.language = $translate.use();
