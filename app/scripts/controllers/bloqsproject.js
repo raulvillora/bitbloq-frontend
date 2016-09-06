@@ -10,8 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $location,
-        imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
-        web2boardOnline) {
+                                             imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
+                                             web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -127,12 +127,11 @@ angular.module('bitbloqApp')
 
                         return projectApi.update($scope.project._id, currentProject).then(function() {
                             $scope.saveOldProject();
-                            localStorage.projfalseectsChange = true;
+                            localStorage.projectsChange = true;
 
                             if ($scope.tempImage.file) {
                                 imageApi.save($scope.project._id, $scope.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
-                                    localStorage.projectsChange = true;
                                     $scope.imageForceReset = !$scope.imageForceReset;
                                     $scope.tempImage = {};
                                 }, function(error) {
@@ -803,11 +802,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
