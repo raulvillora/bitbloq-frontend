@@ -1,5 +1,5 @@
-<div class="under14authorization-view">
-    <form data-ng-show="showForm">
+<div class="under14authorization-view" data-ng-show="showForm">
+    <form name="form">
         <fieldset>
             <legend>
                 <span>{{ 'user-profile' | translate }}</span>
@@ -88,8 +88,8 @@
         <div class="form-control submit">
             <input type="submit" data-ng-click="acceptSubmit(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'accept' | translate}}">
         </div>
-        <div class="form-control submit">
-            <input type="submit" data-ng-click="cancelSubmit(form)" name="cancelform" class="btn btn--primary btn__login--submit" value="{{'cancel' | translate}}">
-        </div>
     </form>
+    <div class="form-control submit">
+        <button data-ng-click="cancelSubmit(form)" name="cancelform" class="btn btn--primary btn__login--submit">{{'cancel' | translate}}</button>
+    </div>
 </div>
