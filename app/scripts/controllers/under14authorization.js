@@ -64,6 +64,7 @@ angular.module('bitbloqApp')
                     type: 'ok',
                     time: 5000
                 });
+                $location.path('');
             }).catch(function(error) {
                 alertId = alertsService.add({
                     text: error.data + ' : ' + $translate.instant('error-under14-auth'),
