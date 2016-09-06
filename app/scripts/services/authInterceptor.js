@@ -5,6 +5,7 @@ angular.module('bitbloqApp')
             // Add authorization token to headers
             'request': function(config) {
                 config.headers = config.headers || {};
+                console.log($cookieStore.get('token'), config.url);
                 if ($cookieStore.get('token') || $routeParams.token) {
                     if (!config.skipAuthorization) {
                         config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
