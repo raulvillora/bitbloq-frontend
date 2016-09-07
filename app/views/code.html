@@ -13,7 +13,7 @@
                 <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="commonModals.renameProject(project)">{{project.name}}
                     <span></span>
                 </h1>
-                <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}">{{ getSavingStatusIdLabel() | translate }}</span>
+                <span class="make--saving" data-element="project-save-label-{{projectService.getSavingStatusIdLabel()}}">{{ projectService.getSavingStatusIdLabel() | translate }}</span>
             </li>
             <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip-position="bottom" data-tooltip="{{ 'verify' | translate }}">
                 <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">

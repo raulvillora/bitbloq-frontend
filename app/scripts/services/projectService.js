@@ -8,10 +8,75 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectApi', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+    .service('projectService', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
 
-        var exports = {};
+        exports.project = exports.getDefaultProject();
+        
+        exports.getDefaultProject = function() {
+            var project = {
+                creator: '',
+                name: '',
+                description: '',
+                userTags: [],
+                hardwareTags: [],
+                videoUrl: '',
+                defaultTheme: 'infotab_option_colorTheme',
+                software: {
+                    vars: {
+                        enable: true,
+                        name: 'varsBloq',
+                        childs: [],
+                        content: [
+                            []
+                        ]
+                    },
+                    setup: {
+                        enable: true,
+                        name: 'setupBloq',
+                        childs: [],
+                        content: [
+                            []
+                        ]
+                    },
+                    loop: {
+                        enable: true,
+                        name: 'loopBloq',
+                        childs: [],
+                        content: [
+                            []
+                        ]
+                    },
+                    freeBloqs: []
+                },
+
+                hardware: {
+                    board: null,
+                    robot: null,
+                    components: [],
+                    connections: []
+                }
+            };
+
+            return _.cloneDeep(project);
+        };
+        
+        
+        
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        
+        var exports = {},
+            savePromise;  //ok
+
+        //ok
+        //Private functions
+        function startSavePromise() {
+            var defer = $q.defer();
+            savePromise = defer.promise;
+            defer.resolve();
+        }
 
         function saveRequest(params) {
             return $http(params)
@@ -93,12 +158,36 @@ angular.module('bitbloqApp')
             return resource.getAll('project/shared', params, myProjectArray);
         };
 
+        
+        //ok
+        exports.startAutosave = function(saveProject) {
+            if (common.user) {
+                exports.saveStatus = 1;
+                if (!savePromise || (savePromise.$$state.status !== 0)) {
+                    savePromise = $timeout(saveProject, envData.config.saveTime || 10000);
+                    return savePromise;
+                }
+            } else {
+                common.session.save = true;
+            }
+        };
+
         exports.save = function(dataProject) {
             return saveRequest({
                 method: 'POST',
                 url: envData.config.serverUrl + 'project',
                 data: dataProject
             });
+        };
+
+        //ok
+        exports.getSavePromise = function() {
+            return savePromise;
+        };
+
+        //ok
+        exports.getSavingStatusIdLabel = function() {
+            return exports.savingStatusIdLabels[exports.saveStatus];
         };
 
         exports.update = function(idProject, dataProject) {
@@ -198,6 +287,21 @@ angular.module('bitbloqApp')
             });
         };
 
+        
+        //ok
+        exports.isShared = function(project) {
+            var found = false,
+                i = 0,
+                propertyNames = Object.getOwnPropertyNames(project._acl);
+            while (!found && (i < propertyNames.length)) {
+                if (propertyNames[i] !== 'ALL' && common.user && propertyNames[i].split('user:')[1] !== common.user._id) {
+                    found = true;
+                }
+                i++;
+            }
+            return found;
+        };
+
         exports.getCleanProject = function(projectRef) {
             var cleanProject = _.cloneDeep(projectRef);
             delete cleanProject._id;
@@ -210,7 +314,7 @@ angular.module('bitbloqApp')
             delete cleanProject.bitbloqOfflineVersion;
             return cleanProject;
         };
-        
+
         exports.download = function(project, type, force) {
             type = type || 'json';
             if (common.user || force) {
@@ -258,7 +362,7 @@ angular.module('bitbloqApp')
          * @type {Number}
          */
         exports.saveStatus = 0;
-        
+
         exports.savingStatusIdLabels = {
             0: '',
             1: 'make-saving',
@@ -266,7 +370,30 @@ angular.module('bitbloqApp')
             3: 'make-project-saved-ko',
             4: 'make-project-not-allow-to-save'
         };
-        
+
+        //ok
+        //Init functions
+        startSavePromise();
+
+        //ok
+        $rootScope.$on('$locationChangeStart', function(event) {
+            if (exports.saveStatus === 1) {
+                var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
+                if (!answer) {
+                    event.preventDefault();
+                }
+            }
+        });
+
+        //ok
+        $window.onbeforeunload = function(event) {
+            if (exports.saveStatus === 1) {
+                var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
+                if (!answer) {
+                    event.preventDefault();
+                }
+            }
+        };
 
         return exports;
     });

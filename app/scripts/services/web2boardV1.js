@@ -9,7 +9,7 @@
  */
 angular.module('bitbloqApp')
     .factory('web2board', function($rootScope, $websocket, $log, $q, ngDialog, _, $timeout, common, envData,
-        web2boardV2, alertsService, $location, commonModals, projectApi) {
+        web2boardV2, alertsService, $location, commonModals, projectService) {
 
         /** Variables */
 
@@ -345,7 +345,7 @@ angular.module('bitbloqApp')
                     } else {
                         if (tryCount === 1) {
                             // we only need to start web2board once and after save to prevent "leave without saving" warning dialog
-                            projectApi.getSavePromise().then(startWeb2board);
+                            projectService.getSavePromise().then(startWeb2board);
                         }
                         $timeout(function() {
                             web2board._openCommunication(instructions, true, tryCount);

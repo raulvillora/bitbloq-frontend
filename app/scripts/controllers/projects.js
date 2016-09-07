@@ -9,8 +9,12 @@
  */
 angular.module('bitbloqApp')
     .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, alertsService, $window,
-        $timeout, ngDialog, commonModals, utils, _, moment, JSZip) {
+        $timeout, ngDialog, commonModals, utils, _, moment, JSZip, projectService) {
 
+
+        $scope.projectService = projectService;
+        
+        
         $scope.sortProjects = function(type) {
             $log.debug('sortProject', type);
             switch (type) {

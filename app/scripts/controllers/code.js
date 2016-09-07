@@ -11,8 +11,11 @@
 angular.module('bitbloqApp')
     .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, $routeParams, _, alertsService, envData,
         $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, chromeAppApi,
-        common, compilerApi, hardwareConstants) {
+        common, compilerApi, hardwareConstants, projectService) {
 
+        
+        $scope.projectService = projectService;
+        
         $window.onbeforeunload = confirmExit;
 
         $scope.$on('$destroy', function() {
@@ -134,15 +137,13 @@ angular.module('bitbloqApp')
         }
 
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
-
-        $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
-
+        
         $scope.toggleCollapseHeader = function() {
             $scope.collapsedHeader = !$scope.collapsedHeader;
         };
 
         $scope.startAutosave = function() {
-            projectApi.startAutosave(_saveProject);
+            projectService.startAutosave(_saveProject);
         };
 
         $scope.verify = function() {
