@@ -435,34 +435,32 @@ angular.module('bitbloqApp')
                 serialMonitorPanel.reposition('center');
                 return;
             }
-            if (common.os === 'Linux') {
-                generateSerialWindow();
-            } else {
-                openCommunication(function() {
-                    inProgress = true;
-                    var toast = alertsService.add({
-                        text: 'alert-web2board-openSerialMonitor',
-                        id: 'web2board',
-                        type: 'loading'
-                    });
 
-                    api.SerialMonitorHub.server.findBoardPort(board.mcu)
-                        .then(function(port) {
-                            alertsService.close(toast);
-                            generateSerialWindow(port);
-                        }, function(error) {
-                            alertsService.add({
-                                text: 'alert-web2board-no-port-found',
-                                id: 'web2board',
-                                type: 'warning'
-                            });
-                            console.error(error);
-                        })
-                        .finally(function() {
-                            inProgress = false;
-                        });
+            openCommunication(function() {
+                inProgress = true;
+                var toast = alertsService.add({
+                    text: 'alert-web2board-openSerialMonitor',
+                    id: 'web2board',
+                    type: 'loading'
                 });
-            }
+
+                api.SerialMonitorHub.server.findBoardPort(board.mcu)
+                    .then(function(port) {
+                        alertsService.close(toast);
+                        generateSerialWindow(port);
+                    }, function(error) {
+                        alertsService.add({
+                            text: 'alert-web2board-no-port-found',
+                            id: 'web2board',
+                            type: 'warning'
+                        });
+                        console.error(error);
+                    })
+                    .finally(function() {
+                        inProgress = false;
+                    });
+            });
+
         };
 
         web2board.chartMonitor = function(board) {
