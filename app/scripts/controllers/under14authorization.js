@@ -28,7 +28,7 @@ angular.module('bitbloqApp')
                 $scope.user.tutor.validation = {
                     result: true
                 };
-                userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function(response) {
+                userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function() {
                     alertsService.add({
                         text: 'under14-auth-done',
                         id: 'under14-auth',

@@ -140,8 +140,8 @@ angular.module('bitbloqApp')
             return compileAndUploadDefer.promise;
         }
 
-        function upload(params) {
-            var uploadDefer = $q.defer();
+        function upload(params, defer) {
+            var uploadDefer = defer || $q.defer();
 
             alertsService.add({
                 text: 'alert-web2board-uploading',
@@ -199,7 +199,7 @@ angular.module('bitbloqApp')
                                 type: 'ok',
                                 time: 5000
                             });
-                            upload(params);
+                            upload(params, uploadDefer);
                         }
                     }
                 });
