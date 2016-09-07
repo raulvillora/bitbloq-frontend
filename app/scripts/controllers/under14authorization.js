@@ -8,8 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('Under14AuthorizationCtrl', function($scope, $routeParams, userApi, alertsService, $translate, $location) {
-        console.log('Under14AuthorizationCtrl');
+    .controller('Under14AuthorizationCtrl', function($scope, $routeParams, _, userApi, alertsService, $translate, $location) {
 
         function goToSupport() {
 
@@ -20,21 +19,23 @@ angular.module('bitbloqApp')
         }
 
         $scope.acceptSubmit = function(form) {
-            console.log('submit');
-            alertsService.add({
-                text: 'under14-saving-data',
-                id: 'under14-auth',
-                type: 'loading'
-            });
-            if (true) {
-                userApi.authorizeUnder14User($scope.user, updateUserToken).then(function(response) {
-                    console.log(response);
+            if (_.isEmpty(form.$error) && $scope.user.cookiePolicyAccepted) {
+                alertsService.add({
+                    text: 'under14-saving-data',
+                    id: 'under14-auth',
+                    type: 'loading'
+                });
+                $scope.user.tutor.validation = {
+                    result: true
+                };
+                userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function() {
                     alertsService.add({
                         text: 'under14-auth-done',
                         id: 'under14-auth',
                         type: 'ok',
                         time: 5000
                     });
+                    $location.path('');
                 }).catch(function(error) {
                     alertId = alertsService.add({
                         text: error.data + ' : ' + $translate.instant('error-under14-auth'),
@@ -47,18 +48,22 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.cancelSubmit = function(form) {
-            console.log('cancel');
-            userApi.authorizeUnder14User({
-                authorized: false
-            }, updateUserToken).then(function(response) {
-                console.log(response);
+        $scope.cancelSubmit = function() {
+            var user = {
+                tutor: {
+                    validation: {
+                        result: false
+                    }
+                }
+            };
+            userApi.authorizeUnder14User(updateUserToken, user).then(function() {
                 alertsService.add({
                     text: 'under14-auth-cancelbyuser',
                     id: 'under14-auth',
                     type: 'ok',
                     time: 5000
                 });
+                $location.path('');
             }).catch(function(error) {
                 alertId = alertsService.add({
                     text: error.data + ' : ' + $translate.instant('error-under14-auth'),
@@ -70,9 +75,10 @@ angular.module('bitbloqApp')
             });
         };
 
-        var alertId, updateUserToken;
+        var alertId,
+            updateUserToken = $routeParams.token;
 
-        $scope.user;
+        $scope.user = null;
         $scope.showForm = false;
 
         alertsService.add({
@@ -80,13 +86,13 @@ angular.module('bitbloqApp')
             id: 'under14-auth',
             type: 'loading'
         });
-        userApi.getUnder14User($routeParams.token).then(function(response) {
+        userApi.getUnder14User(updateUserToken).then(function(response) {
             $scope.showForm = true;
-            console.log(response);
-            $scope.user = response.data.user;
-            updateUserToken = response.data.token;
+
+            $scope.user = response.data;
+            alertsService.closeByTag('under14-auth');
         }).catch(function(error) {
-            console.log(error);
+
             alertId = alertsService.add({
                 text: error.data + ' : ' + $translate.instant('error-under14-auth'),
                 id: 'under14-auth',
@@ -95,5 +101,5 @@ angular.module('bitbloqApp')
                 link: goToSupport
             });
             $location.path('');
-        })
+        });
     });

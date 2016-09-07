@@ -99,6 +99,7 @@ angular.module('bitbloqApp')
             } else {
                 exports.user = null;
                 $translate.use(localStorage.guestLanguage || navigatorLang);
+                console.log('delete cookie');
                 $cookieStore.remove('token');
                 loadedUserPromise.reject();
             }
@@ -178,7 +179,9 @@ angular.module('bitbloqApp')
         var loadedUserPromise = $q.defer();
 
         if (!exports.user) {
+            console.log('gettingUSer on common');
             User.get().$promise.then(function(user) {
+                console.log('gettingUSer on common OK');
                 if (user.username) {
                     delete user.$promise;
                     delete user.$resolved;
@@ -189,6 +192,7 @@ angular.module('bitbloqApp')
                     exports.setUser(null);
                 }
             }, function() {
+                console.log('gettingUSer on common KO');
                 exports.userIsLoaded = true;
                 exports.setUser(null);
             });
@@ -234,6 +238,10 @@ angular.module('bitbloqApp')
                     });
                 });
             }
+        };
+
+        exports.useChromeExtension = function() {
+            return (exports.os === 'ChromeOS' || (exports.user && exports.user.chromeapp));
         };
 
         return exports;

@@ -246,7 +246,7 @@ angular.module('bitbloqApp')
 
         exports.authorizeUnder14User = function(token, userData) {
             return $http({
-                method: 'POST',
+                method: 'PUT',
                 url: envData.config.serverUrl + 'user/under14authorization/',
                 data: {
                     token: token,

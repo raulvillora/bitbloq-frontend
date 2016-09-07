@@ -10,7 +10,7 @@
  */
 angular.module('bitbloqApp')
     .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, $routeParams, _, alertsService, envData,
-        $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, chromeAppApi,
+        $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline,
         common, compilerApi, hardwareConstants, projectService) {
 
         
@@ -137,7 +137,9 @@ angular.module('bitbloqApp')
         }
 
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
-        
+
+        $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
+
         $scope.toggleCollapseHeader = function() {
             $scope.collapsedHeader = !$scope.collapsedHeader;
         };
@@ -147,8 +149,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            //if (common.os === 'ChromeOS') {
-            if (true) {
+            if (common.useChromeExtension()) {
                 var board = getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
@@ -186,41 +187,10 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (true) {
-                //if (common.os === 'ChromeOS') {
-                chromeAppApi.isConnected().then(function() {
-                    var board = getBoardMetaData();
-                    if (!board) {
-                        board = 'bt328';
-                    } else {
-                        board = board.mcu;
-                    }
-                    compilerApi.compile({
-                        board: board,
-                        code: utils.prettyCode($scope.project.code)
-                    }).then(function(response) {
-                        if (response.data.error) {
-                            alertsService.add({
-                                id: 'web2board',
-                                type: 'warning',
-                                translatedText: utils.parseCompileError(response.data.error)
-                            });
-                        } else {
-                            chromeAppApi.sendHex({
-                                board: board,
-                                file: response.data.hex
-                            });
-                        }
-                    });
-                }).catch(function() {
-                    alertsService.add({
-                        text: 'instala chrome app',
-                        id: 'chromeapp-install',
-                        type: 'warning',
-                        linkText: 'aqui',
-                        link: installChromeApp
-                    });
-
+            if (common.useChromeExtension()) {
+                web2boardOnline.compileAndUpload({
+                    board: getBoardMetaData(),
+                    code: utils.prettyCode($scope.project.code)
                 });
             } else {
                 if (web2board.isWeb2boardV2()) {
@@ -230,16 +200,6 @@ angular.module('bitbloqApp')
                 }
             }
         };
-
-        function installChromeApp() {
-            chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
-                console.log('response', response);
-                $scope.upload();
-            }, function(error) {
-                console.log('install error');
-                console.log('error', error);
-            });
-        }
 
         $scope.getCurrentProject = function() {
             return _.cloneDeep($scope.project);

@@ -926,8 +926,7 @@ module.exports = function(grunt) {
     grunt.registerTask('updateAllCollections', function() {
         grunt.task.run([
             'updateCollection:bloq',
-            'updateCollection:property',
-            'updateCollection:forumcategory'
+            'updateCollection:property'
         ]);
     });
 

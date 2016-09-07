@@ -322,7 +322,7 @@ angular.module('bitbloqApp')
             var robot = $scope.project.hardware.robot,
                 version = common.properties.robotsFirmwareVersion[robot];
             robotFirmwareApi.getFirmware(robot, version).then(function(result) {
-                if (common.os === 'ChromeOS') {
+                if (common.useChromeExtension()) {
                     web2boardOnline.upload({
                         hex: result.data,
                         board: {
