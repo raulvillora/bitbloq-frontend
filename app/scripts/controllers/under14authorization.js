@@ -9,7 +9,6 @@
  */
 angular.module('bitbloqApp')
     .controller('Under14AuthorizationCtrl', function($scope, $routeParams, _, userApi, alertsService, $translate, $location) {
-        console.log('Under14AuthorizationCtrl');
 
         function goToSupport() {
 
@@ -30,7 +29,6 @@ angular.module('bitbloqApp')
                     result: true
                 };
                 userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function(response) {
-                    console.log(response);
                     alertsService.add({
                         text: 'under14-auth-done',
                         id: 'under14-auth',
@@ -51,7 +49,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.cancelSubmit = function() {
-            console.log('cancel');
             var user = {
                 tutor: {
                     validation: {
@@ -91,11 +88,11 @@ angular.module('bitbloqApp')
         });
         userApi.getUnder14User(updateUserToken).then(function(response) {
             $scope.showForm = true;
-            console.log(response);
+
             $scope.user = response.data;
             alertsService.closeByTag('under14-auth');
         }).catch(function(error) {
-            console.log(error);
+
             alertId = alertsService.add({
                 text: error.data + ' : ' + $translate.instant('error-under14-auth'),
                 id: 'under14-auth',
