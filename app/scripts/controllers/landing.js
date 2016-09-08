@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common, chromeAppApi) {
+    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common, chromeAppApi, alertsService) {
 
         function getLandingExampleProjects() {
 
@@ -28,7 +28,24 @@ angular.module('bitbloqApp')
             });
         }
 
-        $scope.installChromeApp =  chromeAppApi.installChromeApp;
+        $scope.installChromeApp = function() {
+            chromeAppApi.installChromeApp(function(err) {
+                if (err) {
+                    alertsService.add({
+                        text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
+                        id: 'web2board',
+                        type: 'error'
+                    });
+                } else {
+                    alertsService.add({
+                        text: $translate.instant('chromeapp-installed'),
+                        id: 'web2board',
+                        type: 'ok',
+                        time: 5000
+                    });
+                }
+            });
+        };
 
         $scope.translateGuest = function(language) {
             $translate.use(language);
