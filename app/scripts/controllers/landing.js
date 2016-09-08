@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common) {
+    .controller('LandingCtrl', function($scope, $log, $translate, envData, commonModals, projectApi, common, chromeAppApi) {
 
         function getLandingExampleProjects() {
 
@@ -27,6 +27,8 @@ angular.module('bitbloqApp')
                 $log.debug(error);
             });
         }
+
+        $scope.installChromeApp =  chromeAppApi.installChromeApp;
 
         $scope.translateGuest = function(language) {
             $translate.use(language);
