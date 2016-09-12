@@ -25,11 +25,13 @@ angular.module('bitbloqApp')
                         $scope.common.setUser(user);
                     });
                 }, function(err) {
-                    alertsService.add({
-                        text: 'social-networks-error-has-identity',
-                        id: 'social-network-user',
-                        type: 'warning'
-                    });
+                    if (err.status === 409) {
+                        alertsService.add({
+                            text: 'social-networks-error-has-identity',
+                            id: 'social-network-user',
+                            type: 'warning'
+                        });
+                    }
                     console.log('ERROR ADDING SOCIAL NETWORK: ', err);
                 });
             });
