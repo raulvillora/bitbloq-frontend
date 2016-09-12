@@ -85,5 +85,5 @@
         "getbloqs": "bower uninstall bloqs --save && bower install bloqs --save && grunt getbloqs"
     },
     "dependencies": {},
-    "version": "v3.2.1"
+    "version": "v3.2.2"
 }
