@@ -30,12 +30,6 @@ angular.module('bitbloqApp')
             return closeMessage;
         }
 
-        function getBoardMetaData() {
-            return _.find($scope.boards, function(item) {
-                return item.name === projectService.project.hardware.board;
-            });
-        }
-
         function uploadW2b1() {
             $scope.$emit('uploading');
             if ($scope.isWeb2BoardInProgress()) {
@@ -43,9 +37,7 @@ angular.module('bitbloqApp')
             }
             if (projectService.project.hardware.board) {
                 web2board.setInProcess(true);
-                var boardMetadata = _.find($scope.boards, function(item) {
-                    return item.name === projectService.project.hardware.board;
-                });
+                var boardMetadata = projectService.getBoardMetaData();
                 settingBoardAlert = alertsService.add({
                     text: 'alert-web2board-settingBoard',
                     id: 'upload',
@@ -66,7 +58,7 @@ angular.module('bitbloqApp')
 
         function uploadW2b2() {
             if (projectService.project.hardware.board) {
-                web2board.upload(getBoardMetaData().mcu, utils.prettyCode(projectService.project.code));
+                web2board.upload(projectService.getBoardMetaData().mcu, utils.prettyCode(projectService.project.code));
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add({
@@ -108,9 +100,7 @@ angular.module('bitbloqApp')
                     id: 'serialmonitor',
                     type: 'loading'
                 });
-                var boardMetadata = _.find($scope.boards, function(item) {
-                    return item.name === projectService.project.hardware.board;
-                });
+                var boardMetadata = projectService.getBoardMetaData();
                 web2board.serialMonitor(boardMetadata);
             } else {
                 $scope.currentTab = 'info';
@@ -124,7 +114,7 @@ angular.module('bitbloqApp')
 
         function serialMonitorW2b2() {
             if (projectService.project.hardware.board) {
-                web2board.serialMonitor(getBoardMetaData());
+                web2board.serialMonitor(projectService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
@@ -150,7 +140,7 @@ angular.module('bitbloqApp')
 
         $scope.verify = function() {
             if (common.useChromeExtension()) {
-                var board = getBoardMetaData();
+                var board = projectService.getBoardMetaData();
                 if (!board) {
                     board = 'bt328';
                 } else {
@@ -189,7 +179,7 @@ angular.module('bitbloqApp')
         $scope.upload = function() {
             if (common.useChromeExtension()) {
                 web2boardOnline.compileAndUpload({
-                    board: getBoardMetaData(),
+                    board: projectService.getBoardMetaData(),
                     code: utils.prettyCode(projectService.project.code)
                 });
             } else {
@@ -226,9 +216,7 @@ angular.module('bitbloqApp')
                 projectService.project.hardwareTags.splice(indexTag, 1);
             }
             projectService.project.hardware.board = boardName || 'bq ZUM'; //Default board is ZUM
-            var boardMetadata = _.find($scope.boards, function(board) {
-                return board.name === projectService.project.hardware.board;
-            });
+            var boardMetadata = projectService.getBoardMetaData();
             $scope.boardImage = boardMetadata && boardMetadata.id;
             projectService.project.hardwareTags.push(projectService.project.hardware.board);
         };
@@ -549,13 +537,11 @@ angular.module('bitbloqApp')
 
         projectService.project = projectService.getDefaultProject(true);
 
-        $scope.boards = [];
         $scope.boardNameList = [];
         $scope.commonModals = commonModals;
         $scope.common.isLoading = true;
 
-        $scope.boards = hardwareConstants.boards;
-        $scope.boardNameList = _.pluck($scope.boards, 'name');
+        $scope.boardNameList = _.pluck(hardwareConstants.boards, 'name');
 
         // The ui-ace option
         $scope.aceOptions = {

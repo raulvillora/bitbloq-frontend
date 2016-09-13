@@ -21,12 +21,6 @@ angular.module('bitbloqApp')
          Project save / edit
          *************************************************/
 
-        function getBoardMetaData() {
-            return _.find($scope.hardware.boardList, function(b) {
-                return b.name === projectService.project.hardware.board;
-            });
-        }
-
         $scope.startAutosave = function() {
             projectService.startAutosave(saveProject);
             $scope.hardware.firstLoad = false;
@@ -440,9 +434,7 @@ angular.module('bitbloqApp')
             }
             if (projectService.project.hardware.board) {
                 web2board.setInProcess(true);
-                var boardReference = _.find($scope.hardware.boardList, function(b) {
-                    return b.name === projectService.project.hardware.board;
-                });
+                var boardReference = projectService.getBoardMetaData();
                 settingBoardAlert = alertsService.add({
                     text: 'alert-web2board-settingBoard',
                     id: 'upload',
@@ -464,7 +456,7 @@ angular.module('bitbloqApp')
 
         function uploadW2b2() {
             if (projectService.project.hardware.board) {
-                web2board.upload(getBoardMetaData().mcu, $scope.getPrettyCode());
+                web2board.upload(projectService.getBoardMetaData().mcu, $scope.getPrettyCode());
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add({
@@ -506,9 +498,7 @@ angular.module('bitbloqApp')
                     id: 'serialmonitor',
                     type: 'loading'
                 });
-                var boardReference = _.find($scope.hardware.boardList, function(b) {
-                    return b.name === projectService.project.hardware.board;
-                });
+                var boardReference = projectService.getBoardMetaData();
                 web2board.serialMonitor(boardReference);
             } else {
                 $scope.currentTab = 0;
@@ -524,7 +514,7 @@ angular.module('bitbloqApp')
 
         function serialMonitorW2b2() {
             if (projectService.project.hardware.board) {
-                web2board.serialMonitor(getBoardMetaData());
+                web2board.serialMonitor(projectService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
@@ -539,7 +529,7 @@ angular.module('bitbloqApp')
         $scope.verify = function() {
             if (common.useChromeExtension()) {
                 web2boardOnline.compile({
-                    board: getBoardMetaData(),
+                    board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
                 });
             } else {
@@ -555,7 +545,7 @@ angular.module('bitbloqApp')
             if (projectService.project.hardware.board) {
                 if (common.useChromeExtension()) {
                     web2boardOnline.compileAndUpload({
-                        board: getBoardMetaData(),
+                        board: projectService.getBoardMetaData(),
                         code: $scope.getPrettyCode()
                     });
                 } else {
@@ -579,7 +569,7 @@ angular.module('bitbloqApp')
         $scope.serialMonitor = function() {
             if (projectService.project.hardware.board) {
                 if (common.useChromeExtension()) {
-                    commonModals.launchSerialWindow(getBoardMetaData());
+                    commonModals.launchSerialWindow(projectService.getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
                         serialMonitorW2b2();
@@ -600,7 +590,7 @@ angular.module('bitbloqApp')
 
         $scope.chartMonitor = function() {
             if (projectService.project.hardware.board) {
-                web2board.chartMonitor(getBoardMetaData());
+                web2board.chartMonitor(projectService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
@@ -1156,7 +1146,6 @@ angular.module('bitbloqApp')
         $scope.oldTempImage = {};
 
         $scope.hardware = {
-            boardList: null,
             componentList: null,
             robotList: null,
             cleanSchema: null,

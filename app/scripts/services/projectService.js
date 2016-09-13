@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectService', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
+    .service('projectService', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout, hardwareConstants) {
 
         var exports = {};
 
@@ -79,6 +79,12 @@ angular.module('bitbloqApp')
             } else {
                 common.session.save = true;
             }
+        };
+
+        exports.getBoardMetaData = function(){
+            return _.find(hardwareConstants.boards, function(board) {
+                return board.name === exports.project.hardware.board;
+            });
         };
 
 
