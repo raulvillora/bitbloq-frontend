@@ -62,7 +62,7 @@
         <div class="menu--user" ng-show="common.user">
             <div class="menu--user__header">
                 <span class="menu--user__avatar" ng-click="openMenu($event)">
-                    <img class="img--avatar" data-element="open-header-menu" err-src="../images/common/avatar.png" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}">
+                    <img class="img--avatar" image-change="common.avatarChange" data-element="open-header-menu" err-src="../images/common/avatar.png" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}">
                 </span>
             </div>
             <ul class="menu--user__content" ng-show="showHeader">

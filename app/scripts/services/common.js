@@ -51,6 +51,7 @@ angular.module('bitbloqApp')
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
 
+        exports.avatarChange = false;
         exports.os = utils.getOs();
 
         exports.langToBQ = {

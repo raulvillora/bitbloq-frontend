@@ -151,6 +151,7 @@ angular.module('bitbloqApp')
             };
             utils.uploadImage(e, properties).then(function(response) {
                 $scope.tempAvatar = response.blob;
+                common.avatarChange = true;
                 $scope.saveProfile();
             }).catch(function(response) {
                 switch (response.error) {
