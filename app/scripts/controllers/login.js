@@ -68,12 +68,12 @@ angular.module('bitbloqApp')
         };
         $scope.checkAge = function(form) {
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                var emptyBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
-                if (!emptyBirthday) {
+                var validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
+                if (!validBirthday) {
                     var userBirthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
                     var older = new Date();
                     older.setYear(older.getFullYear() - 14);
-                    $scope.userUnder14Years = userBirthday >= older;
+                    $scope.userUnder14Years = userBirthday >= older &&  userBirthday <= new Date();
                 }
             }
         };
@@ -97,6 +97,7 @@ angular.module('bitbloqApp')
                 email: false,
                 birthday: false,
                 emptyBirthday: false,
+                validBirthday: false,
                 disconnect: false,
                 sameTutorEmail: false
             };
@@ -106,19 +107,22 @@ angular.module('bitbloqApp')
             $scope.errors.disconnect = false;
 
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                $scope.errors.emptyBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
-                if (!$scope.errors.emptyBirthday) {
+                $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
+                if (!$scope.errors.register.validBirthday) {
+                    if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
+                        $scope.errors.register.birthday = true;
+                    }
                     $scope.user.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
                     var older = new Date();
                     older.setYear(older.getFullYear() - 14);
-                    $scope.userUnder14Years = $scope.user.birthday >= older;
+                    $scope.userUnder14Years = $scope.user.birthday >= older && $scope.user.birthday <= new Date() ;
                 } else {
                     fireShakeEffect();
                 }
             } else {
                 fireShakeEffect();
-                $scope.errors.emptyBirthday = true;
-                $scope.errors.birthday = false;
+                $scope.errors.register.emptyBirthday = true;
+                $scope.errors.register.birthday = false;
             }
 
             if ($scope.userUnder14Years && $scope.user.tutor) {
@@ -134,8 +138,9 @@ angular.module('bitbloqApp')
                     !form.username.$error.required &&
                     $scope.username.free &&
                     $scope.user.cookiePolicyAccepted &&
-                    !$scope.errors.birthday &&
-                    !$scope.errors.emptyBirthday &&
+                    !$scope.errors.register.birthday &&
+                    !$scope.errors.register.emptyBirthday &&
+                    !$scope.errors.register.validBirthday &&
                     (!$scope.userUnder14Years || ($scope.userUnder14Years && !form.tutorName.$invalid && !form.tutorSurname.$invalid && !form.tutorEmail.$invalid && !$scope.errors.register.sameTutorEmail));
             }
 
@@ -468,6 +473,7 @@ angular.module('bitbloqApp')
                 email: false,
                 birthday: false,
                 emptyBirthday: false,
+                validBirthday: false,
                 socialEmail: false
             },
             disconnect: false
