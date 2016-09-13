@@ -906,19 +906,19 @@ angular.module('bitbloqApp')
                 }
             });
 
-            $scope.$watch('project.hardware.board', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.hardware.board', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
                     $scope.startAutosave();
                 }
             });
 
-            $scope.$watch('project.name', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.name', function(newVal, oldVal) {
                 if (newVal && newVal !== oldVal) {
                     $scope.startAutosave();
                 }
             });
 
-            $scope.$watch('project.videoUrl', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.videoUrl', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
@@ -932,7 +932,7 @@ angular.module('bitbloqApp')
                     }
                 }
             });
-            $scope.$watch('project.description', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.description', function(newVal, oldVal) {
                 if (!newVal) {
                     projectService.project.description = '';
                 }

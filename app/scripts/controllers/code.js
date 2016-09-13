@@ -134,10 +134,6 @@ angular.module('bitbloqApp')
             $scope.collapsedHeader = !$scope.collapsedHeader;
         };
 
-        $scope.startAutosave = function() {
-            projectService.startAutosave(_saveProject);
-        };
-
         $scope.verify = function() {
             if (common.useChromeExtension()) {
                 var board = projectService.getBoardMetaData();
@@ -336,13 +332,13 @@ angular.module('bitbloqApp')
         function _addWatchersAndListenerGuest() {
             if (!$scope.common.session.save) {
 
-                $scope.$watch('project.code', function(newVal, oldVal) {
+                $scope.$watch('projectService.project.code', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         $scope.common.session.save = true;
                     }
                 });
 
-                $scope.$watch('project.hardware.board', function(newVal, oldVal) {
+                $scope.$watch('projectService.project.hardware.board', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         $scope.common.session.save = true;
                     }
@@ -352,19 +348,19 @@ angular.module('bitbloqApp')
 
         function _addWatchersAndListener() {
 
-            $scope.$watch('project.name', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.name', function(newVal, oldVal) {
                 if (newVal && newVal !== oldVal) {
-                    $scope.startAutosave();
+                    projectService.startAutosave(_saveProject);
                 }
             });
 
-            $scope.$watch('project.code', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.code', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    $scope.startAutosave();
+                    projectService.startAutosave(_saveProject);
                 }
             });
 
-            $scope.$watch('project.videoUrl', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.videoUrl', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
                     $scope.videoId = utils.isYoutubeURL(newVal);
                     if (!$scope.videoId && newVal) {
@@ -374,20 +370,20 @@ angular.module('bitbloqApp')
                             type: 'warning'
                         });
                     } else {
-                        $scope.startAutosave();
+                        projectService.startAutosave(_saveProject);
                     }
                 }
             });
 
-            $scope.$watch('project.description', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.description', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    $scope.startAutosave();
+                    projectService.startAutosave(_saveProject);
                 }
             });
 
-            $scope.$watch('project.hardware.board', function(newVal, oldVal) {
+            $scope.$watch('projectService.project.hardware.board', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    $scope.startAutosave();
+                    projectService.startAutosave(_saveProject);
                 }
             });
         }
@@ -499,7 +495,7 @@ angular.module('bitbloqApp')
                     if ($scope.common.session.save) {
                         projectService.project = $scope.common.session.project;
                         $scope.common.session.save = false;
-                        $scope.startAutosave();
+                        projectService.startAutosave(_saveProject);
                     }
                     $scope.setBoard(projectService.project.hardware.board);
                     _prettyCode().then(function() {
