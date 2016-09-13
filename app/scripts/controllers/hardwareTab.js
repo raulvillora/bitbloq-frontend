@@ -9,7 +9,7 @@
 angular.module('bitbloqApp')
     .controller('hardwareTabCtrl', hardwareTabCtrl);
 
-function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi) {
+function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $q, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi, projectService) {
 
     var container = utils.getDOMElement('.protocanvas'),
         $componentContextMenu = $('#component-context-menu'),
@@ -29,8 +29,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
 
-        if ($scope.project.hardware.board || $scope.project.hardware.robot) {
-            _loadHardwareProjec($scope.project.hardware);
+        if (projectService.project.hardware.board || projectService.project.hardware.robot) {
+            _loadHardwareProjec(projectService.project.hardware);
         }
 
         container.addEventListener('mousedown', _mouseDownHandler, true);
@@ -107,7 +107,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             }
             _focusComponent(ev.target);
         } else if (ev.target.classList.contains('board') || $(ev.target).closest('.board').length) {
-            if ($scope.project.hardware.board) {
+            if (projectService.project.hardware.board) {
                 $boardContextMenu.css({
                     display: 'block',
                     left: event.pageX + 'px',
@@ -133,7 +133,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function checkComponentConnections(componentUid) {
-        var component = _.find($scope.project.hardware.components, function(c) {
+        var component = _.find(projectService.project.hardware.components, function(c) {
             return c.uid === componentUid;
         });
         var connections = 0;
@@ -160,7 +160,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             return filtered.length > 0;
         }
 
-        componentReference = _.find($scope.project.hardware.components, {
+        componentReference = _.find(projectService.project.hardware.components, {
             'uid': e.componentData.uid
         });
 
@@ -200,14 +200,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     var _addBoard = function(board) {
 
-        if ($scope.project.hardware.board === board.name && !$scope.project.hardware.robot) {
+        if (projectService.project.hardware.board === board.name && !projectService.project.hardware.robot) {
             return false;
         }
-        $scope.project.hardware.robot = null;
+        projectService.project.hardware.robot = null;
 
         hw2Bloqs.addBoard(board);
 
-        $scope.project.hardware.board = board.name;
+        projectService.project.hardware.board = board.name;
 
         $scope.refreshComponentsArray();
     };
@@ -217,21 +217,21 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var robotReference = _.find($scope.hardware.robotList, function(r) {
             return r.id === robot.id;
         });
-        $scope.project.hardware.robot = robot.id;
+        projectService.project.hardware.robot = robot.id;
         hw2Bloqs.removeRobot(robotReference);
         hw2Bloqs.addRobot(robotReference);
 
-        $scope.project.hardware.board = robotReference.board;
+        projectService.project.hardware.board = robotReference.board;
 
         $scope.componentSelected = null;
-        $scope.project.hardware.components = [];
+        projectService.project.hardware.components = [];
 
         $scope.refreshComponentsArray();
     };
 
     $scope.deleteRobot = function() {
-        $scope.project.hardware.robot = null;
-        $scope.project.hardware.board = null;
+        projectService.project.hardware.robot = null;
+        projectService.project.hardware.board = null;
         $scope.robotSelected = false;
         $scope.refreshComponentsArray();
         $scope.startAutosave();
@@ -244,7 +244,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         });
 
         var newComponent = _.cloneDeep(component);
-        $scope.project.hardware.components.push(newComponent);
+        projectService.project.hardware.components.push(newComponent);
 
         var relativeCoordinates = {
             x: ((data.coordinates.x / container.clientWidth) * 100),
@@ -265,7 +265,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBoard = function() {
         hw2Bloqs.removeBoard();
         $scope.boardSelected = false;
-        $scope.project.hardware.board = null;
+        projectService.project.hardware.board = null;
         $scope.refreshComponentsArray();
         $scope.startAutosave();
     };
@@ -274,7 +274,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $('.component').removeClass('component-selected');
 
-        var componentSelected = _.find($scope.project.hardware.components, function(c) {
+        var componentSelected = _.find(projectService.project.hardware.components, function(c) {
             return c.uid === component.dataset.uid;
         });
         $(component).addClass('component-selected');
@@ -291,7 +291,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _createUniqueVarName(component) {
         var usedNames = {},
             componentBasicName = $translate.instant('default-var-name-' + component.id);
-        var componentcategoryList = _.filter($scope.project.hardware.components, function(item) {
+        var componentcategoryList = _.filter(projectService.project.hardware.components, function(item) {
             return item.category === component.category;
         });
         for (var i = 0; i < componentcategoryList.length; i++) {
@@ -374,7 +374,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (ev.target.classList.contains('component')) {
             $scope.unsetInputFocus();
             var componentDOM = ev.target;
-            var componentReference = _.find($scope.project.hardware.components, function(c) {
+            var componentReference = _.find(projectService.project.hardware.components, function(c) {
                 return c.uid === componentDOM.dataset.uid;
             });
             var newCoordinates = {
@@ -401,13 +401,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $('.component').removeClass('component-selected');
             hw2Bloqs.unselectAllConnections();
 
-            if ($scope.project.hardware.board) {
+            if (projectService.project.hardware.board) {
                 $scope.subMenuHandler('hwcomponents', 'open', 1);
             } else {
                 $scope.subMenuHandler('boards', 'open', 1);
             }
         } else if (ev.target.classList.contains('component__container')) {
-            if (!$scope.project.hardware.robot && $scope.project.hardware.components.length === 0) {
+            if (!projectService.project.hardware.robot && projectService.project.hardware.components.length === 0) {
                 $scope.subMenuHandler('hwcomponents', 'open', 1);
             }
         } else if (ev.target.classList.contains('oscillator--checkbox')) {
@@ -435,7 +435,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         delete newComponent.pin;
         delete newComponent.uid;
         newComponent.connected = false;
-        $scope.project.hardware.components.push(newComponent);
+        projectService.project.hardware.components.push(newComponent);
 
         var coordinates = {
             x: newComponent.coordinates.x > 85 ? 85 + 3 : newComponent.coordinates.x + 3,
@@ -462,7 +462,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.disconnectAllComponents = function() {
         hw2Bloqs.disconnectAllComponents();
-        $scope.project.hardware.components.forEach(function(comp) {
+        projectService.project.hardware.components.forEach(function(comp) {
             comp.connected = false;
         });
         $scope.refreshComponentsArray();
@@ -471,7 +471,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.deleteComponent = function() {
         $scope.disconnectComponent();
-        var c = _.remove($scope.project.hardware.components, function(el) {
+        var c = _.remove(projectService.project.hardware.components, function(el) {
             return $scope.componentSelected.uid === el.uid;
         });
         var componenetToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
@@ -510,7 +510,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $scope.subMenuHandler('hwcomponents', 'open', 1);
             $scope.startAutosave();
         } else if (data.type === 'components') {
-            if (!$scope.project.hardware.board) {
+            if (!projectService.project.hardware.board) {
                 $scope.subMenuHandler('boards', 'open', 1);
                 alertsService.add({
                     text: 'bloqs-project_alert_no-board',
@@ -518,7 +518,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     type: 'error'
                 });
                 return false;
-            } else if ($scope.project.hardware.robot) {
+            } else if (projectService.project.hardware.robot) {
                 alertsService.add({
                     text: 'bloqs-project_alert_only-robot',
                     id: 'error_noboard',
@@ -540,18 +540,18 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
 
         var hwSchema = {};
-        hwSchema.components = _.cloneDeep($scope.project.hardware.components);
-        hwSchema.connections = _.cloneDeep($scope.project.hardware.connections);
+        hwSchema.components = _.cloneDeep(projectService.project.hardware.components);
+        hwSchema.connections = _.cloneDeep(projectService.project.hardware.connections);
 
         hwBasicsLoaded.promise.then(function() {
-            if ($scope.project.hardware.robot) {
+            if (projectService.project.hardware.robot) {
                 var robotReference = _.find($scope.hardware.robotList, function(robot) {
-                    return robot.id === $scope.project.hardware.robot;
+                    return robot.id === projectService.project.hardware.robot;
                 });
                 hwSchema.robot = robotReference; //The whole board object is passed
-            } else if ($scope.project.hardware.board) {
+            } else if (projectService.project.hardware.board) {
                 var boardReference = _.find($scope.hardware.boardList, function(board) {
-                    return board.name === $scope.project.hardware.board;
+                    return board.name === projectService.project.hardware.board;
                 });
                 hwSchema.board = boardReference; //The whole board object is passed
             }
@@ -562,7 +562,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.refreshComponentsArray();
                 $scope.hardware.firstLoad = false;
                 //Fix components dimensions
-                _.forEach($scope.project.hardware.components, function(item) {
+                _.forEach(projectService.project.hardware.components, function(item) {
                     item = bloqsUtils.checkPins(item);
                     _fixComponentsDimension(item);
                 });
@@ -574,7 +574,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     $scope.checkName = function() {
-        var isNameDuplicated = _.filter($scope.project.hardware.components, {
+        var isNameDuplicated = _.filter(projectService.project.hardware.components, {
             name: $scope.componentSelected.name
         });
         if (isNameDuplicated instanceof Array && isNameDuplicated.length > 1) {

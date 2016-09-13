@@ -10,12 +10,12 @@
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
         bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-        robotFirmwareApi, web2boardOnline) {
+        robotFirmwareApi, web2boardOnline, projectService) {
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
             if ($scope.common.session.save) {
-                $scope.project.code = $scope.code;
+                projectService.project.code = $scope.code;
             }
             if (!$scope.common.user || !$scope.common.user.hasBeenWarnedAboutChangeBloqsToCode) {
                 var modalCode = $rootScope.$new();
@@ -35,10 +35,10 @@ angular.module('bitbloqApp')
                     showClose: false
                 });
             } else {
-                if ($scope.project._id) {
-                    $location.path('/codeproject/' + $scope.project._id);
+                if (projectService.project._id) {
+                    $location.path('/codeproject/' + projectService.project._id);
                 } else {
-                    $scope.common.session.project = $scope.project;
+                    $scope.common.session.project = projectService.project;
                     $scope.common.session.project.codeProject = true;
                     $location.path('/codeproject/');
                 }
@@ -129,9 +129,9 @@ angular.module('bitbloqApp')
                 $scope.bloqs.loopBloq = null;
             }
 
-            $scope.bloqs.varsBloq = bloqs.buildBloqWithContent($scope.project.software.vars, $scope.componentsArray, bloqsApi.schemas, $scope.$field);
-            $scope.bloqs.setupBloq = bloqs.buildBloqWithContent($scope.project.software.setup, $scope.componentsArray, bloqsApi.schemas);
-            $scope.bloqs.loopBloq = bloqs.buildBloqWithContent($scope.project.software.loop, $scope.componentsArray, bloqsApi.schemas);
+            $scope.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, $scope.componentsArray, bloqsApi.schemas, $scope.$field);
+            $scope.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, $scope.componentsArray, bloqsApi.schemas);
+            $scope.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, $scope.componentsArray, bloqsApi.schemas);
 
             $scope.$field.append($scope.bloqs.varsBloq.$bloq, $scope.bloqs.setupBloq.$bloq, $scope.bloqs.loopBloq.$bloq);
             $scope.bloqs.varsBloq.enable(true);
@@ -151,19 +151,19 @@ angular.module('bitbloqApp')
                 lastBottomConnector;
 
             bloqs.destroyFreeBloqs();
-            if ($scope.project.software.freeBloqs && ($scope.project.software.freeBloqs.length > 0)) {
-                for (i = 0; i < $scope.project.software.freeBloqs.length; i++) {
+            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
+                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
                     lastBottomConnector = null;
-                    for (j = 0; j < $scope.project.software.freeBloqs[i].bloqGroup.length; j++) {
-                        // $log.debug($scope.project.software.freeBloqs[i].bloqGroup[j]);
-                        tempBloq = bloqs.buildBloqWithContent($scope.project.software.freeBloqs[i].bloqGroup[j], $scope.componentsArray, bloqsApi.schemas);
+                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
+                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
+                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], $scope.componentsArray, bloqsApi.schemas);
 
                         if (lastBottomConnector) {
                             bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
                             bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
 
                         } else {
-                            tempBloq.$bloq[0].style.transform = 'translate(' + $scope.project.software.freeBloqs[i].position.left + 'px,' + $scope.project.software.freeBloqs[i].position.top + 'px)';
+                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
                         }
 
                         lastBottomConnector = tempBloq.connectors[1];
@@ -319,7 +319,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.performFactoryReset = function() {
-            var robot = $scope.project.hardware.robot,
+            var robot = projectService.project.hardware.robot,
                 version = common.properties.robotsFirmwareVersion[robot];
             robotFirmwareApi.getFirmware(robot, version).then(function(result) {
                 if (common.useChromeExtension()) {
@@ -416,15 +416,15 @@ angular.module('bitbloqApp')
                 userApi.update({
                     hasBeenWarnedAboutChangeBloqsToCode: true
                 });
-                if ($scope.project._id) {
+                if (projectService.project._id) {
                     $scope.saveProject().then(function() {
-                        $location.path('/codeproject/' + $scope.project._id);
+                        $location.path('/codeproject/' + projectService.project._id);
                     });
                 } else {
                     $location.path('/codeproject/');
                 }
             } else {
-                $scope.common.session.project = $scope.project;
+                $scope.common.session.project = projectService.project;
                 $scope.common.session.project.codeProject = true;
                 $location.path('/codeproject/');
             }
@@ -472,7 +472,7 @@ angular.module('bitbloqApp')
                     setScrollsDimension();
                     $('input[type="text"]').on('keyup paste change', checkInputLength);
                     bloqs.translateBloqs($translate.use());
-                    $scope.$watch('project.software', function(newValue) {
+                    $scope.$watch('projectService.project.software', function(newValue) {
                         var actualProjectSoftware = {
                             vars: $scope.bloqs.varsBloq.getBloqsStructure(),
                             setup: $scope.bloqs.setupBloq.getBloqsStructure(),

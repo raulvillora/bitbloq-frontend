@@ -241,7 +241,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.getCurrentProject = function() {
-            var project = _.cloneDeep($scope.project);
+            var project = _.cloneDeep(projectService.project);
             if ($scope.bloqs.varsBloq) {
                 project.software = {
                     vars: $scope.bloqs.varsBloq.getBloqsStructure(),
@@ -727,7 +727,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.saveOldProject = function() {
-            $scope.oldProject = _.cloneDeep($scope.project);
+            $scope.oldProject = _.cloneDeep(projectService.project);
         };
 
         $scope.saveOldTempImage = function() {
@@ -872,9 +872,9 @@ angular.module('bitbloqApp')
                 } else {
                     $scope.publishProjectError = false;
                     if (type === 'Social') {
-                        commonModals.shareSocialModal($scope.project);
+                        commonModals.shareSocialModal(projectService.project);
                     } else {
-                        commonModals.publishModal($scope.project);
+                        commonModals.publishModal(projectService.project);
                     }
                 }
             }
@@ -1227,7 +1227,7 @@ angular.module('bitbloqApp')
                         response.data.software.freeBloqs = response.data.software.freeBloqs || [];
                     }
 
-                    $scope.project = response.data;
+                    projectService.project = response.data;
                     $scope.saveBloqStep(_.clone(response.data.software));
                     $scope.saveOldProject();
                 }

@@ -10,9 +10,9 @@
 angular.module('bitbloqApp')
     .service('projectService', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
 
-        exports.project = exports.getDefaultProject();
-        
-        exports.getDefaultProject = function() {
+        var exports = {};
+
+        exports.getDefaultProject = function(code) {
             var project = {
                 creator: '',
                 name: '',
@@ -21,6 +21,7 @@ angular.module('bitbloqApp')
                 hardwareTags: [],
                 videoUrl: '',
                 defaultTheme: 'infotab_option_colorTheme',
+                codeProject: !!code,
                 software: {
                     vars: {
                         enable: true,
@@ -48,7 +49,6 @@ angular.module('bitbloqApp')
                     },
                     freeBloqs: []
                 },
-
                 hardware: {
                     board: null,
                     robot: null,
@@ -56,19 +56,41 @@ angular.module('bitbloqApp')
                     connections: []
                 }
             };
+            if(code){
+                project.hardware = {
+                    board: 'bq ZUM'
+                };
+                project.code = '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/\n\nvoid setup(){\n\n}\n\n/***   Loop  ***/\n\nvoid loop(){\n\n}';
+            }
 
             return _.cloneDeep(project);
         };
-        
-        
-        
+
+
+
+        //ok
+        exports.startAutosave = function(saveProject) {
+            if (common.user) {
+                exports.saveStatus = 1;
+                if (!savePromise || (savePromise.$$state.status !== 0)) {
+                    savePromise = $timeout(saveProject, envData.config.saveTime || 10000);
+                    return savePromise;
+                }
+            } else {
+                common.session.save = true;
+            }
+        };
+
+
+        exports.project = exports.getDefaultProject();
+
+
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
-        
-        var exports = {},
-            savePromise;  //ok
+
+        var savePromise;  //ok
 
         //ok
         //Private functions
@@ -156,20 +178,6 @@ angular.module('bitbloqApp')
             _.extend(params, queryParams);
 
             return resource.getAll('project/shared', params, myProjectArray);
-        };
-
-        
-        //ok
-        exports.startAutosave = function(saveProject) {
-            if (common.user) {
-                exports.saveStatus = 1;
-                if (!savePromise || (savePromise.$$state.status !== 0)) {
-                    savePromise = $timeout(saveProject, envData.config.saveTime || 10000);
-                    return savePromise;
-                }
-            } else {
-                common.session.save = true;
-            }
         };
 
         exports.save = function(dataProject) {
@@ -287,7 +295,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        
+
         //ok
         exports.isShared = function(project) {
             var found = false,

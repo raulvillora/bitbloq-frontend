@@ -61,7 +61,7 @@
         </div>
         <aside class="content--right">
             <div class="project--actions">
-                <button class="btn btn--primary btn--project--action--add" data-ng-show="common.user && project && !utils.userIsOwner(project, common.user._id)" data-ng-click="commonModals.clone(project); countAdded()" data-element="explore-project-addbutton">
+                <button class="btn btn--primary btn--project--action--add" data-ng-show="common.user && project && !utils.userIsOwner(projectService.project, common.user._id)" data-ng-click="commonModals.clone(project); countAdded()" data-element="explore-project-addbutton">
                     <svg class="svg-icon">
                         <use xlink:href="#mas"></use>
                     </svg>

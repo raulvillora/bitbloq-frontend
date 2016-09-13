@@ -11,7 +11,7 @@ angular.module('bitbloqApp')
     .controller('InfoTabCtrl', function($scope, $rootScope, $timeout, envData, imageApi, projectApi, $log, alertsService, _, utils) {
 
         $scope.setTheme = function(theme) {
-            $scope.project.defaultTheme = theme;
+           projectService.project.defaultTheme = theme;
             $scope.startAutosave();
         };
 
@@ -37,7 +37,7 @@ angular.module('bitbloqApp')
                 $scope.tempImage.file = response.file;
                 $scope.tempImage.img = response.img;
                 $scope.tempImage.generate = false;
-                $scope.project.image = 'custom';
+               projectService.project.image = 'custom';
                 $scope.startAutosave();
             }).catch(function(response) {
                 switch (response.error) {
@@ -76,8 +76,8 @@ angular.module('bitbloqApp')
                     var tagArray = tag.split(',');
                     tagArray.forEach(function(item) {
                         item = item.trim();
-                        if (item && $scope.project.userTags.indexOf(item) === -1) {
-                            $scope.project.userTags.push(item);
+                        if (item &&projectService.project.userTags.indexOf(item) === -1) {
+                           projectService.project.userTags.push(item);
                         }
                     });
                     $scope.startAutosave();
@@ -86,9 +86,9 @@ angular.module('bitbloqApp')
             }
         };
         $scope.removeTag = function(tag) {
-            var indexTag = $scope.project.userTags.indexOf(tag);
+            var indexTag =projectService.project.userTags.indexOf(tag);
             if (indexTag > -1) {
-                $scope.project.userTags.splice(indexTag, 1);
+               projectService.project.userTags.splice(indexTag, 1);
                 $scope.startAutosave();
             }
         };
@@ -100,25 +100,25 @@ angular.module('bitbloqApp')
             var imageObj = new Image();
             canvas.width = 775;
             canvas.height = 411;
-            if ($scope.project.hardware.board) {
-                if ($scope.project.hardware.robot) {
+            if (projectService.project.hardware.board) {
+                if (projectService.project.hardware.robot) {
                     var robotRef = _.find($scope.hardware.robotList, function(b) {
-                        return b.id === $scope.project.hardware.robot;
+                        return b.id ===projectService.project.hardware.robot;
                     });
                     var robotIcon = robotRef.id;
                     imageObj.src = '/images/robots/' + robotIcon + '.png';
                 } else {
                     var boardRef = _.find($scope.hardware.boardList, function(b) {
-                        return b.name === $scope.project.hardware.board;
+                        return b.name ===projectService.project.hardware.board;
                     });
                     var boardIcon = boardRef.id;
                     imageObj.src = '/images/boards/' + boardIcon + '.png';
                 }
             }
-            var components = $scope.project.hardware.components;
+            var components =projectService.project.hardware.components;
 
             imageObj.onload = function() {
-                if ($scope.project.hardware.robot) {
+                if (projectService.project.hardware.robot) {
                     setMainImage(canvas, context, imageObj, true);
                 } else {
                     setMainImage(canvas, context, imageObj, false);

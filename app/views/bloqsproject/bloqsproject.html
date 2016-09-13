@@ -36,21 +36,21 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="!project._acl.ALL && utils.userIsOwner(project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!project._id || !utils.userIsOwner(project, common.user._id)}" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="!project._acl.ALL && utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(projectService.project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!project._id || !utils.userIsOwner(projectService.project, common.user._id)}" data-ng-disabled="!project._id || !utils.userIsOwner(projectService.project, common.user._id)">
                     <svg class="svg-icon">
                         <use xlink:href="#publicar"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl.ALL && project._id && utils.userIsOwner(project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}" data-tooltip-position="bottom">
-                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(project)" data-ng-disabled="!project._id || !utils.userIsOwner(project, common.user._id)">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl.ALL && project._id && utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="{{!project._id || !common.user || !utils.userIsOwner(projectService.project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}" data-tooltip-position="bottom">
+                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(project)" data-ng-disabled="!project._id || !utils.userIsOwner(projectService.project, common.user._id)">
                     <svg class="svg-icon">
                         <use xlink:href="#privado"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl['user:' + common.user._id].permission === 'READ' || project._acl.ALL && project._id && !utils.userIsOwner(project, common.user._id)" data-tooltips="true" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltip-position="bottom">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="project._acl['user:' + common.user._id].permission === 'READ' || project._acl.ALL && project._id && !utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="true" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="commonModals.clone(project, true)">
                     <svg class="svg-icon">
                         <use xlink:href="#mas"></use>
