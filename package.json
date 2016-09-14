@@ -20,7 +20,7 @@
         "Laura del Río <laura.delrio@bq.com>",
         "Diego Segura <diego.segura@bq.com>",
         "Tom Calvo <tomas.calvo@bq.com>",
-                "Luis Antonio Gonzalez <luisantonio.gonzalez@bq.com>",
+        "Luis Antonio Gonzalez <luisantonio.gonzalez@bq.com>",
         "Natalia Gómez <natalia.gomez@bq.com>",
         "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)",
         "Alvaro Sanchez <alvaro.sanchez@bq.com>"
@@ -85,5 +85,5 @@
         "getbloqs": "bower uninstall bloqs --save && bower install bloqs --save && grunt getbloqs"
     },
     "dependencies": {},
-    "version": "v3.2.2"
+    "version": "v3.2.3"
 }
