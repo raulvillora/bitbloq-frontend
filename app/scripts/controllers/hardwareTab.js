@@ -237,11 +237,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _addComponent(data) {
-        console.log("scope.firstComponent 1");
-        console.log($scope.firstComponent);
         $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
-        console.log("scope.firstComponent 2");
-        console.log($scope.firstComponent);
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
@@ -329,7 +325,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     var _isUserConnect = function(componentPins) {
         var userConnect = false;
         _.forEach(componentPins, function(item) {
-            console.log(item);
             if (item === undefined || item === null) {
                 userConnect = true;
             }
