@@ -324,7 +324,7 @@ angular.module('bitbloqApp')
                         $route.current.pathParams.id = idProject;
                         $location.url('/codeproject/' + idProject);
                         $scope.common.isLoading = false;
-                        localStorage.projectsChange = !localStorage.projectsChange;
+                        localStorage.projectsChange = !(JSON.parse(localStorage.projectsChange));
                         if ($scope.tempImage.blob) {
                             imageApi.save(idProject, $scope.tempImage.blob).then(function() {
                                 $scope.imageForceReset = !$scope.imageForceReset;

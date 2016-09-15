@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li class="nav__menu__item project--title">
-                <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="commonModals.renameProject(project)">{{project.name}}
+                <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="commonModals.renameProject(project)">{{project.name || 'new-project' | translate}}
                     <span></span>
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{getSavingStatusIdLabel()}}">{{ getSavingStatusIdLabel() | translate }}</span>

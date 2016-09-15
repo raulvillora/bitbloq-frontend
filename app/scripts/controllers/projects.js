@@ -120,7 +120,7 @@ angular.module('bitbloqApp')
                     currentProjectName = currentProjectName + '_' + j;
                 }
                 projectsToDownload.push(currentProjectName);
-                zip.file(currentProjectName + '.json', JSON.stringify(currentProject));
+                zip.file(currentProjectName + '.bitbloq', JSON.stringify(currentProject));
                 j++;
             }
             var blob = zip.generate({
@@ -307,14 +307,16 @@ angular.module('bitbloqApp')
 
         // Get projects
         $scope.refreshProjects(true);
+
         $window.onfocus = function() {
             $scope.$apply(function() {
                 $scope.timestamp = Date.now();
             });
-            if ($localStorage.projectsChange && $scope.common.itsUserLoaded()) {
-                $localStorage.projectsChange = false;
+            if (JSON.parse(localStorage.projectsChange) && $scope.common.itsUserLoaded()) {
+                localStorage.projectsChange = false;
                 $scope.refreshProjects();
             }
+
         };
 
         $scope.$on('$destroy', function() {
