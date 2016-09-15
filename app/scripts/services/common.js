@@ -100,7 +100,6 @@ angular.module('bitbloqApp')
             } else {
                 exports.user = null;
                 $translate.use(localStorage.guestLanguage || navigatorLang);
-                console.log('delete cookie');
                 $cookieStore.remove('token');
                 loadedUserPromise.reject();
             }
