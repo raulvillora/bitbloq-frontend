@@ -162,7 +162,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         componentReference = _.find($scope.project.hardware.components, {
             'uid': e.componentData.uid
         });
-
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
 
         if (componentReference) {
@@ -333,11 +332,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.closeComponentInteraction = function(pins, connectedPin) {
+
         if (pins[Object.keys(connectedPin)[0]]) {
-            if (!_isUserConnect(pins)) {
-                if ($scope.common.user) {
-                    $scope.firstComponent = undefined;
-                }
+            if (!_isUserConnect(pins) && $scope.firstComponent) {
+                $scope.firstComponent = undefined;
             }
         } else {
             $scope.firstComponent = false;
