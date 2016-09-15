@@ -10,8 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $location,
-        imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
-        web2boardOnline) {
+                                             imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
+                                             web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -161,7 +161,7 @@ angular.module('bitbloqApp')
                             projectApi.saveStatus = 2;
                             $scope.common.isLoading = false;
 
-                            localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
+                            localStorage.projectsChange = !localStorage.projectsChange;
                             $scope.saveOldProject();
 
                             if ($scope.tempImage.file) {
@@ -802,11 +802,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -876,7 +876,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.publishProject = function(type) {
-
             type = type || '';
             var projectEmptyName = $scope.common.translate('new-project');
             if (!$scope.project.name || $scope.project.name === projectEmptyName) {
@@ -895,7 +894,7 @@ angular.module('bitbloqApp')
                 }
                 $scope.project.name = $scope.project.name === projectEmptyName ? '' : $scope.project.name;
                 $scope.publishProjectError = true;
-                $scope.currentTab = 'info';
+                $scope.setTab(2);
             } else if (!$scope.project.description) {
                 alertsService.add({
                     text: 'publishProject__alert__descriptionError' + type,
@@ -903,13 +902,24 @@ angular.module('bitbloqApp')
                     type: 'warning'
                 });
                 $scope.publishProjectError = true;
-                $scope.currentTab = 'info';
+                $scope.setTab(2);
             } else {
-                $scope.publishProjectError = false;
-                if (type === 'Social') {
-                    commonModals.shareSocialModal($scope.project);
+                var projectDefault = getDefaultProject(),
+                    project = $scope.getCurrentProject();
+                delete projectDefault.software.freeBloqs;
+                if (_.isEqual(projectDefault.software, project.software)) {
+                    alertsService.add({
+                        text: 'publishProject__alert__bloqsProjectEmpty' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
                 } else {
-                    commonModals.publishModal($scope.project);
+                    $scope.publishProjectError = false;
+                    if (type === 'Social') {
+                        commonModals.shareSocialModal($scope.project);
+                    } else {
+                        commonModals.publishModal($scope.project);
+                    }
                 }
             }
         };
