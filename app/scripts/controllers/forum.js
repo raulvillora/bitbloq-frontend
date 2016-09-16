@@ -383,6 +383,15 @@
                 }
             };
 
+            forum.subscribeToThread = function(threadId) {
+                console.log("threadId");
+                console.log(threadId);
+                forumApi.subscribeToThread(threadId).then(function(response){
+                  console.log("hola");
+                  console.log(response);
+                });
+            };
+
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
                     forum.bannedUsers = response.data;

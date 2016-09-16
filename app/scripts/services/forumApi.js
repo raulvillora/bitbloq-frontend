@@ -14,7 +14,8 @@ angular
             moveThread: moveThread,
             createAnswer: createAnswer,
             updateAnswer: updateAnswer,
-            deleteAnswer: deleteAnswer
+            deleteAnswer: deleteAnswer,
+            subscribeToThread: subscribeToThread
         };
 
         return forumApi;
@@ -41,7 +42,10 @@ angular
         }
 
         function searchThreads(partialTitle, pageNum) {
-            return getData('/thread/search', {partialTitle: partialTitle, page:pageNum});
+            return getData('/thread/search', {
+                partialTitle: partialTitle,
+                page: pageNum
+            });
         }
 
         function getThemesInCategory(categoryName) {
@@ -64,6 +68,14 @@ angular
                     answer: answer
                 }
             });
+        }
+
+        function subscribeToThread(threadId) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'forum/thread/' + threadId + '/subscribe'
+            });
+
         }
 
         function createAnswer(answer) {
