@@ -161,7 +161,7 @@ angular.module('bitbloqApp')
                             projectApi.saveStatus = 2;
                             $scope.common.isLoading = false;
 
-                            localStorage.projectsChange = !localStorage.projectsChange;
+                            localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
                             $scope.saveOldProject();
 
                             if ($scope.tempImage.file) {
