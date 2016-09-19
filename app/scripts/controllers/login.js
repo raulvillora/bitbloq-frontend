@@ -108,8 +108,6 @@ angular.module('bitbloqApp')
 
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
                 $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
-                console.log("--------valid Birthday -------------");
-                console.log($scope.errors.register.validBirthday);
                 if (!$scope.errors.register.validBirthday) {
                     if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
                         $scope.errors.register.validBirthday = true;
