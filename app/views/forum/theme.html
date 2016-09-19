@@ -1,6 +1,6 @@
 <div ng-include="'views/forum/forumSearcher.html'"></div>
 <div class="forum__theme">
-    <div class="forum__theme__header">
+    <div class="forum__theme__header" ng-if="common.user">
         <button class="btn btn--secondary btn--medium btn--subscribe-theme" data-element="forum-new-reply-button" ng-click="forum.subscribeToThread(forum.currentThread._id)">
             <span ng-if="!forum.currentThread.subscribed">{{'forum_button_topic_subscribe' | translate}}</span>
             <span ng-if="forum.currentThread.subscribed">{{'forum_button_topic_unsubscribe' | translate}}</span>

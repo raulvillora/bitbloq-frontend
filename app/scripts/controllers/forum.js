@@ -492,11 +492,14 @@
                 forumApi.getTheme(themeId).then(function(response) {
 
                     forum.currentThread = response.data.thread;
-                    if (response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
-                        forum.currentThread.subscribed = true;
-                    } else {
-                        forum.currentThread.subscribed = false;
+                    if (common.user) {
+                        if (response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
+                            forum.currentThread.subscribed = true;
+                        } else {
+                            forum.currentThread.subscribed = false;
+                        }
                     }
+
                     forum.themeCategory = themeCategory;
                     var answers = response.data.answers,
                         container;
