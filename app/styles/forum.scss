@@ -118,6 +118,18 @@
                 font-weight: 400;
                 cursor: default;
             }
+            .subscribe-div{
+              margin-bottom: 30px !important;
+            }
+            .subscribe-span{
+              font-weight: 400;
+              margin-top: 10px;
+              margin-bottom: 40px;
+              cursor: default;
+              label{
+                font-size: inherit !important;
+              }
+            }
             .btn--primary {
                 margin-right: 20px;
             }
@@ -254,7 +266,7 @@
         }
     }
     button:first-child {
-        margin-left: 20px;
+        margin-left: 30px;
     }
 }
 .forum__theme__item {

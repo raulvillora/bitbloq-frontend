@@ -1,8 +1,9 @@
 <div ng-include="'views/forum/forumSearcher.html'"></div>
 <div class="forum__theme">
     <div class="forum__theme__header">
-        <button class="btn btn--secondary btn--small btn--subscribe-theme" ng-click="forum.subscribeToThread(forum.currentThread._id)" data-element="forum-new-reply-button">
-            <span>{{'forum_button_topic_subscribe' | translate}}</span>
+        <button class="btn btn--secondary btn--medium btn--subscribe-theme" data-element="forum-new-reply-button" ng-click="forum.subscribeToThread(forum.currentThread._id)">
+            <span ng-if="!forum.currentThread.subscribed">{{'forum_button_topic_subscribe' | translate}}</span>
+            <span ng-if="forum.currentThread.subscribed">{{'forum_button_topic_unsubscribe' | translate}}</span>
         </button>
         <button class="btn btn--primary btn--medium" data-element="forum-new-topic-button">
             <span>{{'forum_button_newReply' | translate}}</span>

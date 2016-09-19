@@ -255,8 +255,12 @@
 
                     var thread = {
                         title: forum.textEditorContent.title,
-                        category: chosenCategory._id
+                        category: chosenCategory._id,
+                        subscribers: []
                     };
+                    if (forum.textEditorContent.subscribe) {
+                        thread.subscribers.push(common.user._id);
+                    }
 
                     var answer = {
                         content: '<p>' + forum.textEditorContent.htmlContent + '</p>',
@@ -267,6 +271,8 @@
                     forum.disabledNewTopic = true;
 
                     forumApi.createThread(thread, answer).then(function(response) {
+                        console.log("...response...");
+                        console.log(response);
                         answer._id = response.data.answer._id;
                         $log.debug('theme: ' + response.data);
                         if (forum.answer.images.length > 0) {
@@ -384,12 +390,24 @@
             };
 
             forum.subscribeToThread = function(threadId) {
-                console.log("threadId");
-                console.log(threadId);
-                forumApi.subscribeToThread(threadId).then(function(response){
-                  console.log("hola");
-                  console.log(response);
-                });
+                if (!forum.currentThread.subscribed) {
+                    forumApi.subscribeToThread(threadId).then(function(response) {
+                        if (response.status === 200) {
+                            forum.currentThread.subscribed = true;
+                        } else if (response.status === 409) {
+                            //ya estaba inscrito
+                        }
+                    });
+                } else {
+                    forumApi.unsubscribeToThread(threadId).then(function(response) {
+                        if (response.status === 200) {
+                            forum.currentThread.subscribed = false;
+                        } else if (response.status === 409) {
+                            //ya estaba inscrito
+                        }
+                    });
+
+                }
             };
 
             function _getBannedUsers() {
@@ -472,7 +490,13 @@
 
             function goForumTheme(themeId, themeCategory) {
                 forumApi.getTheme(themeId).then(function(response) {
+
                     forum.currentThread = response.data.thread;
+                    if (response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
+                        forum.currentThread.subscribed = true;
+                    } else {
+                        forum.currentThread.subscribed = false;
+                    }
                     forum.themeCategory = themeCategory;
                     var answers = response.data.answers,
                         container;

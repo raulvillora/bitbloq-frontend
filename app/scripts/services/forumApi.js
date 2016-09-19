@@ -15,7 +15,8 @@ angular
             createAnswer: createAnswer,
             updateAnswer: updateAnswer,
             deleteAnswer: deleteAnswer,
-            subscribeToThread: subscribeToThread
+            subscribeToThread: subscribeToThread,
+            unsubscribeToThread: unsubscribeToThread
         };
 
         return forumApi;
@@ -75,7 +76,13 @@ angular
                 method: 'PUT',
                 url: envData.config.serverUrl + 'forum/thread/' + threadId + '/subscribe'
             });
+        }
 
+        function unsubscribeToThread(threadId) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'forum/thread/' + threadId + '/unsubscribe'
+            });
         }
 
         function createAnswer(answer) {
