@@ -91,6 +91,7 @@ angular.module('bitbloqApp')
                 if ($scope.tempAvatar.size && $scope.tempAvatar.type !== 'google' && $scope.tempAvatar.type !== 'facebook') {
                     imageApi.save($scope.common.user._id, $scope.tempAvatar, 'avatar').success(function() {
                         $scope.common.oldTempAvatar = $scope.tempAvatar;
+                        common.avatarChange = true;
                         alertsService.add({
                             text: 'account-saved',
                             id: 'saved-user',
@@ -151,7 +152,6 @@ angular.module('bitbloqApp')
             };
             utils.uploadImage(e, properties).then(function(response) {
                 $scope.tempAvatar = response.blob;
-                common.avatarChange = true;
                 $scope.saveProfile();
             }).catch(function(response) {
                 switch (response.error) {
