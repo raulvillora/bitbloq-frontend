@@ -1,11 +1,11 @@
 <div ng-include="'views/forum/forumSearcher.html'"></div>
 <div class="forum__theme">
     <div class="forum__theme__header" ng-if="common.user">
-        <button class="btn btn--secondary btn--medium btn--subscribe-theme" data-element="forum-new-reply-button" ng-click="forum.subscribeToThread(forum.currentThread._id)">
+        <button class="btn btn--secondary btn--medium btn--subscribe-theme" data-element="forum-subscribe-button" ng-click="forum.subscribeToThread(forum.currentThread._id)">
             <span ng-if="!forum.currentThread.subscribed">{{'forum_button_topic_subscribe' | translate}}</span>
             <span ng-if="forum.currentThread.subscribed">{{'forum_button_topic_unsubscribe' | translate}}</span>
         </button>
-        <button class="btn btn--primary btn--medium" data-element="forum-new-topic-button">
+        <button class="btn btn--primary btn--medium" ng-click="forum.goToReply()" data-element="forum-new-reply-button">
             <span>{{'forum_button_newReply' | translate}}</span>
         </button>
     </div>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="forum__answer-form" ng-if="common.user && common.user.scopes[0]!=='bitbloq:user:banned'">
+    <div class="forum__answer-form" id="reply-box" ng-if="common.user && common.user.scopes[0]!=='bitbloq:user:banned'">
         <div class="forum__theme__item">
             <form>
                 <div class="theme__header">

@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals) {
+        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals, $anchorScroll) {
             var forum = this;
             forum.displayedView = 'main';
             forum.commonModals = commonModals;
@@ -408,6 +408,11 @@
                     });
 
                 }
+            };
+
+            forum.goToReply = function() {
+                $location.hash('reply-box');
+                $anchorScroll();
             };
 
             function _getBannedUsers() {
