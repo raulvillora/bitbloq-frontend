@@ -438,14 +438,14 @@ angular.module('bitbloqApp')
             plotterMonitorPanel = $.jsPanel({
                 position: 'center',
                 size: {
-                    width: 500,
+                    width: 800,
                     height: 500
                 },
                 onclosed: function() {
                     scope.$destroy();
                     plotterMonitorPanel = null;
                 },
-                title: $translate.instant('serial'),
+                title: $translate.instant('plotter'),
                 ajax: {
                     url: 'views/plotter.html',
                     done: function() {

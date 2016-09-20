@@ -120,14 +120,7 @@ angular.module('bitbloqApp')
         };
 
         /*Public functions*/
-        $scope.send = function() {
-            if (common.useChromeExtension()) {
-                chromeAppApi.sendSerialData($scope.serial.input);
-            } else {
-                serialHub.server.write($scope.port, $scope.serial.input);
-            }
-            $scope.serial.input = '';
-        };
+
 
         $scope.onKeyPressedInInput = function(event) {
             if (event.which === 13) {
@@ -156,7 +149,7 @@ angular.module('bitbloqApp')
 
         $scope.onClick = function (points, evt) {
             console.log(points, evt);
-        }
+        };
 
 
         $scope.getPorts = function() {
