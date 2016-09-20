@@ -271,8 +271,6 @@
                     forum.disabledNewTopic = true;
 
                     forumApi.createThread(thread, answer).then(function(response) {
-                        console.log("...response...");
-                        console.log(response);
                         answer._id = response.data.answer._id;
                         $log.debug('theme: ' + response.data);
                         if (forum.answer.images.length > 0) {
