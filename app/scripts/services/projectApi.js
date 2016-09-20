@@ -8,15 +8,13 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectApi', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource, bowerData, $timeout) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+    .service('projectApi', function($http, $log, $window, envData, $q, $rootScope, _, alertsService, imageApi, userApi, common, utils, ngDialog, $translate, resource) {
 
         var exports = {};
 
         function saveRequest(params) {
             return $http(params)
                 .then(function(response) {
-                    exports.saveStatus = 2;
                     return response;
                 }, function(error) {
                     $log.debug('Save error: ', error);
@@ -27,19 +25,18 @@ angular.module('bitbloqApp')
                             type: 'warning'
                         });
                     }
-                    exports.saveStatus = 3;
                     return error;
                 });
         }
 
-        function addDownload(idProject) {
+        //Public functions
+        exports.addDownload = function(idProject) {
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + idProject + '/download'
             });
-        }
+        };
 
-        //Public functions
         exports.get = function(id, params) {
             params = params || {};
             return $http({
@@ -169,7 +166,7 @@ angular.module('bitbloqApp')
 
         //---------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------
-        //---------------------------------------------------------------------------------
+        //---------------- SOCIAL NETWORK API ---------------------------------------------
         //---------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------
 
@@ -197,76 +194,6 @@ angular.module('bitbloqApp')
                 skipAuthorization: true
             });
         };
-
-        exports.getCleanProject = function(projectRef) {
-            var cleanProject = _.cloneDeep(projectRef);
-            delete cleanProject._id;
-            delete cleanProject._acl;
-            delete cleanProject.creator;
-            delete cleanProject.createdAt;
-            delete cleanProject.updatedAt;
-            delete cleanProject.links;
-            delete cleanProject.exportedFromBitbloqOffline;
-            delete cleanProject.bitbloqOfflineVersion;
-            return cleanProject;
-        };
-        
-        exports.download = function(project, type, force) {
-            type = type || 'json';
-            if (common.user || force) {
-                addDownload(project._id).then(function(response) {
-                    if (type === 'arduino') {
-                        downloadIno(response.data);
-                    } else {
-                        downloadJSON(response.data);
-                    }
-                });
-            } else {
-                if (type === 'arduino') {
-                    downloadIno(project);
-                } else {
-                    downloadJSON(project);
-                }
-            }
-        };
-
-        function downloadJSON(projectRef) {
-            var project = exports.getCleanProject(projectRef);
-            project.bloqsVersion = bowerData.dependencies.bloqs;
-
-            var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
-
-            utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(project), 'application/json');
-        }
-
-        function downloadIno(project, code) {
-            code = code || project.code;
-            var name = project.name;
-            //Remove all diacritics
-            name = utils.removeDiacritics(name, undefined, $translate.instant('new-project'));
-
-            utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
-        }
-
-        /**
-         * Status of save project
-         * 0 = Nothing
-         * 1 = AutoSaving in progress
-         * 2 = Save correct
-         * 3 = Saved Error
-         * 4 = Dont Allowed to do Save
-         * @type {Number}
-         */
-        exports.saveStatus = 0;
-        
-        exports.savingStatusIdLabels = {
-            0: '',
-            1: 'make-saving',
-            2: 'make-project-saved-ok',
-            3: 'make-project-saved-ko',
-            4: 'make-project-not-allow-to-save'
-        };
-        
 
         return exports;
     });

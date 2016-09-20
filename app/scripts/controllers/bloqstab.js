@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-        bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-        robotFirmwareApi, web2boardOnline, projectService) {
+                                         bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+                                         robotFirmwareApi, web2boardOnline, projectService) {
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
@@ -120,28 +120,28 @@ angular.module('bitbloqApp')
         };
 
         $scope.init = function() {
-            if ($scope.bloqs.varsBloq) {
-                bloqs.removeBloq($scope.bloqs.varsBloq.uuid, true);
-                $scope.bloqs.varsBloq = null;
-                bloqs.removeBloq($scope.bloqs.setupBloq.uuid, true);
-                $scope.bloqs.setupBloq = null;
-                bloqs.removeBloq($scope.bloqs.loopBloq.uuid, true);
-                $scope.bloqs.loopBloq = null;
+            if (projectService.bloqs.varsBloq) {
+                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
+                projectService.bloqs.varsBloq = null;
+                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
+                projectService.bloqs.setupBloq = null;
+                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
+                projectService.bloqs.loopBloq = null;
             }
 
-            $scope.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, $scope.componentsArray, bloqsApi.schemas, $scope.$field);
-            $scope.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, $scope.componentsArray, bloqsApi.schemas);
-            $scope.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, $scope.componentsArray, bloqsApi.schemas);
+            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
+            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
+            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
 
-            $scope.$field.append($scope.bloqs.varsBloq.$bloq, $scope.bloqs.setupBloq.$bloq, $scope.bloqs.loopBloq.$bloq);
-            $scope.bloqs.varsBloq.enable(true);
-            $scope.bloqs.varsBloq.doConnectable();
+            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
+            projectService.bloqs.varsBloq.enable(true);
+            projectService.bloqs.varsBloq.doConnectable();
 
-            $scope.bloqs.setupBloq.enable(true);
-            $scope.bloqs.setupBloq.doConnectable();
+            projectService.bloqs.setupBloq.enable(true);
+            projectService.bloqs.setupBloq.doConnectable();
 
-            $scope.bloqs.loopBloq.enable(true);
-            $scope.bloqs.loopBloq.doConnectable();
+            projectService.bloqs.loopBloq.enable(true);
+            projectService.bloqs.loopBloq.doConnectable();
 
             bloqs.updateDropdowns();
         };
@@ -156,7 +156,7 @@ angular.module('bitbloqApp')
                     lastBottomConnector = null;
                     for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
                         // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
-                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], $scope.componentsArray, bloqsApi.schemas);
+                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
 
                         if (lastBottomConnector) {
                             bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
@@ -183,8 +183,8 @@ angular.module('bitbloqApp')
             var stopWord = ['analogWrite', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
             if (stopWord.indexOf(item) === -1) {
                 var result = false;
-                if ($scope.componentsArray.robot.length === 0) {
-                    var userComponents = _.keys(_.pick($scope.componentsArray, function(value) {
+                if (projectService.componentsArray.robot.length === 0) {
+                    var userComponents = _.keys(_.pick(projectService.componentsArray, function(value) {
                         return value.length > 0;
                     }));
                     if (item === 'hwVariable' && userComponents.length !== 0) {
@@ -224,15 +224,15 @@ angular.module('bitbloqApp')
 
         $scope.showCommunications = function(item) {
             var stopWord = ['convert'];
-            if ($scope.componentsArray.serialElements) {
-                return !(stopWord.indexOf(item) === -1 && $scope.componentsArray.serialElements.length === 0);
+            if (projectService.componentsArray.serialElements) {
+                return !(stopWord.indexOf(item) === -1 && projectService.componentsArray.serialElements.length === 0);
             } else {
                 return false;
             }
         };
 
         $scope.searchBloq = function() {
-            var userComponents = _.pick($scope.componentsArray, function(value) {
+            var userComponents = _.pick(projectService.componentsArray, function(value) {
                 return value.length > 0;
             });
             if (userComponents.indexOf($scope.searchText)) {
@@ -306,7 +306,7 @@ angular.module('bitbloqApp')
         $scope.setSoftwareTab = function(tab) {
             $scope.softTab = tab;
             if (tab === 'code') {
-                $scope.setCode(bloqsUtils.getCode($scope.componentsArray, $scope.bloqs));
+                $scope.setCode(bloqsUtils.getCode(projectService.componentsArray, projectService.bloqs));
             } else if (tab === 'bloqs') {
                 $rootScope.$emit('currenttab:bloqstab');
             }
@@ -343,7 +343,7 @@ angular.module('bitbloqApp')
 
         function copyBloq(bloq) {
 
-            var newBloq = bloqs.buildBloqWithContent(bloq.structure, $scope.componentsArray, bloqsApi.schemas);
+            var newBloq = bloqs.buildBloqWithContent(bloq.structure, projectService.componentsArray, bloqsApi.schemas);
 
             newBloq.doConnectable();
             newBloq.disable();
@@ -417,7 +417,7 @@ angular.module('bitbloqApp')
                     hasBeenWarnedAboutChangeBloqsToCode: true
                 });
                 if (projectService.project._id) {
-                    $scope.saveProject().then(function() {
+                    projectService.saveProject().then(function() {
                         $location.path('/codeproject/' + projectService.project._id);
                     });
                 } else {
@@ -474,9 +474,9 @@ angular.module('bitbloqApp')
                     bloqs.translateBloqs($translate.use());
                     $scope.$watch('projectService.project.software', function(newValue) {
                         var actualProjectSoftware = {
-                            vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                            setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                            loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                            vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                            setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                            loop: projectService.bloqs.loopBloq.getBloqsStructure(),
                             freeBloqs: bloqs.getFreeBloqs() || []
                         };
                         $log.debug('Ha cambiado el proyecto', newValue, actualProjectSoftware);

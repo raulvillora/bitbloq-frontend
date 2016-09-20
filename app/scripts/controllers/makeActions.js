@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $timeout, $location, $http, $window, $document, alertsService, bloqs, ngDialog, projectApi, imageApi, _, $q, $route, $routeParams, utils, bloqsUtils, feedbackApi, commonModals, clipboard) {
+    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $timeout, $location, $http, $window, $document, alertsService, bloqs, ngDialog, projectApi, imageApi, _, $q, $route, $routeParams, utils, bloqsUtils, feedbackApi, commonModals, clipboard, projectService) {
 
         $scope.uploadProjectSelected = function(fileList) {
 
@@ -48,7 +48,7 @@ angular.module('bitbloqApp')
                     if (fileParsed.id) {
                         fileParsed.id = '';
                     }
-                    $scope.setProject(fileParsed);
+                    $scope.uploadProject(fileParsed);
                     $scope.$apply();
                     $scope.setCode($scope.getCode());
                     if (!$scope.common.user) {
@@ -131,14 +131,13 @@ angular.module('bitbloqApp')
         };
 
         $scope.downloadProject = function() {
-            var projectRef = $scope.getCurrentProject();
-            projectApi.download(projectRef);
+            projectService.download(projectService.getCurrentProject());
         };
 
         $scope.downloadIno = function() {
             var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : projectService.project.code;
             projectService.project.code = code;
-            projectApi.download(projectService.project, 'arduino');
+            projectService.download(projectService.project, 'arduino');
         };
 
         $scope.removeProject = function(project) {
@@ -180,7 +179,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.clone = function() {
-            commonModals.clone($scope.getCurrentProject(), true);
+            commonModals.clone(projectService.getCurrentProject(), true);
         };
 
         $scope.zoom = function(value) {

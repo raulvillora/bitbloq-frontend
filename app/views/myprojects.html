@@ -76,12 +76,12 @@
                                 <use xlink:href="#duplicar"></use>
                             </svg>
                         </div>
-                        <div data-ng-if="!project.codeProject" data-element="myprojects-download-project" data-ng-click="projectApi.download(project)" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'download-project' | translate }}">
+                        <div data-ng-if="!project.codeProject" data-element="myprojects-download-project" data-ng-click="projectService.download(project)" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'download-project' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#descargar"></use>
                             </svg>
                         </div>
-                        <div data-element="myprojects-export-arduino-code-button" data-ng-click="projectApi.download(project, 'arduino')" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'export-arduino-code' | translate }}">
+                        <div data-element="myprojects-export-arduino-code-button" data-ng-click="projectService.download(project, 'arduino')" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'export-arduino-code' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#exportcode"></use>
                             </svg>

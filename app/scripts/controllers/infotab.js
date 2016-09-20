@@ -8,11 +8,11 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('InfoTabCtrl', function($scope, $rootScope, $timeout, envData, imageApi, projectApi, $log, alertsService, _, utils) {
+    .controller('InfoTabCtrl', function($scope, $rootScope, $timeout, envData, imageApi, projectApi, $log, alertsService, _, utils, projectService) {
 
         $scope.setTheme = function(theme) {
-           projectService.project.defaultTheme = theme;
-            $scope.startAutosave();
+            projectService.project.defaultTheme = theme;
+            projectService.startAutosave();
         };
 
         $scope.uploadImageTrigger = function(type) {
@@ -33,12 +33,12 @@ angular.module('bitbloqApp')
                 without: /image.gif/
             };
             utils.uploadImage(e, properties).then(function(response) {
-                $scope.tempImage.blob = response.blob;
-                $scope.tempImage.file = response.file;
-                $scope.tempImage.img = response.img;
-                $scope.tempImage.generate = false;
-               projectService.project.image = 'custom';
-                $scope.startAutosave();
+                projectService.tempImage.blob = response.blob;
+                projectService.tempImage.file = response.file;
+                projectService.tempImage.img = response.img;
+                projectService.tempImage.generate = false;
+                projectService.project.image = 'custom';
+                projectService.startAutosave();
             }).catch(function(response) {
                 switch (response.error) {
                     case 'heavy':
@@ -76,20 +76,20 @@ angular.module('bitbloqApp')
                     var tagArray = tag.split(',');
                     tagArray.forEach(function(item) {
                         item = item.trim();
-                        if (item &&projectService.project.userTags.indexOf(item) === -1) {
-                           projectService.project.userTags.push(item);
+                        if (item && projectService.project.userTags.indexOf(item) === -1) {
+                            projectService.project.userTags.push(item);
                         }
                     });
-                    $scope.startAutosave();
+                    projectService.startAutosave();
                     $scope.form.tag = '';
                 }
             }
         };
         $scope.removeTag = function(tag) {
-            var indexTag =projectService.project.userTags.indexOf(tag);
+            var indexTag = projectService.project.userTags.indexOf(tag);
             if (indexTag > -1) {
-               projectService.project.userTags.splice(indexTag, 1);
-                $scope.startAutosave();
+                projectService.project.userTags.splice(indexTag, 1);
+                projectService.startAutosave();
             }
         };
 
@@ -103,19 +103,19 @@ angular.module('bitbloqApp')
             if (projectService.project.hardware.board) {
                 if (projectService.project.hardware.robot) {
                     var robotRef = _.find($scope.hardware.robotList, function(b) {
-                        return b.id ===projectService.project.hardware.robot;
+                        return b.id === projectService.project.hardware.robot;
                     });
                     var robotIcon = robotRef.id;
                     imageObj.src = '/images/robots/' + robotIcon + '.png';
                 } else {
                     var boardRef = _.find($scope.hardware.boardList, function(b) {
-                        return b.name ===projectService.project.hardware.board;
+                        return b.name === projectService.project.hardware.board;
                     });
                     var boardIcon = boardRef.id;
                     imageObj.src = '/images/boards/' + boardIcon + '.png';
                 }
             }
-            var components =projectService.project.hardware.components;
+            var components = projectService.project.hardware.components;
 
             imageObj.onload = function() {
                 if (projectService.project.hardware.robot) {
@@ -215,11 +215,11 @@ angular.module('bitbloqApp')
             $log.debug('Generando imagen...');
             $('#projectImage').attr('src', pngUrl);
 
-            $scope.tempImage.blob = b64toBlob(base64String, 'image/png');
-            $scope.tempImage.file = $scope.tempImage.blob;
-            $scope.tempImage.generate = true;
+            projectService.tempImage.blob = b64toBlob(base64String, 'image/png');
+            projectService.tempImage.file = projectService.tempImage.blob;
+            projectService.tempImage.generate = true;
 
-            $scope.startAutosave();
+            projectService.startAutosave();
         }
 
         $scope.imagesToUpload = [];
