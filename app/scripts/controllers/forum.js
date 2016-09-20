@@ -496,10 +496,12 @@
 
                     forum.currentThread = response.data.thread;
                     if (common.user) {
-                        if (response.data.thread.subscribers && response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
-                            forum.currentThread.subscribed = true;
-                        } else {
-                            forum.currentThread.subscribed = false;
+                        if (response.data.thread.subscribers) {
+                            if (response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
+                                forum.currentThread.subscribed = true;
+                            } else {
+                                forum.currentThread.subscribed = false;
+                            }
                         }
                     }
 
