@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals) {
+        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals, $anchorScroll) {
             var forum = this;
             forum.displayedView = 'main';
             forum.commonModals = commonModals;
@@ -255,8 +255,12 @@
 
                     var thread = {
                         title: forum.textEditorContent.title,
-                        category: chosenCategory._id
+                        category: chosenCategory._id,
+                        subscribers: []
                     };
+                    if (forum.textEditorContent.subscribe) {
+                        thread.subscribers.push(common.user._id);
+                    }
 
                     var answer = {
                         content: '<p>' + forum.textEditorContent.htmlContent + '</p>',
@@ -383,6 +387,32 @@
                 }
             };
 
+            forum.subscribeToThread = function(threadId) {
+                if (!forum.currentThread.subscribed) {
+                    forumApi.subscribeToThread(threadId).then(function(response) {
+                        if (response.status === 200) {
+                            forum.currentThread.subscribed = true;
+                        } else if (response.status === 409) {
+                            //ya estaba inscrito
+                        }
+                    });
+                } else {
+                    forumApi.unsubscribeToThread(threadId).then(function(response) {
+                        if (response.status === 200) {
+                            forum.currentThread.subscribed = false;
+                        } else if (response.status === 409) {
+                            //ya estaba inscrito
+                        }
+                    });
+
+                }
+            };
+
+            forum.goToReply = function() {
+                $location.hash('reply-box');
+                $anchorScroll();
+            };
+
             function _getBannedUsers() {
                 return userApi.getBannedUsers().then(function(response) {
                     forum.bannedUsers = response.data;
@@ -463,7 +493,16 @@
 
             function goForumTheme(themeId, themeCategory) {
                 forumApi.getTheme(themeId).then(function(response) {
+
                     forum.currentThread = response.data.thread;
+                    if (common.user) {
+                        if (response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
+                            forum.currentThread.subscribed = true;
+                        } else {
+                            forum.currentThread.subscribed = false;
+                        }
+                    }
+
                     forum.themeCategory = themeCategory;
                     var answers = response.data.answers,
                         container;
