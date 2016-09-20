@@ -462,6 +462,19 @@ angular.module('bitbloqApp')
             });
         };
 
+        web2board.plotter = function(board) {
+            if (isWeb2boardV2Flag === null) {
+                firstFunctionCalled.name = 'plotter';
+                firstFunctionCalled.args = [board];
+                firstFunctionCalled.alertServiceTag = 'serialmonitor';
+            }
+            web2board._openCommunication(function() {
+                return web2board._setBoard(board.mcu).then(function() {
+                    web2board._send('SerialMonitor ' + web2board.serialPort);
+                });
+            });
+        };
+
         web2board.chartMonitor = function(board) {
             if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'chartMonitor';

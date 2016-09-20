@@ -34,7 +34,8 @@ angular
         'ui.ace',
         'textAngular',
         'angular-clipboard',
-        'angularUtils.directives.dirPagination'
+        'angularUtils.directives.dirPagination',
+        'nvd3'
     ]).config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
 

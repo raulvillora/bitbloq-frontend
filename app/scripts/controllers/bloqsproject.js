@@ -10,8 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $http, $timeout, $routeParams, $document, $window, $q, $translate, $location,
-                                             imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
-                                             web2boardOnline) {
+        imageApi, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, envData, utils, userApi, commonModals, hw2Bloqs, chromeAppApi, common,
+        web2boardOnline) {
 
         /*************************************************
          Project save / edit
@@ -580,6 +580,50 @@ angular.module('bitbloqApp')
             }
         }
 
+
+
+        function plotterW2b1() {
+            if ($scope.isWeb2BoardInProgress()) {
+                return false;
+            }
+            if ($scope.project.hardware.board) {
+                web2board.setInProcess(true);
+                serialMonitorAlert = alertsService.add({
+                    text: 'alert-web2board-openSerialMonitor',
+                    id: 'serialmonitor',
+                    type: 'loading'
+                });
+                var boardReference = _.find($scope.hardware.boardList, function(b) {
+                    return b.name === $scope.project.hardware.board;
+                });
+                web2board.plotter(boardReference);
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+
+            }
+        }
+
+        function plotterW2b2() {
+            if ($scope.project.hardware.board) {
+                web2board.plotter(getBoardMetaData());
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
+        }
+
+
         $scope.verify = function() {
             if (common.useChromeExtension()) {
                 web2boardOnline.compile({
@@ -658,6 +702,29 @@ angular.module('bitbloqApp')
 
         $scope.showWeb2boardSettings = function() {
             web2board.showSettings();
+        };
+
+        $scope.showPlotter = function() {
+            if ($scope.project.hardware.board) {
+                if (common.useChromeExtension()) {
+                    commonModals.launchPlotterWindow(getBoardMetaData());
+                } else {
+                    if (web2board.isWeb2boardV2()) {
+                        plotterW2b2();
+                    } else {
+                        plotterW2b1();
+                    }
+                }
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
+
         };
 
         $scope.getCode = function() {
@@ -802,11 +869,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                    setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                    loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: $scope.bloqs.varsBloq.getBloqsStructure(),
+                setup: $scope.bloqs.setupBloq.getBloqsStructure(),
+                loop: $scope.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 

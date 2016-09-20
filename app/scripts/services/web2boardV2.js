@@ -21,7 +21,8 @@ angular.module('bitbloqApp')
             TIMES_TRY_TO_START_W2B = 7,
             w2bToast = null,
             web2boarTimeOutResponse = 45000, //45 seconds
-            serialMonitorPanel = null;
+            serialMonitorPanel = null,
+            plotterMonitorPanel = null;
 
         web2board.config = {
             wsHost: '127.0.0.1',
@@ -428,6 +429,68 @@ angular.module('bitbloqApp')
             });
             serialMonitorPanel.scope = scope;
         }
+
+        function generatePlotterWindow(port) {
+            var scope = $rootScope.$new();
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+            plotterMonitorPanel = $.jsPanel({
+                position: 'center',
+                size: {
+                    width: 500,
+                    height: 500
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    plotterMonitorPanel = null;
+                },
+                title: $translate.instant('serial'),
+                ajax: {
+                    url: 'views/plotter.html',
+                    done: function() {
+                        if (port) {
+                            scope.port = port;
+                        }
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            plotterMonitorPanel.scope = scope;
+        }
+
+        web2board.plotter = function(board){
+          if (plotterMonitorPanel) {
+              plotterMonitorPanel.normalize();
+              plotterMonitorPanel.reposition('center');
+              return;
+          }
+          openCommunication(function() {
+              inProgress = true;
+              var toast = alertsService.add({
+                  text: 'alert-web2board-openSerialMonitor',
+                  id: 'web2board',
+                  type: 'loading'
+              });
+
+              api.SerialMonitorHub.server.findBoardPort(board.mcu)
+                  .then(function(port) {
+                      alertsService.close(toast);
+                      generatePlotterWindow(port);
+                  }, function(error) {
+                      alertsService.add({
+                          text: 'alert-web2board-no-port-found',
+                          id: 'web2board',
+                          type: 'warning'
+                      });
+                      console.error(error);
+                  })
+                  .finally(function() {
+                      inProgress = false;
+                  });
+          });
+
+        };
 
         web2board.serialMonitor = function(board) {
             if (serialMonitorPanel) {
