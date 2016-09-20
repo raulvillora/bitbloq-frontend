@@ -121,8 +121,12 @@ angular.module('bitbloqApp')
                 }
             } else {
                 fireShakeEffect();
-                $scope.errors.register.emptyBirthday = true;
-                $scope.errors.register.validBirthday = false;
+                if (!form.year.$error.minlength) {
+                    $scope.errors.register.emptyBirthday = true;
+                    $scope.errors.register.validBirthday = false;
+                } else {
+                    $scope.errors.register.validBirthday = true;
+                }
             }
 
             if ($scope.userUnder14Years && $scope.user.tutor) {
