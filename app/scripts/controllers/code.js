@@ -9,9 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('CodeCtrl', function($scope, $q, projectApi, imageApi, resource, $routeParams, _, alertsService, envData,
-                                     $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline,
-                                     common, compilerApi, hardwareConstants, projectService) {
+    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, common, compilerApi, hardwareConstants, projectService) {
 
 
         $scope.projectService = projectService;

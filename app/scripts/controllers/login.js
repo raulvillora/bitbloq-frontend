@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $http, $auth, $location, $q, $rootScope, moment, alertsService, ngDialog, $routeParams, $translate) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate) {
         $scope.focusHandler = function(evt) {
             $scope.focus = evt.currentTarget.name;
         };
@@ -128,14 +128,9 @@ angular.module('bitbloqApp')
             }
 
             function _validateRegister() {
-                return !form.email.$invalid &&
-                    !form.password.$invalid &&
-                    !$scope.username.invalid &&
-                    !form.username.$error.required &&
+                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required &&
                     $scope.username.free &&
-                    $scope.user.cookiePolicyAccepted &&
-                    !$scope.errors.birthday &&
-                    !$scope.errors.emptyBirthday &&
+                    $scope.user.cookiePolicyAccepted && !$scope.errors.birthday && !$scope.errors.emptyBirthday &&
                     (!$scope.userUnder14Years || ($scope.userUnder14Years && !form.tutorName.$invalid && !form.tutorSurname.$invalid && !form.tutorEmail.$invalid && !$scope.errors.register.sameTutorEmail));
             }
 

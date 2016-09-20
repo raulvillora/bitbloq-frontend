@@ -8,8 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, $localStorage, alertsService, $window,
-                                         $timeout, ngDialog, commonModals, utils, _, moment, JSZip, projectService) {
+    .controller('ProjectsCtrl', function($log, $scope, $q, projectApi, $location, $localStorage, alertsService, $window, commonModals, utils, _, moment, JSZip, projectService) {
 
 
         $scope.projectService = projectService;

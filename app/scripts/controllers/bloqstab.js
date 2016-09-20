@@ -9,7 +9,7 @@
  */
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-                                         bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+                                         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
                                          robotFirmwareApi, web2boardOnline, projectService) {
 
         $scope.goToCodeModal = function() {

@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('InfoTabCtrl', function($scope, $rootScope, $timeout, envData, imageApi, projectApi, $log, alertsService, _, utils, projectService) {
+    .controller('InfoTabCtrl', function($scope, $rootScope, $log, alertsService, _, utils, projectService) {
 
         $scope.setTheme = function(theme) {
             projectService.project.defaultTheme = theme;
