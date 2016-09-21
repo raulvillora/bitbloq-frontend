@@ -37,7 +37,7 @@
                 </button>
             </li>
             <li class="nav__menu__item nav__item--white right" data-ng-if="projectService.project._acl.ALL && projectService.project._id && utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="{{!projectService.project._id || !common.user || !utils.userIsOwner(projectService.project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}" data-tooltip-position="bottom">
-                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(project)()">
+                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(projectService.project)()">
                     <svg class="svg-icon">
                         <use xlink:href="#privado"></use>
                     </svg>

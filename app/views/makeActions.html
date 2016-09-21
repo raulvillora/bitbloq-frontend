@@ -36,7 +36,7 @@
             </li>
             <li class="dropdown__item--separator"></li>
             <li data-tooltips="{{!common.user}}" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-disabled="!common.user" data-ng-click="commonModals.renameProject(project)" data-element="menu-changename">
+                <div class="dropdown__item" data-ng-disabled="!common.user" data-ng-click="commonModals.renameProject(projectService.project)" data-element="menu-changename">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#edit"></use>
                     </svg>
@@ -73,7 +73,7 @@
             </li>
             <li class="dropdown__item--separator"></li>
             <li data-tooltips="{{!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="removeProject(project)" data-element="menu-removeproject">
+                <div class="dropdown__item" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="removeProject(projectService.project)" data-element="menu-removeproject">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#remove"></use>
                     </svg>
@@ -162,7 +162,7 @@
                 </div>
             </li>
             <li data-tooltips="{{!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id}}" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-if="projectService.project._acl.ALL" data-element="makeactions-menushare-private" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="commonModals.doPrivateProject(project)">
+                <div class="dropdown__item" data-ng-if="projectService.project._acl.ALL" data-element="makeactions-menushare-private" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="commonModals.doPrivateProject(projectService.project)">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#privado"></use>
                     </svg>
@@ -171,7 +171,7 @@
             </li>
             <li class="dropdown__item--separator"></li>
             <li data-tooltips="{{!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id}}" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="commonModals.modalShareWithUsers(project)" data-element="makeactions-menushare-share-with-users">
+                <div class="dropdown__item" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="commonModals.modalShareWithUsers(projectService.project)" data-element="makeactions-menushare-share-with-users">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#usuario"></use>
                     </svg>
@@ -239,14 +239,14 @@
         </button>
     </li>
     <li class="nav__menu__item right" data-ng-if="projectService.project._acl.ALL && projectService.project._id && common.user && utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="true" data-tooltip="{{ 'do-private' | translate }}" data-tooltip-position="bottom">
-        <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(project)">
+        <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(projectService.project)">
             <svg class="svg-icon">
                 <use xlink:href="#privado"></use>
             </svg>
         </button>
     </li>
     <li class="nav__menu__item right" data-ng-if="projectService.project._acl.ALL && !utils.userIsOwner(projectService.project, common.user._id) || !common.user || projectService.project._acl['user:' + common.user._id].permission === 'READ'" data-tooltips="true" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltip-position="bottom">
-        <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user}" data-ng-click="commonModals.clone(project)">
+        <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user}" data-ng-click="commonModals.clone(projectService.project)">
             <svg class="svg-icon">
                 <use xlink:href="#mas"></use>
             </svg>
