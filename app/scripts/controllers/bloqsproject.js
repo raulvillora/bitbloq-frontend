@@ -12,9 +12,6 @@ angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, common, web2boardOnline, projectService) {
 
 
-        $scope.projectService = projectService;
-
-
         /*************************************************
          Project save / edit
          *************************************************/
@@ -29,7 +26,7 @@ angular.module('bitbloqApp')
             if ($scope.hardware.cleanSchema) {
                 $scope.hardware.cleanSchema();
             }
-            projectService.project = _.extend(projectService.getDefaultProject(), project);
+            projectService.setProject(project);
             $scope.refreshComponentsArray();
         };
 
@@ -156,8 +153,6 @@ angular.module('bitbloqApp')
             $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
             $scope.$apply();
         };
-
-        $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
 
         /*************************************************
          web2board communication
@@ -545,7 +540,6 @@ angular.module('bitbloqApp')
                         $log.debug('dropdown not selected');
                         element.selectedIndex = 0;
                     }
-
                 };
                 var bloqCanvasEl = null;
                 //Update dropdowns values from bloqs canvas
@@ -949,9 +943,10 @@ angular.module('bitbloqApp')
             firstLoad: true
         };
 
-        projectService.setComponentsArray();
-
         $scope.projectApi = projectApi;
+        $scope.projectService = projectService;
+
+        projectService.setBloqProject();
 
         if (!$scope.common.user) {
             $scope.common.session.save = false;
@@ -979,7 +974,6 @@ angular.module('bitbloqApp')
                 if (!$scope.common.user.takeTour) {
                     launchModalTour();
                 }
-                projectService.setBloqProject();
             }
         }, function() {
             $log.debug('no registed user');
@@ -990,7 +984,6 @@ angular.module('bitbloqApp')
             } else {
                 addProjectWatchersAndListener();
                 launchModalGuest();
-                projectService.setBloqProject();
             }
 
         });

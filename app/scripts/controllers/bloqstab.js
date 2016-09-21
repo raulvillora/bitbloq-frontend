@@ -53,11 +53,10 @@ angular.module('bitbloqApp')
                     bloqs.removeBloq($document[0].activeElement.attributes['data-bloq-id'].value, true);
                     $scope.$field.focus();
                     $scope.saveBloqStep();
-                    $scope.startAutosave();
+                    projectService.startAutosave();
                 } else {
                     $log.debug('we cant delete group bloqs');
                 }
-
             }
         };
 
@@ -75,7 +74,7 @@ angular.module('bitbloqApp')
                             bloqs.removeBloq($document[0].activeElement.attributes['data-bloq-id'].value, true);
                             $scope.$field.focus();
                             $scope.saveBloqStep();
-                            $scope.startAutosave();
+                            projectService.startAutosave();
                         } else {
                             $log.debug('we cant delete group bloqs');
                         }
@@ -280,18 +279,18 @@ angular.module('bitbloqApp')
         $scope.enableBloqFromContextMenu = function(bloq) {
             bloq.enable();
             $scope.saveBloqStep();
-            $scope.startAutosave();
+            projectService.startAutosave();
         };
         $scope.disableBloqFromContextMenu = function(bloq) {
             bloq.disable();
             $scope.saveBloqStep();
-            $scope.startAutosave();
+            projectService.startAutosave();
         };
         $scope.removeBloqFromContextMenu = function(bloq) {
             bloqs.removeBloq(bloq.uuid, true);
             //saveBloqStep from here to not listen remove event from children and store one step for children
             $scope.saveBloqStep();
-            $scope.startAutosave();
+            projectService.startAutosave();
         };
 
         $scope.duplicateBloqFromContextMenu = function(bloq) {

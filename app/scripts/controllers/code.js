@@ -9,16 +9,164 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, common, compilerApi, hardwareConstants, projectService) {
+    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, compilerApi, hardwareConstants, projectService) {
 
+        var editInfo, editorRef,
+            compilingAlert,
+            settingBoardAlert,
+            serialMonitorAlert;
 
+        // The ui-ace option
+        $scope.aceOptions = {
+            mode: 'c_cpp',
+            useWrapMode: false,
+            showGutter: true,
+            theme: 'chrome',
+            advanced: {
+                enableSnippets: true,
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true
+            },
+            rendererOptions: {
+                fontSize: 14,
+                minLines: 11
+            },
+            onLoad: function(_editor) {
+                editorRef = _editor;
+                _loadProject();
+                editorRef.on('paste', function() {
+                    setTimeout(function() {
+                        _prettyCode();
+                    }, 10);
+                });
+            }
+        };
+
+        $scope.boardNameList = _.pluck(hardwareConstants.boards, 'name');
+
+        $scope.common.isLoading = true;
+
+        $scope.commonModals = commonModals;
+        $scope.isWeb2BoardInProgress = web2board.isInProcess;
+        $scope.projectApi = projectApi;
         $scope.projectService = projectService;
+        $scope.utils = utils;
 
         $window.onbeforeunload = confirmExit;
 
-        $scope.$on('$destroy', function() {
-            $window.onbeforeunload = null;
-        });
+
+        $scope.onFieldKeyUp = function(event) {
+            if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase() === 's') { //Ctrl + S
+                return true;
+            }
+        };
+
+        $scope.publishProject = function(type) {
+            projectService.checkPublish(type).then(function() {
+                $scope.publishProjectError = false;
+                if (type === 'Social') {
+                    commonModals.shareSocialModal(projectService.project);
+                } else {
+                    commonModals.publishModal(projectService.project);
+                }
+            }.catch(function() {
+                $scope.publishProjectError = true;
+                $scope.currentTab = 'info';
+            }));
+        };
+
+        $scope.showWeb2boardSettings = function() {
+            web2board.showSettings();
+        };
+
+        $scope.serialMonitor = function() {
+            if (web2board.isWeb2boardV2()) {
+                serialMonitorW2b2();
+            } else {
+                serialMonitorW2b1();
+            }
+        };
+
+        $scope.setBoard = function(boardName) {
+            var indexTag = projectService.project.hardwareTags.indexOf(projectService.project.hardware.board);
+            if (indexTag !== -1) {
+                projectService.project.hardwareTags.splice(indexTag, 1);
+            }
+            projectService.project.hardware.board = boardName || 'bq ZUM'; //Default board is ZUM
+            var boardMetadata = projectService.getBoardMetaData();
+            $scope.boardImage = boardMetadata && boardMetadata.id;
+            projectService.project.hardwareTags.push(projectService.project.hardware.board);
+        };
+
+        $scope.toggleCollapseHeader = function() {
+            $scope.collapsedHeader = !$scope.collapsedHeader;
+        };
+
+        $scope.upload = function() {
+            if ($scope.common.useChromeExtension()) {
+                web2boardOnline.compileAndUpload({
+                    board: projectService.getBoardMetaData(),
+                    code: utils.prettyCode(projectService.project.code)
+                });
+            } else {
+                if (web2board.isWeb2boardV2()) {
+                    uploadW2b2();
+                } else {
+                    uploadW2b1();
+                }
+            }
+        };
+
+        $scope.uploadProject = function(project) {
+            projectService.setProject(project);
+            $scope.setBoard(projectService.project.board);
+            _prettyCode();
+        };
+
+        $scope.verify = function() {
+            if ($scope.common.useChromeExtension()) {
+                var board = projectService.getBoardMetaData();
+                if (!board) {
+                    board = 'bt328';
+                } else {
+                    board = board.mcu;
+                }
+                compilerApi.compile({
+                    board: board,
+                    code: utils.prettyCode(projectService.project.code)
+                }).then(function(response) {
+                    console.log('response');
+                    console.log(response);
+                    if (response.data.error) {
+                        alertsService.add({
+                            id: 'web2board',
+                            type: 'warning',
+                            translatedText: utils.parseCompileError(response.data.error)
+                        });
+                    } else {
+                        alertsService.add({
+                            text: 'alert-web2board-compile-verified',
+                            id: 'web2board',
+                            type: 'ok',
+                            time: 5000
+                        });
+                    }
+                });
+            } else {
+                if (web2board.isWeb2boardV2()) {
+                    verifyW2b2();
+                } else {
+                    verifyW2b1();
+                }
+            }
+        };
+
+
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------- PRIVATE FUNCTIONS ----------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
 
         function confirmExit() {
             var closeMessage;
@@ -26,6 +174,43 @@ angular.module('bitbloqApp')
                 closeMessage = $scope.common.translate('leave-without-save');
             }
             return closeMessage;
+        }
+
+        function serialMonitorW2b1() {
+            if ($scope.isWeb2BoardInProgress()) {
+                return false;
+            }
+            if (projectService.project.hardware.board) {
+                web2board.setInProcess(true);
+                serialMonitorAlert = alertsService.add({
+                    text: 'alert-web2board-openSerialMonitor',
+                    id: 'serialmonitor',
+                    type: 'loading'
+                });
+                var boardMetadata = projectService.getBoardMetaData();
+                web2board.serialMonitor(boardMetadata);
+            } else {
+                $scope.currentTab = 'info';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
+        }
+
+        function serialMonitorW2b2() {
+            if (projectService.project.hardware.board) {
+                web2board.serialMonitor(projectService.getBoardMetaData());
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
         }
 
         function uploadW2b1() {
@@ -87,154 +272,6 @@ angular.module('bitbloqApp')
             web2board.verify(utils.prettyCode(projectService.project.code));
         }
 
-        function serialMonitorW2b1() {
-            if ($scope.isWeb2BoardInProgress()) {
-                return false;
-            }
-            if (projectService.project.hardware.board) {
-                web2board.setInProcess(true);
-                serialMonitorAlert = alertsService.add({
-                    text: 'alert-web2board-openSerialMonitor',
-                    id: 'serialmonitor',
-                    type: 'loading'
-                });
-                var boardMetadata = projectService.getBoardMetaData();
-                web2board.serialMonitor(boardMetadata);
-            } else {
-                $scope.currentTab = 'info';
-                alertsService.add({
-                    text: 'alert-web2board-no-board-serial',
-                    id: 'serialmonitor',
-                    type: 'warning'
-                });
-            }
-        }
-
-        function serialMonitorW2b2() {
-            if (projectService.project.hardware.board) {
-                web2board.serialMonitor(projectService.getBoardMetaData());
-            } else {
-                $scope.currentTab = 0;
-                $scope.levelOne = 'boards';
-                alertsService.add({
-                    text: 'alert-web2board-no-board-serial',
-                    id: 'serialmonitor',
-                    type: 'warning'
-                });
-            }
-        }
-
-        $scope.isWeb2BoardInProgress = web2board.isInProcess;
-
-        $scope.getSavingStatusIdLabel = projectApi.getSavingStatusIdLabel;
-
-        $scope.toggleCollapseHeader = function() {
-            $scope.collapsedHeader = !$scope.collapsedHeader;
-        };
-
-        $scope.verify = function() {
-            if (common.useChromeExtension()) {
-                var board = projectService.getBoardMetaData();
-                if (!board) {
-                    board = 'bt328';
-                } else {
-                    board = board.mcu;
-                }
-                compilerApi.compile({
-                    board: board,
-                    code: utils.prettyCode(projectService.project.code)
-                }).then(function(response) {
-                    console.log('response');
-                    console.log(response);
-                    if (response.data.error) {
-                        alertsService.add({
-                            id: 'web2board',
-                            type: 'warning',
-                            translatedText: utils.parseCompileError(response.data.error)
-                        });
-                    } else {
-                        alertsService.add({
-                            text: 'alert-web2board-compile-verified',
-                            id: 'web2board',
-                            type: 'ok',
-                            time: 5000
-                        });
-                    }
-                });
-            } else {
-                if (web2board.isWeb2boardV2()) {
-                    verifyW2b2();
-                } else {
-                    verifyW2b1();
-                }
-            }
-        };
-
-        $scope.upload = function() {
-            if (common.useChromeExtension()) {
-                web2boardOnline.compileAndUpload({
-                    board: projectService.getBoardMetaData(),
-                    code: utils.prettyCode(projectService.project.code)
-                });
-            } else {
-                if (web2board.isWeb2boardV2()) {
-                    uploadW2b2();
-                } else {
-                    uploadW2b1();
-                }
-            }
-        };
-
-        $scope.onFieldKeyUp = function(event) {
-            if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase() === 's') { //Ctrl + S
-                return true;
-            }
-        };
-
-        $scope.uploadProject = function(project) {
-            projectService.setProject(project);
-            $scope.setBoard(projectService.project.board);
-            _prettyCode();
-        };
-
-        $scope.setBoard = function(boardName) {
-            var indexTag = projectService.project.hardwareTags.indexOf(projectService.project.hardware.board);
-            if (indexTag !== -1) {
-                projectService.project.hardwareTags.splice(indexTag, 1);
-            }
-            projectService.project.hardware.board = boardName || 'bq ZUM'; //Default board is ZUM
-            var boardMetadata = projectService.getBoardMetaData();
-            $scope.boardImage = boardMetadata && boardMetadata.id;
-            projectService.project.hardwareTags.push(projectService.project.hardware.board);
-        };
-
-        $scope.serialMonitor = function() {
-            if (web2board.isWeb2boardV2()) {
-                serialMonitorW2b2();
-            } else {
-                serialMonitorW2b1();
-            }
-        };
-
-        $scope.showWeb2boardSettings = function() {
-            web2board.showSettings();
-        };
-
-        $scope.publishProject = function(type) {
-            projectService.checkPublish(type).then(function() {
-                $scope.publishProjectError = false;
-                if (type === 'Social') {
-                    commonModals.shareSocialModal(projectService.project);
-                } else {
-                    commonModals.publishModal(projectService.project);
-                }
-            }.catch(function() {
-                $scope.publishProjectError = true;
-                $scope.currentTab = 'info';
-            }));
-        };
-
-
         function _goToBloqs() {
             alertsService.close(editInfo);
             $location.url('/bloqsproject/' + projectService.project._id);
@@ -270,7 +307,7 @@ angular.module('bitbloqApp')
         }
 
         function _loadProject() {
-
+            projectService.setCodeProject();
             if ($routeParams.id) {
                 projectApi.get($routeParams.id).then(function(response) {
                     projectService.setProject(response.data);
@@ -294,7 +331,9 @@ angular.module('bitbloqApp')
 
                     $scope.setBoard(projectService.project.hardware.board);
 
-                    _prettyCode();
+                    _prettyCode().then(function() {
+                        projectService.addWatchers();
+                    });
 
                 }, function(response) {
                     switch (response.status) {
@@ -321,6 +360,7 @@ angular.module('bitbloqApp')
                                 type: 'warning'
                             });
                     }
+                    projectService.addWatchers();
                 });
             } else {
                 if ($scope.common.session.bloqTab) {
@@ -337,69 +377,41 @@ angular.module('bitbloqApp')
                         $scope.common.session.save = false;
                         projectService.startAutosave();
                     } else {
-                        projectService.setCodeProject();
                     }
                     $scope.setBoard(projectService.project.hardware.board);
-                    _prettyCode();
+                    _prettyCode().then(function() {
+                        projectService.addWatchers();
+                    });
                 }).catch(function() {
                     if ($scope.common.session.project.hardware.board) {
                         $scope.setBoard($scope.common.session.project.hardware.board);
-                        _prettyCode();
                     }
                     if ($scope.common.session.project.code) {
                         projectService.setProject($scope.common.session.project);
-                        _prettyCode();
-                    } else {
-                        projectService.setCodeProject();
                     }
+                    _prettyCode().then(function() {
+                        projectService.addWatchers();
+                    });
                 });
             }
         }
 
-        var editInfo, editorRef,
-            compilingAlert,
-            settingBoardAlert,
-            serialMonitorAlert;
 
-        $scope.utils = utils;
-        $scope.projectApi = projectApi;
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------- WATCHERS -------------------------------------------------------
+        //---------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------
 
-        $scope.boardNameList = [];
-        $scope.commonModals = commonModals;
-        $scope.common.isLoading = true;
-
-        $scope.boardNameList = _.pluck(hardwareConstants.boards, 'name');
-
-        // The ui-ace option
-        $scope.aceOptions = {
-            mode: 'c_cpp',
-            useWrapMode: false,
-            showGutter: true,
-            theme: 'chrome',
-            advanced: {
-                enableSnippets: true,
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true
-            },
-            rendererOptions: {
-                fontSize: 14,
-                minLines: 11
-            },
-            onLoad: function(_editor) {
-                editorRef = _editor;
-                _loadProject();
-                editorRef.on('paste', function() {
-                    setTimeout(function() {
-                        _prettyCode();
-                    }, 10);
-                });
-            }
-        };
 
         $scope.$watch('common.session.save', function(newVal, oldVal) {
             if (newVal && newVal !== oldVal) {
                 $scope.common.session.project = projectService.project;
             }
+        });
+
+        $scope.$on('$destroy', function() {
+            $window.onbeforeunload = null;
         });
 
         /*************************************************

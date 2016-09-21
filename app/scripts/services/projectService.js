@@ -8,20 +8,152 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi, common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location, bloqsUtils, hw2Bloqs) {
+    .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi, common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals) {
 
         var exports = {},
             thereAreWatchers = false,
-            savePromise;
+            savePromise,
+            oldProject = {};
+
+        exports.bloqs = {
+            varsBloq: null,
+            setupBloq: null,
+            loopBloq: null
+        };
 
         exports.componentsArray = [];
 
-        exports.setComponentsArray = function(components) {
-            if (components) {
-                exports.componentsArray = components;
+        exports.project = {};
+
+        var scope = $rootScope.$new();
+        scope.project = exports.project;
+
+        /**
+         * Status of save project
+         * 0 = Nothing
+         * 1 = AutoSaving in progress
+         * 2 = Save correct
+         * 3 = Saved Error
+         * 4 = Dont Allowed to do Save
+         * @type {Number}
+         */
+        exports.saveStatus = 0;
+
+        exports.savingStatusIdLabels = {
+            0: '',
+            1: 'make-saving',
+            2: 'make-project-saved-ok',
+            3: 'make-project-saved-ko',
+            4: 'make-project-not-allow-to-save'
+        };
+
+        exports.tempImage = {};
+
+
+        exports.checkPublish = function(type) {
+            var defered = $q.defer();
+            type = type || '';
+            var projectEmptyName = common.translate('new-project');
+            if (!exports.project.name || exports.project.name === projectEmptyName) {
+                if (!exports.project.description) {
+                    alertsService.add({
+                        text: 'publishProject__alert__nameDescriptionError' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
+                } else {
+                    alertsService.add({
+                        text: 'publishProject__alert__nameError' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
+                }
+                exports.project.name = projectEmptyName ? '' : exports.project.name;
+                defered.reject();
+            } else if (!exports.project.description) {
+                alertsService.add({
+                    text: 'publishProject__alert__descriptionError' + type,
+                    id: 'publishing-project',
+                    type: 'warning'
+                });
+                defered.reject();
             } else {
-                exports.componentsArray = bloqsUtils.getEmptyComponentsArray();
+                defered.resolve();
             }
+            return defered.promise;
+        };
+        
+        exports.clone = function(){
+            exports.completedProject();
+            commonModals.clone(exports.project, true);
+        };
+
+        exports.completedProject = function() {
+            if (!exports.project.codeProject) {
+                if (exports.bloqs.varsBloq) {
+                    exports.project.software = {
+                        vars: exports.bloqs.varsBloq.getBloqsStructure(),
+                        setup: exports.bloqs.setupBloq.getBloqsStructure(),
+                        loop: exports.bloqs.loopBloq.getBloqsStructure()
+                    };
+                }
+
+                _updateHardwareSchema();
+                exports.project.code = bloqsUtils.getCode(exports.componentsArray, exports.bloqs);
+            }
+        };
+
+        exports.download = function(project, type, force) {
+            project = project || exports.project;
+            type = type || 'json';
+            if (common.user || force) {
+                projectApi.addDownload(project._id).then(function(response) {
+                    if (type === 'arduino') {
+                        _downloadIno(response.data);
+                    } else {
+                        _downloadJSON(response.data);
+                    }
+                });
+            } else {
+                if (type === 'arduino') {
+                    _downloadIno(project);
+                } else {
+                    _downloadJSON(project);
+                }
+            }
+        };
+
+        exports.isShared = function(project) {
+            var found = false,
+                i = 0,
+                propertyNames = Object.getOwnPropertyNames(project._acl);
+            while (!found && (i < propertyNames.length)) {
+                if (propertyNames[i] !== 'ALL' && common.user && propertyNames[i].split('user:')[1] !== common.user._id) {
+                    found = true;
+                }
+                i++;
+            }
+            return found;
+        };
+
+        exports.getBoardMetaData = function() {
+            return _.find(hardwareConstants.boards, function(board) {
+                return board.name === exports.project.hardware.board;
+            });
+        };
+
+        exports.getCleanProject = function(projectRef) {
+            projectRef = projectRef || exports.project;
+            var cleanProject = _.cloneDeep(projectRef);
+            delete cleanProject._id;
+            delete cleanProject._acl;
+            delete cleanProject.creator;
+            delete cleanProject.createdAt;
+            delete cleanProject.updatedAt;
+            delete cleanProject.links;
+            delete cleanProject.exportedFromBitbloqOffline;
+            delete cleanProject.bitbloqOfflineVersion;
+            return cleanProject;
         };
 
         exports.getDefaultProject = function(code) {
@@ -35,7 +167,7 @@ angular.module('bitbloqApp')
                 defaultTheme: 'infotab_option_colorTheme',
                 codeProject: !!code
             };
-            if (code) {
+            if (code === 'code') {
                 project.hardware = {
                     board: 'bq ZUM'
                 };
@@ -79,24 +211,50 @@ angular.module('bitbloqApp')
             return _.cloneDeep(project);
         };
 
-        exports.setProject = function(newproject) {
-            exports.project = _.extend(exports.project, newproject);
-            if (!thereAreWatchers) {
-                _addWatchers();
-            }
+        exports.getSavePromise = function() {
+            return savePromise;
+        };
+
+        exports.getSavingStatusIdLabel = function() {
+            return exports.savingStatusIdLabels[exports.saveStatus];
+        };
+
+        exports.projectHasChanged = function() {
+            var identicalProjectObject = _.isEqual(exports.project, oldProject);
+            return !identicalProjectObject || (exports.tempImage.file);
+        };
+
+        exports.saveOldProject = function() {
+            oldProject = _.cloneDeep(exports.project);
         };
 
         exports.setBloqProject = function() {
             exports.project = _.extend(exports.project, exports.getDefaultProject());
+            exports.setComponentsArray();
             if (!thereAreWatchers) {
-                _addWatchers();
+                exports.addWatchers();
             }
         };
 
-        exports.setCodeProject = function() {
-            exports.project = _.extend(exports.project, exports.getDefaultProject(true));
+        exports.setCodeProject = function(watchers) {
+            exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
+            if (watchers && !thereAreWatchers) {
+                exports.addWatchers();
+            }
+        };
+
+        exports.setComponentsArray = function(components) {
+            if (components) {
+                exports.componentsArray = components;
+            } else {
+                exports.componentsArray = bloqsUtils.getEmptyComponentsArray();
+            }
+        };
+
+        exports.setProject = function(newproject) {
+            exports.project = _.extend(exports.project, newproject);
             if (!thereAreWatchers) {
-                _addWatchers();
+                exports.addWatchers();
             }
         };
 
@@ -108,111 +266,42 @@ angular.module('bitbloqApp')
                     return savePromise;
                 }
             } else {
-                //common.session.project = exports.getCurrentProject();
+                exports.completedProject();
+                common.session.project = _.cloneDeep(exports.project);
                 common.session.save = true;
             }
         };
 
-        exports.getBoardMetaData = function() {
-            return _.find(hardwareConstants.boards, function(board) {
-                return board.name === exports.project.hardware.board;
-            });
-        };
 
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+        //----------------- Private functions ---------------------------------
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
-        exports.project = exports.getDefaultProject();
+        function _downloadIno(project, code) {
+            code = code || project.code;
+            var name = project.name;
+            //Remove all diacritics
+            name = utils.removeDiacritics(name, undefined, $translate.instant('new-project'));
 
+            utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
+        }
 
-        exports.checkPublish = function(type) {
-            var defered = $q.defer();
-            type = type || '';
-            var projectEmptyName = common.translate('new-project');
-            if (!exports.project.name || exports.project.name === projectEmptyName) {
-                if (!exports.project.description) {
-                    alertsService.add({
-                        text: 'publishProject__alert__nameDescriptionError' + type,
-                        id: 'publishing-project',
-                        type: 'warning'
-                    });
-                } else {
-                    alertsService.add({
-                        text: 'publishProject__alert__nameError' + type,
-                        id: 'publishing-project',
-                        type: 'warning'
-                    });
-                }
-                exports.project.name = projectEmptyName ? '' : exports.project.name;
-                defered.reject();
-            } else if (!exports.project.description) {
-                alertsService.add({
-                    text: 'publishProject__alert__descriptionError' + type,
-                    id: 'publishing-project',
-                    type: 'warning'
-                });
-                defered.reject();
-            } else {
-                defered.resolve();
-            }
-            return defered.promise;
-        };
+        function _downloadJSON(projectRef) {
+            var project = exports.getCleanProject(projectRef);
+            project.bloqsVersion = bowerData.dependencies.bloqs;
 
-        exports.bloqs = {
-            varsBloq: null,
-            setupBloq: null,
-            loopBloq: null
-        };
+            var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
 
-        var _updateHardwareSchema = function() {
+            utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(project), 'application/json');
+        }
 
-            var schema = hw2Bloqs.saveSchema();
-
-            if (schema) { //If project is loaded on protocanvas
-
-                schema.components = schema.components.map(function(elem) {
-                    var newElem = _.find(exports.project.hardware.components, {
-                        uid: elem.uid
-                    });
-                    if (newElem) {
-                        newElem.connected = elem.connected;
-                    }
-                    return newElem;
-                });
-
-                schema.board = exports.project.hardware.board;
-                schema.robot = exports.project.hardware.robot;
-
-                exports.project.hardware = schema;
-            }
-
-        };
-
-        exports.completedProject = function() {
-            if (!exports.project.codeProject) {
-                if (exports.bloqs.varsBloq) {
-                    exports.project.software = {
-                        vars: exports.bloqs.varsBloq.getBloqsStructure(),
-                        setup: exports.bloqs.setupBloq.getBloqsStructure(),
-                        loop: exports.bloqs.loopBloq.getBloqsStructure()
-                    };
-                }
-
-                _updateHardwareSchema();
-                exports.project.code = bloqsUtils.getCode(exports.componentsArray, exports.bloqs);
-            }
-        };
-
-        var oldProject = {};
-
-        exports.tempImage = {};
-
-        exports.saveOldProject = function() {
-            oldProject = _.cloneDeep(exports.project);
-        };
-
-        exports.projectHasChanged = function() {
-            var identicalProjectObject = _.isEqual(exports.project, oldProject);
-            return !identicalProjectObject || (exports.tempImage.file);
-        };
+        function _init() {
+            var def = $q.defer();
+            savePromise = def.promise;
+            def.resolve();
+        }
 
         function _saveProject() {
             var defered = $q.defer();
@@ -231,11 +320,9 @@ angular.module('bitbloqApp')
                 if (exports.project._id) {
                     if (!exports.project._acl || (exports.project._acl['user:' + common.user._id] && exports.project._acl['user:' + common.user._id].permission === 'ADMIN')) {
                         return projectApi.update(exports.project._id, exports.project).then(function() {
-
+                            exports.saveStatus = 2;
                             exports.saveOldProject();
-
                             localStorage.projectsChange = true;
-
                             if (exports.tempImage.file) {
                                 imageApi.save(exports.project._id, exports.tempImage.file).then(function() {
                                     exports.tempImage = {};
@@ -294,11 +381,32 @@ angular.module('bitbloqApp')
             return defered.promise;
         }
 
+        function _updateHardwareSchema() {
 
-        var scope = $rootScope.$new();
-        scope.project = exports.project;
+            var schema = hw2Bloqs.saveSchema();
+            if (schema) { //If project is loaded on protocanvas
+                schema.components = schema.components.map(function(elem) {
+                    var newElem = _.find(exports.project.hardware.components, {
+                        uid: elem.uid
+                    });
+                    if (newElem) {
+                        newElem.connected = elem.connected;
+                    }
+                    return newElem;
+                });
 
-        function _addWatchers() {
+                schema.board = exports.project.hardware.board;
+                schema.robot = exports.project.hardware.robot;
+                exports.project.hardware = schema;
+            }
+        }
+
+        /*************************************************
+         init functions and watchers
+         *************************************************/
+        _init();
+
+        exports.addWatchers = function() {
             thereAreWatchers = true;
             scope.$watch('project.name', function(newVal, oldVal) {
                 if (newVal && newVal !== oldVal) {
@@ -341,116 +449,7 @@ angular.module('bitbloqApp')
                     exports.startAutosave(_saveProject);
                 }
             });
-        }
-
-        //---------------------------------------------------------------------
-        //---------------------------------------------------------------------
-        //---------------------------------------------------------------------
-        //---------------------------------------------------------------------
-
-        //Private functions
-        function startSavePromise() {
-            var defer = $q.defer();
-            savePromise = defer.promise;
-            defer.resolve();
-        }
-
-
-        exports.getSavePromise = function() {
-            return savePromise;
         };
-
-
-        exports.getSavingStatusIdLabel = function() {
-            return exports.savingStatusIdLabels[exports.saveStatus];
-        };
-
-
-        exports.isShared = function(project) {
-            var found = false,
-                i = 0,
-                propertyNames = Object.getOwnPropertyNames(project._acl);
-            while (!found && (i < propertyNames.length)) {
-                if (propertyNames[i] !== 'ALL' && common.user && propertyNames[i].split('user:')[1] !== common.user._id) {
-                    found = true;
-                }
-                i++;
-            }
-            return found;
-        };
-
-        exports.getCleanProject = function(projectRef) {
-            projectRef = projectRef || exports.project;
-            var cleanProject = _.cloneDeep(projectRef);
-            delete cleanProject._id;
-            delete cleanProject._acl;
-            delete cleanProject.creator;
-            delete cleanProject.createdAt;
-            delete cleanProject.updatedAt;
-            delete cleanProject.links;
-            delete cleanProject.exportedFromBitbloqOffline;
-            delete cleanProject.bitbloqOfflineVersion;
-            return cleanProject;
-        };
-
-        exports.download = function(project, type, force) {
-            type = type || 'json';
-            if (common.user || force) {
-                projectApi.addDownload(project._id).then(function(response) {
-                    if (type === 'arduino') {
-                        downloadIno(response.data);
-                    } else {
-                        downloadJSON(response.data);
-                    }
-                });
-            } else {
-                if (type === 'arduino') {
-                    downloadIno(project);
-                } else {
-                    downloadJSON(project);
-                }
-            }
-        };
-
-        function downloadJSON(projectRef) {
-            var project = exports.getCleanProject(projectRef);
-            project.bloqsVersion = bowerData.dependencies.bloqs;
-
-            var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
-
-            utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(project), 'application/json');
-        }
-
-        function downloadIno(project, code) {
-            code = code || project.code;
-            var name = project.name;
-            //Remove all diacritics
-            name = utils.removeDiacritics(name, undefined, $translate.instant('new-project'));
-
-            utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
-        }
-
-        /**
-         * Status of save project
-         * 0 = Nothing
-         * 1 = AutoSaving in progress
-         * 2 = Save correct
-         * 3 = Saved Error
-         * 4 = Dont Allowed to do Save
-         * @type {Number}
-         */
-        exports.saveStatus = 0;
-
-        exports.savingStatusIdLabels = {
-            0: '',
-            1: 'make-saving',
-            2: 'make-project-saved-ok',
-            3: 'make-project-saved-ko',
-            4: 'make-project-not-allow-to-save'
-        };
-
-        //Init functions
-        startSavePromise();
 
         $rootScope.$on('$locationChangeStart', function(event) {
             if (exports.saveStatus === 1) {

@@ -44,7 +44,7 @@
                 </div>
             </li>
             <li data-tooltips="{{!common.user}}" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-disabled="!common.user" data-ng-click="clone()" data-element="menu-clone">
+                <div class="dropdown__item" data-ng-disabled="!common.user" data-ng-click="projectService.clone()" data-element="menu-clone">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#duplicar"></use>
                     </svg>
@@ -52,7 +52,7 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li ng-if="common.section === 'bloqsproject'" class="dropdown__item" data-ng-click="downloadProject()" data-element="menu-download">
+            <li ng-if="common.section === 'bloqsproject'" class="dropdown__item" data-ng-click="projectService.download()" data-element="menu-download">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                     <use xlink:href="#descargar"></use>
                 </svg>

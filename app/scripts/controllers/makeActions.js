@@ -10,7 +10,16 @@
 
 angular.module('bitbloqApp')
     .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $location, $window, $document, alertsService, bloqs, ngDialog, projectApi, _, $route, commonModals, clipboard, projectService) {
-
+        
+        $scope.defaultZoom = 1;
+        $scope.modal = {
+            projectCloneName: ''
+        };
+        $scope.projectApi = projectApi;
+        $scope.commonModals = commonModals;
+        $scope.projectService = projectService;
+        $scope.removeAlert = [];
+        
         $scope.uploadProjectSelected = function(fileList) {
 
             // Only allow uploading one file.
@@ -130,10 +139,6 @@ angular.module('bitbloqApp')
             $('#uploadProject').trigger('click');
         };
 
-        $scope.downloadProject = function() {
-            projectService.download(projectService.getCurrentProject());
-        };
-
         $scope.downloadIno = function() {
             var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : projectService.project.code;
             projectService.project.code = code;
@@ -178,8 +183,12 @@ angular.module('bitbloqApp')
             clipboard.copyText($scope.getCode());
         };
 
-        $scope.clone = function() {
-            commonModals.clone(projectService.getCurrentProject(), true);
+        $scope.dropdownHandler = function(menu) {
+            if ($scope.dropdown !== menu) {
+                $scope.dropdown = menu;
+            } else {
+                $scope.dropdown = false;
+            }
         };
 
         $scope.zoom = function(value) {
@@ -246,20 +255,6 @@ angular.module('bitbloqApp')
             $scope.common.removeProjects[projectId] = false;
         }
 
-        $scope.dropdownHandler = function(menu) {
-            if ($scope.dropdown !== menu) {
-                $scope.dropdown = menu;
-            } else {
-                $scope.dropdown = false;
-            }
-        };
-
-        $document.on('click', clickDocumentHandler);
-
-        $scope.$on('$destroy', function() {
-            $document.off('click', clickDocumentHandler);
-        });
-
         function clickDocumentHandler(evt) {
             if (!$(evt.target).hasClass('actions__menu--selected')) {
                 $scope.dropdownHandler(false);
@@ -269,12 +264,10 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.defaultZoom = 1;
-        $scope.modal = {
-            projectCloneName: ''
-        };
-        $scope.projectApi = projectApi;
-        $scope.commonModals = commonModals;
-        $scope.removeAlert = [];
+        $document.on('click', clickDocumentHandler);
+
+        $scope.$on('$destroy', function() {
+            $document.off('click', clickDocumentHandler);
+        });
 
     });

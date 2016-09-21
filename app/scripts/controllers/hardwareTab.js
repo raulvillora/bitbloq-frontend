@@ -20,6 +20,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     function _initialize() {
 
+        $scope.projectService = projectService;
         $scope.hardware.componentList = hardwareConstants.components;
         $scope.hardware.boardList = hardwareConstants.boards;
         $scope.hardware.robotList = hardwareConstants.robots;
@@ -40,7 +41,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         container.addEventListener('connectionEvent', connectionEventHandler);
 
-        $scope.$watch('project.hardware', function(newVal, oldVal) {
+        $scope.$watch('projectService.project.hardware', function(newVal, oldVal) {
             if (newVal && (newVal !== oldVal || newVal.anonymousTransient)) {
                 _loadHardwareProjec(newVal);
             }
@@ -234,7 +235,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         projectService.project.hardware.board = null;
         $scope.robotSelected = false;
         $scope.refreshComponentsArray();
-        $scope.startAutosave();
+        projectService.startAutosave();
     };
 
     function _addComponent(data) {
@@ -267,7 +268,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.boardSelected = false;
         projectService.project.hardware.board = null;
         $scope.refreshComponentsArray();
-        $scope.startAutosave();
+        projectService.startAutosave();
     };
 
     function _focusComponent(component) {
@@ -356,7 +357,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.setBaudRate = function(baudRate) {
         $scope.componentSelected.baudRate = baudRate;
         $scope.refreshComponentsArray();
-        $scope.startAutosave();
+        projectService.startAutosave();
     };
 
     $scope.setInputFocus = function() {
@@ -383,7 +384,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             };
             if (!_.isEqual(newCoordinates, componentReference.coordinates) && componentReference.connected) {
                 componentReference.coordinates = newCoordinates;
-                $scope.startAutosave();
+                projectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length ||
             $(ev.target).closest('.board_ep', container).length ||
@@ -508,7 +509,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             });
             _addBoard(board);
             $scope.subMenuHandler('hwcomponents', 'open', 1);
-            $scope.startAutosave();
+            projectService.startAutosave();
         } else if (data.type === 'components') {
             if (!projectService.project.hardware.board) {
                 $scope.subMenuHandler('boards', 'open', 1);
@@ -530,7 +531,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         } else if (data.type === 'robots') {
             $scope.hardware.cleanSchema();
             _addRobot(data);
-            $scope.startAutosave();
+            projectService.startAutosave();
         }
     };
 
@@ -738,7 +739,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {
             $scope.refreshComponentsArray();
-            $scope.startAutosave();
+            projectService.startAutosave();
         }
     });
 
@@ -746,7 +747,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         if (oldVal === '' && newVal !== '') {
             $timeout.cancel($scope.timeoutCode);
-            $scope.startAutosave();
+            projectService.startAutosave();
         } else {
             if (newVal && oldVal && (newVal !== oldVal)) {
                 $scope.checkName();
@@ -754,7 +755,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $timeout.cancel($scope.timeoutCode);
                 $scope.timeoutCode = $timeout(function() {
                     $scope.componentSelected.name = _createUniqueVarName($scope.componentSelected);
-                    $scope.startAutosave();
+                    projectService.startAutosave();
                 }, 3000);
             }
         }

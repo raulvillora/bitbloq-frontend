@@ -12,6 +12,7 @@ angular.module('bitbloqApp')
 
         var exports = {};
 
+
         function saveRequest(params) {
             return $http(params)
                 .then(function(response) {
@@ -34,6 +35,23 @@ angular.module('bitbloqApp')
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + idProject + '/download'
+            });
+        };
+
+        exports.clone = function(idProject, name) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'project/' + idProject + '/clone',
+                data: {
+                    name: name
+                }
+            });
+        };
+
+        exports.delete = function(idProject) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.serverUrl + 'project/' + idProject
             });
         };
 
@@ -90,30 +108,19 @@ angular.module('bitbloqApp')
             return resource.getAll('project/shared', params, myProjectArray);
         };
 
-        exports.save = function(dataProject) {
-            return saveRequest({
-                method: 'POST',
-                url: envData.config.serverUrl + 'project',
-                data: dataProject
-            });
-        };
 
-        exports.update = function(idProject, dataProject) {
-            return saveRequest({
+        exports.private = function(project) {
+            var defered = $q.defer();
+            $http({
                 method: 'PUT',
-                url: envData.config.serverUrl + 'project/' + idProject,
-                data: dataProject
+                url: envData.config.serverUrl + 'project/' + project._id + '/private'
+            }).then(function(response) {
+                delete project._acl.ALL;
+                defered.resolve(response);
+            }, function(error) {
+                defered.reject(error);
             });
-        };
-
-        exports.clone = function(idProject, name) {
-            return $http({
-                method: 'PUT',
-                url: envData.config.serverUrl + 'project/' + idProject + '/clone',
-                data: {
-                    name: name
-                }
-            });
+            return defered.promise;
         };
 
         exports.publish = function(project) {
@@ -135,18 +142,12 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.private = function(project) {
-            var defered = $q.defer();
-            $http({
-                method: 'PUT',
-                url: envData.config.serverUrl + 'project/' + project._id + '/private'
-            }).then(function(response) {
-                delete project._acl.ALL;
-                defered.resolve(response);
-            }, function(error) {
-                defered.reject(error);
+        exports.save = function(dataProject) {
+            return saveRequest({
+                method: 'POST',
+                url: envData.config.serverUrl + 'project',
+                data: dataProject
             });
-            return defered.promise;
         };
 
         exports.shareWithUsers = function(idProject, userEmails) {
@@ -157,10 +158,11 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.delete = function(idProject) {
-            return $http({
-                method: 'DELETE',
-                url: envData.config.serverUrl + 'project/' + idProject
+        exports.update = function(idProject, dataProject) {
+            return saveRequest({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'project/' + idProject,
+                data: dataProject
             });
         };
 
@@ -169,17 +171,6 @@ angular.module('bitbloqApp')
         //---------------- SOCIAL NETWORK API ---------------------------------------------
         //---------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------
-
-        exports.getShortURL = function(longUrl) {
-            // Request short url
-            return $http.post('https://www.googleapis.com/urlshortener/v1/url?key=' + envData.google.apikey, {
-                longUrl: longUrl
-            }).success(function(response) {
-                return response.id;
-            }).error(function(error) {
-                return error.error.message;
-            });
-        };
 
         exports.generateShortUrl = function(longUrl) {
             return $http({
@@ -192,6 +183,17 @@ angular.module('bitbloqApp')
                     longUrl: longUrl
                 },
                 skipAuthorization: true
+            });
+        };
+
+        exports.getShortURL = function(longUrl) {
+            // Request short url
+            return $http.post('https://www.googleapis.com/urlshortener/v1/url?key=' + envData.google.apikey, {
+                longUrl: longUrl
+            }).success(function(response) {
+                return response.id;
+            }).error(function(error) {
+                return error.error.message;
             });
         };
 
