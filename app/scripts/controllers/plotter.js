@@ -16,16 +16,15 @@ angular.module('bitbloqApp')
                 buf: '',
                 separator: '\r\n',
                 retrieve_messages: function(data) {
-                    console.log('data before: ', data);
+                  console.log("data: ", data);
                     data = this.buf + data;
-                    console.log('data after: ', data);
                     var split_data = data.split(this.separator);
-                    console.log('split_data: ', split_data);
                     this.buf = split_data.pop();
+                    console.log("split_data: ", split_data);
                     return split_data;
                 }
             },
-            plotterLength = 500,
+            plotterLength = 30,
             receivedDataCount = 0;
 
         //its setted when the windows its open
@@ -211,27 +210,36 @@ angular.module('bitbloqApp')
             });
         }
 
-        $rootScope.$on('serial', function(event, msg) {
-            if (!$scope.pause && angular.isString(msg)) {
-                var messages = dataParser.retrieve_messages(msg);
-                messages.forEach(function(message) {
-                    var number = parseFloat(message);
-                    if (!$scope.pause && !isNaN(number)) {
-                        $scope.data[0].values.push({
-                            x: receivedDataCount++,
-                            y: number
-                        });
-                        if ($scope.data[0].values.length > plotterLength) {
-                            $scope.data[0].values.shift();
-                        }
-                    }
-                });
-                $scope.$apply();
+          $rootScope.$on('serial', function(event, msg) {
+            $timeout(function(){
+              if (!$scope.pause && angular.isString(msg)) {
+                  var messages = dataParser.retrieve_messages(msg);
+                  messages.forEach(function(message) {
+                      var number = parseFloat(message);
+                      if (!$scope.pause && !isNaN(number)) {
+                          $scope.data[0].values.push({
+                              x: receivedDataCount++,
+                              y: number
+                          });
+                          if ($scope.data[0].values.length > plotterLength) {
+                              $scope.data[0].values.shift();
+                          }
+                      }
+                  });
+                  $scope.$apply();
+              }
+            },500);
+              //    console.log('msg arrived: ', msg);
+          });
 
-            }
-            //    console.log('msg arrived: ', msg);
-        });
+
+
         $scope.$on('$destroy', function() {
+            receivedDataCount = 0;
+            $scope.data = [{
+                values: [],
+                color: '#6a8d2f'
+            }];
             if (common.useChromeExtension()) {
                 chromeAppApi.stopSerialCommunication();
                 web2board.setInProcess(false);

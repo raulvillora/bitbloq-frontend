@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope, $translate, $log) {
+    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope, $translate, $log, $timeout) {
         var exports = {};
 
         var openPort,
@@ -50,7 +50,7 @@ angular.module('bitbloqApp')
                         });
 
                         openPort.onMessage.addListener(function(msg) {
-                            console.log('onMessage', msg, typeof(msg));
+                        //console.log('onMessage', msg, typeof(msg));
                             if (msg === 'connected') {
                                 console.log('chromeapp connected');
                                 clearTimeout(timeoutId);
