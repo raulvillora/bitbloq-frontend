@@ -57,7 +57,7 @@
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
                 </a>
-                <span class="project--item--trash" ng-click="removeProject(projectService.project)" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                <span class="project--item--trash" ng-click="removeProject(project)" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
                     <svg class="svg-icon" data-element="eliminate-myproject">
                         <use xlink:href="#remove"></use>
                     </svg>
@@ -66,44 +66,44 @@
             <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
                 <div ng-class="{'project__footer':true, 'project__footer--wide':itemsLayout === 'list'}">
                     <div class="footer__icons--left">
-                        <div ng-click="renameProject(projectService.project)" data-element="myprojects-rename-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'change-name' | translate }}">
+                        <div ng-click="renameProject(project)" data-element="myprojects-rename-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'change-name' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#edit"></use>
                             </svg>
                         </div>
-                        <div ng-click="createCopy(projectService.project)" data-element="myprojects-copy-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'create-copy' | translate }}">
+                        <div ng-click="createCopy(project)" data-element="myprojects-copy-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'create-copy' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#duplicar"></use>
                             </svg>
                         </div>
-                        <div data-ng-if="!project.codeProject" data-element="myprojects-download-project" data-ng-click="projectService.download(projectService.project)" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'download-project' | translate }}">
+                        <div data-ng-if="!project.codeProject" data-element="myprojects-download-project" data-ng-click="projectService.download(project)" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'download-project' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#descargar"></use>
                             </svg>
                         </div>
-                        <div data-element="myprojects-export-arduino-code-button" data-ng-click="projectService.download(projectService.project, 'arduino')" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'export-arduino-code' | translate }}">
+                        <div data-element="myprojects-export-arduino-code-button" data-ng-click="projectService.download(project, 'arduino')" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'export-arduino-code' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#exportcode"></use>
                             </svg>
                         </div>
                     </div>
                     <div class="footer__icons--right">
-                        <div data-ng-click="publishProject(projectService.project)" class="project--footer--icon" data-ng-if="!project._acl.ALL" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'publish-project' | translate }}" data-element="myprojects-footer-publish">
+                        <div data-ng-click="publishProject(project)" class="project--footer--icon" data-ng-if="!project._acl.ALL" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'publish-project' | translate }}" data-element="myprojects-footer-publish">
                             <svg class="svg-icon">
                                 <use xlink:href="#Compartir_publicarEnExplora"></use>
                             </svg>
                         </div>
-                        <div data-ng-click="commonModals.doPrivateProject(projectService.project)" class="project--footer--icon" data-ng-if="project._acl.ALL" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'do-private' | translate }}" data-element="myprojects-footer-private">
+                        <div data-ng-click="commonModals.doPrivateProject(project)" class="project--footer--icon" data-ng-if="project._acl.ALL" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'do-private' | translate }}" data-element="myprojects-footer-private">
                             <svg class="svg-icon">
                                 <use xlink:href="#privado"></use>
                             </svg>
                         </div>
-                        <div class="project--footer--icon" data-ng-click="commonModals.modalShareWithUsers(projectService.project)" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-with-users' | translate }}">
+                        <div class="project--footer--icon" data-ng-click="commonModals.modalShareWithUsers(project)" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-with-users' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#usuario"></use>
                             </svg>
                         </div>
-                        <div class="project--footer--icon" data-ng-click="publishProject(projectService.project, 'Social')" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-social-networks' | translate }}">
+                        <div class="project--footer--icon" data-ng-click="publishProject(project, 'Social')" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-social-networks' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#redesSociales"></use>
                             </svg>
@@ -122,7 +122,7 @@
                             <svg class="svg-icon" ng-if="project._acl.ALL">
                                 <use xlink:href="#Compartir_publicarEnExplora"></use>
                             </svg>
-                            <svg class="svg-icon" data-ng-if="projectService.isShared(projectService.project)">
+                            <svg class="svg-icon" data-ng-if="projectService.isShared(project)">
                                 <use xlink:href="#usuario"></use>
                             </svg>
                         </div>

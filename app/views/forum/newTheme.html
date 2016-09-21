@@ -2,18 +2,30 @@
 <div class="forum__form">
     <form name="newThemeForm" novalidate>
         <fieldset>
-            <span class="label">{{'forum_column_category' | translate}} *</span>
-            <common-dropdown options="forum.categories" options-click="forum.setPublishCategory" heading-option="'choose_category' | translate" data-element="forum_category_dropdown" selected-option="forum.selectedOption" auto-collapse="true"></common-dropdown>
-            <span class="label">{{'form_title' | translate}} *</span>
+            <span class="label">{{'forum_column_category' | translate}}
+                *</span>
+            <common-dropdown auto-collapse="true" data-element="forum_category_dropdown" heading-option="'choose_category' | translate" options-click="forum.setPublishCategory" options="forum.categories" selected-option="forum.selectedOption"></common-dropdown>
+            <span class="label">{{'form_title' | translate}}
+                *</span>
             <span class="form--input">
-                <input type="text" data-element="forum-new-theme-title" ng-model="forum.textEditorContent.title" name="themetitle" id="theme-title" placeholder="" required>
+                <input data-element="forum-new-theme-title" id="theme-title" name="themetitle" ng-model="forum.textEditorContent.title" placeholder="" required type="text">
             </span>
-            <span class="label">{{'description' | translate}} *</span>
-            <text-angular name="newthemeeditor" ng-mouseenter="forum.setFocusToEditor('newthemeeditor')" ng-model="forum.textEditorContent.htmlContent" data-element="forum-new-theme-description" ta-toolbar="[['h1','h2','h3','p'], ['bold','italics','underline','ul','ol','undo','redo','clear'], ['uploadImage','insertLink','insertVideo']]"></text-angular>
-            <span class="last-span">* {{'form_compulsoryFields' | translate}}</span>
-            <button ng-class="{'btn--disabled':(forum.textEditorContent.htmlContent==='' || newThemeForm.themetitle.$error.required || !forum.textEditorContent.category || forum.disabledNewTopic)}" data-element="forum-publish-theme" class="btn btn--primary btn--small" type="submit" ng-disabled="(forum.textEditorContent.htmlContent==='' || newThemeForm.themetitle.$error.required || !forum.textEditorContent.category)" ng-click="forum.submitNewTheme()">{{'forum_button_publishTheme' | translate}}</button>
+            <span class="label">{{'description' | translate}}
+                *</span>
+            <text-angular data-element="forum-new-theme-description" name="newthemeeditor" ng-model="forum.textEditorContent.htmlContent" ng-mouseenter="forum.setFocusToEditor('newthemeeditor')" ta-toolbar="[['h1','h2','h3','p'], ['bold','italics','underline','ul','ol','undo','redo','clear'], ['uploadImage','insertLink','insertVideo']]"></text-angular>
+            <span class="last-span">*
+                {{'form_compulsoryFields' | translate}}</span>
+            <div class="subscribe-div form-control">
+                <span class="subscribe-span input input--checkbox">
+                    <input data-element="subscribe-theme-input" data-ng-blur="focus = false" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-model="forum.textEditorContent.subscribe" id="subscribeThread" name="subscribeThread" type="checkbox">
+                    <label for="subscribeThread">
+                        {{'forum_button_new-topic_subscribe' | translate}}
+                    </label>
+                </span>
+            </div>
+            <button class="btn btn--primary btn--small" data-element="forum-publish-theme" ng-class="{'btn--disabled':(forum.textEditorContent.htmlContent==='' || newThemeForm.themetitle.$error.required || !forum.textEditorContent.category || forum.disabledNewTopic)}" ng-click="forum.submitNewTheme()" ng-disabled="(forum.textEditorContent.htmlContent==='' || newThemeForm.themetitle.$error.required || !forum.textEditorContent.category)" type="submit">{{'forum_button_publishTheme' | translate}}</button>
             <button class="btn" ng-click="forum.goForumSection()">{{'cancel' | translate}}</button>
-            <input class="btn btn--primary btn--small main-image--input invisible" onchange="angular.element(this).scope().forum.addImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" data-element="infotab-fileinput" data-ng-blur="focus = false" tabindex="-1"/>
+            <input class="btn btn--primary btn--small main-image--input invisible" data-element="infotab-fileinput" data-ng-blur="focus = false" data-ng-focus="focus = 'projectimage'" id="projectimage" name="projectimage" onchange="angular.element(this).scope().forum.addImage(this.files)" placeholder="" tabindex="-1" type="file"/>
         </fieldset>
     </form>
 </div>

@@ -138,14 +138,20 @@ angular.module('bitbloqApp')
             chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {
                 console.log('response', response);
                 clearTimeout(timeout);
-                callback();
+                if (callback) {
+                    callback();
+                }
+
             }, function(error) {
                 console.log('install error');
                 console.log('error', error);
                 clearTimeout(timeout);
-                callback({
-                    error: error
-                });
+                if (callback) {
+                    callback({
+                        error: error
+                    });
+                }
+
             });
         };
 

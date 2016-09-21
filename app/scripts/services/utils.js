@@ -486,6 +486,7 @@ angular.module('bitbloqApp')
             return translatedErrors.join('<br>');
         };
 
+
         exports.clone = function(object) {
             return JSON.parse(JSON.stringify(object));
         };

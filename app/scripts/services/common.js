@@ -51,6 +51,7 @@ angular.module('bitbloqApp')
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
 
+        exports.avatarChange = false;
         exports.os = utils.getOs();
 
         exports.langToBQ = {
@@ -99,7 +100,6 @@ angular.module('bitbloqApp')
             } else {
                 exports.user = null;
                 $translate.use(localStorage.guestLanguage || navigatorLang);
-                console.log('delete cookie');
                 $cookieStore.remove('token');
                 loadedUserPromise.reject();
             }

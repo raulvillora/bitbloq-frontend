@@ -12,7 +12,7 @@
     }
     .forum__footer {
         display: block;
-        margin: 0 30px 30px 30px;
+        margin: 0 30px 30px;
         padding: 18px;
         text-align: center;
         background-color: #e1e1e1;
@@ -37,6 +37,10 @@
                 font-family: Source Sans Pro;
             }
         }
+    }
+
+    .forum__header__admin{
+      margin-bottom: 60px !important;
     }
     .forum__bigsearch {
         &.searching {
@@ -114,6 +118,18 @@
                 font-weight: 400;
                 cursor: default;
             }
+            .subscribe-div{
+              margin-bottom: 30px !important;
+            }
+            .subscribe-span{
+              font-weight: 400;
+              margin-top: 10px;
+              margin-bottom: 40px;
+              cursor: default;
+              label{
+                font-size: inherit !important;
+              }
+            }
             .btn--primary {
                 margin-right: 20px;
             }
@@ -125,7 +141,6 @@
         }
     }
 }
-
 .forum__block {
     background-color: white;
     width: 100%;
@@ -199,7 +214,6 @@
         }
     }
 }
-
 .forum__category {
     margin-top: 30px;
     .forum__delete-theme {
@@ -235,12 +249,26 @@
                     }
                 }
                 &:not(:last-child) {
+
                 }
             }
         }
     }
 }
-
+.forum__theme__header {
+    position: relative;
+    height: 30px;
+    .btn {
+        float: right;
+        span {
+            vertical-align: top;
+            font-family: Source Sans Pro;
+        }
+    }
+    button:first-child {
+        margin-left: 30px;
+    }
+}
 .forum__theme__item {
     background-color: white;
     margin: 30px 0 30px 45px;
@@ -272,7 +300,8 @@
     }
     .answer__header {
         margin-bottom: 20px;
-        time, .forum__date {
+        time,
+        .forum__date {
             cursor: default;
             color: #8c9191;
         }
@@ -328,12 +357,12 @@
                     text-decoration: none;
                 }
                 time {
+
                 }
             }
         }
     }
 }
-
 .forum__answer__not-logged {
     h2 {
         color: #373b44;
@@ -345,7 +374,6 @@
         margin-right: 10px;
     }
 }
-
 .forum__breadcrumb {
     width: 50%;
     display: inline-block;
@@ -394,19 +422,16 @@
         color: #8c919b;
     }
 }
-
 .forum__table-title {
     height: 20px;
     margin-bottom: 10px;
     color: #8c919b;
     cursor: default;
 }
-
 .block__username__link {
     color: #82ad3a;
     text-decoration: none;
 }
-
 .pagination__list {
     margin: 0 auto;
     display: table;
@@ -455,7 +480,6 @@
         }
     }
 }
-
 .ta-hidden-input {
     width: 1px;
     height: 1px;
@@ -470,18 +494,15 @@
 }
 
 /* add generic styling for the editor */
-
 .ta-root.focussed > .ta-scroll-window.form-control {
     border-color: #66afe9;
     outline: 0;
     margin-bottom: 0;
 }
-
 .ta-root {
     border: 1px solid #eee;
     margin-bottom: 20px;
 }
-
 .ta-editor.ta-html,
 .ta-scroll-window.form-control {
     min-height: 100px;
@@ -490,31 +511,26 @@
     font-size: 100%;
     height: 100%;
 }
-
 .ta-scroll-window.form-control {
     position: relative;
     padding: 0;
     margin-bottom: 0;
 }
-
 .ta-scroll-window > .ta-bind {
     height: auto;
     min-height: 130px;
     padding: 6px 12px;
 }
-
 .ta-editor:focus {
     user-select: text;
 }
 
 /* add the styling for the awesomness of the resizer */
-
 .ta-resizer-handle-overlay {
     z-index: 8;
     position: absolute;
     display: none;
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-info {
     position: absolute;
     bottom: 16px;
@@ -522,9 +538,8 @@
     border: 1px solid black;
     background-color: #FFF;
     padding: 0 4px;
-    opacity: .7;
+    opacity: 0.7;
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-background {
     position: absolute;
     bottom: 5px;
@@ -534,34 +549,29 @@
     border: 1px solid black;
     background-color: rgba(0, 0, 0, 0.2);
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner {
     width: 10px;
     height: 10px;
     position: absolute;
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tl {
     top: 0;
     left: 0;
     border-left: 1px solid black;
     border-top: 1px solid black;
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tr {
     top: 0;
     right: 0;
     border-right: 1px solid black;
     border-top: 1px solid black;
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-bl {
     bottom: 0;
     left: 0;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
 }
-
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-br {
     bottom: 0;
     right: 0;
@@ -571,7 +581,6 @@
 }
 
 /* copy the popover code from bootstrap so this will work even without it */
-
 .popover {
     position: absolute;
     top: 0;
@@ -593,15 +602,12 @@
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
-
 .popover.top {
     margin-top: -10px;
 }
-
 .popover.bottom {
     margin-top: 10px;
 }
-
 .popover-title {
     padding: 8px 14px;
     margin: 0;
@@ -610,11 +616,9 @@
     border-bottom: 1px solid #ebebeb;
     border-radius: 5px 5px 0 0;
 }
-
 .popover-content {
     padding: 9px 14px;
 }
-
 .popover > .arrow,
 .popover > .arrow:after {
     position: absolute;
@@ -624,16 +628,13 @@
     border-color: transparent;
     border-style: solid;
 }
-
 .popover > .arrow {
     border-width: 11px;
 }
-
 .popover > .arrow:after {
     content: '';
     border-width: 10px;
 }
-
 .popover.top > .arrow {
     bottom: -11px;
     left: 50%;
@@ -642,7 +643,6 @@
     border-top-color: rgba(0, 0, 0, .25);
     border-bottom-width: 0;
 }
-
 .popover.top > .arrow:after {
     bottom: 1px;
     margin-left: -10px;
@@ -650,7 +650,6 @@
     border-top-color: #fff;
     border-bottom-width: 0;
 }
-
 .popover.bottom > .arrow {
     top: -11px;
     left: 50%;
@@ -659,7 +658,6 @@
     border-bottom-color: #999;
     border-bottom-color: rgba(0, 0, 0, .25);
 }
-
 .popover.bottom > .arrow:after {
     top: 1px;
     margin-left: -10px;
@@ -708,11 +706,11 @@ text-angular {
                     background-color: #f0f0f0 !important;
                 }
             }
-            :first-child {
+             :first-child {
                 border-top-left-radius: 3px;
                 border-bottom-left-radius: 3px;
             }
-            :last-child {
+             :last-child {
                 border-top-right-radius: 3px;
                 border-bottom-right-radius: 3px;
             }
@@ -723,11 +721,9 @@ text-angular {
         box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
     }
 }
-
 .popover {
     display: none !important;
 }
-
 .ta-bind,
 .answer__content {
     h1 {

@@ -358,7 +358,7 @@ angular.module('bitbloqApp')
                             }
 
                             common.isLoading = false;
-                            localStorage.projectsChange = !localStorage.projectsChange;
+                            localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
                             exports.saveOldProject();
 
 
@@ -390,7 +390,7 @@ angular.module('bitbloqApp')
 
         function _thereIsBoardWatcher(){
             var result = _.find(scope.$$watchers, function(item){
-                return item.exp === 'project.hardware.board'
+                return item.exp === 'project.hardware.board';
             });
             return !!result;
         }
@@ -476,7 +476,9 @@ angular.module('bitbloqApp')
         };
 
         exports.unBlindBoardWatcher = function() {
-            boardWatcher();
+            if(_thereIsBoardWatcher()) {
+                boardWatcher();
+            }
         };
 
         $rootScope.$on('$locationChangeStart', function(event) {

@@ -211,7 +211,6 @@ angular
             $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
             $translateProvider.preferredLanguage(envData.config.defaultLang);
             $translateProvider.fallbackLanguage('en-GB');
-
         }
     ])
     .config(function(AnalyticsProvider, envData) {

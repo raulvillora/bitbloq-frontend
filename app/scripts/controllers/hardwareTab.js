@@ -17,7 +17,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $robotContextMenu = $('#robot-context-menu'),
         hwBasicsLoaded = $q.defer();
 
-
     function _initialize() {
 
         $scope.projectService = projectService;
@@ -164,7 +163,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         componentReference = _.find(projectService.project.hardware.components, {
             'uid': e.componentData.uid
         });
-
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
 
         if (componentReference) {
@@ -327,7 +325,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     var _isUserConnect = function(componentPins) {
         var userConnect = false;
         _.forEach(componentPins, function(item) {
-            console.log(item);
             if (item === undefined || item === null) {
                 userConnect = true;
             }
@@ -336,8 +333,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.closeComponentInteraction = function(pins, connectedPin) {
+
         if (pins[Object.keys(connectedPin)[0]]) {
-            if (!_isUserConnect(pins)) {
+            if (!_isUserConnect(pins) && $scope.firstComponent) {
                 $scope.firstComponent = undefined;
             }
         } else {
@@ -677,20 +675,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {

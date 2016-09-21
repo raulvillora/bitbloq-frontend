@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var http = require('http'),
+    var http = require('https'),
         async = require('async');
 
     var sharedToken;
@@ -99,7 +99,6 @@ module.exports = function(grunt) {
         adminRequestToServer('DELETE', collectionName + '/all', {}, callback);
     }
 
-
     function insertCollection(collectionName, items, callback) {
         if (collectionName === 'forumcategory') {
             collectionName = 'forum/category';
@@ -148,7 +147,6 @@ module.exports = function(grunt) {
                         answerIds[item.id] = response;
                     }
                     callbackEach(err, response);
-
 
                 });
             }, timer)
@@ -233,8 +231,8 @@ module.exports = function(grunt) {
         var items = grunt.file.readJSON('backupsDB/' + timestamp + '/user.json');
         var extraUsers = grunt.file.readJSON('backupsDB/extraUsers.json');
         items = items.concat(extraUsers);
-        if(startOn){
-            items.splice(0, startOn*25);
+        if (startOn) {
+            items.splice(0, startOn * 25);
         }
         insertCollection('user', items, done);
 
@@ -260,7 +258,6 @@ module.exports = function(grunt) {
             numItems = Number(grunt.file.read('./backupsDB/' + timestamp + '/Angularproject_tempPageNumber.txt'));
         grunt.log.writeln('importProjectFromCorbel timestamp:' + timestamp, numItems);
 
-
         var timer = 1000;
 
         async.times(numItems, function(n, callback) {
@@ -268,12 +265,12 @@ module.exports = function(grunt) {
             //console.log('read', n);
 
             var items = grunt.file.readJSON('backupsDB/' + timestamp + '/Angularproject_' + n + '.json');
-            var result = _.find(items,function(item){
+            var result = _.find(items, function(item) {
                 //console.log(item);
                 //return (item.creator === null || item.creator === '576c581f1a0555f302158c66')
                 return item.corbelId === '57586c17e4b07fb8123aa16d:f71ec9c2-50a2-44b6-9353-65ce3183031c';
             });
-            if(result){
+            if (result) {
                 console.log('result');
                 console.log(result);
             }
