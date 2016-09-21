@@ -946,7 +946,7 @@ angular.module('bitbloqApp')
         $scope.projectApi = projectApi;
         $scope.projectService = projectService;
 
-        projectService.setBloqProject();
+        projectService.initBloqProject();
 
         if (!$scope.common.user) {
             $scope.common.session.save = false;

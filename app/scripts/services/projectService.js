@@ -13,7 +13,8 @@ angular.module('bitbloqApp')
         var exports = {},
             thereAreWatchers = false,
             savePromise,
-            oldProject = {};
+            oldProject = {},
+            boardWatcher;
 
         exports.bloqs = {
             varsBloq: null,
@@ -136,6 +137,20 @@ angular.module('bitbloqApp')
             return found;
         };
 
+        exports.initBloqProject = function() {
+            exports.project = _.extend(exports.project, exports.getDefaultProject());
+            exports.setComponentsArray();
+            _addWatchers();
+        };
+
+        exports.initCodeProject = function(watchers) {
+            exports.unBlindBoardWatcher();
+            exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
+            if (watchers) {
+                exports.addCodeWatchers();
+            }
+        };
+
         exports.getBoardMetaData = function() {
             return _.find(hardwareConstants.boards, function(board) {
                 return board.name === exports.project.hardware.board;
@@ -238,21 +253,6 @@ angular.module('bitbloqApp')
             oldProject = _.cloneDeep(exports.project);
         };
 
-        exports.setBloqProject = function() {
-            exports.project = _.extend(exports.project, exports.getDefaultProject());
-            exports.setComponentsArray();
-            if (!thereAreWatchers) {
-                exports.addWatchers();
-            }
-        };
-
-        exports.setCodeProject = function(watchers) {
-            exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
-            if (watchers && !thereAreWatchers) {
-                exports.addWatchers();
-            }
-        };
-
         exports.setComponentsArray = function(components) {
             if (components) {
                 exports.componentsArray = components;
@@ -263,9 +263,6 @@ angular.module('bitbloqApp')
 
         exports.setProject = function(newproject) {
             exports.project = _.extend(exports.project, newproject);
-            if (!thereAreWatchers) {
-                exports.addWatchers();
-            }
         };
 
         exports.startAutosave = function() {
@@ -391,6 +388,13 @@ angular.module('bitbloqApp')
             return defered.promise;
         }
 
+        function _thereIsBoardWatcher(){
+            var result = _.find(scope.$$watchers, function(item){
+                return item.exp === 'project.hardware.board'
+            });
+            return !!result;
+        }
+
         function _updateHardwareSchema() {
 
             var schema = hw2Bloqs.saveSchema();
@@ -416,49 +420,63 @@ angular.module('bitbloqApp')
          *************************************************/
         _init();
 
-        exports.addWatchers = function() {
-            thereAreWatchers = true;
-            scope.$watch('project.name', function(newVal, oldVal) {
-                if (newVal && newVal !== oldVal) {
-                    exports.startAutosave(_saveProject);
-                }
-            });
-
-            scope.$watch('project.description', function(newVal, oldVal) {
-                if (!newVal) {
-                    exports.project.description = '';
-                }
-                if (newVal !== oldVal) {
-                    exports.startAutosave();
-                }
-            });
-
-            scope.$watch('project.videoUrl', function(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    if (!utils.isYoutubeURL(newVal) && newVal) {
-                        alertsService.add({
-                            text: 'validate-videourl',
-                            id: 'save-project',
-                            type: 'warning'
-                        });
-                    } else {
+        function _addWatchers() {
+            if (!thereAreWatchers) {
+                thereAreWatchers = true;
+                scope.$watch('project.name', function(newVal, oldVal) {
+                    if (newVal && newVal !== oldVal) {
                         exports.startAutosave(_saveProject);
                     }
-                }
-            });
+                });
 
+                scope.$watch('project.description', function(newVal, oldVal) {
+                    if (!newVal) {
+                        exports.project.description = '';
+                    }
+                    if (newVal !== oldVal) {
+                        exports.startAutosave();
+                    }
+                });
+
+                scope.$watch('project.videoUrl', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        if (!utils.isYoutubeURL(newVal) && newVal) {
+                            alertsService.add({
+                                text: 'validate-videourl',
+                                id: 'save-project',
+                                type: 'warning'
+                            });
+                        } else {
+                            exports.startAutosave(_saveProject);
+                        }
+                    }
+                });
+
+                boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.startAutosave(_saveProject);
+                    }
+                });
+            } else if(!_thereIsBoardWatcher()){
+                boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.startAutosave(_saveProject);
+                    }
+                });
+            }
+        }
+
+        exports.addCodeWatchers = function() {
             scope.$watch('project.code', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
                     exports.startAutosave(_saveProject);
                 }
             });
+            _addWatchers();
+        };
 
-
-            scope.$watch('project.hardware.board', function(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    exports.startAutosave(_saveProject);
-                }
-            });
+        exports.unBlindBoardWatcher = function() {
+            boardWatcher();
         };
 
         $rootScope.$on('$locationChangeStart', function(event) {

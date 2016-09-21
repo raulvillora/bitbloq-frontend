@@ -307,7 +307,7 @@ angular.module('bitbloqApp')
         }
 
         function _loadProject() {
-            projectService.setCodeProject();
+            projectService.initCodeProject();
             if ($routeParams.id) {
                 projectApi.get($routeParams.id).then(function(response) {
                     projectService.setProject(response.data);
@@ -332,7 +332,7 @@ angular.module('bitbloqApp')
                     $scope.setBoard(projectService.project.hardware.board);
 
                     _prettyCode().then(function() {
-                        projectService.addWatchers();
+                        projectService.addCodeWatchers();
                     });
 
                 }, function(response) {
@@ -360,7 +360,7 @@ angular.module('bitbloqApp')
                                 type: 'warning'
                             });
                     }
-                    projectService.addWatchers();
+                    projectService.addCodeWatchers();
                 });
             } else {
                 if ($scope.common.session.bloqTab) {
@@ -376,11 +376,10 @@ angular.module('bitbloqApp')
                         projectService.setProject($scope.common.session.project);
                         $scope.common.session.save = false;
                         projectService.startAutosave();
-                    } else {
                     }
                     $scope.setBoard(projectService.project.hardware.board);
                     _prettyCode().then(function() {
-                        projectService.addWatchers();
+                        projectService.addCodeWatchers();
                     });
                 }).catch(function() {
                     if ($scope.common.session.project.hardware.board) {
@@ -390,7 +389,7 @@ angular.module('bitbloqApp')
                         projectService.setProject($scope.common.session.project);
                     }
                     _prettyCode().then(function() {
-                        projectService.addWatchers();
+                        projectService.addCodeWatchers();
                     });
                 });
             }
