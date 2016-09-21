@@ -580,6 +580,7 @@ angular.module('bitbloqApp')
             verify: web2board.verify,
             upload: web2board.upload,
             serialMonitor: web2board.serialMonitor,
+            plotter: web2board.plotter,
             chartMonitor: web2board.chartMonitor,
             version: web2board.version,
             uploadHex: web2board.uploadHex,

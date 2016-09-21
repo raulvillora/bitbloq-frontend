@@ -1,5 +1,4 @@
 <div class="form plotter--panel" data-ng-controller="PlotterCtrl">
-
     <div class="form-control ports" data-ng-show="showPorts">
         <common-dropdown class="ports--sort-dropdown" direction="down" options-click="setPort" options="portNames" shown-option="selectedPort.portName"></common-dropdown>
         <button class="btn refresh" data-ng-click="getPorts()">
@@ -8,8 +7,9 @@
             </svg>
         </button>
     </div>
+
     <div class="plotter">
-        <nvd3 class="with-3d-shadow with-transitions" data="data" id="chart" options="chartOptions"></nvd3>
+        <nvd3 class="with-3d-shadow with-transitions" data="data" id="plotter" options="chartOptions"></nvd3>
         <!-- Submit Form -->
         <div class="chart-air">
             <button class="btn btn--secondary btn--small" ng-click="onPause()">{{pauseText}}</button>

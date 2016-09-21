@@ -12,14 +12,15 @@ angular.module('bitbloqApp')
     .controller('PlotterCtrl', function($element, web2boardV2, web2board, $timeout, $scope, $translate, common, chromeAppApi, utils, hardwareConstants, $rootScope, _) {
 
         var serialHub = web2boardV2.api.SerialMonitorHub,
-            textArea = $element.find('#serialData'),
-            textAreaMaxLength = 20000,
             dataParser = {
                 buf: '',
                 separator: '\r\n',
                 retrieve_messages: function(data) {
+                    console.log('data before: ', data);
                     data = this.buf + data;
+                    console.log('data after: ', data);
                     var split_data = data.split(this.separator);
+                    console.log('split_data: ', split_data);
                     this.buf = split_data.pop();
                     return split_data;
                 }
@@ -31,11 +32,6 @@ angular.module('bitbloqApp')
         //$scope.board
 
         /*Private functions*/
-        function scrollTextAreaToBottom() {
-            $timeout(function() {
-                textArea.scrollTop(textArea[0].scrollHeight - textArea.height());
-            }, 0);
-        }
 
         /*Set up web2board api*/
         //when web2board tries to call a client function but it is not defined
@@ -93,6 +89,7 @@ angular.module('bitbloqApp')
         $scope.chartOptions = {
             chart: {
                 type: 'lineChart',
+                height: 400,
                 margin: {
                     top: 20,
                     right: 20,
@@ -112,15 +109,10 @@ angular.module('bitbloqApp')
                         return d3.format('.02f')(d);
                     }
                 }
-            },
-            title: {
-                enable: true,
-                text: $translate.instant('plotter')
             }
         };
 
         /*Public functions*/
-
 
         $scope.onKeyPressedInInput = function(event) {
             if (event.which === 13) {
@@ -138,8 +130,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.onPause = function() {
-          $scope.pause = !$scope.pause;
-          $scope.pauseText = $scope.pause ? $translate.instant('plotter-play') : $translate.instant('plotter-pause');
+            $scope.pause = !$scope.pause;
+            $scope.pauseText = $scope.pause ? $translate.instant('plotter-play') : $translate.instant('plotter-pause');
         };
 
         $scope.onClear = function() {
@@ -147,10 +139,9 @@ angular.module('bitbloqApp')
             $scope.data[0].values = [];
         };
 
-        $scope.onClick = function (points, evt) {
+        $scope.onClick = function(points, evt) {
             console.log(points, evt);
         };
-
 
         $scope.getPorts = function() {
             chromeAppApi.getPorts().then(function(response) {
@@ -222,12 +213,21 @@ angular.module('bitbloqApp')
 
         $rootScope.$on('serial', function(event, msg) {
             if (!$scope.pause && angular.isString(msg)) {
-                $scope.serial.dataReceived += msg;
-                var dataLen = $scope.serial.dataReceived.length;
-                if (dataLen > textAreaMaxLength) {
-                    $scope.serial.dataReceived = $scope.serial.dataReceived.slice(dataLen - textAreaMaxLength);
-                }
-                scrollTextAreaToBottom();
+                var messages = dataParser.retrieve_messages(msg);
+                messages.forEach(function(message) {
+                    var number = parseFloat(message);
+                    if (!$scope.pause && !isNaN(number)) {
+                        $scope.data[0].values.push({
+                            x: receivedDataCount++,
+                            y: number
+                        });
+                        if ($scope.data[0].values.length > plotterLength) {
+                            $scope.data[0].values.shift();
+                        }
+                    }
+                });
+                $scope.$apply();
+
             }
             //    console.log('msg arrived: ', msg);
         });
@@ -243,73 +243,5 @@ angular.module('bitbloqApp')
             }
 
         });
-
-        // todo: create a serialHandler service to remove duplicated code
-        /*    var serialHub = web2boardV2.api.SerialMonitorHub;
-            $scope.baudrateOptions = [9600, 115200];
-            $scope.serial = {
-                dataReceived: '',
-                input: '',
-                port: '',
-                baudrate: 9600
-            };
-
-            $scope.labels = [];
-            $scope.series = ['Series A'];
-            $scope.data = [
-                []
-            ];
-
-            $scope.chartOptions = {
-                animation: false,
-                pointDot: true
-            };
-
-            $scope.onClick = function (points, evt) {
-                console.log(points, evt);
-            };
-
-            web2boardV2.api.onClientFunctionNotFound = function (hub, func) {
-                console.error(hub, func);
-            };
-
-            web2boardV2.api.connect().done(function () {
-                serialHub.server.subscribeToHub().done(function () {
-                    console.log('subscribed');
-                    web2boardV2.api.UtilsAPIHub.server.setId('ChartMonitor' + Math.random());
-                });
-                serialHub.server.getAvailablePorts().done(function (ports) {
-                    console.log('ports', ports);
-                    $scope.serial.port = ports[0];
-                    serialHub.server.startConnection(ports[0], $scope.serial.baudrate);
-                });
-            });
-
-            serialHub.client.received = function (port, data) {
-                var number = parseInt(data);
-                if (!isNaN(number)) {
-                    $scope.data[0].push(number);
-                    $scope.labels.push($scope.labels.length);
-                    if ($scope.labels.length > 20) {
-                        $scope.chartOptions.pointDot = false;
-                    }
-                }
-
-            };
-
-            serialHub.client.written = function (message) {
-                $scope.serial.dataReceived += message;
-            };
-
-            $scope.send = function () {
-                serialHub.server.write($scope.serial.port, $scope.serial.input);
-            };
-
-            $scope.onBaudrateChanged = function (baudrate) {
-                $scope.serial.baudrate = baudrate;
-                serialHub.server.changeBaudrate($scope.serial.port, baudrate);
-            };
-
-            */
 
     });

@@ -52,6 +52,7 @@ angular.module('bitbloqApp')
             web2board.verify = web2boardV2.verify;
             web2board.upload = web2boardV2.upload;
             web2board.serialMonitor = web2boardV2.serialMonitor;
+            web2board.plotter = web2boardV2.plotter;
             web2board.chartMonitor = web2boardV2.chartMonitor;
             web2board.version = web2boardV2.version;
             web2board.showSettings = web2boardV2.showSettings;
