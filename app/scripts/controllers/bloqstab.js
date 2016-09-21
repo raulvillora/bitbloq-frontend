@@ -305,7 +305,7 @@ angular.module('bitbloqApp')
         $scope.setSoftwareTab = function(tab) {
             $scope.softTab = tab;
             if (tab === 'code') {
-                $scope.setCode(bloqsUtils.getCode(projectService.componentsArray, projectService.bloqs));
+                $scope.setCode(projectService.getCode());
             } else if (tab === 'bloqs') {
                 $rootScope.$emit('currenttab:bloqstab');
             }

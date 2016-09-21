@@ -469,7 +469,7 @@ angular.module('bitbloqApp')
 
         $scope.getCode = function() {
             $scope.updateBloqs();
-            return bloqsUtils.getCode(projectService.componentsArray, projectService.bloqs);
+            return projectService.getCode();
         };
 
         $scope.getPrettyCode = function() {

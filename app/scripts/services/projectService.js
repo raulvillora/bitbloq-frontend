@@ -82,8 +82,8 @@ angular.module('bitbloqApp')
             }
             return defered.promise;
         };
-        
-        exports.clone = function(){
+
+        exports.clone = function() {
             exports.completedProject();
             commonModals.clone(exports.project, true);
         };
@@ -154,6 +154,16 @@ angular.module('bitbloqApp')
             delete cleanProject.exportedFromBitbloqOffline;
             delete cleanProject.bitbloqOfflineVersion;
             return cleanProject;
+        };
+
+        exports.getCode = function() {
+            var code;
+            if (exports.codeProject) {
+                code = exports.project.code;
+            } else {
+                code = bloqsUtils.getCode(exports.componentsArray, exports.bloqs);
+            }
+            return code;
         };
 
         exports.getDefaultProject = function(code) {
