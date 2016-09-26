@@ -726,6 +726,7 @@ angular.module('bitbloqApp')
         }
 
         function addProjectWatchersAndListener() {
+            projectService.addWatchers();
             $scope.$watch('code', function(newVal, oldVal) {
                 if (newVal !== oldVal && oldVal !== '') {
                     projectService.startAutosave();
@@ -967,12 +968,13 @@ angular.module('bitbloqApp')
                 addProjectWatchersAndListener();
                 if ($scope.common.session.save) {
                     $scope.common.session.save = false;
-                    $scope.setProject($scope.common.session.project);
+                    projectService.setProject($scope.common.session.project);
                     projectService.startAutosave();
                     $scope.hardware.firstLoad = false;
                 }
                 if (!$scope.common.user.takeTour) {
                     launchModalTour();
+                    projectService.initBloqProject();
                 }
             }
         }, function() {
@@ -985,7 +987,6 @@ angular.module('bitbloqApp')
                 addProjectWatchersAndListener();
                 launchModalGuest();
             }
-
         });
 
         var loadProject = function(id) {
@@ -1003,6 +1004,7 @@ angular.module('bitbloqApp')
                     projectService.saveOldProject();
                 }
             }, function(error) {
+                projectService.addWatchers();
                 switch (error.status) {
                     case 404: //not_found
                         alertsService.add({
