@@ -41,7 +41,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         container.addEventListener('connectionEvent', connectionEventHandler);
 
         $scope.$watch('projectService.project.hardware', function(newVal, oldVal) {
-            if (newVal && (newVal !== oldVal || newVal.anonymousTransient)) {
+            if (newVal && (!_.isEqual(newVal,oldVal) || newVal.anonymousTransient)) {
                 _loadHardwareProjec(newVal);
             }
         });
