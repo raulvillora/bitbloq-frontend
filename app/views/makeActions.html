@@ -147,6 +147,13 @@
                     </svg>
                     {{ 'web2board-settings-title' | translate }}
                 </div>
+                <div class="dropdown__item" data-ng-disabled="isWeb2BoardInProgress()" data-ng-click="showPlotter()" data-element="makeactions-menuview-plotter">
+                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                        <use xlink:href="#Ver_verPlotter"></use>
+                    </svg>
+                    {{'show-plotter' | translate}}
+                </div>
+
             </li>
         </ul>
     </li>
