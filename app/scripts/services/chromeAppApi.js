@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope, $translate, $log, $timeout) {
+    .service('chromeAppApi', function($window, $q, envData, alertsService, $rootScope, $translate, $log) {
         var exports = {};
 
         var openPort,

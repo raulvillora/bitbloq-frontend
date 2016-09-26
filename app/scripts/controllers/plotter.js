@@ -104,12 +104,7 @@ angular.module('bitbloqApp')
                 y: function(d) {
                     return d.y;
                 },
-                useInteractiveGuideline: true,
-                yAxis: {
-                    tickFormat: function(d) {
-                        return d3.format('.02f')(d);
-                    }
-                }
+                useInteractiveGuideline: true
             }
         };
 
