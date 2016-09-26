@@ -670,10 +670,8 @@ angular.module('bitbloqApp')
                     commonModals.launchSerialWindow(getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
-                      console.log("version 2");
                         serialMonitorW2b2();
                     } else {
-                      console.log("version 1");
                         serialMonitorW2b1();
                     }
                 }
@@ -712,10 +710,8 @@ angular.module('bitbloqApp')
                     commonModals.launchPlotterWindow(getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
-                      console.log("version 2");
                         plotterW2b2();
                     } else {
-                      console.log("version 1");
                         plotterW2b1();
                     }
                 }

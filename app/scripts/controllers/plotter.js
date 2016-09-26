@@ -219,7 +219,6 @@ angular.module('bitbloqApp')
                     var number = parseFloat(message);
                     if (!$scope.pause && !isNaN(number)) {
                         if (receivedDataCount === -1) {
-                            console.log('me como la primera muestra');
                             receivedDataCount++;
                         } else {
                             $scope.data[0].values.push({
