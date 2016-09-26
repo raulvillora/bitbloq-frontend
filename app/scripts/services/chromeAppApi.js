@@ -50,7 +50,6 @@ angular.module('bitbloqApp')
                         });
 
                         openPort.onMessage.addListener(function(msg) {
-                        //console.log('onMessage', msg, typeof(msg));
                             if (msg === 'connected') {
                                 console.log('chromeapp connected');
                                 clearTimeout(timeoutId);

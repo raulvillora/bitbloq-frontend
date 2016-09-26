@@ -84,7 +84,7 @@ angular.module('bitbloqApp')
 
         $scope.data = [{
             values: [],
-            color: '#6a8d2f'
+            color: '#82ad3a'
         }];
 
         $scope.chartOptions = {
@@ -104,6 +104,7 @@ angular.module('bitbloqApp')
                 y: function(d) {
                     return d.y;
                 },
+                showLegend : false,
                 useInteractiveGuideline: true
             }
         };
@@ -133,10 +134,6 @@ angular.module('bitbloqApp')
         $scope.onClear = function() {
             receivedDataCount = 0;
             $scope.data[0].values = [];
-        };
-
-        $scope.onClick = function(points, evt) {
-            console.log(points, evt);
         };
 
         $scope.getPorts = function() {
@@ -228,14 +225,13 @@ angular.module('bitbloqApp')
                 });
                 $scope.$apply();
             }
-            //    console.log('msg arrived: ', msg);
         });
 
         $scope.$on('$destroy', function() {
             receivedDataCount = 0;
             $scope.data = [{
                 values: [],
-                color: '#6a8d2f'
+                color: '#82ad3a'
             }];
             if (common.useChromeExtension()) {
                 chromeAppApi.stopSerialCommunication();
