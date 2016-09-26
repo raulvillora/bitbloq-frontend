@@ -409,7 +409,7 @@ angular.module('bitbloqApp')
             serialMonitorPanel = $.jsPanel({
                 position: 'center',
                 size: {
-                    width: 500,
+                    width: 800,
                     height: 500
                 },
                 onclosed: function() {

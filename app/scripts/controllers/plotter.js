@@ -16,16 +16,14 @@ angular.module('bitbloqApp')
                 buf: '',
                 separator: '\r\n',
                 retrieve_messages: function(data) {
-                  console.log("data: ", data);
                     data = this.buf + data;
                     var split_data = data.split(this.separator);
                     this.buf = split_data.pop();
-                    console.log("split_data: ", split_data);
                     return split_data;
                 }
             },
             plotterLength = 30,
-            receivedDataCount = 0;
+            receivedDataCount = -1;
 
         //its setted when the windows its open
         //$scope.board
@@ -44,10 +42,14 @@ angular.module('bitbloqApp')
                 messages.forEach(function(message) {
                     var number = parseFloat(message);
                     if (!$scope.pause && !isNaN(number)) {
-                        $scope.data[0].values.push({
-                            x: receivedDataCount++,
-                            y: number
-                        });
+                        if (receivedDataCount === 0) {
+                            receivedDataCount++;
+                        } else {
+                            $scope.data[0].values.push({
+                                x: receivedDataCount++,
+                                y: number
+                            });
+                        }
                         if ($scope.data[0].values.length > plotterLength) {
                             $scope.data[0].values.shift();
                         }
@@ -210,29 +212,30 @@ angular.module('bitbloqApp')
             });
         }
 
-          $rootScope.$on('serial', function(event, msg) {
-            $timeout(function(){
-              if (!$scope.pause && angular.isString(msg)) {
-                  var messages = dataParser.retrieve_messages(msg);
-                  messages.forEach(function(message) {
-                      var number = parseFloat(message);
-                      if (!$scope.pause && !isNaN(number)) {
-                          $scope.data[0].values.push({
-                              x: receivedDataCount++,
-                              y: number
-                          });
-                          if ($scope.data[0].values.length > plotterLength) {
-                              $scope.data[0].values.shift();
-                          }
-                      }
-                  });
-                  $scope.$apply();
-              }
-            },500);
-              //    console.log('msg arrived: ', msg);
-          });
-
-
+        $rootScope.$on('serial', function(event, msg) {
+            if (!$scope.pause && angular.isString(msg)) {
+                var messages = dataParser.retrieve_messages(msg);
+                messages.forEach(function(message) {
+                    var number = parseFloat(message);
+                    if (!$scope.pause && !isNaN(number)) {
+                        if (receivedDataCount === -1) {
+                            console.log('me como la primera muestra');
+                            receivedDataCount++;
+                        } else {
+                            $scope.data[0].values.push({
+                                x: receivedDataCount++,
+                                y: number
+                            });
+                        }
+                        if ($scope.data[0].values.length > plotterLength) {
+                            $scope.data[0].values.shift();
+                        }
+                    }
+                });
+                $scope.$apply();
+            }
+            //    console.log('msg arrived: ', msg);
+        });
 
         $scope.$on('$destroy', function() {
             receivedDataCount = 0;

@@ -466,7 +466,6 @@
             },
 
             closeUnusedConnections : function (){
-
                 return constructMessage('SerialMonitorHub', 'close_unused_connections', arguments);
             },
 

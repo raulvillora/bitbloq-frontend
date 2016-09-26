@@ -580,8 +580,8 @@ angular.module('bitbloqApp')
             plotterMonitorPanel = $.jsPanel({
                 position: 'center',
                 size: {
-                    width: 500,
-                    height: 500
+                    width: 800,
+                    height: 520
                 },
                 onclosed: function() {
                     scope.$destroy();
@@ -613,7 +613,7 @@ angular.module('bitbloqApp')
             serialMonitorPanel = $.jsPanel({
                 position: 'center',
                 size: {
-                    width: 500,
+                    width: 800,
                     height: 500
                 },
                 onclosed: function() {
