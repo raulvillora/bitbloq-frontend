@@ -12,6 +12,81 @@ angular.module('bitbloqApp')
                                          bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
                                          robotFirmwareApi, web2boardOnline, projectService) {
 
+        var $contextMenu = $('#bloqs-context-menu'),
+            field = angular.element('#bloqs--field'),
+            scrollBarContainer = angular.element('.make--scrollbar'),
+            scrollBar = angular.element('.scrollbar--small'),
+            bloqsTab = angular.element('.bloqs-tab');
+
+        $scope.bloqsApi = bloqsApi;
+        $scope.projectService = projectService;
+        $scope.lastPosition = 0;
+
+        $scope.$field = $('#bloqs--field').last();
+
+        var bloqsLoadTimes = 0;
+
+
+        $scope.init = function() {
+            if (projectService.bloqs.varsBloq) {
+                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
+                projectService.bloqs.varsBloq = null;
+                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
+                projectService.bloqs.setupBloq = null;
+                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
+                projectService.bloqs.loopBloq = null;
+            }
+
+            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
+            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
+            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
+
+            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
+            projectService.bloqs.varsBloq.enable(true);
+            projectService.bloqs.varsBloq.doConnectable();
+
+            projectService.bloqs.setupBloq.enable(true);
+            projectService.bloqs.setupBloq.doConnectable();
+
+            projectService.bloqs.loopBloq.enable(true);
+            projectService.bloqs.loopBloq.doConnectable();
+
+            bloqs.updateDropdowns();
+        };
+
+        $scope.initFreeBloqs = function() {
+            var tempBloq, i, j,
+                lastBottomConnector;
+
+            bloqs.destroyFreeBloqs();
+            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
+                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
+                    lastBottomConnector = null;
+                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
+                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
+                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
+
+                        if (lastBottomConnector) {
+                            bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
+                            bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
+
+                        } else {
+                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
+                        }
+
+                        lastBottomConnector = tempBloq.connectors[1];
+
+                        $scope.$field.append(tempBloq.$bloq);
+                        tempBloq.disable();
+                        tempBloq.doConnectable();
+                    }
+
+                    bloqsUtils.redrawTree(tempBloq, bloqs.bloqs, bloqs.connectors);
+                }
+            }
+            bloqsUtils.drawTree(bloqs.bloqs, bloqs.connectors);
+        };
+
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
             if ($scope.common.session.save) {
@@ -42,6 +117,12 @@ angular.module('bitbloqApp')
                     $scope.common.session.project.codeProject = true;
                     $location.path('/codeproject/');
                 }
+            }
+        };
+
+        $scope.hideBloqsMenu = function($event) {
+            if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
+                $scope.toolbox.level = 1;
             }
         };
 
@@ -115,67 +196,16 @@ angular.module('bitbloqApp')
                     }
                     break;
             }
-
         };
 
-        $scope.init = function() {
-            if (projectService.bloqs.varsBloq) {
-                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
-                projectService.bloqs.varsBloq = null;
-                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
-                projectService.bloqs.setupBloq = null;
-                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
-                projectService.bloqs.loopBloq = null;
+
+        $scope.searchBloq = function() {
+            var userComponents = _.pick(projectService.componentsArray, function(value) {
+                return value.length > 0;
+            });
+            if (userComponents.indexOf($scope.searchText)) {
+                //Todo pintar en un contenedor nuevo
             }
-
-            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
-            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
-            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
-
-            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
-            projectService.bloqs.varsBloq.enable(true);
-            projectService.bloqs.varsBloq.doConnectable();
-
-            projectService.bloqs.setupBloq.enable(true);
-            projectService.bloqs.setupBloq.doConnectable();
-
-            projectService.bloqs.loopBloq.enable(true);
-            projectService.bloqs.loopBloq.doConnectable();
-
-            bloqs.updateDropdowns();
-        };
-
-        $scope.initFreeBloqs = function() {
-            var tempBloq, i, j,
-                lastBottomConnector;
-
-            bloqs.destroyFreeBloqs();
-            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
-                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
-                    lastBottomConnector = null;
-                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
-                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
-                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
-
-                        if (lastBottomConnector) {
-                            bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
-                            bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
-
-                        } else {
-                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
-                        }
-
-                        lastBottomConnector = tempBloq.connectors[1];
-
-                        $scope.$field.append(tempBloq.$bloq);
-                        tempBloq.disable();
-                        tempBloq.doConnectable();
-                    }
-
-                    bloqsUtils.redrawTree(tempBloq, bloqs.bloqs, bloqs.connectors);
-                }
-            }
-            bloqsUtils.drawTree(bloqs.bloqs, bloqs.connectors);
         };
 
         $scope.showComponents = function(item) {
@@ -230,52 +260,6 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.searchBloq = function() {
-            var userComponents = _.pick(projectService.componentsArray, function(value) {
-                return value.length > 0;
-            });
-            if (userComponents.indexOf($scope.searchText)) {
-                //Todo pintar en un contenedor nuevo
-            }
-        };
-
-        var contextMenuDocumentHandler = function(event) {
-
-            var bloq = $(event.target).closest('.bloq');
-            var bloqUuid = bloq.attr('data-bloq-id');
-
-            if (bloqUuid && !bloq.hasClass('bloq--group') && bloqs.bloqs[bloqUuid].isConnectable()) {
-                event.preventDefault();
-                $scope.$apply(function() {
-                    $scope.contextMenuBloq = bloqs.bloqs[bloqUuid];
-                });
-                if ((angular.element($window).height() - event.pageY) > $contextMenu.height()) {
-                    $contextMenu.css({
-                        display: 'block',
-                        left: event.pageX + 'px',
-                        top: event.pageY + 'px'
-                    });
-                } else {
-                    $contextMenu.css({
-                        display: 'block',
-                        left: event.pageX + 'px',
-                        top: (event.pageY - $contextMenu.height()) + 'px'
-                    });
-                }
-
-            } else {
-                $contextMenu.css({
-                    display: 'none'
-                });
-            }
-        };
-
-        var clickDocumentHandler = function() {
-            $contextMenu.css({
-                display: 'none'
-            });
-        };
-
         $scope.enableBloqFromContextMenu = function(bloq) {
             bloq.enable();
             $scope.saveBloqStep();
@@ -311,12 +295,6 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.hideBloqsMenu = function($event) {
-            if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
-                $scope.toolbox.level = 1;
-            }
-        };
-
         $scope.performFactoryReset = function() {
             var robot = projectService.project.hardware.robot,
                 version = common.properties.robotsFirmwareVersion[robot];
@@ -340,6 +318,44 @@ angular.module('bitbloqApp')
             setScrollsDimension();
         }
 
+
+        function clickDocumentHandler() {
+            $contextMenu.css({
+                display: 'none'
+            });
+        }
+
+        function contextMenuDocumentHandler(event) {
+
+            var bloq = $(event.target).closest('.bloq');
+            var bloqUuid = bloq.attr('data-bloq-id');
+
+            if (bloqUuid && !bloq.hasClass('bloq--group') && bloqs.bloqs[bloqUuid].isConnectable()) {
+                event.preventDefault();
+                $scope.$apply(function() {
+                    $scope.contextMenuBloq = bloqs.bloqs[bloqUuid];
+                });
+                if ((angular.element($window).height() - event.pageY) > $contextMenu.height()) {
+                    $contextMenu.css({
+                        display: 'block',
+                        left: event.pageX + 'px',
+                        top: event.pageY + 'px'
+                    });
+                } else {
+                    $contextMenu.css({
+                        display: 'block',
+                        left: event.pageX + 'px',
+                        top: (event.pageY - $contextMenu.height()) + 'px'
+                    });
+                }
+
+            } else {
+                $contextMenu.css({
+                    display: 'none'
+                });
+            }
+        }
+
         function copyBloq(bloq) {
 
             var newBloq = bloqs.buildBloqWithContent(bloq.structure, projectService.componentsArray, bloqsApi.schemas);
@@ -356,56 +372,6 @@ angular.module('bitbloqApp')
                     newBloq.varInputs[i].keyup();
                 }
             }
-        }
-
-        function scrollField(e) {
-            scrollBar.css('height', e.currentTarget.scrollHeight);
-            scrollBarContainer.scrollTo(0, e.currentTarget.scrollTop);
-            field.scrollTo(0, scrollBarContainer[0].scrollTop);
-        }
-
-        function scrollHorizontalField(e) {
-            if ($scope.lastPosition > e.currentTarget.scrollLeft) {
-                angular.element('.field--content').scrollLeft(e.currentTarget.scrollLeft);
-            } else {
-                angular.element('.field--content').scrollLeft(e.currentTarget.scrollLeft + 150);
-            }
-            $scope.lastPosition = e.currentTarget.scrollLeft;
-        }
-
-        function setScrollWidth() {
-            $timeout(function() {
-                var groupBloqs = angular.element('.field--content');
-                var horizontalScrollBar = angular.element('#scrollbar--horizontal-small');
-                var horizontalScrollWidth = Math.max.apply(null, groupBloqs.map(function() {
-                    return this.scrollWidth;
-                }));
-                if (horizontalScrollWidth > groupBloqs[0].clientWidth) {
-                    $scope.showHorizontalScroll = true;
-                    horizontalScrollBar.css('width', horizontalScrollWidth + 50);
-                } else {
-                    $scope.showHorizontalScroll = false;
-                }
-            }, 50);
-        }
-
-        function setScrollHeight() {
-            $timeout(function() {
-                var realScrollbarHeight = bloqsTab.height() + 50;
-
-                if ($scope.$field.height() < realScrollbarHeight) {
-                    $scope.showScroll = true;
-                    scrollBar.css('height', field[0].scrollHeight);
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
-                } else {
-                    $scope.showScroll = false;
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
-                }
-            }, 50);
         }
 
         function goToCode() {
@@ -433,30 +399,6 @@ angular.module('bitbloqApp')
             ngDialog.closeAll();
             $scope.setSoftwareTab('bloqs');
         }
-
-        function setScrollsDimension() {
-            if (!$scope.common.isLoading) {
-                setScrollHeight();
-                setScrollWidth();
-            } else {
-                $timeout(function() {
-                    setScrollsDimension();
-                }, 200);
-            }
-        }
-
-        var $contextMenu = $('#bloqs-context-menu'),
-            field = angular.element('#bloqs--field'),
-            scrollBarContainer = angular.element('.make--scrollbar'),
-            scrollBar = angular.element('.scrollbar--small'),
-            bloqsTab = angular.element('.bloqs-tab');
-
-        $scope.lastPosition = 0;
-        $scope.$field = $('#bloqs--field').last();
-
-        $scope.bloqsApi = bloqsApi;
-
-        var bloqsLoadTimes = 0;
 
         function loadBloqs() {
             bloqsLoadTimes++;
@@ -510,6 +452,68 @@ angular.module('bitbloqApp')
                     }
                 });
         }
+
+        function scrollField(e) {
+            scrollBar.css('height', e.currentTarget.scrollHeight);
+            scrollBarContainer.scrollTo(0, e.currentTarget.scrollTop);
+            field.scrollTo(0, scrollBarContainer[0].scrollTop);
+        }
+
+        function scrollHorizontalField(e) {
+            if ($scope.lastPosition > e.currentTarget.scrollLeft) {
+                angular.element('.field--content').scrollLeft(e.currentTarget.scrollLeft);
+            } else {
+                angular.element('.field--content').scrollLeft(e.currentTarget.scrollLeft + 150);
+            }
+            $scope.lastPosition = e.currentTarget.scrollLeft;
+        }
+
+        function setScrollsDimension() {
+            if (!$scope.common.isLoading) {
+                setScrollHeight();
+                setScrollWidth();
+            } else {
+                $timeout(function() {
+                    setScrollsDimension();
+                }, 200);
+            }
+        }
+
+        function setScrollHeight() {
+            $timeout(function() {
+                var realScrollbarHeight = bloqsTab.height() + 50;
+
+                if ($scope.$field.height() < realScrollbarHeight) {
+                    $scope.showScroll = true;
+                    scrollBar.css('height', field[0].scrollHeight);
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    $scope.showScroll = false;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }
+            }, 50);
+        }
+
+        function setScrollWidth() {
+            $timeout(function() {
+                var groupBloqs = angular.element('.field--content');
+                var horizontalScrollBar = angular.element('#scrollbar--horizontal-small');
+                var horizontalScrollWidth = Math.max.apply(null, groupBloqs.map(function() {
+                    return this.scrollWidth;
+                }));
+                if (horizontalScrollWidth > groupBloqs[0].clientWidth) {
+                    $scope.showHorizontalScroll = true;
+                    horizontalScrollBar.css('width', horizontalScrollWidth + 50);
+                } else {
+                    $scope.showHorizontalScroll = false;
+                }
+            }, 50);
+        }
+
 
         loadBloqs();
 
