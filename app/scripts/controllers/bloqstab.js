@@ -462,6 +462,13 @@ angular.module('bitbloqApp')
         function loadBloqs() {
             bloqsLoadTimes++;
             bloqsApi.itsLoaded().then(function() {
+                    bloqs.setOptions({
+                        fieldOffsetLeft: 70,
+                        fieldOffsetRight: 216,
+                        fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
+                        bloqSchemas: bloqsApi.schemas,
+                        suggestionWindowParent: $scope.$field[0]
+                    });
                     $scope.groupBloqs = angular.element('.field--content');
                     $scope.groupBloqs.on('scroll', scrollHorizontalField);
                     $scope.horizontalScrollBarContainer = angular.element('#make--horizontal-scrollbar');
