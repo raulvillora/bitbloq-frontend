@@ -29,9 +29,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
 
-        if (projectService.project.hardware.board || projectService.project.hardware.robot) {
-            _loadHardwareProjec(projectService.project.hardware);
-        }
+        $scope.projectLoaded.promise.then(function() {
+            if (projectService.project.hardware.board || projectService.project.hardware.robot) {
+                _loadHardwareProject(projectService.project.hardware);
+            }
+            $scope.hardware.firstLoad = true;
+        });
 
         container.addEventListener('mousedown', _mouseDownHandler, true);
 
@@ -39,13 +42,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $document.on('click', _clickDocumentHandler);
 
         container.addEventListener('connectionEvent', connectionEventHandler);
-
-        $scope.$watch('projectService.project.hardware', function(newVal, oldVal) {
-            if (newVal && (!_.isEqual(newVal,oldVal) || newVal.anonymousTransient)) {
-                _loadHardwareProjec(newVal);
-            }
-        });
-
     }
 
     function generateFullComponentList(resources) {
@@ -533,7 +529,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
-    function _loadHardwareProjec(hardwareProject) {
+    function _loadHardwareProject(hardwareProject) {
+
+
         if (hardwareProject.anonymousTransient) {
             delete hardwareProject.anonymousTransient;
         }
@@ -675,20 +673,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if ($event.ctrlKey) {
-                //         $scope.undo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if ($event.ctrlKey) {
-                //         $scope.redo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if ($event.ctrlKey) {
+            //         $scope.undo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if ($event.ctrlKey) {
+            //         $scope.redo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {

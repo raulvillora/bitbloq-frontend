@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, common, web2boardOnline, projectService) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, common, web2boardOnline, projectService) {
 
 
         /*************************************************
@@ -85,6 +85,7 @@ angular.module('bitbloqApp')
                 $scope.updateBloqs();
                 if (!$scope.hardware.firstLoad) {
                     projectService.startAutosave();
+                } else {
                     $scope.hardware.firstLoad = false;
                 }
             }
@@ -948,6 +949,7 @@ angular.module('bitbloqApp')
         $scope.projectService = projectService;
 
         projectService.initBloqProject();
+        $scope.projectLoaded = $q.defer();
 
         if (!$scope.common.user) {
             $scope.common.session.save = false;
@@ -1002,9 +1004,11 @@ angular.module('bitbloqApp')
                     projectService.setProject(response.data);
                     $scope.saveBloqStep(_.clone(response.data.software));
                     projectService.saveOldProject();
+                    $scope.projectLoaded.resolve();
                 }
             }, function(error) {
                 projectService.addWatchers();
+                $scope.projectLoaded.reject();
                 switch (error.status) {
                     case 404: //not_found
                         alertsService.add({
