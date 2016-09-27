@@ -16,6 +16,12 @@ angular.module('bitbloqApp')
          Project save / edit
          *************************************************/
 
+        function projectComponentsHaveChanged(newComponentsJSON) {
+            var components = _.find(newComponentsJSON, function(item) {
+                return item.length > 0;
+            });
+            return _.isEqual(projectService.project.hardware.components, components);
+        }
 
         $scope.setCode = function(code) {
             $scope.code = code;
@@ -31,24 +37,16 @@ angular.module('bitbloqApp')
         };
 
         $scope.refreshComponentsArray = function() {
-            var newComponentsArray = bloqsUtils.getEmptyComponentsArray();
             var newHardwareTags = [];
 
-            var plainComponentListTemporal = [];
             var plainComponentList = [];
-            projectService.project.hardware.components.forEach(function(comp) {
-                if (!!comp.connected) {
-                    if (comp.oscillator === true || comp.oscillator === 'true') {
-                        newComponentsArray.oscillators.push(_.cloneDeep(comp));
-                    } else {
-                        newComponentsArray[comp.category].push(_.cloneDeep(comp));
+            var newComponentsArray = _.cloneDeep(projectService.componentsArray);
+            _.forEach(projectService.componentsArray, function(category) {
+                category.forEach(function(item) {
+                    if (!!item.connected) {
+                        newHardwareTags.push(item.id);
                     }
-                    plainComponentListTemporal.push({
-                        'uid': comp.uid,
-                        'name': comp.name
-                    });
-                    newHardwareTags.push(comp.id);
-                }
+                });
             });
 
             if (projectService.project.hardware.robot) {
@@ -71,7 +69,7 @@ angular.module('bitbloqApp')
                 });
             }
 
-            if (!_.isEqual(projectService.componentsArray, newComponentsArray)) {
+            if (!projectComponentsHaveChanged(newComponentsArray)) {
                 //Regenerate hw tags
                 projectService.project.hardwareTags = _.uniq(newHardwareTags);
                 if (projectService.project.hardware.robot) {

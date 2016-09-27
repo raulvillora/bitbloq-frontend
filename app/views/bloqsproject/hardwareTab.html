@@ -17,7 +17,7 @@
                 </span>
             </div>
         </div>
-        <div class="component__container" ng-class="{'component__container--visible':(projectService.project.hardware.components.length === 0 && projectService.project.hardware.board) && !projectService.project.hardware.robot ,'component__container--pseudovisible':(projectService.project.hardware.components.length !== 0) && projectService.project.hardware.board && !projectService.project.hardware.robot}">
+        <div class="component__container" ng-class="{'component__container--visible':(projectService.isEmptyComponentArray() && projectService.project.hardware.board) && !projectService.project.hardware.robot ,'component__container--pseudovisible':(!projectService.isEmptyComponentArray()) && projectService.project.hardware.board && !projectService.project.hardware.robot}">
             <p class="component__message">{{'make-hardware-component-container' | translate}}</p>
         </div>
         <div id="boardSchema" class="board" ng-class="{'board--present':projectService.project.hardware.board, 'board--selected':boardSelected, 'opaque':!projectService.project.hardware.robot}">

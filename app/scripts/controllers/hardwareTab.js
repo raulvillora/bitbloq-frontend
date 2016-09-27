@@ -129,9 +129,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function checkComponentConnections(componentUid) {
-        var component = _.find(projectService.project.hardware.components, function(c) {
-            return c.uid === componentUid;
-        });
+        var component = projectService.findComponentInComponentsArray(componentUid);
         var connections = 0;
         if (component) {
             _.forEach(component.pin, function(value) {
@@ -156,9 +154,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             return filtered.length > 0;
         }
 
-        componentReference = _.find(projectService.project.hardware.components, {
-            'uid': e.componentData.uid
-        });
+        componentReference = projectService.findComponentInComponentsArray(e.componentData.uid);
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
 
         if (componentReference) {
@@ -239,7 +235,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         });
 
         var newComponent = _.cloneDeep(component);
-        projectService.project.hardware.components.push(newComponent);
+        //projectService.project.hardware.components.push(newComponent);
+        projectService.addComponentInComponentsArray(data.category, newComponent);
 
         var relativeCoordinates = {
             x: ((data.coordinates.x / container.clientWidth) * 100),
@@ -269,9 +266,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $('.component').removeClass('component-selected');
 
-        var componentSelected = _.find(projectService.project.hardware.components, function(c) {
-            return c.uid === component.dataset.uid;
-        });
+        var componentSelected = projectService.findComponentInComponentsArray(component.dataset.uid);
         $(component).addClass('component-selected');
 
         container.focus();
@@ -369,9 +364,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (ev.target.classList.contains('component')) {
             $scope.unsetInputFocus();
             var componentDOM = ev.target;
-            var componentReference = _.find(projectService.project.hardware.components, function(c) {
-                return c.uid === componentDOM.dataset.uid;
-            });
+            var componentReference = projectService.findComponentInComponentsArray(componentDOM.dataset.uid);
             var newCoordinates = {
                 x: (componentDOM.offsetLeft / container.offsetWidth) * 100,
                 y: (componentDOM.offsetTop / container.offsetHeight) * 100
@@ -402,7 +395,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.subMenuHandler('boards', 'open', 1);
             }
         } else if (ev.target.classList.contains('component__container')) {
-            if (!projectService.project.hardware.robot && projectService.project.hardware.components.length === 0) {
+            if (!projectService.project.hardware.robot && projectService.isEmptyComponentArray()) {
                 $scope.subMenuHandler('hwcomponents', 'open', 1);
             }
         } else if (ev.target.classList.contains('oscillator--checkbox')) {
@@ -466,9 +459,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.deleteComponent = function() {
         $scope.disconnectComponent();
-        var c = _.remove(projectService.project.hardware.components, function(el) {
-            return $scope.componentSelected.uid === el.uid;
-        });
+        var c = _.remove(projectService.componentsArray[$scope.componentSelected.category], projectService.findComponentInComponentsArray($scope.componentSelected.uid));
         var componenetToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
         $scope.componentSelected = false;
         hw2Bloqs.removeComponent(componenetToRemove);

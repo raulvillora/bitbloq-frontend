@@ -51,6 +51,10 @@ angular.module('bitbloqApp')
         exports.tempImage = {};
 
 
+        exports.isEmptyComponentArray = function() {
+            return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
+        };
+
         exports.checkPublish = function(type) {
             var defered = $q.defer();
             type = type || '';
@@ -124,33 +128,17 @@ angular.module('bitbloqApp')
             }
         };
 
-        exports.isShared = function(project) {
-            var found = false,
-                i = 0,
-                propertyNames = Object.getOwnPropertyNames(project._acl);
-            while (!found && (i < propertyNames.length)) {
-                if (propertyNames[i] !== 'ALL' && common.user && propertyNames[i].split('user:')[1] !== common.user._id) {
-                    found = true;
+        exports.findComponentInComponentsArray = function(myUid) {
+            var myComponent;
+            _.forEach(exports.componentsArray, function(element) {
+                var tmpComponent = _.find(element, function(item) {
+                    return item.uid === myUid;
+                });
+                if (tmpComponent) {
+                    myComponent = tmpComponent;
                 }
-                i++;
-            }
-            return found;
-        };
-
-        exports.initBloqProject = function(watchers) {
-            exports.project = _.extend(exports.project, exports.getDefaultProject());
-            exports.setComponentsArray();
-            if (watchers) {
-                exports.addWatchers();
-            }
-        };
-
-        exports.initCodeProject = function(watchers) {
-            exports.unBlindBoardWatcher();
-            exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
-            if (watchers) {
-                exports.addCodeWatchers();
-            }
+            });
+            return myComponent;
         };
 
         exports.getBoardMetaData = function() {
@@ -246,6 +234,35 @@ angular.module('bitbloqApp')
             return exports.savingStatusIdLabels[exports.saveStatus];
         };
 
+        exports.isShared = function(project) {
+            var found = false,
+                i = 0,
+                propertyNames = Object.getOwnPropertyNames(project._acl);
+            while (!found && (i < propertyNames.length)) {
+                if (propertyNames[i] !== 'ALL' && common.user && propertyNames[i].split('user:')[1] !== common.user._id) {
+                    found = true;
+                }
+                i++;
+            }
+            return found;
+        };
+
+        exports.initBloqProject = function(watchers) {
+            exports.project = _.extend(exports.project, exports.getDefaultProject());
+            exports.setComponentsArray();
+            if (watchers) {
+                exports.addWatchers();
+            }
+        };
+
+        exports.initCodeProject = function(watchers) {
+            exports.unBlindBoardWatcher();
+            exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
+            if (watchers) {
+                exports.addCodeWatchers();
+            }
+        };
+
         exports.projectHasChanged = function() {
             var identicalProjectObject = _.isEqual(exports.project, oldProject);
             return !identicalProjectObject || (exports.tempImage.file);
@@ -255,11 +272,23 @@ angular.module('bitbloqApp')
             oldProject = _.cloneDeep(exports.project);
         };
 
+        exports.addComponentInComponentsArray = function(category, newComponent) {
+            exports.componentsArray[category].push(newComponent);
+        };
+
         exports.setComponentsArray = function(components) {
             if (components) {
                 exports.componentsArray = components;
             } else {
                 exports.componentsArray = bloqsUtils.getEmptyComponentsArray();
+                exports.project.hardware.components.forEach(function(comp) {
+                    if (comp.oscillator === true || comp.oscillator === 'true') {
+                        exports.componentsArray.oscillators.push(_.cloneDeep(comp));
+                    } else {
+                        exports.componentsArray[comp.category].push(_.cloneDeep(comp));
+                    }
+                });
+
             }
         };
 
@@ -268,6 +297,7 @@ angular.module('bitbloqApp')
                 exports.getDefaultProject(newproject.codeProject);
             }
             exports.project = _.extend(exports.project, newproject);
+            exports.setComponentsArray();
             exports.addCodeWatchers();
         };
 
@@ -402,22 +432,18 @@ angular.module('bitbloqApp')
         }
 
         function _updateHardwareSchema() {
-
             var schema = hw2Bloqs.saveSchema();
             if (schema) { //If project is loaded on protocanvas
                 schema.components = schema.components.map(function(elem) {
-                    var newElem = _.find(exports.project.hardware.components, {
-                        uid: elem.uid
-                    });
+                    var newElem = exports.findComponentInComponentsArray(elem.uid);
                     if (newElem) {
-                        newElem.connected = elem.connected;
+                        newElem = _.extend(newElem, elem);
                     }
                     return newElem;
                 });
 
-                schema.board = exports.project.hardware.board;
-                schema.robot = exports.project.hardware.robot;
-                exports.project.hardware = schema;
+                exports.project.hardware.components = schema.components;
+                exports.project.hardware.connections = schema.connections;
             }
         }
 
