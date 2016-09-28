@@ -16,6 +16,8 @@ angular.module('bitbloqApp')
             settingBoardAlert,
             serialMonitorAlert;
 
+        projectService.saveStatus = 0;
+
         // The ui-ace option
         $scope.aceOptions = {
             mode: 'c_cpp',

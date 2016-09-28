@@ -880,6 +880,8 @@ angular.module('bitbloqApp')
         $scope.projectApi = projectApi;
         $scope.projectService = projectService;
 
+        projectService.saveStatus = 0;
+
         projectService.initBloqProject();
         $scope.projectLoaded = $q.defer();
 
