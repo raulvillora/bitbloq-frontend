@@ -20,7 +20,7 @@ angular.module('bitbloqApp')
             var components = _.find(newComponentsJSON, function(item) {
                 return item.length > 0;
             });
-            return _.isEqual(projectService.project.hardware.components, components);
+            return _.isEqual(projectService.componentsArray, components);
         }
 
         $scope.setCode = function(code) {
