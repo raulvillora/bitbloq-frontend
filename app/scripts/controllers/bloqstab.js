@@ -210,10 +210,17 @@ angular.module('bitbloqApp')
             var stopWord = ['analogWrite', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
             if (stopWord.indexOf(item) === -1) {
                 var result = false;
-                if (projectService.componentsArray.robot.length === 0) {
-                    var userComponents = _.keys(_.pick(projectService.componentsArray, function(value) {
-                        return value.length > 0;
-                    }));
+                if (!projectService.project.hardware.robot && projectService.project.hardware.board) {
+                    var userComponents = [];
+                    projectService.project.hardware.components.forEach(function(item) {
+                        if (item.oscillator) {
+                            userComponents.push('oscillators');
+                        } else {
+                            userComponents.push(item.category);
+                        }
+                    });
+                    userComponents = _.unique(userComponents);
+
                     if (item === 'hwVariable' && userComponents.length !== 0) {
                         result = true;
                     } else {

@@ -117,7 +117,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.uploadProject = function(project) {
+        $scope.uploadFileProject = function(project) {
             projectService.setProject(project);
             $scope.setBoard(projectService.project.board);
             _prettyCode();

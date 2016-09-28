@@ -10,7 +10,7 @@
 
 angular.module('bitbloqApp')
     .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $location, $window, $document, alertsService, bloqs, ngDialog, projectApi, _, $route, commonModals, clipboard, projectService) {
-        
+
         $scope.defaultZoom = 1;
         $scope.modal = {
             projectCloneName: ''
@@ -19,7 +19,7 @@ angular.module('bitbloqApp')
         $scope.commonModals = commonModals;
         $scope.projectService = projectService;
         $scope.removeAlert = [];
-        
+
         $scope.uploadProjectSelected = function(fileList) {
 
             // Only allow uploading one file.
@@ -57,7 +57,7 @@ angular.module('bitbloqApp')
                     if (fileParsed.id) {
                         fileParsed.id = '';
                     }
-                    $scope.uploadProject(fileParsed);
+                    $scope.uploadFileProject(fileParsed);
                     $scope.$apply();
                     $scope.setCode($scope.getCode());
                     if (!$scope.common.user) {

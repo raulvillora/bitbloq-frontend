@@ -104,6 +104,7 @@ angular.module('bitbloqApp')
                 }
 
                 _updateHardwareSchema();
+                _updateHardwareTags();
                 exports.project.code = bloqsUtils.getCode(exports.componentsArray, exports.bloqs);
             }
         };
@@ -298,15 +299,21 @@ angular.module('bitbloqApp')
             }
             exports.project = _.extend(exports.project, newproject);
             exports.setComponentsArray();
+            // exports.addComponentsArray(exports.project.hardware);
             exports.addCodeWatchers();
         };
 
-        exports.startAutosave = function() {
+        exports.startAutosave = function(hard) {
             if (common.user) {
-                exports.saveStatus = 1;
-                if (!savePromise || (savePromise.$$state.status !== 0)) {
-                    savePromise = $timeout(_saveProject, envData.config.saveTime || 10000);
-                    return savePromise;
+                exports.completedProject();
+                if (exports.projectHasChanged() || exports.tempImage.file) {
+                    exports.saveStatus = 1;
+                    if (hard) {
+                        savePromise = _saveProject();
+                    } else if (!savePromise || (savePromise.$$state.status !== 0)) {
+                        savePromise = $timeout(_saveProject, envData.config.saveTime || 10000);
+                        return savePromise;
+                    }
                 }
             } else {
                 exports.completedProject();
@@ -348,7 +355,7 @@ angular.module('bitbloqApp')
 
         function _saveProject() {
             var defered = $q.defer();
-            exports.completedProject();
+            //exports.completedProject();
             if (exports.projectHasChanged() || exports.tempImage.file) {
 
                 exports.project.name = exports.project.name || common.translate('new-project');
@@ -445,6 +452,18 @@ angular.module('bitbloqApp')
                 exports.project.hardware.components = schema.components;
                 exports.project.hardware.connections = schema.connections;
             }
+        }
+
+        function _updateHardwareTags() {
+            var newHardwareTags = [];
+            var mainTag = exports.project.hardware.robot || exports.project.hardware.board;
+            if (mainTag) {
+                newHardwareTags.push(mainTag);
+            }
+            exports.project.hardware.components.forEach(function(comp) {
+                newHardwareTags.push(comp.id);
+            });
+            exports.project.hardwareTags = _.uniq(newHardwareTags);
         }
 
         /*************************************************

@@ -20,92 +20,31 @@ angular.module('bitbloqApp')
             var components = _.find(newComponentsJSON, function(item) {
                 return item.length > 0;
             });
-            return _.isEqual(projectService.componentsArray, components);
+            return _.isEqual(projectService.project.hardware.components, components);
         }
 
         $scope.setCode = function(code) {
             $scope.code = code;
         };
 
-        $scope.uploadProject = function(project) {
+        $scope.uploadFileProject = function(project) {
             $scope.hardware.firstLoad = true;
             if ($scope.hardware.cleanSchema) {
                 $scope.hardware.cleanSchema();
             }
-            projectService.setProject(project);
-            $scope.refreshComponentsArray();
+            _uploadProject(project);
             $scope.$broadcast('refresh-bloqs');
-        };
-
-        $scope.refreshComponentsArray = function() {
-            var newHardwareTags = [];
-
-            var plainComponentList = [];
-            var newComponentsArray = _.cloneDeep(projectService.componentsArray);
-            _.forEach(projectService.componentsArray, function(category) {
-                category.forEach(function(item) {
-                    if (!!item.connected) {
-                        newHardwareTags.push(item.id);
-                    }
-                });
-            });
-
-            if (projectService.project.hardware.robot) {
-                newComponentsArray.robot.push(projectService.project.hardware.robot);
-            }
-
-            if (projectService.componentsArray.robot.length > 0) {
-                plainComponentList = projectService.componentsArray.robot;
-            } else {
-                _.forEach(projectService.componentsArray, function(n, key) {
-                    var compUidList = _.map(projectService.componentsArray[key], function(item) {
-                        return {
-                            'uid': item.uid,
-                            'name': item.name
-                        };
-                    });
-                    if (compUidList && compUidList.length > 0) {
-                        plainComponentList = plainComponentList.concat(compUidList);
-                    }
-                });
-            }
-
-            if (!projectComponentsHaveChanged(newComponentsArray)) {
-                //Regenerate hw tags
-                projectService.project.hardwareTags = _.uniq(newHardwareTags);
-                if (projectService.project.hardware.robot) {
-                    projectService.project.hardwareTags.push(projectService.project.hardware.robot);
-                } else if (projectService.project.hardware.board) {
-                    projectService.project.hardwareTags.push(projectService.project.hardware.board);
-                }
-                //update
-                projectService.setComponentsArray(newComponentsArray);
-                bloqs.componentsArray = newComponentsArray;
-                $scope.updateBloqs();
-                if (!$scope.hardware.firstLoad) {
-                    projectService.startAutosave();
-                } else {
-                    $scope.hardware.firstLoad = false;
-                }
-            }
         };
 
         $scope.anyComponent = function(forceCheck) {
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
-            if (_.isEqual(projectService.componentsArray, bloqsUtils.getEmptyComponentsArray())) {
+            if (projectService.project.hardware.components.length === 0) {
                 return false;
+            } else {
+                return true;
             }
-            var compCategories = _.pick(projectService.componentsArray, function(item) {
-                return item.length > 0;
-            });
-            var tmpCompCategories = _.cloneDeep(compCategories);
-            if (tmpCompCategories.robot) {
-                delete tmpCompCategories.robot;
-            }
-
-            return (Object.keys(tmpCompCategories).length > 0);
         };
         $scope.anyAdvancedComponent = function() {
             return !_.isEqual(projectService.componentsArray, bloqsUtils.getEmptyComponentsArray());
@@ -577,6 +516,7 @@ angular.module('bitbloqApp')
         $scope.currentTab = 0;
 
         $scope.setTab = function(index) {
+            projectService.startAutosave(true);
             if (index === 0) {
                 hw2Bloqs.repaint();
             } else if (index === 1) {
@@ -992,19 +932,7 @@ angular.module('bitbloqApp')
 
         var loadProject = function(id) {
             return projectApi.get(id).then(function(response) {
-                if (response.data.codeProject) {
-                    $location.path('/codeproject/' + response.data._id);
-                } else {
-                    //set freebloqs object
-                    if (response.data.software) {
-                        response.data.software.freeBloqs = response.data.software.freeBloqs || [];
-                    }
-
-                    projectService.setProject(response.data);
-                    $scope.saveBloqStep(_.clone(response.data.software));
-                    projectService.saveOldProject();
-                    $scope.projectLoaded.resolve();
-                }
+                _uploadProject(response.data);
             }, function(error) {
                 projectService.addWatchers();
                 $scope.projectLoaded.reject();
@@ -1033,6 +961,22 @@ angular.module('bitbloqApp')
                 }
             });
         };
+
+        function _uploadProject(project) {
+            if (project.codeProject) {
+                $location.path('/codeproject/' + project._id);
+            } else {
+                //set freebloqs object
+                if (project.software) {
+                    project.software.freeBloqs = project.software.freeBloqs || [];
+                }
+
+                projectService.setProject(project);
+                $scope.saveBloqStep(_.clone(project.software));
+                projectService.saveOldProject();
+                $scope.projectLoaded.resolve();
+            }
+        }
 
         function confirmExit() {
             var closeMessage;

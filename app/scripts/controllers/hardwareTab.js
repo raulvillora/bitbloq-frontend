@@ -182,7 +182,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 componentReference.connected = false;
             }
 
-            $scope.refreshComponentsArray();
+            projectService.startAutosave();
 
         } else {
             $log.debug('Unable to find this component or component is already removed');
@@ -200,7 +200,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         projectService.project.hardware.board = board.name;
 
-        $scope.refreshComponentsArray();
+        projectService.startAutosave();
     };
 
     var _addRobot = function(robot) {
@@ -216,15 +216,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.componentSelected = null;
         projectService.project.hardware.components = [];
-
-        $scope.refreshComponentsArray();
+        projectService.setComponentsArray();
+        projectService.startAutosave();
     };
 
     $scope.deleteRobot = function() {
         projectService.project.hardware.robot = null;
         projectService.project.hardware.board = null;
+        projectService.componentsArray['robot'] = [];
         $scope.robotSelected = false;
-        $scope.refreshComponentsArray();
         projectService.startAutosave();
     };
 
@@ -235,7 +235,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         });
 
         var newComponent = _.cloneDeep(component);
-        //projectService.project.hardware.components.push(newComponent);
         projectService.addComponentInComponentsArray(data.category, newComponent);
 
         var relativeCoordinates = {
@@ -258,7 +257,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         hw2Bloqs.removeBoard();
         $scope.boardSelected = false;
         projectService.project.hardware.board = null;
-        $scope.refreshComponentsArray();
         projectService.startAutosave();
     };
 
@@ -281,17 +279,16 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _createUniqueVarName(component) {
         var usedNames = {},
             componentBasicName = $translate.instant('default-var-name-' + component.id);
-        var componentcategoryList = _.filter(projectService.project.hardware.components, function(item) {
-            return item.category === component.category;
+
+        var componentsNames = [];
+        projectService.componentsArray[component.category].forEach(function(comp) {
+            componentsNames[comp.name] = true;
         });
-        for (var i = 0; i < componentcategoryList.length; i++) {
-            usedNames[componentcategoryList[i].name] = true;
-        }
 
         var j = 0,
             finalName = null;
         while (!finalName) {
-            if (!usedNames[componentBasicName + '_' + j]) {
+            if (!componentsNames[componentBasicName + '_' + j]) {
                 finalName = componentBasicName + '_' + j;
             }
             j++;
@@ -345,7 +342,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.setBaudRate = function(baudRate) {
         $scope.componentSelected.baudRate = baudRate;
-        $scope.refreshComponentsArray();
         projectService.startAutosave();
     };
 
@@ -444,7 +440,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.disconnectComponent = function(component) {
         hw2Bloqs.disconnectComponent(component || $scope.componentSelected);
         $scope.componentSelected.connected = false;
-        $scope.refreshComponentsArray();
+        projectService.startAutosave();
         _closeContextMenu();
     };
 
@@ -453,7 +449,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         projectService.project.hardware.components.forEach(function(comp) {
             comp.connected = false;
         });
-        $scope.refreshComponentsArray();
+        projectService.startAutosave();
         _closeContextMenu();
     };
 
@@ -463,13 +459,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var componenetToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
         $scope.componentSelected = false;
         hw2Bloqs.removeComponent(componenetToRemove);
-        $scope.refreshComponentsArray();
+        projectService.startAutosave();
     };
 
     $scope.hardware.cleanSchema = function() {
         hw2Bloqs.removeAllComponents();
+        projectService.setComponentsArray(bloqsUtils.getEmptyComponentsArray());
         $scope.deleteBoard();
-        $scope.refreshComponentsArray();
+        projectService.startAutosave();
     };
 
     $scope.hardware.sortToolbox = function() {
@@ -521,8 +518,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _loadHardwareProject(hardwareProject) {
-
-
         if (hardwareProject.anonymousTransient) {
             delete hardwareProject.anonymousTransient;
         }
@@ -547,7 +542,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if (hwSchema.robot || hwSchema.board) {
                 hw2Bloqs.loadSchema(hwSchema);
                 hw2Bloqs.repaint();
-                $scope.refreshComponentsArray();
+                projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
                 //Fix components dimensions
                 _.forEach(projectService.project.hardware.components, function(item) {
@@ -562,10 +557,18 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     $scope.checkName = function() {
-        var isNameDuplicated = _.filter(projectService.project.hardware.components, {
-            name: $scope.componentSelected.name
+
+        var componentsNames = [];
+        _.forEach(projectService.componentsArray, function(category) {
+            if (category.length > 0) {
+                category.forEach(function(comp) {
+                    componentsNames.push(comp.name);
+                });
+            }
+
         });
-        if (isNameDuplicated instanceof Array && isNameDuplicated.length > 1) {
+
+        if (_.uniq(componentsNames).length !== componentsNames.length) {
             $scope.componentSelected.name += '_copy';
         }
         var nameFixed = _validName($scope.componentSelected.name);
@@ -574,7 +577,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $scope.componentSelected.name = nameFixed;
         }
         if ($scope.componentSelected.connected) {
-            $scope.refreshComponentsArray();
+            projectService.startAutosave();
         }
     };
 
@@ -725,7 +728,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {
-            $scope.refreshComponentsArray();
             projectService.startAutosave();
         }
     });
