@@ -117,7 +117,7 @@ angular.module('bitbloqApp')
                 projectsToDownload = [],
                 j = 1;
             for (var i = 0; i < $scope.filtered.projects.length; i++) {
-                currentProject = projectService.getCleanProject($scope.filtered.projects[i]);
+                currentProject = projectService.getCleanProject($scope.filtered.projects[i], true);
                 currentProjectName = utils.removeDiacritics(currentProject.name).substring(0, 30);
                 if (projectsToDownload.indexOf(currentProjectName) > -1) {
                     currentProjectName = currentProjectName + '_' + j;

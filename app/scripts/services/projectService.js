@@ -148,17 +148,20 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getCleanProject = function(projectRef) {
+        exports.getCleanProject = function(projectRef, download) {
             projectRef = projectRef || exports.project;
             var cleanProject = _.cloneDeep(projectRef);
-            delete cleanProject._id;
-            delete cleanProject._acl;
+            if (download) {
+                delete cleanProject._id;
+                delete cleanProject._acl;
+            }
             delete cleanProject.creator;
             delete cleanProject.createdAt;
             delete cleanProject.updatedAt;
             delete cleanProject.links;
             delete cleanProject.exportedFromBitbloqOffline;
             delete cleanProject.bitbloqOfflineVersion;
+            delete cleanProject.__v;
             return cleanProject;
         };
 
@@ -305,15 +308,12 @@ angular.module('bitbloqApp')
 
         exports.startAutosave = function(hard) {
             if (common.user) {
-                exports.completedProject();
-                if (exports.projectHasChanged() || exports.tempImage.file) {
-                    exports.saveStatus = 1;
-                    if (hard) {
-                        savePromise = _saveProject();
-                    } else if (!savePromise || (savePromise.$$state.status !== 0)) {
-                        savePromise = $timeout(_saveProject, envData.config.saveTime || 10000);
-                        return savePromise;
-                    }
+                exports.saveStatus = 1;
+                if (hard) {
+                    savePromise = _saveProject();
+                } else if (!savePromise || (savePromise.$$state.status !== 0)) {
+                    savePromise = $timeout(_saveProject, envData.config.saveTime || 10000);
+                    return savePromise;
                 }
             } else {
                 exports.completedProject();
@@ -339,7 +339,8 @@ angular.module('bitbloqApp')
         }
 
         function _downloadJSON(projectRef) {
-            var project = exports.getCleanProject(projectRef);
+            projectRef = projectRef || exports.project;
+            var project = exports.getCleanProject(projectRef, true);
             project.bloqsVersion = bowerData.dependencies.bloqs;
 
             var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
@@ -355,7 +356,7 @@ angular.module('bitbloqApp')
 
         function _saveProject() {
             var defered = $q.defer();
-            //exports.completedProject();
+            exports.completedProject();
             if (exports.projectHasChanged() || exports.tempImage.file) {
 
                 exports.project.name = exports.project.name || common.translate('new-project');
@@ -369,7 +370,7 @@ angular.module('bitbloqApp')
 
                 if (exports.project._id) {
                     if (!exports.project._acl || (exports.project._acl['user:' + common.user._id] && exports.project._acl['user:' + common.user._id].permission === 'ADMIN')) {
-                        return projectApi.update(exports.project._id, exports.project).then(function() {
+                        return projectApi.update(exports.project._id, exports.getCleanProject()).then(function() {
                             exports.saveStatus = 2;
                             exports.saveOldProject();
                             localStorage.projectsChange = true;
@@ -385,7 +386,7 @@ angular.module('bitbloqApp')
                 } else {
                     if (common.user) {
                         exports.project.creator = common.user._id;
-                        return projectApi.save(exports.project).then(function(response) {
+                        return projectApi.save(exports.getCleanProject()).then(function(response) {
                             exports.saveStatus = 2;
                             var idProject = response.data;
                             exports.project._id = idProject;

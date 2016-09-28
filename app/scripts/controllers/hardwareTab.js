@@ -17,309 +17,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $robotContextMenu = $('#robot-context-menu'),
         hwBasicsLoaded = $q.defer();
 
-    function _initialize() {
-
-        $scope.projectService = projectService;
-        $scope.hardware.componentList = hardwareConstants.components;
-        $scope.hardware.boardList = hardwareConstants.boards;
-        $scope.hardware.robotList = hardwareConstants.robots;
-        hwBasicsLoaded.resolve();
-        $scope.hardware.sortToolbox($scope.hardware.componentList);
-        generateFullComponentList(hardwareConstants);
-
-        hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
-
-        $scope.projectLoaded.promise.then(function() {
-            if (projectService.project.hardware.board || projectService.project.hardware.robot) {
-                _loadHardwareProject(projectService.project.hardware);
-            }
-            $scope.hardware.firstLoad = true;
-        });
-
-        container.addEventListener('mousedown', _mouseDownHandler, true);
-
-        $document.on('contextmenu', _contextMenuDocumentHandler);
-        $document.on('click', _clickDocumentHandler);
-
-        container.addEventListener('connectionEvent', connectionEventHandler);
-    }
-
-    function generateFullComponentList(resources) {
-        $scope.allHwElements = [];
-        _.each(resources.boards, function(item) {
-            item.dragtype = 'boards';
-        });
-        $scope.allHwElements = $scope.allHwElements.concat(resources.boards);
-        _.each(resources.robots, function(item) {
-            item.dragtype = 'robots';
-        });
-        $scope.allHwElements = $scope.allHwElements.concat(resources.robots);
-        _.each(resources.components, function(item, cat) {
-            if (cat !== 'oscillators') {
-                _.each(item, function(el) {
-                    el.dragtype = 'components';
-                });
-                $scope.allHwElements = $scope.allHwElements.concat(item);
-            }
-        });
-    }
-
-    $scope.$on('$destroy', function() {
-        container.removeEventListener('connectionEvent', connectionEventHandler);
-        container.removeEventListener('mousedown', _mouseDownHandler);
-        $document.off('contextmenu', _contextMenuDocumentHandler);
-        $document.off('click', _clickDocumentHandler);
-    });
-
-    function _mouseDownHandler(e) {
-        if (e.target.classList.contains('component')) {
-            _focusComponent(e.target);
-            if (!$scope.$$phase) {
-                $scope.$digest();
-            }
-        }
-    }
-
-    function _closeContextMenu() {
-        $('.hw-context-menu').css({
-            display: 'none'
-        });
-    }
-
-    function _contextMenuDocumentHandler(ev) {
-        if (ev.target.classList.contains('component')) {
-            if ((angular.element($window).height() - event.pageY) > $componentContextMenu.height()) {
-                $componentContextMenu.css({
-                    display: 'block',
-                    left: event.pageX + 'px',
-                    top: event.pageY + 'px'
-                });
-            } else {
-                $componentContextMenu.css({
-                    display: 'block',
-                    left: event.pageX + 'px',
-                    top: (event.pageY - $componentContextMenu.height()) + 'px'
-                });
-            }
-            _focusComponent(ev.target);
-        } else if (ev.target.classList.contains('board') || $(ev.target).closest('.board').length) {
-            if (projectService.project.hardware.board) {
-                $boardContextMenu.css({
-                    display: 'block',
-                    left: event.pageX + 'px',
-                    top: event.pageY + 'px'
-                });
-            }
-        } else if (ev.target.classList.contains('robot')) {
-            $robotContextMenu.css({
-                display: 'block',
-                left: event.pageX + 'px',
-                top: event.pageY + 'px'
-            });
-        } else {
-            _closeContextMenu();
-        }
-
-        ev.preventDefault();
-        return false;
-    }
-
-    function _clickDocumentHandler() {
-        _closeContextMenu();
-    }
-
-    function checkComponentConnections(componentUid) {
-        var component = projectService.findComponentInComponentsArray(componentUid);
-        var connections = 0;
-        if (component) {
-            _.forEach(component.pin, function(value) {
-                if (!_.isNull(value) && !_.isUndefined(value)) {
-                    connections++;
-                }
-            });
-        }
-        if (connections === 0) {
-            component.connected = false;
-        }
-    }
-
-    var connectionEventHandler = function(e) {
-        var componentReference, pinKey;
-        /* HW Connection listeners */
-
-        function _detectConnected(pins) {
-            var filtered = _.filter(pins, function(pin) {
-                return pin !== undefined;
-            });
-            return filtered.length > 0;
-        }
-
-        componentReference = projectService.findComponentInComponentsArray(e.componentData.uid);
-        $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
-
-        if (componentReference) {
-            if (e.protoBoLaAction === 'attach') {
-
-                pinKey = Object.keys(e.componentData.pin)[0];
-                if (componentReference.pin.hasOwnProperty(pinKey)) {
-                    componentReference.pin[pinKey] = e.componentData.pin[pinKey];
-                }
-
-                $rootScope.$emit('component-connected');
-
-            } else if (e.protoBoLaAction === 'detach') {
-
-                pinKey = Object.keys(e.componentData.pin)[0];
-                if (componentReference.pin.hasOwnProperty(pinKey)) {
-                    componentReference.pin[pinKey] = undefined;
-                }
-
-            }
-
-            if (_detectConnected(componentReference.pin)) {
-                componentReference.connected = true;
-            } else {
-                componentReference.connected = false;
-            }
-
-            projectService.startAutosave();
-
-        } else {
-            $log.debug('Unable to find this component or component is already removed');
-        }
-    };
-
-    var _addBoard = function(board) {
-
-        if (projectService.project.hardware.board === board.name && !projectService.project.hardware.robot) {
-            return false;
-        }
-        projectService.project.hardware.robot = null;
-
-        hw2Bloqs.addBoard(board);
-
-        projectService.project.hardware.board = board.name;
-
-        projectService.startAutosave();
-    };
-
-    var _addRobot = function(robot) {
-
-        var robotReference = _.find($scope.hardware.robotList, function(r) {
-            return r.id === robot.id;
-        });
-        projectService.project.hardware.robot = robot.id;
-        hw2Bloqs.removeRobot(robotReference);
-        hw2Bloqs.addRobot(robotReference);
-
-        projectService.project.hardware.board = robotReference.board;
-
-        $scope.componentSelected = null;
-        projectService.project.hardware.components = [];
-        projectService.setComponentsArray();
-        projectService.startAutosave();
-    };
-
-    $scope.deleteRobot = function() {
-        projectService.project.hardware.robot = null;
-        projectService.project.hardware.board = null;
-        projectService.componentsArray['robot'] = [];
-        $scope.robotSelected = false;
-        projectService.startAutosave();
-    };
-
-    function _addComponent(data) {
-        $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
-        var component = _.find($scope.hardware.componentList[data.category], function(component) {
-            return component.id === data.id;
-        });
-
-        var newComponent = _.cloneDeep(component);
-        projectService.addComponentInComponentsArray(data.category, newComponent);
-
-        var relativeCoordinates = {
-            x: ((data.coordinates.x / container.clientWidth) * 100),
-            y: ((data.coordinates.y / container.clientHeight) * 100)
-        };
-
-        newComponent.coordinates = relativeCoordinates;
-        newComponent.category = data.category;
-        newComponent.name = _createUniqueVarName(newComponent); //Generate unique name
-        newComponent.connected = false;
-
-        hw2Bloqs.unselectAllConnections();
-        var componentDOMRef = hw2Bloqs.addComponent(newComponent);
-        _focusComponent(componentDOMRef);
-        $scope.boardSelected = false;
-    }
-
-    $scope.deleteBoard = function() {
-        hw2Bloqs.removeBoard();
-        $scope.boardSelected = false;
-        projectService.project.hardware.board = null;
-        projectService.startAutosave();
-    };
-
-    function _focusComponent(component) {
-
-        $('.component').removeClass('component-selected');
-
-        var componentSelected = projectService.findComponentInComponentsArray(component.dataset.uid);
-        $(component).addClass('component-selected');
-
-        container.focus();
-
-        $scope.componentSelected = componentSelected;
-        $scope.boardSelected = false;
-
-        $log.debug('focusComponent', $scope.componentSelected);
-
-    }
-
-    function _createUniqueVarName(component) {
-        var usedNames = {},
-            componentBasicName = $translate.instant('default-var-name-' + component.id);
-
-        var componentsNames = [];
-        projectService.componentsArray[component.category].forEach(function(comp) {
-            componentsNames[comp.name] = true;
-        });
-
-        var j = 0,
-            finalName = null;
-        while (!finalName) {
-            if (!componentsNames[componentBasicName + '_' + j]) {
-                finalName = componentBasicName + '_' + j;
-            }
-            j++;
-        }
-        return finalName;
-    }
-
-    var _removeElementFromKeyboard = function() {
-        if ($scope.componentSelected) {
-            $scope.deleteComponent();
-            $scope.componentSelected = false;
-        } else if ($scope.boardSelected) {
-            $scope.deleteBoard();
-        } else if ($scope.robotSelected) {
-            $scope.deleteRobot();
-        } else { //No component or board selected
-            var componentUid = hw2Bloqs.removeSelectedConnection();
-            checkComponentConnections(componentUid);
-        }
-    };
-
-    var _isUserConnect = function(componentPins) {
-        var userConnect = false;
-        _.forEach(componentPins, function(item) {
-            if (item === undefined || item === null) {
-                userConnect = true;
-            }
-        });
-        return userConnect;
-    };
-
     $scope.closeComponentInteraction = function(pins, connectedPin) {
 
         if (pins[Object.keys(connectedPin)[0]]) {
@@ -339,19 +36,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             }
         }
     };
-
-    $scope.setBaudRate = function(baudRate) {
-        $scope.componentSelected.baudRate = baudRate;
+    
+    $scope.deleteBoard = function() {
+        hw2Bloqs.removeBoard();
+        $scope.boardSelected = false;
+        projectService.project.hardware.board = null;
         projectService.startAutosave();
     };
 
-    $scope.setInputFocus = function() {
-        $scope.inputFocus = true;
-    };
-
-    $scope.unsetInputFocus = function() {
-        $scope.inputFocus = false;
-        container.focus();
+    $scope.deleteRobot = function() {
+        projectService.project.hardware.robot = null;
+        projectService.project.hardware.board = null;
+        projectService.componentsArray['robot'] = [];
+        $scope.robotSelected = false;
+        projectService.startAutosave();
     };
 
     $scope.detectElement = function(ev) {
@@ -517,44 +215,19 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
-    function _loadHardwareProject(hardwareProject) {
-        if (hardwareProject.anonymousTransient) {
-            delete hardwareProject.anonymousTransient;
-        }
+    $scope.setBaudRate = function(baudRate) {
+        $scope.componentSelected.baudRate = baudRate;
+        projectService.startAutosave();
+    };
 
-        var hwSchema = {};
-        hwSchema.components = _.cloneDeep(projectService.project.hardware.components);
-        hwSchema.connections = _.cloneDeep(projectService.project.hardware.connections);
+    $scope.setInputFocus = function() {
+        $scope.inputFocus = true;
+    };
 
-        hwBasicsLoaded.promise.then(function() {
-            if (projectService.project.hardware.robot) {
-                var robotReference = _.find($scope.hardware.robotList, function(robot) {
-                    return robot.id === projectService.project.hardware.robot;
-                });
-                hwSchema.robot = robotReference; //The whole board object is passed
-            } else if (projectService.project.hardware.board) {
-                var boardReference = _.find($scope.hardware.boardList, function(board) {
-                    return board.name === projectService.project.hardware.board;
-                });
-                hwSchema.board = boardReference; //The whole board object is passed
-            }
-
-            if (hwSchema.robot || hwSchema.board) {
-                hw2Bloqs.loadSchema(hwSchema);
-                hw2Bloqs.repaint();
-                projectService.startAutosave();
-                $scope.hardware.firstLoad = false;
-                //Fix components dimensions
-                _.forEach(projectService.project.hardware.components, function(item) {
-                    item = bloqsUtils.checkPins(item);
-                    _fixComponentsDimension(item);
-                });
-            } else {
-                $log.debug('robot is undefined');
-            }
-
-        });
-    }
+    $scope.unsetInputFocus = function() {
+        $scope.inputFocus = false;
+        container.focus();
+    };
 
     $scope.checkName = function() {
 
@@ -580,6 +253,341 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             projectService.startAutosave();
         }
     };
+
+
+    /***************************************
+     * Private functions
+     ****************************************/
+
+    function _initialize() {
+
+        $scope.projectService = projectService;
+        $scope.hardware.componentList = hardwareConstants.components;
+        $scope.hardware.boardList = hardwareConstants.boards;
+        $scope.hardware.robotList = hardwareConstants.robots;
+        hwBasicsLoaded.resolve();
+        $scope.hardware.sortToolbox($scope.hardware.componentList);
+        generateFullComponentList(hardwareConstants);
+
+        hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
+
+        $scope.projectLoaded.promise.then(function() {
+            if (projectService.project.hardware.board || projectService.project.hardware.robot) {
+                _loadHardwareProject(projectService.project.hardware);
+            }
+            $scope.hardware.firstLoad = true;
+        });
+
+        container.addEventListener('mousedown', _mouseDownHandler, true);
+
+        $document.on('contextmenu', _contextMenuDocumentHandler);
+        $document.on('click', _clickDocumentHandler);
+
+        container.addEventListener('connectionEvent', connectionEventHandler);
+    }
+
+    function generateFullComponentList(resources) {
+        $scope.allHwElements = [];
+        _.each(resources.boards, function(item) {
+            item.dragtype = 'boards';
+        });
+        $scope.allHwElements = $scope.allHwElements.concat(resources.boards);
+        _.each(resources.robots, function(item) {
+            item.dragtype = 'robots';
+        });
+        $scope.allHwElements = $scope.allHwElements.concat(resources.robots);
+        _.each(resources.components, function(item, cat) {
+            if (cat !== 'oscillators') {
+                _.each(item, function(el) {
+                    el.dragtype = 'components';
+                });
+                $scope.allHwElements = $scope.allHwElements.concat(item);
+            }
+        });
+    }
+
+    function _mouseDownHandler(e) {
+        if (e.target.classList.contains('component')) {
+            _focusComponent(e.target);
+            if (!$scope.$$phase) {
+                $scope.$digest();
+            }
+        }
+    }
+
+    function _closeContextMenu() {
+        $('.hw-context-menu').css({
+            display: 'none'
+        });
+    }
+
+    function _contextMenuDocumentHandler(ev) {
+        if (ev.target.classList.contains('component')) {
+            if ((angular.element($window).height() - event.pageY) > $componentContextMenu.height()) {
+                $componentContextMenu.css({
+                    display: 'block',
+                    left: event.pageX + 'px',
+                    top: event.pageY + 'px'
+                });
+            } else {
+                $componentContextMenu.css({
+                    display: 'block',
+                    left: event.pageX + 'px',
+                    top: (event.pageY - $componentContextMenu.height()) + 'px'
+                });
+            }
+            _focusComponent(ev.target);
+        } else if (ev.target.classList.contains('board') || $(ev.target).closest('.board').length) {
+            if (projectService.project.hardware.board) {
+                $boardContextMenu.css({
+                    display: 'block',
+                    left: event.pageX + 'px',
+                    top: event.pageY + 'px'
+                });
+            }
+        } else if (ev.target.classList.contains('robot')) {
+            $robotContextMenu.css({
+                display: 'block',
+                left: event.pageX + 'px',
+                top: event.pageY + 'px'
+            });
+        } else {
+            _closeContextMenu();
+        }
+
+        ev.preventDefault();
+        return false;
+    }
+
+    function _clickDocumentHandler() {
+        _closeContextMenu();
+    }
+
+    function checkComponentConnections(componentUid) {
+        var component = projectService.findComponentInComponentsArray(componentUid);
+        var connections = 0;
+        if (component) {
+            _.forEach(component.pin, function(value) {
+                if (!_.isNull(value) && !_.isUndefined(value)) {
+                    connections++;
+                }
+            });
+        }
+        if (connections === 0) {
+            component.connected = false;
+        }
+    }
+
+    function connectionEventHandler(e) {
+        var componentReference, pinKey;
+        /* HW Connection listeners */
+
+        function _detectConnected(pins) {
+            var filtered = _.filter(pins, function(pin) {
+                return pin !== undefined;
+            });
+            return filtered.length > 0;
+        }
+
+        componentReference = projectService.findComponentInComponentsArray(e.componentData.uid);
+        $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
+
+        if (componentReference) {
+            if (e.protoBoLaAction === 'attach') {
+
+                pinKey = Object.keys(e.componentData.pin)[0];
+                if (componentReference.pin.hasOwnProperty(pinKey)) {
+                    componentReference.pin[pinKey] = e.componentData.pin[pinKey];
+                }
+
+                $rootScope.$emit('component-connected');
+
+            } else if (e.protoBoLaAction === 'detach') {
+
+                pinKey = Object.keys(e.componentData.pin)[0];
+                if (componentReference.pin.hasOwnProperty(pinKey)) {
+                    componentReference.pin[pinKey] = undefined;
+                }
+
+            }
+
+            if (_detectConnected(componentReference.pin)) {
+                componentReference.connected = true;
+            } else {
+                componentReference.connected = false;
+            }
+
+            if ($scope.projectLoaded.promise.$$state.status === 1 && projectComponentsHaveChanged(projectService.componentsArray)) {
+                projectService.startAutosave();
+            }
+
+        } else {
+            $log.debug('Unable to find this component or component is already removed');
+        }
+    }
+
+    function projectComponentsHaveChanged(newComponentsJSON) {
+        var components = _.flattenDeep(_.filter(newComponentsJSON, function(item) {
+            return item.length > 0;
+        }));
+        return !_.isEqual(_.sortBy(projectService.project.hardware.components, 'name'), _.sortBy(components, 'name'));
+    }
+
+
+    function _addBoard(board) {
+
+        if (projectService.project.hardware.board === board.name && !projectService.project.hardware.robot) {
+            return false;
+        }
+        projectService.project.hardware.robot = null;
+
+        hw2Bloqs.addBoard(board);
+
+        projectService.project.hardware.board = board.name;
+
+        projectService.startAutosave();
+    }
+
+    function _addRobot(robot) {
+
+        var robotReference = _.find($scope.hardware.robotList, function(r) {
+            return r.id === robot.id;
+        });
+        projectService.project.hardware.robot = robot.id;
+        hw2Bloqs.removeRobot(robotReference);
+        hw2Bloqs.addRobot(robotReference);
+
+        projectService.project.hardware.board = robotReference.board;
+
+        $scope.componentSelected = null;
+        projectService.project.hardware.components = [];
+        projectService.setComponentsArray();
+        projectService.startAutosave();
+    }
+
+    function _addComponent(data) {
+        $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
+        var component = _.find($scope.hardware.componentList[data.category], function(component) {
+            return component.id === data.id;
+        });
+
+        var newComponent = _.cloneDeep(component);
+        projectService.addComponentInComponentsArray(data.category, newComponent);
+
+        var relativeCoordinates = {
+            x: ((data.coordinates.x / container.clientWidth) * 100),
+            y: ((data.coordinates.y / container.clientHeight) * 100)
+        };
+
+        newComponent.coordinates = relativeCoordinates;
+        newComponent.category = data.category;
+        newComponent.name = _createUniqueVarName(newComponent); //Generate unique name
+        newComponent.connected = false;
+
+        hw2Bloqs.unselectAllConnections();
+        var componentDOMRef = hw2Bloqs.addComponent(newComponent);
+        _focusComponent(componentDOMRef);
+        $scope.boardSelected = false;
+    }
+
+    function _focusComponent(component) {
+
+        $('.component').removeClass('component-selected');
+
+        var componentSelected = projectService.findComponentInComponentsArray(component.dataset.uid);
+        $(component).addClass('component-selected');
+
+        container.focus();
+
+        $scope.componentSelected = componentSelected;
+        $scope.boardSelected = false;
+
+        $log.debug('focusComponent', $scope.componentSelected);
+
+    }
+
+    function _createUniqueVarName(component) {
+        var usedNames = {},
+            componentBasicName = $translate.instant('default-var-name-' + component.id);
+
+        var componentsNames = [];
+        projectService.componentsArray[component.category].forEach(function(comp) {
+            componentsNames[comp.name] = true;
+        });
+
+        var j = 0,
+            finalName = null;
+        while (!finalName) {
+            if (!componentsNames[componentBasicName + '_' + j]) {
+                finalName = componentBasicName + '_' + j;
+            }
+            j++;
+        }
+        return finalName;
+    }
+
+    function _removeElementFromKeyboard() {
+        if ($scope.componentSelected) {
+            $scope.deleteComponent();
+            $scope.componentSelected = false;
+        } else if ($scope.boardSelected) {
+            $scope.deleteBoard();
+        } else if ($scope.robotSelected) {
+            $scope.deleteRobot();
+        } else { //No component or board selected
+            var componentUid = hw2Bloqs.removeSelectedConnection();
+            checkComponentConnections(componentUid);
+        }
+    }
+
+    function _isUserConnect(componentPins) {
+        var userConnect = false;
+        _.forEach(componentPins, function(item) {
+            if (item === undefined || item === null) {
+                userConnect = true;
+            }
+        });
+        return userConnect;
+    }
+
+    function _loadHardwareProject(hardwareProject) {
+        if (hardwareProject.anonymousTransient) {
+            delete hardwareProject.anonymousTransient;
+        }
+
+        var hwSchema = {};
+        hwSchema.components = _.cloneDeep(projectService.project.hardware.components);
+        hwSchema.connections = _.cloneDeep(projectService.project.hardware.connections);
+
+        hwBasicsLoaded.promise.then(function() {
+            if (projectService.project.hardware.robot) {
+                var robotReference = _.find($scope.hardware.robotList, function(robot) {
+                    return robot.id === projectService.project.hardware.robot;
+                });
+                hwSchema.robot = robotReference; //The whole board object is passed
+            } else if (projectService.project.hardware.board) {
+                var boardReference = _.find($scope.hardware.boardList, function(board) {
+                    return board.name === projectService.project.hardware.board;
+                });
+                hwSchema.board = boardReference; //The whole board object is passed
+            }
+
+            if (hwSchema.robot || hwSchema.board) {
+                hw2Bloqs.loadSchema(hwSchema);
+                hw2Bloqs.repaint();
+                $scope.hardware.firstLoad = false;
+                //Fix components dimensions
+                _.forEach(projectService.project.hardware.components, function(item) {
+                    item = bloqsUtils.checkPins(item);
+                    _fixComponentsDimension(item);
+                });
+            } else {
+                $log.debug('robot is undefined');
+            }
+
+        });
+    }
+
 
     function _fixComponentsDimension(compRef) {
         var c = _.find($scope.hardware.componentList[compRef.category], {
@@ -629,11 +637,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         return name;
     }
 
-    var _getClonComponent = function() {
+    function _getClonComponent() {
         $scope.hardware.clonComponent = $scope.componentSelected;
-    };
+    }
 
-    var _setClonComponent = function() {
+    function _setClonComponent() {
         if ($scope.hardware.clonComponent) {
             $scope.duplicateComponent();
             $scope.hardware.clonComponent = $scope.componentSelected;
@@ -752,6 +760,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $rootScope.$on('$translateChangeEnd', function() {
         $scope.hardware.sortToolbox();
+    });
+
+    $scope.$on('$destroy', function() {
+        container.removeEventListener('connectionEvent', connectionEventHandler);
+        container.removeEventListener('mousedown', _mouseDownHandler);
+        $document.off('contextmenu', _contextMenuDocumentHandler);
+        $document.off('click', _clickDocumentHandler);
     });
 
 }

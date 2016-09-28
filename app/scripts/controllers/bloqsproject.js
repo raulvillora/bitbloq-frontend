@@ -16,13 +16,6 @@ angular.module('bitbloqApp')
          Project save / edit
          *************************************************/
 
-        function projectComponentsHaveChanged(newComponentsJSON) {
-            var components = _.find(newComponentsJSON, function(item) {
-                return item.length > 0;
-            });
-            return _.isEqual(projectService.project.hardware.components, components);
-        }
-
         $scope.setCode = function(code) {
             $scope.code = code;
         };
