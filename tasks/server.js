@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-    var http = require('https'),
+    var http = require('http'),
         async = require('async');
 
     var sharedToken;

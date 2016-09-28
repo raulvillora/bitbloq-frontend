@@ -273,10 +273,7 @@ angular
         // be loaded after bootstrap. This is done so the "_" factory has a chance to
         // "erase" the global reference to the lodash library.
         // ...
-        bloqs.setOptions({
-            fieldOffsetLeft: 70,
-            fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
-        });
+
     })
     .run(function(amMoment, envData) {
         amMoment.changeLocale(envData.config.defaultLang);
