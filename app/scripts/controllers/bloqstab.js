@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-                                         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-                                         robotFirmwareApi, web2boardOnline, projectService) {
+        bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+        robotFirmwareApi, web2boardOnline, projectService) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -25,7 +25,6 @@ angular.module('bitbloqApp')
         $scope.$field = $('#bloqs--field').last();
 
         var bloqsLoadTimes = 0;
-
 
         $scope.init = function() {
             if (projectService.bloqs.varsBloq) {
@@ -198,7 +197,6 @@ angular.module('bitbloqApp')
             }
         };
 
-
         $scope.searchBloq = function() {
             var userComponents = _.pick(projectService.componentsArray, function(value) {
                 return value.length > 0;
@@ -318,7 +316,6 @@ angular.module('bitbloqApp')
             setScrollsDimension();
         }
 
-
         function clickDocumentHandler() {
             $contextMenu.css({
                 display: 'none'
@@ -413,28 +410,10 @@ angular.module('bitbloqApp')
                     setScrollsDimension();
                     $('input[type="text"]').on('keyup paste change', checkInputLength);
                     bloqs.translateBloqs($translate.use());
-                    $scope.$watch('projectService.project.software', function(newValue) {
-                        var actualProjectSoftware = {
-                            vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                            setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                            loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                            freeBloqs: bloqs.getFreeBloqs() || []
-                        };
-                        $log.debug('Ha cambiado el proyecto', newValue, actualProjectSoftware);
-                        if (!angular.equals(newValue, actualProjectSoftware)) {
-                            $log.debug(angular.equals(newValue.vars, actualProjectSoftware.vars));
-                            $log.debug(angular.equals(newValue.loop, actualProjectSoftware.loop));
-                            $log.debug(angular.equals(newValue.setup, actualProjectSoftware.setup));
-                            $log.debug(angular.equals(newValue.freeBloqs, actualProjectSoftware.freeBloqs));
-
-                            $log.debug('Repintamos');
-                            $scope.init();
-                            $scope.initFreeBloqs();
-                        } else {
-                            $log.debug('NO Repintamos');
-                        }
+                    $scope.$on('refresh-bloqs', function() {
+                        $scope.init();
+                        bloqs.destroyFreeBloqs();
                     });
-
                     $rootScope.$on('$translateChangeStart', function(evt, key) {
                         bloqs.translateBloqs(key.language);
                     });
@@ -513,7 +492,6 @@ angular.module('bitbloqApp')
                 }
             }, 50);
         }
-
 
         loadBloqs();
 

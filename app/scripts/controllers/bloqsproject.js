@@ -34,6 +34,7 @@ angular.module('bitbloqApp')
             }
             projectService.setProject(project);
             $scope.refreshComponentsArray();
+            $scope.$broadcast('refresh-bloqs');
         };
 
         $scope.refreshComponentsArray = function() {
