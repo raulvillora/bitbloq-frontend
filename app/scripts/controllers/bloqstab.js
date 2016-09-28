@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-        bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-        robotFirmwareApi, web2boardOnline, projectService) {
+                                         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+                                         robotFirmwareApi, web2boardOnline, projectService) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -379,9 +379,7 @@ angular.module('bitbloqApp')
                     hasBeenWarnedAboutChangeBloqsToCode: true
                 });
                 if (projectService.project._id) {
-                    projectService.saveProject().then(function() {
-                        $location.path('/codeproject/' + projectService.project._id);
-                    });
+                    $location.path('/codeproject/' + projectService.project._id);
                 } else {
                     $location.path('/codeproject/');
                 }
