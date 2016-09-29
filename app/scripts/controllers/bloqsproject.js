@@ -11,7 +11,6 @@
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, common, web2boardOnline, projectService) {
 
-
         /*************************************************
          Project save / edit
          *************************************************/
@@ -528,11 +527,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -625,7 +624,6 @@ angular.module('bitbloqApp')
                 $scope.setTab(2);
             });
         };
-
 
         /*************************************************
          UNDO / REDO
@@ -868,6 +866,7 @@ angular.module('bitbloqApp')
         $scope.shareWithUserTags = [];
 
         $scope.code = '';
+        $scope.uploadProjectReady = false;
 
         $scope.hardware = {
             componentList: null,
@@ -912,6 +911,7 @@ angular.module('bitbloqApp')
                     launchModalTour();
                     projectService.initBloqProject();
                 }
+                $scope.projectLoaded.resolve();
             }
         }, function() {
             $log.debug('no registed user');
@@ -928,6 +928,7 @@ angular.module('bitbloqApp')
         var loadProject = function(id) {
             return projectApi.get(id).then(function(response) {
                 _uploadProject(response.data);
+                $scope.projectLoaded.resolve();
             }, function(error) {
                 projectService.addWatchers();
                 $scope.projectLoaded.reject();
@@ -969,10 +970,15 @@ angular.module('bitbloqApp')
                 projectService.setProject(project);
                 $scope.saveBloqStep(_.clone(project.software));
                 projectService.saveOldProject();
-                $scope.projectLoaded.resolve();
+                console.log("no deberia pasar dos veces");
+                $scope.uploadProjectReady = true;
+
             }
         }
 
+        $scope.setUploadProjectReady = function(value){
+          $scope.uploadProjectReady = value;
+        };
         function confirmExit() {
             var closeMessage;
             if (projectService.saveStatus === 1) {

@@ -36,7 +36,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             }
         }
     };
-    
+
     $scope.deleteBoard = function() {
         hw2Bloqs.removeBoard();
         $scope.boardSelected = false;
@@ -254,7 +254,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
-
     /***************************************
      * Private functions
      ****************************************/
@@ -433,7 +432,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         return !_.isEqual(_.sortBy(projectService.project.hardware.components, 'name'), _.sortBy(components, 'name'));
     }
 
-
     function _addBoard(board) {
 
         if (projectService.project.hardware.board === board.name && !projectService.project.hardware.robot) {
@@ -588,7 +586,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         });
     }
 
-
     function _fixComponentsDimension(compRef) {
         var c = _.find($scope.hardware.componentList[compRef.category], {
             'id': compRef.id
@@ -675,20 +672,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
@@ -767,6 +764,16 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         container.removeEventListener('mousedown', _mouseDownHandler);
         $document.off('contextmenu', _contextMenuDocumentHandler);
         $document.off('click', _clickDocumentHandler);
+    });
+
+    $scope.$watch('uploadProjectReady', function(newValue, oldValue) {
+        if (newValue && newValue !== oldValue) {
+            if (projectService.project.hardware.board || projectService.project.hardware.robot) {
+                _loadHardwareProject(projectService.project.hardware);
+            }
+            $scope.hardware.firstLoad = true;
+            $scope.setUploadProjectReady(false);
+        }
     });
 
 }
