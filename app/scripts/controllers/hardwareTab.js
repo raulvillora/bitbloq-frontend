@@ -47,7 +47,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteRobot = function() {
         projectService.project.hardware.robot = null;
         projectService.project.hardware.board = null;
-        projectService.componentsArray['robot'] = [];
+        projectService.componentsArray.robot = [];
         $scope.robotSelected = false;
         projectService.startAutosave();
     };
@@ -67,10 +67,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 componentReference.coordinates = newCoordinates;
                 projectService.startAutosave();
             }
-        } else if ($(ev.target).closest('.jsplumb-connector', container).length ||
-            $(ev.target).closest('.board_ep', container).length ||
-            $(ev.target).closest('.component_ep', container).length
-        ) {
+        } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target).closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -89,9 +86,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.subMenuHandler('boards', 'open', 1);
             }
         } else if (ev.target.classList.contains('component__container')) {
-            if (!projectService.project.hardware.robot && projectService.isEmptyComponentArray()) {
-                $scope.subMenuHandler('hwcomponents', 'open', 1);
+            if (!projectService.project.hardware.robot) {
+                if (!projectService.project.hardware.board) {
+                    $scope.subMenuHandler('boards', 'open', 1);
+                } else if (projectService.project.hardware.board && projectService.isEmptyComponentArray()) {
+                    $scope.subMenuHandler('hwcomponents', 'open', 1);
+                }
             }
+
         } else if (ev.target.classList.contains('oscillator--checkbox')) {
             $scope.unsetInputFocus();
         } else if ($(ev.target).closest('.baudrate__dropdown').length) {
@@ -505,10 +507,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _createUniqueVarName(component) {
-        var usedNames = {},
-            componentBasicName = $translate.instant('default-var-name-' + component.id);
+        var componentBasicName = $translate.instant('default-var-name-' + component.id),
+            componentsNames = [];
 
-        var componentsNames = [];
         projectService.componentsArray[component.category].forEach(function(comp) {
             componentsNames[comp.name] = true;
         });
@@ -643,7 +644,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $scope.duplicateComponent();
             $scope.hardware.clonComponent = $scope.componentSelected;
         }
-    };
+    }
 
     /*************************************************
      Shortcuts

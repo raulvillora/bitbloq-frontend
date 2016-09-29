@@ -13,9 +13,7 @@ angular.module('bitbloqApp')
             var exports = {},
                 thereAreWatchers = false,
                 savePromise,
-                oldProject = {},
-                boardWatcher,
-                codeWatcher;
+                oldProject = {};
 
             exports.bloqs = {
                 varsBloq: null,
@@ -503,7 +501,7 @@ angular.module('bitbloqApp')
             };
 
             exports.addCodeWatchers = function() {
-                codeWatcher = scope.$watch('project.code', function(newVal, oldVal) {
+                scope.$watch('project.code', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         exports.startAutosave(_saveProject);
                     }
