@@ -49,6 +49,9 @@ angular.module('bitbloqApp')
 
             exports.tempImage = {};
 
+            exports.addComponentInComponentsArray = function(category, newComponent) {
+                exports.componentsArray[category].push(newComponent);
+            };
 
             exports.isEmptyComponentArray = function() {
                 return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
@@ -274,8 +277,8 @@ angular.module('bitbloqApp')
                 oldProject = _.cloneDeep(exports.project);
             };
 
-            exports.addComponentInComponentsArray = function(category, newComponent) {
-                exports.componentsArray[category].push(newComponent);
+            exports.rename = function() {
+                commonModals.renameProject(exports.project).then(exports.startAutosave);
             };
 
             exports.setComponentsArray = function(components) {
