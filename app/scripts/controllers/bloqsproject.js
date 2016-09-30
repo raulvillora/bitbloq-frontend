@@ -508,7 +508,9 @@ angular.module('bitbloqApp')
         $scope.currentTab = 0;
 
         $scope.setTab = function(index) {
-            projectService.startAutosave(true);
+            if(!_.isEqual(projectService.project, projectService.getDefaultProject())) {
+                projectService.startAutosave(true);
+            }
             if (index === 0) {
                 hw2Bloqs.repaint();
             } else if (index === 1) {
@@ -640,7 +642,7 @@ angular.module('bitbloqApp')
             if (options.pointer > 1) {
                 options.pointer--;
                 callback(options.history[options.pointer - 1]);
-                $log.debug('actual position', options.pointer);
+                $log.debug('current position', options.pointer);
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
             }
@@ -650,7 +652,7 @@ angular.module('bitbloqApp')
             if (options.pointer < options.history.length) {
                 callback(options.history[options.pointer]);
                 options.pointer++;
-                $log.debug('actual position', options.pointer);
+                $log.debug('current position', options.pointer);
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
             }
@@ -970,7 +972,6 @@ angular.module('bitbloqApp')
                 projectService.setProject(project);
                 $scope.saveBloqStep(_.clone(project.software));
                 projectService.saveOldProject();
-                console.log("no deberia pasar dos veces");
                 $scope.uploadProjectReady = true;
 
             }

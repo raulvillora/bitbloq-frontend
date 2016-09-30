@@ -229,7 +229,7 @@ angular.module('bitbloqApp')
                     };
                 }
 
-                return _.cloneDeep(project);
+                return project;
             };
 
             exports.getSavePromise = function() {
