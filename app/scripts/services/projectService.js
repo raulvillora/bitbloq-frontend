@@ -262,7 +262,7 @@ angular.module('bitbloqApp')
             };
 
             exports.initCodeProject = function(watchers) {
-                exports.project = _.extend(exports.getDefaultProject('code'), exports.project);
+                exports.project = _.extend(exports.project,exports.getDefaultProject('code'));
                 if (watchers) {
                     exports.addCodeWatchers();
                 }
