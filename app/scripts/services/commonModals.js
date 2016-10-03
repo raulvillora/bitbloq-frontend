@@ -465,6 +465,9 @@ angular.module('bitbloqApp')
         };
 
         exports.clone = function(project, openInTab) {
+            if (!project.name) {
+                project.name = common.translate('new-project');
+            }
             var defered = $q.defer(),
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
 
