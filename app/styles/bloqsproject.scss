@@ -784,7 +784,10 @@ $leftBarWidth: 70px;
     &.toolbox-classes {
         background-color: #e30b9a;
     }
-    &.toolbox-evolution{
+    &.toolbox-evolution {
+        background-color: #7b0754;
+    }
+    &.toolbox-mBot {
         background-color: #7b0754;
     }
 }
@@ -964,7 +967,7 @@ $leftBarWidth: 70px;
 .tour--container {
     text-align: center;
     display: block;
-    & > *:not(:first-child) {
+    & > *:not(: first-child) {
         padding: 1em;
         display: block;
         margin: 0 auto;
