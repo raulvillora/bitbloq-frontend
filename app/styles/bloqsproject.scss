@@ -967,7 +967,7 @@ $leftBarWidth: 70px;
 .tour--container {
     text-align: center;
     display: block;
-    & > *:not(: first-child) {
+    & > *:not(:first-child) {
         padding: 1em;
         display: block;
         margin: 0 auto;
