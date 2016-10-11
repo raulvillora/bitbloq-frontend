@@ -306,6 +306,14 @@ angular.module('bitbloqApp')
                 exports.componentsArray = components;
             } else {
                 exports.componentsArray = bloqsUtils.getEmptyComponentsArray();
+                if (!exports.project.hardware.components) {
+                    project.hardware = {
+                        board: project.hardware.board || null,
+                        robot: project.hardware.robot || null,
+                        components: [],
+                        connections: []
+                    };
+                }
                 exports.project.hardware.components.forEach(function(comp) {
                     if (comp.oscillator === true || comp.oscillator === 'true') {
                         exports.componentsArray.oscillators.push(_.cloneDeep(comp));
