@@ -120,9 +120,11 @@ angular.module('bitbloqApp')
         };
 
         $scope.uploadFileProject = function(project) {
-            projectService.setProject(project);
+            projectService.setProject(project, 'code');
             $scope.setBoard(projectService.project.board);
-            _prettyCode();
+            _prettyCode().then(function() {
+                projectService.addCodeWatchers();
+            });
         };
 
         $scope.verify = function() {
@@ -312,10 +314,6 @@ angular.module('bitbloqApp')
             projectService.initCodeProject();
             if ($routeParams.id) {
                 projectApi.get($routeParams.id).then(function(response) {
-                    projectService.setProject(response.data);
-                    if ($scope.common.user && projectService.project._acl['user:' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
-                        $scope.disablePublish = true;
-                    }
                     if (!response.data.codeProject) {
                         editInfo = alertsService.add({
                             text: 'code-project_alert_edit-code',
@@ -325,11 +323,12 @@ angular.module('bitbloqApp')
                             linkText: 'undo',
                             link: _goToBloqs
                         });
+                        response.data.hardwareTags = [];
                     }
-                    if (!projectService.project.codeProject) {
-                        projectService.project.hardwareTags = [];
+                    projectService.setProject(response.data, 'code');
+                    if ($scope.common.user && projectService.project._acl['user:    ' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
+                        $scope.disablePublish = true;
                     }
-                    projectService.project.codeProject = true;
 
                     $scope.setBoard(projectService.project.hardware.board);
 
@@ -375,7 +374,7 @@ angular.module('bitbloqApp')
 
                 $scope.common.itsUserLoaded().then(function() {
                     if ($scope.common.session.save) {
-                        projectService.setProject($scope.common.session.project);
+                        projectService.setProject($scope.common.session.project, 'code');
                         $scope.common.session.save = false;
                         projectService.startAutosave();
                     }
@@ -384,11 +383,11 @@ angular.module('bitbloqApp')
                         projectService.addCodeWatchers();
                     });
                 }).catch(function() {
+                    if ($scope.common.session.project.code) {
+                        projectService.setProject($scope.common.session.project, 'code');
+                    }
                     if ($scope.common.session.project.hardware.board) {
                         $scope.setBoard($scope.common.session.project.hardware.board);
-                    }
-                    if ($scope.common.session.project.code) {
-                        projectService.setProject($scope.common.session.project);
                     }
                     _prettyCode().then(function() {
                         projectService.addCodeWatchers();

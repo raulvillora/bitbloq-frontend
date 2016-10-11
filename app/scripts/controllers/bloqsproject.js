@@ -508,7 +508,7 @@ angular.module('bitbloqApp')
         $scope.currentTab = 0;
 
         $scope.setTab = function(index) {
-            if(!_.isEqual(projectService.project, projectService.getDefaultProject())) {
+            if (!_.isEqual(projectService.project, projectService.getDefaultProject())) {
                 projectService.startAutosave(true);
             }
             if (index === 0) {
@@ -529,11 +529,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -883,7 +883,7 @@ angular.module('bitbloqApp')
 
         projectService.saveStatus = 0;
 
-        projectService.initBloqProject();
+        projectService.initBloqsProject();
         $scope.projectLoaded = $q.defer();
 
         if (!$scope.common.user) {
@@ -902,7 +902,6 @@ angular.module('bitbloqApp')
                     addProjectWatchersAndListener();
                 });
             } else {
-                addProjectWatchersAndListener();
                 if ($scope.common.session.save) {
                     $scope.common.session.save = false;
                     projectService.setProject($scope.common.session.project);
@@ -911,8 +910,8 @@ angular.module('bitbloqApp')
                 }
                 if (!$scope.common.user.takeTour) {
                     launchModalTour();
-                    projectService.initBloqProject();
                 }
+                addProjectWatchersAndListener();
                 $scope.projectLoaded.resolve();
             }
         }, function() {
@@ -927,7 +926,7 @@ angular.module('bitbloqApp')
             }
         });
 
-        var loadProject = function(id) {
+        function loadProject(id) {
             return projectApi.get(id).then(function(response) {
                 _uploadProject(response.data);
                 $scope.projectLoaded.resolve();
@@ -958,7 +957,7 @@ angular.module('bitbloqApp')
                         });
                 }
             });
-        };
+        }
 
         function _uploadProject(project) {
             if (project.codeProject) {
@@ -969,7 +968,7 @@ angular.module('bitbloqApp')
                     project.software.freeBloqs = project.software.freeBloqs || [];
                 }
 
-                projectService.setProject(project);
+                projectService.setProject(project, project.codeProject, true);
                 $scope.saveBloqStep(_.clone(project.software));
                 projectService.saveOldProject();
                 $scope.uploadProjectReady = true;
@@ -977,8 +976,8 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.setUploadProjectReady = function(value){
-          $scope.uploadProjectReady = value;
+        $scope.setUploadProjectReady = function(value) {
+            $scope.uploadProjectReady = value;
         };
         function confirmExit() {
             var closeMessage;

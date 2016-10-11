@@ -16,7 +16,10 @@ angular.module('bitbloqApp')
             savePromise,
             oldProject = {},
             boardWatcher,
-            codeWatcher;
+            codeWatcher,
+            nameWatcher,
+            descriptionWatcher,
+            videoUrlWatcher;
 
         exports.bloqs = {
             varsBloq: null,
@@ -256,10 +259,8 @@ angular.module('bitbloqApp')
             return found;
         };
 
-        exports.initBloqProject = function(watchers) {
-            if (thereAreCodeProjectWatchers) {
-                _unBlindCodeProjectWatchers();
-            }
+        exports.initBloqsProject = function(watchers) {
+            _unBlindAllWatchers();
             if (_.isEmpty(exports.project)) {
                 exports.project = _.extend(exports.project, exports.getDefaultProject());
             } else {
@@ -272,16 +273,15 @@ angular.module('bitbloqApp')
         };
 
         exports.initCodeProject = function(watchers) {
-            if (thereAreCodeProjectWatchers) {
-                _unBlindCodeProjectWatchers();
-            }
+            _unBlindAllWatchers();
             if (_.isEmpty(exports.project)) {
                 exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
-            } else if (_.isEqual(exports.getDefaultProject(), exports.project)) {
+            } else if (_.isEqual(exports.getDefaultProject(), exports.project) || exports.project.code === '') {
                 exports.project.hardware = {
                     board: 'bq ZUM'
                 };
                 exports.project.code = '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/\n\nvoid setup(){\n\n}\n\n/***   Loop  ***/\n\nvoid loop(){\n\n}';
+                exports.project.codeProject = true;
             }
             if (watchers) {
                 exports.addCodeWatchers();
@@ -317,12 +317,21 @@ angular.module('bitbloqApp')
             }
         };
 
-        exports.setProject = function(newproject) {
+        exports.setProject = function(newproject, type, watcher) {
+            _unBlindAllWatchers();
+            newproject.codeProject = type === 'code' ? true : newproject.codeProject;
             if (_.isEmpty(exports.project)) {
                 exports.project = exports.getDefaultProject(newproject.codeProject);
             }
             exports.project = _.extend(exports.project, newproject);
             exports.setComponentsArray();
+            if (watcher) {
+                if (type === 'code') {
+                    exports.addCodeWatchers();
+                } else {
+                    exports.addWatchers();
+                }
+            }
         };
 
         exports.startAutosave = function(hard) {
@@ -494,13 +503,13 @@ angular.module('bitbloqApp')
         exports.addWatchers = function() {
             if (!thereAreWatchers) {
                 thereAreWatchers = true;
-                scope.$watch('project.name', function(newVal, oldVal) {
+                nameWatcher = scope.$watch('project.name', function(newVal, oldVal) {
                     if (newVal && newVal !== oldVal) {
                         exports.startAutosave(_saveProject);
                     }
                 });
 
-                scope.$watch('project.description', function(newVal, oldVal) {
+                descriptionWatcher = scope.$watch('project.description', function(newVal, oldVal) {
                     if (!newVal) {
                         exports.project.description = '';
                     }
@@ -509,7 +518,7 @@ angular.module('bitbloqApp')
                     }
                 });
 
-                scope.$watch('project.videoUrl', function(newVal, oldVal) {
+                videoUrlWatcher = scope.$watch('project.videoUrl', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         if (!utils.isYoutubeURL(newVal) && newVal) {
                             alertsService.add({
@@ -548,6 +557,31 @@ angular.module('bitbloqApp')
                 exports.addWatchers();
             }
         };
+
+        function _unBlindAllWatchers() {
+            if (thereAreCodeProjectWatchers) {
+                _unBlindCodeProjectWatchers();
+            }
+            if (thereAreWatchers) {
+                _unBlindGenericWatchers();
+            }
+        }
+
+        function _unBlindGenericWatchers() {
+            thereAreWatchers = false;
+            if (_thereIsWatcher('project.hardware.board')) {
+                boardWatcher();
+            }
+            if (_thereIsWatcher('project.name')) {
+                nameWatcher();
+            }
+            if (_thereIsWatcher('project.description')) {
+                descriptionWatcher();
+            }
+            if (_thereIsWatcher('project.videoUrl')) {
+                videoUrlWatcher();
+            }
+        }
 
         function _unBlindCodeProjectWatchers() {
             thereAreCodeProjectWatchers = false;

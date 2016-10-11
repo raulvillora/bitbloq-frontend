@@ -113,7 +113,6 @@ angular.module('bitbloqApp')
                     $location.path('/codeproject/' + projectService.project._id);
                 } else {
                     $scope.common.session.project = projectService.project;
-                    $scope.common.session.project.codeProject = true;
                     $location.path('/codeproject/');
                 }
             }
@@ -392,7 +391,6 @@ angular.module('bitbloqApp')
                 }
             } else {
                 $scope.common.session.project = projectService.project;
-                $scope.common.session.project.codeProject = true;
                 $location.path('/codeproject/');
             }
         }
