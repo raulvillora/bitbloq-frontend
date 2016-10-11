@@ -156,6 +156,12 @@ angular.module('bitbloqApp')
             });
         };
 
+        exports.getRobotMetaData = function() {
+            return  _.find(hardwareConstants.robot, function(robot) {
+                return robot.id === exports.project.hardware.robot;
+            });
+        };
+
         exports.getCleanProject = function(projectRef, download) {
             projectRef = projectRef || exports.project;
             var cleanProject = _.cloneDeep(projectRef);

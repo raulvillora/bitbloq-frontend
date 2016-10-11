@@ -35,7 +35,7 @@
                     <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
                     <div class="bloqs--toolbox--main">
                         <div class="boards-list">
-                            <div class="board-container" ng-repeat="board in hardware.boardList track by board.id" data-ng-dblclick="drop({type:'boards', id:board.id})">
+                            <div class="board-container" ng-repeat="board in hardware.boardList track by board.id" data-ng-click="drop({type:'boards', id:board.id})">
                                 <h1 class="board-name name">{{board.name}}</h1>
                                 <img class="board-image" draggable dragid="{{board.id}}" dragtype="boards" ng-src="/images/boards/{{board.id}}.png">
                             </div>
@@ -81,7 +81,7 @@
                     <h1 class="h3 submenu__title">{{'robots' | translate}}</h1>
                     <div class="bloqs--toolbox--main">
                         <div class="robots-list">
-                            <div class="robot-container" ng-repeat="robot in hardware.robotList">
+                            <div class="robot-container" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.id})">
                                 <h1 class="robot-name name">{{robot.name}}</h1>
                                 <img class="robot-image" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
                             </div>

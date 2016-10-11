@@ -14,6 +14,7 @@ angular.module('bitbloqApp')
         var exports = {};
         var shortUrl;
         var serialMonitorPanel;
+        var plotterMonitorPanel;
 
         exports.contactModal = function() {
             var dialog,
@@ -464,6 +465,9 @@ angular.module('bitbloqApp')
         };
 
         exports.clone = function(project, openInTab) {
+            if (!project.name) {
+                project.name = common.translate('new-project');
+            }
             var defered = $q.defer(),
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
 
@@ -561,6 +565,41 @@ angular.module('bitbloqApp')
                 showClose: false
             });
             return defered.promise;
+        };
+
+        exports.launchPlotterWindow = function(board) {
+            if (plotterMonitorPanel) {
+                plotterMonitorPanel.normalize();
+                plotterMonitorPanel.reposition('center');
+                return;
+            }
+
+            var scope = $rootScope.$new();
+            scope.board = board;
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+
+            plotterMonitorPanel = $.jsPanel({
+                position: 'center',
+                size: {
+                    width: 800,
+                    height: 520
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    plotterMonitorPanel = null;
+                },
+                title: $translate.instant('plotter'),
+                ajax: {
+                    url: 'views/plotter.html',
+                    done: function() {
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            plotterMonitorPanel.scope = scope;
+
         };
 
         exports.launchSerialWindow = function(board) {

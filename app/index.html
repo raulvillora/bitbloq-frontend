@@ -55,11 +55,13 @@
     <link rel="stylesheet" href="bower_components/jspanel/source/jquery.jspanel.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
     <link rel="stylesheet" href="bower_components/bloqs/dist/bloqs.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ddpdpmibfdhifigignfdiggfbcmfblfj">
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hnplgohcflpahpplogmdgdhmefmecekc">
 </head>
 
 <body data-ng-app="bitbloqApp" class="body" data-ng-class="{'show--header':isHeader()}" data-ng-controller="BodyCtrl" oncontextmenu="return false;">
@@ -123,6 +125,9 @@
     <script src="bower_components/jspanel/source/jquery.jspanel.js"></script>
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/nvd3/build/nv.d3.js"></script>
+    <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
     <script src="bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js"></script>
     <script src="bower_components/autogrow/autogrow.js"></script>
     <script src="bower_components/bloqs/dist/bloqs.min.js"></script>
@@ -196,6 +201,7 @@
     <script src="scripts/controllers/hardwareTab.js"></script>
     <script src="scripts/controllers/header.js"></script>
     <script src="scripts/controllers/infotab.js"></script>
+    <script src="scripts/controllers/plotter.js"></script>
     <script src="scripts/controllers/projects.js"></script>
     <script src="scripts/controllers/resetPassword.js"></script>
     <script src="scripts/controllers/styleguide.js"></script>

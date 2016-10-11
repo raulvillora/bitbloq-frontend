@@ -318,6 +318,49 @@ angular.module('bitbloqApp')
             }
         }
 
+
+
+        function plotterW2b1() {
+            if ($scope.isWeb2BoardInProgress()) {
+                return false;
+            }
+            if (projectService.project.hardware.board) {
+                web2board.setInProcess(true);
+                serialMonitorAlert = alertsService.add({
+                    text: 'alert-web2board-openSerialMonitor',
+                    id: 'serialmonitor',
+                    type: 'loading'
+                });
+                //todo....
+                var boardReference = projectService.getBoardMetaData();
+                web2board.plotter(boardReference);
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+
+            }
+        }
+
+        function plotterW2b2() {
+            if (projectService.project.hardware.board) {
+                web2board.plotter(getBoardMetaData());
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
+        }
+
+
         $scope.verify = function() {
             if (common.useChromeExtension()) {
                 web2boardOnline.compile({
@@ -396,6 +439,29 @@ angular.module('bitbloqApp')
 
         $scope.showWeb2boardSettings = function() {
             web2board.showSettings();
+        };
+
+        $scope.showPlotter = function() {
+            if (projectService.project.hardware.board) {
+                if (common.useChromeExtension()) {
+                    commonModals.launchPlotterWindow(getBoardMetaData());
+                } else {
+                    if (web2board.isWeb2boardV2()) {
+                        plotterW2b2();
+                    } else {
+                        plotterW2b1();
+                    }
+                }
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
+
         };
 
         $scope.getCode = function() {

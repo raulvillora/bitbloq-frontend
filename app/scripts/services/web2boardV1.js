@@ -51,6 +51,7 @@ angular.module('bitbloqApp')
             web2board.verify = web2boardV2.verify;
             web2board.upload = web2boardV2.upload;
             web2board.serialMonitor = web2boardV2.serialMonitor;
+            web2board.plotter = web2boardV2.plotter;
             web2board.chartMonitor = web2boardV2.chartMonitor;
             web2board.version = web2boardV2.version;
             web2board.showSettings = web2boardV2.showSettings;
@@ -451,6 +452,19 @@ angular.module('bitbloqApp')
         web2board.serialMonitor = function(board) {
             if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'serialMonitor';
+                firstFunctionCalled.args = [board];
+                firstFunctionCalled.alertServiceTag = 'serialmonitor';
+            }
+            web2board._openCommunication(function() {
+                return web2board._setBoard(board.mcu).then(function() {
+                    web2board._send('SerialMonitor ' + web2board.serialPort);
+                });
+            });
+        };
+
+        web2board.plotter = function(board) {
+            if (isWeb2boardV2Flag === null) {
+                firstFunctionCalled.name = 'plotter';
                 firstFunctionCalled.args = [board];
                 firstFunctionCalled.alertServiceTag = 'serialmonitor';
             }

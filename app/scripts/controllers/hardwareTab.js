@@ -395,7 +395,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         if (componentReference) {
             if (e.protoBoLaAction === 'attach') {
-
                 pinKey = Object.keys(e.componentData.pin)[0];
                 if (componentReference.pin.hasOwnProperty(pinKey)) {
                     componentReference.pin[pinKey] = e.componentData.pin[pinKey];
@@ -404,7 +403,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $rootScope.$emit('component-connected');
 
             } else if (e.protoBoLaAction === 'detach') {
-
                 pinKey = Object.keys(e.componentData.pin)[0];
                 if (componentReference.pin.hasOwnProperty(pinKey)) {
                     componentReference.pin[pinKey] = undefined;
@@ -560,14 +558,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         hwBasicsLoaded.promise.then(function() {
             if (projectService.project.hardware.robot) {
-                var robotReference = _.find($scope.hardware.robotList, function(robot) {
-                    return robot.id === projectService.project.hardware.robot;
-                });
+                var robotReference = projectService.getRobotMetaData();
                 hwSchema.robot = robotReference; //The whole board object is passed
             } else if (projectService.project.hardware.board) {
-                var boardReference = _.find($scope.hardware.boardList, function(board) {
-                    return board.name === projectService.project.hardware.board;
-                });
+                var boardReference = projectService.getBoardMetaData();
                 hwSchema.board = boardReference; //The whole board object is passed
             }
 

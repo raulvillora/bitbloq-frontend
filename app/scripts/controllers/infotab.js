@@ -102,15 +102,11 @@ angular.module('bitbloqApp')
             canvas.height = 411;
             if (projectService.project.hardware.board) {
                 if (projectService.project.hardware.robot) {
-                    var robotRef = _.find($scope.hardware.robotList, function(b) {
-                        return b.id === projectService.project.hardware.robot;
-                    });
+                    var robotRef = projectService.getRobotMetaData();
                     var robotIcon = robotRef.id;
                     imageObj.src = '/images/robots/' + robotIcon + '.png';
                 } else {
-                    var boardRef = _.find($scope.hardware.boardList, function(b) {
-                        return b.name === projectService.project.hardware.board;
-                    });
+                    var boardRef = projectService.getBoardMetaData();
                     var boardIcon = boardRef.id;
                     imageObj.src = '/images/boards/' + boardIcon + '.png';
                 }
