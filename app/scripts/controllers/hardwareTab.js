@@ -272,13 +272,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         hw2Bloqs.initialize(container, 'boardSchema', 'robotSchema');
 
-        $scope.projectLoaded.promise.then(function() {
-            if (projectService.project.hardware.board || projectService.project.hardware.robot) {
-                _loadHardwareProject(projectService.project.hardware);
-            }
-            $scope.hardware.firstLoad = true;
-        });
-
         container.addEventListener('mousedown', _mouseDownHandler, true);
 
         $document.on('contextmenu', _contextMenuDocumentHandler);
