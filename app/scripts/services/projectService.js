@@ -157,7 +157,7 @@ angular.module('bitbloqApp')
         };
 
         exports.getRobotMetaData = function() {
-            return  _.find(hardwareConstants.robot, function(robot) {
+            return _.find(hardwareConstants.robot, function(robot) {
                 return robot.id === exports.project.hardware.robot;
             });
         };
@@ -313,12 +313,8 @@ angular.module('bitbloqApp')
             } else {
                 exports.componentsArray = bloqsUtils.getEmptyComponentsArray();
                 if (!exports.project.hardware.components) {
-                    project.hardware = {
-                        board: project.hardware.board || null,
-                        robot: project.hardware.robot || null,
-                        components: [],
-                        connections: []
-                    };
+                    exports.project.hardware.components = [];
+                    exports.project.hardware.connections = [];
                 }
                 exports.project.hardware.components.forEach(function(comp) {
                     if (comp.oscillator === true || comp.oscillator === 'true') {
