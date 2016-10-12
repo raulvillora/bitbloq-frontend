@@ -319,7 +319,6 @@ angular.module('bitbloqApp')
         }
 
 
-
         function plotterW2b1() {
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
@@ -348,7 +347,7 @@ angular.module('bitbloqApp')
 
         function plotterW2b2() {
             if (projectService.project.hardware.board) {
-                web2board.plotter(getBoardMetaData());
+                web2board.plotter(projectService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
@@ -444,7 +443,7 @@ angular.module('bitbloqApp')
         $scope.showPlotter = function() {
             if (projectService.project.hardware.board) {
                 if (common.useChromeExtension()) {
-                    commonModals.launchPlotterWindow(getBoardMetaData());
+                    commonModals.launchPlotterWindow(projectService.getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
                         plotterW2b2();
