@@ -2,14 +2,33 @@
     <div class="form-control ports" data-ng-show="showPorts">
         <common-dropdown class="ports--sort-dropdown" direction="down" options-click="setPort" options="portNames" shown-option="selectedPort.portName"></common-dropdown>
         <button class="btn refresh" data-ng-click="getPorts()">
-            <svg class="svg-icon svg-icon--text">
+            <svg class="svg-icon">
                 <use xlink:href="#versionAnterior"></use>
             </svg>
         </button>
     </div>
+    <div class="plotter-wheel">
+        <svg>
+            <use xlink:href="#plotter_Wheel"></use>
+        </svg>
+        <svg>
+            <use xlink:href="#plotter_Wheel"></use>
+        </svg>
+        <svg>
+            <use xlink:href="#plotter_Wheel"></use>
+        </svg>
+        <svg>
+            <use xlink:href="#plotter_Wheel"></use>
+        </svg>
+        <svg>
+            <use xlink:href="#plotter_Wheel"></use>
+        </svg>
+    </div>
 
     <div class="plotter">
+      <div class="plotter__graphic">
         <nvd3 class="with-3d-shadow with-transitions" data="data" id="plotter" options="chartOptions"></nvd3>
+      </div>
         <!-- Submit Form -->
         <div class="chart-air">
             <button class="btn btn--secondary btn--small" ng-click="onPause()">{{pauseText}}</button>

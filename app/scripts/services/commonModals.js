@@ -578,7 +578,11 @@ angular.module('bitbloqApp')
             };
 
             plotterMonitorPanel = $.jsPanel({
+                id: 'plotter',
                 position: 'center',
+                addClass: {
+                    content: 'plotter__content'
+                },
                 size: {
                     width: 800,
                     height: 520
