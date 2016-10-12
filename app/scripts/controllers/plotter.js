@@ -90,7 +90,7 @@ angular.module('bitbloqApp')
         $scope.chartOptions = {
             chart: {
                 type: 'lineChart',
-                height: 400,
+                height: null,
                 margin: {
                     top: 20,
                     right: 20,
@@ -104,7 +104,7 @@ angular.module('bitbloqApp')
                 y: function(d) {
                     return d.y;
                 },
-                showLegend : false,
+                showLegend: false,
                 useInteractiveGuideline: true
             }
         };
@@ -224,6 +224,8 @@ angular.module('bitbloqApp')
                     }
                 });
                 $scope.$apply();
+            } else {
+                window.dispatchEvent(new Event('resize'));
             }
         });
 

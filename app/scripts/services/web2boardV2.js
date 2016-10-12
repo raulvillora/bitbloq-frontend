@@ -434,6 +434,10 @@ angular.module('bitbloqApp')
                 scope.uploadFinished = callback;
             };
             plotterMonitorPanel = $.jsPanel({
+                id: 'plotter',
+                addClass: {
+                    content: 'customContentClass'
+                },
                 position: 'center',
                 size: {
                     width: 800,
@@ -457,36 +461,36 @@ angular.module('bitbloqApp')
             plotterMonitorPanel.scope = scope;
         }
 
-        web2board.plotter = function(board){
-          if (plotterMonitorPanel) {
-              plotterMonitorPanel.normalize();
-              plotterMonitorPanel.reposition('center');
-              return;
-          }
-          openCommunication(function() {
-              inProgress = true;
-              var toast = alertsService.add({
-                  text: 'alert-web2board-openSerialMonitor',
-                  id: 'web2board',
-                  type: 'loading'
-              });
+        web2board.plotter = function(board) {
+            if (plotterMonitorPanel) {
+                plotterMonitorPanel.normalize();
+                plotterMonitorPanel.reposition('center');
+                return;
+            }
+            openCommunication(function() {
+                inProgress = true;
+                var toast = alertsService.add({
+                    text: 'alert-web2board-openSerialMonitor',
+                    id: 'web2board',
+                    type: 'loading'
+                });
 
-              api.SerialMonitorHub.server.findBoardPort(board.mcu)
-                  .then(function(port) {
-                      alertsService.close(toast);
-                      generatePlotterWindow(port);
-                  }, function(error) {
-                      alertsService.add({
-                          text: 'alert-web2board-no-port-found',
-                          id: 'web2board',
-                          type: 'warning'
-                      });
-                      console.error(error);
-                  })
-                  .finally(function() {
-                      inProgress = false;
-                  });
-          });
+                api.SerialMonitorHub.server.findBoardPort(board.mcu)
+                    .then(function(port) {
+                        alertsService.close(toast);
+                        generatePlotterWindow(port);
+                    }, function(error) {
+                        alertsService.add({
+                            text: 'alert-web2board-no-port-found',
+                            id: 'web2board',
+                            type: 'warning'
+                        });
+                        console.error(error);
+                    })
+                    .finally(function() {
+                        inProgress = false;
+                    });
+            });
 
         };
 
