@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ExploreCtrl', function($scope, $window, $log, $timeout, $location, $routeParams, envData, _, projectApi, userApi) {
+    .controller('ExploreCtrl', function($scope, $log, $location, $routeParams, envData, _, projectApi, userApi) {
 
         $scope.componentFilter = function(newFilter) {
             if (newFilter === 'without-components' && $scope.componentsFilterOptions[0].value) {
@@ -178,8 +178,8 @@ angular.module('bitbloqApp')
 
         function getComponentFilterRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.componentsFilterOptions[0].value) {
                 var componentsArray = _.pluck($scope.componentsFilterOptions, 'option');
@@ -200,8 +200,8 @@ angular.module('bitbloqApp')
 
         function getBoardFilterRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.boardFilters) {
                 if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi') {
@@ -216,8 +216,8 @@ angular.module('bitbloqApp')
 
         function getGenericFilterRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.genericFilterOptions[0].value) {
                 if ($scope.genericFilters.indexOf('bq') > -1) {
@@ -229,8 +229,8 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
 
             if ($scope.searchText !== '') {
                 queryParams.query.$or = [{

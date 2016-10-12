@@ -10,6 +10,10 @@
 angular.module('bitbloqApp')
     .controller('ProjectCtrl', function($routeParams, $scope, $location, projectApi, alertsService, utils, _, $window, common, commonModals) {
 
+        $scope.commonModals = commonModals;
+        $scope.projectApi = projectApi;
+        $scope.utils = utils;
+
         $scope.countAdded = function() {
             //model updated in projectApi
             $scope.project.timesAdded = $scope.project.timesAdded + 1;
@@ -37,9 +41,6 @@ angular.module('bitbloqApp')
                 } else {
                     $scope.imageShown = '';
                 }
-                projectApi.getShortURL($location.$$absUrl).then(function(data) {
-                    $scope.project.shortUrl = data.data.id;
-                });
             }, function(response) {
                 switch (response.status) {
                     case 404:
@@ -65,9 +66,4 @@ angular.module('bitbloqApp')
                 }
             });
         }
-
-        $scope.projectApi = projectApi;
-        $scope.utils = utils;
-        $scope.commonModals = commonModals;
-        // $scope.project.shortUrl = requestShortUrl($location.path());
     });

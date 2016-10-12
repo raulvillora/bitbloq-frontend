@@ -9,7 +9,16 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $timeout, $location, $http, $window, $document, alertsService, bloqs, ngDialog, projectApi, imageApi, _, $q, $route, $routeParams, utils, bloqsUtils, feedbackApi, commonModals, clipboard) {
+    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $location, $window, $document, alertsService, bloqs, ngDialog, projectApi, _, $route, commonModals, clipboard, projectService) {
+
+        $scope.defaultZoom = 1;
+        $scope.modal = {
+            projectCloneName: ''
+        };
+        $scope.projectApi = projectApi;
+        $scope.commonModals = commonModals;
+        $scope.projectService = projectService;
+        $scope.removeAlert = [];
 
         $scope.uploadProjectSelected = function(fileList) {
 
@@ -48,7 +57,7 @@ angular.module('bitbloqApp')
                     if (fileParsed.id) {
                         fileParsed.id = '';
                     }
-                    $scope.setProject(fileParsed);
+                    $scope.uploadFileProject(fileParsed);
                     $scope.$apply();
                     $scope.setCode($scope.getCode());
                     if (!$scope.common.user) {
@@ -130,15 +139,10 @@ angular.module('bitbloqApp')
             $('#uploadProject').trigger('click');
         };
 
-        $scope.downloadProject = function() {
-            var projectRef = $scope.getCurrentProject();
-            projectApi.download(projectRef);
-        };
-
         $scope.downloadIno = function() {
-            var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : $scope.project.code;
-            $scope.project.code = code;
-            projectApi.download($scope.project, 'arduino');
+            var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : projectService.project.code;
+            projectService.project.code = code;
+            projectService.download(projectService.project, 'arduino');
         };
 
         $scope.removeProject = function(project) {
@@ -179,8 +183,12 @@ angular.module('bitbloqApp')
             clipboard.copyText($scope.getCode());
         };
 
-        $scope.clone = function() {
-            commonModals.clone($scope.getCurrentProject(), true);
+        $scope.dropdownHandler = function(menu) {
+            if ($scope.dropdown !== menu) {
+                $scope.dropdown = menu;
+            } else {
+                $scope.dropdown = false;
+            }
         };
 
         $scope.zoom = function(value) {
@@ -247,20 +255,6 @@ angular.module('bitbloqApp')
             $scope.common.removeProjects[projectId] = false;
         }
 
-        $scope.dropdownHandler = function(menu) {
-            if ($scope.dropdown !== menu) {
-                $scope.dropdown = menu;
-            } else {
-                $scope.dropdown = false;
-            }
-        };
-
-        $document.on('click', clickDocumentHandler);
-
-        $scope.$on('$destroy', function() {
-            $document.off('click', clickDocumentHandler);
-        });
-
         function clickDocumentHandler(evt) {
             if (!$(evt.target).hasClass('actions__menu--selected')) {
                 $scope.dropdownHandler(false);
@@ -270,12 +264,10 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.defaultZoom = 1;
-        $scope.modal = {
-            projectCloneName: ''
-        };
-        $scope.projectApi = projectApi;
-        $scope.commonModals = commonModals;
-        $scope.removeAlert = [];
+        $document.on('click', clickDocumentHandler);
+
+        $scope.$on('$destroy', function() {
+            $document.off('click', clickDocumentHandler);
+        });
 
     });

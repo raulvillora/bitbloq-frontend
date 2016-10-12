@@ -8,8 +8,11 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ProjectsCtrl', function($rootScope, $log, $scope, $q, projectApi, $location, $localStorage, alertsService, $window,
-        $timeout, ngDialog, commonModals, utils, _, moment, JSZip) {
+    .controller('ProjectsCtrl', function($log, $scope, $q, projectApi, $location, $localStorage, alertsService, $window, commonModals, utils, _, moment, JSZip, projectService) {
+
+
+        $scope.projectService = projectService;
+
 
         $scope.sortProjects = function(type) {
             $log.debug('sortProject', type);
@@ -114,7 +117,7 @@ angular.module('bitbloqApp')
                 projectsToDownload = [],
                 j = 1;
             for (var i = 0; i < $scope.filtered.projects.length; i++) {
-                currentProject = projectApi.getCleanProject($scope.filtered.projects[i]);
+                currentProject = projectService.getCleanProject($scope.filtered.projects[i], true);
                 currentProjectName = utils.removeDiacritics(currentProject.name).substring(0, 30);
                 if (projectsToDownload.indexOf(currentProjectName) > -1) {
                     currentProjectName = currentProjectName + '_' + j;

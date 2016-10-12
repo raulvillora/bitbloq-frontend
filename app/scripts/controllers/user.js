@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('UserCtrl', function($scope, $translate, $routeParams, $location, $q, projectApi, userApi, _) {
+    .controller('UserCtrl', function($scope, $translate, $routeParams, $location, projectApi, userApi, _) {
 
         $scope.translate = $translate;
         $scope.userProjects = [];
