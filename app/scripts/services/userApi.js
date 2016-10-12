@@ -255,7 +255,5 @@ angular.module('bitbloqApp')
             });
         };
 
-        //***********************
-
         return exports;
     });

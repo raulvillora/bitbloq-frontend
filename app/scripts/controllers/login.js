@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $http, $auth, $location, $q, $rootScope, moment, alertsService, ngDialog, $routeParams, $translate) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate) {
         $scope.focusHandler = function(evt) {
             $scope.focus = evt.currentTarget.name;
         };

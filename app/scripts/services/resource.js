@@ -11,7 +11,7 @@
      */
     angular.module('bitbloqApp').factory('resource', resourceApi);
 
-    function resourceApi($http, $q, utils, envData) {
+    function resourceApi($http, $q, envData) {
 
         var exports = {
             get: get,

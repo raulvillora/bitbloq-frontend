@@ -17,13 +17,13 @@
                 </span>
             </div>
         </div>
-        <div class="component__container" ng-class="{'component__container--visible':(project.hardware.components.length === 0 && project.hardware.board) && !project.hardware.robot ,'component__container--pseudovisible':(project.hardware.components.length !== 0) && project.hardware.board && !project.hardware.robot}">
+        <div class="component__container" ng-class="{'component__container--visible':(projectService.isEmptyComponentArray() && projectService.project.hardware.board) && !projectService.project.hardware.robot ,'component__container--pseudovisible':(!projectService.isEmptyComponentArray()) && projectService.project.hardware.board && !projectService.project.hardware.robot}">
             <p class="component__message">{{'make-hardware-component-container' | translate}}</p>
         </div>
-        <div id="boardSchema" class="board" ng-class="{'board--present':project.hardware.board, 'board--selected':boardSelected, 'opaque':!project.hardware.robot}">
+        <div id="boardSchema" class="board" ng-class="{'board--present':projectService.project.hardware.board, 'board--selected':boardSelected, 'opaque':!projectService.project.hardware.robot}">
             <p class="board__message">{{'make-hardware-board-container' | translate}}</p>
         </div>
-        <div id="robotSchema" class="robot" ng-class="{'robot--present':project.hardware.robot , 'robot--selected':robotSelected, 'opaque':project.hardware.robot}"></div>
+        <div id="robotSchema" class="robot" ng-class="{'robot--present':projectService.project.hardware.robot , 'robot--selected':robotSelected, 'opaque':projectService.project.hardware.robot}"></div>
     </div>
     <div class="hw-toolbox-container tab--make__block"  data-ng-include="'views/bloqsproject/hardwareToolbox.html'"></div>
     <div id="component-context-menu" class="hw-context-menu">

@@ -1,7 +1,7 @@
 'use strict';
 angular
     .module('bitbloqApp')
-    .service('hw2Bloqs', function($rootScope, jsPlumb, $log, $window, jsPlumbUtil) {
+    .service('hw2Bloqs', function(jsPlumb, $log, $window, jsPlumbUtil) {
         var exports = {},
 
             board = null,

@@ -9,8 +9,8 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, $location, $rootScope, $q, _, $document, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+    .service('common', function($filter, $log, envData, packageData, userApi, User, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
+
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
 

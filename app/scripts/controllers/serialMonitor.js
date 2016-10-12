@@ -9,8 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board, hardwareConstants,
-        utils) {
+    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board, hardwareConstants, utils) {
         /*Private vars*/
         var serialHub = web2boardV2.api.SerialMonitorHub,
             textArea = $element.find('#serialData'),

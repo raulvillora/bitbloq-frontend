@@ -249,6 +249,11 @@ $hw_toolbox: 210px;
             background-color: transparent;
             height: 50%;
         }
+        &.mBot {
+            background-image: url(/images/robots/evolution.svg);
+            background-color: transparent;
+            height: 50%;
+        }
         &.robot--selected {
             outline: 4px solid $color !important;
             background-color: transparent;
@@ -302,6 +307,10 @@ $hw_toolbox: 210px;
             background-color: transparent;
         }
         &.ArduinoUNO {
+            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-color: transparent;
+        }
+        &.mCore {
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
         }

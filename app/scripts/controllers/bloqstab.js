@@ -9,13 +9,87 @@
  */
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-        bloqs, bloqsApi, $http, envData, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-        robotFirmwareApi, web2boardOnline) {
+                                         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+                                         robotFirmwareApi, web2boardOnline, projectService) {
+
+        var $contextMenu = $('#bloqs-context-menu'),
+            field = angular.element('#bloqs--field'),
+            scrollBarContainer = angular.element('.make--scrollbar'),
+            scrollBar = angular.element('.scrollbar--small'),
+            bloqsTab = angular.element('.bloqs-tab');
+
+        $scope.bloqsApi = bloqsApi;
+        $scope.projectService = projectService;
+        $scope.lastPosition = 0;
+
+        $scope.$field = $('#bloqs--field').last();
+
+        var bloqsLoadTimes = 0;
+
+        $scope.init = function() {
+            if (projectService.bloqs.varsBloq) {
+                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
+                projectService.bloqs.varsBloq = null;
+                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
+                projectService.bloqs.setupBloq = null;
+                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
+                projectService.bloqs.loopBloq = null;
+            }
+
+            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
+            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
+            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
+
+            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
+            projectService.bloqs.varsBloq.enable(true);
+            projectService.bloqs.varsBloq.doConnectable();
+
+            projectService.bloqs.setupBloq.enable(true);
+            projectService.bloqs.setupBloq.doConnectable();
+
+            projectService.bloqs.loopBloq.enable(true);
+            projectService.bloqs.loopBloq.doConnectable();
+
+            bloqs.updateDropdowns();
+        };
+
+        $scope.initFreeBloqs = function() {
+            var tempBloq, i, j,
+                lastBottomConnector;
+
+            bloqs.destroyFreeBloqs();
+            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
+                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
+                    lastBottomConnector = null;
+                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
+                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
+                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
+
+                        if (lastBottomConnector) {
+                            bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
+                            bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
+
+                        } else {
+                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
+                        }
+
+                        lastBottomConnector = tempBloq.connectors[1];
+
+                        $scope.$field.append(tempBloq.$bloq);
+                        tempBloq.disable();
+                        tempBloq.doConnectable();
+                    }
+
+                    bloqsUtils.redrawTree(tempBloq, bloqs.bloqs, bloqs.connectors);
+                }
+            }
+            bloqsUtils.drawTree(bloqs.bloqs, bloqs.connectors);
+        };
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
             if ($scope.common.session.save) {
-                $scope.project.code = $scope.code;
+                projectService.project.code = $scope.code;
             }
             if (!$scope.common.user || !$scope.common.user.hasBeenWarnedAboutChangeBloqsToCode) {
                 var modalCode = $rootScope.$new();
@@ -35,13 +109,18 @@ angular.module('bitbloqApp')
                     showClose: false
                 });
             } else {
-                if ($scope.project._id) {
-                    $location.path('/codeproject/' + $scope.project._id);
+                if (projectService.project._id) {
+                    $location.path('/codeproject/' + projectService.project._id);
                 } else {
-                    $scope.common.session.project = $scope.project;
-                    $scope.common.session.project.codeProject = true;
+                    $scope.common.session.project = projectService.project;
                     $location.path('/codeproject/');
                 }
+            }
+        };
+
+        $scope.hideBloqsMenu = function($event) {
+            if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
+                $scope.toolbox.level = 1;
             }
         };
 
@@ -53,11 +132,10 @@ angular.module('bitbloqApp')
                     bloqs.removeBloq($document[0].activeElement.attributes['data-bloq-id'].value, true);
                     $scope.$field.focus();
                     $scope.saveBloqStep();
-                    $scope.startAutosave();
+                    projectService.startAutosave();
                 } else {
                     $log.debug('we cant delete group bloqs');
                 }
-
             }
         };
 
@@ -75,7 +153,7 @@ angular.module('bitbloqApp')
                             bloqs.removeBloq($document[0].activeElement.attributes['data-bloq-id'].value, true);
                             $scope.$field.focus();
                             $scope.saveBloqStep();
-                            $scope.startAutosave();
+                            projectService.startAutosave();
                         } else {
                             $log.debug('we cant delete group bloqs');
                         }
@@ -116,77 +194,32 @@ angular.module('bitbloqApp')
                     }
                     break;
             }
-
         };
 
-        $scope.init = function() {
-            if ($scope.bloqs.varsBloq) {
-                bloqs.removeBloq($scope.bloqs.varsBloq.uuid, true);
-                $scope.bloqs.varsBloq = null;
-                bloqs.removeBloq($scope.bloqs.setupBloq.uuid, true);
-                $scope.bloqs.setupBloq = null;
-                bloqs.removeBloq($scope.bloqs.loopBloq.uuid, true);
-                $scope.bloqs.loopBloq = null;
+        $scope.searchBloq = function() {
+            var userComponents = _.pick(projectService.componentsArray, function(value) {
+                return value.length > 0;
+            });
+            if (userComponents.indexOf($scope.searchText)) {
+                //Todo pintar en un contenedor nuevo
             }
-
-            $scope.bloqs.varsBloq = bloqs.buildBloqWithContent($scope.project.software.vars, $scope.componentsArray, bloqsApi.schemas, $scope.$field);
-            $scope.bloqs.setupBloq = bloqs.buildBloqWithContent($scope.project.software.setup, $scope.componentsArray, bloqsApi.schemas);
-            $scope.bloqs.loopBloq = bloqs.buildBloqWithContent($scope.project.software.loop, $scope.componentsArray, bloqsApi.schemas);
-
-            $scope.$field.append($scope.bloqs.varsBloq.$bloq, $scope.bloqs.setupBloq.$bloq, $scope.bloqs.loopBloq.$bloq);
-            $scope.bloqs.varsBloq.enable(true);
-            $scope.bloqs.varsBloq.doConnectable();
-
-            $scope.bloqs.setupBloq.enable(true);
-            $scope.bloqs.setupBloq.doConnectable();
-
-            $scope.bloqs.loopBloq.enable(true);
-            $scope.bloqs.loopBloq.doConnectable();
-
-            bloqs.updateDropdowns();
-        };
-
-        $scope.initFreeBloqs = function() {
-            var tempBloq, i, j,
-                lastBottomConnector;
-
-            bloqs.destroyFreeBloqs();
-            if ($scope.project.software.freeBloqs && ($scope.project.software.freeBloqs.length > 0)) {
-                for (i = 0; i < $scope.project.software.freeBloqs.length; i++) {
-                    lastBottomConnector = null;
-                    for (j = 0; j < $scope.project.software.freeBloqs[i].bloqGroup.length; j++) {
-                        // $log.debug($scope.project.software.freeBloqs[i].bloqGroup[j]);
-                        tempBloq = bloqs.buildBloqWithContent($scope.project.software.freeBloqs[i].bloqGroup[j], $scope.componentsArray, bloqsApi.schemas);
-
-                        if (lastBottomConnector) {
-                            bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
-                            bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
-
-                        } else {
-                            tempBloq.$bloq[0].style.transform = 'translate(' + $scope.project.software.freeBloqs[i].position.left + 'px,' + $scope.project.software.freeBloqs[i].position.top + 'px)';
-                        }
-
-                        lastBottomConnector = tempBloq.connectors[1];
-
-                        $scope.$field.append(tempBloq.$bloq);
-                        tempBloq.disable();
-                        tempBloq.doConnectable();
-                    }
-
-                    bloqsUtils.redrawTree(tempBloq, bloqs.bloqs, bloqs.connectors);
-                }
-            }
-            bloqsUtils.drawTree(bloqs.bloqs, bloqs.connectors);
         };
 
         $scope.showComponents = function(item) {
             var stopWord = ['analogWrite', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
             if (stopWord.indexOf(item) === -1) {
                 var result = false;
-                if ($scope.componentsArray.robot.length === 0) {
-                    var userComponents = _.keys(_.pick($scope.componentsArray, function(value) {
-                        return value.length > 0;
-                    }));
+                if (!projectService.project.hardware.robot && projectService.project.hardware.board) {
+                    var userComponents = [];
+                    projectService.project.hardware.components.forEach(function(item) {
+                        if (item.oscillator) {
+                            userComponents.push('oscillators');
+                        } else {
+                            userComponents.push(item.category);
+                        }
+                    });
+                    userComponents = _.unique(userComponents);
+
                     if (item === 'hwVariable' && userComponents.length !== 0) {
                         result = true;
                     } else {
@@ -224,23 +257,78 @@ angular.module('bitbloqApp')
 
         $scope.showCommunications = function(item) {
             var stopWord = ['convert'];
-            if ($scope.componentsArray.serialElements) {
-                return !(stopWord.indexOf(item) === -1 && $scope.componentsArray.serialElements.length === 0);
+            if (projectService.componentsArray.serialElements) {
+                return !(stopWord.indexOf(item) === -1 && projectService.componentsArray.serialElements.length === 0);
             } else {
                 return false;
             }
         };
 
-        $scope.searchBloq = function() {
-            var userComponents = _.pick($scope.componentsArray, function(value) {
-                return value.length > 0;
+        $scope.enableBloqFromContextMenu = function(bloq) {
+            bloq.enable();
+            $scope.saveBloqStep();
+            projectService.startAutosave();
+        };
+        $scope.disableBloqFromContextMenu = function(bloq) {
+            bloq.disable();
+            $scope.saveBloqStep();
+            projectService.startAutosave();
+        };
+        $scope.removeBloqFromContextMenu = function(bloq) {
+            bloqs.removeBloq(bloq.uuid, true);
+            //saveBloqStep from here to not listen remove event from children and store one step for children
+            $scope.saveBloqStep();
+            projectService.startAutosave();
+        };
+
+        $scope.duplicateBloqFromContextMenu = function(bloq) {
+            var position = bloq.$bloq[0].getBoundingClientRect();
+            copyBloq({
+                structure: bloq.getBloqsStructure(),
+                top: position.top,
+                left: position.left
             });
-            if (userComponents.indexOf($scope.searchText)) {
-                //Todo pintar en un contenedor nuevo
+        };
+
+        $scope.setSoftwareTab = function(tab) {
+            $scope.softTab = tab;
+            if (tab === 'code') {
+                $scope.setCode(projectService.getCode());
+            } else if (tab === 'bloqs') {
+                $rootScope.$emit('currenttab:bloqstab');
             }
         };
 
-        var contextMenuDocumentHandler = function(event) {
+        $scope.performFactoryReset = function() {
+            var robot = projectService.project.hardware.robot,
+                version = common.properties.robotsFirmwareVersion[robot];
+            robotFirmwareApi.getFirmware(robot, version).then(function(result) {
+                if (common.useChromeExtension()) {
+                    web2boardOnline.upload({
+                        hex: result.data,
+                        board: {
+                            mcu: 'uno'
+                        }
+                    });
+                } else {
+                    web2board.uploadHex('uno', result.data);
+                }
+            }, function() {
+                // alert("Error"); todo: add toast
+            });
+        };
+
+        function checkInputLength() {
+            setScrollsDimension();
+        }
+
+        function clickDocumentHandler() {
+            $contextMenu.css({
+                display: 'none'
+            });
+        }
+
+        function contextMenuDocumentHandler(event) {
 
             var bloq = $(event.target).closest('.bloq');
             var bloqUuid = bloq.attr('data-bloq-id');
@@ -269,81 +357,11 @@ angular.module('bitbloqApp')
                     display: 'none'
                 });
             }
-        };
-
-        var clickDocumentHandler = function() {
-            $contextMenu.css({
-                display: 'none'
-            });
-        };
-
-        $scope.enableBloqFromContextMenu = function(bloq) {
-            bloq.enable();
-            $scope.saveBloqStep();
-            $scope.startAutosave();
-        };
-        $scope.disableBloqFromContextMenu = function(bloq) {
-            bloq.disable();
-            $scope.saveBloqStep();
-            $scope.startAutosave();
-        };
-        $scope.removeBloqFromContextMenu = function(bloq) {
-            bloqs.removeBloq(bloq.uuid, true);
-            //saveBloqStep from here to not listen remove event from children and store one step for children
-            $scope.saveBloqStep();
-            $scope.startAutosave();
-        };
-
-        $scope.duplicateBloqFromContextMenu = function(bloq) {
-            var position = bloq.$bloq[0].getBoundingClientRect();
-            copyBloq({
-                structure: bloq.getBloqsStructure(),
-                top: position.top,
-                left: position.left
-            });
-        };
-
-        $scope.setSoftwareTab = function(tab) {
-            $scope.softTab = tab;
-            if (tab === 'code') {
-                $scope.setCode(bloqsUtils.getCode($scope.componentsArray, $scope.bloqs));
-            } else if (tab === 'bloqs') {
-                $rootScope.$emit('currenttab:bloqstab');
-            }
-        };
-
-        $scope.hideBloqsMenu = function($event) {
-            if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
-                $scope.toolbox.level = 1;
-            }
-        };
-
-        $scope.performFactoryReset = function() {
-            var robot = $scope.project.hardware.robot,
-                version = common.properties.robotsFirmwareVersion[robot];
-            robotFirmwareApi.getFirmware(robot, version).then(function(result) {
-                if (common.useChromeExtension()) {
-                    web2boardOnline.upload({
-                        hex: result.data,
-                        board: {
-                            mcu: 'uno'
-                        }
-                    });
-                } else {
-                    web2board.uploadHex('uno', result.data);
-                }
-            }, function() {
-                // alert("Error"); todo: add toast
-            });
-        };
-
-        function checkInputLength() {
-            setScrollsDimension();
         }
 
         function copyBloq(bloq) {
 
-            var newBloq = bloqs.buildBloqWithContent(bloq.structure, $scope.componentsArray, bloqsApi.schemas);
+            var newBloq = bloqs.buildBloqWithContent(bloq.structure, projectService.componentsArray, bloqsApi.schemas);
 
             newBloq.doConnectable();
             newBloq.disable();
@@ -357,6 +375,71 @@ angular.module('bitbloqApp')
                     newBloq.varInputs[i].keyup();
                 }
             }
+        }
+
+        function goToCode() {
+            ngDialog.closeAll();
+            if ($scope.common.user) {
+                $scope.common.user.hasBeenWarnedAboutChangeBloqsToCode = true;
+                userApi.update({
+                    hasBeenWarnedAboutChangeBloqsToCode: true
+                });
+                if (projectService.project._id) {
+                    $location.path('/codeproject/' + projectService.project._id);
+                } else {
+                    $location.path('/codeproject/');
+                }
+            } else {
+                $scope.common.session.project = projectService.project;
+                $location.path('/codeproject/');
+            }
+        }
+
+        function goToBloq() {
+            ngDialog.closeAll();
+            $scope.setSoftwareTab('bloqs');
+        }
+
+        function loadBloqs() {
+            bloqsLoadTimes++;
+            bloqsApi.itsLoaded().then(function() {
+                    bloqs.setOptions({
+                        fieldOffsetLeft: 70,
+                        fieldOffsetRight: 216,
+                        fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
+                        bloqSchemas: bloqsApi.schemas,
+                        suggestionWindowParent: $scope.$field[0]
+                    });
+                    $scope.groupBloqs = angular.element('.field--content');
+                    $scope.groupBloqs.on('scroll', scrollHorizontalField);
+                    $scope.horizontalScrollBarContainer = angular.element('#make--horizontal-scrollbar');
+                    $scope.horizontalScrollBarContainer.on('scroll', scrollHorizontalField);
+                    $scope.horizontalScrollBar = angular.element('#scrollbar--horizontal-small');
+                    $scope.common.isLoading = false;
+                    $scope.init();
+                    setScrollsDimension();
+                    $('input[type="text"]').on('keyup paste change', checkInputLength);
+                    bloqs.translateBloqs($translate.use());
+                    $scope.$on('refresh-bloqs', function() {
+                        $scope.init();
+                        bloqs.destroyFreeBloqs();
+                    });
+                    $rootScope.$on('$translateChangeStart', function(evt, key) {
+                        bloqs.translateBloqs(key.language);
+                    });
+                },
+                function() {
+                    $log.debug('fail');
+                    if (bloqsLoadTimes < 2) {
+                        loadBloqs();
+                    } else {
+                        alertsService.add({
+                            text: 'make_infoError_bloqsLoadError',
+                            id: 'loadBloqs',
+                            type: 'warning'
+                        });
+                    }
+                });
         }
 
         function scrollField(e) {
@@ -374,20 +457,15 @@ angular.module('bitbloqApp')
             $scope.lastPosition = e.currentTarget.scrollLeft;
         }
 
-        function setScrollWidth() {
-            $timeout(function() {
-                var groupBloqs = angular.element('.field--content');
-                var horizontalScrollBar = angular.element('#scrollbar--horizontal-small');
-                var horizontalScrollWidth = Math.max.apply(null, groupBloqs.map(function() {
-                    return this.scrollWidth;
-                }));
-                if (horizontalScrollWidth > groupBloqs[0].clientWidth) {
-                    $scope.showHorizontalScroll = true;
-                    horizontalScrollBar.css('width', horizontalScrollWidth + 50);
-                } else {
-                    $scope.showHorizontalScroll = false;
-                }
-            }, 50);
+        function setScrollsDimension() {
+            if (!$scope.common.isLoading) {
+                setScrollHeight();
+                setScrollWidth();
+            } else {
+                $timeout(function() {
+                    setScrollsDimension();
+                }, 200);
+            }
         }
 
         function setScrollHeight() {
@@ -409,107 +487,20 @@ angular.module('bitbloqApp')
             }, 50);
         }
 
-        function goToCode() {
-            ngDialog.closeAll();
-            if ($scope.common.user) {
-                $scope.common.user.hasBeenWarnedAboutChangeBloqsToCode = true;
-                userApi.update({
-                    hasBeenWarnedAboutChangeBloqsToCode: true
-                });
-                if ($scope.project._id) {
-                    $scope.saveProject().then(function() {
-                        $location.path('/codeproject/' + $scope.project._id);
-                    });
+        function setScrollWidth() {
+            $timeout(function() {
+                var groupBloqs = angular.element('.field--content');
+                var horizontalScrollBar = angular.element('#scrollbar--horizontal-small');
+                var horizontalScrollWidth = Math.max.apply(null, groupBloqs.map(function() {
+                    return this.scrollWidth;
+                }));
+                if (horizontalScrollWidth > groupBloqs[0].clientWidth) {
+                    $scope.showHorizontalScroll = true;
+                    horizontalScrollBar.css('width', horizontalScrollWidth + 50);
                 } else {
-                    $location.path('/codeproject/');
+                    $scope.showHorizontalScroll = false;
                 }
-            } else {
-                $scope.common.session.project = $scope.project;
-                $scope.common.session.project.codeProject = true;
-                $location.path('/codeproject/');
-            }
-        }
-
-        function goToBloq() {
-            ngDialog.closeAll();
-            $scope.setSoftwareTab('bloqs');
-        }
-
-        function setScrollsDimension() {
-            if (!$scope.common.isLoading) {
-                setScrollHeight();
-                setScrollWidth();
-            } else {
-                $timeout(function() {
-                    setScrollsDimension();
-                }, 200);
-            }
-        }
-
-        var $contextMenu = $('#bloqs-context-menu'),
-            field = angular.element('#bloqs--field'),
-            scrollBarContainer = angular.element('.make--scrollbar'),
-            scrollBar = angular.element('.scrollbar--small'),
-            bloqsTab = angular.element('.bloqs-tab');
-
-        $scope.lastPosition = 0;
-        $scope.$field = $('#bloqs--field').last();
-
-        $scope.bloqsApi = bloqsApi;
-
-        var bloqsLoadTimes = 0;
-
-        function loadBloqs() {
-            bloqsLoadTimes++;
-            bloqsApi.itsLoaded().then(function() {
-                    $scope.groupBloqs = angular.element('.field--content');
-                    $scope.groupBloqs.on('scroll', scrollHorizontalField);
-                    $scope.horizontalScrollBarContainer = angular.element('#make--horizontal-scrollbar');
-                    $scope.horizontalScrollBarContainer.on('scroll', scrollHorizontalField);
-                    $scope.horizontalScrollBar = angular.element('#scrollbar--horizontal-small');
-                    $scope.common.isLoading = false;
-                    $scope.init();
-                    setScrollsDimension();
-                    $('input[type="text"]').on('keyup paste change', checkInputLength);
-                    bloqs.translateBloqs($translate.use());
-                    $scope.$watch('project.software', function(newValue) {
-                        var actualProjectSoftware = {
-                            vars: $scope.bloqs.varsBloq.getBloqsStructure(),
-                            setup: $scope.bloqs.setupBloq.getBloqsStructure(),
-                            loop: $scope.bloqs.loopBloq.getBloqsStructure(),
-                            freeBloqs: bloqs.getFreeBloqs() || []
-                        };
-                        $log.debug('Ha cambiado el proyecto', newValue, actualProjectSoftware);
-                        if (!angular.equals(newValue, actualProjectSoftware)) {
-                            $log.debug(angular.equals(newValue.vars, actualProjectSoftware.vars));
-                            $log.debug(angular.equals(newValue.loop, actualProjectSoftware.loop));
-                            $log.debug(angular.equals(newValue.setup, actualProjectSoftware.setup));
-                            $log.debug(angular.equals(newValue.freeBloqs, actualProjectSoftware.freeBloqs));
-
-                            $log.debug('Repintamos');
-                            $scope.init();
-                            $scope.initFreeBloqs();
-                        } else {
-                            $log.debug('NO Repintamos');
-                        }
-                    });
-
-                    $rootScope.$on('$translateChangeStart', function(evt, key) {
-                        bloqs.translateBloqs(key.language);
-                    });
-                },
-                function() {
-                    $log.debug('fail');
-                    if (bloqsLoadTimes < 2) {
-                        loadBloqs();
-                    } else {
-                        alertsService.add({
-                            text: 'make_infoError_bloqsLoadError',
-                            id: 'loadBloqs',
-                            type: 'warning'
-                        });
-                    }
-                });
+            }, 50);
         }
 
         loadBloqs();
