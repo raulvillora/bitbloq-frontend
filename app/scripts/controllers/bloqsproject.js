@@ -349,7 +349,7 @@ angular.module('bitbloqApp')
             if (projectService.project.hardware.board) {
                 web2board.plotter(projectService.getBoardMetaData());
             } else {
-                $scope.currentTab = 0;
+                $scope.currentTab = 0;  
                 $scope.levelOne = 'boards';
                 alertsService.add({
                     text: 'alert-web2board-no-board-serial',

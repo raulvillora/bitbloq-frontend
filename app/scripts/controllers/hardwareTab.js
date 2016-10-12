@@ -156,9 +156,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteComponent = function() {
         $scope.disconnectComponent();
         var c = _.remove(projectService.componentsArray[$scope.componentSelected.category], projectService.findComponentInComponentsArray($scope.componentSelected.uid));
-        var componenetToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
+        var componentToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
         $scope.componentSelected = false;
-        hw2Bloqs.removeComponent(componenetToRemove);
+        hw2Bloqs.removeComponent(componentToRemove);
         projectService.startAutosave();
     };
 
