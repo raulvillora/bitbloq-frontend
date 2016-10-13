@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, common, web2boardOnline, projectService) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService) {
 
         /*************************************************
          Project save / edit
@@ -349,7 +349,7 @@ angular.module('bitbloqApp')
             if (projectService.project.hardware.board) {
                 web2board.plotter(projectService.getBoardMetaData());
             } else {
-                $scope.currentTab = 0;  
+                $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
                 alertsService.add({
                     text: 'alert-web2board-no-board-serial',
@@ -361,7 +361,7 @@ angular.module('bitbloqApp')
 
 
         $scope.verify = function() {
-            if (common.useChromeExtension()) {
+            if ($scope.common.useChromeExtension()) {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -377,7 +377,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function() {
             if (projectService.project.hardware.board) {
-                if (common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension()) {
                     web2boardOnline.compileAndUpload({
                         board: projectService.getBoardMetaData(),
                         code: $scope.getPrettyCode()
@@ -402,7 +402,7 @@ angular.module('bitbloqApp')
 
         $scope.serialMonitor = function() {
             if (projectService.project.hardware.board) {
-                if (common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension()) {
                     commonModals.launchSerialWindow(projectService.getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
@@ -442,7 +442,7 @@ angular.module('bitbloqApp')
 
         $scope.showPlotter = function() {
             if (projectService.project.hardware.board) {
-                if (common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension()) {
                     commonModals.launchPlotterWindow(projectService.getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {

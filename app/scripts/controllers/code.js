@@ -9,14 +9,12 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, common, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, compilerApi, hardwareConstants, projectService) {
+    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, compilerApi, hardwareConstants, projectService) {
 
         var editInfo, editorRef,
             compilingAlert,
             settingBoardAlert,
             serialMonitorAlert;
-
-        $scope.common = common;
 
         projectService.saveStatus = 0;
 
@@ -398,7 +396,7 @@ angular.module('bitbloqApp')
 
         $scope.showPlotter = function() {
             if (projectService.project.hardware.board) {
-                if (common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension()) {
                     commonModals.launchPlotterWindow(projectService.getBoardMetaData());
                 } else {
                     if (web2board.isWeb2boardV2()) {
