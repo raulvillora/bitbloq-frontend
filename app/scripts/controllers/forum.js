@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, common, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals, $anchorScroll) {
+        .controller('ForumCtrl', function forumCtrl($log, $routeParams, userApi, $location, $route, $scope, forumApi, alertsService, utils, _, imageApi, $rootScope, ngDialog, commonModals, $anchorScroll) {
             var forum = this;
             forum.displayedView = 'main';
             forum.commonModals = commonModals;
@@ -33,8 +33,8 @@
             forum.itemsPerPage = 10; //might be modified by the server
 
             forum.isAdmin = function() {
-                if (common.user) {
-                    return common.user.role === 'admin';
+                if ($scope.common.user) {
+                    return $scope.common.user.role === 'admin';
                 } else {
                     return false;
                 }
@@ -139,8 +139,8 @@
                             if ($routeParams.forumsection !== 'new-theme') {
                                 forum.selectedOption = $routeParams.forumsection;
                             }
-                            common.itsUserLoaded().then(function() {
-                                if (!common.user.bannedInForum) {
+                            $scope.common.itsUserLoaded().then(function() {
+                                if (!$scope.common.user.bannedInForum) {
                                     _goToSection(section);
                                 } else {
                                     alertsService.add({
@@ -158,7 +158,7 @@
                             break;
 
                         case 'banned-users':
-                            common.itsUserLoaded().then(function() {
+                            $scope.common.itsUserLoaded().then(function() {
                                 _getBannedUsers().then(function() {
                                     _goToSection(section);
                                 });
@@ -196,8 +196,8 @@
                 forumApi.createAnswer(answer).then(function(response) {
                     answer._id = response.data;
                     answer.creator = {
-                        _id: common.user._id,
-                        username: common.user.username
+                        _id: $scope.common.user._id,
+                        username: $scope.common.user.username
                     };
 
                     if (forum.answer.images.length > 0) {
@@ -259,7 +259,7 @@
                         subscribers: []
                     };
                     if (forum.textEditorContent.subscribe) {
-                        thread.subscribers.push(common.user._id);
+                        thread.subscribers.push($scope.common.user._id);
                     }
 
                     var answer = {
@@ -428,14 +428,14 @@
                     var section = $routeParams.forumsection;
                     switch (section) {
                         case 'new-theme':
-                            common.itsUserLoaded().then(function() {
+                            $scope.common.itsUserLoaded().then(function() {
                                 forum.displayedView = 'new-theme';
                             }, function() {
                                 $location.path('/login');
                             });
                             break;
                         case 'banned-users':
-                            common.itsUserLoaded().then(function() {
+                            $scope.common.itsUserLoaded().then(function() {
                                 forum.displayedView = 'banned-users';
                                 // _getBannedUsers();
                             }, function() {
@@ -458,8 +458,8 @@
                         theme = arrayRoute[2];
                     if (!theme && category) {
                         if (category === 'new-theme') {
-                            common.itsUserLoaded().then(function() {
-                                if (!common.user.bannedInForum) {
+                            $scope.common.itsUserLoaded().then(function() {
+                                if (!$scope.common.user.bannedInForum) {
                                     forum.goForumSection('new-theme');
                                 } else {
                                     alertsService.add({
@@ -472,7 +472,7 @@
                                 $location.path('/login');
                             });
                         } else if (category === 'banned-users') {
-                            common.itsUserLoaded().then(function() {
+                            $scope.common.itsUserLoaded().then(function() {
                                 forum.goForumSection('banned-users');
                             }, function() {
                                 $location.path('/login');
@@ -495,9 +495,9 @@
                 forumApi.getTheme(themeId).then(function(response) {
 
                     forum.currentThread = response.data.thread;
-                    if (common.user) {
+                    if ($scope.common.user) {
                         if (response.data.thread.subscribers) {
-                            if (response.data.thread.subscribers.indexOf(common.user._id.toString()) > -1) {
+                            if (response.data.thread.subscribers.indexOf($scope.common.user._id.toString()) > -1) {
                                 forum.currentThread.subscribed = true;
                             } else {
                                 forum.currentThread.subscribed = false;
@@ -518,7 +518,7 @@
                                     imgIndex = img.className.split(' ')[0].split('answerImg')[1];
                                 var answerImage = container.getElementsByClassName('answerImg' + imgIndex)[0];
                                 if (answerImage) {
-                                    answerImage.src = common.urlImage + 'forum/' + answer._id + '-' + imgIndex;
+                                    answerImage.src = $scope.common.urlImage + 'forum/' + answer._id + '-' + imgIndex;
                                 }
                                 answer.content = container.innerHTML;
                             }
