@@ -8,7 +8,9 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi, common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals) {
+    .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
+        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -113,7 +115,7 @@ angular.module('bitbloqApp')
 
                 _updateHardwareSchema();
                 _updateHardwareTags();
-                exports.project.code = bloqsUtils.getCode(exports.componentsArray, exports.bloqs);
+                exports.project.code = exports.getCode();
             }
         };
 
@@ -184,7 +186,11 @@ angular.module('bitbloqApp')
             if (exports.codeProject) {
                 code = exports.project.code;
             } else {
-                code = bloqsUtils.getCode(exports.componentsArray, exports.bloqs);
+                code = arduinoGeneration.getCode({
+                    varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
+                    setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
+                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
+                }, exports.project.hardware);
             }
             return code;
         };
