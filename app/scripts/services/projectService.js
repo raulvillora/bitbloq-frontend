@@ -514,16 +514,17 @@ angular.module('bitbloqApp')
             if (!thereAreWatchers) {
                 thereAreWatchers = true;
                 nameWatcher = scope.$watch('project.name', function(newVal, oldVal) {
-                    if (newVal && newVal !== oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.project.name = exports.project.name || common.translate('new-project');
                         exports.startAutosave(_saveProject);
                     }
                 });
 
                 descriptionWatcher = scope.$watch('project.description', function(newVal, oldVal) {
-                    if (!newVal) {
-                        exports.project.description = '';
-                    }
                     if (newVal !== oldVal) {
+                        if (!newVal) {
+                            exports.project.description = '';
+                        }
                         exports.startAutosave();
                     }
                 });
