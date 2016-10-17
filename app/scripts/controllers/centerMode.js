@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function forumCtrl($log, $scope, $rootScope, ngDialog, alertsService) {
+        .controller('CenterCtrl', function forumCtrl($log, $scope, $rootScope, _, ngDialog, alertsService) {
             $scope.instance = [
                 {
                     name: 'Pepito grillo',
@@ -27,6 +27,14 @@
                     students: '105'
                 }
             ];
+
+            $scope.sortArray = _.keys($scope.instance[0]);
+            $scope.orderInstance = 'name';
+
+            $scope.sortInstances = function(type) {
+                $log.debug('sortInstances', type);
+                $scope.orderInstance = type;
+            };
 
             $scope.newTeacher = function() {
                 var confirmAction = function() {
