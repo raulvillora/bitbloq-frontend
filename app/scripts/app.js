@@ -193,7 +193,6 @@ angular
                 scope: envData.facebook.scope,
                 responseType: 'token',
                 display: 'popup',
-                version: envData.facebook.version,
                 popupOptions: {
                     width: envData.facebook.popupOptions.width,
                     height: envData.facebook.popupOptions.height
