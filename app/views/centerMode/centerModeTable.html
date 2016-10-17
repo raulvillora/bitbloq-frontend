@@ -1,0 +1,68 @@
+<div>
+    <div class="centerMode__table-title row">
+        <div class="col-vsmall-6"> <!--4-->
+            <span>{{'centerMode_column_name' | translate}}</span>
+        </div>
+        <div class="col-vsmall-3"> <!--2-->
+            <span>{{'centerMode_column_groups' | translate}}</span>
+        </div>
+        <div class="col-vsmall-2"> <!--2-->
+            <span>{{'centerMode_column_students' | translate}}</span>
+        </div>
+        <!--<div class="col-vsmall-4">
+            <span>{{'centerMode_column_time' | translate}}</span>
+        </div>
+        <div class="col-vsmall-4">
+            <span>{{'centerMode_column_state' | translate}}</span>
+        </div>-->
+    </div>
+    <div class="table__block">
+        <div class="table__block__list row" ng-repeat="item in instance | orderBy:'order'">
+            <div class="col-vsmall-6 table__block__item">
+                <a ng-href="{{'#/centerMode/' + item.name}}">
+                    <h2 class="block__item__title" data-element="{{'centerMode-item-' + item.name}}">
+                        {{item.name}}</h2>
+                    <span class="block__item__explanation">{{item.email}}</span>
+                </a>
+            </div>
+            <div class="col-vsmall-3 table__block__item">
+                <span data-element="{{'centerMode-groups' + item.name}}">
+                    {{item.groups}}
+                </span>
+            </div>
+            <div class="col-vsmall-2 table__block__item">
+                <span>{{item.students}}</span>
+            </div>
+            <div class="col-vsmall-1 table__block__item">
+                <button data-element="centerMode-delete-teacher" class="btn btn--secondary table__block__button--delete" ng-click="deleteTeacher()">
+                    <svg class="svg-icon">
+                        <use xlink:href="#cierre"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table__items">
+    <div class="centerMode__block">
+        <div dir-paginate="result in centerMode.results.data | itemsPerPage: centerMode.itemsPerPage track by $index"
+             current-page="centerMode.currentPage" total-items="centerMode.results.totalSize">
+            <ul class="centerMode__block__list">
+                <li class="centerMode__search__item">
+                    <a ng-href="{{'#/centerMode/' + result.item._id + '/' + result._id}}">
+                        <h2 class="block__item__title">{{result.title}}</h2>
+                    </a>
+            <span class="block__item__description">{{'by' | translate}}
+                <span class="block__item__owner">{{result.creator.username}}</span>
+                {{'centerMode__searcher__into' | translate}}
+                <span>{{result.item.name}}</span>
+            </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="centerMode__paginator">
+        <dir-pagination-controls boundary-links="true" on-page-change="centerMode.refreshSearchLayout()" max-size="7"
+                                 template-url="views/centerMode/centerModePagination.html"></dir-pagination-controls>
+    </div>
+</div>

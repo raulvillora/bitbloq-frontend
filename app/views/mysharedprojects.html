@@ -2,9 +2,6 @@
     <div class="projects--action projects--action--sort">
         <common-dropdown options="orderOptions" options-click="sortProjects" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
     </div>
-    <!-- <div class="projects--action">
-        <common-dropdown options="filterOptions" pre-heading="'see:'" pre-heading-class="'test'" heading-option="filterOptions[0] | translate" options-click="filterProjects" class="projects--filter-dropdown"></common-dropdown>
-    </div> -->
     <div class="projects--action grid-list">
         <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
             <svg class="svg-icon">

@@ -57,6 +57,12 @@ angular
                     controller: 'BloqsprojectCtrl',
                     reloadOnSearch: false
                 })
+
+                .when('/codeproject/:id?', {
+                    templateUrl: 'views/code.html',
+                    controller: 'CodeCtrl',
+                    reloadOnSearch: false
+                })
                 .when('/explore:params?', {
                     templateUrl: 'views/explore.html',
                     controller: 'ExploreCtrl',
@@ -118,9 +124,6 @@ angular
                 .when('/help/forum/:forumsection?/:forumresource?', {
                     redirectTo: '/forum/:forumsection?/:forumresource?'
                 })
-                .when('/404', {
-                    templateUrl: '404.html'
-                })
                 .when('/maintenance', {
                     templateUrl: 'maintenance.html'
                 })
@@ -152,11 +155,6 @@ angular
                     templateUrl: 'views/landing/landing-howitworks.html',
                     controller: 'LandingCtrl'
                 })
-                .when('/codeproject/:id?', {
-                    templateUrl: 'views/code.html',
-                    controller: 'CodeCtrl',
-                    reloadOnSearch: false
-                })
                 .when('/bitbloq-help/', {
                     templateUrl: 'views/landing/landing-help.html',
                     controller: 'LandingCtrl'
@@ -164,6 +162,13 @@ angular
                 .when('/under14authorization/:token', {
                     templateUrl: 'views/under14authorization.html',
                     controller: 'Under14AuthorizationCtrl'
+                })
+                .when('/center/', {
+                    templateUrl: 'views/centerMode/centerModeIndex.html',
+                    controller: 'CenterCtrl'
+                })
+                .when('/404', {
+                    templateUrl: '404.html'
                 })
                 .otherwise({
                     redirectTo: '/404'

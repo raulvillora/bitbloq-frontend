@@ -1,0 +1,14 @@
+<div class="table__main">
+    <div class="forum__breadcrumb" data-element="centerMode-header-breadcrumb" ng-class="{'in-category':forum.currentCategory, 'in-theme':forum.themeCategory}">
+        <h1><a href="#/center">{{'centerMode_teacher' | translate}}</a></h1>
+        <span ng-if="!forum.themeCategory">{{forum.currentCategory}}</span>
+        <a ng-if="forum.themeCategory" ng-href="#/forum/{{forum.themeCategory | encode}}">{{forum.themeCategory}}</a>
+    </div>
+    <button data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newTeacher()">
+        <svg class="svg-icon">
+            <use xlink:href="#plus"></use>
+        </svg>
+        <span>{{'centerMode_button_newTeacher' | translate}}</span>
+    </button>
+</div>
+

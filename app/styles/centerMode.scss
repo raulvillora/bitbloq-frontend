@@ -1,0 +1,125 @@
+.table__header {
+    //forum__header
+    background-color: white;
+    position: relative;
+    height: 93px;
+    margin-bottom: 30px;
+    .btn {
+        float: right;
+        .svg-icon {
+            fill: white;
+            width: 8px;
+            height: 8px;
+            vertical-align: middle;
+            margin-right: 10px;
+            margin-top: -3px;
+        }
+        span {
+            vertical-align: top;
+            font-family: Source Sans Pro;
+        }
+    }
+}
+
+.table__added {
+    padding: 0 30px;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.table__main {
+    //forum__main
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    & > h1 {
+        padding-bottom: 30px;
+        color: #8c919b;
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
+
+.table__items {
+    //forum__categories
+    border-radius: 4px;
+    overflow: hidden;
+    .table-title {
+        //forum__table-title
+        display: table;
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 5px;
+        &:last-child {
+            display: none;
+        }
+    }
+}
+
+.table__block{
+    background-color: white;
+    .row {
+        border-bottom: 1px solid #ebebeb;
+    }
+}
+
+.table__block__list {
+    padding: 15px 0;
+    &:hover{
+        .table__block__button--delete{
+            display: block;
+        }
+    }
+}
+
+.table__block__item {
+    a {
+        color: #373b44;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 120ms;
+        &:hover {
+            &, & > * {
+                color: #82ad3a;
+                cursor: pointer;
+            }
+        }
+    }
+    .block__item__title {
+        display: inline-block;
+    }
+    .block__item__explanation {
+        display: inline-block;
+        &::before {
+            content: '('
+        }
+        &::after {
+            content: ')'
+        }
+    }
+    .block__item__description {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        color: #8c919b;
+        font-size: 12px;
+        font-weight: 400;
+        padding-top: 7px;
+    }
+}
+
+.table__block__button--delete {
+    min-width: 30px;
+    min-height: 30px;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    line-height: 0;
+    display:none;
+    svg {
+        width: 13px;
+        height: 13px;
+    }
+}

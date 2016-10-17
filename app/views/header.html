@@ -12,6 +12,14 @@
                         </svg>
                     </a>
                 </li>
+                <li data-element="nav-center" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" ng-if="common.user">
+                    <a class="nav__menu__link" href="#/center">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#Center"></use>
+                        </svg>
+                        <span>{{ 'header_tab_myCenter' | translate }}</span>
+                    </a>
+                </li>
                 <li data-element="nav-make" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" ng-if="!common.user">
                     <a class="nav__menu__link" href="#/bloqsproject">
                         <svg class="svg-icon svg-icon--text">
