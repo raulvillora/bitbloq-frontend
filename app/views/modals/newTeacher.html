@@ -1,0 +1,4 @@
+<form ng-submit="confirmAction()">
+    <p>{{ 'newTeacher_modal_information' | translate }}</p>
+    <tags-input allowed-tags-pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b" ng-model="newTeachersModel" data-element="modals-new-teacher-input" placeholder="{{'modal-share-with-users-placeholder' | translate}}"></tags-input>
+</form>

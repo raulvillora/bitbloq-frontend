@@ -19,8 +19,6 @@ angular
             unsubscribeToThread: unsubscribeToThread
         };
 
-        return forumApi;
-
         // Get Data
         function getData(resource, options) {
             //if no soy el user owner
@@ -121,4 +119,6 @@ angular
                 url: envData.config.serverUrl + 'forum/thread/' + themeId + '/moveTo/' + categoryName
             });
         }
+
+        return forumApi;
     });

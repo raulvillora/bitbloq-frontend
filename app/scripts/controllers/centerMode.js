@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function forumCtrl($log, $scope) {
+        .controller('CenterCtrl', function forumCtrl($log, $scope, $rootScope, ngDialog, alertsService) {
             $scope.instance = [
                 {
                     name: 'Pepito grillo',
@@ -28,9 +28,86 @@
                 }
             ];
 
-            $scope.newTeacher = function(){
+            $scope.newTeacher = function() {
+                var confirmAction = function() {
+                        var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
+                        if (teachers.length > 0) {
+                            centerModeApi.addTeachers(teachers).then(function() {
+                                alertsService.add({
+                                    text: 'Success: add Teacher',
+                                    id: 'addTeacher',
+                                    type: 'ok',
+                                    time: 5000
+                                });
+                            })
+                                .catch(function() {
+                                    alertsService.add({
+                                        text: 'Error: add Teacher',
+                                        id: 'addTeacher',
+                                        type: 'error'
+                                    });
+                                });
+                        }
+                        newTeacherModal.close();
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new();
 
+                _.extend(modalOptions, {
+                    title: 'newTeacher_modal_title',
+                    confirmButton: 'newTeacher_modal_aceptButton',
+                    confirmAction: confirmAction,
+                    contentTemplate: '/views/modals/newTeacher.html',
+                    modalButtons: true,
+                    newTeachersModel: []
+                });
+
+                var newTeacherModal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+                });
+            };
+
+            $scope.deleteTeacher = function(teacher) {
+                var confirmAction = function() {
+                        centerModeApi.deleteTeacher(teacher).then(function() {
+                            alertsService.add({
+                                text: 'Success: delete Teacher',
+                                id: 'deleteTeacher',
+                                type: 'ok',
+                                time: 5000
+                            });
+                        })
+                            .catch(function() {
+                                alertsService.add({
+                                    text: 'Error: delete Teacher',
+                                    id: 'deleteTeacher',
+                                    type: 'error'
+                                });
+                            });
+                        newTeacherModal.close();
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new();
+
+                _.extend(modalOptions, {
+                    title: 'newTeacher_modal_title',
+                    confirmButton: 'button_delete ',
+                    rejectButton: 'cancel',
+                    confirmAction: confirmAction,
+                    contentTemplate: '/views/modals/information.html',
+                    textContent: 'deleteTeacher_modal_information',
+                    modalButtons: true
+                });
+
+                var newTeacherModal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+                });
             };
         });
-
 })();
