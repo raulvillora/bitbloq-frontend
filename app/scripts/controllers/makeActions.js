@@ -211,6 +211,36 @@ angular.module('bitbloqApp')
             }
         };
 
+        $scope.showViewer = function() {
+            $scope.projectService.startAutosave(true);
+            //if bloqsproject//code
+            if (!$scope.projectService.project.codeproject) {
+                //parent: bloqsproject
+                $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+            } else {
+                //parent: codeproject
+            }
+            if ($scope.projectService.project.hardware.board) {
+                if ($scope.common.useChromeExtension()) {
+                    $scope.commonModals.launchViewerWindow($scope.projectService.getBoardMetaData());
+                } else {
+                    if ($scope.web2board.isWeb2boardV2()) {
+                        //  viewerW2b2();
+                    } else {
+                        //  viewerW2b1();
+                    }
+                }
+            } else {
+                $scope.currentTab = 0;
+                $scope.levelOne = 'boards';
+                $scope.alertsService.add({
+                    text: 'alert-web2board-no-board-serial',
+                    id: 'serialmonitor',
+                    type: 'warning'
+                });
+            }
+        };
+
         function _deleteProject(project) {
             if ($scope.common.removeProjects[project._id]) {
                 projectApi.delete(project._id).then(function() {

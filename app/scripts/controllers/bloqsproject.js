@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants) {
 
         /*************************************************
          Project save / edit
@@ -318,7 +318,6 @@ angular.module('bitbloqApp')
             }
         }
 
-
         function plotterW2b1() {
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
@@ -359,6 +358,86 @@ angular.module('bitbloqApp')
             }
         }
 
+        function getComponents(componentsArray) {
+            console.log('componentsArray');
+            console.log(componentsArray);
+            var components = {};
+
+            var serialPort = _.find(componentsArray, function(o) {
+                return o.id === 'sp';
+            });
+            if (serialPort) {
+                components.sp = serialPort.name;
+            }
+            _.forEach(componentsArray, function(value) {
+                if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
+                    if (components[value.id]) {
+                        components[value.id].names.push(value.name);
+                    } else {
+                        components[value.id] = {};
+                        components[value.id].type = value.type;
+                        components[value.id].names = [value.name];
+                    }
+                }
+            });
+            console.log('components nuevo array');
+            console.log(components);
+            return components;
+        }
+
+        $scope.getViewerCode = function(componentsArray, originalCode) {
+            var components = getComponents(componentsArray);
+            var code = originalCode;
+            var serialName;
+            if (components.sp) {
+                console.log('pues no voy a hacer nada');
+                code = code.substring(0, code.length - 1) + '\n\r';
+                serialName = components.sp;
+                code = generateSensorsCode(components, serialName, code);
+
+            } else {
+                var serialCode = originalCode.split('/***   Included libraries  ***/');
+                serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
+                code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
+                console.log('/***   Included libraries  ***/' + serialCode[0] + serialCode[1]);
+                code = code.split('\n/***   Setup  ***/');
+                code = code[0] + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
+                code = generateSensorsCode(components, 'puerto_serie_0', code);
+
+            }
+            code = code + '}';
+            console.log('code');
+            console.log(code);
+
+            return code;
+        };
+
+        function generateSensorsCode(components, serialName, code) {
+            console.log('esto es lo que llega en components');
+            console.log(components);
+            code = code + '\n\r';
+            _.forEach(components, function(value, key) {
+                console.log('key');
+                console.log(key);
+                if (angular.isObject(value)) {
+                    if (value.type === 'analog') {
+                        _.forEach(value.names, function(name) {
+                            code = code.substring(0, code.length - 1).concat(serialName + '.println(String("[' + name + ']: ") + String(String(analogRead(' + name + '))));\n\r');
+                        });
+                    } else {
+                        _.forEach(value.names, function(name) {
+                            if (key === 'us') {
+                                code = code.substring(0, code.length - 1).concat(serialName + '.println(String("[' + name + ']: ") + String(String(' + name + '.read())));\n\r');
+                            } else {
+                                code = code.substring(0, code.length - 1).concat(serialName + '.println(String("[' + name + ']: ") + String(String(digitalRead(' + name + '))));\n\r');
+                            }
+                        });
+                    }
+                }
+            });
+
+            return code;
+        }
 
         $scope.verify = function() {
             if ($scope.common.useChromeExtension()) {
@@ -594,11 +673,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -1044,6 +1123,7 @@ angular.module('bitbloqApp')
         $scope.setUploadProjectReady = function(value) {
             $scope.uploadProjectReady = value;
         };
+
         function confirmExit() {
             var closeMessage;
             if (projectService.saveStatus === 1) {

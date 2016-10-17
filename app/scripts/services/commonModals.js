@@ -11,10 +11,11 @@ angular.module('bitbloqApp')
     .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
-        var exports = {};
-        var shortUrl;
-        var serialMonitorPanel;
-        var plotterMonitorPanel;
+        var exports = {},
+            shortUrl,
+            serialMonitorPanel,
+            plotterMonitorPanel,
+            viewerMonitorPanel;
 
         exports.contactModal = function() {
             var dialog,
@@ -604,6 +605,44 @@ angular.module('bitbloqApp')
             });
             plotterMonitorPanel.scope = scope;
 
+        };
+
+        exports.launchViewerWindow = function(board) {
+            if (viewerMonitorPanel) {
+                viewerMonitorPanel.normalize();
+                viewerMonitorPanel.reposition('center');
+                return;
+            }
+
+            var scope = $rootScope.$new();
+            scope.board = board;
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+
+            viewerMonitorPanel = $.jsPanel({
+                id: 'plotter',
+                position: 'center',
+              /*  addClass: {
+                    content: 'plotter__content'
+                },*/
+                size: {
+                    width: 800,
+                    height: 450
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    viewerMonitorPanel = null;
+                },
+                title: $translate.instant('viewer'),
+                ajax: {
+                    url: 'views/viewer.html',
+                    done: function() {
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            viewerMonitorPanel.scope = scope;
         };
 
         exports.launchSerialWindow = function(board) {
