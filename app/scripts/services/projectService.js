@@ -157,7 +157,7 @@ angular.module('bitbloqApp')
         };
 
         exports.getRobotMetaData = function() {
-            return _.find(hardwareConstants.robot, function(robot) {
+            return _.find(hardwareConstants.robots, function(robot) {
                 return robot.id === exports.project.hardware.robot;
             });
         };
@@ -360,7 +360,6 @@ angular.module('bitbloqApp')
             }
         };
 
-
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //----------------- Private functions ---------------------------------
@@ -400,7 +399,6 @@ angular.module('bitbloqApp')
                 exports.project.name = exports.project.name || common.translate('new-project');
 
                 $log.debug('Auto saving project...');
-
 
                 if (exports.tempImage.file && !exports.tempImage.generate) {
                     exports.project.image = 'custom';
@@ -443,7 +441,6 @@ angular.module('bitbloqApp')
                             localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
                             exports.saveOldProject();
 
-
                             if (exports.tempImage.file) {
                                 imageApi.save(idProject, exports.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
@@ -465,7 +462,6 @@ angular.module('bitbloqApp')
                 exports.saveStatus = 0;
                 defered.resolve();
             }
-
 
             return defered.promise;
         }
@@ -604,7 +600,6 @@ angular.module('bitbloqApp')
             }
         }
 
-
         $rootScope.$on('$locationChangeStart', function(event) {
             if (exports.saveStatus === 1) {
                 var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
@@ -613,7 +608,6 @@ angular.module('bitbloqApp')
                 }
             }
         });
-
 
         $window.onbeforeunload = function(event) {
             if (exports.saveStatus === 1) {
