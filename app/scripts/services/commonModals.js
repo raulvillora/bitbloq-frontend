@@ -607,7 +607,7 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.launchViewerWindow = function(board) {
+        exports.launchViewerWindow = function(board, components) {
             if (viewerMonitorPanel) {
                 viewerMonitorPanel.normalize();
                 viewerMonitorPanel.reposition('center');
@@ -616,6 +616,7 @@ angular.module('bitbloqApp')
 
             var scope = $rootScope.$new();
             scope.board = board;
+            scope.componentsJSON = components;
             scope.setOnUploadFinished = function(callback) {
                 scope.uploadFinished = callback;
             };
@@ -623,9 +624,9 @@ angular.module('bitbloqApp')
             viewerMonitorPanel = $.jsPanel({
                 id: 'plotter',
                 position: 'center',
-              /*  addClass: {
-                    content: 'plotter__content'
-                },*/
+                /*  addClass: {
+                      content: 'plotter__content'
+                  },*/
                 size: {
                     width: 800,
                     height: 450

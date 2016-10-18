@@ -157,7 +157,7 @@ angular.module('bitbloqApp')
         $rootScope.$on('web2board:uploading', function(evt, port) {
             alertsService.add({
                 text: 'alert-web2board-uploading',
-                id: 'upload',
+                id: 'web2board',
                 type: 'loading',
                 value: port
             });
@@ -358,7 +358,7 @@ angular.module('bitbloqApp')
             }
         }
 
-        function getComponents(componentsArray) {
+        $scope.getComponents = function(componentsArray) {
             console.log('componentsArray');
             console.log(componentsArray);
             var components = {};
@@ -383,14 +383,13 @@ angular.module('bitbloqApp')
             console.log('components nuevo array');
             console.log(components);
             return components;
-        }
+        };
 
         $scope.getViewerCode = function(componentsArray, originalCode) {
-            var components = getComponents(componentsArray);
+            var components = $scope.getComponents(componentsArray);
             var code = originalCode;
             var serialName;
             if (components.sp) {
-                console.log('pues no voy a hacer nada');
                 code = code.substring(0, code.length - 1) + '\n\r';
                 serialName = components.sp;
                 code = generateSensorsCode(components, serialName, code);
@@ -401,35 +400,37 @@ angular.module('bitbloqApp')
                 code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
                 console.log('/***   Included libraries  ***/' + serialCode[0] + serialCode[1]);
                 code = code.split('\n/***   Setup  ***/');
-                code = code[0] + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
+                code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
                 code = generateSensorsCode(components, 'puerto_serie_0', code);
-
             }
             code = code + '}';
             console.log('code');
             console.log(code);
-
             return code;
         };
 
         function generateSensorsCode(components, serialName, code) {
-            console.log('esto es lo que llega en components');
-            console.log(components);
-            code = code + '\n\r';
+            code = code.substring(0, code.length - 1) + '\n\r';
             _.forEach(components, function(value, key) {
-                console.log('key');
-                console.log(key);
                 if (angular.isObject(value)) {
                     if (value.type === 'analog') {
                         _.forEach(value.names, function(name) {
-                            code = code.substring(0, code.length - 1).concat(serialName + '.println(String("[' + name + ']: ") + String(String(analogRead(' + name + '))));\n\r');
+                            code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(analogRead(' + name + '))));\n\r');
+                            code = code + 'delay(500);\n\r';
                         });
                     } else {
                         _.forEach(value.names, function(name) {
                             if (key === 'us') {
-                                code = code.substring(0, code.length - 1).concat(serialName + '.println(String("[' + name + ']: ") + String(String(' + name + '.read())));\n\r');
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
+                                code = code + 'delay(1000);\n\r';
+                            } else if (key === 'hts221') {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
+                                code = code + 'delay(500);\n\r';
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.getHumidity())));\n\r');
+                                code = code + 'delay(500);\n\r';
                             } else {
-                                code = code.substring(0, code.length - 1).concat(serialName + '.println(String("[' + name + ']: ") + String(String(digitalRead(' + name + '))));\n\r');
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(digitalRead(' + name + '))));\n\r');
+                                code = code + 'delay(500);\n\r';
                             }
                         });
                     }
@@ -454,12 +455,20 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.upload = function() {
+        $scope.upload = function(code) {
+            var viewer;
+            if (code) {
+                viewer = true;
+            } else {
+                viewer = false;
+            }
             if (projectService.project.hardware.board) {
                 if ($scope.common.useChromeExtension()) {
+                    $rootScope.$emit('web2board:uploading');
                     web2boardOnline.compileAndUpload({
                         board: projectService.getBoardMetaData(),
-                        code: $scope.getPrettyCode()
+                        code: $scope.getPrettyCode(code),
+                        viewer: viewer
                     });
                 } else {
                     if (web2board.isWeb2boardV2()) {
@@ -547,8 +556,14 @@ angular.module('bitbloqApp')
             return projectService.getCode();
         };
 
-        $scope.getPrettyCode = function() {
-            return utils.prettyCode($scope.getCode());
+        $scope.getPrettyCode = function(code) {
+            var prettyCode;
+            if (code) {
+                prettyCode = utils.prettyCode(code);
+            } else {
+                prettyCode = utils.prettyCode($scope.getCode());
+            }
+            return prettyCode;
         };
 
         /* ****** */

@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData) {
+    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData, $rootScope) {
         var exports = {
             compile: compile,
             upload: upload,
@@ -65,12 +65,19 @@ angular.module('bitbloqApp')
             } else {
                 params.board = params.board.mcu;
             }
-
-            alertsService.add({
-                text: 'alert-web2board-compiling',
-                id: 'web2board',
-                type: 'loading'
-            });
+            if (params.viewer) {
+                alertsService.add({
+                    text: 'alert-viewer-reconfigure',
+                    id: 'web2board',
+                    type: 'loading'
+                });
+            } else {
+                alertsService.add({
+                    text: 'alert-web2board-compiling',
+                    id: 'web2board',
+                    type: 'loading'
+                });
+            }
 
             alertCompile = null;
             completed = false;
@@ -142,25 +149,43 @@ angular.module('bitbloqApp')
 
         function upload(params, defer) {
             var uploadDefer = defer || $q.defer();
-
-            alertsService.add({
-                text: 'alert-web2board-uploading',
-                id: 'web2board',
-                type: 'loading',
-                time: 'infinite'
-            });
+            if (params.viewer) {
+                alertsService.add({
+                    text: 'alert-viewer-reconfigure',
+                    id: 'web2board',
+                    type: 'loading'
+                });
+            } else {
+                alertsService.add({
+                    text: 'alert-web2board-uploading',
+                    id: 'web2board',
+                    type: 'loading',
+                    time: 'infinite'
+                });
+            }
 
             chromeAppApi.isConnected().then(function() {
                 chromeAppApi.sendHex({
                     board: params.board.mcu,
                     file: params.hex
                 }).then(function(uploadHexResponse) {
-                    alertsService.add({
-                        text: 'alert-web2board-code-uploaded',
-                        id: 'web2board',
-                        type: 'ok',
-                        time: 5000
-                    });
+                    $rootScope.$emit('viewer-code:ready');
+                    if (params.viewer) {
+                        alertsService.add({
+                            text: 'alert-viewer-reconfigured',
+                            id: 'web2board',
+                            type: 'ok',
+                            time: 5000
+                        });
+                    } else {
+                        alertsService.add({
+                            text: 'alert-web2board-code-uploaded',
+                            id: 'web2board',
+                            type: 'ok',
+                            time: 5000
+                        });
+                    }
+
                     uploadDefer.resolve(uploadHexResponse);
                 }).catch(function(error) {
                     var text;

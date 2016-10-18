@@ -211,34 +211,51 @@ angular.module('bitbloqApp')
             }
         };
 
+        $rootScope.$on('viewer-code:ready', function() {
+            if (show) {
+                var componentsJSON = $scope.getComponents($scope.projectService.project.hardware.components);
+                if ($scope.projectService.project.hardware.board) {
+                    if ($scope.common.useChromeExtension()) {
+                        $scope.commonModals.launchViewerWindow($scope.projectService.getBoardMetaData(), componentsJSON);
+                    } else {
+                        if ($scope.web2board.isWeb2boardV2()) {
+                            //  viewerW2b2();
+                        } else {
+                            //  viewerW2b1();
+                        }
+                    }
+                } else {
+                    $scope.currentTab = 0;
+                    $scope.levelOne = 'boards';
+                    $scope.alertsService.add({
+                        text: 'alert-web2board-no-board-serial',
+                        id: 'serialmonitor',
+                        type: 'warning'
+                    });
+                }
+                show = false;
+            }
+        });
+        var show;
+
         $scope.showViewer = function() {
             $scope.projectService.startAutosave(true);
+            show = true;
             //if bloqsproject//code
+
             if (!$scope.projectService.project.codeproject) {
                 //parent: bloqsproject
-                $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                $scope.upload(viewerCode);
+
+                //capturar el evento x --> success
+                //borrar watcher
+                //timeout -> ko
+
             } else {
                 //parent: codeproject
             }
-            if ($scope.projectService.project.hardware.board) {
-                if ($scope.common.useChromeExtension()) {
-                    $scope.commonModals.launchViewerWindow($scope.projectService.getBoardMetaData());
-                } else {
-                    if ($scope.web2board.isWeb2boardV2()) {
-                        //  viewerW2b2();
-                    } else {
-                        //  viewerW2b1();
-                    }
-                }
-            } else {
-                $scope.currentTab = 0;
-                $scope.levelOne = 'boards';
-                $scope.alertsService.add({
-                    text: 'alert-web2board-no-board-serial',
-                    id: 'serialmonitor',
-                    type: 'warning'
-                });
-            }
+
         };
 
         function _deleteProject(project) {
