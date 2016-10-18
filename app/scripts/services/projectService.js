@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -518,7 +518,7 @@ angular.module('bitbloqApp')
                 nameWatcher = scope.$watch('project.name', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         exports.project.name = exports.project.name || common.translate('new-project');
-                        exports.startAutosave(_saveProject);
+                        exports.startAutosave();
                     }
                 });
 
@@ -540,20 +540,20 @@ angular.module('bitbloqApp')
                                 type: 'warning'
                             });
                         } else {
-                            exports.startAutosave(_saveProject);
+                            exports.startAutosave();
                         }
                     }
                 });
 
                 boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
-                        exports.startAutosave(_saveProject);
+                        exports.startAutosave();
                     }
                 });
             } else if (!_thereIsWatcher('project.hardware.board')) {
                 boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
-                        exports.startAutosave(_saveProject);
+                        exports.startAutosave();
                     }
                 });
             }
@@ -564,7 +564,7 @@ angular.module('bitbloqApp')
                 thereAreCodeProjectWatchers = true;
                 codeWatcher = scope.$watch('project.code', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
-                        exports.startAutosave(_saveProject);
+                        exports.startAutosave();
                     }
                 });
                 exports.addWatchers();
