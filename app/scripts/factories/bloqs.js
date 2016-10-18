@@ -16,3 +16,9 @@ angular.module('bitbloqApp')
 .factory('bloqsLanguages', function($window) {
     return $window.bloqsLanguages;
 });
+
+angular.module('bitbloqApp')
+
+.factory('arduinoGeneration', function($window) {
+    return $window.arduinoGeneration;
+});

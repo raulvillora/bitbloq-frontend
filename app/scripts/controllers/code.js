@@ -70,10 +70,10 @@ angular.module('bitbloqApp')
                 } else {
                     commonModals.publishModal(projectService.project);
                 }
-            }.catch(function() {
+            }).catch(function() {
                 $scope.publishProjectError = true;
                 $scope.currentTab = 'info';
-            }));
+            });
         };
 
         $scope.showWeb2boardSettings = function() {
