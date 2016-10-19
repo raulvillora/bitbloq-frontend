@@ -506,6 +506,7 @@ angular.module('bitbloqApp')
                 "type": "US",
                 "width": 120,
                 "height": 79,
+                "dataReturnType": "String",
                 "pins": {
                     "digital": [
                         "trigger",
@@ -517,6 +518,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 90,
                 "height": 73,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -527,6 +529,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 100,
                 "height": 92,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -537,6 +540,7 @@ angular.module('bitbloqApp')
                 "type": "encoder",
                 "width": 74,
                 "height": 84,
+                "dataReturnType": "float",
                 "pin": {
                     "sb": "2",
                     "sa": "3"
@@ -553,6 +557,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 100,
                 "height": 102,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -563,6 +568,7 @@ angular.module('bitbloqApp')
                 "type": "ButtonPad",
                 "width": 165,
                 "height": 120,
+                "dataReturnType": "char",
                 "pins": {
                     "analog": [
                         "s"
@@ -573,6 +579,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 90,
                 "height": 77,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -583,6 +590,7 @@ angular.module('bitbloqApp')
                 "type": "LineFollower",
                 "width": 97,
                 "height": 88,
+                "dataReturnType": "float *",
                 "pins": {
                     "digital": [
                         "s1",
@@ -594,6 +602,7 @@ angular.module('bitbloqApp')
                 "type": "Joystick",
                 "width": 100,
                 "height": 102,
+                "dataReturnType": "float *",
                 "pins": {
                     "analog": [
                         "x",
@@ -608,6 +617,7 @@ angular.module('bitbloqApp')
                 "type": "analog",
                 "width": 90,
                 "height": 65,
+                "dataReturnType": "float",
                 "pins": {
                     "analog": [
                         "s"
@@ -618,6 +628,7 @@ angular.module('bitbloqApp')
                 "type": "analog",
                 "width": 74,
                 "height": 101,
+                "dataReturnType": "float",
                 "pins": {
                     "analog": [
                         "s"
