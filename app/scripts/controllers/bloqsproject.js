@@ -933,7 +933,6 @@ angular.module('bitbloqApp')
         $scope.shareWithUserTags = [];
 
         $scope.code = '';
-        $scope.uploadProjectReady = false;
 
         $scope.hardware = {
             componentList: null,
@@ -959,6 +958,11 @@ angular.module('bitbloqApp')
          Load project
          *************************************************/
         $scope.common.isLoading = true;
+        $scope.hwBasicsLoaded = $q.defer();
+
+        $scope.initHardwarePromise = function() {
+            $scope.hwBasicsLoaded = $q.defer();
+        };
 
         $scope.common.itsUserLoaded().then(function() {
             $log.debug('There is a registed user');
@@ -977,6 +981,9 @@ angular.module('bitbloqApp')
                     launchModalTour();
                 }
                 addProjectWatchersAndListener();
+                $scope.hwBasicsLoaded.promise.then(function() {
+                    $scope.$emit('drawHardware');
+                });
                 $scope.projectLoaded.resolve();
             }
         }, function() {
@@ -1036,14 +1043,12 @@ angular.module('bitbloqApp')
                 projectService.setProject(project, project.codeProject, true);
                 $scope.saveBloqStep(_.clone(project.software));
                 projectService.saveOldProject();
-                $scope.uploadProjectReady = true;
-
+                $scope.hwBasicsLoaded.promise.then(function() {
+                    $scope.$emit('drawHardware');
+                });
             }
         }
 
-        $scope.setUploadProjectReady = function(value) {
-            $scope.uploadProjectReady = value;
-        };
         function confirmExit() {
             var closeMessage;
             if (projectService.saveStatus === 1) {
