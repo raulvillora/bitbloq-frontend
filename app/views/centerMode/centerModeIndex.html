@@ -1,5 +1,4 @@
 <div class="forum">
-    <div class="table__header" ng-include="'views/centerMode/centerModeHeader.html'"></div>
-    <div class="table__added" ng-include="'views/centerMode/centerModeOrder.html'"></div>
-    <div class="table__main" ng-include="'views/centerMode/centerModeTable.html'"></div>
+    <div class="table__main" ng-if="urlType==='center'" ng-include="'views/centerMode/center.html'"></div>
+    <div class="table__main" ng-if="urlType==='teacher'" ng-include="'views/centerMode/teacher.html'"></div>
 </div>

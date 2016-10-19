@@ -5,16 +5,25 @@ angular
 
         var centerModeApi = {
             addTeachers: addTeachers,
-            deleteTeacher: deleteTeacher
+            deleteTeacher: deleteTeacher,
+            createGroup: createGroup
         };
-
 
         function addTeachers(teachers) {
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'center/teacher',
+                data: teachers
+            });
+        }
+
+        function createGroup(name, accessId) {
+            return $http({
+                method: 'POST',
+                url: envData.config.serverUrl + 'center/group',
                 data: {
-                    teachers: teachers
+                    group: name,
+                    accessId: accessId
                 }
             });
         }
@@ -23,9 +32,7 @@ angular
             return $http({
                 method: 'DELETE',
                 url: envData.config.serverUrl + 'center/teacher',
-                data: {
-                    teacher: teacher
-                }
+                data: teacher
             });
         }
 

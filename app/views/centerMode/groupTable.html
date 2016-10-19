@@ -1,0 +1,21 @@
+<div class="table__block table__header table__main">
+    <h1 class="forum__breadcrumb">{{'centerMode_groups' | translate}}</h1>
+    <button data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newGroup()">
+        <span>{{'centerMode_button_newGroup' | translate}}</span>
+    </button>
+</div>
+<div class="table__block--separated table__block">
+    <div class="table__block__list row" ng-repeat="group in groups">
+        <div class="col-vsmall-10 table__block__item">
+            <a ng-href="{{'#/center-mode/group/' + group._id}}">
+                <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode-item-' + teacher.name}}">
+                    {{group.name}}
+                </h2>
+                <span class="block__item__explanation--subscript">{{group.accessId}}</span>
+            </a>
+        </div>
+        <div class="col-vsmall-2 table__block__item">
+            <span>{{group.students}}</span>
+        </div>
+    </div>
+</div>
