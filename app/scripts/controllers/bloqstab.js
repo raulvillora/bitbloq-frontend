@@ -424,7 +424,7 @@ angular.module('bitbloqApp')
                         $scope.init();
                         bloqs.destroyFreeBloqs();
                     });
-                    $rootScope.$on('$translateChangeStart', function(evt, key) {
+                    translateChangeStartEvent = $rootScope.$on('$translateChangeStart', function(evt, key) {
                         bloqs.translateBloqs(key.language);
                     });
                 },
@@ -508,18 +508,14 @@ angular.module('bitbloqApp')
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
 
-        $scope.$on('$destroy', function() {
-            $document.off('contextmenu', contextMenuDocumentHandler);
-            $document.off('click', clickDocumentHandler);
-        });
-
         $window.onresize = function() {
             $timeout(function() {
                 setScrollsDimension();
             }, 10);
         };
 
-        $rootScope.$on('currenttab:bloqstab', function() {
+        var translateChangeStartEvent;
+        var bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
             $timeout(function() {
                 setScrollsDimension();
             }, 0);
@@ -529,4 +525,10 @@ angular.module('bitbloqApp')
         $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
         $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
 
+        $scope.$on('$destroy', function() {
+            $document.off('contextmenu', contextMenuDocumentHandler);
+            $document.off('click', clickDocumentHandler);
+            bloqsTabsEvent();
+            translateChangeStartEvent();
+        });
     });

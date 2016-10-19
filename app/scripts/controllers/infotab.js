@@ -226,9 +226,16 @@ angular.module('bitbloqApp')
             onInitialize: true
         });
 
-        $rootScope.$on('generate:image', function() {
+        /*************************************************
+         WATCHERS
+         *************************************************/
+
+        var generateImageEvent = $rootScope.$on('generate:image', function() {
             $log.debug('composing image');
             composeImage();
         });
 
+        $scope.$on('$destroy', function() {
+            generateImageEvent();
+        });
     });

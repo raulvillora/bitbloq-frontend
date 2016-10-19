@@ -89,21 +89,21 @@ angular.module('bitbloqApp')
          web2board communication
          *************************************************/
 
-        $rootScope.$on('web2board:disconnected', function() {
+        var w2bDisconnectedEvent = $rootScope.$on('web2board:disconnected', function() {
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:wrong-version', function() {
+        var w2bVersionEvent = $rootScope.$on('web2board:wrong-version', function() {
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:no-web2board', function() {
+        var w2bNow2bEvent = $rootScope.$on('web2board:no-web2board', function() {
             alertsService.close(compilingAlert);
             alertsService.close(settingBoardAlert);
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:compile-error', function(event, error) {
+        var w2bCompileErrorEvent = $rootScope.$on('web2board:compile-error', function(event, error) {
             error = JSON.parse(error);
             alertsService.add({
                 text: 'alert-web2board-compile-error',
@@ -114,7 +114,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:compile-verified', function() {
+        var w2bCompileVerifiedEvent = $rootScope.$on('web2board:compile-verified', function() {
             alertsService.add({
                 text: 'alert-web2board-compile-verified',
                 id: 'compile',
@@ -124,7 +124,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:boardReady', function(evt, data) {
+        var w2bBoardReadyEvent = $rootScope.$on('web2board:boardReady', function(evt, data) {
             data = JSON.parse(data);
             if (data.length > 0) {
                 if (!alertsService.isVisible('uid', serialMonitorAlert)) {
@@ -145,7 +145,7 @@ angular.module('bitbloqApp')
             }
         });
 
-        $rootScope.$on('web2board: boardNotReady', function() {
+        var w2bBoardNotReadyEvent = $rootScope.$on('web2board: boardNotReady', function() {
             alertsService.add({
                 text: 'alert-web2board-boardNotReady',
                 id: 'upload',
@@ -154,7 +154,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:uploading', function(evt, port) {
+        var w2bUploadingEvent = $rootScope.$on('web2board:uploading', function(evt, port) {
             alertsService.add({
                 text: 'alert-web2board-uploading',
                 id: 'upload',
@@ -164,7 +164,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(true);
         });
 
-        $rootScope.$on('web2board:code-uploaded', function() {
+        var w2bCodeUploadedEvent = $rootScope.$on('web2board:code-uploaded', function() {
             alertsService.add({
                 text: 'alert-web2board-code-uploaded',
                 id: 'upload',
@@ -174,7 +174,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:upload-error', function(evt, data) {
+        var w2bUploadErrorEvent = $rootScope.$on('web2board:upload-error', function(evt, data) {
             data = JSON.parse(data);
             if (!data.error) {
                 alertsService.add({
@@ -200,7 +200,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:no-port-found', function() {
+        var w2bNoPortFoundEvent = $rootScope.$on('web2board:no-port-found', function() {
             $scope.currentTab = 0;
             $scope.levelOne = 'boards';
             web2board.setInProcess(false);
@@ -212,12 +212,27 @@ angular.module('bitbloqApp')
             });
         });
 
-        $rootScope.$on('web2board:serial-monitor-opened', function() {
+        var w2bSerialOpenedEvent = $rootScope.$on('web2board:serial-monitor-opened', function() {
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
 
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
+
+        function _destroyWeb2boardEvents() {
+            w2bDisconnectedEvent();
+            w2bVersionEvent();
+            w2bNow2bEvent();
+            w2bCompileErrorEvent();
+            w2bCompileVerifiedEvent();
+            w2bBoardReadyEvent();
+            w2bBoardNotReadyEvent();
+            w2bUploadingEvent();
+            w2bCodeUploadedEvent();
+            w2bUploadErrorEvent();
+            w2bNoPortFoundEvent();
+            w2bSerialOpenedEvent();
+        }
 
         function uploadW2b1() {
             $scope.$emit('uploading');
@@ -1063,6 +1078,7 @@ angular.module('bitbloqApp')
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);
             $window.onbeforeunload = null;
+            _destroyWeb2boardEvents();
         });
 
     });

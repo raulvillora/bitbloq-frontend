@@ -617,14 +617,5 @@ angular.module('bitbloqApp')
             }
         });
 
-        $window.onbeforeunload = function(event) {
-            if (exports.saveStatus === 1) {
-                var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
-                if (!answer) {
-                    event.preventDefault();
-                }
-            }
-        };
-
         return exports;
     });

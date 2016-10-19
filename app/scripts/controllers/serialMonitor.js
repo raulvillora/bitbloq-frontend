@@ -166,7 +166,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        $rootScope.$on('serial', function(event, msg) {
+        var serialEvent = $rootScope.$on('serial', function(event, msg) {
             if (!$scope.pause && angular.isString(msg)) {
                 $scope.serial.dataReceived += msg;
                 var dataLen = $scope.serial.dataReceived.length;
@@ -175,7 +175,6 @@ angular.module('bitbloqApp')
                 }
                 scrollTextAreaToBottom();
             }
-            //    console.log('msg arrived: ', msg);
         });
         $scope.$on('$destroy', function() {
             if (common.useChromeExtension()) {
@@ -187,6 +186,7 @@ angular.module('bitbloqApp')
                         return serialHub.server.closeUnusedConnections();
                     });
             }
+            serialEvent();
 
         });
     });
