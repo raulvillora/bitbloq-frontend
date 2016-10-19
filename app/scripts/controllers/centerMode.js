@@ -41,6 +41,14 @@
                 }
             ];
 
+            $scope.teacher = {
+                _id: '1234',
+                    name: 'Pepito grillo',
+                email: 'pepito@grillo.com',
+                groups: '4',
+                students: '32'
+            };
+
 
             $scope.groups = [
                 {

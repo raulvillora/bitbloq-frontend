@@ -14,24 +14,24 @@
         </div>
     </div>
     <div class="table__block">
-        <div class="table__block__list row" ng-repeat="teacher in teachers | orderBy:'orderInstance'">
+        <div class="table__block__list row" ng-repeat="item in teachers | orderBy:'orderInstance'">
             <div class="col-vsmall-6 table__block__item">
-                <a ng-href="{{'#/center-mode/teacher/' + teacher._id}}">
-                    <h2 class="block__item__title" data-element="{{'centerMode-item-' + teacher.name}}">
-                        {{teacher.name}}</h2>
-                    <span class="block__item__explanation">{{teacher.email}}</span>
+                <a ng-href="{{'#/center-mode/center-teacher/' + item._id}}">
+                    <h2 class="block__item__title" data-element="{{'centerMode-item-' + item.name}}">
+                        {{item.name}}</h2>
+                    <span class="block__item__explanation">{{item.email}}</span>
                 </a>
             </div>
             <div class="col-vsmall-3 table__block__item">
-                <span data-element="{{'centerMode-groups' + teacher.name}}">
-                    {{teacher.groups}}
+                <span data-element="{{'centerMode-groups' + item.name}}">
+                    {{item.groups}}
                 </span>
             </div>
             <div class="col-vsmall-2 table__block__item">
-                <span>{{teacher.students}}</span>
+                <span>{{item.students}}</span>
             </div>
             <div class="col-vsmall-1 table__block__item">
-                <button data-element="centerMode-delete-teacher" class="btn btn--secondary table__block__button table__block__button--delete" ng-click="deleteTeacher(teacher.email)">
+                <button data-element="centerMode-delete-teacher" class="btn btn--secondary table__block__button table__block__button--delete" ng-click="deleteTeacher(item.email)">
                     <svg class="svg-icon">
                         <use xlink:href="#cierre"></use>
                     </svg>
@@ -46,13 +46,13 @@
              current-page="centerMode.currentPage" total-items="centerMode.results.totalSize">
             <ul class="centerMode__block__list">
                 <li class="centerMode__search__item">
-                    <a ng-href="{{'#/centerMode/' + result.teacher._id + '/' + result._id}}">
+                    <a ng-href="{{'#/centerMode/' + result.item._id + '/' + result._id}}">
                         <h2 class="block__item__title">{{result.title}}</h2>
                     </a>
             <span class="block__item__description">{{'by' | translate}}
                 <span class="block__item__owner">{{result.creator.username}}</span>
                 {{'centerMode__searcher__into' | translate}}
-                <span>{{result.teacher.name}}</span>
+                <span>{{result.item.name}}</span>
             </span>
                 </li>
             </ul>

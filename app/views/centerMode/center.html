@@ -1,4 +1,5 @@
 <div class="centerMode">
     <div class="table__header" ng-include="'views/centerMode/centerModeHeader.html'"></div>
-    <div class="table__main" ng-include="'views/centerMode/centerTable.html'"></div>
+    <div class="table__main" ng-if="urlType==='center'" ng-include="'views/centerMode/centerTable.html'"></div>
+    <div class="table__main" ng-if="urlType==='center-teacher'" ng-include="'views/centerMode/teacher.html'"></div>
 </div>
