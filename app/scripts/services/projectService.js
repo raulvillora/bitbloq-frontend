@@ -424,6 +424,7 @@ angular.module('bitbloqApp')
                         });
                     } else {
                         exports.saveStatus = 4;
+                        defered.reject();
                     }
                 } else {
                     if (common.user) {
@@ -456,6 +457,7 @@ angular.module('bitbloqApp')
                             }
                         }).catch(function() {
                             exports.saveStatus = 3;
+                            defered.reject();
                         });
                     } else {
                         exports.saveStatus = 0;
