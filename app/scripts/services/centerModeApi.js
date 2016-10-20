@@ -9,10 +9,10 @@ angular
             createGroup: createGroup
         };
 
-        function addTeachers(teachers) {
+        function addTeachers(teachers, centerId) {
             return $http({
-                method: 'PUT',
-                url: envData.config.serverUrl + 'center/teacher',
+                method: 'POST',
+                url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher',
                 data: teachers
             });
         }
@@ -20,7 +20,7 @@ angular
         function createGroup(name, accessId) {
             return $http({
                 method: 'POST',
-                url: envData.config.serverUrl + 'center/group',
+                url: envData.config.serverUrl + 'centerMode/center/group',
                 data: {
                     group: name,
                     accessId: accessId
@@ -31,7 +31,7 @@ angular
         function deleteTeacher(teacher) {
             return $http({
                 method: 'DELETE',
-                url: envData.config.serverUrl + 'center/teacher',
+                url: envData.config.serverUrl + 'centerMode/center/teacher',
                 data: teacher
             });
         }
