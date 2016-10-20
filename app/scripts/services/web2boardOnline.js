@@ -69,7 +69,8 @@ angular.module('bitbloqApp')
                 alertsService.add({
                     text: 'alert-viewer-reconfigure',
                     id: 'web2board',
-                    type: 'loading'
+                    type: 'loading',
+                    time: 5000
                 });
             } else {
                 alertsService.add({

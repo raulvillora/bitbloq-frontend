@@ -515,7 +515,7 @@ angular.module('bitbloqApp')
                 thereAreWatchers = true;
                 nameWatcher = scope.$watch('project.name', function(newVal, oldVal) {
                     if (newVal && newVal !== oldVal) {
-                        exports.startAutosave(_saveProject);
+                        exports.startAutosave();
                     }
                 });
 

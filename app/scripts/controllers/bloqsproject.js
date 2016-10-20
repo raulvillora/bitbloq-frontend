@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants, chromeAppApi) {
 
         /*************************************************
          Project save / edit
@@ -393,7 +393,6 @@ angular.module('bitbloqApp')
                 code = code.substring(0, code.length - 1) + '\n\r';
                 serialName = components.sp;
                 code = generateSensorsCode(components, serialName, code);
-
             } else {
                 var serialCode = originalCode.split('/***   Included libraries  ***/');
                 serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
@@ -416,21 +415,21 @@ angular.module('bitbloqApp')
                     if (value.type === 'analog') {
                         _.forEach(value.names, function(name) {
                             code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(analogRead(' + name + '))));\n\r');
-                            code = code + 'delay(500);\n\r';
+                          //  code = code + 'delay(500);\n\r';
                         });
                     } else {
                         _.forEach(value.names, function(name) {
                             if (key === 'us') {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
-                                code = code + 'delay(1000);\n\r';
+                          //      code = code + 'delay(1000);\n\r';
                             } else if (key === 'hts221') {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
-                                code = code + 'delay(500);\n\r';
+                            //    code = code + 'delay(500);\n\r';
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.getHumidity())));\n\r');
-                                code = code + 'delay(500);\n\r';
+                          //      code = code + 'delay(500);\n\r';
                             } else {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(digitalRead(' + name + '))));\n\r');
-                                code = code + 'delay(500);\n\r';
+                            //    code = code + 'delay(500);\n\r';
                             }
                         });
                     }
@@ -1141,6 +1140,9 @@ angular.module('bitbloqApp')
 
         function confirmExit() {
             var closeMessage;
+            chromeAppApi.stopSerialCommunication();
+            $scope.$apply();
+
             if (projectService.saveStatus === 1) {
                 closeMessage = $scope.common.translate('leave-without-save');
             }
