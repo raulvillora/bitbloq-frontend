@@ -249,7 +249,7 @@ angular.module('bitbloqApp')
                     } else if (item.includes('oscillator')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if ((connectedComponents.id === 'servo') && connectedComponents[i].oscillator) {
+                            if ((connectedComponents[i].id === 'servo') && connectedComponents[i].oscillator) {
                                 result = true;
                             }
                             i++;
