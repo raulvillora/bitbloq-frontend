@@ -226,7 +226,7 @@ angular.module('bitbloqApp')
 
         $scope.showComponents = function(item) {
             var result = false;
-            var stopWord = ['analogWrite', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
+            var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
             if (stopWord.indexOf(item) === -1) {
                 var i;
                 if (!projectService.project.hardware.robot && projectService.project.hardware.board && projectService.project.hardware.components) {
