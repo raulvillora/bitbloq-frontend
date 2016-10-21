@@ -35,7 +35,7 @@
                 {
                     name: 'Ejercicio lorem ipsum dolor sit amet consectetur',
                     endDate: '2016-10-19T12:13:14.774Z'
-                },{
+                }, {
                     name: '2.Ejercicio lorem ipsum dolor sit amet consectetur',
                     endDate: '2016-10-20T12:13:14.774Z'
                 }
@@ -43,7 +43,7 @@
 
             $scope.teacher = {
                 _id: '1234',
-                    name: 'Pepito grillo',
+                name: 'Pepito grillo',
                 email: 'pepito@grillo.com',
                 groups: '4',
                 students: '32'
@@ -82,14 +82,14 @@
                 $scope.orderInstance = type;
             };
 
-            $scope.newExercise = function(){
+            $scope.newExercise = function() {
 
             };
 
-            $scope.newGroup = function(){
+            $scope.newGroup = function() {
                 function confirmAction(name) {
                     var accessId = Date.now();
-                    centerModeApi.createGroup(name, accessId).then(function(){
+                    centerModeApi.createGroup(name, accessId).then(function() {
                         modalOptions.title = name;
                         modalOptions.mainText = 'centerMode_modal_accessIdInfo';
                         modalOptions.confirmButton = null;
@@ -132,6 +132,7 @@
                         var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
                             centerModeApi.addTeachers(teachers).then(function() {
+                                _getTeachers();
                                 alertsService.add({
                                     text: 'Success: add Teacher',
                                     id: 'addTeacher',
@@ -208,5 +209,17 @@
                     showClose: false
                 });
             };
+
+            function _getTeachers() {
+                centerModeApi.getTeachers().then(function(response) {
+                    $scope.teachers = response.data;
+                });
+            }
+
+            function _init() {
+                _getTeachers();
+            }
+
+            _init();
         });
 })();

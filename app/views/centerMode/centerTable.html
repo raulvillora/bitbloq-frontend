@@ -18,7 +18,7 @@
             <div class="col-vsmall-6 table__block__item">
                 <a ng-href="{{'#/center-mode/center-teacher/' + item._id}}">
                     <h2 class="block__item__title" data-element="{{'centerMode-item-' + item.name}}">
-                        {{item.name}}</h2>
+                        {{item.name || item.username}}</h2>
                     <span class="block__item__explanation">{{item.email}}</span>
                 </a>
             </div>
