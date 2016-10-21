@@ -333,7 +333,6 @@ angular.module('bitbloqApp')
             }
         }
 
-
         function plotterW2b1() {
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
@@ -373,7 +372,6 @@ angular.module('bitbloqApp')
                 });
             }
         }
-
 
         $scope.verify = function() {
             if ($scope.common.useChromeExtension()) {
@@ -555,14 +553,12 @@ angular.module('bitbloqApp')
                 var bloqCanvasEl = null;
                 //Update dropdowns values from bloqs canvas
                 for (var type in projectService.componentsArray) {
-                    if (projectService.componentsArray[type].length) {
-                        bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
-                        var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
-                        for (var i = 0, len = nodeList.length; i < len; i++) {
-                            updateBloq(nodeList[i], projectService.componentsArray[type]);
-                        }
-                        allComponents = allComponents.concat(projectService.componentsArray[type]);
+                    bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
+                    var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
+                    for (var i = 0, len = nodeList.length; i < len; i++) {
+                        updateBloq(nodeList[i], projectService.componentsArray[type]);
                     }
+                    allComponents = allComponents.concat(projectService.componentsArray[type]);
                 }
                 //Update dropdowns from bloqs of toolbox
                 if (bloqCanvasEl) {
@@ -609,11 +605,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 

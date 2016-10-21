@@ -249,7 +249,7 @@ angular.module('bitbloqApp')
                     } else if (item.includes('oscillator')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if ((connectedComponents[i].id === 'servo') && connectedComponents[i].oscillator) {
+                            if ((connectedComponents[i].id === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
                                 result = true;
                             }
                             i++;
@@ -259,7 +259,13 @@ angular.module('bitbloqApp')
                     } else if ((item === 'servoAttach') || (item === 'servoDetach')) {
                         result = existComponent(['servo', 'servocont'], connectedComponents);
                     } else if (item.includes('servo')) {
-                        result = existComponent(['servo'], connectedComponents);
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if ((connectedComponents[i].id === 'servo') && (connectedComponents[i].oscillator !== true)) {
+                                result = true;
+                            }
+                            i++;
+                        }
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
