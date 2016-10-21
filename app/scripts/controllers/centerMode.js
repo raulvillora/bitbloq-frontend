@@ -172,7 +172,8 @@
 
             $scope.deleteTeacher = function(teacher) {
                 var confirmAction = function() {
-                        centerModeApi.deleteTeacher(teacher).then(function() {
+                        centerModeApi.deleteTeacher(teacher._id).then(function() {
+                            _.remove($scope.teachers, teacher);
                             alertsService.add({
                                 text: 'Success: delete Teacher',
                                 id: 'deleteTeacher',

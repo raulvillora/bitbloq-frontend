@@ -10,7 +10,10 @@ angular
             getTeachers: getTeachers
         };
 
+        var centerLocalId = '580818d0a8acf9a4be2f9458';
+
         function addTeachers(teachers, centerId) {
+            centerId = centerLocalId;
             return $http({
                 method: 'POST',
                 url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher',
@@ -29,15 +32,16 @@ angular
             });
         }
 
-        function deleteTeacher(teacher) {
+        function deleteTeacher(teacherId, centerId) {
+            centerId = centerLocalId;
             return $http({
                 method: 'DELETE',
-                url: envData.config.serverUrl + 'centerMode/center/teacher',
-                data: teacher
+                url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher/' + teacherId
             });
         }
 
         function getTeachers(centerId) {
+            centerId = centerLocalId;
             return $http({
                 method: 'GET',
                 url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher'
