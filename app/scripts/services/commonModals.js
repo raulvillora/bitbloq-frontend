@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, $document, userApi, envData, _, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var exports = {},
@@ -628,8 +628,8 @@ angular.module('bitbloqApp')
                       content: 'plotter__content'
                   },*/
                 size: {
-                    width: 800,
-                    height: 450
+                    width: 855,
+                    height: 500
                 },
                 onclosed: function() {
                     scope.$destroy();
@@ -644,6 +644,7 @@ angular.module('bitbloqApp')
                 }
             });
             viewerMonitorPanel.scope = scope;
+
         };
 
         exports.launchSerialWindow = function(board) {

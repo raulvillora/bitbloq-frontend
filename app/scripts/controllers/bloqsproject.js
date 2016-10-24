@@ -415,21 +415,21 @@ angular.module('bitbloqApp')
                     if (value.type === 'analog') {
                         _.forEach(value.names, function(name) {
                             code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(analogRead(' + name + '))));\n\r');
-                          //  code = code + 'delay(500);\n\r';
+                            //  code = code + 'delay(500);\n\r';
                         });
                     } else {
                         _.forEach(value.names, function(name) {
                             if (key === 'us') {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
-                          //      code = code + 'delay(1000);\n\r';
+                                //      code = code + 'delay(1000);\n\r';
                             } else if (key === 'hts221') {
-                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
-                            //    code = code + 'delay(500);\n\r';
-                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.getHumidity())));\n\r');
-                          //      code = code + 'delay(500);\n\r';
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_temperature:' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_humidity:' + name + ']:") + String(String(' + name + '.getHumidity())));\n\r');
+                                code = code + 'delay(50);\n\r';
                             } else {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(digitalRead(' + name + '))));\n\r');
-                            //    code = code + 'delay(500);\n\r';
+                                //    code = code + 'delay(500);\n\r';
                             }
                         });
                     }
