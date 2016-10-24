@@ -392,7 +392,7 @@ angular.module('bitbloqApp')
             if (components.sp) {
                 code = code.substring(0, code.length - 1) + '\n\r';
                 serialName = components.sp;
-                code = generateSensorsCode(components, serialName, code);
+                code = generateViewerCode(components, serialName, code);
             } else {
                 var serialCode = originalCode.split('/***   Included libraries  ***/');
                 serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
@@ -400,7 +400,7 @@ angular.module('bitbloqApp')
                 console.log('/***   Included libraries  ***/' + serialCode[0] + serialCode[1]);
                 code = code.split('\n/***   Setup  ***/');
                 code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
-                code = generateSensorsCode(components, 'puerto_serie_0', code);
+                code = generateViewerCode(components, 'puerto_serie_0', code);
             }
             code = code + '}';
             console.log('code');
@@ -408,8 +408,15 @@ angular.module('bitbloqApp')
             return code;
         };
 
+        function generateViewerCode(components, serialName, code) {
+            return generateSensorsCode(components, serialName, code.substring(0, code.length - 1) + '\n\r');
+        }
+
+        function generateViewerBloqCode(components, serialName, code){
+
+        }
+
         function generateSensorsCode(components, serialName, code) {
-            code = code.substring(0, code.length - 1) + '\n\r';
             _.forEach(components, function(value, key) {
                 if (angular.isObject(value)) {
                     if (value.type === 'analog') {
@@ -421,7 +428,7 @@ angular.module('bitbloqApp')
                         _.forEach(value.names, function(name) {
                             if (key === 'us') {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
-                                //      code = code + 'delay(1000);\n\r';
+                                // code = code + 'delay(1000);\n\r';
                             } else if (key === 'hts221') {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_temperature:' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
                                 code = code + 'delay(50);\n\r';
@@ -429,14 +436,12 @@ angular.module('bitbloqApp')
                                 code = code + 'delay(50);\n\r';
                             } else {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(digitalRead(' + name + '))));\n\r');
-                                //    code = code + 'delay(500);\n\r';
+                                //   code = code + 'delay(500);\n\r';
                             }
                         });
                     }
                 }
             });
-
-            return code;
         }
 
         $scope.verify = function() {

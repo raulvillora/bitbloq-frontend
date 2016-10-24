@@ -174,10 +174,10 @@ angular.module('bitbloqApp')
                     return d.x;
                 },
                 y: function(d) {
-                    return d.y;
+                    return Math.floor(d.y * 1000) / 1000;
                 },
-                tickFormat: function(d) {
-                    return Math.floor(d * 100) / 100;
+                tickFormat: function(t) {
+                    return Math.floor(t * 1000) / 1000;
                 },
                 showLegend: false,
                 useInteractiveGuideline: true
