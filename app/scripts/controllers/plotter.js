@@ -204,7 +204,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        $rootScope.$on('serial', function(event, msg) {
+        var serialEvent = $rootScope.$on('serial', function(event, msg) {
             if (!$scope.pause && angular.isString(msg)) {
                 var messages = dataParser.retrieve_messages(msg);
                 messages.forEach(function(message) {
@@ -244,6 +244,7 @@ angular.module('bitbloqApp')
                         return serialHub.server.closeUnusedConnections();
                     });
             }
+            serialEvent();
 
         });
 

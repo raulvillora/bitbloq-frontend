@@ -144,6 +144,9 @@
         }, {
             "name": "lcdWritePositionAdvanced-v1",
             "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "viewer",
+            "addClass": "submenu__item submenu__item--component"
         }],
         "functions": [{
             "name": "voidFunction",
@@ -501,6 +504,38 @@
             "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "evolutionDistance",
+            "addClass": "submenu__item submenu__item--component"
+        }],
+        "mBot": [{
+            "name": "mBotMove",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotBuzzer",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotGetDistance",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotGetButtonStatus",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotGetLightSensor",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotSetLed",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotLineFollower",
+            "addClass": "submenu__item submenu__item--component"
+        }],
+        "advancedMBot": [{
+            "name": "mBotBuzzerAdvanced",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotMoveAdvanced",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mBotSetLedAdvanced",
             "addClass": "submenu__item submenu__item--component"
         }]
     }

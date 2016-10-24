@@ -44,7 +44,7 @@
                 </div>
             </li>
             <li data-tooltips="{{!common.user}}" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltip-position="right">
-                <div class="dropdown__item" data-ng-disabled="!common.user || !project._id" data-ng-click="projectService.clone()" data-element="menu-clone">
+                <div class="dropdown__item" data-ng-disabled="!common.user || !projectService.project._id" data-ng-click="projectService.clone()" data-element="menu-clone">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#duplicar"></use>
                     </svg>
@@ -72,7 +72,7 @@
                 {{'change-language' | translate}}
             </li>
             <li class="dropdown__item--separator"></li>
-            <li data-tooltips="{{!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id}}" data-tooltip="{{(!common.user?'need-to-be-logged':!project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin':'') | translate}}" data-tooltip-position="right">
+            <li data-tooltips="{{!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id}}" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin':'') | translate}}" data-tooltip-position="right">
                 <div class="dropdown__item" data-ng-disabled="!utils.userIsOwner(projectService.project, common.user._id) || !projectService.project._id" data-ng-click="removeProject(projectService.project)" data-element="menu-removeproject">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#remove"></use>

@@ -38,7 +38,7 @@
                     <span>{{'forumAdmin_buton_moveTheme' | translate }}</span>
                 </button>
             </div>
-            <div class="forum__admin__action forum__ban-user--main" ng-if="forum.firstAnswer.owner._id !== common.user._id && forum.firstAnswer.owner.scopes[0]!=='bitbloq:user:banned'">
+            <div class="forum__admin__action forum__ban-user--main" ng-if="forum.firstAnswer.creator._id !== common.user._id && forum.firstAnswer.owner.scopes[0]!=='bitbloq:user:banned'">
                 <button class="btn btn--secondary btn--small" ng-class="{'btn--disabled': userBanned}" ng-click="userBanned=true; forum.banUser(forum.firstAnswer.creator._id)" ng-init="userBanned=false">
                     <span>{{'button_banUser' | translate}}</span>
                 </button>
@@ -60,8 +60,8 @@
                         </svg>
                     </button>
                 </div>
-                <div class="forum__admin__action forum__ban-user" ng-if="answer.owner._id !== common.user._id && !answer.owner.bannedInForum">
-                    <button class="btn btn--secondary btn--small" ng-class="{'btn--disabled': userBanned}" ng-click="userBanned=true; forum.banUser(answer.owner._id)" ng-init="userBanned=false">
+                <div class="forum__admin__action forum__ban-user" ng-if="answer.creator._id !== common.user._id && !answer.creator.bannedInForum">
+                    <button class="btn btn--secondary btn--small" ng-class="{'btn--disabled': userBanned}" ng-click="userBanned=true; forum.banUser(answer.creator._id)" ng-init="userBanned=false">
                         <span>{{'button_banUser' | translate}}</span>
                     </button>
                 </div>

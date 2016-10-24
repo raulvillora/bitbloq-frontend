@@ -9,7 +9,7 @@
                 <div class="form-control">
                     <label>{{ 'name' | translate }}*</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname', 'input--error': form.projectname.$error.required && publishProjectError}">
-                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="projectService.project.name" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user" required>
+                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-element="info-project-name" data-ng-model="projectService.project.name" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user" required>
                     </span>
                     <span class="form--error" ng-show="form.projectname.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-nameError' | translate }}</small>
@@ -19,7 +19,7 @@
                 <div class="form-control project__description">
                     <label>{{ 'description' | translate }}*</label>
                     <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
-                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="projectService.project.description" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description" required></textarea>
+                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="projectService.project.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description" required></textarea>
                     </span>
                     <span class="form--error" ng-show="form.textarea.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-descriptionError' | translate }}</small>
@@ -31,7 +31,7 @@
                 <div class="form-control">
                     <label>{{ 'video' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'videourl'}">
-                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="projectService.project.videoUrl" value="{{projectService.project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-disabled="!common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
+                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="projectService.project.videoUrl" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" value="{{projectService.project.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-disabled="!common.user" data-element="infotab-youtubevideo" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }">
                     </span>
                 </div>
             </div>

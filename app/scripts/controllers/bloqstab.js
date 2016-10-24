@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-                                         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-                                         robotFirmwareApi, web2boardOnline, projectService) {
+        bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+        robotFirmwareApi, web2boardOnline, projectService) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -205,54 +205,83 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.showComponents = function(item) {
-            var stopWord = ['analogWrite', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
-            if (stopWord.indexOf(item) === -1) {
-                var result = false;
-                if (!projectService.project.hardware.robot && projectService.project.hardware.board) {
-                    var userComponents = [];
-                    projectService.project.hardware.components.forEach(function(item) {
-                        if (item.oscillator) {
-                            userComponents.push('oscillators');
-                        } else {
-                            userComponents.push(item.category);
-                        }
-                    });
-                    userComponents = _.unique(userComponents);
+        function existComponent(componentsToSearch, components) {
+            var found,
+                j,
+                i = 0;
 
-                    if (item === 'hwVariable' && userComponents.length !== 0) {
+            while (!found && (i < componentsToSearch.length)) {
+                j = 0;
+                while (!found && (j < components.length)) {
+                    if (componentsToSearch[i] === components[j].id) {
+                        found = components[j];
+                    }
+                    j++;
+                }
+                i++;
+            }
+
+            return found;
+        }
+
+        $scope.showComponents = function(item) {
+            var result = false;
+            var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
+            if (stopWord.indexOf(item) === -1) {
+                var i;
+                if (!projectService.project.hardware.robot && projectService.project.hardware.board && projectService.project.hardware.components) {
+                    var connectedComponents = projectService.project.hardware.components;
+                    if (item === 'hwVariable' && connectedComponents.length !== 0) {
                         result = true;
-                    } else {
-                        userComponents.forEach(function(value) {
-                            if (item.indexOf('serial') > -1) {
-                                result = $scope.showCommunications(item);
-                            } else {
-                                if (value[value.length - 1] === 's') {
-                                    value = value.substring(0, value.length - 1);
-                                }
-                                if (value === 'servo') {
-                                    value = 'servoNormal';
-                                }
-                                item = item.toUpperCase();
-                                value = value.toUpperCase();
-                                value = value.toUpperCase();
-                                if (item.includes('RGBLED')) {
-                                    if (value.includes('RGB')) {
-                                        result = true;
-                                    }
-                                } else if ((value.includes('SERVO') || value === 'OSCILLATOR') && (item === 'SERVOATTACH' || item === 'SERVODETACH')) {
-                                    result = true;
-                                } else if (item.includes(value) || value.includes(item)) {
-                                    result = true;
-                                }
+                    } else if (item === 'led') {
+                        result = existComponent(['led'], connectedComponents);
+                    } else if (item === 'readSensor') {
+                        result = existComponent([
+                            'us', 'button', 'limitswitch', 'encoder',
+                            'sound', 'buttons', 'irs', 'irs2',
+                            'joystick', 'ldrs', 'pot'
+                        ], connectedComponents);
+                    } else if (item.indexOf('serial') > -1) {
+                        result = $scope.showCommunications(item);
+
+                    } else if (item.includes('rgb')) {
+                        result = existComponent(['RGBled'], connectedComponents);
+                    } else if (item.includes('oscillator')) {
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if ((connectedComponents[i].id === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
+                                result = true;
                             }
-                        });
+                            i++;
+                        }
+                    } else if (item.includes('continuousServo')) {
+                        result = existComponent(['servocont'], connectedComponents);
+                    } else if ((item === 'servoAttach') || (item === 'servoDetach')) {
+                        result = existComponent(['servo', 'servocont'], connectedComponents);
+                    } else if (item.includes('servo')) {
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if ((connectedComponents[i].id === 'servo') && (connectedComponents[i].oscillator !== true)) {
+                                result = true;
+                            }
+                            i++;
+                        }
+                    } else {
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if (connectedComponents[i].id.includes(item) ||
+                                item.toLowerCase().includes(connectedComponents[i].id)) {
+                                result = true;
+                            }
+                            i++;
+                        }
                     }
                 }
-                return result;
+
             } else {
-                return true;
+                result = true;
             }
+            return result;
         };
 
         $scope.showCommunications = function(item) {
@@ -424,7 +453,7 @@ angular.module('bitbloqApp')
                         $scope.init();
                         bloqs.destroyFreeBloqs();
                     });
-                    $rootScope.$on('$translateChangeStart', function(evt, key) {
+                    translateChangeStartEvent = $rootScope.$on('$translateChangeStart', function(evt, key) {
                         bloqs.translateBloqs(key.language);
                     });
                 },
@@ -508,18 +537,14 @@ angular.module('bitbloqApp')
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
 
-        $scope.$on('$destroy', function() {
-            $document.off('contextmenu', contextMenuDocumentHandler);
-            $document.off('click', clickDocumentHandler);
-        });
-
         $window.onresize = function() {
             $timeout(function() {
                 setScrollsDimension();
             }, 10);
         };
 
-        $rootScope.$on('currenttab:bloqstab', function() {
+        var translateChangeStartEvent;
+        var bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
             $timeout(function() {
                 setScrollsDimension();
             }, 0);
@@ -529,4 +554,10 @@ angular.module('bitbloqApp')
         $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
         $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
 
+        $scope.$on('$destroy', function() {
+            $document.off('contextmenu', contextMenuDocumentHandler);
+            $document.off('click', clickDocumentHandler);
+            bloqsTabsEvent();
+            translateChangeStartEvent();
+        });
     });

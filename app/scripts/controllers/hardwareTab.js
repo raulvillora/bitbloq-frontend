@@ -14,8 +14,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     var container = utils.getDOMElement('.protocanvas'),
         $componentContextMenu = $('#component-context-menu'),
         $boardContextMenu = $('#board-context-menu'),
-        $robotContextMenu = $('#robot-context-menu'),
-        hwBasicsLoaded = $q.defer();
+        $robotContextMenu = $('#robot-context-menu');
 
     $scope.closeComponentInteraction = function(pins, connectedPin) {
 
@@ -266,7 +265,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.hardware.componentList = hardwareConstants.components;
         $scope.hardware.boardList = hardwareConstants.boards;
         $scope.hardware.robotList = hardwareConstants.robots;
-        hwBasicsLoaded.resolve();
+        $scope.hwBasicsLoaded.resolve();
         $scope.hardware.sortToolbox($scope.hardware.componentList);
         generateFullComponentList(hardwareConstants);
 
@@ -549,7 +548,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         hwSchema.components = _.cloneDeep(projectService.project.hardware.components);
         hwSchema.connections = _.cloneDeep(projectService.project.hardware.connections);
 
-        hwBasicsLoaded.promise.then(function() {
+        $scope.hwBasicsLoaded.promise.then(function() {
             if (projectService.project.hardware.robot) {
                 var robotReference = projectService.getRobotMetaData();
                 hwSchema.robot = robotReference; //The whole board object is passed
@@ -721,6 +720,21 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {
+            var index;
+            if (newVal) {
+                index = projectService.componentsArray.servos.indexOf($scope.componentSelected);
+                if (index > -1) {
+                    projectService.componentsArray.servos.splice(index, 1);
+                    projectService.componentsArray.oscillators.push($scope.componentSelected);
+                }
+
+            } else {
+                index = projectService.componentsArray.oscillators.indexOf($scope.componentSelected);
+                if (index > -1) {
+                    projectService.componentsArray.oscillators.splice(index, 1);
+                    projectService.componentsArray.servos.push($scope.componentSelected);
+                }
+            }
             projectService.startAutosave();
         }
     });
@@ -743,25 +757,25 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     });
 
-    $rootScope.$on('$translateChangeEnd', function() {
-        $scope.hardware.sortToolbox();
-    });
-
     $scope.$on('$destroy', function() {
         container.removeEventListener('connectionEvent', connectionEventHandler);
         container.removeEventListener('mousedown', _mouseDownHandler);
         $document.off('contextmenu', _contextMenuDocumentHandler);
         $document.off('click', _clickDocumentHandler);
+        $scope.initHardwarePromise();
+        drawHardwareEvent();
+        translateChangeEndEvent();
     });
 
-    $scope.$watch('uploadProjectReady', function(newValue, oldValue) {
-        if (newValue && newValue !== oldValue) {
-            if (projectService.project.hardware.board || projectService.project.hardware.robot) {
-                _loadHardwareProject(projectService.project.hardware);
-            }
-            $scope.hardware.firstLoad = true;
-            $scope.setUploadProjectReady(false);
+    var translateChangeEndEvent = $rootScope.$on('$translateChangeEnd', function() {
+        $scope.hardware.sortToolbox();
+    });
+
+    var drawHardwareEvent = $rootScope.$on('drawHardware', function() {
+        if (projectService.project.hardware.board || projectService.project.hardware.robot) {
+            _loadHardwareProject(projectService.project.hardware);
         }
+        $scope.hardware.firstLoad = true;
     });
 
 }
