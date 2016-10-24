@@ -270,7 +270,7 @@ angular.module('bitbloqApp')
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
                             if (connectedComponents[i].id.includes(item) ||
-                                item.includes(connectedComponents[i].id)) {
+                                item.toLowerCase().includes(connectedComponents[i].id)) {
                                 result = true;
                             }
                             i++;
