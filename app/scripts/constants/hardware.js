@@ -510,121 +510,121 @@ angular.module('bitbloqApp')
                     "x": 0.478,
                     "y": 0.098,
                     "name": "13",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
+                    "uid": "generic-board-pin-digital-13"
                 }, {
                     "x": 0.508,
                     "y": 0.098,
                     "name": "12",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
+                    "uid": "generic-board-pin-digital-12"
                 }, {
                     "x": 0.545,
                     "y": 0.098,
                     "name": "11",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
+                    "uid": "generic-board-pin-digital-11"
                 }, {
                     "x": 0.58,
                     "y": 0.098,
                     "name": "10",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
+                    "uid": "generic-board-pin-digital-10"
                 }, {
                     "x": 0.615,
                     "y": 0.098,
                     "name": "9",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
+                    "uid": "generic-board-pin-digital-9"
                 }, {
                     "x": 0.649,
                     "y": 0.098,
                     "name": "8",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
+                    "uid": "generic-board-pin-digital-8"
                 }, {
                     "x": 0.695,
                     "y": 0.098,
                     "name": "7",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
+                    "uid": "generic-board-pin-digital-7"
                 }, {
                     "x": 0.73,
                     "y": 0.098,
                     "name": "6",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
+                    "uid": "generic-board-pin-digital-6"
                 }, {
                     "x": 0.765,
                     "y": 0.098,
                     "name": "5",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
+                    "uid": "generic-board-pin-digital-5"
                 }, {
                     "x": 0.795,
                     "y": 0.098,
                     "name": "4",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
+                    "uid": "generic-board-pin-digital-4"
                 }, {
                     "x": 0.832,
                     "y": 0.098,
                     "name": "3",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
+                    "uid": "generic-board-pin-digital-3"
                 }, {
                     "x": 0.869,
                     "y": 0.098,
                     "name": "2",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
+                    "uid": "generic-board-pin-digital-2"
                 }, {
                     "x": 0.9,
                     "y": 0.098,
                     "name": "1",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
+                    "uid": "generic-board-pin-digital-1"
                 }, {
                     "x": 0.935,
                     "y": 0.098,
                     "name": "0",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                    "uid": "generic-board-pin-digital-0"
                 }],
                 "analog": [{
                     "x": 0.763,
                     "y": 0.92,
                     "name": "A0",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
+                    "uid": "generic-board-pin-analog-A0"
                 }, {
                     "x": 0.795,
                     "y": 0.92,
                     "name": "A1",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
+                    "uid": "generic-board-pin-analog-A1"
                 }, {
                     "x": 0.83,
                     "y": 0.92,
                     "name": "A2",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
+                    "uid": "generic-board-pin-analog-A2"
                 }, {
                     "x": 0.862,
                     "y": 0.92,
                     "name": "A3",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
+                    "uid": "generic-board-pin-analog-A3"
                 }, {
                     "x": 0.895,
                     "y": 0.92,
                     "name": "A4",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
+                    "uid": "generic-board-pin-analog-A4"
                 }, {
                     "x": 0.935,
                     "y": 0.92,
                     "name": "A5",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                    "uid": "generic-board-pin-analog-A5"
                 }],
                 "serial": [{
                     "x": 0.045,
                     "y": 0.315,
                     "name": "serial",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                    "uid": "generic-board-pin-serial"
                 }],
                 "i2c-4": [{
                     "x": 0.903,
                     "y": 0.925,
                     "name": "A4-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
+                    "uid": "generic-board-pin-A4-H"
                 }],
                 "i2c-5": [{
                     "x": 0.933,
                     "y": 0.925,
                     "name": "A5-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                    "uid": "generic-board-pin-A4-H"
                 }]
             }
         }],

@@ -569,7 +569,7 @@ angular.module('bitbloqApp')
                     if (newVal !== oldVal) {
                         exports.startAutosave();
                     }
-                }, true);
+                });
             } else if (!_thereIsWatcher('project.hardware.board')) {
                 boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
