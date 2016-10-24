@@ -477,6 +477,156 @@ angular.module('bitbloqApp')
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
                 }]
             }
+        }, {
+            "name": "Generic board",
+            "id": "GenericBoard",
+            "mcu": "generic",
+            "vendorIds": ["0x2341"],
+            "productIds": ["0x43"],
+            "pinSize": {
+                "digital": {
+                    "w": 9,
+                    "h": 15
+                },
+                "analog": {
+                    "w": 9,
+                    "h": 15
+                },
+                "serial": {
+                    "w": 33,
+                    "h": 66
+                },
+                "i2c-4": {
+                    "w": 9,
+                    "h": 9
+                },
+                "i2c-5": {
+                    "w": 9,
+                    "h": 9
+                }
+            },
+            "pins": {
+                "digital": [{
+                    "x": 0.478,
+                    "y": 0.098,
+                    "name": "13",
+                    "uid": "generic-board-pin-digital-13"
+                }, {
+                    "x": 0.508,
+                    "y": 0.098,
+                    "name": "12",
+                    "uid": "generic-board-pin-digital-12"
+                }, {
+                    "x": 0.545,
+                    "y": 0.098,
+                    "name": "11",
+                    "uid": "generic-board-pin-digital-11"
+                }, {
+                    "x": 0.58,
+                    "y": 0.098,
+                    "name": "10",
+                    "uid": "generic-board-pin-digital-10"
+                }, {
+                    "x": 0.615,
+                    "y": 0.098,
+                    "name": "9",
+                    "uid": "generic-board-pin-digital-9"
+                }, {
+                    "x": 0.649,
+                    "y": 0.098,
+                    "name": "8",
+                    "uid": "generic-board-pin-digital-8"
+                }, {
+                    "x": 0.695,
+                    "y": 0.098,
+                    "name": "7",
+                    "uid": "generic-board-pin-digital-7"
+                }, {
+                    "x": 0.73,
+                    "y": 0.098,
+                    "name": "6",
+                    "uid": "generic-board-pin-digital-6"
+                }, {
+                    "x": 0.765,
+                    "y": 0.098,
+                    "name": "5",
+                    "uid": "generic-board-pin-digital-5"
+                }, {
+                    "x": 0.795,
+                    "y": 0.098,
+                    "name": "4",
+                    "uid": "generic-board-pin-digital-4"
+                }, {
+                    "x": 0.832,
+                    "y": 0.098,
+                    "name": "3",
+                    "uid": "generic-board-pin-digital-3"
+                }, {
+                    "x": 0.869,
+                    "y": 0.098,
+                    "name": "2",
+                    "uid": "generic-board-pin-digital-2"
+                }, {
+                    "x": 0.9,
+                    "y": 0.098,
+                    "name": "1",
+                    "uid": "generic-board-pin-digital-1"
+                }, {
+                    "x": 0.935,
+                    "y": 0.098,
+                    "name": "0",
+                    "uid": "generic-board-pin-digital-0"
+                }],
+                "analog": [{
+                    "x": 0.763,
+                    "y": 0.92,
+                    "name": "A0",
+                    "uid": "generic-board-pin-analog-A0"
+                }, {
+                    "x": 0.795,
+                    "y": 0.92,
+                    "name": "A1",
+                    "uid": "generic-board-pin-analog-A1"
+                }, {
+                    "x": 0.83,
+                    "y": 0.92,
+                    "name": "A2",
+                    "uid": "generic-board-pin-analog-A2"
+                }, {
+                    "x": 0.862,
+                    "y": 0.92,
+                    "name": "A3",
+                    "uid": "generic-board-pin-analog-A3"
+                }, {
+                    "x": 0.895,
+                    "y": 0.92,
+                    "name": "A4",
+                    "uid": "generic-board-pin-analog-A4"
+                }, {
+                    "x": 0.935,
+                    "y": 0.92,
+                    "name": "A5",
+                    "uid": "generic-board-pin-analog-A5"
+                }],
+                "serial": [{
+                    "x": 0.045,
+                    "y": 0.315,
+                    "name": "serial",
+                    "uid": "generic-board-pin-serial"
+                }],
+                "i2c-4": [{
+                    "x": 0.903,
+                    "y": 0.925,
+                    "name": "A4-H",
+                    "uid": "generic-board-pin-A4-H"
+                }],
+                "i2c-5": [{
+                    "x": 0.933,
+                    "y": 0.925,
+                    "name": "A5-H",
+                    "uid": "generic-board-pin-A4-H"
+                }]
+            }
         }],
         "components": {
             "leds": [{
@@ -765,5 +915,14 @@ angular.module('bitbloqApp')
             "board": "Arduino UNO",
             "width": 75,
             "height": 86
+        }],
+        "genericBoards": [{
+            id: "nano",
+            name: "Arduino Nano",
+            mcu: "nano"
+        }, {
+            id: "leonardo",
+            name: "Arduino Leonardo",
+            mcu: "leonardo"
         }]
     });
