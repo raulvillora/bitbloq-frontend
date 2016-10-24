@@ -22,13 +22,10 @@
         </div>
         <div id="boardSchema" class="board" ng-class="{'board--present':projectService.project.hardware.board, 'board--selected':boardSelected, 'opaque':!projectService.project.hardware.robot}">
             <p class="board__message">{{'make-hardware-board-container' | translate}}</p>
-            <select class="generic-board" ng-model="projectService.project.genericBoardSelected" ng-show="projectService.project.hardware.board === 'Generic board'" ng-options="board as board.name for board in hardwareConstants.genericBoards track by board.id">
-                <option value="">-- {{'make-hardware-select-board' | translate}} --</option>
-            </select>
         </div>
         <div id="robotSchema" class="robot" ng-class="{'robot--present':projectService.project.hardware.robot , 'robot--selected':robotSelected, 'opaque':projectService.project.hardware.robot}"></div>
     </div>
-    <div class="hw-toolbox-container tab--make__block" data-ng-include="'views/bloqsproject/hardwareToolbox.html'"></div>
+    <div class="hw-toolbox-container tab--make__block"  data-ng-include="'views/bloqsproject/hardwareToolbox.html'"></div>
     <div id="component-context-menu" class="hw-context-menu">
         <ul class="menu">
             <li class="menu__item">

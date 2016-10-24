@@ -310,8 +310,7 @@ $hw_toolbox: 210px;
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
         }
-        &.GenericBoard {
-            position: relative;
+        &.mCore {
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
         }
@@ -393,11 +392,5 @@ $hw_toolbox: 210px;
             padding: 2px 4px;
             background-color: $color;
         }
-    }
-    .generic-board {
-        position: absolute;
-        top: 63px;
-        left: 160px;
-        height: 28px;
     }
 }
