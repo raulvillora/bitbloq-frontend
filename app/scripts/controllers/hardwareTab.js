@@ -260,7 +260,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
      ****************************************/
 
     function _initialize() {
-        $scope.hardwareConstants = hardwareConstants;
+
         $scope.projectService = projectService;
         $scope.hardware.componentList = hardwareConstants.components;
         $scope.hardware.boardList = hardwareConstants.boards;
@@ -552,15 +552,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if (projectService.project.hardware.robot) {
                 var robotReference = projectService.getRobotMetaData();
                 hwSchema.robot = robotReference; //The whole board object is passed
-            } else if (projectService.project.hardware.board === 'Generic board') {
-                var found, i = 0;
-                while (!found && (i < hardwareConstants.boards.length)) {
-                    if (hardwareConstants.boards[i].id === 'GenericBoard') {
-                        found = hardwareConstants.boards[i];
-                    }
-                    i++;
-                }
-                hwSchema.board = found;
             } else if (projectService.project.hardware.board) {
                 var boardReference = projectService.getBoardMetaData();
                 hwSchema.board = boardReference; //The whole board object is passed

@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -21,8 +21,7 @@ angular.module('bitbloqApp')
             codeWatcher,
             nameWatcher,
             descriptionWatcher,
-            videoUrlWatcher,
-            genericBoardWatcher;
+            videoUrlWatcher;
 
         exports.bloqs = {
             varsBloq: null,
@@ -154,14 +153,9 @@ angular.module('bitbloqApp')
         };
 
         exports.getBoardMetaData = function() {
-            if (exports.project.hardware.board === 'Generic board') {
-                return exports.project.genericBoardSelected;
-            } else {
-                return _.find(hardwareConstants.boards, function(board) {
-                    return board.name === exports.project.hardware.board;
-                });
-            }
-
+            return _.find(hardwareConstants.boards, function(board) {
+                return board.name === exports.project.hardware.board;
+            });
         };
 
         exports.getRobotMetaData = function() {
@@ -210,7 +204,6 @@ angular.module('bitbloqApp')
                 hardwareTags: [],
                 videoUrl: '',
                 defaultTheme: 'infotab_option_colorTheme',
-                genericBoardSelected: {},
                 codeProject: !!code
             };
             if (code === 'code') {
@@ -345,11 +338,6 @@ angular.module('bitbloqApp')
             newproject.codeProject = type === 'code' ? true : newproject.codeProject;
             if (_.isEmpty(exports.project)) {
                 exports.project = exports.getDefaultProject(newproject.codeProject);
-            }
-            if (newproject.genericBoardSelected) {
-                newproject.genericBoardSelected = _.find(hardwareConstants.genericBoards, {
-                    id: newproject.genericBoardSelected.id
-                });
             }
             exports.project = _.extend(exports.project, newproject);
             exports.setComponentsArray();
@@ -564,12 +552,6 @@ angular.module('bitbloqApp')
                         exports.startAutosave();
                     }
                 });
-
-                genericBoardWatcher = scope.$watch('project.genericBoardSelected', function(newVal, oldVal) {
-                    if (newVal !== oldVal) {
-                        exports.startAutosave();
-                    }
-                });
             } else if (!_thereIsWatcher('project.hardware.board')) {
                 boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
@@ -614,10 +596,6 @@ angular.module('bitbloqApp')
             if (_thereIsWatcher('project.videoUrl')) {
                 videoUrlWatcher();
             }
-            if (_thereIsWatcher('project.genericBoardSelected')) {
-                genericBoardWatcher();
-            }
-
         }
 
         function _unBlindCodeProjectWatchers() {
