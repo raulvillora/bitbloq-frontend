@@ -127,6 +127,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         newComponent.coordinates = coordinates;
         newComponent.name = _createUniqueVarName(newComponent); //Generate unique name
 
+        projectService.addComponentInComponentsArray(newComponent.category, newComponent);
+
         var componentDOM = hw2Bloqs.addComponent(newComponent);
         if (!$scope.$$phase) {
             $scope.$digest();
@@ -659,20 +661,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if ($event.ctrlKey) {
-                //         $scope.undo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if ($event.ctrlKey) {
-                //         $scope.redo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if ($event.ctrlKey) {
+            //         $scope.undo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if ($event.ctrlKey) {
+            //         $scope.redo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
