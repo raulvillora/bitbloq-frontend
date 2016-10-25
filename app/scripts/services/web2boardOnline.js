@@ -186,7 +186,7 @@ angular.module('bitbloqApp')
                     link: chromeAppApi.installChromeApp,
                     closeFunction: function() {
                         uploadDefer.reject({
-                            erro: 'rejeted by user'
+                            error: 'rejeted by user'
                         });
                     },
                     linkParams: function(err) {
