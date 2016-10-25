@@ -8,11 +8,12 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('ProjectCtrl', function($routeParams, $scope, $location, projectApi, alertsService, utils, _, $window, common, commonModals) {
+    .controller('ProjectCtrl', function($routeParams, $scope, $location, projectApi, alertsService, utils, _, $window, common, commonModals, projectService) {
 
         $scope.commonModals = commonModals;
         $scope.projectApi = projectApi;
         $scope.utils = utils;
+        $scope.projectService = projectService;
 
         $scope.countAdded = function() {
             //model updated in projectApi
