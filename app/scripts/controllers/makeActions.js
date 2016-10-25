@@ -239,25 +239,29 @@ angular.module('bitbloqApp')
         var show;
 
         $scope.showViewer = function() {
-            $scope.projectService.startAutosave(true);
-            show = true;
-            //if bloqsproject//code
+            commonModals.requestChromeExtensionActivation(function(err) {
+                if (!err) {
+                    $scope.projectService.startAutosave(true);
+                    show = true;
+                    //if bloqsproject//code
 
-            if (!$scope.projectService.project.codeproject) {
-                //parent: bloqsproject
-                if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
-                    $scope.upload();
-                } else {
-                    var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
-                    $scope.upload(viewerCode);
+                    if (!$scope.projectService.project.codeproject) {
+                        //parent: bloqsproject
+                        if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
+                            $scope.upload();
+                        } else {
+                            var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                            $scope.upload(viewerCode);
+                        }
+                        //capturar el evento x --> success
+                        //borrar watcher
+                        //timeout -> ko
+
+                    } else {
+                        //parent: codeproject
+                    }
                 }
-                //capturar el evento x --> success
-                //borrar watcher
-                //timeout -> ko
-
-            } else {
-                //parent: codeproject
-            }
+            });
 
         };
 
