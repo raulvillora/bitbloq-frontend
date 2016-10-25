@@ -750,6 +750,13 @@ angular.module('bitbloqApp')
                 $scope.$apply();
             });
 
+            $window.addEventListener('bloqs:connect', function() {
+                $scope.saveBloqStep();
+                projectService.startAutosave();
+                $scope.hardware.firstLoad = false;
+                $scope.$apply();
+            });
+
             $window.addEventListener('bloqs:change', function() {
                 if (projectService.bloqs.loopBloq) {
                     $scope.saveBloqStep();
