@@ -9,7 +9,10 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout,
+        $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog,
+        _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs,
+        web2boardOnline, projectService) {
 
         /*************************************************
          Project save / edit
@@ -373,7 +376,8 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension()) {
+            if ($scope.common.useChromeExtension() ||
+                (projectService.project.hardware.robot === 'mBot')) {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -385,20 +389,31 @@ angular.module('bitbloqApp')
                     verifyW2b1();
                 }
             }
+
         };
 
         $scope.upload = function() {
             if (projectService.project.hardware.board) {
-                if ($scope.common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension() ||
+                    ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
                     web2boardOnline.compileAndUpload({
                         board: projectService.getBoardMetaData(),
                         code: $scope.getPrettyCode()
                     });
                 } else {
-                    if (web2board.isWeb2boardV2()) {
-                        uploadW2b2();
+                    if (projectService.project.hardware.robot === 'mBot') {
+                        commonModals.requestChromeExtensionActivation(function(err) {
+                            if (!err) {
+                                $scope.upload();
+                            }
+                        });
+
                     } else {
-                        uploadW2b1();
+                        if (web2board.isWeb2boardV2()) {
+                            uploadW2b2();
+                        } else {
+                            uploadW2b1();
+                        }
                     }
                 }
             } else {
@@ -743,6 +758,13 @@ angular.module('bitbloqApp')
             });
 
             $window.addEventListener('bloqs:dragend', function() {
+                $scope.saveBloqStep();
+                projectService.startAutosave();
+                $scope.hardware.firstLoad = false;
+                $scope.$apply();
+            });
+
+            $window.addEventListener('bloqs:connect', function() {
                 $scope.saveBloqStep();
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
