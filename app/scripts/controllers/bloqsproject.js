@@ -247,7 +247,6 @@ angular.module('bitbloqApp')
                     id: 'upload',
                     type: 'loading'
                 });
-                web2board.setInProcess(true);
 
                 web2board.upload(boardReference, $scope.getPrettyCode());
             } else {
