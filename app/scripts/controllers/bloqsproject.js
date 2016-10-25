@@ -12,7 +12,7 @@ angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout,
         $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog,
         _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs,
-        web2boardOnline, projectService, chromeAppApi, $translate) {
+        web2boardOnline, projectService) {
 
         /*************************************************
          Project save / edit
@@ -403,39 +403,12 @@ angular.module('bitbloqApp')
                     });
                 } else {
                     if (projectService.project.hardware.robot === 'mBot') {
-                        //ngdialog
-                        var modalNeedWeb2boardOnline = $rootScope.$new();
-                        _.extend(modalNeedWeb2boardOnline, {
-                            contentTemplate: '/views/modals/alert.html',
-                            text: 'modal-need-chrome-extension-activation',
-                            confirmText: 'activate',
-                            confirmAction: function(res) {
-                                console.log('res', res);
-                                ngDialog.closeAll();
-                                chromeAppApi.installChromeApp(function(err) {
-                                    if (!err) {
-                                        $scope.upload();
-                                    } else {
-                                        alertsService.add({
-                                            text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                                            id: 'web2board',
-                                            type: 'error'
-                                        });
-                                    }
-
-                                });
-                                $scope.common.user.chromeapp = true;
-                                userApi.update({
-                                    chromeapp: true
-                                });
+                        commonModals.requestChromeExtensionActivation(function(err) {
+                            if (!err) {
+                                $scope.upload();
                             }
                         });
-                        ngDialog.open({
-                            template: '/views/modals/modal.html',
-                            className: 'modal--container modal--alert',
-                            scope: modalNeedWeb2boardOnline,
-                            showClose: false
-                        });
+
                     } else {
                         if (web2board.isWeb2boardV2()) {
                             uploadW2b2();
