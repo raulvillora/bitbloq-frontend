@@ -443,7 +443,9 @@ angular.module('bitbloqApp')
                 code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
                 code = generateViewerBloqCode(components, 'puerto_serie_0', code);
             }
-            console.log('code');
+
+            code = code + '}';
+            console.log('code de bloq');
             console.log(code);
             return code;
         }
@@ -496,7 +498,8 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension()) {
+            if ($scope.common.useChromeExtension() ||
+                (projectService.project.hardware.robot === 'mBot')) {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -508,6 +511,7 @@ angular.module('bitbloqApp')
                     verifyW2b1();
                 }
             }
+
         };
 
         $scope.upload = function(code) {
@@ -518,8 +522,10 @@ angular.module('bitbloqApp')
                 viewer = false;
             }
             if (projectService.project.hardware.board) {
-                if ($scope.common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension() ||
+                    ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
                     $rootScope.$emit('web2board:uploading');
+
                     if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                         web2boardOnline.compileAndUpload({
                             board: projectService.getBoardMetaData(),
@@ -533,11 +539,21 @@ angular.module('bitbloqApp')
                             viewer: viewer
                         });
                     }
+
                 } else {
-                    if (web2board.isWeb2boardV2()) {
-                        uploadW2b2();
+                    if (projectService.project.hardware.robot === 'mBot') {
+                        commonModals.requestChromeExtensionActivation(function(err) {
+                            if (!err) {
+                                $scope.upload();
+                            }
+                        });
+
                     } else {
-                        uploadW2b1();
+                        if (web2board.isWeb2boardV2()) {
+                            uploadW2b2();
+                        } else {
+                            uploadW2b1();
+                        }
                     }
                 }
             } else {
@@ -549,6 +565,7 @@ angular.module('bitbloqApp')
                     type: 'warning'
                 });
             }
+
         };
 
         $scope.serialMonitor = function() {
@@ -705,6 +722,7 @@ angular.module('bitbloqApp')
                         }
                         allComponents = allComponents.concat(projectService.componentsArray[type]);
                     }
+                    allComponents = allComponents.concat(projectService.componentsArray[type]);
                 }
                 //Update dropdowns from bloqs of toolbox
                 if (bloqCanvasEl) {
@@ -890,6 +908,13 @@ angular.module('bitbloqApp')
             });
 
             $window.addEventListener('bloqs:dragend', function() {
+                $scope.saveBloqStep();
+                projectService.startAutosave();
+                $scope.hardware.firstLoad = false;
+                $scope.$apply();
+            });
+
+            $window.addEventListener('bloqs:connect', function() {
                 $scope.saveBloqStep();
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
