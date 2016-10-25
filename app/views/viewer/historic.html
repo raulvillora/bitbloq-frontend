@@ -10,10 +10,7 @@
             <p ng-if="key.indexOf('humidity') === -1">{{sensors[dataSensor[0].type].name}}</p>
             <p ng-if="key.indexOf('humidity') === -1">{{key}}</p>
         </div>
-        <nvd3 ng-if="dataSensor[0].type === 'hts211' || dataSensor[0].type === 'us'" class="with-3d-shadow with-transitions" data="dataSensor" options="chartOptionsTemperatureHumidityUs"></nvd3>
-        <nvd3 ng-if="dataSensor[0].type !== 'hts211' || dataSensor[0].type !== 'us'" class="with-3d-shadow with-transitions" data="dataSensor" options="chartOptions"></nvd3>
+        <nvd3 ng-if="dataSensor[0].type === 'hts221' || dataSensor[0].type === 'us'" class="with-3d-shadow with-transitions" data="dataSensor" options="chartOptionsTemperatureHumidityUs"></nvd3>
+        <nvd3 ng-if="dataSensor[0].type !== 'hts221' && dataSensor[0].type !== 'us'" class="with-3d-shadow with-transitions" data="dataSensor" options="chartOptions"></nvd3>
     </div>
-
-    <!--dataSensor[0].type === 'hts221'-->
-
 </div>

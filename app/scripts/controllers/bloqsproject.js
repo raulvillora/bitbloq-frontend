@@ -401,8 +401,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.getViewerCode = function(componentsArray, originalCode) {
-            console.log('originalCode');
-            console.log(originalCode);
             var components = $scope.getComponents(componentsArray);
             var code = originalCode;
             var serialName;
@@ -415,14 +413,11 @@ angular.module('bitbloqApp')
                 var serialCode = originalCode.split('/***   Included libraries  ***/');
                 serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
                 code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
-                console.log('/***   Included libraries  ***/' + serialCode[0] + serialCode[1]);
                 code = code.split('\n/***   Setup  ***/');
                 code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
                 visorCode = generateSensorsCode(components, 'puerto_serie_0', '');
                 code = code.replace(/loop\(\){([^]*)}/, 'loop() {' + visorCode + '$1' + '}');
             }
-            console.log('code');
-            console.log(code);
             return code;
         };
 
@@ -445,8 +440,6 @@ angular.module('bitbloqApp')
             }
 
             code = code + '}';
-            console.log('code de bloq');
-            console.log(code);
             return code;
         }
 
