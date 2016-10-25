@@ -492,8 +492,8 @@ angular.module('bitbloqApp')
                     return newElem;
                 });
 
-                exports.project.hardware.components = schema.components;
-                exports.project.hardware.connections = schema.connections;
+                exports.project.hardware.components = _.cloneDeep(schema.components);
+                exports.project.hardware.connections = _.cloneDeep(schema.connections);
             }
         }
 
