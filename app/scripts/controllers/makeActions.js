@@ -254,7 +254,7 @@ angular.module('bitbloqApp')
                     //parent: codeproject
                 }
             } else {
-                commonModals.requestChromeExtensionActivation(function(err) {
+                commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation-viewer', function(err) {
                     if (!err) {
                         $scope.projectService.startAutosave(true);
                         show = true;

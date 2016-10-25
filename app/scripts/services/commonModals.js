@@ -710,11 +710,11 @@ angular.module('bitbloqApp')
             });
         }
 
-        exports.requestChromeExtensionActivation = function(callback) {
+        exports.requestChromeExtensionActivation = function(text, callback) {
             var modalNeedWeb2boardOnline = $rootScope.$new();
             _.extend(modalNeedWeb2boardOnline, {
                 contentTemplate: '/views/modals/alert.html',
-                text: 'modal-need-chrome-extension-activation',
+                text: text,
                 confirmText: 'activate',
                 confirmAction: function() {
 

@@ -66,12 +66,9 @@ module.exports = function(config) {
             '../bower_components/d3/d3.js',
             '../bower_components/nvd3/build/nv.d3.js',
             '../bower_components/angular-nvd3/dist/angular-nvd3.js',
-<<<<<<< HEAD
-=======
             '../bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js',
             '../bower_components/autogrow/autogrow.js',
             '../bower_components/bloqs/dist/bloqs.min.js',
->>>>>>> 4c5f134459e771a952bd54db3d6ed77923828289
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
             '../app/scripts/**/*.js',

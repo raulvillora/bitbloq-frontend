@@ -529,7 +529,7 @@ angular.module('bitbloqApp')
 
                 } else {
                     if (projectService.project.hardware.robot === 'mBot') {
-                        commonModals.requestChromeExtensionActivation(function(err) {
+                        commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation', function(err) {
                             if (!err) {
                                 $scope.upload();
                             }
