@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData, $rootScope) {
+    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData, $rootScope, web2board) {
         var exports = {
             compile: compile,
             upload: upload,
@@ -86,6 +86,7 @@ angular.module('bitbloqApp')
             alertServerTimeout();
 
             var compilerPromise = compilerApi.compile(params);
+            web2board.setInProcess(true);
 
             compilerPromise.then(function(response) {
                 if (response.data.error) {
@@ -109,6 +110,7 @@ angular.module('bitbloqApp')
                     translatedText: response.data
                 });
             }).finally(function() {
+                web2board.setInProcess(false);
                 completed = true;
                 alertsService.close(alertCompile);
             });
@@ -166,12 +168,14 @@ angular.module('bitbloqApp')
             }
 
             chromeAppApi.isConnected().then(function() {
+                web2board.setInProcess(true);
                 chromeAppApi.sendHex({
                     board: params.board.mcu,
                     file: params.hex
                 }).then(function(uploadHexResponse) {
                     $rootScope.$emit('viewer-code:ready');
                     if (params.viewer) {
+                      web2board.setInProcess(true);
                         alertsService.add({
                             text: 'alert-viewer-reconfigured',
                             id: 'web2board',
@@ -179,6 +183,7 @@ angular.module('bitbloqApp')
                             time: 5000
                         });
                     } else {
+                        web2board.setInProcess(false);
                         alertsService.add({
                             text: 'alert-web2board-code-uploaded',
                             id: 'web2board',
@@ -200,6 +205,7 @@ angular.module('bitbloqApp')
                         id: 'web2board',
                         type: 'error'
                     });
+                    web2board.setInProcess(false);
                     uploadDefer.reject(error);
                 });
             }).catch(function() {

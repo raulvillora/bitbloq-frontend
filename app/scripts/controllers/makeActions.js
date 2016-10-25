@@ -245,9 +245,12 @@ angular.module('bitbloqApp')
 
             if (!$scope.projectService.project.codeproject) {
                 //parent: bloqsproject
-                var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
-                $scope.upload(viewerCode);
-
+                if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
+                    $scope.upload();
+                } else {
+                    var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                    $scope.upload(viewerCode);
+                }
                 //capturar el evento x --> success
                 //borrar watcher
                 //timeout -> ko

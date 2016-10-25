@@ -151,8 +151,8 @@ angular.module('bitbloqApp')
                 y: function(d) {
                     return d.y;
                 },
-                tickFormat: function(d) {
-                    return Math.round(d);
+                tickFormat: function(t) {
+                    return Math.round(t < 0 ? 0 : t);
                 },
                 showLegend: false,
                 useInteractiveGuideline: true
@@ -362,7 +362,10 @@ angular.module('bitbloqApp')
                 } else {
                     $scope.data[key] = [{
                         type: value,
-                        values: [],
+                        values: [{
+                            x: 0,
+                            y: 0
+                        }],
                         color: '#82ad3a'
                     }];
                     receivedDataCount[key] = 0;
@@ -421,14 +424,15 @@ angular.module('bitbloqApp')
             if (!$scope.pause && angular.isString(msg)) {
                 var messages = dataParser.retrieve_messages(msg);
                 messages.forEach(function(message) {
-                    if (message.match('\[[A-Z]+[0-9]*(_([a-z])+)?:.*\]:[.0-9]+')) {
+                    if (message.match(/\[[A-Z]+[0-9]*(_([a-z])+)?:.*\]:[.\-0-9]+[\n\r\t\s]*/)) {
+                      console.log('y entra?');
                         var sensor = message.split(':');
                         var sensorName = sensor[1].substring(0, sensor[1].length - 1);
                         var sensorType = (sensor[0].split('['))[1];
                         var sensorValue = sensor[2].replace(/\s+/, '');
 
-                        var number = parseFloat(sensorValue);
 
+                        var number = parseFloat(sensorValue);
                         if ((sensorType.toLowerCase()).indexOf('hts221') > -1) {
                             var property = sensorType.split('_');
                             $scope.sensorsData[sensorName][property[1]].value = sensorValue;
@@ -456,6 +460,9 @@ angular.module('bitbloqApp')
                                 }
                             }
                         }
+                    }else{
+                      console.log('-------message----');
+                      console.log(message);
                     }
                 });
                 $scope.$apply();

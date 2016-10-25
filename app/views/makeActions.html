@@ -153,7 +153,7 @@
                     </svg>
                     {{'show-plotter' | translate}}
                 </div>
-                <div class="dropdown__item" data-ng-disabled="isWeb2BoardInProgress()" data-ng-click="showViewer()" data-element="makeactions-menuview-plotter">
+                <div class="dropdown__item" ng-if="!projectService.project.codeProject" data-ng-disabled="isWeb2BoardInProgress()" data-ng-click="showViewer()" data-element="makeactions-menuview-plotter">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#Ver_verPlotter"></use>
                     </svg>
