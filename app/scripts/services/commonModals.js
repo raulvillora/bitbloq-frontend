@@ -8,8 +8,9 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate,
+        $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
+        $location, clipboard, $q, chromeAppApi) {
 
         var exports = {};
         var shortUrl;
@@ -667,6 +668,42 @@ angular.module('bitbloqApp')
                 showClose: false
             });
         }
+
+        exports.requestChromeExtensionActivation = function(callback) {
+            var modalNeedWeb2boardOnline = $rootScope.$new();
+            _.extend(modalNeedWeb2boardOnline, {
+                contentTemplate: '/views/modals/alert.html',
+                text: 'modal-need-chrome-extension-activation',
+                confirmText: 'activate',
+                confirmAction: function() {
+
+                    ngDialog.closeAll();
+                    chromeAppApi.installChromeApp(function(err) {
+                        if (!err) {
+                            callback(null);
+                        } else {
+                            alertsService.add({
+                                text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
+                                id: 'web2board',
+                                type: 'error'
+                            });
+                            callback(err);
+                        }
+
+                    });
+                    common.user.chromeapp = true;
+                    userApi.update({
+                        chromeapp: true
+                    });
+                }
+            });
+            ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--alert',
+                scope: modalNeedWeb2boardOnline,
+                showClose: false
+            });
+        };
 
         return exports;
     });
