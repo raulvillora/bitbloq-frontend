@@ -11,14 +11,6 @@
 angular.module('bitbloqApp')
     .controller('ViewerCtrl', function($element, web2boardV2, web2board, $timeout, $scope, common, $translate, chromeAppApi, utils, hardwareConstants, $rootScope, _) {
 
-        /*  "encoder",
-          "hts221",
-          "pot",
-          "ldrs",
-          "sound",
-          "us",
-          "irs"*/
-
         $scope.sensorsList = {};
 
         $scope.sensors = {
@@ -40,7 +32,7 @@ angular.module('bitbloqApp')
             'sound': {
                 name: common.translate('sound'),
                 value: '--',
-                range: '0-1023'
+                range: '0/1'
             },
             'encoder': {
                 name: common.translate('encoder'),
@@ -325,9 +317,6 @@ angular.module('bitbloqApp')
         receivedDataCount = {};
 
         function initGraphData(sensorsList) {
-            console.log('sensorList');
-            console.log(sensorsList);
-
             _.forEach(sensorsList, function(value, key) {
 
                 if (value === 'hts221') {
@@ -425,7 +414,6 @@ angular.module('bitbloqApp')
                 var messages = dataParser.retrieve_messages(msg);
                 messages.forEach(function(message) {
                     if (message.match(/\[[A-Z]+[0-9]*(_([a-z])+)?:.*\]:[.\-0-9]+[\n\r\t\s]*/)) {
-                      console.log('y entra?');
                         var sensor = message.split(':');
                         var sensorName = sensor[1].substring(0, sensor[1].length - 1);
                         var sensorType = (sensor[0].split('['))[1];
@@ -460,9 +448,6 @@ angular.module('bitbloqApp')
                                 }
                             }
                         }
-                    }else{
-                      console.log('-------message----');
-                      console.log(message);
                     }
                 });
                 $scope.$apply();
