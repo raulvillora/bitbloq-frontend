@@ -146,10 +146,12 @@ angular.module('bitbloqApp')
                             compileAndUploadDefer.resolve(uploadResponse);
                         }).catch(function(uploadError) {
                             compileAndUploadDefer.reject(uploadError);
+                            web2board.setInProcess(false);
                         });
                     }
                 }).catch(function(error) {
                     compileAndUploadDefer.reject(error);
+                    web2board.setInProcess(false);
                 });
             }
             return compileAndUploadDefer.promise;
@@ -207,7 +209,7 @@ angular.module('bitbloqApp')
                     }
                     alertsService.add({
                         text: text,
-                        id: 'web2board',
+                        id: 'upload',
                         type: 'error'
                     });
                     web2board.setInProcess(false);
@@ -216,7 +218,7 @@ angular.module('bitbloqApp')
             }).catch(function() {
                 alertsService.add({
                     text: $translate.instant('landing_howitworks_oval_2_chromeos'),
-                    id: 'web2board',
+                    id: 'upload',
                     type: 'warning',
                     time: 20000,
                     linkText: $translate.instant('from-here'),
@@ -230,14 +232,14 @@ angular.module('bitbloqApp')
                         if (err) {
                             alertsService.add({
                                 text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                                id: 'web2board',
+                                id: 'upload',
                                 type: 'error'
                             });
                             uploadDefer.reject(err);
                         } else {
                             alertsService.add({
                                 text: $translate.instant('chromeapp-installed'),
-                                id: 'web2board',
+                                id: 'upload',
                                 type: 'ok',
                                 time: 5000
                             });
