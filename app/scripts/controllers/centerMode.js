@@ -52,11 +52,11 @@
                 }
             ];
 
-            $scope.sortArray = _.keys($scope.teachers[0]);
             $scope.orderInstance = 'name';
             $scope.urlType = $routeParams.type;
             $scope.center = {};
             $scope.teachers = [];
+            $scope.sortArray;
 
 
             $scope.sortInstances = function(type) {
@@ -196,6 +196,7 @@
             function _getTeachers(centerId) {
                 centerModeApi.getTeachers(centerId).then(function(response) {
                     $scope.teachers = response.data;
+                    $scope.sortArray = _.keys($scope.teachers[0]);
                 });
             }
 
