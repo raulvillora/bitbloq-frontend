@@ -419,7 +419,6 @@ angular.module('bitbloqApp')
                         var sensorType = (sensor[0].split('['))[1];
                         var sensorValue = sensor[2].replace(/\s+/, '');
 
-
                         var number = parseFloat(sensorValue);
                         if ((sensorType.toLowerCase()).indexOf('hts221') > -1) {
                             var property = sensorType.split('_');
@@ -433,19 +432,17 @@ angular.module('bitbloqApp')
                             $scope.sensors[sensorType.toLowerCase()].value = sensorValue;
                             $scope.sensorsData[sensorName].value = number;
                         }
-                        if (!$scope.pauseSensors[sensorName]) {
-                            if (!$scope.pause && !isNaN(number)) {
-                                if (receivedDataCount[sensorName] === -1) {
-                                    receivedDataCount[sensorName]++;
-                                } else {
-                                    $scope.data[sensorName][0].values.push({
-                                        x: receivedDataCount[sensorName]++,
-                                        y: number
-                                    });
-                                }
-                                if ($scope.data[sensorName][0].values.length > plotterLength) {
-                                    $scope.data[sensorName][0].values.shift();
-                                }
+                        if (!$scope.pauseSensors[sensorName] && !$scope.pause && !isNaN(number)) {
+                            if (receivedDataCount[sensorName] === -1) {
+                                receivedDataCount[sensorName]++;
+                            } else {
+                                $scope.data[sensorName][0].values.push({
+                                    x: receivedDataCount[sensorName]++,
+                                    y: number
+                                });
+                            }
+                            if ($scope.data[sensorName][0].values.length > plotterLength) {
+                                $scope.data[sensorName][0].values.shift();
                             }
                         }
                     }

@@ -65,57 +65,63 @@ angular.module('bitbloqApp')
             } else {
                 params.board = params.board.mcu;
             }
-            if (params.viewer) {
-                alertsService.add({
-                    text: 'alert-viewer-reconfigure',
-                    id: 'web2board',
-                    type: 'loading',
-                    time: 5000
-                });
-            } else {
+            if (!params.viewer && !params.upload) {
                 alertsService.add({
                     text: 'alert-web2board-compiling',
-                    id: 'web2board',
+                    id: 'compile',
                     type: 'loading'
                 });
             }
 
-            alertCompile = null;
             completed = false;
 
             alertServerTimeout();
 
-            var compilerPromise = compilerApi.compile(params);
             web2board.setInProcess(true);
+            var compilerPromise = compilerApi.compile(params);
+            if (!params.upload) {
+                compilerAlerts(compilerPromise);
+            } else {
+                compilerPromise.finally(function() {
+                    web2board.setInProcess(false);
+                    completed = true;
+                });
+            }
+            return compilerPromise;
+
+        }
+
+        function compilerAlerts(compilerPromise) {
+            alertCompile = null;
 
             compilerPromise.then(function(response) {
-                if (response.data.error) {
+                    if (response.data.error) {
+                        alertsService.add({
+                            id: 'compile',
+                            type: 'warning',
+                            translatedText: utils.parseCompileError(response.data.error)
+                        });
+                    } else {
+                        alertsService.add({
+                            text: 'alert-web2board-compile-verified',
+                            id: 'compile',
+                            type: 'ok',
+                            time: 5000
+                        });
+                    }
+                }).catch(function(response) {
                     alertsService.add({
-                        id: 'web2board',
-                        type: 'warning',
-                        translatedText: utils.parseCompileError(response.data.error)
+                        id: 'compile',
+                        type: 'error',
+                        translatedText: response.data
                     });
-                } else {
-                    alertsService.add({
-                        text: 'alert-web2board-compile-verified',
-                        id: 'web2board',
-                        type: 'ok',
-                        time: 5000
-                    });
-                }
-            }).catch(function(response) {
-                alertsService.add({
-                    id: 'web2board',
-                    type: 'error',
-                    translatedText: response.data
+                })
+                .finally(function() {
+                    web2board.setInProcess(false);
+                    completed = true;
+                    alertsService.close(alertCompile);
                 });
-            }).finally(function() {
-                web2board.setInProcess(false);
-                completed = true;
-                alertsService.close(alertCompile);
-            });
 
-            return compilerPromise;
         }
 
         /**
@@ -130,7 +136,7 @@ angular.module('bitbloqApp')
             if (!compileAndUploadDefer || (compileAndUploadDefer.promise.$$state.status !== 0)) {
 
                 compileAndUploadDefer = $q.defer();
-
+                params.upload = true;
                 compile(utils.clone(params)).then(function(response) {
                     if (response.data.error) {
                         compileAndUploadDefer.reject(response);
@@ -155,13 +161,13 @@ angular.module('bitbloqApp')
             if (params.viewer) {
                 alertsService.add({
                     text: 'alert-viewer-reconfigure',
-                    id: 'web2board',
+                    id: 'reconfigure',
                     type: 'loading'
                 });
             } else {
                 alertsService.add({
                     text: 'alert-web2board-uploading',
-                    id: 'web2board',
+                    id: 'upload',
                     type: 'loading',
                     time: 'infinite'
                 });
@@ -175,10 +181,10 @@ angular.module('bitbloqApp')
                 }).then(function(uploadHexResponse) {
                     $rootScope.$emit('viewer-code:ready');
                     if (params.viewer) {
-                      web2board.setInProcess(true);
+                        web2board.setInProcess(true);
                         alertsService.add({
                             text: 'alert-viewer-reconfigured',
-                            id: 'web2board',
+                            id: 'reconfigure',
                             type: 'ok',
                             time: 5000
                         });
@@ -186,7 +192,7 @@ angular.module('bitbloqApp')
                         web2board.setInProcess(false);
                         alertsService.add({
                             text: 'alert-web2board-code-uploaded',
-                            id: 'web2board',
+                            id: 'upload',
                             type: 'ok',
                             time: 5000
                         });

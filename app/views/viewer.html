@@ -4,19 +4,19 @@
             <ul class="tabs__header">
                 <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'realtime'}" ng-click="selectedTab = 'realtime'">
                     <span class="menu__item__span">
-                        Tiempo real
+                      {{'realtime' | translate}}
                     </span>
                 </li>
                 <li data-element="viewer-representation" ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'representation'}" ng-click="selectedTab = 'representation'">
                     <span class="menu__item__span">
-                        Representación
+                      {{'sensor-representation' | translate}}
                     </span>
                 </span>
             </li>
 
             <li data-element="viewer-settings" ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'settings'}" ng-click="selectedTab = 'settings'">
                 <span class="menu__item__span">
-                    Ajustes
+                  {{'viewer-settings' | translate}}
                 </span>
             </span>
         </li>

@@ -157,7 +157,7 @@ angular.module('bitbloqApp')
         var w2bUploadingEvent = $rootScope.$on('web2board:uploading', function(evt, port) {
             alertsService.add({
                 text: 'alert-web2board-uploading',
-                id: 'web2board',
+                id: 'upload',
                 type: 'loading',
                 value: port
             });
@@ -503,15 +503,13 @@ angular.module('bitbloqApp')
 
         $scope.upload = function(code) {
             var viewer;
-            if (code) {
-                viewer = true;
-            } else {
-                viewer = false;
-            }
+            viewer = code ? true : false;
             if (projectService.project.hardware.board) {
                 if ($scope.common.useChromeExtension() ||
                     ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
-                    $rootScope.$emit('web2board:uploading');
+                    if (!viewer) {
+                        $rootScope.$emit('web2board:uploading');
+                    }
 
                     if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                         web2boardOnline.compileAndUpload({
@@ -701,13 +699,10 @@ angular.module('bitbloqApp')
                 var bloqCanvasEl = null;
                 //Update dropdowns values from bloqs canvas
                 for (var type in projectService.componentsArray) {
-                    if (projectService.componentsArray[type].length) {
-                        bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
-                        var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
-                        for (var i = 0, len = nodeList.length; i < len; i++) {
-                            updateBloq(nodeList[i], projectService.componentsArray[type]);
-                        }
-                        allComponents = allComponents.concat(projectService.componentsArray[type]);
+                    bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
+                    var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
+                    for (var i = 0, len = nodeList.length; i < len; i++) {
+                        updateBloq(nodeList[i], projectService.componentsArray[type]);
                     }
                     allComponents = allComponents.concat(projectService.componentsArray[type]);
                 }

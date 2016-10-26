@@ -217,12 +217,6 @@ angular.module('bitbloqApp')
                 if ($scope.projectService.project.hardware.board) {
                     if ($scope.common.useChromeExtension()) {
                         $scope.commonModals.launchViewerWindow($scope.projectService.getBoardMetaData(), componentsJSON);
-                    } else {
-                        if ($scope.web2board.isWeb2boardV2()) {
-                            //  viewerW2b2();
-                        } else {
-                            //  viewerW2b1();
-                        }
                     }
                 } else {
                     $scope.currentTab = 0;
