@@ -31,7 +31,7 @@
         width: 190px;
     }
     &:after {
-        clear:both;
+        clear: both;
     }
 }
 
@@ -149,3 +149,25 @@
 .table__block--separated {
     border-top: 5px solid #ebebeb;
 }
+
+.breadcrumb {
+    width: 50%;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    h1 {
+        display: inline-block;
+    }
+    .breadcrumb--secondary {
+        display: inline-block;
+        text-decoration: initial;
+        cursor: default;
+    }
+    .breadcrumb--secondary::before {
+        text-decoration: initial;
+        content: '>';
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+

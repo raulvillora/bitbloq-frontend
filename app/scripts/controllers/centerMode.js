@@ -57,6 +57,7 @@
             $scope.center = {};
             $scope.teachers = [];
             $scope.sortArray;
+            $scope.secondaryBreadcrumb = false;
 
 
             $scope.sortInstances = function(type) {
@@ -193,6 +194,29 @@
                 });
             };
 
+            function _checkUrl() {
+                $scope.urlType = $routeParams.type;
+                switch ($scope.urlType) {
+                    case 'center':
+                        _getCenter();
+                        break;
+                    case 'center-teacher':
+                    case 'teacher':
+                        _getTeacher($routeParams.id);
+                        break;
+
+
+                }
+            }
+
+            function _getTeacher(teacherId) {
+                centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
+                    console.log('chachi', response);
+                    $scope.secondaryBreadcrumb = true;
+                    $scope.teacher = _.extend($scope.teacher, response.data);
+                });
+            }
+
             function _getTeachers(centerId) {
                 centerModeApi.getTeachers(centerId).then(function(response) {
                     $scope.teachers = response.data;
@@ -200,15 +224,19 @@
                 });
             }
 
-            function _init() {
-                $scope.common.itsUserLoaded().then(function() {
-                    centerModeApi.getMyCenter().then(function(response) {
-                        $scope.center = response.data;
-                        _getTeachers($scope.center._id);
-                    });
+            function _getCenter() {
+                centerModeApi.getMyCenter().then(function(response) {
+                    $scope.center = response.data;
+                    _getTeachers($scope.center._id);
                 });
+
             }
 
-            _init();
+            $scope.common.itsUserLoaded().then(function() {
+                centerModeApi.getMyCenter().then(function(response) { //todo delete
+                    $scope.center = response.data;
+                    _checkUrl();
+                });
+            });
         });
 })();

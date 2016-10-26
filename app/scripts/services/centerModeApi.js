@@ -7,12 +7,13 @@ angular
             addTeachers: addTeachers,
             deleteTeacher: deleteTeacher,
             createGroup: createGroup,
+            getTeacher: getTeacher,
             getTeachers: getTeachers,
             getMyCenter: getMyCenter,
             isHeadMaster: isHeadMaster
         };
 
-        
+
         function addTeachers(teachers, centerId) {
             return $http({
                 method: 'POST',
@@ -39,10 +40,17 @@ angular
             });
         }
 
-        function getMyCenter(){
+        function getMyCenter() {
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'center/me'
+            });
+        }
+
+        function getTeacher(teacherId, centerId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher/' + teacherId
             });
         }
 
