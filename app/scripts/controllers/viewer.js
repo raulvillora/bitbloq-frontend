@@ -37,7 +37,7 @@ angular.module('bitbloqApp')
             'encoder': {
                 name: common.translate('encoder'),
                 value: '--',
-                range: '0-1023'
+                range: ''
 
             },
             'pot': {
