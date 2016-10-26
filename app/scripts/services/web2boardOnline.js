@@ -222,6 +222,11 @@ angular.module('bitbloqApp')
                     time: 20000,
                     linkText: $translate.instant('from-here'),
                     link: chromeAppApi.installChromeApp,
+                    closeFunction: function() {
+                        uploadDefer.reject({
+                            error: 'rejeted by user'
+                        });
+                    },
                     linkParams: function(err) {
                         if (err) {
                             alertsService.add({
