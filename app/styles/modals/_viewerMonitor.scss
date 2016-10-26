@@ -1,0 +1,180 @@
+.viewerMonitor {
+    height: 100%;
+    overflow-y: auto;
+    .tabs-layout {
+        height: 100%;
+    }
+    .tabs-layout__aside {
+        position: absolute;
+        background-color: white;
+        width: 98.3%;
+        max-width: inherit;
+    }
+    .tabs-layout__content {
+        padding-top: 70px;
+        height: calc(100% - 0px);
+    }
+    .tabs__header {
+        padding-left: 0;
+    }
+    .tabs__header__item {
+        width: calc(100% / 3);
+        padding-left: 20px;
+        .menu__item__span {
+            font-size: 12pt;
+        }
+    }
+    .viewer__realtime__content {
+        width: 100%;
+    }
+    .viewer__realtime__content__item {
+        display: inline-block;
+        width: 260px;
+        height: 150px;
+        margin: 1em;
+        text-align: center;
+        vertical-align: top;
+        padding-top: 20px;
+        background-color: white;
+    }
+    .viewer__realtime__content__item__title {
+        height: 14%;
+        p:nth-child(1) {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        font-weight: bold;
+        p:nth-child(2) {
+            color: #8c919b;
+            font-size: 1em;
+        }
+    }
+    .viewer__realtime__content__item__data {
+        line-height: 98px;
+    }
+    .viewer__realtime__content__item__value {
+        font-size: 4em;
+        font-weight: bold;
+        height: 30px;
+    }
+    .viewer__realtime__content__item__value__number {
+        color: #81ae39;
+    }
+    .viewer__realtime__content__item__value__nonumber {
+        color: #adb1b4;
+    }
+    .viewer__realtime__content__item__range {
+        font-size: 1em;
+        height: 1em;
+        color: #adb1b4;
+    }
+    .viewer__realtime__content__item__hts221 {
+        display: inline-block;
+        font-size: 2.5em;
+        margin-right: 8px;
+    }
+    .viewer__representation_content__item {
+        float: left;
+        width: 97%;
+        margin: 10px;
+        padding-top: 15px;
+        padding-left: 15px;
+        background-color: white;
+    }
+    .viewer__representation__content__item__title {
+        height: 14%;
+        p:nth-child(1) {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        font-weight: bold;
+        p:nth-child(2) {
+            color: #8c919b;
+            font-size: 1em;
+        }
+    }
+    nvd3 {
+        padding: 0;
+        .nvd3-svg {
+            background-color: white;
+        }
+        svg {
+            border-radius: 0;
+        }
+    }
+    .viewer__realtime__header {
+        button {
+            float: right;
+            margin-bottom: 10px;
+            &:nth-child(1) {
+                margin-right: 12px;
+            }
+            &:nth-child(2) {
+                margin-right: 10px;
+            }
+        }
+    }
+    .viewer__historic_content__item--button {
+        float: right;
+        margin-bottom: 10px;
+        &:nth-child(1) {
+            margin-right: 20px;
+        }
+        &:nth-child(2) {
+            margin-right: 10px;
+        }
+    }
+    .viewer__settings_content__item {
+        height: 350px;
+        .ports {
+            &:nth-child(1) {
+                margin-top: 20px;
+            }
+            text-align: left;
+            .refresh {
+                margin-top: 15px;
+                margin-right: 15px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .sort-dropdown {
+                width: calc(50% - 57px);
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 10px;
+                margin-left: 10px;
+                margin-top: 10px;
+            }
+            .margin-left {
+                margin-left: 30px;
+            }
+            .ports--text {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 30px;
+                margin-top: 10px;
+                font-size: 1.5em;
+            }
+            .dropwdown__menu {
+                max-height: 182px;
+            }
+        }
+    }
+    .extra-margin {
+        margin-top: 14px;
+    }
+    .viewer__settings_content__item--temperature,
+    .viewer__settings_content__item--humidity {
+        padding-right: 0;
+        margin-right: 0;
+        padding-left: 0;
+        margin-left: 0;
+        width: 48.5%;
+        float: left;
+    }
+    .viewer__settings_content__item--temperature {
+        padding-top: 24px;
+        margin-left: 10px;
+        padding-left: 15px;
+    }
+}

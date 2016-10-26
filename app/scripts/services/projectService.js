@@ -366,6 +366,7 @@ angular.module('bitbloqApp')
             }
         };
 
+
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //----------------- Private functions ---------------------------------
@@ -405,6 +406,7 @@ angular.module('bitbloqApp')
                 exports.project.name = exports.project.name || common.translate('new-project');
 
                 $log.debug('Auto saving project...');
+
 
                 if (exports.tempImage.file && !exports.tempImage.generate) {
                     exports.project.image = 'custom';
@@ -448,6 +450,7 @@ angular.module('bitbloqApp')
                             localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
                             exports.saveOldProject();
 
+
                             if (exports.tempImage.file) {
                                 imageApi.save(idProject, exports.tempImage.file).then(function() {
                                     $log.debug('imageSaveok');
@@ -470,6 +473,7 @@ angular.module('bitbloqApp')
                 exports.saveStatus = 0;
                 defered.resolve();
             }
+
 
             return defered.promise;
         }
@@ -616,6 +620,5 @@ angular.module('bitbloqApp')
                 }
             }
         });
-
         return exports;
     });

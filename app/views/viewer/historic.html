@@ -1,0 +1,16 @@
+<div class="viewerMonitor">
+    <div class="viewer__realtime__header clearfix">
+        <button class="btn btn--tertiary btn--small" ng-click="onPause()">{{pauseText}}</button>
+        <button class="btn btn--tertiary btn--small" ng-click="onClear()">{{'plotter-clear' | translate}}</button>
+    </div>
+    <div class="viewer__representation_content__item" ng-class="{'viewer__settings_content__item--temperature' : key.indexOf('temperature') > -1 , 'viewer__settings_content__item--humidity': key.indexOf('humidity') > -1 }" ng-repeat="(key,dataSensor) in data">
+        <button class="btn btn--tertiary btn--small viewer__historic_content__item--button" ng-click="onPauseSensor(key)" ng-if="key.indexOf('temperature') === -1">{{pauseTextSensor[key]}}</button>
+        <button class="btn btn--tertiary btn--small viewer__historic_content__item--button" ng-click="onClearSensor(key)" ng-if="key.indexOf('temperature') === -1">{{'plotter-clear' | translate}}</button>
+        <div class="viewer__realtime__content__item__title">
+            <p ng-if="key.indexOf('humidity') === -1">{{sensors[dataSensor[0].type].name}}</p>
+            <p ng-if="key.indexOf('humidity') === -1">{{key}}</p>
+        </div>
+        <nvd3 ng-if="dataSensor[0].type === 'hts221' || dataSensor[0].type === 'us'" class="with-3d-shadow with-transitions" data="dataSensor" options="chartOptionsTemperatureHumidityUs"></nvd3>
+        <nvd3 ng-if="dataSensor[0].type !== 'hts221' && dataSensor[0].type !== 'us'" class="with-3d-shadow with-transitions" data="dataSensor" options="chartOptions"></nvd3>
+    </div>
+</div>

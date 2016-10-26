@@ -3,10 +3,10 @@
 
 /**
  * @ngdoc function
- * @name bitbloqApp.controller:LoginCtrl
+ * @name bitbloqApp.controller:PlotterCtrl
  * @description
- * # LoginCtrl
- * Controller of the bitbloqApp
+ * # PlotterCtrl
+ * Plotter controller
  */
 angular.module('bitbloqApp')
     .controller('PlotterCtrl', function($element, web2boardV2, web2board, $timeout, $scope, $translate, common, chromeAppApi, utils, hardwareConstants, $rootScope, _) {

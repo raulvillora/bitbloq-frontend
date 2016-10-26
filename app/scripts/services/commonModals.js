@@ -12,10 +12,11 @@ angular.module('bitbloqApp')
         $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
         $location, clipboard, $q, chromeAppApi) {
 
-        var exports = {};
-        var shortUrl;
-        var serialMonitorPanel;
-        var plotterMonitorPanel;
+        var exports = {},
+            shortUrl,
+            serialMonitorPanel,
+            plotterMonitorPanel,
+            viewerMonitorPanel;
 
         exports.contactModal = function() {
             var dialog,
@@ -607,6 +608,46 @@ angular.module('bitbloqApp')
 
         };
 
+        exports.launchViewerWindow = function(board, components) {
+            if (viewerMonitorPanel) {
+                viewerMonitorPanel.normalize();
+                viewerMonitorPanel.reposition('center');
+                return;
+            }
+
+            var scope = $rootScope.$new();
+            scope.board = board;
+            scope.componentsJSON = components;
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+
+            viewerMonitorPanel = $.jsPanel({
+                id: 'plotter',
+                position: 'center',
+                /*  addClass: {
+                      content: 'plotter__content'
+                  },*/
+                size: {
+                    width: 855,
+                    height: 500
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    viewerMonitorPanel = null;
+                },
+                title: $translate.instant('viewer'),
+                ajax: {
+                    url: 'views/viewer.html',
+                    done: function() {
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            viewerMonitorPanel.scope = scope;
+
+        };
+
         exports.launchSerialWindow = function(board) {
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
@@ -669,11 +710,11 @@ angular.module('bitbloqApp')
             });
         }
 
-        exports.requestChromeExtensionActivation = function(callback) {
+        exports.requestChromeExtensionActivation = function(text, callback) {
             var modalNeedWeb2boardOnline = $rootScope.$new();
             _.extend(modalNeedWeb2boardOnline, {
                 contentTemplate: '/views/modals/alert.html',
-                text: 'modal-need-chrome-extension-activation',
+                text: text,
                 confirmText: 'activate',
                 confirmAction: function() {
 

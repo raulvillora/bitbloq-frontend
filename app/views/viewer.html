@@ -1,0 +1,35 @@
+<div class="form viewerMonitor" data-ng-controller="ViewerCtrl">
+    <div class="tabs-layout">
+        <aside class="tabs-layout__aside">
+            <ul class="tabs__header">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'realtime'}" ng-click="selectedTab = 'realtime'">
+                    <span class="menu__item__span">
+                      {{'realtime' | translate}}
+                    </span>
+                </li>
+                <li data-element="viewer-representation" ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'representation'}" ng-click="selectedTab = 'representation'">
+                    <span class="menu__item__span">
+                      {{'sensor-representation' | translate}}
+                    </span>
+                </span>
+            </li>
+
+            <li data-element="viewer-settings" ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'settings'}" ng-click="selectedTab = 'settings'">
+                <span class="menu__item__span">
+                  {{'viewer-settings' | translate}}
+                </span>
+            </span>
+        </li>
+    </ul>
+</aside>
+<div class="tabs-layout__content">
+    <div class="tab myprojects" ng-include="'views/viewer/realtime.html'" ng-show="selectedTab === 'realtime'"></div>
+    <div class="myprojects--tab projects--tab" class="tab mysharedprojects" ng-show="selectedTab === 'representation'">
+        <div ng-include="'views/viewer/historic.html'"></div>
+    </div>
+    <div class="myprojects--tab projects--tab" class="tab mysharedprojects" ng-show="selectedTab === 'settings'">
+        <div ng-include="'views/viewer/settings.html'"></div>
+    </div>
+</div>
+</div>
+</div>

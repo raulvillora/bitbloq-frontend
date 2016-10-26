@@ -9,10 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout,
-        $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog,
-        _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs,
-        web2boardOnline, projectService) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants, chromeAppApi) {
 
         /*************************************************
          Project save / edit
@@ -375,6 +372,118 @@ angular.module('bitbloqApp')
             }
         }
 
+        $scope.getComponents = function(componentsArray) {
+            var components = {};
+
+            var serialPort = _.find(componentsArray, function(o) {
+                return o.id === 'sp';
+            });
+            if (serialPort) {
+                components.sp = serialPort.name;
+            }
+            _.forEach(componentsArray, function(value) {
+                if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
+                    if (components[value.id]) {
+                        components[value.id].names.push(value.name);
+                    } else {
+                        components[value.id] = {};
+                        components[value.id].type = value.type;
+                        components[value.id].names = [value.name];
+                    }
+                }
+            });
+            return components;
+        };
+
+        $scope.getViewerCode = function(componentsArray, originalCode) {
+            var components = $scope.getComponents(componentsArray);
+            var code = originalCode;
+            var serialName;
+            var visorCode;
+            if (components.sp) {
+                serialName = components.sp;
+                visorCode = generateSensorsCode(components, serialName, '');
+                code = code.replace(/loop\(\){([^]*)}/, 'loop() {' + visorCode + '$1' + '}');
+            } else {
+                var serialCode = originalCode.split('/***   Included libraries  ***/');
+                serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
+                code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
+                code = code.split('\n/***   Setup  ***/');
+                code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
+                visorCode = generateSensorsCode(components, 'puerto_serie_0', '');
+                code = code.replace(/loop\(\){([^]*)}/, 'loop() {' + visorCode + '$1' + '}');
+            }
+            return code;
+        };
+
+        function generateSerialViewerBloqCode(componentsArray, originalCode) {
+            var components = $scope.getComponents(componentsArray);
+            var code = originalCode;
+            var serialName;
+            if (components.sp) {
+                code = code.substring(0, code.length - 1) + '\n\r';
+                serialName = components.sp;
+                code = generateViewerBloqCode(components, serialName, code);
+            } else {
+                var serialCode = originalCode.split('/***   Included libraries  ***/');
+                serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
+                code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
+                code = code.split('\n/***   Setup  ***/');
+                code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
+                code = generateViewerBloqCode(components, 'puerto_serie_0', code);
+            }
+
+            code = code + '}';
+            return code;
+        }
+
+        function generateViewerBloqCode(componentsArray, serialName, code) {
+            var sensorsCode = generateSensorsCode(componentsArray, serialName, '');
+            code = code.replace('/*sendViewerData*/', sensorsCode);
+            return code;
+        }
+
+        $scope.thereIsSerialBlock = function(code) {
+            var serialBlock;
+            if (code.indexOf('/*sendViewerData*/') > -1) {
+                serialBlock = true;
+            } else {
+                serialBlock = false;
+            }
+
+            return serialBlock;
+        };
+
+        function generateSensorsCode(components, serialName, code) {
+            _.forEach(components, function(value, key) {
+                if (angular.isObject(value)) {
+                    if (value.type === 'analog') {
+                        _.forEach(value.names, function(name) {
+                            code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(analogRead(' + name + '))));\n\r');
+                            //  code = code + 'delay(500);\n\r';
+                        });
+                    } else {
+                        _.forEach(value.names, function(name) {
+                            if (key === 'us' || key === 'encoder') {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                            } else if (key === 'hts221') {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_temperature:' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_humidity:' + name + ']:") + String(String(' + name + '.getHumidity())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                            } else {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(digitalRead(' + name + '))));\n\r');
+                                //   code = code + 'delay(500);\n\r';
+                            }
+                        });
+                    }
+                }
+            });
+
+            return code;
+        }
+
         $scope.verify = function() {
             if ($scope.common.useChromeExtension() ||
                 (projectService.project.hardware.robot === 'mBot')) {
@@ -392,17 +501,33 @@ angular.module('bitbloqApp')
 
         };
 
-        $scope.upload = function() {
+        $scope.upload = function(code) {
+            var viewer;
+            viewer = code ? true : false;
             if (projectService.project.hardware.board) {
                 if ($scope.common.useChromeExtension() ||
                     ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
-                    web2boardOnline.compileAndUpload({
-                        board: projectService.getBoardMetaData(),
-                        code: $scope.getPrettyCode()
-                    });
+                    if (!viewer) {
+                        $rootScope.$emit('web2board:uploading');
+                    }
+
+                    if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                        web2boardOnline.compileAndUpload({
+                            board: projectService.getBoardMetaData(),
+                            code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                            viewer: viewer
+                        });
+                    } else {
+                        web2boardOnline.compileAndUpload({
+                            board: projectService.getBoardMetaData(),
+                            code: $scope.getPrettyCode(code),
+                            viewer: viewer
+                        });
+                    }
+
                 } else {
                     if (projectService.project.hardware.robot === 'mBot') {
-                        commonModals.requestChromeExtensionActivation(function(err) {
+                        commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation', function(err) {
                             if (!err) {
                                 $scope.upload();
                             }
@@ -425,6 +550,7 @@ angular.module('bitbloqApp')
                     type: 'warning'
                 });
             }
+
         };
 
         $scope.serialMonitor = function() {
@@ -495,8 +621,14 @@ angular.module('bitbloqApp')
             return projectService.getCode();
         };
 
-        $scope.getPrettyCode = function() {
-            return utils.prettyCode($scope.getCode());
+        $scope.getPrettyCode = function(code) {
+            var prettyCode;
+            if (code) {
+                prettyCode = utils.prettyCode(code);
+            } else {
+                prettyCode = utils.prettyCode($scope.getCode());
+            }
+            return prettyCode;
         };
 
         /* ****** */
@@ -1083,6 +1215,9 @@ angular.module('bitbloqApp')
 
         function confirmExit() {
             var closeMessage;
+            chromeAppApi.stopSerialCommunication();
+            $scope.$apply();
+
             if (projectService.saveStatus === 1) {
                 closeMessage = $scope.common.translate('leave-without-save');
             }

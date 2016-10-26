@@ -765,5 +765,15 @@ angular.module('bitbloqApp')
             "board": "Arduino UNO",
             "width": 75,
             "height": 86
-        }]
+        }],
+
+        "viewerSensors": [
+            "encoder",
+            "hts221",
+            "pot",
+            "ldrs",
+            "sound",
+            "us",
+            "irs"
+        ]
     });
