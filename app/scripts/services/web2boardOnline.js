@@ -83,7 +83,6 @@ angular.module('bitbloqApp')
                 compilerAlerts(compilerPromise);
             } else {
                 compilerPromise.finally(function() {
-                    web2board.setInProcess(false);
                     completed = true;
                 });
             }

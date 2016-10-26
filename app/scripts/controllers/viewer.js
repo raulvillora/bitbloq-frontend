@@ -13,6 +13,8 @@ angular.module('bitbloqApp')
 
         $scope.sensorsList = {};
 
+        $scope.disableSensorPause = false;
+
         $scope.sensors = {
             'hts221': {
                 name: common.translate('hts221'),
@@ -196,6 +198,19 @@ angular.module('bitbloqApp')
         $scope.onPause = function() {
             $scope.pause = !$scope.pause;
             $scope.pauseText = $scope.pause ? $translate.instant('plotter-play') : $translate.instant('plotter-pause');
+            _.forEach($scope.sensorsList, function(value, key) {
+                if (value === 'hts221') {
+                    $scope.pauseSensors[key + '-temperature'] = false;
+                    $scope.pauseTextSensor[key + '-temperature'] = $translate.instant('serial-pause');
+                    $scope.pauseSensors[key + '-humidity'] = false;
+                    $scope.pauseTextSensor[key + '-humidity'] = $translate.instant('serial-pause');
+                } else {
+                    $scope.pauseSensors[key] = false;
+                    $scope.pauseTextSensor[key] = $translate.instant('serial-pause');
+
+                }
+
+            });
         };
 
         $scope.onPauseSensor = function(sensorName) {
