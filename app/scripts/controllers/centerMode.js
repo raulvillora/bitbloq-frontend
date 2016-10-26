@@ -9,27 +9,15 @@
      */
     angular.module('bitbloqApp')
         .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams) {
-            $scope.teachers = [
-                {
-                    _id: '1234',
-                    name: 'Pepito grillo',
-                    email: 'pepito@grillo.com',
-                    groups: '4',
-                    students: '32'
-                }, {
-                    _id: '4567',
-                    name: 'Caperucita roja',
-                    email: 'caperucita@roja.com',
-                    groups: '4',
-                    students: '30'
-                }, {
-                    _id: '7890',
-                    name: 'El principe azul',
-                    email: 'el.principe@azul.com',
-                    groups: '10',
-                    students: '105'
-                }
-            ];
+            /*$scope.teachers = [
+             {
+             _id: '1234',
+             name: 'Pepito grillo',
+             email: 'pepito@grillo.com',
+             groups: '4',
+             students: '32'
+             }, ...
+             */
 
             $scope.exercises = [
                 {
@@ -64,18 +52,11 @@
                 }
             ];
 
-            /* $scope.headOptions = {
-             'name': 4,
-             'groups': 2,
-             'students': 2,
-             'time': 2,
-             'state': 2
-             };*/
-
             $scope.sortArray = _.keys($scope.teachers[0]);
             $scope.orderInstance = 'name';
             $scope.urlType = $routeParams.type;
             $scope.center = {};
+            $scope.teachers = [];
 
 
             $scope.sortInstances = function(type) {
