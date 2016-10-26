@@ -7,16 +7,16 @@ angular
             addTeachers: addTeachers,
             deleteTeacher: deleteTeacher,
             createGroup: createGroup,
-            getTeachers: getTeachers
+            getTeachers: getTeachers,
+            getMyCenter: getMyCenter,
+            isHeadMaster: isHeadMaster
         };
 
-        var centerLocalId = '580818d0a8acf9a4be2f9458';
-
+        
         function addTeachers(teachers, centerId) {
-            centerId = centerLocalId;
             return $http({
                 method: 'POST',
-                url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher',
+                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher',
                 data: teachers
             });
         }
@@ -24,7 +24,7 @@ angular
         function createGroup(name, accessId) {
             return $http({
                 method: 'POST',
-                url: envData.config.serverUrl + 'centerMode/center/group',
+                url: envData.config.centerModeUrl + 'center/group',
                 data: {
                     group: name,
                     accessId: accessId
@@ -33,18 +33,30 @@ angular
         }
 
         function deleteTeacher(teacherId, centerId) {
-            centerId = centerLocalId;
             return $http({
                 method: 'DELETE',
-                url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher/' + teacherId
+                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher/' + teacherId
+            });
+        }
+
+        function getMyCenter(){
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'center/me'
             });
         }
 
         function getTeachers(centerId) {
-            centerId = centerLocalId;
             return $http({
                 method: 'GET',
-                url: envData.config.serverUrl + 'centerMode/center/' + centerId + '/teacher'
+                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher'
+            });
+        }
+
+        function isHeadMaster() {
+            return $http({
+                method: 'HEAD',
+                url: envData.config.centerModeUrl + 'center/headMaster'
             });
         }
 

@@ -75,6 +75,7 @@
             $scope.sortArray = _.keys($scope.teachers[0]);
             $scope.orderInstance = 'name';
             $scope.urlType = $routeParams.type;
+            $scope.center = {};
 
 
             $scope.sortInstances = function(type) {
@@ -131,8 +132,8 @@
                 var confirmAction = function() {
                         var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
-                            centerModeApi.addTeachers(teachers).then(function() {
-                                _getTeachers();
+                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function() {
+                                _getTeachers($scope.center._id);
                                 alertsService.add({
                                     text: 'Success: add Teacher',
                                     id: 'addTeacher',
@@ -172,7 +173,7 @@
 
             $scope.deleteTeacher = function(teacher) {
                 var confirmAction = function() {
-                        centerModeApi.deleteTeacher(teacher._id).then(function() {
+                        centerModeApi.deleteTeacher(teacher._id, $scope.center._id).then(function() {
                             _.remove($scope.teachers, teacher);
                             alertsService.add({
                                 text: 'Success: delete Teacher',
@@ -211,14 +212,19 @@
                 });
             };
 
-            function _getTeachers() {
-                centerModeApi.getTeachers().then(function(response) {
+            function _getTeachers(centerId) {
+                centerModeApi.getTeachers(centerId).then(function(response) {
                     $scope.teachers = response.data;
                 });
             }
 
             function _init() {
-                _getTeachers();
+                $scope.common.itsUserLoaded().then(function() {
+                    centerModeApi.getMyCenter().then(function(response) {
+                        $scope.center = response.data;
+                        _getTeachers($scope.center._id);
+                    });
+                });
             }
 
             _init();
