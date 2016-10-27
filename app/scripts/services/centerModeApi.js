@@ -7,9 +7,10 @@ angular
             addTeachers: addTeachers,
             deleteTeacher: deleteTeacher,
             createGroup: createGroup,
+            getGroups: getGroups,
+            getMyCenter: getMyCenter,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
-            getMyCenter: getMyCenter,
             isHeadMaster: isHeadMaster
         };
 
@@ -42,6 +43,20 @@ angular
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher/' + teacherId
             });
+        }
+
+        function getGroups(teacherId) {
+            if (teacherId) {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'group/teacher/' + teacherId
+                });
+            } else {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'group'
+                });
+            }
         }
 
         function getMyCenter() {

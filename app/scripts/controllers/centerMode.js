@@ -29,35 +29,15 @@
                 }
             ];
 
-            $scope.teacher = {
-                _id: '1234',
-                name: 'Pepito grillo',
-                email: 'pepito@grillo.com',
-                groups: '4',
-                students: '32'
-            };
 
-
-            $scope.groups = [
-                {
-                    _id: '1234',
-                    name: 'Clase 3º B',
-                    accessId: '2016-10-19T12:13:14.774Z',
-                    students: '30'
-                }, {
-                    _id: '4567',
-                    name: 'Asignatura de tecnología 3º',
-                    accessId: '2016-10-20T12:13:14.774Z',
-                    students: '30'
-                }
-            ];
-
+            $scope.center = {};
+            $scope.groups = [];
+            $scope.teacher = {};
+            $scope.teachers = [];
+            $scope.secondaryBreadcrumb = false;
+            $scope.sortArray = [];
             $scope.orderInstance = 'name';
             $scope.urlType = $routeParams.type;
-            $scope.center = {};
-            $scope.teachers = [];
-            $scope.sortArray;
-            $scope.secondaryBreadcrumb = false;
 
 
             $scope.sortInstances = function(type) {
@@ -79,6 +59,7 @@
                         modalOptions.rejectButton = 'close';
                         modalOptions.modalInput = false;
                         modalOptions.secondaryText = accessId;
+                        _getGroups();
                     });
                 }
 
@@ -117,7 +98,7 @@
                             centerModeApi.addTeachers(teachers, $scope.center._id).then(function() {
                                 _getTeachers($scope.center._id);
                                 alertsService.add({
-                                    text: 'Success: add Teacher',
+                                    text: 'centerMode_alert_addTeacher',
                                     id: 'addTeacher',
                                     type: 'ok',
                                     time: 5000
@@ -125,7 +106,7 @@
                             })
                                 .catch(function() {
                                     alertsService.add({
-                                        text: 'Error: add Teacher',
+                                        text: 'centerMode_alert_addTeacher-Error',
                                         id: 'addTeacher',
                                         type: 'error'
                                     });
@@ -158,7 +139,7 @@
                         centerModeApi.deleteTeacher(teacher._id, $scope.center._id).then(function() {
                             _.remove($scope.teachers, teacher);
                             alertsService.add({
-                                text: 'Success: delete Teacher',
+                                text: 'centerMode_alert_deleteTeacher',
                                 id: 'deleteTeacher',
                                 type: 'ok',
                                 time: 5000
@@ -166,7 +147,7 @@
                         })
                             .catch(function() {
                                 alertsService.add({
-                                    text: 'Error: delete Teacher',
+                                    text: 'centerMode_alert_deleteTeacher-Error',
                                     id: 'deleteTeacher',
                                     type: 'error'
                                 });
@@ -209,11 +190,17 @@
                 }
             }
 
+            function _getGroups() {
+                centerModeApi.getGroups($scope.teacher._id).then(function(response) {
+                    $scope.groups = response.data;
+                });
+            }
+
             function _getTeacher(teacherId) {
                 centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
-                    console.log('chachi', response);
                     $scope.secondaryBreadcrumb = true;
                     $scope.teacher = _.extend($scope.teacher, response.data);
+                    _getGroups();
                 });
             }
 
