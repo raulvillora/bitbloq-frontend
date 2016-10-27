@@ -72,7 +72,7 @@
             $scope.newGroup = function() {
                 function confirmAction(name) {
                     var accessId = Date.now();
-                    centerModeApi.createGroup(name, accessId).then(function() {
+                    centerModeApi.createGroup(name, accessId, $scope.teacher._id, $scope.center._id).then(function() {
                         modalOptions.title = name;
                         modalOptions.mainText = 'centerMode_modal_accessIdInfo';
                         modalOptions.confirmButton = null;

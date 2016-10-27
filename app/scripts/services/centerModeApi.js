@@ -22,13 +22,17 @@ angular
             });
         }
 
-        function createGroup(name, accessId) {
+        function createGroup(name, accessId, teacherId, centerId) {
             return $http({
                 method: 'POST',
-                url: envData.config.centerModeUrl + 'center/group',
+                url: envData.config.centerModeUrl + 'group',
                 data: {
-                    group: name,
-                    accessId: accessId
+                    name: name,
+                    statusId: 'open',
+                    accessId: accessId,
+                    teacher: teacherId,
+                    center: centerId,
+                    student: []
                 }
             });
         }
