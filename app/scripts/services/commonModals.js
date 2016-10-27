@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate,
-        $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
-        $location, clipboard, $q, chromeAppApi) {
+                                      $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
+                                      $location, clipboard, $q, chromeAppApi) {
 
         var exports = {},
             shortUrl,
@@ -626,8 +626,8 @@ angular.module('bitbloqApp')
                 id: 'plotter',
                 position: 'center',
                 /*  addClass: {
-                      content: 'plotter__content'
-                  },*/
+                 content: 'plotter__content'
+                 },*/
                 size: {
                     width: 855,
                     height: 500
@@ -725,7 +725,7 @@ angular.module('bitbloqApp')
                         } else {
                             alertsService.add({
                                 text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                                id: 'web2board',
+                                id: 'chromeapp',
                                 type: 'error'
                             });
                             callback(err);

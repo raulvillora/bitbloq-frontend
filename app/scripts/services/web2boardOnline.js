@@ -51,6 +51,7 @@ angular.module('bitbloqApp')
                 }, envData.config.compileErrorTime);
             }
         }
+
         /**
          * [compile description]
          * @param  {object} params {
@@ -94,27 +95,27 @@ angular.module('bitbloqApp')
             alertCompile = null;
 
             compilerPromise.then(function(response) {
-                    if (response.data.error) {
-                        alertsService.add({
-                            id: 'compile',
-                            type: 'warning',
-                            translatedText: utils.parseCompileError(response.data.error)
-                        });
-                    } else {
-                        alertsService.add({
-                            text: 'alert-web2board-compile-verified',
-                            id: 'compile',
-                            type: 'ok',
-                            time: 5000
-                        });
-                    }
-                }).catch(function(response) {
+                if (response.data.error) {
                     alertsService.add({
                         id: 'compile',
-                        type: 'error',
-                        translatedText: response.data
+                        type: 'warning',
+                        translatedText: utils.parseCompileError(response.data.error)
                     });
-                })
+                } else {
+                    alertsService.add({
+                        text: 'alert-web2board-compile-verified',
+                        id: 'compile',
+                        type: 'ok',
+                        time: 5000
+                    });
+                }
+            }).catch(function(response) {
+                alertsService.add({
+                    id: 'compile',
+                    type: 'error',
+                    translatedText: response.data
+                });
+            })
                 .finally(function() {
                     web2board.setInProcess(false);
                     completed = true;
@@ -218,7 +219,7 @@ angular.module('bitbloqApp')
             }).catch(function() {
                 alertsService.add({
                     text: $translate.instant('landing_howitworks_oval_2_chromeos'),
-                    id: 'upload',
+                    id: 'chromeapp',
                     type: 'warning',
                     time: 20000,
                     linkText: $translate.instant('from-here'),
@@ -232,14 +233,14 @@ angular.module('bitbloqApp')
                         if (err) {
                             alertsService.add({
                                 text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                                id: 'upload',
+                                id: 'chromeapp',
                                 type: 'error'
                             });
                             uploadDefer.reject(err);
                         } else {
                             alertsService.add({
                                 text: $translate.instant('chromeapp-installed'),
-                                id: 'upload',
+                                id: 'chromeapp',
                                 type: 'ok',
                                 time: 5000
                             });
