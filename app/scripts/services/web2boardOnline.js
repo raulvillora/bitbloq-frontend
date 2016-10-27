@@ -217,6 +217,7 @@ angular.module('bitbloqApp')
                     uploadDefer.reject(error);
                 });
             }).catch(function() {
+                alertsService.closeByTag('upload');
                 alertsService.add({
                     text: $translate.instant('landing_howitworks_oval_2_chromeos'),
                     id: 'chromeapp',
