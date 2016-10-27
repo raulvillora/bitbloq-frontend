@@ -9,6 +9,7 @@ angular
             createGroup: createGroup,
             getGroups: getGroups,
             getMyCenter: getMyCenter,
+            getMyRole: getMyRole,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
             isHeadMaster: isHeadMaster
@@ -66,6 +67,13 @@ angular
             });
         }
 
+        function getMyRole() {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'user/role'
+            });
+        }
+
         function getTeacher(teacherId, centerId) {
             return $http({
                 method: 'GET',
@@ -83,7 +91,7 @@ angular
         function isHeadMaster() {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'center/headMaster'
+                url: envData.config.centerModeUrl + 'user/headMaster'
             });
         }
 

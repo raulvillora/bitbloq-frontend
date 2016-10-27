@@ -22,7 +22,7 @@ angular.module('bitbloqApp')
         $scope.commonModals = commonModals;
         $scope.showHeader = false;
         $scope.common.session.save = false;
-        $scope.thereAreCenter = false;
+        $scope.userRole = 'student';
 
         $scope.logout = function() {
             userApi.logout();
@@ -43,12 +43,8 @@ angular.module('bitbloqApp')
         });
 
         $scope.common.itsUserLoaded().then(function() {
-            centerModeApi.isHeadMaster().then(function(result) {
-                if (result.status === 200) {
-                    $scope.thereAreCenter = true;
-                } else {
-                    $scope.thereAreCenter = false;
-                }
+            centerModeApi.getMyRole().then(function(result) {
+                $scope.userRole = result.data;
             });
         });
     });
