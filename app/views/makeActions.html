@@ -43,7 +43,7 @@
                     {{'change-name' | translate}}
                 </div>
             </li>
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltips="{{!common.user}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':'') | translate}}" data-tooltips="{{!common.user || !projectService.project._id || (!utils.userIsOwner(projectService.project, common.user._id))}}">
                 <div class="dropdown__item" data-element="menu-clone" data-ng-click="projectService.clone()" data-ng-disabled="!common.user || !projectService.project._id">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#duplicar"></use>
