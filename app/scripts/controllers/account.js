@@ -262,6 +262,12 @@ angular.module('bitbloqApp')
                 }
             });
 
+            $scope.$watch('common.user.seeBoardsUnderDevelopment', function(newVal, oldVal) {
+                if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
+                    $scope.validateProfile();
+                }
+            });
+
             $scope.$watch('common.user.lastName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
                     $scope.validateProfile();

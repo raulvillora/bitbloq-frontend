@@ -51,7 +51,7 @@
                         </legend>
                         <div class="form-control">
                             <label>{{ 'account-change-password' | translate }}</label>
-                            <input class="btn btn--secondary btn--small btn--account--password" data-element="account-reset-password-button" data-ng-click="changePassword($event)" id="password" type="button" value="{{ 'account-restore-password' | translate }}"/>
+                            <input class="btn btn--secondary btn--small btn--account--password" data-element="account-reset-password-button" data-ng-click="changePassword($event)" id="password" type="button" value="{{ 'account-restore-password' | translate }}" />
                         </div>
                     </fieldset>
                     <fieldset>
@@ -74,21 +74,27 @@
                             </div>
                         </div>
                         <div class="form-control">
-                            <input class="btn btn--social btn__login--google" data-element="account-social-google-button" ng-click="authenticate('google')" ng-if="common.user && !common.user.social.google.id" type="button" value="{{ 'google+' | translate }}"/>
-                            <input class="btn btn--social btn__login--facebook" data-element="account-social-facebook-button" ng-click="authenticate('facebook')" ng-if="common.user && !common.user.social.facebook.id" type="button" value="{{ 'facebook' | translate }}"/>
+                            <input class="btn btn--social btn__login--google" data-element="account-social-google-button" ng-click="authenticate('google')" ng-if="common.user && !common.user.social.google.id" type="button" value="{{ 'google+' | translate }}" />
+                            <input class="btn btn--social btn__login--facebook" data-element="account-social-facebook-button" ng-click="authenticate('facebook')" ng-if="common.user && !common.user.social.facebook.id" type="button" value="{{ 'facebook' | translate }}" />
                         </div>
                     </fieldset>
                 </div>
-                <fieldset class="teacher-checkbox">
+                <fieldset class="user-options-checkbox">
                     <span class="input input--checkbox">
                         <input data-element="teacher-checkbox" id="teacherCheckbox" name="teacherCheckbox" ng-checked="common.user.newsletter === true" ng-model="common.user.newsletter" type="checkbox" value="common.user.newsletter">
                         <label for="teacherCheckbox">{{'account-checkbox-teacher' | translate}}</label>
                     </span>
                 </fieldset>
-                <fieldset ng-if="common.os !== 'ChromeOS'" class="chromeapp-checkbox">
+                <fieldset ng-if="common.os !== 'ChromeOS'" class="user-options-checkbox">
                     <span class="input input--checkbox">
                         <input data-element="chromeapp-checkbox" id="chromeappCheckbox" name="chromeappCheckbox" ng-checked="common.user.chromeapp === true" ng-model="common.user.chromeapp" type="checkbox" value="common.user.chromeapp">
                         <label for="chromeappCheckbox">{{'account-checkbox-chromeapp' | translate}}</label>
+                    </span>
+                </fieldset>
+                <fieldset class="user-options-checkbox last">
+                    <span class="input input--checkbox">
+                        <input data-element="seeBoardsUnderDevelopment-checkbox" id="seeBoardsUnderDevelopmentCheckbox" name="seeBoardsUnderDevelopmentCheckbox" ng-checked="common.user.seeBoardsUnderDevelopment === true" ng-model="common.user.seeBoardsUnderDevelopment" type="checkbox" value="common.user.seeBoardsUnderDevelopment">
+                        <label for="seeBoardsUnderDevelopmentCheckbox">{{'account-checkbox-seeboardsunderdevelopment' | translate}}</label>
                     </span>
                 </fieldset>
                 <p class="account__delete">{{'account-link-deleteAccount' | translate}}
@@ -112,10 +118,8 @@
                                 <div class="main--user--image" id="main-image" ng-click="uploadImageTrigger('main')">
                                     <img data-element="account-image" id="avatarUser" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png">
                                 </div>
-
-                                <input class="btn btn--primary btn--small hidden main-image--input" data-element="account-fileinput" data-ng-blur="focus = false" data-ng-focus="focus='projectimage'" id="" name="projectimage" onchange="angular.element(this).scope().uploadImage(this.files)" placeholder="" type="file"/>
-                                <input class="btn btn--secondary btn--small btn--account-upload-image" data-ng-click="uploadImageTrigger('main')" type="button" value="{{ 'upload-image' | translate }}"/>
-
+                                <input class="btn btn--primary btn--small hidden main-image--input" data-element="account-fileinput" data-ng-blur="focus = false" data-ng-focus="focus='projectimage'" id="" name="projectimage" onchange="angular.element(this).scope().uploadImage(this.files)" placeholder="" type="file" />
+                                <input class="btn btn--secondary btn--small btn--account-upload-image" data-ng-click="uploadImageTrigger('main')" type="button" value="{{ 'upload-image' | translate }}" />
                                 <div>
                                     <small>{{ 'account-avatar-requisites' | translate }}</small>
                                 </div>
@@ -132,7 +136,7 @@
                             <span>{{ 'language' | translate }}</span>
                         </legend>
                         <div class="form-control">
-                            <common-dropdown class="dropdown--small" data-heading-option="common.user.language | translate" data-options-click="changeLanguage" data-options="test"/>
+                            <common-dropdown class="dropdown--small" data-heading-option="common.user.language | translate" data-options-click="changeLanguage" data-options="test" />
                         </div>
                     </fieldset>
                 </div>

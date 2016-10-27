@@ -762,6 +762,7 @@ angular.module('bitbloqApp')
         }, {
             "id": "mBot",
             "name": "mBot",
+            "underDevelopment": true,
             "board": "Arduino UNO",
             "width": 75,
             "height": 86
