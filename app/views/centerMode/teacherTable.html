@@ -1,66 +1,55 @@
-<div class="projects--action projects--action--sort table__added clearfix">
-    <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
-</div>
-<div>
-    <div class="centerMode__table-title row">
-        <div class="col-vsmall-6">
-            <span>{{'centerMode_column_name' | translate}}</span>
-        </div>
-        <div class="col-vsmall-3">
-            <span>{{'centerMode_column_groups' | translate}}</span>
-        </div>
-        <div class="col-vsmall-2">
-            <span>{{'centerMode_column_students' | translate}}</span>
-        </div>
+<div ng-if="teachers.length>0">
+    <div class="projects--action projects--action--sort table__added clearfix">
+        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
     </div>
-    <div class="table__block">
-        <div class="table__block__list row" ng-repeat="item in teachers | orderBy:'orderInstance'">
-            <div class="col-vsmall-6 table__block__item">
-                <a ng-href="{{'#/center-mode/center-teacher/' + item._id}}">
-                    <h2 class="block__item__title" data-element="{{'centerMode-item-' + item.name}}">
-                        {{item.name || item.username}}</h2>
-                    <span class="block__item__explanation">{{item.email}}</span>
-                </a>
+    <div>
+        <div class="centerMode__table-title row">
+            <div class="col-vsmall-6">
+                <span>{{'centerMode_column_name' | translate}}</span>
             </div>
-            <div class="col-vsmall-3 table__block__item">
+            <div class="col-vsmall-3">
+                <span>{{'centerMode_column_groups' | translate}}</span>
+            </div>
+            <div class="col-vsmall-2">
+                <span>{{'centerMode_column_students' | translate}}</span>
+            </div>
+        </div>
+        <div class="table__block">
+            <div class="table__block__list row" ng-repeat="item in teachers | orderBy:'orderInstance'">
+                <div class="col-vsmall-6 table__block__item">
+                    <a ng-href="{{'#/center-mode/center-teacher/' + item._id}}">
+                        <h2 class="block__item__title" data-element="{{'centerMode-item-' + item.name}}">
+                            {{item.name || item.username}}</h2>
+                        <span class="block__item__explanation">{{item.email}}</span>
+                    </a>
+                </div>
+                <div class="col-vsmall-3 table__block__item">
                 <span data-element="{{'centerMode-groups' + item.name}}">
                     {{item.groups}}
                 </span>
-            </div>
-            <div class="col-vsmall-2 table__block__item">
-                <span>{{item.students}}</span>
-            </div>
-            <div class="col-vsmall-1 table__block__item">
-                <button data-element="centerMode-delete-teacher" class="btn btn--secondary table__block__button table__block__button--delete" ng-click="deleteTeacher(item)">
-                    <svg class="svg-icon">
-                        <use xlink:href="#cierre"></use>
-                    </svg>
-                </button>
+                </div>
+                <div class="col-vsmall-2 table__block__item">
+                    <span>{{item.students}}</span>
+                </div>
+                <div class="col-vsmall-1 table__block__item">
+                    <button data-element="centerMode-delete-teacher" class="btn btn--secondary table__block__button table__block__button--delete" ng-click="deleteTeacher(item)">
+                        <svg class="svg-icon">
+                            <use xlink:href="#cierre"></use>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="table__items">
-    <div class="centerMode__block">
-        <div dir-paginate="result in centerMode.results.data | itemsPerPage: centerMode.itemsPerPage track by $index"
-             current-page="centerMode.currentPage" total-items="centerMode.results.totalSize">
-            <ul class="centerMode__block__list">
-                <li class="centerMode__search__item">
-                    <a ng-href="{{'#/centerMode/' + result.item._id + '/' + result._id}}">
-                        <h2 class="block__item__title">{{result.title}}</h2>
-                    </a>
-            <span class="block__item__description">{{'by' | translate}}
-                <span class="block__item__owner">{{result.creator.username}}</span>
-                {{'centerMode__searcher__into' | translate}}
-                <span>{{result.item.name}}</span>
-            </span>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="centerMode__paginator">
-        <dir-pagination-controls boundary-links="true" on-page-change="centerMode.refreshSearchLayout()" max-size="7"
-                                 template-url="views/centerMode/centerModePagination.html"></dir-pagination-controls>
-    </div>
+<div ng-if="teachers.length===0">
+    <h1> tienes profesores en tu cuenta</h1>
+    <p>Agraga un profesor a tu centro para que pueda crear clases y ejercicios para después asignárselos a los alumnos registrados en esas clases.</p>
+    <p>*Si quieres gestionar el centro y ser profesor a la vez, puedes hacerlo introduciendo el correo de tu cuenta de usuario en el formulario para agregar a un profesor.</p>
+    <button ng-if="urlType==='center'" data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newTeacher()">
+        <svg class="svg-icon">
+            <use xlink:href="#plus"></use>
+        </svg>
+        <span>{{'centerMode_button_newTeacher' | translate}}</span>
+    </button>
 </div>
--->
