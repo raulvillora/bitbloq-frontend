@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData, $rootScope, web2board) {
+    .service('web2boardOnline', function(compilerApi, chromeAppApi, alertsService, utils, $q, $translate, envData, $rootScope, web2board, $timeout) {
         var exports = {
             compile: compile,
             upload: upload,
@@ -34,7 +34,7 @@ angular.module('bitbloqApp')
                         alertText = 'compiler-still-inprogress';
                         break;
                 }
-                setTimeout(function() {
+                $timeout(function() {
                     if (!completed) {
                         alertCompile = alertsService.add({
                             text: alertText,
@@ -66,7 +66,7 @@ angular.module('bitbloqApp')
             } else {
                 params.board = params.board.mcu;
             }
-            if (!params.viewer && !params.upload) {
+            if (!params.viewer) {
                 alertsService.add({
                     text: 'alert-web2board-compiling',
                     id: 'compile',
@@ -95,27 +95,27 @@ angular.module('bitbloqApp')
             alertCompile = null;
 
             compilerPromise.then(function(response) {
-                if (response.data.error) {
+                    if (response.data.error) {
+                        alertsService.add({
+                            id: 'compile',
+                            type: 'warning',
+                            translatedText: utils.parseCompileError(response.data.error)
+                        });
+                    } else {
+                        alertsService.add({
+                            text: 'alert-web2board-compile-verified',
+                            id: 'compile',
+                            type: 'ok',
+                            time: 5000
+                        });
+                    }
+                }).catch(function(response) {
                     alertsService.add({
                         id: 'compile',
-                        type: 'warning',
-                        translatedText: utils.parseCompileError(response.data.error)
+                        type: 'error',
+                        translatedText: response.data
                     });
-                } else {
-                    alertsService.add({
-                        text: 'alert-web2board-compile-verified',
-                        id: 'compile',
-                        type: 'ok',
-                        time: 5000
-                    });
-                }
-            }).catch(function(response) {
-                alertsService.add({
-                    id: 'compile',
-                    type: 'error',
-                    translatedText: response.data
-                });
-            })
+                })
                 .finally(function() {
                     web2board.setInProcess(false);
                     completed = true;
@@ -138,7 +138,17 @@ angular.module('bitbloqApp')
                 compileAndUploadDefer = $q.defer();
                 params.upload = true;
                 compile(utils.clone(params)).then(function(response) {
+                    alertsService.closeByTag('compiler-timeout');
+                    alertsService.closeByTag('upload');
+                    alertsService.closeByTag('compile');
                     if (response.data.error) {
+                        completed = true;
+                        web2board.setInProcess(false);
+                        alertsService.add({
+                            id: 'compile',
+                            type: 'warning',
+                            translatedText: utils.parseCompileError(response.data.error)
+                        });
                         compileAndUploadDefer.reject(response);
                     } else {
                         params.hex = response.data.hex;

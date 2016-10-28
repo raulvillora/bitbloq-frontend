@@ -507,9 +507,6 @@ angular.module('bitbloqApp')
             if (projectService.project.hardware.board) {
                 if ($scope.common.useChromeExtension() ||
                     ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
-                    if (!viewer) {
-                        $rootScope.$emit('web2board:uploading');
-                    }
 
                     if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                         web2boardOnline.compileAndUpload({
