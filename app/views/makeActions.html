@@ -136,7 +136,7 @@
             <li data-tooltips="{{!projectService.project._id || !common.user || !utils.userIsOwner(projectService.project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="right">
                 <div class="dropdown__item" data-element="makeactions-menuview-viewer" data-ng-click="showViewer()" data-ng-disabled="!projectService.project._id || isWeb2BoardInProgress()" ng-if="!projectService.project.codeProject">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
-                        <use xlink:href="#Ver_verPlotter"></use>
+                        <use xlink:href="#ver_verVisor"></use>
                     </svg>
                     {{'show-viewer' | translate}}
                 </div>
