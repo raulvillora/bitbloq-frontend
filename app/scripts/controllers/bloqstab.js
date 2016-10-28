@@ -453,6 +453,10 @@ angular.module('bitbloqApp')
                         $scope.init();
                         bloqs.destroyFreeBloqs();
                     });
+                    $rootScope.$on('update-bloqs', function() {
+                        $scope.init();
+                        $scope.initFreeBloqs();
+                    });
                     translateChangeStartEvent = $rootScope.$on('$translateChangeStart', function(evt, key) {
                         bloqs.translateBloqs(key.language);
                     });

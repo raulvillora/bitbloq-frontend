@@ -751,17 +751,18 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 
         $scope.undoBloqStep = function() {
             undo($scope.bloqsHistory, function(step) {
                 projectService.project.software = step;
+                $rootScope.$emit('update-bloqs');
             });
         };
 
@@ -896,9 +897,13 @@ angular.module('bitbloqApp')
                 $scope.hardware.firstLoad = false;
                 $scope.$apply();
             });
+            $window.addEventListener('bloqs:suggestedAdded', function() {
+                $scope.saveBloqStep();
+                $scope.hardware.firstLoad = false;
+                $scope.$apply();
+            });
 
             $window.addEventListener('bloqs:connect', function() {
-                $scope.saveBloqStep();
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
                 $scope.$apply();
