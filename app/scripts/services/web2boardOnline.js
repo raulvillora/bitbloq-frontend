@@ -85,6 +85,8 @@ angular.module('bitbloqApp')
             } else {
                 compilerPromise.finally(function() {
                     completed = true;
+                    alertsService.closeByTag('compiler-timeout');
+                    alertsService.closeByTag('compile');
                 });
             }
             return compilerPromise;
