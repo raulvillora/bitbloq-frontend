@@ -9,7 +9,7 @@
                 </svg>
             </button>
         </div>
-        <div class="form-control ports">
+        <div ng-if="componentsJSON.sp" class="form-control ports">
             <span class="ports--text">{{' make-hardware-component-baudrate' | translate}}: </span>
             <common-dropdown class="sort-dropdown" direction="down" heading-option="serial.baudrate" options-click="onBaudrateChanged" options="baudrateOptions" style="width:150px"></common-dropdown>
         </div>
