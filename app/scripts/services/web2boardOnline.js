@@ -138,11 +138,11 @@ angular.module('bitbloqApp')
                 compileAndUploadDefer = $q.defer();
                 params.upload = true;
                 compile(utils.clone(params)).then(function(response) {
+                    completed = true;
                     alertsService.closeByTag('compiler-timeout');
                     alertsService.closeByTag('upload');
                     alertsService.closeByTag('compile');
                     if (response.data.error) {
-                        completed = true;
                         web2board.setInProcess(false);
                         alertsService.add({
                             id: 'compile',
