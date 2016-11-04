@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -366,7 +366,6 @@ angular.module('bitbloqApp')
             }
         };
 
-
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //----------------- Private functions ---------------------------------
@@ -407,12 +406,10 @@ angular.module('bitbloqApp')
 
                 $log.debug('Auto saving project...');
 
-
                 if (exports.tempImage.file && !exports.tempImage.generate) {
                     exports.project.image = 'custom';
                 }
 
-            
                 if (exports.project._id) {
                     if (!exports.project._acl || (exports.project._acl['user:' + common.user._id] && exports.project._acl['user:' + common.user._id].permission === 'ADMIN')) {
                         return projectApi.update(exports.project._id, exports.getCleanProject()).then(function() {
@@ -448,9 +445,10 @@ angular.module('bitbloqApp')
                             }
 
                             common.isLoading = false;
-                            localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
+                            if (localStorage.projectsChange) {
+                                localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
+                            }
                             exports.saveOldProject();
-
 
                             if (exports.tempImage.file) {
                                 imageApi.save(idProject, exports.tempImage.file).then(function() {
@@ -474,7 +472,6 @@ angular.module('bitbloqApp')
                 exports.saveStatus = 0;
                 defered.resolve();
             }
-
 
             return defered.promise;
         }
