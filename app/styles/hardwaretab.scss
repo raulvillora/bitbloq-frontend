@@ -310,7 +310,11 @@ $hw_toolbox: 210px;
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
         }
-        &.mCore {
+        &.ArduinoNano {
+            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-color: transparent;
+        }
+        &.ArduinoLeonardo {
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
         }

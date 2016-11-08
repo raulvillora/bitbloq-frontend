@@ -33,13 +33,13 @@ angular.module('bitbloqApp')
                 if (err) {
                     alertsService.add({
                         text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                        id: 'web2board',
+                        id: 'chromeapp',
                         type: 'error'
                     });
                 } else {
                     alertsService.add({
                         text: $translate.instant('chromeapp-installed'),
-                        id: 'web2board',
+                        id: 'chromeapp',
                         type: 'ok',
                         time: 5000
                     });

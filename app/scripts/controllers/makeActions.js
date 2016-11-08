@@ -211,6 +211,64 @@ angular.module('bitbloqApp')
             }
         };
 
+        $rootScope.$on('viewer-code:ready', function() {
+            if (show) {
+                var componentsJSON = $scope.getComponents($scope.projectService.project.hardware.components);
+                if ($scope.projectService.project.hardware.board) {
+                    if ($scope.common.useChromeExtension()) {
+                        $scope.commonModals.launchViewerWindow($scope.projectService.getBoardMetaData(), componentsJSON);
+                    }
+                } else {
+                    $scope.currentTab = 0;
+                    $scope.levelOne = 'boards';
+                    $scope.alertsService.add({
+                        text: 'alert-web2board-no-board-serial',
+                        id: 'serialmonitor',
+                        type: 'warning'
+                    });
+                }
+                show = false;
+            }
+        });
+        var show;
+
+        $scope.showViewer = function() {
+            if ($scope.common.useChromeExtension()) {
+                $scope.projectService.startAutosave(true);
+                show = true;
+                if (!$scope.projectService.project.codeproject) {
+                    //parent: bloqsproject
+                    if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
+                        $scope.upload();
+                    } else {
+                        var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                        $scope.upload(viewerCode);
+                    }
+                } else {
+                    //parent: codeproject
+                }
+            } else {
+                commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation-viewer', function(err) {
+                    if (!err) {
+                        $scope.projectService.startAutosave(true);
+                        show = true;
+                        if (!$scope.projectService.project.codeproject) {
+                            //parent: bloqsproject
+                            if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
+                                $scope.upload();
+                            } else {
+                                var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                                $scope.upload(viewerCode);
+                            }
+                        } else {
+                            //parent: codeproject
+                        }
+                    }
+                });
+            }
+
+        };
+
         function _deleteProject(project) {
             if ($scope.common.removeProjects[project._id]) {
                 projectApi.delete(project._id).then(function() {

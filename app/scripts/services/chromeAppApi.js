@@ -131,7 +131,7 @@ angular.module('bitbloqApp')
             }, 30000);
             alertsService.add({
                 text: $translate.instant('chromeapp-installing'),
-                id: 'web2board',
+                id: 'chromeapp',
                 type: 'loading'
             });
             chrome.webstore.install('https://chrome.google.com/webstore/detail/' + envData.config.chromeAppId, function(response) {

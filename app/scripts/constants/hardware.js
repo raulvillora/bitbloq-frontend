@@ -477,6 +477,308 @@ angular.module('bitbloqApp')
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
                 }]
             }
+        }, {
+            "name": "Arduino Leonardo",
+            "id": "ArduinoLeonardo",
+            "mcu": "leonardo",
+            "underDevelopment": true,
+            "vendorIds": ["0x2341"],
+            "productIds": ['0x0036', '0x8036', '0x800c'],
+            "pinSize": {
+                "digital": {
+                    "w": 9,
+                    "h": 15
+                },
+                "analog": {
+                    "w": 9,
+                    "h": 15
+                },
+                "serial": {
+                    "w": 33,
+                    "h": 66
+                },
+                "i2c-4": {
+                    "w": 9,
+                    "h": 9
+                },
+                "i2c-5": {
+                    "w": 9,
+                    "h": 9
+                }
+            },
+            "pins": {
+                "digital": [{
+                    "x": 0.478,
+                    "y": 0.098,
+                    "name": "13",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
+                }, {
+                    "x": 0.508,
+                    "y": 0.098,
+                    "name": "12",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
+                }, {
+                    "x": 0.545,
+                    "y": 0.098,
+                    "name": "11",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
+                }, {
+                    "x": 0.58,
+                    "y": 0.098,
+                    "name": "10",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
+                }, {
+                    "x": 0.615,
+                    "y": 0.098,
+                    "name": "9",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
+                }, {
+                    "x": 0.649,
+                    "y": 0.098,
+                    "name": "8",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
+                }, {
+                    "x": 0.695,
+                    "y": 0.098,
+                    "name": "7",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
+                }, {
+                    "x": 0.73,
+                    "y": 0.098,
+                    "name": "6",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
+                }, {
+                    "x": 0.765,
+                    "y": 0.098,
+                    "name": "5",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
+                }, {
+                    "x": 0.795,
+                    "y": 0.098,
+                    "name": "4",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
+                }, {
+                    "x": 0.832,
+                    "y": 0.098,
+                    "name": "3",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
+                }, {
+                    "x": 0.869,
+                    "y": 0.098,
+                    "name": "2",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
+                }, {
+                    "x": 0.9,
+                    "y": 0.098,
+                    "name": "1",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
+                }, {
+                    "x": 0.935,
+                    "y": 0.098,
+                    "name": "0",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                }],
+                "analog": [{
+                    "x": 0.763,
+                    "y": 0.92,
+                    "name": "A0",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
+                }, {
+                    "x": 0.795,
+                    "y": 0.92,
+                    "name": "A1",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
+                }, {
+                    "x": 0.83,
+                    "y": 0.92,
+                    "name": "A2",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
+                }, {
+                    "x": 0.862,
+                    "y": 0.92,
+                    "name": "A3",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
+                }, {
+                    "x": 0.895,
+                    "y": 0.92,
+                    "name": "A4",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
+                }, {
+                    "x": 0.935,
+                    "y": 0.92,
+                    "name": "A5",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                }],
+                "serial": [{
+                    "x": 0.045,
+                    "y": 0.315,
+                    "name": "serial",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                }],
+                "i2c-4": [{
+                    "x": 0.903,
+                    "y": 0.925,
+                    "name": "A4-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
+                }],
+                "i2c-5": [{
+                    "x": 0.933,
+                    "y": 0.925,
+                    "name": "A5-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                }]
+            }
+        }, {
+            "name": "Arduino Nano",
+            "id": "ArduinoNano",
+            "mcu": "nano",
+            "underDevelopment": true,
+            "vendorIds": ["0x2341"],
+            "productIds": ['0x6001', '0x7523'],
+            "pinSize": {
+                "digital": {
+                    "w": 9,
+                    "h": 15
+                },
+                "analog": {
+                    "w": 9,
+                    "h": 15
+                },
+                "serial": {
+                    "w": 33,
+                    "h": 66
+                },
+                "i2c-4": {
+                    "w": 9,
+                    "h": 9
+                },
+                "i2c-5": {
+                    "w": 9,
+                    "h": 9
+                }
+            },
+            "pins": {
+                "digital": [{
+                    "x": 0.478,
+                    "y": 0.098,
+                    "name": "13",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
+                }, {
+                    "x": 0.508,
+                    "y": 0.098,
+                    "name": "12",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
+                }, {
+                    "x": 0.545,
+                    "y": 0.098,
+                    "name": "11",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
+                }, {
+                    "x": 0.58,
+                    "y": 0.098,
+                    "name": "10",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
+                }, {
+                    "x": 0.615,
+                    "y": 0.098,
+                    "name": "9",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
+                }, {
+                    "x": 0.649,
+                    "y": 0.098,
+                    "name": "8",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
+                }, {
+                    "x": 0.695,
+                    "y": 0.098,
+                    "name": "7",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
+                }, {
+                    "x": 0.73,
+                    "y": 0.098,
+                    "name": "6",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
+                }, {
+                    "x": 0.765,
+                    "y": 0.098,
+                    "name": "5",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
+                }, {
+                    "x": 0.795,
+                    "y": 0.098,
+                    "name": "4",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
+                }, {
+                    "x": 0.832,
+                    "y": 0.098,
+                    "name": "3",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
+                }, {
+                    "x": 0.869,
+                    "y": 0.098,
+                    "name": "2",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
+                }, {
+                    "x": 0.9,
+                    "y": 0.098,
+                    "name": "1",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
+                }, {
+                    "x": 0.935,
+                    "y": 0.098,
+                    "name": "0",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                }],
+                "analog": [{
+                    "x": 0.763,
+                    "y": 0.92,
+                    "name": "A0",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
+                }, {
+                    "x": 0.795,
+                    "y": 0.92,
+                    "name": "A1",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
+                }, {
+                    "x": 0.83,
+                    "y": 0.92,
+                    "name": "A2",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
+                }, {
+                    "x": 0.862,
+                    "y": 0.92,
+                    "name": "A3",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
+                }, {
+                    "x": 0.895,
+                    "y": 0.92,
+                    "name": "A4",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
+                }, {
+                    "x": 0.935,
+                    "y": 0.92,
+                    "name": "A5",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                }],
+                "serial": [{
+                    "x": 0.045,
+                    "y": 0.315,
+                    "name": "serial",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                }],
+                "i2c-4": [{
+                    "x": 0.903,
+                    "y": 0.925,
+                    "name": "A4-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
+                }],
+                "i2c-5": [{
+                    "x": 0.933,
+                    "y": 0.925,
+                    "name": "A5-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                }]
+            }
         }],
         "components": {
             "leds": [{
@@ -506,6 +808,7 @@ angular.module('bitbloqApp')
                 "type": "US",
                 "width": 120,
                 "height": 79,
+                "dataReturnType": "String",
                 "pins": {
                     "digital": [
                         "trigger",
@@ -517,6 +820,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 90,
                 "height": 73,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -527,6 +831,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 100,
                 "height": 92,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -537,6 +842,7 @@ angular.module('bitbloqApp')
                 "type": "encoder",
                 "width": 74,
                 "height": 84,
+                "dataReturnType": "float",
                 "pin": {
                     "sb": "2",
                     "sa": "3"
@@ -553,6 +859,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 100,
                 "height": 102,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -563,6 +870,7 @@ angular.module('bitbloqApp')
                 "type": "ButtonPad",
                 "width": 165,
                 "height": 120,
+                "dataReturnType": "char",
                 "pins": {
                     "analog": [
                         "s"
@@ -573,6 +881,7 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 90,
                 "height": 77,
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "s"
@@ -583,6 +892,7 @@ angular.module('bitbloqApp')
                 "type": "LineFollower",
                 "width": 97,
                 "height": 88,
+                "dataReturnType": "float *",
                 "pins": {
                     "digital": [
                         "s1",
@@ -594,6 +904,7 @@ angular.module('bitbloqApp')
                 "type": "Joystick",
                 "width": 100,
                 "height": 102,
+                "dataReturnType": "float *",
                 "pins": {
                     "analog": [
                         "x",
@@ -608,6 +919,7 @@ angular.module('bitbloqApp')
                 "type": "analog",
                 "width": 90,
                 "height": 65,
+                "dataReturnType": "float",
                 "pins": {
                     "analog": [
                         "s"
@@ -618,6 +930,7 @@ angular.module('bitbloqApp')
                 "type": "analog",
                 "width": 74,
                 "height": 101,
+                "dataReturnType": "float",
                 "pins": {
                     "analog": [
                         "s"
@@ -751,8 +1064,19 @@ angular.module('bitbloqApp')
         }, {
             "id": "mBot",
             "name": "mBot",
+            "underDevelopment": true,
             "board": "Arduino UNO",
             "width": 75,
             "height": 86
-        }]
+        }],
+
+        "viewerSensors": [
+            "encoder",
+            "hts221",
+            "pot",
+            "ldrs",
+            "sound",
+            "us",
+            "irs"
+        ]
     });

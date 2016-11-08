@@ -61,166 +61,166 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ddpdpmibfdhifigignfdiggfbcmfblfj">
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/bpefhflbflbdddgghohdmnpbngpcghlk">
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hnplgohcflpahpplogmdgdhmefmecekc">
 </head>
 
 <body data-ng-app="bitbloqApp" class="body" data-ng-class="{'show--header':isHeader()}" data-ng-controller="BodyCtrl" oncontextmenu="return false;">
-    <!--[if lt IE 9]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div ng-include="'images/sprite.svg'" class="hidden"></div>
-    <div data-ng-include="'views/header.html'" class="header--general" data-ng-if="isHeader()"></div>
-    <div data-ng-include="'views/alerts.html'" class="alerts--container" ng-controller="AlertsCtrl"></div>
-    <div data-ng-view="" class="main">
-    </div>
-    <div ng-hide="common.cookiesAccepted" class="bitbloq--cookies" ng-class="{visible:common.userIsLoaded || common.user && !common.user.cookiePolicyAccepted}">
-        <p>{{ 'policies-cookies-info' | translate }} <a href="/#/cookies" data-element="cookies-link" target="_blank">{{ 'policies-cookies' | translate }}</a></p>
-        <button data-element="cookies" class="btn btn--close--cookies" ng-click="common.acceptCookies()">
-            {{'accept' | translate}}
-        </button>
-        <a href="http://bq.com">{{'reject' | translate}}</a>
-    </div>
-    <canvas id="testcanvas" style="background-color: white; width: 285px; height: 190px;" class="invisible"></canvas>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <!-- build:js({.,app}) scripts/vendors.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-elastic-input/dist/angular-elastic-input.min.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/angular-moment/angular-moment.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-    <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
-    <script src="bower_components/angular-websocket/angular-websocket.min.js"></script>
-    <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
-    <script src="bower_components/js-beautify/js/lib/beautify.js"></script>
-    <script src="bower_components/jsplumb/dist/js/jsPlumb-2.0.5.js"></script>
-    <script src="bower_components/jsrsasign/jsrsasign-latest-all-min.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/mobile-detect/mobile-detect.js"></script>
-    <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
-    <script src="bower_components/satellizer/satellizer.js"></script>
-    <script src="bower_components/jszip/dist/jszip.js"></script>
-    <script src="bower_components/rangy/rangy-core.js"></script>
-    <script src="bower_components/rangy/rangy-classapplier.js"></script>
-    <script src="bower_components/rangy/rangy-highlighter.js"></script>
-    <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
-    <script src="bower_components/rangy/rangy-serializer.js"></script>
-    <script src="bower_components/rangy/rangy-textrange.js"></script>
-    <script src="bower_components/textAngular/dist/textAngular.js"></script>
-    <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
-    <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
-    <script src="bower_components/angular-clipboard/angular-clipboard.js"></script>
-    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
-    <script src="bower_components/angular-google-analytics/dist/angular-google-analytics.min.js"></script>
-    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-    <script src="bower_components/jspanel/source/jquery.jspanel.js"></script>
-    <script src="bower_components/fastclick/lib/fastclick.js"></script>
-    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
-    <script src="bower_components/d3/d3.js"></script>
-    <script src="bower_components/nvd3/build/nv.d3.js"></script>
-    <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
-    <script src="bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js"></script>
-    <script src="bower_components/autogrow/autogrow.js"></script>
-    <script src="bower_components/bloqs/dist/bloqs.min.js"></script>
-    <!-- endbower -->
-    <!-- jsrsasign: manual injection -->
-    <script src="bower_components/ace-builds/src-min/ace.js"></script>
-    <script src="bower_components/ace-builds/src-min/ext-language_tools.js"></script>
-    <script src="bower_components/ace-builds/src-min/ext-beautify.js"></script>
-    <script src="bower_components/ace-builds/src-min/snippets/text.js"></script>
-    <script src="bower_components/ace-builds/src-min/snippets/c_cpp.js"></script>
-    <script src="bower_components/ace-builds/src-min/theme-chrome.js"></script>
-    <script src="bower_components/ace-builds/src-min/mode-c_cpp.js"></script>
-    <script src="bower_components/jsrsasign/base64x-1.1.min.js"></script>
-    <script src="bower_components/jsrsasign/ext/sha256.js"></script>
-    <!-- /jsrsasign -->
-    <script src="scripts/vendors/prism.js"></script>
-    <!-- <script src="scripts/vendors/protoBoLa.js"></script> -->
-    <script src="scripts/vendors/autoGrow.js"></script>
-    <script src="scripts/vendors/autoGrowInput.js"></script>
-    <script src="res/vendor/moment.js"></script>
-    <!-- endbuild -->
-    <script src="res/config/config.js"></script>
-    <!-- build:js({.tmp,app}) scripts/main.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/HubsApi.js"></script>
-    <script src="scripts/constants/hardware.js"></script>
-    <script src="scripts/factories/WSHubsAPI.js"></script>
-    <script src="scripts/factories/lodash.js"></script>
-    <script src="scripts/factories/bloqs.js"></script>
-    <script src="scripts/factories/jsplumbutil.js"></script>
-    <script src="scripts/factories/jsplumb.js"></script>
-    <script src="scripts/factories/jszip.js"></script>
-    <script src="scripts/services/alerts.js"></script>
-    <script src="scripts/services/authInterceptor.js"></script>
-    <script src="scripts/services/projectService.js"></script>
-    <script src="scripts/services/common.js"></script>
-    <script src="scripts/services/user.js"></script>
-    <script src="scripts/services/userApi.js"></script>
-    <script src="scripts/services/projectApi.js"></script>
-    <script src="scripts/services/imageApi.js"></script>
-    <script src="scripts/services/forumApi.js"></script>
-    <script src="scripts/services/web2boardV1.js"></script>
-    <script src="scripts/services/web2boardV2.js"></script>
-    <script src="scripts/services/resource.js"></script>
-    <script src="scripts/services/bloqsApi.js"></script>
-    <script src="scripts/services/utils.js"></script>
-    <script src="scripts/services/hw2bloqs.js"></script>
-    <script src="scripts/services/feedbackApi.js"></script>
-    <script src="scripts/services/commonModals.js"></script>
-    <script src="scripts/services/openWindow.js"></script>
-    <script src="scripts/services/robotFirmwareApi.js"></script>
-    <script src="scripts/services/chromeAppApi.js"></script>
-    <script src="scripts/services/compilerApi.js"></script>
-    <script src="scripts/services/web2boardOnline.js"></script>
-    <script src="scripts/services/centerModeApi.js"></script>
-    <script src="scripts/directives/beautyCode.js"></script>
-    <script src="scripts/directives/bitbloqBloqCreator.js"></script>
-    <script src="scripts/directives/commonDropdown.js"></script>
-    <script src="scripts/directives/drag&drop.js"></script>
-    <script src="scripts/directives/bitbloqTooltip.js"></script>
-    <script src="scripts/directives/imageDefault.js"></script>
-    <script src="scripts/directives/imageChange.js"></script>
-    <script src="scripts/controllers/landing.js"></script>
-    <script src="scripts/controllers/body.js"></script>
-    <script src="scripts/controllers/account.js"></script>
-    <script src="scripts/controllers/bloqsproject.js"></script>
-    <script src="scripts/controllers/makeActions.js"></script>
-    <script src="scripts/controllers/explore.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/bloqstab.js"></script>
-    <script src="scripts/controllers/infotab.js"></script>
-    <script src="scripts/controllers/hardwareTab.js"></script>
-    <script src="scripts/controllers/header.js"></script>
-    <script src="scripts/controllers/infotab.js"></script>
-    <script src="scripts/controllers/plotter.js"></script>
-    <script src="scripts/controllers/projects.js"></script>
-    <script src="scripts/controllers/resetPassword.js"></script>
-    <script src="scripts/controllers/styleguide.js"></script>
-    <script src="scripts/controllers/cookies.js"></script>
-    <script src="scripts/controllers/terms.js"></script>
-    <script src="scripts/controllers/alerts.js"></script>
-    <script src="scripts/controllers/project.js"></script>
-    <script src="scripts/controllers/learn.js"></script>
-    <script src="scripts/controllers/user.js"></script>
-    <script src="scripts/controllers/unsupported.js"></script>
-    <script src="scripts/controllers/code.js"></script>
-    <script src="scripts/controllers/forum.js"></script>
-    <script src="scripts/controllers/serialMonitor.js"></script>
-    <script src="scripts/controllers/web2boardSettings.js"></script>
-    <script src="scripts/controllers/web2boardUpgrade.js"></script>
-    <script src="scripts/controllers/under14authorization.js"></script>
-    <script src="scripts/controllers/centerMode.js"></script>
-    <!-- endbuild -->
+<!--[if lt IE 9]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div ng-include="'images/sprite.svg'" class="hidden"></div>
+<div data-ng-include="'views/header.html'" class="header--general" data-ng-if="isHeader()"></div>
+<div data-ng-include="'views/alerts.html'" class="alerts--container" ng-controller="AlertsCtrl"></div>
+<div data-ng-view="" class="main">
+</div>
+<div ng-hide="common.cookiesAccepted" class="bitbloq--cookies" ng-class="{visible:common.userIsLoaded || common.user && !common.user.cookiePolicyAccepted}">
+    <p>{{ 'policies-cookies-info' | translate }} <a href="/#/cookies" data-element="cookies-link" target="_blank">{{ 'policies-cookies' | translate }}</a></p>
+    <button data-element="cookies" class="btn btn--close--cookies" ng-click="common.acceptCookies()">
+        {{'accept' | translate}}
+    </button>
+    <a href="http://bq.com">{{'reject' | translate}}</a>
+</div>
+<canvas id="testcanvas" style="background-color: white; width: 285px; height: 190px;" class="invisible"></canvas>
+<script src="https://www.youtube.com/iframe_api"></script>
+<!-- build:js({.,app}) scripts/vendors.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-elastic-input/dist/angular-elastic-input.min.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-scroll/angular-scroll.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+<script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+<script src="bower_components/angular-websocket/angular-websocket.min.js"></script>
+<script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
+<script src="bower_components/js-beautify/js/lib/beautify.js"></script>
+<script src="bower_components/jsplumb/dist/js/jsPlumb-2.0.5.js"></script>
+<script src="bower_components/jsrsasign/jsrsasign-latest-all-min.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/mobile-detect/mobile-detect.js"></script>
+<script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="bower_components/satellizer/satellizer.js"></script>
+<script src="bower_components/jszip/dist/jszip.js"></script>
+<script src="bower_components/rangy/rangy-core.js"></script>
+<script src="bower_components/rangy/rangy-classapplier.js"></script>
+<script src="bower_components/rangy/rangy-highlighter.js"></script>
+<script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+<script src="bower_components/rangy/rangy-serializer.js"></script>
+<script src="bower_components/rangy/rangy-textrange.js"></script>
+<script src="bower_components/textAngular/dist/textAngular.js"></script>
+<script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+<script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+<script src="bower_components/angular-clipboard/angular-clipboard.js"></script>
+<script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+<script src="bower_components/angular-google-analytics/dist/angular-google-analytics.min.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/jspanel/source/jquery.jspanel.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+<script src="bower_components/d3/d3.js"></script>
+<script src="bower_components/nvd3/build/nv.d3.js"></script>
+<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+<script src="bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js"></script>
+<script src="bower_components/autogrow/autogrow.js"></script>
+<script src="bower_components/bloqs/dist/bloqs.min.js"></script>
+<!-- endbower -->
+<!-- jsrsasign: manual injection -->
+<script src="bower_components/ace-builds/src-min/ace.js"></script>
+<script src="bower_components/ace-builds/src-min/ext-language_tools.js"></script>
+<script src="bower_components/ace-builds/src-min/ext-beautify.js"></script>
+<script src="bower_components/ace-builds/src-min/snippets/text.js"></script>
+<script src="bower_components/ace-builds/src-min/snippets/c_cpp.js"></script>
+<script src="bower_components/ace-builds/src-min/theme-chrome.js"></script>
+<script src="bower_components/ace-builds/src-min/mode-c_cpp.js"></script>
+<script src="bower_components/jsrsasign/base64x-1.1.min.js"></script>
+<script src="bower_components/jsrsasign/ext/sha256.js"></script>
+<!-- /jsrsasign -->
+<script src="scripts/vendors/prism.js"></script>
+<!-- <script src="scripts/vendors/protoBoLa.js"></script> -->
+<script src="scripts/vendors/autoGrow.js"></script>
+<script src="scripts/vendors/autoGrowInput.js"></script>
+<script src="res/vendor/moment.js"></script>
+<!-- endbuild -->
+<script src="res/config/config.js"></script>
+<!-- build:js({.tmp,app}) scripts/main.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/HubsApi.js"></script>
+<script src="scripts/constants/hardware.js"></script>
+<script src="scripts/factories/WSHubsAPI.js"></script>
+<script src="scripts/factories/lodash.js"></script>
+<script src="scripts/factories/bloqs.js"></script>
+<script src="scripts/factories/jsplumbutil.js"></script>
+<script src="scripts/factories/jsplumb.js"></script>
+<script src="scripts/factories/jszip.js"></script>
+<script src="scripts/services/alerts.js"></script>
+<script src="scripts/services/authInterceptor.js"></script>
+<script src="scripts/services/projectService.js"></script>
+<script src="scripts/services/common.js"></script>
+<script src="scripts/services/user.js"></script>
+<script src="scripts/services/userApi.js"></script>
+<script src="scripts/services/projectApi.js"></script>
+<script src="scripts/services/imageApi.js"></script>
+<script src="scripts/services/forumApi.js"></script>
+<script src="scripts/services/web2boardV1.js"></script>
+<script src="scripts/services/web2boardV2.js"></script>
+<script src="scripts/services/resource.js"></script>
+<script src="scripts/services/bloqsApi.js"></script>
+<script src="scripts/services/utils.js"></script>
+<script src="scripts/services/hw2bloqs.js"></script>
+<script src="scripts/services/feedbackApi.js"></script>
+<script src="scripts/services/commonModals.js"></script>
+<script src="scripts/services/openWindow.js"></script>
+<script src="scripts/services/robotFirmwareApi.js"></script>
+<script src="scripts/services/chromeAppApi.js"></script>
+<script src="scripts/services/compilerApi.js"></script>
+<script src="scripts/services/web2boardOnline.js"></script>
+<script src="scripts/directives/beautyCode.js"></script>
+<script src="scripts/directives/bitbloqBloqCreator.js"></script>
+<script src="scripts/directives/commonDropdown.js"></script>
+<script src="scripts/directives/drag&drop.js"></script>
+<script src="scripts/directives/bitbloqTooltip.js"></script>
+<script src="scripts/directives/imageDefault.js"></script>
+<script src="scripts/directives/imageChange.js"></script>
+<script src="scripts/controllers/landing.js"></script>
+<script src="scripts/controllers/body.js"></script>
+<script src="scripts/controllers/account.js"></script>
+<script src="scripts/controllers/bloqsproject.js"></script>
+<script src="scripts/controllers/makeActions.js"></script>
+<script src="scripts/controllers/explore.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/bloqstab.js"></script>
+<script src="scripts/controllers/infotab.js"></script>
+<script src="scripts/controllers/hardwareTab.js"></script>
+<script src="scripts/controllers/header.js"></script>
+<script src="scripts/controllers/infotab.js"></script>
+<script src="scripts/controllers/plotter.js"></script>
+<script src="scripts/controllers/viewer.js"></script>
+<script src="scripts/controllers/projects.js"></script>
+<script src="scripts/controllers/resetPassword.js"></script>
+<script src="scripts/controllers/styleguide.js"></script>
+<script src="scripts/controllers/cookies.js"></script>
+<script src="scripts/controllers/terms.js"></script>
+<script src="scripts/controllers/alerts.js"></script>
+<script src="scripts/controllers/project.js"></script>
+<script src="scripts/controllers/learn.js"></script>
+<script src="scripts/controllers/user.js"></script>
+<script src="scripts/controllers/unsupported.js"></script>
+<script src="scripts/controllers/code.js"></script>
+<script src="scripts/controllers/forum.js"></script>
+<script src="scripts/controllers/serialMonitor.js"></script>
+<script src="scripts/controllers/web2boardSettings.js"></script>
+<script src="scripts/controllers/web2boardUpgrade.js"></script>
+<script src="scripts/controllers/under14authorization.js"></script>
+<!-- endbuild -->
 </body>
 
 </html>

@@ -1,0 +1,16 @@
+<div class="viewer__realtime__content">
+    <div class="viewer__realtime__content__item" ng-repeat="(key, sensor) in sensorsData">
+        <div class="viewer__realtime__content__item__title">
+            <p>{{sensor.type}}</p>
+            <p>{{key}}</p>
+        </div>
+        <div class="viewer__realtime__content__item__data extra-margin" ng-if="sensor.acron === 'hts221'">
+            <div class="viewer__realtime__content__item__value viewer__realtime__content__item__hts221"  ng-class="sensor.temperature.value === '--' ? 'viewer__realtime__content__item__value__nonumber' : 'viewer__realtime__content__item__value__number'">{{sensor.temperature.value + 'º'}}</div>
+            <div class="viewer__realtime__content__item__value viewer__realtime__content__item__hts221"  ng-class="sensor.humidity.value === '--' ? 'viewer__realtime__content__item__value__nonumber' : 'viewer__realtime__content__item__value__number'">{{sensor.humidity.value + '%'}}</div>
+        </div>
+        <div class="viewer__realtime__content__item__data" ng-if="sensor.acron !== 'hts221'">
+            <p class="viewer__realtime__content__item__value" ng-class="sensor.value === '--' ? 'viewer__realtime__content__item__value__nonumber' : 'viewer__realtime__content__item__value__number'">{{sensor.value}}</p>
+            <p class="viewer__realtime__content__item__range">{{sensor.range}}</p>
+        </div>
+    </div>
+</div>

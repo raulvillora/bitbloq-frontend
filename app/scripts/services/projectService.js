@@ -9,8 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -424,6 +424,7 @@ angular.module('bitbloqApp')
                         });
                     } else {
                         exports.saveStatus = 4;
+                        defered.reject();
                     }
                 } else {
                     if (common.user) {
@@ -444,7 +445,9 @@ angular.module('bitbloqApp')
                             }
 
                             common.isLoading = false;
-                            localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
+                            if (localStorage.projectsChange) {
+                                localStorage.projectsChange = !JSON.parse(localStorage.projectsChange);
+                            }
                             exports.saveOldProject();
 
                             if (exports.tempImage.file) {
@@ -456,6 +459,7 @@ angular.module('bitbloqApp')
                             }
                         }).catch(function() {
                             exports.saveStatus = 3;
+                            defered.reject();
                         });
                     } else {
                         exports.saveStatus = 0;
@@ -490,8 +494,8 @@ angular.module('bitbloqApp')
                     return newElem;
                 });
 
-                exports.project.hardware.components = schema.components;
-                exports.project.hardware.connections = schema.connections;
+                exports.project.hardware.components = _.cloneDeep(schema.components);
+                exports.project.hardware.connections = _.cloneDeep(schema.connections);
             }
         }
 
@@ -614,15 +618,5 @@ angular.module('bitbloqApp')
                 }
             }
         });
-
-        $window.onbeforeunload = function(event) {
-            if (exports.saveStatus === 1) {
-                var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
-                if (!answer) {
-                    event.preventDefault();
-                }
-            }
-        };
-
         return exports;
     });

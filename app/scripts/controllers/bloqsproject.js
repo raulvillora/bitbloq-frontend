@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService) {
+    .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants, chromeAppApi) {
 
         /*************************************************
          Project save / edit
@@ -89,21 +89,21 @@ angular.module('bitbloqApp')
          web2board communication
          *************************************************/
 
-        $rootScope.$on('web2board:disconnected', function() {
+        var w2bDisconnectedEvent = $rootScope.$on('web2board:disconnected', function() {
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:wrong-version', function() {
+        var w2bVersionEvent = $rootScope.$on('web2board:wrong-version', function() {
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:no-web2board', function() {
+        var w2bNow2bEvent = $rootScope.$on('web2board:no-web2board', function() {
             alertsService.close(compilingAlert);
             alertsService.close(settingBoardAlert);
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:compile-error', function(event, error) {
+        var w2bCompileErrorEvent = $rootScope.$on('web2board:compile-error', function(event, error) {
             error = JSON.parse(error);
             alertsService.add({
                 text: 'alert-web2board-compile-error',
@@ -114,7 +114,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:compile-verified', function() {
+        var w2bCompileVerifiedEvent = $rootScope.$on('web2board:compile-verified', function() {
             alertsService.add({
                 text: 'alert-web2board-compile-verified',
                 id: 'compile',
@@ -124,7 +124,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:boardReady', function(evt, data) {
+        var w2bBoardReadyEvent = $rootScope.$on('web2board:boardReady', function(evt, data) {
             data = JSON.parse(data);
             if (data.length > 0) {
                 if (!alertsService.isVisible('uid', serialMonitorAlert)) {
@@ -145,7 +145,7 @@ angular.module('bitbloqApp')
             }
         });
 
-        $rootScope.$on('web2board: boardNotReady', function() {
+        var w2bBoardNotReadyEvent = $rootScope.$on('web2board: boardNotReady', function() {
             alertsService.add({
                 text: 'alert-web2board-boardNotReady',
                 id: 'upload',
@@ -154,7 +154,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:uploading', function(evt, port) {
+        var w2bUploadingEvent = $rootScope.$on('web2board:uploading', function(evt, port) {
             alertsService.add({
                 text: 'alert-web2board-uploading',
                 id: 'upload',
@@ -164,7 +164,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(true);
         });
 
-        $rootScope.$on('web2board:code-uploaded', function() {
+        var w2bCodeUploadedEvent = $rootScope.$on('web2board:code-uploaded', function() {
             alertsService.add({
                 text: 'alert-web2board-code-uploaded',
                 id: 'upload',
@@ -174,7 +174,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:upload-error', function(evt, data) {
+        var w2bUploadErrorEvent = $rootScope.$on('web2board:upload-error', function(evt, data) {
             data = JSON.parse(data);
             if (!data.error) {
                 alertsService.add({
@@ -200,7 +200,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        $rootScope.$on('web2board:no-port-found', function() {
+        var w2bNoPortFoundEvent = $rootScope.$on('web2board:no-port-found', function() {
             $scope.currentTab = 0;
             $scope.levelOne = 'boards';
             web2board.setInProcess(false);
@@ -212,12 +212,27 @@ angular.module('bitbloqApp')
             });
         });
 
-        $rootScope.$on('web2board:serial-monitor-opened', function() {
+        var w2bSerialOpenedEvent = $rootScope.$on('web2board:serial-monitor-opened', function() {
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
 
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
+
+        function _destroyWeb2boardEvents() {
+            w2bDisconnectedEvent();
+            w2bVersionEvent();
+            w2bNow2bEvent();
+            w2bCompileErrorEvent();
+            w2bCompileVerifiedEvent();
+            w2bBoardReadyEvent();
+            w2bBoardNotReadyEvent();
+            w2bUploadingEvent();
+            w2bCodeUploadedEvent();
+            w2bUploadErrorEvent();
+            w2bNoPortFoundEvent();
+            w2bSerialOpenedEvent();
+        }
 
         function uploadW2b1() {
             $scope.$emit('uploading');
@@ -232,7 +247,6 @@ angular.module('bitbloqApp')
                     id: 'upload',
                     type: 'loading'
                 });
-                web2board.setInProcess(true);
 
                 web2board.upload(boardReference, $scope.getPrettyCode());
             } else {
@@ -318,7 +332,6 @@ angular.module('bitbloqApp')
             }
         }
 
-
         function plotterW2b1() {
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
@@ -359,9 +372,121 @@ angular.module('bitbloqApp')
             }
         }
 
+        $scope.getComponents = function(componentsArray) {
+            var components = {};
+
+            var serialPort = _.find(componentsArray, function(o) {
+                return o.id === 'sp';
+            });
+            if (serialPort) {
+                components.sp = serialPort.name;
+            }
+            _.forEach(componentsArray, function(value) {
+                if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
+                    if (components[value.id]) {
+                        components[value.id].names.push(value.name);
+                    } else {
+                        components[value.id] = {};
+                        components[value.id].type = value.type;
+                        components[value.id].names = [value.name];
+                    }
+                }
+            });
+            return components;
+        };
+
+        $scope.getViewerCode = function(componentsArray, originalCode) {
+            var components = $scope.getComponents(componentsArray);
+            var code = originalCode;
+            var serialName;
+            var visorCode;
+            if (components.sp) {
+                serialName = components.sp;
+                visorCode = generateSensorsCode(components, serialName, '');
+                code = code.replace(/loop\(\){([^]*)}/, 'loop() {' + visorCode + '$1' + '}');
+            } else {
+                var serialCode = originalCode.split('/***   Included libraries  ***/');
+                serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
+                code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
+                code = code.split('\n/***   Setup  ***/');
+                code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
+                visorCode = generateSensorsCode(components, 'puerto_serie_0', '');
+                code = code.replace(/loop\(\){([^]*)}/, 'loop() {' + visorCode + '$1' + '}');
+            }
+            return code;
+        };
+
+        function generateSerialViewerBloqCode(componentsArray, originalCode) {
+            var components = $scope.getComponents(componentsArray);
+            var code = originalCode;
+            var serialName;
+            if (components.sp) {
+                code = code.substring(0, code.length - 1) + '\n\r';
+                serialName = components.sp;
+                code = generateViewerBloqCode(components, serialName, code);
+            } else {
+                var serialCode = originalCode.split('/***   Included libraries  ***/');
+                serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
+                code = '/***   Included libraries  ***/' + serialCode[0] + serialCode[1];
+                code = code.split('\n/***   Setup  ***/');
+                code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
+                code = generateViewerBloqCode(components, 'puerto_serie_0', code);
+            }
+
+            code = code + '}';
+            return code;
+        }
+
+        function generateViewerBloqCode(componentsArray, serialName, code) {
+            var sensorsCode = generateSensorsCode(componentsArray, serialName, '');
+            code = code.replace('/*sendViewerData*/', sensorsCode);
+            return code;
+        }
+
+        $scope.thereIsSerialBlock = function(code) {
+            var serialBlock;
+            if (code.indexOf('/*sendViewerData*/') > -1) {
+                serialBlock = true;
+            } else {
+                serialBlock = false;
+            }
+
+            return serialBlock;
+        };
+
+        function generateSensorsCode(components, serialName, code) {
+            _.forEach(components, function(value, key) {
+                if (angular.isObject(value)) {
+                    if (value.type === 'analog') {
+                        _.forEach(value.names, function(name) {
+                            code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(analogRead(' + name + '))));\n\r');
+                            //  code = code + 'delay(500);\n\r';
+                        });
+                    } else {
+                        _.forEach(value.names, function(name) {
+                            if (key === 'us' || key === 'encoder') {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                            } else if (key === 'hts221') {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_temperature:' + name + ']:") + String(String(' + name + '.getTemperature())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + '_humidity:' + name + ']:") + String(String(' + name + '.getHumidity())));\n\r');
+                                code = code + 'delay(50);\n\r';
+                            } else {
+                                code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(digitalRead(' + name + '))));\n\r');
+                                //   code = code + 'delay(500);\n\r';
+                            }
+                        });
+                    }
+                }
+            });
+
+            return code;
+        }
 
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension()) {
+            if ($scope.common.useChromeExtension() ||
+                (projectService.project.hardware.robot === 'mBot')) {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -373,20 +498,44 @@ angular.module('bitbloqApp')
                     verifyW2b1();
                 }
             }
+
         };
 
-        $scope.upload = function() {
+        $scope.upload = function(code) {
+            var viewer;
+            viewer = code ? true : false;
             if (projectService.project.hardware.board) {
-                if ($scope.common.useChromeExtension()) {
-                    web2boardOnline.compileAndUpload({
-                        board: projectService.getBoardMetaData(),
-                        code: $scope.getPrettyCode()
-                    });
-                } else {
-                    if (web2board.isWeb2boardV2()) {
-                        uploadW2b2();
+                if ($scope.common.useChromeExtension() ||
+                    ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
+
+                    if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                        web2boardOnline.compileAndUpload({
+                            board: projectService.getBoardMetaData(),
+                            code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                            viewer: viewer
+                        });
                     } else {
-                        uploadW2b1();
+                        web2boardOnline.compileAndUpload({
+                            board: projectService.getBoardMetaData(),
+                            code: $scope.getPrettyCode(code),
+                            viewer: viewer
+                        });
+                    }
+
+                } else {
+                    if (projectService.project.hardware.robot === 'mBot') {
+                        commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation', function(err) {
+                            if (!err) {
+                                $scope.upload();
+                            }
+                        });
+
+                    } else {
+                        if (web2board.isWeb2boardV2()) {
+                            uploadW2b2();
+                        } else {
+                            uploadW2b1();
+                        }
                     }
                 }
             } else {
@@ -398,6 +547,7 @@ angular.module('bitbloqApp')
                     type: 'warning'
                 });
             }
+
         };
 
         $scope.serialMonitor = function() {
@@ -468,8 +618,14 @@ angular.module('bitbloqApp')
             return projectService.getCode();
         };
 
-        $scope.getPrettyCode = function() {
-            return utils.prettyCode($scope.getCode());
+        $scope.getPrettyCode = function(code) {
+            var prettyCode;
+            if (code) {
+                prettyCode = utils.prettyCode(code);
+            } else {
+                prettyCode = utils.prettyCode($scope.getCode());
+            }
+            return prettyCode;
         };
 
         /* ****** */
@@ -540,14 +696,12 @@ angular.module('bitbloqApp')
                 var bloqCanvasEl = null;
                 //Update dropdowns values from bloqs canvas
                 for (var type in projectService.componentsArray) {
-                    if (projectService.componentsArray[type].length) {
-                        bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
-                        var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
-                        for (var i = 0, len = nodeList.length; i < len; i++) {
-                            updateBloq(nodeList[i], projectService.componentsArray[type]);
-                        }
-                        allComponents = allComponents.concat(projectService.componentsArray[type]);
+                    bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
+                    var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
+                    for (var i = 0, len = nodeList.length; i < len; i++) {
+                        updateBloq(nodeList[i], projectService.componentsArray[type]);
                     }
+                    allComponents = allComponents.concat(projectService.componentsArray[type]);
                 }
                 //Update dropdowns from bloqs of toolbox
                 if (bloqCanvasEl) {
@@ -594,17 +748,18 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             saveStep(step, $scope.bloqsHistory);
         };
 
         $scope.undoBloqStep = function() {
             undo($scope.bloqsHistory, function(step) {
                 projectService.project.software = step;
+                $rootScope.$emit('update-bloqs');
             });
         };
 
@@ -668,6 +823,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.publishProject = function(type) {
+            type = type || '';
             projectService.checkPublish(type).then(function() {
                 var projectDefault = projectService.getDefaultProject();
                 projectService.completedProject();
@@ -734,6 +890,17 @@ angular.module('bitbloqApp')
 
             $window.addEventListener('bloqs:dragend', function() {
                 $scope.saveBloqStep();
+                projectService.startAutosave();
+                $scope.hardware.firstLoad = false;
+                $scope.$apply();
+            });
+            $window.addEventListener('bloqs:suggestedAdded', function() {
+                $scope.saveBloqStep();
+                $scope.hardware.firstLoad = false;
+                $scope.$apply();
+            });
+
+            $window.addEventListener('bloqs:connect', function() {
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
                 $scope.$apply();
@@ -933,7 +1100,6 @@ angular.module('bitbloqApp')
         $scope.shareWithUserTags = [];
 
         $scope.code = '';
-        $scope.uploadProjectReady = false;
 
         $scope.hardware = {
             componentList: null,
@@ -959,6 +1125,11 @@ angular.module('bitbloqApp')
          Load project
          *************************************************/
         $scope.common.isLoading = true;
+        $scope.hwBasicsLoaded = $q.defer();
+
+        $scope.initHardwarePromise = function() {
+            $scope.hwBasicsLoaded = $q.defer();
+        };
 
         $scope.common.itsUserLoaded().then(function() {
             $log.debug('There is a registed user');
@@ -977,6 +1148,9 @@ angular.module('bitbloqApp')
                     launchModalTour();
                 }
                 addProjectWatchersAndListener();
+                $scope.hwBasicsLoaded.promise.then(function() {
+                    $scope.$emit('drawHardware');
+                });
                 $scope.projectLoaded.resolve();
             }
         }, function() {
@@ -1036,16 +1210,17 @@ angular.module('bitbloqApp')
                 projectService.setProject(project, project.codeProject, true);
                 $scope.saveBloqStep(_.clone(project.software));
                 projectService.saveOldProject();
-                $scope.uploadProjectReady = true;
-
+                $scope.hwBasicsLoaded.promise.then(function() {
+                    $scope.$emit('drawHardware');
+                });
             }
         }
 
-        $scope.setUploadProjectReady = function(value) {
-            $scope.uploadProjectReady = value;
-        };
         function confirmExit() {
             var closeMessage;
+            chromeAppApi.stopSerialCommunication();
+            $scope.$apply();
+
             if (projectService.saveStatus === 1) {
                 closeMessage = $scope.common.translate('leave-without-save');
             }
@@ -1058,6 +1233,7 @@ angular.module('bitbloqApp')
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);
             $window.onbeforeunload = null;
+            _destroyWeb2boardEvents();
         });
 
     });

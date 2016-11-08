@@ -8,13 +8,15 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils, $location, clipboard, $q) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate,
+                                      $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
+                                      $location, clipboard, $q, chromeAppApi) {
 
-        var exports = {};
-        var shortUrl;
-        var serialMonitorPanel;
-        var plotterMonitorPanel;
+        var exports = {},
+            shortUrl,
+            serialMonitorPanel,
+            plotterMonitorPanel,
+            viewerMonitorPanel;
 
         exports.contactModal = function() {
             var dialog,
@@ -606,6 +608,46 @@ angular.module('bitbloqApp')
 
         };
 
+        exports.launchViewerWindow = function(board, components) {
+            if (viewerMonitorPanel) {
+                viewerMonitorPanel.normalize();
+                viewerMonitorPanel.reposition('center');
+                return;
+            }
+
+            var scope = $rootScope.$new();
+            scope.board = board;
+            scope.componentsJSON = components;
+            scope.setOnUploadFinished = function(callback) {
+                scope.uploadFinished = callback;
+            };
+
+            viewerMonitorPanel = $.jsPanel({
+                id: 'plotter',
+                position: 'center',
+                /*  addClass: {
+                 content: 'plotter__content'
+                 },*/
+                size: {
+                    width: 855,
+                    height: 500
+                },
+                onclosed: function() {
+                    scope.$destroy();
+                    viewerMonitorPanel = null;
+                },
+                title: $translate.instant('viewer'),
+                ajax: {
+                    url: 'views/viewer.html',
+                    done: function() {
+                        this.html($compile(this.html())(scope));
+                    }
+                }
+            });
+            viewerMonitorPanel.scope = scope;
+
+        };
+
         exports.launchSerialWindow = function(board) {
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
@@ -667,6 +709,42 @@ angular.module('bitbloqApp')
                 showClose: false
             });
         }
+
+        exports.requestChromeExtensionActivation = function(text, callback) {
+            var modalNeedWeb2boardOnline = $rootScope.$new();
+            _.extend(modalNeedWeb2boardOnline, {
+                contentTemplate: '/views/modals/alert.html',
+                text: text,
+                confirmText: 'activate',
+                confirmAction: function() {
+
+                    ngDialog.closeAll();
+                    chromeAppApi.installChromeApp(function(err) {
+                        if (!err) {
+                            callback(null);
+                        } else {
+                            alertsService.add({
+                                text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
+                                id: 'chromeapp',
+                                type: 'error'
+                            });
+                            callback(err);
+                        }
+
+                    });
+                    common.user.chromeapp = true;
+                    userApi.update({
+                        chromeapp: true
+                    });
+                }
+            });
+            ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--alert',
+                scope: modalNeedWeb2boardOnline,
+                showClose: false
+            });
+        };
 
         return exports;
     });
