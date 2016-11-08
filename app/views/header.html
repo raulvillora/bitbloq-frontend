@@ -20,7 +20,7 @@
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && userRole==='teacher'" data-element="nav-class" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
+                <li ng-if="common.user && (userRole==='headMaster' || userRole==='teacher')" data-element="nav-class" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
                     <a class="nav__menu__link" href="#/center-mode/class">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Class"></use>
@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="menu--user" ng-show="common.user">
-            <div class="menu--user__center-mode">
+            <div ng-if="common.user && userRole!=='headMaster'" class="menu--user__center-mode">
                 <p>{{'centerMode_modal_createCenterTitle' | translate}}</p>
                 <button ng-click="activateCenterMode()">{{'centerMode_header_info' | translate}}</button>
             </div>
