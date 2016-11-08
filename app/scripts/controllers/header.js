@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, userApi, commonModals, $document, $translate, centerModeApi) {
+    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService) {
         $scope.userApi = userApi;
 
         function clickDocumentHandler() {
@@ -23,6 +23,49 @@ angular.module('bitbloqApp')
         $scope.showHeader = false;
         $scope.common.session.save = false;
         $scope.userRole = 'student';
+
+        $scope.activateCenterMode = function() {
+            function tryCenter() {
+                modalOptions.mainText = 'centerMode_modal_createCenter-mainText';
+                modalOptions.confirmButton = 'centerMode_button_createCenter-confirm';
+                modalOptions.information = false;
+                modalOptions.confirmAction = createCenter;
+                modalOptions.center = {};
+
+
+                function createCenter() {
+                    console.log(modalOptions.center);
+                    centerModeApi.createCenter(modalOptions.center).then(function() {
+                        ngDialog.close(centerModal);
+                        alertsService.add({
+                            text: 'centerMode_alert_createCenter',
+                            id: 'createCenter',
+                            type: 'ok'
+                        });
+                    });
+                }
+            }
+
+            var modalOptions = $rootScope.$new();
+
+            _.extend(modalOptions, {
+                title: 'centerMode_modal_createCenterTitle',
+                contentTemplate: 'views/modals/createCenter.html',
+                mainText: 'centerMode_modal_createCenter-introText',
+                confirmButton: 'centerMode_button_createCenter-try',
+                confirmAction: tryCenter,
+                modalButtons: true,
+                information: true
+            });
+
+            var centerModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--input',
+                scope: modalOptions,
+                showClose: false
+
+            });
+        };
 
         $scope.logout = function() {
             userApi.logout();

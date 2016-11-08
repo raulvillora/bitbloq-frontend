@@ -76,6 +76,10 @@
             </div>
         </div>
         <div class="menu--user" ng-show="common.user">
+            <div class="menu--user__center-mode">
+                <p>{{'centerMode_modal_createCenterTitle' | translate}}</p>
+                <button ng-click="activateCenterMode()">{{'centerMode_header_info' | translate}}</button>
+            </div>
             <div class="menu--user__header">
                 <span class="menu--user__avatar" ng-click="openMenu($event)">
                     <img class="img--avatar" image-change="common.avatarChange" data-element="open-header-menu" err-src="../images/common/avatar.png" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}">
