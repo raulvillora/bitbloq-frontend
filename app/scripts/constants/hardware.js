@@ -993,7 +993,7 @@ angular.module('bitbloqApp')
                         "s"
                     ]
                 },
-                "oscillator": "false"
+                "oscillator": false
             }],
             "continuousServos": [{
                 "id": "servocont",
