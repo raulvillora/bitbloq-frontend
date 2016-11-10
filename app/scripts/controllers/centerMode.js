@@ -182,11 +182,9 @@
                         _getCenter();
                         break;
                     case 'center-teacher':
-                    case 'teacher':
+                    case 'classes':
                         _getTeacher($routeParams.id);
                         break;
-
-
                 }
             }
 
@@ -197,6 +195,7 @@
             }
 
             function _getTeacher(teacherId) {
+                teacherId = teacherId || $scope.common.user._id;
                 centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
                     $scope.secondaryBreadcrumb = true;
                     $scope.teacher = _.extend($scope.teacher, response.data);
