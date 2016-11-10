@@ -8,6 +8,7 @@ angular
             createCenter: createCenter,
             createGroup: createGroup,
             deleteTeacher: deleteTeacher,
+            getGroup: getGroup,
             getGroups: getGroups,
             getMyCenter: getMyCenter,
             getMyRole: getMyRole,
@@ -52,6 +53,13 @@ angular
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher/' + teacherId
+            });
+        }
+
+        function getGroup(groupId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'group/' + groupId
             });
         }
 

@@ -29,8 +29,18 @@
                 }
             ];
 
+            $scope.students = [
+                {
+                    _id: '1234',
+                    firstName: 'pepe',
+                    lastName: 'Sanz',
+                    mark: 6
+                }
+            ];
+
 
             $scope.center = {};
+            $scope.group = {};
             $scope.groups = [];
             $scope.teacher = {};
             $scope.teachers = [];
@@ -185,7 +195,17 @@
                     case 'classes':
                         _getTeacher($routeParams.id);
                         break;
+                    case 'group':
+                        _getGroup($routeParams.id);
+                        break;
                 }
+            }
+
+            function _getGroup(groupId) {
+                centerModeApi.getGroup(groupId).then(function(response) {
+                    $scope.secondaryBreadcrumb = true;
+                    $scope.group = response.data;
+                });
             }
 
             function _getGroups() {

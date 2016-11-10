@@ -163,7 +163,7 @@ angular
                     templateUrl: 'views/under14authorization.html',
                     controller: 'Under14AuthorizationCtrl'
                 })
-                .when('/center-mode/:type?/:id?', {
+                .when('/center-mode/:type?/:id?/:subtype?/:subtypeId?', {
                     templateUrl: 'views/centerMode/centerModeIndex.html',
                     controller: 'CenterCtrl'
                 })
