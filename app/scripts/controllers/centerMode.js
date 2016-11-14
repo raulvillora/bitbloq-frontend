@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location) {
             /*$scope.teachers = [
              {
              _id: '1234',
@@ -49,6 +49,7 @@
             $scope.orderInstance = 'name';
             $scope.urlType = $routeParams.type;
 
+            var currentModal;
 
             $scope.sortInstances = function(type) {
                 $log.debug('sortInstances', type);
@@ -144,39 +145,58 @@
             };
 
             $scope.closeGroup = function() {
-                var confirmAction = function() {
-                        $scope.classStateCheck = false;
-                        $scope.group.status = 'closed';
-                        centerModeApi.closeGroup($scope.group).then(function(response) {
-                            alertsService.add({
-                                text: 'centerMode_alert_closeGroup',
-                                id: 'closeGroup',
-                                type: 'ok',
-                                time: 5000
-                            });
-                        }).catch(function() {
-                            alertsService.add({
-                                text: 'centerMode_alert_closeGroup-Error',
-                                id: 'closeGroup',
-                                type: 'ko'
-                            });
-                        });
-                        finishAction.close();
-                    },
-                    parent = $rootScope,
+                var parent = $rootScope,
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
                     title: 'closeGroup_modal_title',
                     confirmButton: 'closeGroup_modal_acceptButton',
-                    confirmAction: confirmAction,
+                    confirmAction: _closeGroupAction,
                     rejectButton: 'modal-button-cancel',
                     textContent: 'closeGroup_modal_info',
                     contentTemplate: '/views/modals/information.html',
-                    modalButtons: true,
-                    newTeachersModel: []
+                    modalButtons: true
                 });
 
-                var finishAction = ngDialog.open({
+                currentModal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+                });
+            };
+
+            $scope.deleteGroup = function() {
+                var confirmAction = function() {
+                        centerModeApi.deleteGroup($scope.group._id).then(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_deleteGroup',
+                                id: 'deleteGroup',
+                                type: 'ok',
+                                time: 5000
+                            });
+                            $location.url('center-mode/teacher');
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_deleteGroup-Error',
+                                id: 'deleteGroup',
+                                type: 'ko'
+                            });
+                        });
+                        currentModal.close();
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new();
+                _.extend(modalOptions, {
+                    title: 'deleteGroup_modal_title',
+                    confirmButton: 'deleteGroup_modal_acceptButton',
+                    confirmAction: confirmAction,
+                    rejectButton: 'modal-button-cancel',
+                    contentTemplate: '/views/modals/centerMode/deleteGroup.html',
+                    finishAction: _closeGroupAction,
+                    modalButtons: true
+                });
+
+                currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
                     scope: modalOptions,
@@ -231,13 +251,33 @@
                         _getCenter();
                         break;
                     case 'center-teacher':
-                    case 'classes':
+                    case 'teacher':
                         _getTeacher($routeParams.id);
                         break;
                     case 'group':
                         _getGroup($routeParams.id);
                         break;
                 }
+            }
+
+            function _closeGroupAction() {
+                $scope.classStateCheck = false;
+                $scope.group.status = 'closed';
+                centerModeApi.closeGroup($scope.group).then(function() {
+                    alertsService.add({
+                        text: 'centerMode_alert_closeGroup',
+                        id: 'closeGroup',
+                        type: 'ok',
+                        time: 5000
+                    });
+                }).catch(function() {
+                    alertsService.add({
+                        text: 'centerMode_alert_closeGroup-Error',
+                        id: 'closeGroup',
+                        type: 'ko'
+                    });
+                });
+                currentModal.close();
             }
 
             function _getGroup(groupId) {

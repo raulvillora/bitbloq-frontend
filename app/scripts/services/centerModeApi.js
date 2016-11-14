@@ -8,6 +8,7 @@ angular
             closeGroup: closeGroup,
             createCenter: createCenter,
             createGroup: createGroup,
+            deleteGroup: deleteGroup,
             deleteTeacher: deleteTeacher,
             getGroup: getGroup,
             getGroups: getGroups,
@@ -27,14 +28,14 @@ angular
             });
         }
 
-        function closeGroup (group) {
+        function closeGroup(group) {
             return $http({
                 method: 'PUT',
                 url: envData.config.centerModeUrl + 'group/' + group._id,
                 data: group
-            }); 
+            });
         }
-        
+
         function createCenter(center) {
             return $http({
                 method: 'POST',
@@ -55,6 +56,13 @@ angular
                     center: centerId,
                     student: []
                 }
+            });
+        }
+
+        function deleteGroup(groupId) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.centerModeUrl + 'group/' + groupId
             });
         }
 

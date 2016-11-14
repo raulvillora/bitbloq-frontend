@@ -11,6 +11,11 @@
     <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_inProgress' | translate}}</span>
     <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
     <div class="header--new-project--button">
+        <button class="btn btn--primary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#remove"></use>
+            </svg>
+        </button>
         <button class="btn btn--primary btn--small btn--new-project" ng-click="closeGroup()" data-element="centerMode-close-group">
             <svg class="svg-icon svg-icon--text">
                 <use xlink:href="#archive"></use>

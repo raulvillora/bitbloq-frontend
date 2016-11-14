@@ -4,16 +4,16 @@
 
 @mixin button($color) {
     background-color: $color;
-    padding         : .8em 1em;
-    border-radius   : .3em;
-    min-width       : 145px;
-    min-height      : 50px;
-    line-height     : 27px;
-    transition      : background-color 250ms;
-    text-decoration : none;
+    padding: .8em 1em;
+    border-radius: .3em;
+    min-width: 145px;
+    min-height: 50px;
+    line-height: 27px;
+    transition: background-color 250ms;
+    text-decoration: none;
 
     &:hover {
-        transition     : background-color 250ms;
+        transition: background-color 250ms;
         text-decoration: none;
     }
 
@@ -23,7 +23,7 @@
 }
 
 .btn--primary {
-    color      : white;
+    color: white;
     font-weight: bold;
     @include button($font-color-heading);
 
@@ -48,7 +48,8 @@
         background-color: #d1d1d1;
     }
 }
-.btn--tertiary{
+
+.btn--tertiary {
     color: black;
     border: 1px solid #cfcfcf;
     font-family: $font-family-base;
@@ -71,22 +72,33 @@
 }
 
 .btn--small {
-    max-height : 35px;
-    min-height : 35px;
+    max-height: 35px;
+    min-height: 35px;
     line-height: 15px;
 }
 
 .btn--medium {
-    min-height:40px;
-    max-height:40px;
+    min-height: 40px;
+    max-height: 40px;
     line-height: 14px;
 }
 
 .btn--new-project {
-    float        : right;
-    margin-right : 30px;
+    float: right;
+    margin-right: 30px;
     padding-right: 40.5px;
-    padding-left : 40.5px;
+    padding-left: 40.5px;
+}
+
+.btn--delete {
+    float: right;
+    padding-left: 0px;
+    min-width: 50px;
+    .svg-icon {
+        position: relative;
+        top: -4px;
+        left: 14px;
+    }
 }
 
 .btn--subscribe-theme {
@@ -94,52 +106,51 @@
     font-weight: bold;
 }
 
-
 .btn--social {
-    width      : 110px;
-    font-size  : .9375em;
+    width: 110px;
+    font-size: .9375em;
     font-weight: bold;
-    padding    : .9em;
-    color      : white;
-    height     : 34px;
+    padding: .9em;
+    color: white;
+    height: 34px;
     line-height: 10px;
-    transition : background-color 120ms linear;
+    transition: background-color 120ms linear;
 }
 
 .btn--dropdown {
-    color        : $font-color-secondary;
-    flex         : 1;
-    text-align   : left;
-    height       : 34px;
-    font-style   : italic;
-    min-width    : 70px;
+    color: $font-color-secondary;
+    flex: 1;
+    text-align: left;
+    height: 34px;
+    font-style: italic;
+    min-width: 70px;
     padding-right: .2em;
-    padding-left : .5em;
-    display      : flex;
-    align-items  : center;
-    white-space  : nowrap;
+    padding-left: .5em;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    overflow     : hidden;
-    position     : relative;
+    overflow: hidden;
+    position: relative;
 
     .dropdown__heading {
-        font-style    : normal;
-        display       : inline-block;
+        font-style: normal;
+        display: inline-block;
         vertical-align: middle;
-        color         : #5d6069;
-        cursor        : pointer;
-        margin-left   : .2em;
-        font-weight   : 400;
-        max-width     : 100%;
-        overflow      : hidden;
-        white-space   : nowrap;
-        text-overflow : ellipsis;
-        padding-right : 10px;
+        color: #5d6069;
+        cursor: pointer;
+        margin-left: .2em;
+        font-weight: 400;
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 10px;
     }
 
-     :first-child {
+    :first-child {
         margin-left: 11px;
-        font-style : normal;
+        font-style: normal;
     }
 }
 
