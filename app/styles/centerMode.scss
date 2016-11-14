@@ -158,16 +158,35 @@
     h1 {
         display: inline-block;
     }
-    .breadcrumb--secondary {
+    .breadcrumb--secondary, .breadcrumb--subtext {
         display: inline-block;
         text-decoration: initial;
         cursor: default;
     }
+
+
     .breadcrumb--secondary::before {
         text-decoration: initial;
         content: '>';
         margin-left: 5px;
         margin-right: 5px;
+    }
+
+    .breadcrumb--subtext {
+        color: #cccccc;
+        font-size: 0.8em;
+        &::before {
+            text-decoration: initial;
+            content: '(ID';
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        &::after {
+            text-decoration: initial;
+            content: ')';
+            margin-left: 5px;
+            margin-right: 5px;
+        }
     }
 }
 

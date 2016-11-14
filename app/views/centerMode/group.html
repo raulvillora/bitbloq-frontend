@@ -1,6 +1,7 @@
 <div class="breadcrumb" data-element="centerMode-header-breadcrumb">
     <h1><a href="#/center-mode/center">{{'centerMode_groups' | translate}}</a></h1>
     <p ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/group/{{group.name}}">{{group.name}}</p>
+    <p ng-if="secondaryBreadcrumb" class="breadcrumb--subtext">{{group.accessId}}</p>
 </div>
 <div>
     <label class="switch">

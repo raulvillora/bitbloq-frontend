@@ -11,7 +11,7 @@
 <div ng-if="exercises.length===0 && groups.length===0">
     <h1>{{'centerMode_groups_empty' | translate}}</h1>
     <p>{{'centerMode_groups_emptyInfo' | translate}}</p>
-    <button data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newGroup()">
+    <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup" >
         <span>{{'centerMode_button_newGroup' | translate}}</span>
     </button>
 </div>

@@ -51,99 +51,6 @@
 
             var currentModal;
 
-            $scope.sortInstances = function(type) {
-                $log.debug('sortInstances', type);
-                $scope.orderInstance = type;
-            };
-
-            $scope.newExercise = function() {
-
-            };
-
-            $scope.newGroup = function() {
-                function confirmAction(name) {
-                    var accessId = Date.now();
-                    centerModeApi.createGroup(name, accessId, $scope.teacher._id, $scope.center._id).then(function() {
-                        modalOptions.title = name;
-                        modalOptions.mainText = 'centerMode_modal_accessIdInfo';
-                        modalOptions.confirmButton = null;
-                        modalOptions.rejectButton = 'close';
-                        modalOptions.modalInput = false;
-                        modalOptions.secondaryText = accessId;
-                        _getGroups();
-                    });
-                }
-
-                var modalOptions = $rootScope.$new();
-
-                _.extend(modalOptions, {
-                    title: 'centerMode_modal_createGroupTitle',
-                    contentTemplate: 'views/modals/input.html',
-                    mainText: 'centerMode_modal_createGroupInfo',
-                    modalInput: true,
-                    secondaryText: false,
-                    input: {
-                        id: 'groupName',
-                        name: 'groupName',
-                        placeholder: 'centerMode_modal_createGroupPlaceholder'
-                    },
-                    confirmButton: 'centerMode_button_createGroup',
-                    rejectButton: 'modal-button-cancel',
-                    confirmAction: confirmAction,
-                    modalButtons: true
-                });
-
-                ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
-
-                });
-            };
-
-            $scope.newTeacher = function() {
-                var confirmAction = function() {
-                        var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
-                        if (teachers.length > 0) {
-                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function() {
-                                _getTeachers($scope.center._id);
-                                alertsService.add({
-                                    text: 'centerMode_alert_addTeacher',
-                                    id: 'addTeacher',
-                                    type: 'ok',
-                                    time: 5000
-                                });
-                            }).catch(function() {
-                                alertsService.add({
-                                    text: 'centerMode_alert_addTeacher-Error',
-                                    id: 'addTeacher',
-                                    type: 'error'
-                                });
-                            });
-                        }
-                        newTeacherModal.close();
-                    },
-                    parent = $rootScope,
-                    modalOptions = parent.$new();
-
-                _.extend(modalOptions, {
-                    title: 'newTeacher_modal_title',
-                    confirmButton: 'newTeacher_modal_aceptButton',
-                    confirmAction: confirmAction,
-                    contentTemplate: '/views/modals/newTeacher.html',
-                    modalButtons: true,
-                    newTeachersModel: []
-                });
-
-                var newTeacherModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
-                });
-            };
-
             $scope.closeGroup = function() {
                 var parent = $rootScope,
                     modalOptions = parent.$new();
@@ -241,6 +148,135 @@
                     className: 'modal--container modal--input',
                     scope: modalOptions,
                     showClose: false
+                });
+            };
+
+            $scope.sortInstances = function(type) {
+                $log.debug('sortInstances', type);
+                $scope.orderInstance = type;
+            };
+
+            $scope.newExercise = function() {
+
+            };
+
+            $scope.newGroup = function() {
+                function confirmAction(name) {
+                    var accessId = Date.now();
+                    centerModeApi.createGroup(name, accessId, $scope.teacher._id, $scope.center._id).then(function() {
+                        modalOptions.title = name;
+                        modalOptions.mainText = 'centerMode_modal_accessIdInfo';
+                        modalOptions.confirmButton = null;
+                        modalOptions.rejectButton = 'close';
+                        modalOptions.modalInput = false;
+                        modalOptions.secondaryText = accessId;
+                        _getGroups();
+                    });
+                }
+
+                var modalOptions = $rootScope.$new();
+
+                _.extend(modalOptions, {
+                    title: 'centerMode_modal_createGroupTitle',
+                    contentTemplate: 'views/modals/input.html',
+                    mainText: 'centerMode_modal_createGroupInfo',
+                    modalInput: true,
+                    secondaryText: false,
+                    input: {
+                        id: 'groupName',
+                        name: 'groupName',
+                        placeholder: 'centerMode_modal_createGroupPlaceholder'
+                    },
+                    confirmButton: 'centerMode_button_createGroup',
+                    rejectButton: 'modal-button-cancel',
+                    confirmAction: confirmAction,
+                    modalButtons: true
+                });
+
+                ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+
+                });
+            };
+
+            $scope.newTeacher = function() {
+                var confirmAction = function() {
+                        var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
+                        if (teachers.length > 0) {
+                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function() {
+                                _getTeachers($scope.center._id);
+                                alertsService.add({
+                                    text: 'centerMode_alert_addTeacher',
+                                    id: 'addTeacher',
+                                    type: 'ok',
+                                    time: 5000
+                                });
+                            }).catch(function() {
+                                alertsService.add({
+                                    text: 'centerMode_alert_addTeacher-Error',
+                                    id: 'addTeacher',
+                                    type: 'error'
+                                });
+                            });
+                        }
+                        newTeacherModal.close();
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new();
+
+                _.extend(modalOptions, {
+                    title: 'newTeacher_modal_title',
+                    confirmButton: 'newTeacher_modal_aceptButton',
+                    confirmAction: confirmAction,
+                    contentTemplate: '/views/modals/newTeacher.html',
+                    modalButtons: true,
+                    newTeachersModel: []
+                });
+
+                var newTeacherModal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+                });
+            };
+
+            $scope.registerInGroup = function(){
+                function confirmAction(groupId) {
+                    centerModeApi.registerInGroup(groupId).then(function() {
+                        //modalOptions.title = name;
+                        _getGroups();
+                    });
+                }
+
+                var modalOptions = $rootScope.$new();
+
+                _.extend(modalOptions, {
+                    title: 'centerMode_modal_registerInGroupTitle',
+                    contentTemplate: 'views/modals/input.html',
+                    mainText: 'centerMode_modal_registerInGroupInfo',
+                    modalInput: true,
+                    secondaryText: false,
+                    input: {
+                        id: 'groupId',
+                        name: 'groupId',
+                        placeholder: 'centerMode_modal_groupIdPlaceholder'
+                    },
+                    confirmButton: 'centerMode_button_registerInGroup',
+                    rejectButton: 'modal-button-cancel',
+                    confirmAction: confirmAction,
+                    modalButtons: true
+                });
+
+                ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+
                 });
             };
 

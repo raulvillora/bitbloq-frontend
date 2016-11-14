@@ -1,14 +1,17 @@
 <div class="table__block table__header table__main">
     <h1 class="forum__breadcrumb">{{'centerMode_groups' | translate}}</h1>
-    <button data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newGroup()">
+    <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
         <span>{{'centerMode_button_newGroup' | translate}}</span>
+    </button>
+    <button ng-if="common.user && common.userRole=='headMaster'" class="btn btn--primary btn--small" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup" >
+        <span>{{'centerMode_button_registerInGroup' | translate}}</span>
     </button>
 </div>
 <div class="table__block--separated table__block">
     <div class="table__block__list row" ng-repeat="group in groups">
         <div class="col-vsmall-10 table__block__item">
             <a ng-href="{{'#/center-mode/group/' + group._id}}">
-                <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode-item-' + teacher.name}}">
+                <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + teacher.name}}">
                     {{group.name}}
                 </h2>
                 <span class="block__item__explanation--subscript">{{group.accessId}}</span>

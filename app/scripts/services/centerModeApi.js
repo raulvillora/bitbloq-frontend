@@ -16,7 +16,8 @@ angular
             getMyRole: getMyRole,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
-            isHeadMaster: isHeadMaster
+            isHeadMaster: isHeadMaster,
+            registerInGroup: registerInGroup
         };
 
 
@@ -126,6 +127,13 @@ angular
             return $http({
                 method: 'HEAD',
                 url: envData.config.centerModeUrl + 'user/headMaster'
+            });
+        }
+
+        function registerInGroup(groupId){
+            return $http({
+                method: 'HEAD',
+                url: envData.config.centerModeUrl + 'group/' + groupId +'/register'
             });
         }
 
