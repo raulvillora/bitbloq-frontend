@@ -6,6 +6,7 @@
         height: 100%;
     }
 }
+
 .tabs-layout__aside {
     max-width: 1200px;
     margin: 0 auto;
@@ -45,7 +46,6 @@
         }
         &.selected--tab {
             background-color: #eee;
-            border: 0;
             color: #373b44;
             &:hover {
                 color: #373b44;
@@ -59,6 +59,7 @@
         }
     }
 }
+
 .tabs-layout__content {
     height: calc(100% - #{$tabsLayout-asideHeight});
     background-color: #eee;
