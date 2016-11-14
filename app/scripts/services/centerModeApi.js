@@ -5,6 +5,7 @@ angular
 
         var centerModeApi = {
             addTeachers: addTeachers,
+            closeGroup: closeGroup,
             createCenter: createCenter,
             createGroup: createGroup,
             deleteTeacher: deleteTeacher,
@@ -26,6 +27,14 @@ angular
             });
         }
 
+        function closeGroup (group) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'group/' + group._id,
+                data: group
+            }); 
+        }
+        
         function createCenter(center) {
             return $http({
                 method: 'POST',

@@ -113,14 +113,13 @@
                                     type: 'ok',
                                     time: 5000
                                 });
-                            })
-                                .catch(function() {
-                                    alertsService.add({
-                                        text: 'centerMode_alert_addTeacher-Error',
-                                        id: 'addTeacher',
-                                        type: 'error'
-                                    });
+                            }).catch(function() {
+                                alertsService.add({
+                                    text: 'centerMode_alert_addTeacher-Error',
+                                    id: 'addTeacher',
+                                    type: 'error'
                                 });
+                            });
                         }
                         newTeacherModal.close();
                     },
@@ -144,6 +143,47 @@
                 });
             };
 
+            $scope.closeGroup = function() {
+                var confirmAction = function() {
+                        $scope.classStateCheck = false;
+                        $scope.group.status = 'closed';
+                        centerModeApi.closeGroup($scope.group).then(function(response) {
+                            alertsService.add({
+                                text: 'centerMode_alert_closeGroup',
+                                id: 'closeGroup',
+                                type: 'ok',
+                                time: 5000
+                            });
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_closeGroup-Error',
+                                id: 'closeGroup',
+                                type: 'ko'
+                            });
+                        });
+                        finishAction.close();
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new();
+                _.extend(modalOptions, {
+                    title: 'closeGroup_modal_title',
+                    confirmButton: 'closeGroup_modal_acceptButton',
+                    confirmAction: confirmAction,
+                    rejectButton: 'modal-button-cancel',
+                    textContent: 'closeGroup_modal_info',
+                    contentTemplate: '/views/modals/information.html',
+                    modalButtons: true,
+                    newTeachersModel: []
+                });
+
+                var finishAction = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions,
+                    showClose: false
+                });
+            };
+
             $scope.deleteTeacher = function(teacher) {
                 var confirmAction = function() {
                         centerModeApi.deleteTeacher(teacher._id, $scope.center._id).then(function() {
@@ -154,14 +194,13 @@
                                 type: 'ok',
                                 time: 5000
                             });
-                        })
-                            .catch(function() {
-                                alertsService.add({
-                                    text: 'centerMode_alert_deleteTeacher-Error',
-                                    id: 'deleteTeacher',
-                                    type: 'error'
-                                });
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_deleteTeacher-Error',
+                                id: 'deleteTeacher',
+                                type: 'error'
                             });
+                        });
                         newTeacherModal.close();
                     },
                     parent = $rootScope,
@@ -205,6 +244,7 @@
                 centerModeApi.getGroup(groupId).then(function(response) {
                     $scope.secondaryBreadcrumb = true;
                     $scope.group = response.data;
+                    $scope.classStateCheck = $scope.group.status === 'open' ? true : false;
                 });
             }
 

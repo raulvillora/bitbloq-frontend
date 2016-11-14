@@ -19,7 +19,8 @@
             <svg class="svg-icon--search">
                 <use xlink:href="#lupa"></use>
             </svg>
-            <input type="search" name="search--normal" id="search--normal" ng-model="searchText" placeholder="{{'find'|translate}}" data-element="projects-shared-find" data-ng-focus="focus = 'sharedprojectssearch'" data-ng-blur="focus = false">
+            <input type="search" name="search--normal" id="search--normal" ng-model="searchText" placeholder="{{'find'|translate}}" data-element="projects-shared-find" data-ng-focus="focus = 'sharedprojectssearch'"
+                   data-ng-blur="focus = false">
         </span>
     </div>
 </div>
@@ -33,7 +34,8 @@
 
         <p>
     </div>
-    <li data-ng-repeat="project in sharedProjects | filter:{name: searchText} | filter:userProjectsFilterFunction(userProjectsFilter) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}">
+    <li data-ng-repeat="project in sharedProjects | filter:{name: searchText} | filter:userProjectsFilterFunction(userProjectsFilter) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id"
+        ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">

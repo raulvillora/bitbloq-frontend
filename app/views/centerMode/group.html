@@ -4,13 +4,14 @@
 </div>
 <div>
     <label class="switch">
-        <input type="checkbox" ng-init="openClass===true" ng-model="openClass" checked>
+        <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'" ng-disabled="group.status==='closed'" checked>
         <div class="slider round"></div>
     </label>
-    <span ng-if="openClass">Clase abierta</span>
-    <span ng-if="!openClass">Clase cerrada</span>
+    <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
+    <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_inProgress' | translate}}</span>
+    <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
     <div class="header--new-project--button">
-        <button class="btn btn--primary btn--small btn--new-project" data-element="centerMode-close-group">
+        <button class="btn btn--primary btn--small btn--new-project" ng-click="closeGroup()" data-element="centerMode-close-group">
             <svg class="svg-icon svg-icon--text">
                 <use xlink:href="#archive"></use>
             </svg>
