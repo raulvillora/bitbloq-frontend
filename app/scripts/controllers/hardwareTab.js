@@ -724,7 +724,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {
             var index;
-            if (newVal && (newVal !== "false")) {
+            if (newVal && (newVal !== 'false')) {
                 index = projectService.componentsArray.servos.indexOf($scope.componentSelected);
                 if (index > -1) {
                     projectService.componentsArray.servos.splice(index, 1);
