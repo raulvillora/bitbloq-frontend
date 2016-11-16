@@ -103,7 +103,7 @@
         }
 
         .menu--user {
-            width: 350px;
+            width: 400px;
         }
         .menu--user__header {
             display: flex;
@@ -226,6 +226,9 @@
 
         .menu--user__center-mode {
             float: left;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
     }
 }

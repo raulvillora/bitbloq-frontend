@@ -4,6 +4,7 @@
     background-position: center center fixed;
     background-image: url($url);
 }
+
 @mixin absoluteCenter($maxWidth) {
     display: block;
     max-width: $maxWidth;
@@ -14,20 +15,25 @@
     bottom: 0;
     margin: auto;
 }
+
 textarea:disabled {
-    background-color: #ebebeb!important;
+    background-color: #ebebeb !important;
 }
+
 .opaque {
     opacity: 1 !important;
 }
+
 .ta-hidden-input {
     display: none !important;
 }
+
 .section-with-header-and-subheader {
     height: calc(#{$viewportHeight} - #{$sectionHeaderHeight});
     overflow: hidden;
     overflow-y: auto;
 }
+
 .section-header {
     height: 70px;
     background-color: white;
@@ -59,6 +65,7 @@ textarea:disabled {
         cursor: default;
     }
 }
+
 @-moz-keyframes spin {
     from {
         -moz-transform: rotate(0deg);
@@ -67,6 +74,7 @@ textarea:disabled {
         -moz-transform: rotate(360deg);
     }
 }
+
 @-webkit-keyframes spin {
     from {
         -webkit-transform: rotate(0deg);
@@ -75,6 +83,7 @@ textarea:disabled {
         -webkit-transform: rotate(360deg);
     }
 }
+
 @-webkit-keyframes spin {
     from {
         transform: rotate(0deg);
@@ -83,11 +92,13 @@ textarea:disabled {
         transform: rotate(360deg);
     }
 }
+
 #loading-bar .bar {
     background: none;
     background-color: #82ad3a;
     height: 5px;
 }
+
 .common--textarea {
     max-height: none !important;
     textarea {
@@ -97,6 +108,7 @@ textarea:disabled {
         min-height: 124px;
     }
 }
+
 .nopadding {
     padding: 0;
     margin-right: 1em;
@@ -110,11 +122,13 @@ textarea:disabled {
         }
     }
 }
+
 .social-share-icon.facebook {
     .svg-icon {
         fill: #3b5998;
     }
 }
+
 .social-share-icon.twitter {
     .svg-icon {
         fill: #55acee;
@@ -122,16 +136,19 @@ textarea:disabled {
         height: 1.2em;
     }
 }
+
 .social-share-icon.pinterest {
     .svg-icon {
         fill: #bd081c;
     }
 }
+
 .social-share-icon.googleplus {
     .svg-icon {
         fill: #cc3732;
     }
 }
+
 .social-share-icon {
     border: 1px solid #ebebeb;
     height: 30px;
@@ -180,6 +197,7 @@ textarea:disabled {
         }
     }
 }
+
 .social--count {
     border: 1px solid #ebebeb;
     height: 30px;
@@ -209,12 +227,15 @@ textarea:disabled {
         border-radius: 100%;
     }
 }
+
 .main {
     position: relative;
 }
+
 .margin-right {
     margin-right: 0.5em;
 }
+
 .project--item--container {
     background-color: transparent !important;
     display: flex;
@@ -223,14 +244,17 @@ textarea:disabled {
         background-color: transparent !important;
     }
 }
+
 .flexmax {
     flex: 1 100%;
 }
+
 .svg-icon__modal--close--no-title {
     width: 13px;
     height: 13px;
     fill: #999ca1;
 }
+
 .grid-list {
     button {
         display: block;
@@ -265,10 +289,12 @@ textarea:disabled {
         }
     }
 }
+
 .handcursor {
     cursor: pointer;
     cursor: hand;
 }
+
 .loading--content {
     z-index: 9;
     &:before {
@@ -302,6 +328,7 @@ textarea:disabled {
         z-index: 10;
     }
 }
+
 .spin {
     -webkit-animation-name: spin;
     -webkit-animation-duration: 1s;
@@ -310,13 +337,14 @@ textarea:disabled {
     object-fit: contain !important;
     width: 32px !important;
     height: 32px !important;
-    position: absolute!important;
+    position: absolute !important;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
 }
+
 @-moz-keyframes spin {
     from {
         -moz-transform: rotate(0deg);
@@ -325,6 +353,7 @@ textarea:disabled {
         -moz-transform: rotate(360deg);
     }
 }
+
 @-webkit-keyframes spin {
     from {
         -webkit-transform: rotate(0deg);
@@ -333,6 +362,7 @@ textarea:disabled {
         -webkit-transform: rotate(360deg);
     }
 }
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -341,21 +371,26 @@ textarea:disabled {
         transform: rotate(360deg);
     }
 }
+
 .visible {
     display: block !important;
 }
+
 .h1 {
     font-size: $font-size-h1;
     color: $font-color-heading;
 }
+
 .h2 {
     font-size: $font-size-h2;
     color: $font-color-heading;
 }
+
 .h3 {
     font-size: $font-size-h3;
     color: $font-color-heading;
 }
+
 .clearfix:after {
     visibility: hidden;
     display: block;
@@ -364,6 +399,40 @@ textarea:disabled {
     clear: both;
     height: 0;
 }
+
 #plotter .plotter__content {
     background-color: #3B3E45;
+}
+
+.notification-info {
+    .notification-alert {
+        display: block;
+        background-color: #eac915;
+        float: left;
+        width: 51px;
+        height: 25px;
+        margin: 10px 17px 0 0;
+        text-align: center;
+        font-weight: bold;
+        line-height: 2.27;
+        text-transform: uppercase;
+        color: #373b44;
+        font-size: 0.8em;
+    }
+
+    .notification__content {
+        float: right;
+    }
+
+    .notification__title {
+        color: white;
+        font-weight: bold;
+    }
+
+    .notification__link {
+        color: #73767c;
+        &:hover {
+            color: white;
+        }
+    }
 }
