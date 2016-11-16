@@ -485,8 +485,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension() ||
-                (projectService.project.hardware.robot === 'mBot')) {
+            if ($scope.common.useChromeExtension()) {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -505,37 +504,50 @@ angular.module('bitbloqApp')
             var viewer;
             viewer = code ? true : false;
             if (projectService.project.hardware.board) {
-                if ($scope.common.useChromeExtension() ||
-                    ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
-
-                    if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
-                        web2boardOnline.compileAndUpload({
-                            board: projectService.getBoardMetaData(),
-                            code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
-                            viewer: viewer
+                if (projectService.project.hardware.robot === 'mBot') {
+                    if ($scope.common.os === 'ChromeOS') {
+                        alertsService.add({
+                            text: 'mbot-not-compatible-chromebook',
+                            id: 'mbotChromebooks',
+                            type: 'error',
+                            time: 'infinite'
                         });
                     } else {
-                        web2boardOnline.compileAndUpload({
-                            board: projectService.getBoardMetaData(),
-                            code: $scope.getPrettyCode(code),
-                            viewer: viewer
-                        });
-                    }
-
-                } else {
-                    if (projectService.project.hardware.robot === 'mBot') {
-                        commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation', function(err) {
-                            if (!err) {
-                                $scope.upload();
-                            }
-                        });
-
-                    } else {
-                        if (web2board.isWeb2boardV2()) {
-                            uploadW2b2();
+                        if ($scope.common.user && $scope.common.user.chromeapp) {
+                            alertsService.add({
+                                text: 'mbot-not-compatible-chromeextension',
+                                id: 'mbotChromebooks',
+                                type: 'error',
+                                time: 'infinite',
+                                linkText: 'click-here-load-with-web2board',
+                                link: function() {
+                                    alertsService.closeByTag('mbotChromebooks');
+                                    uploadWithWeb2board();
+                                }
+                            });
                         } else {
-                            uploadW2b1();
+                            uploadWithWeb2board();
                         }
+                    }
+                } else {
+                    if ($scope.common.useChromeExtension()) {
+
+                        if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                            web2boardOnline.compileAndUpload({
+                                board: projectService.getBoardMetaData(),
+                                code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                                viewer: viewer
+                            });
+                        } else {
+                            web2boardOnline.compileAndUpload({
+                                board: projectService.getBoardMetaData(),
+                                code: $scope.getPrettyCode(code),
+                                viewer: viewer
+                            });
+                        }
+
+                    } else {
+                        uploadWithWeb2board();
                     }
                 }
             } else {
@@ -549,6 +561,14 @@ angular.module('bitbloqApp')
             }
 
         };
+
+        function uploadWithWeb2board() {
+            if (web2board.isWeb2boardV2()) {
+                uploadW2b2();
+            } else {
+                uploadW2b1();
+            }
+        }
 
         $scope.serialMonitor = function() {
             if (projectService.project.hardware.board) {
