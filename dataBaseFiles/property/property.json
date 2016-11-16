@@ -1,6 +1,6 @@
 [{
     "web2boardVersion": "1.0.0",
-    "bitbloqLibsVersion": "0.1.2",
+    "bitbloqLibsVersion": "1.0.0",
     "robotsFirmwareVersion": {
         "zowi": "1.0.0"
     },
