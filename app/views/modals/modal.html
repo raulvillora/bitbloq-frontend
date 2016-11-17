@@ -1,10 +1,10 @@
 <section class="modal">
     <div class="modal__dialog">
-        <div class="modal__dialog__content {{customClass}}">
+        <div class="modal__dialog__content" ng-class="{'{{customClass}}':true}">
             <div ng-if="title" class="modal__header">
                 <h1 class="modal--title" data-element="modal-title">{{title | translate}}</h1>
 
-                <div class="modal--close">
+                <div class="modal--close" ng-if="showClose">
                     <button ng-click="closeThisDialog(); rejectAction()" class="btn btn__modal--close" data-element="modal-blade-close">
                         <svg class="svg-icon svg-icon__modal--close">
                             <use xlink:href="#cierre"></use>
@@ -15,7 +15,8 @@
             <div ng-if="contentTemplate" ng-include="contentTemplate" class="modal__body"></div>
             <div ng-if="modalButtons" class="modal__footer">
                 <div class="modal--buttons" ng-if="!footerText">
-                    <button ng-if="confirmButton" form="inputForm" type="submit" ng-click="confirmAction(input.value) && closeThisDialog()" ng-disabled="condition && !condition()" ng-class="{'btn--disabled':condition && !condition()}" class="btn btn--primary btn__modal--footer btn--confirm" data-element="modal-ok-dialog">{{confirmButton | translate}}</button>
+                    <button ng-if="confirmButton" type="submit" ng-click="confirmAction(input.value) && closeThisDialog()" ng-disabled="condition && !condition()" ng-class="{'btn--disabled':condition && !condition()}" class="btn btn--primary btn__modal--footer btn--confirm" data-element="modal-ok-dialog">{{confirmButton | translate}}</button>
+                    <button ng-if="extraButton" type="submit" ng-click="extraAction(input.value) && closeThisDialog()" ng-disabled="condition && !condition()" ng-class="{'btn--disabled':condition && !condition()}" class="btn btn--primary btn__modal--footer btn--confirm" data-element="modal-ok-dialog">{{extraButton | translate}}</button>
                     <button ng-if="rejectButton" type="button" ng-click="rejectAction(); closeThisDialog()" class="btn btn--secondary btn__modal--footer btn--reject" data-element="modal-cancel-dialog">{{rejectButton | translate}}</button>
                 </div>
                 <div class="modal__footer--text" ng-if="footerText">

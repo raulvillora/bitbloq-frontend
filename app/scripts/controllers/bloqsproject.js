@@ -486,7 +486,8 @@ angular.module('bitbloqApp')
 
         $scope.verify = function() {
             if ($scope.common.useChromeExtension() ||
-                (projectService.project.hardware.robot === 'mBot')) {
+                (projectService.project.hardware.robot === 'mBot'))
+            {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
                     code: $scope.getPrettyCode()
@@ -506,7 +507,8 @@ angular.module('bitbloqApp')
             viewer = code ? true : false;
             if (projectService.project.hardware.board) {
                 if ($scope.common.useChromeExtension() ||
-                    ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user)) {
+                    ((projectService.project.hardware.robot === 'mBot') && !$scope.common.user))
+                {
 
                     if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                         web2boardOnline.compileAndUpload({
@@ -748,11 +750,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             saveStep(step, $scope.bloqsHistory);
         };
 
@@ -922,7 +924,9 @@ angular.module('bitbloqApp')
             var modalTour = $rootScope.$new(),
                 modalTourInit;
             _.extend(modalTour, {
+                title: 'modal-tour-text-first',
                 contentTemplate: '/views/modals/infoTour.html',
+                customClass: 'modal--information',
                 confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });
@@ -986,7 +990,8 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
 
                 event.preventDefault();
             }

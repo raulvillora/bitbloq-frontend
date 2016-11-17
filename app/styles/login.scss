@@ -282,7 +282,6 @@ input:-webkit-autofill {
 
     input {
         background: none;
-        border: none;
         width: 1.2em !important;
         height: 1.2em !important;
         -webkit-appearance: none;
@@ -290,16 +289,16 @@ input:-webkit-autofill {
         border-radius: .3em;
         border: 2px solid $font-color-disabled;
 
-        &:hover {
+        &:hover, &:focus {
             transition: background-color 250ms;
             border: 2px solid $font-color-base;
         }
 
         &:checked {
-            border: 1px solid $font-color-base;
             border: none;
-            background-color: $font-color-base;
-            background-image: url('../images/icons/verificarmini.svg');
+            filter: invert(100%);
+            background-color: #A29F96;
+            background-image: url('../images/icons/verificar.svg');
             background-size: 70%;
             background-repeat: no-repeat;
             background-position: center center;
@@ -307,11 +306,6 @@ input:-webkit-autofill {
 
         &:disabled {
             background-color: $font-color-disabled;
-        }
-
-        &:focus {
-            transition: background-color 250ms;
-            border: 2px solid $font-color-base;
         }
     }
 

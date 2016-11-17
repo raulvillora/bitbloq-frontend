@@ -969,25 +969,6 @@ $leftBarWidth: 70px;
     }
 }
 
-.tour--container {
-    text-align: center;
-    display: block;
-    & > *:not(:first-child) {
-        padding: 1em;
-        display: block;
-        margin: 0 auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    button {
-        padding-left: 3em !important;
-        padding-right: 3em !important;
-    }
-    a {
-        color: #5d6069;
-    }
-}
-
 .error--text {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
