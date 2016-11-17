@@ -193,10 +193,10 @@
             "name": "setVariable",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "arrayVariable",
+            "name": "declareArray",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "declareArray",
+            "name": "arrayVariable",
             "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "setArrayVariable",
