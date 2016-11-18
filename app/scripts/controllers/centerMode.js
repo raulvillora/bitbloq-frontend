@@ -140,6 +140,7 @@
                     confirmAction: confirmAction,
                     contentTemplate: '/views/modals/information.html',
                     textContent: 'deleteTeacher_modal_information',
+                    secondaryContent: 'deleteTeacher_modal_information-explain',
                     modalButtons: true
                 });
 
