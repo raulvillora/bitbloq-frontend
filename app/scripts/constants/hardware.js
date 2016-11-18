@@ -808,7 +808,7 @@ angular.module('bitbloqApp')
                 "type": "US",
                 "width": 120,
                 "height": 79,
-                "dataReturnType": "String",
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "trigger",
