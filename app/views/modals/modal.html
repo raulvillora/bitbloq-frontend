@@ -3,14 +3,6 @@
         <div class="modal__dialog__content" ng-class="{'{{customClass}}':true}">
             <div ng-if="title" class="modal__header">
                 <h1 class="modal--title" data-element="modal-title">{{title | translate}}</h1>
-
-                <div class="modal--close" ng-if="showClose">
-                    <button ng-click="closeThisDialog(); rejectAction()" class="btn btn__modal--close" data-element="modal-blade-close">
-                        <svg class="svg-icon svg-icon__modal--close">
-                            <use xlink:href="#cierre"></use>
-                        </svg>
-                    </button>
-                </div>
             </div>
             <div ng-if="contentTemplate" ng-include="contentTemplate" class="modal__body"></div>
             <div ng-if="modalButtons" class="modal__footer">

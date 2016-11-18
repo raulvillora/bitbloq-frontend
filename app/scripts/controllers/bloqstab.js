@@ -105,8 +105,7 @@ angular.module('bitbloqApp')
                 ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container code-modal modal--alert',
-                    scope: modalCode,
-                    showClose: false
+                    scope: modalCode
                 });
             } else {
                 if (projectService.project._id) {

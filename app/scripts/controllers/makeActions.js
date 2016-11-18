@@ -130,8 +130,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--open-project',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         };
 

@@ -397,31 +397,6 @@ angular.module('bitbloqApp')
                         default:
 
                     }
-
-                    //     //{error: "no_such_principal", errorDescription: "Unknown basic user credentials."}
-                    //     if ($scope.user.username) {
-                    //         userApi.validateUserName($scope.user.username.toLowerCase()).success(function () {
-                    //             $scope.errors.login.password = true;
-                    //             $scope.errors.login.emailUserName = false;
-                    //         }).error(function () {
-                    //             $scope.errors.login.emailUserName = true;
-                    //             $scope.errors.login.password = false;
-                    //         });
-                    //     } else {
-                    //         userApi.getUserId($scope.user.email).success(function () {
-                    //             $scope.errors.login.password = true;
-                    //             $scope.errors.login.emailUserName = false;
-                    //         }).error(function () {
-                    //             $scope.errors.login.emailUserName = true;
-                    //             $scope.errors.login.password = false;
-                    //         });
-                    //     }
-                    //     $scope.errors.disconnect = false;
-                    // } else {
-                    //     $scope.errors.login.emailUserName = false;
-                    //     $scope.errors.login.password = false;
-                    //     $scope.errors.disconnect = true;
-
                 }
             });
         }

@@ -239,8 +239,7 @@
                 var newTeacherModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
+                    scope: modalOptions
                 });
             };
 

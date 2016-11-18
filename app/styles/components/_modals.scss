@@ -1,4 +1,10 @@
 // Modals
+.ngdialog-close:before {
+    color: #c0c3c9;
+    position: relative;
+    right: 4px;
+}
+
 .modal--container {
     text-align: center;
 
@@ -152,7 +158,6 @@
                 }
 
                 .btn--primary {
-                    margin-right: 10px;
                     margin: auto;
                 }
 
@@ -427,7 +432,8 @@
 
         h1 {
             padding-left: 30px;
-            width: calc(100% - 65px);
+            width: calc(100% - 60px);
+            border-right: 1px solid #e2e2e2;
         }
 
         .modal--close {
@@ -591,6 +597,9 @@
         padding-top: 30px;
         border-bottom: none;
         padding-left: 0;
+        h1 {
+            border-right: 0;
+        }
     }
     .modal--title {
         font-size: 20px;

@@ -61,8 +61,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--send-comments',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
             $('textarea.msd-elastic').autogrow({
                 onInitialize: true
@@ -112,8 +111,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--send-comments',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
             $('textarea.msd-elastic').autogrow({
                 onInitialize: true
@@ -175,8 +173,7 @@ angular.module('bitbloqApp')
             languageModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
@@ -223,8 +220,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--feedback-error',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
 
             $('textarea.msd-elastic').autogrow({
@@ -267,8 +263,7 @@ angular.module('bitbloqApp')
             publishModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--publish',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         };
 
@@ -303,8 +298,7 @@ angular.module('bitbloqApp')
             privateModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--publish',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
 
         };
@@ -359,8 +353,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--share-with-users',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         };
 
@@ -461,8 +454,7 @@ angular.module('bitbloqApp')
             shareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
@@ -522,8 +514,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
 
             });
 
@@ -563,8 +554,7 @@ angular.module('bitbloqApp')
             renameModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
             return defered.promise;
         };
@@ -705,8 +695,7 @@ angular.module('bitbloqApp')
             noShareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--share-no-users',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         }
 
@@ -741,8 +730,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--alert',
-                scope: modalNeedWeb2boardOnline,
-                showClose: false
+                scope: modalNeedWeb2boardOnline
             });
         };
 

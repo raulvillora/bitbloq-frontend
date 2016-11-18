@@ -220,8 +220,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container password-reset--modal',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
 
             $('textarea.msd-elastic').autogrow({

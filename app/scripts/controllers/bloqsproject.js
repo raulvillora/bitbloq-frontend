@@ -651,8 +651,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--share-with-users',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
