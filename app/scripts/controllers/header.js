@@ -91,7 +91,7 @@ angular.module('bitbloqApp')
 
             _.extend(modalOptions, {
                 title: 'centerMode_modal_createCenterTitle',
-                contentTemplate: 'views/modals/createCenter.html',
+                contentTemplate: 'views/modals/activateCenterMode.html',
                 customClass: 'modal--information',
                 mainText: 'centerMode_modal_createCenter-introText',
                 confirmButton: 'centerMode_button_createCenter-student',

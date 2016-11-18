@@ -594,6 +594,7 @@
     }
     .modal--title {
         font-size: 20px;
+        padding-left: 30px;
     }
     .modal_alert > *:not(.btn) {
         margin: 20px auto;
@@ -623,6 +624,23 @@
             margin-right: 11.5px;
         }
     }
+
+    .input-list {
+        .row {
+            margin-top: 10px;
+        }
+        label {
+            text-align: right;
+        }
+        & input {
+            width: 338px;
+            height: 35px;
+            border-radius: 4px;
+            background-color: #ffffff;
+            border: solid 1px #cfcfcf;
+        }
+    }
+
     .modal--buttons {
         padding: 0 30px 50px;
     }
@@ -630,4 +648,5 @@
     .modal__body {
         padding: 25px 49px;
     }
+
 }

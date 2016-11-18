@@ -1,0 +1,28 @@
+<div class="modal_alert">
+    <p>{{mainText | translate}}</p>
+    <p ng-if="textContent">{{textContent | translate}}</p>
+    <div ng-if="type==='information'">
+        <h1>{{'centerMode_modal_createCenter-content' | translate}}</h1>
+        <ul class="objective-list">
+            <li>{{'centerMode_modal_createCenter-item1' | translate}}</li>
+            <li>{{'centerMode_modal_createCenter-item2' | translate}}</li>
+            <li>{{'centerMode_modal_createCenter-item3' | translate}}</li>
+            <li>{{'centerMode_modal_createCenter-item4' | translate}}</li>
+            <li>{{'centerMode_modal_createCenter-item5' | translate}}</li>
+        </ul>
+    </div>
+    <div ng-if="type==='form'" class="input-list row">
+        <div class="row">
+            <label for="centerName" class="col-vsmall-4">{{'centerMode_modal_createCenter-centerName' | translate }}</label>
+            <input type="text" class="col-vsmall-8" id="centerName" name="centerName" data-ng-model="center.name" autofocus>
+        </div>
+        <div class="row">
+            <label for="centerLocation" class="col-vsmall-4">{{'centerMode_modal_createCenter-location' | translate }}</label>
+            <input type="text" class="col-vsmall-8" id="centerLocation" name="centerLocation" data-ng-model="center.location" autofocus>
+        </div>
+        <div class="row">
+            <label for="centerTelephone" class="col-vsmall-4">{{'centerMode_modal_createCenter-telephone' | translate }}</label>
+            <input type="number" class="col-vsmall-8" id="centerTelephone" name="centerTelephone" data-ng-model="center.telephone" autofocus>
+        </div>
+    </div>
+</div>
