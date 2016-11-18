@@ -614,14 +614,18 @@
         li {
             vertical-align: middle;
             margin: 10px 0;
-            text-indent: -2.5em;
-            padding-left: 2.5em;
+            text-indent: -1.8em;
+            padding-left: 1.8em;
         }
         li::before {
-            content: url(../images/common/verificarminiGreen.svg);
-            width: 13px;
-            height: 10px;
+            content: '';
             margin-right: 11.5px;
+            background-image: url(../images/common/verificarminiGreen.svg);
+            background-size: 13px 10px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 12px;
+            height: 10px;
         }
     }
 
