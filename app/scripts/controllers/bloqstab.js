@@ -243,7 +243,8 @@ angular.module('bitbloqApp')
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = $scope.showCommunications(item);
-
+                    } else if (item.indexOf('phone') > -1) {
+                        result = existComponent(['phone'], connectedComponents);
                     } else if (item.includes('rgb')) {
                         result = existComponent(['RGBled'], connectedComponents);
                     } else if (item.includes('oscillator')) {
@@ -284,6 +285,9 @@ angular.module('bitbloqApp')
             return result;
         };
 
+        $scope.showPhones = function(item) {
+
+        };
         $scope.showCommunications = function(item) {
             var stopWord = ['convert'];
             if (projectService.componentsArray.serialElements) {
@@ -327,6 +331,8 @@ angular.module('bitbloqApp')
                 $rootScope.$emit('currenttab:bloqstab');
             }
         };
+        console.log('common');
+        console.log(common);
 
         $scope.performFactoryReset = function() {
             var robot = projectService.project.hardware.robot,

@@ -1047,6 +1047,18 @@ angular.module('bitbloqApp')
                         "s"
                     ]
                 }
+            }],
+            "phoneElements": [{
+                "id": "device",
+                "baudRate": "9600",
+                "width": 115,
+                "height": 88,
+                "pins": {
+                    "digital": [
+                        "rx",
+                        "tx"
+                    ]
+                }
             }]
         },
         "robots": [{
