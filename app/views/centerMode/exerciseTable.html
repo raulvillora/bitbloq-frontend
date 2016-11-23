@@ -1,5 +1,10 @@
 <div ng-if="exercises.length>0">
-    <h1 class="table__title">{{'centerMode_exercises' | translate}}</h1>
+    <h1 class="table__title">
+        <svg class="svg-icon svg-icon--text">
+            <use xlink:href="#exercises"></use>
+        </svg>
+        {{'centerMode_exercises' | translate}}
+    </h1>
     <div>
         <div class="centerMode__table-title row">
             <span class="col-vsmall-7">{{'centerMode_column_name' | translate}}</span>

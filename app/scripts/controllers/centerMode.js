@@ -320,7 +320,7 @@
                 centerModeApi.getGroup(groupId).then(function(response) {
                     $scope.secondaryBreadcrumb = true;
                     $scope.group = response.data;
-                    $scope.classStateCheck = $scope.group.status === 'open' ? true : false;
+                    $scope.classStateCheck = $scope.group.status === 'open';
                 });
             }
 
