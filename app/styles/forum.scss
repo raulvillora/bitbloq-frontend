@@ -363,6 +363,7 @@
         }
     }
 }
+
 .forum__answer__not-logged {
     h2 {
         color: #373b44;
@@ -374,64 +375,19 @@
         margin-right: 10px;
     }
 }
-.forum__breadcrumb {
-    width: 50%;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 700;
-    &.in-category {
-        h2 {
-            &:after {
-                content: '>';
-                margin-left: 5px;
-            }
-            a {
-                color: #373b44;
-            }
-        }
-    }
-    &.in-theme {
-        h2 {
-            &:after {
-                content: '>';
-                margin-left: 5px;
-            }
-        }
-        a {
-            color: #373b44;
-            text-decoration: none;
-            &:hover {
-                color: #82ad3a;
-            }
-        }
-    }
-    h2 {
-        color: #8c919b;
-        font-size: 16px;
-        font-weight: 700;
-        display: inline-block;
-        a {
-            color: #8c919b;
-            text-decoration: none;
-            &:hover {
-                color: #82ad3a;
-            }
-        }
-    }
-    span {
-        color: #8c919b;
-    }
-}
+
 .forum__table-title {
     height: 20px;
     margin-bottom: 10px;
     color: #8c919b;
     cursor: default;
 }
+
 .block__username__link {
     color: #82ad3a;
     text-decoration: none;
 }
+
 .pagination__list {
     margin: 0 auto;
     display: table;

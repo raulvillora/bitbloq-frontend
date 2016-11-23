@@ -1,5 +1,5 @@
-<div class="centerMode">
-    <div class="table__header" ng-if="(urlType==='center' && teachers.length>0) || (urlType==='center-teacher')" ng-include="'views/centerMode/centerHeader.html'"></div>
+<div class="table__header" ng-if="(urlType==='center' && teachers.length>0) || (urlType==='center-teacher')" ng-include="'views/centerMode/centerHeader.html'"></div>
+<div class="table__page">
     <div class="table__main" ng-if="urlType==='center'" ng-include="'views/centerMode/teacherTable.html'"></div>
     <div class="table__main" ng-if="urlType==='center-teacher'" ng-include="'views/centerMode/teacher.html'"></div>
 </div>

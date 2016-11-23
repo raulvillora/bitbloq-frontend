@@ -1,5 +1,3 @@
-<div class="forum">
-    <div class="table__main" ng-if="urlType.indexOf(center)" ng-include="'views/centerMode/center.html'"></div>
-    <div class="table__main" ng-if="urlType==='teacher'" ng-include="'views/centerMode/teacher.html'"></div>
-    <div class="table__main" ng-if="urlType==='group'" ng-include="'views/centerMode/group.html'"></div>
-</div>
+<div class="centerMode" ng-if="urlType.indexOf(center)" ng-include="'views/centerMode/center.html'"></div>
+<div class="centerMode" ng-if="urlType==='teacher'" ng-include="'views/centerMode/teacher.html'"></div>
+<div class="centerMode" ng-if="urlType==='group'" ng-include="'views/centerMode/group.html'"></div>

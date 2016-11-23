@@ -1,0 +1,133 @@
+.table__page {
+    background-color: #eeeeee;
+}
+
+.table__header {
+    background-color: white;
+    position: relative;
+    height: 93px;
+}
+
+.table__block {
+    border-top: 2px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+}
+
+.table__block__list {
+    padding: 10px;
+    background-color: #eeeeee;
+    &:nth-child(2n) {
+        background-color: white;
+    }
+    &:hover {
+        background-color: #e2e2e2;
+        .table__block__button--delete {
+            display: block;
+        }
+    }
+}
+
+.table__block__list, .centerMode__table-title {
+    &.row {
+        margin: 0;
+    }
+}
+
+.table__title {
+    padding: 0 10px 30px 0;
+    font-size: 16px;
+    color: #373b44;
+}
+
+.centerMode__table-title span:first-child {
+    padding-left: 0;
+}
+
+.table__block__item {
+    margin: 0;
+    padding: 0;
+    a {
+        color: #373b44;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 120ms;
+        &:hover {
+            &, & > * {
+                color: #82ad3a;
+                cursor: pointer;
+            }
+        }
+    }
+    .block__item__title {
+        display: inline-block;
+    }
+    .block__item__title--small {
+        font-size: 1em;
+        font-weight: initial;
+    }
+    .block__item__explanation {
+        display: inline-block;
+        &::before {
+            content: '('
+        }
+        &::after {
+            content: ')'
+        }
+    }
+    .block__item__explanation--subscript {
+        font-size: 0.7em;
+        font-weight: 100;
+        color: gray;
+        display: block;
+    }
+}
+
+.table__block__button--delete {
+    float: right;
+    margin: 0 10px;
+    width: 35px;
+    height: 35px;
+    display: none;
+    background-color: white;
+    border: solid 1px #cfcfcf;
+    border-radius: 4px;
+    .svg-icon {
+        fill: #d82b32;
+    }
+}
+
+.table__main {
+    padding: 36px 30px 22px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.table__added {
+    margin: 30px auto;
+    width: 100%;
+    common-dropdown {
+        float: left;
+        width: 190px;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.table__block__button {
+    min-width: 30px;
+    min-height: 30px;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    line-height: 0;
+    svg {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+.table__block--separated {
+    border-top: 5px solid #ebebeb;
+}

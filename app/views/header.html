@@ -12,7 +12,7 @@
                         </svg>
                     </a>
                 </li>
-                <li ng-if="common.user && userRole==='headMaster'" data-element="nav-center" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
+                <li ng-if="common.user && common.userRole==='headMaster'" data-element="nav-center" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Center"></use>
@@ -20,12 +20,20 @@
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && (userRole==='headMaster' || userRole==='teacher')" data-element="nav-class" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
+                <li ng-if="common.user && (common.userRole==='headMaster' || common.userRole==='teacher')" data-element="nav-class" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
                     <a class="nav__menu__link" href="#/center-mode/teacher">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Class"></use>
                         </svg>
                         <span>{{ 'header_tab_myClass' | translate }}</span>
+                    </a>
+                </li>
+                <li ng-if="common.user && common.user.studentMode" data-element="nav-class" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}">
+                    <a class="nav__menu__link" href="#/center-mode/teacher">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#exercises"></use>
+                        </svg>
+                        <span>{{ 'header_tab_myExercises' | translate }}</span>
                     </a>
                 </li>
                 <li data-element="nav-make" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" ng-if="!common.user">
@@ -76,7 +84,7 @@
             </div>
         </div>
         <div class="menu--user" ng-show="common.user">
-            <div ng-if="common.user && userRole!=='headMaster'" class="menu--user__center-mode notification-info">
+            <div ng-if="common.user && (common.userRole!=='headMaster' && !common.user.studentMode)" class="menu--user__center-mode notification-info">
                 <p class="notification-alert">{{'new' | translate}}</p>
                 <div class="notification__content">
                     <p class="notification__title">{{'centerMode_modal_createCenterTitle' | translate}}</p>

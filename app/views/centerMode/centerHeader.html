@@ -1,13 +1,22 @@
-<div class="table__main">
-    <div class="breadcrumb" data-element="centerMode-header-breadcrumb">
+<div class="table__main row">
+    <div class="breadcrumb col-vsmall-8"  ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
         <h1><a href="#/center-mode/center">{{'centerMode_teacher' | translate}}</a></h1>
-        <p ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.name}}</p>
+        <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.firstName ? teacher.firstName + ' ' +teacher.lastName : teacher.username}}</a>
     </div>
-    <button ng-if="urlType==='center'" data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newTeacher()">
-        <svg class="svg-icon">
-            <use xlink:href="#plus"></use>
-        </svg>
-        <span>{{'centerMode_button_newTeacher' | translate}}</span>
-    </button>
+    <div class="button-group col-vsmall-4">
+        <button ng-if="urlType==='center'" data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newTeacher()">
+            <span>{{'centerMode_button_newTeacher' | translate}}</span>
+        </button>
+        <button ng-if="urlType==='center-teacher'" class="btn btn--primary btn--small" ng-click="newExercise()" data-element="centerMode-new-teacher-button">
+            <span>{{'centerMode_button_newExercise' | translate}}</span>
+        </button>
+        
+        <button ng-if="urlType==='center-teacher'" class="btn btn--secondary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
+            <span>{{'centerMode_button_newGroup' | translate}}</span>
+        </button>
+        <button ng-if="common.user && common.userRole=='student'" class="btn btn--primary btn--small" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
+            <span>{{'centerMode_button_registerInGroup' | translate}}</span>
+        </button>
+    </div>
 </div>
 

@@ -34,8 +34,11 @@
 @import "components/_icons.scss";
 @import "components/_serial.scss";
 @import "components/_dropdowns.scss";
+@import "components/_breadcrumb.scss";
+@import "components/_switchButton.scss";
+@import "components/_table.scss";
 //components
-@import "components/_tabs-layout";
+@import "components/tabsLayout";
 @import "styleguide";
 @import "notFound";
 @import "landing";
