@@ -244,7 +244,7 @@ angular.module('bitbloqApp')
                     } else if (item.indexOf('serial') > -1) {
                         result = $scope.showCommunications(item);
                     } else if (item.indexOf('phone') > -1) {
-                        result = existComponent(['phone'], connectedComponents);
+                        result = existComponent(['device'], connectedComponents);
                     } else if (item.includes('rgb')) {
                         result = existComponent(['RGBled'], connectedComponents);
                     } else if (item.includes('oscillator')) {
