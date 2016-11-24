@@ -247,7 +247,7 @@
             $scope.registerInGroup = function(){
                 function confirmAction(groupId) {
                     centerModeApi.registerInGroup(groupId).then(function() {
-                        //modalOptions.title = name;
+                        currentModal.close();
                         _getGroups();
                     });
                 }
@@ -271,11 +271,10 @@
                     modalButtons: true
                 });
 
-                ngDialog.open({
+                currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
+                    scope: modalOptions
 
                 });
             };
@@ -292,6 +291,9 @@
                         break;
                     case 'group':
                         _getGroup($routeParams.id);
+                        break;
+                    case 'student':
+                        _getGroups();
                         break;
                 }
             }

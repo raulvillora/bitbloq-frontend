@@ -1,5 +1,5 @@
 <div class="table__main row">
-    <div class="breadcrumb col-vsmall-8"  ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
+    <div ng-if="(urlType==='center' && teachers.length>0) || (urlType==='center-teacher')" class="breadcrumb col-vsmall-8"  ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
         <h1><a href="#/center-mode/center">{{'centerMode_teacher' | translate}}</a></h1>
         <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.firstName ? teacher.firstName + ' ' +teacher.lastName : teacher.username}}</a>
     </div>
@@ -14,7 +14,7 @@
         <button ng-if="urlType==='center-teacher'" class="btn btn--secondary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
             <span>{{'centerMode_button_newGroup' | translate}}</span>
         </button>
-        <button ng-if="common.user && common.userRole=='student'" class="btn btn--primary btn--small" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
+        <button ng-if="common.user && common.user.studentMode" class="btn btn--primary btn--small" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
             <span>{{'centerMode_button_registerInGroup' | translate}}</span>
         </button>
     </div>
