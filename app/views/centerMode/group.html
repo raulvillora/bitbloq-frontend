@@ -1,57 +1,54 @@
-<div class="breadcrumb" data-element="centerMode-header-breadcrumb">
-    <h1><a href="#/center-mode/center">{{'centerMode_groups' | translate}}</a></h1>
-    <p ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/group/{{group.name}}">{{group.name}}</p>
-    <p ng-if="secondaryBreadcrumb" class="breadcrumb--subtext">{{group.accessId}}</p>
-</div>
-<div>
-    <label class="switch">
-        <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'" ng-disabled="group.status==='closed'" checked>
-        <div class="slider round"></div>
-    </label>
-    <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
-    <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_inProgress' | translate}}</span>
-    <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
-    <div class="header--new-project--button">
-        <button class="btn btn--primary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
-            <svg class="svg-icon svg-icon--text">
-                <use xlink:href="#remove"></use>
-            </svg>
-        </button>
-        <button class="btn btn--primary btn--small btn--new-project" ng-click="closeGroup()" data-element="centerMode-close-group">
-            <svg class="svg-icon svg-icon--text">
-                <use xlink:href="#archive"></use>
-            </svg>
-            {{ 'centerMode_button_closeGroup' | translate }}
-        </button>
-    </div>
-
-</div>
-<div class="tabs-layout">
-    <aside class="tabs-layout__aside">
-        <h1 class="invisible">Groups menu</h1>
-        <ul class="tabs__header" ng-init="selectedTab = 'students'">
-            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'students'}" ng-click="selectedTab = 'students'">
-                <svg class="svg-icon--aside--menu">
-                    <use xlink:href="#students"></use>
+<div class="table__main">
+    <div>
+        <label class="switch">
+            <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'" ng-disabled="group.status==='closed'" checked>
+            <div class="slider round"></div>
+        </label>
+        <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
+        <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_inProgress' | translate}}</span>
+        <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
+        <div class="button-group">
+            <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
+                <svg class="svg-icon">
+                    <use xlink:href="#remove"></use>
                 </svg>
+            </button>
+            <button class="btn btn--tertiary btn--small" ng-click="closeGroup()" data-element="centerMode-close-group">
+                <svg class="svg-icon svg-icon--text">
+                    <use xlink:href="#archive"></use>
+                </svg>
+                {{ 'centerMode_button_closeGroup' | translate }}
+            </button>
+        </div>
+    
+    </div>
+    <div class="tabs-layout">
+        <aside class="tabs-layout__aside">
+            <h1 class="invisible">Groups menu</h1>
+            <ul class="tabs__header" ng-init="selectedTab = 'students'">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'students'}" ng-click="selectedTab = 'students'">
+                    <svg class="svg-icon--aside--menu">
+                        <use xlink:href="#students"></use>
+                    </svg>
                     <span class="menu__item__span">
                         {{ 'centerMode_column_students' | translate }} ({{ students.length || 0}})
                     </span>
-            </li>
-            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}" data-element="centerMode-tab-exercises" ng-click="selectedTab = 'exercises'">
-                <svg class="svg-icon--aside--menu">
-                    <use xlink:href="#exercises"></use>
-                </svg>
+                </li>
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}" data-element="centerMode-tab-exercises" ng-click="selectedTab = 'exercises'">
+                    <svg class="svg-icon--aside--menu">
+                        <use xlink:href="#exercises"></use>
+                    </svg>
                     <span class="menu__item__span">
                         {{'centerMode_exercises' | translate}} ({{ exercises.length || 0 }})
                     </span>
-                </span>
-            </li>
-
-        </ul>
-    </aside>
-    <div class="tabs-layout__content">
-        <div class="tab myprojects" ng-show="selectedTab === 'students'" ng-include="'views/centerMode/studentTable.html'"></div>
-        <div class="tab mysharedprojects" ng-show="selectedTab === 'exercises'" ng-include="'views/centerMode/exerciseTable.html'"></div>
+                    </span>
+                </li>
+            
+            </ul>
+        </aside>
+        <div class="tabs-layout__content">
+            <div class="tab myprojects" ng-show="selectedTab === 'students'" ng-include="'views/centerMode/studentTable.html'"></div>
+            <div class="tab mysharedprojects" ng-show="selectedTab === 'exercises'" ng-include="'views/centerMode/exerciseTable.html'"></div>
+        </div>
     </div>
 </div>

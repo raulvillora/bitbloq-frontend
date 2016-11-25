@@ -67,8 +67,7 @@
                 currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
+                    scope: modalOptions
                 });
             };
 
@@ -106,8 +105,7 @@
                 currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
+                    scope: modalOptions
                 });
             };
 
@@ -147,8 +145,7 @@
                 var newTeacherModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
+                    scope: modalOptions
                 });
             };
 
@@ -197,8 +194,7 @@
                 ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
-                    scope: modalOptions,
-                    showClose: false
+                    scope: modalOptions
 
                 });
             };

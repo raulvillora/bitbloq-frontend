@@ -2,8 +2,9 @@
 // BUTTONS //
 */
 
-@mixin button($color) {
-    background-color: $color;
+@mixin button($backgroudColor, $textColor) {
+    background-color: $backgroudColor;
+    color: $textColor;
     padding: .8em 1em;
     border-radius: .3em;
     min-width: 145px;
@@ -11,21 +12,28 @@
     line-height: 27px;
     transition: background-color 250ms;
     text-decoration: none;
-
     &:hover {
         transition: background-color 250ms;
         text-decoration: none;
     }
-
     &:active {
         text-decoration: none;
     }
+    .svg-icon {
+        fill: $textColor;
+        width: 1em;
+        height: 1em;
+    }
+}
+
+.btn {
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .btn--primary {
-    color: white;
     font-weight: bold;
-    @include button($font-color-heading);
+    @include button($font-color-heading, white);
 
     &:hover {
         background-color: #26292f;
@@ -37,8 +45,7 @@
 }
 
 .btn--secondary {
-    color: black;
-    @include button(#ebebeb);
+    @include button(#ebebeb, black);
 
     &:hover {
         background-color: $brand-secondary;
@@ -50,12 +57,9 @@
 }
 
 .btn--tertiary {
-    color: black;
-    border: 1px solid #cfcfcf;
-    font-family: $font-family-base;
-    font-size: 14px;
-    font-weight: 700;
-    @include button(#fff);
+    @include button(#fff, #373b44);
+    border: 1px solid #dddddd;
+    font-weight: bold;
 
     &:hover {
         background-color: #e8e8e8;
@@ -67,8 +71,7 @@
 }
 
 .btn--disabled {
-    color: $font-color-disabled;
-    @include button(#dbdee3);
+    @include button(#dbdee3, $font-color-disabled);
 }
 
 .btn--small {
@@ -92,9 +95,12 @@
 
 .btn--delete {
     float: right;
-    padding-left: 0px;
+    padding: 10px 27px 0 0;
     min-width: 50px;
     .svg-icon {
+        width: 11px;
+        height: 13px;
+        fill: #d82b32;
         position: relative;
         top: -4px;
         left: 14px;
