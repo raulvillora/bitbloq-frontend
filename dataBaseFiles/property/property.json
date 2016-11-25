@@ -85,6 +85,10 @@
         {
             "name": "phoneSendText",
             "addClass": "submenu__item submenu__item--component"
+        },
+        {
+            "name": "phoneReceive",
+            "addClass": "submenu__item submenu__item--component"
         }],
         "advancedComponents": [{
             "name": "hwVariable",
