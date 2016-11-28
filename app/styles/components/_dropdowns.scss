@@ -159,3 +159,14 @@ common-dropdown {
         }
     }
 }
+
+.dropdown-group {
+    padding: 0;
+    common-dropdown {
+        margin: 0 4.5px;
+        float: right;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}

@@ -1,31 +1,30 @@
 <div ng-if="students.length>0">
-    <div class="projects--action projects--action--sort table__added clearfix">
-        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+    <div class="dropdown-group table__added clearfix">
         <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
     </div>
     <div>
         <div class="centerMode__table-title row">
-            <div class="col-vsmall-7">
+            <div class="col-vsmall-9">
                 <span>{{'centerMode_column_name' | translate}}</span>
             </div>
-            <div class="col-vsmall-2">
+            <div class="table__column--centered col-vsmall-2">
                 <span>{{'centerMode_column_mark' | translate}}</span>
             </div>
         </div>
         <div class="table__block">
             <div class="table__block__list row" ng-repeat="student in students | orderBy:'orderInstance'">
-                <div class="col-vsmall-7 table__block__item">
+                <div class="table__block__item col-vsmall-9">
                     <a ng-href="{{'#/center-mode/group/' + group._id + '/student/' + students._id}}">
                         <h2 class="block__item__title" data-element="{{'centerMode-student-' + student.firstName + student.lastName}}">
                             {{student.firstName}}</h2>
                     </a>
                 </div>
-                <div class="col-vsmall-2 table__block__item">
+                <div class="table__block__item table__column--centered col-vsmall-2">
                     <span data-element="{{'centerMode-student' + student.mark}}">
                         {{student.mark}}
                     </span>
                 </div>
-                <div class="col-vsmall-2 table__block__item">
+                <div class="table__block__item table__column--right col-vsmall-1">
                     <button data-element="centerMode-button-options" class="btn table__block__button table__block__button--options">
                         <svg class="svg-icon">
                             <use xlink:href="#menu"></use>

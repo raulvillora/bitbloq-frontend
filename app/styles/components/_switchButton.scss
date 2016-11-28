@@ -5,8 +5,13 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
     height: 34px;
+    span {
+        display: inline-block;
+        height: 10px;
+        vertical-align: middle;
+        padding-left: 10px;
+    }
 }
 
 .switch input {
@@ -14,27 +19,22 @@
 }
 
 .slider {
-    position: absolute;
+    display: inline-block;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 33px;
-    bottom: 4px;
-    background-color: #9b9da1;
-    -webkit-transition: .4s;
-    transition: .4s;
+    &:before {
+        position: absolute;
+        content: "";
+        height: 29px;
+        width: 29px;
+        left: 33px;
+        bottom: 2px;
+        background-color: #9b9da1;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
 }
 
 input:checked + .slider:before {
@@ -42,9 +42,9 @@ input:checked + .slider:before {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(-26px);
-    -ms-transform: translateX(-26px);
-    transform: translateX(-26px);
+    -webkit-transform: translateX(-29px);
+    -ms-transform: translateX(-29px);
+    transform: translateX(-29px);
 }
 
 /* Rounded sliders */
@@ -53,8 +53,35 @@ input:checked + .slider:before {
     height: 35px;
     border-radius: 17.5px;
     border: solid 1px #dddddd;
+    &:before {
+        border-radius: 50%;
+    }
 }
 
-.slider.round:before {
-    border-radius: 50%;
+/* Svgs */
+.slider.round .svg-icon {
+    width: 13px;
+    height: 10px;
+    object-fit: contain;
+    position: relative;
+    top: 6px;
+    &:first-child {
+        fill: #cacdd2;
+        left: 12px;
+        display: initial;
+    }
+    &:nth-child(2) {
+        fill: #82ad3a;
+        left: 42px;
+        display: none;
+    }
+}
+
+input:checked + .slider .svg-icon {
+    &:first-child {
+        display: none;
+    }
+    &:nth-child(2) {
+        display: initial;
+    }
 }

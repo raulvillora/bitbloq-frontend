@@ -1,29 +1,34 @@
 <div ng-if="exercises.length>0">
-    <h1 class="table__title">
+    <h1 class="table__title" ng-if="urlType!=='group'">
         <svg class="svg-icon svg-icon--text">
             <use xlink:href="#exercises"></use>
         </svg>
         {{'centerMode_exercises' | translate}}
     </h1>
+    <div class="dropdown-group table__added clearfix" ng-if="urlType==='group'">
+        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+    </div>
     <div>
         <div class="centerMode__table-title row">
-            <span class="col-vsmall-7">{{'centerMode_column_name' | translate}}</span>
+            <span class="col-vsmall-8">{{'centerMode_column_name' | translate}}</span>
             <span class="col-vsmall-4">{{'centerMode_column_time' | translate}}</span>
         </div>
         <div class="table__block">
             <div class="table__block__list row" ng-repeat="exercise in exercises | orderBy:'orderInstance'">
-                <div class="col-vsmall-8 table__block__item">
+                <div class="table__block__item col-vsmall-8">
                     <a ng-href="{{'#/center-mode/teacher/' + exercise._id}}">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                             {{exercise.name}}</h2>
                     </a>
                 </div>
-                <div class="col-vsmall-3 table__block__item">
+                <div class="table__block__item col-vsmall-3">
                     <span data-element="{{'centerMode-groups' + exercise.name}}">
                         {{exercise.endDate}}
                     </span>
                 </div>
-                <div class="col-vsmall-1 table__block__item">
+                <div class="table__block__item table__column--right col-vsmall-1">
                     <button data-element="centerMode-button-options" class="btn table__block__button table__block__button--options">
                         <svg class="svg-icon">
                             <use xlink:href="#menu"></use>

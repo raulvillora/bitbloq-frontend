@@ -1,12 +1,19 @@
-<div class="table__main">
-    <div>
+<div class="center-mode__group">
+    <div class="group__header">
         <label class="switch">
             <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'" ng-disabled="group.status==='closed'" checked>
-            <div class="slider round"></div>
+            <div class="slider round">
+                <svg class="svg-icon">
+                    <use xlink:href="#cierre"></use>
+                </svg>
+                <svg class="svg-icon">
+                    <use xlink:href="#verificar"></use>
+                </svg>
+            </div>
+            <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
+            <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_inProgress' | translate}}</span>
+            <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
         </label>
-        <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
-        <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_inProgress' | translate}}</span>
-        <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
         <div class="button-group">
             <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
                 <svg class="svg-icon">

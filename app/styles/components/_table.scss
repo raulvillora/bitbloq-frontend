@@ -5,11 +5,12 @@
 
 .table__header {
     height: 93px;
-    padding: 36px 28px 22px 5px;
+    padding: 36px 0 22px 0;
     .header__title {
         font-size: 20px;
         font-weight: 700;
         color: #373b44;
+        padding: 0;
     }
 }
 
@@ -103,9 +104,17 @@
 }
 
 .table__main {
-    padding: 36px 30px 22px 30px;
+    padding: 36px 0 22px 0;
     max-width: 1200px;
     margin: 0 auto;
+    .table__item {
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
+    }
 }
 
 .table__added {
@@ -135,4 +144,12 @@
 
 .table__block--separated {
     border-top: 5px solid #ebebeb;
+}
+
+.table__column--centered {
+    text-align: center;
+}
+
+.table__column--right {
+    text-align: right;
 }
