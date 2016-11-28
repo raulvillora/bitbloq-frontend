@@ -1,7 +1,7 @@
 <div class="center-mode__group">
     <div class="group__header">
         <label class="switch">
-            <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'" ng-disabled="group.status==='closed'" checked>
+            <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'; changeStatusClass();" ng-disabled="group.status==='closed'" checked>
             <div class="slider round">
                 <svg class="svg-icon">
                     <use xlink:href="#cierre"></use>
@@ -20,7 +20,7 @@
                     <use xlink:href="#remove"></use>
                 </svg>
             </button>
-            <button class="btn btn--tertiary btn--small" ng-click="closeGroup()" data-element="centerMode-close-group">
+            <button class="btn btn--tertiary btn--small" ng-click="closeGroup()" ng-disabled="group.status==='closed'" data-element="centerMode-close-group">
                 <svg class="svg-icon svg-icon--text">
                     <use xlink:href="#archive"></use>
                 </svg>
@@ -41,7 +41,7 @@
                         {{ 'centerMode_column_students' | translate }} ({{ students.length || 0}})
                     </span>
                 </li>
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}" data-element="centerMode-tab-exercises" ng-click="selectedTab = 'exercises'">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}" ng-click="selectedTab = 'exercises'" data-element="centerMode-tab-exercises">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#exercises"></use>
                     </svg>

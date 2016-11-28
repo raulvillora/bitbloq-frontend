@@ -29,7 +29,7 @@
                     </span>
                 </div>
                 <div class="table__block__item table__column--right col-vsmall-1">
-                    <button data-element="centerMode-button-options" class="btn table__block__button table__block__button--options">
+                    <button data-element="centerMode-button-options" class="btn table__block__button">
                         <svg class="svg-icon">
                             <use xlink:href="#menu"></use>
                         </svg>
@@ -42,7 +42,7 @@
 <div ng-if="exercises.length===0">
     <h1>{{'centerMode_exercises_empty' | translate}}</h1>
     <p>{{'centerMode_exercises_emptyInfo' | translate}}</p>
-    <button data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newExercise()">
+    <button class="btn btn--primary btn--small" ng-click="newExercise()" data-element="centerMode-new-teacher-button" >
         <span>{{'centerMode_button_newExercise' | translate}}</span>
     </button>
 </div>

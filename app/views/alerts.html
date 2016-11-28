@@ -7,12 +7,12 @@
         <span class="alert--text" ng-if="!alert.translatedText">
             {{alert.text | translate:alert }}
         </span>
-        <button class="text--strong alert--action" data-element="alert-undo-button" ng-click="alert.linkAction(alert.linkParams)" ng-if="alert.linkText">{{alert.linkText | translate:alert }}</button>
+        <button class="text--strong alert--action" ng-click="alert.linkAction(alert.linkParams)" ng-if="alert.linkText" data-element="alert-undo-button">{{alert.linkText | translate:alert }}</button>
         <svg class="svg-icon icon--postIcon" ng-if="alert.postIcon">
             <use ng-attr-xlink:href="{{'#'+alert.postIcon}}"></use>
         </svg>
     </div>
-    <div class="alert--close" data-element="alert-close-toast" ng-click="alert.close(alert.uid, $event); alert.closeFunction(closeParams)" ng-if="alert.type!=='loading'">
+    <div class="alert--close" ng-click="alert.close(alert.uid, $event); alert.closeFunction(closeParams)" ng-if="alert.type!=='loading'" data-element="alert-close-toast">
         <svg class="svg-icon">
             <use xlink:href="#icon-close"></use>
         </svg>

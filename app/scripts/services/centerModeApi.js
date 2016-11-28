@@ -5,7 +5,6 @@ angular
 
         var centerModeApi = {
             addTeachers: addTeachers,
-            closeGroup: closeGroup,
             createCenter: createCenter,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
@@ -17,7 +16,8 @@ angular
             getTeacher: getTeacher,
             getTeachers: getTeachers,
             isHeadMaster: isHeadMaster,
-            registerInGroup: registerInGroup
+            registerInGroup: registerInGroup,
+            updateGroup: updateGroup
         };
 
 
@@ -26,14 +26,6 @@ angular
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher',
                 data: teachers
-            });
-        }
-
-        function closeGroup(group) {
-            return $http({
-                method: 'PUT',
-                url: envData.config.centerModeUrl + 'group/' + group._id,
-                data: group
             });
         }
 
@@ -134,6 +126,15 @@ angular
             return $http({
                 method: 'HEAD',
                 url: envData.config.centerModeUrl + 'group/' + groupId +'/register'
+            });
+        }
+
+
+        function updateGroup(group) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'group/' + group._id,
+                data: group
             });
         }
 

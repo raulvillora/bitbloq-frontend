@@ -71,7 +71,19 @@
 }
 
 .btn--disabled {
-    @include button(#dbdee3, $font-color-disabled);
+    background-color: #dbdee3;
+    color: $font-color-disabled;
+    .svg-icon {
+        fill: $font-color-disabled;
+    }
+}
+
+.btn:disabled{
+    background-color: #dbdee3;
+    color: $font-color-disabled;
+    .svg-icon {
+        fill: $font-color-disabled;
+    }
 }
 
 .btn--small {

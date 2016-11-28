@@ -51,6 +51,16 @@
 
             var currentModal;
 
+            $scope.changeStatusClass = function (){
+              centerModeApi.updateGroup($scope.group).catch(function() {
+                  alertsService.add({
+                      text: 'updateGroup_alert_Error',
+                      id: 'deleteGroup',
+                      type: 'ko'
+                  });
+              });
+            };
+
             $scope.closeGroup = function() {
                 var parent = $rootScope,
                     modalOptions = parent.$new();
@@ -297,7 +307,7 @@
             function _closeGroupAction() {
                 $scope.classStateCheck = false;
                 $scope.group.status = 'closed';
-                centerModeApi.closeGroup($scope.group).then(function() {
+                centerModeApi.updateGroup($scope.group).then(function() {
                     alertsService.add({
                         text: 'centerMode_alert_closeGroup',
                         id: 'closeGroup',

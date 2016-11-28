@@ -42,7 +42,7 @@
                             <svg class="svg-icon form-icon--username icon--form--validating">
                                 <use xlink:href="#usuario"></use>
                             </svg>
-                            <input id="emailusername" name="emailusername" type="text" data-ng-model="form.emailUserNameModel" data-ng-focus="form.emailusername.submitted=false; focus = 'emailusername'" data-ng-blur="focus = false" maxlength="50" placeholder="{{'login-username-email' | translate}}" autocorrect="off" autocomplete="on" required data-element="login-emailusername-intput">
+                            <input type="text" id="emailusername" name="emailusername" data-ng-model="form.emailUserNameModel" data-ng-focus="form.emailusername.submitted=false; focus = 'emailusername'" data-ng-blur="focus = false" maxlength="50" placeholder="{{'login-username-email' | translate}}" autocorrect="off" autocomplete="on" data-element="login-emailusername-intput" required>
                         </span>
                         <span class="form--error" data-ng-show="form.emailusername.submitted && form.emailusername.$error.required" data-element="show-no-user-and-email">
                             <small>{{ 'login-username-or-email' | translate }}</small>
@@ -62,7 +62,7 @@
                             <svg class="svg-icon">
                                 <use xlink:href="#candado"></use>
                             </svg>
-                            <input type="password" name="password" autocomplete="off" data-ng-model="user.password" data-ng-focus="form.password.submitted=false; focus = 'password'" data-ng-blur="focus = false" id="password" data-ng-minlength="6" maxlength="50" placeholder="{{'password' | translate}}" autocorrect="off" required data-element="login-password-input">
+                            <input type="password" id="password" name="password" autocomplete="off" data-ng-model="user.password" data-ng-focus="form.password.submitted=false; focus = 'password'" data-ng-blur="focus = false" data-ng-minlength="6" maxlength="50" placeholder="{{'password' | translate}}" autocorrect="off" data-element="login-password-input" required>
                         </span>
                         <span class="form--error" data-ng-show="form.password.submitted && form.password.$error.required" data-element="show-no-pass">
                             <small>{{ 'login-enter-password' | translate }}</small>
@@ -76,7 +76,7 @@
                     </div>
                     <!-- Submit Form -->
                     <div class="form-control">
-                        <input type="submit" data-ng-click="form.password.submitted=true; form.emailusername.submitted=true; loginSubmit(form)" name="submitform" class="btn btn--primary btn__login--submit" value="{{'enter' | translate}}" ng-init="" data-element="login-button">
+                        <input type="submit" name="submitform" class="btn btn--primary btn__login--submit" value="{{'enter' | translate}}" data-ng-click="form.password.submitted=true; form.emailusername.submitted=true; loginSubmit(form)" data-element="login-button">
                     </div>
                 </fieldset>
             </form>
@@ -112,7 +112,7 @@
                             <svg class="svg-icon">
                                 <use xlink:href="#email"></use>
                             </svg>
-                            <input data-element="login-email-to-send-input" data-ng-model="emailToSend" data-ng-focus="formForgot.emailToSend.submitted=false; focus = 'email'" data-ng-blur="focus = false" id="emailToSend" name="emailToSend" type="email" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required>
+                            <input type="email" id="emailToSend" name="emailToSend" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" data-ng-model="emailToSend" data-ng-focus="formForgot.emailToSend.submitted=false; focus = 'email'" data-ng-blur="focus = false" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" data-element="login-email-to-send-input" required>
                         </span>
                         <span class="form--error" data-ng-show="formForgot.emailToSend.submitted && formForgot.emailToSend.$error.required" data-element="show-noemail">
                             <small>{{ 'login-email-empty' | translate }}</small>
@@ -129,7 +129,7 @@
                     </div>
                     <!-- Submit Form -->
                     <div class="form-control">
-                        <button data-element="login-email-to-send-button" type="submit" name="submitform" ng-click="formForgot.emailToSend.submitted=true" class="btn btn--primary btn__login--submit">{{ 'send' | translate }}</button>
+                        <button type="submit" name="submitform" class="btn btn--primary btn__login--submit" ng-click="formForgot.emailToSend.submitted=true" data-element="login-email-to-send-button">{{ 'send' | translate }}</button>
                     </div>
                 </fieldset>
             </form>

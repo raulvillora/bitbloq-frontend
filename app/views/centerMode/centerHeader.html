@@ -11,7 +11,7 @@
     </a>
 </div>
 <div class="button-group col-vsmall-4">
-    <button ng-if="urlType==='center'" data-element="centerMode-new-teacher-button" class="btn btn--primary btn--small" ng-click="newTeacher()">
+    <button ng-if="urlType==='center'" class="btn btn--primary btn--small" ng-click="newTeacher()" data-element="centerMode-new-teacher-button">
         <span>{{'centerMode_button_newTeacher' | translate}}</span>
     </button>
     <button ng-if="urlType.indexOf('teacher') > -1" class="btn btn--primary btn--small" ng-click="newExercise()" data-element="centerMode-new-teacher-button">

@@ -30,6 +30,12 @@
         .table__block__button--delete {
             display: block;
         }
+        .table__column--hover button {
+            display: inherit;
+        }
+    }
+    .table__column--hover button {
+        display: none;
     }
 }
 
