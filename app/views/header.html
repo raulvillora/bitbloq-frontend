@@ -1,6 +1,5 @@
 <header ng-class="{'header--ru':translate.use() === 'ru-RU', 'header--de':translate.use() === 'de-DE', header:true, 'header--relative':!common.headerAbsolute}" ng-controller="HeaderCtrl" role="banner">
     <h1 class="invisible">Bitbloq</h1>
-
     <div class="nav nav--bar nav--main">
         <nav class="menu" role="navigation">
             <h1 class="invisible">Bitbloq Navigation</h1>
@@ -14,7 +13,7 @@
                 </li>
             </ul>
             <ul ng-if="common.user && (common.userRole==='headMaster' || common.user.studentMode)" class="nav__menu nav__menu__center-mode">
-                <li ng-if="common.user && common.userRole==='headMaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" data-element="nav-center">
+                <li ng-if="common.user && common.userRole==='headMaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#Center"></use>
@@ -22,7 +21,7 @@
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && (common.userRole==='headMaster' || common.userRole==='teacher')" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" data-element="nav-class">
+                <li ng-if="common.user && (common.userRole==='headMaster' || common.userRole==='teacher')" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/center-mode/teacher">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#group"></use>
@@ -30,7 +29,7 @@
                         <span>{{ 'header_tab_myClass' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && common.user.studentMode" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" data-element="nav-class">
+                <li ng-if="common.user && common.user.studentMode" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/center-mode/student">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#exercises"></use>

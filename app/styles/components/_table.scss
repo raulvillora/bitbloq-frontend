@@ -22,6 +22,7 @@
 .table__block__list {
     padding: 10px;
     background-color: #eeeeee;
+    min-height: 50px;
     &:nth-child(2n) {
         background-color: white;
     }
@@ -58,6 +59,7 @@
 .table__block__item {
     margin: 0;
     padding: 0;
+    padding-top: 0.7px;
     a {
         color: #373b44;
         font-size: 16px;
@@ -73,6 +75,8 @@
     }
     .block__item__title {
         display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
     }
     .block__item__title--small {
         font-size: 1em;
@@ -80,12 +84,9 @@
     }
     .block__item__explanation {
         display: inline-block;
-        &::before {
-            content: '('
-        }
-        &::after {
-            content: ')'
-        }
+        font-size: 12px;
+        color: #8c919b;
+
     }
     .block__item__explanation--subscript {
         font-size: 0.7em;

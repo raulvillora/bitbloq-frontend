@@ -466,13 +466,16 @@
     .modal__body {
         padding: 30px;
         .modal__parraph {
-            margin-bottom: 27px;
+            margin-bottom: 17px;
+            & + .modal__input {
+                margin-top: 27px;
+            }
         }
     }
 
     .modal--buttons {
         button {
-            margin-right: 10px;
+            margin-right: 20px;
         }
         padding: 0 30px 30px;
     }
@@ -596,31 +599,52 @@
 .modal--information {
     text-align: center;
     display: block;
+
     .modal__header {
         padding-top: 30px;
         border-bottom: none;
         padding-left: 0;
         h1 {
             border-right: 0;
+            padding-left: 0;
         }
     }
     .modal--title {
-        font-size: 20px;
-        padding-left: 30px;
+        font-size: 21px;
+        font-weight: bold;
     }
+
+    .modal--sencond-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 48px;
+        margin-bottom: 24px;
+    }
+
     .modal_alert > *:not(.btn) {
-        margin: 20px auto;
         display: block;
+        margin: 37px auto 25px auto;
     }
     .modal_alert > *:first-child {
         margin-top: 10px;
     }
-    .btn {
-        padding: 0 3em;
+
+    .modal_alert .text-content {
+        margin: 25px auto 15px auto;
     }
+
+    .modal--buttons button {
+            margin: 0 10px;
+    }
+    .btn {
+        // padding: 0 54px;
+        width: 187px;
+    }
+
     a {
         color: #5d6069;
     }
+
     .objective-list {
         text-align: left;
         li {
@@ -628,6 +652,7 @@
             margin: 10px 0;
             text-indent: -1.8em;
             padding-left: 1.8em;
+            line-height: 1.57;
         }
         li::before {
             content: '';
@@ -647,9 +672,12 @@
         }
         label {
             text-align: right;
+            height: 35px;
+            line-height: 2.5;
+            font-size: 13px;
         }
         & input {
-            width: 338px;
+            width: 324px;
             height: 35px;
             border-radius: 4px;
             background-color: #ffffff;
@@ -662,7 +690,7 @@
     }
 
     .modal__body {
-        padding: 25px 49px;
+        padding: 25px 52px;
     }
 
 }

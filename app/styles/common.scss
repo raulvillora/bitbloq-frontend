@@ -425,12 +425,20 @@ textarea:disabled {
     .notification__title {
         color: white;
         font-weight: bold;
+        font-size: 14px;
     }
 
     .notification__link {
         color: #73767c;
+        font-size: 12px;
         &:hover {
             color: white;
         }
+    }
+}
+
+.text-ID {
+    &:before {
+        content: 'ID ';
     }
 }

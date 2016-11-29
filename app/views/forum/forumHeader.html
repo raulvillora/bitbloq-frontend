@@ -9,7 +9,7 @@
         </svg>
         <span>{{'forum_button_newTheme' | translate}}</span>
     </button>
-    <button ng-if="!forum.themeCategory && forum.isAdmin()" class="btn btn--secondary btn--small btn--ban-user" ng-click="forum.goForumSection('banned-users')" data-element="forum-new-topic-button">
+    <button ng-if="!forum.themeCategory && forum.isAdmin()" class="btn btn--small btn--tertiary btn--ban-user" ng-click="forum.goForumSection('banned-users')" data-element="forum-new-topic-button">
         <span>{{'forum_button_bannedUsers' | translate}}</span>
     </button>
 </div>

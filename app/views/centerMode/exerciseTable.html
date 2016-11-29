@@ -1,11 +1,11 @@
 <div ng-if="exercises.length>0">
-    <h1 class="table__title" ng-if="urlType!=='group'">
+    <h1 class="table__title" ng-if="common.urlType!=='group'">
         <svg class="svg-icon svg-icon--text">
             <use xlink:href="#exercises"></use>
         </svg>
         {{'centerMode_exercises' | translate}}
     </h1>
-    <div class="dropdown-group table__added clearfix" ng-if="urlType==='group'">
+    <div class="dropdown-group table__added clearfix" ng-if="common.urlType==='group'">
         <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
         <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
         <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
@@ -29,9 +29,9 @@
                     </span>
                 </div>
                 <div class="table__block__item table__column--right col-vsmall-1">
-                    <button data-element="centerMode-button-options" class="btn table__block__button">
+                    <button class="btn btn--tertiary table__block__button" data-element="centerMode-button-options" >
                         <svg class="svg-icon">
-                            <use xlink:href="#menu"></use>
+                            <use xlink:href="#options"></use>
                         </svg>
                     </button>
                 </div>

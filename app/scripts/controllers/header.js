@@ -36,23 +36,26 @@ angular.module('bitbloqApp')
 
 
                 function createCenter() {
-                    console.log(modalOptions.center);
-                    centerModeApi.createCenter(modalOptions.center).then(function() {
-                        ngDialog.close(centerModal);
-                        $scope.common.userRole = 'headMaster';
-                        alertsService.add({
-                            text: 'centerMode_alert_createCenter',
-                            id: 'createCenter',
-                            type: 'ok',
-                            time: 5000
+                    if(modalOptions.center.name && modalOptions.center.location && modalOptions.center.telephone) {
+                        centerModeApi.createCenter(modalOptions.center).then(function() {
+                            ngDialog.close(centerModal);
+                            $scope.common.userRole = 'headMaster';
+                            alertsService.add({
+                                text: 'centerMode_alert_createCenter',
+                                id: 'createCenter',
+                                type: 'ok',
+                                time: 5000
+                            });
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_createCenter-Error',
+                                id: 'createCenter',
+                                type: 'ko'
+                            });
                         });
-                    }).catch(function() {
-                        alertsService.add({
-                            text: 'centerMode_alert_createCenter-Error',
-                            id: 'createCenter',
-                            type: 'ko'
-                        });
-                    });
+                    } else {
+                        modalOptions.errors = true;
+                    }
                 }
             }
 
@@ -92,7 +95,7 @@ angular.module('bitbloqApp')
 
             _.extend(modalOptions, {
                 title: 'centerMode_modal_createCenterTitle',
-                contentTemplate: 'views/modals/activateCenterMode.html',
+                contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
                 customClass: 'modal--information',
                 mainText: 'centerMode_modal_createCenter-introText',
                 confirmButton: 'centerMode_button_createCenter-student',
@@ -100,7 +103,8 @@ angular.module('bitbloqApp')
                 extraButton: 'centerMode_button_createCenter-try',
                 extraAction: tryCenter,
                 modalButtons: true,
-                type: 'information'
+                type: 'information',
+                errors: false
             });
 
             var centerModal = ngDialog.open({

@@ -47,7 +47,7 @@
             $scope.secondaryBreadcrumb = false;
             $scope.sortArray = [];
             $scope.orderInstance = 'name';
-            $scope.urlType = $routeParams.type;
+            $scope.common.urlType = $routeParams.type;
 
             var currentModal;
 
@@ -142,7 +142,7 @@
                     modalOptions = parent.$new();
 
                 _.extend(modalOptions, {
-                    title: 'newTeacher_modal_title',
+                    title: 'deleteTeacher_modal_title',
                     confirmButton: 'button_delete ',
                     rejectButton: 'cancel',
                     confirmAction: confirmAction,
@@ -215,12 +215,6 @@
                         if (teachers.length > 0) {
                             centerModeApi.addTeachers(teachers, $scope.center._id).then(function() {
                                 _getTeachers($scope.center._id);
-                                alertsService.add({
-                                    text: 'centerMode_alert_addTeacher',
-                                    id: 'addTeacher',
-                                    type: 'ok',
-                                    time: 5000
-                                });
                             }).catch(function() {
                                 alertsService.add({
                                     text: 'centerMode_alert_addTeacher-Error',
@@ -238,7 +232,7 @@
                     title: 'newTeacher_modal_title',
                     confirmButton: 'newTeacher_modal_aceptButton',
                     confirmAction: confirmAction,
-                    contentTemplate: '/views/modals/newTeacher.html',
+                    contentTemplate: '/views/modals/centerMode/newTeacher.html',
                     modalButtons: true,
                     newTeachersModel: []
                 });
@@ -286,8 +280,8 @@
             };
 
             function _checkUrl() {
-                $scope.urlType = $routeParams.type;
-                switch ($scope.urlType) {
+                $scope.common.urlType = $routeParams.type;
+                switch ($scope.common.urlType) {
                     case 'center':
                         _getCenter();
                         break;

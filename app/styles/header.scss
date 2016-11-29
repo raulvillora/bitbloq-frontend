@@ -25,6 +25,15 @@
         max-height: 70px;
     }
 
+    .nav__menu .nav__menu__item--selected {
+        span {
+            color: white;
+        }
+        svg {
+            fill: white;
+        }
+    }
+
     .menu {
         display: flex;
         height: 70px;
