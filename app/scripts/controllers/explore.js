@@ -178,8 +178,8 @@ angular.module('bitbloqApp')
 
         function getComponentFilterRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.componentsFilterOptions[0].value) {
                 var componentsArray = _.pluck($scope.componentsFilterOptions, 'option');
@@ -200,11 +200,11 @@ angular.module('bitbloqApp')
 
         function getBoardFilterRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.boardFilters) {
-                if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi') {
+                if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi' || $scope.boardFilters === 'mBot') {
                     queryParams.query['hardware.robot'] = $scope.boardFilters.toLowerCase();
                 } else {
                     queryParams.query['hardware.board'] = $scope.boardFilters;
@@ -216,8 +216,8 @@ angular.module('bitbloqApp')
 
         function getGenericFilterRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.genericFilterOptions[0].value) {
                 if ($scope.genericFilters.indexOf('bq') > -1) {
@@ -229,8 +229,8 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
 
             if ($scope.searchText !== '') {
                 queryParams.query.$or = [{
@@ -311,6 +311,9 @@ angular.module('bitbloqApp')
             value: false
         }, {
             option: 'Evolution',
+            value: false
+        }, {
+            option: 'mBot',
             value: false
         }];
         $scope.componentsFilters = [];

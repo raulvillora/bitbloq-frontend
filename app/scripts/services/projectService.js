@@ -186,6 +186,7 @@ angular.module('bitbloqApp')
             if (exports.codeProject) {
                 code = exports.project.code;
             } else {
+                _updateHardwareSchema();
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
