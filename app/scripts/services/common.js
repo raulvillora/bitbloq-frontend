@@ -179,9 +179,9 @@ angular.module('bitbloqApp')
         var loadedUserPromise = $q.defer();
 
         if (!exports.user) {
-            console.log('gettingUSer on common');
+            $log.debug('gettingUSer on common');
             User.get().$promise.then(function(user) {
-                console.log('gettingUSer on common OK');
+                $log.debug('gettingUSer on common OK');
                 if (user.username) {
                     delete user.$promise;
                     delete user.$resolved;
@@ -192,7 +192,7 @@ angular.module('bitbloqApp')
                     exports.setUser(null);
                 }
             }, function() {
-                console.log('gettingUSer on common KO');
+                $log.debug('gettingUSer on common KO');
                 exports.userIsLoaded = true;
                 exports.setUser(null);
             });

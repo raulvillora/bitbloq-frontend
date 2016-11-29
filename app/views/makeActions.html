@@ -85,13 +85,13 @@
     <li class="actions__menu__item" data-ng-show="currentTab === 1">
         <button data-element="makeactions-menuedit" data-ng-class="{'actions__menu__button':true, 'actions__menu--selected':dropdown === 'edit'}" data-ng-click="dropdownHandler('edit')">{{'edit' | translate}}</button>
         <ul data-ng-class="{actions__menu__dropdown:true, 'actions--edit':true, hidden:dropdown !== 'edit', 'actions__menu--selected':dropdown === 'edit'}">
-            <li data-element="makeactions-menuedit-undo" data-ng-class="{'dropdown__item':true, 'dropdown__menu--disabled':bloqsHistory.length <= 1 }" data-ng-click="undo()" data-ng-disabled="disableUndo()">
+            <li data-element="makeactions-menuedit-undo" data-ng-class="{'dropdown__item':true, 'dropdown__menu--disabled':bloqsHistory.length <= 1 }" data-ng-click="undo()" data-ng-disabled="disableUndo(currentTab, hardwareHistory, bloqsHistory)">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                     <use xlink:href="#deshacer"></use>
                 </svg>
                 {{'undo' | translate}}
             </li>
-            <li data-element="makeactions-menuedit-redo" data-ng-class="{'dropdown__item':true, 'dropdown__menu--disabled':bloqsHistoryPointer >= bloqsHistory.length }" data-ng-click="redo()" data-ng-disabled="disableRedo()">
+            <li data-element="makeactions-menuedit-redo" data-ng-class="{'dropdown__item':true, 'dropdown__menu--disabled':bloqsHistoryPointer >= bloqsHistory.length }" data-ng-click="redo()" data-ng-disabled="disableRedo(currentTab, hardwareHistory, bloqsHistory)">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                     <use xlink:href="#rehacer"></use>
                 </svg>
@@ -260,4 +260,4 @@
         </button>
     </li>
 </ul>
-<input accept=".json, .bitbloq" class="hide" data-element="makeactions-input-upload-file" id="uploadProject" name="uploadProject" onchange="angular.element(this).scope().uploadProjectSelected(this.files)" type="file"/>
+<input accept=".json, .bitbloq" class="hide" data-element="makeactions-input-upload-file" id="uploadProject" name="uploadProject" onchange="angular.element(this).scope().uploadProjectSelected(this.files)" type="file" />

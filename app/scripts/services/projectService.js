@@ -186,6 +186,7 @@ angular.module('bitbloqApp')
             if (exports.codeProject) {
                 code = exports.project.code;
             } else {
+                _updateHardwareSchema();
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
@@ -332,8 +333,19 @@ angular.module('bitbloqApp')
 
             }
         };
-
+        //temp fix to code refactor, sensor types
+        var sensorsTypes = {};
+        for (var i = 0; i < hardwareConstants.components.sensors.length; i++) {
+            sensorsTypes[hardwareConstants.components.sensors[i].id] = hardwareConstants.components.sensors[i].dataReturnType;
+        }
         exports.setProject = function(newproject, type, watcher) {
+            for (var i = 0; i < newproject.hardware.components.length; i++) {
+                if (newproject.hardware.components[i].category === 'sensors') {
+                    newproject.hardware.components[i].dataReturnType = sensorsTypes[newproject.hardware.components[i].id];
+                }
+            }
+            //end temp fix
+
             _unBlindAllWatchers();
             newproject.codeProject = type === 'code' ? true : newproject.codeProject;
             if (_.isEmpty(exports.project)) {

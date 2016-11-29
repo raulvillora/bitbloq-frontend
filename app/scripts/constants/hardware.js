@@ -808,7 +808,7 @@ angular.module('bitbloqApp')
                 "type": "US",
                 "width": 120,
                 "height": 79,
-                "dataReturnType": "String",
+                "dataReturnType": "float",
                 "pins": {
                     "digital": [
                         "trigger",
@@ -993,7 +993,7 @@ angular.module('bitbloqApp')
                         "s"
                     ]
                 },
-                "oscillator": "false"
+                "oscillator": false
             }],
             "continuousServos": [{
                 "id": "servocont",
@@ -1062,9 +1062,8 @@ angular.module('bitbloqApp')
             "width": 75,
             "height": 86
         }, {
-            "id": "mBot",
+            "id": "mbot",
             "name": "mBot",
-            "underDevelopment": true,
             "board": "Arduino UNO",
             "width": 75,
             "height": 86

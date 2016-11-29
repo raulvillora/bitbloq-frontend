@@ -1,6 +1,6 @@
 [{
     "web2boardVersion": "1.0.0",
-    "bitbloqLibsVersion": "0.1.2",
+    "bitbloqLibsVersion": "1.0.0",
     "robotsFirmwareVersion": {
         "zowi": "1.0.0"
     },
@@ -193,10 +193,10 @@
             "name": "setVariable",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "arrayVariable",
+            "name": "declareArray",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "declareArray",
+            "name": "arrayVariable",
             "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "setArrayVariable",
@@ -365,6 +365,9 @@
             "name": "caseDefault",
             "addClass": "submenu__item submenu__item--component indent-1"
         }, {
+            "name": "magicFor",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
             "name": "for-v1",
             "addClass": "submenu__item submenu__item--component"
         }, {
@@ -383,6 +386,9 @@
         }, {
             "name": "else",
             "addClass": "submenu__item submenu__item--component indent-1"
+        }, {
+            "name": "magicForAdvanced",
+            "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "forAdvanced-v1",
             "addClass": "submenu__item submenu__item--component"
