@@ -176,7 +176,7 @@ angular.module('bitbloqApp')
                         context.drawImage(imageObj, xStart, 30, 542, 348);
                         break;
                     case 'evolution':
-                        context.drawImage(imageObj, xStart, 20, 542, 378);
+                        context.drawImage(imageObj, xStart, 60, 542, 325);
                         break;
                     default:
                         context.drawImage(imageObj, xStart, -60, 542, 542);
