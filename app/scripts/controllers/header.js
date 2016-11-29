@@ -61,7 +61,7 @@ angular.module('bitbloqApp')
                 modalOptions.mainText = 'centerMode_modal_createStudentProfile-mainText';
                 modalOptions.confirmButton = 'centerMode_button_createStudentProfile-confirm';
                 modalOptions.extraButton = '';
-                modalOptions.textContent = 'Podrás registrarte en los grupos con un ID que el profesor te indique para así poder ver los ejercicios.';
+                modalOptions.textContent = 'centerMode_modal_createStudent-content';
                 modalOptions.type = '';
                 modalOptions.confirmAction = createStudent;
 

@@ -4,14 +4,16 @@
     <div class="nav nav--bar nav--main">
         <nav class="menu" role="navigation">
             <h1 class="invisible">Bitbloq Navigation</h1>
-            <ul class="nav__menu">
-                <li class="nav--logo" data-element="nav-logo">
+            <ul>
+                <li data-element="nav-logo">
                     <a class="nav__menu__link" data-ng-href="#/{{common.user?'projects':''}}">
                         <svg class="svg-icon svg-icon-logo">
                             <use xlink:href="#logoBibtloq_webTool"></use>
                         </svg>
                     </a>
                 </li>
+            </ul>
+            <ul ng-if="common.user && (common.userRole==='headMaster' || common.user.studentMode)" class="nav__menu nav__menu__center-mode">
                 <li ng-if="common.user && common.userRole==='headMaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" data-element="nav-center">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
@@ -36,6 +38,8 @@
                         <span>{{ 'header_tab_myExercises' | translate }}</span>
                     </a>
                 </li>
+            </ul>
+            <ul class="nav__menu">
                 <li ng-if="!common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
                     <a class="nav__menu__link" href="#/bloqsproject">
                         <svg class="svg-icon svg-icon--text">
