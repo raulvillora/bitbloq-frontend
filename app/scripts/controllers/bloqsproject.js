@@ -858,7 +858,7 @@ angular.module('bitbloqApp')
                 freeBloqs: freeBloqs
             };
             //showProjectResumeOnConsole(step);
-            if ($scope.bloqsHistory.pointer != ($scope.bloqsHistory.history.length - 1)) {
+            if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
             $scope.bloqsHistory.history.push(_.cloneDeep(step));
@@ -898,7 +898,7 @@ angular.module('bitbloqApp')
 
         };
 
-        function showProjectResumeOnConsole(project) {
+        function showProjectResumeOnConsole(project) { // jshint ignore:line
             $log.log('Resume project');
             $log.log('*vars');
             if (project.vars.childs) {
@@ -907,9 +907,9 @@ angular.module('bitbloqApp')
                     if (project.vars.childs[i].childs) {
                         for (var j = 0; j < project.vars.childs[i].childs.length; j++) {
                             $log.log('------', project.vars.childs[i].childs[j].name);
-                        };
+                        }
                     }
-                };
+                }
             }
         }
 
