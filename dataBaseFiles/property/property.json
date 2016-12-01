@@ -516,6 +516,9 @@
             "name": "mBotMove",
             "addClass": "submenu__item submenu__item--component"
         }, {
+            "name": "mBotStop",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
             "name": "mBotBuzzer",
             "addClass": "submenu__item submenu__item--component"
         }, {
