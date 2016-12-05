@@ -15,6 +15,7 @@ angular.module('bitbloqApp')
                 '',
                 'bloqsproject',
                 'codeproject',
+                'exercise',
                 'features',
                 'downloads',
                 'bitbloq-help',

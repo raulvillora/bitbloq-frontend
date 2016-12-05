@@ -17,42 +17,29 @@ angular.module('bitbloqApp')
         $log.log('Bitbloq version:', packageData.version);
 
         //See drag directives
-        exports.draggingElement = {};
-
-        exports.isLoggedIn = userApi.isLoggedIn;
-
-        exports.isAdmin = userApi.isAdmin;
-
-        exports.section = '';
-
-        exports.user = null;
-
         exports.appAlert = null;
-
-        exports.warnedOfIncompatibility = false;
-
-        exports.properties = null;
-
-        exports.isLoading = false;
-
+        exports.avatarChange = false;
+        exports.draggingElement = {};
         exports.connectedWeb2Board = false;
-
+        exports.isLoading = false;
+        exports.isLoggedIn = userApi.isLoggedIn;
+        exports.isAdmin = userApi.isAdmin;
+        exports.oldVersionMasthead = false;
+        exports.os = utils.getOs();
+        exports.properties = null;
+        exports.removeProjects = [];
+        exports.section = '';
         exports.session = {
             bloqTab: false,
             project: {},
             save: false
         };
-
         exports.translate = $filter('translate');
-
-        exports.removeProjects = [];
-
-        exports.oldVersionMasthead = false;
-
         exports.urlImage = envData.config.gCloudUrl + '/images/';
-
-        exports.avatarChange = false;
-        exports.os = utils.getOs();
+        exports.urlType = null;
+        exports.user = null;
+        exports.userRole = '';
+        exports.warnedOfIncompatibility = false;
 
         exports.langToBQ = {
             ca: 'es',

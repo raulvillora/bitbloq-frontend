@@ -167,6 +167,11 @@ angular
                 templateUrl: 'views/centerMode/centerModeIndex.html',
                 controller: 'CenterCtrl'
             })
+            .when('/exercise/:id?', {
+                templateUrl: 'views/centerMode/exercise.html',
+                controller: 'ExerciseCtrl',
+                reloadOnSearch: false
+            })
             .when('/404', {
                 templateUrl: '404.html'
             })
