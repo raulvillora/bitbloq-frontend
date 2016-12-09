@@ -14,57 +14,6 @@ $hw_toolbox: 210px;
     }
 }
 
-.sidebar-filter-list {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: inherit;
-    height: calc(90% - 54px);
-    background-color: #fff;
-    overflow: auto;
-    .sidebar-filter-title {
-        padding: 0.5em;
-        text-align: left;
-        padding: 1em 0 1em 20px;
-        border-bottom: 1px solid #edf1f2;
-    }
-    .sidebar-filter-element {
-        margin: 1em;
-        .name {
-            font-weight: lighter;
-        }
-    }
-}
-
-.hw-toolbox-container {
-    width: #{$hw_toolbox};
-    float: right;
-    .components-list {
-        .component-container {
-            @extend .container-default;
-            .component-image {
-                max-width: 60%;
-            }
-        }
-    }
-    .boards-list {
-        .board-container {
-            @extend .container-default;
-            .board-image {
-                width: 80%;
-            }
-        }
-    }
-    .robots-list {
-        .robot-container {
-            @extend .container-default;
-            .board-image {
-                width: 80%;
-            }
-        }
-    }
-}
-
 .hw-context-menu {
     display: none;
     background-color: transparent;

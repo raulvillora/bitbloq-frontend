@@ -1,0 +1,100 @@
+$hw_toolbox: 210px;
+
+.hw-toolbox {
+    min-width: #{$hw_toolbox};
+    float: right;
+}
+
+.toolbox--right {
+    border-top: 1px solid #edf0f1;
+    border-left: 1px solid #cfcfcf;
+    background-color: white;
+    color: black;
+    font-size: 13px;
+    height: 100%;
+    width: 227px;
+    max-width: 271px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    &.toolbox--expand {
+        width: 271px;
+    }
+}
+
+.toolbox__buttons {
+    width: 60px;
+    float: left;
+    background-color: #b9bdc8;
+    .toolbox__item {
+        border-bottom: 1px solid white;
+    }
+    .svg-icon {
+        fill: white;
+        width: 24.1px;
+        height: 24px;
+    }
+    .toolbox--selected {
+        background-color: white;
+        border-bottom: 1px solid #b9bdc8;
+        .svg-icon {
+            fill: #b9bdc8;
+        }
+    }
+}
+
+.toolbox__menu {
+    width: 166px;
+    float: right;
+    .toolbox__item {
+        border-bottom: 1px solid #edf0f1;
+    }
+}
+
+.toolbox__content {
+    width: 210px;
+    float: right;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    transition: transform 250ms;
+    opacity: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: translate3d(0, 0, 0);
+    border-left: 1px solid #cfcfcf;
+    .submenu__title {
+        padding: .5em;
+        text-align: left;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-left: 20px;
+    }
+    .toolbox__conten-container {
+        padding-right: 20px;
+    }
+    .toolbox__content__list {
+        padding: 10px;
+        margin: 0 40px 0 14px;
+        .list-name {
+            padding: 5px;
+            font-weight: lighter;
+        }
+    }
+}
+
+.toolbox__item {
+    height: 58px;
+    border-bottom: 1px solid white;
+    .btn-svg {
+        width: 100%;
+        padding: 17px;
+    }
+    .btn-text {
+        width: 100%;
+        line-height: 1.7;
+        padding: 18px 16px;
+        text-align: left;
+    }
+}
+

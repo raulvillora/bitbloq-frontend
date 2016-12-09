@@ -49,35 +49,6 @@ angular.module('bitbloqApp')
             $scope.levelOne = $scope.levelTwo = $scope.submenuVisible = false;
         };
 
-        $scope.subMenuHandler = function(menu, action, level) {
-            if (action === 'open') {
-                $scope.$emit('menu--open');
-                switch (level) {
-                    case 1:
-                        $scope.levelOne = menu;
-                        $scope.levelTwo = false;
-                        break;
-                    case 2:
-
-                        $scope.levelTwo = menu;
-                        break;
-                    default:
-                        throw 'Error opening sidebar menu';
-                }
-            } else {
-                switch (level) {
-                    case 1:
-                        $scope.levelOne = false;
-                        $scope.levelTwo = false;
-                        break;
-                    case 2:
-                        $scope.levelTwo = false;
-                        break;
-                    default:
-                        throw 'Error closing sidebar menu';
-                }
-            }
-        };
 
         $scope.setLevelTwo = function() {
             $scope.levelTwo = !$scope.levelTwo;
@@ -852,11 +823,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer != ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -907,9 +878,11 @@ angular.module('bitbloqApp')
                     if (project.vars.childs[i].childs) {
                         for (var j = 0; j < project.vars.childs[i].childs.length; j++) {
                             $log.log('------', project.vars.childs[i].childs[j].name);
-                        };
+                        }
+                        ;
                     }
-                };
+                }
+                ;
             }
         }
 
@@ -1020,7 +993,8 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
 
                 event.preventDefault();
             }
@@ -1041,9 +1015,6 @@ angular.module('bitbloqApp')
                         $scope.tourCurrentStep = 2;
                         var runStepThree = $scope.$on('menu--open', function() {
                             $timeout(function() {
-                                $('.submenu-level').animate({
-                                    scrollTop: $('[dragid="led"]').offset().top - 150
-                                }, 'slow');
                                 $scope.handleTour(3);
                                 runStepThree();
                             }, 0);

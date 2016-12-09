@@ -1,5 +1,4 @@
-<!-- <div ng-class="{'container--main':true, 'header--collapsed':collapsedHeader, 'header--anonymous':!common.user}"> -->
-<div ng-class="{'make-view':true, 'main--collapsed':collapsedHeader || !common.user, 'walkthrough':tourCurrentStep}" class="step-{{tourCurrentStep}}">
+<div ng-class="{'make-view':true, 'main--collapsed':collapsedHeader || !common.user}" class="step-{{tourCurrentStep}}">
     <!-- Navigation -->
     <div ng-show="common.user && common.section === 'exercise'" ng-class="{'nav':true, 'nav--bar':true, 'nav--make':true, 'header--collapsed':collapsedHeader}">
         <div class="tour-steps">
@@ -106,4 +105,3 @@
         </div>
     </div>
 </div>
-<!-- </div> -->

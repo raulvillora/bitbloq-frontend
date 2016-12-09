@@ -381,71 +381,6 @@ $leftBarWidth: 70px;
     }
 }
 
-.tabs--make--right {
-    border: 1px solid #edf1f2;
-    border-left: 1px solid #cfcfcf;
-    // max-width: 210px;
-    width: 210px;
-    background-color: white;
-    color: black;
-    height: 100%;
-    position: absolute;
-    overflow: hidden;
-    transition: transform 250ms, width 250ms;
-    right: 0;
-    .tabs__menu {
-        .tabs__menu__item {
-            border-bottom: 1px solid #edf1f2;
-            font-size: 14px;
-            font-weight: bold;
-            color: #3b3b3b;
-            position: static;
-            &:last-child {
-                position: absolute;
-                bottom: 10px;
-                left: 10px;
-                padding: 0;
-                width: 190px;
-                &:hover {
-                    background-color: white;
-                }
-                .search--icon {
-                    display: block;
-                    background-color: #89b63f;
-                    width: 40px;
-                    height: 35px;
-                    float: left;
-                    &:hover {
-                        background-color: #8fbc45;
-                    }
-                }
-            }
-        }
-    }
-}
-
-.submenu-level {
-    width: 210px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 55px;
-    background-color: white;
-    z-index: 2;
-    transition: transform 250ms;
-    opacity: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
-    transform: translate3d(0, 0, 0);
-    border-left: 1px solid #cfcfcf;
-}
-
-.submenu-level--closed {
-    transform: translate3d(100%, 0, 0);
-    opacity: 0;
-    // display  : none; -> FAIL!
-}
-
 .submenu__button--back {
     border-bottom: 1px solid #edf1f2;
     width: 100%;
@@ -543,17 +478,6 @@ $leftBarWidth: 70px;
         cursor: pointer;
         background-color: #ebebeb;
     }
-    // &:after {
-    //     content: "";
-    //     width: 100%;
-    //     height: 8px;
-    //     display: block;
-    //     background-color: white;
-    //     position: absolute;
-    //     z-index: 10;
-    //     left: 0;
-    //     top: 22px;
-    // }
 }
 
 .submenu__title {
@@ -562,22 +486,12 @@ $leftBarWidth: 70px;
     padding-top: 1em;
     padding-bottom: 1em;
     padding-left: 20px;
-    border-bottom: 1px solid #edf1f2;
 }
 
 .menu--level-one {
     width: 265px;
     max-width: 265px;
     // background-color: gray;
-}
-
-.menu--level-one__toolbox {
-    width: 265px;
-    max-width: 265px;
-    // background-color: gray;
-    position: absolute;
-    right: 0;
-    z-index: 1;
 }
 
 .disabled--level {
@@ -605,12 +519,6 @@ $leftBarWidth: 70px;
     .submenu__button--back {
         pointer-events: all;
     }
-}
-
-.bloqs--toolbox--main {
-    height: calc(100% - 90px);
-    pointer-events: auto;
-    width: 190px;
 }
 
 .submenu--item--bottom {
@@ -694,14 +602,6 @@ $leftBarWidth: 70px;
     width: 8px;
 }
 
-.tabs__item--clickable {
-    padding: 1.3em;
-    cursor: pointer;
-    &:hover {
-        background-color: #ebebeb;
-    }
-}
-
 .console--title {
     padding: 1em;
     color: #373b46;
@@ -726,9 +626,6 @@ $leftBarWidth: 70px;
     transition-property: top;
     transition-duration: 250ms;
     top: #{$titleHeightNumber + $makeActionsHeightNumber}px;
-    .submenu-level {
-        width: calc(100% - 53px);
-    }
     &.navbar--collapsed {
         top: #{$makeActionsHeightNumber}px;
     }
@@ -815,40 +712,14 @@ $leftBarWidth: 70px;
     fill: #3b3e45;
 }
 
-.submenu--inactive:after {
-    top: 0;
-    content: '';
-    background-color: black;
-    opacity: .3;
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
 .active--sidebar {
     position: relative;
     height: calc(100% - 210px);
     pointer-events: auto;
 }
 
-.inactive--sidebar {
-    transition: opacity 250ms;
-    height: 100%;
-}
-
 .inactive {
     pointer-events: none;
-}
-
-.sidebar--close--outside {
-    background-color: black;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    opacity: .5;
-    cursor: pointer;
 }
 
 .right {
@@ -896,15 +767,6 @@ $leftBarWidth: 70px;
     width: 130px;
 }
 
-.sidebar--close--outside {
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    position: absolute;
-    opacity: .5;
-}
-
 .make__project--name {
     padding-right: 1em;
 }
@@ -939,13 +801,6 @@ $leftBarWidth: 70px;
     width: 585px;
     max-width: 585px;
     min-width: 585px;
-}
-
-.components--container--soft {}
-
-.menu--level-two {
-    width: 635px;
-    max-width: 635px;
 }
 
 #toolbox {

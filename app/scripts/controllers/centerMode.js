@@ -33,14 +33,14 @@
 
             var currentModal;
 
-            $scope.changeStatusClass = function (){
-              centerModeApi.updateGroup($scope.group).catch(function() {
-                  alertsService.add({
-                      text: 'updateGroup_alert_Error',
-                      id: 'deleteGroup',
-                      type: 'ko'
-                  });
-              });
+            $scope.changeStatusClass = function() {
+                centerModeApi.updateGroup($scope.group).catch(function() {
+                    alertsService.add({
+                        text: 'updateGroup_alert_Error',
+                        id: 'deleteGroup',
+                        type: 'ko'
+                    });
+                });
             };
 
             $scope.closeGroup = function() {
@@ -222,7 +222,7 @@
                 });
             };
 
-            $scope.registerInGroup = function(){
+            $scope.registerInGroup = function() {
                 function confirmAction(groupId) {
                     centerModeApi.registerInGroup(groupId).then(function() {
                         currentModal.close();

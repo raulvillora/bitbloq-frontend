@@ -12,100 +12,101 @@ $makeHeaderPlusMakeActions: 110px;
 
     .level {
         border-left: 1px solid #cfcfcf;
-        display    : block;
-        position   : absolute;
-        height     : 100%;
-        width      : 100%;
-        top        : 1px;
-        left       : 0;
-        transition : transform 250ms;
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 1px;
+        left: 0;
+        transition: transform 250ms;
 
         ul {
             top: 0;
         }
 
         .toolbox--bloqs--container {
-            height    : calc(100vh - 260px);
-            display   : block;
-            overflow  : hidden;
+            height: calc(100vh - 260px);
+            display: block;
+            overflow: hidden;
             overflow-y: auto;
-            width     : 90%;
+            width: 90%;
         }
 
         .toolbox--bloqs--container--full {
-            height    : calc(100vh - 200px);
-            display   : block;
-            overflow  : hidden;
+            height: calc(100vh - 200px);
+            display: block;
+            overflow: hidden;
             overflow-y: auto;
-            width     : 90%;
+            width: 90%;
         }
     }
 
-    .toolbox--item {}
+    .toolbox--item {
+    }
 }
 
 .btn--toolbox {
-    position     : relative;
-    max-height   : 60px;
-    height       : 10%;
-    width        : 100%;
-    text-align   : left;
-    padding      : 1em;
+    position: relative;
+    max-height: 60px;
+    height: 10%;
+    width: 100%;
+    text-align: left;
+    padding: 1em;
     border-bottom: 1px solid #edf1f2;
-    padding-left : 2em;
-    line-height  : 20px;
+    padding-left: 2em;
+    line-height: 20px;
 
     &:first-child {
         border-top: none;
     }
 
     &.btn--advanced {
-        position        : absolute;
-        bottom          : 0;
-        width           : 100%;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
         background-color: white;
-        z-index         : 4;
-        border-top      : 1px solid #edf1f2;
+        z-index: 4;
+        border-top: 1px solid #edf1f2;
     }
 }
 
 .level--1--shadow,
 .level--2--shadow {
-    position        : absolute;
-    height          : 100%;
-    width           : 600px;
-    left            : 0;
-    top             : 0;
-    opacity         : 0;
-    transition      : opacity 250ms;
-    transform       : translate3d(600px, 0px, 0);
-    z-index         : 1;
+    position: absolute;
+    height: 100%;
+    width: 600px;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 250ms;
+    transform: translate3d(600px, 0px, 0);
+    z-index: 1;
     background-color: transparent;
-    cursor          : pointer;
+    cursor: pointer;
 }
 
 .level--shadow--active {
-    opacity  : 1;
+    opacity: 1;
     transform: translate3d(0px, 0px, 0);
 }
 
 .level--active {
     &.trash {
         &:after {
-            content            : '';
-            position           : absolute;
-            width              : 100%;
-            height             : 100%;
-            background-color   : white;
-            background-image   : url('../images/trash.jpg');
-            display            : block;
-            top                : 0;
-            right              : 0;
-            z-index            : 3;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            background-image: url('../images/trash.jpg');
+            display: block;
+            top: 0;
+            right: 0;
+            z-index: 3;
             background-position: 40% 40%;
-            background-repeat  : no-repeat;
-            animation-name     : fadeIn;
-            animation-duration : 250ms;
+            background-repeat: no-repeat;
+            animation-name: fadeIn;
+            animation-duration: 250ms;
         }
     }
 }
@@ -118,33 +119,33 @@ $makeHeaderPlusMakeActions: 110px;
     }
 
     &.level--active {
-        z-index   : 3;
-        transform : translate3d(0px, 0px, 0);
-        overflow  : auto;
+        z-index: 3;
+        transform: translate3d(0px, 0px, 0);
+        overflow: auto;
         overflow-x: hidden;
-        height    : calc(100% - #{$makeHeaderPlusMakeActions});
+        height: calc(100% - #{$makeHeaderPlusMakeActions});
     }
 
     &.level--inactive--1 {
-        transform    : translate3d(-315px, 0, 0);
+        transform: translate3d(-315px, 0, 0);
         border-bottom: 1px solid rgba(55, 59, 68, 0.7);
     }
 
     &.level--inactive--2 {
-        transform    : translate3d(-365px, 0, 0);
+        transform: translate3d(-365px, 0, 0);
         border-bottom: 1px solid rgba(55, 59, 68, 0.7);
     }
 }
 
 .level--2 {
-    z-index  : 2;
+    z-index: 2;
     min-width: $softwareToolboxLevel2Width;
     transform: translate3d($softwareToolboxWidth, 0px, 0);
 
     .level--2--shadow {
         background-color: rgba(55, 59, 68, 0.4);
-        pointer-events  : all;
-        z-index         : 2;
+        pointer-events: all;
+        z-index: 2;
     }
 
     .btn--toolbox {
@@ -152,10 +153,10 @@ $makeHeaderPlusMakeActions: 110px;
     }
 
     &.level--active {
-        height   : calc(100% - 106px);
-        overflow : hidden;
+        height: calc(100% - 106px);
+        overflow: hidden;
         transform: translate3d($softwareToolboxSpaceBetweenLevels, 0px, 0);
-        z-index  : 8;
+        z-index: 8;
     }
 
     &.toolbox--collapsed {
@@ -171,14 +172,14 @@ $makeHeaderPlusMakeActions: 110px;
 }
 
 .level--3 {
-    z-index  : 3;
+    z-index: 3;
     transform: translate3d($softwareToolboxLevel2Width, 0px, 0);
 
     &.level--active {
-        height   : calc(100% - 106px);
-        overflow : hidden;
+        height: calc(100% - 106px);
+        overflow: hidden;
         transform: translate3d($softwareToolboxSpaceBetweenLevels, 0px, 0);
-        z-index  : 9;
+        z-index: 9;
     }
 
     &.toolbox--collapsed {

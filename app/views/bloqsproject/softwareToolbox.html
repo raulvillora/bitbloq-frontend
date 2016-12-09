@@ -25,7 +25,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container--full">
-                        <li id="{{'bloq' + zowi.name}}" data-ng-class="zowi.addClass" data-ng-repeat="zowi in common.properties.bloqsSortTree.zowi" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.zowi[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + zowi.name}}" data-ng-class="zowi.addClass" data-ng-repeat="zowi in common.properties.bloqsSortTree.zowi" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.zowi[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -42,7 +43,8 @@
                         <!-- ADVANCED -->
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedZowi.name}}" data-ng-class="advancedZowi.addClass" data-ng-repeat="advancedZowi in common.properties.bloqsSortTree.advancedZowis" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedZowis[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedZowi.name}}" data-ng-class="advancedZowi.addClass" data-ng-repeat="advancedZowi in common.properties.bloqsSortTree.advancedZowis" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedZowis[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -64,7 +66,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container--full">
-                        <li id="{{'bloq' + evolution.name}}" data-ng-class="evolution.addClass" data-ng-repeat="evolution in common.properties.bloqsSortTree.evolution" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.evolution[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + evolution.name}}" data-ng-class="evolution.addClass" data-ng-repeat="evolution in common.properties.bloqsSortTree.evolution" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.evolution[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -81,7 +84,8 @@
                         <!-- ADVANCED -->
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedEvolution.name}}" data-ng-class="advancedEvolution.addClass" data-ng-repeat="advancedEvolution in common.properties.bloqsSortTree.advancedEvolution" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedEvolution[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedEvolution.name}}" data-ng-class="advancedEvolution.addClass" data-ng-repeat="advancedEvolution in common.properties.bloqsSortTree.advancedEvolution" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedEvolution[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -103,7 +107,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container--full">
-                        <li id="{{'bloq' + mBot.name}}" data-ng-class="mBot.addClass" data-ng-repeat="mBot in common.properties.bloqsSortTree.mBot" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mBot[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + mBot.name}}" data-ng-class="mBot.addClass" data-ng-repeat="mBot in common.properties.bloqsSortTree.mBot" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mBot[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -120,7 +125,8 @@
                         <!-- ADVANCED -->
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedMBot.name}}" data-ng-class="advancedMBot.addClass" data-ng-repeat="advancedMBot in common.properties.bloqsSortTree.advancedMBot" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMBot[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedMBot.name}}" data-ng-class="advancedMBot.addClass" data-ng-repeat="advancedMBot in common.properties.bloqsSortTree.advancedMBot" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMBot[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -137,14 +143,16 @@
                     <use xlink:href="#flecha"></use>
                 </svg>
             </button>
-            <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'components', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'components'}" data-walkthrough="components-container">
+            <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'components', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'components'}"
+                data-walkthrough="components-container">
                 <li>
                     <h1 class="h3 submenu__title">{{ 'components' | translate }}</h1>
                 </li>
                 <li ng-if="!anyComponent()" class="error--text">{{"no-components-connected" | translate}}</li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li class="{{component.addClass}}" id="{{'bloq' + component.name}}" data-ng-show="showComponents(component.name)" data-ng-repeat="component in common.properties.bloqsSortTree.components" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.components[$index].name]" data-components-array="componentsArray"></li>
+                        <li class="{{component.addClass}}" id="{{'bloq' + component.name}}" data-ng-show="showComponents(component.name)" data-ng-repeat="component in common.properties.bloqsSortTree.components" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.components[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -161,7 +169,9 @@
                         <!-- ADVANCED -->
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedComponent.name}}" data-ng-class="advancedComponent.addClass" data-ng-show="showComponents(advancedComponent.name)" data-ng-repeat="advancedComponent in common.properties.bloqsSortTree.advancedComponents" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedComponents[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedComponent.name}}" data-ng-class="advancedComponent.addClass" data-ng-show="showComponents(advancedComponent.name)"
+                                    data-ng-repeat="advancedComponent in common.properties.bloqsSortTree.advancedComponents" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedComponents[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -184,7 +194,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + function.name}}" data-ng-class="function.addClass" data-ng-repeat="function in common.properties.bloqsSortTree.functions" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.functions[$index].name]" data-components-array="componentsArray">
+                        <li id="{{'bloq' + function.name}}" data-ng-class="function.addClass" data-ng-repeat="function in common.properties.bloqsSortTree.functions" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.functions[$index].name]" data-components-array="componentsArray">
                         </li>
                     </ul>
                 </li>
@@ -202,7 +213,8 @@
                         </li>
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedFunction.name}}" data-ng-class="advancedFunction.addClass" data-ng-repeat="advancedFunction in common.properties.bloqsSortTree.advancedFunctions" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedFunctions[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedFunction.name}}" data-ng-class="advancedFunction.addClass" data-ng-repeat="advancedFunction in common.properties.bloqsSortTree.advancedFunctions" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedFunctions[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -225,7 +237,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + variable.name}}" data-ng-class="variable.addClass" data-ng-repeat="variable in common.properties.bloqsSortTree.variables" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.variables[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + variable.name}}" data-ng-class="variable.addClass" data-ng-repeat="variable in common.properties.bloqsSortTree.variables" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.variables[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -242,7 +255,8 @@
                         </li>
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedVariable.addClass" data-ng-repeat="advancedVariable in common.properties.bloqsSortTree.advancedVariables" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedVariables[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedVariable.addClass" data-ng-repeat="advancedVariable in common.properties.bloqsSortTree.advancedVariables" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedVariables[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -265,7 +279,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container--full">
-                        <li id="{{'bloq' + code.name}}" data-ng-class="code.addClass" data-ng-repeat="code in common.properties.bloqsSortTree.codes" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.codes[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + code.name}}" data-ng-class="code.addClass" data-ng-repeat="code in common.properties.bloqsSortTree.codes" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.codes[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
@@ -286,7 +301,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + math.name}}" data-ng-class="math.addClass" data-ng-repeat="math in common.properties.bloqsSortTree.mathematics" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mathematics[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + math.name}}" data-ng-class="math.addClass" data-ng-repeat="math in common.properties.bloqsSortTree.mathematics" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mathematics[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -303,7 +319,8 @@
                         </li>
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedMathematics.addClass" data-ng-repeat="advancedMathematics in common.properties.bloqsSortTree.advancedMathematics" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMathematics[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedMathematics.addClass" data-ng-repeat="advancedMathematics in common.properties.bloqsSortTree.advancedMathematics" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMathematics[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -326,7 +343,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + text.name}}" data-ng-class="text.addClass" data-ng-repeat="text in common.properties.bloqsSortTree.texts" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.texts[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + text.name}}" data-ng-class="text.addClass" data-ng-repeat="text in common.properties.bloqsSortTree.texts" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.texts[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -343,7 +361,8 @@
                         </li>
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedText.addClass" data-ng-repeat="advancedText in common.properties.bloqsSortTree.advancedText" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedText[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedText.addClass" data-ng-repeat="advancedText in common.properties.bloqsSortTree.advancedText" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedText[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -366,7 +385,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + control.name}}" data-ng-class="control.addClass" data-ng-repeat="control in common.properties.bloqsSortTree.controls" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.controls[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + control.name}}" data-ng-class="control.addClass" data-ng-repeat="control in common.properties.bloqsSortTree.controls" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.controls[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -383,7 +403,8 @@
                         </li>
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedControl.addClass" data-ng-repeat="advancedControl in common.properties.bloqsSortTree.advancedControls" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedControls[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedControl.addClass" data-ng-repeat="advancedControl in common.properties.bloqsSortTree.advancedControls" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedControls[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -406,7 +427,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + logic.name}}" data-ng-class="logic.addClass" data-ng-repeat="logic in common.properties.bloqsSortTree.logics" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.logics[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + logic.name}}" data-ng-class="logic.addClass" data-ng-repeat="logic in common.properties.bloqsSortTree.logics" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.logics[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
@@ -414,28 +436,6 @@
         </li>
         <!-- END LOGIC -->
         <!-- CLASSES -->
-        <!--         <li>
-            <button class="btn btn--toolbox" ng-click="toolbox.level = 2; toolbox.section = 'classes'">
-                <span class="toolbox toolbox-code"></span> {{ 'make-swtoolbox-classes' | translate }}
-                <svg class="svg-icon svg-icon--right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'classes', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'classes'}">
-                <li>
-                    <button class="btn submenu__button--back" ng-click="toolbox.level = 1">{{ 'back' | translate }}</button>
-                </li>
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-classes' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox--bloqs--container--full">
-                        <li id="{{'bloq' + classes.name}}" data-ng-class="classes.addClass" data-ng-repeat="class in common.properties.bloqsSortTree.classes" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.classes[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li> -->
         <li data-element="toolbox-classes">
             <button class="btn btn--toolbox" ng-click="toolbox.level = 2; toolbox.section = 'classes'">
                 <span class="toolbox toolbox-classes"></span> {{ 'make-swtoolbox-classes' | translate }}
@@ -449,7 +449,8 @@
                 </li>
                 <li>
                     <ul class="toolbox--bloqs--container">
-                        <li id="{{'bloq' + classes.name}}" data-ng-class="classes.addClass" data-ng-repeat="classes in common.properties.bloqsSortTree.classes" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.classes[$index].name]" data-components-array="componentsArray"></li>
+                        <li id="{{'bloq' + classes.name}}" data-ng-class="classes.addClass" data-ng-repeat="classes in common.properties.bloqsSortTree.classes" data-bitbloq-bloq-creator
+                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.classes[$index].name]" data-components-array="componentsArray"></li>
                     </ul>
                 </li>
                 <li>
@@ -466,7 +467,8 @@
                         </li>
                         <li>
                             <ul class="toolbox--bloqs--container--full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedClasses.addClass" data-ng-repeat="advancedClasses in common.properties.bloqsSortTree.advancedClasses" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedClasses[$index].name]" data-components-array="componentsArray"></li>
+                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedClasses.addClass" data-ng-repeat="advancedClasses in common.properties.bloqsSortTree.advancedClasses" data-bitbloq-bloq-creator
+                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedClasses[$index].name]" data-components-array="componentsArray"></li>
                             </ul>
                         </li>
                     </ul>
@@ -474,15 +476,6 @@
                 <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
             </ul>
         </li>
-        <!-- END CLASSES -->
-        <!--<li class="tabs__menu__item" ng-click="searchBloq()">
-                  <span class="form--input">
-                    <svg class="svg-icon--search">
-                        <use xlink:href="#lupa"></use>
-                    </svg>
-                    <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}">
-                </span>
-            </li> -->
         <div ng-class="{'level--1--shadow':true,'level--shadow--active':toolbox.level !== 1}"></div>
     </ul>
 </aside>

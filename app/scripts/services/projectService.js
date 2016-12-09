@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration)
+    {
 
         var exports = {},
             thereAreWatchers = false,

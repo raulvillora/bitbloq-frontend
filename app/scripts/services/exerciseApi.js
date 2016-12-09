@@ -29,7 +29,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        function deleteExercise(idExercise){
+        function deleteExercise(idExercise) {
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'exercise/' + idExercise

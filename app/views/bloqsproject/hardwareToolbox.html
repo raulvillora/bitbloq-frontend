@@ -17,93 +17,84 @@
         <span>{{ 'tour-step-four-text' | translate }}</span>
     </div>
 </div>
-<aside class="tabs--make--right" id="hwtoolbox" ng-class="{'menu--level-one__toolbox':levelOne, 'menu--level-two':levelTwo}">
-    <div ng-class="{'inactive--sidebar':levelOne}">
-        <ul class="tabs__menu">
-            <!-- BOARDS -->
-            <li class="tabs__menu__item" data-walkthrough="boards">
-                <div class="tabs__item--clickable" data-element="boards" ng-class="{'disabled--level':levelOne}" ng-click="subMenuHandler('boards', 'open', 1); handleTour(2)">
-                    <svg class="svg-icon svg-icon--text">
+<aside id="hwtoolbox" class="toolbox--right" ng-class="{'toolbox--expand':selectedToolbox!==''}" ng-init="selectedToolbox=''">
+    <div class="toolbox__buttons">
+        <ul>
+            <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='boards'}">
+                <button class="btn-svg" ng-click="selectedToolbox='boards'">
+                    <svg class="svg-icon">
                         <use xlink:href="#placas"></use>
                     </svg>
-                    <button class="btn">{{'boards' | translate}}</button>
-                    <svg class="svg-icon svg-icon--right">
-                        <use xlink:href="#flecha"></use>
-                    </svg>
-                </div>
-                <div class="submenu-level" ng-class="{'submenu-level--closed':levelOne !== 'boards','submenu--inactive':levelTwo}">
-                    <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
-                    <div class="bloqs--toolbox--main">
-                        <div class="boards-list">
-                            <div class="board-container" ng-if="!board.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="board in hardware.boardList track by board.id" data-ng-click="drop({type:'boards', id:board.id})">
-                                <h1 class="board-name name">{{board.name}}</h1>
-                                <img class="board-image" draggable dragid="{{board.id}}" dragtype="boards" ng-src="/images/boards/{{board.id}}.png">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </button>
             </li>
-            <!-- COMPONENTS -->
-            <li class="tabs__menu__item">
-                <div class="tabs__item--clickable" ng-class="{'disabled--level':levelOne}" ng-click="subMenuHandler('hwcomponents', 'open', 1)">
-                    <svg class="svg-icon svg-icon--text">
+            <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='components'}">
+                <button class="btn-svg" ng-click="selectedToolbox='components'">
+                    <svg class="svg-icon">
                         <use xlink:href="#componentes"></use>
                     </svg>
-                    <button class="btn">{{'components' | translate}}</button>
-                    <svg class="svg-icon svg-icon--right">
-                        <use xlink:href="#flecha"></use>
-                    </svg>
-                </div>
-                <div class="submenu-level" ng-class="{'submenu-level--closed':levelOne !== 'hwcomponents','submenu--inactive':levelTwo}">
-                    <h1 class="h3 submenu__title">{{'components' | translate}}</h1>
-                    <div class="bloqs--toolbox--main">
-                        <div class="components-list">
-                            <div class="component-container" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
-                                <h1 class="component-name name" translate>{{component.id}}</h1>
-                                <img class="component-image" dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="components" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </button>
             </li>
-            <!-- ROBOTS -->
-            <li class="tabs__menu__item">
-                <div class="tabs__item--clickable" ng-class="{'disabled--level':levelOne}" ng-click="subMenuHandler('robots', 'open', 1)">
-                    <svg class="svg-icon svg-icon--text">
+            <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='robots'}">
+                <button class="btn-svg" ng-click="selectedToolbox='robots'">
+                    <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
                     </svg>
-                    <button class="btn">{{'robots' | translate}}</button>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="toolbox__menu" ng-show="selectedToolbox===''">
+        <ul>
+            <li class="toolbox__item">
+                <button class="btn btn-text" ng-click="selectedToolbox='boards'">
+                    {{'boards' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
                     </svg>
-                </div>
-                <div class="submenu-level" ng-class="{'submenu-level--closed':levelOne !== 'robots'}">
-                    <h1 class="h3 submenu__title">{{'robots' | translate}}</h1>
-                    <div class="bloqs--toolbox--main">
-                        <div class="robots-list">
-                            <div ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" class="robot-container" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.id})">
-                                <h1 class="robot-name name">{{robot.name}}</h1>
-                                <img class="robot-image" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </button>
             </li>
-            <li class="tabs__menu__item">
-                <!-- <span class="form--input">
-                    <svg class="svg-icon--search"><use xlink:href="#lupa"></use></svg>
-                    <input type="search" name="search--normal" data-element="" id="search--normal" placeholder="{{'find'|translate}}" ng-model="searchText">
-                </span> -->
+            <li class="toolbox__item">
+                <button class="btn btn-text" ng-click="selectedToolbox='components'">
+                    {{'components' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#flecha"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item">
+                <button class="btn btn-text" ng-click="selectedToolbox='robots'">
+                    {{'robots' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#flecha"></use>
+                    </svg>
+                </button>
             </li>
         </ul>
-        <p class="sidebar--close--outside" ng-click="closeMenu()" ng-if="levelOne"></p>
     </div>
-    <div class="sidebar-filter-list" ng-show="searchText">
-        <h3 class="h3 submenu__title">Buscar "{{searchText}}"</h3>
-        <ul>
-            <li ng-repeat="item in allHwElements | filter:filterSearch(searchText)" class="sidebar-filter-element">
-                <h1 class="component-name name" translate>{{item.id}}</h1>
-                <img class="component-image" draggable dragid="{{item.id}}" dragtype="{{item.dragtype}}" ng-src="{{'/images/' + item.dragtype + '/' + item.id + '.svg'}}" ng-style="{width:item.width + 'px'}" />
+    <div class="toolbox__content" ng-show="selectedToolbox==='boards'">
+        <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-if="!board.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="board in hardware.boardList track by board.id" data-ng-click="drop({type:'boards', id:board.id})">
+                <h1 class="list-name">{{board.name}}</h1>
+                <img draggable dragid="{{board.id}}" dragtype="boards" ng-src="/images/boards/{{board.id}}.png">
+            </li>
+        </ul>
+    </div>
+    <div class="toolbox__content" ng-show="selectedToolbox==='components'">
+        <h1 class="h3 submenu__title">{{'components' | translate}}</h1>
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
+                <h1 class="list-name" translate>{{component.id}}</h1>
+                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="components" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+            </li>
+        </ul>
+    </div>
+    <div class="toolbox__content" ng-show="selectedToolbox==='robots'">
+        <h1 class="h3 submenu__title">{{'robots' | translate}}</h1>
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.id})">
+                <h1 class="list-name">{{robot.name}}</h1>
+                <img draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
             </li>
         </ul>
     </div>

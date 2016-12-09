@@ -58,36 +58,6 @@ angular.module('bitbloqApp')
             $scope.levelOne = $scope.levelTwo = $scope.submenuVisible = false;
         };
 
-        $scope.subMenuHandler = function(menu, action, level) {
-            if (action === 'open') {
-                $scope.$emit('menu--open');
-                switch (level) {
-                    case 1:
-                        $scope.levelOne = menu;
-                        $scope.levelTwo = false;
-                        break;
-                    case 2:
-
-                        $scope.levelTwo = menu;
-                        break;
-                    default:
-                        throw 'Error opening sidebar menu';
-                }
-            } else {
-                switch (level) {
-                    case 1:
-                        $scope.levelOne = false;
-                        $scope.levelTwo = false;
-                        break;
-                    case 2:
-                        $scope.levelTwo = false;
-                        break;
-                    default:
-                        throw 'Error closing sidebar menu';
-                }
-            }
-        };
-
         $scope.setLevelTwo = function() {
             $scope.levelTwo = !$scope.levelTwo;
             $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
@@ -1041,9 +1011,6 @@ angular.module('bitbloqApp')
                         $scope.tourCurrentStep = 2;
                         var runStepThree = $scope.$on('menu--open', function() {
                             $timeout(function() {
-                                $('.submenu-level').animate({
-                                    scrollTop: $('[dragid="led"]').offset().top - 150
-                                }, 'slow');
                                 $scope.handleTour(3);
                                 runStepThree();
                             }, 0);

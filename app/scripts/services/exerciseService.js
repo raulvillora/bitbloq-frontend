@@ -27,6 +27,7 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
+
         /**
          * Status of save exercise
          * 0 = Nothing
@@ -356,7 +357,7 @@ angular.module('bitbloqApp')
 
         function _saveExercise() {
             var defered = $q.defer();
-            exports.completedExercise();
+            // exports.completedExercise();
             if (exports.exerciseHasChanged() || exports.tempImage.file) {
 
                 exports.exercise.name = exports.exercise.name || common.translate('new-project');
