@@ -16,6 +16,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $boardContextMenu = $('#board-context-menu'),
         $robotContextMenu = $('#robot-context-menu');
 
+    $scope.selectedToolbox = '';
+
+    $scope.changeToolbox = function(tab) {
+        if (tab !== '') {
+            $scope.$emit('menu--open');
+        }
+        $scope.selectedToolbox = tab;
+    };
+
     $scope.closeComponentInteraction = function(pins, connectedPin) {
 
         if (pins[Object.keys(connectedPin)[0]]) {
@@ -52,7 +61,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.detectElement = function(ev) {
-        $scope.closeMenu();
+        $scope.changeToolbox('');
         //If component, check it out if component has been moved
         if (ev.target.classList.contains('component')) {
             $scope.unsetInputFocus();
@@ -82,16 +91,16 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             hw2Bloqs.unselectAllConnections();
 
             if (projectService.project.hardware.board) {
-                $scope.subMenuHandler('hwcomponents', 'open', 1);
+                $scope.changeToolbox('components');
             } else {
-                $scope.subMenuHandler('boards', 'open', 1);
+                $scope.changeToolbox('boards');
             }
         } else if (ev.target.classList.contains('component__container')) {
             if (!projectService.project.hardware.robot) {
                 if (!projectService.project.hardware.board) {
-                    $scope.subMenuHandler('boards', 'open', 1);
+                    $scope.changeToolbox('boards');
                 } else if (projectService.project.hardware.board && projectService.isEmptyComponentArray()) {
-                    $scope.subMenuHandler('hwcomponents', 'open', 1);
+                    $scope.changeToolbox('components');
                 }
             }
 
@@ -194,11 +203,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 return board.id === data.id;
             });
             _addBoard(board);
-            $scope.subMenuHandler('hwcomponents', 'open', 1);
+            $scope.changeToolbox('components');
             projectService.startAutosave();
         } else if (data.type === 'components') {
             if (!projectService.project.hardware.board) {
-                $scope.subMenuHandler('boards', 'open', 1);
+                $scope.changeToolbox('boards');
                 alertsService.add({
                     text: 'bloqs-project_alert_no-board',
                     id: 'error_noboard',

@@ -45,17 +45,6 @@ angular.module('bitbloqApp')
             return projectService.componentsArray.serialElements.length > 0;
         };
 
-        $scope.closeMenu = function() {
-            $scope.levelOne = $scope.levelTwo = $scope.submenuVisible = false;
-        };
-
-
-        $scope.setLevelTwo = function() {
-            $scope.levelTwo = !$scope.levelTwo;
-            $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
-            $scope.$apply();
-        };
-
         /*************************************************
          web2board communication
          *************************************************/
@@ -1015,6 +1004,9 @@ angular.module('bitbloqApp')
                         $scope.tourCurrentStep = 2;
                         var runStepThree = $scope.$on('menu--open', function() {
                             $timeout(function() {
+                                $('.toolbox__content').animate({
+                                    scrollTop: $('[dragid="led"]').offset().top - 150
+                                }, 'slow');
                                 $scope.handleTour(3);
                                 runStepThree();
                             }, 0);

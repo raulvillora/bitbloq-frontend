@@ -52,7 +52,7 @@ $leftBarWidth: 70px;
                 }
             }
             .tour-step--right {
-                right: 225px;
+                right: 240px;
                 &:after {
                     content: '';
                     position: absolute;
@@ -115,11 +115,17 @@ $leftBarWidth: 70px;
             }
         }
         .toolbox-step {
-            border: 2px solid #f1c933 !important;
+            border: 2px solid #f1c933;
         }
         &.step-1 {
             [data-walkthrough="boards"] {
-                border: 2px solid #f1c933 !important;
+                border: 2px solid #f1c933;
+                &.toolbox__item--buttons {
+                    border-right: none;
+                }
+                &:not(.toolbox__item--buttons) {
+                    border-left: none;
+                }
             }
         }
         &.step-3 {

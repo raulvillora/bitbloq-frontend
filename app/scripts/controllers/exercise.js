@@ -54,15 +54,6 @@ angular.module('bitbloqApp')
             return exerciseService.componentsArray.serialElements.length > 0;
         };
 
-        $scope.closeMenu = function() {
-            $scope.levelOne = $scope.levelTwo = $scope.submenuVisible = false;
-        };
-
-        $scope.setLevelTwo = function() {
-            $scope.levelTwo = !$scope.levelTwo;
-            $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
-            $scope.$apply();
-        };
 
         /*************************************************
          web2board communication
@@ -920,24 +911,6 @@ angular.module('bitbloqApp')
             });
         }
 
-        function launchModalTour() {
-            ngDialog.closeAll();
-            var modalTour = $rootScope.$new(),
-                modalTourInit;
-            _.extend(modalTour, {
-                contentTemplate: '/views/modals/infoTour.html',
-                confirmAction: $scope.handleTour,
-                rejectAction: $scope.tourDone
-            });
-            modalTourInit = ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container modal--alert',
-                scope: modalTour,
-                showClose: false,
-                closeByDocument: false
-            });
-        }
-
         function launchModalAlert() {
             var modalTourStep = $rootScope.$new();
             _.extend(modalTourStep, {
@@ -953,11 +926,6 @@ angular.module('bitbloqApp')
                 showClose: false
             });
 
-        }
-
-        function showStepFive() {
-            ngDialog.closeAll();
-            $scope.tourCurrentStep = 5;
         }
 
         function launchModalGuest() {
@@ -996,84 +964,6 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.handleTour = function(step) {
-
-            step = step || 1;
-            switch (step) {
-                case 1:
-                    if (!$scope.tourCurrentStep) {
-                        $scope.tourCurrentStep = 1;
-                    }
-                    break;
-                case 2:
-                    if ($scope.tourCurrentStep === 1) {
-
-                        $scope.tourCurrentStep = 2;
-                        var runStepThree = $scope.$on('menu--open', function() {
-                            $timeout(function() {
-                                $scope.handleTour(3);
-                                runStepThree();
-                            }, 0);
-                        });
-                    }
-                    break;
-                case 3:
-                    if ($scope.tourCurrentStep === 2) {
-                        $scope.tourCurrentStep = 3;
-                        var runStepFour = $rootScope.$on('component-connected', function() {
-                            $scope.handleTour(4);
-                            runStepFour();
-                        });
-                    }
-                    break;
-                case 4:
-                    if ($scope.tourCurrentStep === 3) {
-                        $scope.tourCurrentStep = 4;
-                    }
-                    break;
-                case 5:
-                    if ($scope.tourCurrentStep === 4) {
-                        launchModalAlert();
-                    }
-                    break;
-                case 6:
-                    if ($scope.tourCurrentStep === 5) {
-                        $scope.tourCurrentStep = 6;
-                        var runStepSeven = $window.addEventListener('bloqs:connect', function() {
-                            $scope.handleTour(7);
-                            runStepSeven();
-                        });
-                    }
-                    break;
-                case 7:
-                    if ($scope.tourCurrentStep === 6) {
-                        $scope.$apply(function() {
-                            $scope.tourCurrentStep = 7;
-                        });
-                        var endTour = $scope.$on('uploading', function() {
-                            $scope.tourDone();
-                            endTour();
-                        });
-                    }
-                    break;
-                default:
-                    throw 'not a tour step';
-            }
-            if (!$scope.$$phase) {
-                $scope.$digest();
-            }
-        };
-
-        $scope.tourDone = function() {
-            ngDialog.closeAll();
-            $scope.tourCurrentStep = null;
-            if ($scope.common.user) {
-                $scope.common.user.takeTour = true;
-                userApi.update({
-                    takeTour: true
-                });
-            }
-        };
         $scope.toolbox = {};
         $scope.toolbox.level = 1;
 

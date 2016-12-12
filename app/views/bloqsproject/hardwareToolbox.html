@@ -17,25 +17,25 @@
         <span>{{ 'tour-step-four-text' | translate }}</span>
     </div>
 </div>
-<aside id="hwtoolbox" class="toolbox--right" ng-class="{'toolbox--expand':selectedToolbox!==''}" ng-init="selectedToolbox=''">
+<aside id="hwtoolbox" class="toolbox--right" ng-class="{'toolbox--expand':selectedToolbox!==''}">
     <div class="toolbox__buttons">
         <ul>
-            <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='boards'}">
-                <button class="btn-svg" ng-click="selectedToolbox='boards'">
+            <li class="toolbox__item toolbox__item--buttons" ng-class="{'toolbox--selected': selectedToolbox==='boards'}" data-walkthrough="boards">
+                <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)">
                     <svg class="svg-icon">
                         <use xlink:href="#placas"></use>
                     </svg>
                 </button>
             </li>
             <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='components'}">
-                <button class="btn-svg" ng-click="selectedToolbox='components'">
+                <button class="btn-svg" ng-click="changeToolbox('components')">
                     <svg class="svg-icon">
                         <use xlink:href="#componentes"></use>
                     </svg>
                 </button>
             </li>
             <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='robots'}">
-                <button class="btn-svg" ng-click="selectedToolbox='robots'">
+                <button class="btn-svg" ng-click="changeToolbox('robots')">
                     <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
                     </svg>
@@ -45,8 +45,8 @@
     </div>
     <div class="toolbox__menu" ng-show="selectedToolbox===''">
         <ul>
-            <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="selectedToolbox='boards'">
+            <li class="toolbox__item" data-walkthrough="boards">
+                <button class="btn btn-text" ng-click="changeToolbox('boards'); handleTour(2)">
                     {{'boards' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -54,7 +54,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="selectedToolbox='components'">
+                <button class="btn btn-text" ng-click="changeToolbox('components')">
                     {{'components' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -62,7 +62,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="selectedToolbox='robots'">
+                <button class="btn btn-text" ng-click="changeToolbox('robots')">
                     {{'robots' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
