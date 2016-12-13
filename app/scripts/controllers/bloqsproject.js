@@ -868,10 +868,8 @@ angular.module('bitbloqApp')
                         for (var j = 0; j < project.vars.childs[i].childs.length; j++) {
                             $log.log('------', project.vars.childs[i].childs[j].name);
                         }
-                        ;
                     }
                 }
-                ;
             }
         }
 
@@ -989,8 +987,12 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.handleTour = function(step) {
 
+        /*****************************
+         *   Toolbox
+         *****************************/
+
+        $scope.handleTour = function(step) {
             step = step || 1;
             switch (step) {
                 case 1:

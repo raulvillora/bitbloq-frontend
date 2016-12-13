@@ -1,5 +1,6 @@
 $titleHeightNumber: 70;
 $titleHeight: $titleHeightNumber + px;
+$titleWidth: 76px;
 $makeActionsHeightNumber: 40;
 $makeActionsHeight: $makeActionsHeightNumber + px;
 $leftBarWidth: 70px;
@@ -253,7 +254,7 @@ $leftBarWidth: 70px;
         }
         .nav__menu__item {
             height: $titleHeight;
-            width: $titleHeight;
+            width: $titleWidth;
             display: inline-block;
             vertical-align: middle;
             border-bottom: 1px solid #dadada;
@@ -650,54 +651,6 @@ $leftBarWidth: 70px;
 &.btn--mbot {
     background-color: #0076b4;
     color: white;
-}
-
-.toolbox {
-    width: 10px;
-    height: 58px;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    left: 0;
-    &.toolbox-functions {
-        background-color: #dd5a0a;
-    }
-    &.toolbox-variables {
-        background-color: #d9b032;
-    }
-    &.toolbox-code {
-        background-color: #58b42d;
-    }
-    &.toolbox-math {
-        background-color: #01c0c8;
-    }
-    &.toolbox-text {
-        background-color: #0294cf;
-    }
-    &.toolbox-control {
-        background-color: #11489a;
-    }
-    &.toolbox-logic {
-        background-color: #7c0dd6;
-    }
-    &.toolbox-communication {
-        background-color: #e30b9a;
-    }
-    &.toolbox-zowi {
-        background-color: #4e929b;
-    }
-    &.toolbox-components {
-        background-color: #cf1c22;
-    }
-    &.toolbox-classes {
-        background-color: #e30b9a;
-    }
-    &.toolbox-evolution {
-        background-color: #7b0754;
-    }
-    &.toolbox-mbot {
-        background-color: #0059B4;
-    }
 }
 
 .actions__menu--selected {

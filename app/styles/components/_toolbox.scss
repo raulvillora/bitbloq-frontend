@@ -12,13 +12,13 @@ $hw_toolbox: 210px;
     color: black;
     font-size: 13px;
     height: 100%;
-    width: 227px;
-    max-width: 271px;
+    width: 228px;
+    max-width: 289px;
     position: absolute;
     right: 0;
     z-index: 1;
     &.toolbox--expand {
-        width: 271px;
+        width: 289px;
     }
 }
 
@@ -41,10 +41,15 @@ $hw_toolbox: 210px;
             fill: #b9bdc8;
         }
     }
+    .btn-text {
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+    }
 }
 
 .toolbox__menu {
-    width: 166px;
+    width: 167px;
     float: right;
     .toolbox__item {
         border-bottom: 1px solid #edf0f1;
@@ -52,7 +57,7 @@ $hw_toolbox: 210px;
 }
 
 .toolbox__content {
-    width: 210px;
+    width: 228px;
     float: right;
     height: 100%;
     background-color: white;
@@ -81,6 +86,18 @@ $hw_toolbox: 210px;
             font-weight: lighter;
         }
     }
+    .toolbox__tabs{
+        .tabs__header__item {
+            width: 50%;
+            padding: 0 20px;
+            background-color: #eee;
+            border-bottom: 1px solid #dddddd;
+            &.selected--tab {
+                background-color: white;
+                border-bottom: none;
+            }
+        }
+    }
 }
 
 .toolbox__item {
@@ -93,8 +110,47 @@ $hw_toolbox: 210px;
     .btn-text {
         width: 100%;
         line-height: 1.7;
-        padding: 18px 16px;
+        padding: 18px;
         text-align: left;
+    }
+}
+
+.toolbox {
+    .toolbox-components {
+        background-color: #cf1c22;
+    }
+    .toolbox-functions {
+        background-color: #dd5a0a;
+    }
+    .toolbox-variables {
+        background-color: #d9b032;
+    }
+    .toolbox-code {
+        background-color: #58b42d;
+    }
+    .toolbox-math {
+        background-color: #01c0c8;
+    }
+    .toolbox-text {
+        background-color: #0294cf;
+    }
+    .toolbox-control {
+        background-color: #11489a;
+    }
+    .toolbox-logic {
+        background-color: #7c0dd6;
+    }
+    .toolbox-zowi {
+        background-color: #4e929b;
+    }
+    .toolbox-classes {
+        background-color: #e30b9a;
+    }
+    .toolbox-evolution {
+        background-color: #7b0754;
+    }
+    .toolbox-mbot {
+        background-color: #0059B4;
     }
 }
 
