@@ -111,8 +111,8 @@
             </div>
             <div class="form--section choose--theme">
                 <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" element-data="'infotab-choosetheme'"></common-dropdown>
-                <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../images/gray-theme.jpg" alt=""/>
-                <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../images/color-theme.jpg" alt=""/>
+                <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg" alt=""/>
+                <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt=""/>
             </div>
         </fieldset>
         <fieldset ng-if="currentProject.codeProject" class="fieldset--right" data-ng-init="focus = false">

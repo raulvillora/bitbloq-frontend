@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name bitbloqApp.controller:BloqstabCtrl
+ * @name bitbloqApp.controller:SoftwareTabCtrl
  * @description
- * # BloqstabCtrl
+ * # SoftwareTabCtrl
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
+    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
         robotFirmwareApi, web2boardOnline, projectService) {
 
@@ -25,6 +25,12 @@ angular.module('bitbloqApp')
         $scope.$field = $('#bloqs--field').last();
 
         var bloqsLoadTimes = 0;
+
+        $scope.selectedSoftwareToolbox = '';
+
+        $scope.changeSoftwareToolbox = function (tab) {
+            $scope.selectedSoftwareToolbox = tab;
+        };
 
         $scope.init = function() {
             if (projectService.bloqs.varsBloq) {
