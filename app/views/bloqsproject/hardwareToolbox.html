@@ -18,23 +18,23 @@
     </div>
 </div>
 <aside id="hwtoolbox" class="toolbox--right" ng-class="{'toolbox--expand':selectedToolbox!==''}">
-    <div class="toolbox__buttons">
-        <ul>
-            <li class="toolbox__item toolbox__item--buttons" ng-class="{'toolbox--selected': selectedToolbox==='boards'}" data-walkthrough="boards">
+    <aside class="tabs-layout__aside tabs-layout__aside--vertical" ng-click="changeToolbox('', $event)">
+        <ul class="tabs__header--vertical">
+            <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='boards'}" data-walkthrough="boards">
                 <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)">
                     <svg class="svg-icon">
                         <use xlink:href="#placas"></use>
                     </svg>
                 </button>
             </li>
-            <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='components'}">
+            <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='components'}">
                 <button class="btn-svg" ng-click="changeToolbox('components')">
                     <svg class="svg-icon">
                         <use xlink:href="#componentes"></use>
                     </svg>
                 </button>
             </li>
-            <li class="toolbox__item" ng-class="{'toolbox--selected': selectedToolbox==='robots'}">
+            <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='robots'}">
                 <button class="btn-svg" ng-click="changeToolbox('robots')">
                     <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
@@ -42,7 +42,7 @@
                 </button>
             </li>
         </ul>
-    </div>
+    </aside>
     <div class="toolbox__menu" ng-show="selectedToolbox===''">
         <ul>
             <li class="toolbox__item" data-walkthrough="boards">

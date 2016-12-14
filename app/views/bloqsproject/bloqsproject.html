@@ -97,12 +97,8 @@
         </aside>
         <div class="tab--container">
             <div class="tab--make" data-ng-show="currentTab===0" data-ng-include="'views/bloqsproject/hardwareTab.html'"></div>
-            <div class="tab--make" data-ng-show="currentTab===1" data-ng-include="'views/bloqsproject/bloqstab.html'"></div>
-            <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/infotab.html'"></div>
-            <div data-ng-repeat="project in projects">
-                <p data-ng-click="test()">test</p>
-                <img ng-src="{{common.urlImage + 'project/' + projectService.project._id}}" err-src="../../images/common/default-project.png"/>
-            </div>
+            <div class="tab--make" data-ng-show="currentTab===1" data-ng-include="'views/bloqsproject/softwareTab.html'"></div>
+            <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/infoTab.html'"></div>
         </div>
     </div>
 </div>

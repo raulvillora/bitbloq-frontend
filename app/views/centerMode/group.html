@@ -33,7 +33,7 @@
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Groups menu</h1>
             <ul class="tabs__header" ng-init="selectedTab = 'students'">
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'students'}" ng-click="selectedTab = 'students'">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'students'}" ng-click="selectedTab = 'students'">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#students"></use>
                     </svg>

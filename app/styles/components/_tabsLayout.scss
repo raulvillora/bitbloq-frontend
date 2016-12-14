@@ -14,7 +14,6 @@
         display: block;
         width: 100%;
         height: $tabsLayout-asideHeight;
-       // padding-left: 30px;
     }
     .tabs__header__item {
         display: inline-block;
@@ -49,7 +48,7 @@
         &.selected--tab {
             background-color: #eee;
             color: #373b44;
-            &.aside--menu__item--projects:after {
+            &.tabs__header__main:after {
                 content: '';
                 display: block;
                 position: relative;
@@ -68,6 +67,33 @@
         }
         span {
             cursor: pointer;
+        }
+    }
+    .tabs__header__item--vertical {
+        height: 58px;
+        border-bottom: 1px solid white;
+        border-right: none;
+        .btn-svg {
+            width: 100%;
+            padding: 17px;
+        }
+        &.selected--tab {
+            background-color: white;
+            border-bottom: 1px solid #b9bdc8;
+            .svg-icon {
+                fill: #b9bdc8;
+            }
+            &:after {
+                content: '';
+                display: block;
+                position: relative;
+                top: -59px;
+                left: 60px;
+                background-color: white;
+                height: 58px;
+                width: 1px;
+                z-index: 1;
+            }
         }
     }
 }

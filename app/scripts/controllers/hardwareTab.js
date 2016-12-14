@@ -18,11 +18,17 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.selectedToolbox = '';
 
-    $scope.changeToolbox = function(tab) {
+    $scope.changeToolbox = function(tab, event) {
         if (tab !== '') {
             $scope.$emit('menu--open');
         }
-        $scope.selectedToolbox = tab;
+        if (event){
+            if(_.isEqual(event.target.classList, event.currentTarget.classList)){
+                $scope.selectedToolbox = tab;
+            }
+        } else {
+            $scope.selectedToolbox = tab;
+        }
     };
 
     $scope.closeComponentInteraction = function(pins, connectedPin) {

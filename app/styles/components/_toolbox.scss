@@ -13,38 +13,36 @@ $hw_toolbox: 210px;
     font-size: 13px;
     height: 100%;
     width: 228px;
-    max-width: 289px;
+    max-width: 451px;
     position: absolute;
     right: 0;
     z-index: 1;
     &.toolbox--expand {
         width: 289px;
     }
-}
-
-.toolbox__buttons {
-    width: 60px;
-    float: left;
-    background-color: #b9bdc8;
-    .toolbox__item {
-        border-bottom: 1px solid white;
-    }
-    .svg-icon {
-        fill: white;
-        width: 24.1px;
-        height: 24px;
-    }
-    .toolbox--selected {
+    .tabs-layout__aside {
+        width: 60px;
+        float: left;
         background-color: white;
-        border-bottom: 1px solid #b9bdc8;
+        .tabs__header--vertical {
+            background-color: #b9bdc8;
+        }
+        .toolbox__item {
+            border-bottom: 1px solid white;
+        }
         .svg-icon {
-            fill: #b9bdc8;
+            fill: white;
+            width: 24.1px;
+            height: 24px;
+        }
+        .btn-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
         }
     }
-    .btn-text {
-        font-size: 14px;
-        font-weight: bold;
-        color: white;
+    .tabs-layout__aside--vertical {
+        height: 100%;
     }
 }
 
@@ -86,16 +84,18 @@ $hw_toolbox: 210px;
             font-weight: lighter;
         }
     }
-    .toolbox__tabs{
+    .toolbox__tabs {
         .tabs__header__item {
             width: 50%;
             padding: 0 20px;
             background-color: #eee;
-            border-bottom: 1px solid #dddddd;
             &.selected--tab {
                 background-color: white;
-                border-bottom: none;
             }
+            &:not(.selected--tab) {
+                border-bottom: 1px solid #dddddd;
+            }
+
         }
     }
 }
@@ -103,19 +103,38 @@ $hw_toolbox: 210px;
 .toolbox__item {
     height: 58px;
     border-bottom: 1px solid white;
-    .btn-svg {
-        width: 100%;
-        padding: 17px;
-    }
     .btn-text {
         width: 100%;
         line-height: 1.7;
-        padding: 18px;
+        padding: 17.5px;
         text-align: left;
     }
 }
 
-.toolbox {
+.toolbox--software {
+    &.toolbox--expand {
+        width: 451px;
+    }
+    .toolbox__menu {
+        width: 174px;
+    }
+    .tabs-layout__aside {
+        width: 53px;
+    }
+    .toolbox__item {
+        height: 53px;
+        .btn-text {
+            padding: 15px;
+        }
+    }
+    .tabs-layout {
+        width: calc(100% - 53px);
+    }
+    .tabs-layout__content {
+        background-color: white;
+        border-top: none;
+    }
+
     .toolbox-components {
         background-color: #cf1c22;
     }
@@ -154,3 +173,8 @@ $hw_toolbox: 210px;
     }
 }
 
+.toolbox--bloqs--container {
+    height: calc(100vh - 172px);
+    overflow: hidden;
+    overflow-y: auto;
+}

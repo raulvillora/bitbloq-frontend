@@ -3,48 +3,6 @@ $softwareToolboxLevel2Width: 530px;
 $softwareToolboxSpaceBetweenLevels: 50px;
 $makeHeaderPlusMakeActions: 110px;
 
-.toolbox--software {
-    height: 100%;
-
-    ul {
-        background-color: white;
-    }
-
-    .level {
-        border-left: 1px solid #cfcfcf;
-        display: block;
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 1px;
-        left: 0;
-        transition: transform 250ms;
-
-        ul {
-            top: 0;
-        }
-
-        .toolbox--bloqs--container {
-            height: calc(100vh - 260px);
-            display: block;
-            overflow: hidden;
-            overflow-y: auto;
-            width: 90%;
-        }
-
-        .toolbox--bloqs--container--full {
-            height: calc(100vh - 200px);
-            display: block;
-            overflow: hidden;
-            overflow-y: auto;
-            width: 90%;
-        }
-    }
-
-    .toolbox--item {
-    }
-}
-
 .btn--toolbox {
     position: relative;
     max-height: 60px;

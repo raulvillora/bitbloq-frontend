@@ -121,10 +121,10 @@ $leftBarWidth: 70px;
         &.step-1 {
             [data-walkthrough="boards"] {
                 border: 2px solid #f1c933;
-                &.toolbox__item--buttons {
+                &.tabs__header__item--vertical {
                     border-right: none;
                 }
-                &:not(.toolbox__item--buttons) {
+                &:not(.tabs__header__item--vertical) {
                     border-left: none;
                 }
             }
