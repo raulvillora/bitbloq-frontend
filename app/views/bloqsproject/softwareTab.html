@@ -8,7 +8,7 @@
                     <use xlink:href="#versionAnterior"></use>
                 </svg>
                 <span>{{'button_zowi_rest' | translate}}</span>
-
+            
             </li>
         </ul>
     </div>
@@ -19,8 +19,9 @@
         <div id="scrollbar--horizontal-small"></div>
     </div>
     <div class="software--tab" ng-init="softTab = 'bloqs'" ng-show="softTab==='bloqs'">
-        <div id="bloqs--field" ng-class="{'theme-colors':projectService.project.defaultTheme === 'infotab_option_colorTheme', 'theme-basic':projectService.project.defaultTheme === 'infotab_option_grayTheme' || !projectService.project.defaultTheme}" class="field" tabindex="0">
-            <div data-ng-class="{'toolbox--main':true,'navbar--collapsed':collapsedHeader}" data-ng-include="'views/bloqsproject/softwareToolbox.html'"></div>
+        <div id="bloqs--field" ng-class="{'theme-colors':projectService.project.defaultTheme === 'infotab_option_colorTheme', 'theme-basic':projectService.project.defaultTheme === 'infotab_option_grayTheme' || !projectService.project.defaultTheme}"
+             class="field" tabindex="0">
+            <div data-ng-class="{'toolbox--main':true,'navbar--collapsed':collapsedHeader}" data-ng-include="'views/bloqsproject/bloqsToolbox.html'"></div>
         </div>
         <div id="empty"></div>
         <div id="bloqs-context-menu">

@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-        bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-        robotFirmwareApi, web2boardOnline, projectService) {
+                                            bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
+                                            robotFirmwareApi, web2boardOnline, projectService)
+    {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -26,15 +27,15 @@ angular.module('bitbloqApp')
 
         var bloqsLoadTimes = 0;
 
-        $scope.selectedSoftwareToolbox = '';
+        $scope.selectedBloqsToolbox = '';
 
-        $scope.changeSoftwareToolbox = function (tab, event) {
-            if (event){
-                if(_.isEqual(event.target.classList, event.currentTarget.classList)){
-                    $scope.selectedSoftwareToolbox = tab;
+        $scope.changeBloqsToolbox = function(tab, event) {
+            if (event) {
+                if (_.isEqual(event.target.classList, event.currentTarget.classList)) {
+                    $scope.selectedBloqsToolbox = tab;
                 }
             } else {
-                $scope.selectedSoftwareToolbox = tab;
+                $scope.selectedBloqsToolbox = tab;
             }
         };
 
@@ -281,7 +282,8 @@ angular.module('bitbloqApp')
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
                             if (connectedComponents[i].id.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].id)) {
+                                item.toLowerCase().includes(connectedComponents[i].id))
+                            {
                                 result = true;
                             }
                             i++;
@@ -363,6 +365,7 @@ angular.module('bitbloqApp')
         }
 
         function clickDocumentHandler() {
+            $scope.selectedBloqsToolbox = '';
             $contextMenu.css({
                 display: 'none'
             });
@@ -560,7 +563,6 @@ angular.module('bitbloqApp')
 
         var translateChangeStartEvent;
         var bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
-            $scope.selectedSoftwareToolbox = '';
             $timeout(function() {
                 setScrollsDimension();
             }, 0);
