@@ -570,7 +570,20 @@ angular.module('bitbloqApp')
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
         $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
-        $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
+        $window.addEventListener('bloqs:dragend', function() {
+            _.throttle(setScrollsDimension, 1000);
+            $scope.showPaperBin = false;
+            $scope.$apply();
+        });
+
+        $window.addEventListener('bloqs:startMove', function(bloq) {
+            console.log(bloq);
+            $scope.showPaperBin = true;
+            $scope.$apply();
+        });
+
+        $scope.showPaperBin = true;
+
 
         $scope.$on('$destroy', function() {
             $document.off('contextmenu', contextMenuDocumentHandler);

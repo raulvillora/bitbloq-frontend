@@ -818,7 +818,7 @@ angular.module('bitbloqApp')
                     freeBloqs: freeBloqs
                 };
             //showProjectResumeOnConsole(step);
-            if ($scope.bloqsHistory.pointer != ($scope.bloqsHistory.history.length - 1)) {
+            if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
             $scope.bloqsHistory.history.push(_.cloneDeep(step));
