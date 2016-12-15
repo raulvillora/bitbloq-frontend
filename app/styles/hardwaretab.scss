@@ -255,6 +255,11 @@ $hw_toolbox: 210px;
             background-color: transparent;
             height: 50%;
         }
+        &.mranger {
+            background-image: url(/images/robots/mranger.svg);
+            background-color: transparent;
+            height: 50%;
+        }
         &.robot--selected {
             outline: 4px solid $color !important;
             background-color: transparent;
@@ -318,6 +323,11 @@ $hw_toolbox: 210px;
         &.ArduinoLeonardo {
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
+        }
+        &.ArduinoMEGA2560 {
+            background-image: url(/images/boards/ArduinoMEGA2560.svg);
+            background-color: transparent;
+            width: 555px;
         }
     }
     .component {

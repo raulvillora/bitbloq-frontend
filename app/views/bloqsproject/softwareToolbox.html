@@ -128,6 +128,45 @@
                 <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
             </ul>
         </li>
+        <!-- mRanger -->
+        <li ng-if="projectService.project.hardware.robot==='mranger'" data-element="toolbox-mranger">
+            <button class="btn btn--toolbox btn--mranger" ng-click="toolbox.level = 2; toolbox.section = 'mranger'">
+                <span class="toolbox toolbox-mranger"></span> {{ 'make-swtoolbox-mranger' | translate }}
+                <svg class="svg-icon svg-icon--right">
+                    <use xlink:href="#flecha"></use>
+                </svg>
+            </button>
+            <ul ng-class="{'level':true, 'level--2':true, 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 2 && toolbox.section === 'mranger', 'level--inactive--1':toolbox.level === 3, 'hidden':toolbox.section !== 'mranger'}">
+                <li>
+                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-mranger' | translate }}</h1>
+                </li>
+                <li>
+                    <ul class="toolbox--bloqs--container--full">
+                        <li id="{{'bloq' + mRanger.name}}" data-ng-class="mRanger.addClass" data-ng-repeat="mRanger in common.properties.bloqsSortTree.mRanger" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mRanger[$index].name]" data-components-array="componentsArray"></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="btn btn--toolbox btn--advanced" ng-click="toolbox.level = 3">
+                        {{ 'make-swtoolbox-advanced' | translate }}
+                        <svg class="svg-icon svg-icon--right">
+                            <use xlink:href="#flecha"></use>
+                        </svg>
+                    </button>
+                    <ul ng-class="{'level':true, 'level--3':toolbox.section === 'mranger', 'toolbox--collapsed':collapsedHeader, 'level--active':toolbox.level === 3, 'hidden':toolbox.section !== 'mranger'}">
+                        <li>
+                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advanced' | translate }}</h1>
+                        </li>
+                        <!-- ADVANCED -->
+                        <li>
+                            <ul class="toolbox--bloqs--container--full">
+                                <li id="{{'bloq' + advancedMRanger.name}}" data-ng-class="advancedMRanger.addClass" data-ng-repeat="advancedMRanger in common.properties.bloqsSortTree.advancedMRanger" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMRanger[$index].name]" data-components-array="componentsArray"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <div ng-class="{'level--2--shadow':true,'level--shadow--active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
+            </ul>
+        </li>
         <!-- END CODE -->
         <!-- COMPONENTS -->
         <li data-walkthrough="components" data-element="toolbox-components">

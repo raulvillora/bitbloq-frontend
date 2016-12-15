@@ -546,6 +546,29 @@
         }, {
             "name": "mBotSetLedAdvanced",
             "addClass": "submenu__item submenu__item--component"
+        }],
+        "mRanger": [{
+            "name": "mRangerBuzzer",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mRangerGetDistance",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mRangerGetLightSensor",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mRangerSetLed",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mRangerLineFollower",
+            "addClass": "submenu__item submenu__item--component"
+        }],
+        "advancedMRanger": [{
+            "name": "mRangerBuzzerAdvanced",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "mRangerSetLedAdvanced",
+            "addClass": "submenu__item submenu__item--component"
         }]
     }
 }]

@@ -478,6 +478,157 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
+            "name": "Arduino MEGA 2560",
+            "id": "ArduinoMEGA2560",
+            "mcu": "mega",
+            "underDevelopment": true,
+            "vendorIds": ["0x2341"],
+            "productIds": ["0x10", "0x0042", "0x6001", "0x0010"],
+            "pinSize": {
+                "digital": {
+                    "w": 12,
+                    "h": 13
+                },
+                "analog": {
+                    "w": 12,
+                    "h": 13
+                },
+                "serial": {
+                    "w": 80,
+                    "h": 57
+                },
+                "i2c-4": {
+                    "w": 9,
+                    "h": 9
+                },
+                "i2c-5": {
+                    "w": 9,
+                    "h": 9
+                }
+            },
+            "pins": {
+                "digital": [{
+                    "x": 0.3505,
+                    "y": 0.05,
+                    "name": "13",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
+                }, {
+                    "x": 0.374,
+                    "y": 0.05,
+                    "name": "12",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
+                }, {
+                    "x": 0.545,
+                    "y": 0.05,
+                    "name": "11",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
+                }, {
+                    "x": 0.3945,
+                    "y": 0.05,
+                    "name": "10",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
+                }, {
+                    "x": 0.4165,
+                    "y": 0.05,
+                    "name": "9",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
+                }, {
+                    "x": 0.4385,
+                    "y": 0.05,
+                    "name": "8",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
+                }, {
+                    "x": 0.695,
+                    "y": 0.05,
+                    "name": "7",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
+                }, {
+                    "x": 0.73,
+                    "y": 0.05,
+                    "name": "6",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
+                }, {
+                    "x": 0.765,
+                    "y": 0.05,
+                    "name": "5",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
+                }, {
+                    "x": 0.795,
+                    "y": 0.05,
+                    "name": "4",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
+                }, {
+                    "x": 0.832,
+                    "y": 0.05,
+                    "name": "3",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
+                }, {
+                    "x": 0.869,
+                    "y": 0.05,
+                    "name": "2",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
+                }, {
+                    "x": 0.9,
+                    "y": 0.05,
+                    "name": "1",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
+                }, {
+                    "x": 0.935,
+                    "y": 0.05,
+                    "name": "0",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                }],
+                "analog": [{
+                    "x": 0.763,
+                    "y": 0.92,
+                    "name": "A0",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
+                }, {
+                    "x": 0.795,
+                    "y": 0.92,
+                    "name": "A1",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
+                }, {
+                    "x": 0.83,
+                    "y": 0.92,
+                    "name": "A2",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
+                }, {
+                    "x": 0.862,
+                    "y": 0.92,
+                    "name": "A3",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
+                }, {
+                    "x": 0.895,
+                    "y": 0.92,
+                    "name": "A4",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
+                }, {
+                    "x": 0.935,
+                    "y": 0.92,
+                    "name": "A5",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                }],
+                "serial": [{
+                    "x": 0.045,
+                    "y": 0.315,
+                    "name": "serial",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                }],
+                "i2c-4": [{
+                    "x": 0.903,
+                    "y": 0.925,
+                    "name": "A4-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
+                }],
+                "i2c-5": [{
+                    "x": 0.933,
+                    "y": 0.925,
+                    "name": "A5-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                }]
+            }
+        }, {
             "name": "Arduino Leonardo",
             "id": "ArduinoLeonardo",
             "mcu": "leonardo",
@@ -1065,6 +1216,12 @@ angular.module('bitbloqApp')
             "id": "mbot",
             "name": "mBot",
             "board": "Arduino UNO",
+            "width": 75,
+            "height": 86
+        }, {
+            "id": "mranger",
+            "name": "mRanger",
+            "board": "Arduino MEGA 2560",
             "width": 75,
             "height": 86
         }],
