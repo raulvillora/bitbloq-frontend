@@ -21,7 +21,7 @@ $hw_toolbox: 210px;
         width: 289px;
     }
     .tabs-layout__aside {
-        width: 60px;
+        width: 100%;
         float: left;
         background-color: white;
         .tabs__header--vertical {
@@ -42,6 +42,7 @@ $hw_toolbox: 210px;
         }
     }
     .tabs-layout__aside--vertical {
+        width: 60px;
         height: 100%;
     }
 }
@@ -86,16 +87,28 @@ $hw_toolbox: 210px;
     }
     .toolbox__tabs {
         .tabs__header__item {
+            height: 53px;
             width: 50%;
-            padding: 0 20px;
             background-color: #eee;
+            padding: 0;
             &.selected--tab {
                 background-color: white;
             }
             &:not(.selected--tab) {
                 border-bottom: 1px solid #dddddd;
             }
-
+            button {
+                width: 100%;
+                height: 100%;
+                line-height: inherit;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: left;
+                padding-left: 20px;
+            }
+            .menu__item__span{
+                padding: 0 20px;
+            }
         }
     }
 }
@@ -118,13 +131,25 @@ $hw_toolbox: 210px;
     .toolbox__menu {
         width: 174px;
     }
-    .tabs-layout__aside {
-        width: 53px;
-    }
     .toolbox__item {
         height: 53px;
         .btn-text {
             padding: 15px;
+        }
+    }
+    .tabs-layout__aside--vertical {
+        width: 53px;
+        .tabs__header__item--vertical {
+            height: 53px;
+            .btn-text {
+                height: 100%;
+                width: 100%;
+            }
+            &.selected--tab:after {
+                top: -53px;
+                left: 53px;
+                height: 53px;
+            }
         }
     }
     .tabs-layout {
@@ -135,41 +160,77 @@ $hw_toolbox: 210px;
         border-top: none;
     }
 
-    .toolbox-components {
-        background-color: #cf1c22;
-    }
-    .toolbox-functions {
-        background-color: #dd5a0a;
-    }
-    .toolbox-variables {
-        background-color: #d9b032;
-    }
-    .toolbox-code {
-        background-color: #58b42d;
-    }
-    .toolbox-math {
-        background-color: #01c0c8;
-    }
-    .toolbox-text {
-        background-color: #0294cf;
-    }
-    .toolbox-control {
-        background-color: #11489a;
-    }
-    .toolbox-logic {
-        background-color: #7c0dd6;
-    }
     .toolbox-zowi {
         background-color: #4e929b;
-    }
-    .toolbox-classes {
-        background-color: #e30b9a;
+        &.selected--tab .btn-svg .svg-icon {
+            fill: #4e929b
+        }
     }
     .toolbox-evolution {
         background-color: #7b0754;
+        &.selected--tab .btn-svg .svg-icon {
+            fill: #7b0754
+        }
     }
     .toolbox-mbot {
         background-color: #0059B4;
+        &.selected--tab .btn-svg .svg-icon {
+            fill: #0059B4
+        }
+    }
+    .toolbox-components {
+        background-color: #cf1c22;
+        &.selected--tab .btn-svg .svg-icon {
+            fill: #cf1c22
+        }
+    }
+    .toolbox-functions {
+        background-color: #dd5a0a;
+        &.selected--tab .btn-text {
+            color: #dd5a0a
+        }
+    }
+    .toolbox-variables {
+        background-color: #d9b032;
+        &.selected--tab .btn-text {
+            color: #d9b032
+        }
+    }
+    .toolbox-code {
+        background-color: #58b42d;
+        &.selected--tab .btn-text {
+            color: #58b42d
+        }
+    }
+    .toolbox-math {
+        background-color: #01c0c8;
+        &.selected--tab .btn-text {
+            color: #01c0c8
+        }
+    }
+    .toolbox-text {
+        background-color: #0294cf;
+        &.selected--tab .btn-text {
+            color: #0294cf
+        }
+    }
+    .toolbox-control {
+        background-color: #11489a;
+        &.selected--tab .btn-text {
+            color: #11489a
+        }
+    }
+    .toolbox-logic {
+        background-color: #7c0dd6;
+        &.selected--tab .btn-text {
+            color: #7c0dd6
+        }
+    }
+    .toolbox-classes {
+        background-color: #e30b9a;
+        &.selected--tab .btn-text {
+            color: #e30b9a
+        }
     }
 }
 

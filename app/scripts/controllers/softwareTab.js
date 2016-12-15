@@ -28,8 +28,14 @@ angular.module('bitbloqApp')
 
         $scope.selectedSoftwareToolbox = '';
 
-        $scope.changeSoftwareToolbox = function (tab) {
-            $scope.selectedSoftwareToolbox = tab;
+        $scope.changeSoftwareToolbox = function (tab, event) {
+            if (event){
+                if(_.isEqual(event.target.classList, event.currentTarget.classList)){
+                    $scope.selectedSoftwareToolbox = tab;
+                }
+            } else {
+                $scope.selectedSoftwareToolbox = tab;
+            }
         };
 
         $scope.init = function() {
@@ -554,6 +560,7 @@ angular.module('bitbloqApp')
 
         var translateChangeStartEvent;
         var bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
+            $scope.selectedSoftwareToolbox = '';
             $timeout(function() {
                 setScrollsDimension();
             }, 0);

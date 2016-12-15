@@ -8,73 +8,103 @@
         <span>{{ 'tour-step-six-text' | translate }}</span>
     </div>
 </div>
-<aside class="toolbox toolbox--right toolbox--software" id="toolbox" data-element="toolbox">
+<aside id="toolbox" class="toolbox--right toolbox--software" ng-init="selectedToolboxTab = 'basic'" ng-class="{'toolbox--expand':selectedSoftwareToolbox!==''}" data-element="toolbox">
     <h1 class="hidden">Components Toolbox</h1>
     <!-- Alias buttons -->
-    <div class="toolbox__buttons">
-        <ul>
-            <li class="toolbox__item toolbox-zowi" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='zowi'}">
+    <aside class="tabs-layout__aside tabs-layout__aside--vertical" ng-click="changeSoftwareToolbox('', $event)">
+        <ul ng-click="selectedToolboxTab = 'basic'">
+            <li class="tabs__header__item--vertical toolbox-zowi" ng-class="{'selected--tab': selectedSoftwareToolbox==='zowi'}" ng-show="projectService.project.hardware.robot==='zowi'" data-element="toolbox-zowi">
                 <button class="btn-svg" ng-click="changeSoftwareToolbox('zowi')">
                     <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
                     </svg>
                 </button>
             </li>
-            <li class="toolbox__item toolbox-components" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='components'}">
+            <li class="tabs__header__item--vertical toolbox-evolution" ng-class="{'selected--tab': selectedSoftwareToolbox==='evolution'}" ng-show="projectService.project.hardware.robot==='evolution'" data-element="toolbox-evolution">
+                <button class="btn-svg" ng-click="changeSoftwareToolbox('evolution')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#robots"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="tabs__header__item--vertical toolbox-mbot" ng-class="{'selected--tab': selectedSoftwareToolbox==='mBot'}" ng-show="projectService.project.hardware.robot==='mbot'" data-element="toolbox-mbot">
+                <button class="btn-svg" ng-click="changeSoftwareToolbox('mBot')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#robots"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="tabs__header__item--vertical toolbox-components" ng-class="{'selected--tab': selectedSoftwareToolbox==='components'}" data-element="toolbox-components">
                 <button class="btn-svg" ng-click="changeSoftwareToolbox('components')">
                     <svg class="svg-icon">
                         <use xlink:href="#componentes"></use>
                     </svg>
                 </button>
             </li>
-            <li class="toolbox__item toolbox-functions" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='functions'}">
+            <li class="tabs__header__item--vertical toolbox-functions" ng-class="{'selected--tab': selectedSoftwareToolbox==='functions'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('functions')">
                     {{('make-swtoolbox-functions' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-variables" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='variables'}">
+            <li class="tabs__header__item--vertical toolbox-variables" ng-class="{'selected--tab': selectedSoftwareToolbox==='variables'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('variables')">
                     {{('make-swtoolbox-variables' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-code" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='code'}">
+            <li class="tabs__header__item--vertical toolbox-code" ng-class="{'selected--tab': selectedSoftwareToolbox==='code'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('code')">
                     {{('make-swtoolbox-code' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-math" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='maths'}">
+            <li class="tabs__header__item--vertical toolbox-math" ng-class="{'selected--tab': selectedSoftwareToolbox==='maths'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('maths')">
                     {{('make-swtoolbox-mathematics' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-text" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='text'}">
+            <li class="tabs__header__item--vertical toolbox-text" ng-class="{'selected--tab': selectedSoftwareToolbox==='text'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('text')">
                     {{('make-swtoolbox-text' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-control" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='control'}">
+            <li class="tabs__header__item--vertical toolbox-control" ng-class="{'selected--tab': selectedSoftwareToolbox==='control'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('control')">
                     {{('make-swtoolbox-control' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-logic" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='logic'}">
+            <li class="tabs__header__item--vertical toolbox-logic" ng-class="{'selected--tab': selectedSoftwareToolbox==='logic'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('logic')">
                     {{('make-swtoolbox-logic' | translate).substring(0, 3)}}
                 </button>
             </li>
-            <li class="toolbox__item toolbox-classes" ng-class="{'toolbox--selected': selectedSoftwareToolbox==='classes'}">
+            <li class="tabs__header__item--vertical toolbox-classes" ng-class="{'selected--tab': selectedSoftwareToolbox==='classes'}">
                 <button class="btn-text" ng-click="changeSoftwareToolbox('classes')">
                     {{('make-swtoolbox-classes' | translate).substring(0, 3)}}
                 </button>
             </li>
         </ul>
-    </div>
+    </aside>
     <!-- Alias text -->
     <div class="toolbox__menu" ng-show="selectedSoftwareToolbox===''">
-        <ul>
-            <li class="toolbox__item">
+        <ul ng-click="selectedToolboxTab = 'basic'">
+            <li class="toolbox__item" ng-show="projectService.project.hardware.robot==='zowi'">
                 <button class="btn btn-text" ng-click="changeSoftwareToolbox('zowi')">
                     {{'make-swtoolbox-zowi' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#flecha"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item" ng-show="projectService.project.hardware.robot==='evolution'">
+                <button class="btn btn-text" ng-click="changeSoftwareToolbox('evolution')">
+                    {{'make-swtoolbox-evolution' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#flecha"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item" ng-show="projectService.project.hardware.robot==='mbot'">
+                <button class="btn btn-text" ng-click="changeSoftwareToolbox('mBot')">
+                    {{'make-swtoolbox-mbot' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
                     </svg>
@@ -154,491 +184,163 @@
             </li>
         </ul>
     </div>
+    <!-- Tabs -->
     <div class="toolbox__content tabs-layout" ng-show="selectedSoftwareToolbox!==''">
         <aside class="toolbox__tabs tabs-layout__aside">
             <h1 class="invisible">Components menu</h1>
-            <ul class="tabs__header" ng-init="selectedToolboxTab='basic'">
-                <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'basic'}" ng-click="selectedToolboxTab = 'basic'" role="button" tabindex="0">
-                    <span class="menu__item__span ng-binding">{{'components' | translate}}</span>
+            <ul class="tabs__header">
+                <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'basic'}">
+                    <button ng-click="selectedToolboxTab = 'basic'" >{{'basics' | translate}}</button>
                 </li>
-                <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}" ng-click="selectedToolboxTab = 'advance'" role="button" tabindex="0">
-                    <span class="menu__item__span ng-binding">{{'Avanzados' | translate}}</span>
+                <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}">
+                    <button ng-click="selectedToolboxTab = 'advance'">{{'make-swtoolbox-advanced' | translate}}</button>
                 </li>
             </ul>
         </aside>
-        <div class="toolbox__content">
-        
+        <!-- BASIC BLOQS -->
+        <div class="tabs-layout__content" ng-show="selectedToolboxTab === 'basic'">
+            <!-- Zowi -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='zowi'">
+                <li id="{{'bloq' + zowi.name}}" data-ng-class="zowi.addClass" data-ng-repeat="zowi in common.properties.bloqsSortTree.zowi" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.zowi[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Evolution -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='evolution'">
+                <li id="{{'bloq' + evolution.name}}" data-ng-class="evolution.addClass" data-ng-repeat="evolution in common.properties.bloqsSortTree.evolution" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.evolution[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- mBot -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='mBot'">
+                <li id="{{'bloq' + mBot.name}}" data-ng-class="mBot.addClass" data-ng-repeat="mBot in common.properties.bloqsSortTree.mBot" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mBot[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Components -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='components'">
+                <li class="{{component.addClass}}" id="{{'bloq' + component.name}}" data-ng-show="showComponents(component.name)" data-ng-repeat="component in common.properties.bloqsSortTree.components" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.components[$index].name]" data-components-array="componentsArray">
+                </li>
+                <li ng-if="!anyComponent()" class="error--text">{{"no-components-connected" | translate}}</li>
+            </ul>
+            <!-- Functions -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='functions'">
+                <li id="{{'bloq' + function.name}}" data-ng-class="function.addClass" data-ng-repeat="function in common.properties.bloqsSortTree.functions" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.functions[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Variables -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='variables'">
+                <li id="{{'bloq' + variable.name}}" data-ng-class="variable.addClass" data-ng-repeat="variable in common.properties.bloqsSortTree.variables" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.variables[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Code -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='code'">
+                <li id="{{'bloq' + code.name}}" data-ng-class="code.addClass" data-ng-repeat="code in common.properties.bloqsSortTree.codes" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.codes[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Math -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='maths'">
+                <li id="{{'bloq' + math.name}}" data-ng-class="math.addClass" data-ng-repeat="math in common.properties.bloqsSortTree.mathematics" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mathematics[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Text -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='text'">
+                <li id="{{'bloq' + text.name}}" data-ng-class="text.addClass" data-ng-repeat="text in common.properties.bloqsSortTree.texts" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.texts[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Control -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='control'">
+                <li id="{{'bloq' + control.name}}" data-ng-class="control.addClass" data-ng-repeat="control in common.properties.bloqsSortTree.controls" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.controls[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Logic -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='logic'">
+                <li id="{{'bloq' + logic.name}}" data-ng-class="logic.addClass" data-ng-repeat="logic in common.properties.bloqsSortTree.logics" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.logics[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Classes -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='classes'">
+                <li id="{{'bloq' + classes.name}}" data-ng-class="classes.addClass" data-ng-repeat="classes in common.properties.bloqsSortTree.classes" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.classes[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
         </div>
-        <div class="toolbox__content">
         
+        
+        <!-- ADVANCE BLOQS -->
+        <div class="tabs-layout__content" ng-show="selectedToolboxTab === 'advance'">
+            <!-- Zowi -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='zowi'">
+                <li id="{{'bloq' + advancedZowi.name}}" data-ng-class="advancedZowi.addClass" data-ng-repeat="advancedZowi in common.properties.bloqsSortTree.advancedZowis" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedZowis[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Evolution -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='evolution'">
+                <li id="{{'bloq' + advancedEvolution.name}}" data-ng-class="advancedEvolution.addClass" data-ng-repeat="advancedEvolution in common.properties.bloqsSortTree.advancedEvolution" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedEvolution[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- mBot -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='mBot'">
+                <li id="{{'bloq' + advancedMBot.name}}" data-ng-class="advancedMBot.addClass" data-ng-repeat="advancedMBot in common.properties.bloqsSortTree.advancedMBot" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMBot[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Components -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='components'">
+                <li id="{{'bloq' + advancedComponent.name}}" data-ng-class="advancedComponent.addClass" data-ng-show="showComponents(advancedComponent.name)"
+                    data-ng-repeat="advancedComponent in common.properties.bloqsSortTree.advancedComponents" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedComponents[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Functions -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='functions'">
+                <li id="{{'bloq' + advancedFunction.name}}" data-ng-class="advancedFunction.addClass" data-ng-repeat="advancedFunction in common.properties.bloqsSortTree.advancedFunctions" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedFunctions[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Variables -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='variables'">
+                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedVariable.addClass" data-ng-repeat="advancedVariable in common.properties.bloqsSortTree.advancedVariables" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedVariables[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Code -->
+            <!-- Math -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='maths'">
+                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedMathematics.addClass" data-ng-repeat="advancedMathematics in common.properties.bloqsSortTree.advancedMathematics" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMathematics[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Text -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='text'">
+                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedText.addClass" data-ng-repeat="advancedText in common.properties.bloqsSortTree.advancedText" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedText[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Control -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='control'">
+                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedControl.addClass" data-ng-repeat="advancedControl in common.properties.bloqsSortTree.advancedControls" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedControls[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
+            <!-- Logic -->
+            <!-- Classes -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedSoftwareToolbox==='classes'">
+                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedClasses.addClass" data-ng-repeat="advancedClasses in common.properties.bloqsSortTree.advancedClasses" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedClasses[$index].name]" data-components-array="componentsArray">
+                </li>
+            </ul>
         </div>
     </div>
-    <!--<ul ng-class="{'level':true, 'level&#45;&#45;1':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 1,'level&#45;&#45;inactive':toolbox.level !== 1, 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 2, 'level&#45;&#45;inactive&#45;&#45;2':toolbox.level === 3}">
-        &lt;!&ndash; ZOWI &ndash;&gt;
-        <li ng-if="projectService.project.hardware.robot==='zowi'" data-element="toolbox-zowi">
-            <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;zowi" ng-click="toolbox.level = 2; toolbox.section = 'zowi'">
-                <span class="toolbox toolbox-zowi"></span> {{ 'make-swtoolbox-zowi' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'zowi', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'zowi'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-zowi' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                        <li id="{{'bloq' + zowi.name}}" data-ng-class="zowi.addClass" data-ng-repeat="zowi in common.properties.bloqsSortTree.zowi" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.zowi[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'zowi', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'zowi'}">
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedZowi' | translate }}</h1>
-                        </li>
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedZowi.name}}" data-ng-class="advancedZowi.addClass" data-ng-repeat="advancedZowi in common.properties.bloqsSortTree.advancedZowis" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedZowis[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; Evolution &ndash;&gt;
-        <li ng-if="projectService.project.hardware.robot==='evolution'" data-element="toolbox-evolution">
-            <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;evolution" ng-click="toolbox.level = 2; toolbox.section = 'evolution'">
-                <span class="toolbox toolbox-evolution"></span> {{ 'make-swtoolbox-evolution' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'evolution', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'evolution'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-evolution' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                        <li id="{{'bloq' + evolution.name}}" data-ng-class="evolution.addClass" data-ng-repeat="evolution in common.properties.bloqsSortTree.evolution" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.evolution[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'evolution', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'evolution'}">
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advanced-evolution' | translate }}</h1>
-                        </li>
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedEvolution.name}}" data-ng-class="advancedEvolution.addClass" data-ng-repeat="advancedEvolution in common.properties.bloqsSortTree.advancedEvolution" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedEvolution[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; mBot &ndash;&gt;
-        <li ng-if="projectService.project.hardware.robot==='mbot'" data-element="toolbox-mbot">
-            <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;mbot" ng-click="toolbox.level = 2; toolbox.section = 'mbot'">
-                <span class="toolbox toolbox-mbot"></span> {{ 'make-swtoolbox-mbot' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'mbot', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'mbot'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-mbot' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                        <li id="{{'bloq' + mBot.name}}" data-ng-class="mBot.addClass" data-ng-repeat="mBot in common.properties.bloqsSortTree.mBot" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mBot[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'mbot', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'mbot'}">
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advanced-mbot' | translate }}</h1>
-                        </li>
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedMBot.name}}" data-ng-class="advancedMBot.addClass" data-ng-repeat="advancedMBot in common.properties.bloqsSortTree.advancedMBot" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMBot[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END CODE &ndash;&gt;
-        &lt;!&ndash; COMPONENTS &ndash;&gt;
-        <li data-walkthrough="components" data-element="toolbox-components">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'components'; handleTour(6)">
-                <span class="toolbox toolbox-components"></span> {{ 'components' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'components', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'components'}"
-                data-walkthrough="components-container">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'components' | translate }}</h1>
-                </li>
-                <li ng-if="!anyComponent()" class="error&#45;&#45;text">{{"no-components-connected" | translate}}</li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li class="{{component.addClass}}" id="{{'bloq' + component.name}}" data-ng-show="showComponents(component.name)" data-ng-repeat="component in common.properties.bloqsSortTree.components" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.components[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'components', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'components'}">
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedComponents' | translate }}</h1>
-                        </li>
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedComponent.name}}" data-ng-class="advancedComponent.addClass" data-ng-show="showComponents(advancedComponent.name)"
-                                    data-ng-repeat="advancedComponent in common.properties.bloqsSortTree.advancedComponents" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedComponents[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END COMPONENTS &ndash;&gt;
-        &lt;!&ndash; FUNCTIONS &ndash;&gt;
-        <li data-element="toolbox-functions">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'functions'">
-                <span class="toolbox toolbox-functions"></span> {{ 'make-swtoolbox-functions' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'functions', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'functions'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-functions' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + function.name}}" data-ng-class="function.addClass" data-ng-repeat="function in common.properties.bloqsSortTree.functions" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.functions[$index].name]" data-components-array="componentsArray">
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    &lt;!&ndash; ADVANCED &ndash;&gt;
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'functions', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'functions'}">
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'functions-swtoolbox-advancedFunctions' | translate }}</h1>
-                        </li>
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedFunction.name}}" data-ng-class="advancedFunction.addClass" data-ng-repeat="advancedFunction in common.properties.bloqsSortTree.advancedFunctions" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedFunctions[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END FUNCTIONS &ndash;&gt;
-        &lt;!&ndash; VARIABLES &ndash;&gt;
-        <li data-element="toolbox-vars">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'variables'">
-                <span class="toolbox toolbox-variables"></span> {{ 'make-swtoolbox-variables' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'variables', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'variables'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-variables' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + variable.name}}" data-ng-class="variable.addClass" data-ng-repeat="variable in common.properties.bloqsSortTree.variables" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.variables[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'variables', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'variables'}">
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedVariables' | translate }}</h1>
-                        </li>
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedVariable.addClass" data-ng-repeat="advancedVariable in common.properties.bloqsSortTree.advancedVariables" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedVariables[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END VARIABLES &ndash;&gt;
-        &lt;!&ndash; CODE &ndash;&gt;
-        <li data-element="toolbox-code">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'code'">
-                <span class="toolbox toolbox-code"></span> {{ 'make-swtoolbox-code' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'code', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'code'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-code' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                        <li id="{{'bloq' + code.name}}" data-ng-class="code.addClass" data-ng-repeat="code in common.properties.bloqsSortTree.codes" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.codes[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END CODE &ndash;&gt;
-        &lt;!&ndash; MATH &ndash;&gt;
-        <li data-element="toolbox-maths">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'math'">
-                <span class="toolbox toolbox-math"></span> {{ 'make-swtoolbox-mathematics' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'math', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'math'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-mathematics' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + math.name}}" data-ng-class="math.addClass" data-ng-repeat="math in common.properties.bloqsSortTree.mathematics" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mathematics[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'math', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'math'}">
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedMathematics' | translate }}</h1>
-                        </li>
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedMathematics.addClass" data-ng-repeat="advancedMathematics in common.properties.bloqsSortTree.advancedMathematics" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMathematics[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END MATH &ndash;&gt;
-        &lt;!&ndash; TEXT &ndash;&gt;
-        <li data-element="toolbox-texts">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'text'">
-                <span class="toolbox toolbox-text"></span> {{ 'make-swtoolbox-text' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'text', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'text'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-text' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + text.name}}" data-ng-class="text.addClass" data-ng-repeat="text in common.properties.bloqsSortTree.texts" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.texts[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'text', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'text'}">
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-text-advanced' | translate }}</h1>
-                        </li>
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedText.addClass" data-ng-repeat="advancedText in common.properties.bloqsSortTree.advancedText" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedText[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END TEXT &ndash;&gt;
-        &lt;!&ndash; CONTROL &ndash;&gt;
-        <li data-element="toolbox-control">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'control'">
-                <span class="toolbox toolbox-control"></span> {{ 'make-swtoolbox-control' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'control', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'control'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-control' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + control.name}}" data-ng-class="control.addClass" data-ng-repeat="control in common.properties.bloqsSortTree.controls" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.controls[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'control', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'control'}">
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedControls' | translate }}</h1>
-                        </li>
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedControl.addClass" data-ng-repeat="advancedControl in common.properties.bloqsSortTree.advancedControls" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedControls[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END CONTROL &ndash;&gt;
-        &lt;!&ndash; LOGIC &ndash;&gt;
-        <li data-element="toolbox-logic">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'logic'">
-                <span class="toolbox toolbox-logic"></span> {{ 'make-swtoolbox-logic' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'logic', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'logic'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-logic' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + logic.name}}" data-ng-class="logic.addClass" data-ng-repeat="logic in common.properties.bloqsSortTree.logics" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.logics[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        &lt;!&ndash; END LOGIC &ndash;&gt;
-        &lt;!&ndash; CLASSES &ndash;&gt;
-        <li data-element="toolbox-classes">
-            <button class="btn btn&#45;&#45;toolbox" ng-click="toolbox.level = 2; toolbox.section = 'classes'">
-                <span class="toolbox toolbox-classes"></span> {{ 'make-swtoolbox-classes' | translate }}
-                <svg class="svg-icon svg-icon&#45;&#45;right">
-                    <use xlink:href="#flecha"></use>
-                </svg>
-            </button>
-            <ul ng-class="{'level':true, 'level&#45;&#45;2':true, 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 2 && toolbox.section === 'classes', 'level&#45;&#45;inactive&#45;&#45;1':toolbox.level === 3, 'hidden':toolbox.section !== 'classes'}">
-                <li>
-                    <h1 class="h3 submenu__title">{{ 'make-swtoolbox-classes' | translate }}</h1>
-                </li>
-                <li>
-                    <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container">
-                        <li id="{{'bloq' + classes.name}}" data-ng-class="classes.addClass" data-ng-repeat="classes in common.properties.bloqsSortTree.classes" data-bitbloq-bloq-creator
-                            data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.classes[$index].name]" data-components-array="componentsArray"></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="btn btn&#45;&#45;toolbox btn&#45;&#45;advanced" ng-click="toolbox.level = 3">
-                        {{ 'make-swtoolbox-advanced' | translate }}
-                        <svg class="svg-icon svg-icon&#45;&#45;right">
-                            <use xlink:href="#flecha"></use>
-                        </svg>
-                    </button>
-                    <ul ng-class="{'level':true, 'level&#45;&#45;3':toolbox.section === 'classes', 'toolbox&#45;&#45;collapsed':collapsedHeader, 'level&#45;&#45;active':toolbox.level === 3, 'hidden':toolbox.section !== 'classes'}">
-                        &lt;!&ndash; ADVANCED &ndash;&gt;
-                        <li>
-                            <h1 class="h3 submenu__title">{{ 'make-swtoolbox-advancedClasses' | translate }}</h1>
-                        </li>
-                        <li>
-                            <ul class="toolbox&#45;&#45;bloqs&#45;&#45;container&#45;&#45;full">
-                                <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedClasses.addClass" data-ng-repeat="advancedClasses in common.properties.bloqsSortTree.advancedClasses" data-bitbloq-bloq-creator
-                                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedClasses[$index].name]" data-components-array="componentsArray"></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <div ng-class="{'level&#45;&#45;2&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level === 3}" ng-click="toolbox.level = 2"></div>
-            </ul>
-        </li>
-        <div ng-class="{'level&#45;&#45;1&#45;&#45;shadow':true,'level&#45;&#45;shadow&#45;&#45;active':toolbox.level !== 1}"></div>
-    </ul>-->
+    
 </aside>
