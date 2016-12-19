@@ -8,10 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
-                                            bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-                                            robotFirmwareApi, web2boardOnline, projectService)
-    {
+    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils, bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -22,12 +19,15 @@ angular.module('bitbloqApp')
         $scope.bloqsApi = bloqsApi;
         $scope.projectService = projectService;
         $scope.lastPosition = 0;
+        $scope.selectedBloqsToolbox = '';
+        $scope.showTrashcan = false;
 
         $scope.$field = $('#bloqs--field').last();
+        $scope.$trashcan;
 
-        var bloqsLoadTimes = 0;
-
-        $scope.selectedBloqsToolbox = '';
+        var bloqsLoadTimes = 0,
+            translateChangeStartEvent,
+            bloqsTabsEvent;
 
         $scope.changeBloqsToolbox = function(tab, event) {
             if (event) {
@@ -39,65 +39,26 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.init = function() {
-            if (projectService.bloqs.varsBloq) {
-                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
-                projectService.bloqs.varsBloq = null;
-                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
-                projectService.bloqs.setupBloq = null;
-                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
-                projectService.bloqs.loopBloq = null;
-            }
-
-            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
-            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
-            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
-
-            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
-            projectService.bloqs.varsBloq.enable(true);
-            projectService.bloqs.varsBloq.doConnectable();
-
-            projectService.bloqs.setupBloq.enable(true);
-            projectService.bloqs.setupBloq.doConnectable();
-
-            projectService.bloqs.loopBloq.enable(true);
-            projectService.bloqs.loopBloq.doConnectable();
-
-            bloqs.updateDropdowns();
+        $scope.duplicateBloqFromContextMenu = function(bloq) {
+            var position = bloq.$bloq[0].getBoundingClientRect();
+            copyBloq({
+                structure: bloq.getBloqsStructure(),
+                top: position.top,
+                left: position.left
+            });
         };
 
-        $scope.initFreeBloqs = function() {
-            var tempBloq, i, j,
-                lastBottomConnector;
-
-            bloqs.destroyFreeBloqs();
-            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
-                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
-                    lastBottomConnector = null;
-                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
-                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
-                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
-
-                        if (lastBottomConnector) {
-                            bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
-                            bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
-
-                        } else {
-                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
-                        }
-
-                        lastBottomConnector = tempBloq.connectors[1];
-
-                        $scope.$field.append(tempBloq.$bloq);
-                        tempBloq.disable();
-                        tempBloq.doConnectable();
-                    }
-
-                    bloqsUtils.redrawTree(tempBloq, bloqs.bloqs, bloqs.connectors);
-                }
-            }
-            bloqsUtils.drawTree(bloqs.bloqs, bloqs.connectors);
+        $scope.enableBloqFromContextMenu = function(bloq) {
+            bloq.enable();
+            $scope.saveBloqStep();
+            projectService.startAutosave();
         };
+        $scope.disableBloqFromContextMenu = function(bloq) {
+            bloq.disable();
+            $scope.saveBloqStep();
+            projectService.startAutosave();
+        };
+
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
@@ -134,6 +95,68 @@ angular.module('bitbloqApp')
             if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
                 $scope.toolbox.level = 1;
             }
+        };
+
+        $scope.init = function() {
+            if (projectService.bloqs.varsBloq) {
+                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
+                projectService.bloqs.varsBloq = null;
+                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
+                projectService.bloqs.setupBloq = null;
+                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
+                projectService.bloqs.loopBloq = null;
+            }
+
+            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
+            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
+            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
+
+            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
+            projectService.bloqs.varsBloq.enable(true);
+            projectService.bloqs.varsBloq.doConnectable();
+
+            projectService.bloqs.setupBloq.enable(true);
+            projectService.bloqs.setupBloq.doConnectable();
+
+            projectService.bloqs.loopBloq.enable(true);
+            projectService.bloqs.loopBloq.doConnectable();
+
+            bloqs.updateDropdowns();
+
+            $scope.$trashcan = $('#trashcan').last();
+        };
+
+        $scope.initFreeBloqs = function() {
+            var tempBloq, i, j,
+                lastBottomConnector;
+
+            bloqs.destroyFreeBloqs();
+            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
+                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
+                    lastBottomConnector = null;
+                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
+                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
+                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
+
+                        if (lastBottomConnector) {
+                            bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
+                            bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
+
+                        } else {
+                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
+                        }
+
+                        lastBottomConnector = tempBloq.connectors[1];
+
+                        $scope.$field.append(tempBloq.$bloq);
+                        tempBloq.disable();
+                        tempBloq.doConnectable();
+                    }
+
+                    bloqsUtils.redrawTree(tempBloq, bloqs.bloqs, bloqs.connectors);
+                }
+            }
+            bloqsUtils.drawTree(bloqs.bloqs, bloqs.connectors);
         };
 
         $scope.onFieldKeyDown = function(event) {
@@ -208,6 +231,32 @@ angular.module('bitbloqApp')
             }
         };
 
+        $scope.performFactoryReset = function() {
+            var robot = projectService.project.hardware.robot,
+                version = common.properties.robotsFirmwareVersion[robot];
+            robotFirmwareApi.getFirmware(robot, version).then(function(result) {
+                if (common.useChromeExtension()) {
+                    web2boardOnline.upload({
+                        hex: result.data,
+                        board: {
+                            mcu: 'uno'
+                        }
+                    });
+                } else {
+                    web2board.uploadHex('uno', result.data);
+                }
+            }, function() {
+                // alert("Error"); todo: add toast
+            });
+        };
+
+        $scope.removeBloqFromContextMenu = function(bloq) {
+            bloqs.removeBloq(bloq.uuid, true);
+            //saveBloqStep from here to not listen remove event from children and store one step for children
+            $scope.saveBloqStep();
+            projectService.startAutosave();
+        };
+
         $scope.searchBloq = function() {
             var userComponents = _.pick(projectService.componentsArray, function(value) {
                 return value.length > 0;
@@ -217,24 +266,14 @@ angular.module('bitbloqApp')
             }
         };
 
-        function existComponent(componentsToSearch, components) {
-            var found,
-                j,
-                i = 0;
-
-            while (!found && (i < componentsToSearch.length)) {
-                j = 0;
-                while (!found && (j < components.length)) {
-                    if (componentsToSearch[i] === components[j].id) {
-                        found = components[j];
-                    }
-                    j++;
-                }
-                i++;
+        $scope.setSoftwareTab = function(tab) {
+            $scope.softTab = tab;
+            if (tab === 'code') {
+                $scope.setCode(projectService.getCode());
+            } else if (tab === 'bloqs') {
+                $rootScope.$emit('currenttab:bloqstab');
             }
-
-            return found;
-        }
+        };
 
         $scope.showComponents = function(item) {
             var result = false;
@@ -254,7 +293,7 @@ angular.module('bitbloqApp')
                             'joystick', 'ldrs', 'pot'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
-                        result = $scope.showCommunications(item);
+                        result = showCommunications(item);
 
                     } else if (item.includes('rgb')) {
                         result = existComponent(['RGBled'], connectedComponents);
@@ -297,75 +336,11 @@ angular.module('bitbloqApp')
             return result;
         };
 
-        $scope.showCommunications = function(item) {
-            var stopWord = ['convert'];
-            if (projectService.componentsArray.serialElements) {
-                return !(stopWord.indexOf(item) === -1 && projectService.componentsArray.serialElements.length === 0);
-            } else {
-                return false;
-            }
-        };
-
-        $scope.enableBloqFromContextMenu = function(bloq) {
-            bloq.enable();
-            $scope.saveBloqStep();
-            projectService.startAutosave();
-        };
-        $scope.disableBloqFromContextMenu = function(bloq) {
-            bloq.disable();
-            $scope.saveBloqStep();
-            projectService.startAutosave();
-        };
-        $scope.removeBloqFromContextMenu = function(bloq) {
-            bloqs.removeBloq(bloq.uuid, true);
-            //saveBloqStep from here to not listen remove event from children and store one step for children
-            $scope.saveBloqStep();
-            projectService.startAutosave();
-        };
-
-        $scope.duplicateBloqFromContextMenu = function(bloq) {
-            var position = bloq.$bloq[0].getBoundingClientRect();
-            copyBloq({
-                structure: bloq.getBloqsStructure(),
-                top: position.top,
-                left: position.left
-            });
-        };
-
-        $scope.setSoftwareTab = function(tab) {
-            $scope.softTab = tab;
-            if (tab === 'code') {
-                $scope.setCode(projectService.getCode());
-            } else if (tab === 'bloqs') {
-                $rootScope.$emit('currenttab:bloqstab');
-            }
-        };
-
-        $scope.performFactoryReset = function() {
-            var robot = projectService.project.hardware.robot,
-                version = common.properties.robotsFirmwareVersion[robot];
-            robotFirmwareApi.getFirmware(robot, version).then(function(result) {
-                if (common.useChromeExtension()) {
-                    web2boardOnline.upload({
-                        hex: result.data,
-                        board: {
-                            mcu: 'uno'
-                        }
-                    });
-                } else {
-                    web2board.uploadHex('uno', result.data);
-                }
-            }, function() {
-                // alert("Error"); todo: add toast
-            });
-        };
-
         function checkInputLength() {
             setScrollsDimension();
         }
 
         function clickDocumentHandler() {
-            $scope.selectedBloqsToolbox = '';
             $contextMenu.css({
                 display: 'none'
             });
@@ -418,6 +393,25 @@ angular.module('bitbloqApp')
                     newBloq.varInputs[i].keyup();
                 }
             }
+        }
+
+        function existComponent(componentsToSearch, components) {
+            var found,
+                j,
+                i = 0;
+
+            while (!found && (i < componentsToSearch.length)) {
+                j = 0;
+                while (!found && (j < components.length)) {
+                    if (componentsToSearch[i] === components[j].id) {
+                        found = components[j];
+                    }
+                    j++;
+                }
+                i++;
+            }
+
+            return found;
         }
 
         function goToCode() {
@@ -550,6 +544,15 @@ angular.module('bitbloqApp')
             }, 50);
         }
 
+        function showCommunications(item) {
+            var stopWord = ['convert'];
+            if (projectService.componentsArray.serialElements) {
+                return !(stopWord.indexOf(item) === -1 && projectService.componentsArray.serialElements.length === 0);
+            } else {
+                return false;
+            }
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
@@ -561,8 +564,7 @@ angular.module('bitbloqApp')
             }, 10);
         };
 
-        var translateChangeStartEvent;
-        var bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
+        bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
             $timeout(function() {
                 setScrollsDimension();
             }, 0);
@@ -570,20 +572,22 @@ angular.module('bitbloqApp')
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
         $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
-        $window.addEventListener('bloqs:dragend', function() {
+        $window.addEventListener('bloqs:dragend', function(bloq) {
             _.throttle(setScrollsDimension, 1000);
-            $scope.showPaperBin = false;
+            var bloqToDelete = bloqsUtils.itsOver(bloq.detail.$bloq, $scope.$trashcan);
+            if (bloqToDelete) {
+                bloqs.removeBloq(bloq.detail.uuid, false, true);
+            }
+            $scope.showTrashcan = false;
             $scope.$apply();
         });
 
         $window.addEventListener('bloqs:startMove', function(bloq) {
             console.log(bloq);
-            $scope.showPaperBin = true;
+            $scope.showTrashcan = true;
+            $scope.selectedBloqsToolbox = '';
             $scope.$apply();
         });
-
-        $scope.showPaperBin = true;
-
 
         $scope.$on('$destroy', function() {
             $document.off('contextmenu', contextMenuDocumentHandler);
