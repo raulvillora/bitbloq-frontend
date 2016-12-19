@@ -11,73 +11,74 @@
 <aside id="toolbox" class="toolbox--right toolbox--software" ng-init="selectedToolboxTab = 'basic'" ng-class="{'toolbox--expand':selectedBloqsToolbox!==''}" data-element="toolbox">
     <h1 class="hidden">Components Toolbox</h1>
     <!-- Alias buttons -->
-    <aside class="tabs-layout__aside tabs-layout__aside--vertical" ng-click="changeBloqsToolbox('', $event)">
-        <ul ng-click="selectedToolboxTab = 'basic'">
+    <aside class="tabs-layout__aside tabs-layout__aside--vertical">
+        <!-- project buttons -->
+        <ul class="component-toolbox" ng-click="selectedToolboxTab = 'basic'">
             <li class="tabs__header__item--vertical toolbox-zowi" ng-class="{'selected--tab': selectedBloqsToolbox==='zowi'}" ng-show="projectService.project.hardware.robot==='zowi'" data-element="toolbox-zowi">
-                <button class="btn-svg" ng-click="changeBloqsToolbox('zowi')">
+                <button class="btn-svg component-toolbox" ng-click="changeBloqsToolbox('zowi')">
                     <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-evolution" ng-class="{'selected--tab': selectedBloqsToolbox==='evolution'}" ng-show="projectService.project.hardware.robot==='evolution'" data-element="toolbox-evolution">
-                <button class="btn-svg" ng-click="changeBloqsToolbox('evolution')">
+                <button class="btn-svg component-toolbox" ng-click="changeBloqsToolbox('evolution')">
                     <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-mbot" ng-class="{'selected--tab': selectedBloqsToolbox==='mBot'}" ng-show="projectService.project.hardware.robot==='mbot'" data-element="toolbox-mbot">
-                <button class="btn-svg" ng-click="changeBloqsToolbox('mBot')">
+                <button class="btn-svg component-toolbox" ng-click="changeBloqsToolbox('mBot')">
                     <svg class="svg-icon">
                         <use xlink:href="#robots"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-components" ng-class="{'selected--tab': selectedBloqsToolbox==='components'}" data-element="toolbox-components">
-                <button class="btn-svg" ng-click="changeBloqsToolbox('components')">
+                <button class="btn-svg component-toolbox" ng-click="changeBloqsToolbox('components')">
                     <svg class="svg-icon">
                         <use xlink:href="#componentes"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-functions" ng-class="{'selected--tab': selectedBloqsToolbox==='functions'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('functions')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('functions')">
                     {{('make-swtoolbox-functions' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-variables" ng-class="{'selected--tab': selectedBloqsToolbox==='variables'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('variables')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('variables')">
                     {{('make-swtoolbox-variables' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-code" ng-class="{'selected--tab': selectedBloqsToolbox==='code'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('code')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('code')">
                     {{('make-swtoolbox-code' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-math" ng-class="{'selected--tab': selectedBloqsToolbox==='maths'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('maths')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('maths')">
                     {{('make-swtoolbox-mathematics' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-text" ng-class="{'selected--tab': selectedBloqsToolbox==='text'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('text')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('text')">
                     {{('make-swtoolbox-text' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-control" ng-class="{'selected--tab': selectedBloqsToolbox==='control'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('control')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('control')">
                     {{('make-swtoolbox-control' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-logic" ng-class="{'selected--tab': selectedBloqsToolbox==='logic'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('logic')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('logic')">
                     {{('make-swtoolbox-logic' | translate).substring(0, 3)}}
                 </button>
             </li>
             <li class="tabs__header__item--vertical toolbox-classes" ng-class="{'selected--tab': selectedBloqsToolbox==='classes'}">
-                <button class="btn-text" ng-click="changeBloqsToolbox('classes')">
+                <button class="btn-text component-toolbox" ng-click="changeBloqsToolbox('classes')">
                     {{('make-swtoolbox-classes' | translate).substring(0, 3)}}
                 </button>
             </li>
@@ -87,7 +88,7 @@
     <div class="toolbox__menu" ng-show="selectedBloqsToolbox===''">
         <ul ng-click="selectedToolboxTab = 'basic'">
             <li class="toolbox__item" ng-show="projectService.project.hardware.robot==='zowi'">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('zowi')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('zowi')">
                     {{'make-swtoolbox-zowi' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -95,7 +96,7 @@
                 </button>
             </li>
             <li class="toolbox__item" ng-show="projectService.project.hardware.robot==='evolution'">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('evolution')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('evolution')">
                     {{'make-swtoolbox-evolution' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -103,7 +104,7 @@
                 </button>
             </li>
             <li class="toolbox__item" ng-show="projectService.project.hardware.robot==='mbot'">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('mBot')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('mBot')">
                     {{'make-swtoolbox-mbot' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -111,7 +112,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('components')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('components')">
                     {{'components' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -119,7 +120,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('functions')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('functions')">
                     {{'make-swtoolbox-functions' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -127,7 +128,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('variables')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('variables')">
                     {{'make-swtoolbox-variables' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -135,7 +136,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('code')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('code')">
                     {{'make-swtoolbox-code' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -143,7 +144,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('maths')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('maths')">
                     {{'make-swtoolbox-mathematics' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -151,7 +152,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('text')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('text')">
                     {{'make-swtoolbox-text' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -159,7 +160,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('control')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('control')">
                     {{'make-swtoolbox-control' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -167,7 +168,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('logic')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('logic')">
                     {{'make-swtoolbox-logic' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -175,7 +176,7 @@
                 </button>
             </li>
             <li class="toolbox__item">
-                <button class="btn btn-text" ng-click="changeBloqsToolbox('classes')">
+                <button class="btn btn-text component-toolbox" ng-click="changeBloqsToolbox('classes')">
                     {{'make-swtoolbox-classes' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#flecha"></use>
@@ -190,10 +191,10 @@
             <h1 class="invisible">Components menu</h1>
             <ul class="tabs__header">
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'basic'}">
-                    <button ng-click="selectedToolboxTab = 'basic'">{{'basics' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'">{{'basics' | translate}}</button>
                 </li>
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}">
-                    <button ng-click="selectedToolboxTab = 'advance'">{{'make-swtoolbox-advanced' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'">{{'make-swtoolbox-advanced' | translate}}</button>
                 </li>
             </ul>
         </aside>

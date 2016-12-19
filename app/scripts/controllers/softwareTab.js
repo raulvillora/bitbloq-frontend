@@ -29,14 +29,8 @@ angular.module('bitbloqApp')
             translateChangeStartEvent,
             bloqsTabsEvent;
 
-        $scope.changeBloqsToolbox = function(tab, event) {
-            if (event) {
-                if (_.isEqual(event.target.classList, event.currentTarget.classList)) {
-                    $scope.selectedBloqsToolbox = tab;
-                }
-            } else {
-                $scope.selectedBloqsToolbox = tab;
-            }
+        $scope.changeBloqsToolbox = function(tab) {
+            $scope.selectedBloqsToolbox = tab;
         };
 
         $scope.duplicateBloqFromContextMenu = function(bloq) {
@@ -92,8 +86,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.hideBloqsMenu = function($event) {
-            if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
-                $scope.toolbox.level = 1;
+            if (!$event.target.className.match('toolbox--bloqs--container') && !$event.target.className.match('component-toolbox') && !$event.target.className.match('submenu__item')) {
+                $scope.selectedBloqsToolbox = '';
             }
         };
 
