@@ -858,7 +858,7 @@ angular.module('bitbloqApp')
 
         };
 
-        function showProjectResumeOnConsole(project) {
+        function showProjectResumeOnConsole(project) { // jshint ignore:line
             $log.log('Resume project');
             $log.log('*vars');
             if (project.vars.childs) {
