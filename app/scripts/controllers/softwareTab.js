@@ -579,7 +579,7 @@ angular.module('bitbloqApp')
         $window.addEventListener('bloqs:startMove', function(bloq) {
             console.log(bloq);
             $scope.showTrashcan = true;
-            $scope.selectedBloqsToolbox = '';
+           // $scope.selectedBloqsToolbox = '';
             $scope.$apply();
         });
 

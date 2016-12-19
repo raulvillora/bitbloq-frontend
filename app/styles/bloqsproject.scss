@@ -625,9 +625,12 @@ $leftBarWidth: 70px;
 }
 
 .toolbox--main {
+    &.toolbox--expand {
+        width: 451px;
+    }
     z-index: 7;
     height: 100%;
-    min-width: 210px;
+    min-width: 228px;
     right: 0;
     position: fixed;
     transition-property: top;
