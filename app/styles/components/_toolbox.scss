@@ -110,6 +110,10 @@ $hw_toolbox: 210px;
                 padding: 0 20px;
             }
         }
+        &.tabs-layout__aside .tabs__header__item {
+            border-left: none;
+            border-top: none;
+        }
     }
 }
 
