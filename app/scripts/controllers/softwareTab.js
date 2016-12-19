@@ -23,7 +23,7 @@ angular.module('bitbloqApp')
         $scope.showTrashcan = false;
 
         $scope.$field = $('#bloqs--field').last();
-        $scope.$trashcan;
+        $scope.$trashcan = null;
 
         var bloqsLoadTimes = 0,
             translateChangeStartEvent,

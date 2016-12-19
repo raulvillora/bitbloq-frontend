@@ -46,7 +46,7 @@ angular.module('bitbloqApp')
         }
 
         function save(dataExercise) {
-            return saveRequest({
+            return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'exercise',
                 data: dataExercise
@@ -54,7 +54,7 @@ angular.module('bitbloqApp')
         }
 
         function update(idExercise, dataExercise) {
-            return saveRequest({
+            return $http({
                 method: 'PUT',
                 url: envData.config.centerModeUrl + 'exercise/' + idExercise,
                 data: dataExercise

@@ -823,8 +823,7 @@ angular.module('bitbloqApp')
                     loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
                     freeBloqs: freeBloqs
                 };
-            //showExerciseResumeOnConsole(step);
-            if ($scope.bloqsHistory.pointer != ($scope.bloqsHistory.history.length - 1)) {
+            if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
             $scope.bloqsHistory.history.push(_.cloneDeep(step));
@@ -839,7 +838,6 @@ angular.module('bitbloqApp')
                 $scope.bloqsHistory.pointer--;
 
                 var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
-                //showExerciseResumeOnConsole(step);
                 exerciseService.exercise.software = step;
 
                 $rootScope.$emit('update-bloqs');
@@ -854,7 +852,6 @@ angular.module('bitbloqApp')
                 $scope.bloqsHistory.pointer++;
 
                 var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
-                //showExerciseResumeOnConsole(step);
                 exerciseService.exercise.software = step;
 
                 $rootScope.$emit('update-bloqs');
@@ -863,21 +860,6 @@ angular.module('bitbloqApp')
             }
 
         };
-
-        function showExerciseResumeOnConsole(exercise) {
-            $log.log('Resume exercise');
-            $log.log('*vars');
-            if (exercise.vars.childs) {
-                for (var i = 0; i < exercise.vars.childs.length; i++) {
-                    $log.log('---', exercise.vars.childs[i].name);
-                    if (exercise.vars.childs[i].childs) {
-                        for (var j = 0; j < exercise.vars.childs[i].childs.length; j++) {
-                            $log.log('------', exercise.vars.childs[i].childs[j].name);
-                        }
-                    }
-                }
-            }
-        }
 
         function addExerciseWatchersAndListener() {
             exerciseService.addWatchers();
@@ -908,48 +890,6 @@ angular.module('bitbloqApp')
                     $scope.$apply();
                 }
 
-            });
-        }
-
-        function launchModalAlert() {
-            var modalTourStep = $rootScope.$new();
-            _.extend(modalTourStep, {
-                contentTemplate: '/views/modals/alert.html',
-                text: 'modal-tour-step',
-                confirmText: 'modal__understood-button',
-                confirmAction: showStepFive
-            });
-            ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container modal--alert',
-                scope: modalTourStep,
-                showClose: false
-            });
-
-        }
-
-        function launchModalGuest() {
-            var modalGuest = $rootScope.$new(),
-                modalGuestInit;
-            _.extend(modalGuest, {
-                contentTemplate: '/views/modals/alert.html',
-                confirmAction: function() {
-                    ngDialog.closeAll();
-                    $scope.common.goToLogin();
-                },
-                cancelButton: true,
-                text: 'modal-not-registered-text',
-                cancelText: 'continue-as-guest',
-                confirmText: 'enter-or-register',
-                rejectAction: launchModalTour
-            });
-
-            modalGuestInit = ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container modal--alert',
-                scope: modalGuest,
-                showClose: false,
-                closeByDocument: false
             });
         }
 
@@ -1034,9 +974,6 @@ angular.module('bitbloqApp')
                     exerciseService.startAutosave();
                     $scope.hardware.firstLoad = false;
                 }
-                if (!$scope.common.user.takeTour) {
-                    launchModalTour();
-                }
                 addExerciseWatchersAndListener();
                 $scope.hwBasicsLoaded.promise.then(function() {
                     $scope.$emit('drawHardware');
@@ -1051,7 +988,6 @@ angular.module('bitbloqApp')
                 });
             } else {
                 addExerciseWatchersAndListener();
-                launchModalGuest();
             }
         });
 
