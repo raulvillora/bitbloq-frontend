@@ -34,7 +34,7 @@ angular.module('bitbloqApp')
             $scope.libsPathClass = 'w2b__settings_w2b__settings_loading';
             return configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
                 .then(function(isPossible) {
-                    $scope.libsPathIcon = isPossible ? '#ok' : '#error';
+                    $scope.libsPathIcon = isPossible ? '#tickCircle' : '#warning';
                     $scope.libsError = !isPossible;
                 });
         };
@@ -44,11 +44,11 @@ angular.module('bitbloqApp')
             $scope.proxyTestClass = 'w2b__settings_w2b__settings_loading';
             return configHub.server.testProxy($scope.settings.proxy)
                 .then(function() {
-                    $scope.proxyTestIcon = '#ok';
+                    $scope.proxyTestIcon = '#tickCircle';
                     $scope.proxyError = false;
                 })
                 .catch(function() {
-                    $scope.proxyTestIcon = '#error';
+                    $scope.proxyTestIcon = '#warning';
                     $scope.proxyError = true;
                 });
         };

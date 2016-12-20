@@ -12,6 +12,7 @@
                 cursor: default;
                 height: 112px;
                 width : 96px;
+                fill: $brand-primary;
             }
         }
 
@@ -53,6 +54,7 @@
                     float       : left;
                     margin-left : 20px;
                     margin-right: 20px;
+                    fill: #3E424B;
                 }
 
                 div {
@@ -78,10 +80,10 @@
                 }
             }
 
-            .contact-by-email {
+            .contact-by-email, .contact-by-phone {
                 .svg-icon {
-                    height: 50px;
-                    width : 43px;
+                    width : 40px;
+                    height: 58px;
                 }
 
                 div{
@@ -90,13 +92,6 @@
 
                 a:hover {
                   text-decoration: underline;
-                }
-            }
-
-            .contact-by-phone {
-                .svg-icon {
-                    width : 40px;
-                    height: 58px;
                 }
             }
         }

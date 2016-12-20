@@ -4,10 +4,10 @@
             <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'; changeStatusClass();" ng-disabled="group.status==='closed'" checked>
             <div class="slider round">
                 <svg class="svg-icon">
-                    <use xlink:href="#cierre"></use>
+                    <use xlink:href="#close"></use>
                 </svg>
                 <svg class="svg-icon">
-                    <use xlink:href="#verificar"></use>
+                    <use xlink:href="#tick"></use>
                 </svg>
             </div>
             <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
@@ -17,12 +17,12 @@
         <div class="button-group">
             <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
                 <svg class="svg-icon">
-                    <use xlink:href="#remove"></use>
+                    <use xlink:href="#delete"></use>
                 </svg>
             </button>
             <button class="btn btn--tertiary btn--small" ng-click="closeGroup()" ng-disabled="group.status==='closed'" data-element="centerMode-close-group">
                 <svg class="svg-icon svg-icon--text">
-                    <use xlink:href="#archive"></use>
+                    <use xlink:href="#store"></use>
                 </svg>
                 {{ 'centerMode_button_closeGroup' | translate }}
             </button>
@@ -43,7 +43,7 @@
                 </li>
                 <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}" ng-click="selectedTab = 'exercises'" data-element="centerMode-tab-exercises">
                     <svg class="svg-icon--aside--menu">
-                        <use xlink:href="#exercises"></use>
+                        <use xlink:href="#exercise"></use>
                     </svg>
                     <span class="menu__item__span">
                         {{'centerMode_exercises' | translate}} ({{ exercises.length || 0 }})

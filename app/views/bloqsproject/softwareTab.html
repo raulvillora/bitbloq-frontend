@@ -5,7 +5,7 @@
             <li data-element="code-tab" ng-click="setSoftwareTab('code')" ng-class="{'active':softTab==='code'}">{{ 'code' | translate }}</li>
             <li ng-if="projectService.project.hardware.robot==='zowi'" class="btn btn--zowi-firmware" ng-click="performFactoryReset()">
                 <svg class="svg-icon">
-                    <use xlink:href="#versionAnterior"></use>
+                    <use xlink:href="#lastVersion"></use>
                 </svg>
                 <span>{{'button_zowi_rest' | translate}}</span>
             
@@ -45,7 +45,7 @@
     <div class="software--tab" ng-show="softTab==='code'">
         <button class="software__edit-code" data-ng-click="goToCodeModal()" data-element="software-edit-code">
             <svg class="svg-icon svg-icon--text svg-icon--menu">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#edit"></use>
+                <use xlink:href="#pencil"></use>
             </svg>
             {{'bloqsTab_button_editCode' | translate }}
         </button>

@@ -40,7 +40,7 @@
                         <label for="emailusername" class="invisible">Username or Email</label>
                         <span ng-class="{'input input--form--login input--default':true, 'input--focused':focus === 'emailusername', 'input--error':form.emailusername.submitted && (form.emailusername.$error.required || errors.login.emailUserName)}">
                             <svg class="svg-icon form-icon--username icon--form--validating">
-                                <use xlink:href="#usuario"></use>
+                                <use xlink:href="#user"></use>
                             </svg>
                             <input type="text" id="emailusername" name="emailusername" data-ng-model="form.emailUserNameModel" data-ng-focus="form.emailusername.submitted=false; focus = 'emailusername'" data-ng-blur="focus = false" maxlength="50" placeholder="{{'login-username-email' | translate}}" autocorrect="off" autocomplete="on" data-element="login-emailusername-intput" required>
                         </span>
@@ -60,7 +60,7 @@
                     <div class="form-control">
                         <span data-ng-class="{'input input--form--login input--default':true, 'input--focused':focus === 'password', 'input--error':form.password.submitted && (form.password.$error.required || form.password.$error.minlength || errors.login.password)}">
                             <svg class="svg-icon">
-                                <use xlink:href="#candado"></use>
+                                <use xlink:href="#lock"></use>
                             </svg>
                             <input type="password" id="password" name="password" autocomplete="off" data-ng-model="user.password" data-ng-focus="form.password.submitted=false; focus = 'password'" data-ng-blur="focus = false" data-ng-minlength="6" maxlength="50" placeholder="{{'password' | translate}}" autocorrect="off" data-element="login-password-input" required>
                         </span>
@@ -110,7 +110,7 @@
                         <label for="emailToSend" class="invisible">email</label>
                         <span ng-class="{'input input--form--login input--default':true, 'input--focused':focus === 'email', 'input--error':formForgot.emailToSend.submitted && (formForgot.emailToSend.$invalid || formForgot.emailToSend.$error.required || recovery.emailError)}">
                             <svg class="svg-icon">
-                                <use xlink:href="#email"></use>
+                                <use xlink:href="#mail"></use>
                             </svg>
                             <input type="email" id="emailToSend" name="emailToSend" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" data-ng-model="emailToSend" data-ng-focus="formForgot.emailToSend.submitted=false; focus = 'email'" data-ng-blur="focus = false" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" data-element="login-email-to-send-input" required>
                         </span>

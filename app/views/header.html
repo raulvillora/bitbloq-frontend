@@ -7,7 +7,7 @@
                 <li data-element="nav-logo">
                     <a class="nav__menu__link" data-ng-href="#/{{common.user?'projects':''}}">
                         <svg class="svg-icon svg-icon-logo">
-                            <use xlink:href="#logoBibtloq_webTool"></use>
+                            <use xlink:href="#logo"></use>
                         </svg>
                     </a>
                 </li>
@@ -16,7 +16,7 @@
                 <li ng-if="common.user && common.userRole==='headMaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Center"></use>
+                            <use xlink:href="#home"></use>
                         </svg>
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
@@ -24,7 +24,7 @@
                 <li ng-if="common.user && (common.userRole==='headMaster' || common.userRole==='teacher')" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/center-mode/teacher">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#group"></use>
+                            <use xlink:href="#people"></use>
                         </svg>
                         <span>{{ 'header_tab_myClass' | translate }}</span>
                     </a>
@@ -32,7 +32,7 @@
                 <li ng-if="common.user && common.user.studentMode" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/center-mode/student">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#exercises"></use>
+                            <use xlink:href="#exercise"></use>
                         </svg>
                         <span>{{ 'header_tab_myExercises' | translate }}</span>
                     </a>
@@ -42,7 +42,7 @@
                 <li ng-if="!common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
                     <a class="nav__menu__link" href="#/bloqsproject">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Construye"></use>
+                            <use xlink:href="#build"></use>
                         </svg>
                         <span>{{ 'make' | translate }}</span>
                     </a>
@@ -50,7 +50,7 @@
                 <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'projects'}" data-element="nav-projects">
                     <a class="nav__menu__link" href="#/projects">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Mis_proyectos"></use>
+                            <use xlink:href="#folder"></use>
                         </svg>
                         <span>{{ 'projects' | translate }}</span>
                     </a>
@@ -58,7 +58,7 @@
                 <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'explore'}" data-element="nav-explore">
                     <a class="nav__menu__link" href="#/explore">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Explora"></use>
+                            <use xlink:href="#cloud"></use>
                         </svg>
                         <span>{{ 'explore' | translate }}</span>
                     </a>
@@ -66,7 +66,7 @@
                 <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'learn'}" data-element="nav-learn">
                     <a class="nav__menu__link" href="#/learn">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Aprende"></use>
+                            <use xlink:href="#book"></use>
                         </svg>
                         <span data-element="header-menu-learn">{{ 'learn' | translate }}</span>
                     </a>
@@ -74,7 +74,7 @@
                 <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'forum'}" data-element="nav-forum">
                     <a class="nav__menu__link" href="#/forum">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Forum"></use>
+                            <use xlink:href="#forum"></use>
                         </svg>
                         <span>{{ 'help_title_forum' | translate }}</span>
                     </a>
@@ -109,7 +109,7 @@
                 <li class="menu--user__item">
                     <a href="/#/account">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#preferencias"></use>
+                            <use xlink:href="#settings"></use>
                         </svg>
                         {{ 'header-account-config' | translate }}
                     </a>
@@ -117,7 +117,7 @@
                 <li class="menu--user__item">
                     <button ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#Archivo_CambiarIdioma"></use>
+                            <use xlink:href="#earth"></use>
                         </svg>
                         {{ 'header-change-language' | translate }}
                     </button>
@@ -125,7 +125,7 @@
                 <li class="menu--user__item">
                     <button href ng-click="logout()" data-element="header-menu-logout">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#cerrarsesion"></use>
+                            <use xlink:href="#logOut"></use>
                         </svg>
                         {{ 'header-close-session' | translate }}
                     </button>

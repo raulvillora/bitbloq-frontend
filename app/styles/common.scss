@@ -315,7 +315,8 @@ textarea:disabled {
         -webkit-animation-timing-function: linear;
         width: 64px;
         height: 64px;
-        background-image: url(../images/icons/loadr.svg);
+        background-image: url(../images/icons/loader.svg);
+        background-size: cover;
         position: absolute;
         top: 0;
         left: 0;
@@ -323,6 +324,7 @@ textarea:disabled {
         bottom: 0;
         margin: auto;
         z-index: 10;
+        opacity: 0.2;
     }
 }
 

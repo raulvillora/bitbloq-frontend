@@ -26,14 +26,14 @@
             <div class="forum__admin__action forum__delete-theme" data-tooltip-position="bottom" data-tooltip="{{ 'delete-theme' | translate }}" data-tooltips="true">
                 <button class="btn btn--small btn--delete-answer" ng-click="forum.deleteThread(forum.currentThread._id)">
                     <svg class="svg-icon svg-icon--text">
-                        <use xlink:href="#remove"></use>
+                        <use xlink:href="#delete"></use>
                     </svg>
                 </button>
             </div>
             <div class="forum__admin__action forum__move-theme">
                 <button class="btn btn--secondary btn--small btn--admin" ng-click="forum.moveThread(forum.currentThread._id)">
                     <svg class="svg-icon svg-icon--text">
-                        <use xlink:href="#deshacer"></use>
+                        <use xlink:href="#undo"></use>
                     </svg>
                     <span>{{'forumAdmin_buton_moveTheme' | translate }}</span>
                 </button>
@@ -56,7 +56,7 @@
                 <div class="forum__admin__action forum__delete-answer" data-tooltip-position="bottom" data-tooltip="{{ 'delete-answer' | translate }}" data-tooltips="true">
                     <button class="btn btn--small btn--delete-answer" ng-click="forum.deleteAnswer(answer)">
                         <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#remove"></use>
+                            <use xlink:href="#delete"></use>
                         </svg>
                     </button>
                 </div>

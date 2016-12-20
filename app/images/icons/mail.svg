@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="12.97" height="13" viewBox="0 0 12.97 13">
+  <defs>
+    <clipPath id="clip-path-1">
+      <rect x="-1089" y="-1567" width="3296" height="2238"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip-path-1)">
+    <path d="M12.980,0.921 L6.501,3.766 L-0.000,0.924 L-0.000,0.924 L-0.000,-0.015 L12.980,-0.015 L12.980,0.921 ZM6.351,5.218 C6.446,5.265 6.557,5.265 6.652,5.218 L12.980,2.447 L12.980,8.962 L-0.000,8.962 L-0.000,2.451 L-0.000,2.451 L6.351,5.218 Z" transform="translate(0 2.01)" />
+  </g>
+</svg>

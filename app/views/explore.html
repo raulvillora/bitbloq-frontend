@@ -13,12 +13,12 @@
                 <div class="explore__tool grid-list">
                     <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--explore--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
                         <svg class="svg-icon">
-                            <use xlink:href="#cuadricula"></use>
+                            <use xlink:href="#grid"></use>
                         </svg>
                     </button>
                     <button ng-click="itemsLayout = 'list'" ng-class="{btn:true, 'btn--explore--actions':true, 'btn--selected':itemsLayout === 'list', 'grid--right':true}">
                         <svg class="svg-icon">
-                            <use xlink:href="#listado"></use>
+                            <use xlink:href="#list"></use>
                         </svg>
                     </button>
                 </div>
@@ -26,7 +26,7 @@
                     <h3 class="invisible">{{ 'searcher-search-form' | translate }}</h3>
                     <span class="form--input" ng-class="{'input--focused':focus === 'exploresearch'}">
                         <svg class="svg-icon--search">
-                            <use xlink:href="#lupa"></use>
+                            <use xlink:href="#search"></use>
                         </svg>
                         <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="searchText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'exploresearch'" data-ng-blur="focus = false" data-element="explore-find">
                     </span>
@@ -108,20 +108,20 @@
                             <div class="stats">
                                 <span class="explore__project-item__icon">
                                     <svg class="svg-icon">
-                                        <use xlink:href="#vistas"></use>
+                                        <use xlink:href="#eye"></use>
                                     </svg>
                                     <span>{{project.timesViewed}}</span>
                                 </span>
                                 <span class="explore__project-item__icon">
                                     <svg class="svg-icon">
-                                        <use xlink:href="#mas"></use>
+                                        <use xlink:href="#plusCircle"></use>
                                     </svg>
                                     <span>{{project.timesAdded}}</span>
                                 </span>
                             </div>
                             <span ng-if="project.codeProject" class="project--item--code" placeholder="{{'my-project_placeholder_code-project' | translate }}">
                                 <svg class="svg-icon">
-                                    <use xlink:href="#codigo"></use>
+                                    <use xlink:href="#code"></use>
                                 </svg>
                             </span>
                         </div>

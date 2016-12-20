@@ -97,7 +97,7 @@
                         <span class="tags__item--text">{{tag}}</span>
                         <span class="tags__item--trash">
                             <svg class="svg-icon" data-ng-click="removeTag(tag)" data-element="infotab-remove-tag">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#remove"></use>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#delete"></use>
                             </svg>
                         </span>
                     </div>
@@ -128,7 +128,7 @@
         <fieldset ng-if="common.section==='exercise'" class="fieldset--right" data-ng-init="focus = false">
             <div class="field--title">
                 <svg class="svg-icon svg-icon--text">
-                    <use xlink:href="#group"></use>
+                    <use xlink:href="#people"></use>
                 </svg>
                 <legend class="h3">{{ 'Grupos asignados' | translate }}</legend>
             </div>
