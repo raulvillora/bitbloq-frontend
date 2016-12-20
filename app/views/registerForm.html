@@ -43,7 +43,7 @@
                             </svg>
                             <input ng-class="{'input--login--username':true}" ng-model="user.username" ng-focus="form.username.submitted = false; focus = 'username'" ng-blur="form.username.submitted = true; checkUserName(); focus = false" id="username" name="username" type="text" maxlength="50" placeholder="{{'user-name' | translate}}" autocorrect="off" autocomplete="off" required>
                             <svg ng-show="form.username.submitted && username.searching" class="svg-icon icon--form--loading icon--form--validating icon--animated--spin">
-                                <use xlink:href="#loading"></use>
+                                <use xlink:href="#loader"></use>
                             </svg>
                             <svg ng-show="form.username.submitted && username.search && username.free" class="svg-icon icon--form--validating icon--form--validated ">
                                 <use xlink:href="#tickCircle"></use>

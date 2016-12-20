@@ -30,7 +30,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.testLibrariesPath = function() {
-            $scope.libsPathIcon = '#loading';
+            $scope.libsPathIcon = '#loader';
             $scope.libsPathClass = 'w2b__settings_w2b__settings_loading';
             return configHub.server.isPossibleLibrariesPath($scope.settings.libraries_path)
                 .then(function(isPossible) {
@@ -40,7 +40,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.testProxy = function() {
-            $scope.proxyTestIcon = '#loading';
+            $scope.proxyTestIcon = '#loader';
             $scope.proxyTestClass = 'w2b__settings_w2b__settings_loading';
             return configHub.server.testProxy($scope.settings.proxy)
                 .then(function() {

@@ -25,9 +25,6 @@ angular.module('bitbloqApp')
             });
 
             if (removedAlert.length > 0) {
-                // if (alerts.length === 0) {
-                //     i = 0;
-                // }
 
                 if (!$rootScope.$$phase) {
                     $rootScope.$digest();
