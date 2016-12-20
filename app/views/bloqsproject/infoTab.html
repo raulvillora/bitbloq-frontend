@@ -5,7 +5,8 @@
                 <svg class="svg-icon svg-icon--text">
                     <use xlink:href="#info"></use>
                 </svg>
-                <legend class="h3">{{ 'info' | translate }}</legend>
+                <legend ng-if="common.section !== 'exercise'" class="h3">{{ 'info' | translate }}</legend>
+                <legend ng-if="common.section === 'exercise'" class="h3">{{ 'infoTab_title_exerciseInfo' | translate }}</legend>
             </div>
             <div class="form--section">
                 <!-- input type="text"-->
@@ -107,6 +108,9 @@
         </fieldset>
         <fieldset ng-if="!currentProject.codeProject" class="fieldset--right">
             <div class="field--title">
+                <svg class="svg-icon svg-icon--text">
+                    <use xlink:href="#brush"></use>
+                </svg>
                 <legend class="h3">{{ 'infotab_title_theme' | translate }}</legend>
             </div>
             <div class="form--section choose--theme">
@@ -132,7 +136,7 @@
                 </svg>
                 <legend class="h3">{{ 'Grupos asignados' | translate }}</legend>
             </div>
-            <ul class="table__block">
+            <ul class="table__block--invert">
                 <li class="table__block__list" ng-repeat="group in groups">
                     <span class="table__block__item">
                         <a ng-href="{{'#/center-mode/group/' + group._id}}">

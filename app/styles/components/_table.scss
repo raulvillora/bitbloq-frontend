@@ -16,16 +16,24 @@
 
 .table__block {
     border-top: 2px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
+    .table__block__list:nth-child(2n) {
+        background-color: white;
+    }
+
+}
+
+.table__block--invert {
+    padding: 0 10px;
+    background-color: white;
+    .table__block__list:nth-child(2n + 1) {
+        background-color: white;
+    }
 }
 
 .table__block__list {
     padding: 10px;
     background-color: #eeeeee;
     min-height: 50px;
-    &:nth-child(2n) {
-        background-color: white;
-    }
     &:hover {
         background-color: #e2e2e2;
         .table__block__button--delete {
@@ -34,6 +42,9 @@
         .table__column--hover button {
             display: inherit;
         }
+    }
+    &:last-child {
+        border-bottom: 1px solid #dddddd;
     }
     .table__column--hover button {
         display: none;
