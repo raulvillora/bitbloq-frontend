@@ -8,12 +8,12 @@
         <span>{{ 'tour-step-six-text' | translate }}</span>
     </div>
 </div>
-<aside id="toolbox" class="toolbox--right toolbox--software" ng-init="selectedToolboxTab = 'basic'" ng-class="{'toolbox--expand':selectedBloqsToolbox!==''}" data-element="toolbox">
+<aside id="toolbox" class="toolbox--right toolbox--software" ng-init="selectedToolboxTab = 'basic'" ng-class="{'toolbox--expand':selectedBloqsToolbox!=='', 'toolbox--exercise':common.section!=='exercise'}" data-element="toolbox">
     <h1 class="hidden">Components Toolbox</h1>
     <!-- Alias buttons -->
     <aside class="tabs-layout__aside tabs-layout__aside--vertical">
         <!-- project buttons -->
-        <ul class="component-toolbox" ng-click="selectedToolboxTab = 'basic'">
+        <ul class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" ng-show="common.section==='bloqsproject' || (common.section!=='exercise' && selectedBloqsToolbox!=='')">
             <li class="tabs__header__item--vertical toolbox-zowi" ng-class="{'selected--tab': selectedBloqsToolbox==='zowi'}" ng-show="projectService.project.hardware.robot==='zowi'" data-element="toolbox-zowi">
                 <button class="btn-svg component-toolbox" ng-click="changeBloqsToolbox('zowi')">
                     <svg class="svg-icon">

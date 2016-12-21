@@ -11,6 +11,8 @@
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants, chromeAppApi) {
 
+
+
         /*************************************************
          Project save / edit
          *************************************************/
@@ -32,11 +34,7 @@ angular.module('bitbloqApp')
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
-            if (projectService.project.hardware.components.length === 0) {
-                return false;
-            } else {
-                return true;
-            }
+            return  projectService.project.hardware.components.length !== 0;
         };
         $scope.anyAdvancedComponent = function() {
             return !_.isEqual(projectService.componentsArray, bloqsUtils.getEmptyComponentsArray());
@@ -1096,8 +1094,6 @@ angular.module('bitbloqApp')
             settingBoardAlert,
             serialMonitorAlert;
 
-        $scope.shareWithUserTags = [];
-
         $scope.code = '';
 
         $scope.hardware = {
@@ -1110,7 +1106,7 @@ angular.module('bitbloqApp')
 
         $scope.projectApi = projectApi;
         $scope.currentProject = projectService.project;
-        $scope.projectService = projectService;
+        $scope.currentProjectService = projectService;
 
         projectService.saveStatus = 0;
 

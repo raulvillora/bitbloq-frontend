@@ -14,20 +14,22 @@ angular.module('bitbloqApp')
             field = angular.element('#bloqs--field'),
             scrollBarContainer = angular.element('.make--scrollbar'),
             scrollBar = angular.element('.scrollbar--small'),
-            bloqsTab = angular.element('.bloqs-tab');
-
-        $scope.bloqsApi = bloqsApi;
-        $scope.projectService = projectService;
-        $scope.lastPosition = 0;
-        $scope.selectedBloqsToolbox = '';
-        $scope.showTrashcan = false;
-
-        $scope.$field = $('#bloqs--field').last();
-        $scope.$trashcan = null;
+            bloqsTab = angular.element('.bloqs-tab'),
+            currentProjectService = $scope.currentProjectService || projectService;
 
         var bloqsLoadTimes = 0,
             translateChangeStartEvent,
             bloqsTabsEvent;
+
+        $scope.bloqsApi = bloqsApi;
+        $scope.currentProject = $scope.currentProject || projectService.project;
+        $scope.lastPosition = 0;
+        $scope.selectedBloqsToolbox = '';
+
+        $scope.showTrashcan = false;
+        $scope.$field = $('#bloqs--field').last();
+
+        $scope.$trashcan = null;
 
         $scope.changeBloqsToolbox = function(tab) {
             $scope.selectedBloqsToolbox = tab;
@@ -45,19 +47,19 @@ angular.module('bitbloqApp')
         $scope.enableBloqFromContextMenu = function(bloq) {
             bloq.enable();
             $scope.saveBloqStep();
-            projectService.startAutosave();
+            currentProjectService.startAutosave();
         };
         $scope.disableBloqFromContextMenu = function(bloq) {
             bloq.disable();
             $scope.saveBloqStep();
-            projectService.startAutosave();
+            currentProjectService.startAutosave();
         };
 
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
             if ($scope.common.session.save) {
-                projectService.project.code = $scope.code;
+                $scope.currentProject.code = $scope.code;
             }
             if (!$scope.common.user || !$scope.common.user.hasBeenWarnedAboutChangeBloqsToCode) {
                 var modalCode = $rootScope.$new();
@@ -76,10 +78,10 @@ angular.module('bitbloqApp')
                     scope: modalCode
                 });
             } else {
-                if (projectService.project._id) {
-                    $location.path('/codeproject/' + projectService.project._id);
+                if ($scope.currentProject._id) {
+                    $location.path('/codeproject/' + $scope.currentProject._id);
                 } else {
-                    $scope.common.session.project = projectService.project;
+                    $scope.common.session.project = $scope.currentProject;
                     $location.path('/codeproject/');
                 }
             }
@@ -92,28 +94,28 @@ angular.module('bitbloqApp')
         };
 
         $scope.init = function() {
-            if (projectService.bloqs.varsBloq) {
-                bloqs.removeBloq(projectService.bloqs.varsBloq.uuid, true);
-                projectService.bloqs.varsBloq = null;
-                bloqs.removeBloq(projectService.bloqs.setupBloq.uuid, true);
-                projectService.bloqs.setupBloq = null;
-                bloqs.removeBloq(projectService.bloqs.loopBloq.uuid, true);
-                projectService.bloqs.loopBloq = null;
+            if (currentProjectService.bloqs.varsBloq) {
+                bloqs.removeBloq(currentProjectService.bloqs.varsBloq.uuid, true);
+                currentProjectService.bloqs.varsBloq = null;
+                bloqs.removeBloq(currentProjectService.bloqs.setupBloq.uuid, true);
+                currentProjectService.bloqs.setupBloq = null;
+                bloqs.removeBloq(currentProjectService.bloqs.loopBloq.uuid, true);
+                currentProjectService.bloqs.loopBloq = null;
             }
 
-            projectService.bloqs.varsBloq = bloqs.buildBloqWithContent(projectService.project.software.vars, projectService.componentsArray, bloqsApi.schemas, $scope.$field);
-            projectService.bloqs.setupBloq = bloqs.buildBloqWithContent(projectService.project.software.setup, projectService.componentsArray, bloqsApi.schemas);
-            projectService.bloqs.loopBloq = bloqs.buildBloqWithContent(projectService.project.software.loop, projectService.componentsArray, bloqsApi.schemas);
+            currentProjectService.bloqs.varsBloq = bloqs.buildBloqWithContent($scope.currentProject.software.vars, currentProjectService.componentsArray, bloqsApi.schemas, $scope.$field);
+            currentProjectService.bloqs.setupBloq = bloqs.buildBloqWithContent($scope.currentProject.software.setup, currentProjectService.componentsArray, bloqsApi.schemas);
+            currentProjectService.bloqs.loopBloq = bloqs.buildBloqWithContent($scope.currentProject.software.loop, currentProjectService.componentsArray, bloqsApi.schemas);
 
-            $scope.$field.append(projectService.bloqs.varsBloq.$bloq, projectService.bloqs.setupBloq.$bloq, projectService.bloqs.loopBloq.$bloq);
-            projectService.bloqs.varsBloq.enable(true);
-            projectService.bloqs.varsBloq.doConnectable();
+            $scope.$field.append(currentProjectService.bloqs.varsBloq.$bloq, currentProjectService.bloqs.setupBloq.$bloq, currentProjectService.bloqs.loopBloq.$bloq);
+            currentProjectService.bloqs.varsBloq.enable(true);
+            currentProjectService.bloqs.varsBloq.doConnectable();
 
-            projectService.bloqs.setupBloq.enable(true);
-            projectService.bloqs.setupBloq.doConnectable();
+            currentProjectService.bloqs.setupBloq.enable(true);
+            currentProjectService.bloqs.setupBloq.doConnectable();
 
-            projectService.bloqs.loopBloq.enable(true);
-            projectService.bloqs.loopBloq.doConnectable();
+            currentProjectService.bloqs.loopBloq.enable(true);
+            currentProjectService.bloqs.loopBloq.doConnectable();
 
             bloqs.updateDropdowns();
 
@@ -125,19 +127,19 @@ angular.module('bitbloqApp')
                 lastBottomConnector;
 
             bloqs.destroyFreeBloqs();
-            if (projectService.project.software.freeBloqs && (projectService.project.software.freeBloqs.length > 0)) {
-                for (i = 0; i < projectService.project.software.freeBloqs.length; i++) {
+            if ($scope.currentProject.software.freeBloqs && ( $scope.currentProject.software.freeBloqs.length > 0)) {
+                for (i = 0; i < $scope.currentProject.software.freeBloqs.length; i++) {
                     lastBottomConnector = null;
-                    for (j = 0; j < projectService.project.software.freeBloqs[i].bloqGroup.length; j++) {
-                        // $log.debug(projectService.project.software.freeBloqs[i].bloqGroup[j]);
-                        tempBloq = bloqs.buildBloqWithContent(projectService.project.software.freeBloqs[i].bloqGroup[j], projectService.componentsArray, bloqsApi.schemas);
+                    for (j = 0; j < $scope.currentProject.software.freeBloqs[i].bloqGroup.length; j++) {
+                        // $log.debug( $scope.currentProject.software.freeBloqs[i].bloqGroup[j]);
+                        tempBloq = bloqs.buildBloqWithContent($scope.currentProject.software.freeBloqs[i].bloqGroup[j], currentProjectService.componentsArray, bloqsApi.schemas);
 
                         if (lastBottomConnector) {
                             bloqs.connectors[lastBottomConnector].connectedTo = tempBloq.connectors[0];
                             bloqs.connectors[tempBloq.connectors[0]].connectedTo = lastBottomConnector;
 
                         } else {
-                            tempBloq.$bloq[0].style.transform = 'translate(' + projectService.project.software.freeBloqs[i].position.left + 'px,' + projectService.project.software.freeBloqs[i].position.top + 'px)';
+                            tempBloq.$bloq[0].style.transform = 'translate(' + $scope.currentProject.software.freeBloqs[i].position.left + 'px,' + $scope.currentProject.software.freeBloqs[i].position.top + 'px)';
                         }
 
                         lastBottomConnector = tempBloq.connectors[1];
@@ -161,7 +163,7 @@ angular.module('bitbloqApp')
                     bloqs.removeBloq($document[0].activeElement.attributes['data-bloq-id'].value, true);
                     $scope.$field.focus();
                     $scope.saveBloqStep();
-                    projectService.startAutosave();
+                    currentProjectService.startAutosave();
                 } else {
                     $log.debug('we cant delete group bloqs');
                 }
@@ -182,7 +184,7 @@ angular.module('bitbloqApp')
                             bloqs.removeBloq($document[0].activeElement.attributes['data-bloq-id'].value, true);
                             $scope.$field.focus();
                             $scope.saveBloqStep();
-                            projectService.startAutosave();
+                            currentProjectService.startAutosave();
                         } else {
                             $log.debug('we cant delete group bloqs');
                         }
@@ -226,7 +228,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.performFactoryReset = function() {
-            var robot = projectService.project.hardware.robot,
+            var robot = $scope.currentProject.hardware.robot,
                 version = common.properties.robotsFirmwareVersion[robot];
             robotFirmwareApi.getFirmware(robot, version).then(function(result) {
                 if (common.useChromeExtension()) {
@@ -248,11 +250,11 @@ angular.module('bitbloqApp')
             bloqs.removeBloq(bloq.uuid, true);
             //saveBloqStep from here to not listen remove event from children and store one step for children
             $scope.saveBloqStep();
-            projectService.startAutosave();
+            currentProjectService.startAutosave();
         };
 
         $scope.searchBloq = function() {
-            var userComponents = _.pick(projectService.componentsArray, function(value) {
+            var userComponents = _.pick(currentProjectService.componentsArray, function(value) {
                 return value.length > 0;
             });
             if (userComponents.indexOf($scope.searchText)) {
@@ -263,7 +265,7 @@ angular.module('bitbloqApp')
         $scope.setSoftwareTab = function(tab) {
             $scope.softTab = tab;
             if (tab === 'code') {
-                $scope.setCode(projectService.getCode());
+                $scope.setCode(currentProjectService.getCode());
             } else if (tab === 'bloqs') {
                 $rootScope.$emit('currenttab:bloqstab');
             }
@@ -274,8 +276,8 @@ angular.module('bitbloqApp')
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
             if (stopWord.indexOf(item) === -1) {
                 var i;
-                if (!projectService.project.hardware.robot && projectService.project.hardware.board && projectService.project.hardware.components) {
-                    var connectedComponents = projectService.project.hardware.components;
+                if (!$scope.currentProject.hardware.robot && $scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
+                    var connectedComponents = $scope.currentProject.hardware.components;
                     if (item === 'hwVariable' && connectedComponents.length !== 0) {
                         result = true;
                     } else if (item === 'led') {
@@ -373,7 +375,7 @@ angular.module('bitbloqApp')
 
         function copyBloq(bloq) {
 
-            var newBloq = bloqs.buildBloqWithContent(bloq.structure, projectService.componentsArray, bloqsApi.schemas);
+            var newBloq = bloqs.buildBloqWithContent(bloq.structure, currentProjectService.componentsArray, bloqsApi.schemas);
 
             newBloq.doConnectable();
             newBloq.disable();
@@ -415,13 +417,13 @@ angular.module('bitbloqApp')
                 userApi.update({
                     hasBeenWarnedAboutChangeBloqsToCode: true
                 });
-                if (projectService.project._id) {
-                    $location.path('/codeproject/' + projectService.project._id);
+                if ($scope.currentProject._id) {
+                    $location.path('/codeproject/' + $scope.currentProject._id);
                 } else {
                     $location.path('/codeproject/');
                 }
             } else {
-                $scope.common.session.project = projectService.project;
+                $scope.common.session.project = $scope.currentProject;
                 $location.path('/codeproject/');
             }
         }
@@ -540,8 +542,8 @@ angular.module('bitbloqApp')
 
         function showCommunications(item) {
             var stopWord = ['convert'];
-            if (projectService.componentsArray.serialElements) {
-                return !(stopWord.indexOf(item) === -1 && projectService.componentsArray.serialElements.length === 0);
+            if (currentProjectService.componentsArray.serialElements) {
+                return !(stopWord.indexOf(item) === -1 && currentProjectService.componentsArray.serialElements.length === 0);
             } else {
                 return false;
             }
@@ -579,7 +581,7 @@ angular.module('bitbloqApp')
         $window.addEventListener('bloqs:startMove', function(bloq) {
             console.log(bloq);
             $scope.showTrashcan = true;
-           // $scope.selectedBloqsToolbox = '';
+            // $scope.selectedBloqsToolbox = '';
             $scope.$apply();
         });
 

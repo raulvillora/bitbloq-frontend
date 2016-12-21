@@ -11,7 +11,38 @@
 angular.module('bitbloqApp')
     .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi) {
 
+
+        /*************************************************
+         Exercise settings
+         *************************************************/
+
+        var compilingAlert,
+            settingBoardAlert,
+            serialMonitorAlert;
+
         $scope.groups = [];
+
+        $scope.hardware = {
+            componentList: null,
+            robotList: null,
+            cleanSchema: null,
+            sortToolbox: null,
+            firstLoad: true
+        };
+
+        $scope.exerciseApi = exerciseApi;
+        $scope.currentProject = exerciseService.exercise;
+        $scope.currentProjectService = exerciseService;
+
+        exerciseService.saveStatus = 0;
+
+        exerciseService.initBloqsExercise();
+        $scope.exerciseLoaded = $q.defer();
+
+
+
+
+
 
         $scope.getGroups = function() {
             centerModeApi.getGroups().then(function(response) {
@@ -28,8 +59,11 @@ angular.module('bitbloqApp')
          exercise save / edit
          *************************************************/
 
+        $scope.setCode = function(code) {
+            $scope.code = code;
+        };
+
         $scope.uploadFileExercise = function(exercise) {
-            $scope.hardware.firstLoad = true;
             if ($scope.hardware.cleanSchema) {
                 $scope.hardware.cleanSchema();
             }
@@ -41,11 +75,7 @@ angular.module('bitbloqApp')
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
-            if (exerciseService.exercise.hardware.components.length === 0) {
-                return false;
-            } else {
-                return true;
-            }
+            return exerciseService.exercise.hardware.components.length !== 0;
         };
         $scope.anyAdvancedComponent = function() {
             return !_.isEqual(exerciseService.componentsArray, bloqsUtils.getEmptyComponentsArray());
@@ -53,6 +83,410 @@ angular.module('bitbloqApp')
         $scope.anySerialComponent = function() {
             return exerciseService.componentsArray.serialElements.length > 0;
         };
+
+
+
+        $scope.informErrorAction = function() {
+
+            var confirmAction = function() {
+                    ngDialog.close('ngdialog1');
+                },
+                parent = $rootScope,
+                modalOptions = parent.$new();
+
+            _.extend(modalOptions, {
+                title: 'make-actions-share-with-users',
+                confirmOnly: true,
+                buttonConfirm: 'make-actions-share-with-users-confirm',
+                contentTemplate: '/views/modals/shareWithUsers.html',
+                confirmAction: confirmAction
+            });
+
+            ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--share-with-users',
+                scope: modalOptions
+            });
+        };
+
+        $scope.updateBloqs = function() {
+
+            if (exerciseService.bloqs.varsBloq) {
+
+                var allBloqs = bloqs.bloqs;
+                var allComponents = [];
+
+                //Why?
+                for (var bloq in allBloqs) {
+                    allBloqs[bloq].componentsArray = exerciseService.componentsArray;
+                }
+
+                var updateBloq = function(element, list) {
+
+                    var tempValue,
+                        tempRef;
+
+                    tempRef = element.dataset.reference;
+                    tempValue = element.dataset.value;
+
+                    bloqsUtils.drawDropdownOptions($(element), list);
+
+                    if (tempRef && tempValue) {
+
+                        var componentRef = list.find(function(comp) {
+                            return comp.uid === tempRef;
+                        });
+
+                        if (componentRef) {
+                            element.value = componentRef.name;
+                            element.dataset.reference = componentRef.uid;
+                            element.dataset.value = componentRef.name;
+                        }
+
+                    } else {
+                        $log.debug('dropdown not selected');
+                        element.selectedIndex = 0;
+                    }
+                };
+                var bloqCanvasEl = null;
+                //Update dropdowns values from bloqs canvas
+                for (var type in exerciseService.componentsArray) {
+                    bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
+                    var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
+                    for (var i = 0, len = nodeList.length; i < len; i++) {
+                        updateBloq(nodeList[i], exerciseService.componentsArray[type]);
+                    }
+                    allComponents = allComponents.concat(exerciseService.componentsArray[type]);
+                }
+                //Update dropdowns from bloqs of toolbox
+                if (bloqCanvasEl) {
+                    var toolboxNodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="varComponents"]');
+                    for (var j = 0, len2 = toolboxNodeList.length; j < len2; j++) {
+                        updateBloq(toolboxNodeList[j], allComponents);
+                    }
+
+                    var varServos = [];
+                    varServos = varServos.concat(exerciseService.componentsArray.servos, exerciseService.componentsArray.oscillators, exerciseService.componentsArray.continuousServos);
+                    var servosNodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="allServos"]');
+                    for (var y = 0, lenServo = servosNodeList.length; y < lenServo; y++) {
+                        updateBloq(servosNodeList[y], varServos);
+                    }
+                }
+
+            }
+        };
+
+        /*************************************************
+         Tab settings
+         *************************************************/
+        $scope.currentTab = 0;
+
+        $scope.setTab = function(index) {
+            if (!_.isEqual( $scope.currentProject, exerciseService.getDefaultExercise())) {
+                exerciseService.startAutosave(true);
+            }
+            if (index === 0) {
+                hw2Bloqs.repaint();
+            } else if (index === 1) {
+                if ($scope.toolbox.level !== 1) {
+                    $scope.toolbox.level = 1;
+                }
+                $scope.setCode($scope.getCode());
+                $rootScope.$emit('currenttab:bloqstab');
+            }
+
+            $scope.currentTab = index;
+        };
+
+        $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
+            var condition = false;
+            switch (currentTab) {
+                case 0:
+                    condition = hardwareHistory.pointer <= 1;
+                    break;
+                case 1:
+                    condition = bloqsHistory.pointer < 1;
+                    break;
+            }
+            return condition;
+        };
+
+        $scope.disableRedo = function(currentTab, hardwareHistory, bloqsHistory) {
+            var condition = false;
+            switch (currentTab) {
+                case 0:
+                    condition = !((hardwareHistory.pointer < (hardwareHistory.history.length)) && hardwareHistory.pointer >= 1);
+                    break;
+                case 1:
+                    condition = (bloqsHistory.pointer >= (bloqsHistory.history.length - 1));
+                    break;
+            }
+            return condition;
+        };
+
+        $scope.undo = function() {
+            switch ($scope.currentTab) {
+                case 0:
+                    $scope.undoHardwareStep();
+                    break;
+                case 1:
+                    $scope.undoBloqStep();
+                    break;
+            }
+        };
+
+        $scope.redo = function() {
+            switch ($scope.currentTab) {
+                case 0:
+                    $scope.redoHardwareStep();
+                    break;
+                case 1:
+                    $scope.redoBloqStep();
+                    break;
+            }
+        };
+
+        $scope.toggleCollapseHeader = function() {
+            $scope.collapsedHeader = !$scope.collapsedHeader;
+            hw2Bloqs.repaint();
+        };
+
+        $scope.publishexercise = function(type) {
+            type = type || '';
+            exerciseService.checkPublish(type).then(function() {
+                var exerciseDefault = exerciseService.getDefaultExercise();
+                exerciseService.completedExercise();
+                delete exerciseDefault.software.freeBloqs;
+                if (_.isEqual(exerciseDefault.software,  $scope.currentProject.software)) {
+                    alertsService.add({
+                        text: 'publishProject__alert__bloqsProjectEmpty' + type,
+                        id: 'publishing-project',
+                        type: 'warning'
+                    });
+                } else {
+                    $scope.publishExerciseError = false;
+                    if (type === 'Social') {
+                        commonModals.shareSocialModal( $scope.currentProject);
+                    } else {
+                        commonModals.publishModal( $scope.currentProject);
+                    }
+                }
+            }).catch(function() {
+                $scope.publishExerciseError = true;
+                $scope.setTab(2);
+            });
+        };
+
+        /*************************************************
+         UNDO / REDO
+         *************************************************/
+
+        //Stores one step in the history
+        $scope.saveBloqStep = function(step) {
+            //$log.debug('Guardamos Estado de Bloqs');
+            var freeBloqs = bloqs.getFreeBloqs();
+            //$log.debug(freeBloqs);
+            step = step || {
+                    vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
+            if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
+                $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
+            }
+            $scope.bloqsHistory.history.push(_.cloneDeep(step));
+
+            $scope.bloqsHistory.pointer++;
+
+        };
+
+        $scope.undoBloqStep = function() {
+            //$log.log('undo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
+            if ($scope.bloqsHistory.pointer > 0) {
+                $scope.bloqsHistory.pointer--;
+
+                var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
+                 $scope.currentProject.software = step;
+
+                $rootScope.$emit('update-bloqs');
+                exerciseService.startAutosave();
+            }
+        };
+
+        $scope.redoBloqStep = function() {
+            //$log.log('redo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
+            if ($scope.bloqsHistory.pointer < ($scope.bloqsHistory.history.length - 1)) {
+                $scope.bloqsHistory.pointer++;
+
+                var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
+                 $scope.currentProject.software = step;
+
+                $rootScope.$emit('update-bloqs');
+                exerciseService.startAutosave();
+            }
+
+        };
+
+        function addExerciseWatchersAndListener() {
+            exerciseService.addWatchers();
+
+            $window.addEventListener('bloqs:dragend', function() {
+                $scope.saveBloqStep();
+                exerciseService.startAutosave();
+                $scope.$apply();
+            });
+            $window.addEventListener('bloqs:suggestedAdded', function() {
+                $scope.saveBloqStep();
+                $scope.$apply();
+            });
+
+            $window.addEventListener('bloqs:connect', function() {
+                exerciseService.startAutosave();
+                $scope.$apply();
+            });
+
+            $window.addEventListener('bloqs:change', function() {
+                if (exerciseService.bloqs.loopBloq) {
+                    $scope.saveBloqStep();
+                    exerciseService.startAutosave();
+                    $scope.$apply();
+                }
+
+            });
+        }
+
+        function checkBackspaceKey(event) {
+            if (event.which === 8 &&
+                event.target.nodeName !== 'INPUT' &&
+                event.target.nodeName !== 'SELECT' &&
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
+
+                event.preventDefault();
+            }
+        }
+
+        $scope.toolbox = {};
+        $scope.toolbox.level = 1;
+
+        //'Mad science', objects mantain reference, primitive values can't be passed for generic functions
+        $scope.bloqsHistory = {
+            pointer: -1, //-1 never set state, 0 first state
+            history: []
+        };
+        $scope.hardwareHistory = {
+            pointer: 0,
+            history: []
+        };
+
+        $scope.commonModals = commonModals;
+        $scope.utils = utils;
+
+
+        /*************************************************
+         Load exercise
+         *************************************************/
+        $scope.common.isLoading = true;
+        $scope.hwBasicsLoaded = $q.defer();
+
+        $scope.initHardwarePromise = function() {
+            $scope.hwBasicsLoaded = $q.defer();
+        };
+
+        $scope.common.itsUserLoaded().then(function() {
+            $log.debug('There is a registed user');
+            if ($routeParams.id) {
+                loadExercise($routeParams.id).finally(function() {
+                    addExerciseWatchersAndListener();
+                });
+            } else {
+                addExerciseWatchersAndListener();
+                $scope.hwBasicsLoaded.promise.then(function() {
+                    $scope.$emit('drawHardware');
+                });
+                $scope.exerciseLoaded.resolve();
+            }
+        }, function() {
+            $log.debug('no registed user');
+            if ($routeParams.id) {
+                loadExercise($routeParams.id).finally(function() {
+                    addExerciseWatchersAndListener();
+                });
+            } else {
+                addExerciseWatchersAndListener();
+            }
+        });
+
+        function loadExercise(id) {
+            return exerciseApi.get(id).then(function(response) {
+                _uploadExercise(response.data);
+                $scope.exerciseLoaded.resolve();
+            }, function(error) {
+                exerciseService.addWatchers();
+                $scope.exerciseLoaded.reject();
+                switch (error.status) {
+                    case 404: //not_found
+                        alertsService.add({
+                            text: 'no-project',
+                            id: 'load-project',
+                            type: 'warning'
+                        });
+                        break;
+                    case 401: //unauthorized
+                        $location.path('/exercise/');
+                        alertsService.add({
+                            text: 'alert_text_errorProjectUnauthorized',
+                            id: 'load-project',
+                            type: 'warning'
+                        });
+                        break;
+                    default:
+                        alertsService.add({
+                            text: 'alert_text_errorProjectUndefined',
+                            id: 'load-project',
+                            type: 'warning'
+                        });
+                }
+            });
+        }
+
+        function _uploadExercise(exercise) {
+            if (exercise.software) {
+                exercise.software.freeBloqs = exercise.software.freeBloqs || [];
+            }
+
+            exerciseService.setExercise(exercise);
+            $scope.saveBloqStep(_.clone(exercise.software));
+            exerciseService.saveOldExercise();
+            $scope.hwBasicsLoaded.promise.then(function() {
+                $scope.$emit('drawHardware');
+            });
+        }
+
+        function confirmExit() {
+            var closeMessage;
+            chromeAppApi.stopSerialCommunication();
+            $scope.$apply();
+
+            if (exerciseService.saveStatus === 1) {
+                closeMessage = $scope.common.translate('leave-without-save');
+            }
+            return closeMessage;
+        }
+
+        $document.on('keydown', checkBackspaceKey);
+        $window.onbeforeunload = confirmExit;
+
+        $scope.$on('$destroy', function() {
+            $document.off('keydown', checkBackspaceKey);
+            $window.onbeforeunload = null;
+            _destroyWeb2boardEvents();
+        });
+
+
+
+
 
 
         /*************************************************
@@ -209,7 +643,7 @@ angular.module('bitbloqApp')
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
             }
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.setInProcess(true);
                 var boardReference = exerciseService.getBoardMetaData();
                 settingBoardAlert = alertsService.add({
@@ -231,7 +665,7 @@ angular.module('bitbloqApp')
         }
 
         function uploadW2b2() {
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.upload(exerciseService.getBoardMetaData().mcu, $scope.getPrettyCode());
             } else {
                 $scope.currentTab = 'info';
@@ -267,7 +701,7 @@ angular.module('bitbloqApp')
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
             }
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.setInProcess(true);
                 serialMonitorAlert = alertsService.add({
                     text: 'alert-web2board-openSerialMonitor',
@@ -289,7 +723,7 @@ angular.module('bitbloqApp')
         }
 
         function serialMonitorW2b2() {
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.serialMonitor(exerciseService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
@@ -306,7 +740,7 @@ angular.module('bitbloqApp')
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
             }
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.setInProcess(true);
                 serialMonitorAlert = alertsService.add({
                     text: 'alert-web2board-openSerialMonitor',
@@ -329,7 +763,7 @@ angular.module('bitbloqApp')
         }
 
         function plotterW2b2() {
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.plotter(exerciseService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
@@ -473,8 +907,8 @@ angular.module('bitbloqApp')
         $scope.upload = function(code) {
             var viewer;
             viewer = !!code;
-            if (exerciseService.exercise.hardware.board) {
-                if (exerciseService.exercise.hardware.robot === 'mBot') {
+            if ( $scope.currentProject.hardware.board) {
+                if ( $scope.currentProject.hardware.robot === 'mBot') {
                     if ($scope.common.os === 'ChromeOS') {
                         alertsService.add({
                             text: 'mbot-not-compatible-chromebook',
@@ -506,7 +940,7 @@ angular.module('bitbloqApp')
                         if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                             web2boardOnline.compileAndUpload({
                                 board: exerciseService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(generateSerialViewerBloqCode(exerciseService.exercise.hardware.components, $scope.getPrettyCode())),
+                                code: $scope.getPrettyCode(generateSerialViewerBloqCode( $scope.currentProject.hardware.components, $scope.getPrettyCode())),
                                 viewer: viewer
                             });
                         } else {
@@ -542,7 +976,7 @@ angular.module('bitbloqApp')
         }
 
         $scope.serialMonitor = function() {
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 if ($scope.common.useChromeExtension()) {
                     commonModals.launchSerialWindow(exerciseService.getBoardMetaData());
                 } else {
@@ -564,7 +998,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.chartMonitor = function() {
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 web2board.chartMonitor(exerciseService.getBoardMetaData());
             } else {
                 $scope.currentTab = 0;
@@ -582,7 +1016,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.showPlotter = function() {
-            if (exerciseService.exercise.hardware.board) {
+            if ( $scope.currentProject.hardware.board) {
                 if ($scope.common.useChromeExtension()) {
                     commonModals.launchPlotterWindow(exerciseService.getBoardMetaData());
                 } else {
@@ -617,444 +1051,5 @@ angular.module('bitbloqApp')
 
         /* ****** */
 
-        $scope.informErrorAction = function() {
-
-            var confirmAction = function() {
-                    ngDialog.close('ngdialog1');
-                },
-                parent = $rootScope,
-                modalOptions = parent.$new();
-
-            _.extend(modalOptions, {
-                title: 'make-actions-share-with-users',
-                confirmOnly: true,
-                buttonConfirm: 'make-actions-share-with-users-confirm',
-                contentTemplate: '/views/modals/shareWithUsers.html',
-                confirmAction: confirmAction
-            });
-
-            ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container modal--share-with-users',
-                scope: modalOptions
-            });
-        };
-
-        $scope.updateBloqs = function() {
-
-            if (exerciseService.bloqs.varsBloq) {
-
-                var allBloqs = bloqs.bloqs;
-                var allComponents = [];
-
-                //Why?
-                for (var bloq in allBloqs) {
-                    allBloqs[bloq].componentsArray = exerciseService.componentsArray;
-                }
-
-                var updateBloq = function(element, list) {
-
-                    var tempValue,
-                        tempRef;
-
-                    tempRef = element.dataset.reference;
-                    tempValue = element.dataset.value;
-
-                    bloqsUtils.drawDropdownOptions($(element), list);
-
-                    if (tempRef && tempValue) {
-
-                        var componentRef = list.find(function(comp) {
-                            return comp.uid === tempRef;
-                        });
-
-                        if (componentRef) {
-                            element.value = componentRef.name;
-                            element.dataset.reference = componentRef.uid;
-                            element.dataset.value = componentRef.name;
-                        }
-
-                    } else {
-                        $log.debug('dropdown not selected');
-                        element.selectedIndex = 0;
-                    }
-                };
-                var bloqCanvasEl = null;
-                //Update dropdowns values from bloqs canvas
-                for (var type in exerciseService.componentsArray) {
-                    bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
-                    var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
-                    for (var i = 0, len = nodeList.length; i < len; i++) {
-                        updateBloq(nodeList[i], exerciseService.componentsArray[type]);
-                    }
-                    allComponents = allComponents.concat(exerciseService.componentsArray[type]);
-                }
-                //Update dropdowns from bloqs of toolbox
-                if (bloqCanvasEl) {
-                    var toolboxNodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="varComponents"]');
-                    for (var j = 0, len2 = toolboxNodeList.length; j < len2; j++) {
-                        updateBloq(toolboxNodeList[j], allComponents);
-                    }
-
-                    var varServos = [];
-                    varServos = varServos.concat(exerciseService.componentsArray.servos, exerciseService.componentsArray.oscillators, exerciseService.componentsArray.continuousServos);
-                    var servosNodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="allServos"]');
-                    for (var y = 0, lenServo = servosNodeList.length; y < lenServo; y++) {
-                        updateBloq(servosNodeList[y], varServos);
-                    }
-                }
-
-            }
-        };
-
-        /*************************************************
-         Tab settings
-         *************************************************/
-        $scope.currentTab = 0;
-
-        $scope.setTab = function(index) {
-            if (!_.isEqual(exerciseService.exercise, exerciseService.getDefaultExercise())) {
-                exerciseService.startAutosave(true);
-            }
-            if (index === 0) {
-                hw2Bloqs.repaint();
-            } else if (index === 1) {
-                if ($scope.toolbox.level !== 1) {
-                    $scope.toolbox.level = 1;
-                }
-                $scope.setCode($scope.getCode());
-                $rootScope.$emit('currenttab:bloqstab');
-            }
-
-            $scope.currentTab = index;
-        };
-
-        $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
-            var condition = false;
-            switch (currentTab) {
-                case 0:
-                    condition = hardwareHistory.pointer <= 1;
-                    break;
-                case 1:
-                    condition = bloqsHistory.pointer < 1;
-                    break;
-            }
-            return condition;
-        };
-
-        $scope.disableRedo = function(currentTab, hardwareHistory, bloqsHistory) {
-            var condition = false;
-            switch (currentTab) {
-                case 0:
-                    condition = !((hardwareHistory.pointer < (hardwareHistory.history.length)) && hardwareHistory.pointer >= 1);
-                    break;
-                case 1:
-                    condition = (bloqsHistory.pointer >= (bloqsHistory.history.length - 1));
-                    break;
-            }
-            return condition;
-        };
-
-        $scope.undo = function() {
-            switch ($scope.currentTab) {
-                case 0:
-                    $scope.undoHardwareStep();
-                    break;
-                case 1:
-                    $scope.undoBloqStep();
-                    break;
-            }
-        };
-
-        $scope.redo = function() {
-            switch ($scope.currentTab) {
-                case 0:
-                    $scope.redoHardwareStep();
-                    break;
-                case 1:
-                    $scope.redoBloqStep();
-                    break;
-            }
-        };
-
-        $scope.toggleCollapseHeader = function() {
-            $scope.collapsedHeader = !$scope.collapsedHeader;
-            hw2Bloqs.repaint();
-        };
-
-        $scope.publishexercise = function(type) {
-            type = type || '';
-            exerciseService.checkPublish(type).then(function() {
-                var exerciseDefault = exerciseService.getDefaultExercise();
-                exerciseService.completedExercise();
-                delete exerciseDefault.software.freeBloqs;
-                if (_.isEqual(exerciseDefault.software, exerciseService.exercise.software)) {
-                    alertsService.add({
-                        text: 'publishProject__alert__bloqsProjectEmpty' + type,
-                        id: 'publishing-project',
-                        type: 'warning'
-                    });
-                } else {
-                    $scope.publishExerciseError = false;
-                    if (type === 'Social') {
-                        commonModals.shareSocialModal(exerciseService.exercise);
-                    } else {
-                        commonModals.publishModal(exerciseService.exercise);
-                    }
-                }
-            }).catch(function() {
-                $scope.publishExerciseError = true;
-                $scope.setTab(2);
-            });
-        };
-
-        /*************************************************
-         UNDO / REDO
-         *************************************************/
-
-        //Stores one step in the history
-        $scope.saveBloqStep = function(step) {
-            //$log.debug('Guardamos Estado de Bloqs');
-            var freeBloqs = bloqs.getFreeBloqs();
-            //$log.debug(freeBloqs);
-            step = step || {
-                    vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
-            if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
-                $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
-            }
-            $scope.bloqsHistory.history.push(_.cloneDeep(step));
-
-            $scope.bloqsHistory.pointer++;
-
-        };
-
-        $scope.undoBloqStep = function() {
-            //$log.log('undo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
-            if ($scope.bloqsHistory.pointer > 0) {
-                $scope.bloqsHistory.pointer--;
-
-                var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
-                exerciseService.exercise.software = step;
-
-                $rootScope.$emit('update-bloqs');
-                exerciseService.startAutosave();
-                $scope.hardware.firstLoad = false;
-            }
-        };
-
-        $scope.redoBloqStep = function() {
-            //$log.log('redo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
-            if ($scope.bloqsHistory.pointer < ($scope.bloqsHistory.history.length - 1)) {
-                $scope.bloqsHistory.pointer++;
-
-                var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
-                exerciseService.exercise.software = step;
-
-                $rootScope.$emit('update-bloqs');
-                exerciseService.startAutosave();
-                $scope.hardware.firstLoad = false;
-            }
-
-        };
-
-        function addExerciseWatchersAndListener() {
-            exerciseService.addWatchers();
-
-            $window.addEventListener('bloqs:dragend', function() {
-                $scope.saveBloqStep();
-                exerciseService.startAutosave();
-                $scope.hardware.firstLoad = false;
-                $scope.$apply();
-            });
-            $window.addEventListener('bloqs:suggestedAdded', function() {
-                $scope.saveBloqStep();
-                $scope.hardware.firstLoad = false;
-                $scope.$apply();
-            });
-
-            $window.addEventListener('bloqs:connect', function() {
-                exerciseService.startAutosave();
-                $scope.hardware.firstLoad = false;
-                $scope.$apply();
-            });
-
-            $window.addEventListener('bloqs:change', function() {
-                if (exerciseService.bloqs.loopBloq) {
-                    $scope.saveBloqStep();
-                    exerciseService.startAutosave();
-                    $scope.hardware.firstLoad = false;
-                    $scope.$apply();
-                }
-
-            });
-        }
-
-        function checkBackspaceKey(event) {
-            if (event.which === 8 &&
-                event.target.nodeName !== 'INPUT' &&
-                event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
-
-                event.preventDefault();
-            }
-        }
-
-        $scope.toolbox = {};
-        $scope.toolbox.level = 1;
-
-        //'Mad science', objects mantain reference, primitive values can't be passed for generic functions
-        $scope.bloqsHistory = {
-            pointer: -1, //-1 never set state, 0 first state
-            history: []
-        };
-        $scope.hardwareHistory = {
-            pointer: 0,
-            history: []
-        };
-
-        $scope.commonModals = commonModals;
-        $scope.utils = utils;
-
-        /*************************************************
-         Exercise settings
-         *************************************************/
-
-        var compilingAlert,
-            settingBoardAlert,
-            serialMonitorAlert;
-
-        $scope.shareWithUserTags = [];
-
-        $scope.hardware = {
-            componentList: null,
-            robotList: null,
-            cleanSchema: null,
-            sortToolbox: null,
-            firstLoad: true
-        };
-
-        $scope.exerciseApi = exerciseApi;
-        $scope.currentProject = exerciseService.exercise;
-        $scope.exerciseService = exerciseService;
-
-        exerciseService.saveStatus = 0;
-
-        exerciseService.initBloqsExercise();
-        $scope.exerciseLoaded = $q.defer();
-
-        if (!$scope.common.user) {
-            $scope.common.session.save = false;
-        }
-
-        /*************************************************
-         Load exercise
-         *************************************************/
-        $scope.common.isLoading = true;
-        $scope.hwBasicsLoaded = $q.defer();
-
-        $scope.initHardwarePromise = function() {
-            $scope.hwBasicsLoaded = $q.defer();
-        };
-
-        $scope.common.itsUserLoaded().then(function() {
-            $log.debug('There is a registed user');
-            if ($routeParams.id) {
-                loadExercise($routeParams.id).finally(function() {
-                    addExerciseWatchersAndListener();
-                });
-            } else {
-                if ($scope.common.session.save) {
-                    $scope.common.session.save = false;
-                    exerciseService.setExercise($scope.common.session.exercise);
-                    exerciseService.startAutosave();
-                    $scope.hardware.firstLoad = false;
-                }
-                addExerciseWatchersAndListener();
-                $scope.hwBasicsLoaded.promise.then(function() {
-                    $scope.$emit('drawHardware');
-                });
-                $scope.exerciseLoaded.resolve();
-            }
-        }, function() {
-            $log.debug('no registed user');
-            if ($routeParams.id) {
-                loadExercise($routeParams.id).finally(function() {
-                    addExerciseWatchersAndListener();
-                });
-            } else {
-                addExerciseWatchersAndListener();
-            }
-        });
-
-        function loadExercise(id) {
-            return exerciseApi.get(id).then(function(response) {
-                _uploadExercise(response.data);
-                $scope.exerciseLoaded.resolve();
-            }, function(error) {
-                exerciseService.addWatchers();
-                $scope.exerciseLoaded.reject();
-                switch (error.status) {
-                    case 404: //not_found
-                        alertsService.add({
-                            text: 'no-project',
-                            id: 'load-project',
-                            type: 'warning'
-                        });
-                        break;
-                    case 401: //unauthorized
-                        $location.path('/exercise/');
-                        alertsService.add({
-                            text: 'alert_text_errorProjectUnauthorized',
-                            id: 'load-project',
-                            type: 'warning'
-                        });
-                        break;
-                    default:
-                        alertsService.add({
-                            text: 'alert_text_errorProjectUndefined',
-                            id: 'load-project',
-                            type: 'warning'
-                        });
-                }
-            });
-        }
-
-        function _uploadExercise(exercise) {
-            if (exercise.software) {
-                exercise.software.freeBloqs = exercise.software.freeBloqs || [];
-            }
-
-            exerciseService.setExercise(exercise);
-            $scope.saveBloqStep(_.clone(exercise.software));
-            exerciseService.saveOldExercise();
-            $scope.hwBasicsLoaded.promise.then(function() {
-                $scope.$emit('drawHardware');
-            });
-        }
-
-        function confirmExit() {
-            var closeMessage;
-            chromeAppApi.stopSerialCommunication();
-            $scope.$apply();
-
-            if (exerciseService.saveStatus === 1) {
-                closeMessage = $scope.common.translate('leave-without-save');
-            }
-            return closeMessage;
-        }
-
-        $document.on('keydown', checkBackspaceKey);
-        $window.onbeforeunload = confirmExit;
-
-        $scope.$on('$destroy', function() {
-            $document.off('keydown', checkBackspaceKey);
-            $window.onbeforeunload = null;
-            _destroyWeb2boardEvents();
-        });
 
     });

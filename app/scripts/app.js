@@ -53,7 +53,7 @@ angular
                 controller: 'AccountCtrl'
             })
             .when('/bloqsproject/:id?', {
-                templateUrl: 'views/bloqsproject/bloqsproject.html',
+                templateUrl: 'views/project/bloqsproject.html',
                 controller: 'BloqsprojectCtrl',
                 reloadOnSearch: false
             })
@@ -168,7 +168,7 @@ angular
                 controller: 'CenterCtrl'
             })
             .when('/exercise/:id?', {
-                templateUrl: 'views/centerMode/exercise.html',
+                templateUrl: 'views/project/exercise.html',
                 controller: 'ExerciseCtrl',
                 reloadOnSearch: false
             })

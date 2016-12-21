@@ -58,11 +58,8 @@
                         </div>
                         <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder=""
                                data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput"/>
-                        <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">{{
-                                                                                                                                                                                                                          'upload-image'
-                                                                                                                                                                                                                          |
-                                                                                                                                                                                                                          translate
-                                                                                                                                                                                                                          }}
+                        <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
+                            {{'upload-image' | translate}}
                         </button>
                     </div>
                 </div>
@@ -134,7 +131,7 @@
                 <svg class="svg-icon svg-icon--text">
                     <use xlink:href="#people"></use>
                 </svg>
-                <legend class="h3">{{ 'Grupos asignados' | translate }}</legend>
+                <legend class="h3">{{ 'infotab_title_groups' | translate }}</legend>
             </div>
             <ul class="table__block--invert">
                 <li class="table__block__list" ng-repeat="group in groups">
