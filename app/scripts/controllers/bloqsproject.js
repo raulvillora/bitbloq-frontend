@@ -763,53 +763,27 @@ angular.module('bitbloqApp')
             $scope.currentTab = index;
         };
 
-        $scope.saveBloqStep = function(step) {
-            //$log.debug('Guardamos Estado de Bloqs');
-            var freeBloqs = bloqs.getFreeBloqs();
-            //$log.debug(freeBloqs);
-            step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
-            saveStep(step, $scope.bloqsHistory);
-        };
-
-        $scope.undoBloqStep = function() {
-            undo($scope.bloqsHistory, function(step) {
-                projectService.project.software = step;
-                $rootScope.$emit('update-bloqs');
-            });
-        };
-
-        $scope.redoBloqStep = function() {
-            redo($scope.bloqsHistory, function(step) {
-                projectService.project.software = step;
-            });
-        };
-
-        $scope.disableUndo = function() {
+        $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
             var condition = false;
-            switch ($scope.currentTab) {
+            switch (currentTab) {
                 case 0:
-                    condition = $scope.hardwareHistory.pointer <= 1;
+                    condition = hardwareHistory.pointer <= 1;
                     break;
                 case 1:
-                    // condition = true;
+                    condition = bloqsHistory.pointer < 1;
                     break;
             }
             return condition;
         };
 
-        $scope.disableRedo = function() {
+        $scope.disableRedo = function(currentTab, hardwareHistory, bloqsHistory) {
             var condition = false;
-            switch ($scope.currentTab) {
+            switch (currentTab) {
                 case 0:
-                    condition = !(($scope.hardwareHistory.pointer < ($scope.hardwareHistory.history.length)) && $scope.hardwareHistory.pointer >= 1);
+                    condition = !((hardwareHistory.pointer < (hardwareHistory.history.length)) && hardwareHistory.pointer >= 1);
                     break;
                 case 1:
-                    // condition = true;
+                    condition = (bloqsHistory.pointer >= (bloqsHistory.history.length - 1));
                     break;
             }
             return condition;
@@ -873,29 +847,69 @@ angular.module('bitbloqApp')
          *************************************************/
 
         //Stores one step in the history
-        function saveStep(step, options) {
-            options.history = _.take(options.history, options.pointer);
-            options.history.push(_.cloneDeep(step));
-            options.pointer++;
-        }
+        $scope.saveBloqStep = function(step) {
+            //$log.debug('Guardamos Estado de Bloqs');
+            var freeBloqs = bloqs.getFreeBloqs();
+            //$log.debug(freeBloqs);
+            step = step || {
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
+            //showProjectResumeOnConsole(step);
+            if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
+                $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
+            }
+            $scope.bloqsHistory.history.push(_.cloneDeep(step));
 
-        function undo(options, callback) {
-            if (options.pointer > 1) {
-                options.pointer--;
-                callback(options.history[options.pointer - 1]);
-                $log.debug('current position', options.pointer);
+            $scope.bloqsHistory.pointer++;
+
+        };
+
+        $scope.undoBloqStep = function() {
+            //$log.log('undo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
+            if ($scope.bloqsHistory.pointer > 0) {
+                $scope.bloqsHistory.pointer--;
+
+                var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
+                //showProjectResumeOnConsole(step);
+                projectService.project.software = step;
+
+                $rootScope.$emit('update-bloqs');
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
             }
-        }
+        };
 
-        function redo(options, callback) {
-            if (options.pointer < options.history.length) {
-                callback(options.history[options.pointer]);
-                options.pointer++;
-                $log.debug('current position', options.pointer);
+        $scope.redoBloqStep = function() {
+            //$log.log('redo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
+            if ($scope.bloqsHistory.pointer < ($scope.bloqsHistory.history.length - 1)) {
+                $scope.bloqsHistory.pointer++;
+
+                var step = $scope.bloqsHistory.history[$scope.bloqsHistory.pointer];
+                //showProjectResumeOnConsole(step);
+                projectService.project.software = step;
+
+                $rootScope.$emit('update-bloqs');
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
+            }
+
+        };
+
+        function showProjectResumeOnConsole(project) { // jshint ignore:line
+            $log.log('Resume project');
+            $log.log('*vars');
+            if (project.vars.childs) {
+                for (var i = 0; i < project.vars.childs.length; i++) {
+                    $log.log('---', project.vars.childs[i].name);
+                    if (project.vars.childs[i].childs) {
+                        for (var j = 0; j < project.vars.childs[i].childs.length; j++) {
+                            $log.log('------', project.vars.childs[i].childs[j].name);
+                        }
+                    }
+                }
             }
         }
 
@@ -1098,7 +1112,7 @@ angular.module('bitbloqApp')
 
         //'Mad science', objects mantain reference, primitive values can't be passed for generic functions
         $scope.bloqsHistory = {
-            pointer: 0,
+            pointer: -1, //-1 never set state, 0 first state
             history: []
         };
         $scope.hardwareHistory = {

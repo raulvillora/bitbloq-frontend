@@ -248,9 +248,15 @@ $hw_toolbox: 210px;
             background-image: url(/images/robots/evolution.svg);
             background-color: transparent;
             height: 50%;
+            width: 500px;
         }
-        &.mBot {
-            background-image: url(/images/robots/mBot.svg);
+        &.mbot {
+            background-image: url(/images/robots/mbot.svg);
+            background-color: transparent;
+            height: 50%;
+        }
+        &.mranger {
+            background-image: url(/images/robots/mranger.svg);
             background-color: transparent;
             height: 50%;
         }
@@ -317,6 +323,11 @@ $hw_toolbox: 210px;
         &.ArduinoLeonardo {
             background-image: url(/images/boards/ArduinoUNO.svg);
             background-color: transparent;
+        }
+        &.ArduinoMEGA2560 {
+            background-image: url(/images/boards/ArduinoMEGA2560.svg);
+            background-color: transparent;
+            width: 555px;
         }
     }
     .component {

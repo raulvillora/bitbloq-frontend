@@ -115,7 +115,7 @@ angular.module('bitbloqApp')
 
             imageObj.onload = function() {
                 if (projectService.project.hardware.robot) {
-                    setMainImage(canvas, context, imageObj, true);
+                    setMainImage(canvas, context, imageObj, projectService.project.hardware.robot);
                 } else {
                     setMainImage(canvas, context, imageObj, false);
                 }
@@ -171,7 +171,16 @@ angular.module('bitbloqApp')
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
             if (robot) {
-                context.drawImage(imageObj, xStart, -60, 542, 542);
+                switch (robot) {
+                    case 'mbot':
+                        context.drawImage(imageObj, xStart, 30, 542, 348);
+                        break;
+                    case 'evolution':
+                        context.drawImage(imageObj, xStart, 60, 542, 325);
+                        break;
+                    default:
+                        context.drawImage(imageObj, xStart, -60, 542, 542);
+                }
             } else {
                 context.drawImage(imageObj, xStart, -120, 530, 380);
             }

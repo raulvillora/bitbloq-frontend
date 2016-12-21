@@ -53,7 +53,7 @@ angular.module('bitbloqApp')
         $scope.projectApi = projectApi;
         $scope.projectService = projectService;
         $scope.utils = utils;
-        
+
         $scope.onFieldKeyUp = function(event) {
             if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase() === 's') { //Ctrl + S
                 return true;
@@ -286,13 +286,7 @@ angular.module('bitbloqApp')
             editorRef.$blockScrolling = Infinity;
             editorRef.setAutoScrollEditorIntoView(true);
 
-            //Prepare string to js_beautify
-            function insertBeautyIgnores(match) {
-                return '/* beautify ignore:start */' + match + '/* beautify ignore:end */';
-            }
-
-            //Remove beautify ignore & preserve sections
-            tmpCode = js_beautify(projectService.project.code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores)).replace(/(\/\* (beautify)+ .*? \*\/)/gm, ''); // jshint ignore:line
+            tmpCode = utils.prettyCode(projectService.project.code);
 
             $timeout(function() {
 
