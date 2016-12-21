@@ -204,7 +204,7 @@ angular.module('bitbloqApp')
             };
 
             if ($scope.boardFilters) {
-                if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi' || $scope.boardFilters === 'mBot') {
+                if ($scope.boardFilters === 'Evolution' || $scope.boardFilters === 'Zowi' || $scope.boardFilters === 'mBot' || $scope.boardFilters === 'mRanger') {
                     queryParams.query['hardware.robot'] = $scope.boardFilters.toLowerCase();
                 } else {
                     queryParams.query['hardware.board'] = $scope.boardFilters;
@@ -314,6 +314,9 @@ angular.module('bitbloqApp')
             value: false
         }, {
             option: 'mBot',
+            value: false
+        }, {
+            option: 'mRanger',
             value: false
         }];
         $scope.componentsFilters = [];
