@@ -450,7 +450,7 @@ angular.module('bitbloqApp')
             }
 
             //Remove beautify ignore & preserve sections
-            pretty = js_beautify(code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores)).replace(/(\/\* (beautify)+ .*? \*\/)/gm, ''); // jshint ignore:line
+            pretty = js_beautify(code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores)).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->'); // jshint ignore:line
 
             return pretty;
         };
