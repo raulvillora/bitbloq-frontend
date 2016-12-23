@@ -296,14 +296,14 @@
             <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='functions'">
                 <li id="{{'bloq' + function.name}}" data-ng-class="function.addClass" data-ng-repeat="function in common.properties.bloqsSortTree.functions" data-bitbloq-bloq-creator
                     data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.functions[$index].name]" data-components-array="componentsArray">
-                    <input type="checkbox" class="component-toolbox" id="{{function.name + 'Check'}}"/>
+                    <input type="checkbox" class="component-toolbox" id="{{function.name + 'Check'}}" ng-model="checkModel[function.name]" ng-click="addChecks('functions', checkModel[function.name], function.name)" ng-checked="checkBasicModel && selectedBloqsToolbox==='functions'"/>
                 </li>
             </ul>
             <!-- Variables -->
             <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='variables'">
                 <li id="{{'bloq' + variable.name}}" data-ng-class="variable.addClass" data-ng-repeat="variable in common.properties.bloqsSortTree.variables" data-bitbloq-bloq-creator
                     data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.variables[$index].name]" data-components-array="componentsArray">
-                    <input type="checkbox" class="component-toolbox" id="{{variable.name + 'Check'}}" ng-model="modelChecks[variable.name]" ng-click="addChecks('variables', modelChecks[variable.name], variable.name)" ng-checked="checkBasicModel && selectedBloqsToolbox==='variables'"/>
+                    <input type="checkbox" class="component-toolbox" id="{{variable.name + 'Check'}}" ng-model="checkModel[variable.name]" ng-click="addChecks('variables', checkModel[variable.name], variable.name)" ng-checked="checkBasicModel && selectedBloqsToolbox==='variables'"/>
                 </li>
             </ul>
             <!-- Code -->

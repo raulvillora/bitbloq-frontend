@@ -46,6 +46,10 @@ angular.module('bitbloqApp')
                         scope.functionSelectAll(scope.selectedTab, true, 'any');
                     }
                 });
+
+                scope.$watch('scope.selectedTab', function(newValue){
+                    //todo si cambia de pestaña checkear el estado del check generico
+                });
             }
         };
     });

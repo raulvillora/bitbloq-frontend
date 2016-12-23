@@ -31,6 +31,7 @@ angular.module('bitbloqApp')
         $scope.checkAdvanceTab = 0;
 
         $scope.selectedBloqs = {
+            functions: [],
             variables: [],
             advancedVariables: []
         };
