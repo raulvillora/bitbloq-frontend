@@ -106,7 +106,7 @@ $hw_toolbox: 210px;
                 text-align: left;
                 padding-left: 20px;
             }
-            .menu__item__span{
+            .menu__item__span {
                 padding: 0 20px;
             }
         }
@@ -242,4 +242,16 @@ $hw_toolbox: 210px;
     height: calc(100vh - 172px);
     overflow: hidden;
     overflow-y: auto;
+}
+
+.toolbox--right {
+    input {
+        display: none;
+    }
+}
+
+.toolbox--checks {
+    input {
+        display: inherit;
+    }
 }

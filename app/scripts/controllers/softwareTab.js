@@ -21,15 +21,54 @@ angular.module('bitbloqApp')
             translateChangeStartEvent,
             bloqsTabsEvent;
 
+
         $scope.bloqsApi = bloqsApi;
         $scope.currentProject = $scope.currentProject || projectService.project;
         $scope.lastPosition = 0;
         $scope.selectedBloqsToolbox = '';
 
+        $scope.checkBasicTab = 0;
+
+        $scope.selectedBloqs = {
+            variables: []
+        };
+
         $scope.showTrashcan = false;
         $scope.$field = $('#bloqs--field').last();
 
         $scope.$trashcan = null;
+
+        $scope.addChecks = function(type, value, bloqName) {
+            switch (bloqName) {
+                case 'all':
+                    _.forEach($scope.common.properties.bloqsSortTree[type], function(item) {
+                        if ($scope.selectedBloqs[type].indexOf(item.name) === -1) {
+                            $scope.selectedBloqs[type].push(item.name);
+                        }
+                    });
+                    break;
+                case 'any':
+                    $scope.selectedBloqs[type].splice(0, $scope.selectedBloqs[type].length);
+                    break;
+                default:
+                    var indexBloq = $scope.selectedBloqs[type].indexOf(bloqName);
+                    if (value) {
+                        if (indexBloq === -1) {
+                            $scope.selectedBloqs[type].push(bloqName);
+                        }
+                    } else {
+                        if (indexBloq > -1) {
+                            $scope.selectedBloqs[type].splice(indexBloq, 1);
+                        }
+                    }
+                    if ($scope.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                        console.log('estan todos');
+                        $scope.checkBasicTab = 'full';
+                    } else {
+                        $scope.checkBasicTab = $scope.selectedBloqs[type].length;
+                    }
+            }
+        };
 
         $scope.changeBloqsToolbox = function(tab) {
             $scope.selectedBloqsToolbox = tab;
