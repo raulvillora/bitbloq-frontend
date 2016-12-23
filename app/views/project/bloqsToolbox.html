@@ -256,7 +256,7 @@
                     <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'">{{'basics' | translate}}</button>
                 </li>
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}">
-                    <input type="checkbox" class="component-toolbox" id="advanceCheck"/>
+                    <input type="checkbox" class="component-toolbox" id="advanceCheck" ng-model="checkAdvanceModel" data-indeterminate-checkbox data-generic-check="checkAdvanceTab" data-function-select-all="addChecks" data-selected-tab="selectedBloqsToolbox"/>
                     <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'">{{'make-swtoolbox-advanced' | translate}}</button>
                 </li>
             </ul>
@@ -393,7 +393,8 @@
             <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='variables'">
                 <li id="{{'bloq' + advancedVariable.name}}" data-ng-class="advancedVariable.addClass" data-ng-repeat="advancedVariable in common.properties.bloqsSortTree.advancedVariables" data-bitbloq-bloq-creator
                     data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedVariables[$index].name]" data-components-array="componentsArray">
-                    <input type="checkbox" class="component-toolbox" id="{{advancedVariable.name + 'Check'}}"/>
+                    <input type="checkbox" class="component-toolbox" id="{{advancedVariable.name + 'Check'}}" ng-model="checkModel[advancedVariable.name]" ng-click="addChecks('advancedVariables', checkModel[advancedVariable.name], advancedVariable.name)"
+                           ng-checked="checkAdvanceModel && selectedBloqsToolbox==='variables'"/>
                 </li>
             </ul>
             <!-- Code -->

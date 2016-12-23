@@ -28,9 +28,11 @@ angular.module('bitbloqApp')
         $scope.selectedBloqsToolbox = '';
 
         $scope.checkBasicTab = 0;
+        $scope.checkAdvanceTab = 0;
 
         $scope.selectedBloqs = {
-            variables: []
+            variables: [],
+            advancedVariables: []
         };
 
         $scope.showTrashcan = false;
@@ -61,11 +63,21 @@ angular.module('bitbloqApp')
                             $scope.selectedBloqs[type].splice(indexBloq, 1);
                         }
                     }
+
+                    var isAdvance = type.indexOf('advance') > -1;
                     if ($scope.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
                         console.log('estan todos');
-                        $scope.checkBasicTab = 'full';
+                        if (isAdvance) {
+                            $scope.checkAdvanceTab = 'full';
+                        } else {
+                            $scope.checkBasicTab = 'full';
+                        }
                     } else {
-                        $scope.checkBasicTab = $scope.selectedBloqs[type].length;
+                        if (isAdvance) {
+                            $scope.checkAdvanceTab = $scope.selectedBloqs[type].length;
+                        } else {
+                            $scope.checkBasicTab = $scope.selectedBloqs[type].length;
+                        }
                     }
             }
         };
