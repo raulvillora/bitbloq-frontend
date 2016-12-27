@@ -1205,7 +1205,8 @@ angular.module('bitbloqApp')
             "name": "Zowi",
             "board": "Arduino UNO",
             "width": 75,
-            "height": 86
+            "height": 86,
+            "components": ['buzz']
         }, {
             "id": "evolution",
             "name": "Evolution",
@@ -1222,6 +1223,13 @@ angular.module('bitbloqApp')
             "id": "mranger",
             "name": "mRanger",
             "board": "Arduino MEGA 2560",
+            "width": 75,
+            "height": 86
+        }, {
+            "id": "starterthreewheels",
+            "name": "Starter kit Modo 3 ruedas",
+            "underDevelopment": true,
+            "board": "Arduino UNO",
             "width": 75,
             "height": 86
         }],

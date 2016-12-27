@@ -229,7 +229,7 @@ angular.module('bitbloqApp')
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
             if (stopWord.indexOf(item) === -1) {
                 var i;
-                if (!projectService.project.hardware.robot && projectService.project.hardware.board && projectService.project.hardware.components) {
+                if (projectService.project.hardware.board && projectService.project.hardware.components) {
                     var connectedComponents = projectService.project.hardware.components;
                     if (item === 'hwVariable' && connectedComponents.length !== 0) {
                         result = true;

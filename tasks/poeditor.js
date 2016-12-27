@@ -442,4 +442,48 @@ module.exports = function(grunt) {
         }
         grunt.file.write(destinationPath, JSON.stringify(content));
     });
+
+    grunt.registerTask('getUntranslatedTexts', '(sin terminar)get bitbloq and bloqs text to send to translation department', function() {
+        var date = new Date(),
+            dateFormat = timestamp || date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
+
+        var async = require('async'),
+            gruntTaskDone = this.async(),
+            folder = 'sendToTranslate/' + dateFormat + '/';
+
+        getPoeditorLanguages(projectId, function(err, languages) {
+            if (err) {
+                console.log('error getting languages');
+                console.log(err);
+            } else {
+                async.parallel([
+                    function(done) {
+                        //store terms
+                        callPoEditorApi({
+                            action: 'view_terms',
+                            id: projectId
+                        }, function(err, terms) {
+                            if (err) {
+                                done(err);
+                            } else {
+                                grunt.file.write(backupFolder + 'terms.json', JSON.stringify(terms));
+                                done();
+                            }
+                        });
+                    },
+                    function(done) {
+                        async.each(languages, function(item, done) {
+                                exportFromPoeditor(projectId, item.code, 'json', '', '', backupFolder, done);
+                            },
+                            done);
+                    }
+                ], function(err) {
+                    if (err) {
+                        console.log('error :S ' + err);
+                    }
+                    gruntTaskDone();
+                });
+            }
+        });
+    });
 };
