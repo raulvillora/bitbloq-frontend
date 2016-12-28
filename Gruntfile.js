@@ -747,6 +747,15 @@ module.exports = function(grunt) {
         ]);
     });
 
+    grunt.registerTask('getUntranslatedTexts', 'get bitbloq and bloqs text to send to translation department', function() {
+        var date = new Date();
+        var dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
+        grunt.task.run([
+            'getUntranslatedTextsFromProject:38967:' + dateFormat,
+            'getUntranslatedTextsFromProject:42730:' + dateFormat
+        ]);
+    });
+
     grunt.registerTask('getbloqsfrombranch', function(branch) {
         branch = branch || 'master';
         var done = this.async(),
