@@ -457,22 +457,14 @@ angular.module('bitbloqApp')
             var components = $scope.getComponents(projectService.project.hardware.components);
             var code = originalCode;
             var deviceName;
-            console.log("components");
-            console.log(components);
             if (components.device) {
                 deviceName = components.device;
                 code = generateTwitterBloqCode(deviceName, code);
             }
-            console.log("el codeeeeeeeeeeee");
-            console.log(code);
             return code;
         }
 
         function generateTwitterBloqCode(serialName, code) {
-            console.log("entro con device");
-            console.log(serialName);
-            console.log("y con code");
-            console.log(code);
             var finalCode = code.replace('/*sendTwitterAppConfig*/', serialName + '.println(String("twitterConfig-")+String("' + $scope.common.user.twitterApp.consumerKey + '")+"/"+String("' + $scope.common.user.twitterApp.consumerSecret + '")+"/"+String("' + $scope.common.user.twitterApp.accessToken + '")+"/"+String("' + $scope.common.user.twitterApp.accessTokenSecret + '"));');
             return finalCode;
         }

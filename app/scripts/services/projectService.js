@@ -10,7 +10,7 @@
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
         common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -377,6 +377,29 @@ angular.module('bitbloqApp')
                 common.session.save = true;
             }
         };
+        exports.saveTwitterApp=function() {
+            var defered = $q.defer();
+
+            userApi.update(common.user).then(function() {
+                common.setUser(common.user);
+                alertsService.add({
+                    text: 'account-saved',
+                    id: 'saved-user',
+                    type: 'ok',
+                    time: 5000
+                });
+                defered.resolve();
+            }, function(error) {
+                alertsService.add({
+                    text: 'account-saved-error',
+                    id: 'saved-user',
+                    type: 'warning'
+                });
+                defered.reject(error);
+            });
+            return defered.promise;
+        };
+
 
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------

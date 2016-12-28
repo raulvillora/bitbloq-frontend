@@ -248,3 +248,30 @@ $toolboxWidthClosed: 210px;
         text-align: left;
     }
 }
+
+.twitter-code{
+  position: relative;
+  display: inline-block;
+  border-radius: 3px;
+  height: 30px;
+  padding-left: 10px;
+  float: right !important;
+  margin-right: 0 !important;
+
+  & > * {
+      display: inline-block;
+      vertical-align: -webkit-baseline-middle;
+      margin-top: 4px;
+      color: #373b44;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+  }
+
+  .svg-icon {
+      margin-right: 7px;
+      fill: #373b44;
+      width: 15px;
+      height: 15px;
+  }
+}

@@ -107,9 +107,13 @@ angular
             _autoConnect(board.name);
         };
 
-        exports.addComponent = function(newComponent) {
+        exports.addComponent = function(newComponent, board) {
             console.log('newComponent');
             console.log(newComponent);
+
+            console.log("board");
+            console.log(board);
+
 
             if (!newComponent) {
                 throw new Error('You need provide a component element :: addComponent');
@@ -398,7 +402,6 @@ angular
             }
         }
 
-
         function _connectionListeners() {
 
             jsPlumbInstance.unbind('click');
@@ -414,7 +417,6 @@ angular
         function _connectionAction(connection) {
             connection.targetEndpoint.setType('connected');
             connection.sourceEndpoint.setType('connected');
-
 
             var pinAssignation = {};
             pinAssignation[connection.sourceEndpoint.getParameter('pinComponent')] = connection.targetEndpoint.getParameter('pinBoard');
@@ -495,13 +497,13 @@ angular
         function _getConnections() {
             return jsPlumbInstance.getAllConnections().map(function(connection) {
 
-                    var connectionParams = connection.getParameters();
-                    return ({
-                        pinSourceUid: connectionParams.pinSourceUid,
-                        pinTargetUid: connectionParams.pinTargetUid
-                    });
+                var connectionParams = connection.getParameters();
+                return ({
+                    pinSourceUid: connectionParams.pinSourceUid,
+                    pinTargetUid: connectionParams.pinTargetUid
+                });
 
-                }) || [];
+            }) || [];
         }
 
         function _getPinBoardReference(selector) {
@@ -564,7 +566,6 @@ angular
                     options.maxConnections = -1;
                 }
 
-
                 //Create a 'basic' endpoint
                 var epBoard = jsPlumbInstance.addEndpoint(boardDOMElement, options);
 
@@ -596,7 +597,7 @@ angular
             }
         }
 
-//Adds a raw svg for a component
+        //Adds a raw svg for a component
         function _loadComponent(DOMComponent, newComponent) {
             var spaceInterPin;
             if (newComponent.pins.digital && newComponent.pins.analog) {
@@ -897,5 +898,4 @@ angular
 
         return exports;
 
-    })
-;
+    });

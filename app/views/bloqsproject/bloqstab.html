@@ -9,7 +9,7 @@
                 </svg>
                 <span>{{'button_zowi_rest' | translate}}</span>
             </li>
-            <li class="twitter-config"  ng-show="twitterWheel" >
+            <li ng-class="(softTab==='code') ? 'twitter-code' : 'twitter-config'" ng-show="twitterWheel" >
                 <svg id ="twitter-config-button" class="svg-icon" ng-click="clickTwitterConfig()">
                     <use xlink:href="#preferencias"></use>
                 </svg>

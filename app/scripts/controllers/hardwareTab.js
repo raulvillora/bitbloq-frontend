@@ -463,8 +463,23 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
+        var boardMetadata = projectService.getBoardMetaData();
 
         var newComponent = _.cloneDeep(component);
+
+        if (newComponent.id === 'device' || newComponent.id === 'bt' ) {
+            switch (boardMetadata.id) {
+                case 'bqZUM':
+                    newComponent.baudRate = 19200;
+                    break;
+                case 'FreaduinoUNO':
+                    newComponent.baudRate = 38400;
+                    break;
+                case 'ArduinoUNO':
+                    newComponent.baudRate = 38400;
+                    break;
+            }
+        }
         projectService.addComponentInComponentsArray(data.category, newComponent);
 
         var relativeCoordinates = {
