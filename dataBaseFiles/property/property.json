@@ -99,6 +99,9 @@
             "name": "phoneConfigTwitter",
             "addClass": "submenu__item submenu__item--component"
         }, {
+            "name": "phoneSendTweet",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
             "name": "phoneReadLinearAccel",
             "addClass": "submenu__item submenu__item--component"
         }, {
@@ -110,8 +113,7 @@
         }, {
             "name": "phoneReadGyroscope",
             "addClass": "submenu__item submenu__item--component"
-        },
-        {
+        },{
             "name": "phoneReadMagnetic",
             "addClass": "submenu__item submenu__item--component"
         }, {

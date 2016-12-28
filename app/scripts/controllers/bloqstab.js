@@ -10,7 +10,7 @@
 angular.module('bitbloqApp')
     .controller('BloqstabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils,
         bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board,
-        robotFirmwareApi, web2boardOnline, projectService) {
+        robotFirmwareApi, web2boardOnline, projectService, $q) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -21,10 +21,15 @@ angular.module('bitbloqApp')
         $scope.bloqsApi = bloqsApi;
         $scope.projectService = projectService;
         $scope.lastPosition = 0;
+        $scope.twitterSettings = false;
 
         $scope.$field = $('#bloqs--field').last();
 
         var bloqsLoadTimes = 0;
+
+        $scope.clickTwitterConfig = function() {
+            $scope.twitterSettings = !$scope.twitterSettings;
+        };
 
         $scope.init = function() {
             if (projectService.bloqs.varsBloq) {
@@ -119,7 +124,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.hideBloqsMenu = function($event) {
-            if (!$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
+            if ($event.target.className || !$event.target.className.match('btn--advanced') && !$event.target.className.match('level--2--shadow') && !$event.target.className.match('toolbox--bloqs--container')) {
                 $scope.toolbox.level = 1;
             }
         };
@@ -361,6 +366,14 @@ angular.module('bitbloqApp')
             $contextMenu.css({
                 display: 'none'
             });
+
+            if ($('#twitter-config-button:hover').length === 0 && $('#twitter-content:hover').length === 0) {
+                $scope.twitterSettings = false;
+                if (!$scope.$$phase) {
+                    $scope.$digest();
+                }
+            }
+
         }
 
         function contextMenuDocumentHandler(event) {
@@ -542,10 +555,62 @@ angular.module('bitbloqApp')
             }, 50);
         }
 
+
+        function saveTwitterApp() {
+            var defered = $q.defer();
+
+            userApi.update($scope.common.user).then(function() {
+                $scope.common.setUser($scope.common.user);
+                    alertsService.add({
+                        text: 'account-saved',
+                        id: 'saved-user',
+                        type: 'ok',
+                        time: 5000
+                    });
+                    defered.resolve();
+            }, function(error) {
+                alertsService.add({
+                    text: 'account-saved-error',
+                    id: 'saved-user',
+                    type: 'warning'
+                });
+                defered.reject(error);
+            });
+            return defered.promise;
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
+
+        $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                console.log('ha cambiado consumerKey');
+                saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+              console.log('ha cambiado consumerSecret');
+              saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+              console.log('ha cambiado accessToken');
+              saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+              console.log('ha cambiado accessTokenSecret');
+              saveTwitterApp();
+            }
+        });
 
         $window.onresize = function() {
             $timeout(function() {

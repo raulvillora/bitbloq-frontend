@@ -28,6 +28,7 @@ angular.module('bitbloqApp')
             $scope.$broadcast('refresh-bloqs');
         };
 
+        $scope.twitterWheel = false;
         $scope.anyComponent = function(forceCheck) {
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
@@ -378,9 +379,18 @@ angular.module('bitbloqApp')
             var serialPort = _.find(componentsArray, function(o) {
                 return o.id === 'sp';
             });
+
+            var phoneElements = _.find(componentsArray, function(o) {
+                return o.id === 'device';
+            });
             if (serialPort) {
                 components.sp = serialPort.name;
             }
+
+            if (phoneElements) {
+                components.device = phoneElements.name;
+            }
+
             _.forEach(componentsArray, function(value) {
                 if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
                     if (components[value.id]) {
@@ -443,6 +453,30 @@ angular.module('bitbloqApp')
             return code;
         }
 
+        function generateMobileTwitterCode(componentsArray, originalCode) {
+            var components = $scope.getComponents(projectService.project.hardware.components);
+            var code = originalCode;
+            var deviceName;
+            console.log("components");
+            console.log(components);
+            if (components.device) {
+                deviceName = components.device;
+                code = generateTwitterBloqCode(deviceName, code);
+            }
+            console.log("el codeeeeeeeeeeee");
+            console.log(code);
+            return code;
+        }
+
+        function generateTwitterBloqCode(serialName, code) {
+            console.log("entro con device");
+            console.log(serialName);
+            console.log("y con code");
+            console.log(code);
+            var finalCode = code.replace('/*sendTwitterAppConfig*/', serialName + '.println(String("twitterConfig-")+String("' + $scope.common.user.twitterApp.consumerKey + '")+"/"+String("' + $scope.common.user.twitterApp.consumerSecret + '")+"/"+String("' + $scope.common.user.twitterApp.accessToken + '")+"/"+String("' + $scope.common.user.twitterApp.accessTokenSecret + '"));');
+            return finalCode;
+        }
+
         $scope.thereIsSerialBlock = function(code) {
             var serialBlock;
             if (code.indexOf('/*sendViewerData*/') > -1) {
@@ -452,6 +486,17 @@ angular.module('bitbloqApp')
             }
 
             return serialBlock;
+        };
+
+        $scope.thereIsTwitterBlock = function(code) {
+            var twitterBlock;
+            if (code.indexOf('/*sendTwitterAppConfig*/') > -1) {
+                twitterBlock = true;
+            } else {
+                twitterBlock = false;
+            }
+
+            return twitterBlock;
         };
 
         function generateSensorsCode(components, serialName, code) {
@@ -538,6 +583,13 @@ angular.module('bitbloqApp')
                                 code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
                                 viewer: viewer
                             });
+                        } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                            web2boardOnline.compileAndUpload({
+                                board: projectService.getBoardMetaData(),
+                                code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                                viewer: viewer
+                            });
+
                         } else {
                             web2boardOnline.compileAndUpload({
                                 board: projectService.getBoardMetaData(),
@@ -922,12 +974,18 @@ angular.module('bitbloqApp')
                 }
             });
 
-            $window.addEventListener('bloqs:dragend', function() {
+            $window.addEventListener('bloqs:dragend', function(evt) {
+                console.log('evt');
+                console.log(evt.detail.bloqData.name);
+                if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
+                    $scope.twitterWheel = true;
+                }
                 $scope.saveBloqStep();
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
                 $scope.$apply();
             });
+
             $window.addEventListener('bloqs:suggestedAdded', function() {
                 $scope.saveBloqStep();
                 $scope.hardware.firstLoad = false;
@@ -1169,6 +1227,7 @@ angular.module('bitbloqApp')
             $log.debug('There is a registed user');
             if ($routeParams.id) {
                 loadProject($routeParams.id).finally(function() {
+                    checkIfTwitterBloq(projectService.project);
                     addProjectWatchersAndListener();
                 });
             } else {
@@ -1198,6 +1257,24 @@ angular.module('bitbloqApp')
                 launchModalGuest();
             }
         });
+
+        function checkIfTwitterBloq(projectData) {
+            projectData.software.loop.childs.forEach(function(element) {
+                if (element.name === 'phoneConfigTwitter') {
+                    $scope.twitterWheel = true;
+                }
+            });
+            projectData.software.setup.childs.forEach(function(element) {
+                if (element.name === 'phoneConfigTwitter') {
+                    $scope.twitterWheel = true;
+                }
+            });
+            projectData.software.vars.childs.forEach(function(element) {
+                if (element.name === 'phoneConfigTwitter') {
+                    $scope.twitterWheel = true;
+                }
+            });
+        }
 
         function loadProject(id) {
             return projectApi.get(id).then(function(response) {

@@ -268,30 +268,6 @@ angular.module('bitbloqApp')
                 }
             });
 
-            $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
-                    $scope.validateProfile();
-                }
-            });
-
-            $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
-                    $scope.validateProfile();
-                }
-            });
-
-            $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
-                    $scope.validateProfile();
-                }
-            });
-
-            $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
-                    $scope.validateProfile();
-                }
-            });
-
         }, function() {
             alertsService.add({
                 text: 'view-need-tobe-logged',
