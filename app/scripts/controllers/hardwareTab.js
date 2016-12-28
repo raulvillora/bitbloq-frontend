@@ -453,7 +453,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         projectService.project.hardware.board = robotReference.board;
 
         $scope.componentSelected = null;
-        var components
+
         switch (robot.id) {
             case 'zowi':
                 projectService.project.hardware.components = getZowiComponents();
@@ -480,7 +480,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         sp.category = 'serialElements';
         sp.pin = {
             s: 'serial'
-        }
+        };
 
         var bt = getComponentData('bt', 'serialElements');
         bt.name = $scope.common.translate('default-var-name-bt').toLowerCase() + '_zowi';
@@ -488,7 +488,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         bt.pin = {
             rx: 0,
             tx: 1
-        }
+        };
 
         var sound = getComponentData('sound', 'sensors');
         sound.name = $scope.common.translate('default-var-name-sound').toLowerCase() + '_zowi';
@@ -596,7 +596,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         components.push(oscillator3);
 
         return components;
-    };
+    }
 
     function getComponentData(id, category) {
         var searchResult = _.find($scope.hardware.componentList[category], function(component) {
@@ -604,7 +604,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         });
 
         return _.cloneDeep(searchResult);
-    };
+    }
 
     function _addComponent(data) {
         $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
