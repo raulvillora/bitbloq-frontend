@@ -747,6 +747,17 @@ module.exports = function(grunt) {
         ]);
     });
 
+    grunt.registerTask('poeditorbackupocio', 'backup all poeditor projects from odio digital', function() {
+        var date = new Date();
+        var dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
+        grunt.task.run([
+            'poeditorprojectbackup:35334:' + dateFormat,
+            'poeditorprojectbackup:36294:' + dateFormat,
+            'poeditorprojectbackup:42094:' + dateFormat,
+            'poeditorprojectbackup:44335:' + dateFormat
+        ]);
+    });
+
     grunt.registerTask('getUntranslatedTexts', 'get bitbloq and bloqs text to send to translation department', function() {
         var date = new Date();
         var dateFormat = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
