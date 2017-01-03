@@ -36,13 +36,13 @@ angular.module('bitbloqApp')
         $scope.$trashcan = null;
 
         $scope.statusGeneralCheck = function(type) {
-            $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type]? $scope.currentProject.selectedBloqs[type].length : 0;
+            $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0;
             var advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1);
             $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
-            if ($scope.checkBasicTab!==0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+            if ($scope.checkBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
                 $scope.checkBasicTab = 'full';
             }
-            if ($scope.checkAdvanceTab!==0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[type].length) {
+            if ($scope.checkAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
                 $scope.checkAdvanceTab = 'full';
             }
         };
@@ -86,6 +86,7 @@ angular.module('bitbloqApp')
                     $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type].length;
                 }
             }
+            currentProjectService.startAutosave();
         };
 
         $scope.changeBloqsToolbox = function(tab) {
@@ -145,9 +146,14 @@ angular.module('bitbloqApp')
         };
 
         $scope.hideBloqsMenu = function($event) {
-            if (!$event.target.className.match('toolbox--bloqs--container') && !$event.target.className.match('component-toolbox') && !$event.target.className.match('submenu__item')) {
+            var current = $event.target.className;
+            if (typeof current === 'object') {
+                current = $event.target.parentElement.parentElement.className;
+            }
+            if (!current.match('toolbox--bloqs--container') && !current.match('component-toolbox') && !current.match('submenu__item')) {
                 $scope.selectedBloqsToolbox = '';
             }
+
         };
 
         $scope.init = function() {

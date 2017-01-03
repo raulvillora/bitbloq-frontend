@@ -111,8 +111,9 @@ $hw_toolbox: 210px;
             }
         }
         &.tabs-layout__aside .tabs__header__item {
-            border-left: none;
             border-top: none;
+            border-right: none;
+            border-left: 1px solid #dddddd;
         }
     }
 }
@@ -245,13 +246,13 @@ $hw_toolbox: 210px;
 }
 
 .toolbox--right {
-    input {
+    input.component-toolbox {
         display: none;
     }
 }
 
 .toolbox--checks {
-    input {
+    input.component-toolbox {
         display: inherit;
     }
 }

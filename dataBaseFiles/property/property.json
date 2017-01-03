@@ -452,7 +452,7 @@
             "name": "zowiIfDistance",
             "addClass": "submenu__item submenu__item--component"
         }],
-        "advancedZowis": [{
+        "advancedZowi": [{
             "name": "zowiMovementsFront",
             "addClass": "submenu__item submenu__item--component"
         }, {
