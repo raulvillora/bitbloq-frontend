@@ -13,7 +13,7 @@
     <!-- Alias buttons -->
     <aside class="tabs-layout__aside tabs-layout__aside--vertical">
         <!-- project buttons -->
-        <ul class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" ng-show="common.section ==='bloqsproject' || (common.section ==='exercise' && selectedBloqsToolbox!=='')">
+        <ul class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" ng-show="common.section ==='bloqsproject' || common.section ==='task' || (common.section ==='exercise' && selectedBloqsToolbox!=='')">
             <li class="tabs__header__item--vertical toolbox-zowi" ng-class="{'selected--tab': selectedBloqsToolbox==='zowi'}" ng-show="projectService.project.hardware.robot==='zowi'" data-element="toolbox-zowi">
                 <button class="btn-svg component-toolbox" ng-click="changeBloqsToolbox('zowi')">
                     <svg class="svg-icon">

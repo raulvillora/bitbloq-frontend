@@ -172,6 +172,11 @@ angular
                 controller: 'ExerciseCtrl',
                 reloadOnSearch: false
             })
+            .when('/task/:id?', {
+                templateUrl: 'views/project/exercise.html',
+                controller: 'ExerciseCtrl',
+                reloadOnSearch: false
+            })
             .when('/404', {
                 templateUrl: '404.html'
             })
