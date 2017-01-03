@@ -12,7 +12,7 @@
                     </a>
                 </li>
             </ul>
-            <ul ng-if="common.user && (common.userRole==='headMaster' || common.user.studentMode)" class="nav__menu nav__menu__center-mode">
+            <ul ng-if="common.user && (common.userRole==='headMaster' || common.userRole==='teacher' || common.user.studentMode)" class="nav__menu nav__menu__center-mode">
                 <li ng-if="common.user && common.userRole==='headMaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="menu--user" ng-show="common.user">
-            <div ng-if="common.user && (common.userRole!=='headMaster' && !common.user.studentMode)" class="menu--user__center-mode notification-info">
+            <div ng-if="common.user && (common.userRole!=='headMaster' && common.userRole!=='teacher' && !common.user.studentMode)" class="menu--user__center-mode notification-info">
                 <p class="notification-alert">{{'new' | translate}}</p>
                 <div class="notification__content">
                     <p class="notification__title">{{'centerMode_modal_createCenterTitle' | translate}}</p>
