@@ -4,9 +4,7 @@
 
 /**
  * @ngdoc directive
- * @name bitbloqApp.directive:beautyCode
- * @description Directive for beautify auto-generated Aruidno code
- * # prism
+ * @name bitbloqApp.directive:indeterminateCheckbox
  */
 angular.module('bitbloqApp')
     .directive('indeterminateCheckbox', function() {
@@ -16,14 +14,14 @@ angular.module('bitbloqApp')
             scope: {
                 genericCheck: '=',
                 functionSelectAll: '=',
-                selectedTab: '='
+                selectedTab: '=',
+                updateState: '='
             },
             link: function(scope, element, attrs, ngModel) {
-                // Watch the children for changes
                 scope.$watch('genericCheck', function(newValue) {
-                    console.log(ngModel.$viewValue);
                     if (newValue) {
                         if (newValue === 'full') {
+                            ngModel.$setViewValue(true);
                             element.prop('checked', true);
                             element.prop('indeterminate', false);
                         } else {
@@ -36,7 +34,6 @@ angular.module('bitbloqApp')
                     }
                 });
 
-                // Bind the onChange event to update children
                 element.bind('change', function() {
                     if (element.prop('checked')) {
                         ngModel.$setViewValue(false);
@@ -47,8 +44,13 @@ angular.module('bitbloqApp')
                     }
                 });
 
-                scope.$watch('scope.selectedTab', function(newValue){
-                    //todo si cambia de pestaña checkear el estado del check generico
+                scope.$watch('selectedTab', function(newValue) {
+                    if (newValue) {
+                        ngModel.$setViewValue(false);
+                        if (scope.updateState) {
+                            scope.updateState(newValue);
+                        }
+                    }
                 });
             }
         };
