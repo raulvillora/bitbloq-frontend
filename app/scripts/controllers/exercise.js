@@ -42,8 +42,6 @@ angular.module('bitbloqApp')
 
 
 
-
-
         $scope.getGroups = function() {
             centerModeApi.getGroups().then(function(response) {
                 $scope.groups = response.data;

@@ -1,4 +1,3 @@
-/* global Prism, js_beautify */
 /*jshint camelcase: false */
 'use strict';
 

@@ -1,4 +1,3 @@
-/* global Prism, js_beautify */
 /*jshint camelcase: false */
 'use strict';
 
@@ -13,13 +12,27 @@ angular.module('bitbloqApp')
             require: 'ngModel',
             scope: {
                 indeterminateParentCheckbox: '=',
-                selectedTab: '='
+                selectedTab: '=',
+                json: '='
             },
             link: function(scope, element, attrs, ngModel) {
+                console.log(scope.json);
                 scope.$watch('indeterminateParentCheckbox', function(newValue) {
-                    if (newValue && attrs.myTab===scope.selectedTab) {
+                    if (newValue && attrs.myTab === scope.selectedTab) {
                         ngModel.$setViewValue(newValue);
                         element.prop('checked', newValue);
+                    }
+                });
+
+                var initialize = scope.$watch('json', function(newValue, oldValue) {
+                    if (oldValue) {
+                        initialize();
+                    } else if (newValue) {
+                        if (newValue.indexOf(attrs.id.split('Check')[0]) > -1) {
+                            ngModel.$setViewValue(true);
+                            element.prop('checked', true);
+                        }
+                        initialize();
                     }
                 });
             }

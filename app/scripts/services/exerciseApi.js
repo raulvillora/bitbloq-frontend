@@ -45,7 +45,10 @@ angular.module('bitbloqApp')
             });
         }
 
-        function save(dataExercise) {
+        function save(dataExercise, teacherId) {
+            if (teacherId) {
+                dataExercise.teacher = teacherId;
+            }
             return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'exercise',
