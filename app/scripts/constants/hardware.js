@@ -769,7 +769,7 @@ angular.module('bitbloqApp')
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad51"
                 }, {
                     "x": 0.911,
-                    "y": 0.0,
+                    "y": 0.795,
                     "name": "52",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad52"
                 }, {
@@ -779,53 +779,103 @@ angular.module('bitbloqApp')
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad53"
                 }],
                 "analog": [{
-                    "x": 0.763,
-                    "y": 0.92,
+                    "x": 0.532,
+                    "y": 0.945,
                     "name": "A0",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
                 }, {
-                    "x": 0.795,
-                    "y": 0.92,
+                    "x": 0.555,
+                    "y": 0.945,
                     "name": "A1",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
                 }, {
-                    "x": 0.83,
-                    "y": 0.92,
+                    "x": 0.576,
+                    "y": 0.945,
                     "name": "A2",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
                 }, {
-                    "x": 0.862,
-                    "y": 0.92,
+                    "x": 0.599,
+                    "y": 0.945,
                     "name": "A3",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
                 }, {
-                    "x": 0.895,
-                    "y": 0.92,
+                    "x": 0.62,
+                    "y": 0.945,
                     "name": "A4",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
                 }, {
-                    "x": 0.935,
-                    "y": 0.92,
+                    "x": 0.643,
+                    "y": 0.945,
                     "name": "A5",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                }, {
+                    "x": 0.666,
+                    "y": 0.945,
+                    "name": "A6",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa06"
+                }, {
+                    "x": 0.688,
+                    "y": 0.945,
+                    "name": "A7",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa07"
+                }, {
+                    "x": 0.732,
+                    "y": 0.945,
+                    "name": "A8",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa08"
+                }, {
+                    "x": 0.755,
+                    "y": 0.945,
+                    "name": "A9",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa09"
+                }, {
+                    "x": 0.776,
+                    "y": 0.945,
+                    "name": "A10",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa10"
+                }, {
+                    "x": 0.8,
+                    "y": 0.945,
+                    "name": "A11",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa11"
+                }, {
+                    "x": 0.822,
+                    "y": 0.945,
+                    "name": "A12",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa12"
+                }, {
+                    "x": 0.845,
+                    "y": 0.945,
+                    "name": "A13",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa13"
+                }, {
+                    "x": 0.866,
+                    "y": 0.945,
+                    "name": "A14",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa14"
+                }, {
+                    "x": 0.889,
+                    "y": 0.945,
+                    "name": "A15",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa15"
                 }],
                 "serial": [{
-                    "x": 0.045,
-                    "y": 0.315,
+                    "x": 0.095,
+                    "y": 0.2943,
                     "name": "serial",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edadserial1"
                 }],
                 "i2c-4": [{
-                    "x": 0.903,
-                    "y": 0.925,
-                    "name": "A4-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
+                    "x": 0.822,
+                    "y": 0.05,
+                    "name": "20-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a220"
                 }],
                 "i2c-5": [{
-                    "x": 0.933,
-                    "y": 0.925,
-                    "name": "A5-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                    "x": 0.8447,
+                    "y": 0.05,
+                    "name": "21-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a221"
                 }]
             }
         }, {
