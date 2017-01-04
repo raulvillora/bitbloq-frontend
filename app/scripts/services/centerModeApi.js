@@ -73,7 +73,7 @@ angular
             });
         }
 
-        function getGroups(teacherId) {
+        function getGroups(teacherId, centerId) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
@@ -82,7 +82,7 @@ angular
             } else {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'group'
+                    url: envData.config.centerModeUrl + 'group/center/' + centerId
                 });
             }
         }
@@ -122,10 +122,10 @@ angular
             });
         }
 
-        function registerInGroup(groupId){
+        function registerInGroup(groupId) {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'group/' + groupId +'/register'
+                url: envData.config.centerModeUrl + 'group/' + groupId + '/register'
             });
         }
 

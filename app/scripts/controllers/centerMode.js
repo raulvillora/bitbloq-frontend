@@ -305,18 +305,27 @@
             }
 
             function _getGroups() {
-                centerModeApi.getGroups($scope.teacher._id).then(function(response) {
+                var teacherId;
+                if ($scope.teacher._id !== $scope.common.user._id) {
+                    teacherId = $scope.teacher._id;
+                }
+                centerModeApi.getGroups(teacherId, $scope.center._id).then(function(response) {
                     $scope.groups = response.data;
                 });
             }
 
             function _getTeacher(teacherId) {
-                teacherId = teacherId || $scope.common.user._id;
-                centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
+                if (!teacherId) {
                     $scope.secondaryBreadcrumb = true;
-                    $scope.teacher = _.extend($scope.teacher, response.data);
+                    $scope.teacher = _.extend($scope.teacher, $scope.common.user);
                     _getGroups();
-                });
+                } else {
+                    centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
+                        $scope.secondaryBreadcrumb = true;
+                        $scope.teacher = _.extend($scope.teacher, response.data);
+                        _getGroups();
+                    });
+                }
             }
 
             function _getTeachers(centerId) {
