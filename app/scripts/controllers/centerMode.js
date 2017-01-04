@@ -10,17 +10,8 @@
     angular.module('bitbloqApp')
         .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location) {
 
-            $scope.exercises = [
-                {
-                    name: 'Ejercicio lorem ipsum dolor sit amet consectetur',
-                    endDate: '2016-10-19T12:13:14.774Z'
-                }, {
-                    name: '2.Ejercicio lorem ipsum dolor sit amet consectetur',
-                    endDate: '2016-10-20T12:13:14.774Z'
-                }
-            ];
-
             $scope.center = {};
+            $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
             $scope.teacher = {};
@@ -296,6 +287,12 @@
                 currentModal.close();
             }
 
+            function _getExercises (teacherId) {
+                centerModeApi.getExercises(teacherId).then(function(response) {
+                    $scope.exercises = response.data;
+                });
+            }
+
             function _getGroup(groupId) {
                 centerModeApi.getGroup(groupId).then(function(response) {
                     $scope.secondaryBreadcrumb = true;
@@ -319,11 +316,13 @@
                     $scope.secondaryBreadcrumb = true;
                     $scope.teacher = _.extend($scope.teacher, $scope.common.user);
                     _getGroups();
+                    _getExercises();
                 } else {
                     centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
                         $scope.secondaryBreadcrumb = true;
                         $scope.teacher = _.extend($scope.teacher, response.data);
                         _getGroups();
+                        _getExercises($scope.teacher._id);
                     });
                 }
             }

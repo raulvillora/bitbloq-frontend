@@ -9,6 +9,7 @@ angular
             createGroup: createGroup,
             deleteGroup: deleteGroup,
             deleteTeacher: deleteTeacher,
+            getExercises: getExercises,
             getGroup: getGroup,
             getGroups: getGroups,
             getMyCenter: getMyCenter,
@@ -66,6 +67,20 @@ angular
             });
         }
 
+        function getExercises(teacherId) {
+            if(teacherId) {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId
+                });
+            } else {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'exercise'
+                });
+            }
+        }
+
         function getGroup(groupId) {
             return $http({
                 method: 'GET',
@@ -79,10 +94,15 @@ angular
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/teacher/' + teacherId
                 });
-            } else {
+            } else if(centerId) {
                 return $http({
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/center/' + centerId
+                });
+            } else {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'group/'
                 });
             }
         }
