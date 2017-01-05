@@ -113,8 +113,11 @@
         }, {
             "name": "phoneReadGyroscope",
             "addClass": "submenu__item submenu__item--component"
-        },{
+        }, {
             "name": "phoneReadMagnetic",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReadOrientation",
             "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "phoneisCovered",
