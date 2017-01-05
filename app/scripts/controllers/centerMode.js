@@ -135,9 +135,6 @@
             $scope.sortInstances = function(type) {
                 $log.debug('sortInstances', type);
                 switch (type) {
-                    case 'login-username':
-                        $scope.orderInstance = 'username';
-                        break;
                     case 'email':
                         $scope.orderInstance = 'email';
                         break;
