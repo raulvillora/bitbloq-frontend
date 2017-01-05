@@ -18,7 +18,7 @@
         <div class="table__block">
             <div class="table__block__list row" ng-repeat="exercise in exercises | orderBy:'orderInstance'">
                 <div class="table__block__item col-vsmall-8">
-                    <a ng-href="{{'#/center-mode/teacher/' + exercise._id}}">
+                    <a ng-href="{{'#/exercise/' + exercise._id}}">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                             {{exercise.name}}</h2>
                     </a>
