@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location, commonModals) {
 
             $scope.center = {};
             $scope.exercises = [];
@@ -182,8 +182,16 @@
                 var confirmAction = function() {
                         var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
-                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function() {
-                                _getTeachers($scope.center._id);
+                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function(response) {
+                                if (response.data.teachersNotAdded) {
+                                    commonModals.noAddTeachers(response.data.teachersNotAdded, response.data.teachersAdded.length);
+                                }
+                                if (response.data.teachersAdded) {
+                                    _.forEach(response.data.teachersAdded, function(teacher) {
+                                        $scope.teachers.push(teacher);
+                                    });
+                                }
+                                $scope.sortArray = _.keys($scope.teachers[0]);
                             }).catch(function() {
                                 alertsService.add({
                                     text: 'centerMode_alert_addTeacher-Error',
@@ -287,7 +295,7 @@
                 currentModal.close();
             }
 
-            function _getExercises (teacherId) {
+            function _getExercises(teacherId) {
                 centerModeApi.getExercises(teacherId).then(function(response) {
                     $scope.exercises = response.data;
                 });
@@ -329,6 +337,8 @@
 
             function _getTeachers(centerId) {
                 centerModeApi.getTeachers(centerId).then(function(response) {
+                    console.log("response.data");
+                    console.log(response.data);
                     $scope.teachers = response.data;
                     $scope.sortArray = _.keys($scope.teachers[0]);
                 });

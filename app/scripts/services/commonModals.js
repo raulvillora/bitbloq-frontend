@@ -669,6 +669,37 @@ angular.module('bitbloqApp')
             });
             serialMonitorPanel.scope = scope;
         };
+        exports.noAddTeachers = function(teachers, added){
+          var noShareModal, confirmAction = function() {
+                  noShareModal.close();
+                  alertsService.add({
+                      text: 'modalShare_alert_addTeacher ',
+                      id: 'private-project',
+                      type: 'ok',
+                      time: 5000,
+                      value: added
+                  });
+              },
+              modalScope = $rootScope.$new();
+
+          _.extend(modalScope, {
+              title: 'newTeacher_modal_aceptButton',
+              modalButtons: true,
+              confirmButton: 'modal__understood-button',
+              confirmAction: confirmAction,
+              contentTemplate: '/views/modals/centerMode/noAddTeachers.html',
+              teachers: teachers
+          });
+
+          noShareModal = ngDialog.open({
+              template: '/views/modals/modal.html',
+              className: 'modal--container modal--share-no-users',
+              scope: modalScope
+          });
+        };
+
+
+
 
         function _shareUserInfoModal(noUsers, usersLength) {
             var noShareModal, confirmAction = function() {
@@ -698,6 +729,7 @@ angular.module('bitbloqApp')
                 scope: modalScope
             });
         }
+
 
         exports.requestChromeExtensionActivation = function(text, callback) {
             var modalNeedWeb2boardOnline = $rootScope.$new();
