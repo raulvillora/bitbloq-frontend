@@ -16,8 +16,8 @@
             $scope.groups = [];
             $scope.teacher = {};
             $scope.teachers = [];
+            $scope.sortArray = ['login-username', 'email', 'name', 'surname'];
             $scope.secondaryBreadcrumb = false;
-            $scope.sortArray = [];
             $scope.students = [];
             $scope.orderInstance = 'name';
             $scope.common.urlType = $routeParams.type;
@@ -134,7 +134,20 @@
 
             $scope.sortInstances = function(type) {
                 $log.debug('sortInstances', type);
-                $scope.orderInstance = type;
+                switch (type) {
+                    case 'login-username':
+                        $scope.orderInstance = 'username';
+                        break;
+                    case 'email':
+                        $scope.orderInstance = 'email';
+                        break;
+                    case 'name':
+                        $scope.orderInstance = 'firstName';
+                        break;
+                    case 'surname':
+                        $scope.orderInstance = 'lastName';
+                        break;
+                }
             };
 
             $scope.newGroup = function() {
@@ -191,7 +204,6 @@
                                         $scope.teachers.push(teacher);
                                     });
                                 }
-                                $scope.sortArray = _.keys($scope.teachers[0]);
                             }).catch(function() {
                                 alertsService.add({
                                     text: 'centerMode_alert_addTeacher-Error',
@@ -337,10 +349,7 @@
 
             function _getTeachers(centerId) {
                 centerModeApi.getTeachers(centerId).then(function(response) {
-                    console.log("response.data");
-                    console.log(response.data);
                     $scope.teachers = response.data;
-                    $scope.sortArray = _.keys($scope.teachers[0]);
                 });
             }
 
