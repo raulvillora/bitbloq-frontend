@@ -11,6 +11,7 @@ angular.module('bitbloqApp')
     .service('exerciseApi', function($http, $log, envData) {
 
         var exerciseApi = {
+            canUpdate: canUpdate,
             clone: clone,
             delete: deleteExercise,
             get: get,
@@ -18,6 +19,13 @@ angular.module('bitbloqApp')
             update: update
         };
 
+
+        function canUpdate(idExercise) {
+            return $http({
+                method: 'HEAD',
+                url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/owner'
+            });
+        }
 
         function clone(idExercise, name) {
             return $http({

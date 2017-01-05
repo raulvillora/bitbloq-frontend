@@ -1,5 +1,4 @@
 'use strict';
-/* global js_beautify */
 
 /**
  * @ngdoc function

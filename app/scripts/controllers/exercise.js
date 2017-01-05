@@ -33,6 +33,7 @@ angular.module('bitbloqApp')
         $scope.exerciseApi = exerciseApi;
         $scope.currentProject = exerciseService.exercise;
         $scope.currentProjectService = exerciseService;
+        $scope.isOwner = false;
 
         exerciseService.saveStatus = 0;
 
@@ -49,6 +50,16 @@ angular.module('bitbloqApp')
         $scope.common.itsUserLoaded().then(function() {
             $scope.getGroups();
         });
+
+        function _canUpdate() {
+            exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
+                if (res.status === 200){
+                    $scope.isOwner = true;
+                } else {
+                    $scope.isOwner = false;
+                }
+            });
+        }
 
 
         /*************************************************
@@ -416,6 +427,7 @@ angular.module('bitbloqApp')
         function loadExercise(id) {
             return exerciseApi.get(id).then(function(response) {
                 _uploadExercise(response.data);
+                _canUpdate();
                 $scope.exerciseLoaded.resolve();
             }, function(error) {
                 exerciseService.addWatchers();
