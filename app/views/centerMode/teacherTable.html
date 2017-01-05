@@ -30,7 +30,7 @@
             <div class="table__block__item col-vsmall-2">
                 <span>{{item.students}}</span>
             </div>
-            <div class="table__block__item table__column--right col-vsmall-1">
+            <div class="table__block__item table__column--right col-vsmall-1" ng-if="item._id !== common.user._id">
                 <button class="btn btn--secondary table__block__button table__block__button--delete" ng-click="deleteTeacher(item)" data-element="centerMode-delete-teacher">
                     <svg class="svg-icon">
                         <use xlink:href="#delete"></use>
