@@ -29,12 +29,12 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="!currentProjectService.exercise._acl.ALL && utils.userIsOwner(currentProjectService.exercise, common.user._id)"
-                data-tooltips="{{!currentProjectService.exercise._id || !common.user || !utils.userIsOwner(currentProjectService.exercise, common.user._id)}}"
-                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProjectService.exercise._id?'empty-project':!utils.userIsOwner(currentProjectService.exercise, common.user._id)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}"
+            <li class="nav__menu__item nav__item--white right" data-ng-if="!currentProjectService.exercise._acl.ALL && utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)"
+                data-tooltips="{{!currentProjectService.exercise._id || !common.user || !utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)}}"
+                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProjectService.exercise._id?'empty-project':!utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}"
                 data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!currentProjectService.exercise._id || !utils.userIsOwner(currentProjectService.exercise, common.user._id)}"
-                        data-ng-disabled="!currentProjectService.exercise._id || !utils.userIsOwner(currentProjectService.exercise, common.user._id)">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!currentProjectService.exercise._id || !utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)}"
+                        data-ng-disabled="!currentProjectService.exercise._id || !utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)">
                     <svg class="svg-icon">
                         <use xlink:href="#cloud"></use>
                     </svg>

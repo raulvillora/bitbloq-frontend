@@ -9,7 +9,7 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $location, $window, $document, alertsService, bloqs, ngDialog, projectApi, _, $route, commonModals, clipboard, projectService) {
+    .controller('MakeActionsCtrl', function($rootScope, $scope, $log, $location, $window, $document, alertsService, bloqs, ngDialog, projectApi, exerciseApi, _, $route, commonModals, clipboard, projectService) {
 
         $scope.defaultZoom = 1;
         $scope.modal = {
@@ -17,8 +17,12 @@ angular.module('bitbloqApp')
         };
         $scope.projectApi = projectApi;
         $scope.commonModals = commonModals;
-        $scope.projectService = projectService;
         $scope.removeAlert = [];
+
+
+        $scope.currentProjectService = $scope.currentProjectService || projectService;
+
+        $scope.currentProject = $scope.currentProject || $scope.currentProject;
 
         $scope.uploadProjectSelected = function(fileList) {
 
@@ -139,36 +143,50 @@ angular.module('bitbloqApp')
         };
 
         $scope.downloadIno = function() {
-            var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : projectService.project.code;
-            projectService.project.code = code;
-            projectService.download(projectService.project, 'arduino');
+            var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : $scope.currentProject.code;
+            $scope.currentProject.code = code;
+            currentProjectService.download($scope.currentProject, 'arduino');
         };
 
-        $scope.removeProject = function(project) {
-            if (project._id) {
-                $scope.common.removeProjects[project._id] = true;
-                $scope.removeAlert[project._id] = alertsService.add({
-                    text: 'make-deleted-project',
-                    id: 'deleted-project' + project._id,
-                    type: 'warning',
-                    time: 7000,
-                    linkText: 'undo',
-                    link: _undoRemoveProject,
-                    linkParams: project._id,
-                    closeFunction: _deleteProject,
-                    closeParams: {
-                        _id: project._id,
-                        imageType: project.imageType
-                    }
+        $scope.removeProject = function(project, type) {
+            if(type === 'exercise' || type === 'task'){
+                exerciseApi.delete(project._id).then(function() {
+                    $log.log('we delete this project');
+                }, function(error) {
+                    $log.log('Delete error: ', error);
+                    alertsService.add({
+                        text: 'make-delete-project-error',
+                        id: 'deleted-project',
+                        type: 'warning'
+                    });
                 });
-                $location.path('projects');
+                $location.path('center-mode/teacher');
             } else {
-                alertsService.add({
-                    text: 'make-delete-project-not-changed',
-                    id: 'deleted-project',
-                    type: 'ok',
-                    time: 5000
-                });
+                if (project._id) {
+                    $scope.common.removeProjects[project._id] = true;
+                    $scope.removeAlert[project._id] = alertsService.add({
+                        text: 'make-deleted-project',
+                        id: 'deleted-project' + project._id,
+                        type: 'warning',
+                        time: 7000,
+                        linkText: 'undo',
+                        link: _undoRemoveProject,
+                        linkParams: project._id,
+                        closeFunction: _deleteProject,
+                        closeParams: {
+                            _id: project._id,
+                            imageType: project.imageType
+                        }
+                    });
+                    $location.path('projects');
+                } else {
+                    alertsService.add({
+                        text: 'make-delete-project-not-changed',
+                        id: 'deleted-project',
+                        type: 'ok',
+                        time: 5000
+                    });
+                }
             }
         };
 
@@ -212,10 +230,10 @@ angular.module('bitbloqApp')
 
         $rootScope.$on('viewer-code:ready', function() {
             if (show) {
-                var componentsJSON = $scope.getComponents($scope.projectService.project.hardware.components);
-                if ($scope.projectService.project.hardware.board) {
+                var componentsJSON = $scope.getComponents($scope.$scope.currentProject.hardware.components);
+                if ($scope.$scope.currentProject.hardware.board) {
                     if ($scope.common.useChromeExtension()) {
-                        $scope.commonModals.launchViewerWindow($scope.projectService.getBoardMetaData(), componentsJSON);
+                        $scope.commonModals.launchViewerWindow($scope.currentProjectService.getBoardMetaData(), componentsJSON);
                     }
                 } else {
                     $scope.currentTab = 0;
@@ -233,14 +251,14 @@ angular.module('bitbloqApp')
 
         $scope.showViewer = function() {
             if ($scope.common.useChromeExtension()) {
-                $scope.projectService.startAutosave(true);
+                $scope.currentProjectService.startAutosave(true);
                 show = true;
-                if (!$scope.projectService.project.codeproject) {
+                if (!$scope.$scope.currentProject.codeproject) {
                     //parent: bloqsproject
-                    if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
+                    if ($scope.thereIsSerialBlock($scope.currentProjectService.getCode())) {
                         $scope.upload();
                     } else {
-                        var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                        var viewerCode = $scope.getViewerCode($scope.$scope.currentProject.hardware.components, $scope.currentProjectService.getCode());
                         $scope.upload(viewerCode);
                     }
                 } else {
@@ -249,14 +267,14 @@ angular.module('bitbloqApp')
             } else {
                 commonModals.requestChromeExtensionActivation('modal-need-chrome-extension-activation-viewer', function(err) {
                     if (!err) {
-                        $scope.projectService.startAutosave(true);
+                        $scope.currentProjectService.startAutosave(true);
                         show = true;
-                        if (!$scope.projectService.project.codeproject) {
+                        if (!$scope.$scope.currentProject.codeproject) {
                             //parent: bloqsproject
-                            if ($scope.thereIsSerialBlock($scope.projectService.getCode())) {
+                            if ($scope.thereIsSerialBlock($scope.currentProjectService.getCode())) {
                                 $scope.upload();
                             } else {
-                                var viewerCode = $scope.getViewerCode($scope.projectService.project.hardware.components, $scope.projectService.getCode());
+                                var viewerCode = $scope.getViewerCode($scope.$scope.currentProject.hardware.components, $scope.currentProjectService.getCode());
                                 $scope.upload(viewerCode);
                             }
                         } else {
