@@ -209,6 +209,11 @@ $hw_toolbox: 210px;
             background-color: transparent;
             height: 50%;
         }
+        &.starterthreewheels {
+            background-image: url(/images/robots/starterthreewheels.svg);
+            background-color: transparent;
+            height: 60%;
+        }
         &.robot--selected {
             outline: 4px solid $color !important;
             background-color: transparent;

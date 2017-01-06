@@ -442,4 +442,52 @@ module.exports = function(grunt) {
         }
         grunt.file.write(destinationPath, JSON.stringify(content));
     });
+
+    function fixEnGBFile(projectId, folder, done) {
+        var path = folder + projectId + '_en.xliff',
+            content = grunt.file.read(path);
+        content = content.replace(/target-language="en"/g, 'target-language="en-GB"');
+        grunt.file.write(path, content);
+        done();
+    }
+
+    function fixPtFile(projectId, folder, done) {
+        var path = folder + projectId + '_pt.xliff',
+            content = grunt.file.read(path);
+        content = content.replace(/target-language="pt"/g, 'target-language="pt-PT"');
+        grunt.file.write(path, content);
+        done();
+    }
+
+    grunt.registerTask('getUntranslatedTextsFromProject', 'get untranslated texts from project', function(projectId, timestamp) {
+        var date = new Date(),
+            dateFormat = timestamp || date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
+
+        var async = require('async'),
+            gruntTaskDone = this.async(),
+            folder = 'sendToTranslate/' + dateFormat + '/';
+
+        getPoeditorLanguages(projectId, function(err, languages) {
+            if (err) {
+                console.log('error getting languages');
+                console.log(err);
+            } else {
+                async.waterfall([
+                    function(done) {
+                        async.each(languages, function(item, done) {
+                                exportFromPoeditor(projectId, item.code, 'xliff', 'untranslated', projectId + '_', folder, done);
+                            },
+                            done);
+                    },
+                    async.apply(fixEnGBFile, projectId, folder),
+                    async.apply(fixPtFile, projectId, folder)
+                ], function(err) {
+                    if (err) {
+                        console.log('error :S ' + err);
+                    }
+                    gruntTaskDone();
+                });
+            }
+        });
+    });
 };
