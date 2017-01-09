@@ -179,7 +179,7 @@ angular.module('bitbloqApp')
         exports.getDefaultExercise = function() {
             var exercise = {
                 creator: '',
-                name: common.translate('new-project'),
+                name: common.translate('new-exercise'),
                 description: '',
                 hardwareTags: [],
                 defaultTheme: 'infotab_option_colorTheme',

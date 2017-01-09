@@ -123,7 +123,7 @@ angular.module('bitbloqApp')
         exports.download = function(project, type, force) {
             project = project || exports.project;
             type = type || 'json';
-            if (common.user || force) {
+            if ((common.user && project._id)|| force) {
                 projectApi.addDownload(project._id).then(function(response) {
                     if (type === 'arduino') {
                         _downloadIno(response.data);

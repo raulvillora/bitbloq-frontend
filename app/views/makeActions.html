@@ -12,13 +12,15 @@
                 <a data-element="menu-newproject" href="#/bloqsproject/" target="_blank">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#file"></use>
-                    </svg>{{'create-new-project' | translate}}</a>
+                    </svg>
+                    {{'create-new-project' | translate}}</a>
             </li>
             <li class="dropdown__item" ng-if="common.section !== 'exercise' && common.section !== 'task'">
                 <a data-element="menu-newprojectcode" href="#/codeproject/" target="_blank">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#code"></use>
-                    </svg>{{'create-new-code-project' | translate}}</a>
+                    </svg>
+                    {{'create-new-code-project' | translate}}</a>
             </li>
             <li ng-if="common.section !== 'exercise' && common.section !== 'task'" data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltips="{{!common.user}}">
                 <div class="dropdown__item" data-element="menu-openproject" data-ng-click="openProject()" data-ng-disabled="!common.user">
@@ -44,7 +46,7 @@
                 </div>
             </li>
             <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':'') | translate}}" data-tooltips="{{!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section))}}">
-                <div class="dropdown__item" data-element="menu-clone" data-ng-click="currentProjectService.clone()" data-ng-disabled="!common.user || !currentProject._id">
+                <div class="dropdown__item" data-ng-click="currentProjectService.clone()" data-ng-disabled="!common.user || !currentProject._id" data-element="menu-clone">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#duplicate"></use>
                     </svg>
@@ -52,11 +54,14 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li class="dropdown__item" data-ng-click="currentProjectService.download()" ng-if="common.section !== 'codeproject'" data-element="menu-download" >
-                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                    <use xlink:href="#download"></use>
-                </svg>
-                {{common.section === 'bloqsproject'? 'download-project' : 'centerMode_downloadExercise' | translate}}
+            <li ng-if="common.section !== 'codeproject'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}"
+                data-tooltips="{{!currentProject._id}}">
+                <div class="dropdown__item" data-ng-click="currentProjectService.download()" data-ng-disabled="!currentProject._id" data-element="menu-download">
+                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                        <use xlink:href="#download"></use>
+                    </svg>
+                    {{common.section === 'bloqsproject'? 'download-project' : 'centerMode_downloadExercise' | translate}}
+                </div>
             </li>
             <li class="dropdown__item" data-element="menu-exportarduino" data-ng-click="downloadIno()">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
@@ -72,7 +77,8 @@
                 {{'change-language' | translate}}
             </li>
             <li class="dropdown__item--separator"></li>
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin':'') | translate}}" data-tooltips="{{!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin':'') | translate}}"
+                data-tooltips="{{!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id}}">
                 <div class="dropdown__item" data-element="menu-removeproject" data-ng-click="removeProject(currentProject, common.section)" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#delete"></use>
@@ -133,7 +139,8 @@
                     {{'show-plotter' | translate}}
                 </div>
             </li>
-            <li data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="right">
+            <li data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}"
+                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="right">
                 <div class="dropdown__item" data-element="makeactions-menuview-viewer" data-ng-click="showViewer()" data-ng-disabled="!currentProject._id || isWeb2BoardInProgress()" ng-if="!currentProject.codeProject">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#group"></use>
@@ -146,7 +153,8 @@
     <li class="actions__menu__item" ng-if="common.section !== 'exercise' && common.section !== 'task'">
         <button data-element="makeactions-menushare" data-ng-class="{'actions__menu__button':true, 'actions__menu--selected':dropdown === 'share'}" data-ng-click="dropdownHandler('share')">{{'share' | translate}}</button>
         <ul data-ng-class="{actions__menu__dropdown:true, 'actions--share':true, hidden:dropdown !== 'share', 'actions__menu--selected':dropdown === 'share'}">
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}"
+                data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}">
                 <div class="dropdown__item" data-element="makeactions-menushare-publish" data-ng-click="publishProject()" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id" data-ng-if="!currentProject._acl.ALL">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#publish"></use>
@@ -154,7 +162,8 @@
                     {{'to-explore' | translate}}
                 </div>
             </li>
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'') | translate}}" data-tooltips="{{!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'') | translate}}"
+                data-tooltips="{{!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id}}">
                 <div class="dropdown__item" data-element="makeactions-menushare-private" data-ng-click="commonModals.doPrivateProject(currentProject)" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id" data-ng-if="currentProject._acl.ALL">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#private"></use>
@@ -163,7 +172,8 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'') | translate}}" data-tooltips="{{!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'') | translate}}"
+                data-tooltips="{{!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id}}">
                 <div class="dropdown__item" data-element="makeactions-menushare-share-with-users" data-ng-click="commonModals.modalShareWithUsers(currentProject)" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#user"></use>
@@ -172,7 +182,8 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':(!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)?'projectActions__text_privateProjectAndNoAdmin':'') | translate}}" data-tooltips="{{!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':(!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)?'projectActions__text_privateProjectAndNoAdmin':'') | translate}}"
+                data-tooltips="{{!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)}}">
                 <div class="dropdown__item" data-element="makeactions-menushare-share-social" data-ng-click="publishProject('Social')" data-ng-disabled="!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#share"></use>
@@ -224,7 +235,8 @@
     </svg>
 </button>
 <ul data-ng-class="{'little__actions right':true, 'header--transparent':!collapsedHeader && common.user}">
-    <li class="nav__menu__item right" data-ng-if="!currentProject._acl.ALL && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="true">
+    <li class="nav__menu__item right" data-ng-if="!currentProject._acl.ALL && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom"
+        data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="true">
         <button data-ng-click="publishProject()" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!currentProject._id}">
             <svg class="svg-icon">
                 <use xlink:href="#cloud"></use>
@@ -238,7 +250,8 @@
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-ng-if="currentProject._acl.ALL && !utils.userIsOwner(currentProject, common.user._id, common.section) || !common.user || currentProject._acl['user:' + common.user._id].permission === 'READ'" data-tooltip-position="bottom" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltips="true">
+    <li class="nav__menu__item right" data-ng-if="currentProject._acl.ALL && !utils.userIsOwner(currentProject, common.user._id, common.section) || !common.user || currentProject._acl['user:' + common.user._id].permission === 'READ'" data-tooltip-position="bottom" data-tooltip="{{ 'project-addto-myprojects' | translate }}"
+        data-tooltips="true">
         <button data-ng-click="commonModals.clone(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user}">
             <svg class="svg-icon">
                 <use xlink:href="#plusCircle"></use>
@@ -260,4 +273,4 @@
         </button>
     </li>
 </ul>
-<input accept=".json, .bitbloq" class="hide" data-element="makeactions-input-upload-file" id="uploadProject" name="uploadProject" onchange="angular.element(this).scope().uploadProjectSelected(this.files)" type="file" />
+<input accept=".json, .bitbloq" class="hide" data-element="makeactions-input-upload-file" id="uploadProject" name="uploadProject" onchange="angular.element(this).scope().uploadProjectSelected(this.files)" type="file"/>

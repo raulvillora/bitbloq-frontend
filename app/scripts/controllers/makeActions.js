@@ -145,7 +145,7 @@ angular.module('bitbloqApp')
         $scope.downloadIno = function() {
             var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : $scope.currentProject.code;
             $scope.currentProject.code = code;
-            currentProjectService.download($scope.currentProject, 'arduino');
+            $scope.currentProjectService.download($scope.currentProject, 'arduino');
         };
 
         $scope.removeProject = function(project, type) {
