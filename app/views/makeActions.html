@@ -8,19 +8,19 @@
     <li class="actions__menu__item">
         <button data-element="menu-file" ng-class="{'actions__menu__button':true, 'actions__menu--selected':dropdown === 'file'}" ng-click="dropdownHandler('file')">{{'file' | translate}}</button>
         <ul ng-class="{actions__menu__dropdown:true, hidden:dropdown !== 'file', 'actions__menu--selected':dropdown === 'file'}">
-            <li class="dropdown__item">
+            <li class="dropdown__item" ng-if="common.section !== 'exercise' && common.section !== 'task'">
                 <a data-element="menu-newproject" href="#/bloqsproject/" target="_blank">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#file"></use>
                     </svg>{{'create-new-project' | translate}}</a>
             </li>
-            <li class="dropdown__item">
+            <li class="dropdown__item" ng-if="common.section !== 'exercise' && common.section !== 'task'">
                 <a data-element="menu-newprojectcode" href="#/codeproject/" target="_blank">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#code"></use>
                     </svg>{{'create-new-code-project' | translate}}</a>
             </li>
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltips="{{!common.user}}">
+            <li ng-if="common.section !== 'exercise' && common.section !== 'task'" data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltips="{{!common.user}}">
                 <div class="dropdown__item" data-element="menu-openproject" data-ng-click="openProject()" data-ng-disabled="!common.user">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#open"></use>
@@ -28,7 +28,7 @@
                     {{'open-project' | translate}}
                 </div>
             </li>
-            <li class="dropdown__item" data-element="menu-openprojectfromfile" data-ng-click="openFileProject()" ng-if="common.section === 'bloqsproject'">
+            <li ng-if="common.section !== 'exercise' && common.section !== 'task'" class="dropdown__item" data-element="menu-openprojectfromfile" data-ng-click="openFileProject()" ng-if="common.section === 'bloqsproject'">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                     <use xlink:href="#upload"></use>
                 </svg>
@@ -52,11 +52,11 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li class="dropdown__item" data-element="menu-download" data-ng-click="currentProjectService.download()" ng-if="common.section === 'bloqsproject'">
+            <li class="dropdown__item" data-ng-click="currentProjectService.download()" ng-if="common.section !== 'codeproject'" data-element="menu-download" >
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                     <use xlink:href="#download"></use>
                 </svg>
-                {{'download-project' | translate}}
+                {{common.section === 'bloqsproject'? 'download-project' : 'centerMode_downloadExercise' | translate}}
             </li>
             <li class="dropdown__item" data-element="menu-exportarduino" data-ng-click="downloadIno()">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
@@ -143,7 +143,7 @@
             </li>
         </ul>
     </li>
-    <li class="actions__menu__item">
+    <li class="actions__menu__item" ng-if="common.section !== 'exercise' && common.section !== 'task'">
         <button data-element="makeactions-menushare" data-ng-class="{'actions__menu__button':true, 'actions__menu--selected':dropdown === 'share'}" data-ng-click="dropdownHandler('share')">{{'share' | translate}}</button>
         <ul data-ng-class="{actions__menu__dropdown:true, 'actions--share':true, hidden:dropdown !== 'share', 'actions__menu--selected':dropdown === 'share'}">
             <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}">
