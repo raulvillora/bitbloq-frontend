@@ -10,7 +10,8 @@
 angular.module('bitbloqApp')
     .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate,
                                       $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
-                                      $location, clipboard, $q, chromeAppApi) {
+                                      $location, clipboard, $q, chromeAppApi)
+    {
 
         var exports = {},
             shortUrl,
@@ -437,15 +438,16 @@ angular.module('bitbloqApp')
                 }
             });
 
-            projectApi.generateShortUrl($location.protocol() + '://' + $location.host() + '/#/project/' + project._id).success(function(response) {
-                shortUrl = response.id;
-                _.extend(modalOptions, {
-                    shortUrl: shortUrl,
-                    copyAction: function(shortLink) {
-                        clipboard.copyText(shortLink);
-                    }
-                });
-            }).error(function() {
+            projectApi.generateShortUrl($location.protocol() + '://' + $location.host() + '/#/project/' + project._id)
+                .success(function(response) {
+                    shortUrl = response.id;
+                    _.extend(modalOptions, {
+                        shortUrl: shortUrl,
+                        copyAction: function(shortLink) {
+                            clipboard.copyText(shortLink);
+                        }
+                    });
+                }).error(function() {
                 _.extend(modalOptions, {
                     shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
                 });
@@ -524,7 +526,7 @@ angular.module('bitbloqApp')
         exports.rename = function(project, type) {
             type = type || 'bloqsproject';
             var ModalTitle, defaultTitle, mainText;
-            if(type === 'bloqsproject'){
+            if (type === 'bloqsproject') {
                 ModalTitle = 'modal-change-project-name-title';
                 defaultTitle = 'new-project';
                 mainText = 'modal-change-project-name-maintext';
@@ -680,36 +682,34 @@ angular.module('bitbloqApp')
             });
             serialMonitorPanel.scope = scope;
         };
-        exports.noAddTeachers = function(teachers, added){
-          var noShareModal, confirmAction = function() {
-                  noShareModal.close();
-                  alertsService.add({
-                      text: 'modalShare_alert_addTeacher ',
-                      id: 'private-project',
-                      type: 'ok',
-                      time: 5000,
-                      value: added
-                  });
-              },
-              modalScope = $rootScope.$new();
+        exports.noAddTeachers = function(teachers, added) {
+            var noShareModal, confirmAction = function() {
+                    noShareModal.close();
+                    alertsService.add({
+                        text: 'modalShare_alert_addTeacher ',
+                        id: 'private-project',
+                        type: 'ok',
+                        time: 5000,
+                        value: added
+                    });
+                },
+                modalScope = $rootScope.$new();
 
-          _.extend(modalScope, {
-              title: 'newTeacher_modal_aceptButton',
-              modalButtons: true,
-              confirmButton: 'modal__understood-button',
-              confirmAction: confirmAction,
-              contentTemplate: '/views/modals/centerMode/noAddTeachers.html',
-              teachers: teachers
-          });
+            _.extend(modalScope, {
+                title: 'newTeacher_modal_aceptButton',
+                modalButtons: true,
+                confirmButton: 'modal__understood-button',
+                confirmAction: confirmAction,
+                contentTemplate: '/views/modals/centerMode/noAddTeachers.html',
+                teachers: teachers
+            });
 
-          noShareModal = ngDialog.open({
-              template: '/views/modals/modal.html',
-              className: 'modal--container modal--share-no-users',
-              scope: modalScope
-          });
+            noShareModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--share-no-users',
+                scope: modalScope
+            });
         };
-
-
 
 
         function _shareUserInfoModal(noUsers, usersLength) {

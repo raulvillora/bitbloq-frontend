@@ -29,7 +29,7 @@ angular.module('bitbloqApp')
 
 
         exports.rename = function() {
-            commonModals.rename(exports.exercise).then(exports.startAutosave);
+            commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
         };
 
         /**
