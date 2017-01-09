@@ -1,4 +1,4 @@
-/* global Prism, js_beautify */
+/* global Prism*/
 /*jshint camelcase: false */
 'use strict';
 
@@ -24,15 +24,7 @@ angular.module('bitbloqApp')
                 var beautifier = function(el, code) {
                     var beautyCode = '' + code;
 
-                    //Prepare string to js_beautify
-                    function insertBeautyIgnores(match) {
-                        return '/* beautify ignore:start */' + match + '/* beautify ignore:end */';
-                    }
-
                     beautyCode = utils.prettyCode(code);
-
-                    //Remove beautify ignore & preserve sections
-                    beautyCode = beautyCode.replace(/(\/\* (beautify)+ .*? \*\/)/gm, '');
 
                     //Inject beautyCode
                     angular.element(el).text(beautyCode);
