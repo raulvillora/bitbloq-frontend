@@ -8,9 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate,
-                                      $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
-                                      $location, clipboard, $q, chromeAppApi)
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi)
     {
 
         var exports = {},
@@ -460,12 +458,19 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.clone = function(project, openInTab) {
-            if (!project.name) {
-                project.name = common.translate('new-project');
-            }
-            var defered = $q.defer(),
+        exports.clone = function(project, openInTab, type) {
+            type = type || 'project';
+            var modalTitle,
+                defaultTitle,
+                mainText,
+                currentApi,
+                modalOptions = $rootScope.$new(),
+                defered = $q.defer(),
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
+
+            if (!project.name) {
+                project.name = common.translate(defaultTitle);
+            }
 
             function confirmAction(newName) {
                 alertsService.add({
@@ -474,7 +479,7 @@ angular.module('bitbloqApp')
                     type: 'ok',
                     time: 5000
                 });
-                projectApi.clone(project._id, newName).then(function(newProjectId) {
+                currentApi.clone(project._id, newName).then(function(newProjectId) {
                     alertsService.add({
                         text: 'make-cloned-project',
                         id: 'clone-project',
@@ -483,24 +488,35 @@ angular.module('bitbloqApp')
                     });
                     if (newProjectId.data && openInTab) {
                         var newtab = $window.open('', '_blank');
-                        newtab.location = '#/bloqsproject/' + newProjectId.data;
+                        newtab.location = (type === 'project' ? '#/bloqsproject/' : '#/exercise/') + newProjectId.data;
                     }
                     defered.resolve(newProjectId.data);
                 });
                 return true;
             }
 
-            var modalOptions = $rootScope.$new();
+
+            if (type === 'project') {
+                currentApi = projectApi;
+                modalTitle = 'modal-change-project-name-title';
+                defaultTitle = 'new-project';
+                mainText = 'modal-change-project-name-maintext';
+            } else {
+                currentApi = exerciseApi;
+                modalTitle = 'centerMode_modal_cloneExercise-title';
+                defaultTitle = 'new-exercise';
+                mainText = 'centerMode_modal_cloneExercise-maintext';
+            }
 
             _.extend(modalOptions, {
-                title: 'modal-clone-project-title',
+                title: modalTitle,
                 contentTemplate: 'views/modals/input.html',
-                mainText: 'modal-clone-project-intro',
+                mainText: mainText,
                 modalInput: true,
                 input: {
                     id: 'projectCloneName',
                     name: 'projectCloneName',
-                    placeholder: 'modal-change-project-name-maintext',
+                    placeholder: mainText,
                     value: newProjectName
                 },
                 confirmButton: 'modal-button-ok',
@@ -524,29 +540,33 @@ angular.module('bitbloqApp')
         };
 
         exports.rename = function(project, type) {
-            type = type || 'bloqsproject';
-            var ModalTitle, defaultTitle, mainText;
-            if (type === 'bloqsproject') {
-                ModalTitle = 'modal-change-project-name-title';
-                defaultTitle = 'new-project';
-                mainText = 'modal-change-project-name-maintext';
-            } else {
-                ModalTitle = 'centerMode_modal_renameExercise-title';
-                defaultTitle = 'new-exercise';
-                mainText = 'centerMode_modal_renameExercise-maintext';
-            }
-            var defered = $q.defer();
+            type = type || 'project';
+            var modalTitle,
+                defaultTitle,
+                mainText,
+                renameModal,
+                defered = $q.defer(),
+                currentProjectName = project.name,
+                modalOptions = $rootScope.$new();
 
-            var renameModal, confirmAction = function() {
+            function confirmAction() {
                 project.name = modalOptions.project.name || $translate.instant(defaultTitle);
                 renameModal.close();
                 defered.resolve();
-            };
+            }
 
-            var currentProjectName = project.name,
-                modalOptions = $rootScope.$new();
+            if (type === 'project') {
+                modalTitle = 'modal-change-project-name-title';
+                defaultTitle = 'new-project';
+                mainText = 'modal-change-project-name-maintext';
+            } else {
+                modalTitle = 'centerMode_modal_renameExercise-title';
+                defaultTitle = 'new-exercise';
+                mainText = 'centerMode_modal_renameExercise-maintext';
+            }
+
             _.extend(modalOptions, {
-                title: ModalTitle,
+                title: modalTitle,
                 modalButtons: true,
                 confirmButton: 'save',
                 rejectButton: 'cancel',

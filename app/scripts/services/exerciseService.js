@@ -32,6 +32,25 @@ angular.module('bitbloqApp')
             commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
         };
 
+        exports.clone = function() {
+            exports.completedExercise();
+            commonModals.clone(exports.exercise, true, 'exercise');
+        };
+
+        exports.completedExercise = function() {
+            if (exports.bloqs.varsBloq) {
+                exports.exercise.software = {
+                    vars: exports.bloqs.varsBloq.getBloqsStructure(),
+                    setup: exports.bloqs.setupBloq.getBloqsStructure(),
+                    loop: exports.bloqs.loopBloq.getBloqsStructure()
+                };
+            }
+
+            _updateHardwareSchema();
+            _updateHardwareTags();
+            exports.exercise.code = exports.getCode();
+        };
+
         /**
          * Status of save exercise
          * 0 = Nothing
@@ -92,25 +111,6 @@ angular.module('bitbloqApp')
                 defered.resolve();
             }
             return defered.promise;
-        };
-
-        exports.clone = function() {
-            exports.completedExercise();
-            commonModals.clone(exports.exercise, true);
-        };
-
-        exports.completedExercise = function() {
-            if (exports.bloqs.varsBloq) {
-                exports.exercise.software = {
-                    vars: exports.bloqs.varsBloq.getBloqsStructure(),
-                    setup: exports.bloqs.setupBloq.getBloqsStructure(),
-                    loop: exports.bloqs.loopBloq.getBloqsStructure()
-                };
-            }
-
-            _updateHardwareSchema();
-            _updateHardwareTags();
-            exports.exercise.code = exports.getCode();
         };
 
         exports.download = function(exercise, type, force) {
