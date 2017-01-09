@@ -40,7 +40,6 @@ angular.module('bitbloqApp')
         exerciseService.initBloqsExercise();
         $scope.exerciseLoaded = $q.defer();
 
-
         $scope.getGroups = function() {
             centerModeApi.getGroups().then(function(response) {
                 $scope.groups = response.data;

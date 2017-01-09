@@ -28,6 +28,12 @@ angular.module('bitbloqApp')
         scope.exercise = exports.exercise;
 
 
+        exports.assignGroup = function() {
+        };
+
+        exports.editDate = function() {
+        };
+
         exports.rename = function() {
             commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
         };
