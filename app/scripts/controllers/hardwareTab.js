@@ -579,7 +579,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             s: 5
         };
 
-        components.push(buzzer);
+        /*components.push(buzzer);
         components.push(sp);
         components.push(bt);
         components.push(sound);
@@ -593,7 +593,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         components.push(oscillator0);
         components.push(oscillator1);
         components.push(oscillator2);
-        components.push(oscillator3);
+        components.push(oscillator3);*/
 
         return components;
     }
