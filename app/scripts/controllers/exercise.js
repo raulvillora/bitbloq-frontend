@@ -60,6 +60,32 @@ angular.module('bitbloqApp')
             });
         }
 
+        $scope.assignGroup = function () {
+            function confirmAction(name) {
+                console.log('confirm -> ' + name);
+            }
+
+            var modalOptions = $rootScope.$new();
+
+            _.extend(modalOptions, {
+                title: 'centerMode_editGroups',
+                contentTemplate: 'views/modals/centerMode/editGroups.html',
+                mainText: 'centerMode_editGroups_info',
+                exerciseName: $scope.currentProject.name,
+                groups: $scope.groups,
+                confirmButton: 'save',
+                rejectButton: 'modal-button-cancel',
+                confirmAction: confirmAction,
+                modalButtons: true
+            });
+
+            ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--input',
+                scope: modalOptions
+
+            });
+        };
 
         /*************************************************
          exercise save / edit

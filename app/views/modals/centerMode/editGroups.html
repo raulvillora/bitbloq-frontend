@@ -1,0 +1,41 @@
+<div class="modal_alert">
+    <p>{{mainText | translate}}</p>
+    <h2>{{exerciseName}}</h2>
+    
+    <div>
+        <div class="centerMode__table-title row">
+            <span class="col-vsmall-9">{{'centerMode_column_group' | translate}}</span>
+            <span class="col-vsmall-3">{{'centerMode_column_students' | translate}}</span>
+        </div>
+        <ul class="table__block">
+            <li class="table__block__list row" ng-repeat="group in groups">
+                <div ng-click="expandedItem[group._id] = !expandedItem[group._id]">
+                    <span class="col-vsmall-10 table__block__item">
+                            <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
+                                {{group.name}}
+                            </h2>
+                            <span class="block__item__explanation--subscript text-ID">{{group.accessId}}</span>
+                    </span>
+                    <span class="col-vsmall-1 table__block__item">{{group.students.length || 0}}</span>
+                    <div class="col-vsmall-1 table__block__item">
+                        <svg class="svg-icon svg-icon--text" ng-show="!expandedItem[group._id]">
+                            <use xlink:href="#plus"></use>
+                        </svg>
+                        <svg class="svg-icon svg-icon--text" ng-show="expandedItem[group._id]">
+                            <use xlink:href="#minus"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div ng-show="expandedItem[group._id]">
+                    <input type="checkbox" name="date" id="date"/>
+                    <label for="date">{{'centerMode_exerciseWithoutDate' | translate}}</label>
+                </div>
+            
+            </li>
+        </ul>
+    </div>
+    
+    <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode-new-group">
+        {{ 'Crear nuevo grupo' | translate }}
+    </button>
+</div>

@@ -21,3 +21,7 @@
         <span class="col-vsmall-1 table__block__item">{{group.students.length || 0}}</span>
     </li>
 </ul>
+
+<button class="btn btn--small btn--tertiary btn--row" ng-if="!common.user.studentMode" ng-click="editGroups()">
+    {{'centerMode_editGroups' | translate}}
+</button>
