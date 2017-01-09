@@ -333,11 +333,14 @@ angular.module('bitbloqApp')
             return (url.match(REGEXP)) ? RegExp.$1 : false;
         };
 
-        exports.userIsOwner = function(object, userId, type) {
+        exports.userIsOwner = function(object, userId, type, otro) {
+            if (otro) {
+                console.log();
+            }
             var isOwner = false;
             if (userId && object) {
                 if (type === 'exercise' || type === 'task') {
-                    isOwner = (object.creator && object.creator._id === userId) || (object.teacher && object.teacher._id === userId);
+                    isOwner = (object.creator && (object.creator === userId || object.creator._id === userId)) || (object.teacher && object.teacher._id === userId);
                 } else {
                     isOwner = !object._id || (object._acl && object._acl['user:' + userId] && object._acl['user:' + userId].permission === 'ADMIN');
                 }

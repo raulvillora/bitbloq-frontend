@@ -94,7 +94,7 @@ angular.module('bitbloqApp')
         exports.checkPublish = function(type) {
             var defered = $q.defer();
             type = type || '';
-            var exerciseEmptyName = common.translate('new-project');
+            var exerciseEmptyName = common.translate('new-exercise');
             if (!exports.exercise.name || exports.exercise.name === exerciseEmptyName) {
                 if (!exports.exercise.description) {
                     alertsService.add({
@@ -326,7 +326,7 @@ angular.module('bitbloqApp')
             code = code || exercise.code;
             var name = exercise.name;
             //Remove all diacritics
-            name = utils.removeDiacritics(name, undefined, $translate.instant('new-project'));
+            name = utils.removeDiacritics(name, undefined, $translate.instant('new-exercise'));
 
             utils.downloadFile(name.substring(0, 30) + '.ino', code, 'text/plain;charset=UTF-8');
         }
@@ -336,7 +336,7 @@ angular.module('bitbloqApp')
             var exercise = exports.getCleanExercise(exerciseRef, true);
             exercise.bloqsVersion = bowerData.dependencies.bloqs;
 
-            var filename = utils.removeDiacritics(exercise.name, undefined, $translate.instant('new-project'));
+            var filename = utils.removeDiacritics(exercise.name, undefined, $translate.instant('new-exercise'));
 
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(exercise), 'application/json');
         }
@@ -352,7 +352,7 @@ angular.module('bitbloqApp')
             // exports.completedExercise();
             if (exports.exerciseHasChanged() || exports.tempImage.file) {
 
-                exports.exercise.name = exports.exercise.name || common.translate('new-project');
+                exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
 
                 $log.debug('Auto saving exercise...');
 
@@ -458,7 +458,7 @@ angular.module('bitbloqApp')
         exports.addWatchers = function() {
             scope.$watch('exercise.name', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    exports.exercise.name = exports.exercise.name || common.translate('new-project');
+                    exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
                     exports.startAutosave();
                 }
             });
