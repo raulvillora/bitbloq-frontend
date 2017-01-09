@@ -51,6 +51,17 @@ angular.module('bitbloqApp')
             exports.exercise.code = exports.getCode();
         };
 
+        exports.download = function(exercise, type, force) {
+            exercise = exports.getCleanExercise(exercise || exports.exercise, true);
+            type = type || 'json';
+            if (type === 'arduino') {
+                _downloadIno(exercise);
+            } else {
+                _downloadJSON(exercise);
+            }
+
+        };
+
         /**
          * Status of save exercise
          * 0 = Nothing
@@ -113,25 +124,6 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.download = function(exercise, type, force) {
-            exercise = exercise || exports.exercise;
-            type = type || 'json';
-            if (common.user || force) {
-                exerciseApi.addDownload(exercise._id).then(function(response) {
-                    if (type === 'arduino') {
-                        _downloadIno(response.data);
-                    } else {
-                        _downloadJSON(response.data);
-                    }
-                });
-            } else {
-                if (type === 'arduino') {
-                    _downloadIno(exercise);
-                } else {
-                    _downloadJSON(exercise);
-                }
-            }
-        };
 
         exports.findComponentInComponentsArray = function(myUid) {
             var myComponent;
@@ -163,9 +155,9 @@ angular.module('bitbloqApp')
             var cleanExercise = _.cloneDeep(exerciseRef);
             if (download) {
                 delete cleanExercise._id;
-                delete cleanExercise._acl;
             }
             delete cleanExercise.creator;
+            delete cleanExercise.teacher;
             delete cleanExercise.createdAt;
             delete cleanExercise.updatedAt;
             delete cleanExercise.links;
