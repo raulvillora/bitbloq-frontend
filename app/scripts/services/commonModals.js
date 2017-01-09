@@ -521,11 +521,22 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.renameProject = function(project) {
+        exports.rename = function(project, type) {
+            type = type || 'bloqsproject';
+            var ModalTitle, defaultTitle, mainText;
+            if(type === 'bloqsproject'){
+                ModalTitle = 'modal-change-project-name-title';
+                defaultTitle = 'new-project';
+                mainText = 'modal-change-project-name-maintext';
+            } else {
+                ModalTitle = 'centerMode_modal_renameExercise-title';
+                defaultTitle = 'new-exercise';
+                mainText = 'centerMode_modal_renameExercise-maintext';
+            }
             var defered = $q.defer();
 
             var renameModal, confirmAction = function() {
-                project.name = modalOptions.project.name || $translate.instant('new-project');
+                project.name = modalOptions.project.name || $translate.instant(defaultTitle);
                 renameModal.close();
                 defered.resolve();
             };
@@ -533,7 +544,7 @@ angular.module('bitbloqApp')
             var currentProjectName = project.name,
                 modalOptions = $rootScope.$new();
             _.extend(modalOptions, {
-                title: 'modal-change-project-name-title',
+                title: ModalTitle,
                 modalButtons: true,
                 confirmButton: 'save',
                 rejectButton: 'cancel',
@@ -541,7 +552,7 @@ angular.module('bitbloqApp')
                 modalInput: true,
                 confirmAction: confirmAction,
                 contentTemplate: '/views/modals/input.html',
-                mainText: 'modal-change-project-name-maintext',
+                mainText: mainText,
                 project: {
                     name: currentProjectName
                 },

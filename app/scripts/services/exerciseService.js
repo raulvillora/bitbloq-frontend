@@ -28,6 +28,10 @@ angular.module('bitbloqApp')
         scope.exercise = exports.exercise;
 
 
+        exports.rename = function() {
+            commonModals.rename(exports.exercise).then(exports.startAutosave);
+        };
+
         /**
          * Status of save exercise
          * 0 = Nothing
@@ -261,10 +265,6 @@ angular.module('bitbloqApp')
 
         exports.saveOldExercise = function() {
             oldExercise = _.cloneDeep(exports.exercise);
-        };
-
-        exports.rename = function() {
-            commonModals.renameExercise(exports.exercise).then(exports.startAutosave);
         };
 
         exports.setComponentsArray = function(components) {

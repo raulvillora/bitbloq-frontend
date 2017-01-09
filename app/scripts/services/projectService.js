@@ -312,7 +312,7 @@ angular.module('bitbloqApp')
         };
 
         exports.rename = function() {
-            commonModals.renameProject(exports.project).then(exports.startAutosave);
+            commonModals.rename(exports.project).then(exports.startAutosave);
         };
 
         exports.setComponentsArray = function(components) {
