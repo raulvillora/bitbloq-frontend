@@ -143,13 +143,13 @@ angular.module('bitbloqApp')
         };
 
         $scope.downloadIno = function() {
-            var code = $scope.common.section === 'bloqsproject' ? $scope.getCode() : $scope.currentProject.code;
+            var code = $scope.common.section !== 'codeproject' ? $scope.getCode() : $scope.currentProject.code;
             $scope.currentProject.code = code;
             $scope.currentProjectService.download($scope.currentProject, 'arduino');
         };
 
         $scope.removeProject = function(project, type) {
-            if(type === 'exercise' || type === 'task'){
+            if (type === 'exercise' || type === 'task') {
                 exerciseApi.delete(project._id).then(function() {
                     $log.log('we delete this project');
                 }, function(error) {
