@@ -16,7 +16,7 @@
             $scope.groups = [];
             $scope.teacher = {};
             $scope.teachers = [];
-            $scope.sortArray = ['login-username', 'email', 'name', 'surname'];
+            $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
             $scope.secondaryBreadcrumb = false;
             $scope.students = [];
             $scope.orderInstance = 'name';
@@ -135,14 +135,29 @@
             $scope.sortInstances = function(type) {
                 $log.debug('sortInstances', type);
                 switch (type) {
+                    case 'explore-sortby-recent':
+                        $scope.orderInstance = 'dateCreated';
+                        $scope.reverseOrder = true;
+                        break;
                     case 'email':
                         $scope.orderInstance = 'email';
+                        $scope.reverseOrder = false;
                         break;
                     case 'name':
                         $scope.orderInstance = 'firstName';
+                        $scope.reverseOrder = false;
                         break;
                     case 'surname':
                         $scope.orderInstance = 'lastName';
+                        $scope.reverseOrder = false;
+                        break;
+                    case 'centerMode_column_groups':
+                        $scope.orderInstance = 'groups';
+                        $scope.reverseOrder = false;
+                        break;
+                    case 'centerMode_column_students':
+                        $scope.orderInstance = 'students';
+                        $scope.reverseOrder = false;
                         break;
                 }
             };
@@ -346,6 +361,8 @@
 
             function _getTeachers(centerId) {
                 centerModeApi.getTeachers(centerId).then(function(response) {
+                    console.log('response teachers');
+                    console.log(response);
                     $scope.teachers = response.data;
                 });
             }
