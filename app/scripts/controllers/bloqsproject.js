@@ -235,7 +235,7 @@ angular.module('bitbloqApp')
             w2bSerialOpenedEvent();
         }
 
-        function uploadW2b1() {
+        function uploadW2b1(code) {
             $scope.$emit('uploading');
             if ($scope.isWeb2BoardInProgress()) {
                 return false;
@@ -249,7 +249,7 @@ angular.module('bitbloqApp')
                     type: 'loading'
                 });
 
-                web2board.upload(boardReference, $scope.getPrettyCode());
+                web2board.upload(boardReference, $scope.getPrettyCode(code));
             } else {
                 $scope.currentTab = 0;
                 $scope.levelOne = 'boards';
@@ -261,9 +261,9 @@ angular.module('bitbloqApp')
             }
         }
 
-        function uploadW2b2() {
+        function uploadW2b2(code) {
             if (projectService.project.hardware.board) {
-                web2board.upload(projectService.getBoardMetaData().mcu, $scope.getPrettyCode());
+                web2board.upload(projectService.getBoardMetaData().mcu, $scope.getPrettyCode(code));
             } else {
                 $scope.currentTab = 'info';
                 alertsService.add({
@@ -568,7 +568,6 @@ angular.module('bitbloqApp')
                     }
                 } else {
                     if ($scope.common.useChromeExtension()) {
-
                         if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                             web2boardOnline.compileAndUpload({
                                 board: projectService.getBoardMetaData(),
@@ -591,7 +590,14 @@ angular.module('bitbloqApp')
                         }
 
                     } else {
-                        uploadWithWeb2board();
+                        if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                            uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                        } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                            uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                        } else {
+                            uploadWithWeb2board();
+                        }
+
                     }
                 }
             } else {
@@ -606,11 +612,11 @@ angular.module('bitbloqApp')
 
         };
 
-        function uploadWithWeb2board() {
+        function uploadWithWeb2board(code) {
             if (web2board.isWeb2boardV2()) {
-                uploadW2b2();
+                uploadW2b2(code);
             } else {
-                uploadW2b1();
+                uploadW2b1(code);
             }
         }
 
