@@ -42,16 +42,22 @@
 
 
 <div class="date-picker">
-    <!--<div ng-show="showPicker" date-picker="selectedDate" min-view="date" max-view="year" format="dd/MM/yyyy HH:mm" view="date"></div>-->
-    <div ng-show="showPicker" date-picker="selectedDate" min-view="date" max-view="year" format="dd/MM/yyyy HH:mm" view="date"></div>
-    
-    <!--<input value="{{selectedDate | date : 'dd/MM/yyyy'}}" placeholder="dd/mm/aaaa" ng-click="showPicker=true; autoClosePicker=true"/>-->
     <input date-time id="mypicker" ng-model="selectedDate" format ="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date"/>
-    <button class="btn btn--tertiary table__block__button" ng-click="showPicker=!showPicker">
+    <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker()">
         <svg class="svg-icon">
             <use xlink:href="#calendar"></use>
         </svg>
     </button>
 </div>
 
+
+<div class="time-picker" ng-init="initTimePicker()">
+    <input type="text" id="timepicker-one" name="timepicker-one" class="timepicker"/>
+    
+    <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker($event)">
+        <svg class="svg-icon">
+            <use xlink:href="#clock"></use>
+        </svg>
+    </button>
+</div>
 

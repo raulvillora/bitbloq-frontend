@@ -1,0 +1,27 @@
+.date-picker, .time-picker {
+    input {
+        display: inline-block;
+        width: 107px;
+        height: 35px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        border: solid 1px #cfcfcf;
+        margin: 0;
+        padding: 12px 20px 11px 10px;
+        font-size: 13px;
+    }
+    .btn {
+        display: inline-block;
+        width: 40px;
+        height: 35px;
+        background-color: #eeeeee;
+        border: solid 1px #cfcfcf;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        left: -6px;
+        top: 2px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}

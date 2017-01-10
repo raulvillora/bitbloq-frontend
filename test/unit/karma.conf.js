@@ -71,6 +71,8 @@ module.exports = function(config) {
             '../bower_components/bloqs/dist/bloqs.min.js',
             '../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js',
             '../bower_components/angular-datepicker/dist/angular-datepicker.js',
+            '../bower_components/wickedpicker/dist/wickedpicker.min.js',
+            '../bower_components/wickedpicker/src/wickedpicker.js',
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
             '../app/scripts/**/*.js',
