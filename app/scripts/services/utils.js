@@ -333,10 +333,7 @@ angular.module('bitbloqApp')
             return (url.match(REGEXP)) ? RegExp.$1 : false;
         };
 
-        exports.userIsOwner = function(object, userId, type, otro) {
-            if (otro) {
-                console.log();
-            }
+        exports.userIsOwner = function(object, userId, type) {
             var isOwner = false;
             if (userId && object) {
                 if (type === 'exercise' || type === 'task') {

@@ -2,7 +2,7 @@
 **Switch button
 **/
 
-.switch {
+.switch-button {
     position: relative;
     display: inline-block;
     height: 34px;
@@ -15,7 +15,7 @@
     }
 }
 
-.switch input {
+.switch-button input {
     display: none;
 }
 
@@ -51,7 +51,6 @@ input:checked + .slider:before {
 input:disabled + .slider {
     cursor: default;
 }
-
 
 /* Rounded sliders */
 .slider.round {

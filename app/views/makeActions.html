@@ -159,7 +159,7 @@
                 </div>
             </li>
             <li data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}"
-                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section, 'hola')?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="right">
+                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="right">
                 <div class="dropdown__item" data-ng-click="showViewer()" data-ng-disabled="!currentProject._id || isWeb2BoardInProgress()" ng-if="!currentProject.codeProject" data-element="makeactions-menuview-viewer">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#group"></use>

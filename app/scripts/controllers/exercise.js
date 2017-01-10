@@ -74,6 +74,7 @@ angular.module('bitbloqApp')
                 exerciseName: $scope.currentProject.name,
                 groups: $scope.groups,
                 confirmButton: 'save',
+                selectedDate: new Date(),
                 rejectButton: 'modal-button-cancel',
                 confirmAction: confirmAction,
                 modalButtons: true
