@@ -442,7 +442,6 @@ angular.module('bitbloqApp')
             $scope.setSoftwareTab('bloqs');
         }
 
-
         function loadBloqs() {
             bloqsLoadTimes++;
             bloqsApi.itsLoaded().then(function() {
@@ -550,42 +549,44 @@ angular.module('bitbloqApp')
             }, 50);
         }
 
+        function onDeleteBloq() {
+            _.throttle(setScrollsDimension, 250);
+            var twitterConfigBloqs = _.filter(bloqs.bloqs, function(item) {
+                return item.bloqData.name === 'phoneConfigTwitter';
+            });
+            if (twitterConfigBloqs.length === 2) {
+                $scope.hideTwitterWheel();
+            }
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
 
-
         $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-                console.log('ha cambiado consumerKey');
                 projectService.saveTwitterApp();
             }
         });
 
         $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-              console.log('ha cambiado consumerSecret');
-              projectService.saveTwitterApp();
+                projectService.saveTwitterApp();
             }
         });
 
         $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-              console.log('ha cambiado accessToken');
-              projectService.saveTwitterApp();
+                projectService.saveTwitterApp();
             }
         });
 
         $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-              console.log('ha cambiado accessTokenSecret');
-              projectService.saveTwitterApp();
+                projectService.saveTwitterApp();
             }
         });
-
-
-
 
         $window.onresize = function() {
             $timeout(function() {
@@ -599,9 +600,10 @@ angular.module('bitbloqApp')
                 setScrollsDimension();
             }, 0);
         });
+
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
-        $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
+        $window.addEventListener('bloqs:bloqremoved', onDeleteBloq);
         $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
 
         $scope.$on('$destroy', function() {

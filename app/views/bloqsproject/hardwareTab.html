@@ -1,4 +1,5 @@
 <div class="hardware-tab tab--make" ng-controller="hardwareTabCtrl">
+  <!--<a target="_blank" href='https://play.google.com/store/apps/details?id=com.apalon.weatherlive.free&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>-->
     <div class="protocanvas" droppable drop="drop" drop-offset-left="70" drop-offset-top="offsetTop" ng-click="detectElement($event)" data-ng-keydown="onKeyPress($event)">
         <div ng-show="firstComponent && (!common.user || !common.user.hasFirstComponent)" data-ng-include="'views/componentInteraction.html' "></div>
         <div class="name--container">

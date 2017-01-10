@@ -948,6 +948,10 @@ angular.module('bitbloqApp')
 
         };
 
+        $scope.hideTwitterWheel = function() {
+            $scope.twitterWheel = false;
+        };
+
         function showProjectResumeOnConsole(project) { // jshint ignore:line
             $log.log('Resume project');
             $log.log('*vars');
@@ -973,8 +977,6 @@ angular.module('bitbloqApp')
             });
 
             $window.addEventListener('bloqs:dragend', function(evt) {
-                console.log('evt');
-                console.log(evt.detail.bloqData.name);
                 if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
                     $scope.twitterWheel = true;
                 }
