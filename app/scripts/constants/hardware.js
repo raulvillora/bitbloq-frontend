@@ -1202,8 +1202,8 @@ angular.module('bitbloqApp')
             "phoneElements": [{
                 "id": "device",
                 "baudRate": "9600",
-                "width": 115,
-                "height": 88,
+                "width": 74,
+                "height": 102,
                 "pins": {
                     "digital": [
                         "rx",
