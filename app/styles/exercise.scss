@@ -1,8 +1,10 @@
 .form--marktab .form--input {
     border: none;
+
     .mark--integer {
         margin-right: 29px;
     }
+
     &:after {
         content: ',';
         display: block;
@@ -14,4 +16,8 @@
         top: -24px;
         left: 52px;
     }
+}
+
+.table__block__exercise {
+    height: 540px;
 }

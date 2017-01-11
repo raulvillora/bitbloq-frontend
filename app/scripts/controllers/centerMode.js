@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location, commonModals) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location, commonModals, $window) {
 
             $scope.center = {};
             $scope.exercises = [];
@@ -21,6 +21,12 @@
             $scope.students = [];
             $scope.orderInstance = 'name';
             $scope.common.urlType = $routeParams.type;
+            $scope.pageno = 1;
+            $scope.exercisesCount = 0;
+            $scope.itemsPerPage = 10;
+            $scope.pagination = {
+                current: 1
+            };
 
             var currentModal;
 
@@ -319,9 +325,34 @@
                 currentModal.close();
             }
 
-            function _getExercises(teacherId) {
-                centerModeApi.getExercises(teacherId).then(function(response) {
+            function _getExercises(teacherId, params) {
+                centerModeApi.getExercises(teacherId, params).then(function(response) {
                     $scope.exercises = response.data;
+                });
+            }
+
+            $scope.getExercisesPaginated = function(pageno) {
+                centerModeApi.getExercises($scope.teacher._id, {
+                    'page': pageno,
+                    'pageSize': $scope.itemsPerPage
+                }).then(function(response) {
+                    $scope.exercises = response.data;
+                    $location.search('page', pageno);
+                });
+            };
+
+            function _getUrlParams() {
+                if ($routeParams.page) {
+                    $scope.getExercisesPaginated($routeParams.page);
+                    $scope.pagination.current = $routeParams.page;
+                } else {
+                    $scope.getExercisesPaginated($scope.pageno);
+                }
+            }
+
+            function _getExercisesCount() {
+                centerModeApi.getExercisesCount($scope.teacher._id, {}).then(function(response) {
+                    $scope.exercisesCount = response.data.count;
                 });
             }
 
@@ -347,22 +378,23 @@
                 if (!teacherId) {
                     $scope.secondaryBreadcrumb = true;
                     $scope.teacher = _.extend($scope.teacher, $scope.common.user);
+                    _getExercisesCount();
                     _getGroups();
-                    _getExercises();
+                    _getUrlParams();
                 } else {
                     centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
                         $scope.secondaryBreadcrumb = true;
                         $scope.teacher = _.extend($scope.teacher, response.data);
+                        _getExercisesCount();
                         _getGroups();
-                        _getExercises($scope.teacher._id);
+                        _getUrlParams();
+                        //_getExercises($scope.teacher._id, {'page': 2});
                     });
                 }
             }
 
             function _getTeachers(centerId) {
                 centerModeApi.getTeachers(centerId).then(function(response) {
-                    console.log('response teachers');
-                    console.log(response);
                     $scope.teachers = response.data;
                 });
             }
@@ -380,6 +412,22 @@
                     $scope.center = response.data;
                     _checkUrl();
                 });
+            });
+
+            $window.onfocus = function() {
+                if ($routeParams.type === 'teacher') {
+                    $scope.$apply(function() {
+                        $scope.timestamp = Date.now();
+                    });
+                    if (JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
+                        localStorage.exercisesChange = false;
+                        _getTeacher();
+                    }
+                }
+            };
+
+            $scope.$on('$destroy', function() {
+                $window.onfocus = null;
             });
         });
 })();

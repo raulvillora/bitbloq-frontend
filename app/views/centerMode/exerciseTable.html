@@ -15,8 +15,8 @@
             <span class="col-vsmall-8">{{'centerMode_column_name' | translate}}</span>
             <span class="col-vsmall-4">{{'centerMode_column_time' | translate}}</span>
         </div>
-        <div class="table__block">
-            <div class="table__block__list row" ng-repeat="exercise in exercises | orderBy:'orderInstance'">
+        <div class="table__block table__block__exercise">
+            <div class="table__block__list row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
                 <div class="table__block__item col-vsmall-8">
                     <a ng-href="{{'#/exercise/' + exercise._id}}">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
@@ -38,11 +38,15 @@
             </div>
         </div>
     </div>
+
+    <div class="forum__paginator">
+        <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
 </div>
 <div ng-if="exercises.length===0">
     <h1>{{'centerMode_exercises_empty' | translate}}</h1>
     <p>{{'centerMode_exercises_emptyInfo' | translate}}</p>
-    <a class="btn btn--primary btn--small" href="/#/exercise" data-element="centerMode_button_newExercise-empty">
+    <a class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise-empty">
         <span>{{'centerMode_button_newExercise' | translate}}</span>
     </a>
 </div>

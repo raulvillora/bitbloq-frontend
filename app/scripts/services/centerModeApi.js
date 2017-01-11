@@ -10,6 +10,7 @@ angular
             deleteGroup: deleteGroup,
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
+            getExercisesCount: getExercisesCount,
             getGroup: getGroup,
             getGroups: getGroups,
             getMyCenter: getMyCenter,
@@ -20,7 +21,6 @@ angular
             registerInGroup: registerInGroup,
             updateGroup: updateGroup
         };
-
 
         function addTeachers(teachers, centerId) {
             return $http({
@@ -67,16 +67,33 @@ angular
             });
         }
 
-        function getExercises(teacherId) {
-            if(teacherId) {
+        function getExercises(teacherId, params) {
+            if (teacherId) {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId
+                    url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId,
+                    params: params
                 });
             } else {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'exercise'
+                    url: envData.config.centerModeUrl + 'exercise',
+                    params: params
+                });
+            }
+        }
+
+        function getExercisesCount(teacherId, params) {
+            if (teacherId) {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId + '/count'
+                });
+            } else {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'exercise/count',
+                    params: params
                 });
             }
         }
@@ -94,7 +111,7 @@ angular
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/teacher/' + teacherId
                 });
-            } else if(centerId) {
+            } else if (centerId) {
                 return $http({
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/center/' + centerId
@@ -148,7 +165,6 @@ angular
                 url: envData.config.centerModeUrl + 'group/' + groupId + '/register'
             });
         }
-
 
         function updateGroup(group) {
             return $http({

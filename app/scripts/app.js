@@ -167,7 +167,8 @@ angular
                 })
                 .when('/center-mode/:type?/:id?/:subtype?/:subtypeId?', {
                     templateUrl: 'views/centerMode/centerModeIndex.html',
-                    controller: 'CenterCtrl'
+                    controller: 'CenterCtrl',
+                    reloadOnSearch: false
                 })
                 .when('/exercise/:id?', {
                     templateUrl: 'views/project/exercise.html',
