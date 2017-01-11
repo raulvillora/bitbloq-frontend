@@ -1,7 +1,6 @@
 .date-picker, .time-picker {
     input {
         display: inline-block;
-        width: 107px;
         height: 35px;
         border-radius: 4px;
         background-color: #ffffff;
@@ -9,6 +8,10 @@
         margin: 0;
         padding: 12px 20px 11px 10px;
         font-size: 13px;
+        &:disabled {
+            color: #c0c3c9;
+            background-color: #ebebeb;
+        }
     }
     .btn {
         display: inline-block;
@@ -23,5 +26,41 @@
         top: 2px;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+}
+
+.date-picker input {
+    width: 100px;
+}
+
+.time-picker input {
+    width: 70px;
+}
+
+.wickedpicker {
+    z-index: 99999;
+    width: 143px;
+    height: 92px;
+    .wickedpicker__title {
+        display: none;
+    }
+}
+
+.date-picker-date-time {
+    border: solid 1px #cfcfcf;
+}
+
+.picker__container {
+    display: inline-block;
+    width: 49.5%;
+    .picker-title {
+        display: block;
+        font-weight: bold;
+        color: #373b44;
+        line-height: 2.43;
+    }
+
+    .date-picker, .time-picker {
+        display: inline-block;
     }
 }

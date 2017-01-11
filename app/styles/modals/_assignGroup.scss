@@ -1,0 +1,60 @@
+.modal--assign-group {
+    width: 680px;
+    .exercise-name {
+        font-size: 16px;
+        line-height: 1.38;
+        font-weight: bold;
+        margin-top: 26px;
+        margin-bottom: 20px;
+    }
+}
+
+.assign-group {
+    margin-bottom: 20px;
+}
+
+.assign-group__content {
+    color: #3b3e45;
+    .group__head {
+        float: left;
+        height: 50px;
+        width: calc(100% - 29px);
+        padding-left: 4px;
+        .group__expanded--number {
+            margin-top: 4px
+        }
+        .group__expanded--icon {
+            margin-top: 10px
+        }
+    }
+
+    .checkbox--general {
+        float: left;
+        margin-top: 11px;
+        margin-right: 16px;
+    }
+
+    .checkbox {
+        display: block;
+        label {
+            line-height: 2.43;
+            color: #373b44;
+        }
+    }
+    .block__item__title {
+        font-weight: bold;
+    }
+    .table__block__item svg {
+        width: 11px;
+        height: 11px;
+        fill: #3b3e45;
+    }
+    .table__block__list {
+        min-height: 55px;
+    }
+}
+
+.group__content {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}

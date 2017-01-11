@@ -52,7 +52,7 @@ angular.module('bitbloqApp')
 
         function _canUpdate() {
             exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
-                if (res.status === 200){
+                if (res.status === 200) {
                     $scope.isOwner = true;
                 } else {
                     $scope.isOwner = false;
@@ -60,40 +60,28 @@ angular.module('bitbloqApp')
             });
         }
 
-        $scope.assignGroup = function () {
+        $scope.assignGroup = function() {
             function confirmAction(name) {
                 console.log('confirm -> ' + name);
             }
 
             var modalOptions = $rootScope.$new();
 
-            function showDatePicker () {
-                setTimeout(function(){
-                    $('#mypicker').focus();
+            function showDatePicker(datePickerId) {
+                setTimeout(function() {
+                    $('#' + datePickerId).focus();
                 }, 0);
             }
 
-            function showTimePicker (event) {
-                $('.timepicker').click();
+            function showTimePicker(event, timePickerId) {
+                $('#' + timePickerId).click();
                 event.stopPropagation();
             }
 
             function initTimePicker() {
                 var today = new Date();
                 var options = {
-                    now: today.getHours() + ':' + today.getMinutes(), //hh:mm 24 hour format only, defaults to current time
-                    twentyFour: true,  //Display 24 hour format, defaults to false
-                    upArrow: 'wickedpicker__controls__control-up',  //The up arrow class selector to use, for custom CSS
-                    downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS
-                    close: 'wickedpicker__close', //The close class selector to use, for custom CSS
-                    hoverState: 'hover-state', //The hover state class to use, for custom CSS
-                    title: 'Time', //The Wickedpicker's title,
-                    showSeconds: false, //Whether or not to show seconds,
-                    secondsInterval: 1, //Change interval for seconds, defaults to 1,
-                    minutesInterval: 1, //Change interval for minutes, defaults to 1
-                    beforeShow: null, //A function to be called before the Wickedpicker is shown
-                    show: null, //A function to be called when the Wickedpicker is shown
-                    clearable: false //Make the picker's input clearable (has clickable "x")
+                    twentyFour: true  //Display 24 hour format, defaults to false
                 };
                 $('.timepicker').wickedpicker(options);
             }
@@ -116,7 +104,7 @@ angular.module('bitbloqApp')
 
             ngDialog.open({
                 template: '/views/modals/modal.html',
-                className: 'modal--container modal--input',
+                className: 'modal--container modal--assign-group',
                 scope: modalOptions
 
             });

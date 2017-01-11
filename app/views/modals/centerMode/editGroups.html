@@ -1,23 +1,26 @@
 <div class="modal_alert">
     <p>{{mainText | translate}}</p>
-    <h2>{{exerciseName}}</h2>
+    <h2 class="exercise-name">{{exerciseName}}</h2>
     
-    <div>
+    <div class="assign-group">
         <div class="centerMode__table-title row">
-            <span class="col-vsmall-9">{{'centerMode_column_group' | translate}}</span>
-            <span class="col-vsmall-3">{{'centerMode_column_students' | translate}}</span>
+            <span class="col-vsmall-8">{{'centerMode_column_group' | translate}}</span>
+            <span class="col-vsmall-4">{{'centerMode_column_students' | translate}}</span>
         </div>
-        <ul class="table__block">
-            <li class="table__block__list row" ng-repeat="group in groups">
-                <div ng-click="expandedItem[group._id] = !expandedItem[group._id]">
-                    <span class="col-vsmall-10 table__block__item">
+        <ul class="table__block assign-group__content">
+            <li class="table__block__list" ng-repeat="group in groups">
+                <span class="checkbox--general">
+                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}"/>
+                </span>
+                <div class="group__head row" ng-click="expandedItem[group._id] = !expandedItem[group._id]">
+                    <span class="col-vsmall-9 table__block__item">
                             <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
                                 {{group.name}}
                             </h2>
                             <span class="block__item__explanation--subscript text-ID">{{group.accessId}}</span>
                     </span>
-                    <span class="col-vsmall-1 table__block__item">{{group.students.length || 0}}</span>
-                    <div class="col-vsmall-1 table__block__item">
+                    <span class="col-vsmall-2 table__block__item group__expanded--number">{{group.students.length || 0}}</span>
+                    <div class="col-vsmall-1 table__block__item group__expanded--icon">
                         <svg class="svg-icon svg-icon--text" ng-show="!expandedItem[group._id]">
                             <use xlink:href="#plus"></use>
                         </svg>
@@ -26,38 +29,59 @@
                         </svg>
                     </div>
                 </div>
-                <div ng-show="expandedItem[group._id]">
-                    <input type="checkbox" name="date" id="date"/>
-                    <label for="date">{{'centerMode_exerciseWithoutDate' | translate}}</label>
+                <div class="group__content" ng-show="expandedItem[group._id]">
+                    <span class="checkbox">
+                        <input type="checkbox" name="date" id="{{'withoutDate' + group._id}}" ng-model="withoutDate[group._id]"/>
+                        <label class="without-date" for="{{'withoutDate' + group._id}}">{{'centerMode_exerciseWithoutDate' | translate}}</label>
+                    </span>
+                    <div>
+                        <div class="picker__container">
+                            <span class="picker-title">{{'centerMode_date_from' | translate}}</span>
+                            <div class="date-picker">
+                                <input date-time id="{{'datePicker0' + group._id}}" ng-model="selectedDate" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" ng-disabled="withoutDate[group._id]"/>
+                                <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker0' + group._id)" ng-disabled="withoutDate[group._id]">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#calendar"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="time-picker" ng-init="initTimePicker()">
+                                <input type="text" id="{{'timePicker0' + group._id}}" name="timepicker-one" class="timepicker" ng-disabled="withoutDate[group._id]"/>
+                                
+                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker($event, 'timePicker0' + group._id)" ng-disabled="withoutDate[group._id]">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#clock"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="picker__container">
+                            <span class="picker-title">{{'centerMode_date_to' | translate}}</span>
+                            <div class="date-picker">
+                                <input date-time id="{{'datePicker1' + group._id}}" ng-model="selectedDate" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" ng-disabled="withoutDate[group._id]"/>
+                                <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker1' + group._id)" ng-disabled="withoutDate[group._id]">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#calendar"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="time-picker" ng-init="initTimePicker()">
+                                <input type="text" id="{{'timePicker1' + group._id}}" name="timepicker-one" class="timepicker" ng-disabled="withoutDate[group._id]"/>
+                                
+                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker($event, 'timePicker1' + group._id)" ng-disabled="withoutDate[group._id]">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#clock"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            
             </li>
         </ul>
     </div>
     
-    <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode-new-group">
+    <button class="btn btn--secondary btn--small" ng-click="newGroup()" data-element="centerMode-new-group">
         {{ 'Crear nuevo grupo' | translate }}
     </button>
 </div>
-
-
-<div class="date-picker">
-    <input date-time id="mypicker" ng-model="selectedDate" format ="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date"/>
-    <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker()">
-        <svg class="svg-icon">
-            <use xlink:href="#calendar"></use>
-        </svg>
-    </button>
-</div>
-
-
-<div class="time-picker" ng-init="initTimePicker()">
-    <input type="text" id="timepicker-one" name="timepicker-one" class="timepicker"/>
-    
-    <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker($event)">
-        <svg class="svg-icon">
-            <use xlink:href="#clock"></use>
-        </svg>
-    </button>
-</div>
-
