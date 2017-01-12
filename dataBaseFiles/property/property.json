@@ -87,9 +87,6 @@
             "name": "phoneReceive",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "phoneToggleLight",
-            "addClass": "submenu__item submenu__item--component"
-        }, {
             "name": "phoneTurnOnLight",
             "addClass": "submenu__item submenu__item--component"
         }, {
@@ -102,13 +99,7 @@
             "name": "phoneSendTweet",
             "addClass": "submenu__item submenu__item--component"
         }, {
-            "name": "phoneReadLinearAccel",
-            "addClass": "submenu__item submenu__item--component"
-        }, {
             "name": "phoneReadAccel",
-            "addClass": "submenu__item submenu__item--component"
-        }, {
-            "name": "phoneReadGravity",
             "addClass": "submenu__item submenu__item--component"
         }, {
             "name": "phoneReadGyroscope",
