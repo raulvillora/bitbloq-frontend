@@ -15,8 +15,10 @@
             <div class="table__block__list row" ng-repeat="student in students | orderBy:'orderInstance'">
                 <div class="table__block__item col-vsmall-7">
                     <a ng-href="{{'#/center-mode/group/' + group._id + '/student/' + students._id}}">
-                        <h2 class="block__item__title" data-element="{{'centerMode-student-' + student.firstName + student.lastName}}">
-                            {{student.firstName}}</h2>
+                        <h2 class="block__item__title" data-element="{{'centerMode-student-' + student.username}}">
+                            {{student.firstName? student.firstName + ' ' + student.lastName : student.username}}
+                        </h2>
+                        <span class="block__item__explanation">{{student.email}}</span>
                     </a>
                 </div>
                 <div class="table__block__item table__column--centered col-vsmall-3">
