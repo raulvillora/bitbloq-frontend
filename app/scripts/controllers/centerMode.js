@@ -312,6 +312,7 @@
                         break;
                     case 'group':
                         _getGroup($routeParams.id);
+                        _getTasks($routeParams.id);
                         break;
                     case 'student':
                         _getGroups();
@@ -378,8 +379,8 @@
                 });
             }
 
-            function _getTasks() {
-                centerModeApi.getTasks().then(function(response) {
+            function _getTasks(groupId) {
+                centerModeApi.getTasks(groupId).then(function(response) {
                     $scope.exercises = response.data;
                 });
             }

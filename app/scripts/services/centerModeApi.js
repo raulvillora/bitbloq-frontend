@@ -139,11 +139,18 @@ angular
             });
         }
 
-        function getTasks() {
-            return $http({
-                method: 'GET',
-                url: envData.config.centerModeUrl + 'task'
-            });
+        function getTasks(groupId) {
+            if (groupId) {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'task/group/' + groupId
+                });
+            } else {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'task'
+                });
+            }
         }
 
         function getTeacher(teacherId, centerId) {
