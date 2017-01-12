@@ -15,6 +15,7 @@ angular
             getGroups: getGroups,
             getMyCenter: getMyCenter,
             getMyRole: getMyRole,
+            getTasks: getTasks,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
             isHeadMaster: isHeadMaster,
@@ -135,6 +136,13 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'user/role'
+            });
+        }
+
+        function getTasks() {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'task'
             });
         }
 

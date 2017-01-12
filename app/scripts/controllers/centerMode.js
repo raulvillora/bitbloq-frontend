@@ -138,6 +138,20 @@
                 });
             };
 
+            $scope.getDatetime = function(date) {
+                return moment(date).fromNow();
+            };
+
+            $scope.getExercisesPaginated = function(pageno) {
+                centerModeApi.getExercises($scope.teacher._id, {
+                    'page': pageno,
+                    'pageSize': $scope.itemsPerPage
+                }).then(function(response) {
+                    $scope.exercises = response.data;
+                    $location.search('page', pageno);
+                });
+            };
+
             $scope.sortInstances = function(type) {
                 $log.debug('sortInstances', type);
                 switch (type) {
@@ -301,6 +315,7 @@
                         break;
                     case 'student':
                         _getGroups();
+                        _getTasks();
                         break;
                 }
             }
@@ -325,29 +340,18 @@
                 currentModal.close();
             }
 
+            function _getCenter() {
+                centerModeApi.getMyCenter().then(function(response) {
+                    $scope.center = response.data;
+                    _getTeachers($scope.center._id);
+                });
+
+            }
+
             function _getExercises(teacherId, params) {
                 centerModeApi.getExercises(teacherId, params).then(function(response) {
                     $scope.exercises = response.data;
                 });
-            }
-
-            $scope.getExercisesPaginated = function(pageno) {
-                centerModeApi.getExercises($scope.teacher._id, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage
-                }).then(function(response) {
-                    $scope.exercises = response.data;
-                    $location.search('page', pageno);
-                });
-            };
-
-            function _getUrlParams() {
-                if ($routeParams.page) {
-                    $scope.getExercisesPaginated($routeParams.page);
-                    $scope.pagination.current = $routeParams.page;
-                } else {
-                    $scope.getExercisesPaginated($scope.pageno);
-                }
             }
 
             function _getExercisesCount() {
@@ -371,6 +375,12 @@
                 }
                 centerModeApi.getGroups(teacherId, $scope.center._id).then(function(response) {
                     $scope.groups = response.data;
+                });
+            }
+
+            function _getTasks() {
+                centerModeApi.getTasks().then(function(response) {
+                    $scope.exercises = response.data;
                 });
             }
 
@@ -399,12 +409,13 @@
                 });
             }
 
-            function _getCenter() {
-                centerModeApi.getMyCenter().then(function(response) {
-                    $scope.center = response.data;
-                    _getTeachers($scope.center._id);
-                });
-
+            function _getUrlParams() {
+                if ($routeParams.page) {
+                    $scope.getExercisesPaginated($routeParams.page);
+                    $scope.pagination.current = $routeParams.page;
+                } else {
+                    $scope.getExercisesPaginated($scope.pageno);
+                }
             }
 
             $scope.common.itsUserLoaded().then(function() {

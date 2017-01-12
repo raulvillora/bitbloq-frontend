@@ -12,21 +12,21 @@
     </div>
     <div>
         <div class="centerMode__table-title row">
-            <span class="col-vsmall-8">{{'centerMode_column_name' | translate}}</span>
+            <span class="col-vsmall-7">{{'centerMode_column_name' | translate}}</span>
             <span class="col-vsmall-4">{{'centerMode_column_time' | translate}}</span>
         </div>
         <div class="table__block table__block__exercise">
             <div class="table__block__list row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
                 <div class="table__block__item col-vsmall-8">
-                    <a ng-href="{{'#/exercise/' + exercise._id}}">
+                    <a ng-href="{{ (exercise.exercise? '#/task/' : '#/exercise/') + exercise._id}}">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
-                            {{exercise.name}}</h2>
+                            {{exercise.name || exercise.exercise.name || 'new-exercise' | translate}}</h2>
                     </a>
                 </div>
                 <div class="table__block__item col-vsmall-3">
-                    <span data-element="{{'centerMode-groups' + exercise.name}}">
-                        {{exercise.endDate}}
-                    </span>
+                    <p class="fist-uppercase" data-element="{{'centerMode-endDate' + exercise.name}}">
+                        {{getDatetime(exercises[1].endDate)}}
+                    </p>
                 </div>
                 <div class="table__block__item table__column--right col-vsmall-1">
                     <button class="btn btn--tertiary table__block__button" data-element="centerMode-button-options">
@@ -38,12 +38,12 @@
             </div>
         </div>
     </div>
-
+    
     <div class="forum__paginator">
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div ng-if="exercises.length===0">
+<div ng-if="(common.userRole==='teacher' || common.userRole==='headMaster') && exercises.length===0">
     <h1>{{'centerMode_exercises_empty' | translate}}</h1>
     <p>{{'centerMode_exercises_emptyInfo' | translate}}</p>
     <a class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise-empty">

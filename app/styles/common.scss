@@ -443,3 +443,7 @@ textarea:disabled {
         content: 'ID ';
     }
 }
+
+.fist-uppercase::first-letter {
+    text-transform: uppercase;
+}
