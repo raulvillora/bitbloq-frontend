@@ -27,10 +27,6 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
-
-        exports.assignGroup = function() {
-        };
-
         exports.editDate = function() {
         };
 

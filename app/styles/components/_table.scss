@@ -30,24 +30,29 @@
     }
 }
 
-.table__block__list {
-    padding: 10px;
-    background-color: #eeeeee;
-    min-height: 50px;
-    &:hover {
-        background-color: #e2e2e2;
-        .table__block__button--delete {
-            display: block;
+.table__block--invert, .table__block {
+    .table__block__list {
+        padding: 10px;
+        background-color: #eeeeee;
+        min-height: 50px;
+        &:hover {
+            background-color: #e2e2e2;
+            .table__block__button--delete {
+                display: block;
+            }
+            .table__column--hover button {
+                display: inherit;
+            }
+        }
+        &:first-child {
+            border-top: 1px solid #dddddd;
+        }
+        &:last-child {
+            border-bottom: 1px solid #dddddd;
         }
         .table__column--hover button {
-            display: inherit;
+            display: none;
         }
-    }
-    &:last-child {
-        border-bottom: 1px solid #dddddd;
-    }
-    .table__column--hover button {
-        display: none;
     }
 }
 

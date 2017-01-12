@@ -1,11 +1,21 @@
 .modal--assign-group {
-    width: 680px;
+    .modal {
+        width: 680px;
+    }
     .exercise-name {
         font-size: 16px;
         line-height: 1.38;
         font-weight: bold;
         margin-top: 26px;
         margin-bottom: 20px;
+    }
+}
+
+.centerMode__table-title {
+    font-size: 12px;
+    padding-left: 25px;
+    &:first-child {
+        padding-left: 41px;
     }
 }
 

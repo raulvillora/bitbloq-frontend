@@ -61,8 +61,34 @@ angular.module('bitbloqApp')
         }
 
         $scope.assignGroup = function() {
-            function confirmAction(name) {
-                console.log('confirm -> ' + name);
+            function confirmAction(groups) {
+                var selectedGroups = _.filter(groups, {'selected': true}),
+                    groupsToAssign = [];
+                selectedGroups.forEach(function(group) {
+                    if (!group.withoutDate) {
+                        var hourFrom = selectedGroups[0].calendar.from.time.split(':')[0];
+                        var minutesFrom = selectedGroups[0].calendar.from.time.split(':')[1];
+                        var hourTo = selectedGroups[0].calendar.to.time.split(':')[0];
+                        var minutesTo = selectedGroups[0].calendar.to.time.split(':')[1];
+                        selectedGroups[0].calendar.from.date.hour(hourFrom);
+                        selectedGroups[0].calendar.from.date.minute(minutesFrom);
+                        selectedGroups[0].calendar.to.date.hour(hourTo);
+                        selectedGroups[0].calendar.to.date.minute(minutesTo);
+                        groupsToAssign.push({
+                            _id: group._id,
+                            calendar: {
+                                from: selectedGroups[0].calendar.from.date,
+                                to: selectedGroups[0].calendar.to.date
+                            }
+                        });
+                    } else {
+                        groupsToAssign.push({
+                            _id: group._id,
+                            calendar: {}
+                        });
+                    }
+                });
+                exerciseApi.assignGroups($scope.currentProject._id, groupsToAssign);
             }
 
             var modalOptions = $rootScope.$new();
@@ -73,7 +99,7 @@ angular.module('bitbloqApp')
                 }, 0);
             }
 
-            function showTimePicker(event, timePickerId) {
+            function showTimePicker(timePickerId, event) {
                 $('#' + timePickerId).click();
                 event.stopPropagation();
             }
