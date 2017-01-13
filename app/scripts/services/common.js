@@ -50,6 +50,7 @@ angular.module('bitbloqApp')
         exports.oldVersionMasthead = false;
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
+        exports.twitterTutorialId = envData.config.twitterTutorialId;
 
         exports.avatarChange = false;
         exports.os = utils.getOs();
