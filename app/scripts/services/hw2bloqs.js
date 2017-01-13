@@ -107,13 +107,7 @@ angular
             _autoConnect(board.name);
         };
 
-        exports.addComponent = function(newComponent, board) {
-            console.log('newComponent');
-            console.log(newComponent);
-
-            console.log("board");
-            console.log(board);
-
+        exports.addComponent = function(newComponent) {
 
             if (!newComponent) {
                 throw new Error('You need provide a component element :: addComponent');

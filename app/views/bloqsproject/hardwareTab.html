@@ -1,12 +1,14 @@
 <div class="hardware-tab tab--make" ng-controller="hardwareTabCtrl">
-  <!--<a target="_blank" href='https://play.google.com/store/apps/details?id=com.apalon.weatherlive.free&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>-->
+    <!--<a target="_blank" href='https://play.google.com/store/apps/details?id=com.apalon.weatherlive.free&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>-->
     <div class="protocanvas" droppable drop="drop" drop-offset-left="70" drop-offset-top="offsetTop" ng-click="detectElement($event)" data-ng-keydown="onKeyPress($event)">
         <div ng-show="firstComponent && (!common.user || !common.user.hasFirstComponent)" data-ng-include="'views/componentInteraction.html' "></div>
+        <img tabindex="1" class="bitbloqconnect-icon handcursor" ng-show="projectService.project.useBitbloqConnect" src="/images/components/device.svg">
         <div class="name--container">
-            <div class="component-name__container" ng-class="{opaque:componentSelected}">
+            <div class="component-name__container" ng-class="{opaque:componentSelected, noborder:componentSelected.message}">
                 <span class="form--input form--input--reset">
-                    <label for="componentName" class="component-name__label">{{'name' | translate}}</label>
-                    <input id="componentName" class="component-name__input" type="text" placeholder="{{'insert-name' | translate}}" data-ng-model="componentSelected.name" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }">
+                    <label for="componentName" ng-show="!componentSelected.message" class="component-name__label">{{'name' | translate}}</label>
+                    <input id="componentName" ng-show="!componentSelected.message" class="component-name__input" type="text" placeholder="{{'insert-name' | translate}}" data-ng-model="componentSelected.name" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }">
+                    <label ng-show="componentSelected.message" class="component-name__label">{{componentSelected.message | translate}}</label>
                     <span ng-if="componentSelected.oscillator !== undefined" class="input input--checkbox input--checkbox__oscillator form--input--reset">
                         <label for="sample--checkbox" class="component-name__label">{{'make-hardware-component-oscillator' | translate}}</label>
                         <input type="checkbox" id="oscillator--checkbox" class="oscillator--checkbox" name="oscillator--checkbox" data-ng-model="componentSelected.oscillator">
@@ -26,7 +28,7 @@
         </div>
         <div id="robotSchema" class="robot" ng-class="{'robot--present':projectService.project.hardware.robot , 'robot--selected':robotSelected, 'opaque':projectService.project.hardware.robot}"></div>
     </div>
-    <div class="hw-toolbox-container tab--make__block"  data-ng-include="'views/bloqsproject/hardwareToolbox.html'"></div>
+    <div class="hw-toolbox-container tab--make__block" data-ng-include="'views/bloqsproject/hardwareToolbox.html'"></div>
     <div id="component-context-menu" class="hw-context-menu">
         <ul class="menu">
             <li class="menu__item">
@@ -56,6 +58,13 @@
         <ul class="menu">
             <li class="menu__item">
                 <button data-ng-click="deleteRobot($event)" data-element="hw-contextmenu-robot-delete">{{'make-hardware-component-delete' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+    <div id="btcomponent-context-menu" class="hw-context-menu">
+        <ul class="menu">
+            <li class="menu__item">
+                <button data-ng-click="deleteBTComponent()" data-element="hw-contextmenu-btcomponent-delete">{{'make-hardware-component-delete' | translate}}</button>
             </li>
         </ul>
     </div>

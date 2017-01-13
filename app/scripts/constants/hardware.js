@@ -1201,15 +1201,11 @@ angular.module('bitbloqApp')
             }, {
                 "id": "device",
                 "baudRate": "9600",
+                "dragType": "btComponent",
                 "width": 74,
                 "height": 102,
-                "pins": {
-                    "digital": [
-                        "rx",
-                        "tx"
-                    ]
-                }
-            }],
+                "pins": {}
+            }]
         },
         "robots": [{
             "id": "zowi",

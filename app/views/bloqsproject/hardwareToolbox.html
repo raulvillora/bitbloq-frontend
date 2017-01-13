@@ -60,7 +60,7 @@
                         <div class="components-list">
                             <div class="component-container" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
                                 <h1 class="component-name name" translate>{{component.id}}</h1>
-                                <img class="component-image" dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="components" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                                <img class="component-image" dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
                             </div>
                         </div>
                     </div>

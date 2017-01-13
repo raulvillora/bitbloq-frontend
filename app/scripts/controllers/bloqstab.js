@@ -249,7 +249,7 @@ angular.module('bitbloqApp')
                         result = $scope.showCommunications(item);
 
                     } else if (item.indexOf('phone') > -1) {
-                        result = existComponent(['device'], connectedComponents);
+                        result = projectService.project.useBitbloqConnect;
                     } else if (item.includes('rgb')) {
                         result = existComponent(['RGBled'], connectedComponents);
                     } else if (item.includes('oscillator')) {
@@ -562,9 +562,9 @@ angular.module('bitbloqApp')
         function onDragEnd(evt) {
             if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
                 $scope.toolbox.level = 1;
-                $timeout(function(){
-                  $scope.twitterSettings = true;
-                },500);
+                $timeout(function() {
+                    $scope.twitterSettings = true;
+                }, 500);
             }
             _.throttle(setScrollsDimension, 1000);
         }

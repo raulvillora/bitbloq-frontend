@@ -61,6 +61,12 @@ angular.module('bitbloqApp')
             exports.componentsArray[category].push(newComponent);
         };
 
+        exports.removeComponentInComponentsArray = function(category, componentName) {
+            _.remove(exports.componentsArray[category], {
+                name: componentName
+            });
+        };
+
         exports.isEmptyComponentArray = function() {
             return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
         };
@@ -187,11 +193,15 @@ angular.module('bitbloqApp')
                 code = exports.project.code;
             } else {
                 _updateHardwareSchema();
+                var hardware = _.cloneDeep(exports.project.hardware);
+                if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bq ZUM' && exports.project.bitbloqConnectBT) {
+                    hardware.components.push(exports.project.bitbloqConnectBT);
+                }
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
                     loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
-                }, exports.project.hardware);
+                }, hardware);
             }
             return code;
         };
@@ -330,7 +340,10 @@ angular.module('bitbloqApp')
                         exports.componentsArray[comp.category].push(_.cloneDeep(comp));
                     }
                 });
+            }
 
+            if (exports.project.useBitbloqConnect && (exports.project.hardware.board === 'bq ZUM') && exports.project.bitbloqConnectBT) {
+                exports.addComponentInComponentsArray('serialElements', exports.project.bitbloqConnectBT);
             }
         };
         //temp fix to code refactor, sensor types
@@ -377,7 +390,7 @@ angular.module('bitbloqApp')
                 common.session.save = true;
             }
         };
-        exports.saveTwitterApp=function() {
+        exports.saveTwitterApp = function() {
             var defered = $q.defer();
 
             userApi.update(common.user).then(function() {
@@ -399,7 +412,6 @@ angular.module('bitbloqApp')
             });
             return defered.promise;
         };
-
 
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------

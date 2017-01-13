@@ -191,6 +191,9 @@ $hw_toolbox: 210px;
                     }
                 }
             }
+            &.noborder {
+                border-right: none;
+            }
         }
     }
     .component__container {
@@ -406,6 +409,14 @@ $hw_toolbox: 210px;
             font-size: 1em;
             padding: 2px 4px;
             background-color: $color;
+        }
+    }
+    .bitbloqconnect-icon {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        &:focus {
+            box-shadow: 0 0 0 2px $color;
         }
     }
 }
