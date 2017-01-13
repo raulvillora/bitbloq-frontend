@@ -18,7 +18,8 @@ angular.module('bitbloqApp')
             get: get,
             getTask: getTask,
             save: save,
-            update: update
+            update: update,
+            updateTask: updateTask
         };
 
 
@@ -97,6 +98,14 @@ angular.module('bitbloqApp')
                 method: 'PUT',
                 url: envData.config.centerModeUrl + 'exercise/' + idExercise,
                 data: dataExercise
+            });
+        }
+
+        function updateTask(idTask, dataTask) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'task/' + idTask,
+                data: dataTask
             });
         }
 

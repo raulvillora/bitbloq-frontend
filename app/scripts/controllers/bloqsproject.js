@@ -1111,7 +1111,7 @@ angular.module('bitbloqApp')
         projectService.saveStatus = 0;
 
         projectService.initBloqsProject();
-        $scope.projectLoaded = $q.defer();
+        $scope.currentProjectLoaded = $q.defer();
 
         if (!$scope.common.user) {
             $scope.common.session.save = false;
@@ -1147,7 +1147,7 @@ angular.module('bitbloqApp')
                 $scope.hwBasicsLoaded.promise.then(function() {
                     $scope.$emit('drawHardware');
                 });
-                $scope.projectLoaded.resolve();
+                $scope.currentProjectLoaded.resolve();
             }
         }, function() {
             $log.debug('no registed user');
@@ -1164,10 +1164,10 @@ angular.module('bitbloqApp')
         function loadProject(id) {
             return projectApi.get(id).then(function(response) {
                 _uploadProject(response.data);
-                $scope.projectLoaded.resolve();
+                $scope.currentProjectLoaded.resolve();
             }, function(error) {
                 projectService.addWatchers();
-                $scope.projectLoaded.reject();
+                $scope.currentProjectLoaded.reject();
                 switch (error.status) {
                     case 404: //not_found
                         alertsService.add({

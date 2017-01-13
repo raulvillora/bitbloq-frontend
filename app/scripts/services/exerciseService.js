@@ -185,6 +185,7 @@ angular.module('bitbloqApp')
                 description: '',
                 hardwareTags: [],
                 defaultTheme: 'infotab_option_colorTheme',
+                selectedBloqs: {},
                 software: {
                     vars: {
                         enable: true,
@@ -320,6 +321,29 @@ angular.module('bitbloqApp')
 
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
+        //----------------- api communication ---------------------------------
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
+
+        function _updateExerciseOrTask(exerciseId, exercise) {
+            if (common.section === 'task') {
+                return exerciseApi.updateTask(exerciseId, exercise);
+            } else {
+                return exerciseApi.update(exerciseId, exercise);
+            }
+        }
+
+        exports.getExerciseOrTask = function(id) {
+            if (common.section === 'task') {
+                return exerciseApi.getTask(id);
+            } else {
+                return exerciseApi.get(id);
+            }
+        };
+
+
+        //---------------------------------------------------------------------
+        //---------------------------------------------------------------------
         //----------------- Private functions ---------------------------------
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
@@ -351,7 +375,7 @@ angular.module('bitbloqApp')
 
         function _saveExercise() {
             var defered = $q.defer();
-            // exports.completedExercise();
+            exports.completedExercise();
             if (exports.exerciseHasChanged() || exports.tempImage.file) {
 
                 exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
@@ -364,7 +388,7 @@ angular.module('bitbloqApp')
 
                 if (exports.exercise._id) {
                     if (!exports.exercise._acl || (exports.exercise._acl['user:' + common.user._id] && exports.exercise._acl['user:' + common.user._id].permission === 'ADMIN')) {
-                        return exerciseApi.update(exports.exercise._id, exports.getCleanExercise()).then(function() {
+                        return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise()).then(function() {
                             exports.saveStatus = 2;
                             exports.saveOldExercise();
                             localStorage.exercisesChange = true;
@@ -385,7 +409,7 @@ angular.module('bitbloqApp')
                             exports.saveStatus = 2;
                             var idExercise = response.data;
                             exports.exercise._id = idExercise;
-                            exerciseApi.get(idExercise).success(function(response) {
+                            exports.getExerciseOrTask(idExercise).success(function(response) {
                                 exports.exercise._acl = response._acl;
                             });
                             //to avoid reload

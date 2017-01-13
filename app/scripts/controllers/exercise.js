@@ -38,7 +38,7 @@ angular.module('bitbloqApp')
         exerciseService.saveStatus = 0;
 
         exerciseService.initBloqsExercise();
-        $scope.exerciseLoaded = $q.defer();
+        $scope.currentProjectLoaded = $q.defer();
 
         $scope.getGroups = function() {
             centerModeApi.getGroups().then(function(response) {
@@ -486,7 +486,7 @@ angular.module('bitbloqApp')
                 $scope.hwBasicsLoaded.promise.then(function() {
                     $scope.$emit('drawHardware');
                 });
-                $scope.exerciseLoaded.resolve();
+                $scope.currentProjectLoaded.resolve();
             }
         }, function() {
             $log.debug('no registed user');
@@ -499,23 +499,15 @@ angular.module('bitbloqApp')
             }
         });
 
-        function _loadProject(id) {
-            if ($scope.common.section === 'task') {
-                return exerciseApi.getTask(id);
-            } else {
-                return exerciseApi.get(id);
-            }
-        }
-
         function loadExercise(id) {
-            _loadProject(id).then(function(response) {
+            exerciseService.getExerciseOrTask(id).then(function(response) {
                 console.log(response.data);
                 _uploadExercise(response.data);
                 _canUpdate();
-                $scope.exerciseLoaded.resolve();
+                $scope.currentProjectLoaded.resolve();
             }, function(error) {
                 exerciseService.addWatchers();
-                $scope.exerciseLoaded.reject();
+                $scope.currentProjectLoaded.reject();
                 switch (error.status) {
                     case 404: //not_found
                         alertsService.add({
