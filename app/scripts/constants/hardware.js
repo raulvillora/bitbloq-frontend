@@ -1198,8 +1198,7 @@ angular.module('bitbloqApp')
                         "s"
                     ]
                 }
-            }],
-            "phoneElements": [{
+            }, {
                 "id": "device",
                 "baudRate": "9600",
                 "width": 74,
@@ -1210,7 +1209,7 @@ angular.module('bitbloqApp')
                         "tx"
                     ]
                 }
-            }]
+            }],
         },
         "robots": [{
             "id": "zowi",

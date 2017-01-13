@@ -559,6 +559,16 @@ angular.module('bitbloqApp')
             }
         }
 
+        function onDragEnd(evt) {
+            if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
+                $scope.toolbox.level = 1;
+                $timeout(function(){
+                  $scope.twitterSettings = true;
+                },500);
+            }
+            _.throttle(setScrollsDimension, 1000);
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
@@ -604,7 +614,7 @@ angular.module('bitbloqApp')
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
         $window.addEventListener('bloqs:bloqremoved', onDeleteBloq);
-        $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
+        $window.addEventListener('bloqs:dragend', onDragEnd);
 
         $scope.$on('$destroy', function() {
             $document.off('contextmenu', contextMenuDocumentHandler);
