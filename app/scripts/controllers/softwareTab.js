@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, common, bloqsUtils, bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService) {
+    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -28,7 +28,6 @@ angular.module('bitbloqApp')
         $scope.checkBasicTab = 0;
         $scope.checkAdvanceTab = 0;
         $scope.selectedBloqsToolbox = '';
-        $scope.currentProject.selectedBloqs = {};
 
         $scope.showTrashcan = false;
         $scope.$field = $('#bloqs--field').last();
@@ -292,9 +291,9 @@ angular.module('bitbloqApp')
 
         $scope.performFactoryReset = function() {
             var robot = $scope.currentProject.hardware.robot,
-                version = common.properties.robotsFirmwareVersion[robot];
+                version = $scope.common.properties.robotsFirmwareVersion[robot];
             robotFirmwareApi.getFirmware(robot, version).then(function(result) {
-                if (common.useChromeExtension()) {
+                if ($scope.common.useChromeExtension()) {
                     web2boardOnline.upload({
                         hex: result.data,
                         board: {
