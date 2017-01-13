@@ -499,8 +499,17 @@ angular.module('bitbloqApp')
             }
         });
 
+        function _loadProject(id) {
+            if ($scope.common.section === 'task') {
+                return exerciseApi.getTask(id);
+            } else {
+                return exerciseApi.get(id);
+            }
+        }
+
         function loadExercise(id) {
-            return exerciseApi.get(id).then(function(response) {
+            _loadProject(id).then(function(response) {
+                console.log(response.data);
                 _uploadExercise(response.data);
                 _canUpdate();
                 $scope.exerciseLoaded.resolve();

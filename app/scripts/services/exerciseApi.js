@@ -16,6 +16,7 @@ angular.module('bitbloqApp')
             clone: clone,
             delete: deleteExercise,
             get: get,
+            getTask: getTask,
             save: save,
             update: update
         };
@@ -70,6 +71,13 @@ angular.module('bitbloqApp')
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'exercise/' + id,
                 params: params
+            });
+        }
+
+        function getTask(id) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'task/' + id
             });
         }
 
