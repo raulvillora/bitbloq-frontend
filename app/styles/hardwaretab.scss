@@ -1,13 +1,12 @@
 $color: #f1c933;
 $color_hover: #f19833;
 $hw_toolbox: 210px;
-
 /* hardware toolbox */
-
 .container-default {
     pointer-events: auto;
     padding: 10px;
     margin-left: 1em;
+
     .name {
         padding: 5px;
         font-weight: lighter;
@@ -22,14 +21,17 @@ $hw_toolbox: 210px;
     height: calc(90% - 54px);
     background-color: #fff;
     overflow: auto;
+
     .sidebar-filter-title {
         padding: 0.5em;
         text-align: left;
         padding: 1em 0 1em 20px;
         border-bottom: 1px solid #edf1f2;
     }
+
     .sidebar-filter-element {
         margin: 1em;
+
         .name {
             font-weight: lighter;
         }
@@ -39,25 +41,31 @@ $hw_toolbox: 210px;
 .hw-toolbox-container {
     width: #{$hw_toolbox};
     float: right;
+
     .components-list {
         .component-container {
             @extend .container-default;
+
             .component-image {
                 max-width: 60%;
             }
         }
     }
+
     .boards-list {
         .board-container {
             @extend .container-default;
+
             .board-image {
                 width: 80%;
             }
         }
     }
+
     .robots-list {
         .robot-container {
             @extend .container-default;
+
             .board-image {
                 width: 80%;
             }
@@ -72,19 +80,24 @@ $hw_toolbox: 210px;
     top: 0;
     left: 0;
     z-index: 8;
+
     &.open {
         display: block;
     }
+
     .menu {
         box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
         background-color: white;
+
         hr {
             border: 1px solid #ddd;
         }
+
         .menu__item {
             &:hover {
                 background-color: #ebebeb;
             }
+
             button {
                 padding: 15px;
             }
@@ -102,34 +115,42 @@ $hw_toolbox: 210px;
     justify-content: center;
     flex-direction: column;
     z-index: 1;
+
     &.dragging-over {
         &.dragging-component {
             .name--container {
                 opacity: 0;
             }
+
             .component__container {
                 border: 5px solid $color;
+
                 &.component__container--pseudovisible {
                     border: 4px dashed $color;
                     opacity: 0.5;
+
                     .component__message {
                         opacity: 0;
                     }
                 }
+
                 &.component__container--visible {
                     border: 4px dashed $color;
+
                     .component__message {
                         opacity: 1;
                     }
                 }
             }
         }
+
         &.dragging-board {
             .board {
                 outline: 4px dashed $color !important;
             }
         }
     }
+
     .name--container {
         position: absolute;
         top: 0;
@@ -141,6 +162,7 @@ $hw_toolbox: 210px;
         align-items: center;
         justify-content: center;
         z-index: 7;
+
         .component-name__container {
             opacity: 0;
             border-left: 2px solid $color;
@@ -150,6 +172,7 @@ $hw_toolbox: 210px;
             background-color: white;
             margin-top: 3%;
             height: 38px;
+
             .form--input--reset {
                 border: none;
                 outline: none;
@@ -158,6 +181,7 @@ $hw_toolbox: 210px;
                 height: inherit;
                 width: inherit;
             }
+
             .component-name__label {
                 color: #000;
                 font-weight: 900;
@@ -166,36 +190,44 @@ $hw_toolbox: 210px;
                 display: inline-block;
                 white-space: nowrap;
             }
+
             .component-name__input {
                 padding: 8px 10px;
                 min-width: 130px;
             }
+
             .input--checkbox__oscillator {
                 display: flex;
                 align-items: center;
                 margin: 0;
+
                 .oscillator--checkbox {
                     vertical-align: inherit;
                     margin: 0 8px;
                 }
             }
+
             .baudrate__container {
                 display: flex;
                 align-items: center;
+
                 .baudrate__dropdown {
                     width: 115px;
                     display: inline-block;
                     vertical-align: middle;
+
                     .form--select {
                         border: none;
                     }
                 }
             }
+
             &.noborder {
                 border-right: none;
             }
         }
     }
+
     .component__container {
         position: absolute;
         top: 0;
@@ -207,10 +239,12 @@ $hw_toolbox: 210px;
         height: 90%;
         opacity: 0;
         z-index: -1;
+
         &.component__container--visible {
             opacity: 0.4;
             border: 4px dashed #c0c3c9;
         }
+
         .component__message {
             margin-top: 5%;
             font-size: 1.5em;
@@ -219,21 +253,25 @@ $hw_toolbox: 210px;
             align-self: baseline;
         }
     }
-    .component__container,
+
     .board,
+    .component__container,
     .robot {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: white;
     }
+
     .board,
     .robot {
         display: none;
+
         &.opaque {
             display: flex;
         }
     }
+
     .robot {
         background-size: contain;
         background-repeat: no-repeat;
@@ -242,37 +280,45 @@ $hw_toolbox: 210px;
         height: 265px;
         width: 355px;
         outline: 4px dashed #c0c3c9;
+
         &.zowi {
-            background-image: url(/images/robots/zowi.svg);
+            background-image: url("/images/robots/zowi.svg");
             background-color: transparent;
             height: 50%;
         }
+
         &.evolution {
-            background-image: url(/images/robots/evolution.svg);
+            background-image: url("/images/robots/evolution.svg");
             background-color: transparent;
             height: 50%;
             width: 500px;
         }
+
         &.mbot {
-            background-image: url(/images/robots/mbot.svg);
+            background-image: url("/images/robots/mbot.svg");
             background-color: transparent;
             height: 50%;
         }
+
         &.mranger {
-            background-image: url(/images/robots/mranger.svg);
+            background-image: url("/images/robots/mranger.svg");
             background-color: transparent;
             height: 50%;
         }
+
         &.robot--selected {
             outline: 4px solid $color !important;
             background-color: transparent;
         }
+
         &.robot--present {
             outline: none;
+
             .board__message {
                 opacity: 0;
             }
         }
+
         .board__message {
             color: #000;
             font-size: 1.5em;
@@ -281,6 +327,7 @@ $hw_toolbox: 210px;
             opacity: 0.4;
         }
     }
+
     .board {
         background-size: contain;
         background-repeat: no-repeat;
@@ -289,16 +336,20 @@ $hw_toolbox: 210px;
         height: 265px;
         width: 355px;
         outline: 4px dashed #c0c3c9;
+
         &.board--selected {
             outline: 4px solid $color !important;
             background-color: transparent;
         }
+
         &.board--present {
             outline: none;
+
             .board__message {
                 opacity: 0;
             }
         }
+
         .board__message {
             color: #000;
             font-size: 1.5em;
@@ -308,37 +359,44 @@ $hw_toolbox: 210px;
         }
         //Boards
         &.bqZUM {
-            background-image: url(/images/boards/bqZUM.svg);
+            background-image: url("/images/boards/bqZUM.svg");
             background-color: transparent;
         }
+
         &.FreaduinoUNO {
-            background-image: url(/images/boards/FreaduinoUNO.svg);
+            background-image: url("/images/boards/FreaduinoUNO.svg");
             background-color: transparent;
         }
+
         &.ArduinoUNO {
-            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-image: url("/images/boards/ArduinoUNO.svg");
             background-color: transparent;
         }
+
         &.ArduinoNano {
-            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-image: url("/images/boards/ArduinoUNO.svg");
             background-color: transparent;
         }
+
         &.ArduinoLeonardo {
-            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-image: url("/images/boards/ArduinoUNO.svg");
             background-color: transparent;
         }
+
         &.ArduinoMEGA2560 {
-            background-image: url(/images/boards/ArduinoMEGA2560.svg);
+            background-image: url("/images/boards/ArduinoMEGA2560.svg");
             background-color: transparent;
             width: 555px;
         }
     }
+
     .component {
         position: absolute;
         border-radius: 5px;
         cursor: pointer;
         box-shadow: rgb(170, 170, 170) 0 0 5px 1px;
         z-index: 3;
+
         &.component-selected,
         &.jsplumb-dragged {
             box-shadow: 0 0 0 2px $color;
@@ -353,6 +411,7 @@ $hw_toolbox: 210px;
     /* jsPlumb connector styles */
     .jsplumb-connector {
         cursor: pointer;
+
         &.jsplumb-hover,
         &.selected {
             z-index: 4;
@@ -363,37 +422,46 @@ $hw_toolbox: 210px;
         z-index: 3;
         cursor: pointer;
         border-radius: 10px;
+
         &.board_ep {
             opacity: 0;
         }
+
         &.jsplumb-hover,
         &.selected {
             z-index: 5;
             opacity: 1;
         }
+
         &.dragActive {
             opacity: 0.6;
             background-color: $color_hover !important;
         }
+
         &.dragHover {
             opacity: 0.6;
             background-color: $color_hover !important;
         }
+
         &.dropHover {
             opacity: 1;
         }
+
         &.jsplumb-drag {
             opacity: 1 !important;
             background-color: $color_hover !important;
         }
+
         &.jsplumb-endpoint-connected {
             background-color: $color;
             outline: none;
             opacity: 1;
+
             + .jsplumb-overlay {
                 background-color: $color_hover !important;
             }
         }
+
         &.component_endpoint {
             outline: none !important;
         }
@@ -403,6 +471,7 @@ $hw_toolbox: 210px;
         z-index: 2;
         transition: opacity 80ms ease-in;
         opacity: 0;
+
         &.jsplumb-hover {
             transition: opacity 80ms ease-in;
             opacity: 1;
@@ -411,12 +480,20 @@ $hw_toolbox: 210px;
             background-color: $color;
         }
     }
+
     .bitbloqconnect-icon {
         position: absolute;
         top: 10%;
         left: 10%;
+
         &:focus {
             box-shadow: 0 0 0 2px $color;
         }
+    }
+}
+
+.first-component--device {
+    .component-interaction {
+        top: 210px;
     }
 }

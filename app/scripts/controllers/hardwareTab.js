@@ -18,13 +18,27 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $bTComponentContextMenu = $('#btcomponent-context-menu');
 
     $scope.closeComponentInteraction = function(pins, connectedPin) {
-
-        if (!pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
+        if (!pins || !pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
             $scope.firstComponent = false;
             if ($scope.common.user) {
                 $scope.common.user.hasFirstComponent = true;
                 userApi.update({
                     hasFirstComponent: true
+                });
+            }
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }
+    };
+
+    $scope.closeBluetoothInteraction = function(pins, connectedPin) {
+        if (!pins || !pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
+            $scope.isMobileConnected = false;
+            if ($scope.common.user) {
+                $scope.common.user.isMobileConnected = true;
+                userApi.update({
+                    isMobileConnected: true
                 });
             }
             if (!$scope.$$phase) {
@@ -63,9 +77,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 componentReference.coordinates = newCoordinates;
                 projectService.startAutosave();
             }
-        } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
-        {
+        } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target).closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -269,10 +281,17 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 projectService.project.bitbloqConnectBT = {
                     message: 'Esta placa necesita un modulo bluetooth, tendrás que seleccionar en los bloques'
                 };
-                //show gif
+
+                var btConnected = _.find(projectService.componentsArray.serialElements, function(component) {
+                    return component.id === 'bt';
+                });
+                if (!btConnected) {
+                    $scope.isMobileConnected = true;
+                }
             }
 
         }
+        projectService.startAutosave();
     }
 
     $scope.deleteBTComponent = function() {
@@ -457,7 +476,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
 
         componentReference = projectService.findComponentInComponentsArray(e.componentData.uid);
+        //poner misma condicion
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
+        if (($scope.isMobileConnected || $scope.isMobileConnected === undefined) && componentReference.id === 'bt') {
+            $scope.closeBluetoothInteraction(componentReference.pin, e.componentData.pin);
+        }
 
         if (componentReference) {
             if (e.protoBoLaAction === 'attach') {
@@ -535,6 +558,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         });
         if (!component.pin || !component.pin[Object.keys(component.pin)[0]]) { // if !autoConnected
             $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
+            if (projectService.project.useBitbloqConnect && data.id === 'bt') {
+                $scope.isMobileConnected = !($scope.isMobileConnected === undefined || ($scope.common.user && $scope.common.user.isMobileConnected)) ? true : $scope.isMobileConnected;
+            }
         }
         var boardMetadata = projectService.getBoardMetaData();
 
@@ -689,10 +715,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
             }
             //Remove all accents
-            name = name.replace(/([áàâä])/g, 'a').replace(/([éèêë])/g, 'e').replace(/([íìîï])/g, 'i')
-                .replace(/([óòôö])/g, 'o').replace(/([úùûü])/g, 'u');
-            name = name.replace(/([ÁÀÂÄ])/g, 'A').replace(/([ÉÈÊË])/g, 'E').replace(/([ÍÌÎÏ])/g, 'I')
-                .replace(/([ÓÒÔÖ])/g, 'O').replace(/([ÚÙÛÜ])/g, 'U');
+            name = name.replace(/([áàâä])/g, 'a').replace(/([éèêë])/g, 'e').replace(/([íìîï])/g, 'i').replace(/([óòôö])/g, 'o').replace(/([úùûü])/g, 'u');
+            name = name.replace(/([ÁÀÂÄ])/g, 'A').replace(/([ÉÈÊË])/g, 'E').replace(/([ÍÌÎÏ])/g, 'I').replace(/([ÓÒÔÖ])/g, 'O').replace(/([ÚÙÛÜ])/g, 'U');
             //Remove spaces and ñ
             name = name.replace(/([ ])/g, '_')
                 .replace(/([ñ])/g, 'n');
@@ -754,20 +778,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
@@ -812,6 +836,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.offsetTop = ['header', 'nav--make', 'actions--make', 'tabs--title'];
     $scope.firstComponent = undefined;
+    $scope.isMobileConnected = undefined;
 
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {
