@@ -349,12 +349,6 @@
 
             }
 
-            function _getExercises(teacherId, params) {
-                centerModeApi.getExercises(teacherId, params).then(function(response) {
-                    $scope.exercises = response.data;
-                });
-            }
-
             function _getExercisesCount() {
                 centerModeApi.getExercisesCount($scope.teacher._id, {}).then(function(response) {
                     $scope.exercisesCount = response.data.count;
@@ -400,7 +394,6 @@
                         _getExercisesCount();
                         _getGroups();
                         _getUrlParams();
-                        //_getExercises($scope.teacher._id, {'page': 2});
                     });
                 }
             }

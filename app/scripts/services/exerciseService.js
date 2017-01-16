@@ -53,7 +53,7 @@ angular.module('bitbloqApp')
             exports.exercise.code = exports.getCode();
         };
 
-        exports.download = function(exercise, type, force) {
+        exports.download = function(exercise, type) {
             exercise = exports.getCleanExercise(exercise || exports.exercise, true);
             type = type || 'json';
             if (type === 'arduino') {

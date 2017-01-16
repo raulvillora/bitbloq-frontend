@@ -449,6 +449,8 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        /* jshint ignore:start */
+
         exports.prettyCode = function(code) {
             var pretty = '';
 
@@ -460,10 +462,12 @@ angular.module('bitbloqApp')
             //Remove beautify ignore & preserve sections
             pretty = js_beautify(code.replace(/(#include *.*)/gm, insertBeautyIgnores)
                 .replace(/(#define *.*)/gm, insertBeautyIgnores)).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '')
-                .replace(/(- >)/gm, '->'); // jshint ignore:line
+                .replace(/(- >)/gm, '->');
 
             return pretty;
         };
+
+        /* jshint ignore:end */
 
         exports.getOs = function() {
             if ($window.navigator.platform.indexOf('Win') !== -1) {
