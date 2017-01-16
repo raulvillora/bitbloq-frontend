@@ -515,6 +515,9 @@
         }, {
             "name": "zowiDistance",
             "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "zowiMouthAdvanced",
+            "addClass": "submenu__item submenu__item--component"
         }],
         "evolution": [{
             "name": "evolutionHome",

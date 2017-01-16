@@ -1,5 +1,4 @@
 'use strict';
-/* global js_beautify */
 
 /**
  * @ngdoc function
@@ -448,7 +447,6 @@ angular.module('bitbloqApp')
                 });
             }
         }
-
 
         /*************************************************
          web2board communication

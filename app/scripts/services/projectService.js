@@ -531,18 +531,20 @@ angular.module('bitbloqApp')
         }
 
         function _updateHardwareSchema() {
-            var schema = hw2Bloqs.saveSchema();
-            if (schema) { //If project is loaded on protocanvas
-                schema.components = schema.components.map(function(elem) {
-                    var newElem = exports.findComponentInComponentsArray(elem.uid);
-                    if (newElem) {
-                        newElem = _.extend(newElem, elem);
-                    }
-                    return newElem;
-                });
+            if (!exports.project.hardware.robot) {
+                var schema = hw2Bloqs.saveSchema();
+                if (schema) { //If project is loaded on protocanvas
+                    schema.components = schema.components.map(function(elem) {
+                        var newElem = exports.findComponentInComponentsArray(elem.uid);
+                        if (newElem) {
+                            newElem = _.extend(newElem, elem);
+                        }
+                        return newElem;
+                    });
 
-                exports.project.hardware.components = _.cloneDeep(schema.components);
-                exports.project.hardware.connections = _.cloneDeep(schema.connections);
+                    exports.project.hardware.components = _.cloneDeep(schema.components);
+                    exports.project.hardware.connections = _.cloneDeep(schema.connections);
+                }
             }
         }
 

@@ -508,124 +508,374 @@ angular.module('bitbloqApp')
             },
             "pins": {
                 "digital": [{
-                    "x": 0.3505,
+                    "x": 0.330,
                     "y": 0.05,
                     "name": "13",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
                 }, {
-                    "x": 0.374,
+                    "x": 0.3505,
                     "y": 0.05,
                     "name": "12",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
                 }, {
-                    "x": 0.545,
+                    "x": 0.374,
                     "y": 0.05,
                     "name": "11",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
                 }, {
-                    "x": 0.3945,
+                    "x": 0.396,
                     "y": 0.05,
                     "name": "10",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
                 }, {
-                    "x": 0.4165,
+                    "x": 0.419,
                     "y": 0.05,
                     "name": "9",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
                 }, {
-                    "x": 0.4385,
+                    "x": 0.441,
                     "y": 0.05,
                     "name": "8",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
                 }, {
-                    "x": 0.695,
+                    "x": 0.4861,
                     "y": 0.05,
                     "name": "7",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
                 }, {
-                    "x": 0.73,
+                    "x": 0.508,
                     "y": 0.05,
                     "name": "6",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
                 }, {
-                    "x": 0.765,
+                    "x": 0.531,
                     "y": 0.05,
                     "name": "5",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
                 }, {
-                    "x": 0.795,
+                    "x": 0.553,
                     "y": 0.05,
                     "name": "4",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
                 }, {
-                    "x": 0.832,
+                    "x": 0.576,
                     "y": 0.05,
                     "name": "3",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
                 }, {
-                    "x": 0.869,
+                    "x": 0.598,
                     "y": 0.05,
                     "name": "2",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
                 }, {
-                    "x": 0.9,
+                    "x": 0.62,
                     "y": 0.05,
                     "name": "1",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
                 }, {
-                    "x": 0.935,
+                    "x": 0.643,
                     "y": 0.05,
                     "name": "0",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                }, {
+                    "x": 0.6872,
+                    "y": 0.05,
+                    "name": "14",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad14"
+                }, {
+                    "x": 0.71,
+                    "y": 0.05,
+                    "name": "15",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad15"
+                }, {
+                    "x": 0.732,
+                    "y": 0.05,
+                    "name": "16",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad16"
+                }, {
+                    "x": 0.755,
+                    "y": 0.05,
+                    "name": "17",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad17"
+                }, {
+                    "x": 0.7762,
+                    "y": 0.05,
+                    "name": "18",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad18"
+                }, {
+                    "x": 0.8,
+                    "y": 0.05,
+                    "name": "19",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad19"
+                }, {
+                    "x": 0.822,
+                    "y": 0.05,
+                    "name": "20",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad20"
+                }, {
+                    "x": 0.8447,
+                    "y": 0.05,
+                    "name": "21",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad21"
+                }, {
+                    "x": 0.911,
+                    "y": 0.104,
+                    "name": "22",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad22"
+                }, {
+                    "x": 0.933,
+                    "y": 0.104,
+                    "name": "23",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad23"
+                }, {
+                    "x": 0.911,
+                    "y": 0.15,
+                    "name": "24",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad24"
+                }, {
+                    "x": 0.933,
+                    "y": 0.15,
+                    "name": "25",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad25"
+                }, {
+                    "x": 0.911,
+                    "y": 0.194,
+                    "name": "26",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad26"
+                }, {
+                    "x": 0.933,
+                    "y": 0.194,
+                    "name": "27",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad27"
+                }, {
+                    "x": 0.911,
+                    "y": 0.24,
+                    "name": "28",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad28"
+                }, {
+                    "x": 0.933,
+                    "y": 0.24,
+                    "name": "29",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad29"
+                }, {
+                    "x": 0.911,
+                    "y": 0.29,
+                    "name": "30",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad30"
+                }, {
+                    "x": 0.933,
+                    "y": 0.29,
+                    "name": "31",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad31"
+                }, {
+                    "x": 0.911,
+                    "y": 0.335,
+                    "name": "32",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad32"
+                }, {
+                    "x": 0.933,
+                    "y": 0.335,
+                    "name": "33",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad33"
+                }, {
+                    "x": 0.911,
+                    "y": 0.38,
+                    "name": "34",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad34"
+                }, {
+                    "x": 0.933,
+                    "y": 0.38,
+                    "name": "35",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad35"
+                }, {
+                    "x": 0.911,
+                    "y": 0.43,
+                    "name": "36",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad36"
+                }, {
+                    "x": 0.933,
+                    "y": 0.43,
+                    "name": "37",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad37"
+                }, {
+                    "x": 0.911,
+                    "y": 0.475,
+                    "name": "38",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad38"
+                }, {
+                    "x": 0.933,
+                    "y": 0.475,
+                    "name": "39",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad39"
+                }, {
+                    "x": 0.911,
+                    "y": 0.52,
+                    "name": "40",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad40"
+                }, {
+                    "x": 0.933,
+                    "y": 0.52,
+                    "name": "41",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad41"
+                }, {
+                    "x": 0.911,
+                    "y": 0.565,
+                    "name": "42",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad42"
+                }, {
+                    "x": 0.933,
+                    "y": 0.565,
+                    "name": "43",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad43"
+                }, {
+                    "x": 0.911,
+                    "y": 0.61,
+                    "name": "44",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad44"
+                }, {
+                    "x": 0.933,
+                    "y": 0.61,
+                    "name": "45",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad45"
+                }, {
+                    "x": 0.911,
+                    "y": 0.66,
+                    "name": "46",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad46"
+                }, {
+                    "x": 0.933,
+                    "y": 0.66,
+                    "name": "47",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad47"
+                }, {
+                    "x": 0.911,
+                    "y": 0.705,
+                    "name": "48",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad48"
+                }, {
+                    "x": 0.933,
+                    "y": 0.705,
+                    "name": "49",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad49"
+                }, {
+                    "x": 0.911,
+                    "y": 0.75,
+                    "name": "50",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad50"
+                }, {
+                    "x": 0.933,
+                    "y": 0.75,
+                    "name": "51",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad51"
+                }, {
+                    "x": 0.911,
+                    "y": 0.795,
+                    "name": "52",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad52"
+                }, {
+                    "x": 0.933,
+                    "y": 0.795,
+                    "name": "53",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad53"
                 }],
                 "analog": [{
-                    "x": 0.763,
-                    "y": 0.92,
+                    "x": 0.532,
+                    "y": 0.945,
                     "name": "A0",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
                 }, {
-                    "x": 0.795,
-                    "y": 0.92,
+                    "x": 0.555,
+                    "y": 0.945,
                     "name": "A1",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
                 }, {
-                    "x": 0.83,
-                    "y": 0.92,
+                    "x": 0.576,
+                    "y": 0.945,
                     "name": "A2",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
                 }, {
-                    "x": 0.862,
-                    "y": 0.92,
+                    "x": 0.599,
+                    "y": 0.945,
                     "name": "A3",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
                 }, {
-                    "x": 0.895,
-                    "y": 0.92,
+                    "x": 0.62,
+                    "y": 0.945,
                     "name": "A4",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
                 }, {
-                    "x": 0.935,
-                    "y": 0.92,
+                    "x": 0.643,
+                    "y": 0.945,
                     "name": "A5",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                }, {
+                    "x": 0.666,
+                    "y": 0.945,
+                    "name": "A6",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa06"
+                }, {
+                    "x": 0.688,
+                    "y": 0.945,
+                    "name": "A7",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa07"
+                }, {
+                    "x": 0.732,
+                    "y": 0.945,
+                    "name": "A8",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa08"
+                }, {
+                    "x": 0.755,
+                    "y": 0.945,
+                    "name": "A9",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa09"
+                }, {
+                    "x": 0.776,
+                    "y": 0.945,
+                    "name": "A10",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa10"
+                }, {
+                    "x": 0.8,
+                    "y": 0.945,
+                    "name": "A11",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa11"
+                }, {
+                    "x": 0.822,
+                    "y": 0.945,
+                    "name": "A12",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa12"
+                }, {
+                    "x": 0.845,
+                    "y": 0.945,
+                    "name": "A13",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa13"
+                }, {
+                    "x": 0.866,
+                    "y": 0.945,
+                    "name": "A14",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa14"
+                }, {
+                    "x": 0.889,
+                    "y": 0.945,
+                    "name": "A15",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa15"
                 }],
                 "serial": [{
-                    "x": 0.045,
-                    "y": 0.315,
+                    "x": 0.095,
+                    "y": 0.2943,
                     "name": "serial",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edadserial1"
                 }],
                 "i2c-4": [{
-                    "x": 0.903,
-                    "y": 0.925,
-                    "name": "A4-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
+                    "x": 0.822,
+                    "y": 0.05,
+                    "name": "20-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a220"
                 }],
                 "i2c-5": [{
-                    "x": 0.933,
-                    "y": 0.925,
-                    "name": "A5-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                    "x": 0.8447,
+                    "y": 0.05,
+                    "name": "21-H",
+                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a221"
                 }]
             }
         }, {
@@ -1212,7 +1462,8 @@ angular.module('bitbloqApp')
             "name": "Zowi",
             "board": "Arduino UNO",
             "width": 75,
-            "height": 86
+            "height": 86,
+            "components": ['buzz']
         }, {
             "id": "evolution",
             "name": "Evolution",
@@ -1229,6 +1480,13 @@ angular.module('bitbloqApp')
             "id": "mranger",
             "name": "mRanger",
             "board": "Arduino MEGA 2560",
+            "width": 75,
+            "height": 86
+        }, {
+            "id": "starterthreewheels",
+            "name": "Starter kit Modo 3 ruedas",
+            "underDevelopment": true,
+            "board": "Arduino UNO",
             "width": 75,
             "height": 86
         }],
