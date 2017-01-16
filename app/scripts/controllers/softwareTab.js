@@ -35,14 +35,16 @@ angular.module('bitbloqApp')
         $scope.$trashcan = null;
 
         $scope.statusGeneralCheck = function(type) {
-            $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0;
-            var advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1);
-            $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
-            if ($scope.checkBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
-                $scope.checkBasicTab = 'full';
-            }
-            if ($scope.checkAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
-                $scope.checkAdvanceTab = 'full';
+            if($scope.currentProject.selectedBloqs) {
+                $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0;
+                var advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1);
+                $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
+                if ($scope.checkBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                    $scope.checkBasicTab = 'full';
+                }
+                if ($scope.checkAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
+                    $scope.checkAdvanceTab = 'full';
+                }
             }
         };
 

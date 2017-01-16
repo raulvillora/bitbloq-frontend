@@ -105,7 +105,6 @@ angular.module('bitbloqApp')
             }
 
             function initTimePicker() {
-                var today = new Date();
                 var options = {
                     twentyFour: true  //Display 24 hour format, defaults to false
                 };
@@ -500,7 +499,7 @@ angular.module('bitbloqApp')
         });
 
         function loadExercise(id) {
-            exerciseService.getExerciseOrTask(id).then(function(response) {
+            return exerciseService.getExerciseOrTask(id).then(function(response) {
                 console.log(response.data);
                 _uploadExercise(response.data);
                 _canUpdate();

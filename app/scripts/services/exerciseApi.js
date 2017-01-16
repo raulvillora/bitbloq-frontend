@@ -31,17 +31,6 @@ angular.module('bitbloqApp')
             });
         }
 
-        function assignGroup(idExercise, groupId, groupCalendar) {
-            return $http({
-                method: 'PUT',
-                url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/assign',
-                data: {
-                    groupId: groupId,
-                    calendar: groupCalendar
-                }
-            });
-        }
-
         function canUpdate(idExercise) {
             return $http({
                 method: 'HEAD',
