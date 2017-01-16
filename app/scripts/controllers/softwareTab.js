@@ -27,8 +27,8 @@ angular.module('bitbloqApp')
         $scope.lastPosition = 0;
         $scope.checkBasicTab = 0;
         $scope.checkAdvanceTab = 0;
-        $scope.selectedBloqsToolbox = '',
-	$scope.twitterSettings = false;
+        $scope.selectedBloqsToolbox = '';
+        $scope.twitterSettings = false;
 
         $scope.showTrashcan = false;
         $scope.$field = $('#bloqs--field').last();
@@ -36,7 +36,7 @@ angular.module('bitbloqApp')
         $scope.$trashcan = null;
 
         $scope.statusGeneralCheck = function(type) {
-            if($scope.currentProject.selectedBloqs) {
+            if ($scope.currentProject.selectedBloqs) {
                 $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0;
                 var advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1);
                 $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
@@ -330,7 +330,7 @@ angular.module('bitbloqApp')
             $scope.twitterSettings = !$scope.twitterSettings;
         };
 
-	$scope.setSoftwareTab = function(tab) {
+        $scope.setSoftwareTab = function(tab) {
             $scope.softTab = tab;
             if (tab === 'code') {
                 $scope.setCode(currentProjectService.getCode());
@@ -645,7 +645,7 @@ angular.module('bitbloqApp')
             }
         }
 
-	function onDeleteBloq() {
+        function onDeleteBloq() {
             _.throttle(setScrollsDimension, 250);
             var twitterConfigBloqs = _.filter(bloqs.bloqs, function(item) {
                 return item.bloqData.name === 'phoneConfigTwitter';

@@ -15,7 +15,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $componentContextMenu = $('#component-context-menu'),
         $boardContextMenu = $('#board-context-menu'),
         $robotContextMenu = $('#robot-context-menu'),
-	$bTComponentContextMenu = $('#btcomponent-context-menu'),
+        $bTComponentContextMenu = $('#btcomponent-context-menu'),
         currentProjectService = $scope.currentProjectService || projectService;
 
 
@@ -27,8 +27,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (tab !== '') {
             $scope.$emit('menu--open');
         }
-        if (event){
-            if(_.isEqual(event.target.classList, event.currentTarget.classList)){
+        if (event) {
+            if (_.isEqual(event.target.classList, event.currentTarget.classList)) {
                 $scope.selectedToolbox = tab;
             }
         } else {
@@ -234,12 +234,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 });
                 _addBoard(board);
                 $scope.changeToolbox('components');
-	        currentProjectService.startAutosave();
+                currentProjectService.startAutosave();
                 break;
             case 'components':
                 if (!$scope.currentProject.hardware.board) {
                     $scope.changeToolbox('boards');
-		    alertsService.add({
+                    alertsService.add({
                         text: 'bloqs-project_alert_no-board',
                         id: 'error_noboard',
                         type: 'error'
@@ -281,7 +281,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
-function _addBtComponent() {
+    function _addBtComponent() {
         if (!$scope.currentProject.useBitbloqConnect) {
             $scope.currentProject.useBitbloqConnect = true;
             if ($scope.currentProject.hardware.board === 'bq ZUM') {
@@ -693,20 +693,20 @@ function _addBtComponent() {
         };
 
         /*components.push(buzzer);
-        components.push(sp);
-        components.push(bt);
-        components.push(sound);
-        components.push(us);
-        components.push(buttonA);
-        components.push(buttonB);
-        components.push(servo0);
-        components.push(servo1);
-        components.push(servo2);
-        components.push(servo3);
-        components.push(oscillator0);
-        components.push(oscillator1);
-        components.push(oscillator2);
-        components.push(oscillator3);*/
+         components.push(sp);
+         components.push(bt);
+         components.push(sound);
+         components.push(us);
+         components.push(buttonA);
+         components.push(buttonB);
+         components.push(servo0);
+         components.push(servo1);
+         components.push(servo2);
+         components.push(servo3);
+         components.push(oscillator0);
+         components.push(oscillator1);
+         components.push(oscillator2);
+         components.push(oscillator3);*/
 
         return components;
     }
