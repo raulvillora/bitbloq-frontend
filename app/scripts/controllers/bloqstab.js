@@ -21,6 +21,7 @@ angular.module('bitbloqApp')
         $scope.bloqsApi = bloqsApi;
         $scope.projectService = projectService;
         $scope.lastPosition = 0;
+        $scope.twitterSettings = false;
 
         $scope.$field = $('#bloqs--field').last();
 
@@ -204,6 +205,9 @@ angular.module('bitbloqApp')
                 //Todo pintar en un contenedor nuevo
             }
         };
+        $scope.clickTwitterConfig = function() {
+            $scope.twitterSettings = !$scope.twitterSettings;
+        };
 
         function existComponent(componentsToSearch, components) {
             var found,
@@ -244,6 +248,8 @@ angular.module('bitbloqApp')
                     } else if (item.indexOf('serial') > -1) {
                         result = $scope.showCommunications(item);
 
+                    } else if (item.indexOf('phone') > -1) {
+                        result = projectService.project.useBitbloqConnect;
                     } else if (item.includes('rgb')) {
                         result = existComponent(['RGBled'], connectedComponents);
                     } else if (item.includes('oscillator')) {
@@ -355,6 +361,13 @@ angular.module('bitbloqApp')
             $contextMenu.css({
                 display: 'none'
             });
+
+            if ($('#twitter-config-button:hover').length === 0 && $('#twitter-content:hover').length === 0) {
+                $scope.twitterSettings = false;
+                if (!$scope.$$phase) {
+                    $scope.$digest();
+                }
+            }
         }
 
         function contextMenuDocumentHandler(event) {
@@ -536,10 +549,54 @@ angular.module('bitbloqApp')
             }, 50);
         }
 
+        function onDeleteBloq() {
+            _.throttle(setScrollsDimension, 250);
+            var twitterConfigBloqs = _.filter(bloqs.bloqs, function(item) {
+                return item.bloqData.name === 'phoneConfigTwitter';
+            });
+            if (twitterConfigBloqs.length === 2) {
+                $scope.hideTwitterWheel();
+            }
+        }
+
+        function onDragEnd(evt) {
+            if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
+                $scope.toolbox.level = 1;
+                $timeout(function() {
+                    $scope.twitterSettings = true;
+                }, 500);
+            }
+            _.throttle(setScrollsDimension, 1000);
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
+
+        $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
 
         $window.onresize = function() {
             $timeout(function() {
@@ -553,10 +610,11 @@ angular.module('bitbloqApp')
                 setScrollsDimension();
             }, 0);
         });
+
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
-        $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
-        $window.addEventListener('bloqs:dragend', _.throttle(setScrollsDimension, 1000));
+        $window.addEventListener('bloqs:bloqremoved', onDeleteBloq);
+        $window.addEventListener('bloqs:dragend', onDragEnd);
 
         $scope.$on('$destroy', function() {
             $document.off('contextmenu', contextMenuDocumentHandler);

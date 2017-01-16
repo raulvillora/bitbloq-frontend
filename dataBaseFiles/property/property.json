@@ -77,6 +77,45 @@
         }, {
             "name": "serialSend-v1",
             "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneEmitSound",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneSendText",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReceive",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneTurnOnLight",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneTurnOffLight",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneConfigTwitter",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneSendTweet",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReadAccel",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReadGyroscope",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReadMagnetic",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReadOrientation",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneisCovered",
+            "addClass": "submenu__item submenu__item--component"
+        }, {
+            "name": "phoneReadLight",
+            "addClass": "submenu__item submenu__item--component"
         }],
         "advancedComponents": [{
             "name": "hwVariable",
