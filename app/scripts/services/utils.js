@@ -460,9 +460,8 @@ angular.module('bitbloqApp')
             }
 
             //Remove beautify ignore & preserve sections
-            pretty = js_beautify(code.replace(/(#include *.*)/gm, insertBeautyIgnores)
-                .replace(/(#define *.*)/gm, insertBeautyIgnores)).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '')
-                .replace(/(- >)/gm, '->');
+            var replacedCode = code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores);
+            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->').replace(/([ (])0 b([01]+)/g, '$10b$2');
 
             return pretty;
         };
@@ -499,7 +498,6 @@ angular.module('bitbloqApp')
 
             return translatedErrors.join('<br>');
         };
-
 
         exports.clone = function(object) {
             return JSON.parse(JSON.stringify(object));

@@ -15,6 +15,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $componentContextMenu = $('#component-context-menu'),
         $boardContextMenu = $('#board-context-menu'),
         $robotContextMenu = $('#robot-context-menu'),
+	$bTComponentContextMenu = $('#btcomponent-context-menu'),
         currentProjectService = $scope.currentProjectService || projectService;
 
 
@@ -36,17 +37,27 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.closeComponentInteraction = function(pins, connectedPin) {
-
-        if (pins[Object.keys(connectedPin)[0]]) {
-            if (!_isUserConnect(pins) && $scope.firstComponent) {
-                $scope.firstComponent = undefined;
-            }
-        } else {
+        if (!pins || !pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
             $scope.firstComponent = false;
             if ($scope.common.user) {
                 $scope.common.user.hasFirstComponent = true;
                 userApi.update({
                     hasFirstComponent: true
+                });
+            }
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }
+    };
+
+    $scope.closeBluetoothInteraction = function(pins, connectedPin) {
+        if (!pins || !pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
+            $scope.isMobileConnected = false;
+            if ($scope.common.user) {
+                $scope.common.user.isMobileConnected = true;
+                userApi.update({
+                    isMobileConnected: true
                 });
             }
             if (!$scope.$$phase) {
@@ -123,6 +134,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $scope.setInputFocus();
         } else if ($(ev.target).closest('.component-name__container').length) {
             $scope.unsetInputFocus();
+        } else if (ev.target.classList.contains('bitbloqconnect-icon')) {
+            $scope.inputFocus = false;
+            hw2Bloqs.unselectAllConnections();
+            $scope.robotSelected = $scope.boardSelected = false;
+            $('.component').removeClass('component-selected');
+            if (projectService.project.bitbloqConnectBT) {
+                $scope.componentSelected = $scope.currentProject.bitbloqConnectBT;
+            }
         } else {
             $scope.robotSelected = $scope.boardSelected = $scope.componentSelected = false;
             $('.component').removeClass('component-selected');
@@ -208,36 +227,101 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.drop = function(data) {
-        if (data.type === 'boards') {
-            var board = _.find($scope.hardware.boardList, function(board) {
-                return board.id === data.id;
-            });
-            _addBoard(board);
-            $scope.changeToolbox('components');
-            currentProjectService.startAutosave();
-        } else if (data.type === 'components') {
-            if (!$scope.currentProject.hardware.board) {
-                $scope.changeToolbox('boards');
-                alertsService.add({
-                    text: 'bloqs-project_alert_no-board',
-                    id: 'error_noboard',
-                    type: 'error'
+        switch (data.type) {
+            case 'boards':
+                var board = _.find($scope.hardware.boardList, function(board) {
+                    return board.id === data.id;
                 });
-                return false;
-            } else if ($scope.currentProject.hardware.robot) {
-                alertsService.add({
-                    text: 'bloqs-project_alert_only-robot',
-                    id: 'error_noboard',
-                    type: 'error'
-                });
-                return false;
-            }
-            _addComponent(data);
-        } else if (data.type === 'robots') {
-            $scope.hardware.cleanSchema();
-            _addRobot(data);
-            currentProjectService.startAutosave();
+                _addBoard(board);
+                $scope.changeToolbox('components');
+	        currentProjectService.startAutosave();
+                break;
+            case 'components':
+                if (!$scope.currentProject.hardware.board) {
+                    $scope.changeToolbox('boards');
+		    alertsService.add({
+                        text: 'bloqs-project_alert_no-board',
+                        id: 'error_noboard',
+                        type: 'error'
+                    });
+                    return false;
+                } else if ($scope.currentProject.hardware.robot) {
+                    alertsService.add({
+                        text: 'bloqs-project_alert_only-robot',
+                        id: 'error_noboard',
+                        type: 'error'
+                    });
+                    return false;
+                }
+                _addComponent(data);
+                break;
+            case 'robots':
+                $scope.hardware.cleanSchema();
+                _addRobot(data);
+                currentProjectService.startAutosave();
+                break;
+            case 'btComponent':
+                if (!$scope.currentProject.hardware.board) {
+                    $scope.subMenuHandler('boards', 'open', 1);
+                    alertsService.add({
+                        text: 'bloqs-project_alert_no-board',
+                        id: 'error_noboard',
+                        type: 'error'
+                    });
+                } else if ($scope.currentProject.hardware.robot) {
+                    alertsService.add({
+                        text: 'bloqs-project_alert_only-robot',
+                        id: 'error_noboard',
+                        type: 'error'
+                    });
+                } else {
+                    _addBtComponent(data);
+                }
+                break;
         }
+    };
+
+function _addBtComponent() {
+        if (!$scope.currentProject.useBitbloqConnect) {
+            $scope.currentProject.useBitbloqConnect = true;
+            if ($scope.currentProject.hardware.board === 'bq ZUM') {
+                //added on get code too
+                var bTComponent = _.cloneDeep(_.find(hardwareConstants.components.serialElements, {
+                    id: 'bt'
+                }));
+                bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
+                bTComponent.pin = {
+                    rx: 0,
+                    tx: 1,
+                    baudRate: 19200
+                };
+                bTComponent.uid = 'btComponent';
+                currentProjectService.addComponentInComponentsArray('serialElements', bTComponent);
+                $scope.currentProject.bitbloqConnectBT = bTComponent;
+            } else {
+                $scope.currentProject.bitbloqConnectBT = {
+                    message: 'Esta placa necesita un modulo bluetooth, tendrás que seleccionar en los bloques'
+                };
+
+                var btConnected = _.find(currentProjectService.componentsArray.serialElements, function(component) {
+                    return component.id === 'bt';
+                });
+                if (!btConnected) {
+                    $scope.isMobileConnected = true;
+                }
+            }
+
+        }
+        projectService.startAutosave();
+    }
+
+    $scope.deleteBTComponent = function() {
+        $scope.currentProject.useBitbloqConnect = false;
+        $scope.componentSelected = false;
+        if (currentProject.hardware.board === 'bq ZUM') {
+            currentProjectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
+        }
+        $scope.currentProject.bitbloqConnectBT = null;
     };
 
     $scope.setBaudRate = function(baudRate) {
@@ -274,7 +358,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (nameFixed !== $scope.componentSelected.name) {
             $scope.componentSelected.name = nameFixed;
         }
-        if ($scope.componentSelected.connected) {
+        if ($scope.componentSelected.connected || $scope.componentSelected.uid === 'btComponent') {
             currentProjectService.startAutosave();
         }
     };
@@ -367,6 +451,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 left: event.pageX + 'px',
                 top: event.pageY + 'px'
             });
+        } else if (ev.target.classList.contains('bitbloqconnect-icon')) {
+            $bTComponentContextMenu.css({
+                display: 'block',
+                left: event.pageX + 'px',
+                top: event.pageY + 'px'
+            });
         } else {
             _closeContextMenu();
         }
@@ -407,6 +497,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         componentReference = currentProjectService.findComponentInComponentsArray(e.componentData.uid);
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
+        if (($scope.isMobileConnected || $scope.isMobileConnected === undefined) && componentReference.id === 'bt') {
+            $scope.closeBluetoothInteraction(componentReference.pin, e.componentData.pin);
+        }
 
         if (componentReference) {
             if (e.protoBoLaAction === 'attach') {
@@ -599,7 +692,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             s: 5
         };
 
-        components.push(buzzer);
+        /*components.push(buzzer);
         components.push(sp);
         components.push(bt);
         components.push(sound);
@@ -613,7 +706,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         components.push(oscillator0);
         components.push(oscillator1);
         components.push(oscillator2);
-        components.push(oscillator3);
+        components.push(oscillator3);*/
 
         return components;
     }
@@ -627,12 +720,32 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addComponent(data) {
-        $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
+        if (!component.pin || !component.pin[Object.keys(component.pin)[0]]) { // if !autoConnected
+            $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
+            if ($scope.currentProject.useBitbloqConnect && data.id === 'bt') {
+                $scope.isMobileConnected = !($scope.isMobileConnected === undefined || ($scope.common.user && $scope.common.user.isMobileConnected)) ? true : $scope.isMobileConnected;
+            }
+        }
+        var boardMetadata = currentProjectService.getBoardMetaData();
 
         var newComponent = _.cloneDeep(component);
+
+        if (newComponent.id === 'device' || newComponent.id === 'bt') {
+            switch (boardMetadata.id) {
+                case 'bqZUM':
+                    newComponent.baudRate = 19200;
+                    break;
+                case 'FreaduinoUNO':
+                    newComponent.baudRate = 38400;
+                    break;
+                case 'ArduinoUNO':
+                    newComponent.baudRate = 38400;
+                    break;
+            }
+        }
         currentProjectService.addComponentInComponentsArray(data.category, newComponent);
 
         var relativeCoordinates = {
@@ -686,8 +799,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         return finalName;
     }
 
-    function _removeElementFromKeyboard() {
-        if ($scope.componentSelected) {
+    function _removeElementFromKeyboard(focusedElement) {
+        if (focusedElement.classList.contains('bitbloqconnect-icon')) {
+            $scope.deleteBTComponent(focusedElement);
+        } else if ($scope.componentSelected) {
             $scope.deleteComponent();
             $scope.componentSelected = false;
         } else if ($scope.boardSelected) {
@@ -698,16 +813,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             var componentUid = hw2Bloqs.removeSelectedConnection();
             checkComponentConnections(componentUid);
         }
-    }
-
-    function _isUserConnect(componentPins) {
-        var userConnect = false;
-        _.forEach(componentPins, function(item) {
-            if (item === undefined || item === null) {
-                userConnect = true;
-            }
-        });
-        return userConnect;
     }
 
     function _loadHardwareProject(hardwareProject) {
@@ -851,7 +956,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if ($scope.inputFocus) {
                     return false;
                 }
-                _removeElementFromKeyboard();
+                _removeElementFromKeyboard($event.target);
                 $event.preventDefault();
                 break;
             case 46:
@@ -859,7 +964,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if ($scope.inputFocus) {
                     return false;
                 }
-                _removeElementFromKeyboard();
+                _removeElementFromKeyboard($event.target);
                 $event.preventDefault();
                 break;
         }
@@ -890,6 +995,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.offsetTop = ['header', 'nav--make', 'actions--make', 'tabs--title'];
     $scope.firstComponent = undefined;
+    $scope.isMobileConnected = undefined;
 
     $scope.$watch('componentSelected.oscillator', function(newVal, oldVal) {
         if (newVal !== oldVal) {

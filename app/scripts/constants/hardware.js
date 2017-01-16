@@ -1448,6 +1448,13 @@ angular.module('bitbloqApp')
                         "s"
                     ]
                 }
+            }, {
+                "id": "device",
+                "baudRate": "9600",
+                "dragType": "btComponent",
+                "width": 74,
+                "height": 102,
+                "pins": {}
             }]
         },
         "robots": [{

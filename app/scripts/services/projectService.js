@@ -10,7 +10,7 @@
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
                                         common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration)
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
     {
 
         var exports = {},
@@ -60,6 +60,12 @@ angular.module('bitbloqApp')
 
         exports.addComponentInComponentsArray = function(category, newComponent) {
             exports.componentsArray[category].push(newComponent);
+        };
+
+        exports.removeComponentInComponentsArray = function(category, componentName) {
+            _.remove(exports.componentsArray[category], {
+                name: componentName
+            });
         };
 
         exports.isEmptyComponentArray = function() {
@@ -188,11 +194,15 @@ angular.module('bitbloqApp')
                 code = exports.project.code;
             } else {
                 _updateHardwareSchema();
+                var hardware = _.cloneDeep(exports.project.hardware);
+                if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bq ZUM' && exports.project.bitbloqConnectBT) {
+                    hardware.components.push(exports.project.bitbloqConnectBT);
+                }
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
                     loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
-                }, exports.project.hardware);
+                }, hardware);
             }
             return code;
         };
@@ -331,7 +341,10 @@ angular.module('bitbloqApp')
                         exports.componentsArray[comp.category].push(_.cloneDeep(comp));
                     }
                 });
+            }
 
+            if (exports.project.useBitbloqConnect && (exports.project.hardware.board === 'bq ZUM') && exports.project.bitbloqConnectBT) {
+                exports.addComponentInComponentsArray('serialElements', exports.project.bitbloqConnectBT);
             }
         };
         //temp fix to code refactor, sensor types
@@ -377,6 +390,28 @@ angular.module('bitbloqApp')
                 common.session.project = _.cloneDeep(exports.project);
                 common.session.save = true;
             }
+        };
+        exports.saveTwitterApp = function() {
+            var defered = $q.defer();
+
+            userApi.update(common.user).then(function() {
+                common.setUser(common.user);
+                alertsService.add({
+                    text: 'account-saved',
+                    id: 'saved-user',
+                    type: 'ok',
+                    time: 5000
+                });
+                defered.resolve();
+            }, function(error) {
+                alertsService.add({
+                    text: 'account-saved-error',
+                    id: 'saved-user',
+                    type: 'warning'
+                });
+                defered.reject(error);
+            });
+            return defered.promise;
         };
 
         //---------------------------------------------------------------------

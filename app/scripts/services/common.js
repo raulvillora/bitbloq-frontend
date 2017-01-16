@@ -35,6 +35,7 @@ angular.module('bitbloqApp')
             save: false
         };
         exports.translate = $filter('translate');
+	exports.twitterTutorialId = envData.config.twitterTutorialId;
         exports.urlImage = envData.config.gCloudUrl + '/images/';
         exports.urlType = null;
         exports.user = null;

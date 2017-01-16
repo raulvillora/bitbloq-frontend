@@ -8,9 +8,70 @@ $hw_toolbox: 210px;
     pointer-events: auto;
     padding: 10px;
     margin-left: 1em;
+
     .name {
         padding: 5px;
         font-weight: lighter;
+    }
+}
+
+.sidebar-filter-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: calc(90% - 54px);
+    background-color: #fff;
+    overflow: auto;
+
+    .sidebar-filter-title {
+        padding: 0.5em;
+        text-align: left;
+        padding: 1em 0 1em 20px;
+        border-bottom: 1px solid #edf1f2;
+    }
+
+    .sidebar-filter-element {
+        margin: 1em;
+
+        .name {
+            font-weight: lighter;
+        }
+    }
+}
+
+.hw-toolbox-container {
+    width: #{$hw_toolbox};
+    float: right;
+
+    .components-list {
+        .component-container {
+            @extend .container-default;
+
+            .component-image {
+                max-width: 60%;
+            }
+        }
+    }
+
+    .boards-list {
+        .board-container {
+            @extend .container-default;
+
+            .board-image {
+                width: 80%;
+            }
+        }
+    }
+
+    .robots-list {
+        .robot-container {
+            @extend .container-default;
+
+            .board-image {
+                width: 80%;
+            }
+        }
     }
 }
 
@@ -21,6 +82,7 @@ $hw_toolbox: 210px;
     top: 0;
     left: 0;
     z-index: 8;
+
     &.open {
         display: block;
     }
@@ -51,6 +113,7 @@ $hw_toolbox: 210px;
     justify-content: center;
     flex-direction: column;
     z-index: 1;
+
     &.dragging-over {
         &.dragging-component {
             .name--container {
@@ -140,6 +203,10 @@ $hw_toolbox: 210px;
                     }
                 }
             }
+
+            &.noborder {
+                border-right: none;
+            }
         }
     }
     .component__container {
@@ -165,6 +232,8 @@ $hw_toolbox: 210px;
             align-self: baseline;
         }
     }
+
+    .board,
     .component__container,
     .board,
     .robot {
@@ -189,31 +258,27 @@ $hw_toolbox: 210px;
         width: 355px;
         outline: 4px dashed #c0c3c9;
         &.zowi {
-            background-image: url(/images/robots/zowi.svg);
+            background-image: url("/images/robots/zowi.svg");
             background-color: transparent;
             height: 50%;
         }
         &.evolution {
-            background-image: url(/images/robots/evolution.svg);
+            background-image: url("/images/robots/evolution.svg");
             background-color: transparent;
             height: 50%;
             width: 500px;
         }
         &.mbot {
-            background-image: url(/images/robots/mbot.svg);
+            background-image: url("/images/robots/mbot.svg");
             background-color: transparent;
             height: 50%;
         }
         &.mranger {
-            background-image: url(/images/robots/mranger.svg);
+            background-image: url("/images/robots/mranger.svg");
             background-color: transparent;
             height: 50%;
         }
-        &.starterthreewheels {
-            background-image: url(/images/robots/starterthreewheels.svg);
-            background-color: transparent;
-            height: 60%;
-        }
+
         &.robot--selected {
             outline: 4px solid $color !important;
             background-color: transparent;
@@ -259,27 +324,27 @@ $hw_toolbox: 210px;
         }
         //Boards
         &.bqZUM {
-            background-image: url(/images/boards/bqZUM.svg);
+            background-image: url("/images/boards/bqZUM.svg");
             background-color: transparent;
         }
         &.FreaduinoUNO {
-            background-image: url(/images/boards/FreaduinoUNO.svg);
+            background-image: url("/images/boards/FreaduinoUNO.svg");
             background-color: transparent;
         }
         &.ArduinoUNO {
-            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-image: url("/images/boards/ArduinoUNO.svg");
             background-color: transparent;
         }
         &.ArduinoNano {
-            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-image: url("/images/boards/ArduinoUNO.svg");
             background-color: transparent;
         }
         &.ArduinoLeonardo {
-            background-image: url(/images/boards/ArduinoUNO.svg);
+            background-image: url("/images/boards/ArduinoUNO.svg");
             background-color: transparent;
         }
         &.ArduinoMEGA2560 {
-            background-image: url(/images/boards/ArduinoMEGA2560.svg);
+            background-image: url("/images/boards/ArduinoMEGA2560.svg");
             background-color: transparent;
             width: 555px;
         }
@@ -361,5 +426,21 @@ $hw_toolbox: 210px;
             padding: 2px 4px;
             background-color: $color;
         }
+    }
+
+    .bitbloqconnect-icon {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+
+        &:focus {
+            box-shadow: 0 0 0 2px $color;
+        }
+    }
+}
+
+.first-component--device {
+    .component-interaction {
+        top: 210px;
     }
 }

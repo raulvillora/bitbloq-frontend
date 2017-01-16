@@ -27,7 +27,8 @@ angular.module('bitbloqApp')
         $scope.lastPosition = 0;
         $scope.checkBasicTab = 0;
         $scope.checkAdvanceTab = 0;
-        $scope.selectedBloqsToolbox = '';
+        $scope.selectedBloqsToolbox = '',
+	$scope.twitterSettings = false;
 
         $scope.showTrashcan = false;
         $scope.$field = $('#bloqs--field').last();
@@ -325,8 +326,11 @@ angular.module('bitbloqApp')
                 //Todo pintar en un contenedor nuevo
             }
         };
+        $scope.clickTwitterConfig = function() {
+            $scope.twitterSettings = !$scope.twitterSettings;
+        };
 
-        $scope.setSoftwareTab = function(tab) {
+	$scope.setSoftwareTab = function(tab) {
             $scope.softTab = tab;
             if (tab === 'code') {
                 $scope.setCode(currentProjectService.getCode());
@@ -334,6 +338,25 @@ angular.module('bitbloqApp')
                 $rootScope.$emit('currenttab:bloqstab');
             }
         };
+
+        function existComponent(componentsToSearch, components) {
+            var found,
+                j,
+                i = 0;
+
+            while (!found && (i < componentsToSearch.length)) {
+                j = 0;
+                while (!found && (j < components.length)) {
+                    if (componentsToSearch[i] === components[j].id) {
+                        found = components[j];
+                    }
+                    j++;
+                }
+                i++;
+            }
+
+            return found;
+        }
 
         $scope.showComponents = function(item) {
             var result = false;
@@ -355,6 +378,8 @@ angular.module('bitbloqApp')
                     } else if (item.indexOf('serial') > -1) {
                         result = showCommunications(item);
 
+                    } else if (item.indexOf('phone') > -1) {
+                        result = $scope.currentProject.useBitbloqConnect;
                     } else if (item.includes('rgb')) {
                         result = existComponent(['RGBled'], connectedComponents);
                     } else if (item.includes('oscillator')) {
@@ -404,6 +429,13 @@ angular.module('bitbloqApp')
             $contextMenu.css({
                 display: 'none'
             });
+
+            if ($('#twitter-config-button:hover').length === 0 && $('#twitter-content:hover').length === 0) {
+                $scope.twitterSettings = false;
+                if (!$scope.$$phase) {
+                    $scope.$digest();
+                }
+            }
         }
 
         function contextMenuDocumentHandler(event) {
@@ -613,10 +645,54 @@ angular.module('bitbloqApp')
             }
         }
 
+	function onDeleteBloq() {
+            _.throttle(setScrollsDimension, 250);
+            var twitterConfigBloqs = _.filter(bloqs.bloqs, function(item) {
+                return item.bloqData.name === 'phoneConfigTwitter';
+            });
+            if (twitterConfigBloqs.length === 2) {
+                $scope.hideTwitterWheel();
+            }
+        }
+
+        function onDragEnd(evt) {
+            if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
+                $scope.toolbox.level = 1;
+                $timeout(function() {
+                    $scope.twitterSettings = true;
+                }, 500);
+            }
+            _.throttle(setScrollsDimension, 1000);
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
+
+        $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
+
+        $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
+            if (oldValue && oldValue !== newValue) {
+                projectService.saveTwitterApp();
+            }
+        });
 
         $window.onresize = function() {
             $timeout(function() {
@@ -629,6 +705,7 @@ angular.module('bitbloqApp')
                 setScrollsDimension();
             }, 0);
         });
+
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
         $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));

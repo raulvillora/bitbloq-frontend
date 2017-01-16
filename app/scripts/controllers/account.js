@@ -267,12 +267,6 @@ angular.module('bitbloqApp')
                 }
             });
 
-            $scope.$watch('common.user.lastName', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
-                    $scope.validateProfile();
-                }
-            });
-
         }, function() {
             alertsService.add({
                 text: 'view-need-tobe-logged',
