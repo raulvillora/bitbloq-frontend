@@ -796,16 +796,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     }
 
-    function _isUserConnect(componentPins) {
-        var userConnect = false;
-        _.forEach(componentPins, function(item) {
-            if (item === undefined || item === null) {
-                userConnect = true;
-            }
-        });
-        return userConnect;
-    }
-
     function _loadHardwareProject(hardwareProject) {
         if (hardwareProject.anonymousTransient) {
             delete hardwareProject.anonymousTransient;
