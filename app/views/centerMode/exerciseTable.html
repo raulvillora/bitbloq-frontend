@@ -18,7 +18,7 @@
         <div class="table__block table__block__exercise">
             <div class="table__block__list row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
                 <div class="table__block__item col-vsmall-8">
-                    <a ng-href="{{ (exercise.exercise? '#/task/' : '#/exercise/') + exercise._id}}">
+                    <a ng-href="{{ (exercise.exercise? '#/task/' : '#/center-mode/exercise-info/') + exercise._id}}">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                             {{exercise.name || exercise.exercise.name || 'new-exercise' | translate}}</h2>
                     </a>

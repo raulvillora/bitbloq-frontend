@@ -138,8 +138,17 @@
                 });
             };
 
-            $scope.getDatetime = function(date) {
-                return moment(date).fromNow();
+            $scope.getDatetime = function(date, diff) {
+                if (diff) {
+                    if (date) {
+                        var now = moment();
+                        return now.diff(date) > 0;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return moment(date).fromNow();
+                }
             };
 
             $scope.getExercisesPaginated = function(pageno) {
@@ -318,6 +327,9 @@
                         _getGroups();
                         _getTasks();
                         break;
+                    case 'exercise-info':
+                        _getTasksByExercise($routeParams.id);
+                        break;
                 }
             }
 
@@ -377,6 +389,18 @@
             function _getTasks(groupId) {
                 centerModeApi.getTasks(groupId).then(function(response) {
                     $scope.exercises = response.data;
+                });
+            }
+
+            function _getTasksByExercise(exerciseId) {
+                centerModeApi.getTasksByExercise(exerciseId).then(function(response) {
+                    response.data.forEach(function(task) {
+                        _.extend(task, task.student);
+                        if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
+                            task.status = 'notDelivered';
+                        }
+                    });
+                    $scope.tasks = response.data;
                 });
             }
 

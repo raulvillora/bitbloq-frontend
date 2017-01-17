@@ -40,7 +40,7 @@
             .table__block__button--delete {
                 display: block;
             }
-            .table__column--hover button {
+            .table__column--hover .btn {
                 display: inherit;
             }
         }
@@ -50,7 +50,7 @@
         &:last-child {
             border-bottom: 1px solid #dddddd;
         }
-        .table__column--hover button {
+        .table__column--hover .btn {
             display: none;
         }
     }

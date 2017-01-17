@@ -122,6 +122,7 @@ angular.module('bitbloqApp')
                 showDatePicker: showDatePicker,
                 showTimePicker: showTimePicker,
                 initTimePicker: initTimePicker,
+                newGroup: $scope.newGroup,
                 rejectButton: 'modal-button-cancel',
                 confirmAction: confirmAction,
                 modalButtons: true
@@ -130,6 +131,48 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--assign-group',
+                scope: modalOptions
+
+            });
+        };
+
+
+        $scope.newGroup = function() {
+            function confirmAction(name) {
+                var accessId = Date.now();
+                centerModeApi.createGroup(name, accessId, $scope.common.user._id, $scope.center._id).then(function() {
+                    modalOptions.title = name;
+                    modalOptions.mainText = 'centerMode_modal_accessIdInfo';
+                    modalOptions.confirmButton = null;
+                    modalOptions.rejectButton = 'close';
+                    modalOptions.modalInput = false;
+                    modalOptions.secondaryText = accessId;
+                    _getGroups();
+                });
+            }
+
+            var modalOptions = $rootScope.$new();
+
+            _.extend(modalOptions, {
+                title: 'centerMode_modal_createGroupTitle',
+                contentTemplate: 'views/modals/input.html',
+                mainText: 'centerMode_modal_createGroupInfo',
+                modalInput: true,
+                secondaryText: false,
+                input: {
+                    id: 'groupName',
+                    name: 'groupName',
+                    placeholder: 'centerMode_modal_createGroupPlaceholder'
+                },
+                confirmButton: 'centerMode_button_createGroup',
+                rejectButton: 'modal-button-cancel',
+                confirmAction: confirmAction,
+                modalButtons: true
+            });
+
+            ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--input',
                 scope: modalOptions
 
             });

@@ -16,6 +16,7 @@ angular
             getMyCenter: getMyCenter,
             getMyRole: getMyRole,
             getTasks: getTasks,
+            getTasksByExercise: getTasksByExercise,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
             isHeadMaster: isHeadMaster,
@@ -151,6 +152,13 @@ angular
                     url: envData.config.centerModeUrl + 'task'
                 });
             }
+        }
+
+        function getTasksByExercise(exerciseId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId
+            });
         }
 
         function getTeacher(teacherId, centerId) {
