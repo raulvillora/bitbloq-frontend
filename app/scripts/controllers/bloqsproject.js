@@ -34,7 +34,11 @@ angular.module('bitbloqApp')
                 return false;
             }
             if (projectService.project.hardware.components.length === 0) {
-                return false;
+                if (projectService.project.useBitbloqConnect) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return true;
             }
