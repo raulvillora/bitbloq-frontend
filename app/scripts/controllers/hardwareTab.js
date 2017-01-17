@@ -775,6 +775,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     }
 
+    $scope.hasDownloadedApp = function() {
+        if ($scope.common.user) {
+            userApi.update({
+                hasDownloadedApp: true
+            });
+        }
+    };
+
     function _createUniqueVarName(component) {
         var componentBasicName = $translate.instant('default-var-name-' + component.id),
             componentsNames = [];
