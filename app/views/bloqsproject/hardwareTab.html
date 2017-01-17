@@ -1,9 +1,11 @@
 <div class="hardware-tab tab--make" ng-controller="hardwareTabCtrl">
-    <!--<a target="_blank" href='https://play.google.com/store/apps/details?id=com.apalon.weatherlive.free&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>-->
     <div class="protocanvas" droppable drop="drop" drop-offset-left="70" drop-offset-top="offsetTop" ng-click="detectElement($event)" data-ng-keydown="onKeyPress($event)">
         <div ng-class="{'first-component--device':projectService.project.useBitbloqConnect}" ng-show="firstComponent && (!common.user || !common.user.hasFirstComponent)" data-ng-include="'views/componentInteraction.html' "></div>
         <div ng-show="isMobileConnected" data-ng-include="'views/bluetoothInteraction.html' "></div>
-        <img tabindex="1" class="bitbloqconnect-icon handcursor" ng-show="projectService.project.useBitbloqConnect" src="/images/components/device.svg">
+        <div class="bitbloqconnect">
+            <img class="bitbloqconnect-icon handcursor" tabindex="1" ng-show="projectService.project.useBitbloqConnect" src="/images/components/device.svg">
+            <a class="bitbloqconnect--badge" target="_blank" ng-href='{{common.playStoreUrl}}'><img alt='Get it on Google Play' ng-src="{{'https://play.google.com/intl/en_us/badges/images/generic/' + langToBadge[translate.use()] + '_badge_web_generic.png'}}"/></a>
+        </div>
         <div class="name--container">
             <div class="component-name__container" ng-class="{opaque:componentSelected, noborder:componentSelected.message}">
                 <span class="form--input form--input--reset">

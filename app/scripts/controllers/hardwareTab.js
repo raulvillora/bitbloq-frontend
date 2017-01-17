@@ -32,6 +32,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
+    $scope.langToBadge = {
+        'ca-ES': 'ca',
+        'de-De': 'de',
+        'en-GB': 'en',
+        'es-ES': 'es',
+        'eu-ES': 'eu',
+        'fr-FR': 'fr',
+        'gl': 'gl',
+        'it-IT': 'it',
+        'pt-PT': 'pt'
+    };
+    $scope.translate = $translate;
+
+    console.log($scope.userLanguage);
     $scope.closeBluetoothInteraction = function(pins, connectedPin) {
         if (!pins || !pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
             $scope.isMobileConnected = false;

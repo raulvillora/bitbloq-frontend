@@ -60,7 +60,10 @@
                         <div class="components-list">
                             <div class="component-container" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
                                 <h1 class="component-name name" translate>{{component.id}}</h1>
-                                <img class="component-image" dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                                <img ng-if="component.id !== 'device' && !common.user || common.user" class="component-image" dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                                <div ng-if="component.id === 'device' && !common.user" data-tooltips="true" data-tooltip="{{'need-to-be-logged-component' | translate}}" data-tooltip-position="bottom">
+                                    <img class="component-image component-image--device" draggable="false" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,7 +106,7 @@
         <ul>
             <li ng-repeat="item in allHwElements | filter:filterSearch(searchText)" class="sidebar-filter-element">
                 <h1 class="component-name name" translate>{{item.id}}</h1>
-                <img class="component-image" draggable dragid="{{item.id}}" dragtype="{{item.dragtype}}" ng-src="{{'/images/' + item.dragtype + '/' + item.id + '.svg'}}" ng-style="{width:item.width + 'px'}" />
+                <img class="component-image" draggable dragid="{{item.id}}" dragtype="{{item.dragtype}}" ng-src="{{'/images/' + item.dragtype + '/' + item.id + '.svg'}}" ng-style="{width:item.width + 'px'}"/>
             </li>
         </ul>
     </div>

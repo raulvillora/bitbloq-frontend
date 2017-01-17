@@ -51,6 +51,7 @@ angular.module('bitbloqApp')
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
         exports.twitterTutorialId = envData.config.twitterTutorialId;
+        exports.playStoreUrl = envData.config.playStoreUrl;
 
         exports.avatarChange = false;
         exports.os = utils.getOs();
