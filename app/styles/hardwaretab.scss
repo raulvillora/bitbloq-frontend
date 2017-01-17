@@ -388,6 +388,12 @@ $hw_toolbox: 210px;
             background-color: transparent;
             width: 555px;
         }
+
+        &.grooveshield {
+            background-image: url("/images/boards/grooveshield.svg");
+            background-color: transparent;
+            width: 555px;
+        }
     }
 
     .component {
