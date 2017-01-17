@@ -1,0 +1,48 @@
+<div ng-if="tasks.length>0">
+    <div class="dropdown-group table__added clearfix">
+        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+    </div>
+    <div>
+        <div class="centerMode__table-title row">
+            <div class="col-vsmall-5">
+                <span>{{'centerMode_column_name' | translate}}</span>
+            </div>
+            <div class="table__column--centered col-vsmall-1">
+                <span>{{'centerMode_column_mark' | translate}}</span>
+            </div>
+            <div class="table__column--centered col-vsmall-3">
+                <span>{{'centerMode_column_status' | translate}}</span>
+            </div>
+        </div>
+        <div class="table__block">
+            <div class="table__block__list row" ng-repeat="task in tasks | orderBy:'orderInstance'">
+                <div class="table__block__item col-vsmall-5">
+                    <a ng-href="{{'#/center-mode/group/' + group._id + '/task/' + task._id}}">
+                        <h2 class="block__item__title" data-element="{{'centerMode-task-' + task._id}}">
+                            {{task.firstName? task.firstName + ' ' + task.lastName : task.username}}
+                        </h2>
+                    </a>
+                </div>
+                <div class="table__block__item table__column--centered col-vsmall-2">
+                    <span data-element="{{'centerMode-task-mark' + task._id}}">
+                        {{task.mark || '-'}}
+                    </span>
+                </div>
+                <div class="table__block__item table__column--centered col-vsmall-2">
+                    <span data-element="{{'centerMode-task-status' + task._id}}">
+                        {{task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='corrected' ? 'centerMode_status_corrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : ''  | translate}}
+                    </span>
+                </div>
+                <div class="table__block__item table__column--hover table__column--right col-vsmall-3">
+                    <a class="btn btn--tertiary btn--small" data-element="centerMode-button-showExercises">
+                        {{'centerMode_button_correct' | translate}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="tasks.length===0">
+    <h1>{{'centerMode_tasks_empty' | translate}}</h1>
+    <p>{{'centerMode_tasks_emptyInfo' | translate}}</p>
+</div>
