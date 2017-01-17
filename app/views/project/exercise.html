@@ -48,6 +48,11 @@
     <div data-ng-class="{'content--main':true, 'content--main--collapse':collapsedHeader}" data-ng-click="dropdown = false">
         <aside data-ng-class="{'tabs--make--left':true, 'content--main--collapse':collapsedHeader}">
             <ul class="tabs__menu">
+                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltips="true" data-tooltip="{{ 'exercise-info' | translate }}" data-tooltip-position="right" data-element="info-tab">
+                    <svg class="svg-icon">
+                        <use xlink:href="#info"></use>
+                    </svg>
+                </li>
                 <li data-ng-class="{tabs__menu__item:true, selected:currentTab===0}" data-ng-click="setTab(0)" data-tooltips="true" data-tooltip="{{ 'hardware' | translate }}" data-tooltip-position="right" data-element="hardware-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#hardware"></use>
@@ -58,12 +63,6 @@
                         <use xlink:href="#software"></use>
                     </svg>
                 </li>
-                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltips="true" data-tooltip="{{ 'exercise-info' | translate }}" data-tooltip-position="right" data-element="info-tab">
-                    <svg class="svg-icon">
-                        <use xlink:href="#info"></use>
-                    </svg>
-                </li>
-                
                 <li data-ng-if="common.section==='task' && isOwner" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'project-mark' | translate }}" data-tooltip-position="right" data-element="info-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#tickCircle"></use>
