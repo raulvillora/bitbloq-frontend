@@ -294,7 +294,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 projectService.project.bitbloqConnectBT = bTComponent;
             } else {
                 projectService.project.bitbloqConnectBT = {
-                    message: 'Esta placa necesita un modulo bluetooth, tendrás que seleccionar en los bloques'
+                    message: $scope.common.translate('device-needs-bluetooth')
                 };
 
                 var btConnected = _.find(projectService.componentsArray.serialElements, function(component) {
