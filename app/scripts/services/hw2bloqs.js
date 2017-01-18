@@ -92,7 +92,6 @@ angular
         };
 
         exports.addBoard = function(newBoard) {
-          console.log("add boaaaard");
             exports.removeBoard();
 
             board = newBoard;
