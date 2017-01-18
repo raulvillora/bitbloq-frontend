@@ -4,7 +4,7 @@
 </div>
 <h1 class="header__title col-vsmall-8" ng-if="common.urlType==='teacher'">{{'header_tab_myClass' | translate}}</h1>
 <div ng-if="common.urlType==='group'" class="breadcrumb header__title col-vsmall-8" ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
-    <h1><a href="#/center-mode/center">{{'groups' | translate}}</a></h1>
+    <h1><a ng-href="{{'#' + common.lastUrl}}">{{'groups' | translate}}</a></h1>
     <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{group._id}}">
         {{group.name}}
         <span class="breadcrumb--subtext">{{group.accessId}}</span>

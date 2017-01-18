@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
+    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
 
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -24,6 +24,7 @@ angular.module('bitbloqApp')
         exports.isLoading = false;
         exports.isLoggedIn = userApi.isLoggedIn;
         exports.isAdmin = userApi.isAdmin;
+        exports.lastUrl = '';
         exports.oldVersionMasthead = false;
         exports.os = utils.getOs();
         exports.properties = null;
@@ -39,7 +40,6 @@ angular.module('bitbloqApp')
         exports.urlImage = envData.config.gCloudUrl + '/images/';
         exports.urlType = null;
         exports.user = null;
-        exports.userRole = '';
         exports.warnedOfIncompatibility = false;
 
         exports.langToBQ = {

@@ -30,6 +30,11 @@
 
             var currentModal;
 
+            $scope.saveUrl = function(newUrl) {
+                $scope.common.lastUrl = $location.url();
+                $location.path(newUrl);
+            };
+
             $scope.changeStatusClass = function() {
                 centerModeApi.updateGroup($scope.group).catch(function() {
                     alertsService.add({
@@ -69,7 +74,7 @@
                                 type: 'ok',
                                 time: 5000
                             });
-                            $location.url('center-mode/teacher');
+                            $location.path('center-mode/teacher');
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteGroup-Error',
