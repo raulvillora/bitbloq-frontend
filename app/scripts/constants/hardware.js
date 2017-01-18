@@ -1480,6 +1480,7 @@ angular.module('bitbloqApp')
             "id": "mranger",
             "name": "mRanger",
             "board": "Arduino MEGA 2560",
+            "underDevelopment": true,
             "width": 75,
             "height": 86
         }, {
