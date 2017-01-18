@@ -40,6 +40,7 @@ angular.module('bitbloqApp')
         exports.urlImage = envData.config.gCloudUrl + '/images/';
         exports.urlType = null;
         exports.user = null;
+        exports.userRole = 'user';
         exports.warnedOfIncompatibility = false;
 
         exports.langToBQ = {
@@ -164,6 +165,12 @@ angular.module('bitbloqApp')
             });
         }
 
+        function getUserRole() {
+            centerModeApi.getMyRole().then(function(result) {
+                exports.userRole = result.data;
+            });
+        }
+
         var loadedUserPromise = $q.defer();
 
         if (!exports.user) {
@@ -199,6 +206,7 @@ angular.module('bitbloqApp')
 
         exports.itsUserLoaded().finally(function() {
             getProperties();
+            getUserRole();
         });
 
         $rootScope.$on('$locationChangeSuccess', function() {

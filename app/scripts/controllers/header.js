@@ -22,7 +22,6 @@ angular.module('bitbloqApp')
         $scope.commonModals = commonModals;
         $scope.showHeader = false;
         $scope.common.session.save = false;
-        $scope.common.userRole = 'student';
 
         $scope.activateCenterMode = function() {
             function tryCenter() {
@@ -131,11 +130,5 @@ angular.module('bitbloqApp')
 
         $scope.$on('$destroy', function() {
             $document.off('click', clickDocumentHandler);
-        });
-
-        $scope.common.itsUserLoaded().then(function() {
-            centerModeApi.getMyRole().then(function(result) {
-                $scope.common.userRole = result.data;
-            });
         });
     });

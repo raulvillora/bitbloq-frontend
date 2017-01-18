@@ -400,10 +400,12 @@
             function _getTasksByExercise(exerciseId) {
                 centerModeApi.getTasksByExercise(exerciseId).then(function(response) {
                     response.data.forEach(function(task) {
+                        var taskId = task._id;
                         _.extend(task, task.student);
                         if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
                             task.status = 'notDelivered';
                         }
+                        task._id = taskId;
                     });
                     $scope.tasks = response.data;
                 });

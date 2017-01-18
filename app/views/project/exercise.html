@@ -63,7 +63,8 @@
                         <use xlink:href="#software"></use>
                     </svg>
                 </li>
-                <li data-ng-if="common.section==='task' && isOwner" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'project-mark' | translate }}" data-tooltip-position="right" data-element="info-tab">
+                <li data-ng-if="common.section==='task' && (common.userRole==='headMaster' || common.userRole==='teacher')" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'project-mark' | translate }}" data-tooltip-position="right"
+                    data-element="info-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#tickCircle"></use>
                     </svg>
