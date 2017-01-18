@@ -10,7 +10,10 @@ To start you need to:
 
 1. Clone the repo
 
-2. Execute the command "npm install && bower install" to install all dependencies.
+2. Execute this command to install all dependencies
+```
+npm install && bower install
+```
 
 3. Then you need to add the enviroment files:
 
@@ -50,7 +53,7 @@ To start you need to:
 }
 ```
 
-6. Create a file called facebook.json with the oauth info of Facebook, you need to fill the clientId field.
+6 . Create a file in app/res/config called facebook.json with the oauth info of Facebook, you need to fill the clientId field.
 
 ```
 {
@@ -69,7 +72,7 @@ To start you need to:
 }
 ```
 
-7. Create a file called google.json with the oauth info of Facebook, you need to fill the clientId and apikey fields
+7 . Create a file in app/res/config called google.json with the oauth info of Facebook, you need to fill the clientId and apikey fields
 
 ```
 {
@@ -95,4 +98,10 @@ To start you need to:
         "height": 400
     }
 }
+```
+
+8 . Execute the command 
+
+```
+grunt serve
 ```
