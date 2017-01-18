@@ -593,8 +593,6 @@ angular.module('bitbloqApp')
                                 viewer: viewer
                             });
                         } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
-                            console.log("twitterBloq");
-                            console.log($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
                             web2boardOnline.compileAndUpload({
                                 board: projectService.getBoardMetaData(),
                                 code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),

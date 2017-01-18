@@ -281,11 +281,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 var bTComponent = _.cloneDeep(_.find(hardwareConstants.components.serialElements, {
                     id: 'bt'
                 }));
+
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
+                bTComponent.baudRate= 19200;
+
                 bTComponent.pin = {
                     rx: 0,
                     tx: 1,
-                    baudRate: 19200
                 };
                 bTComponent.uid = 'btComponent';
                 projectService.addComponentInComponentsArray('serialElements', bTComponent);
