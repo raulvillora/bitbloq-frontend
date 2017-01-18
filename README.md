@@ -7,10 +7,15 @@ Feel free to do pull request, ask any question on the [Bitbloq forum](http://bit
 The website use node, grunt, bower, and angular 1.x.
 
 To start you need to:
+
 1. Clone the repo
+
 2. Execute the command "npm install && bower install" to install all dependencies.
+
 3. Then you need to add the enviroment files:
+
 4. Create a folder in app/res called config.
+
 5. Create a file in app/res/config called config.json with this content
 
 ```
