@@ -76,12 +76,14 @@
     margin: 0;
     padding: 0;
     padding-top: 0.7px;
-    a {
+    .table__item__text {
         color: #373b44;
         font-size: 16px;
         font-weight: 700;
         text-decoration: none;
         transition: color 120ms;
+        line-height: 1.5;
+        text-align: left;
         &:hover {
             &, & > * {
                 color: #82ad3a;
