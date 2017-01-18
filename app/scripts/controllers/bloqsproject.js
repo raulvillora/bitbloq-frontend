@@ -384,11 +384,19 @@ angular.module('bitbloqApp')
                 return o.id === 'sp';
             });
 
+            var bluetooth = _.find(componentsArray, function(o) {
+                return o.id === 'bt';
+            });
+
             var phoneElements = _.find(componentsArray, function(o) {
                 return o.id === 'device';
             });
             if (serialPort) {
                 components.sp = serialPort.name;
+            }
+
+            if (bluetooth) {
+                components.bt = bluetooth.name;
             }
 
             if (phoneElements) {
@@ -459,12 +467,19 @@ angular.module('bitbloqApp')
 
         function generateMobileTwitterCode(componentsArray, originalCode) {
             var components = $scope.getComponents(projectService.project.hardware.components);
+            var board = projectService.getBoardMetaData().id;
+
             var code = originalCode;
             var deviceName;
-            if (components.device) {
-                deviceName = components.device;
-                code = generateTwitterBloqCode(deviceName, code);
+            //bqZUM
+
+            if (board === 'bqZUM') {
+                deviceName = projectService.project.bitbloqConnectBT.name;
+            } else {
+                deviceName = components.bt;
             }
+
+            code = generateTwitterBloqCode(deviceName, code);
             return code;
         }
 
@@ -491,7 +506,6 @@ angular.module('bitbloqApp')
             } else {
                 twitterBlock = false;
             }
-
             return twitterBlock;
         };
 
@@ -579,6 +593,8 @@ angular.module('bitbloqApp')
                                 viewer: viewer
                             });
                         } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                            console.log("twitterBloq");
+                            console.log($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
                             web2boardOnline.compileAndUpload({
                                 board: projectService.getBoardMetaData(),
                                 code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),
