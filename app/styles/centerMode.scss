@@ -1,10 +1,19 @@
 .centerMode {
     background-color: #eeeeee;
     height: 100%;
+    [class*="col-"] {
+        padding-left: 0;
+    }
 }
 
 .center-mode__group .group__header {
     padding: 20px 0;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.center-mode__block {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }

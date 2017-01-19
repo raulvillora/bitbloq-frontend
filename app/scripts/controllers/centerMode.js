@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location, commonModals, $window) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, $routeParams, $location, commonModals, $window) {
 
             $scope.center = {};
             $scope.exercises = [];
@@ -333,7 +333,9 @@
                         _getTasks();
                         break;
                     case 'exercise-info':
+                        _getExercise($routeParams.id);
                         _getTasksByExercise($routeParams.id);
+                        _getGroups($routeParams.id);
                         break;
                 }
             }
@@ -366,6 +368,12 @@
 
             }
 
+            function _getExercise(exerciseId) {
+                exerciseApi.get(exerciseId).then(function(response) {
+                    $scope.exercise = response.data;
+                });
+            }
+
             function _getExercisesCount() {
                 centerModeApi.getExercisesCount($scope.teacher._id, {}).then(function(response) {
                     $scope.exercisesCount = response.data.count;
@@ -381,24 +389,30 @@
                 });
             }
 
-            function _getGroups() {
-                var teacherId;
-                if ($scope.teacher._id !== $scope.common.user._id) {
-                    teacherId = $scope.teacher._id;
+            function _getGroups(exerciseId) {
+                if (exerciseId) {
+                    centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
+                        $scope.groups = response.data;
+                    });
+                } else {
+                    var teacherId;
+                    if ($scope.teacher._id !== $scope.common.user._id) {
+                        teacherId = $scope.teacher._id;
+                    }
+                    centerModeApi.getGroups(teacherId, $scope.center._id).then(function(response) {
+                        $scope.groups = response.data;
+                    });
                 }
-                centerModeApi.getGroups(teacherId, $scope.center._id).then(function(response) {
-                    $scope.groups = response.data;
-                });
             }
 
             function _getTasks(groupId) {
-                centerModeApi.getTasks(groupId).then(function(response) {
+                exerciseApi.getTasks(groupId).then(function(response) {
                     $scope.exercises = response.data;
                 });
             }
 
             function _getTasksByExercise(exerciseId) {
-                centerModeApi.getTasksByExercise(exerciseId).then(function(response) {
+                exerciseApi.getTasksByExercise(exerciseId).then(function(response) {
                     response.data.forEach(function(task) {
                         var taskId = task._id;
                         _.extend(task, task.student);

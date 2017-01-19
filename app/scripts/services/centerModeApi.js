@@ -13,10 +13,9 @@ angular
             getExercisesCount: getExercisesCount,
             getGroup: getGroup,
             getGroups: getGroups,
+            getGroupsByExercise: getGroupsByExercise,
             getMyCenter: getMyCenter,
             getMyRole: getMyRole,
-            getTasks: getTasks,
-            getTasksByExercise: getTasksByExercise,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
             isHeadMaster: isHeadMaster,
@@ -126,6 +125,13 @@ angular
             }
         }
 
+        function getGroupsByExercise(exerciseId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'group/exercise/' + exerciseId
+            });
+        }
+
         function getMyCenter() {
             return $http({
                 method: 'GET',
@@ -137,27 +143,6 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'user/role'
-            });
-        }
-
-        function getTasks(groupId) {
-            if (groupId) {
-                return $http({
-                    method: 'GET',
-                    url: envData.config.centerModeUrl + 'task/group/' + groupId
-                });
-            } else {
-                return $http({
-                    method: 'GET',
-                    url: envData.config.centerModeUrl + 'task'
-                });
-            }
-        }
-
-        function getTasksByExercise(exerciseId) {
-            return $http({
-                method: 'GET',
-                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId
             });
         }
 

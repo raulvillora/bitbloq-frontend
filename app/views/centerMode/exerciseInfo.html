@@ -1,13 +1,22 @@
-<div>
-    <a class="btn btn--primary btn--small" ng-href="{{'#/exercise/' + exercise._id}}" target="_blank" data-element="centerMode_openExercise">
-        <span class="block__item__title">{{ 'centerMode_openExercise' | translate}}</span>
-    </a>
+<div class="center-mode__block row">
+    <p class="col-vsmall-6">
+        <span>{{'centerMode_createdAt' | translate}}</span>
+        {{exercise.createdAt | date:'dd MMM yyyy'}}
+    </p>
+    <div class="button-group col-vsmall-6">
+        <button class="btn btn--tertiary btn--small" data-element="centerMode_button_moreActions">
+            <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
+        </button>
+        <a class="btn btn--primary btn--small" ng-href="{{'#/exercise/' + exercise._id}}" target="_blank" data-element="centerMode_openExercise">
+            <span class="block__item__title">{{ 'centerMode_openExercise' | translate}}</span>
+        </a>
+    </div>
 </div>
-<div ng-if="exercises.length>0 || tasks.length>0" class="centerMode row">
+<div ng-if="groups.length>0 || tasks.length>0" class="centerMode row">
     <div class="col-vsmall-3 table__item" ng-include="'views/centerMode/groupTable.html'"></div>
     <div class="col-vsmall-9 table__item" ng-include="'views/centerMode/taskTable.html'"></div>
 </div>
-<div ng-if="exercises.length===0 && tasks.length===0">
+<div ng-if="groups.length===0 && tasks.length===0">
     <h1>{{'centerMode_groups_empty' | translate}}</h1>
     <p>{{'centerMode_groups_emptyInfo' | translate}}</p>
     <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">

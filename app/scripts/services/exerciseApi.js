@@ -17,6 +17,8 @@ angular.module('bitbloqApp')
             delete: deleteExercise,
             get: get,
             getTask: getTask,
+            getTasks: getTasks,
+            getTasksByExercise: getTasksByExercise,
             save: save,
             update: update,
             updateTask: updateTask
@@ -68,6 +70,27 @@ angular.module('bitbloqApp')
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'task/' + id
+            });
+        }
+
+        function getTasks(groupId) {
+            if (groupId) {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'task/group/' + groupId
+                });
+            } else {
+                return $http({
+                    method: 'GET',
+                    url: envData.config.centerModeUrl + 'task'
+                });
+            }
+        }
+
+        function getTasksByExercise(exerciseId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId
             });
         }
 
