@@ -339,25 +339,6 @@ angular.module('bitbloqApp')
             }
         };
 
-        function existComponent(componentsToSearch, components) {
-            var found,
-                j,
-                i = 0;
-
-            while (!found && (i < componentsToSearch.length)) {
-                j = 0;
-                while (!found && (j < components.length)) {
-                    if (componentsToSearch[i] === components[j].id) {
-                        found = components[j];
-                    }
-                    j++;
-                }
-                i++;
-            }
-
-            return found;
-        }
-
         $scope.showComponents = function(item) {
             var result = false;
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
@@ -655,14 +636,20 @@ angular.module('bitbloqApp')
             }
         }
 
-        function onDragEnd(evt) {
-            if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
+        function onDragEnd(object) {
+            if (object.detail.bloqData.name === 'phoneConfigTwitter') {
                 $scope.toolbox.level = 1;
                 $timeout(function() {
                     $scope.twitterSettings = true;
                 }, 500);
             }
             _.throttle(setScrollsDimension, 1000);
+            var bloqToDelete = bloqsUtils.itsOver(object.detail.$bloq, $scope.$trashcan);
+            if (bloqToDelete) {
+                object.removeBloq(object.detail.uuid, false, true);
+            }
+            $scope.showTrashcan = false;
+            $scope.$apply();
         }
 
         loadBloqs();
@@ -708,16 +695,8 @@ angular.module('bitbloqApp')
 
         $scope.$field.on('scroll', scrollField);
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
-        $window.addEventListener('bloqs:bloqremoved', _.throttle(setScrollsDimension, 250));
-        $window.addEventListener('bloqs:dragend', function(bloq) {
-            _.throttle(setScrollsDimension, 1000);
-            var bloqToDelete = bloqsUtils.itsOver(bloq.detail.$bloq, $scope.$trashcan);
-            if (bloqToDelete) {
-                bloqs.removeBloq(bloq.detail.uuid, false, true);
-            }
-            $scope.showTrashcan = false;
-            $scope.$apply();
-        });
+        $window.addEventListener('bloqs:bloqremoved', onDeleteBloq);
+        $window.addEventListener('bloqs:dragend', onDragEnd);
 
         $window.addEventListener('bloqs:startMove', function(bloq) {
             console.log(bloq);
