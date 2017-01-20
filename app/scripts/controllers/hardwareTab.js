@@ -285,7 +285,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
                 bTComponent.baudRate = 19200;
-
+                bTComponent.category = 'serialElements';
                 bTComponent.pin = {
                     rx: 0,
                     tx: 1,
@@ -334,7 +334,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.checkName = function() {
-
         var componentsNames = [];
         _.forEach(projectService.componentsArray, function(category) {
             if (category.length > 0) {
@@ -793,6 +792,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var componentBasicName = $translate.instant('default-var-name-' + component.id),
             componentsNames = [];
 
+        if (component.id === 'bt') {
+            componentBasicName = $scope.common.translate('device').toLowerCase();
+        }
+
         projectService.componentsArray[component.category].forEach(function(comp) {
             componentsNames[comp.name] = true;
         });
@@ -1026,7 +1029,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     });
 
     $scope.$watch('componentSelected.name', function(newVal, oldVal) {
-
         if (oldVal === '' && newVal !== '') {
             $timeout.cancel($scope.timeoutCode);
             projectService.startAutosave();
