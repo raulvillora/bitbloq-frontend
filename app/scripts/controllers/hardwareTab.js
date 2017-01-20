@@ -275,6 +275,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     function _addBtComponent() {
         if (!projectService.project.useBitbloqConnect) {
+
             projectService.project.useBitbloqConnect = true;
             if (projectService.project.hardware.board === 'bq ZUM') {
                 //added on get code too
@@ -283,7 +284,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }));
 
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
-                bTComponent.baudRate= 19200;
+                bTComponent.baudRate = 19200;
 
                 bTComponent.pin = {
                     rx: 0,
@@ -312,7 +313,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBTComponent = function() {
         projectService.project.useBitbloqConnect = false;
         $scope.componentSelected = false;
-        if (projectService.project.hardware.board === 'bq ZUM') {
+        if (projectService.project.bitbloqConnectBT.name) {
             projectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
         }
         projectService.project.bitbloqConnectBT = null;
@@ -545,6 +546,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         hw2Bloqs.addBoard(board);
 
         projectService.project.hardware.board = board.name;
+
         if (hw2Bloqs.checkIfOldConnections && projectService.project.hardware.components > 0 || projectService.project.useBitbloqConnect) {
             $scope.deleteBTComponent();
             _addBtComponent();
