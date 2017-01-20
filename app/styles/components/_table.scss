@@ -62,6 +62,15 @@
     }
 }
 
+.centerMode__table-title--exercises {
+    padding-left: 0 !important;
+    padding-bottom: 5px !important;
+
+    span {
+        padding-left: 0;
+    }
+}
+
 .table__title {
     padding: 0 10px 30px 0;
     font-size: 16px;
@@ -91,11 +100,13 @@
             }
         }
     }
+
     .block__item__title {
         display: inline-block;
         font-size: 16px;
         font-weight: bold;
     }
+
     .block__item__title--small {
         font-size: 1em;
         font-weight: initial;
@@ -132,10 +143,12 @@
     padding: 36px 0 22px 0;
     max-width: 1200px;
     margin: 0 auto;
+
     .table__item {
         &:first-child {
             padding-left: 0;
         }
+
         &:last-child {
             padding-right: 0;
         }
@@ -145,10 +158,31 @@
 .table__added {
     margin: 30px 0;
     width: 100%;
+
     common-dropdown {
         float: left;
         width: 190px;
     }
+
+    &:after {
+        clear: both;
+    }
+}
+
+.table__added__exercise {
+    margin: 30px 0;
+    width: 100%;
+
+    common-dropdown {
+        float: left;
+        width: 48%;
+        margin: 0 7px;
+
+        &:last-child {
+            float: right;
+        }
+    }
+
     &:after {
         clear: both;
     }

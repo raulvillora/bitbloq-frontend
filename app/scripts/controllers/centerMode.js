@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, $routeParams, $location, commonModals, $window) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location, commonModals, $window) {
 
             $scope.center = {};
             $scope.exercises = [];
@@ -27,6 +27,7 @@
             $scope.pagination = {
                 current: 1
             };
+            $scope.groupArray = {};
 
             var currentModal;
 
@@ -194,6 +195,15 @@
                         $scope.reverseOrder = false;
                         break;
                 }
+            };
+
+            $scope.sortInstancesByGroup = function(group) {
+                console.log("group seleccionado");
+                console.log(group);
+                console.log(group._id);
+                var nana = _getTasks(group._id);
+                console.log("nana");
+                console.log(nana);
             };
 
             $scope.newGroup = function() {

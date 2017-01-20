@@ -1,7 +1,7 @@
 <span class="form--select dropdown--bottom" data-ng-class="{'dropdown--disabled':disabled}">
     <button ng-if="!behavior" ng-click="triggerSelect()" class="btn btn--dropdown" data-ng-class="{'btn--dropdown--active':selected}" data-element="{{elementData}}">
-        <span ng-if="preHeading" class="{{ preHeadingClass }}" data-element="{{elementData + '-preheading'}}" >{{ preHeading | translate }}</span>
-        <span class="dropdown__heading" data-element="{{elementData + '-heading'}}">{{ shownOption || selected || headingOption }}</span>
+        <span ng-if="preHeading" class="{{ preHeadingClass }}" data-element="{{elementData + '-preheading'}}">{{ preHeading | translate }}</span>
+        <span class="dropdown__heading" data-element="{{elementData + '-heading'}}">{{ shownOption || selected.name || selected || headingOption }}</span>
         <span ng-if="preHeading" class="{{ postHeadingClass }}" data-element="{{elementData + '-preheading'}}">{{ postHeading | translate }}</span>
         <svg class="dropdown__icon">
             <use xlink:href="#dropdown"></use>
@@ -9,7 +9,7 @@
     </button>
     <ul class="dropwdown__menu" data-ng-show="collapsed === false" data-ng-class="dropdownMenuClass">
         <li data-ng-repeat="item in options" class="dropdown__menu__item">
-            <button data-ng-click="selectOption($index)" data-element="{{item}}">{{ item | translate}}</button>
+            <button data-ng-click="selectOption($index)" data-element="{{item.name || item}}">{{(item.name || item) | translate}}</button>
         </li>
     </ul>
 </span>

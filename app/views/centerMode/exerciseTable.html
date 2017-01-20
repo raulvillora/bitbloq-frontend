@@ -1,19 +1,28 @@
 <div ng-if="exercises.length>0">
-    <h1 class="table__title" ng-if="common.urlType!=='group'">
-        <svg class="svg-icon svg-icon--text">
-            <use xlink:href="#exercise"></use>
-        </svg>
-        {{'centerMode_exercises' | translate}}
-    </h1>
-    <div class="dropdown-group table__added clearfix" ng-if="common.urlType==='group'">
-        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
-        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
-        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+    <div class="center-mode__table__header center-mode__table__header__exercise">
+        <h1 class="table__title center-mode__table__header__element-left" ng-if="common.urlType!=='group'">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#exercise"></use>
+            </svg>
+            {{'centerMode_exercises' | translate}}
+        </h1>
+        <span class="center-mode__table__header__element-right">
+            {{'centerMode_exercises_showFilters' | translate}}</span>
+
+        <!--{{'centerMode_exercises_hideFilters' | translate}}-->
+    </div>
+
+    <!--<div style="background-color: red !important" class="center-mode__table__filters">
+      sadsadsadasd
+    </div>-->
+    <div class="dropdown-group table__added__exercise clearfix" ng-if="common.urlType!=='group'">
+        <common-dropdown options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        <common-dropdown options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
     </div>
     <div>
-        <div class="centerMode__table-title row">
-            <span class="col-vsmall-7">{{'centerMode_column_name' | translate}}</span>
-            <span class="col-vsmall-4">{{'centerMode_column_time' | translate}}</span>
+        <div class="centerMode__table-title centerMode__table-title--exercises row">
+            <span class="col-vsmall-8">{{'centerMode_column_name' | translate}}</span>
+            <span class="col-vsmall-3">{{'centerMode_column_time' | translate}}</span>
         </div>
         <div class="table__block table__block__exercise">
             <div class="table__block__list row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
@@ -38,7 +47,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="forum__paginator">
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>

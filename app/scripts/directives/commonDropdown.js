@@ -46,7 +46,11 @@ angular.module('bitbloqApp')
                 };
 
                 scope.selectOption = function(indexItem) {
-                    scope.selected = common.translate(scope.options[indexItem]);
+                    if (scope.options[indexItem].name) {
+                        scope.selected = scope.options[indexItem].name;
+                    } else {
+                        scope.selected = common.translate(scope.options[indexItem]);
+                    }
                     scope.collapsed = true;
                     scope.optionsClick(scope.options[indexItem]);
                 };

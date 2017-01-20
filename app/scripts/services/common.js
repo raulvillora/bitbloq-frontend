@@ -72,6 +72,7 @@ angular.module('bitbloqApp')
             ru: 'en-GB',
             zh: 'en-GB'
         };
+        var loadedUserPromise = $q.defer();
 
         exports.setUser = function(user) {
             if (loadedUserPromise.promise.$$state.status !== 0) {
@@ -85,11 +86,14 @@ angular.module('bitbloqApp')
                     exports.cookiesAccepted = true;
                 }
                 exports.user = user;
+                getUserRole();
                 loadedUserPromise.resolve();
+
             } else {
                 exports.user = null;
                 $translate.use(localStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
+                exports.userRole = 'user';
                 loadedUserPromise.reject();
             }
         };
@@ -171,8 +175,6 @@ angular.module('bitbloqApp')
             });
         }
 
-        var loadedUserPromise = $q.defer();
-
         if (!exports.user) {
             $log.debug('gettingUSer on common');
             User.get().$promise.then(function(user) {
@@ -206,7 +208,6 @@ angular.module('bitbloqApp')
 
         exports.itsUserLoaded().finally(function() {
             getProperties();
-            getUserRole();
         });
 
         $rootScope.$on('$locationChangeSuccess', function() {
