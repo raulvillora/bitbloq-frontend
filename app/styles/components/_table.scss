@@ -1,6 +1,8 @@
 .table__page {
     background-color: #eeeeee;
     height: 100%;
+    width: 100%;
+    overflow-y: auto;
 }
 
 .table__header {
