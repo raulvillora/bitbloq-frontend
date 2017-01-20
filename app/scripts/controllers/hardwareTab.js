@@ -318,7 +318,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBTComponent = function() {
         $scope.currentProject.useBitbloqConnect = false;
         $scope.componentSelected = false;
-        if (currentProject.hardware.board === 'bq ZUM') {
+        if ($scope.currentProject.hardware.board === 'bq ZUM') {
             currentProjectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
         }
         $scope.currentProject.bitbloqConnectBT = null;

@@ -15,6 +15,7 @@ angular
             getGroups: getGroups,
             getGroupsByExercise: getGroupsByExercise,
             getMyCenter: getMyCenter,
+            getMyCentersAsTeacher: getMyCentersAsTeacher,
             getMyRole: getMyRole,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
@@ -136,6 +137,13 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'center/me'
+            });
+        }
+
+        function getMyCentersAsTeacher() {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'center/teacher/me'
             });
         }
 

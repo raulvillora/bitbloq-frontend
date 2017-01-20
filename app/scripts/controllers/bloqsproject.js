@@ -968,14 +968,13 @@ angular.module('bitbloqApp')
 
         function launchModalTour() {
             ngDialog.closeAll();
-            var modalTour = $rootScope.$new(),
-                modalTourInit;
+            var modalTour = $rootScope.$new();
             _.extend(modalTour, {
                 contentTemplate: '/views/modals/infoTour.html',
                 confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });
-            modalTourInit = ngDialog.open({
+            ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--alert',
                 scope: modalTour,
@@ -1007,8 +1006,7 @@ angular.module('bitbloqApp')
         }
 
         function launchModalGuest() {
-            var modalGuest = $rootScope.$new(),
-                modalGuestInit;
+            var modalGuest = $rootScope.$new();
             _.extend(modalGuest, {
                 contentTemplate: '/views/modals/alert.html',
                 confirmAction: function() {
@@ -1022,7 +1020,7 @@ angular.module('bitbloqApp')
                 rejectAction: launchModalTour
             });
 
-            modalGuestInit = ngDialog.open({
+            ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--alert',
                 scope: modalGuest,

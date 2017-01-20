@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('exerciseService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi, common, utils, $translate, bowerData, $timeout, hardwareConstants, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
+    .service('exerciseService', function($log, $window, envData, $q, $rootScope, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareConstants, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration) {
 
         var exports = {},
             savePromise,
@@ -62,6 +62,94 @@ angular.module('bitbloqApp')
                 _downloadJSON(exercise);
             }
 
+        };
+
+        exports.assignGroup = function(project, teacherId, groups, centerId) {
+            function confirmAction(groups) {
+                var selectedGroups = _.filter(groups, {'selected': true}),
+                    groupsToAssign = [];
+                selectedGroups.forEach(function(group) {
+                    if (group.withoutDate || !selectedGroups[0].calendar.from.date || selectedGroups[0].calendar.to.date) {
+                        groupsToAssign.push({
+                            _id: group._id,
+                            calendar: {}
+                        });
+                    } else {
+                        var hourFrom = selectedGroups[0].calendar.from.time.split(':')[0],
+                            minutesFrom = selectedGroups[0].calendar.from.time.split(':')[1],
+                            hourTo = selectedGroups[0].calendar.to.time.split(':')[0],
+                            minutesTo = selectedGroups[0].calendar.to.time.split(':')[1];
+                        selectedGroups[0].calendar.from.date.hour(hourFrom);
+                        selectedGroups[0].calendar.from.date.minute(minutesFrom);
+                        selectedGroups[0].calendar.to.date.hour(hourTo);
+                        selectedGroups[0].calendar.to.date.minute(minutesTo);
+                        groupsToAssign.push({
+                            _id: group._id,
+                            calendar: {
+                                from: selectedGroups[0].calendar.from.date,
+                                to: selectedGroups[0].calendar.to.date
+                            }
+                        });
+                    }
+                });
+                exerciseApi.assignGroups(project._id, groupsToAssign).then(function() {
+                    assignModal.close();
+                });
+            }
+
+            var modalOptions = $rootScope.$new(),
+                assignModal;
+
+            function showDatePicker(datePickerId) {
+                setTimeout(function() {
+                    $('#' + datePickerId).focus();
+                }, 0);
+            }
+
+            function showTimePicker(timePickerId, event) {
+                $('#' + timePickerId).click();
+                event.stopPropagation();
+            }
+
+            function initTimePicker() {
+                var options = {
+                    twentyFour: true  //Display 24 hour format, defaults to false
+                };
+                $('.timepicker').wickedpicker(options);
+            }
+
+            function _newGroup() {
+                centerModeService.newGroup(teacherId, centerId).then(function(response) {
+                    groups.push(response.data);
+                    _.extend(modalOptions, {
+                        groups: groups
+                    });
+                });
+            }
+
+            _.extend(modalOptions, {
+                title: 'centerMode_editGroups',
+                contentTemplate: 'views/modals/centerMode/editGroups.html',
+                mainText: 'centerMode_editGroups_info',
+                exerciseName: project.name,
+                groups: groups,
+                confirmButton: 'save',
+                selectedDate: new Date(),
+                showDatePicker: showDatePicker,
+                showTimePicker: showTimePicker,
+                initTimePicker: initTimePicker,
+                newGroup: _newGroup,
+                rejectButton: 'modal-button-cancel',
+                confirmAction: confirmAction,
+                modalButtons: true
+            });
+
+            assignModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--assign-group',
+                scope: modalOptions
+
+            });
         };
 
         /**
@@ -325,14 +413,6 @@ angular.module('bitbloqApp')
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
 
-        function _updateExerciseOrTask(exerciseId, exercise) {
-            if (common.section === 'task') {
-                return exerciseApi.updateTask(exerciseId, exercise);
-            } else {
-                return exerciseApi.update(exerciseId, exercise);
-            }
-        }
-
         exports.getExerciseOrTask = function(id) {
             if (common.section === 'task') {
                 return exerciseApi.getTask(id);
@@ -341,6 +421,13 @@ angular.module('bitbloqApp')
             }
         };
 
+        function _updateExerciseOrTask(exerciseId, exercise) {
+            if (common.section === 'task') {
+                return exerciseApi.updateTask(exerciseId, exercise);
+            } else {
+                return exerciseApi.update(exerciseId, exercise);
+            }
+        }
 
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------

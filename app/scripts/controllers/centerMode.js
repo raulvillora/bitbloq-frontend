@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, $routeParams, $location, commonModals, $window) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window) {
 
             $scope.center = {};
             $scope.exercises = [];
@@ -198,52 +198,13 @@
             };
 
             $scope.sortInstancesByGroup = function(group) {
-                console.log("group seleccionado");
-                console.log(group);
-                console.log(group._id);
                 var nana = _getTasks(group._id);
-                console.log("nana");
                 console.log(nana);
             };
 
             $scope.newGroup = function() {
-                function confirmAction(name) {
-                    var accessId = Date.now();
-                    centerModeApi.createGroup(name, accessId, $scope.teacher._id, $scope.center._id).then(function() {
-                        modalOptions.title = name;
-                        modalOptions.mainText = 'centerMode_modal_accessIdInfo';
-                        modalOptions.confirmButton = null;
-                        modalOptions.rejectButton = 'close';
-                        modalOptions.modalInput = false;
-                        modalOptions.secondaryText = accessId;
-                        _getGroups();
-                    });
-                }
-
-                var modalOptions = $rootScope.$new();
-
-                _.extend(modalOptions, {
-                    title: 'centerMode_modal_createGroupTitle',
-                    contentTemplate: 'views/modals/input.html',
-                    mainText: 'centerMode_modal_createGroupInfo',
-                    modalInput: true,
-                    secondaryText: false,
-                    input: {
-                        id: 'groupName',
-                        name: 'groupName',
-                        placeholder: 'centerMode_modal_createGroupPlaceholder'
-                    },
-                    confirmButton: 'centerMode_button_createGroup',
-                    rejectButton: 'modal-button-cancel',
-                    confirmAction: confirmAction,
-                    modalButtons: true
-                });
-
-                ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions
-
+                centerModeService.newGroup($scope.teacher._id, $scope.center._id).then(function() {
+                    _getGroups();
                 });
             };
 
