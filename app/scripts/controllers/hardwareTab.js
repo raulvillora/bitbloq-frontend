@@ -261,6 +261,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _addBtComponent() {
+        console.log('_addBtComponent');
         if (!projectService.project.useBitbloqConnect) {
             projectService.project.useBitbloqConnect = true;
             if (projectService.project.hardware.board === 'bq ZUM') {
@@ -295,6 +296,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     $scope.deleteBTComponent = function() {
+        console.log('deleteBTComponent');
         projectService.project.useBitbloqConnect = false;
         $scope.componentSelected = false;
         if (projectService.project.hardware.board === 'bq ZUM') {

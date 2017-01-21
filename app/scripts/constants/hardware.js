@@ -1452,6 +1452,17 @@ angular.module('bitbloqApp')
                         "s"
                     ]
                 }
+            }, {
+                "id": "GroveShieldButton",
+                "type": "digital",
+                "width": 72,
+                "height": 81,
+                "dataReturnType": "float",
+                "pins": {
+                    "digital": [
+                        "s"
+                    ]
+                }
             }],
             "clocks": [{
                 "id": "rtc",
@@ -1494,6 +1505,16 @@ angular.module('bitbloqApp')
                 "type": "digital",
                 "width": 85,
                 "height": 80,
+                "pins": {
+                    "digital": [
+                        "s"
+                    ]
+                }
+            }, {
+                "id": "GroveShieldBuzzer",
+                "type": "digital",
+                "width": 72,
+                "height": 81,
                 "pins": {
                     "digital": [
                         "s"

@@ -243,15 +243,14 @@ angular.module('bitbloqApp')
                         result = existComponent([
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
-                            'joystick', 'ldrs', 'pot'
+                            'joystick', 'ldrs', 'pot', 'GroveShieldButton'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = $scope.showCommunications(item);
-
                     } else if (item.indexOf('phone') > -1) {
                         result = projectService.project.useBitbloqConnect;
                     } else if (item.includes('rgb')) {
-                        result = existComponent(['RGBled'], connectedComponents);
+                        result = existComponent(['RGBled'], connectedComponents) || existComponent(['GroveShieldRGB'], connectedComponents);
                     } else if (item.includes('oscillator')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
@@ -272,6 +271,8 @@ angular.module('bitbloqApp')
                             }
                             i++;
                         }
+                    } else if (item.includes('buzz')) {
+                        result = existComponent(['buzz'], connectedComponents) || existComponent(['GroveShieldBuzzer'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
