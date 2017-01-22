@@ -793,6 +793,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             componentsNames = [];
 
         if (component.id === 'bt') {
+          
             componentBasicName = $scope.common.translate('device').toLowerCase();
         }
 
