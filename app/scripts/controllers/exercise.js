@@ -46,10 +46,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        $scope.common.itsUserLoaded().then(function() {
-            $scope.getGroups();
-        });
-
         function _canUpdate() {
             exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
                 $scope.isOwner = (res.status === 200);
@@ -477,9 +473,13 @@ angular.module('bitbloqApp')
 
         function loadExercise(id) {
             return exerciseService.getExerciseOrTask(id).then(function(response) {
-                console.log(response.data);
                 _uploadExercise(response.data);
-                _canUpdate();
+                if ($scope.common.section === 'exercise') {
+                    _canUpdate();
+                    $scope.getGroups();
+                } else {
+                    $scope.isOwner = false;
+                }
                 $scope.currentProjectLoaded.resolve();
             }, function(error) {
                 exerciseService.addWatchers();
