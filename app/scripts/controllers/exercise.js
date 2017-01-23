@@ -52,16 +52,64 @@ angular.module('bitbloqApp')
 
         function _canUpdate() {
             exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
-                if (res.status === 200) {
-                    $scope.isOwner = true;
-                } else {
-                    $scope.isOwner = false;
-                }
+                $scope.isOwner = (res.status === 200);
             });
         }
 
         $scope.assignGroup = function() {
             exerciseService.assignGroup($scope.currentProject, $scope.common.user._id, $scope.groups);
+        };
+
+        $scope.sendTask = function(task) {
+            var dialog,
+                parent = $rootScope,
+                modalOptions = parent.$new(),
+                confirmAction = function() {
+                    exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function() {
+                        alertsService.add({
+                            text: 'centerMode__alert__sendTask-ok',
+                            id: 'publishing-project',
+                            type: 'info',
+                            time: 5000
+                        });
+                        $scope.currentProject.status = 'delivered';
+                    }).catch(function() {
+                        alertsService.add({
+                            text: 'centerMode__alert__sendTask-error',
+                            id: 'publishing-project',
+                            type: 'warning'
+                        });
+                    });
+                    dialog.close();
+                };
+
+            _.extend(modalOptions, {
+                title: 'centerMode__modal__sendTask',
+                confirmButton: 'send',
+                confirmAction: confirmAction,
+                rejectButton: 'modal-button-cancel',
+                textContent: 'centerMode__modal__sendTask-mainText',
+                secondaryContent: 'centerMode__modal__sendTask-secondaryText',
+                contentTemplate: '/views/modals/information.html',
+                modalButtons: true
+            });
+
+            dialog = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--input',
+                scope: modalOptions
+            });
+
+
+        };
+
+        $scope.onTime = function() {
+            var now = moment(),
+                canDeliver = false;
+            if ((!$scope.currentProject.initDate || now.diff($scope.currentProject.initDate) > 0) && (!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0)) {
+                canDeliver = true;
+            }
+            return canDeliver;
         };
 
 

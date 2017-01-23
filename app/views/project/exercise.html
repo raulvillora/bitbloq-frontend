@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li class="nav__menu__item project--title">
-                <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="currentProjectService.rename()">{{currentProjectService.exercise.name || 'new-project' | translate}}
+                <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="currentProjectService.rename()">{{currentProject.name || 'new-project' | translate}}
                     <span></span>
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{currentProjectService.getSavingStatusIdLabel()}}">{{ currentProjectService.getSavingStatusIdLabel() | translate }}</span>
@@ -29,12 +29,19 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="!currentProjectService.exercise._acl.ALL && utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)"
-                data-tooltips="{{!currentProjectService.exercise._id || !common.user || !utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)}}"
-                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProjectService.exercise._id?'empty-project':!utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}"
+            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ 'send' | translate }}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="sendTask()" data-ng-disabled="currentProject.status!=='pending' || !onTime()" data-ng-class="{'btn--make--disabled':currentProject.status!=='pending'}" data-walkthrough="upload">
+                    <svg class="svg-icon">
+                        <use xlink:href="#do"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="nav__menu__item nav__item--white right" data-ng-if="!currentProject._acl.ALL && utils.userIsOwner(currentProject, common.user._id, common.section)"
+                data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section)}}"
+                data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}"
                 data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!currentProjectService.exercise._id || !utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)}"
-                        data-ng-disabled="!currentProjectService.exercise._id || !utils.userIsOwner(currentProjectService.exercise, common.user._id, common.section)">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!currentProject._id || !utils.userIsOwner(currentProject, common.user._id, common.section)}"
+                        data-ng-disabled="!currentProject._id || !utils.userIsOwner(currentProject, common.user._id, common.section)">
                     <svg class="svg-icon">
                         <use xlink:href="#cloud"></use>
                     </svg>

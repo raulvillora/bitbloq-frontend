@@ -284,6 +284,14 @@
             </svg>
         </button>
     </li>
+    <li class="nav__menu__item right" data-ng-if="common.section === 'task' || common.section === 'exercise'" data-tooltip-position="bottom" data-tooltip="{{ 'send' | translate }}"
+        data-tooltips="true">
+        <button data-ng-click="sendTask(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user || currentProject.status!=='pending'}" data-ng-disabled="currentProject.status!=='pending' || !onTime()">
+            <svg class="svg-icon">
+                <use xlink:href="#do"></use>
+            </svg>
+        </button>
+    </li>
     <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ 'load' | translate }}" data-tooltips="true">
         <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="upload();" data-ng-disabled="isWeb2BoardInProgress()" data-walkthrough="upload">
             <svg class="svg-icon">
