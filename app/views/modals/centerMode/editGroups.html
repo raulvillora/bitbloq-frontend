@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="group__content" ng-show="expandedItem[group._id]" ng-init="group.calendar={}">
-                    <span class="checkbox">
+                    <span class="checkbox" ng-init="group.withoutDate=(oldGroups[group._id]&&!oldGroups[group._id][0].endDate)">
                         <input type="checkbox" name="date" id="{{'withoutDate' + group._id}}" ng-model="group.withoutDate"/>
                         <label class="without-date" for="{{'withoutDate' + group._id}}">{{'centerMode_exerciseWithoutDate' | translate}}</label>
                     </span>

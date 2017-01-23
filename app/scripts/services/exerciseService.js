@@ -74,25 +74,32 @@ angular.module('bitbloqApp')
                     var selectedGroups = _.filter(groups, {'selected': true}),
                         groupsToAssign = [];
                     selectedGroups.forEach(function(group) {
-                        if (group.withoutDate || !selectedGroups[0].calendar.from.date || selectedGroups[0].calendar.to.date) {
+                        if (group.withoutDate || !group.calendar.from.date || !group.calendar.to.date) {
                             groupsToAssign.push({
                                 _id: group._id,
                                 calendar: {}
                             });
                         } else {
-                            var hourFrom = selectedGroups[0].calendar.from.time.split(':')[0],
-                                minutesFrom = selectedGroups[0].calendar.from.time.split(':')[1],
-                                hourTo = selectedGroups[0].calendar.to.time.split(':')[0],
-                                minutesTo = selectedGroups[0].calendar.to.time.split(':')[1];
-                            selectedGroups[0].calendar.from.date.hour(hourFrom);
-                            selectedGroups[0].calendar.from.date.minute(minutesFrom);
-                            selectedGroups[0].calendar.to.date.hour(hourTo);
-                            selectedGroups[0].calendar.to.date.minute(minutesTo);
+                            if (typeof(group.calendar.from.date) === 'string') {
+                                group.calendar.from.date = moment(group.calendar.from.date);
+                            }
+                            if (typeof(group.calendar.to.date) === 'string') {
+                                group.calendar.to.date = moment(group.calendar.to.date);
+                            }
+                            var hourFrom = group.calendar.from.time.split(':')[0],
+                                minutesFrom = group.calendar.from.time.split(':')[1],
+                                hourTo = group.calendar.to.time.split(':')[0],
+                                minutesTo = group.calendar.to.time.split(':')[1];
+                            group.calendar.from.date.hour(hourFrom);
+                            group.calendar.from.date.minute(minutesFrom);
+                            group.calendar.to.date.hour(hourTo);
+                            group.calendar.to.date.minute(minutesTo);
+
                             groupsToAssign.push({
                                 _id: group._id,
                                 calendar: {
-                                    from: selectedGroups[0].calendar.from.date,
-                                    to: selectedGroups[0].calendar.to.date
+                                    from: group.calendar.from.date,
+                                    to: group.calendar.to.date
                                 }
                             });
                         }
