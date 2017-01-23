@@ -1297,6 +1297,7 @@ angular.module('bitbloqApp')
         "components": {
             "leds": [{
                 "id": "led",
+                "codeCategory": "simplePinOutput",
                 "width": 55,
                 "height": 83,
                 "pins": {
