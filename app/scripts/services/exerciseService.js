@@ -73,11 +73,12 @@ angular.module('bitbloqApp')
                     var selectedGroups = _.filter(groups, {'selected': true}),
                         groupsToAssign = [];
                     selectedGroups.forEach(function(group) {
-                        if(group.students.length === 0){
+                        if (group.students.length === 0) {
                             alertsService.add({
                                 text: 'centerMode__alert__assignGroup-empty',
                                 id: 'centerMode-assignGroup',
-                                type: 'info'
+                                type: 'info',
+                                time: 5000
                             });
                         }
                         if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
