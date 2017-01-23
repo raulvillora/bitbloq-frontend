@@ -1,11 +1,13 @@
-<div ng-if="exercises.length>0 || groups.length>0" class="centerMode row">
-    <div class="col-vsmall-3 table__item" ng-include="'views/centerMode/groupTable.html'"></div>
-    <div class="col-vsmall-9 table__item" ng-include="'views/centerMode/exerciseTable.html'"></div>
-</div>
-<div ng-if="exercises.length===0 && groups.length===0">
-    <h1>{{'centerMode_groups_empty' | translate}}</h1>
-    <p>{{'centerMode_groups_emptyInfo' | translate}}</p>
-    <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
-        <span>{{'centerMode_button_newGroup' | translate}}</span>
-    </button>
+<div class="table__main">
+    <div ng-if="exercises.length>0 || groups.length>0" class="centerMode row">
+        <div class="col-vsmall-3 table__item" ng-include="'views/centerMode/groupTable.html'"></div>
+        <div class="col-vsmall-9 table__item" ng-include="'views/centerMode/exerciseTable.html'"></div>
+    </div>
+    <div ng-if="exercises.length===0 && groups.length===0">
+        <h1>{{'centerMode_groups_empty' | translate}}</h1>
+        <p>{{'centerMode_groups_emptyInfo' | translate}}</p>
+        <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
+            <span>{{'centerMode_button_newGroup' | translate}}</span>
+        </button>
+    </div>
 </div>

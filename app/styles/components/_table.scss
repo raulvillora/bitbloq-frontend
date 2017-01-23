@@ -1,8 +1,9 @@
 .table__page {
     background-color: #eeeeee;
-    height: 100%;
-    width: 100%;
-    overflow-y: auto;
+}
+
+.table__page--with-header {
+    height: calc(100% - 93px);
 }
 
 .table__header {

@@ -1,6 +1,5 @@
 .centerMode {
     background-color: #eeeeee;
-    height: 100%;
     [class*="col-"] {
         padding-left: 0;
     }
@@ -17,7 +16,8 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
-center-mode__table__header {
+
+.center-mode__table__header {
     width: 100%;
     display: table;
 }
