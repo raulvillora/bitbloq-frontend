@@ -38,18 +38,22 @@
                 </svg>
                 {{'open-project-from-file' | translate}}
             </li>
-            <li ng-if="common.section === 'exercise'" class="dropdown__item" data-ng-click="currentProjectService.editDate()" data-element="centerMode_editDate">
-                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                    <use xlink:href="#calendar"></use>
-                </svg>
-                {{'centerMode_editDate' | translate}}
+            <li ng-if="common.section === 'exercise'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}" data-tooltips="{{!currentProject._id}}">
+                <div class="dropdown__item" data-ng-click="currentProjectService.editDate()" data-ng-disabled="!common.user || !currentProject._id" data-element="centerMode_editDate">
+                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                        <use xlink:href="#calendar"></use>
+                    </svg>
+                    {{'centerMode_editDate' | translate}}
+                </div>
             </li>
             
-            <li ng-if="common.section === 'exercise'" class="dropdown__item" data-ng-click="assignGroup()" data-element="centerMode_asignGroup">
-                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                    <use xlink:href="#people"></use>
-                </svg>
-                {{'centerMode_assignGroup' | translate}}
+            <li ng-if="common.section === 'exercise'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}" data-tooltips="{{!currentProject._id}}">
+                <div class="dropdown__item" data-ng-click="assignGroup()" data-ng-disabled="!common.user || !currentProject._id" data-element="centerMode_asignGroup">
+                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                        <use xlink:href="#people"></use>
+                    </svg>
+                    {{'centerMode_assignGroup' | translate}}
+                </div>
             </li>
             <li class="dropdown__item--separator"></li>
             <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':'') | translate}}" data-tooltips="{{!common.user}}">
@@ -69,8 +73,7 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li ng-if="common.section !== 'codeproject'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}"
-                data-tooltips="{{!currentProject._id}}">
+            <li ng-if="common.section !== 'codeproject'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}" data-tooltips="{{!currentProject._id}}">
                 <div class="dropdown__item" data-ng-click="currentProjectService.download()" data-ng-disabled="!currentProject._id" data-element="menu-download">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#download"></use>
