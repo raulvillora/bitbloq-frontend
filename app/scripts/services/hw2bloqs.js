@@ -539,7 +539,7 @@ angular
                         }],
                         overlays: [
                             ['Label', {
-                                label: 'Pin ' + pinName,
+                                label: pin.tooltip || ('Pin ' + pinName),
                                 labelStyle: {
                                     color: 'black'
                                 },

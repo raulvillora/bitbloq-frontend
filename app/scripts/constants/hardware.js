@@ -1213,37 +1213,44 @@ angular.module('bitbloqApp')
                 "digital": [{
                     "x": 0.357,
                     "y": 0.45,
-                    "name": "D8",
+                    "name": "8",
+                    "tooltip": "D8",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
                 }, {
                     "x": 0.464,
                     "y": 0.45,
-                    "name": "D7",
+                    "name": "7",
+                    "tooltip": "D7",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
                 }, {
                     "x": 0.57,
                     "y": 0.45,
-                    "name": "D6",
+                    "name": "6",
+                    "tooltip": "D6",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
                 }, {
                     "x": 0.678,
                     "y": 0.45,
-                    "name": "D5",
+                    "name": "5",
+                    "tooltip": "D5",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
                 }, {
                     "x": 0.357,
                     "y": 0.19,
-                    "name": "D4",
+                    "name": "4",
+                    "tooltip": "D4",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
                 }, {
                     "x": 0.464,
                     "y": 0.19,
-                    "name": "D3",
+                    "name": "3",
+                    "tooltip": "D3",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
                 }, {
                     "x": 0.57,
                     "y": 0.19,
-                    "name": "D2",
+                    "name": "2",
+                    "tooltip": "D2",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
                 }],
                 "analog": [{
