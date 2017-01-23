@@ -64,17 +64,23 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.assignGroup = function(project, teacherId, groups, centerId) {
-            centerModeApi.getGroupsByExercise(project._id).then(function(response) {
-                var oldGroups = _.groupBy(response.data, '_id');
-
+        exports.assignGroup = function(project, teacherId, oldGroups, centerId) {
+            oldGroups = _.groupBy(oldGroups, '_id');
+            centerModeApi.getGroups().then(function(response) {
+                var groups = response.data;
 
                 function confirmAction(groups) {
-                    console.log(oldGroups);
                     var selectedGroups = _.filter(groups, {'selected': true}),
                         groupsToAssign = [];
                     selectedGroups.forEach(function(group) {
-                        if (group.withoutDate || !group.calendar.from.date || !group.calendar.to.date) {
+                        if(group.students.length === 0){
+                            alertsService.add({
+                                text: 'centerMode__alert__assignGroup-empty',
+                                id: 'centerMode-assignGroup',
+                                type: 'info'
+                            });
+                        }
+                        if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
                             groupsToAssign.push({
                                 _id: group._id,
                                 calendar: {}

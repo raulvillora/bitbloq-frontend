@@ -41,7 +41,7 @@ angular.module('bitbloqApp')
         $scope.currentProjectLoaded = $q.defer();
 
         $scope.getGroups = function() {
-            centerModeApi.getGroups().then(function(response) {
+            centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
                 $scope.groups = response.data;
             });
         };
