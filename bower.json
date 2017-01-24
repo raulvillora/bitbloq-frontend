@@ -72,7 +72,7 @@
     "jquery": "2.1.1",
     "lodash": "~3.10.0",
     "angular-cookies": "^1.5.3",
-    "bloqs": "^0.10.8"
+    "angular-cookies": "^1.5.3"
   },
   "appPath": "app",
   "moduleName": "bitbloqApp",

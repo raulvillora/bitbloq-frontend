@@ -228,7 +228,7 @@ angular.module('bitbloqApp')
         /*************************************************
          Tab settings
          *************************************************/
-        $scope.currentTab = 0;
+        $scope.currentTab = 2;
 
         $scope.setTab = function(index) {
             if (!_.isEqual($scope.currentProject, exerciseService.getDefaultExercise())) {
