@@ -1,16 +1,22 @@
 // Modals
+.ngdialog-close:before {
+    color: #c0c3c9;
+    position: relative;
+    right: 4px;
+}
+
 .modal--container {
-    text-align : center;
+    text-align: center;
 
     /* May want to do this if there is risk the container may be narrower than the element inside */
     white-space: nowrap;
 
     &:before {
-        content       : '';
-        display       : inline-block;
-        height        : 100%;
+        content: '';
+        display: inline-block;
+        height: 100%;
         vertical-align: middle;
-        margin-right  : -0.25em;
+        margin-right: -0.25em;
     }
 
     .ngdialog-overlay {
@@ -18,32 +24,10 @@
     }
 
     .ngdialog-content {
-        border-radius : 5px;
-        white-space   : normal;
-        display       : inline-block;
+        border-radius: 5px;
+        white-space: normal;
+        display: inline-block;
         vertical-align: middle;
-
-        .modal--content {
-
-        }
-
-        .modal {
-            .modal__dialog {
-                .modal__dialog__content {
-                    .modal--header {
-                        .modal--title {
-
-                        }
-                    }
-
-                    .modal--footer {
-                        .btn__modal--footer {
-
-                        }
-                    }
-                }
-            }
-        }
     }
 
     &.password-reset--modal,
@@ -57,6 +41,12 @@
         }
     }
 
+    &.modal--centerMode {
+        .ngdialog-content {
+            width: 580px;
+        }
+    }
+
     &.password-reset--modal {
         .modal {
             text-align: left;
@@ -66,9 +56,9 @@
 
                 label {
                     margin-bottom: 10px;
-                    color        : #5d6069;
-                    font-size    : 14px;
-                    font-weight  : 400;
+                    color: #5d6069;
+                    font-size: 14px;
+                    font-weight: 400;
                 }
             }
         }
@@ -76,7 +66,7 @@
 
     &.modal--input {
         .form--input {
-            margin-top   : 10px;
+            margin-top: 10px;
             margin-bottom: 20px;
         }
     }
@@ -89,23 +79,23 @@
 
     &.modal--feedback-error {
         .common--textarea {
-            margin-top   : 20px;
+            margin-top: 20px;
             margin-bottom: 10px;
 
             textarea {
-                resize       : none;
+                resize: none;
                 border-radius: 10px;
-                color        : #8c919b;
-                font-size    : 13px;
-                font-style   : italic;
+                color: #8c919b;
+                font-size: 13px;
+                font-style: italic;
             }
         }
 
         .form--input {
             input {
-                color        : #8c919b;
-                font-size    : 13px;
-                font-style   : italic;
+                color: #8c919b;
+                font-size: 13px;
+                font-style: italic;
                 border-radius: 4px;
             }
         }
@@ -113,22 +103,22 @@
 
     &.modal--send-comments {
         .short--input {
-            margin-top   : 20px;
+            margin-top: 20px;
             margin-bottom: 10px;
         }
 
         textarea {
-            resize       : none;
+            resize: none;
             border-radius: 10px;
-            color        : #8c919b;
-            font-size    : 13px;
-            font-style   : italic;
+            color: #8c919b;
+            font-size: 13px;
+            font-style: italic;
         }
 
         input {
-            color        : #8c919b;
-            font-size    : 13px;
-            font-style   : italic;
+            color: #8c919b;
+            font-size: 13px;
+            font-style: italic;
             border-radius: 4px;
         }
     }
@@ -139,24 +129,24 @@
 
             .modal {
                 text-align: center;
-                position  : relative;
+                position: relative;
 
                 .modal--not-logged--image {
-                    width  : 65px;
-                    fill   : #f33;
-                    height : 59px;
-                    margin : 20px auto;
+                    width: 65px;
+                    fill: #f33;
+                    height: 59px;
+                    margin: 20px auto;
                     display: block;
                 }
 
                 .modal--not-logged-alert {
-                    color        : #373b44;
-                    font-size    : 24px;
-                    font-weight  : 700;
-                    font-family  : 'PT Sans', sans-serif;
-                    margin-top   : 20px;
+                    color: #373b44;
+                    font-size: 24px;
+                    font-weight: 700;
+                    font-family: 'PT Sans', sans-serif;
+                    margin-top: 20px;
                     margin-bottom: 20px;
-                    display      : block;
+                    display: block;
                 }
 
                 .modal--not-logged--text {
@@ -168,7 +158,6 @@
                 }
 
                 .btn--primary {
-                    margin-right: 10px;
                     margin: auto;
                 }
 
@@ -178,8 +167,8 @@
 
                 .btn__modal--close--no-title {
                     position: absolute;
-                    top     : 20px;
-                    right   : 20px;
+                    top: 20px;
+                    right: 20px;
                 }
             }
         }
@@ -198,7 +187,7 @@
 
                 button {
                     margin-top: 20px;
-                    width     : 235px;
+                    width: 235px;
                 }
 
                 p {
@@ -206,33 +195,33 @@
                 }
 
                 span {
-                    height          : 50px;
-                    min-width       : 236px;
+                    height: 50px;
+                    min-width: 236px;
                     background-color: #ebebeb;
-                    display         : block;
-                    line-height     : 50px;
-                    padding-left    : 20px;
-                    border-radius   : 4px;
-                    color           : #373b44;
-                    font-size       : 14px;
-                    font-weight     : 700;
-                    text-align      : left;
-                    max-width       : 235px;
-                    margin          : 10px auto;
-                    cursor          : pointer;
-                    position        : relative;
+                    display: block;
+                    line-height: 50px;
+                    padding-left: 20px;
+                    border-radius: 4px;
+                    color: #373b44;
+                    font-size: 14px;
+                    font-weight: 700;
+                    text-align: left;
+                    max-width: 235px;
+                    margin: 10px auto;
+                    cursor: pointer;
+                    position: relative;
 
                     input {
                         margin-right: 20px;
                     }
 
                     label {
-                        height      : 100%;
-                        display     : block;
-                        position    : absolute;
-                        top         : 0;
-                        left        : 0;
-                        width       : 100%;
+                        height: 100%;
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
                         padding-left: 50px;
                     }
                 }
@@ -248,75 +237,75 @@
 
     &.modal--download-web2board {
         .ngdialog-content {
-            width     : 550px;
+            width: 550px;
             text-align: center;
         }
 
         .modal--download--webtoboard--title {
-            margin-top   : 1em;
+            margin-top: 1em;
             margin-bottom: 1em;
-            text-align   : center;
+            text-align: center;
         }
 
         .modal--download--webtoboard--text {
             margin-bottom: 2em;
-            text-align   : center;
-            margin-left  : 1em;
-            margin-right : 1em;
+            text-align: center;
+            margin-left: 1em;
+            margin-right: 1em;
         }
 
         .modal--download--webtoboard--choose {
-            font-weight  : bold;
-            text-align   : center;
-            width        : 100%;
-            display      : block;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            display: block;
             margin-bottom: 2em;
         }
 
         .modal--download--webtoboard--block-container {
-            display    : flex;
-            height     : 139px;
+            display: flex;
+            height: 139px;
 
             small {
-                margin-top   : 1em;
+                margin-top: 1em;
                 margin-bottom: 1em;
             }
 
             .webtoboard-view-all-link {
-                color     : #666;
-                font-size : 12px;
+                color: #666;
+                font-size: 12px;
                 margin-top: 17px;
-                display   : block;
+                display: block;
             }
         }
 
         .modal--download--webtoboard--image--container {
-            display    : flex;
-            width      : 127px;
-            height     : 118px;
+            display: flex;
+            width: 127px;
+            height: 118px;
             margin-left: 7%;
         }
 
         .modal--download--webtoboard--text-container {
-          float: right;
+            float: right;
 
-          span {
-            height     : 13px;
-            color      : #373b44;
-            font-size  : 16px;
-            font-weight: 700;
-            line-height: 22px;
-            display    : block;
-            cursor     : default;
-          }
+            span {
+                height: 13px;
+                color: #373b44;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 22px;
+                display: block;
+                cursor: default;
+            }
         }
 
         .btn--webtoboard {
-          width           : 139px;
-          height          : 36px;
-          background-color: #373b44;
-          border-radius   : 4px;
-          margin-top      : 17px;
+            width: 139px;
+            height: 36px;
+            background-color: #373b44;
+            border-radius: 4px;
+            margin-top: 17px;
         }
     }
 
@@ -329,9 +318,9 @@
                     padding: 0;
 
                     .open-project--tabs {
-                        padding    : 20px 30px;
-                        color      : #5d6069;
-                        font-size  : 14px;
+                        padding: 20px 30px;
+                        color: #5d6069;
+                        font-size: 14px;
                         font-weight: 700;
                     }
 
@@ -349,38 +338,38 @@
 
                     .modal--project--list {
                         margin-bottom: 30px;
-                        height       : 328px;
-                        overflow     : auto;
+                        height: 328px;
+                        overflow: auto;
 
                         & .modal--project--item {
-                            height       : 50px;
-                            line-height  : 50px;
-                            padding-left : 30px;
+                            height: 50px;
+                            line-height: 50px;
+                            padding-left: 30px;
                             padding-right: 30px;
 
                             .modal--project--name {
-                                width        : 70%;
-                                float        : left;
+                                width: 70%;
+                                float: left;
                                 text-overflow: ellipsis;
-                                overflow     : hidden;
-                                white-space  : nowrap;
+                                overflow: hidden;
+                                white-space: nowrap;
                             }
 
                             .modal--project--date {
-                                float        : right;
-                                width        : 30%;
-                                float        : right;
-                                color        : #8c919b;
-                                font-size    : 12px;
-                                text-align   : right;
+                                float: right;
+                                width: 30%;
+                                float: right;
+                                color: #8c919b;
+                                font-size: 12px;
+                                text-align: right;
                                 text-overflow: ellipsis;
-                                overflow     : hidden;
-                                white-space  : nowrap;
+                                overflow: hidden;
+                                white-space: nowrap;
                             }
 
                             &:hover {
                                 background-color: #ebebeb;
-                                cursor          : pointer;
+                                cursor: pointer;
                             }
 
                             &:nth-child(odd) {
@@ -388,15 +377,15 @@
 
                                 &:hover {
                                     background-color: #ebebeb;
-                                    cursor          : pointer;
+                                    cursor: pointer;
                                 }
                             }
                         }
 
                         .selected--item {
                             background-color: black !important;
-                            color           : white;
-                            font-weight     : bold;
+                            color: white;
+                            font-weight: bold;
 
                             &:hover {
                                 background-color: black;
@@ -414,76 +403,81 @@
 }
 
 .modal {
-    height    : 100%;
+    height: 100%;
     text-align: left;
 
     .modal__dialog {
         height: 100%;
+    }
+    .modal__dialog__content {
+        height: 100%;
+    }
+    .modal__header {
+        width: 100%;
+        height: 60px;
+        border-bottom: 1px solid #e2e2e2;
+        line-height: 60px;
+        color: #373b44;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: 'PT Sans', sans-serif;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
 
-        .modal__dialog__content {
-            height: 100%;
+        h1,
+        .modal--close {
+            display: inline-block;
+            border-top-right-radius: 5px;
+        }
 
-            .modal__header {
-                width                  : 100%;
-                height                 : 60px;
-                border-bottom          : 1px solid #e2e2e2;
-                line-height            : 60px;
-                color                  : #373b44;
-                font-size              : 16px;
-                font-weight            : 700;
-                font-family            : 'PT Sans', sans-serif;
-                border-top-right-radius: 5px;
-                border-top-left-radius : 5px;
+        h1 {
+            padding-left: 30px;
+            width: calc(100% - 60px);
+            border-right: 1px solid #e2e2e2;
+        }
 
-                h1,
-                .modal--close {
-                    display                : inline-block;
-                    border-top-right-radius: 5px;
-                }
+        .modal--close {
+            width: 60px;
+            border: 1px solid #e2e2e2;
+            border-bottom: 0;
+            float: right;
 
-                h1 {
-                    padding-left: 30px;
-                    width       : calc(100% - 65px);
-                }
-
-                .modal--close {
-                    width        : 60px;
-                    border       : 1px solid #e2e2e2;
-                    border-bottom: 0;
-                    float        : right;
-
-                    .btn__modal--close {
-                        width : 100%;
-                        height: 60px;
-                    }
-
-                    .svg-icon__modal--close {
-                        fill      : $font-color-disabled;
-                        width     : 13px;
-                        height    : 13px;
-                        transition: fill 250ms;
-                    }
-
-                    &:hover {
-                        .svg-icon__modal--close {
-                            transition: fill 250ms;
-                            fill      : #939499;
-                        }
-                    }
-                }
+            .btn__modal--close {
+                width: 100%;
+                height: 60px;
             }
 
-            .modal__body {
-                padding: 30px;
+            .svg-icon__modal--close {
+                fill: $font-color-disabled;
+                width: 13px;
+                height: 13px;
+                transition: fill 250ms;
             }
 
-            .modal--buttons {
-                button {
-                    margin-right: 10px;
+            &:hover {
+                .svg-icon__modal--close {
+                    transition: fill 250ms;
+                    fill: #939499;
                 }
-                padding: 0 30px 30px;
             }
         }
+    }
+
+    .modal__body {
+        padding: 30px;
+        .modal__parraph {
+            margin-bottom: 17px;
+            & + .modal__input {
+                margin-top: 27px;
+            }
+        }
+    }
+
+    .modal--buttons {
+        button {
+            margin-right: 20px;
+        }
+        padding: 0 30px 30px;
     }
 }
 
@@ -498,7 +492,7 @@
 
     .share-modal__emails-no-user {
         background-color: #e2e2e2;
-        padding         : 20px 30px;
+        padding: 20px 30px;
 
         .email:last-child {
             .colon {
@@ -507,21 +501,23 @@
         }
     }
 }
+
 .modal-share-social--container {
     .social-networks {
         padding: 15px 0;
     }
 }
+
 .modal-share--short-url-input {
-    width     : 100%;
+    width: 100%;
     margin-top: 10px;
 
     input {
-        height       : 28px;
-        text-align   : center;
+        height: 28px;
+        text-align: center;
         padding-right: 10px;
-        border-right : 1px solid #cfcfcf;
-        min-width    : calc(100% - 60px);
+        border-right: 1px solid #cfcfcf;
+        min-width: calc(100% - 60px);
     }
 
     &:after {
@@ -530,11 +526,11 @@
 
     .copy-selected-text {
         margin-left: 5px;
-        position   : relative;
-        text-align : center;
+        position: relative;
+        text-align: center;
 
         &:hover {
-            cursor         : pointer;
+            cursor: pointer;
             text-decoration: underline;
         }
     }
@@ -549,8 +545,8 @@
     }
 }
 
-.modal--web2board-errors{
-    .modal__body{
+.modal--web2board-errors {
+    .modal__body {
         width: 546px;
         padding: 50px;
     }
@@ -565,9 +561,9 @@
         margin: 20px 0;
     }
 
-    .modal--web2board-errors--list{
+    .modal--web2board-errors--list {
         margin: 5px 0;
-        .svg-icon{
+        .svg-icon {
             fill: #82ad3a;
             width: 15px;
         }
@@ -583,7 +579,118 @@
         text-align: center;
     }
 
-    .link--default{
+    .link--default {
         color: #000000;
     }
+}
+
+.modal_input_secondaryText {
+    font-size: 25px;
+    margin-top: 15px;
+    &::before {
+        content: 'ID '
+    }
+}
+
+/*
+* simple and information modals
+*/
+
+.modal--information {
+    text-align: center;
+    display: block;
+
+    .modal__header {
+        padding-top: 30px;
+        border-bottom: none;
+        padding-left: 0;
+        h1 {
+            border-right: 0;
+            padding-left: 0;
+        }
+    }
+    .modal--title {
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    .modal--sencond-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 48px;
+        margin-bottom: 24px;
+    }
+
+    .modal_alert > *:not(.btn) {
+        display: block;
+        margin: 37px auto 25px auto;
+    }
+    .modal_alert > *:first-child {
+        margin-top: 10px;
+    }
+
+    .modal_alert .text-content {
+        margin: 25px auto 15px auto;
+    }
+
+    .modal--buttons button {
+            margin: 0 10px;
+    }
+    .btn {
+        // padding: 0 54px;
+        width: 187px;
+    }
+
+    a {
+        color: #5d6069;
+    }
+
+    .objective-list {
+        text-align: left;
+        li {
+            vertical-align: middle;
+            margin: 10px 0;
+            text-indent: -1.8em;
+            padding-left: 1.8em;
+            line-height: 1.57;
+        }
+        li::before {
+            content: '';
+            margin-right: 11.5px;
+            background-image: url(../images/common/tickGreen.svg);
+            background-size: 13px 10px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 12px;
+            height: 10px;
+        }
+    }
+
+    .input-list {
+        .row {
+            margin-top: 10px;
+        }
+        label {
+            text-align: right;
+            height: 35px;
+            line-height: 2.5;
+            font-size: 13px;
+        }
+        & input {
+            width: 324px;
+            height: 35px;
+            border-radius: 4px;
+            background-color: #ffffff;
+            border: solid 1px #cfcfcf;
+        }
+    }
+
+    .modal--buttons {
+        padding: 0 30px 50px;
+    }
+
+    .modal__body {
+        padding: 25px 52px;
+    }
+
 }

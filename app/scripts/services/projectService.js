@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
+    {
 
         var exports = {},
             thereAreWatchers = false,
@@ -128,7 +129,7 @@ angular.module('bitbloqApp')
         exports.download = function(project, type, force) {
             project = project || exports.project;
             type = type || 'json';
-            if (common.user || force) {
+            if ((common.user && project._id) || force) {
                 projectApi.addDownload(project._id).then(function(response) {
                     if (type === 'arduino') {
                         _downloadIno(response.data);
@@ -320,7 +321,7 @@ angular.module('bitbloqApp')
         };
 
         exports.rename = function() {
-            commonModals.renameProject(exports.project).then(exports.startAutosave);
+            commonModals.rename(exports.project).then(exports.startAutosave);
         };
 
         exports.setComponentsArray = function(components) {

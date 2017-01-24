@@ -1,0 +1,101 @@
+<div class="tour-steps">
+    <div class="tour-step--first tour-step--right" ng-show="tourCurrentStep === 1">
+        <small>{{ 'tour-step-one' | translate }}</small>
+        <span>{{ 'tour-step-one-text' | translate }}</span>
+    </div>
+    <div class="tour-step--second tour-step--right" ng-show="tourCurrentStep === 2">
+        <small>{{ 'tour-step-two' | translate }}</small>
+        <span>{{ 'tour-step-two-text' | translate }}</span>
+        <span>{{ 'tour-step-two-text-small' | translate }}</span>
+    </div>
+    <div class="tour-step--third tour-step--right" ng-show="tourCurrentStep === 3">
+        <small>{{ 'tour-step-three' | translate }}</small>
+        <span>{{ 'tour-step-three-text' | translate }}</span>
+    </div>
+    <div class="tour-step--fourth tour-step--left" ng-show="tourCurrentStep === 4">
+        <small>{{ 'tour-step-four' | translate }}</small>
+        <span>{{ 'tour-step-four-text' | translate }}</span>
+    </div>
+</div>
+<aside id="hwtoolbox" class="toolbox--right" ng-class="{'toolbox--expand':selectedToolbox!==''}">
+    <aside class="tabs-layout__aside tabs-layout__aside--vertical" ng-click="changeToolbox('', $event)">
+        <ul class="tabs__header--vertical">
+            <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='boards'}" data-walkthrough="boards">
+                <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)">
+                    <svg class="svg-icon">
+                        <use xlink:href="#board"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='components'}">
+                <button class="btn-svg" ng-click="changeToolbox('components')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#component"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='robots'}">
+                <button class="btn-svg" ng-click="changeToolbox('robots')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#robot"></use>
+                    </svg>
+                </button>
+            </li>
+        </ul>
+    </aside>
+    <div class="toolbox__menu" ng-show="selectedToolbox===''">
+        <ul>
+            <li class="toolbox__item" data-walkthrough="boards">
+                <button class="btn btn-text" ng-click="changeToolbox('boards'); handleTour(2)">
+                    {{'boards' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item">
+                <button class="btn btn-text" ng-click="changeToolbox('components')">
+                    {{'components' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item">
+                <button class="btn btn-text" ng-click="changeToolbox('robots')">
+                    {{'robots' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="toolbox__content" ng-show="selectedToolbox==='boards'">
+        <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-if="!board.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="board in hardware.boardList track by board.id" data-ng-click="drop({type:'boards', id:board.id})">
+                <h1 class="list-name">{{board.name}}</h1>
+                <img draggable dragid="{{board.id}}" dragtype="boards" ng-src="/images/boards/{{board.id}}.png">
+            </li>
+        </ul>
+    </div>
+    <div class="toolbox__content" ng-show="selectedToolbox==='components'">
+        <h1 class="h3 submenu__title">{{'components' | translate}}</h1>
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
+                <h1 class="list-name" translate>{{component.id}}</h1>
+                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="components" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+            </li>
+        </ul>
+    </div>
+    <div class="toolbox__content" ng-show="selectedToolbox==='robots'">
+        <h1 class="h3 submenu__title">{{'robots' | translate}}</h1>
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.id})">
+                <h1 class="list-name">{{robot.name}}</h1>
+                <img draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
+            </li>
+        </ul>
+    </div>
+</aside>

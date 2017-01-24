@@ -1,0 +1,23 @@
+.form--marktab .form--input {
+    border: none;
+
+    .mark--integer {
+        margin-right: 29px;
+    }
+
+    &:after {
+        content: ',';
+        display: block;
+        width: 20px;
+        height: 20px;
+        font-size: 13px;
+        position: relative;
+        color: #5d6069;
+        top: -24px;
+        left: 52px;
+    }
+}
+
+.table__block__exercise {
+    height: 540px;
+}

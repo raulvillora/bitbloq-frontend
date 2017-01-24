@@ -56,6 +56,9 @@
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
     <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css" />
+    <link rel="stylesheet" href="bower_components/angular-datepicker/dist/angular-datepicker.css" />
+    <link rel="stylesheet" href="bower_components/wickedpicker/dist/wickedpicker.min.css" />
+    <link rel="stylesheet" href="bower_components/wickedpicker/stylesheets/wickedpicker.css" />
     <link rel="stylesheet" href="bower_components/bloqs/dist/bloqs.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="styles/main.css">
@@ -129,6 +132,10 @@
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/nvd3/build/nv.d3.js"></script>
 <script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+<script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+<script src="bower_components/angular-datepicker/dist/angular-datepicker.js"></script>
+<script src="bower_components/wickedpicker/dist/wickedpicker.min.js"></script>
+<script src="bower_components/wickedpicker/src/wickedpicker.js"></script>
 <script src="bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js"></script>
 <script src="bower_components/autogrow/autogrow.js"></script>
 <script src="bower_components/bloqs/dist/bloqs.min.js"></script>
@@ -164,10 +171,12 @@
 <script src="scripts/services/alerts.js"></script>
 <script src="scripts/services/authInterceptor.js"></script>
 <script src="scripts/services/projectService.js"></script>
+<script src="scripts/services/exerciseService.js"></script>
 <script src="scripts/services/common.js"></script>
 <script src="scripts/services/user.js"></script>
 <script src="scripts/services/userApi.js"></script>
 <script src="scripts/services/projectApi.js"></script>
+<script src="scripts/services/exerciseApi.js"></script>
 <script src="scripts/services/imageApi.js"></script>
 <script src="scripts/services/forumApi.js"></script>
 <script src="scripts/services/web2boardV1.js"></script>
@@ -182,12 +191,16 @@
 <script src="scripts/services/robotFirmwareApi.js"></script>
 <script src="scripts/services/chromeAppApi.js"></script>
 <script src="scripts/services/compilerApi.js"></script>
+<script src="scripts/services/centerModeApi.js"></script>
+<script src="scripts/services/centerModeService.js"></script>
 <script src="scripts/services/web2boardOnline.js"></script>
 <script src="scripts/directives/beautyCode.js"></script>
 <script src="scripts/directives/bitbloqBloqCreator.js"></script>
+<script src="scripts/directives/childrenIndeterminateCheck.js"></script>
 <script src="scripts/directives/commonDropdown.js"></script>
 <script src="scripts/directives/drag&drop.js"></script>
 <script src="scripts/directives/bitbloqTooltip.js"></script>
+<script src="scripts/directives/indeterminateCheck.js"></script>
 <script src="scripts/directives/imageDefault.js"></script>
 <script src="scripts/directives/imageChange.js"></script>
 <script src="scripts/controllers/landing.js"></script>
@@ -197,11 +210,10 @@
 <script src="scripts/controllers/makeActions.js"></script>
 <script src="scripts/controllers/explore.js"></script>
 <script src="scripts/controllers/login.js"></script>
-<script src="scripts/controllers/bloqstab.js"></script>
-<script src="scripts/controllers/infotab.js"></script>
+<script src="scripts/controllers/softwareTab.js"></script>
+<script src="scripts/controllers/infoTab.js"></script>
 <script src="scripts/controllers/hardwareTab.js"></script>
 <script src="scripts/controllers/header.js"></script>
-<script src="scripts/controllers/infotab.js"></script>
 <script src="scripts/controllers/plotter.js"></script>
 <script src="scripts/controllers/viewer.js"></script>
 <script src="scripts/controllers/projects.js"></script>
@@ -220,6 +232,8 @@
 <script src="scripts/controllers/web2boardSettings.js"></script>
 <script src="scripts/controllers/web2boardUpgrade.js"></script>
 <script src="scripts/controllers/under14authorization.js"></script>
+<script src="scripts/controllers/centerMode.js"></script>
+<script src="scripts/controllers/exercise.js"></script>
 <!-- endbuild -->
 </body>
 

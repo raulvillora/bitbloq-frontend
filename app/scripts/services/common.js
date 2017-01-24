@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
+    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
 
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -17,44 +17,33 @@ angular.module('bitbloqApp')
         $log.log('Bitbloq version:', packageData.version);
 
         //See drag directives
-        exports.draggingElement = {};
-
-        exports.isLoggedIn = userApi.isLoggedIn;
-
-        exports.isAdmin = userApi.isAdmin;
-
-        exports.section = '';
-
-        exports.user = null;
-
         exports.appAlert = null;
-
-        exports.warnedOfIncompatibility = false;
-
-        exports.properties = null;
-
-        exports.isLoading = false;
-
+        exports.avatarChange = false;
+        exports.draggingElement = {};
         exports.connectedWeb2Board = false;
-
+        exports.isLoading = false;
+        exports.isLoggedIn = userApi.isLoggedIn;
+        exports.isAdmin = userApi.isAdmin;
+        exports.lastUrl = '';
+        exports.oldVersionMasthead = false;
+        exports.os = utils.getOs();
+        exports.properties = null;
+        exports.removeProjects = [];
+        exports.section = '';
         exports.session = {
             bloqTab: false,
             project: {},
             save: false
         };
-
         exports.translate = $filter('translate');
-
-        exports.removeProjects = [];
-
-        exports.oldVersionMasthead = false;
+        exports.twitterTutorialId = envData.config.twitterTutorialId;
+		exports.playStoreUrl = envData.config.playStoreUrl;
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
-        exports.twitterTutorialId = envData.config.twitterTutorialId;
-        exports.playStoreUrl = envData.config.playStoreUrl;
-
-        exports.avatarChange = false;
-        exports.os = utils.getOs();
+        exports.urlType = null;
+        exports.user = null;
+        exports.userRole = 'user';
+        exports.warnedOfIncompatibility = false;
 
         exports.langToBQ = {
             ca: 'es',
@@ -85,6 +74,7 @@ angular.module('bitbloqApp')
             ru: 'en-GB',
             zh: 'en-GB'
         };
+        var loadedUserPromise = $q.defer();
 
         exports.setUser = function(user) {
             if (loadedUserPromise.promise.$$state.status !== 0) {
@@ -98,11 +88,13 @@ angular.module('bitbloqApp')
                     exports.cookiesAccepted = true;
                 }
                 exports.user = user;
+                getUserRole();
                 loadedUserPromise.resolve();
             } else {
                 exports.user = null;
                 $translate.use(localStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
+                exports.userRole = 'user';
                 loadedUserPromise.reject();
             }
         };
@@ -178,7 +170,11 @@ angular.module('bitbloqApp')
             });
         }
 
-        var loadedUserPromise = $q.defer();
+        function getUserRole() {
+            centerModeApi.getMyRole().then(function(result) {
+                exports.userRole = result.data;
+            });
+        }
 
         if (!exports.user) {
             $log.debug('gettingUSer on common');

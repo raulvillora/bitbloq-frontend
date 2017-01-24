@@ -5,7 +5,7 @@
                 <span>{{alert.text}}</span>
                 <div class="alert--close" ng-click="alerts.close(alert.uid, $event)">
                     <svg class="svg-icon">
-                        <use xlink:href="#icon-close"></use>
+                        <use xlink:href="#erase"></use>
                     </svg>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                     <div class="col-mobile-7">
                         <span class="form--input">
                             <svg class="svg-icon--search">
-                                <use xlink:href="#lupa"></use>
+                                <use xlink:href="#search"></use>
                             </svg>
                             <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}">
                         </span>
@@ -110,10 +110,10 @@
                         <span class="form--input">
                             <input ng-click="validate($event)" type="text" name="normal" id="normal" placeholder="Escribe aquí">
                             <svg ng-show="validating" class="svg-icon icon--form--loading icon--form--validating icon--animated--spin">
-                                <use xlink:href="#loading"></use>
+                                <use xlink:href="#loader"></use>
                             </svg>
                             <svg ng-show="validationOk" class="svg-icon icon--form--validating icon--form--validated ">
-                                <use xlink:href="#ok"></use>
+                                <use xlink:href="#tickCircle"></use>
                             </svg>
                         </span>
                     </div>

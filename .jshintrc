@@ -20,6 +20,7 @@
     "globals": {
         "angular": false,
         "$": false,
-        "chrome": false
+        "chrome": false,
+        "moment": false
     }
 }

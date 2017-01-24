@@ -281,8 +281,8 @@ angular.module('bitbloqApp')
 
         exports.removeDiacritics = function(str, config, defaultName) {
             var configDefault = config || {
-                    spaces: true
-                },
+                        spaces: true
+                    },
                 newStr;
             newStr = str.replace(/[^\u0000-\u007E]/g, function(a) {
                 return diacriticsMap[a] || a;
@@ -333,8 +333,16 @@ angular.module('bitbloqApp')
             return (url.match(REGEXP)) ? RegExp.$1 : false;
         };
 
-        exports.userIsOwner = function(object, userId) {
-            return userId && (!object._id || (object._acl && object._acl['user:' + userId] && object._acl['user:' + userId].permission === 'ADMIN'));
+        exports.userIsOwner = function(object, userId, type) {
+            var isOwner = false;
+            if (userId && object) {
+                if (type === 'exercise' || type === 'task') {
+                    isOwner = (object.creator && (object.creator === userId || object.creator._id === userId)) || (object.teacher && object.teacher._id === userId);
+                } else {
+                    isOwner = !object._id || (object._acl && object._acl['user:' + userId] && object._acl['user:' + userId].permission === 'ADMIN');
+                }
+            }
+            return isOwner;
         };
 
         exports.getDOMElement = function(selector) {
@@ -441,6 +449,8 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        /* jshint ignore:start */
+
         exports.prettyCode = function(code) {
             var pretty = '';
 
@@ -450,10 +460,11 @@ angular.module('bitbloqApp')
             }
             //Remove beautify ignore & preserve sections
             var replacedCode = code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores);
-            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->').replace(/([ (])0 b([01]+)/g, '$10b$2'); // jshint ignore:line
+            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->').replace(/([ (])0 b([01]+)/g, '$10b$2');
 
             return pretty;
         };
+        /* jshint ignore:end */
 
         exports.getOs = function() {
             if ($window.navigator.platform.indexOf('Win') !== -1) {

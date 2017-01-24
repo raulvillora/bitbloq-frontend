@@ -8,9 +8,8 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate,
-                                      $compile, userApi, envData, _, ngDialog, $window, common, projectApi, utils,
-                                      $location, clipboard, $q, chromeAppApi) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi)
+    {
 
         var exports = {},
             shortUrl,
@@ -61,8 +60,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--send-comments',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
             $('textarea.msd-elastic').autogrow({
                 onInitialize: true
@@ -112,8 +110,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--send-comments',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
             $('textarea.msd-elastic').autogrow({
                 onInitialize: true
@@ -175,8 +172,7 @@ angular.module('bitbloqApp')
             languageModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
@@ -223,8 +219,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--feedback-error',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
 
             $('textarea.msd-elastic').autogrow({
@@ -267,8 +262,7 @@ angular.module('bitbloqApp')
             publishModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--publish',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         };
 
@@ -303,8 +297,7 @@ angular.module('bitbloqApp')
             privateModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--publish',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
 
         };
@@ -359,8 +352,7 @@ angular.module('bitbloqApp')
             dialog = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--share-with-users',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         };
 
@@ -444,15 +436,16 @@ angular.module('bitbloqApp')
                 }
             });
 
-            projectApi.generateShortUrl($location.protocol() + '://' + $location.host() + '/#/project/' + project._id).success(function(response) {
-                shortUrl = response.id;
-                _.extend(modalOptions, {
-                    shortUrl: shortUrl,
-                    copyAction: function(shortLink) {
-                        clipboard.copyText(shortLink);
-                    }
-                });
-            }).error(function() {
+            projectApi.generateShortUrl($location.protocol() + '://' + $location.host() + '/#/project/' + project._id)
+                .success(function(response) {
+                    shortUrl = response.id;
+                    _.extend(modalOptions, {
+                        shortUrl: shortUrl,
+                        copyAction: function(shortLink) {
+                            clipboard.copyText(shortLink);
+                        }
+                    });
+                }).error(function() {
                 _.extend(modalOptions, {
                     shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
                 });
@@ -461,17 +454,23 @@ angular.module('bitbloqApp')
             shareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
-        exports.clone = function(project, openInTab) {
-            if (!project.name) {
-                project.name = common.translate('new-project');
-            }
-            var defered = $q.defer(),
+        exports.clone = function(project, openInTab, type) {
+            type = type || 'project';
+            var modalTitle,
+                defaultTitle,
+                mainText,
+                currentApi,
+                modalOptions = $rootScope.$new(),
+                defered = $q.defer(),
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
+
+            if (!project.name) {
+                project.name = common.translate(defaultTitle);
+            }
 
             function confirmAction(newName) {
                 alertsService.add({
@@ -480,7 +479,7 @@ angular.module('bitbloqApp')
                     type: 'ok',
                     time: 5000
                 });
-                projectApi.clone(project._id, newName).then(function(newProjectId) {
+                currentApi.clone(project._id, newName).then(function(newProjectId) {
                     alertsService.add({
                         text: 'make-cloned-project',
                         id: 'clone-project',
@@ -489,24 +488,35 @@ angular.module('bitbloqApp')
                     });
                     if (newProjectId.data && openInTab) {
                         var newtab = $window.open('', '_blank');
-                        newtab.location = '#/bloqsproject/' + newProjectId.data;
+                        newtab.location = (type === 'project' ? '#/bloqsproject/' : '#/exercise/') + newProjectId.data;
                     }
                     defered.resolve(newProjectId.data);
                 });
                 return true;
             }
 
-            var modalOptions = $rootScope.$new();
+
+            if (type === 'project') {
+                currentApi = projectApi;
+                modalTitle = 'modal-change-project-name-title';
+                defaultTitle = 'new-project';
+                mainText = 'modal-change-project-name-maintext';
+            } else {
+                currentApi = exerciseApi;
+                modalTitle = 'centerMode_modal_cloneExercise-title';
+                defaultTitle = 'new-exercise';
+                mainText = 'centerMode_modal_cloneExercise-maintext';
+            }
 
             _.extend(modalOptions, {
-                title: 'modal-clone-project-title',
+                title: modalTitle,
                 contentTemplate: 'views/modals/input.html',
-                mainText: 'modal-clone-project-intro',
+                mainText: mainText,
                 modalInput: true,
                 input: {
                     id: 'projectCloneName',
                     name: 'projectCloneName',
-                    placeholder: 'modal-change-project-name-maintext',
+                    placeholder: mainText,
                     value: newProjectName
                 },
                 confirmButton: 'modal-button-ok',
@@ -522,27 +532,41 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
 
             });
 
             return defered.promise;
         };
 
-        exports.renameProject = function(project) {
-            var defered = $q.defer();
+        exports.rename = function(project, type) {
+            type = type || 'project';
+            var modalTitle,
+                defaultTitle,
+                mainText,
+                renameModal,
+                defered = $q.defer(),
+                currentProjectName = project.name,
+                modalOptions = $rootScope.$new();
 
-            var renameModal, confirmAction = function() {
-                project.name = modalOptions.project.name || $translate.instant('new-project');
+            function confirmAction() {
+                project.name = modalOptions.project.name || $translate.instant(defaultTitle);
                 renameModal.close();
                 defered.resolve();
-            };
+            }
 
-            var currentProjectName = project.name,
-                modalOptions = $rootScope.$new();
+            if (type === 'project') {
+                modalTitle = 'modal-change-project-name-title';
+                defaultTitle = 'new-project';
+                mainText = 'modal-change-project-name-maintext';
+            } else {
+                modalTitle = 'centerMode_modal_renameExercise-title';
+                defaultTitle = 'new-exercise';
+                mainText = 'centerMode_modal_renameExercise-maintext';
+            }
+
             _.extend(modalOptions, {
-                title: 'modal-change-project-name-title',
+                title: modalTitle,
                 modalButtons: true,
                 confirmButton: 'save',
                 rejectButton: 'cancel',
@@ -550,7 +574,7 @@ angular.module('bitbloqApp')
                 modalInput: true,
                 confirmAction: confirmAction,
                 contentTemplate: '/views/modals/input.html',
-                mainText: 'modal-change-project-name-maintext',
+                mainText: mainText,
                 project: {
                     name: currentProjectName
                 },
@@ -563,8 +587,7 @@ angular.module('bitbloqApp')
             renameModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--input',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
             return defered.promise;
         };
@@ -679,6 +702,35 @@ angular.module('bitbloqApp')
             });
             serialMonitorPanel.scope = scope;
         };
+        exports.noAddTeachers = function(teachers, added) {
+            var noShareModal, confirmAction = function() {
+                    noShareModal.close();
+                    alertsService.add({
+                        text: 'modalShare_alert_addTeacher ',
+                        id: 'private-project',
+                        type: 'ok',
+                        time: 5000,
+                        value: added
+                    });
+                },
+                modalScope = $rootScope.$new();
+
+            _.extend(modalScope, {
+                title: 'newTeacher_modal_aceptButton',
+                modalButtons: true,
+                confirmButton: 'modal__understood-button',
+                confirmAction: confirmAction,
+                contentTemplate: '/views/modals/centerMode/noAddTeachers.html',
+                teachers: teachers
+            });
+
+            noShareModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--share-no-users',
+                scope: modalScope
+            });
+        };
+
 
         function _shareUserInfoModal(noUsers, usersLength) {
             var noShareModal, confirmAction = function() {
@@ -705,10 +757,10 @@ angular.module('bitbloqApp')
             noShareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--share-no-users',
-                scope: modalScope,
-                showClose: false
+                scope: modalScope
             });
         }
+
 
         exports.requestChromeExtensionActivation = function(text, callback) {
             var modalNeedWeb2boardOnline = $rootScope.$new();
@@ -741,8 +793,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--alert',
-                scope: modalNeedWeb2boardOnline,
-                showClose: false
+                scope: modalNeedWeb2boardOnline
             });
         };
 

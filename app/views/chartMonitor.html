@@ -10,7 +10,7 @@
                                    type="text"
                                    data-ng-model="serial.input"
                                    placeholder="Send text to board" autocorrect="off"
-                                   autocomplete="on" required data-element="login-emailusername-intput">
+                                   autocomplete="on" data-element="login-emailusername-intput" required>
                             <button class="btn btn--secondary btn--small" ng-click="send()">Send</button>
                         </span>
                 </div>
@@ -27,7 +27,6 @@
                     <common-dropdown options="baudrateOptions" class="projects--sort-dropdown right" style="width:150px"
                                      heading-option="serial.baudrate" options-click="onBaudrateChanged"></common-dropdown>
                 </div>
-
             </fieldset>
         </form>
     </div>

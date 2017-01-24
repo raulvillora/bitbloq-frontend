@@ -1,0 +1,30 @@
+<div class="form--infotab form--marktab" data-ng-controller="InfoTabCtrl">
+    <form id="form-infotab" name="form" class="form-infotab" novalidate="true">
+        <fieldset class="fieldset--left" data-ng-init="focus = false">
+            <div class="field--title">
+                <svg class="svg-icon svg-icon--text">
+                    <use xlink:href="#tickCircle"></use>
+                </svg>
+                <legend class="h3">{{ 'infoTab_title_exerciseMark' | translate }}</legend>
+            </div>
+            <div class="form--section">
+                <!-- input type="text"-->
+                <div class="form-control">
+                    <label>{{ 'infoTab_subTitle_exerciseRemark' | translate }}</label>
+                    <span class="form--input" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
+                        <input type="text" id="exerciseMark0" name="exerciseMark0" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark mark--integer" data-ng-class="{'input--focused':focus === 'exerciseMark0'}" data-ng-model="currentProject.mark[0]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="!common.user" data-element="info-exercise-mark0">
+                        <input type="text" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.mark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="!common.user" data-element="info-exercise-mark1">
+                    </span>
+                </div>
+                <!-- textarea -->
+                <div class="form-control project__description">
+                    <label>{{ 'infoTab_subTitle_exerciseMark' | translate }}</label>
+                    <span class="form--textarea" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
+                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-model="currentProject.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
+                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-exercise-remark"/>
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

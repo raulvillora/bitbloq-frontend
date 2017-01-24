@@ -35,8 +35,10 @@ angular
         'textAngular',
         'angular-clipboard',
         'angularUtils.directives.dirPagination',
-        'nvd3'
-    ]).config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
+        'nvd3',
+        'datePicker'
+    ])
+    .config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
 
             if (envData.config.env === 'production') {
@@ -53,8 +55,14 @@ angular
                     controller: 'AccountCtrl'
                 })
                 .when('/bloqsproject/:id?', {
-                    templateUrl: 'views/bloqsproject/bloqsproject.html',
+                    templateUrl: 'views/project/bloqsproject.html',
                     controller: 'BloqsprojectCtrl',
+                    reloadOnSearch: false
+                })
+
+                .when('/codeproject/:id?', {
+                    templateUrl: 'views/code.html',
+                    controller: 'CodeCtrl',
                     reloadOnSearch: false
                 })
                 .when('/explore:params?', {
@@ -118,9 +126,6 @@ angular
                 .when('/help/forum/:forumsection?/:forumresource?', {
                     redirectTo: '/forum/:forumsection?/:forumresource?'
                 })
-                .when('/404', {
-                    templateUrl: '404.html'
-                })
                 .when('/maintenance', {
                     templateUrl: 'maintenance.html'
                 })
@@ -152,11 +157,6 @@ angular
                     templateUrl: 'views/landing/landing-howitworks.html',
                     controller: 'LandingCtrl'
                 })
-                .when('/codeproject/:id?', {
-                    templateUrl: 'views/code.html',
-                    controller: 'CodeCtrl',
-                    reloadOnSearch: false
-                })
                 .when('/bitbloq-help/', {
                     templateUrl: 'views/landing/landing-help.html',
                     controller: 'LandingCtrl'
@@ -164,6 +164,24 @@ angular
                 .when('/under14authorization/:token', {
                     templateUrl: 'views/under14authorization.html',
                     controller: 'Under14AuthorizationCtrl'
+                })
+                .when('/center-mode/:type?/:id?/:subtype?/:subtypeId?', {
+                    templateUrl: 'views/centerMode/centerModeIndex.html',
+                    controller: 'CenterCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/exercise/:id?', {
+                    templateUrl: 'views/project/exercise.html',
+                    controller: 'ExerciseCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/task/:id?', {
+                    templateUrl: 'views/project/exercise.html',
+                    controller: 'ExerciseCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/404', {
+                    templateUrl: '404.html'
                 })
                 .otherwise({
                     redirectTo: '/404'

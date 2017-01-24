@@ -16,19 +16,13 @@
                 </div>
                 <div class="subheader--item">
                     <svg class="svg-icon">
-                        <use xlink:href="#vistas"></use>
+                        <use xlink:href="#eye"></use>
                     </svg>
                     <span data-element="project-times-viewed">{{project.timesViewed}}</span>
                 </div>
-                <!--                 <div class="subheader--item">
-                    <svg class="svg-icon">
-                        <use xlink:href="#corazon"></use>
-                    </svg>
-                    <span>{{project.timesLiked || 0}}</span>
-                </div> -->
                 <div class="subheader--item">
                     <svg class="svg-icon">
-                        <use xlink:href="#mas"></use>
+                        <use xlink:href="#plusCircle"></use>
                     </svg>
                     <span data-element="project-times-added">{{project.timesAdded || 0}}</span>
                 </div>
@@ -63,16 +57,10 @@
             <div class="project--actions">
                 <button class="btn btn--primary btn--project--action--add" data-ng-show="common.user && project && !utils.userIsOwner(project, common.user._id)" data-ng-click="commonModals.clone(project); countAdded()" data-element="explore-project-addbutton">
                     <svg class="svg-icon">
-                        <use xlink:href="#mas"></use>
+                        <use xlink:href="#plusCircle"></use>
                     </svg>
                     {{ 'project-addto-myprojects' | translate }}
                 </button>
-                <!--                 <button class="btn btn--project--action" ng-click="projectApi.addTimesLiked(project._id)">
-                    <svg class="svg-icon">
-                        <use xlink:href="#corazon"></use>
-                    </svg>
-                    {{ 'like' | translate }}
-                </button> -->
                 <button class="btn btn--project--action" ng-click="openProject(project)" data-element="explora-project-seebutton">
                     <svg class="svg-icon">
                         <use xlink:href="#open"></use>
@@ -81,13 +69,13 @@
                 </button>
                 <button class="btn btn--project--action" data-ng-if="project && !project.codeProject" data-ng-click="projectService.download(project, 'json', true)" data-element="explora-project-download">
                     <svg class="svg-icon">
-                        <use xlink:href="#descargar"></use>
+                        <use xlink:href="#download"></use>
                     </svg>
                     {{ 'download' | translate }}
                 </button>
                 <button class="btn btn--project--action" data-ng-if="project.codeProject" data-ng-click="projectService.download(project, 'arduino', true)" data-element="explora-project-download">
                     <svg class="svg-icon">
-                        <use xlink:href="#descargar"></use>
+                        <use xlink:href="#download"></use>
                     </svg>
                     {{ 'download' | translate }}
                 </button>

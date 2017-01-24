@@ -1,5 +1,6 @@
 <div class="modal_input">
     <p>{{ mainText | translate }}</p>
+    <p ng-if="secondaryText" class="modal_input_secondaryText">{{ secondaryText | translate }}</p>
 
     <form id="inputForm" ng-if="modalInput">
         <span class="form--input">

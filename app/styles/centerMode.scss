@@ -1,0 +1,43 @@
+.centerMode {
+    background-color: #eeeeee;
+    [class*="col-"] {
+        padding-left: 0;
+    }
+}
+
+.center-mode__group .group__header {
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.center-mode__block {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.center-mode__table__header {
+    width: 100%;
+    display: table;
+}
+
+.center-mode__table__header__element-left {
+    display: block;
+    float: left;
+    padding-bottom: 10px;
+}
+
+.center-mode__table__header__element-right {
+    display: block;
+    float: right;
+}
+
+.center-mode__table__header__exercise {
+    top: 0;
+    margin: 0;
+    padding: 0 2px 2px 3px;
+    border-width: 2px;
+    border-bottom: 2px white solid;
+    width: 100%;
+}

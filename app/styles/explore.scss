@@ -8,7 +8,7 @@
         position        : relative;
 
         .explore__toolbar {
-            padding  : 20px 30px;
+            padding  : 20px 0;
             max-width: 1200px;
             margin   : 0 auto;
 
@@ -64,7 +64,7 @@
                             content          : '';
                             width            : 10px;
                             height           : 10px;
-                            background-image : url('../images/icons/flecha_abajo.svg');
+                            background-image : url('../images/icons/arrowDown.svg');
                             background-repeat: no-repeat;
                             background-size  : 100%;
                             position         : absolute;
@@ -227,7 +227,7 @@
                                     width            : 30px;
                                     height           : 30px;
                                     position         : absolute;
-                                    background-image : url('../images/icons/loadr.svg');
+                                    background-image : url('../images/icons/loader.svg');
                                     background-size  : 30px;
                                     left             : 0;
                                     top              : 0;

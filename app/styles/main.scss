@@ -26,16 +26,22 @@
 @import "vendors/prism";
 // Base: components
 @import "components/_modals.scss";
+@import "components/_icons.scss";
 @import "components/_buttons.scss";
 @import "components/_cookies.scss";
 @import "components/_forms.scss";
+@import "components/_inputs.scss";
 @import "components/_text.scss";
 @import "components/_tooltips.scss";
-@import "components/_icons.scss";
 @import "components/_serial.scss";
 @import "components/_dropdowns.scss";
+@import "components/_breadcrumb.scss";
+@import "components/_switchButton.scss";
+@import "components/_table.scss";
+@import "components/_toolbox.scss";
+@import "components/_dateTimePicker.scss";
 //components
-@import "components/_tabs-layout";
+@import "components/tabsLayout";
 @import "styleguide";
 @import "notFound";
 @import "landing";
@@ -49,9 +55,9 @@
 @import "explore";
 @import "login";
 @import "resetPassword";
-@import "infotab";
+@import "infoTab";
 @import "bloqsproject";
-@import "bloqstab";
+@import "softwareTab";
 @import "header";
 @import "projects";
 @import "account";
@@ -65,6 +71,8 @@
 @import "componentInteraction";
 @import "bluetoothInteraction";
 @import "under14authorization";
+@import "centerMode";
+@import "exercise";
 // Components: hwTab
 @import "hardwaretab";
 // Components: Draggable
@@ -81,3 +89,4 @@
 @import "modals/_serialMonitor.scss";
 @import "modals/_plotterMonitor.scss";
 @import "modals/_viewerMonitor.scss";
+@import "modals/_assignGroup.scss";

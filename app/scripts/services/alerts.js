@@ -25,9 +25,6 @@ angular.module('bitbloqApp')
             });
 
             if (removedAlert.length > 0) {
-                // if (alerts.length === 0) {
-                //     i = 0;
-                // }
 
                 if (!$rootScope.$$phase) {
                     $rootScope.$digest();
@@ -185,7 +182,7 @@ angular.module('bitbloqApp')
 //             </i>
 //             <div class="alert--close" ng-click="alerts.close(alert.uid, $event)">
 //                 <svg class="svg-icon">
-//                     <use xlink:href="images/sprite.svg#icon-close"></use>
+//                     <use xlink:href="images/sprite.svg#erase"></use>
 //                 </svg>
 //             </div>
 //         </div>

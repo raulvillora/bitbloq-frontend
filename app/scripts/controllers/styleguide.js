@@ -52,8 +52,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container password-reset--modal',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
@@ -100,8 +99,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modal.html',
                 className: 'modal--container',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 

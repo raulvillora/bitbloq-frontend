@@ -7,9 +7,9 @@
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Menú de Proyectos</h1>
             <ul class="tabs__header">
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'projects'}" ng-click="selectedTab = 'projects'; refreshProjects()">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'projects'}" ng-click="selectedTab = 'projects'; refreshProjects()">
                     <svg class="svg-icon--aside--menu">
-                        <use xlink:href="#proyectos"></use>
+                        <use xlink:href="#folderOpen"></use>
                     </svg>
                     <span class="menu__item__span">
                         {{ 'my-projects' | translate }} ({{ filtered.projects.length}})
@@ -17,20 +17,18 @@
                 </li>
                 <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'releases'}" data-element="projects-shared-projects" ng-click="selectedTab = 'releases'">
                     <svg class="svg-icon--aside--menu">
-                        <use xlink:href="#releases"></use>
+                        <use xlink:href="#inbox"></use>
                     </svg>
                     <span class="menu__item__span">
                         {{'shared' | translate}} ({{ sharedProjects.length || 0 }})
                     </span>
                     </span>
                 </li>
-                <div class="header--new-project--button">
-                    <a href="#/bloqsproject" target="_blank" class="btn btn--primary btn--small btn--new-project" data-element="projects-new-project">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#mas"></use>
-                        </svg>
-                        {{ 'create-new-project' | translate }}</a>
-                </div>
+                <a href="#/bloqsproject" target="_blank" class="btn btn--primary btn--small btn--new-project" data-element="projects-new-project">
+                    <svg class="svg-icon svg-icon--text">
+                        <use xlink:href="#plusCircle"></use>
+                    </svg>
+                    {{ 'create-new-project' | translate }}</a>
             </ul>
         </aside>
         <div class="tabs-layout__content">

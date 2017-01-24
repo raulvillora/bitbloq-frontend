@@ -1,0 +1,116 @@
+.input--checkbox {
+    vertical-align: text-top;
+    position: relative;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: .5em;
+
+    input {
+        background: none;
+        width: 1.2em !important;
+        height: 1.2em !important;
+        -webkit-appearance: none;
+        background-color: white;
+        border-radius: .3em;
+        border: 2px solid $font-color-disabled;
+
+        &:hover, &:focus {
+            transition: background-color 250ms;
+            border: 2px solid $font-color-base;
+        }
+
+        &:checked {
+            border: none;
+            filter: invert(100%);
+            background-color: #A29F96;
+            background-image: url('../images/icons/tick.svg');
+            background-size: 70%;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        &:disabled {
+            background-color: $font-color-disabled;
+        }
+    }
+
+    .fa {
+        position: absolute;
+        top: .1em;
+        left: .1em;
+
+        &:before {
+            content: '\f00c';
+            color: white;
+            top: -3px;
+            position: relative;
+            font-size: .85em;
+            left: 1px;
+        }
+    }
+}
+
+.input--date {
+    width: 220px;
+    display: flex;
+    height: 35px;
+
+    & input {
+        float: left;
+    }
+}
+
+.input--group--date {
+    background-color: #F1F1F1;
+
+    input {
+        border: 1px solid #dadada; //para seleccionar $font-color-base;
+        width: 25%;
+        height: 34px;
+        border-radius: .2em;
+        text-align: center;
+
+        &:nth-child(2) {
+            margin: 0 12.5%;
+        }
+
+        &:focus {
+            border: 1px solid $font-color-base;
+        }
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+input::-webkit-input-placeholder {
+    font-style: italic;
+    font-size: 13px;
+}
+
+/*
+* Errors
+ */
+
+.input--checkbox--error {
+
+    vertical-align: text-top;
+    position: relative;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: .5em;
+
+    input {
+        background: none;
+        width: 1.2em !important;
+        height: 1.2em !important;
+        -webkit-appearance: none;
+        border-radius: .3em;
+        border: 1px solid white;
+        background-color: rgba(255, 51, 51, 0.2);
+        -webkit-box-shadow: 0 0 5px 2px rgba(255, 51, 51, 0.79);
+        -moz-box-shadow: 0 0 5px 2px rgba(255, 51, 51, 0.79);
+        box-shadow: 0 0 2px 2px rgba(255, 51, 51, 0.7);
+    }
+}

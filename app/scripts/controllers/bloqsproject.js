@@ -50,46 +50,6 @@ angular.module('bitbloqApp')
             return projectService.componentsArray.serialElements.length > 0;
         };
 
-        $scope.closeMenu = function() {
-            $scope.levelOne = $scope.levelTwo = $scope.submenuVisible = false;
-        };
-
-        $scope.subMenuHandler = function(menu, action, level) {
-            if (action === 'open') {
-                $scope.$emit('menu--open');
-                switch (level) {
-                    case 1:
-                        $scope.levelOne = menu;
-                        $scope.levelTwo = false;
-                        break;
-                    case 2:
-
-                        $scope.levelTwo = menu;
-                        break;
-                    default:
-                        throw 'Error opening sidebar menu';
-                }
-            } else {
-                switch (level) {
-                    case 1:
-                        $scope.levelOne = false;
-                        $scope.levelTwo = false;
-                        break;
-                    case 2:
-                        $scope.levelTwo = false;
-                        break;
-                    default:
-                        throw 'Error closing sidebar menu';
-                }
-            }
-        };
-
-        $scope.setLevelTwo = function() {
-            $scope.levelTwo = !$scope.levelTwo;
-            $scope.submenuSecondVisible = !$scope.submenuSecondVisible;
-            $scope.$apply();
-        };
-
         /*************************************************
          web2board communication
          *************************************************/
@@ -557,7 +517,7 @@ angular.module('bitbloqApp')
 
         $scope.upload = function(code) {
             var viewer;
-            viewer = code ? true : false;
+            viewer = !!code;
             if (projectService.project.hardware.board) {
                 if (projectService.project.hardware.robot === 'mBot') {
                     if ($scope.common.os === 'ChromeOS') {
@@ -737,8 +697,7 @@ angular.module('bitbloqApp')
             ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--share-with-users',
-                scope: modalOptions,
-                showClose: false
+                scope: modalOptions
             });
         };
 
@@ -915,11 +874,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -1097,8 +1056,12 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.handleTour = function(step) {
 
+        /*****************************
+         *   Toolbox
+         *****************************/
+
+        $scope.handleTour = function(step) {
             step = step || 1;
             switch (step) {
                 case 1:
@@ -1112,7 +1075,7 @@ angular.module('bitbloqApp')
                         $scope.tourCurrentStep = 2;
                         var runStepThree = $scope.$on('menu--open', function() {
                             $timeout(function() {
-                                $('.submenu-level').animate({
+                                $('.toolbox__content').animate({
                                     scrollTop: $('[dragid="led"]').offset().top - 150
                                 }, 'slow');
                                 $scope.handleTour(3);
@@ -1202,8 +1165,6 @@ angular.module('bitbloqApp')
             settingBoardAlert,
             serialMonitorAlert;
 
-        $scope.shareWithUserTags = [];
-
         $scope.code = '';
 
         $scope.hardware = {
@@ -1215,12 +1176,13 @@ angular.module('bitbloqApp')
         };
 
         $scope.projectApi = projectApi;
-        $scope.projectService = projectService;
+        $scope.currentProject = projectService.project;
+        $scope.currentProjectService = projectService;
 
         projectService.saveStatus = 0;
 
         projectService.initBloqsProject();
-        $scope.projectLoaded = $q.defer();
+        $scope.currentProjectLoaded = $q.defer();
 
         if (!$scope.common.user) {
             $scope.common.session.save = false;
@@ -1257,7 +1219,7 @@ angular.module('bitbloqApp')
                 $scope.hwBasicsLoaded.promise.then(function() {
                     $scope.$emit('drawHardware');
                 });
-                $scope.projectLoaded.resolve();
+                $scope.currentProjectLoaded.resolve();
             }
         }, function() {
             $log.debug('no registed user');
@@ -1292,10 +1254,10 @@ angular.module('bitbloqApp')
         function loadProject(id) {
             return projectApi.get(id).then(function(response) {
                 _uploadProject(response.data);
-                $scope.projectLoaded.resolve();
+                $scope.currentProjectLoaded.resolve();
             }, function(error) {
                 projectService.addWatchers();
-                $scope.projectLoaded.reject();
+                $scope.currentProjectLoaded.reject();
                 switch (error.status) {
                     case 404: //not_found
                         alertsService.add({

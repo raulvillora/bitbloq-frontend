@@ -1,0 +1,113 @@
+.tabs-layout {
+    height: calc(100% - #{$sectionSubHeaderHeight});
+    width: 100%;
+    display: table;
+    &.tabs-layout-proyect {
+        height: 100%;
+    }
+}
+
+.tabs-layout__aside {
+    max-width: 1200px;
+    margin: 0 auto;
+    .tabs__header {
+        display: block;
+        width: 100%;
+        height: $tabsLayout-asideHeight;
+    }
+    .tabs__header__item {
+        display: inline-block;
+        float: left;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-right: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+        color: #8c919b;
+        font-weight: bold;
+        height: $tabsLayout-asideHeight;
+        width: 220px;
+        line-height: $tabsLayout-asideHeight;
+        transition: color 250ms, background-color 250ms;
+        background-color: white;
+        &:first-child {
+            border-left: 1px solid #dddddd;
+        }
+        .svg-icon--aside--menu {
+            transition: fill 250ms;
+        }
+        &:hover {
+            color: #373b44;
+            cursor: pointer;
+            .svg-icon--aside--menu {
+                fill: #373b44;
+            }
+        }
+        .svg-icon--aside--menu {
+            fill: #8c919b;
+        }
+        &.selected--tab {
+            background-color: #eee;
+            color: #373b44;
+            &.tabs__header__main:after {
+                content: '';
+                display: block;
+                position: relative;
+                top: -3px;
+                left: -40px;
+                background-color: #eee;
+                height: 4px;
+                width: 157.6%;
+            }
+            &:hover {
+                color: #373b44;
+            }
+            .svg-icon--aside--menu {
+                fill: $font-color-heading;
+            }
+        }
+        span {
+            cursor: pointer;
+        }
+    }
+    .tabs__header__item--vertical {
+        height: 58px;
+        border-bottom: 1px solid white;
+        border-right: none;
+        .btn-svg {
+            width: 100%;
+            height: 100%;
+        }
+        &.selected--tab {
+            background-color: white;
+            border-bottom: 1px solid #b9bdc8;
+            .svg-icon {
+                fill: #b9bdc8;
+            }
+            &:after {
+                content: '';
+                display: block;
+                position: relative;
+                top: -59px;
+                left: 60px;
+                background-color: white;
+                height: 58px;
+                width: 1px;
+                z-index: 1;
+            }
+        }
+    }
+}
+
+.tabs-layout__content {
+    height: calc(100% - #{$tabsLayout-asideHeight});
+    border-top: 1px solid #dddddd;
+    background-color: #eee;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    .tab {
+        height: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}

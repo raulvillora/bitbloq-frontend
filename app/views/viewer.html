@@ -2,7 +2,7 @@
     <div class="tabs-layout">
         <aside class="tabs-layout__aside">
             <ul class="tabs__header">
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--projects':true, 'selected--tab':selectedTab === 'realtime'}" ng-click="selectedTab = 'realtime'">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'realtime'}" ng-click="selectedTab = 'realtime'">
                     <span class="menu__item__span">
                       {{'realtime' | translate}}
                     </span>

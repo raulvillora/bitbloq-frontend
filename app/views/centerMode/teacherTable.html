@@ -1,0 +1,43 @@
+<div class="dropdown-group table__added clearfix">
+    <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="sortArray[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+</div>
+<div>
+    <div class="centerMode__table-title row">
+        <div class="col-vsmall-6">
+            <span>{{'centerMode_column_name' | translate}}</span>
+        </div>
+        <div class="col-vsmall-3">
+            <span>{{'centerMode_column_groups' | translate}}</span>
+        </div>
+        <div class="col-vsmall-2">
+            <span>{{'centerMode_column_students' | translate}}</span>
+        </div>
+    </div>
+    <div class="table__block">
+        <div class="table__block__list row" ng-repeat="item in teachers | orderBy:orderInstance:reverseOrder">
+            <div class="table__block__item col-vsmall-6">
+                <a ng-href="{{'#/center-mode/center-teacher/' + item._id}}">
+                    <h2 class="block__item__title" data-element="{{'centerMode-item-' + item.username}}">
+                        {{item.firstName? item.firstName + ' ' + item.lastName : item.username}}
+                    </h2>
+                    <span class="block__item__explanation">{{item.email}}</span>
+                </a>
+            </div>
+            <div class="able__block__item col-vsmall-3 ">
+                <span data-element="{{'centerMode-groups' + item.name}}">
+                    {{item.groups}}
+                </span>
+            </div>
+            <div class="table__block__item col-vsmall-2">
+                <span>{{item.students}}</span>
+            </div>
+            <div class="table__block__item table__column--right col-vsmall-1" ng-if="item._id !== common.user._id">
+                <button class="btn btn--secondary table__block__button table__block__button--delete" ng-click="deleteTeacher(item)" data-element="centerMode-delete-teacher">
+                    <svg class="svg-icon">
+                        <use xlink:href="#delete"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

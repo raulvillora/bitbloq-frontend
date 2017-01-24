@@ -1,0 +1,7 @@
+<div class="section-header table__header" ng-include="'views/centerMode/centerHeader.html'"></div>
+<div class="table__page table__page--with-header">
+    <div class="centerMode" ng-if="common.urlType.indexOf('center') > -1" ng-include="'views/centerMode/center.html'"></div>
+    <div class="centerMode" ng-if="common.urlType==='teacher' || common.urlType==='student'" ng-include="'views/centerMode/teacher.html'"></div>
+    <div class="centerMode" ng-if="common.urlType==='group'" ng-include="'views/centerMode/group.html'"></div>
+    <div class="centerMode" ng-if="common.urlType==='exercise-info'" ng-include="'views/centerMode/exerciseInfo.html'"></div>
+</div>

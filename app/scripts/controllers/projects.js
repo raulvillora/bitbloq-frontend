@@ -301,7 +301,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.renameProject = function(project) {
-            commonModals.renameProject(project).then(function() {
+            commonModals.rename(project).then(function() {
                 projectApi.update(project._id, project).then(function() {
                     $scope.refreshProjects();
                 });
