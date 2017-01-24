@@ -46,7 +46,7 @@
                     {{'centerMode_editDate' | translate}}
                 </div>
             </li>
-            
+
             <li ng-if="common.section === 'exercise'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}" data-tooltips="{{!currentProject._id}}">
                 <div class="dropdown__item" data-ng-click="assignGroup()" data-ng-disabled="!common.user || !currentProject._id" data-element="centerMode_asignGroup">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
@@ -119,7 +119,7 @@
             </li>
             <li data-ng-class="{'dropdown__item':true, 'dropdown__menu--disabled':bloqsHistoryPointer >= bloqsHistory.length }" data-ng-click="redo()" data-ng-disabled="disableRedo(currentTab, hardwareHistory, bloqsHistory)" data-element="makeactions-menuedit-redo">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
-                    <use xlink:href="#do"></use>
+                    <use xlink:href="#airplane"></use>
                 </svg>
                 {{'redo' | translate}}
             </li>
