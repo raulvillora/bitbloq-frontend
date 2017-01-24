@@ -40,20 +40,23 @@ angular.module('bitbloqApp')
         exerciseService.initBloqsExercise();
         $scope.currentProjectLoaded = $q.defer();
 
+        $scope.assignGroup = function() {
+            exerciseService.assignGroup($scope.currentProject, $scope.common.user._id, $scope.groups);
+        };
+
         $scope.getGroups = function() {
             centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
                 $scope.groups = response.data;
             });
         };
 
-        function _canUpdate() {
-            exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
-                $scope.isOwner = (res.status === 200);
-            });
-        }
-
-        $scope.assignGroup = function() {
-            exerciseService.assignGroup($scope.currentProject, $scope.common.user._id, $scope.groups);
+        $scope.onTime = function() {
+            var now = moment(),
+                canDeliver = false;
+            if ((!$scope.currentProject.initDate || now.diff($scope.currentProject.initDate) > 0) && (!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0)) {
+                canDeliver = true;
+            }
+            return canDeliver;
         };
 
         $scope.sendTask = function(task) {
@@ -95,35 +98,17 @@ angular.module('bitbloqApp')
                 className: 'modal--container modal--input',
                 scope: modalOptions
             });
-
-
         };
 
-        $scope.onTime = function() {
-            var now = moment(),
-                canDeliver = false;
-            if ((!$scope.currentProject.initDate || now.diff($scope.currentProject.initDate) > 0) && (!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0)) {
-                canDeliver = true;
-            }
-            return canDeliver;
-        };
-
+        function _canUpdate() {
+            exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
+                $scope.isOwner = (res.status === 200);
+            });
+        }
 
         /*************************************************
          exercise save / edit
          *************************************************/
-
-        $scope.setCode = function(code) {
-            $scope.code = code;
-        };
-
-        $scope.uploadFileExercise = function(exercise) {
-            if ($scope.hardware.cleanSchema) {
-                $scope.hardware.cleanSchema();
-            }
-            _uploadExercise(exercise);
-            $scope.$broadcast('refresh-bloqs');
-        };
 
         $scope.anyComponent = function(forceCheck) {
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
@@ -137,7 +122,6 @@ angular.module('bitbloqApp')
         $scope.anySerialComponent = function() {
             return exerciseService.componentsArray.serialElements.length > 0;
         };
-
 
         $scope.informErrorAction = function() {
 
@@ -160,6 +144,18 @@ angular.module('bitbloqApp')
                 className: 'modal--container modal--share-with-users',
                 scope: modalOptions
             });
+        };
+
+        $scope.setCode = function(code) {
+            $scope.code = code;
+        };
+
+        $scope.uploadFileExercise = function(exercise) {
+            if ($scope.hardware.cleanSchema) {
+                $scope.hardware.cleanSchema();
+            }
+            _uploadExercise(exercise);
+            $scope.$broadcast('refresh-bloqs');
         };
 
         $scope.updateBloqs = function() {
