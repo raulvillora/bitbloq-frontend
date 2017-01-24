@@ -656,25 +656,25 @@ angular.module('bitbloqApp')
 
         $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
+                currentProjectService.saveTwitterApp();
             }
         });
 
         $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
+                currentProjectService.saveTwitterApp();
             }
         });
 
         $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
+                currentProjectService.saveTwitterApp();
             }
         });
 
         $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
             if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
+                currentProjectService.saveTwitterApp();
             }
         });
 

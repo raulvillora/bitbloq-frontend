@@ -18,7 +18,7 @@ angular.module('bitbloqApp')
             link: function(scope, element, attrs, ngModel) {
                 console.log(scope.json);
                 scope.$watch('indeterminateParentCheckbox', function(newValue) {
-                    if (newValue && attrs.myTab === scope.selectedTab) {
+                    if (newValue!==undefined && attrs.myTab === scope.selectedTab) {
                         ngModel.$setViewValue(newValue);
                         element.prop('checked', newValue);
                     }

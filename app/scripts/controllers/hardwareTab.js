@@ -152,7 +152,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             hw2Bloqs.unselectAllConnections();
             $scope.robotSelected = $scope.boardSelected = false;
             $('.component').removeClass('component-selected');
-            if (projectService.project.bitbloqConnectBT) {
+            if ($scope.currentProject.bitbloqConnectBT) {
                 $scope.componentSelected = $scope.currentProject.bitbloqConnectBT;
             }
         } else {
@@ -326,14 +326,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             }
 
         }
-        projectService.startAutosave();
+        currentProjectService.startAutosave();
     }
 
     $scope.deleteBTComponent = function() {
         $scope.currentProject.useBitbloqConnect = false;
         $scope.componentSelected = false;
         if ($scope.currentProject.hardware.board === 'bq ZUM') {
-            currentProjectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
+            currentProjectService.removeComponentInComponentsArray('serialElements', $scope.currentProject.bitbloqConnectBT.name);
         }
         $scope.currentProject.bitbloqConnectBT = null;
     };
