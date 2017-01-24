@@ -756,28 +756,23 @@ angular.module('bitbloqApp')
 
                 var updateBloq = function(element, list) {
 
-                    var tempValue,
-                        tempRef;
-
-                    tempRef = element.dataset.reference;
-                    tempValue = element.dataset.value;
+                    var componentRef = list.find(function(comp) {
+                        return comp.uid === element.dataset.reference;
+                    });
 
                     bloqsUtils.drawDropdownOptions($(element), list);
 
-                    if (tempRef && tempValue) {
+                    if (element.dataset.reference && element.dataset.value && componentRef) {
 
-                        var componentRef = list.find(function(comp) {
-                            return comp.uid === tempRef;
-                        });
-
-                        if (componentRef) {
-                            element.value = componentRef.name;
-                            element.dataset.reference = componentRef.uid;
-                            element.dataset.value = componentRef.name;
-                        }
+                        element.value = componentRef.name;
+                        element.dataset.reference = componentRef.uid;
+                        element.dataset.value = componentRef.name;
 
                     } else {
-                        $log.debug('dropdown not selected');
+                        $log.debug('dropdown not selected or reference was lost');
+                        element.dataset.reference = '';
+                        element.dataset.value = '';
+
                         element.selectedIndex = 0;
                     }
                 };
