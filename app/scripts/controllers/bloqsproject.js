@@ -25,7 +25,6 @@ angular.module('bitbloqApp')
                 $scope.hardware.cleanSchema();
             }
             _uploadProject(project);
-            $scope.$broadcast('refresh-bloqs');
         };
 
         $scope.twitterWheel = false;
@@ -874,11 +873,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -1055,7 +1054,6 @@ angular.module('bitbloqApp')
                 event.preventDefault();
             }
         }
-
 
         /*****************************
          *   Toolbox
@@ -1299,6 +1297,7 @@ angular.module('bitbloqApp')
                 $scope.hwBasicsLoaded.promise.then(function() {
                     $scope.$emit('drawHardware');
                 });
+                $scope.$broadcast('refresh-bloqs');
             }
         }
 

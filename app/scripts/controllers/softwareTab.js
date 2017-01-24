@@ -649,6 +649,13 @@ angular.module('bitbloqApp')
             $scope.$apply();
         }
 
+        function onMoveBloq(bloq) {
+            console.log(bloq);
+            $scope.showTrashcan = true;
+            // $scope.selectedBloqsToolbox = '';
+            $scope.$apply();
+        }
+
         loadBloqs();
 
         $document.on('contextmenu', contextMenuDocumentHandler);
@@ -694,17 +701,14 @@ angular.module('bitbloqApp')
         scrollBarContainer.on('scroll', _.throttle(scrollField, 250));
         $window.addEventListener('bloqs:bloqremoved', onDeleteBloq);
         $window.addEventListener('bloqs:dragend', onDragEnd);
-
-        $window.addEventListener('bloqs:startMove', function(bloq) {
-            console.log(bloq);
-            $scope.showTrashcan = true;
-            // $scope.selectedBloqsToolbox = '';
-            $scope.$apply();
-        });
+        $window.addEventListener('bloqs:startMove', onMoveBloq);
 
         $scope.$on('$destroy', function() {
             $document.off('contextmenu', contextMenuDocumentHandler);
             $document.off('click', clickDocumentHandler);
+            $window.removeEventListener('bloqs:bloqremoved', onDeleteBloq);
+            $window.removeEventListener('bloqs:dragend', onDragEnd);
+            $window.removeEventListener('bloqs:startMove', onMoveBloq);
             bloqsTabsEvent();
             translateChangeStartEvent();
         });
