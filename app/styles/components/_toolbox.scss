@@ -1,5 +1,4 @@
 $hw_toolbox: 210px;
-
 .hw-toolbox {
     min-width: #{$hw_toolbox};
     float: right;
@@ -164,7 +163,6 @@ $hw_toolbox: 210px;
         background-color: white;
         border-top: none;
     }
-
     .toolbox-zowi {
         background-color: #4e929b;
         &.selected--tab .btn-svg .svg-icon {
@@ -243,6 +241,28 @@ $hw_toolbox: 210px;
     height: calc(100vh - 172px);
     overflow: hidden;
     overflow-y: auto;
+    li {
+        display: -webkit-box;
+        margin: 1em 1em 1em 10px;
+        &.indent-1 {
+            margin-left: 2.5em;
+        }
+        .bloq {
+            margin-left: 1em;
+            position: relative;
+            &:hover {
+                cursor: move;
+            }
+        }
+        .bloq--output {
+            margin-left: 2em;
+        }
+        .bloqinput {
+            select {
+                margin-left: .5em;
+            }
+        }
+    }
 }
 
 .toolbox--right {

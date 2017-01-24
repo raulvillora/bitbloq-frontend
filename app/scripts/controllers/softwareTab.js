@@ -21,7 +21,6 @@ angular.module('bitbloqApp')
             translateChangeStartEvent,
             bloqsTabsEvent;
 
-
         $scope.bloqsApi = bloqsApi;
         $scope.currentProject = $scope.currentProject || projectService.project;
         $scope.lastPosition = 0;
@@ -115,7 +114,6 @@ angular.module('bitbloqApp')
             currentProjectService.startAutosave();
         };
 
-
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
             if ($scope.common.session.save) {
@@ -192,7 +190,7 @@ angular.module('bitbloqApp')
                 lastBottomConnector;
 
             bloqs.destroyFreeBloqs();
-            if ($scope.currentProject.software.freeBloqs && ( $scope.currentProject.software.freeBloqs.length > 0)) {
+            if ($scope.currentProject.software.freeBloqs && ($scope.currentProject.software.freeBloqs.length > 0)) {
                 for (i = 0; i < $scope.currentProject.software.freeBloqs.length; i++) {
                     lastBottomConnector = null;
                     for (j = 0; j < $scope.currentProject.software.freeBloqs[i].bloqGroup.length; j++) {
@@ -387,8 +385,7 @@ angular.module('bitbloqApp')
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
                             if (connectedComponents[i].id.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].id))
-                            {
+                                item.toLowerCase().includes(connectedComponents[i].id)) {
                                 result = true;
                             }
                             i++;
@@ -646,7 +643,7 @@ angular.module('bitbloqApp')
             _.throttle(setScrollsDimension, 1000);
             var bloqToDelete = bloqsUtils.itsOver(object.detail.$bloq, $scope.$trashcan);
             if (bloqToDelete) {
-                object.removeBloq(object.detail.uuid, false, true);
+                bloqs.removeBloq(object.detail.uuid, false, true);
             }
             $scope.showTrashcan = false;
             $scope.$apply();
