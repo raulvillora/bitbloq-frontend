@@ -51,6 +51,19 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
+    $scope.langToBadge = {
+        'ca-ES': 'ca',
+        'de-De': 'de',
+        'en-GB': 'en',
+        'es-ES': 'es',
+        'eu-ES': 'eu',
+        'fr-FR': 'fr',
+        'gl': 'gl',
+        'it-IT': 'it',
+        'pt-PT': 'pt'
+    };
+    $scope.translate = $translate;
+
     $scope.closeBluetoothInteraction = function(pins, connectedPin) {
         if (!pins || !pins[Object.keys(connectedPin)[0]]) { //if !autoConnected
             $scope.isMobileConnected = false;
@@ -290,17 +303,18 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     id: 'bt'
                 }));
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
+                bTComponent.baudRate = 19200;
+                bTComponent.category = 'serialElements';
                 bTComponent.pin = {
                     rx: 0,
-                    tx: 1,
-                    baudRate: 19200
+                    tx: 1
                 };
                 bTComponent.uid = 'btComponent';
                 currentProjectService.addComponentInComponentsArray('serialElements', bTComponent);
                 $scope.currentProject.bitbloqConnectBT = bTComponent;
             } else {
                 $scope.currentProject.bitbloqConnectBT = {
-                    message: 'Esta placa necesita un modulo bluetooth, tendrás que seleccionar en los bloques'
+                    message: $scope.common.translate('device-needs-bluetooth')
                 };
 
                 var btConnected = _.find(currentProjectService.componentsArray.serialElements, function(component) {
@@ -339,7 +353,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.checkName = function() {
-
         var componentsNames = [];
         _.forEach(currentProjectService.componentsArray, function(category) {
             if (category.length > 0) {
@@ -551,6 +564,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.currentProject.hardware.board = board.name;
 
+        if (hw2Bloqs.checkIfOldConnections && $scope.currentProject.hardware.components > 0 || $scope.currentProject.useBitbloqConnect) {
+            $scope.deleteBTComponent();
+            _addBtComponent();
+        }
         currentProjectService.startAutosave();
     }
 
@@ -780,9 +797,21 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     }
 
+    $scope.hasDownloadedApp = function() {
+        if ($scope.common.user) {
+            userApi.update({
+                hasDownloadedApp: true
+            });
+        }
+    };
+
     function _createUniqueVarName(component) {
         var componentBasicName = $translate.instant('default-var-name-' + component.id),
             componentsNames = [];
+
+        if (component.id === 'bt') {
+            componentBasicName = $scope.common.translate('device').toLowerCase();
+        }
 
         currentProjectService.componentsArray[component.category].forEach(function(comp) {
             componentsNames[comp.name] = true;
@@ -1019,7 +1048,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     });
 
     $scope.$watch('componentSelected.name', function(newVal, oldVal) {
-
         if (oldVal === '' && newVal !== '') {
             $timeout.cancel($scope.timeoutCode);
             currentProjectService.startAutosave();

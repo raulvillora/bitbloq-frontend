@@ -92,7 +92,6 @@ angular
         };
 
         exports.addBoard = function(newBoard) {
-
             exports.removeBoard();
 
             board = newBoard;
@@ -331,7 +330,9 @@ angular
                 });
             });
         };
-
+        exports.checkIfOldConnections = function(){
+          return oldConnections.length > 0;
+        };
         function _autoConnect(board) {
             if (oldConnections.length > 0) {
                 var i2cToFemale = (board === 'Arduino UNO');

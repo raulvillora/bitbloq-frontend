@@ -458,16 +458,12 @@ angular.module('bitbloqApp')
             function insertBeautyIgnores(match) {
                 return '/* beautify ignore:start */' + match + '/* beautify ignore:end */';
             }
-
             //Remove beautify ignore & preserve sections
-            var replacedCode = code.replace(/(#include *.*)/gm, insertBeautyIgnores)
-                .replace(/(#define *.*)/gm, insertBeautyIgnores);
-            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->')
-                .replace(/([ (])0 b([01]+)/g, '$10b$2');
+            var replacedCode = code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores);
+            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->').replace(/([ (])0 b([01]+)/g, '$10b$2');
 
             return pretty;
         };
-
         /* jshint ignore:end */
 
         exports.getOs = function() {

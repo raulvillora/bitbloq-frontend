@@ -11,7 +11,6 @@
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, projectService, hardwareConstants, chromeAppApi) {
 
-
         /*************************************************
          Project save / edit
          *************************************************/
@@ -34,7 +33,15 @@ angular.module('bitbloqApp')
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
-            return projectService.project.hardware.components.length !== 0;
+            if (projectService.project.hardware.components.length === 0) {
+                if (projectService.project.useBitbloqConnect) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
         };
         $scope.anyAdvancedComponent = function() {
             return !_.isEqual(projectService.componentsArray, bloqsUtils.getEmptyComponentsArray());
@@ -337,11 +344,19 @@ angular.module('bitbloqApp')
                 return o.id === 'sp';
             });
 
+            var bluetooth = _.find(componentsArray, function(o) {
+                return o.id === 'bt';
+            });
+
             var phoneElements = _.find(componentsArray, function(o) {
                 return o.id === 'device';
             });
             if (serialPort) {
                 components.sp = serialPort.name;
+            }
+
+            if (bluetooth) {
+                components.bt = bluetooth.name;
             }
 
             if (phoneElements) {
@@ -412,12 +427,19 @@ angular.module('bitbloqApp')
 
         function generateMobileTwitterCode(componentsArray, originalCode) {
             var components = $scope.getComponents(projectService.project.hardware.components);
+            var board = projectService.getBoardMetaData().id;
+
             var code = originalCode;
             var deviceName;
-            if (components.device) {
-                deviceName = components.device;
-                code = generateTwitterBloqCode(deviceName, code);
+            //bqZUM
+
+            if (board === 'bqZUM') {
+                deviceName = projectService.project.bitbloqConnectBT.name;
+            } else {
+                deviceName = components.bt;
             }
+
+            code = generateTwitterBloqCode(deviceName, code);
             return code;
         }
 
@@ -444,7 +466,6 @@ angular.module('bitbloqApp')
             } else {
                 twitterBlock = false;
             }
-
             return twitterBlock;
         };
 
@@ -523,7 +544,6 @@ angular.module('bitbloqApp')
                             uploadWithWeb2board();
                         }
                     }
-
                 } else {
                     if ($scope.common.useChromeExtension()) {
                         if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
@@ -695,28 +715,23 @@ angular.module('bitbloqApp')
 
                 var updateBloq = function(element, list) {
 
-                    var tempValue,
-                        tempRef;
-
-                    tempRef = element.dataset.reference;
-                    tempValue = element.dataset.value;
+                    var componentRef = list.find(function(comp) {
+                        return comp.uid === element.dataset.reference;
+                    });
 
                     bloqsUtils.drawDropdownOptions($(element), list);
 
-                    if (tempRef && tempValue) {
+                    if (element.dataset.reference && element.dataset.value && componentRef) {
 
-                        var componentRef = list.find(function(comp) {
-                            return comp.uid === tempRef;
-                        });
-
-                        if (componentRef) {
-                            element.value = componentRef.name;
-                            element.dataset.reference = componentRef.uid;
-                            element.dataset.value = componentRef.name;
-                        }
+                        element.value = componentRef.name;
+                        element.dataset.reference = componentRef.uid;
+                        element.dataset.value = componentRef.name;
 
                     } else {
-                        $log.debug('dropdown not selected');
+                        $log.debug('dropdown not selected or reference was lost');
+                        element.dataset.reference = '';
+                        element.dataset.value = '';
+
                         element.selectedIndex = 0;
                     }
                 };
@@ -968,13 +983,14 @@ angular.module('bitbloqApp')
 
         function launchModalTour() {
             ngDialog.closeAll();
-            var modalTour = $rootScope.$new();
+            var modalTour = $rootScope.$new(),
+                modalTourInit;
             _.extend(modalTour, {
                 contentTemplate: '/views/modals/infoTour.html',
                 confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });
-            ngDialog.open({
+            modalTourInit = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--alert',
                 scope: modalTour,
@@ -1006,7 +1022,8 @@ angular.module('bitbloqApp')
         }
 
         function launchModalGuest() {
-            var modalGuest = $rootScope.$new();
+            var modalGuest = $rootScope.$new(),
+                modalGuestInit;
             _.extend(modalGuest, {
                 contentTemplate: '/views/modals/alert.html',
                 confirmAction: function() {
@@ -1020,7 +1037,7 @@ angular.module('bitbloqApp')
                 rejectAction: launchModalTour
             });
 
-            ngDialog.open({
+            modalGuestInit = ngDialog.open({
                 template: '/views/modals/modal.html',
                 className: 'modal--container modal--alert',
                 scope: modalGuest,
@@ -1033,8 +1050,7 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
 
                 event.preventDefault();
             }

@@ -122,6 +122,7 @@ angular.module('bitbloqApp')
                 }
             }
             var components = $scope.currentProject.hardware.components;
+            var useBitbloqConnect = $scope.currentProject.useBitbloqConnect;
 
             imageObj.onload = function() {
                 if ($scope.currentProject.hardware.robot) {
@@ -129,12 +130,17 @@ angular.module('bitbloqApp')
                 } else {
                     setMainImage(canvas, context, imageObj, false);
                 }
-                setComponentsImage(canvas, context, components);
+                setComponentsImage(canvas, context, components, useBitbloqConnect);
             };
         }
 
-        function setComponentsImage(canvas, context, components) {
+        function setComponentsImage(canvas, context, components, useBitbloqConnect) {
 
+            if (useBitbloqConnect) {
+                components.unshift({
+                    id: 'device'
+                });
+            }
             var limitedComponents = components.slice(0, 4);
             var counter = 0;
             limitedComponents.forEach(function(component) {

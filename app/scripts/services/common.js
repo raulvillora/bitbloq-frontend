@@ -37,6 +37,8 @@ angular.module('bitbloqApp')
         };
         exports.translate = $filter('translate');
         exports.twitterTutorialId = envData.config.twitterTutorialId;
+		exports.playStoreUrl = envData.config.playStoreUrl;
+
         exports.urlImage = envData.config.gCloudUrl + '/images/';
         exports.urlType = null;
         exports.user = null;
@@ -88,7 +90,6 @@ angular.module('bitbloqApp')
                 exports.user = user;
                 getUserRole();
                 loadedUserPromise.resolve();
-
             } else {
                 exports.user = null;
                 $translate.use(localStorage.guestLanguage || navigatorLang);

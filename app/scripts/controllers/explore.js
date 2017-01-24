@@ -315,9 +315,6 @@ angular.module('bitbloqApp')
         }, {
             option: 'mBot',
             value: false
-        }, {
-            option: 'mRanger',
-            value: false
         }];
         $scope.componentsFilters = [];
         $scope.componentsFilterOptions = [{
