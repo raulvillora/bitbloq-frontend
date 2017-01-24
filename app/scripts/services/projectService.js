@@ -284,9 +284,8 @@ angular.module('bitbloqApp')
 
         exports.initBloqsProject = function(watchers) {
             _unBlindAllWatchers();
-            if (_.isEmpty(exports.project)) {
-                exports.project = _.extend(exports.project, exports.getDefaultProject());
-            } else {
+            exports.project = _.extend(exports.project, exports.getDefaultProject());
+            if (!_.isEmpty(exports.project)) {
                 exports.codeProject = false;
             }
             exports.setComponentsArray();
