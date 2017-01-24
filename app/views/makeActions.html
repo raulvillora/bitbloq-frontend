@@ -119,7 +119,7 @@
             </li>
             <li data-ng-class="{'dropdown__item':true, 'dropdown__menu--disabled':bloqsHistoryPointer >= bloqsHistory.length }" data-ng-click="redo()" data-ng-disabled="disableRedo(currentTab, hardwareHistory, bloqsHistory)" data-element="makeactions-menuedit-redo">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
-                    <use xlink:href="#airplane"></use>
+                    <use xlink:href="#do"></use>
                 </svg>
                 {{'redo' | translate}}
             </li>
@@ -173,7 +173,7 @@
         </ul>
     </li>
     <li class="actions__menu__item" ng-if="common.section !== 'exercise' && common.section !== 'task'">
-        <button data-ng-class="{'actions__menu__button':true, 'actions__menu--selected':dropdown === 'share'}" data-ng-click="dropdownHandler('share')" data-element="makeactions-menushare">
+        <button data-ng-class="{'actions__menu__button':true, 'actions__menu#--selected':dropdown === 'share'}" data-ng-click="dropdownHandler('share')" data-element="makeactions-menushare">
             {{'share' | translate}}
         </button>
         <ul data-ng-class="{actions__menu__dropdown:true, 'actions--share':true, hidden:dropdown !== 'share', 'actions__menu--selected':dropdown === 'share'}">
@@ -261,7 +261,7 @@
     </svg>
 </button>
 <ul data-ng-class="{'little__actions right':true, 'header--transparent':!collapsedHeader && common.user}">
-    <li class="nav__menu__item right" data-ng-if="!currentProject._acl.ALL && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom"
+    <li class="nav__menu__item right" data-ng-if="common.section !== 'task' && common.section !== 'exercise && !currentProject._acl.ALL && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom"
         data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="true">
         <button data-ng-click="publishProject()" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!currentProject._id}">
             <svg class="svg-icon">
@@ -284,11 +284,11 @@
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-ng-if="common.section === 'task' || common.section === 'exercise'" data-tooltip-position="bottom" data-tooltip="{{ 'send' | translate }}"
+    <li class="nav__menu__item right" data-ng-if="common.section === 'task' || common.section === 'exercise'" data-tooltip-position="bottom" data-tooltip="{{(!onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send') | translate}}"
         data-tooltips="true">
-        <button data-ng-click="sendTask(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user || currentProject.status!=='pending'}" data-ng-disabled="currentProject.status!=='pending' || !onTime()">
+        <button data-ng-click="sendTask(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user || currentProject.status!=='pending'}" data-ng-disabled="currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]">
             <svg class="svg-icon">
-                <use xlink:href="#do"></use>
+                <use xlink:href="#airplane"></use>
             </svg>
         </button>
     </li>

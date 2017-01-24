@@ -51,11 +51,17 @@ angular.module('bitbloqApp')
 
         $scope.onTime = function() {
             var now = moment(),
-                canDeliver = false;
-            if ((!$scope.currentProject.initDate || now.diff($scope.currentProject.initDate) > 0) && (!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0)) {
-                canDeliver = true;
+                isEarly = true,
+                isLate = false;
+            if (!$scope.currentProject.initDate || now.diff($scope.currentProject.initDate) >= 0) {
+                isEarly = false;
+                isLate = true;
+                if(!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0){
+                  isLate = false;
+                }
             }
-            return canDeliver;
+            //It's "on time" when return [inf, sup](limits) -> [true, true]
+            return [!isEarly, !isLate];
         };
 
         $scope.sendTask = function(task) {
