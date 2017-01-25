@@ -207,6 +207,8 @@
         }, {
             "name": "buzzer"
         }, {
+            "name": "stopBuzzer"
+        }, {
             "name": "continuousServoStart"
         }, {
             "name": "continuousServoStop"
