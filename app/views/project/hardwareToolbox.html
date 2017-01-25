@@ -21,21 +21,21 @@
     <aside class="tabs-layout__aside tabs-layout__aside--vertical" ng-click="changeToolbox('', $event)">
         <ul class="tabs__header--vertical">
             <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='boards'}" data-walkthrough="boards">
-                <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)">
+                <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)" data-element="toolbox-boards">
                     <svg class="svg-icon">
                         <use xlink:href="#board"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='components'}">
-                <button class="btn-svg" ng-click="changeToolbox('components')">
+                <button class="btn-svg" ng-click="changeToolbox('components')" data-element="toolbox-components">
                     <svg class="svg-icon">
                         <use xlink:href="#component"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='robots'}">
-                <button class="btn-svg" ng-click="changeToolbox('robots')">
+                <button class="btn-svg" ng-click="changeToolbox('robots')" data-element="toolbox-robots">
                     <svg class="svg-icon">
                         <use xlink:href="#robot"></use>
                     </svg>
@@ -85,7 +85,7 @@
         <ul class="toolbox__content-container">
             <li class="toolbox__content__list" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
                 <h1 class="list-name" translate>{{component.id}}</h1>
-                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="components" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
             </li>
         </ul>
     </div>

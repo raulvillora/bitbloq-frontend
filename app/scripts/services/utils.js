@@ -281,8 +281,8 @@ angular.module('bitbloqApp')
 
         exports.removeDiacritics = function(str, config, defaultName) {
             var configDefault = config || {
-                        spaces: true
-                    },
+                    spaces: true
+                },
                 newStr;
             newStr = str.replace(/[^\u0000-\u007E]/g, function(a) {
                 return diacriticsMap[a] || a;
@@ -559,6 +559,17 @@ angular.module('bitbloqApp')
 
             console.log('result', result);
             return result;
+        };
+
+        exports.itsOver = function(item1, item2, margin) {
+            margin = margin || 0;
+            return item1.left < (item2.left + item2.width + margin) && (item1.left + item1.width) > (item2.left - margin) && item1.top < (item2.top + item2.height + margin) && (item1.top + item1.height) > (item2.top - margin);
+        };
+
+        exports.apply = function($scope) {
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
         };
 
         return exports;

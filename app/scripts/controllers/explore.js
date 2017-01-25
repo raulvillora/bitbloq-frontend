@@ -380,6 +380,9 @@ angular.module('bitbloqApp')
         }, {
             option: 'limitswitch',
             value: false
+        }, {
+            option: 'Bitbloq Connect',
+            value: false
         }];
 
         angular.element('.explore-view').bind('scroll', function(evt) {

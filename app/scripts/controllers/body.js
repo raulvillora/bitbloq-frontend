@@ -8,8 +8,9 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('BodyCtrl', function($scope, common, _) {
+    .controller('BodyCtrl', function($scope, common, _, envData) {
         $scope.common = common;
+        $scope.envData = envData;
         $scope.isHeader = function() {
             var notInSections = [
                 '',

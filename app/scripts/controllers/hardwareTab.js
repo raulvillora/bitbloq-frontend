@@ -18,7 +18,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $bTComponentContextMenu = $('#btcomponent-context-menu'),
         currentProjectService = $scope.currentProjectService || projectService;
 
-
     $scope.selectedToolbox = '';
     $scope.currentProject = $scope.currentProject || projectService.project;
     $scope.isEmptyComponentArray = currentProjectService.isEmptyComponentArray;
@@ -110,8 +109,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 currentProjectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
-        {
+            .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -332,7 +330,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBTComponent = function() {
         $scope.currentProject.useBitbloqConnect = false;
         $scope.componentSelected = false;
-        if ($scope.currentProject.hardware.board === 'bq ZUM') {
+        if (projectService.project.bitbloqConnectBT.name) {
             currentProjectService.removeComponentInComponentsArray('serialElements', $scope.currentProject.bitbloqConnectBT.name);
         }
         $scope.currentProject.bitbloqConnectBT = null;
@@ -966,20 +964,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
