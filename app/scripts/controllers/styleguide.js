@@ -67,7 +67,7 @@ angular.module('bitbloqApp')
             _.extend(modalOptions, {
                 title: 'hola que ase',
                 confirmOnly: true,
-                buttonConfirm: 'modal-button-ok',
+                confirmButton: 'modal-button-ok',
                 buttonReject: 'modal-button-cancel',
                 confirmAction: confirmAction
             });
@@ -91,7 +91,7 @@ angular.module('bitbloqApp')
             _.extend(modalOptions, {
                 title: 'hola que ase',
                 confirmOrReject: true,
-                buttonConfirm: 'modal-button-ok',
+                confirmButton: 'modal-button-ok',
                 buttonReject: 'modal-button-cancel',
                 confirmAction: confirmAction
             });

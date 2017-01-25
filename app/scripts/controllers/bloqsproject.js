@@ -10,8 +10,9 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-        projectService, hardwareConstants, chromeAppApi) {
+                                             $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+                                             projectService, hardwareConstants, chromeAppApi)
+    {
 
         /*************************************************
          Project save / edit
@@ -679,29 +680,6 @@ angular.module('bitbloqApp')
 
         /* ****** */
 
-        $scope.informErrorAction = function() {
-
-            var confirmAction = function() {
-                    ngDialog.close('ngdialog1');
-                },
-                parent = $rootScope,
-                modalOptions = parent.$new();
-
-            _.extend(modalOptions, {
-                title: 'make-actions-share-with-users',
-                confirmOnly: true,
-                buttonConfirm: 'make-actions-share-with-users-confirm',
-                contentTemplate: '/views/modals/shareWithUsers.html',
-                confirmAction: confirmAction
-            });
-
-            ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container modal--share-with-users',
-                scope: modalOptions
-            });
-        };
-
         $scope.updateBloqs = function() {
 
             if (projectService.bloqs.varsBloq) {
@@ -875,11 +853,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -1051,7 +1029,8 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
 
                 event.preventDefault();
             }

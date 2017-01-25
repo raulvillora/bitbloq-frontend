@@ -205,15 +205,14 @@
                 }
             };
 
-            $scope.sortInstancesByGroup = function(group) {
-                var nana = _getTasks(group._id);
-                console.log(nana);
+            $scope.sortInstancesByGroup = function() {
             };
 
             $scope.newGroup = function() {
-                centerModeService.newGroup($scope.teacher._id, $scope.center._id).then(function() {
-                    _getGroups();
-                });
+                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
+                    .then(function() {
+                        _getGroups();
+                    });
             };
 
             $scope.newTeacher = function() {
@@ -406,20 +405,19 @@
             }
 
             function _getTeacher(teacherId) {
-                if (!teacherId) {
-                    $scope.secondaryBreadcrumb = true;
-                    $scope.teacher = _.extend($scope.teacher, $scope.common.user);
-                    _getExercisesCount();
-                    _getGroups();
-                    _getUrlParams();
-                } else {
+                if (teacherId) {
                     centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
                         $scope.secondaryBreadcrumb = true;
                         $scope.teacher = _.extend($scope.teacher, response.data);
                         _getExercisesCount();
                         _getGroups();
-                        _getUrlParams();
+                        _getExercises();
                     });
+                } else {
+                    $scope.secondaryBreadcrumb = true;
+                    _getExercisesCount();
+                    _getGroups();
+                    _getExercises();
                 }
             }
 
@@ -429,7 +427,7 @@
                 });
             }
 
-            function _getUrlParams() {
+            function _getExercises() {
                 if ($routeParams.page) {
                     $scope.getExercisesPaginated($routeParams.page);
                     $scope.pagination.current = $routeParams.page;
