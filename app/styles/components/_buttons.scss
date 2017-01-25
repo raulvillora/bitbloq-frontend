@@ -1,5 +1,5 @@
 /*
-// BUTTONS //
+//     BUTTONS //
 */
 
 @mixin button($backgroudColor, $textColor) {
@@ -26,19 +26,12 @@
     }
 }
 
-.btn {
-    padding-right: 15px;
-    padding-left: 15px;
-}
-
 .btn--primary {
     font-weight: bold;
     @include button($font-color-heading, white);
-
     &:hover {
         background-color: #26292f;
     }
-
     &:active {
         background-color: #000;
     }
@@ -46,11 +39,9 @@
 
 .btn--secondary {
     @include button(#ebebeb, black);
-
     &:hover {
         background-color: $brand-secondary;
     }
-
     &:active {
         background-color: #d1d1d1;
     }
@@ -60,11 +51,9 @@
     @include button(#fff, #373b44);
     border: 1px solid #dddddd;
     font-weight: bold;
-
     &:hover {
         background-color: #e8e8e8;
     }
-
     &:active {
         background-color: #ddd;
     }
@@ -78,7 +67,7 @@
     }
 }
 
-.btn:disabled{
+.btn:disabled {
     background-color: #dbdee3;
     color: $font-color-disabled;
     .svg-icon {
@@ -149,7 +138,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
     position: relative;
-
     .dropdown__heading {
         font-style: normal;
         display: inline-block;
@@ -164,7 +152,6 @@
         text-overflow: ellipsis;
         padding-right: 10px;
     }
-
     :first-child {
         margin-left: 11px;
         font-style: normal;
@@ -178,7 +165,8 @@
 .button-group {
     float: right;
     padding: 0;
-    button, a {
+    button,
+    a {
         margin: 0 10px;
         float: right;
         &:first-child {
