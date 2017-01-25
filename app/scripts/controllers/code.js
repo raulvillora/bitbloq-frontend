@@ -44,6 +44,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.boardNameList = _.pluck(hardwareConstants.boards, 'name');
+        $scope.currentProject = projectService.project;
 
         $scope.common.isLoading = true;
 
@@ -372,10 +373,11 @@ angular.module('bitbloqApp')
                         projectService.addCodeWatchers();
                     });
                 }).catch(function() {
+
                     if ($scope.common.session.project.code) {
                         projectService.setProject($scope.common.session.project, 'code');
                     }
-                    if ($scope.common.session.project.hardware.board) {
+                    if ($scope.common.session.project.hardware && $scope.common.session.project.hardware.board) {
                         $scope.setBoard($scope.common.session.project.hardware.board);
                     }
                     _prettyCode().then(function() {

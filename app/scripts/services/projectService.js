@@ -351,11 +351,14 @@ angular.module('bitbloqApp')
             sensorsTypes[hardwareConstants.components.sensors[i].id] = hardwareConstants.components.sensors[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
-            for (var i = 0; i < newproject.hardware.components.length; i++) {
-                if (newproject.hardware.components[i].category === 'sensors') {
-                    newproject.hardware.components[i].dataReturnType = sensorsTypes[newproject.hardware.components[i].id];
+            if (newproject.hardware.components) {
+                for (var i = 0; i < newproject.hardware.components.length; i++) {
+                    if (newproject.hardware.components[i].category === 'sensors') {
+                        newproject.hardware.components[i].dataReturnType = sensorsTypes[newproject.hardware.components[i].id];
+                    }
                 }
             }
+
             //end temp fix
 
             _unBlindAllWatchers();
