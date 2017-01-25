@@ -9,7 +9,9 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location, $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline, exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi) {
+    .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
+        $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi) {
 
         /*************************************************
          Exercise settings
@@ -56,8 +58,8 @@ angular.module('bitbloqApp')
             if (!$scope.currentProject.initDate || now.diff($scope.currentProject.initDate) >= 0) {
                 isEarly = false;
                 isLate = true;
-                if(!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0){
-                  isLate = false;
+                if (!$scope.currentProject.endDate || now.diff($scope.currentProject.endDate) <= 0) {
+                    isLate = false;
                 }
             }
             //It's "on time" when return [inf, sup](limits) -> [true, true]
@@ -385,29 +387,34 @@ angular.module('bitbloqApp')
         function addExerciseWatchersAndListener() {
             exerciseService.addWatchers();
 
-            $window.addEventListener('bloqs:dragend', function() {
+            $window.addEventListener('bloqs:dragend', onDragEndHandler);
+            $window.addEventListener('bloqs:suggestedAdded', onBloqsSuggestedAddedHandler);
+            $window.addEventListener('bloqs:connect', onBloqsConnectHandler);
+            $window.addEventListener('bloqs:change', onBloqsChangeHandler);
+        }
+
+        function onBloqsDragEndHandler() {
+            $scope.saveBloqStep();
+            exerciseService.startAutosave();
+            utils.apply($scope);
+        }
+
+        function onBloqsSuggestedAddedHandler() {
+            $scope.saveBloqStep();
+            utils.apply($scope);
+        }
+
+        function onBloqsConnectHandler() {
+            exerciseService.startAutosave();
+            utils.apply($scope);
+        }
+
+        function onBloqsChangeHandler() {
+            if (exerciseService.bloqs.loopBloq) {
                 $scope.saveBloqStep();
                 exerciseService.startAutosave();
-                $scope.$apply();
-            });
-            $window.addEventListener('bloqs:suggestedAdded', function() {
-                $scope.saveBloqStep();
-                $scope.$apply();
-            });
-
-            $window.addEventListener('bloqs:connect', function() {
-                exerciseService.startAutosave();
-                $scope.$apply();
-            });
-
-            $window.addEventListener('bloqs:change', function() {
-                if (exerciseService.bloqs.loopBloq) {
-                    $scope.saveBloqStep();
-                    exerciseService.startAutosave();
-                    $scope.$apply();
-                }
-
-            });
+                utils.apply($scope);
+            }
         }
 
         function checkBackspaceKey(event) {
@@ -526,7 +533,7 @@ angular.module('bitbloqApp')
         function confirmExit() {
             var closeMessage;
             chromeAppApi.stopSerialCommunication();
-            $scope.$apply();
+            utils.apply($scope);
 
             if (exerciseService.saveStatus === 1) {
                 closeMessage = $scope.common.translate('leave-without-save');
@@ -1103,6 +1110,11 @@ angular.module('bitbloqApp')
             return prettyCode;
         };
 
-        /* ****** */
+        $scope.$on('$destroy', function() {
+            $window.removeEventListener('bloqs:dragend', onDragEndHandler);
+            $window.removeEventListener('bloqs:suggestedAdded', onBloqsSuggestedAddedHandler);
+            $window.removeEventListener('bloqs:connect', onBloqsConnectHandler);
+            $window.removeEventListener('bloqs:change', onBloqsChangeHandler);
+        });
 
     });
