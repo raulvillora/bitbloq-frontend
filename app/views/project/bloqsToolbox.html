@@ -262,11 +262,11 @@
             <ul class="tabs__header">
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'basic'}">
                     <input type="checkbox" class="component-toolbox" id="basicCheck" ng-model="basicModel" data-indeterminate-checkbox data-generic-check="checkBasicTab" data-function-select-all="addChecks" data-selected-tab="selectedBloqsToolbox" data-update-state="statusGeneralCheck"/>
-                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'">{{'basics' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" data-element="toolbox-basic-button">{{'basics' | translate}}</button>
                 </li>
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}" ng-show="common.properties.bloqsSortTree['advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)]">
                     <input type="checkbox" class="component-toolbox" id="advanceCheck" ng-model="advancedModel" data-indeterminate-checkbox data-generic-check="checkAdvanceTab" data-function-select-all="addChecks" data-selected-tab="'advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)"/>
-                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'">{{'make-swtoolbox-advanced' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'" data-element="toolbox-advanced-button">{{'make-swtoolbox-advanced' | translate}}</button>
                 </li>
             </ul>
         </aside>
@@ -309,7 +309,7 @@
                 <li ng-if="!anyComponent()" class="error--text">{{"no-components-connected" | translate}}</li>
             </ul>
             <!-- Functions -->
-            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='functions'">
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='functions'" data-element="toolbox-container-functions">
                 <li id="{{'bloq' + function.name}}" data-ng-class="function.addClass" data-ng-repeat="function in common.properties.bloqsSortTree.functions" ng-show="common.section !== 'task' || currentProject.selectedBloqs.functions.indexOf(function.name)>-1" data-bitbloq-bloq-creator
                     data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.functions[$index].name]" data-components-array="componentsArray">
                     <input type="checkbox" class="component-toolbox" id="{{function.name + 'Check'}}" ng-model="checkModel[function.name]" ng-click="addChecks('functions', checkModel[function.name], function.name)" data-indeterminate-parent-checkbox="basicModel" data-selected-tab="selectedBloqsToolbox" data-my-tab="functions"
@@ -414,7 +414,7 @@
                 </li>
             </ul>
             <!-- Functions -->
-            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='functions'">
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='functions'" data-element="toolbox-container-functions">
                 <li id="{{'bloq' + advancedFunction.name}}" data-ng-class="advancedFunction.addClass" data-ng-repeat="advancedFunction in common.properties.bloqsSortTree.advancedFunctions" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedFunctions.indexOf(advancedFunction.name)>-1"
                     data-bitbloq-bloq-creator
                     data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedFunctions[$index].name]" data-components-array="componentsArray">
