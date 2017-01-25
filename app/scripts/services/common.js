@@ -36,8 +36,6 @@ angular.module('bitbloqApp')
             save: false
         };
         exports.translate = $filter('translate');
-        exports.twitterTutorialId = envData.config.twitterTutorialId;
-		exports.playStoreUrl = envData.config.playStoreUrl;
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
         exports.urlType = null;
@@ -245,37 +243,3 @@ angular.module('bitbloqApp')
         return exports;
 
     });
-
-/* MODALS */
-//  This example is using lodash _extend()
-//  Type of modals:
-//      -Without buttons
-//      -With confirm button: set confirmOnly as true in the modal scope
-//      -With confirm and reject buttons: set confirmOrReject as true in the modal scope
-//  Controller side:
-// $scope.clickToOpen = function() {
-
-//     var confirmAction = function(e) {
-//             ngDialog.close('ngdialog1');
-//         },
-//         parent = $rootScope,
-//         modalOptions = parent.$new();
-
-//     _.extend(modalOptions, {
-//         title: 'hola que ase',
-//         confirmOnly: true,
-//         buttonConfirm: 'Aceptar',
-//         buttonReject: 'Cancelar',
-//         confirmAction: confirmAction
-//     });
-
-//     ngDialog.open({
-//         template: '/views/modal.html',
-//         className: 'modal--container',
-//         scope: modalOptions,
-//         showClose: false
-//     });
-// };
-//
-// Template side:
-// ng-click="clickToOpen()"
