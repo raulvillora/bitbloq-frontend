@@ -255,6 +255,7 @@
                     centerModeApi.registerInGroup(groupId).then(function() {
                         currentModal.close();
                         _getGroups();
+                        _getTasks();
                     });
                 }
 
