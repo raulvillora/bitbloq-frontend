@@ -262,11 +262,11 @@
             <ul class="tabs__header">
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'basic'}">
                     <input type="checkbox" class="component-toolbox" id="basicCheck" ng-model="basicModel" data-indeterminate-checkbox data-generic-check="checkBasicTab" data-function-select-all="addChecks" data-selected-tab="selectedBloqsToolbox" data-update-state="statusGeneralCheck"/>
-                    <button class="component-toolbox" data-element="toolbox-basic-button"ng-click="selectedToolboxTab = 'basic'">{{'basics' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" data-element="toolbox-basic-button">{{'basics' | translate}}</button>
                 </li>
                 <li class="tabs__header__item" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}" ng-show="common.properties.bloqsSortTree['advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)]">
                     <input type="checkbox" class="component-toolbox" id="advanceCheck" ng-model="advancedModel" data-indeterminate-checkbox data-generic-check="checkAdvanceTab" data-function-select-all="addChecks" data-selected-tab="'advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)"/>
-                    <button class="component-toolbox" data-element="toolbox-advanced-button" ng-click="selectedToolboxTab = 'advance'">{{'make-swtoolbox-advanced' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'" data-element="toolbox-advanced-button">{{'make-swtoolbox-advanced' | translate}}</button>
                 </li>
             </ul>
         </aside>
