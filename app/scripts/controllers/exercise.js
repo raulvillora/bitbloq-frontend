@@ -387,7 +387,7 @@ angular.module('bitbloqApp')
         function addExerciseWatchersAndListener() {
             exerciseService.addWatchers();
 
-            $window.addEventListener('bloqs:dragend', onDragEndHandler);
+            $window.addEventListener('bloqs:dragend', onBloqsDragEndHandler);
             $window.addEventListener('bloqs:suggestedAdded', onBloqsSuggestedAddedHandler);
             $window.addEventListener('bloqs:connect', onBloqsConnectHandler);
             $window.addEventListener('bloqs:change', onBloqsChangeHandler);
@@ -1111,7 +1111,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.$on('$destroy', function() {
-            $window.removeEventListener('bloqs:dragend', onDragEndHandler);
+            $window.removeEventListener('bloqs:dragend', onBloqsDragEndHandler);
             $window.removeEventListener('bloqs:suggestedAdded', onBloqsSuggestedAddedHandler);
             $window.removeEventListener('bloqs:connect', onBloqsConnectHandler);
             $window.removeEventListener('bloqs:change', onBloqsChangeHandler);

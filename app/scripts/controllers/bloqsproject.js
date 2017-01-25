@@ -948,7 +948,7 @@ angular.module('bitbloqApp')
             });
 
             $window.addEventListener('bloqs:dragend', function(evt) {
-                if (evt.detail.bloqData.name === 'phoneConfigTwitter') {
+                if (evt.detail.bloq.bloqData.name === 'phoneConfigTwitter') {
                     $scope.twitterWheel = true;
                 }
                 $scope.saveBloqStep();

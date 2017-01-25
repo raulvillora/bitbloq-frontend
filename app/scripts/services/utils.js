@@ -570,7 +570,7 @@ angular.module('bitbloqApp')
             if (!$scope.$$phase) {
                 $scope.$apply();
             }
-        }
+        };
 
         return exports;
     });

@@ -8,7 +8,9 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi, $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService) {
+    .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -634,16 +636,28 @@ angular.module('bitbloqApp')
         }
 
         function onDragEnd(object) {
-            if (object.detail.bloqData.name === 'phoneConfigTwitter') {
+            if (object.detail.bloq.bloqData.name === 'phoneConfigTwitter') {
                 $scope.toolbox.level = 1;
                 $timeout(function() {
                     $scope.twitterSettings = true;
                 }, 500);
             }
             _.throttle(setScrollsDimension, 1000);
-            var bloqToDelete = bloqsUtils.itsOver(object.detail.$bloq, $scope.$trashcan);
+            var mouseItem = {
+                top: object.detail.mouseEvent.y - 5,
+                left: object.detail.mouseEvent.x - 5,
+                width: 10,
+                height: 10
+            };
+            var trashcanItem = {
+                top: $scope.$trashcan.offset().top,
+                left: $scope.$trashcan.offset().left,
+                width: $scope.$trashcan[0].clientWidth,
+                height: $scope.$trashcan[0].clientHeight
+            };
+            var bloqToDelete = utils.itsOver(mouseItem, trashcanItem);
             if (bloqToDelete) {
-                bloqs.removeBloq(object.detail.uuid, false, true);
+                bloqs.removeBloq(object.detail.bloq.uuid, false, true);
             }
             $scope.showTrashcan = false;
             $scope.$apply();
