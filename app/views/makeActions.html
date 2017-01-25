@@ -39,7 +39,7 @@
                 {{'open-project-from-file' | translate}}
             </li>
             <li ng-if="common.section === 'exercise'" data-tooltip-position="right" data-tooltip="{{(!currentProject._id?'empty-project':'') | translate}}" data-tooltips="{{!currentProject._id}}">
-                <div class="dropdown__item" data-ng-click="currentProjectService.editDate()" data-ng-disabled="!common.user || !currentProject._id" data-element="centerMode_editDate">
+                <div class="dropdown__item" data-ng-click="editDate()" data-ng-disabled="!common.user || !currentProject._id" data-element="centerMode_editDate">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#calendar"></use>
                     </svg>

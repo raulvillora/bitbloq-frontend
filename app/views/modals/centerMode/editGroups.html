@@ -8,9 +8,9 @@
             <span class="col-vsmall-5">{{'centerMode_column_students' | translate}}</span>
         </div>
         <ul class="table__block--invert assign-group__content">
-            <li class="table__block__list" ng-repeat="group in groups">
+            <li class="table__block__list" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
                 <span class="checkbox--general">
-                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-init="group.selected=oldGroups[group._id]? true: false" ng-model="group.selected"/>
+                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-init="group.selected=oldGroups[group._id]? true: false" ng-model="group.selected"/>
                 </span>
                 <div class="group__head row" ng-click="expandedItem[group._id] = !expandedItem[group._id]">
                     <span class="col-vsmall-8 table__block__item">
@@ -81,7 +81,7 @@
         </ul>
     </div>
     
-    <button class="btn btn--secondary btn--small" ng-click="newGroup()" data-element="centerMode-new-group">
+    <button class="btn btn--secondary btn--small" ng-if="!onlyEdit" ng-click="newGroup()" data-element="centerMode-new-group">
         {{ 'centerMode_button_createNewGroup' | translate }}
     </button>
 </div>

@@ -46,6 +46,10 @@ angular.module('bitbloqApp')
             exerciseService.assignGroup($scope.currentProject, $scope.common.user._id, $scope.groups);
         };
 
+        $scope.editDate = function() {
+            exerciseService.assignGroup($scope.currentProject, $scope.common.user._id, $scope.groups, null, true);
+        };
+
         $scope.getGroups = function() {
             centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
                 $scope.groups = response.data;

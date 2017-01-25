@@ -16,8 +16,8 @@
                     {{group.name}}
                 </h2>
                 <span class="block__item__explanation--subscript text-ID" ng-if="common.urlType!=='exercise-info'">{{group.accessId}}</span>
-                <span class="block__item__explanation--subscript" ng-if="common.urlType==='exercise-info'">{{group.initDate ? ('date_from' | translate) + (group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
-                <span class="block__item__explanation--subscript" ng-if="common.urlType==='exercise-info'"> {{group.endDate ? ('date_to' | translate) + (group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
+                <span class="block__item__explanation--subscript" ng-if="common.urlType==='exercise-info'">{{group.initDate ? ('date_from' | translate)+' '+(group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
+                <span class="block__item__explanation--subscript" ng-if="common.urlType==='exercise-info'"> {{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
             </button>
         </span>
         <span class="col-vsmall-1 table__block__item" ng-if="common.urlType!=='exercise-info'">{{group.students.length || 0}}</span>

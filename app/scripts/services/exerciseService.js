@@ -64,7 +64,7 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.assignGroup = function(project, teacherId, oldGroups, centerId) {
+        exports.assignGroup = function(project, teacherId, oldGroups, centerId, onlyEdit) {
             var defered = $q.defer();
             oldGroups = _.groupBy(oldGroups, '_id');
             centerModeApi.getGroups().then(function(response) {
@@ -172,6 +172,7 @@ angular.module('bitbloqApp')
                     newGroup: _newGroup,
                     getTime: getTime,
                     oldGroups: oldGroups,
+                    onlyEdit: onlyEdit,
                     rejectButton: 'modal-button-cancel',
                     rejectAction: defered.reject,
                     confirmAction: confirmAction,
