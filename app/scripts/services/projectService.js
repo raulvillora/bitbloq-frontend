@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
-    {
+        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -553,6 +552,9 @@ angular.module('bitbloqApp')
             var mainTag = exports.project.hardware.robot || exports.project.hardware.board;
             if (mainTag) {
                 newHardwareTags.push(mainTag);
+            }
+            if (exports.project.bitbloqConnectBT) {
+                newHardwareTags.push('Bitbloq Connect');
             }
             exports.project.hardware.components.forEach(function(comp) {
                 newHardwareTags.push(comp.id);

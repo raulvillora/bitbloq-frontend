@@ -331,7 +331,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.currentProject.useBitbloqConnect = false;
         $scope.componentSelected = false;
         if (projectService.project.bitbloqConnectBT.name) {
-
             currentProjectService.removeComponentInComponentsArray('serialElements', $scope.currentProject.bitbloqConnectBT.name);
         }
         $scope.currentProject.bitbloqConnectBT = null;
