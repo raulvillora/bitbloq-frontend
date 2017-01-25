@@ -85,7 +85,7 @@
         <ul class="toolbox__content-container">
             <li class="toolbox__content__list" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
                 <h1 class="list-name" translate>{{component.id}}</h1>
-                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="components" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
             </li>
         </ul>
     </div>
