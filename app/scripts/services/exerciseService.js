@@ -65,6 +65,7 @@ angular.module('bitbloqApp')
         };
 
         exports.assignGroup = function(project, teacherId, oldGroups, centerId) {
+            var defered = $q.defer();
             oldGroups = _.groupBy(oldGroups, '_id');
             centerModeApi.getGroups().then(function(response) {
                 var groups = response.data;
@@ -112,6 +113,7 @@ angular.module('bitbloqApp')
                         }
                     });
                     exerciseApi.assignGroups(project._id, groupsToAssign).then(function() {
+                        defered.resolve();
                         assignModal.close();
                     });
                 }
@@ -171,6 +173,7 @@ angular.module('bitbloqApp')
                     getTime: getTime,
                     oldGroups: oldGroups,
                     rejectButton: 'modal-button-cancel',
+                    rejectAction: defered.reject,
                     confirmAction: confirmAction,
                     modalButtons: true
                 });
@@ -182,6 +185,7 @@ angular.module('bitbloqApp')
 
                 });
             });
+            return defered.promise;
         };
 
         /**

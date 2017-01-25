@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService) {
 
             $scope.center = {};
             $scope.exercises = [];
@@ -30,6 +30,14 @@
             $scope.groupArray = {};
 
             var currentModal;
+
+            $scope.editGroup = function() {
+                exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
+                    .then(function() {
+                        _getTasksByExercise($routeParams.id);
+                        _getGroups($routeParams.id);
+                    });
+            };
 
             $scope.saveUrl = function(newUrl) {
                 $scope.common.lastUrl = $location.url();
