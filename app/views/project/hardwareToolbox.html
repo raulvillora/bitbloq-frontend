@@ -21,21 +21,21 @@
     <aside class="tabs-layout__aside tabs-layout__aside--vertical" ng-click="changeToolbox('', $event)">
         <ul class="tabs__header--vertical">
             <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='boards'}" data-walkthrough="boards">
-                <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)">
+                <button class="btn-svg" ng-click="changeToolbox('boards'); handleTour(2)" data-element="toolbox-boards">
                     <svg class="svg-icon">
                         <use xlink:href="#board"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='components'}">
-                <button class="btn-svg" ng-click="changeToolbox('components')">
+                <button class="btn-svg" ng-click="changeToolbox('components')" data-element="toolbox-components">
                     <svg class="svg-icon">
                         <use xlink:href="#component"></use>
                     </svg>
                 </button>
             </li>
             <li class="tabs__header__item--vertical" ng-class="{'selected--tab': selectedToolbox==='robots'}">
-                <button class="btn-svg" ng-click="changeToolbox('robots')">
+                <button class="btn-svg" ng-click="changeToolbox('robots')" data-element="toolbox-robots">
                     <svg class="svg-icon">
                         <use xlink:href="#robot"></use>
                     </svg>
