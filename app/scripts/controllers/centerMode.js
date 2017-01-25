@@ -209,9 +209,10 @@
             };
 
             $scope.newGroup = function() {
-                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id).then(function() {
-                    _getGroups();
-                });
+                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
+                    .then(function() {
+                        _getGroups();
+                    });
             };
 
             $scope.newTeacher = function() {
@@ -404,13 +405,7 @@
             }
 
             function _getTeacher(teacherId) {
-                if (!teacherId) {
-                    $scope.secondaryBreadcrumb = true;
-                    //$scope.teacher = _.extend($scope.teacher, $scope.common.user);
-                    _getExercisesCount();
-                    _getGroups();
-                    _getExercises();
-                } else {
+                if (teacherId) {
                     centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
                         $scope.secondaryBreadcrumb = true;
                         $scope.teacher = _.extend($scope.teacher, response.data);
@@ -418,6 +413,11 @@
                         _getGroups();
                         _getExercises();
                     });
+                } else {
+                    $scope.secondaryBreadcrumb = true;
+                    _getExercisesCount();
+                    _getGroups();
+                    _getExercises();
                 }
             }
 
