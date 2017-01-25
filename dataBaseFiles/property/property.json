@@ -25,7 +25,13 @@
         "advancedComponents": [{
             "name": "hwVariable"
         }, {
-            "name": "buzzerAdvanced"
+            "name": "buzzerAdvanced-v2"
+        }, {
+            "name": "buzzerWithoutPause"
+        }, {
+            "name": "buzzerWithoutPauseAdvanced"
+        }, {
+            "name": "stopBuzzer"
         }, {
             "name": "continuousServoStartAdvanced-v1"
         }, {
@@ -57,7 +63,7 @@
         }, {
             "name": "readAdvanced"
         }, {
-            "name": "servoNormalAdvanced"
+            "name": "servoNormalAdvanced-v2"
         }, {
             "name": "servoAttach"
         }, {
@@ -206,8 +212,6 @@
             "name": "hts221Humidity"
         }, {
             "name": "buzzer"
-        }, {
-            "name": "stopBuzzer"
         }, {
             "name": "continuousServoStart"
         }, {
@@ -373,6 +377,8 @@
             "name": "numberArray"
         }, {
             "name": "basicOperations"
+        }, {
+            "name": "parenthesis"
         }, {
             "name": "map"
         }, {
