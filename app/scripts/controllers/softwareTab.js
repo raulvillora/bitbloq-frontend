@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-        utils) {
+                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+                                            utils)
+    {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -27,6 +28,7 @@ angular.module('bitbloqApp')
         $scope.currentProject = $scope.currentProject || projectService.project;
         $scope.lastPosition = 0;
         $scope.checkBasicTab = 0;
+        $scope.checkFunction = 0;
         $scope.checkAdvanceTab = 0;
         $scope.selectedBloqsToolbox = '';
         $scope.twitterSettings = false;
@@ -38,14 +40,17 @@ angular.module('bitbloqApp')
 
         $scope.statusGeneralCheck = function(type) {
             if ($scope.currentProject.selectedBloqs) {
+                var oldCheckBasicTab = $scope.checkBasicTab,
+                    oldAdvancedTab = $scope.checkAdvanceTab;
                 $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0;
                 var advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1);
                 $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
                 if ($scope.checkBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
-                    $scope.checkBasicTab = 'full';
+                    $scope.checkBasicTab = oldCheckBasicTab === 'full' ? 'complete' : 'full';
+
                 }
                 if ($scope.checkAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
-                    $scope.checkAdvanceTab = 'full';
+                    $scope.checkAdvanceTab = oldAdvancedTab === 'full' ? 'complete' : 'full';
                 }
             }
         };
@@ -386,8 +391,9 @@ angular.module('bitbloqApp')
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].id.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].id)) {
+                            if (connectedComponents[i].id.includes(item) || item.toLowerCase()
+                                    .includes(connectedComponents[i].id))
+                            {
                                 result = true;
                             }
                             i++;

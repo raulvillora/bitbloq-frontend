@@ -19,13 +19,16 @@ angular.module('bitbloqApp')
             link: function(scope, element, attrs, ngModel) {
                 scope.$watch('genericCheck', function(newValue) {
                     if (newValue) {
-                        if (newValue === 'full') {
-                            ngModel.$setViewValue(true);
-                            element.prop('checked', true);
-                            element.prop('indeterminate', false);
-                        } else {
-                            element.prop('checked', false);
-                            element.prop('indeterminate', true);
+                        switch (newValue) {
+                            case 'full':
+                            case 'complete':
+                                ngModel.$setViewValue(true);
+                                element.prop('checked', true);
+                                element.prop('indeterminate', false);
+                                break;
+                            default:
+                                element.prop('checked', false);
+                                element.prop('indeterminate', true);
                         }
                     } else {
                         element.prop('checked', false);
