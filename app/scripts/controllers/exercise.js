@@ -35,7 +35,9 @@ angular.module('bitbloqApp')
         $scope.exerciseApi = exerciseApi;
         $scope.currentProject = exerciseService.exercise;
         $scope.currentProjectService = exerciseService;
-        $scope.isOwner = false;
+        $scope.currentProject.canMark = false;
+        $scope.currentProject.userCanUpdate = false;
+        $scope.currentProject.newMark = [];
 
         exerciseService.saveStatus = 0;
 
@@ -105,9 +107,34 @@ angular.module('bitbloqApp')
         };
 
         function _canUpdate() {
-            exerciseApi.canUpdate($scope.currentProject._id).then(function(res) {
-                $scope.isOwner = (res.status === 200);
-            });
+            var defered = $q.defer();
+            if ($scope.common.section === 'task' && $scope.currentProject.student === $scope.common.user._id) {
+                $scope.currentProject.userCanUpdate = true;
+                defered.resolve();
+            } else {
+                if ($scope.currentProject.student !== $scope.common.user._id && ($scope.currentProject.teacher === $scope.common.user._id || $scope.currentProject.owner !== $scope.common.user._id)) {
+                    if ($scope.common.section === 'exercise') {
+                        $scope.currentProject.userCanUpdate = true;
+                    } else {
+                        $scope.currentProject.canMark = true;
+                    }
+                    defered.resolve();
+                } else {
+                    exerciseApi.userIsHeadMaster($scope.currentProject._id).then(function(response) {
+                        $scope.currentProject.canMark = response.data.headMaster;
+                        defered.resolve();
+                    }).catch(defered.reject);
+                }
+            }
+            return defered.promise;
+        }
+
+        function _generateMark() {
+            if ($scope.currentProject.mark) {
+                var mark = String($scope.currentProject.mark).split('.');
+                $scope.currentProject.newMark[0] = mark[0] || 0;
+                $scope.currentProject.newMark[1] = mark[1] || 0;
+            }
         }
 
         /*************************************************
@@ -212,17 +239,20 @@ angular.module('bitbloqApp')
         $scope.currentTab = 2;
 
         $scope.setTab = function(index) {
-            if (!_.isEqual($scope.currentProject, exerciseService.getDefaultExercise())) {
+            if ($scope.currentProject.userCanUpdate && !_.isEqual($scope.currentProject, exerciseService.getDefaultExercise())) {
                 exerciseService.startAutosave(true);
             }
-            if (index === 0) {
-                hw2Bloqs.repaint();
-            } else if (index === 1) {
-                if ($scope.toolbox.level !== 1) {
-                    $scope.toolbox.level = 1;
-                }
-                $scope.setCode($scope.getCode());
-                $rootScope.$emit('currenttab:bloqstab');
+            switch (index) {
+                case 0:
+                    hw2Bloqs.repaint();
+                    break;
+                case 1:
+                    if ($scope.toolbox.level !== 1) {
+                        $scope.toolbox.level = 1;
+                    }
+                    $scope.setCode($scope.getCode());
+                    $rootScope.$emit('currenttab:bloqstab');
+                    break;
             }
 
             $scope.currentTab = index;
@@ -455,11 +485,11 @@ angular.module('bitbloqApp')
         function loadExercise(id) {
             return exerciseService.getExerciseOrTask(id).then(function(response) {
                 _uploadExercise(response.data);
+                _canUpdate().then(function() {
+                    _generateMark();
+                });
                 if ($scope.common.section === 'exercise') {
-                    _canUpdate();
                     $scope.getGroups();
-                } else {
-                    $scope.isOwner = false;
                 }
                 $scope.currentProjectLoaded.resolve();
             }, function(error) {

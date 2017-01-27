@@ -423,24 +423,26 @@ angular.module('bitbloqApp')
             if (_.isEmpty(exports.exercise)) {
                 exports.exercise = exports.getDefaultExercise();
             }
-            exports.exercise = _.extend(exports.exercise, newExercise);
+            _.extend(exports.exercise, newExercise);
             exports.setComponentsArray();
             exports.addWatchers();
         };
 
         exports.startAutosave = function(hard) {
-            if (common.user) {
-                exports.saveStatus = 1;
-                if (hard) {
-                    savePromise = _saveExercise();
-                } else if (!savePromise || (savePromise.$$state.status !== 0)) {
-                    savePromise = $timeout(_saveExercise, envData.config.saveTime || 10000);
-                    return savePromise;
+            if (exports.exercise.userCanUpdate || exports.exercise.canMark) {
+                if (common.user) {
+                    exports.saveStatus = 1;
+                    if (hard) {
+                        savePromise = _saveExercise();
+                    } else if (!savePromise || (savePromise.$$state.status !== 0)) {
+                        savePromise = $timeout(_saveExercise, envData.config.saveTime || 10000);
+                        return savePromise;
+                    }
+                } else {
+                    exports.completedExercise();
+                    common.session.exercise = _.cloneDeep(exports.exercise);
+                    common.session.save = true;
                 }
-            } else {
-                exports.completedExercise();
-                common.session.exercise = _.cloneDeep(exports.exercise);
-                common.session.save = true;
             }
         };
 
@@ -499,74 +501,90 @@ angular.module('bitbloqApp')
 
         function _saveExercise() {
             var defered = $q.defer();
-            exports.completedExercise();
-            if (exports.exerciseHasChanged() || exports.tempImage.file) {
-
-                exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
-
-                $log.debug('Auto saving exercise...');
-
-                if (exports.tempImage.file && !exports.tempImage.generate) {
-                    exports.exercise.image = 'custom';
-                }
-
-                if (exports.exercise._id) {
-                    if (!exports.exercise._acl || (exports.exercise._acl['user:' + common.user._id] && exports.exercise._acl['user:' + common.user._id].permission === 'ADMIN')) {
-                        return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise()).then(function() {
-                            exports.saveStatus = 2;
-                            exports.saveOldExercise();
-                            localStorage.exercisesChange = true;
-                            if (exports.tempImage.file) {
-                                imageApi.save(exports.exercise._id, exports.tempImage.file).then(function() {
-                                    exports.tempImage = {};
-                                });
-                            }
-                        });
-                    } else {
-                        exports.saveStatus = 4;
+            if (exports.exercise.canMark) {
+                if (exports.exercise.mark || exports.exercise.remark) {
+                    exerciseApi.markTask(exports.exercise).then(function() {
+                        exports.saveStatus = 2;
+                        defered.resolve();
+                    }).catch(function() {
+                        exports.saveStatus = 3;
                         defered.reject();
-                    }
+                    })
                 } else {
-                    if (common.user) {
-                        exports.exercise.creator = common.user._id;
-                        return exerciseApi.save(exports.getCleanExercise()).then(function(response) {
-                            exports.saveStatus = 2;
-                            var idExercise = response.data;
-                            exports.exercise._id = idExercise;
-                            exports.getExerciseOrTask(idExercise).success(function(response) {
-                                exports.exercise._acl = response._acl;
-                            });
-                            //to avoid reload
-                            $route.current.pathParams.id = idExercise;
-                            $location.url('/exercise/' + idExercise);
-
-                            common.isLoading = false;
-                            if (localStorage.exercisesChange) {
-                                localStorage.exercisesChange = !JSON.parse(localStorage.exercisesChange);
-                            }
-                            exports.saveOldExercise();
-
-                            if (exports.tempImage.file) {
-                                imageApi.save(idExercise, exports.tempImage.file).then(function() {
-                                    $log.debug('imageSaveok');
-                                    localStorage.exercisesChange = true;
-                                    exports.tempImage = {};
-                                });
-                            }
-                        }).catch(function() {
-                            exports.saveStatus = 3;
-                            defered.reject();
-                        });
-                    } else {
-                        exports.saveStatus = 0;
-                        $log.debug('why we start to save if the user its not logged??, check startAutoSave');
-                        defered.reject();
-                    }
+                    exports.saveStatus = 0;
+                    defered.resolve();
                 }
             } else {
-                $log.debug('we cant save Exercise if there is no changes');
-                exports.saveStatus = 0;
-                defered.resolve();
+                exports.completedExercise();
+                if (exports.exerciseHasChanged() || exports.tempImage.file) {
+
+                    exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
+
+                    $log.debug('Auto saving exercise...');
+
+                    if (exports.tempImage.file && !exports.tempImage.generate) {
+                        exports.exercise.image = 'custom';
+                    }
+
+                    if (exports.exercise._id) {
+                        if (!exports.exercise._acl || (exports.exercise._acl['user:' + common.user._id] && exports.exercise._acl['user:' + common.user._id].permission === 'ADMIN')) {
+                            return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
+                                .then(function() {
+                                    exports.saveStatus = 2;
+                                    exports.saveOldExercise();
+                                    localStorage.exercisesChange = true;
+                                    if (exports.tempImage.file) {
+                                        imageApi.save(exports.exercise._id, exports.tempImage.file).then(function() {
+                                            exports.tempImage = {};
+                                        });
+                                    }
+                                });
+                        } else {
+                            exports.saveStatus = 4;
+                            defered.reject();
+                        }
+                    } else {
+                        if (common.user) {
+                            exports.exercise.creator = common.user._id;
+                            return exerciseApi.save(exports.getCleanExercise()).then(function(response) {
+                                exports.saveStatus = 2;
+                                var idExercise = response.data;
+                                exports.exercise._id = idExercise;
+                                exports.getExerciseOrTask(idExercise).success(function(response) {
+                                    exports.exercise._acl = response._acl;
+                                });
+                                //to avoid reload
+                                $route.current.pathParams.id = idExercise;
+                                $location.url('/exercise/' + idExercise);
+
+                                common.isLoading = false;
+                                if (localStorage.exercisesChange) {
+                                    localStorage.exercisesChange = !JSON.parse(localStorage.exercisesChange);
+                                }
+                                exports.saveOldExercise();
+
+                                if (exports.tempImage.file) {
+                                    imageApi.save(idExercise, exports.tempImage.file).then(function() {
+                                        $log.debug('imageSaveok');
+                                        localStorage.exercisesChange = true;
+                                        exports.tempImage = {};
+                                    });
+                                }
+                            }).catch(function() {
+                                exports.saveStatus = 3;
+                                defered.reject();
+                            });
+                        } else {
+                            exports.saveStatus = 0;
+                            $log.debug('why we start to save if the user its not logged??, check startAutoSave');
+                            defered.reject();
+                        }
+                    }
+                } else {
+                    $log.debug('we cant save Exercise if there is no changes');
+                    exports.saveStatus = 0;
+                    defered.resolve();
+                }
             }
 
             return defered.promise;
@@ -623,6 +641,24 @@ angular.module('bitbloqApp')
             });
 
             scope.$watch('exercise.hardware.board', function(newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    exports.startAutosave();
+                }
+            });
+
+            scope.$watch('exercise.newMark[0]', function(newVal, oldVal) {
+                if (newVal !== oldVal && newVal !== String(exports.exercise.mark).split('.')[0]) {
+                    exports.startAutosave();
+                }
+            });
+
+            scope.$watch('exercise.newMark[1]', function(newVal, oldVal) {
+                if (newVal !== oldVal && newVal !== String(exports.exercise.mark).split('.')[1]) {
+                    exports.startAutosave();
+                }
+            });
+
+            scope.$watch('exercise.remark', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
                     exports.startAutosave();
                 }

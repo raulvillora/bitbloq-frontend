@@ -12,17 +12,18 @@ angular.module('bitbloqApp')
 
         var exerciseApi = {
             assignGroups: assignGroups,
-            canUpdate: canUpdate,
             clone: clone,
             delete: deleteExercise,
             get: get,
             getTask: getTask,
             getTasks: getTasks,
             getTasksByExercise: getTasksByExercise,
+            markTask: markTask,
             save: save,
             sendTask: sendTask,
             update: update,
-            updateTask: updateTask
+            updateTask: updateTask,
+            userIsHeadMaster: userIsHeadMaster
         };
 
 
@@ -31,13 +32,6 @@ angular.module('bitbloqApp')
                 method: 'PUT',
                 url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/assign',
                 data: groups
-            });
-        }
-
-        function canUpdate(idExercise) {
-            return $http({
-                method: 'HEAD',
-                url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/owner'
             });
         }
 
@@ -95,6 +89,17 @@ angular.module('bitbloqApp')
             });
         }
 
+        function markTask(task) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'task/' + task._id + '/mark',
+                data: {
+                    mark: task.newMark[0] + '.' + task.newMark[1],
+                    remark: task.remark
+                }
+            });
+        }
+
         function save(dataExercise, teacherId) {
             if (teacherId) {
                 dataExercise.teacher = teacherId;
@@ -129,6 +134,12 @@ angular.module('bitbloqApp')
             });
         }
 
+        function userIsHeadMaster(idExercise) {
+            return $http({
+                method: 'HEAD',
+                url: envData.config.centerModeUrl + 'task/' + idExercise + '/head-master'
+            });
+        }
 
         return exerciseApi;
     });
