@@ -88,12 +88,8 @@ angular.module('bitbloqApp')
                                 calendar: {}
                             });
                         } else {
-                            if (typeof(group.calendar.from.date) === 'string') {
-                                group.calendar.from.date = moment(group.calendar.from.date);
-                            }
-                            if (typeof(group.calendar.to.date) === 'string') {
-                                group.calendar.to.date = moment(group.calendar.to.date);
-                            }
+                            group.calendar.from.date = moment(group.calendar.from.date);
+                            group.calendar.to.date = moment(group.calendar.to.date);
                             var hourFrom = group.calendar.from.time.split(':')[0],
                                 minutesFrom = group.calendar.from.time.split(':')[1],
                                 hourTo = group.calendar.to.time.split(':')[0],
