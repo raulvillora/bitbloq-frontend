@@ -259,10 +259,13 @@
 
             $scope.registerInGroup = function() {
                 function confirmAction(groupId) {
+                    var self = this;
                     centerModeApi.registerInGroup(groupId).then(function() {
                         currentModal.close();
                         _getGroups();
                         _getTasks();
+                    }).catch(function() {
+                        self.input.showError = true;
                     });
                 }
 
@@ -277,9 +280,14 @@
                     input: {
                         id: 'groupId',
                         name: 'groupId',
-                        placeholder: 'centerMode_modal_groupIdPlaceholder'
+                        placeholder: 'centerMode_modal_groupIdPlaceholder',
+                        errorText: 'Este ID no existe o no está disponible para registrarse en estos momentos.',
+                        showError: false
                     },
                     confirmButton: 'centerMode_button_registerInGroup',
+                    condition: function() {
+                        return this.input.value;
+                    },
                     rejectButton: 'modal-button-cancel',
                     confirmAction: confirmAction,
                     modalButtons: true
@@ -287,7 +295,7 @@
 
                 currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
+                    className: 'modal--container modal--input modal--register-in-group',
                     scope: modalOptions
 
                 });

@@ -400,6 +400,12 @@
             }
         }
     }
+
+    &.modal--register-in-group {
+        .input--error {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .modal {
@@ -634,7 +640,7 @@
     }
 
     .modal--buttons button {
-            margin: 0 10px;
+        margin: 0 10px;
     }
     .btn {
         // padding: 0 54px;
