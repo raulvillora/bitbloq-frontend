@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate, utils) {
         $scope.focusHandler = function(evt) {
             $scope.focus = evt.currentTarget.name;
         };
@@ -68,13 +68,7 @@ angular.module('bitbloqApp')
         };
         $scope.checkAge = function(form) {
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                var validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
-                if (!validBirthday) {
-                    var userBirthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
-                    var older = new Date();
-                    older.setYear(older.getFullYear() - 14);
-                    $scope.userUnder14Years = userBirthday >= older && userBirthday <= new Date();
-                }
+                $scope.userUnder14Years = utils.userIsUnder14(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY');
             }
         };
 
@@ -107,7 +101,8 @@ angular.module('bitbloqApp')
             $scope.errors.disconnect = false;
 
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
+                $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
+                    .isValid();
                 if (!$scope.errors.register.validBirthday) {
                     if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
                         $scope.errors.register.validBirthday = true;
@@ -136,14 +131,9 @@ angular.module('bitbloqApp')
             }
 
             function _validateRegister() {
-                return !form.email.$invalid &&
-                    !form.password.$invalid &&
-                    !$scope.username.invalid &&
-                    !form.username.$error.required &&
+                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required &&
                     $scope.username.free &&
-                    $scope.user.cookiePolicyAccepted &&
-                    !$scope.errors.register.emptyBirthday &&
-                    !$scope.errors.register.validBirthday &&
+                    $scope.user.cookiePolicyAccepted && !$scope.errors.register.emptyBirthday && !$scope.errors.register.validBirthday &&
                     (!$scope.userUnder14Years || ($scope.userUnder14Years && !form.tutorName.$invalid && !form.tutorSurname.$invalid && !form.tutorEmail.$invalid && !$scope.errors.register.sameTutorEmail));
             }
 

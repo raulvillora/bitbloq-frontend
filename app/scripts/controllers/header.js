@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService) {
+    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService, utils) {
         $scope.userApi = userApi;
 
         function clickDocumentHandler() {
@@ -35,7 +35,7 @@ angular.module('bitbloqApp')
 
 
                 function createCenter() {
-                    if(modalOptions.center.name && modalOptions.center.location && modalOptions.center.telephone) {
+                    if (modalOptions.center.name && modalOptions.center.location && modalOptions.center.telephone) {
                         centerModeApi.createCenter(modalOptions.center).then(function() {
                             ngDialog.close(centerModal);
                             $scope.common.userRole = 'headMaster';
@@ -92,6 +92,8 @@ angular.module('bitbloqApp')
 
             var modalOptions = $rootScope.$new();
 
+            var extraButton = utils.userIsUnder14($scope.common.user.birthday)? null : 'centerMode_button_createCenter-try';
+
             _.extend(modalOptions, {
                 title: 'centerMode_modal_createCenterTitle',
                 contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
@@ -99,7 +101,7 @@ angular.module('bitbloqApp')
                 mainText: 'centerMode_modal_createCenter-introText',
                 confirmButton: 'centerMode_button_createCenter-student',
                 confirmAction: studentAction,
-                extraButton: 'centerMode_button_createCenter-try',
+                extraButton: extraButton,
                 extraAction: tryCenter,
                 modalButtons: true,
                 type: 'information',

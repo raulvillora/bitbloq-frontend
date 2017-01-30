@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('utils', function(_, $q, $window, $translate) {
+    .service('utils', function(_, $q, $window, $translate, moment) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var exports = {};
         var defaultDiacriticsRemovalap = [{
@@ -281,8 +281,8 @@ angular.module('bitbloqApp')
 
         exports.removeDiacritics = function(str, config, defaultName) {
             var configDefault = config || {
-                    spaces: true
-                },
+                        spaces: true
+                    },
                 newStr;
             newStr = str.replace(/[^\u0000-\u007E]/g, function(a) {
                 return diacriticsMap[a] || a;
@@ -343,6 +343,17 @@ angular.module('bitbloqApp')
                 }
             }
             return isOwner;
+        };
+
+        exports.userIsUnder14 = function(date, format) {
+            var result = false,
+                date = moment(date, format);
+            if (date.isValid()) {
+                var now = moment(),
+                    older = moment().year(now.year() - 14);
+                result = older.diff(date) < 0 && now.diff(date) >= 0;
+            }
+            return result;
         };
 
         exports.getDOMElement = function(selector) {
@@ -458,9 +469,12 @@ angular.module('bitbloqApp')
             function insertBeautyIgnores(match) {
                 return '/* beautify ignore:start */' + match + '/* beautify ignore:end */';
             }
+
             //Remove beautify ignore & preserve sections
-            var replacedCode = code.replace(/(#include *.*)/gm, insertBeautyIgnores).replace(/(#define *.*)/gm, insertBeautyIgnores);
-            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->').replace(/([ (])0 b([01]+)/g, '$10b$2');
+            var replacedCode = code.replace(/(#include *.*)/gm, insertBeautyIgnores)
+                .replace(/(#define *.*)/gm, insertBeautyIgnores);
+            pretty = js_beautify(replacedCode).replace(/(\/\* (beautify)+ .*? \*\/)/gm, '').replace(/(- >)/gm, '->')
+                .replace(/([ (])0 b([01]+)/g, '$10b$2');
 
             return pretty;
         };
