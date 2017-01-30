@@ -45,6 +45,11 @@
         .ngdialog-content {
             width: 580px;
         }
+        .modal--information {
+            .btn {
+                width: 187px;
+            }
+        }
     }
 
     &.password-reset--modal {
@@ -226,6 +231,22 @@
                     }
                 }
             }
+        }
+    }
+
+    &.modal--tour {
+        .ngdialog-content {
+            width: 560px;
+        }
+        .modal {
+            text-align: center;
+        }
+        .btn {
+            padding-left: 3em;
+            padding-right: 3em;
+        }
+        .tour--reject {
+            margin-top: 24px;
         }
     }
 
@@ -641,10 +662,6 @@
 
     .modal--buttons button {
         margin: 0 10px;
-    }
-    .btn {
-        // padding: 0 54px;
-        width: 187px;
     }
 
     a {

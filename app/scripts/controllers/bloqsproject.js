@@ -965,13 +965,15 @@ angular.module('bitbloqApp')
             var modalTour = $rootScope.$new(),
                 modalTourInit;
             _.extend(modalTour, {
+                title: 'modal-tour-text-first',
                 contentTemplate: '/views/modals/infoTour.html',
+                customClass: 'modal--information',
                 confirmAction: $scope.handleTour,
                 rejectAction: $scope.tourDone
             });
             modalTourInit = ngDialog.open({
                 template: '/views/modals/modal.html',
-                className: 'modal--container modal--alert',
+                className: 'modal--container modal--tour',
                 scope: modalTour,
                 showClose: false,
                 closeByDocument: false
