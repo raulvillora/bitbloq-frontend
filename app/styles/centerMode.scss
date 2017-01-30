@@ -41,3 +41,16 @@
     border-bottom: 2px white solid;
     width: 100%;
 }
+
+.center-mode--empty {
+    text-align: center;
+    .center-mode--empty__title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 60px;
+        margin-bottom: 15px;
+    }
+    .center-mode--empty__info {
+        color: #676a71;
+    }
+}

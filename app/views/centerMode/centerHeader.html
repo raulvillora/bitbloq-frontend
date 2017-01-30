@@ -20,10 +20,10 @@
     <button ng-if="common.urlType==='center'" class="btn btn--primary btn--small" ng-click="newTeacher()" data-element="centerMode_button_newTeacher">
         <span>{{'centerMode_button_newTeacher' | translate}}</span>
     </button>
-    <a ng-if="common.urlType.indexOf('teacher') > -1" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise" >
+    <a ng-if="common.urlType.indexOf('teacher') > -1 && groups.length > 0" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
         <span>{{'centerMode_button_newExercise' | translate}}</span>
     </a>
-    <button ng-if="common.urlType.indexOf('teacher') > -1" class="btn btn--secondary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
+    <button ng-if="common.urlType.indexOf('teacher') > -1" class="btn btn--small" ng-class="{'btn--primary': groups.length === 0, 'btn--secondary': groups.length > 0 }" ng-click="newGroup()" data-element="centerMode_button_newGroup">
         <span>{{'centerMode_button_newGroup' | translate}}</span>
     </button>
     <button ng-if="common.user && common.user.studentMode" class="btn btn--primary btn--small" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">

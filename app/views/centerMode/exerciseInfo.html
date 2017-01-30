@@ -18,10 +18,9 @@
         <div class="col-vsmall-9 table__item" ng-include="'views/centerMode/taskTable.html'"></div>
     </div>
     <div ng-if="groups.length===0 && tasks.length===0">
-        <h1>{{'centerMode_groups_empty' | translate}}</h1>
-        <p>{{'centerMode_groups_emptyInfo' | translate}}</p>
-        <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
-            <span>{{'centerMode_button_newGroup' | translate}}</span>
-        </button>
+        <div class="center-mode--empty">
+            <h1 class="center-mode--empty__title">{{'centerMode_groups_empty' | translate}}</h1>
+            <p class="center-mode--empty__info">{{'centerMode_groups_emptyInfo' | translate}}</p>
+        </div>
     </div>
 </div>
