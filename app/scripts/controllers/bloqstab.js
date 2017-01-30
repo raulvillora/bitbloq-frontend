@@ -16,7 +16,8 @@ angular.module('bitbloqApp')
             field = angular.element('#bloqs--field'),
             scrollBarContainer = angular.element('.make--scrollbar'),
             scrollBar = angular.element('.scrollbar--small'),
-            bloqsTab = angular.element('.bloqs-tab');
+            bloqsTab = angular.element('.bloqs-tab'),
+            consumerKeyWatcher, consumerSecretWatcher, accessTokenWatcher, accessTokenSecretWatcher;
 
         $scope.bloqsApi = bloqsApi;
         $scope.projectService = projectService;
@@ -556,6 +557,11 @@ angular.module('bitbloqApp')
             });
             if (twitterConfigBloqs.length === 2) {
                 $scope.hideTwitterWheel();
+                //Delete Twitter watchers
+                consumerKeyWatcher();
+                consumerSecretWatcher();
+                accessTokenWatcher();
+                accessTokenSecretWatcher();
             }
         }
 
@@ -564,6 +570,30 @@ angular.module('bitbloqApp')
                 $scope.toolbox.level = 1;
                 $timeout(function() {
                     $scope.twitterSettings = true;
+
+                    consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
+                        if (oldValue && oldValue !== newValue) {
+                            projectService.saveTwitterApp();
+                        }
+                    });
+
+                    consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
+                        if (oldValue && oldValue !== newValue) {
+                            projectService.saveTwitterApp();
+                        }
+                    });
+
+                    accessTokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
+                        if (oldValue && oldValue !== newValue) {
+                            projectService.saveTwitterApp();
+                        }
+                    });
+
+                    accessTokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
+                        if (oldValue && oldValue !== newValue) {
+                            projectService.saveTwitterApp();
+                        }
+                    });
                 }, 500);
             }
             _.throttle(setScrollsDimension, 1000);
@@ -573,30 +603,6 @@ angular.module('bitbloqApp')
 
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
-
-        $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
-            }
-        });
-
-        $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
-            }
-        });
-
-        $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
-            }
-        });
-
-        $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                projectService.saveTwitterApp();
-            }
-        });
 
         $window.onresize = function() {
             $timeout(function() {
