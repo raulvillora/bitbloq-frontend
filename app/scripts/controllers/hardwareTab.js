@@ -279,12 +279,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (!projectService.project.useBitbloqConnect) {
 
             projectService.project.useBitbloqConnect = true;
+
+            console.log(projectService.project.hardwareTags);
             if (projectService.project.hardware.board === 'bq ZUM') {
                 //added on get code too
                 var bTComponent = _.cloneDeep(_.find(hardwareConstants.components.serialElements, {
                     id: 'bt'
                 }));
-
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
                 bTComponent.baudRate = 19200;
                 bTComponent.category = 'serialElements';
@@ -318,6 +319,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (projectService.project.bitbloqConnectBT && projectService.project.bitbloqConnectBT.name) {
             projectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
         }
+        var pepe= _.findIndex(projectService.project.hardwareTags, function(o) { return o === 'Bitbloq Connect'; });
+        console.log("pepe");
+        console.log(pepe);
         projectService.project.bitbloqConnectBT = null;
     };
 
