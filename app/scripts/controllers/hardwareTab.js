@@ -319,9 +319,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (projectService.project.bitbloqConnectBT && projectService.project.bitbloqConnectBT.name) {
             projectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
         }
-        var pepe= _.findIndex(projectService.project.hardwareTags, function(o) { return o === 'Bitbloq Connect'; });
-        console.log("pepe");
-        console.log(pepe);
         projectService.project.bitbloqConnectBT = null;
     };
 
@@ -809,9 +806,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _createUniqueVarName(component) {
         var componentBasicName = $translate.instant('default-var-name-' + component.id),
             componentsNames = [];
-
-        console.log("component");
-        console.log(component);
         if (component.uid === 'btComponent') {
             componentBasicName = $scope.common.translate('device').toLowerCase();
         }
