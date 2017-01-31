@@ -390,6 +390,7 @@ angular.module('bitbloqApp')
                 common.session.save = true;
             }
         };
+        
         exports.saveTwitterApp = function() {
             var defered = $q.defer();
 

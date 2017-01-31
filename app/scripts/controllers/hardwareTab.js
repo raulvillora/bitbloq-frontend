@@ -219,6 +219,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.drop = function(data) {
+        hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
                 var board = _.find($scope.hardware.boardList, function(board) {
@@ -489,8 +490,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             });
             return filtered.length > 0;
         }
-
         componentReference = projectService.findComponentInComponentsArray(e.componentData.uid);
+
         //poner misma condicion
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
         if (($scope.isMobileConnected || $scope.isMobileConnected === undefined) && componentReference.id === 'bt') {
@@ -505,8 +506,19 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
 
                 $rootScope.$emit('component-connected');
-
+                if (hw2Bloqs.userInteraction) {
+                    if (_.findKey(componentReference.pin, function(o) {
+                            return o === '1' || o === '0';
+                        })) {
+                        alertsService.add({
+                            text: 'connect_alert_01',
+                            id: 'connect-error',
+                            type: 'warning',
+                        });
+                    }
+                }
             } else if (e.protoBoLaAction === 'detach') {
+                hw2Bloqs.userInteraction = true;
                 pinKey = Object.keys(e.componentData.pin)[0];
                 if (componentReference.pin.hasOwnProperty(pinKey)) {
                     componentReference.pin[pinKey] = undefined;
@@ -720,6 +732,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addComponent(data) {
+
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
@@ -793,7 +806,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             componentsNames = [];
 
         if (component.id === 'bt') {
-          
+
             componentBasicName = $scope.common.translate('device').toLowerCase();
         }
 
@@ -829,6 +842,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _loadHardwareProject(hardwareProject) {
+        hw2Bloqs.userInteraction = false;
         if (hardwareProject.anonymousTransient) {
             delete hardwareProject.anonymousTransient;
         }
