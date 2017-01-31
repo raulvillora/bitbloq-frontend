@@ -554,6 +554,7 @@ angular.module('bitbloqApp')
             }
 
         };
+        var warningShown;
 
         $scope.upload = function(code) {
             var viewer;
@@ -585,6 +586,15 @@ angular.module('bitbloqApp')
                         }
                     }
                 } else {
+                    if (showCompileWarning(projectService.project) && !warningShown) {
+                        alertsService.add({
+                            text: 'connect_alert_01',
+                            id: 'connect-error',
+                            type: 'warning',
+                        });
+                        warningShown = true;
+                    }
+
                     if ($scope.common.useChromeExtension()) {
                         if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                             web2boardOnline.compileAndUpload({
@@ -629,6 +639,23 @@ angular.module('bitbloqApp')
             }
 
         };
+
+        function showCompileWarning(project) {
+            var compileWarning;
+            var result;
+            _.forEach(project.hardware.components, function(component) {
+                compileWarning = _.findKey(component.pin, function(o) {
+                    return o === '1' || o === '0';
+                });
+            });
+
+            if (compileWarning) {
+                result = true;
+            } else {
+                result = false;
+            }
+            return result;
+        }
 
         function uploadWithWeb2board(code) {
             if (web2board.isWeb2boardV2()) {

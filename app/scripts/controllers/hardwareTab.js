@@ -219,6 +219,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.drop = function(data) {
+        hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
                 var board = _.find($scope.hardware.boardList, function(board) {
@@ -249,6 +250,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 break;
             case 'robots':
                 $scope.hardware.cleanSchema();
+                $scope.deleteBTComponent();
                 _addRobot(data);
                 projectService.startAutosave();
                 break;
@@ -277,12 +279,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (!projectService.project.useBitbloqConnect) {
 
             projectService.project.useBitbloqConnect = true;
+
+            console.log(projectService.project.hardwareTags);
             if (projectService.project.hardware.board === 'bq ZUM') {
                 //added on get code too
                 var bTComponent = _.cloneDeep(_.find(hardwareConstants.components.serialElements, {
                     id: 'bt'
                 }));
-
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
                 bTComponent.baudRate = 19200;
                 bTComponent.category = 'serialElements';
@@ -313,7 +316,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBTComponent = function() {
         projectService.project.useBitbloqConnect = false;
         $scope.componentSelected = false;
-        if (projectService.project.bitbloqConnectBT.name) {
+        if (projectService.project.bitbloqConnectBT && projectService.project.bitbloqConnectBT.name) {
             projectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
         }
         projectService.project.bitbloqConnectBT = null;
@@ -489,8 +492,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             });
             return filtered.length > 0;
         }
-
         componentReference = projectService.findComponentInComponentsArray(e.componentData.uid);
+
         //poner misma condicion
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
         if (($scope.isMobileConnected || $scope.isMobileConnected === undefined) && componentReference.id === 'bt') {
@@ -505,8 +508,19 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
 
                 $rootScope.$emit('component-connected');
-
+                if (hw2Bloqs.userInteraction) {
+                    if (_.findKey(componentReference.pin, function(o) {
+                            return o === '1' || o === '0';
+                        })) {
+                        alertsService.add({
+                            text: 'connect_alert_01',
+                            id: 'connect-error',
+                            type: 'warning',
+                        });
+                    }
+                }
             } else if (e.protoBoLaAction === 'detach') {
+                hw2Bloqs.userInteraction = true;
                 pinKey = Object.keys(e.componentData.pin)[0];
                 if (componentReference.pin.hasOwnProperty(pinKey)) {
                     componentReference.pin[pinKey] = undefined;
@@ -720,6 +734,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addComponent(data) {
+
         var component = _.find($scope.hardware.componentList[data.category], function(component) {
             return component.id === data.id;
         });
@@ -791,9 +806,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _createUniqueVarName(component) {
         var componentBasicName = $translate.instant('default-var-name-' + component.id),
             componentsNames = [];
-
-        if (component.id === 'bt') {
-          
+        if (component.uid === 'btComponent') {
             componentBasicName = $scope.common.translate('device').toLowerCase();
         }
 
@@ -829,6 +842,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _loadHardwareProject(hardwareProject) {
+        hw2Bloqs.userInteraction = false;
         if (hardwareProject.anonymousTransient) {
             delete hardwareProject.anonymousTransient;
         }
