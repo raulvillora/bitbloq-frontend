@@ -250,6 +250,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 break;
             case 'robots':
                 $scope.hardware.cleanSchema();
+                $scope.deleteBTComponent();
                 _addRobot(data);
                 projectService.startAutosave();
                 break;
@@ -314,7 +315,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBTComponent = function() {
         projectService.project.useBitbloqConnect = false;
         $scope.componentSelected = false;
-        if (projectService.project.bitbloqConnectBT.name) {
+        if (projectService.project.bitbloqConnectBT && projectService.project.bitbloqConnectBT.name) {
             projectService.removeComponentInComponentsArray('serialElements', projectService.project.bitbloqConnectBT.name);
         }
         projectService.project.bitbloqConnectBT = null;
