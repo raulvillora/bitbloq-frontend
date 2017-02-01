@@ -381,7 +381,7 @@ angular.module('bitbloqApp')
             option: 'limitswitch',
             value: false
         }, {
-            option: 'Bitbloq Connect',
+            option: 'bitbloqconnect',
             value: false
         }];
 

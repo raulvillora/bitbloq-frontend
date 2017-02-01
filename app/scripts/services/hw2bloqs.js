@@ -354,6 +354,8 @@ angular
             }
         }
 
+        exports.userInteraction = false;
+
         function _checkPinsI2C(connection, connecting) {
             var endpoint = connection.targetEndpoint || connection.originalTargetEndpoint,
                 currentPin = endpoint.getParameter('pinBoard').toLowerCase();
@@ -479,6 +481,7 @@ angular
             connection.originalTargetEndpoint.removeType('selected');
             connection.originalTargetEndpoint.removeClass('selected');
             connection.originalTargetEndpoint.removeClass('endpointDrag');
+            exports.userInteraction = true;
             _checkPinsI2C(connection, false);
         }
 
