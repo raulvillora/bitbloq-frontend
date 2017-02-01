@@ -1,7 +1,7 @@
 <div class="forum__main forum__header">
-    <div class="breadcrumb" ng-class="{'second-level':forum.currentCategory, 'third-level':forum.themeCategory}" data-element="forum-header-breadcrumb" >
-        <h1><a href="#/forum">{{'help_title_forum' | translate}}</a></h1>
-        <a ng-if="forum.currentCategory || forum.themeCategory" class="breadcrumb--secondary" ng-href="#/forum/{{forum.themeCategory | encode}}">{{forum.currentCategory || forum.themeCategory}}</a>
+    <div class="breadcrumb" ng-class="{'second-level':forum.currentCategory, 'third-level':forum.themeCategory}">
+        <h1><a href="#/forum" data-element="forum-header-breadcrumb-forum">{{'help_title_forum' | translate}}</a></h1>
+        <a ng-if="forum.currentCategory || forum.themeCategory" class="breadcrumb--secondary" ng-href="#/forum/{{forum.themeCategory | encode}}" data-element="forum-header-breadcrumb-category">{{forum.currentCategory || forum.themeCategory}}</a>
     </div>
     <button ng-if="!forum.themeCategory" class="btn btn--primary btn--small" ng-click="forum.goForumSection('new-theme')" data-element="forum-new-topic-button">
         <svg class="svg-icon">
