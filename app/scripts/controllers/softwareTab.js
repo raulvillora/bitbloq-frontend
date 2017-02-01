@@ -28,8 +28,8 @@ angular.module('bitbloqApp')
         $scope.currentProject = $scope.currentProject || projectService.project;
         $scope.lastPosition = 0;
         $scope.checkBasicTab = 0;
-        $scope.checkFunction = 0;
         $scope.checkAdvanceTab = 0;
+        // $scope.functionsCheckCounter = 0;
         $scope.selectedBloqsToolbox = '';
         $scope.twitterSettings = false;
 
@@ -38,22 +38,12 @@ angular.module('bitbloqApp')
 
         $scope.$trashcan = null;
 
-        $scope.statusGeneralCheck = function(type) {
-            if ($scope.currentProject.selectedBloqs) {
-                var oldCheckBasicTab = $scope.checkBasicTab,
-                    oldAdvancedTab = $scope.checkAdvanceTab;
-                $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0;
-                var advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1);
-                $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
-                if ($scope.checkBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
-                    $scope.checkBasicTab = oldCheckBasicTab === 'full' ? 'complete' : 'full';
 
-                }
-                if ($scope.checkAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
-                    $scope.checkAdvanceTab = oldAdvancedTab === 'full' ? 'complete' : 'full';
-                }
-            }
-        };
+        /***********************************
+         ***********************************
+         *  Indeterminate checkbox functions
+         ***********************************
+         ***********************************/
 
         $scope.addChecks = function(type, value, bloqName) {
             $scope.currentProject.selectedBloqs[type] = $scope.currentProject.selectedBloqs[type] || [];
@@ -87,15 +77,61 @@ angular.module('bitbloqApp')
                 } else {
                     $scope.checkBasicTab = 'full';
                 }
+                if ($scope.checkAdvanceTab === 'full' && $scope.checkBasicTab === 'full') {
+                    $scope.checkFunction = 'full';
+                }
             } else {
                 if (isAdvance) {
                     $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[type].length;
+                    $scope.checkFunction = $scope.checkAdvanceTab + $scope.checkBasicTab;
                 } else {
                     $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type].length;
+                    $scope.checkFunction = $scope.checkBasicTab;
                 }
             }
             currentProjectService.startAutosave();
+            utils.apply($scope);
         };
+
+        $scope.statusGeneralCheck = function(type, counter) {
+            if ($scope.currentProject.selectedBloqs) {
+                var newcheckBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0,
+                    advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1),
+                    newcheckAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
+                if (counter || counter === 0) {
+                    if (newcheckBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                        //basic tab is full
+                        if (!$scope.currentProject.selectedBloqs[advancedType] || (newcheckAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length)) {
+                            //advanced tab is full
+                            counter = counter === 'full' ? 'complete' : 'full';
+                        } else {
+                            counter = newcheckBasicTab + (typeof newcheckAdvanceTab === 'number' ? newcheckAdvanceTab : 0);
+                        }
+                    } else {
+                        counter = newcheckBasicTab + (typeof newcheckAdvanceTab === 'number' ? newcheckAdvanceTab : 0);
+                    }
+                } else {
+                    if (newcheckBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                        $scope.checkBasicTab = $scope.checkBasicTab === 'full' ? 'complete' : 'full';
+
+                    } else {
+                        $scope.checkBasicTab = newcheckBasicTab;
+                    }
+                    if (newcheckAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
+                        $scope.checkAdvanceTab = $scope.checkAdvanceTab === 'full' ? 'complete' : 'full';
+                    } else {
+                        $scope.checkAdvanceTab = newcheckAdvanceTab;
+                    }
+                }
+            }
+            return counter;
+        };
+
+        /***********************************
+         end indeterminate checkbox
+         ***********************************/
+
+
 
         $scope.changeBloqsToolbox = function(tab) {
             $scope.selectedBloqsToolbox = tab;
@@ -391,8 +427,8 @@ angular.module('bitbloqApp')
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].id.includes(item) || item.toLowerCase()
-                                    .includes(connectedComponents[i].id))
+                            if (connectedComponents[i].id.includes(item) ||
+                                item.toLowerCase().includes(connectedComponents[i].id))
                             {
                                 result = true;
                             }
