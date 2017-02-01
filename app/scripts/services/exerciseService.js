@@ -505,7 +505,7 @@ angular.module('bitbloqApp')
                     }).catch(function() {
                         exports.saveStatus = 3;
                         defered.reject();
-                    })
+                    });
                 } else {
                     exports.saveStatus = 0;
                     defered.resolve();

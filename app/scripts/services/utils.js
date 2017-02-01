@@ -346,8 +346,8 @@ angular.module('bitbloqApp')
         };
 
         exports.userIsUnder14 = function(date, format) {
-            var result = false,
-                date = moment(date, format);
+            var result = false;
+            date = moment(date, format);
             if (date.isValid()) {
                 var now = moment(),
                     older = moment().year(now.year() - 14);

@@ -21,7 +21,7 @@ angular.module('bitbloqApp')
 
                 if (attrs.childrenCheckbox) {
                     scope.$watch('childrenCheckbox.length', function(newValue, oldValue) {
-                        if (newValue != oldValue) {
+                        if (newValue !== oldValue) {
                             if (newValue && scope.childrenCheckbox.indexOf(attrs.id.split('Check')[0]) > -1) {
                                 ngModel.$setViewValue(true);
                                 element.prop('checked', true);
@@ -34,9 +34,6 @@ angular.module('bitbloqApp')
                 } else {
                     scope.counterCheck = scope.counterCheck || 0;
                     scope.$watch('counterCheck', function(newValue) {
-                        if(attrs.advancedTab){
-                            console.log();
-                        }
                         if (newValue) {
                             switch (newValue) {
                                 case 'full':
@@ -74,7 +71,7 @@ angular.module('bitbloqApp')
                     });
 
                     scope.$watch('selectedTab', function(newValue, oldValue) {
-                        if (attrs.basicTab && (attrs.basicTab===oldValue || attrs.basicTab===newValue)) {
+                        if (attrs.basicTab && (attrs.basicTab === oldValue || attrs.basicTab === newValue)) {
                             //grand parent checkbox
                             var counter = scope.updateState(newValue || oldValue, scope.counterCheck);
                             scope.counterCheck = counter;
