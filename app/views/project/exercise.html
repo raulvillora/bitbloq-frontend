@@ -10,8 +10,11 @@
                 </a>
             </li>
             <li class="nav__menu__item project--title">
-                <h1 data-element="project-name" id="currentproject" class="h3 make__project--name" ng-click="currentProjectService.rename()">{{currentProject.name || 'new-project' | translate}}
-                    <span></span>
+                <h1 id="currentproject" class="h3">
+                    <button class="project--name project--name--editable" ng-if="common.section==='exercise'" ng-click="currentProjectService.rename()" data-element="exercise-name">
+                        <span>{{currentProject.name || 'new-exercise' | translate}}</span>
+                    </button>
+                    <span class="project--name" ng-if="common.section==='task'">{{currentProject.name || 'new-project' | translate}}</span>
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{currentProjectService.getSavingStatusIdLabel()}}">{{ currentProjectService.getSavingStatusIdLabel() | translate }}</span>
             </li>
