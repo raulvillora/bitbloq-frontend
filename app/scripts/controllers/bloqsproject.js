@@ -769,6 +769,18 @@ angular.module('bitbloqApp')
             });
         };
 
+        function _resetDropdown(element, list) {
+            if (list[0]) {
+                element.dataset.reference = list[0].uid;
+                element.dataset.value = list[0].name;;
+                element.value = list[0].name;
+            } else {
+                delete element.dataset.reference;
+                delete element.dataset.value;
+            }
+            element.selectedIndex = 0;
+        };
+
         $scope.updateBloqs = function() {
 
             if (projectService.bloqs.varsBloq) {
@@ -801,11 +813,13 @@ angular.module('bitbloqApp')
                             element.value = componentRef.name;
                             element.dataset.reference = componentRef.uid;
                             element.dataset.value = componentRef.name;
+                        } else {
+                            _resetDropdown(element, list);
                         }
 
                     } else {
                         $log.debug('dropdown not selected');
-                        element.selectedIndex = 0;
+                        _resetDropdown(element, list);
                     }
                 };
                 var bloqCanvasEl = null;
