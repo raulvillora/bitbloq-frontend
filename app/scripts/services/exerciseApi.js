@@ -19,6 +19,7 @@ angular.module('bitbloqApp')
             getTasks: getTasks,
             getTasksByExercise: getTasksByExercise,
             markTask: markTask,
+            taskToProject: taskToProject,
             save: save,
             sendTask: sendTask,
             update: update,
@@ -100,6 +101,14 @@ angular.module('bitbloqApp')
             });
         }
 
+        function taskToProject(taskId) {
+            return $http({
+                method: 'POST',
+                url: envData.config.centerModeUrl + 'task/cloneToProject',
+                data: {taskId: taskId}
+            });
+        }
+
         function save(dataExercise, teacherId) {
             if (teacherId) {
                 dataExercise.teacher = teacherId;
@@ -137,7 +146,7 @@ angular.module('bitbloqApp')
         function userIsHeadMaster(idExercise) {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'task/' + idExercise + '/head-master'
+                url: envData.config.centerModeUrl + 'task/' + idExercise + '/headMaster'
             });
         }
 
