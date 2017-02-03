@@ -36,11 +36,12 @@ angular.module('bitbloqApp')
             });
         }
 
-        function clone(idExercise, name) {
+        function clone(exerciseId, name) {
             return $http({
-                method: 'PUT',
-                url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/clone',
+                method: 'POST',
+                url: envData.config.centerModeUrl + 'exercise/clone',
                 data: {
+                    exerciseId: exerciseId,
                     name: name
                 }
             });
