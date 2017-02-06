@@ -8,6 +8,7 @@ angular
             createCenter: createCenter,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
+            deleteTask: deleteTask,
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
             getExercisesCount: getExercisesCount,
@@ -59,6 +60,13 @@ angular
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'group/' + groupId
+            });
+        }
+
+        function deleteTask(taskId) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.centerModeUrl + 'task/' + taskId
             });
         }
 
