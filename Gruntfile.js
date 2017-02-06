@@ -314,11 +314,11 @@ module.exports = function(grunt) {
                 options: {
                     collapseWhitespace: true,
                     removeComments: true
-                    // preserveLineBreaks:true,
-                    // conservativeCollapse: true,
-                    // collapseBooleanAttributes: true,
-                    // removeCommentsFromCDATA: true,
-                    // removeOptionalTags: true
+                        // preserveLineBreaks:true,
+                        // conservativeCollapse: true,
+                        // collapseBooleanAttributes: true,
+                        // removeCommentsFromCDATA: true,
+                        // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
@@ -540,7 +540,7 @@ module.exports = function(grunt) {
         },
         addTimestampToFiles: {
             dist: {
-                htmlFiles: ['dist/**/*.html', '!dist/index.html', '!dist/google0e0d0e0b7164c58a.html'],
+                htmlFiles: ['dist/{,*}{,*/}*.html', '!dist/index.html', '!dist/google0e0d0e0b7164c58a.html'],
                 localeFiles: ['dist/res/locales/*.json'],
                 configFiles: ['dist/res/config/**/*.json'],
                 imageFiles: ['dist/images/**/*.{svg,png,jpg,ico}'],
@@ -771,24 +771,23 @@ module.exports = function(grunt) {
         branch = branch || 'master';
         var done = this.async(),
             https = require('https');
-        https.get('https://raw.githubusercontent.com/bq/bloqs/' + branch + '/dist/list.json')
-            .on('response', function(response) {
-                var body = '';
-                var i = 0;
-                response.on('data', function(chunk) {
-                    i++;
-                    body += chunk;
-                });
-                response.on('end', function() {
-                    if (body.length) {
-                        grunt.log.oklns('get Bloqs done!');
-                        grunt.file.write('dataBaseFiles/bloq/bloq.json', body);
-                    } else {
-                        grunt.log.error('No se han conseguido bloques');
-                    }
-                    done();
-                });
+        https.get('https://raw.githubusercontent.com/bq/bloqs/' + branch + '/dist/list.json').on('response', function(response) {
+            var body = '';
+            var i = 0;
+            response.on('data', function(chunk) {
+                i++;
+                body += chunk;
             });
+            response.on('end', function() {
+                if (body.length) {
+                    grunt.log.oklns('get Bloqs done!');
+                    grunt.file.write('dataBaseFiles/bloq/bloq.json', body);
+                } else {
+                    grunt.log.error('No se han conseguido bloques');
+                }
+                done();
+            });
+        });
     });
 
     grunt.registerTask('getbloqs', function() {
