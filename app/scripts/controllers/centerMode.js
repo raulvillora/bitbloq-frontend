@@ -116,19 +116,17 @@
             $scope.deleteTask = function(task) {
                 var confirmAction = function() {
                         centerModeApi.deleteTask(task._id).then(function() {
-                            _.remove($scope.tasks, function(item) {
-                                return item._id === task._id;
-                            });
+                            _.remove($scope.tasks, task);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteTask',
-                                id: 'deleteGroup',
+                                id: 'deleteTask',
                                 type: 'ok',
                                 time: 5000
                             });
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteTask-error',
-                                id: 'deleteGroup',
+                                id: 'deleteTask',
                                 type: 'ko'
                             });
                         });
@@ -186,6 +184,47 @@
                     contentTemplate: '/views/modals/information.html',
                     textContent: 'deleteTeacher_modal_information',
                     secondaryContent: 'deleteTeacher_modal_information-explain',
+                    modalButtons: true
+                });
+
+                var newTeacherModal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions
+                });
+            };
+
+            $scope.deleteStudent = function(student) {
+                var confirmAction = function() {
+                        centerModeApi.deleteStudent(student._id, $scope.group._id).then(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_deleteStudent',
+                                id: 'deleteStudent',
+                                type: 'ok',
+                                time: 5000
+                            });
+                            $location.path('center-mode/group/' + $scope.group._id);
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode_alert_deleteStudent-error',
+                                id: 'deleteTStudent',
+                                type: 'error'
+                            });
+                        });
+                        newTeacherModal.close();
+                    },
+                    parent = $rootScope,
+                    modalOptions = parent.$new(),
+                    studentName = $scope.student && $scope.student.firstName ? $scope.student.firstName + $scope.student.lastName : $scope.student.username;
+
+                _.extend(modalOptions, {
+                    title: 'deleteStudent_modal_title',
+                    confirmButton: 'button_delete ',
+                    rejectButton: 'cancel',
+                    confirmAction: confirmAction,
+                    contentTemplate: '/views/modals/information.html',
+                    textContent: $scope.common.translate('deleteStudent_modal_information', {value: studentName}),
+                    secondaryContent: 'deleteStudent_modal_information-explain',
                     modalButtons: true
                 });
 

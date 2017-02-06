@@ -14,7 +14,7 @@
     <div class="dropdown-group table__added clearfix">
         <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
         <div class="button-group col-vsmall-6" ng-if="urlSubType==='student'">
-            <button class="btn btn--tertiary btn--small btn--delete" ng-click="" data-element="centerMode_button_deleteStudent">
+            <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
                 <svg class="svg-icon">
                     <use xlink:href="#delete"></use>
                 </svg>
