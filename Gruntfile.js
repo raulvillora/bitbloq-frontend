@@ -314,16 +314,16 @@ module.exports = function(grunt) {
                 options: {
                     collapseWhitespace: true,
                     removeComments: true
-                        // preserveLineBreaks:true,
-                        // conservativeCollapse: true,
-                        // collapseBooleanAttributes: true,
-                        // removeCommentsFromCDATA: true,
-                        // removeOptionalTags: true
+                    // preserveLineBreaks:true,
+                    // conservativeCollapse: true,
+                    // collapseBooleanAttributes: true,
+                    // removeCommentsFromCDATA: true,
+                    // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
                     cwd: 'dist',
-                    src: ['*.html', 'views/**/*.html', '!google0e0d0e0b7164c58a.html'],
+                    src: ['*.html', 'views/{,*}{,*/}*.html', '!google0e0d0e0b7164c58a.html'],
                     dest: 'dist'
                 }]
             }
@@ -394,7 +394,7 @@ module.exports = function(grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         '*.html',
-                        'views/{,*/}*.html',
+                        'views/{,*}{,*/}*.html',
                         'styles/ajax-loader.gif',
                         'styles/fonts/{,*/}*.*',
                         'res/locales/*.*',
@@ -535,7 +535,7 @@ module.exports = function(grunt) {
             },
             files: {
                 src: ['app/index.html']
-                    //src: ['app/**/*.html']
+                //src: ['app/**/*.html']
             }
         },
         addTimestampToFiles: {
@@ -771,23 +771,24 @@ module.exports = function(grunt) {
         branch = branch || 'master';
         var done = this.async(),
             https = require('https');
-        https.get('https://raw.githubusercontent.com/bq/bloqs/' + branch + '/dist/list.json').on('response', function(response) {
-            var body = '';
-            var i = 0;
-            response.on('data', function(chunk) {
-                i++;
-                body += chunk;
+        https.get('https://raw.githubusercontent.com/bq/bloqs/' + branch + '/dist/list.json')
+            .on('response', function(response) {
+                var body = '';
+                var i = 0;
+                response.on('data', function(chunk) {
+                    i++;
+                    body += chunk;
+                });
+                response.on('end', function() {
+                    if (body.length) {
+                        grunt.log.oklns('get Bloqs done!');
+                        grunt.file.write('dataBaseFiles/bloq/bloq.json', body);
+                    } else {
+                        grunt.log.error('No se han conseguido bloques');
+                    }
+                    done();
+                });
             });
-            response.on('end', function() {
-                if (body.length) {
-                    grunt.log.oklns('get Bloqs done!');
-                    grunt.file.write('dataBaseFiles/bloq/bloq.json', body);
-                } else {
-                    grunt.log.error('No se han conseguido bloques');
-                }
-                done();
-            });
-        });
     });
 
     grunt.registerTask('getbloqs', function() {
