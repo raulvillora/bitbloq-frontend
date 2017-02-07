@@ -22,9 +22,9 @@
             <span class="col-vsmall-3">{{'centerMode_column_time' | translate}}</span>
         </div>
         <div class="table__block table__block__exercise">
-            <div class="table__block__list row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
+            <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
                 <div class="table__block__item col-vsmall-8">
-                    <button class="table__item__text" ng-click="saveUrl((exercise.exercise? '/task/' : '/center-mode/exercise-info/') + exercise._id)">
+                    <button class="table__item__text table__item__link" ng-click="saveUrl((exercise.exercise? '/task/' : '/center-mode/exercise-info/') + exercise._id)">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                             {{exercise.name || exercise.exercise.name || 'new-exercise' | translate}}</h2>
                     </button>
