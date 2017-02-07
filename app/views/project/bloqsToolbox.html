@@ -295,16 +295,20 @@
             <h1 class="invisible">Components menu</h1>
             <ul class="tabs__header">
                 <li class="tabs__header__item toolbox_tabs--checkbox" ng-class="{'selected--tab':selectedToolboxTab === 'basic'}">
-                    <span class="input input--checkbox">
-                        <input type="checkbox" class="component-toolbox" id="basicCheck" ng-model="basicModel" data-indeterminate-checkbox data-counter-check="checkBasicTab" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-update-state="statusGeneralCheck"/>
-                    </span>
-                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" data-element="toolbox-basic-button">{{'basics' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'basic'" data-element="toolbox-basic-button">
+                        <span class="input input--checkbox">
+                            <input type="checkbox" class="component-toolbox" id="basicCheck" ng-model="basicModel" data-indeterminate-checkbox data-counter-check="checkBasicTab" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-update-state="statusGeneralCheck"/>
+                        </span>
+                        {{'basics' | translate}}
+                    </button>
                 </li>
                 <li class="tabs__header__item toolbox_tabs--checkbox" ng-class="{'selected--tab':selectedToolboxTab === 'advance'}" ng-show="common.properties.bloqsSortTree['advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)]">
-                    <span class="input input--checkbox">
-                        <input type="checkbox" class="component-toolbox" id="advanceCheck" ng-model="advancedModel" data-indeterminate-checkbox data-counter-check="checkAdvanceTab" data-change-function="addChecks" data-selected-tab="'advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)"/>
-                    </span>
-                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'" data-element="toolbox-advanced-button">{{'make-swtoolbox-advanced' | translate}}</button>
+                    <button class="component-toolbox" ng-click="selectedToolboxTab = 'advance'" data-element="toolbox-advanced-button">
+                        <span class="input input--checkbox">
+                            <input type="checkbox" class="component-toolbox" id="advanceCheck" ng-model="advancedModel" data-indeterminate-checkbox data-counter-check="checkAdvanceTab" data-change-function="addChecks" data-selected-tab="'advanced'+selectedBloqsToolbox.charAt(0).toUpperCase()+selectedBloqsToolbox.slice(1)"/>
+                        </span>
+                        {{'make-swtoolbox-advanced' | translate}}
+                    </button>
                 </li>
             </ul>
         </aside>

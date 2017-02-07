@@ -118,16 +118,18 @@ $hw_toolbox: 210px;
     .input--checkbox {
         float: left;
         position: relative;
-        top: 15px;
-        left: 2px;
+        top: 13px;
+        left: 11px;
     }
 
     .toolbox_tabs--checkbox {
         .input--checkbox {
             top: 21px;
-            left: 10px;
+            left: 0;
             input {
                 float: left;
+                width: 16px !important;
+                height: 16px !important;
             }
         }
         button.component-toolbox {
