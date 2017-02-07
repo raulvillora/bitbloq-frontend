@@ -27,12 +27,7 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {
-        };
-
-        exports.rename = function() {
-            commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
-        };
+        exports.editDate = function() {};
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -188,32 +183,6 @@ angular.module('bitbloqApp')
                 });
             });
             return defered.promise;
-        };
-
-
-        exports.completedExercise = function() {
-            if (exports.bloqs.varsBloq) {
-                exports.exercise.software = {
-                    vars: exports.bloqs.varsBloq.getBloqsStructure(),
-                    setup: exports.bloqs.setupBloq.getBloqsStructure(),
-                    loop: exports.bloqs.loopBloq.getBloqsStructure()
-                };
-            }
-
-            _updateHardwareSchema();
-            _updateHardwareTags();
-            exports.exercise.code = exports.getCode();
-        };
-
-        exports.download = function(exercise, type) {
-            exercise = exports.getCleanExercise(exercise || exports.exercise, true);
-            type = type || 'json';
-            if (type === 'arduino') {
-                _downloadIno(exercise);
-            } else {
-                _downloadJSON(exercise);
-            }
-
         };
 
         exports.saveInMyProjects = function() {
@@ -535,6 +504,7 @@ angular.module('bitbloqApp')
 
         function _saveExercise() {
             var defered = $q.defer();
+            exports.completedExercise();
             if (exports.exercise.canMark) {
                 if (exports.exercise.mark || exports.exercise.remark) {
                     exerciseApi.markTask(exports.exercise).then(function() {
@@ -549,7 +519,6 @@ angular.module('bitbloqApp')
                     defered.resolve();
                 }
             } else {
-                exports.completedExercise();
                 if (exports.exerciseHasChanged() || exports.tempImage.file) {
 
                     exports.exercise.name = exports.exercise.name || common.translate('new-exercise');

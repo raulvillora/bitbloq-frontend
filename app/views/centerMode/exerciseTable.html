@@ -53,7 +53,7 @@
                         </li>
 
                         <li class="dropdown__item--separator"></li>
-                        <li class="table__block__item--menu__item">
+                        <li ng-click="exerciseService.assignGroup(exercise, common.user._id, groups, null, true)" class="table__block__item--menu__item">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#people"></use>
                             </svg>
@@ -73,14 +73,14 @@
                         </li>
                         <li class="dropdown__item--separator--thick"></li>
 
-                        <li class="table__block__item--menu__item">
+                        <li ng-click="exerciseService.download(exercise)" class="table__block__item--menu__item">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#download"></use>
                             </svg>
                             {{'download' | translate}}
                         </li>
 
-                        <li class="table__block__item--menu__item">
+                        <li ng-click="exerciseService.download(exercise, 'arduino')" class="table__block__item--menu__item">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#fileCode"></use>
                             </svg>

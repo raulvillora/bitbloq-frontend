@@ -30,6 +30,7 @@
                 current: 1
             };
             $scope.groupArray = {};
+            $scope.exerciseService = exerciseService;
 
             var currentModal;
 
@@ -189,7 +190,7 @@
                     },
                     parent = $rootScope,
                     modalOptions = parent.$new();
-                    //student = $scope.student && $scope.student.firstName ? $scope.student.firstName + $scope.student.lastName : $scope.student.username;
+                //student = $scope.student && $scope.student.firstName ? $scope.student.firstName + $scope.student.lastName : $scope.student.username;
                 _.extend(modalOptions, {
                     title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
                     confirmButton: 'button_delete',
@@ -606,9 +607,10 @@
             };
 
             $scope.createExerciseCopy = function(exercise) {
-              exerciseService.clone(exercise);
-              localStorage.exercisesChange = true;
+                exerciseService.clone(exercise);
+                localStorage.exercisesChange = true;
             };
+
 
             $window.onfocus = function() {
                 if ($routeParams.type === 'teacher') {
