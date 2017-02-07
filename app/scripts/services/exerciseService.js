@@ -27,7 +27,8 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {};
+        exports.editDate = function() {
+        };
 
         exports.rename = function() {
             commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
@@ -464,7 +465,7 @@ angular.module('bitbloqApp')
         };
 
         exports.startAutosave = function(hard) {
-            if (exports.exercise.userCanUpdate || exports.exercise.canMark) {
+            if (!exports.exercise._id || exports.exercise.userCanUpdate || exports.exercise.canMark) {
                 if (common.user) {
                     exports.saveStatus = 1;
                     if (hard) {
