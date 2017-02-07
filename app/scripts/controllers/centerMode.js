@@ -605,10 +605,9 @@
                 });
             };
 
-            $scope.createExerciseCopy = function(project) {
-                commonModals.clone(project).then(function() {
-                    $scope.refreshProjects();
-                });
+            $scope.createExerciseCopy = function(exercise) {
+              exerciseService.clone(exercise);
+              localStorage.exercisesChange = true;
             };
 
             $window.onfocus = function() {

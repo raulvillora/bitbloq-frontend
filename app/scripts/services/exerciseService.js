@@ -34,9 +34,12 @@ angular.module('bitbloqApp')
             commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
         };
 
-        exports.clone = function() {
-            exports.completedExercise();
-            commonModals.clone(exports.exercise, true, 'exercise');
+        exports.clone = function(exercise) {
+            if (!exercise) {
+                exercise = exports.exercise;
+                exports.completedExercise();
+            }
+            commonModals.clone(exercise, true, 'exercise');
         };
 
         exports.completedExercise = function() {
@@ -187,10 +190,6 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.clone = function() {
-            exports.completedExercise();
-            commonModals.clone(exports.exercise, true, 'exercise');
-        };
 
         exports.completedExercise = function() {
             if (exports.bloqs.varsBloq) {
@@ -286,7 +285,6 @@ angular.module('bitbloqApp')
             }
             return defered.promise;
         };
-
 
         exports.findComponentInComponentsArray = function(myUid) {
             var myComponent;
