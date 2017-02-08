@@ -617,8 +617,7 @@
 
             $scope.editGroups = function(exercise) {
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
-                  console.log(response.data);
-                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data, null, true);
+                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data);
                 });
             };
 
