@@ -1,7 +1,7 @@
 <div class="modal_alert">
     <p>{{mainText | translate}}</p>
     <h2 class="exercise-name">{{exerciseName}}</h2>
-    
+
     <div class="assign-group">
         <div class="center-mode__table-title row">
             <span class="col-vsmall-7">{{'centerMode_column_group' | translate}}</span>
@@ -10,14 +10,14 @@
         <ul class="table__block--invert assign-group__content">
             <li class="table__block__list table__block__hover" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
                 <span class="checkbox--general">
-                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-init="group.selected=oldGroups[group._id]? true: false" ng-model="group.selected"/>
+                    <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-init="group.selected=oldGroups[group._id]? true: false" ng-model="group.selected"/>
                 </span>
                 <div class="group__head row" ng-click="expandedItem[group._id] = !expandedItem[group._id]">
                     <span class="col-vsmall-8 table__block__item">
-                            <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
-                                {{group.name}}
-                            </h2>
-                            <span class="block__item__explanation--subscript text-ID">{{group.accessId}}</span>
+                        <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
+                            {{group.name}}
+                        </h2>
+                        <span class="block__item__explanation--subscript text-ID">{{group.accessId}}</span>
                     </span>
                     <span class="col-vsmall-3 table__block__item group__expanded--number">{{group.students.length || 0}}</span>
                     <div class="col-vsmall-1 table__block__item group__expanded--icon">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="time-picker" ng-init="initTimePicker(); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
                                 <input type="text" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" ng-disabled="group.withoutDate"/>
-                                
+
                                 <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)" ng-disabled="group.withoutDate">
                                     <svg class="svg-icon">
                                         <use xlink:href="#clock"></use>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="time-picker" ng-init="initTimePicker(); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
                                 <input type="text" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" ng-disabled="group.withoutDate"/>
-                                
+
                                 <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event)" ng-disabled="group.withoutDate">
                                     <svg class="svg-icon">
                                         <use xlink:href="#clock"></use>
@@ -80,7 +80,7 @@
             </li>
         </ul>
     </div>
-    
+
     <button class="btn btn--secondary btn--small" ng-if="!onlyEdit" ng-click="newGroup()" data-element="centerMode-new-group">
         {{ 'centerMode_button_createNewGroup' | translate }}
     </button>

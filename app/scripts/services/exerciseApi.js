@@ -27,12 +27,14 @@ angular.module('bitbloqApp')
             userIsHeadMaster: userIsHeadMaster
         };
 
-
-        function assignGroups(idExercise, groups) {
+        function assignGroups(idExercise, assignedGroups, removedGroups) {
             return $http({
                 method: 'PUT',
                 url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/assign',
-                data: groups
+                data: {
+                    'assign': assignedGroups,
+                    'remove': removedGroups
+                }
             });
         }
 
@@ -113,7 +115,9 @@ angular.module('bitbloqApp')
             return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'task/cloneToProject',
-                data: {taskId: taskId}
+                data: {
+                    taskId: taskId
+                }
             });
         }
 

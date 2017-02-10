@@ -229,6 +229,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.editExerciseGroups = function(exercise, groups) {
+          console.log("groups to be assigned ...."),
+          console.log(groups);
             $scope.currentProjectService.assignGroup(exercise, $scope.common.user._id, groups).then(function(response) {
                 $scope.setGroups(response);
             });

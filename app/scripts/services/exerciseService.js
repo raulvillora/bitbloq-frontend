@@ -67,12 +67,17 @@ angular.module('bitbloqApp')
             oldGroups = _.groupBy(oldGroups, '_id');
             centerModeApi.getGroups().then(function(response) {
                 var groups = response.data;
-
                 function confirmAction(groups) {
                     var selectedGroups = _.filter(groups, {
                             'selected': true
                         }),
+                        removedGroups = _.filter(groups, {
+                          'selected': false
+                        }),
                         groupsToAssign = [];
+
+
+
                     selectedGroups.forEach(function(group) {
                         if (group.students.length === 0) {
                             alertsService.add({
@@ -108,8 +113,7 @@ angular.module('bitbloqApp')
                             });
                         }
                     });
-
-                    exerciseApi.assignGroups(project._id, groupsToAssign).then(function(response) {
+                    exerciseApi.assignGroups(project._id, groupsToAssign, removedGroups).then(function(response) {
                         defered.resolve(response.data);
                         assignModal.close();
                     });

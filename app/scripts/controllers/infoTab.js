@@ -18,7 +18,6 @@ angular.module('bitbloqApp')
         $scope.projectImages = [0, 1, 2, 3];
         $scope.availableThemes = ['infotab_option_grayTheme', 'infotab_option_colorTheme'];
 
-
         $scope.addTag = function(tag, event) {
             if (!event || event.keyCode === 13) {
                 if (!!tag) {
@@ -100,6 +99,12 @@ angular.module('bitbloqApp')
                         });
                         break;
                 }
+            });
+        };
+
+        $scope.editGroups = function(currentProject, groups) {
+            $scope.currentProjectService.assignGroup(currentProject, $scope.common.user._id, groups).then(function(response) {
+                $scope.setGroups(response);
             });
         };
 
