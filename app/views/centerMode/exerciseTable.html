@@ -50,66 +50,80 @@
                     </button>
                 </div>
                 <div ng-show="menuActive[$index]" class="table__block__item--menu">
-                    <ul>
-
-                        <li class="table__block__item--menu__item table__block__item--menu__item--open">
-                            <a class="table__block__item--menu__link" data-ng-href="#/center-mode/exercise-info/{{exercise._id}}" target="_blank">
+                    <div ng-if="common.userRole!=='student'">
+                        <ul>
+                            <li class="table__block__item--menu__item table__block__item--menu__item--open">
+                                <a class="table__block__item--menu__link" data-ng-href="#/center-mode/exercise-info/{{exercise._id}}" target="_blank">
+                                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                        <use xlink:href=""></use>
+                                    </svg>
+                                    {{'open' | translate}}</a>
+                            </li>
+                            
+                            <li class="dropdown__item--separator"></li>
+                            <li class="table__block__item--menu__item" ng-click="exerciseService.assignGroup(exercise, common.user._id, groups, null, true)" data-element="menu-edit-groups">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                    <use xlink:href=""></use>
+                                    <use xlink:href="#people"></use>
                                 </svg>
-                                {{'open' | translate}}</a>
-                        </li>
-
-                        <li class="dropdown__item--separator"></li>
-                        <li ng-click="exerciseService.assignGroup(exercise, common.user._id, groups, null, true)" class="table__block__item--menu__item">
-                            <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                <use xlink:href="#people"></use>
-                            </svg>
-                            {{'centerMode_editGroups' | translate}}
-                        </li>
-                        <li ng-click="renameExercise(exercise)" class="table__block__item--menu__item">
-                            <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                <use xlink:href="#pencil"></use>
-                            </svg>
-                            {{'change-name' | translate}}
-                        </li>
-                        <li ng-click="createExerciseCopy(exercise)" class="table__block__item--menu__item">
-                            <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                <use xlink:href="#duplicate"></use>
-                            </svg>
-                            {{'centerMode_exercise_duplicate' | translate}}
-                        </li>
-                        <li class="dropdown__item--separator--thick"></li>
-
-                        <li ng-click="exerciseService.download(exercise)" class="table__block__item--menu__item">
-                            <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                <use xlink:href="#download"></use>
-                            </svg>
-                            {{'download' | translate}}
-                        </li>
-
-                        <li ng-click="exerciseService.download(exercise, 'arduino')" class="table__block__item--menu__item">
-                            <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                <use xlink:href="#fileCode"></use>
-                            </svg>
-                            {{'navigation_text_file_downloadArduinoCode' | translate}}
-                        </li>
-
-                        <li class="dropdown__item--separator--thick"></li>
-                        <li ng-click="deleteExercise(exercise)" class="table__block__item--menu__item table__block__item--menu__item-red">
-                            <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                <use xlink:href="#delete"></use>
-                            </svg>
-                            {{'button_delete' | translate}}
-                        </li>
-
-                    </ul>
-
+                                {{'centerMode_editGroups' | translate}}
+                            </li>
+                            <li class="table__block__item--menu__item" ng-click="renameExercise(exercise)" data-element="menu-change-name">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#pencil"></use>
+                                </svg>
+                                {{'change-name' | translate}}
+                            </li>
+                            <li class="table__block__item--menu__item" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#duplicate"></use>
+                                </svg>
+                                {{'centerMode_exercise_duplicate' | translate}}
+                            </li>
+                            <li class="dropdown__item--separator--thick"></li>
+                            <li class="table__block__item--menu__item" ng-click="exerciseService.download(exercise)">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#download"></use>
+                                </svg>
+                                {{'download' | translate}}
+                            </li>
+                            <li class="table__block__item--menu__item" ng-click="exerciseService.download(exercise, 'arduino')">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#fileCode"></use>
+                                </svg>
+                                {{'navigation_text_file_downloadArduinoCode' | translate}}
+                            </li>
+                            <li class="dropdown__item--separator--thick"></li>
+                            <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="deleteExercise(exercise)">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#delete"></use>
+                                </svg>
+                                {{'button_delete' | translate}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-if="common.userRole==='student'">
+                        <ul>
+                            <li class="table__block__item--menu__item table__block__item--menu__item--open">
+                                <a class="table__block__item--menu__link" data-ng-href="#/task/{{exercise._id}}" target="_blank">
+                                    <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                        <use xlink:href=""></use>
+                                    </svg>
+                                    {{'open' | translate}}</a>
+                            </li>
+                            <li class="dropdown__item--separator"></li>
+                            <li class="table__block__item--menu__item" ng-click="exerciseService.saveInMyProjects(exercise._id)" data-element="menu-save-in-projects">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#folder"></use>
+                                </svg>
+                                {{'save-in-my-projects' | translate}}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <div class="forum__paginator">
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>

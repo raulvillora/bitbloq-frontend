@@ -27,7 +27,8 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {};
+        exports.editDate = function() {
+        };
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -204,8 +205,15 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.saveInMyProjects = function() {
-            exerciseApi.taskToProject().then();
+        exports.saveInMyProjects = function(taskId) {
+            exerciseApi.taskToProject(taskId || exports.exercise._id).then(function() {
+                alertsService.add({
+                    text: 'centerMode__alert__saveInMyProjects',
+                    id: 'centerMode-saveInMyProjects',
+                    type: 'info',
+                    time: 5000
+                });
+            });
         };
 
         exports.rename = function() {
