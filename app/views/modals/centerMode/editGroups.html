@@ -37,38 +37,38 @@
                     <div ng-show="!group.withoutDate">
                         <div class="picker__container" ng-init="group.calendar.from={}">
                             <span class="picker-title">{{'centerMode_date_from' | translate}}</span>
-                            <div class="date-picker" ng-init="group.calendar.from.date=oldGroups[group._id]?oldGroups[group._id][0].initDate:today">
-                                <input date-time id="{{'datePicker0' + group._id}}" ng-model="group.calendar.from.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" ng-disabled="group.withoutDate"/>
-                                <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker0' + group._id)" ng-disabled="group.withoutDate">
+                            <div class="date-picker" ng-init="group.calendar.from.date=oldGroups[group._id]?oldGroups[group._id][0].initDate:''">
+                                <input date-time id="{{'datePicker0' + group._id}}" ng-model="group.calendar.from.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date"/>
+                                <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker0' + group._id)">
                                     <svg class="svg-icon">
                                         <use xlink:href="#calendar"></use>
                                     </svg>
                                 </button>
                             </div>
                             <div class="time-picker" ng-init="initTimePicker(); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
-                                <input type="text" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" ng-disabled="group.withoutDate"/>
-
-                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)" ng-disabled="group.withoutDate">
+                                <input type="text" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" />
+                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)">
                                     <svg class="svg-icon">
                                         <use xlink:href="#clock"></use>
                                     </svg>
                                 </button>
                             </div>
                         </div>
-                        <div class="picker__container" ng-init="group.calendar.to={date: today}">
+                        <div class="picker__container" ng-init="group.calendar.to={}">
                             <span class="picker-title">{{'centerMode_date_to' | translate}}</span>
-                            <div class="date-picker" ng-init="group.calendar.to.date=oldGroups[group._id]?oldGroups[group._id][0].endDate:today">
-                                <input date-time id="{{'datePicker1' + group._id}}" ng-model="group.calendar.to.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" ng-disabled="group.withoutDate"/>
-                                <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker1' + group._id)" ng-disabled="group.withoutDate">
+                            <div class="date-picker" ng-init="group.calendar.to.date=oldGroups[group._id]?oldGroups[group._id][0].endDate:''">
+                                <input date-time id="{{'datePicker1' + group._id}}" ng-model="group.calendar.to.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date"/>
+                                <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker1' + group._id)">
                                     <svg class="svg-icon">
                                         <use xlink:href="#calendar"></use>
                                     </svg>
                                 </button>
                             </div>
                             <div class="time-picker" ng-init="initTimePicker(); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
-                                <input type="text" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" ng-disabled="group.withoutDate"/>
+                                <input type="text" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" />
 
-                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event)" ng-disabled="group.withoutDate">
+
+                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event)" >
                                     <svg class="svg-icon">
                                         <use xlink:href="#clock"></use>
                                     </svg>

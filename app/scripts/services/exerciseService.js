@@ -27,8 +27,7 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {
-        };
+        exports.editDate = function() {};
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -78,7 +77,6 @@ angular.module('bitbloqApp')
                         }), '_id'),
                         groupsToAssign = [];
 
-
                     selectedGroups.forEach(function(group) {
                         if (group.students.length === 0) {
                             alertsService.add({
@@ -117,6 +115,21 @@ angular.module('bitbloqApp')
                     exerciseApi.assignGroups(project._id, groupsToAssign, removedGroups).then(function(response) {
                         defered.resolve(response.data);
                         assignModal.close();
+                        alertsService.add({
+                            text: 'centerMode__alert__assignGroup-ok',
+                            id: 'centerMode-assignGroup',
+                            type: 'info',
+                            time: 5000
+                        });
+                    }).catch(function() {
+                        defered.reject();
+                        assignModal.close();
+                        alertsService.add({
+                            text: 'centerMode__alert__assignGroup-error',
+                            id: 'centerMode-assignGroup',
+                            type: 'info',
+                            time: 5000
+                        });
                     });
                 }
 

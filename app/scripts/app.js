@@ -45,6 +45,26 @@ angular
                 $logProvider.debugEnabled(false);
             }
 
+            $provide.decorator('mFormatFilter', function() {
+                return function newFilter(date, format, tz) {
+                    var dateResult;
+                    if (date) {
+                        date = moment(date);
+                        if (!(date.isValid())) {
+                            dateResult = '';
+                        } else {
+                            dateResult = tz ? moment.tz(date, tz).format(format) : date.format(format);
+                        }
+
+                    } else {
+                          dateResult = '';
+                    }
+
+                    return dateResult;
+
+                };
+            });
+
             $routeProvider
                 .when('/', {
                     templateUrl: 'views/landing/landing.html',
@@ -60,7 +80,7 @@ angular
                     reloadOnSearch: false
                 })
 
-                .when('/codeproject/:id?', {
+            .when('/codeproject/:id?', {
                     templateUrl: 'views/code.html',
                     controller: 'CodeCtrl',
                     reloadOnSearch: false
