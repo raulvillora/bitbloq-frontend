@@ -27,7 +27,8 @@ angular.module('bitbloqApp')
         var scope = $rootScope.$new();
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {};
+        exports.editDate = function() {
+        };
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -67,15 +68,15 @@ angular.module('bitbloqApp')
             oldGroups = _.groupBy(oldGroups, '_id');
             centerModeApi.getGroups().then(function(response) {
                 var groups = response.data;
+
                 function confirmAction(groups) {
                     var selectedGroups = _.filter(groups, {
                             'selected': true
                         }),
-                        removedGroups = _.filter(groups, {
-                          'selected': false
-                        }),
+                        removedGroups = _.map(_.filter(groups, {
+                            'selected': false
+                        }), '_id'),
                         groupsToAssign = [];
-
 
 
                     selectedGroups.forEach(function(group) {
