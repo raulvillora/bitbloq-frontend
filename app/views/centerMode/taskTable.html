@@ -65,7 +65,7 @@
         </div>
     </div>
 </div>
-<div ng-if="tasks.length===0">
-    <h1>{{'centerMode_tasks_empty' | translate}}</h1>
-    <p>{{'centerMode_tasks_emptyInfo' | translate}}</p>
+<div class="center-mode--empty"  ng-if="tasks.length===0">
+    <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty' | translate}}</h1>
+    <p class="center-mode--empty__info">{{'centerMode_tasks_emptyInfo' | translate}}</p>
 </div>
