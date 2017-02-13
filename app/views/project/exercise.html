@@ -32,7 +32,8 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{(common.section!=='task'? 'send-to-teacher' : currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltip-position="bottom">
+            <li class="nav__menu__item nav__item--white right" data-tooltips="true"
+                data-tooltip="{{(common.section!=='task'? 'send-to-teacher' : currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="sendTask()" data-ng-disabled="common.section!=='task' || currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]" data-ng-class="{'btn--make--disabled':currentProject.status!=='pending'}" data-walkthrough="upload">
                     <svg class="svg-icon">
                         <use xlink:href="#airplane"></use>
@@ -62,8 +63,8 @@
                         <use xlink:href="#software"></use>
                     </svg>
                 </li>
-                <li data-ng-if="common.section==='task' && (common.userRole==='headMaster' || common.userRole==='teacher')" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'project-mark' | translate }}" data-tooltip-position="right"
-                    data-element="info-tab">
+                <li data-ng-if="common.section==='task' && (common.userRole==='headMaster' || common.userRole==='teacher')" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'exercise-mark' | translate }}"
+                    data-tooltip-position="right" data-element="info-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#tickCircle"></use>
                     </svg>
