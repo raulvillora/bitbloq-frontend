@@ -557,11 +557,9 @@ angular.module('bitbloqApp')
                             exports.exercise.creator = common.user._id;
                             return exerciseApi.save(exports.getCleanExercise()).then(function(response) {
                                 exports.saveStatus = 2;
+                                exports.exercise.userCanUpdate = true;
                                 var idExercise = response.data;
                                 exports.exercise._id = idExercise;
-                                exports.getExerciseOrTask(idExercise).success(function(response) {
-                                    exports.exercise._acl = response._acl;
-                                });
                                 //to avoid reload
                                 $route.current.pathParams.id = idExercise;
                                 $location.url('/exercise/' + idExercise);
