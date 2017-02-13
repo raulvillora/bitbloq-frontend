@@ -10,7 +10,7 @@
     angular.module('bitbloqApp')
         .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document) {
 
-            $scope.center = {};
+            $scope.center = {}; // when user is headmaster
             $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
@@ -474,6 +474,7 @@
                         break;
                     case 'center-teacher':
                     case 'teacher':
+                        $scope.center = {};
                         _getTeacher($routeParams.id);
                         break;
                     case 'group':
@@ -485,6 +486,7 @@
                         }
                         break;
                     case 'student':
+                        $scope.center = {};
                         _getGroups();
                         _getTasks();
                         break;
@@ -517,7 +519,7 @@
             }
 
             function _getCenter() {
-                centerModeApi.getMyCenter().then(function(response) {
+                return centerModeApi.getMyCenter().then(function(response) {
                     $scope.center = response.data;
                     _getTeachers($scope.center._id);
                 });
@@ -553,7 +555,7 @@
                 } else {
                     var teacherId;
                     if ($scope.teacher._id !== $scope.common.user._id) {
-                        teacherId = $scope.teacher._id;
+                        teacherId = $scope.teacher._id; //if user is student, it will be undefined
                     }
                     centerModeApi.getGroups(teacherId, $scope.center._id).then(function(response) {
                         $scope.groups = response.data;
@@ -590,12 +592,15 @@
             function _getTeacher(teacherId) {
                 if (teacherId) {
                     //user is headmaster
-                    centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
-                        $scope.secondaryBreadcrumb = true;
-                        $scope.teacher = _.extend($scope.teacher, response.data);
-                        _getExercisesCount();
-                        _getGroups();
-                        _getExercises();
+                    centerModeApi.getMyCenter().then(function(response) {
+                        $scope.center = response.data;
+                        centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
+                            $scope.secondaryBreadcrumb = true;
+                            $scope.teacher = _.extend($scope.teacher, response.data);
+                            _getExercisesCount();
+                            _getGroups();
+                            _getExercises();
+                        });
                     });
                 } else {
                     $scope.secondaryBreadcrumb = true;
