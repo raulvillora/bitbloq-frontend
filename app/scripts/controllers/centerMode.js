@@ -34,16 +34,6 @@
 
             var currentModal;
 
-            $scope.changeExerciseMenu = function(index) {
-                var previousState;
-                if ($scope.menuActive[index]) {
-                    previousState = $scope.menuActive[index];
-                } else {
-                    previousState = false;
-                }
-                $scope.menuActive = {};
-                $scope.menuActive[index] = !previousState;
-            };
 
             $scope.editGroup = function() {
                 exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
@@ -53,9 +43,23 @@
                     });
             };
 
-            $scope.saveUrl = function(newUrl) {
-                $scope.common.lastUrl = $location.url();
-                $location.path(newUrl);
+            $scope.editGroups = function(exercise) {
+                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
+                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
+                        _getGroups();
+                    });
+                });
+            };
+
+            $scope.changeExerciseMenu = function(index) {
+                var previousState;
+                if ($scope.menuActive[index]) {
+                    previousState = $scope.menuActive[index];
+                } else {
+                    previousState = false;
+                }
+                $scope.menuActive = {};
+                $scope.menuActive[index] = !previousState;
             };
 
             $scope.changeStatusClass = function() {
@@ -86,6 +90,11 @@
                     className: 'modal--container modal--input',
                     scope: modalOptions
                 });
+            };
+
+            $scope.createExerciseCopy = function(exercise) {
+                exerciseService.clone(exercise);
+                localStorage.exercisesChange = true;
             };
 
             $scope.deleteGroup = function() {
@@ -351,7 +360,9 @@
                 }
             };
 
-            $scope.sortInstancesByGroup = function() {};
+            $scope.sortInstancesByGroup = function() {
+            };
+
 
             $scope.newGroup = function() {
                 centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
@@ -442,6 +453,17 @@
                     scope: modalOptions
 
                 });
+            };
+
+            $scope.renameExercise = function(exercise) {
+                commonModals.rename(exercise, 'exercise').then(function() {
+                    exerciseApi.update(exercise._id, exercise);
+                });
+            };
+
+            $scope.saveUrl = function(newUrl) {
+                $scope.common.lastUrl = $location.url();
+                $location.path(newUrl);
             };
 
             function _checkUrl() {
@@ -567,6 +589,7 @@
 
             function _getTeacher(teacherId) {
                 if (teacherId) {
+                    //user is headmaster
                     centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
                         $scope.secondaryBreadcrumb = true;
                         $scope.teacher = _.extend($scope.teacher, response.data);
@@ -597,31 +620,14 @@
                 }
             }
 
-            $scope.common.itsUserLoaded().then(function() {
-                centerModeApi.getMyCenter().then(function(response) { //todo delete
-                    $scope.center = response.data;
-                    _checkUrl();
-                });
-            });
-
-            $scope.renameExercise = function(exercise) {
-                commonModals.rename(exercise, 'exercise').then(function() {
-                    exerciseApi.update(exercise._id, exercise).then(function() {});
-                });
-            };
-
-            $scope.createExerciseCopy = function(exercise) {
-                exerciseService.clone(exercise);
-                localStorage.exercisesChange = true;
-            };
-
-            $scope.editGroups = function(exercise) {
-                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
-                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function(){
-                      _getGroups();
-                    });
-                });
-            };
+            function clickDocumentHandler(evt) {
+                if (!$(evt.target).hasClass('btn--center-mode--table')) {
+                    $scope.menuActive = {};
+                    if (!$scope.$$phase) {
+                        $scope.$digest();
+                    }
+                }
+            }
 
             $window.onfocus = function() {
                 if ($routeParams.type === 'teacher') {
@@ -635,14 +641,9 @@
                 }
             };
 
-            function clickDocumentHandler(evt) {
-                if (!$(evt.target).hasClass('btn--center-mode--table')) {
-                    $scope.menuActive = {};
-                    if (!$scope.$$phase) {
-                        $scope.$digest();
-                    }
-                }
-            }
+            $scope.common.itsUserLoaded().then(function() {
+                _checkUrl();
+            });
 
             $document.on('click', clickDocumentHandler);
 
