@@ -59,9 +59,9 @@
                                     </svg>
                                     {{'open' | translate}}</a>
                             </li>
-                            
+
                             <li class="dropdown__item--separator"></li>
-                            <li class="table__block__item--menu__item" ng-click="exerciseService.assignGroup(exercise, common.user._id, groups, null, true)" data-element="menu-edit-groups">
+                            <li class="table__block__item--menu__item" ng-click="editGroups(exercise)" data-element="menu-edit-groups">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#people"></use>
                                 </svg>
@@ -123,7 +123,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="forum__paginator">
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>

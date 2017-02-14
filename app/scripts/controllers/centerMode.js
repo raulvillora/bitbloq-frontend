@@ -486,7 +486,7 @@
 
             $scope.saveUrl = function(newUrl) {
                 $scope.common.lastUrl = $location.url();
-                $location.path(newUrl);
+                $location.url(newUrl);
             };
 
             function _checkUrl() {
