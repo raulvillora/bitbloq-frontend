@@ -17,6 +17,7 @@ angular.module('bitbloqApp')
             get: get,
             getTask: getTask,
             getTasks: getTasks,
+            getTasksCount: getTasksCount,
             getTasksByExercise: getTasksByExercise,
             getTasksByExerciseCount: getTasksByExerciseCount,
             markTask: markTask,
@@ -73,7 +74,7 @@ angular.module('bitbloqApp')
             });
         }
 
-        function getTasks(groupId, studentId) {
+        function getTasks(groupId, studentId, params) {
             if (groupId) {
                 if (studentId) {
                     return $http({
@@ -89,9 +90,17 @@ angular.module('bitbloqApp')
             } else {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'task'
+                    url: envData.config.centerModeUrl + 'task',
+                    params: params
                 });
             }
+        }
+
+        function getTasksCount() {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'task/count'
+            });
         }
 
         function getTasksByExercise(exerciseId, params) {

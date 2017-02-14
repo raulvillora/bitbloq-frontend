@@ -325,7 +325,19 @@
             };
 
             //get Exercises paginated
+
             $scope.getExercisesPaginated = function(pageno) {
+                switch ($scope.common.urlType) {
+                    case 'teacher':
+                        getTeacherExercisesPaginated(pageno);
+                        break;
+                    case 'student':
+                        getTasksWithParams(pageno);
+                        break;
+                }
+            };
+
+            function getTeacherExercisesPaginated(pageno) {
                 centerModeApi.getExercises($scope.teacher._id, {
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage
@@ -333,7 +345,7 @@
                     $scope.exercises = response.data;
                     $location.search('page', pageno);
                 });
-            };
+            }
 
             //getTasksPaginated
 
@@ -511,7 +523,7 @@
                     case 'student':
                         $scope.center = {};
                         _getGroups();
-                        _getTasks();
+                        _getMyExercises();
                         break;
                     case 'exercise-info':
                         _getExercise($routeParams.id);
@@ -587,8 +599,11 @@
                 }
             }
 
-            function _getTasks(groupId, studentId) {
-                exerciseApi.getTasks(groupId, studentId).then(function(response) {
+            function _getTasks(groupId, studentId, pageno) {
+                exerciseApi.getTasks(groupId, studentId, {
+                    'page': pageno,
+                    'pageSize': $scope.itemsPerPage
+                }).then(function(response) {
                     $scope.exercises = response.data;
                     if ($scope.urlSubType === 'student') {
                         $scope.tertiaryBreadcrumb = true;
@@ -599,13 +614,40 @@
                 });
             }
 
+            function getTasksWithParams(pageno) {
+                exerciseApi.getTasks(null, null, {
+                    'page': pageno,
+                    'pageSize': $scope.itemsPerPage
+                }).then(function(response) {
+                    $scope.exercises = response.data;
+                    $location.search('page', pageno);
+                });
+            }
+
+            function _getMyExercisesCount() {
+                exerciseApi.getTasksCount().then(function(response) {
+                    $scope.exercisesCount = response.data.count;
+                });
+
+            }
+
+            function _getMyExercises() {
+                _getMyExercisesCount();
+                if ($routeParams.page) {
+                    getTasksWithParams($routeParams.page);
+                    $scope.pagination.exercises.current = $routeParams.page;
+                } else {
+                    getTasksWithParams($scope.pageno);
+                }
+            }
+
             function _getTasksByExercise() {
-              if ($routeParams.page) {
-                  $scope.getTasksPaginated($routeParams.page);
-                  $scope.pagination.tasks.current = $routeParams.page;
-              } else {
-                  $scope.getTasksPaginated($scope.pageno);
-              }
+                if ($routeParams.page) {
+                    $scope.getTasksPaginated($routeParams.page);
+                    $scope.pagination.tasks.current = $routeParams.page;
+                } else {
+                    $scope.getTasksPaginated($scope.pageno);
+                }
             }
 
             function _getTasksByExerciseCount(exerciseId) {
@@ -643,10 +685,10 @@
 
             function _getExercises() {
                 if ($routeParams.page) {
-                    $scope.getExercisesPaginated($routeParams.page);
+                    getTeacherExercisesPaginated($routeParams.page);
                     $scope.pagination.exercises.current = $routeParams.page;
                 } else {
-                    $scope.getExercisesPaginated($scope.pageno);
+                    getTeacherExercisesPaginated($scope.pageno);
                 }
             }
 
