@@ -397,7 +397,8 @@
                 }
             };
 
-            $scope.sortInstancesByGroup = function() {};
+            $scope.sortInstancesByGroup = function() {
+            };
 
             $scope.newGroup = function() {
                 centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)

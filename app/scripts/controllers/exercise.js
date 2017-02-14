@@ -123,8 +123,8 @@ angular.module('bitbloqApp')
                     }
                     defered.resolve();
                 } else {
-                    exerciseApi.userIsHeadMaster($scope.currentProject._id).then(function(response) {
-                        $scope.currentProject.canMark = response.data.headMaster;
+                    exerciseApi.userIsHeadmaster($scope.currentProject._id).then(function(response) {
+                        $scope.currentProject.canMark = response.data.headmaster;
                         defered.resolve();
                     }).catch(defered.reject);
                 }

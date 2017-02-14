@@ -26,7 +26,7 @@ angular.module('bitbloqApp')
             sendTask: sendTask,
             update: update,
             updateTask: updateTask,
-            userIsHeadMaster: userIsHeadMaster
+            userIsHeadmaster: userIsHeadmaster
         };
 
         function assignGroups(idExercise, assignedGroups, removedGroups) {
@@ -173,10 +173,10 @@ angular.module('bitbloqApp')
             });
         }
 
-        function userIsHeadMaster(idExercise) {
+        function userIsHeadmaster(idExercise) {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'task/' + idExercise + '/headMaster'
+                url: envData.config.centerModeUrl + 'task/' + idExercise + '/headmaster'
             });
         }
 

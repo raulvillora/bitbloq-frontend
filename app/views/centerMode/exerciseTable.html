@@ -128,7 +128,7 @@
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty" ng-if="(common.userRole==='teacher' || common.userRole==='headMaster') && exercises.length===0">
+<div class="center-mode--empty" ng-if="(common.userRole==='teacher' || common.userRole==='headmaster') && exercises.length===0">
     <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty' | translate}}</h1>
     <p class="center-mode--empty__info">{{'centerMode_exercises_emptyInfo' | translate}}</p>
 </div>

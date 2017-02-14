@@ -21,7 +21,7 @@ angular
             getMyRole: getMyRole,
             getTeacher: getTeacher,
             getTeachers: getTeachers,
-            isHeadMaster: isHeadMaster,
+            isHeadmaster: isHeadmaster,
             registerInGroup: registerInGroup,
             updateGroup: updateGroup
         };
@@ -184,10 +184,10 @@ angular
             });
         }
 
-        function isHeadMaster() {
+        function isHeadmaster() {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'user/headMaster'
+                url: envData.config.centerModeUrl + 'user/headmaster'
             });
         }
 

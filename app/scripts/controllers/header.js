@@ -38,7 +38,7 @@ angular.module('bitbloqApp')
                     if (modalOptions.center.name && modalOptions.center.location && modalOptions.center.telephone) {
                         centerModeApi.createCenter(modalOptions.center).then(function() {
                             ngDialog.close(centerModal);
-                            $scope.common.userRole = 'headMaster';
+                            $scope.common.userRole = 'headmaster';
                             alertsService.add({
                                 text: 'centerMode_alert_createCenter',
                                 id: 'createCenter',

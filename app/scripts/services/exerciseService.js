@@ -557,7 +557,7 @@ angular.module('bitbloqApp')
                     }
 
                     if (exports.exercise._id) {
-                        if (!exports.exercise._acl || (exports.exercise._acl['user:' + common.user._id] && exports.exercise._acl['user:' + common.user._id].permission === 'ADMIN')) {
+                        if (exports.exercise.teacher === common.user._id || exports.exercise.owner === common.user._id || common.userRole === 'headmaster') {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
