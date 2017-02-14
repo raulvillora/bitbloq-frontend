@@ -18,6 +18,7 @@ angular.module('bitbloqApp')
             getTask: getTask,
             getTasks: getTasks,
             getTasksByExercise: getTasksByExercise,
+            getTasksByExerciseCount: getTasksByExerciseCount,
             markTask: markTask,
             taskToProject: taskToProject,
             save: save,
@@ -93,10 +94,18 @@ angular.module('bitbloqApp')
             }
         }
 
-        function getTasksByExercise(exerciseId) {
+        function getTasksByExercise(exerciseId, params) {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId
+                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId,
+                params: params
+            });
+        }
+
+        function getTasksByExerciseCount(exerciseId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId + '/count'
             });
         }
 

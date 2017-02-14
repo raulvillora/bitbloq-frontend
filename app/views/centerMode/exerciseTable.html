@@ -13,7 +13,7 @@
             </svg>
         </button>
     </div>
-    
+
     <div class="dropdown-group table__added__exercise clearfix" ng-if="common.urlType!=='group'" ng-show="showFilters">
         <span class="form--input searcher" ng-class="{'input--focused':focus === 'search'}">
             <svg class="svg-icon--search">
@@ -30,7 +30,7 @@
             <span class="col-vsmall-3">{{'centerMode_column_time' | translate}}</span>
         </div>
         <div class="table__block table__block__exercise">
-            <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.current" total-items="{{exercisesCount}}">
+            <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}">
                 <div class="table__block__item col-vsmall-8">
                     <button class="table__item__text table__item__link" ng-click="saveUrl((exercise.exercise? '/task/' : '/center-mode/exercise-info/') + exercise._id)">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">

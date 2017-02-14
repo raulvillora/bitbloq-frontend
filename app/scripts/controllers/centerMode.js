@@ -27,13 +27,17 @@
             $scope.itemsPerPage = 10;
             $scope.menuActive = {};
             $scope.pagination = {
-                current: 1
+                'exercises': {
+                    'current': 1
+                },
+                'tasks': {
+                    'current': 1
+                }
             };
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
 
             var currentModal;
-
 
             $scope.editGroup = function() {
                 exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
@@ -320,12 +324,33 @@
                 return result;
             };
 
+            //get Exercises paginated
             $scope.getExercisesPaginated = function(pageno) {
                 centerModeApi.getExercises($scope.teacher._id, {
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage
                 }).then(function(response) {
                     $scope.exercises = response.data;
+                    $location.search('page', pageno);
+                });
+            };
+
+            //getTasksPaginated
+
+            $scope.getTasksPaginated = function(pageno) {
+                exerciseApi.getTasksByExercise($scope.exercise._id, {
+                    'page': pageno,
+                    'pageSize': $scope.itemsPerPage
+                }).then(function(response) {
+                    response.data.forEach(function(task) {
+                        var taskId = task._id;
+                        _.extend(task, task.student);
+                        if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
+                            task.status = 'notDelivered';
+                        }
+                        task._id = taskId;
+                    });
+                    $scope.tasks = response.data;
                     $location.search('page', pageno);
                 });
             };
@@ -360,9 +385,7 @@
                 }
             };
 
-            $scope.sortInstancesByGroup = function() {
-            };
-
+            $scope.sortInstancesByGroup = function() {};
 
             $scope.newGroup = function() {
                 centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
@@ -492,7 +515,7 @@
                         break;
                     case 'exercise-info':
                         _getExercise($routeParams.id);
-                        _getTasksByExercise($routeParams.id);
+                        _getTasksByExerciseCount($routeParams.id);
                         _getGroups($routeParams.id);
                         break;
                 }
@@ -529,6 +552,7 @@
             function _getExercise(exerciseId) {
                 exerciseApi.get(exerciseId).then(function(response) {
                     $scope.exercise = response.data;
+                    _getTasksByExercise();
                 });
             }
 
@@ -575,17 +599,18 @@
                 });
             }
 
-            function _getTasksByExercise(exerciseId) {
-                exerciseApi.getTasksByExercise(exerciseId).then(function(response) {
-                    response.data.forEach(function(task) {
-                        var taskId = task._id;
-                        _.extend(task, task.student);
-                        if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
-                            task.status = 'notDelivered';
-                        }
-                        task._id = taskId;
-                    });
-                    $scope.tasks = response.data;
+            function _getTasksByExercise() {
+              if ($routeParams.page) {
+                  $scope.getTasksPaginated($routeParams.page);
+                  $scope.pagination.tasks.current = $routeParams.page;
+              } else {
+                  $scope.getTasksPaginated($scope.pageno);
+              }
+            }
+
+            function _getTasksByExerciseCount(exerciseId) {
+                exerciseApi.getTasksByExerciseCount(exerciseId).then(function(response) {
+                    $scope.tasksCount = response.data.count;
                 });
             }
 
@@ -619,7 +644,7 @@
             function _getExercises() {
                 if ($routeParams.page) {
                     $scope.getExercisesPaginated($routeParams.page);
-                    $scope.pagination.current = $routeParams.page;
+                    $scope.pagination.exercises.current = $routeParams.page;
                 } else {
                     $scope.getExercisesPaginated($scope.pageno);
                 }

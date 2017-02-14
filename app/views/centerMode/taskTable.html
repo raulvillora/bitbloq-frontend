@@ -34,8 +34,8 @@
                 <span>{{'centerMode_column_status' | translate}}</span>
             </div>
         </div>
-        <div class="table__block">
-            <div class="table__block__list table__block__hover row" ng-repeat="task in tasks | orderBy:'orderInstance'">
+        <div class="table__block table__block__exercise">
+            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | orderBy:'orderInstance' | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
                 <div class="table__block__item col-vsmall-5">
                     <h2 class="block__item__title">
                         {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name}}
@@ -63,6 +63,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="forum__paginator">
+        <dir-pagination-controls on-page-change="getTasksPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
 <div class="center-mode--empty"  ng-if="tasks.length===0">
