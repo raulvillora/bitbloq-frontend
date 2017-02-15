@@ -23,7 +23,7 @@ angular.module('bitbloqApp')
                 if (newFilter) {
                     $scope.componentsFilterOptions[0].value = false;
                 }
-                $scope.componentsFilters = _.pluck(_.where($scope.componentsFilterOptions, {
+                $scope.componentsFilters = _.map(_.where($scope.componentsFilterOptions, {
                     value: true
                 }), 'option');
                 $scope.filterParams.compo = $scope.componentsFilters.length > 0 ? $scope.componentsFilters.join('+') : undefined;
@@ -49,7 +49,7 @@ angular.module('bitbloqApp')
 
                 $scope.genericFilterOptions[0].value = true;
 
-                $scope.genericFilters = _.pluck(_.where($scope.genericFilterOptions, {
+                $scope.genericFilters = _.map(_.where($scope.genericFilterOptions, {
                     value: true
                 }), 'option')[0];
 
@@ -66,7 +66,7 @@ angular.module('bitbloqApp')
                     item.value = false;
                 }
             });
-            $scope.boardFilters = _.pluck(_.where($scope.boardsFilterOptions, {
+            $scope.boardFilters = _.map(_.where($scope.boardsFilterOptions, {
                 value: true
             }), 'option')[0];
             $scope.filterParams.board = $scope.boardFilters;
@@ -182,7 +182,7 @@ angular.module('bitbloqApp')
             };
 
             if ($scope.componentsFilterOptions[0].value) {
-                var componentsArray = _.pluck($scope.componentsFilterOptions, 'option');
+                var componentsArray = _.map($scope.componentsFilterOptions, 'option');
                 componentsArray.splice(0, 1);
                 queryParams.query.hardwareTags = {
                     '$nin': componentsArray

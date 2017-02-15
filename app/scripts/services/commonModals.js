@@ -305,7 +305,7 @@ angular.module('bitbloqApp')
             var emailsShared = userApi.getAliasByACL(project._acl);
 
             var confirmAction = function() {
-                    var users = _.pluck(modalScope.shareWithUserModel, 'text');
+                    var users = _.map(modalScope.shareWithUserModel, 'text');
                     var userIndex = users.indexOf(common.user.email);
                     if (userIndex > -1) {
                         users.splice(userIndex, 1);

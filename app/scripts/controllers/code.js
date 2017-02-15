@@ -43,7 +43,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.boardNameList = _.pluck(hardwareConstants.boards, 'name');
+        $scope.boardNameList = _.map(hardwareConstants.boards, 'name');
         $scope.currentProject = projectService.project;
 
         $scope.common.isLoading = true;

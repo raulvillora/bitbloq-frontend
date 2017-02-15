@@ -408,7 +408,7 @@
 
             $scope.newTeacher = function() {
                 var confirmAction = function() {
-                        var teachers = _.pluck(modalOptions.newTeachersModel, 'text');
+                        var teachers = _.map(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
                             centerModeApi.addTeachers(teachers, $scope.center._id).then(function(response) {
                                 if (response.data.teachersNotAdded) {
