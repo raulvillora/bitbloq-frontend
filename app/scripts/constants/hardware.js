@@ -1927,45 +1927,51 @@ angular.module('bitbloqApp')
             "id": "mbot",
             "name": "mBot",
             "board": "Arduino UNO",
+            "showThumbnail": true,
+            "availableComponents": [
+                'mkb_infrared',
+                'mkb_lightsensor',
+                'mkb_linefollower',
+                'mkb_ultrasonic'
+            ],
             "width": 75,
             "height": 86
         }, {
             "id": "rangerlandraider",
             "name": "mRanger Land Raider",
             "board": "Arduino MEGA 2560",
-            "underDevelopment": true,
+            "showThumbnail": true,
             "width": 75,
             "height": 86
         }, {
             "id": "rangerraptor",
             "name": "mRanger Raptor",
             "board": "Arduino MEGA 2560",
-            "underDevelopment": true,
+            "showThumbnail": true,
             "width": 75,
             "height": 86
         }, {
             "id": "rangernervousbird",
             "name": "mRanger Nervous bird",
             "board": "Arduino MEGA 2560",
-            "underDevelopment": true,
+            "showThumbnail": true,
             "width": 75,
             "height": 86
         }, {
             "id": "startertank",
             "name": "Starter kit Modo tanke",
-            "underDevelopment": true,
             "board": "Arduino UNO",
+            "showThumbnail": true,
             "width": 75,
             "height": 86
         }, {
             "id": "starterthreewheels",
             "name": "Starter kit Modo 3 ruedas",
-            "underDevelopment": true,
             "board": "Arduino UNO",
+            "showThumbnail": true,
             "width": 75,
             "height": 86
         }],
-
         "viewerSensors": [
             "encoder",
             "hts221",
@@ -1974,5 +1980,51 @@ angular.module('bitbloqApp')
             "sound",
             "us",
             "irs"
-        ]
+        ],
+        "robotComponents": {
+            "mkb_infrared": {
+                "id": "mkb_infrared",
+                "width": 84.5,
+                "height": 128,
+                "dataReturnType": "float",
+                "pins": {
+                    "blue": [
+                        "s"
+                    ]
+                }
+            },
+            "mkb_lightsensor": {
+                "id": "mkb_lightsensor",
+                "width": 84.5,
+                "height": 128,
+                "dataReturnType": "float",
+                "pins": {
+                    "black": [
+                        "s"
+                    ]
+                }
+            },
+            "mkb_linefollower": {
+                "id": "mkb_linefollower",
+                "width": 84.5,
+                "height": 128,
+                "dataReturnType": "float",
+                "pins": {
+                    "blue": [
+                        "s"
+                    ]
+                }
+            },
+            "mkb_ultrasonic": {
+                "id": "mkb_ultrasonic",
+                "width": 134.5,
+                "height": 106.2,
+                "dataReturnType": "float",
+                "pins": {
+                    "yellow": [
+                        "s"
+                    ]
+                }
+            }
+        }
     });

@@ -32,6 +32,7 @@
             <p class="board__message">{{'make-hardware-board-container' | translate}}</p>
         </div>
         <div id="robotSchema" class="robot" ng-class="{'robot--present':currentProject.hardware.robot , 'robot--selected':robotSelected, 'opaque':currentProject.hardware.robot}"></div>
+        <img class="robot-thumbnail" data-ng-show="robotsMap[currentProject.hardware.robot].showThumbnail" data-ng-src="/images/robots/{{currentProject.hardware.robot}}.svg">
     </div>
     <div class="hw-toolbox tab--make__block" data-ng-include="'views/project/hardwareToolbox.html'"></div>
     <div id="component-context-menu" class="hw-context-menu">

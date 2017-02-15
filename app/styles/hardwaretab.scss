@@ -496,3 +496,14 @@ $hw_toolbox: 210px;
     left: 8.5%;
     width: 120px;
 }
+
+.hardware-tab {
+    .robot-thumbnail {
+        position: absolute;
+        opacity: 0.09;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

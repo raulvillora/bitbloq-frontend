@@ -291,8 +291,32 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     _addBtComponent(data);
                 }
                 break;
+            case 'robotcomponent':
+                $log.debug('hi', data);
+                _addRobotComponent(data);
+                break;
         }
     };
+
+    function _addRobotComponent(data) {
+        var newComponent = '';
+        currentProjectService.addComponentInComponentsArray(data.category, newComponent);
+
+        var relativeCoordinates = {
+            x: ((data.coordinates.x / container.clientWidth) * 100),
+            y: ((data.coordinates.y / container.clientHeight) * 100)
+        };
+
+        newComponent.coordinates = relativeCoordinates;
+        newComponent.category = data.category;
+        newComponent.name = _createUniqueVarName(newComponent); //Generate unique name
+        newComponent.connected = false;
+
+        hw2Bloqs.unselectAllConnections();
+        var componentDOMRef = hw2Bloqs.addComponent(newComponent);
+        _focusComponent(componentDOMRef);
+        $scope.boardSelected = false;
+    }
 
     function _addBtComponent() {
         if (!$scope.currentProject.useBitbloqConnect) {
@@ -381,7 +405,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
      ****************************************/
 
     function _initialize() {
-
+        $scope.robotsMap = _getRobotsMap(hardwareConstants);
         $scope.hardware.componentList = hardwareConstants.components;
         $scope.hardware.boardList = hardwareConstants.boards;
         $scope.hardware.robotList = hardwareConstants.robots;
@@ -397,6 +421,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $document.on('click', _clickDocumentHandler);
 
         container.addEventListener('connectionEvent', connectionEventHandler);
+    }
+
+    function _getRobotsMap(hardwareConstants) {
+        var map = {};
+        for (var i = 0; i < hardwareConstants.robots.length; i++) {
+            map[hardwareConstants.robots[i].id] = hardwareConstants.robots[i];
+        }
+        return map;
     }
 
     function generateFullComponentList(resources) {
