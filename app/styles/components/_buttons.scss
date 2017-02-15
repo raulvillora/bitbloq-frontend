@@ -1,24 +1,26 @@
 /*
 // BUTTONS //
 */
-
 @mixin button($backgroudColor, $textColor) {
     background-color: $backgroudColor;
     color: $textColor;
-    padding: .8em 1em;
-    border-radius: .3em;
+    padding: 0.8em 1em;
+    border-radius: 0.3em;
     min-width: 170px;
     min-height: 50px;
     line-height: 27px;
     transition: background-color 250ms;
     text-decoration: none;
+
     &:hover {
         transition: background-color 250ms;
         text-decoration: none;
     }
+
     &:active {
         text-decoration: none;
     }
+
     .svg-icon {
         fill: $textColor;
         width: 1em;
@@ -57,6 +59,12 @@
     border: 1px solid #dddddd;
     font-weight: bold;
 
+    &.btn--showMoreActions {
+        span {
+            pointer-events: none;
+        }
+    }
+
     &:hover {
         background-color: #e8e8e8;
     }
@@ -89,14 +97,16 @@
 .btn--disabled {
     background-color: #dbdee3;
     color: $font-color-disabled;
+
     .svg-icon {
         fill: $font-color-disabled;
     }
 }
 
-.btn:disabled{
+.btn:disabled {
     background-color: #dbdee3;
     color: $font-color-disabled;
+
     .svg-icon {
         fill: $font-color-disabled;
     }
@@ -123,6 +133,7 @@
 .btn--delete {
     float: right;
     min-width: 50px;
+
     .svg-icon {
         width: 13px;
         height: 13px;
@@ -137,9 +148,9 @@
 
 .btn--social {
     width: 110px;
-    font-size: .9375em;
+    font-size: 0.9375em;
     font-weight: bold;
-    padding: .9em;
+    padding: 0.9em;
     color: white;
     height: 34px;
     line-height: 10px;
@@ -153,8 +164,8 @@
     height: 34px;
     font-style: italic;
     min-width: 70px;
-    padding-right: .2em;
-    padding-left: .5em;
+    padding-right: 0.2em;
+    padding-left: 0.5em;
     display: flex;
     align-items: center;
     white-space: nowrap;
@@ -168,7 +179,7 @@
         vertical-align: middle;
         color: #5d6069;
         cursor: pointer;
-        margin-left: .2em;
+        margin-left: 0.2em;
         font-weight: 400;
         max-width: 100%;
         overflow: hidden;
@@ -190,9 +201,12 @@
 .button-group {
     float: right;
     padding: 0;
-    button, a {
+
+    a,
+    button {
         margin: 0 10px;
         float: right;
+
         &:first-child {
             margin-right: 0;
         }

@@ -158,7 +158,6 @@ angular.module('bitbloqApp')
             } else {
                 return true;
             }
-//            return exerciseService.exercise.hardware.components.length !== 0;
         };
         $scope.anyAdvancedComponent = function() {
             return !_.isEqual(exerciseService.componentsArray, bloqsUtils.getEmptyComponentsArray());

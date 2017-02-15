@@ -231,6 +231,17 @@
     border-left: 1px solid white;
     padding-top: 0.5em;
 
+    &.table__block__moreactions--menu{
+      margin-right: 0;
+      margin-top: 36px;
+      -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+      &:hover {
+          background-color: white;
+      }
+    }
+
     li:last-child {
         margin-bottom: 0.5em;
     }

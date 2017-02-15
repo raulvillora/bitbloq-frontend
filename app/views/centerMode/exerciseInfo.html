@@ -5,12 +5,41 @@
             {{exercise.createdAt | date:'dd MMM yyyy'}}
         </p>
         <div class="button-group col-vsmall-6">
-            <button class="btn btn--tertiary btn--small" data-element="centerMode_button_moreActions">
+            <button class="btn btn--tertiary btn--small btn--showMoreActions" ng-click="setMoreOptions()" data-element="centerMode_button_moreActions">
                 <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
             </button>
             <a class="btn btn--primary btn--small" ng-href="{{'#/exercise/' + exercise._id}}" target="_blank" data-element="centerMode_openExercise">
                 <span class="block__item__title">{{ 'centerMode_openExercise' | translate}}</span>
             </a>
+            <div ng-show="showMoreActions" class="table__block__item--menu table__block__moreactions--menu">
+                <ul>
+                    <li class="table__block__item--menu__item" ng-click="renameExercise(exercise)" data-element="menu-change-name">
+                        <svg class="svg-icon svg-icon--text svg-icon--menu">
+                            <use xlink:href="#pencil"></use>
+                        </svg>
+                        {{'change-name' | translate}}
+                    </li>
+                    <li class="table__block__item--menu__item" ng-if="common.urlType!=='center-teacher'" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
+                        <svg class="svg-icon svg-icon--text svg-icon--menu">
+                            <use xlink:href="#duplicate"></use>
+                        </svg>
+                        {{'centerMode_exercise_duplicate' | translate}}
+                    </li>
+                    <li class="dropdown__item--separator--thick"></li>
+                    <li class="table__block__item--menu__item" ng-click="exerciseService.download(exercise)">
+                        <svg class="svg-icon svg-icon--text svg-icon--menu">
+                            <use xlink:href="#download"></use>
+                        </svg>
+                        {{'download' | translate}}
+                    </li>
+                    <li class="table__block__item--menu__item" ng-click="exerciseService.download(exercise, 'arduino')">
+                        <svg class="svg-icon svg-icon--text svg-icon--menu">
+                            <use xlink:href="#download"></use>
+                        </svg>
+                        {{'navigation_text_file_downloadArduinoCode' | translate}}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div ng-if="groups.length>0 || tasks.length>0" class="centerMode row">

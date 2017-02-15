@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils) {
 
             $scope.center = {}; // when user is headmaster
             $scope.exercises = [];
@@ -22,6 +22,7 @@
             $scope.orderInstance = 'name';
             $scope.common.urlType = $routeParams.type;
             $scope.urlSubType = $routeParams.subtype;
+            $scope.showMoreActions = false;
             $scope.pageno = 1;
             $scope.exercisesCount = 0;
             $scope.itemsPerPage = 10;
@@ -396,8 +397,7 @@
                 }
             };
 
-            $scope.sortInstancesByGroup = function() {
-            };
+            $scope.sortInstancesByGroup = function() {};
 
             $scope.newGroup = function() {
                 centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
@@ -692,13 +692,27 @@
                 }
             }
 
+            $scope.setMoreOptions = function() {
+                $scope.showMoreActions = !$scope.showMoreActions;
+            };
+
             function clickDocumentHandler(evt) {
-                if (!$(evt.target).hasClass('btn--center-mode--table')) {
-                    $scope.menuActive = {};
-                    if (!$scope.$$phase) {
-                        $scope.$digest();
-                    }
+                switch ($scope.common.urlType) {
+                    case 'exercise-info':
+                        if (!angular.element(evt.target).hasClass('btn--showMoreActions')) {
+                            $scope.showMoreActions = false;
+                            utils.apply($scope);
+                        }
+                        break;
+                    case 'teacher':
+                        if (!$(evt.target).hasClass('btn--center-mode--table')) {
+                            $scope.menuActive = {};
+                            utils.apply($scope);
+                        }
+                        break;
+
                 }
+
             }
 
             $window.onfocus = function() {
