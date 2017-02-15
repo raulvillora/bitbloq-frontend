@@ -37,8 +37,7 @@
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
 
-            var currentModal,
-                checkWatchers = [];
+            var currentModal;
 
             $scope.editGroup = function() {
                 exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
@@ -702,20 +701,6 @@
                 }
             }
 
-            function addCheckWatchers(groups) {
-                _.forEach(groups, function(group, index) {
-                    checkWatchers[index] = $scope.$watch('group.selected', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {}
-                    });
-
-                });
-            }
-
-            function removeCheckWatchers() {
-                _.forEach(checkWatchers, function(watcher) {
-                    watcher();
-                });
-            }
             $window.onfocus = function() {
                 if ($routeParams.type === 'teacher') {
                     $scope.$apply(function() {

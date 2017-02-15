@@ -148,7 +148,17 @@ angular.module('bitbloqApp')
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
-            return exerciseService.exercise.hardware.components.length !== 0;
+
+            if (exerciseService.exercise.hardware.components.length === 0) {
+                if (exerciseService.exercise.useBitbloqConnect) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+//            return exerciseService.exercise.hardware.components.length !== 0;
         };
         $scope.anyAdvancedComponent = function() {
             return !_.isEqual(exerciseService.componentsArray, bloqsUtils.getEmptyComponentsArray());
