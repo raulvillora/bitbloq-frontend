@@ -42,14 +42,13 @@ angular
             });
         }
 
-        function createGroup(name, accessId, teacherId, centerId) {
+        function createGroup(name, teacherId, centerId) {
             return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'group',
                 data: {
                     name: name,
                     statusId: 'open',
-                    accessId: accessId,
                     teacher: teacherId,
                     center: centerId,
                     student: []

@@ -16,14 +16,13 @@ angular.module('bitbloqApp')
             var def = $q.defer();
 
             function confirmAction(name) {
-                var accessId = Date.now();
-                centerModeApi.createGroup(name, accessId, teacherId, centerId).then(function(newGroup) {
+                centerModeApi.createGroup(name, teacherId, centerId).then(function(newGroup) {
                     modalOptions.title = name;
                     modalOptions.mainText = 'centerMode_modal_accessIdInfo';
                     modalOptions.confirmButton = null;
                     modalOptions.rejectButton = 'close';
                     modalOptions.modalInput = false;
-                    modalOptions.secondaryText = accessId;
+                    modalOptions.secondaryText = newGroup.data.accessId;
                     modalOptions.modalDropdown = null;
                     def.resolve(newGroup);
                 });
