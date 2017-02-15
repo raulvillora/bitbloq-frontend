@@ -24,11 +24,11 @@ angular.module('bitbloqApp')
 
         exports.exercise = {};
 
-        var scope = $rootScope.$new();
+        var scope = $rootScope.$new(),
+            confirmDeleteModal;
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {
-        };
+        exports.editDate = function() {};
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -64,10 +64,14 @@ angular.module('bitbloqApp')
         };
 
         exports.assignGroup = function(project, teacherId, oldGroups, centerId, onlyEdit) {
-            var defered = $q.defer();
+            var defered = $q.defer(),
+                checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
             centerModeApi.getGroups().then(function(response) {
                 var groups = response.data;
+                _.forEach(groups, function(group) {
+                    group.selected = oldGroups[group._id] ? true : false;
+                });
 
                 function confirmAction(groups) {
                     var selectedGroups = _.filter(groups, {
@@ -113,6 +117,7 @@ angular.module('bitbloqApp')
                             });
                         }
                     });
+
                     exerciseApi.assignGroups(project._id, groupsToAssign, removedGroups).then(function(response) {
                         defered.resolve(response.data);
                         assignModal.close();
@@ -174,6 +179,22 @@ angular.module('bitbloqApp')
                     });
                 }
 
+                function allCheckWatchers(groups) {
+                    _.forEach(groups, function(group, index) {
+                        checkWatchers[index] = modalOptions.$watch('groups[' + index + '].selected', function(newVal, oldVal) {
+                            if (oldVal && newVal !== oldVal) {
+                                deleteTaskConfirm(group, index, modalOptions);
+                            }
+                        });
+                    });
+                }
+
+                function deleteAllWatchers() {
+                    _.forEach(checkWatchers, function(watcher) {
+                        watcher();
+                    });
+                }
+
                 _.extend(modalOptions, {
                     title: 'centerMode_editGroups',
                     contentTemplate: 'views/modals/centerMode/editGroups.html',
@@ -195,11 +216,13 @@ angular.module('bitbloqApp')
                     modalButtons: true
                 });
 
+                allCheckWatchers(modalOptions.groups);
+
                 assignModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--assign-group',
+                    preCloseCallback: deleteAllWatchers,
                     scope: modalOptions
-
                 });
             });
             return defered.promise;
@@ -325,11 +348,15 @@ angular.module('bitbloqApp')
         exports.getCode = function() {
             var code;
             _updateHardwareSchema();
+            var hardware = _.cloneDeep(exports.exercise.hardware);
+            if (exports.exercise.useBitbloqConnect && exports.exercise.hardware.board === 'bq ZUM' && exports.exercise.bitbloqConnectBT) {
+                hardware.components.push(exports.exercise.bitbloqConnectBT);
+            }
             code = arduinoGeneration.getCode({
                 varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                 setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
                 loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
-            }, exports.exercise.hardware);
+            }, hardware);
             return code;
         };
 
@@ -433,6 +460,10 @@ angular.module('bitbloqApp')
                         exports.componentsArray[comp.category].push(_.cloneDeep(comp));
                     }
                 });
+
+                if (exports.exercise.useBitbloqConnect && (exports.exercise.hardware.board === 'bq ZUM') && exports.exercise.bitbloqConnectBT) {
+                    exports.addComponentInComponentsArray('serialElements', exports.exercise.bitbloqConnectBT);
+                }
 
             }
         };
@@ -640,10 +671,51 @@ angular.module('bitbloqApp')
             if (mainTag) {
                 newHardwareTags.push(mainTag);
             }
+            if (exports.exercise.bitbloqConnectBT) {
+                newHardwareTags.push('Bitbloq Connect');
+            }
             exports.exercise.hardware.components.forEach(function(comp) {
                 newHardwareTags.push(comp.id);
             });
+            if (exports.exercise.useBitbloqConnect) {
+                newHardwareTags.push('bitbloqconnect');
+            }
             exports.exercise.hardwareTags = _.uniq(newHardwareTags);
+        }
+
+        function deleteTaskConfirm(group, index, scope) {
+            var parent = $rootScope,
+                modalOptions = parent.$new();
+
+            function checkGroup() {
+                scope.groups[index].selected = true;
+                confirmDeleteModal.close();
+            }
+
+            function unCheckGroup() {
+                scope.groups[index].selected = false;
+                confirmDeleteModal.close();
+
+            }
+            _.extend(modalOptions, {
+                title: 'unassignGroup_modal_title',
+                confirmButton: 'unassignGroup_modal_acceptButton',
+                confirmAction: unCheckGroup,
+                rejectButton: 'modal-button-cancel',
+                rejectAction: checkGroup,
+                textContent: common.translate('unassignGroup_modal_info', {
+                    value: group.name
+                }),
+                contentTemplate: '/views/modals/information.html',
+                modalButtons: true
+            });
+
+            confirmDeleteModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--input',
+                scope: modalOptions
+            });
+
         }
 
         /*************************************************

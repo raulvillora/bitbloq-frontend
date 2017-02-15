@@ -37,7 +37,8 @@
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
 
-            var currentModal;
+            var currentModal,
+                checkWatchers = [];
 
             $scope.editGroup = function() {
                 exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
@@ -207,7 +208,6 @@
                 _.extend(modalOptions, {
                     title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
                     confirmButton: 'button_delete',
-                    value: 'se acabaron los tiempos',
                     confirmAction: confirmAction,
                     rejectButton: 'modal-button-cancel',
                     contentTemplate: '/views/modals/information.html',
@@ -702,6 +702,20 @@
                 }
             }
 
+            function addCheckWatchers(groups) {
+                _.forEach(groups, function(group, index) {
+                    checkWatchers[index] = $scope.$watch('group.selected', function(newVal, oldVal) {
+                        if (newVal !== oldVal) {}
+                    });
+
+                });
+            }
+
+            function removeCheckWatchers() {
+                _.forEach(checkWatchers, function(watcher) {
+                    watcher();
+                });
+            }
             $window.onfocus = function() {
                 if ($routeParams.type === 'teacher') {
                     $scope.$apply(function() {
