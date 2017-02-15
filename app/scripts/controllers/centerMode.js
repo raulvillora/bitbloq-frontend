@@ -241,7 +241,7 @@
                                 type: 'error'
                             });
                         });
-                        newTeacherModal.close();
+                        teacherModal.close();
                     },
                     parent = $rootScope,
                     modalOptions = parent.$new();
@@ -257,7 +257,7 @@
                     modalButtons: true
                 });
 
-                var newTeacherModal = ngDialog.open({
+                var teacherModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
                     scope: modalOptions
@@ -281,7 +281,7 @@
                                 type: 'error'
                             });
                         });
-                        newTeacherModal.close();
+                        studentModal.close();
                     },
                     parent = $rootScope,
                     modalOptions = parent.$new(),
@@ -300,7 +300,7 @@
                     modalButtons: true
                 });
 
-                var newTeacherModal = ngDialog.open({
+                var studentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
                     scope: modalOptions

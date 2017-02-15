@@ -65,7 +65,8 @@ angular.module('bitbloqApp')
                             optionsClick: function(selected) {
                                 centerId = selected._id;
                             },
-                            headingOptions: 'centerMode_createGroup_selectCenter'
+                            headingOptions: 'centerMode_createGroup_selectCenter',
+                            dropdownDataElement: 'centerMode_dropdown'
                         });
                     }
                     ngDialog.open({
