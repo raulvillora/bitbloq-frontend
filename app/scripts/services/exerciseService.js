@@ -261,7 +261,9 @@ angular.module('bitbloqApp')
             2: 'exercise-saved-ok',
             3: 'exercise-saved-ko',
             4: 'exercise-not-allow-to-save',
-            5: 'exercise-saved-mark'
+            5: 'exercise-saved-mark',
+            6: 'exercise-saved-ko-delivered',
+            7: 'exercise-saved-ko-outTime'
         };
 
         exports.tempImage = {};
@@ -567,8 +569,8 @@ angular.module('bitbloqApp')
             exports.completedExercise();
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
-                    var newMark = _.join(exports.exercise.newMark,'.');
-                    if(newMark===String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark){
+                    var newMark = _.join(exports.exercise.newMark, '.');
+                    if (newMark === String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark) {
                         exports.saveStatus = 4;
                     } else {
                         exerciseApi.markTask(exports.exercise).then(function() {
@@ -598,8 +600,8 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && exports.exercise.teacher === common.user._id) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)) ||
-                            (common.userRole === 'student' && exports.exercise.student === common.user._id)) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
@@ -611,6 +613,33 @@ angular.module('bitbloqApp')
                                         });
                                     }
                                 });
+                        }
+                        if (common.userRole === 'student' && exports.exercise.student === common.user._id) {
+                            if (exports.exercise.status === 'delivered') {
+                                exports.saveStatus = 6;
+                                defered.reject();
+                            } else {
+                                var now = moment(),
+                                    date = moment(exports.exercise.endDate);
+                                var aux = date.diff(now) >= 0;
+                                if (!exports.exercise.endDate || date.diff(now) >= 0) {
+                                    return exerciseApi.updateTask(exports.exercise._id, exports.getCleanExercise())
+                                        .then(function() {
+                                            exports.saveStatus = 2;
+                                            exports.saveOldExercise();
+                                            localStorage.exercisesChange = true;
+                                            if (exports.tempImage.file) {
+                                                imageApi.save(exports.exercise._id, exports.tempImage.file)
+                                                    .then(function() {
+                                                        exports.tempImage = {};
+                                                    });
+                                            }
+                                        });
+                                } else {
+                                    exports.saveStatus = 7;
+                                    defered.reject();
+                                }
+                            }
                         } else {
                             exports.saveStatus = 4;
                             defered.reject();
