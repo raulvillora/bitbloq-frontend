@@ -33,6 +33,6 @@ angular.module('bitbloqApp')
                 'howitworks'
             ];
 
-            return (!common.user && (common.section === 'bloqsproject' || common.section === 'codeproject')) || !_.contains(notInSections, common.section);
+            return (!common.user && (common.section === 'bloqsproject' || common.section === 'codeproject')) || !_.includes(notInSections, common.section);
         };
     });

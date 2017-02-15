@@ -124,7 +124,7 @@ angular.module('bitbloqApp')
                 url: envData.config.centerModeUrl + 'task/' + task._id + '/mark',
                 data: {
                     mark: task.newMark[0] + '.' + task.newMark[1],
-                    remark: task.remark
+                    remark: task.newRemark
                 }
             });
         }

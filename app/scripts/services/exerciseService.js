@@ -28,7 +28,8 @@ angular.module('bitbloqApp')
             confirmDeleteModal;
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {};
+        exports.editDate = function() {
+        };
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -257,9 +258,10 @@ angular.module('bitbloqApp')
         exports.savingStatusIdLabels = {
             0: '',
             1: 'make-saving',
-            2: 'make-project-saved-ok',
-            3: 'make-project-saved-ko',
-            4: 'make-project-not-allow-to-save'
+            2: 'exercise-saved-ok',
+            3: 'exercise-saved-ko',
+            4: 'exercise-not-allow-to-save',
+            5: 'exercise-saved-mark'
         };
 
         exports.tempImage = {};
@@ -564,14 +566,21 @@ angular.module('bitbloqApp')
             var defered = $q.defer();
             exports.completedExercise();
             if (exports.exercise.canMark) {
-                if (exports.exercise.newMark || exports.exercise.remark) {
-                    exerciseApi.markTask(exports.exercise).then(function() {
-                        exports.saveStatus = 2;
-                        defered.resolve();
-                    }).catch(function() {
-                        exports.saveStatus = 3;
-                        defered.reject();
-                    });
+                if (exports.exercise.newMark || exports.exercise.newRemark) {
+                    var newMark = _.join(exports.exercise.newMark,'.');
+                    if(newMark===String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark){
+                        exports.saveStatus = 4;
+                    } else {
+                        exerciseApi.markTask(exports.exercise).then(function() {
+                            exports.exercise.mark = newMark;
+                            exports.exercise.remark = exports.exercise.newRemark;
+                            exports.saveStatus = 5;
+                            defered.resolve();
+                        }).catch(function() {
+                            exports.saveStatus = 3;
+                            defered.reject();
+                        });
+                    }
                 } else {
                     exports.saveStatus = 0;
                     defered.resolve();
@@ -588,7 +597,9 @@ angular.module('bitbloqApp')
                     }
 
                     if (exports.exercise._id) {
-                        if (exports.exercise.teacher === common.user._id || exports.exercise.owner === common.user._id || exports.exercise.creator._id === common.user._id || common.userRole === 'headmaster') {
+                        if ((common.userRole === 'teacher' && exports.exercise.teacher === common.user._id) ||
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)) ||
+                            (common.userRole === 'student' && exports.exercise.student === common.user._id)) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
@@ -697,6 +708,7 @@ angular.module('bitbloqApp')
                 confirmDeleteModal.close();
 
             }
+
             _.extend(modalOptions, {
                 title: 'unassignGroup_modal_title',
                 confirmButton: 'unassignGroup_modal_acceptButton',
@@ -758,8 +770,8 @@ angular.module('bitbloqApp')
                 }
             });
 
-            scope.$watch('exercise.remark', function(newVal, oldVal) {
-                if (newVal !== oldVal) {
+            scope.$watch('exercise.newRemark', function(newVal, oldVal) {
+                if (oldVal && newVal !== oldVal && newVal !== exports.exercise.remark) {
                     exports.startAutosave();
                 }
             });
