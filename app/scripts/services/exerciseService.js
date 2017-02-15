@@ -771,7 +771,7 @@ angular.module('bitbloqApp')
             });
 
             scope.$watch('exercise.newRemark', function(newVal, oldVal) {
-                if (oldVal && newVal !== oldVal && newVal !== exports.exercise.remark) {
+                if (newVal && newVal !== oldVal && newVal !== exports.exercise.remark) {
                     exports.startAutosave();
                 }
             });

@@ -12,10 +12,10 @@
                 <div class="form-control">
                     <label>{{ 'infoTab_subTitle_exerciseMark' | translate }}</label>
                     <span class="form--input" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
-                        <input type="text" id="exerciseMark0" name="exerciseMark0" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark mark--integer" data-ng-class="{'input--focused':focus === 'exerciseMark0'}" data-ng-model="currentProject.newMark[0]"
+                        <input type="number" id="exerciseMark0" name="exerciseMark0" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark mark--integer" data-ng-class="{'input--focused':focus === 'exerciseMark0'}" data-ng-model="currentProject.newMark[0]"
                                data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
                                data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="!common.user" data-element="info-exercise-mark0">
-                        <input type="text" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
+                        <input type="number" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
                                data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="!common.user" data-element="info-exercise-mark1">
                     </span>
                 </div>

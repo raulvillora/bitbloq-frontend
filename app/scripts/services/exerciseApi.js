@@ -123,7 +123,7 @@ angular.module('bitbloqApp')
                 method: 'PUT',
                 url: envData.config.centerModeUrl + 'task/' + task._id + '/mark',
                 data: {
-                    mark: task.newMark[0] + '.' + task.newMark[1],
+                    mark: _.join(task.newMark, '.'),
                     remark: task.newRemark
                 }
             });
