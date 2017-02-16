@@ -97,17 +97,10 @@
     </div>
     <div class="toolbox__content" ng-show="selectedToolbox==='components'">
         <h1 class="h3 submenu__title">{{'components' | translate}}</h1>
-        <ul class="toolbox__content-container" ng-show="!currentProject.hardware.robot">
-            <li class="toolbox__content__list" ng-if="component.id" ng-repeat="component in hardware.componentSortered">
+        <ul class="toolbox__content-container">
+            <li class="toolbox__content__list" ng-repeat="component in hardware.componentSortered">
                 <h1 class="list-name" translate>{{component.id}}</h1>
                 <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
-            </li>
-        </ul>
-        <ul class="toolbox__content-container" ng-show="currentProject.hardware.robot">
-            <p data-ng-show="!robotsMap[currentProject.hardware.robot].availableComponents || (robotsMap[currentProject.hardware.robot].availableComponents.length === 0)">{{'robot-not-available-components' | translate}}</p>
-            <li class="toolbox__content__list" ng-repeat="robotComponent in robotsMap[currentProject.hardware.robot].availableComponents">
-                <h1 class="list-name">{{robotComponent | translate}}</h1>
-                <img dragcategory="{{hardwareConstants.robotsComponent[robotComponent].category}}" draggable dragid="{{robotComponent}}" dragtype="{{hardwareConstants.robotsComponent[robotComponent].dragType || 'robotcomponent'}}" ng-src="/images/robotscomponents/{{robotComponent}}.svg" ng-style="{width:hardwareConstants.robotsComponent[robotComponent].width + 'px'}">
             </li>
         </ul>
     </div>

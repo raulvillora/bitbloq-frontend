@@ -30,7 +30,7 @@
                     </svg>
                 </button>
             </li>
-            <li class="tabs__header__item--vertical toolbox-mbot" ng-class="{'selected--tab': selectedBloqsToolbox==='mBot'}" ng-show="currentProject.hardware.robot==='mbot'" data-element="toolbox-mbot">
+            <li class="tabs__header__item--vertical toolbox-mbot" ng-class="{'selected--tab': selectedBloqsToolbox==='mBot'}" ng-show="currentProject.hardware.robot==='mbot' || currentProject.hardware.showRobotImage==='mbot'" data-element="toolbox-mbot">
                 <button class="btn-svg element-toolbox" ng-click="changeBloqsToolbox('mBot')">
                     <svg class="svg-icon">
                         <use xlink:href="#robot"></use>
@@ -108,7 +108,7 @@
                     </span>
                 </button>
             </li>
-            <li class="tabs__header__item--vertical toolbox-mbot" ng-class="{'selected--tab': selectedBloqsToolbox==='mBot'}" ng-show="currentProject.hardware.robot==='mbot'" data-element="toolbox-mbot">
+            <li class="tabs__header__item--vertical toolbox-mbot" ng-class="{'selected--tab': selectedBloqsToolbox==='mBot'}" ng-show="currentProject.hardware.robot==='mbot' || currentProject.hardware.showRobotImage === 'mbot'" data-element="toolbox-mbot">
                 <button class="btn-svg element-toolbox">
                     <span class="input input--checkbox">
                         <input type="checkbox" class="element-toolbox" id="allMBotBloqs" ng-model="mBotCheckModel" data-indeterminate-checkbox data-counter-check="mBotCheckCounter" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-basic-tab="mBot" data-advanced-tab="advancedMBot" data-update-state="statusGeneralCheck" />
@@ -208,7 +208,7 @@
                     </svg>
                 </button>
             </li>
-            <li class="toolbox__item" ng-show="currentProject.hardware.robot==='mbot'">
+            <li class="toolbox__item" ng-show="currentProject.hardware.robot==='mbot' || currentProject.hardware.showRobotImage === 'mbot'">
                 <button class="btn btn-text element-toolbox" ng-click="changeBloqsToolbox('mBot')">
                     {{'make-swtoolbox-mbot' | translate}}
                     <svg class="svg-icon svg-icon--right">

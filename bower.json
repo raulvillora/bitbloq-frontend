@@ -71,7 +71,8 @@
     "angular-mocks": "1.3.18",
     "jquery": "2.1.1",
     "lodash": "~4.17.4",
-    "angular-cookies": "^1.5.3"
+    "angular-cookies": "^1.5.3",
+    "bloqs": "dev"
   },
   "appPath": "app",
   "moduleName": "bitbloqApp",

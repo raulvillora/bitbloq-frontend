@@ -330,9 +330,10 @@ angular
                 });
             });
         };
-        exports.checkIfOldConnections = function(){
-          return oldConnections.length > 0;
+        exports.checkIfOldConnections = function() {
+            return oldConnections.length > 0;
         };
+
         function _autoConnect(board) {
             if (oldConnections.length > 0) {
                 var i2cToFemale = (board === 'Arduino UNO');
@@ -597,7 +598,7 @@ angular
 
         //Adds a raw svg for a component
         function _loadComponent(DOMComponent, newComponent) {
-            var spaceInterPin;
+            var spaceInterPin = {};
             if (newComponent.pins.digital && newComponent.pins.analog) {
                 spaceInterPin = {
                     digital: {
@@ -647,6 +648,18 @@ angular
                     }
                 };
             }
+            spaceInterPin.blue = {
+                x: 0.5,
+                y: 1
+            };
+            spaceInterPin.black = {
+                x: 0.5,
+                y: 1
+            };
+            spaceInterPin.yellow = {
+                x: 0.5,
+                y: 1
+            };
 
             var mandatoryPins = {};
 
