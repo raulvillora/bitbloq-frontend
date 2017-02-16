@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('exerciseApi', function($http, $log, envData) {
+    .service('exerciseApi', function($http, $log, envData, _) {
 
         var exerciseApi = {
             assignGroups: assignGroups,
