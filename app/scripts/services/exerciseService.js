@@ -94,7 +94,7 @@ angular.module('bitbloqApp')
                         if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
                             groupsToAssign.push({
                                 _id: group._id,
-                                calendar: {}
+                                date: {}
                             });
                         } else {
                             group.calendar.from.date = moment(group.calendar.from.date);
@@ -110,9 +110,9 @@ angular.module('bitbloqApp')
 
                             groupsToAssign.push({
                                 _id: group._id,
-                                calendar: {
-                                    from: group.calendar.from.date,
-                                    to: group.calendar.to.date
+                                date: {
+                                    initDate: group.calendar.from.date,
+                                    endDate: group.calendar.to.date
                                 }
                             });
                         }
