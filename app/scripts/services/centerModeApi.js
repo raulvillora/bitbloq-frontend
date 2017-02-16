@@ -100,17 +100,16 @@ angular
             }
         }
 
-        function getExercisesCount(teacherId, params) {
+        function getExercisesCount(teacherId) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId + '/count'
+                    url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId + '/count',
                 });
             } else {
                 return $http({
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'exercise/count',
-                    params: params
                 });
             }
         }
