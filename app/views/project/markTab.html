@@ -9,23 +9,28 @@
             </div>
             <div class="form--section">
                 <!-- input type="text"-->
-                <div class="form-control">
+                <div class="form-control" ng-class="{'task__student-info': common.userRole==='student'}">
                     <label>{{ 'infoTab_subTitle_exerciseMark' | translate }}</label>
-                    <span class="form--input" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
+                    <span class="form--input" ng-if="currentProject.canMark" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
                         <input type="number" id="exerciseMark0" name="exerciseMark0" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark mark--integer" data-ng-class="{'input--focused':focus === 'exerciseMark0'}" data-ng-model="currentProject.newMark[0]"
-                               data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
-                               data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="!common.user" data-element="info-exercise-mark0">
+                               data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="!common.user" data-element="info-exercise-mark0">
                         <input type="number" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
                                data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="!common.user" data-element="info-exercise-mark1">
                     </span>
+                    <p ng-class="{'form--show-mark': currentProject.mark}" ng-if="common.userRole==='student'">
+                        {{currentProject.mark || ('centerMode_task_withoutMark' | translate)}}
+                    </p>
                 </div>
                 <!-- textarea -->
-                <div class="form-control project__description">
+                <div class="form-control project__description" ng-class="{'task__student-info': common.userRole==='student'}">
                     <label>{{ 'infoTab_subTitle_exerciseRemark' | translate }}</label>
-                    <span class="form--textarea" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
-                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-init="currentProject.newRemark = currentProject.remark" data-ng-model="currentProject.newRemark" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'"
-                                  data-ng-disabled="!common.user" data-element="infotab-exercise-remark"/>
+                    <span class="form--textarea" ng-if="currentProject.canMark" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
+                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-init="currentProject.newRemark = currentProject.remark" data-ng-model="currentProject.newRemark" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
+                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-exercise-remark"/>
                     </span>
+                    <p ng-class="{'form--show-description':currentProject.remark}" ng-if="common.userRole==='student'">
+                        {{currentProject.remark || ('centerMode_task_withoutRemark' | translate)}}
+                    </p>
                 </div>
             </div>
         </fieldset>

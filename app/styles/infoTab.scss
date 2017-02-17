@@ -33,7 +33,7 @@
                     margin: 6px;
                     margin-right: 10px;
                     line-height: normal;
-                    &.svg-icon--big{
+                    &.svg-icon--big {
                         width: 15px;
                         height: 15px;
                         margin-top: 5px;
@@ -159,6 +159,29 @@
                     text-align: right;
                     .form--error {
                         text-align: left;
+                    }
+                }
+                .task__student-info {
+                    label {
+                        width: 100%;
+                    }
+                    p {
+                        font-style: italic;
+                        color: #999999;
+                        width: 100%;
+                        font-size: 13px;
+                        text-align: left;
+                    }
+                    .form--show-mark {
+                        font-style: normal;
+                        font-size: 40px;
+                        color: #3b3e45;
+                        font-weight: bold;
+                    }
+                    .form--show-description {
+                        font-style: normal;
+                        font-size: 14px;
+                        color: #5d6069;
                     }
                 }
                 .btn--addtag {
