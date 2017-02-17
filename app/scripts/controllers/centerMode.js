@@ -616,6 +616,11 @@
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage
                 }).then(function(response) {
+                    response.data.forEach(function(task) {
+                        if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
+                            task.status = 'notDelivered';
+                        }
+                    });
                     $scope.exercises = response.data;
                     $location.search('page', pageno);
                 });

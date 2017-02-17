@@ -47,7 +47,7 @@
                     </span>
                 </div>
                 <div class="table__block__item table__column--centered col-vsmall-3">
-                    <span data-element="{{'centerMode-task-status' + task._id}}" ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected' || (task.status==='delivered' && task.mark)}">
+                    <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected' || (task.status==='delivered' && task.mark)}" data-element="{{'centerMode-task-status' + task._id}}">
                         {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : ''  | translate}}
                     </span>
                 </div>
