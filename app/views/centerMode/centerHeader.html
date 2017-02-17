@@ -1,9 +1,9 @@
-<div ng-if="(common.urlType==='center' && teachers.length>0) || (common.urlType==='center-teacher')" class="breadcrumb header__title col-vsmall-8" ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
+<div ng-if="(common.urlType==='center' && teachers.length>0) || (common.urlType==='center-teacher')" class="breadcrumb header__title col-vsmall-7" ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
     <h1><a href="#/center-mode/center">{{'centerMode_teacher' | translate}}</a></h1>
     <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.firstName ? teacher.firstName + ' ' +teacher.lastName : teacher.username}}</a>
 </div>
-<h1 class="header__title col-vsmall-8" ng-if="common.urlType==='teacher'">{{'header_tab_myClass' | translate}}</h1>
-<div ng-if="common.urlType==='group'" class="breadcrumb header__title col-vsmall-8" ng-class="{'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
+<h1 class="header__title col-vsmall-7" ng-if="common.urlType==='teacher'">{{'header_tab_myClass' | translate}}</h1>
+<div ng-if="common.urlType==='group'" class="breadcrumb header__title col-vsmall-7" ng-class="{'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
     <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl: '#/center-mode/teacher'}}">{{'groups' | translate}}</a></h1>
     <a ng-if="secondaryBreadcrumb || tertiaryBreadcrumb" ng-class="{'breadcrumb--secondary': secondaryBreadcrumb, 'breadcrumb__item': tertiaryBreadcrumb}" ng-href="#/center-mode/group/{{group._id}}">
         {{group.name}}
@@ -13,16 +13,16 @@
         {{student.firstName? student.firstName + student.lastName : student.username}}
     </a>
 </div>
-<div ng-if="common.urlType==='exercise-info'" class="breadcrumb header__title col-vsmall-8 second-level" data-element="centerMode-header-breadcrumb">
+<div ng-if="common.urlType==='exercise-info'" class="breadcrumb header__title col-vsmall-7 second-level" data-element="centerMode-header-breadcrumb">
     <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl : '#/center-mode/teacher'}}">{{'centerMode_exercises' | translate}}</a></h1>
     <a class="breadcrumb--secondary" ng-href="#/center-mode/{{exercise._id}}">
         {{exercise.name}}
     </a>
 </div>
-<div ng-if="common.urlType==='student'" class="breadcrumb header__title col-vsmall-8" data-element="centerMode-header-breadcrumb">
+<div ng-if="common.urlType==='student'" class="breadcrumb header__title col-vsmall-7" data-element="centerMode-header-breadcrumb">
     <h1><a href="#/center-mode/student">{{'header_tab_myExercises' | translate}}</a></h1>
 </div>
-<div ng-if="urlSubType!=='student'" class="button-group col-vsmall-4">
+<div ng-if="urlSubType!=='student'" class="button-group col-vsmall-5">
     <button ng-if="common.urlType==='center'" class="btn btn--primary btn--small" ng-click="newTeacher()" data-element="centerMode_button_newTeacher">
         <span>{{'centerMode_button_newTeacher' | translate}}</span>
     </button>
