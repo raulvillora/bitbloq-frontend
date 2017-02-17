@@ -26,9 +26,9 @@
                     <label>{{ 'infoTab_subTitle_exerciseRemark' | translate }}</label>
                     <span class="form--textarea" ng-if="currentProject.canMark" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
                         <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-init="currentProject.newRemark = currentProject.remark" data-ng-model="currentProject.newRemark" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
-                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-exercise-remark"/>
+                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-exercise-remark"></textarea>
                     </span>
-                    <p ng-class="{'form--show-description':currentProject.remark}" ng-if="common.userRole==='student'">
+                    <p ng-class="{'form--show-description': currentProject.remark}" ng-if="common.userRole==='student'">
                         {{currentProject.remark || ('centerMode_task_withoutRemark' | translate)}}
                     </p>
                 </div>
