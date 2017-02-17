@@ -1,3 +1,10 @@
+.menu--user__center-mode {
+    cursor: pointer;
+    .notification-alert, .notification__title {
+        pointer-events: none;
+    }
+}
+
 .centerMode {
     background-color: #eeeeee;
 
