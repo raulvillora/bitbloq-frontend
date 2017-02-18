@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-                                            utils)
-    {
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -37,7 +36,6 @@ angular.module('bitbloqApp')
         $scope.$field = $('#bloqs--field').last();
 
         $scope.$trashcan = null;
-
 
         /***********************************
          ***********************************
@@ -130,8 +128,6 @@ angular.module('bitbloqApp')
         /***********************************
          end indeterminate checkbox
          ***********************************/
-
-
 
         $scope.changeBloqsToolbox = function(tab) {
             $scope.selectedBloqsToolbox = tab;
@@ -395,7 +391,7 @@ angular.module('bitbloqApp')
                         result = existComponent([
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
-                            'joystick', 'ldrs', 'pot'
+                            'joystick', 'ldrs', 'pot', 'mkb_ultrasound'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = showCommunications(item);
@@ -428,8 +424,7 @@ angular.module('bitbloqApp')
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
                             if (connectedComponents[i].id.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].id))
-                            {
+                                item.toLowerCase().includes(connectedComponents[i].id)) {
                                 result = true;
                             }
                             i++;

@@ -489,7 +489,7 @@ angular.module('bitbloqApp')
                 'mkb_infrared',
                 'mkb_lightsensor',
                 'mkb_linefollower',
-                'mkb_ultrasonic',
+                'mkb_ultrasound',
                 'sp'
             ],
             "pinSize": {
@@ -1851,7 +1851,7 @@ angular.module('bitbloqApp')
             "pins": {}
         }, {
             "id": "mkb_infrared",
-            "category": "mkb_sensors",
+            "category": "sensors",
             "manufacter": "makeblock",
             "width": 84.5,
             "height": 128,
@@ -1863,7 +1863,7 @@ angular.module('bitbloqApp')
             }
         }, {
             "id": "mkb_lightsensor",
-            "category": "mkb_sensors",
+            "category": "sensors",
             "manufacter": "makeblock",
             "width": 84.5,
             "height": 128,
@@ -1875,8 +1875,9 @@ angular.module('bitbloqApp')
             }
         }, {
             "id": "mkb_linefollower",
-            "category": "mkb_sensors",
+            "category": "sensors",
             "manufacter": "makeblock",
+            "type": "mkb_linefollower",
             "width": 84.5,
             "height": 128,
             "dataReturnType": "float",
@@ -1886,8 +1887,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_ultrasonic",
-            "category": "mkb_sensors",
+            "id": "mkb_ultrasound",
+            "category": "sensors",
             "manufacter": "makeblock",
             "width": 134.5,
             "height": 106.2,
