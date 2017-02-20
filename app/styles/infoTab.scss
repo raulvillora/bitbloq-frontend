@@ -81,10 +81,11 @@
                     }
 
                     span {
-                        width: 70%;
                         display: inline-block;
                         border-radius: 2px;
-
+                        &:not(.container-span) {
+                            width: 70%;
+                        }
                         input {
                             line-height: 32px;
                             font-size: 14px;
@@ -92,6 +93,7 @@
                             font-weight: 400;
                             border-radius: 2px;
                         }
+
                     }
 
                     .form--textarea {

@@ -58,7 +58,7 @@
                         </svg>
                     </button>
                     <a class="btn btn--tertiary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="{{'centerMode-button-showTask' + task._id}}">
-                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'see': 'centerMode_button_correct' | translate}}
+                        {{(task.status!=='delivered' || task.status==='corrected' || (task.status==='delivered' && task.mark))? 'see': 'centerMode_button_correct' | translate}}
                     </a>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         <dir-pagination-controls on-page-change="getTasksPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty"  ng-if="tasks.length===0">
+<div class="center-mode--empty" ng-if="tasks.length===0">
     <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty' | translate}}</h1>
     <p class="center-mode--empty__info">{{'centerMode_tasks_emptyInfo' | translate}}</p>
 </div>
