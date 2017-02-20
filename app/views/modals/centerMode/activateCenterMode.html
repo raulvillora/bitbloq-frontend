@@ -11,7 +11,7 @@
             <li>{{'centerMode_modal_createCenter-item5' | translate}}</li>
         </ul>
     </div>
-    <div ng-if="type==='form'" class="input-list row">
+    <form ng-if="type==='form'" name="formActivateCenter" class="input-list row" novalidate>
         <div class="row">
             <label for="centerName" class="col-vsmall-4">{{'centerMode_modal_createCenter-centerName' | translate }}</label>
             <input type="text" id="centerName" name="centerName" class="col-vsmall-8" ng-class="{'input--error': errors && !center.name}" data-ng-model="center.name" autofocus data-element="modals-center-name">
@@ -24,5 +24,8 @@
             <label for="centerTelephone" class="col-vsmall-4">{{'centerMode_modal_createCenter-telephone' | translate }}</label>
             <input type="number" id="centerTelephone" name="centerTelephone" class="col-vsmall-8" ng-class="{'input--error': errors && !center.telephone}" data-ng-model="center.telephone" autofocus data-element="modals-center-telephone">
         </div>
-    </div>
+        <span class="row form--error" ng-show="errors && (!center.name || !center.location || !center.telephone)">
+            <small class="col-vsmall-push-4">{{ 'centerMode_modal_createCenter-error' | translate }}</small>
+        </span>
+    </form>
 </div>
