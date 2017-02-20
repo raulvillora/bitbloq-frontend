@@ -157,13 +157,55 @@
                         }
                     }
                 }
+
+                .image-alone {
+                    width: 285px;
+                    height: 190px;
+                    object-fit: cover;
+                    background-color: #ebebeb;
+                    display: inline-block;
+                    position: relative;
+                }
                 .project__description {
                     text-align: right;
                     .form--error {
                         text-align: left;
                     }
                 }
-                .task__student-info {
+                &.task__student-info {
+                    .form-time {
+                        float: right;
+                        width: calc(100% - 290px);
+                        padding: 0 30px;
+                    }
+                    p {
+                        text-align: left;
+                        display: inline-block;
+                    }
+                    .form--title {
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: #3b3e45;
+                        .svg-icon--text {
+                            width: 13px;
+                            fill: #3b3e45;
+                        }
+                    }
+                    .form--content {
+                        font-size: 13px;
+                        margin-top: 20px;
+                        .date {
+                            font-weight: bold;
+                        }
+                        .row {
+                            width: 100%;
+                        }
+                        *[class*="col-"] {
+                            padding: 0;
+                        }
+                    }
+                }
+                .task__student-mark {
                     label {
                         width: 100%;
                     }

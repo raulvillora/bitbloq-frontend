@@ -9,7 +9,7 @@
             </div>
             <div class="form--section">
                 <!-- input type="text"-->
-                <div class="form-control" ng-class="{'task__student-info': common.userRole==='student'}">
+                <div class="form-control" ng-class="{'task__student-mark': common.userRole==='student'}">
                     <label>{{ 'infoTab_subTitle_exerciseMark' | translate }}</label>
                     <span class="form--input" ng-if="currentProject.canMark" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
                         <span class="container-span" data-tooltip-position="bottom" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered'}}">
@@ -26,7 +26,7 @@
                     </p>
                 </div>
                 <!-- textarea -->
-                <div class="form-control project__description" ng-class="{'task__student-info': common.userRole==='student'}">
+                <div class="form-control project__description" ng-class="{'task__student-mark': common.userRole==='student'}">
                     <label>{{ 'infoTab_subTitle_exerciseRemark' | translate }}</label>
                     <span class="form--textarea" ng-if="currentProject.canMark" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
                         <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-init="currentProject.newRemark = currentProject.remark" data-ng-model="currentProject.newRemark" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
