@@ -30,6 +30,7 @@ angular.module('bitbloqApp')
 
             link: function(scope, el, attrs) {
                 scope.collapsed = true;
+                scope.element = scope.element || attrs.element;
                 if (scope.selectedOption) {
                     scope.selected = common.translate(scope.selectedOption);
                     scope.optionsClick(scope.selectedOption);
