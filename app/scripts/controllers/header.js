@@ -75,6 +75,7 @@ angular.module('bitbloqApp')
                         $scope.common.user.studentMode = true;
                         ngDialog.close(centerModal);
                         $scope.common.userRole = 'student';
+                        $location.url('/center-mode/student');
                         alertsService.add({
                             text: 'centerMode_alert_createStudent',
                             id: 'createStudent',
