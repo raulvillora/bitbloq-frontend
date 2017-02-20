@@ -160,7 +160,7 @@ angular.module('bitbloqApp')
 
         exports.getBoardMetaData = function() {
             return _.find(hardwareConstants.boards, function(board) {
-                return board.id === exports.project.hardware.board;
+                return (board.id === exports.project.hardware.board || board.name === exports.project.hardware.board);
             });
         };
 

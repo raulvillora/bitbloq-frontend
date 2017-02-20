@@ -143,6 +143,13 @@ $hw_toolbox: 210px;
             width: calc(100% - 24px);
         }
     }
+    .toolbox-info {
+        font-family: 'Roboto', sans-serif;
+        font-size: ($text-size) + px;
+        color: $font-color-disabled;
+        margin: 20px;
+        font-style: italic;
+    }
 }
 
 .toolbox__item {

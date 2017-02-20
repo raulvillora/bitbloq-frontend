@@ -102,6 +102,7 @@
                 <h1 class="list-name" translate>{{component.id}}</h1>
                 <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
             </li>
+            <li data-ng-show="currentProject.hardware.robot === 'mbot' && !currentProject.hardware.showRobotImage" class="toolbox-info">{{'hardware-toolbox-no-mbot-components' | translate}}</li>
         </ul>
     </div>
     <div class="toolbox__content" ng-show="selectedToolbox==='robots'">

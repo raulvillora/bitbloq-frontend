@@ -257,7 +257,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 });
                 _addBoard(board);
                 $scope.changeToolbox('components');
-                currentProjectService.startAutosave();
                 break;
             case 'components':
                 if (!$scope.currentProject.hardware.board) {
@@ -282,7 +281,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.hardware.cleanSchema();
                 $scope.deleteBTComponent();
                 _addRobot(data);
-                currentProjectService.startAutosave();
                 break;
             case 'btComponent':
                 if (!$scope.currentProject.hardware.board) {
@@ -926,6 +924,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     item = bloqsUtils.checkPins(item);
                     _fixComponentsDimension(item);
                 });
+
+                $scope.hardware.sortToolbox();
             } else {
                 $log.debug('robot is undefined');
             }
