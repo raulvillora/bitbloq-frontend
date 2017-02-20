@@ -23,7 +23,7 @@ angular.module('bitbloqApp')
                 postHeading: '=', // Text after heading
                 postHeadingClass: '=',
                 optionsClick: '=', // Function to launch with the item name as param
-                dataElement: '=',
+                element: '=',
                 selectedOption: '=',
                 shownOption: '='
             },

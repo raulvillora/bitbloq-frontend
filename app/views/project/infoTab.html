@@ -107,7 +107,7 @@
                 <legend class="h3">{{ 'infotab_title_theme' | translate }}</legend>
             </div>
             <div class="form--section choose--theme">
-                <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" element-data="'infotab-choosetheme'"></common-dropdown>
+                <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" data-element="'infotab-choosetheme'"></common-dropdown>
                 <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg" alt=""/>
                 <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt=""/>
             </div>
@@ -118,7 +118,7 @@
             </div>
             <div class="form--section choose--theme">
                 <common-dropdown options="boardNameList" heading-option="currentProject.hardware.board" options-click="setBoard" ng-model="currentProject.hardware.board"
-                                 element-data="'infotab-chooseboard'"></common-dropdown>
+                                 data-element="'infotab-chooseboard'"></common-dropdown>
                 <img ng-src="/images/boards/{{boardImage}}.svg"/>
             </div>
         </fieldset>

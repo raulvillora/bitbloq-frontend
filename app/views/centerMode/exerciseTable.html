@@ -21,8 +21,8 @@
             </svg>
             <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="searchText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="filter-searcher">
         </span>
-        <common-dropdown options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
-        <common-dropdown options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate"></common-dropdown>
     </div>
     <div class="center-mode__table">
         <div class="center-mode__table-title center-mode__table-title--exercises row">
