@@ -606,7 +606,7 @@ angular.module('bitbloqApp')
                                     exports.saveOldExercise();
                                     localStorage.exercisesChange = true;
                                     if (exports.tempImage.file) {
-                                        imageApi.save(exports.exercise._id, exports.tempImage.file).then(function() {
+                                        imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise').then(function() {
                                             exports.tempImage = {};
                                         });
                                     }
@@ -626,7 +626,7 @@ angular.module('bitbloqApp')
                                             exports.saveOldExercise();
                                             localStorage.exercisesChange = true;
                                             if (exports.tempImage.file) {
-                                                imageApi.save(exports.exercise._id, exports.tempImage.file)
+                                                imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise')
                                                     .then(function() {
                                                         exports.tempImage = {};
                                                     });
@@ -660,7 +660,7 @@ angular.module('bitbloqApp')
                                 exports.saveOldExercise();
 
                                 if (exports.tempImage.file) {
-                                    imageApi.save(idExercise, exports.tempImage.file).then(function() {
+                                    imageApi.save(idExercise, exports.tempImage.file, 'exercise').then(function() {
                                         $log.debug('imageSaveok');
                                         localStorage.exercisesChange = true;
                                         exports.tempImage = {};

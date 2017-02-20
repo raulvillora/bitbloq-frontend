@@ -38,6 +38,7 @@ angular.module('bitbloqApp')
         $scope.currentProject.canMark = false;
         $scope.currentProject.userCanUpdate = false;
         $scope.currentProject.newMark = [];
+        $scope.urlGetImage = $scope.common.urlImage + 'exercise/';
 
         exerciseService.saveStatus = 0;
 

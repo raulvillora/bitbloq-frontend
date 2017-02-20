@@ -51,7 +51,7 @@
                     </div>
                     <div class="imagecontainer">
                         <div class="main--project--image" id="main-image">
-                            <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{common.urlImage + 'project/' + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
+                            <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + (common.section==='task'? currentProject.exercise._id : currentProject._id)}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
                         </div>
                         <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput"/>
                         <button type="button" ng-if="common.section!=='task'" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
