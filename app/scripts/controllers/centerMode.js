@@ -43,14 +43,14 @@
                 exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
                     .then(function() {
                         _getTasksByExercise($routeParams.id);
-                        _getGroups($routeParams.id);
+                        _getGroups('teacher', $routeParams.id);
                     });
             };
 
             $scope.editGroups = function(exercise) {
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
                     exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
-                        _getGroups();
+                        _getGroups('teacher');
                     });
                 });
             };
@@ -396,12 +396,13 @@
                 }
             };
 
-            $scope.sortInstancesByGroup = function() {};
+            $scope.sortInstancesByGroup = function() {
+            };
 
             $scope.newGroup = function() {
                 centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
                     .then(function() {
-                        _getGroups();
+                        _getGroups('teacher');
                     });
             };
 
@@ -450,7 +451,7 @@
                 function confirmAction(groupId) {
                     centerModeApi.registerInGroup(groupId).then(function() {
                         currentModal.close();
-                        _getGroups();
+                        _getGroups('student');
                         _getTasks();
                     }).catch(function() {
                         modal.input.showError = true;
@@ -520,13 +521,13 @@
                         break;
                     case 'student':
                         $scope.center = {};
-                        _getGroups();
+                        _getGroups('student');
                         _getMyExercises();
                         break;
                     case 'exercise-info':
                         _getExercise($routeParams.id);
                         _getTasksByExerciseCount($routeParams.id);
-                        _getGroups($routeParams.id);
+                        _getGroups(null, $routeParams.id);
                         break;
                 }
             }
@@ -580,7 +581,7 @@
                 });
             }
 
-            function _getGroups(exerciseId) {
+            function _getGroups(role, exerciseId) {
                 if (exerciseId) {
                     centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
                         $scope.groups = response.data;
@@ -590,7 +591,7 @@
                     if ($scope.teacher._id !== $scope.common.user._id) {
                         teacherId = $scope.teacher._id; // if user is student, it will be undefined
                     }
-                    centerModeApi.getGroups(teacherId, $scope.center._id).then(function(response) {
+                    centerModeApi.getGroups(role, teacherId, $scope.center._id).then(function(response) {
                         $scope.groups = response.data;
                     });
                 }
@@ -666,14 +667,14 @@
                             $scope.secondaryBreadcrumb = true;
                             $scope.teacher = _.extend($scope.teacher, response.data);
                             _getExercisesCount();
-                            _getGroups();
+                            _getGroups('teacher');
                             _getExercises();
                         });
                     });
                 } else {
                     $scope.secondaryBreadcrumb = true;
                     _getExercisesCount();
-                    _getGroups();
+                    _getGroups('teacher');
                     _getExercises();
                 }
             }

@@ -28,7 +28,8 @@ angular.module('bitbloqApp')
             confirmDeleteModal;
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {};
+        exports.editDate = function() {
+        };
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -67,7 +68,7 @@ angular.module('bitbloqApp')
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
-            centerModeApi.getGroups().then(function(response) {
+            centerModeApi.getGroups('teacher').then(function(response) {
                 var groups = response.data;
                 _.forEach(groups, function(group) {
                     group.selected = oldGroups[group._id] ? true : false;
@@ -599,16 +600,18 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && exports.exercise.teacher === common.user._id) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
                                     exports.saveOldExercise();
                                     localStorage.exercisesChange = true;
                                     if (exports.tempImage.file) {
-                                        imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise').then(function() {
-                                            exports.tempImage = {};
-                                        });
+                                        imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise')
+                                            .then(function() {
+                                                exports.tempImage = {};
+                                            });
                                     }
                                 });
                         }

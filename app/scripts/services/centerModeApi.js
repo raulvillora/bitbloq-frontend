@@ -121,7 +121,7 @@ angular
             });
         }
 
-        function getGroups(teacherId, centerId) {
+        function getGroups(role, teacherId, centerId) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
@@ -135,7 +135,8 @@ angular
             } else {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'group/'
+                    url: envData.config.centerModeUrl + 'group/',
+                    params: {role: role}
                 });
             }
         }
