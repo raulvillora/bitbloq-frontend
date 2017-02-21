@@ -407,6 +407,7 @@ angular.module('bitbloqApp')
                 code = code.substring(0, code.length - 1) + '\n\r';
                 serialName = components.sp;
                 code = generateViewerBloqCode(components, serialName, code);
+                code = code + '}';
             } else {
                 var serialCode = originalCode.split('/***   Included libraries  ***/');
                 serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
@@ -415,8 +416,6 @@ angular.module('bitbloqApp')
                 code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
                 code = generateViewerBloqCode(components, 'puerto_serie_0', code);
             }
-
-            code = code + '}';
             return code;
         }
 
