@@ -237,7 +237,7 @@ angular.module('bitbloqApp')
                     result = now.diff(date) > 0;
                 } else {
                     if (now.diff(date) > 0) {
-                        result = $scope.common.translate('time_finished');
+                        result = common.translate('time_finished');
                     } else {
                         result = moment(date).fromNow();
                     }
