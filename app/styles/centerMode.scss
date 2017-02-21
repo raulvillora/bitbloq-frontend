@@ -135,11 +135,6 @@
         color: #676a71;
     }
 
-    &:hover {
-        background-color: #ebebeb;
-        cursor: pointer;
-    }
-
     &[disabled] {
         pointer-events: none;
         color: gray;
