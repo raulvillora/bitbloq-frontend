@@ -67,6 +67,10 @@
     margin-bottom: 20px;
 }
 
+.center-mode__header .breadcrumb {
+    width: 100%;
+}
+
 .center-mode__table__header {
     width: 100%;
     display: table;
@@ -93,6 +97,15 @@
 .table__block__list, .center-mode__table-title {
     &.row {
         margin: 0;
+    }
+    .table__item__link {
+        width: 100%;
+        .block__item__title {
+            max-width: 95%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
 
