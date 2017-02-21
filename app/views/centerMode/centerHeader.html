@@ -3,7 +3,7 @@
     <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.firstName ? teacher.firstName + ' ' +teacher.lastName : teacher.username}}</a>
 </div>
 <h1 class="header__title col-vsmall-7" ng-if="common.urlType==='teacher'">{{'header_tab_myClass' | translate}}</h1>
-<div ng-if="common.urlType==='group'" class="breadcrumb breadcrumb-longer header__title col-vsmall-7" ng-class="{'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
+<div ng-if="common.urlType==='group'" class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer':!student.average, 'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
     <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl: '#/center-mode/teacher'}}">{{'groups' | translate}}</a></h1>
     <a ng-if="secondaryBreadcrumb || tertiaryBreadcrumb" ng-class="{'breadcrumb--secondary': secondaryBreadcrumb, 'breadcrumb__item': tertiaryBreadcrumb}" ng-href="#/center-mode/group/{{group._id}}">
         {{group.name}}

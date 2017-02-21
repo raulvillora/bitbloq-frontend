@@ -5,7 +5,7 @@
     }
 }
 
-.centerMode {
+.center-mode {
     background-color: #eeeeee;
 
     [class*="col-"] {
@@ -31,6 +31,9 @@
 }
 
 .center-mode__group {
+    .tabs-layout__aside, .tabs-layout__content {
+        padding: 0 30px;
+    }
     .group__header {
         padding: 20px 30px;
         max-width: 1200px;
