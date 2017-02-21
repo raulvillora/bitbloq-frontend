@@ -116,6 +116,9 @@
                             </svg>
                             <legend class="h3">{{ 'centerMode_column_time' | translate }}</legend>
                         </div>
+                        <p class="form--title-distinguished">
+                            {{currentProject.endDate? currentProjectService.getDatetime(currentProject.endDate) :'time-unlimited' | translate}}
+                        </p>
                         <div class="form--content">
                             <span class="container-span row">
                                 <p class="col-vsmall-4">{{'centerMode_startDate' | translate}}:</p>

@@ -305,23 +305,6 @@
                 });
             };
 
-            $scope.getDatetime = function(date, diff) {
-                var now = moment(),
-                    result = '';
-                if (date) {
-                    if (diff) {
-                        result = now.diff(date) > 0;
-                    } else {
-                        if (now.diff(date) < 0) {
-                            result = $scope.common.translate('time_finished');
-                        } else {
-                            result = moment(date).fromNow();
-                        }
-                    }
-                }
-                return result;
-            };
-
             // get Exercises paginated
 
             $scope.getExercisesPaginated = function(pageno) {
@@ -356,7 +339,7 @@
                     response.data.forEach(function(task) {
                         var taskId = task._id;
                         _.extend(task, task.student);
-                        if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
+                        if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
                             task.status = 'notDelivered';
                         }
                         task._id = taskId;
@@ -618,7 +601,7 @@
                     'pageSize': $scope.itemsPerPage
                 }).then(function(response) {
                     response.data.forEach(function(task) {
-                        if (task.status === 'pending' && $scope.getDatetime(task.endDate, true)) {
+                        if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
                             task.status = 'notDelivered';
                         }
                     });

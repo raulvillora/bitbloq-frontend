@@ -229,6 +229,23 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        exports.getDatetime = function(date, diff) {
+            var now = moment(),
+                result = '';
+            if (date) {
+                if (diff) {
+                    result = now.diff(date) > 0;
+                } else {
+                    if (now.diff(date) > 0) {
+                        result = $scope.common.translate('time_finished');
+                    } else {
+                        result = moment(date).fromNow();
+                    }
+                }
+            }
+            return result;
+        };
+
         exports.saveInMyProjects = function(taskId) {
             exerciseApi.taskToProject(taskId || exports.exercise._id).then(function() {
                 alertsService.add({
