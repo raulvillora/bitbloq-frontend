@@ -78,7 +78,7 @@
                             <svg class="svg-icon form-icon--username icon--form--validating">
                                 <use xlink:href="#user"></use>
                             </svg>
-                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="formSocial.tutorName.submitted = false; focus = 'tutorName'" ng-blur="formSocial.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50" placeholder="{{'name' | translate}}" autocorrect="off" autocomplete="off" required>
+                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="formSocial.tutorName.submitted = false; focus = 'tutorName'" ng-blur="formSocial.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50" placeholder="{{'name' | translate}}" autocorrect="off" autocomplete="off" required data-element="login-tutor-name">
                         </span>
                         <span class="form--error" data-ng-show="formSocial.tutorName.submitted && formSocial.tutorName.$error.required" data-element="show-nonametutor">
                             <small>{{ 'insert-name' | translate }}</small>
@@ -91,7 +91,7 @@
                             <svg class="svg-icon form-icon--username icon--form--validating">
                                 <use xlink:href="#user"></use>
                             </svg>
-                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.lastName" ng-focus="formSocial.tutorSurname.submitted = false; focus = 'tutorSurname'" ng-blur="formSocial.tutorSurname.submitted = true;focus = false" id="tutorSurname" name="tutorSurname" type="text" maxlength="50" placeholder="{{'surname' | translate}}" autocorrect="off" autocomplete="off" required>
+                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.lastName" ng-focus="formSocial.tutorSurname.submitted = false; focus = 'tutorSurname'" ng-blur="formSocial.tutorSurname.submitted = true;focus = false" id="tutorSurname" name="tutorSurname" type="text" maxlength="50" placeholder="{{'surname' | translate}}" autocorrect="off" autocomplete="off" required data-element="login-tutor-lastname">
                         </span>
                         <span class="form--error" data-ng-show="formSocial.tutorSurname.submitted && formSocial.tutorSurname.$error.required" data-element="show-nosurname">
                             <small>{{ 'insert-surname' | translate }}</small>
@@ -104,7 +104,7 @@
                             <svg class="svg-icon">
                                 <use xlink:href="#mail"></use>
                             </svg>
-                            <input data-ng-model="user.tutor.email" data-ng-focus="formSocial.tutorEmail.submitted=false; focus = 'tutorEmail'" data-ng-blur="focus = false;formSocial.tutorEmail.submitted=true;" id="tutorEmail" name="tutorEmail" type="email" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required>
+                            <input data-ng-model="user.tutor.email" data-ng-focus="formSocial.tutorEmail.submitted=false; focus = 'tutorEmail'" data-ng-blur="focus = false;formSocial.tutorEmail.submitted=true;" id="tutorEmail" name="tutorEmail" type="email" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required data-element="login-tutor-email">
                         </span>
                         <span class="form--error" data-ng-show="formSocial.tutorEmail.submitted && formSocial.tutorEmail.$error.required" data-element="register-show-notutoremail">
                             <small>{{ 'login-email-empty' | translate }}</small>

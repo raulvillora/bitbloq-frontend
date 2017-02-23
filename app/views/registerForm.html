@@ -106,11 +106,11 @@
                         <label for="birthday">{{ 'login-birth-day' | translate }}</label>
                         <span id="birthday" data-ng-class="{'input input--date':true, 'input--focused':focus === 'birthday'}">
                             <div ng-init="form.birthday.submitted=false" class="input--group--date">
-                                <input data-element="login-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="form.birthday.day" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
+                                <input data-element="register-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="form.birthday.day" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
                                        data-ng-blur="focus = false; checkAge(form)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                                <input data-element="login-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="form.birthday.month" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
+                                <input data-element="register-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="form.birthday.month" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
                                        data-ng-blur="focus = false; checkAge(form)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                                <input data-element="login-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="form.birthday.year" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
+                                <input data-element="register-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="form.birthday.year" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
                                        data-ng-blur="focus = false; checkAge(form)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
                             </div>
                         </span>
@@ -141,7 +141,7 @@
                                 <use xlink:href="#user"></use>
                             </svg>
                             <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="form.tutorName.submitted = false; focus = 'tutorName'" ng-blur="form.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50" placeholder="{{'name' | translate}}"
-                                   autocorrect="off" autocomplete="off" required>
+                                   autocorrect="off" autocomplete="off" required data-element="register-tutor-name">
                         </span>
                         <span class="form--error" data-ng-show="form.tutorName.submitted && form.tutorName.$error.required" data-element="show-nonametutor">
                             <small>{{ 'insert-name' | translate }}</small>
@@ -155,7 +155,7 @@
                                 <use xlink:href="#user"></use>
                             </svg>
                             <input ng-class="{'input--login--username':true}" ng-model="user.tutor.lastName" ng-focus="form.tutorSurname.submitted = false; focus = 'tutorSurname'" ng-blur="form.tutorSurname.submitted = true;focus = false" id="tutorSurname" name="tutorSurname" type="text" maxlength="50"
-                                   placeholder="{{'surname' | translate}}" autocorrect="off" autocomplete="off" required>
+                                   placeholder="{{'surname' | translate}}" autocorrect="off" autocomplete="off" required data-element="register-tutor-lastname">
                         </span>
                         <span class="form--error" data-ng-show="form.tutorSurname.submitted && form.tutorSurname.$error.required" data-element="show-nosurname">
                             <small>{{ 'insert-surname' | translate }}</small>
@@ -169,7 +169,7 @@
                                 <use xlink:href="#mail"></use>
                             </svg>
                             <input data-ng-model="user.tutor.email" data-ng-focus="form.tutorEmail.submitted=false; focus = 'tutorEmail'" data-ng-blur="focus = false;form.tutorEmail.submitted=true;" id="tutorEmail" name="tutorEmail" type="email"
-                                   data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required>
+                                   data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required data-element="register-tutor-email">
                         </span>
                         <span class="form--error" data-ng-show="form.tutorEmail.submitted && form.tutorEmail.$error.required" data-element="register-show-notutoremail">
                             <small>{{ 'login-email-empty' | translate }}</small>
