@@ -100,16 +100,18 @@ angular
             }
         }
 
-        function getExercisesCount(teacherId) {
+        function getExercisesCount(teacherId, paramsSearch) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'exercise/teacher/' + teacherId + '/count',
+                    params: paramsSearch
                 });
             } else {
                 return $http({
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'exercise/count',
+                    params: paramsSearch
                 });
             }
         }
@@ -136,7 +138,9 @@ angular
                 return $http({
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/',
-                    params: {role: role}
+                    params: {
+                        role: role
+                    }
                 });
             }
         }

@@ -23,9 +23,12 @@
             $scope.urlSubType = $routeParams.subtype;
             $scope.showMoreActions = false;
             $scope.pageno = 1;
+            $scope.showFilters = false;
             $scope.exercisesCount = 0;
             $scope.itemsPerPage = 10;
             $scope.menuActive = {};
+            $scope.search = {};
+            $scope.filterExercisesParams = {};
             $scope.pagination = {
                 'exercises': {
                     'current': 1
@@ -38,6 +41,10 @@
             $scope.exerciseService = exerciseService;
 
             var currentModal;
+
+            $scope.changeFilter = function() {
+                $scope.showFilters = !$scope.showFilters;
+            };
 
             $scope.editGroup = function() {
                 exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
@@ -311,7 +318,7 @@
                 switch ($scope.common.urlType) {
                     case 'teacher':
                     case 'center-teacher':
-                        getTeacherExercisesPaginated(pageno);
+                        getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
                         break;
                     case 'student':
                         getTasksWithParams(pageno);
@@ -319,10 +326,12 @@
                 }
             };
 
-            function getTeacherExercisesPaginated(pageno) {
+            function getTeacherExercisesPaginated(pageno, search) {
+
                 centerModeApi.getExercises($scope.teacher._id, {
                     'page': pageno,
-                    'pageSize': $scope.itemsPerPage
+                    'pageSize': $scope.itemsPerPage,
+                    'searchParams': search
                 }).then(function(response) {
                     $scope.exercises = response.data;
                     $location.search('page', pageno);
@@ -380,6 +389,7 @@
             };
 
             $scope.sortInstancesByGroup = function() {
+
             };
 
             $scope.newGroup = function() {
@@ -549,8 +559,11 @@
                 });
             }
 
-            function _getExercisesCount() {
-                centerModeApi.getExercisesCount($scope.teacher._id).then(function(response) {
+            function _getExercisesCount(searchText) {
+                var searchParams = searchText ? searchText : ($routeParams.name ? {
+                    'name': $routeParams.name
+                } : '');
+                centerModeApi.getExercisesCount($scope.teacher._id, searchParams).then(function(response) {
                     $scope.exercisesCount = response.data.count;
                 });
             }
@@ -568,6 +581,7 @@
                 if (exerciseId) {
                     centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
                         $scope.groups = response.data;
+                        $scope.groupArray = $scope.groups;
                     });
                 } else {
                     var teacherId;
@@ -576,8 +590,10 @@
                     }
                     centerModeApi.getGroups(role, teacherId, $scope.center._id).then(function(response) {
                         $scope.groups = response.data;
+                        $scope.groupArray = $scope.groups;
                     });
                 }
+
             }
 
             function _getTasks(groupId, studentId, pageno) {
@@ -669,8 +685,16 @@
             }
 
             function _getExercises() {
+                var searchParams;
+                searchParams = $routeParams.name ? $routeParams.name : '';
+                if (searchParams) {
+                    $scope.showFilters = true;
+                    $scope.search.searchExercisesText = searchParams;
+                }
                 if ($routeParams.page) {
-                    getTeacherExercisesPaginated($routeParams.page);
+                    getTeacherExercisesPaginated($routeParams.page, {
+                        'name': searchParams
+                    });
                     $scope.pagination.exercises.current = $routeParams.page;
                 } else {
                     getTeacherExercisesPaginated($scope.pageno);
@@ -721,6 +745,28 @@
                     type: 'error'
                 });
                 $location.path('/login');
+            });
+
+            $scope.searchExercises = function() {
+                $location.search($scope.filterExercisesParams);
+                getTeacherExercisesPaginated($scope.pageno, $scope.filterExercisesParams);
+                _getExercisesCount($scope.filterExercisesParams);
+            };
+
+            $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {
+                if (newValue !== oldValue && (oldValue || oldValue === '')) {
+                    if (newValue || newValue === '') {
+                        $scope.filterExercisesParams.name = newValue;
+                        if (newValue === '') {
+                            $scope.filterExercisesParams = {};
+                            $location.search('name', null);
+                            $location.search('page', 1);
+                        }
+                        $scope.searchExercises();
+                    } else {
+                        delete $scope.filterExercisesParams.name;
+                    }
+                }
             });
 
             $document.on('click', clickDocumentHandler);

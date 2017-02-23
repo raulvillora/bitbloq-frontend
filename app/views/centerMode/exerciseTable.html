@@ -1,4 +1,4 @@
-<div ng-if="exercises.length>0">
+<div ng-if="exercises.length>0 ||  search.searchExercisesText ">
     <div class="center-mode__table__header center-mode__table__header__exercise">
         <h1 class="table__title center-mode__table__header__element-left" ng-if="common.urlType!=='group'">
             <svg class="svg-icon svg-icon--text">
@@ -6,7 +6,7 @@
             </svg>
             {{'centerMode_exercises' | translate}}
         </h1>
-        <button class="center-mode__table__header__element-right filter-button" ng-click="showFilters=!showFilters" ng-init="showFilters=false">
+        <button class="center-mode__table__header__element-right filter-button" ng-click="changeFilter()">
             {{!showFilters? 'centerMode_exercises_showFilters' : 'centerMode_exercises_hideFilters' | translate}}
             <svg class="svg-icon filter-arrow" ng-class="{'filter-arrow--reversed' : showFilters}">
                 <use xlink:href="#arrowDown"></use>
@@ -19,7 +19,7 @@
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
             </svg>
-            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="searchText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="filter-searcher">
+            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="filter-searcher">
         </span>
         <common-dropdown class="projects--sort-dropdown" options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
         <common-dropdown class="projects--sort-dropdown" options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate"></common-dropdown>
