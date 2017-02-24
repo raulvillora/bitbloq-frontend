@@ -106,6 +106,14 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            &.block__item__short{
+                max-width: 70%;
+            }
+        }
+        .block__item__explanation {
+            margin-left: 3px;
+            position: relative;
+            top: -7px;
         }
     }
 }
