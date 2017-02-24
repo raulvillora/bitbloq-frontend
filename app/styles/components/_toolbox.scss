@@ -50,6 +50,7 @@ $hw_toolbox: 210px;
     &.toolbox--checks {
         .input--checkbox {
             display: inline-block;
+            margin-right: 0;
         }
     }
 }
