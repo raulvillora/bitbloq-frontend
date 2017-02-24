@@ -8,7 +8,7 @@
             <input ng-if="changeName" type="text" name="os" id="os" ng-model="project.name" ng-pattern="/[^\s\\]/" placeholder="{{ 'modal-change-project-name-placeholder' | translate }}" data-ng-focus="focus = 'changeName'" data-ng-class="{'input--focused':focus === 'changeName'}" data-ng-blur="focus = false"
                    data-element="modal-change-name-input" required autofocus>
         </span>
-        <span class="form--error" ng-show="input.showError">
+        <span class="form--error" ng-show="input.showError" data-element="modals-input-error">
             <small>{{ input.errorText | translate }}</small>
         </span>
     </form>
