@@ -754,7 +754,7 @@
             };
 
             $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {
-                if (newValue !== oldValue && (oldValue || oldValue === '')) {
+                if (newValue !== oldValue && (oldValue || oldValue === '') || (!oldValue && newValue)) {
                     if (newValue || newValue === '') {
                         $scope.filterExercisesParams.name = newValue;
                         if (newValue === '') {
