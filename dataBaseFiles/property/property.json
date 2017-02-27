@@ -130,13 +130,6 @@
         }, {
             "name": "return"
         }],
-        "advancedMBot": [{
-            "name": "mBotBuzzerAdvanced"
-        }, {
-            "name": "mBotMoveAdvanced"
-        }, {
-            "name": "mBotSetLedAdvanced"
-        }],
         "advancedMRanger": [{
             "name": "mRangerBuzzerAdvanced"
         }, {
@@ -254,6 +247,8 @@
             "name": "serialReceiveInt"
         }, {
             "name": "serialSend-v1"
+        }, {
+            "name": "mBotGetDistance-v2"
         }],
         "controls": [{
             "name": "wait"
@@ -333,6 +328,29 @@
             "name": "mBotSetLed"
         }, {
             "name": "mBotLineFollower"
+        }],
+        "mBotV2": [{
+            "name": "mBotGetDistance-v2"
+        }, {
+            "name": "mBotBuzzer-v2"
+        }, {
+            "name": "mBotGetButtonStatus-v2"
+        }, {
+            "name": "mBotGetLightSensor-v2"
+        }],
+        "advancedMBot": [{
+            "name": "mBotBuzzerAdvanced"
+        }, {
+            "name": "mBotMoveAdvanced"
+        }, {
+            "name": "mBotSetLedAdvanced"
+        }],
+        "advancedMBotV2": [{
+            "name": "mBotBuzzerAdvanced"
+        }, {
+            "name": "mBotMoveAdvanced"
+        }, {
+            "name": "mBotSetLedAdvanced"
         }],
         "mRanger": [{
             "name": "mRangerBuzzer"

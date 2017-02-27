@@ -553,8 +553,12 @@ angular.module('bitbloqApp')
                         return newElem;
                     });
 
-                    exports.project.hardware.components = _.cloneDeep(schema.components);
                     exports.project.hardware.connections = _.cloneDeep(schema.connections);
+
+                    //concat integrated hardware and connected hardware
+                    exports.project.hardware.components = _.filter(exports.project.hardware.components, {
+                        integratedComponent: true
+                    }).concat(schema.components);
                 }
             }
         }

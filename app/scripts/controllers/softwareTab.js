@@ -420,6 +420,8 @@ angular.module('bitbloqApp')
                             }
                             i++;
                         }
+                    } else if (item === 'mBotGetDistance-v2') {
+                        result = existComponent(['mkb_ultrasound'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
@@ -686,6 +688,9 @@ angular.module('bitbloqApp')
                 width: 10,
                 height: 10
             };
+            if ($scope.$trashcan.length === 0) {
+                $scope.$trashcan = $('#trashcan').last();
+            }
             var trashcanItem = {
                 top: $scope.$trashcan.offset().top,
                 left: $scope.$trashcan.offset().left,

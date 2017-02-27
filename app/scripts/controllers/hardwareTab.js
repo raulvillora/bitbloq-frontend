@@ -595,8 +595,22 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         return !_.isEqual(_.sortBy($scope.currentProject.hardware.components, 'name'), _.sortBy(components, 'name'));
     }
 
-    function _addBoard(board) {
+    function _addIntegratedComponents(board) {
+        if (board.integratedComponents) {
+            var tempComponent;
+            for (var i = 0; i < board.integratedComponents.length; i++) {
+                tempComponent = _.clone($scope.componentsMap[board.integratedComponents[i].id], true);
+                _.extend(tempComponent, board.integratedComponents[i]);
 
+                tempComponent.name = $scope.common.translate(board.integratedComponents[i].name);
+                tempComponent.integratedComponent = true;
+                $scope.currentProject.hardware.components.push(tempComponent);
+                projectService.addComponentInComponentsArray(tempComponent.category, tempComponent);
+            }
+        }
+    }
+
+    function _addBoard(board) {
         if ($scope.currentProject.hardware.board !== board.id || $scope.currentProject.hardware.robot) {
             $scope.deleteRobot();
 
@@ -611,6 +625,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addBtComponent();
             }
             $scope.hardware.sortToolbox();
+            _addIntegratedComponents(board);
+
             currentProjectService.startAutosave();
         } else {
             $log.debug('same board');

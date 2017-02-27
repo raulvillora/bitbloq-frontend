@@ -492,6 +492,39 @@ angular.module('bitbloqApp')
                 'mkb_ultrasound',
                 'sp'
             ],
+            "integratedComponents": [{
+                "id": "button",
+                "name": "default-var-name-button",
+                "pin": {
+                    "s": 2
+                },
+                "uid": "mkb-mcore-button"
+            }, {
+                "id": "ldrs",
+                "name": "default-var-name-ldrs",
+                "pin": {
+                    "s": "A4"
+                },
+                "uid": "mkb-mcore-ldrs"
+            }, {
+                "id": "RGBled",
+                "name": "default-var-name-RGBled_left",
+                "pin": {
+                    "r": 2,
+                    "g": 3,
+                    "b": 4
+                },
+                "uid": "mkb-mcore-RGBled-0"
+            }, {
+                "id": "RGBled",
+                "name": "default-var-name-RGBled_right",
+                "pin": {
+                    "r": 2,
+                    "g": 3,
+                    "b": 4
+                },
+                "uid": "mkb-mcore-RGBled-1"
+            }],
             "pinSize": {
                 "yellow blue white": {
                     "w": 37,
@@ -1850,18 +1883,6 @@ angular.module('bitbloqApp')
             "height": 102,
             "pins": {}
         }, {
-            "id": "mkb_infrared",
-            "category": "sensors",
-            "manufacter": "makeblock",
-            "width": 84.5,
-            "height": 128,
-            "dataReturnType": "float",
-            "pins": {
-                "blue": [
-                    "s"
-                ]
-            }
-        }, {
             "id": "mkb_lightsensor",
             "category": "sensors",
             "manufacter": "makeblock",
@@ -1888,7 +1909,7 @@ angular.module('bitbloqApp')
             }
         }, {
             "id": "mkb_ultrasound",
-            "category": "sensors",
+            "category": "mkb_ultrasound",
             "manufacter": "makeblock",
             "width": 134.5,
             "height": 106.2,

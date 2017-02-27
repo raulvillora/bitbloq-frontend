@@ -85,6 +85,10 @@ module.exports = function(grunt) {
                                 '/bower_components',
                                 connect.static('./bower_components')
                             ),
+                            connect().use(
+                                '/dataBaseFiles',
+                                connect.static('./dataBaseFiles')
+                            ),
                             connect.static('app')
                         ];
                     }
@@ -535,7 +539,7 @@ module.exports = function(grunt) {
             },
             files: {
                 src: ['app/index.html']
-                //src: ['app/**/*.html']
+                    //src: ['app/**/*.html']
             }
         },
         addTimestampToFiles: {
