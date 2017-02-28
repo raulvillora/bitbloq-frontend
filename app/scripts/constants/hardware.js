@@ -493,17 +493,17 @@ angular.module('bitbloqApp')
                 'sp'
             ],
             "integratedComponents": [{
-                "id": "button",
+                "id": "mkb_integrated_analogPinButton",
                 "name": "default-var-name-button",
                 "pin": {
-                    "s": 2
+                    "s": "A7"
                 },
                 "uid": "mkb-mcore-button"
             }, {
-                "id": "ldrs",
+                "id": "mkb_integrated_lightsensor",
                 "name": "default-var-name-ldrs",
                 "pin": {
-                    "s": "A4"
+                    "s": "A6"
                 },
                 "uid": "mkb-mcore-ldrs"
             }, {
@@ -524,6 +524,13 @@ angular.module('bitbloqApp')
                     "b": 4
                 },
                 "uid": "mkb-mcore-RGBled-1"
+            }, {
+                "id": "mkb_integrated_buzz",
+                "name": "default-var-name-mkb_integrated_buzz",
+                "pin": {
+                    "s": 8
+                },
+                "uid": "mkb-mcore-buzz"
             }],
             "pinSize": {
                 "yellow blue white": {
@@ -1916,6 +1923,43 @@ angular.module('bitbloqApp')
             "dataReturnType": "float",
             "pins": {
                 "yellow": [
+                    "s"
+                ]
+            }
+        }, {
+            "id": "mkb_integrated_analogPinButton",
+            "manufacter": "makeblock",
+            "category": "sensors",
+            "type": "mkb_integrated_analogPinButton",
+            "width": 0,
+            "height": 0,
+            "dataReturnType": "float",
+            "pins": {
+                "digital": [
+                    "s"
+                ]
+            }
+        }, {
+            "id": "mkb_integrated_lightsensor",
+            "manufacter": "makeblock",
+            "category": "sensors",
+            "type": "mkb_integrated_lightsensor",
+            "width": 0,
+            "height": 0,
+            "dataReturnType": "float",
+            "pins": {
+                "digital": [
+                    "s"
+                ]
+            }
+        }, {
+            "id": "mkb_integrated_buzz",
+            "manufacter": "standard",
+            "category": "mkb_integrated_buzz",
+            "width": 0,
+            "height": 0,
+            "pins": {
+                "digital": [
                     "s"
                 ]
             }

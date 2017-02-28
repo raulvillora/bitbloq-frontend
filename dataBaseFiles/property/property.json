@@ -206,6 +206,8 @@
         }, {
             "name": "buzzer"
         }, {
+            "name": "mBotBuzzer-v2"
+        }, {
             "name": "continuousServoStart"
         }, {
             "name": "continuousServoStop"
@@ -240,6 +242,8 @@
         }, {
             "name": "readSensor"
         }, {
+            "name": "mBotGetDistance-v2"
+        }, {
             "name": "servoNormal"
         }, {
             "name": "serialReceive"
@@ -247,8 +251,6 @@
             "name": "serialReceiveInt"
         }, {
             "name": "serialSend-v1"
-        }, {
-            "name": "mBotGetDistance-v2"
         }],
         "controls": [{
             "name": "wait"
@@ -330,13 +332,11 @@
             "name": "mBotLineFollower"
         }],
         "mBotV2": [{
-            "name": "mBotGetDistance-v2"
+            "name": "mBotMove-v2"
         }, {
-            "name": "mBotBuzzer-v2"
+            "name": "mBotStop-v2"
         }, {
-            "name": "mBotGetButtonStatus-v2"
-        }, {
-            "name": "mBotGetLightSensor-v2"
+            "name": "mBotSomethingNear"
         }],
         "advancedMBot": [{
             "name": "mBotBuzzerAdvanced"

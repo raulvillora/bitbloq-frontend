@@ -376,6 +376,28 @@ angular.module('bitbloqApp')
             }
         };
 
+        $scope.showMBotComponents = function(bloqName) {
+
+            var result = false;
+            var stopWord = ['mBotMove-v2', 'mBotStop-v2'];
+            if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
+                var connectedComponents = $scope.currentProject.hardware.components;
+                if (stopWord.indexOf(bloqName) === -1) {
+                    if (bloqName === 'mBotSomethingNear') {
+                        result = existComponent(['mkb_ultrasound'], connectedComponents);
+                    } else {
+                        result = false;
+                    }
+                } else {
+                    result = true;
+                }
+            } else {
+                result = false;
+            }
+
+            return result;
+        };
+
         $scope.showComponents = function(item) {
             var result = false;
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
@@ -391,7 +413,8 @@ angular.module('bitbloqApp')
                         result = existComponent([
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
-                            'joystick', 'ldrs', 'pot', 'mkb_ultrasound'
+                            'joystick', 'ldrs', 'pot', 'mkb_ultrasound',
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = showCommunications(item);
@@ -422,6 +445,8 @@ angular.module('bitbloqApp')
                         }
                     } else if (item === 'mBotGetDistance-v2') {
                         result = existComponent(['mkb_ultrasound'], connectedComponents);
+                    } else if (item === 'mBotBuzzer-v2') {
+                        result = existComponent(['mkb_integrated_buzz'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
