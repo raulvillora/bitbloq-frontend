@@ -86,7 +86,7 @@
                 <button class="btn btn--secondary btn--small" ng-click="common.goToLogin()" data-element="header-enterbutton">{{ 'enter' | translate }}</button>
             </div>
         </div>
-        <div class="menu--user" ng-show="common.user">
+        <div class="menu--user" ng-show="common.user"  ng-class="{'menu--user--reduced': (common.userRole==='headmaster' || common.userRole==='teacher' || common.user.studentMode)}" >
             <div class="menu--user__center-mode notification-info"  ng-if="common.user && (common.userRole!=='headmaster' && common.userRole!=='teacher' && !common.user.studentMode)" ng-click="activateCenterMode()">
                 <p class="notification-alert">{{'new' | translate}}</p>
                 <div class="notification__content">
