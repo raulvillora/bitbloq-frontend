@@ -58,7 +58,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'en %s',
+            future: '%s',
             past: 'hace %s',
             s: 'unos segundos',
             m: 'un minuto',
@@ -115,7 +115,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'en %s',
+            future: '%s',
             past: 'fa %s',
             s: 'uns segons',
             m: 'un minut',
@@ -186,7 +186,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'in %s',
+            future: '%s',
             past: 'duela %s',
             s: 'segundo',
             m: 'minutu bat',
@@ -232,7 +232,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'in %s',
+            future: '%s',
             past: '%s ago',
             s: 'a few seconds',
             m: 'a minute',
@@ -284,7 +284,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'dans %s',
+            future: '%s',
             past: 'il y a %s',
             s: 'quelques secondes',
             m: 'une minute',
@@ -342,7 +342,7 @@
             future: function(s) {
                 return ((/^[0-9].+$/).test(s) ? 'tra' : 'in') + ' ' + s;
             },
-            past: '%s fa',
+            past: '%s',
             s: 'alcuni secondi',
             m: 'un minuto',
             mm: '%d minuti',
@@ -391,7 +391,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'em %s',
+            future: '%s',
             past: 'há %s',
             s: 'segundos',
             m: 'um minuto',
@@ -452,7 +452,7 @@
             lastWeek: '[letzten] dddd [um] LT [Uhr]'
         },
         relativeTime: {
-            future: 'in %s',
+            future: '%s',
             past: 'vor %s',
             s: 'ein paar Sekunden',
             m: processRelativeTime,
@@ -507,7 +507,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'over %s',
+            future: '%s',
             past: '%s geleden',
             s: 'een paar seconden',
             m: 'één minuut',
@@ -634,7 +634,7 @@
             sameElse: 'L'
         },
         relativeTime: {
-            future: 'через %s',
+            future: '%s',
             past: '%s назад',
             s: 'несколько секунд',
             m: relativeTimeWithPlural,
