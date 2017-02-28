@@ -45,16 +45,6 @@ $hw_toolbox: 210px;
             .component-image {
                 max-width: 60%;
             }
-            .component-image--device {
-                filter: grayscale(60%);
-                opacity: 0.5;
-                user-drag: none;
-                user-select: none;
-                -moz-user-select: none;
-                -webkit-user-drag: none;
-                -webkit-user-select: none;
-                -ms-user-select: none;
-            }
         }
     }
     .boards-list {
