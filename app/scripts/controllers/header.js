@@ -39,6 +39,7 @@ angular.module('bitbloqApp')
                         centerModeApi.createCenter(modalOptions.center).then(function() {
                             ngDialog.close(centerModal);
                             $scope.common.userRole = 'headmaster';
+                            $location.url('/center-mode/center');
                             alertsService.add({
                                 text: 'centerMode_alert_createCenter',
                                 id: 'createCenter',
@@ -74,6 +75,7 @@ angular.module('bitbloqApp')
                         $scope.common.user.studentMode = true;
                         ngDialog.close(centerModal);
                         $scope.common.userRole = 'student';
+                        $location.url('/center-mode/student');
                         alertsService.add({
                             text: 'centerMode_alert_createStudent',
                             id: 'createStudent',

@@ -46,4 +46,18 @@
             cursor: default;
         }
     }
+    &.breadcrumb-longer {
+        width: 100%;
+        a {
+            max-width: 88%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+        }
+        h1:after {
+            position: relative;
+            top: -8px;
+        }
+    }
 }

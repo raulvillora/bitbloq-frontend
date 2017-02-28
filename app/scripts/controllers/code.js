@@ -52,7 +52,9 @@ angular.module('bitbloqApp')
         $scope.isWeb2BoardInProgress = web2board.isInProcess;
         $scope.projectApi = projectApi;
         $scope.projectService = projectService;
+        $scope.urlGetImage = $scope.common.urlImage + 'project/';
         $scope.utils = utils;
+
 
         $scope.onFieldKeyUp = function(event) {
             if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase() === 's') { //Ctrl + S

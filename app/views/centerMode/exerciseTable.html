@@ -1,4 +1,4 @@
-<div ng-if="exercises.length>0">
+<div ng-if="exercises.length>0 ||  search.searchExercisesText ">
     <div class="center-mode__table__header center-mode__table__header__exercise">
         <h1 class="table__title center-mode__table__header__element-left" ng-if="common.urlType!=='group'">
             <svg class="svg-icon svg-icon--text">
@@ -6,7 +6,7 @@
             </svg>
             {{'centerMode_exercises' | translate}}
         </h1>
-        <button class="center-mode__table__header__element-right filter-button" ng-click="showFilters=!showFilters" ng-init="showFilters=false">
+        <button class="center-mode__table__header__element-right filter-button" ng-click="changeFilter()">
             {{!showFilters? 'centerMode_exercises_showFilters' : 'centerMode_exercises_hideFilters' | translate}}
             <svg class="svg-icon filter-arrow" ng-class="{'filter-arrow--reversed' : showFilters}">
                 <use xlink:href="#arrowDown"></use>
@@ -19,23 +19,29 @@
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
             </svg>
-            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="searchText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="filter-searcher">
+            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="filter-searcher">
         </span>
-        <common-dropdown options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
-        <common-dropdown options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate"></common-dropdown>
     </div>
     <div class="center-mode__table">
         <div class="center-mode__table-title center-mode__table-title--exercises row">
-            <span class="col-vsmall-8">{{'centerMode_column_name' | translate}}</span>
+            <span ng-class="{'col-vsmall-8': common.userRole!=='student', 'col-vsmall-6': common.userRole==='student'}">{{'centerMode_column_name' | translate}}</span>
+            <span class="col-vsmall-2" ng-if="common.userRole==='student'">{{'centerMode_column_status' | translate}}</span>
             <span class="col-vsmall-3">{{'centerMode_column_time' | translate}}</span>
         </div>
         <div class="table__block table__block__exercise">
             <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}">
-                <div class="table__block__item col-vsmall-8">
+                <div class="table__block__item" ng-class="{'col-vsmall-8': common.userRole!=='student', 'col-vsmall-6': common.userRole==='student'}">
                     <button class="table__item__text table__item__link" ng-click="saveUrl((exercise.exercise? '/task/' : '/center-mode/exercise-info/') + exercise._id)">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                             {{exercise.name || exercise.exercise.name || 'new-exercise' | translate}}</h2>
                     </button>
+                </div>
+                <div class="table__block__item table__column--centered col-vsmall-2" ng-if="common.userRole==='student'">
+                    <span data-element="{{'centerMode-task-status' + exercise._id}}" ng-class="{'centerMode_status_delivered': exercise.status==='delivered', 'status-mark' : exercise.status==='corrected' || (exercise.status==='delivered' && exercise.mark)}">
+                        {{exercise.mark || (exercise.status==='delivered'? 'centerMode_status_delivered' : exercise.status==='notDelivered' ? 'centerMode_status_notDelivered' : ''  | translate)}}
+                    </span>
                 </div>
                 <div class="table__block__item col-vsmall-3">
                     <p class="fist-uppercase" data-element="{{'centerMode-endDate' + exercise.name}}">
@@ -65,7 +71,7 @@
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#people"></use>
                                 </svg>
-                                {{'centerMode_editGroups' | translate}}
+                                {{'centerMode_assignGroup' | translate}}
                             </li>
                             <li class="table__block__item--menu__item" ng-click="renameExercise(exercise)" data-element="menu-change-name">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">

@@ -1,11 +1,11 @@
 <div class="form--infotab" data-ng-controller="InfoTabCtrl">
     <form id="form-infotab" name="form" class="form-infotab" novalidate="true">
-        <fieldset class="fieldset--left" data-ng-init="focus = false">
+        <fieldset class="fieldset--left" ng-if="common.section!=='task'" data-ng-init="focus = false">
             <div class="field--title">
                 <svg class="svg-icon svg-icon--text">
                     <use xlink:href="#info"></use>
                 </svg>
-                <legend class="h3">{{ common.section !== 'exercise' && common.section !== 'task'? 'info' : 'infoTab_title_exerciseInfo' | translate }}</legend>
+                <legend class="h3">{{ common.section !== 'exercise'? 'info' : 'infoTab_title_exerciseInfo' | translate }}</legend>
             </div>
             <div class="form--section">
                 <!-- input type="text"-->
@@ -13,7 +13,7 @@
                     <label>{{ 'name' | translate }}*</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname', 'input--error': form.projectname.$error.required && publishProjectError}">
                         <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-ng-model="currentProject.name" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()"
-                               data-ng-disabled="!common.user || common.section==='task'" data-element="info-project-name" required>
+                               data-ng-disabled="!common.user" data-element="info-project-name" required>
                     </span>
                     <span class="form--error" ng-show="form.projectname.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-nameError' | translate }}</small>
@@ -21,17 +21,17 @@
                 </div>
                 <!-- textarea -->
                 <div class="form-control project__description">
-                    <label>{{ common.section !== 'exercise' && common.section !== 'task'? 'description' : 'centerMode_title_exerciseContent' | translate }}*</label>
+                    <label>{{ common.section !== 'exercise'? 'description' : 'centerMode_title_exerciseContent' | translate }}*</label>
                     <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
                         <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="currentProject.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'"
-                                  data-ng-disabled="!common.user ||  common.section==='task'" data-element="infotab-description" required> </textarea>
+                                  data-ng-disabled="!common.user" data-element="infotab-description" required> </textarea>
                     </span>
                     <span class="form--error" ng-show="form.textarea.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-descriptionError' | translate }}</small>
                     </span>
                 </div>
             </div>
-            <div ng-if="common.section!=='exercise' && common.section!=='task'" class="form--section">
+            <div ng-if="common.section!=='exercise'" class="form--section">
                 <!-- input type="text"-->
                 <div class="form-control">
                     <label>{{ 'video' | translate }}</label>
@@ -47,14 +47,14 @@
                 <div class="form-control">
                     <div class="labelcontainer">
                         <label>{{ 'info-tab-first-image' | translate }}</label>
-                        <small ng-if="common.section!=='task'">{{ 'info-tab-image-requisites' | translate }}</small>
+                        <small>{{ 'info-tab-image-requisites' | translate }}</small>
                     </div>
                     <div class="imagecontainer">
                         <div class="main--project--image" id="main-image">
-                            <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{common.urlImage + 'project/' + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
+                            <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
                         </div>
                         <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput"/>
-                        <button type="button" ng-if="common.section!=='task'" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
+                        <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
                             {{'upload-image' | translate}}
                         </button>
                     </div>
@@ -74,7 +74,7 @@
                 </div>
                 <input class="other-image--input" type="file" multiple id="otherimages" name="otherimages" placeholder="" data-ng-focus="focus = 'otherimages'" data-ng-blur="focus = false" data-ng-disabled="!common.user">-->
             </div>
-            <div ng-if="common.section!=='exercise' && common.section!=='task'" class="form--section">
+            <div ng-if="common.section!=='exercise'" class="form--section">
                 <div class="form-control  form--tags">
                     <label>{{ 'tags' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
@@ -97,7 +97,42 @@
                     </div>
                 </div>
             </div>
-            <small ng-if="common.section!=='exercise' && common.section!=='task'" class="form--infotab--mandatory">{{ 'infotab-mandatory' | translate }}</small>
+            <small ng-if="common.section!=='exercise'" class="form--infotab--mandatory">{{ 'infotab-mandatory' | translate }}</small>
+        </fieldset>
+        <fieldset class="fieldset--left" ng-if="common.section==='task'">
+            <div class="field--title">
+                <svg class="svg-icon svg-icon--text">
+                    <use xlink:href="#info"></use>
+                </svg>
+                <legend class="h3">{{ 'infoTab_title_exerciseInfo' | translate }}</legend>
+            </div>
+            <div class="form--section task__student-info">
+                <div class="form-control">
+                    <img class="image-alone" ng-src="{{urlGetImage + currentProject.exercise._id}}" err-src="../images/common/default-project.png">
+                    <div class="form-time">
+                        <div class="form--title">
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#clock"></use>
+                            </svg>
+                            <legend class="h3">{{ 'centerMode_column_time' | translate }}</legend>
+                        </div>
+                        <p class="form--title-distinguished">
+                            {{currentProject.endDate? currentProjectService.getDatetime(currentProject.endDate) :'time-unlimited' | translate}}
+                        </p>
+                        <div class="form--content">
+                            <span class="container-span row">
+                                <p class="col-vsmall-4">{{'centerMode_startDate' | translate}}:</p>
+                                <p class="date">{{(currentProject.initDate | date:'dd MMM yyyy - HH:mm') || 'date_without_initDate' | translate}}</p>
+                            </span>
+                            <span class="container-span row">
+                                <p class="col-vsmall-4">{{'centerMode_endDate' | translate}} : </p>
+                                <p class="date">{{(currentProject.endDate | date:'dd MMM yyyy - HH:mm') || 'date_without_endDate' | translate}}</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <p class="form-control">{{currentProject.description}}</p>
+            </div>
         </fieldset>
         <fieldset ng-if="!currentProject.codeProject" class="fieldset--right">
             <div class="field--title">
@@ -107,7 +142,7 @@
                 <legend class="h3">{{ 'infotab_title_theme' | translate }}</legend>
             </div>
             <div class="form--section choose--theme">
-                <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" element-data="'infotab-choosetheme'"></common-dropdown>
+                <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" data-element="'infotab_choosetheme'"></common-dropdown>
                 <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg" alt=""/>
                 <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt=""/>
             </div>
@@ -118,7 +153,7 @@
             </div>
             <div class="form--section choose--theme">
                 <common-dropdown options="boardNameList" heading-option="currentProject.hardware.board" options-click="setBoard" ng-model="currentProject.hardware.board"
-                                 element-data="'infotab-chooseboard'"></common-dropdown>
+                                 data-element="'infotab_chooseboard'"></common-dropdown>
                 <img ng-src="/images/boards/{{boardImage}}.svg"/>
             </div>
         </fieldset>
@@ -136,8 +171,8 @@
                             <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
                                 {{group.name}}
                             </h2>
-                            <span class="block__item__explanation--subscript">{{'date_from' | translate}} {{group.initDate | date  }}</span>
-                            <span class="block__item__explanation--subscript">{{'date_to' | translate}} {{group.endDate | date}}</span>
+                            <span class="block__item__explanation--subscript">{{group.initDate ? ('date_from' | translate)+' '+(group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
+                            <span class="block__item__explanation--subscript">{{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
                         </a>
                     </span>
                 </li>

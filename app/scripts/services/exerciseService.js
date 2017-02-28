@@ -67,7 +67,7 @@ angular.module('bitbloqApp')
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
-            centerModeApi.getGroups().then(function(response) {
+            centerModeApi.getGroups('teacher').then(function(response) {
                 var groups = response.data;
                 _.forEach(groups, function(group) {
                     group.selected = oldGroups[group._id] ? true : false;
@@ -94,7 +94,7 @@ angular.module('bitbloqApp')
                         if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
                             groupsToAssign.push({
                                 _id: group._id,
-                                calendar: {}
+                                date: {}
                             });
                         } else {
                             group.calendar.from.date = moment(group.calendar.from.date);
@@ -110,9 +110,9 @@ angular.module('bitbloqApp')
 
                             groupsToAssign.push({
                                 _id: group._id,
-                                calendar: {
-                                    from: group.calendar.from.date,
-                                    to: group.calendar.to.date
+                                date: {
+                                    initDate: group.calendar.from.date,
+                                    endDate: group.calendar.to.date
                                 }
                             });
                         }
@@ -226,6 +226,23 @@ angular.module('bitbloqApp')
                 });
             });
             return defered.promise;
+        };
+
+        exports.getDatetime = function(date, diff) {
+            var now = moment(),
+                result = '';
+            if (date) {
+                if (diff) {
+                    result = now.diff(date) > 0;
+                } else {
+                    if (now.diff(date) > 0) {
+                        result = common.translate('time_finished');
+                    } else {
+                        result = moment(date).fromNow();
+                    }
+                }
+            }
+            return result;
         };
 
         exports.saveInMyProjects = function(taskId) {
@@ -606,9 +623,10 @@ angular.module('bitbloqApp')
                                     exports.saveOldExercise();
                                     localStorage.exercisesChange = true;
                                     if (exports.tempImage.file) {
-                                        imageApi.save(exports.exercise._id, exports.tempImage.file).then(function() {
-                                            exports.tempImage = {};
-                                        });
+                                        imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise')
+                                            .then(function() {
+                                                exports.tempImage = {};
+                                            });
                                     }
                                 });
                         }
@@ -626,7 +644,7 @@ angular.module('bitbloqApp')
                                             exports.saveOldExercise();
                                             localStorage.exercisesChange = true;
                                             if (exports.tempImage.file) {
-                                                imageApi.save(exports.exercise._id, exports.tempImage.file)
+                                                imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise')
                                                     .then(function() {
                                                         exports.tempImage = {};
                                                     });
@@ -660,7 +678,7 @@ angular.module('bitbloqApp')
                                 exports.saveOldExercise();
 
                                 if (exports.tempImage.file) {
-                                    imageApi.save(idExercise, exports.tempImage.file).then(function() {
+                                    imageApi.save(idExercise, exports.tempImage.file, 'exercise').then(function() {
                                         $log.debug('imageSaveok');
                                         localStorage.exercisesChange = true;
                                         exports.tempImage = {};

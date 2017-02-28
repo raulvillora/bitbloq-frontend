@@ -236,8 +236,8 @@ angular.module('bitbloqApp')
 
         $rootScope.$on('viewer-code:ready', function() {
             if (show) {
-                var componentsJSON = $scope.getComponents($scope.$scope.currentProject.hardware.components);
-                if ($scope.$scope.currentProject.hardware.board) {
+                var componentsJSON = $scope.getComponents($scope.currentProject.hardware.components);
+                if ($scope.currentProject.hardware.board) {
                     if ($scope.common.useChromeExtension()) {
                         $scope.commonModals.launchViewerWindow($scope.currentProjectService.getBoardMetaData(), componentsJSON);
                     }
@@ -259,12 +259,12 @@ angular.module('bitbloqApp')
             if ($scope.common.useChromeExtension()) {
                 $scope.currentProjectService.startAutosave(true);
                 show = true;
-                if (!$scope.$scope.currentProject.codeproject) {
+                if (!$scope.currentProject.codeproject) {
                     //parent: bloqsproject
                     if ($scope.thereIsSerialBlock($scope.currentProjectService.getCode())) {
                         $scope.upload();
                     } else {
-                        var viewerCode = $scope.getViewerCode($scope.$scope.currentProject.hardware.components, $scope.currentProjectService.getCode());
+                        var viewerCode = $scope.getViewerCode($scope.currentProject.hardware.components, $scope.currentProjectService.getCode());
                         $scope.upload(viewerCode);
                     }
                 } else {
@@ -275,12 +275,12 @@ angular.module('bitbloqApp')
                     if (!err) {
                         $scope.currentProjectService.startAutosave(true);
                         show = true;
-                        if (!$scope.$scope.currentProject.codeproject) {
+                        if (!$scope.currentProject.codeproject) {
                             //parent: bloqsproject
                             if ($scope.thereIsSerialBlock($scope.currentProjectService.getCode())) {
                                 $scope.upload();
                             } else {
-                                var viewerCode = $scope.getViewerCode($scope.$scope.currentProject.hardware.components, $scope.currentProjectService.getCode());
+                                var viewerCode = $scope.getViewerCode($scope.currentProject.hardware.components, $scope.currentProjectService.getCode());
                                 $scope.upload(viewerCode);
                             }
                         } else {

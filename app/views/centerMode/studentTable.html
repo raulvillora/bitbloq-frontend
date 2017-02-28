@@ -1,6 +1,6 @@
 <div ng-if="students.length>0">
     <div class="dropdown-group table__added clearfix">
-        <common-dropdown options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" class="projects--sort-dropdown"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
     </div>
     <div class="center-mode__table">
         <div class="center-mode__table-title row">
@@ -27,9 +27,9 @@
                     </span>
                 </div>
                 <div class="table__block__item table__column--hover table__column--right col-vsmall-2">
-                    <button class="btn btn--tertiary btn--small" data-element="centerMode-button-showExercises">
+                    <a class="btn btn--tertiary btn--small table__item__btn" ng-href="{{'#/center-mode/group/' + group._id + '/student/' + student._id}}" data-element="{{'centerMode-button-showTasks' + student._id}}">
                         {{'centerMode_button_showExercises' | translate}}
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

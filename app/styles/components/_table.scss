@@ -8,7 +8,7 @@
 
 .table__header {
     height: 93px;
-    padding: 36px 0 22px 0;
+    padding-top: 36px;
     .header__title {
         font-size: 20px;
         font-weight: 700;
@@ -140,7 +140,7 @@
 }
 
 .table__main {
-    padding: 36px 0 22px 0;
+    padding: 36px 30px 22px 30px;
     max-width: 1200px;
     margin: 0 auto;
 
@@ -156,7 +156,7 @@
 }
 
 .table__added {
-    margin-bottom: 30px;
+    margin: 20px 0;
     width: 100%;
 
     common-dropdown {

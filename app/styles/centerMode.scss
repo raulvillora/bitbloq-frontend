@@ -1,4 +1,11 @@
-.centerMode {
+.menu--user__center-mode {
+    cursor: pointer;
+    .notification-alert, .notification__title {
+        pointer-events: none;
+    }
+}
+
+.center-mode {
     background-color: #eeeeee;
 
     [class*="col-"] {
@@ -13,15 +20,48 @@
         color: #dd1010;
     }
 
-    .status-corrected {
+    .status-corrected, .centerMode_status_delivered {
         color: #82ad3a;
+    }
+
+    .status-mark {
+        color: #373b44;
+        font-weight: bold;
     }
 }
 
-.center-mode__group .group__header {
-    padding: 20px 0;
-    max-width: 1200px;
-    margin: 0 auto;
+.center-mode__group {
+    .tabs-layout__aside, .tabs-layout__content {
+        padding: 0 30px;
+    }
+    .group__header {
+        padding: 20px 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .tabs-layout__aside .tabs__header__item {
+        border-color: #dddddd;
+        &.selected--tab {
+            border-top: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+            &:after {
+                content: '';
+                display: block;
+                position: relative;
+                top: -3px;
+                left: -40px;
+                background-color: #eee;
+                height: 4px;
+                width: 158%;
+            }
+        }
+        &:first-child {
+            border-left: 1px solid #dddddd;
+        }
+    }
+    .tabs-layout__content {
+        border-top: 1px solid #dddddd;
+    }
 }
 
 .center-mode__block {
@@ -56,6 +96,25 @@
 .table__block__list, .center-mode__table-title {
     &.row {
         margin: 0;
+    }
+    .table__item__link {
+        width: 100%;
+    }
+    .table__item__link, .table__item__ellipsis {
+        .block__item__title {
+            max-width: 95%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &.block__item__short{
+                max-width: 70%;
+            }
+        }
+        .block__item__explanation {
+            margin-left: 3px;
+            position: relative;
+            top: -7px;
+        }
     }
 }
 
@@ -96,11 +155,6 @@
 
     .center-mode--empty__info {
         color: #676a71;
-    }
-
-    &:hover {
-        background-color: #ebebeb;
-        cursor: pointer;
     }
 
     &[disabled] {

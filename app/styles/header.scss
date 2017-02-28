@@ -100,6 +100,10 @@
         order: 0;
     }
 
+    .menu--user--reduced {
+        width: 100px;
+    }
+
     .menu--user__header {
         display: flex;
         position: absolute;
@@ -215,9 +219,6 @@
             width: 100%;
             text-align: left;
         }
-    }
-
-    .menu--user__center-mode {
     }
 }
 
