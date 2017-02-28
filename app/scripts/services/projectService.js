@@ -350,8 +350,6 @@ angular.module('bitbloqApp')
         var sensorsArray = _.filter(hardwareConstants.components, {
             category: 'sensors'
         });
-        console.log(' sensorsArray');
-        console.log(sensorsArray);
         for (var i = 0; i < sensorsArray.length; i++) {
             sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }

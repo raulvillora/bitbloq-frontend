@@ -28,7 +28,8 @@ angular.module('bitbloqApp')
             confirmDeleteModal;
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {};
+        exports.editDate = function() {
+        };
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -487,10 +488,13 @@ angular.module('bitbloqApp')
 
             }
         };
-        //temp fix to code refactor, sensor types
+        ///temp fix to code refactor, sensor types
         var sensorsTypes = {};
-        for (var i = 0; i < hardwareConstants.components.sensors.length; i++) {
-            sensorsTypes[hardwareConstants.components.sensors[i].id] = hardwareConstants.components.sensors[i].dataReturnType;
+        var sensorsArray = _.filter(hardwareConstants.components, {
+            category: 'sensors'
+        });
+        for (var i = 0; i < sensorsArray.length; i++) {
+            sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
 
         exports.setExercise = function(newExercise) {
@@ -616,7 +620,8 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && exports.exercise.teacher === common.user._id) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;

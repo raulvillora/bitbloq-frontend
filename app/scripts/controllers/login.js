@@ -265,7 +265,7 @@ angular.module('bitbloqApp')
             } else {
                 fireShakeEffect();
             }
-        }
+        };
 
         $scope.checkUserName = function() {
             var defered = $q.defer();
