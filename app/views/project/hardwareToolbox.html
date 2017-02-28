@@ -100,7 +100,10 @@
         <ul class="toolbox__content-container">
             <li class="toolbox__content__list" ng-repeat="component in hardware.componentSortered">
                 <h1 class="list-name" translate>{{component.id}}</h1>
-                <img dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                <img ng-if="component.id !== 'device' && !common.user || common.user" class="component-image" dragcategory="{{component.category}}" draggable dragid="{{component.id}}" dragtype="{{component.dragType || 'components'}}" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                <div ng-if="component.id === 'device' && !common.user" data-tooltips="true" data-tooltip="{{'need-to-be-logged-component' | translate}}" data-tooltip-position="bottom">
+                    <img class="component-image component-image--device" draggable="false" ng-src="/images/components/{{component.id}}.svg" ng-style="{width:component.width + 'px'}">
+                </div>
             </li>
             <li data-ng-show="currentProject.hardware.robot === 'mbot' && !currentProject.hardware.showRobotImage" class="toolbox-info">{{'hardware-toolbox-no-mbot-components' | translate}}</li>
         </ul>
