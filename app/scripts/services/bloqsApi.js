@@ -22,16 +22,14 @@ angular.module('bitbloqApp')
 
             $http({
                 method: 'GET',
-                //                url: envData.config.serverUrl + 'bloq',
-                url: 'http://localhost:9000/bower_components/bloqs/dist/bloqsmap.json',
-
+                url: envData.config.serverUrl + 'bloq',
                 params: {
                     'pageSize': pageSize,
                     'page': page
                 }
             }).success(function(response) {
 
-                /*for (var i = 0; i < response.length; i++) {
+                for (var i = 0; i < response.length; i++) {
                     if (exports.schemas[response[i].name]) {
                         $log.debug('dupli', response[i].name, response[i]);
                     }
@@ -43,9 +41,7 @@ angular.module('bitbloqApp')
                     loadedBloqsPromise.resolve();
                 } else {
                     requestBloqs(pageSize, ++page);
-                }*/
-                exports.schemas = response;
-                loadedBloqsPromise.resolve();
+                }
 
             }).error(function(error) {
                 loadedBloqsPromise.reject(error);
