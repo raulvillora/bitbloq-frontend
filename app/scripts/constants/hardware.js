@@ -1892,6 +1892,7 @@ angular.module('bitbloqApp')
         }, {
             "id": "mkb_lightsensor",
             "category": "sensors",
+            "type": "analog",
             "manufacter": "makeblock",
             "width": 84.5,
             "height": 128,

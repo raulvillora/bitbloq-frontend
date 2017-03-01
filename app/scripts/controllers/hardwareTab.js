@@ -918,8 +918,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             delete hardwareProject.anonymousTransient;
         }
 
-        var hwSchema = {};
-        hwSchema.components = _.cloneDeep($scope.currentProject.hardware.components);
+        var hwSchema = {},
+            conectableComponents = _.filter($scope.currentProject.hardware.components, function(item) {
+                return !item.integratedComponent;
+            });
+        hwSchema.components = _.cloneDeep(conectableComponents);
         hwSchema.connections = _.cloneDeep($scope.currentProject.hardware.connections);
 
         $scope.hwBasicsLoaded.promise.then(function() {
@@ -936,7 +939,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 hw2Bloqs.repaint();
                 $scope.hardware.firstLoad = false;
                 //Fix components dimensions
-                _.forEach($scope.currentProject.hardware.components, function(item) {
+                _.forEach(conectableComponents, function(item) {
                     item = bloqsUtils.checkPins(item);
                     _fixComponentsDimension(item);
                 });
@@ -950,7 +953,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _fixComponentsDimension(compRef) {
-        var c = _.find(hardwareConstants.components[compRef.category], {
+        var c = _.find(hardwareConstants.components, {
             'id': compRef.id
         });
         var componentDOM = document.querySelector('[data-uid="' + compRef.uid + '"]');
