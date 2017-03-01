@@ -57,7 +57,7 @@ angular
                         }
 
                     } else {
-                          dateResult = '';
+                        dateResult = '';
                     }
 
                     return dateResult;
@@ -227,7 +227,7 @@ angular
             // Facebook
             $authProvider.facebook({
                 clientId: envData.facebook.clientId,
-                authorizationEndpoint: 'https://www.facebook.com/dialog/oauth',
+                authorizationEndpoint: 'https://www.facebook.com/v2.3/dialog/oauth',
                 scope: envData.facebook.scope,
                 responseType: 'token',
                 display: 'popup',
