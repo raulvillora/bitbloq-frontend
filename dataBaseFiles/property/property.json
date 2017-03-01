@@ -338,6 +338,13 @@
         }, {
             "name": "mBotSomethingNear"
         }],
+        "startertank": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
         "advancedMBot": [{
             "name": "mBotBuzzerAdvanced"
         }, {

@@ -731,151 +731,95 @@ angular.module('bitbloqApp')
             "name": "Me Orion",
             "id": "meorion",
             "mcu": "uno",
-            "vendorIds": [""],
-            "productIds": [""],
+            "vendorIds": ["0x1A86"],
+            "productIds": ["0x7523"],
+            "manufacter": "makeblock",
             "underDevelopment": true,
+            "availableComponents": [
+                'mkb_infrared',
+                'mkb_lightsensor',
+                'mkb_linefollower',
+                'mkb_ultrasound',
+                'sp'
+            ],
+            "integratedComponents": [],
             "pinSize": {
-                "digital": {
-                    "w": 9,
-                    "h": 15
+                "red": {
+                    "w": 50,
+                    "h": 50
                 },
-                "analog": {
-                    "w": 9,
-                    "h": 15
+                "yellow blue white": {
+                    "w": 50,
+                    "h": 50
+                },
+                "yellow blue grey": {
+                    "w": 50,
+                    "h": 50
+                },
+                "yellow black white": {
+                    "w": 50,
+                    "h": 50
+                },
+                "yellow blue black white": {
+                    "w": 50,
+                    "h": 50
                 },
                 "serial": {
-                    "w": 33,
-                    "h": 66
-                },
-                "i2c-4": {
-                    "w": 9,
-                    "h": 9
-                },
-                "i2c-5": {
-                    "w": 9,
-                    "h": 9
+                    "w": 22,
+                    "h": 30
                 }
             },
             "pins": {
-                "digital": [{
-                    "x": 0.478,
-                    "y": 0.098,
-                    "name": "13",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
-                }, {
-                    "x": 0.508,
-                    "y": 0.098,
-                    "name": "12",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
-                }, {
-                    "x": 0.545,
-                    "y": 0.098,
-                    "name": "11",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
-                }, {
-                    "x": 0.58,
-                    "y": 0.098,
-                    "name": "10",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
-                }, {
-                    "x": 0.615,
-                    "y": 0.098,
-                    "name": "9",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
-                }, {
-                    "x": 0.649,
-                    "y": 0.098,
-                    "name": "8",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
-                }, {
-                    "x": 0.695,
-                    "y": 0.098,
-                    "name": "7",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
-                }, {
-                    "x": 0.73,
-                    "y": 0.098,
-                    "name": "6",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
-                }, {
-                    "x": 0.765,
-                    "y": 0.098,
-                    "name": "5",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
-                }, {
-                    "x": 0.795,
-                    "y": 0.098,
-                    "name": "4",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
-                }, {
-                    "x": 0.832,
-                    "y": 0.098,
-                    "name": "3",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
-                }, {
-                    "x": 0.869,
-                    "y": 0.098,
-                    "name": "2",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
-                }, {
-                    "x": 0.9,
-                    "y": 0.098,
+                "red": [{
+                    "x": 0.57,
+                    "y": 0.171,
                     "name": "1",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
+                    "uid": "morion-red-1"
                 }, {
-                    "x": 0.935,
-                    "y": 0.098,
-                    "name": "0",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                    "x": 0.701,
+                    "y": 0.171,
+                    "name": "2",
+                    "uid": "morion-red-2"
                 }],
-                "analog": [{
-                    "x": 0.763,
-                    "y": 0.92,
-                    "name": "A0",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
+                "yellow blue white": [{
+                    "x": 0.57,
+                    "y": 0.171,
+                    "name": "3",
+                    "uid": "morion-yellowBlueWhite-3"
                 }, {
-                    "x": 0.795,
-                    "y": 0.92,
-                    "name": "A1",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
+                    "x": 0.701,
+                    "y": 0.171,
+                    "name": "4",
+                    "uid": "morion-yellowBlueWhite-4"
+                }],
+                "yellow blue grey": [{
+                    "x": 0.57,
+                    "y": 0.171,
+                    "name": "5",
+                    "uid": "morion-yellowBlueGrey-5"
+                }],
+                "yellow blue black white": [{
+                    "x": 0.701,
+                    "y": 0.9,
+                    "name": "6",
+                    "uid": "morion-yellowBlueBlackWhite-6"
+                }],
+                "yellow black white": [{
+                    "x": 0.57,
+                    "y": 0.171,
+                    "name": "7",
+                    "uid": "morion-yellowBlackWhite-7"
                 }, {
-                    "x": 0.83,
-                    "y": 0.92,
-                    "name": "A2",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
-                }, {
-                    "x": 0.862,
-                    "y": 0.92,
-                    "name": "A3",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
-                }, {
-                    "x": 0.895,
-                    "y": 0.92,
-                    "name": "A4",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
-                }, {
-                    "x": 0.935,
-                    "y": 0.92,
-                    "name": "A5",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                    "x": 0.701,
+                    "y": 0.171,
+                    "name": "8",
+                    "uid": "morion-yellowBlackWhite-8"
                 }],
                 "serial": [{
-                    "x": 0.045,
-                    "y": 0.315,
+                    "x": 0.35,
+                    "y": 0.9,
                     "name": "serial",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
-                }],
-                "i2c-4": [{
-                    "x": 0.903,
-                    "y": 0.925,
-                    "name": "A4-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
-                }],
-                "i2c-5": [{
-                    "x": 0.933,
-                    "y": 0.925,
-                    "name": "A5-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                    "uid": "morion-serial"
                 }]
             }
         }, {
@@ -895,7 +839,7 @@ angular.module('bitbloqApp')
                     "h": 13
                 },
                 "serial": {
-                    "w": 80,
+                    "w": 22,
                     "h": 57
                 },
                 "i2c-4": {

@@ -37,6 +37,13 @@
                     </svg>
                 </button>
             </li>
+            <li class="tabs__header__item--vertical toolbox-startertank" ng-class="{'selected--tab': selectedBloqsToolbox==='startertank'}" ng-show="currentProject.hardware.robot==='startertank' || currentProject.hardware.showRobotImage==='startertank'" data-element="toolbox-startertank">
+                <button class="btn-svg element-toolbox" ng-click="changeBloqsToolbox('startertank')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#robot"></use>
+                    </svg>
+                </button>
+            </li>
             <li class="tabs__header__item--vertical toolbox-phone" ng-class="{'selected--tab': selectedBloqsToolbox==='phone'}" ng-show="currentProject.useBitbloqConnect" data-element="toolbox-phone">
                 <button class="btn-svg element-toolbox" ng-click="changeBloqsToolbox('phone')">
                     <svg class="svg-icon">
@@ -112,6 +119,13 @@
                 <button class="btn-svg element-toolbox">
                     <span class="input input--checkbox">
                         <input type="checkbox" class="element-toolbox" id="allMBotBloqs" ng-model="mBotCheckModel" data-indeterminate-checkbox data-counter-check="mBotCheckCounter" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-basic-tab="mBot" data-advanced-tab="advancedMBot" data-update-state="statusGeneralCheck" />
+                    </span>
+                </button>
+            </li>
+            <li class="tabs__header__item--vertical toolbox-startertank" ng-class="{'selected--tab': selectedBloqsToolbox==='startertank'}" ng-show="currentProject.hardware.robot==='startertank' || currentProject.hardware.showRobotImage === 'startertank'" data-element="toolbox-startertank">
+                <button class="btn-svg element-toolbox">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="allStaterTankBloqs" ng-model="starterTankCheckModel" data-indeterminate-checkbox data-counter-check="starterTankCheckCounter" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-basic-tab="startertank" data-advanced-tab="advancedStarterTank" data-update-state="statusGeneralCheck" />
                     </span>
                 </button>
             </li>
@@ -211,6 +225,14 @@
             <li class="toolbox__item" ng-show="currentProject.hardware.robot==='mbot' || currentProject.hardware.showRobotImage === 'mbot'">
                 <button class="btn btn-text element-toolbox" ng-click="changeBloqsToolbox('mBot')">
                     {{'make-swtoolbox-mbot' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item" ng-show="currentProject.hardware.robot==='startertank' || currentProject.hardware.showRobotImage === 'startertank'">
+                <button class="btn btn-text element-toolbox" ng-click="changeBloqsToolbox('startertank')">
+                    {{'make-swtoolbox-startertank' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#arrow"></use>
                     </svg>
@@ -356,6 +378,14 @@
                 <li id="{{'bloq' + mBot.name}}" data-ng-class="mBot.addClass" data-ng-repeat="mBot in common.properties.bloqsSortTree.mBotV2" ng-show="showMBotComponents(mBot.name) && common.section !== 'task' || currentProject.selectedBloqs.mBot.indexOf(mBot.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mBotV2[$index].name]" data-components-array="currentProjectService.componentsArray">
                     <span class="input input--checkbox">
                         <input type="checkbox" class="element-toolbox" id="{{mBot.name + 'Check'}}" ng-model="checkModel[mBot.name]" ng-click="addChecks('mBot', checkModel[mBot.name], mBot.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.mBot" />
+                    </span>
+                </li>
+            </ul>
+            <!-- starterTank-->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='startertank' && currentProject.hardware.showRobotImage">
+                <li id="{{'bloq' + startertank.name}}" data-ng-class="startertank.addClass" data-ng-repeat="startertank in common.properties.bloqsSortTree.startertank" ng-show="showMBotComponents(startertank.name) && common.section !== 'task' || currentProject.selectedBloqs.startertank.indexOf(startertank.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.startertank[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{startertank.name + 'Check'}}" ng-model="checkModel[startertank.name]" ng-click="addChecks('startertank', checkModel[startertank.name], startertank.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.startertank" />
                     </span>
                 </li>
             </ul>
