@@ -494,14 +494,14 @@ angular.module('bitbloqApp')
             ],
             "integratedComponents": [{
                 "id": "mkb_integrated_analogPinButton",
-                "name": "default-var-name-button",
+                "name": "default-var-name-mkb_integrated_analogPinButton",
                 "pin": {
                     "s": "A7"
                 },
                 "uid": "mkb-mcore-button"
             }, {
                 "id": "mkb_integrated_lightsensor",
-                "name": "default-var-name-ldrs",
+                "name": "default-var-name-mkb_integrated_lightsensor",
                 "pin": {
                     "s": "A6"
                 },
