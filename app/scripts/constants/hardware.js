@@ -1925,6 +1925,8 @@ angular.module('bitbloqApp')
             "id": "mbot",
             "name": "mBot",
             "board": "mcore",
+            "family": "mBot",
+            "thirdParty": true,
             "manufacter": "makeblock",
             "useBoardImage": true,
             "width": 75,
@@ -1933,6 +1935,8 @@ angular.module('bitbloqApp')
             "id": "rangerlandraider",
             "name": "mRanger Land Raider",
             "board": "meauriga",
+            "family": "mRanger",
+            "thirdParty": true,
             "useBoardImage": true,
             "width": 75,
             "height": 86
@@ -1940,6 +1944,8 @@ angular.module('bitbloqApp')
             "id": "rangerraptor",
             "name": "mRanger Raptor",
             "board": "meauriga",
+            "family": "mRanger",
+            "thirdParty": true,
             "useBoardImage": true,
             "width": 75,
             "height": 86
@@ -1947,6 +1953,8 @@ angular.module('bitbloqApp')
             "id": "rangernervousbird",
             "name": "mRanger Nervous bird",
             "board": "meauriga",
+            "family": "mRanger",
+            "thirdParty": true,
             "useBoardImage": true,
             "width": 75,
             "height": 86
@@ -1954,12 +1962,16 @@ angular.module('bitbloqApp')
             "id": "startertank",
             "name": "Starter kit Modo tanke",
             "board": "meorion",
+            "family": "starterKit",
+            "thirdParty": true,
             "useBoardImage": true,
             "width": 75,
             "height": 86
         }, {
             "id": "starterthreewheels",
             "name": "Starter kit Modo 3 ruedas",
+            "family": "starterKit",
+            "thirdParty": true,
             "board": "meorion",
             "useBoardImage": true,
             "width": 75,

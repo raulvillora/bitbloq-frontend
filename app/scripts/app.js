@@ -36,7 +36,8 @@ angular
         'angular-clipboard',
         'angularUtils.directives.dirPagination',
         'nvd3',
-        'datePicker'
+        'datePicker',
+        'ngPatternRestrict'
     ])
     .config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {

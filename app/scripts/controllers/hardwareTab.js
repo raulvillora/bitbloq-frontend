@@ -9,7 +9,7 @@
 angular.module('bitbloqApp')
     .controller('hardwareTabCtrl', hardwareTabCtrl);
 
-function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi, projectService) {
+function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi, projectService, commonModals) {
 
     var container = utils.getDOMElement('.protocanvas'),
         $componentContextMenu = $('#component-context-menu'),
@@ -247,7 +247,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
-
     $scope.drop = function(data) {
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
@@ -278,9 +277,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addComponent(data);
                 break;
             case 'robots':
+                var robotFamily = $scope.robotsMap[data.id].family;
                 $scope.hardware.cleanSchema();
                 $scope.deleteBTComponent();
                 _addRobot(data);
+                if (robotFamily && (!$scope.common.user.thirdPartyRobots || !$scope.common.user.thirdPartyRobots[robotFamily])) {
+                    commonModals.activateRobot(robotFamily);
+                }
                 break;
             case 'btComponent':
                 if (!$scope.currentProject.hardware.board) {
@@ -301,6 +304,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
                 break;
         }
+
     };
 
     function _addBtComponent() {

@@ -113,7 +113,10 @@
         <ul class="toolbox__content-container">
             <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.id})">
                 <h1 class="list-name">{{robot.name}}</h1>
-                <img draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
+                <img  ng-if="!robot.thirdParty && !common.user || common.user" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
+                <div ng-if="robot.thirdParty === true && !common.user" data-tooltips="true" data-tooltip="{{'need-to-be-logged-component' | translate}}" data-tooltip-position="bottom">
+                    <img class="component-image--device" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
+                </div>
             </li>
         </ul>
     </div>

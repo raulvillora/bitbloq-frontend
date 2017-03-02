@@ -8,8 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi) {
-
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi) {
         var exports = {},
             shortUrl,
             serialMonitorPanel,
@@ -298,7 +297,6 @@ angular.module('bitbloqApp')
                 className: 'modal--container modal--publish',
                 scope: modalScope
             });
-
         };
 
         exports.modalShareWithUsers = function(project) {
@@ -373,17 +371,17 @@ angular.module('bitbloqApp')
                     var link;
                     switch (e.currentTarget.id) {
                         case 'facebook':
-                            //projectApi.addProjectStats(project._id, 'facebookCount');
+                            // projectApi.addProjectStats(project._id, 'facebookCount');
                             modalOptions.stats.facebookCount += 1;
                             link = 'https://www.facebook.com/sharer/sharer.php?u=' + shortUrl;
                             break;
                         case 'twitter':
-                            //projectApi.addProjectStats(project._id, 'twitterCount');
+                            // projectApi.addProjectStats(project._id, 'twitterCount');
                             modalOptions.stats.twitterCount += 1;
                             link = 'https://twitter.com/intent/tweet?url=' + shortUrl;
                             break;
                         case 'googleplus':
-                            //projectApi.addProjectStats(project._id, 'googleCount');
+                            // projectApi.addProjectStats(project._id, 'googleCount');
                             modalOptions.stats.googleCount += 1;
                             link = 'https://plus.google.com/share?url=' + shortUrl;
                             break;
@@ -522,7 +520,7 @@ angular.module('bitbloqApp')
                 confirmAction: confirmAction,
                 modalButtons: true,
                 condition: function() {
-                    /*jshint validthis: true */
+                    /* jshint validthis: true */
                     return !!this.$parent.input.value;
                 }
             });
@@ -577,7 +575,7 @@ angular.module('bitbloqApp')
                     name: currentProjectName
                 },
                 condition: function() {
-                    /*jshint validthis: true */
+                    /* jshint validthis: true */
                     return !!this.$parent.project.name;
                 }
             });
@@ -626,7 +624,6 @@ angular.module('bitbloqApp')
                 }
             });
             plotterMonitorPanel.scope = scope;
-
         };
 
         exports.launchViewerWindow = function(board, components) {
@@ -648,7 +645,7 @@ angular.module('bitbloqApp')
                 position: 'center',
                 /*  addClass: {
                  content: 'plotter__content'
-                 },*/
+                 }, */
                 size: {
                     width: 855,
                     height: 500
@@ -666,7 +663,6 @@ angular.module('bitbloqApp')
                 }
             });
             viewerMonitorPanel.scope = scope;
-
         };
 
         exports.launchSerialWindow = function(board) {
@@ -765,7 +761,6 @@ angular.module('bitbloqApp')
                 text: text,
                 confirmText: 'activate',
                 confirmAction: function() {
-
                     ngDialog.closeAll();
                     chromeAppApi.installChromeApp(function(err) {
                         if (!err) {
@@ -778,7 +773,6 @@ angular.module('bitbloqApp')
                             });
                             callback(err);
                         }
-
                     });
                     common.user.chromeapp = true;
                     userApi.update({
@@ -793,5 +787,80 @@ angular.module('bitbloqApp')
             });
         };
 
+        exports.activateRobot = function(robot) {
+            var activateModal,
+                modalScope = $rootScope.$new(),
+                robotName = robot,
+                activationCode = {},
+                errorMessage = '';
+
+            var confirmAction = function() {
+                var actCode = '';
+                _.forEach(activationCode, function(value) {
+                    actCode = actCode + value;
+                });
+
+                thirdPartyRobotsApi.exchangeCode(actCode, robot).then(function(res) {
+                    common.setUser(res.data);
+                    activateModal.close();
+                }).catch(function(err) {
+                    switch (err.status) {
+                        case 404:
+                            modalScope.errorMessage = common.translate('modal-activate-error--notfound');
+                            break;
+                        case 409:
+                            modalScope.errorMessage = common.translate('modal-activate-error--conflict');
+                            break;
+                        default:
+                            modalScope.errorMessage = common.translate('modal-activate-error--generic');
+                            break;
+                    }
+                });
+            };
+
+            var testAction = function() {};
+
+            var handlePaste = function($event) {
+                if (typeof $event.originalEvent.clipboardData !== 'undefined') {
+                    splitActivationCode($event.originalEvent.clipboardData.getData('text/plain'));
+                } else { // To support browsers without clipboard API (IE and older browsers)
+                    $timeout(function() {
+                        splitActivationCode(angular.element($event.currentTarget).val());
+                    });
+                }
+            };
+
+            function splitActivationCode(code) {
+                var parts = code.split(String.fromCharCode(45));
+                activationCode.field1 = parts[0];
+                activationCode.field2 = (parts[1] === undefined ? '' : parts[1]);
+                activationCode.field3 = (parts[2] === undefined ? '' : parts[2]);
+                activationCode.field4 = (parts[3] === undefined ? '' : parts[3]);
+                document.getElementById('code-4').focus();
+            }
+
+            _.extend(modalScope, {
+                title: common.translate('modal-activate-robot-title', {
+                    value: robotName
+                }),
+                modalButtons: true,
+                confirmButton: 'activate',
+                confirmAction: confirmAction,
+                extraButton: 'modal-activate-robot-test',
+                extraAction: testAction,
+                value: robotName,
+                handlePaste: handlePaste,
+                activationCode: activationCode,
+                errorMessage: errorMessage,
+                rejectButton: 'modal-button-cancel',
+                contentTemplate: '/views/modals/activateRobot.html'
+            });
+
+            activateModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--activate-robot',
+                scope: modalScope
+            });
+        };
         return exports;
     });
