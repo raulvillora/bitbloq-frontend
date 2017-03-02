@@ -148,7 +148,7 @@
 
             $scope.deleteTask = function(task) {
                 var confirmAction = function() {
-                        centerModeApi.deleteTask(task._id).then(function() {
+                        exerciseApi.deleteTask(task._id).then(function() {
                             _.remove($scope.tasks, task);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteTask',

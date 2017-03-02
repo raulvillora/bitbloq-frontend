@@ -148,45 +148,59 @@ angular.module('bitbloqApp')
         };
 
         $scope.removeProject = function(project, type) {
-            if (type === 'exercise' || type === 'task') {
-                //add link: _undoRemoveExercise
-                exerciseApi.delete(project._id).then(function() {
-                    $log.log('we delete this project');
-                }, function(error) {
-                    $log.log('Delete error: ', error);
-                    alertsService.add({
-                        text: 'make-delete-project-error',
-                        id: 'deleted-project',
-                        type: 'warning'
+            switch (type) {
+                case 'exercise':
+                    exerciseApi.delete(project._id).then(function() {
+                        $log.log('we delete this project');
+                    }, function(error) {
+                        $log.log('Delete error: ', error);
+                        alertsService.add({
+                            text: 'make-delete-project-error',
+                            id: 'deleted-project',
+                            type: 'warning'
+                        });
                     });
-                });
-                $location.path('center-mode/teacher');
-            } else {
-                if (project._id) {
-                    $scope.common.removeProjects[project._id] = true;
-                    $scope.removeAlert[project._id] = alertsService.add({
-                        text: 'make-deleted-project',
-                        id: 'deleted-project' + project._id,
-                        type: 'warning',
-                        time: 7000,
-                        linkText: 'undo',
-                        link: _undoRemoveProject,
-                        linkParams: project._id,
-                        closeFunction: _deleteProject,
-                        closeParams: {
-                            _id: project._id,
-                            imageType: project.imageType
-                        }
+                    $location.path('center-mode/teacher');
+                    break;
+                case 'task':
+                    exerciseApi.deleteTask(project._id).then(function() {
+                        $log.log('we delete this project');
+                    }, function(error) {
+                        $log.log('Delete error: ', error);
+                        alertsService.add({
+                            text: 'make-delete-project-error',
+                            id: 'deleted-project',
+                            type: 'warning'
+                        });
                     });
-                    $location.path('projects');
-                } else {
-                    alertsService.add({
-                        text: 'make-delete-project-not-changed',
-                        id: 'deleted-project',
-                        type: 'ok',
-                        time: 5000
-                    });
-                }
+                    $location.path('center-mode/teacher');
+                    break;
+                default:
+                    if (project._id) {
+                        $scope.common.removeProjects[project._id] = true;
+                        $scope.removeAlert[project._id] = alertsService.add({
+                            text: 'make-deleted-project',
+                            id: 'deleted-project' + project._id,
+                            type: 'warning',
+                            time: 7000,
+                            linkText: 'undo',
+                            link: _undoRemoveProject,
+                            linkParams: project._id,
+                            closeFunction: _deleteProject,
+                            closeParams: {
+                                _id: project._id,
+                                imageType: project.imageType
+                            }
+                        });
+                        $location.path('projects');
+                    } else {
+                        alertsService.add({
+                            text: 'make-delete-project-not-changed',
+                            id: 'deleted-project',
+                            type: 'ok',
+                            time: 5000
+                        });
+                    }
             }
         };
 
