@@ -281,7 +281,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.hardware.cleanSchema();
                 $scope.deleteBTComponent();
                 _addRobot(data);
-                if (robotFamily && (!$scope.common.user.thirdPartyRobots || !$scope.common.user.thirdPartyRobots[robotFamily])) {
+                //  if (robotFamily && (!$scope.common.user.thirdPartyRobots || !$scope.common.user.thirdPartyRobots[robotFamily])) {
+                if (false) {
                     commonModals.activateRobot(robotFamily);
                 }
                 break;

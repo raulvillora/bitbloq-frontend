@@ -1,0 +1,24 @@
+<div class="modal-activate-robot--text">
+    {{'modal-activate-robot-text '|translate}}
+</div>
+<div class="modal--activate-robot--code">
+    {{'code' | translate}}
+</div>
+
+<form>
+    <span class="form--input activate--input" data-ng-class="{'input--focused':focus === 'browser'}">
+        <input type="text" ng-paste="handlePaste($event)" name="code-1" id="code-1" maxlength="8" placeholder="XXXXXXXX" move-next-on-maxlength ng-model="activationCode.field1" ng-pattern-restrict="^[A-Za-z0-9]*$" data-ng-focus="focus = 'browser'" data-ng-blur="focus = false" data-element="modal-activate-robot-code-1">
+    </span>
+    <span class="form--input activate--input" data-ng-class="{'input--focused':focus === 'browser'}">
+        <input type="text" name="code-2" id="code-2" maxlength="8" placeholder="XXXXXXXX" move-next-on-maxlength ng-model="activationCode.field2" ng-pattern-restrict="^[A-Za-z0-9]*$" data-ng-focus="focus = 'browser'" data-ng-blur="focus = false" data-element="modal-activate-robot-code-2">
+    </span>
+    <span class="form--input activate--input" data-ng-class="{'input--focused':focus === 'browser'}">
+        <input type="text" name="code-3" id="code-3" maxlength="8" placeholder="XXXXXXXX" move-next-on-maxlength ng-model="activationCode.field3" ng-pattern-restrict="^[a-zA-Z0-9]*$" data-ng-focus="focus = 'browser'" data-ng-blur="focus = false" data-element="modal-activate-robot-code-3">
+    </span>
+    <span class="form--input activate--input" data-ng-class="{'input--focused':focus === 'browser'}">
+        <input type="text" name="code-4" id="code-4" maxlength="8" placeholder="XXXXXXXX" move-next-on-maxlength ng-model="activationCode.field4" ng-pattern-restrict="^[a-zA-Z0-9]*$" data-ng-focus="focus = 'browser'" data-ng-blur="focus = false" data-element="modal-activate-robot-code-4">
+    </span>
+</form>
+<span class="form--error">
+    {{errorMessage}}
+</span>
