@@ -148,7 +148,7 @@ angular
         function getGroupsByExercise(exerciseId) {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'group/exercise/' + exerciseId
+                url: envData.config.centerModeUrl + 'assignment/exercise/' + exerciseId
             });
         }
 

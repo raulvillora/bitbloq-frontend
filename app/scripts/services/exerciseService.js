@@ -71,17 +71,20 @@ angular.module('bitbloqApp')
             centerModeApi.getGroups('teacher').then(function(response) {
                 var groups = response.data;
                 _.forEach(groups, function(group) {
-                    group.selected = oldGroups[group._id] ? true : false;
+                    group.selected = !!oldGroups[group._id];
                 });
 
                 function confirmAction(groups) {
                     var selectedGroups = _.filter(groups, {
                             'selected': true
                         }),
-                        removedGroups = _.map(_.filter(groups, {
-                            'selected': false
-                        }), '_id'),
-                        groupsToAssign = [];
+                        groupsToAssign = [],
+                        removedGroups = {
+                            groupIds: _.map(_.filter(groups, {
+                                'selected': false
+                            }), '_id'),
+                            exerciseId: project._id
+                        };
 
                     selectedGroups.forEach(function(group) {
                         if (group.students.length === 0) {
@@ -94,8 +97,8 @@ angular.module('bitbloqApp')
                         }
                         if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
                             groupsToAssign.push({
-                                _id: group._id,
-                                date: {}
+                                group: group._id,
+                                exercise: project._id
                             });
                         } else {
                             group.calendar.from.date = moment(group.calendar.from.date);
@@ -110,16 +113,15 @@ angular.module('bitbloqApp')
                             group.calendar.to.date.minute(minutesTo);
 
                             groupsToAssign.push({
-                                _id: group._id,
-                                date: {
-                                    initDate: group.calendar.from.date,
-                                    endDate: group.calendar.to.date
-                                }
+                                group: group._id,
+                                exercise: project._id,
+                                initDate: group.calendar.from.date,
+                                endDate: group.calendar.to.date
                             });
                         }
                     });
 
-                    exerciseApi.assignGroups(project._id, groupsToAssign, removedGroups).then(function(response) {
+                    exerciseApi.assignGroups(groupsToAssign, removedGroups).then(function(response) {
                         defered.resolve(response.data);
                         assignModal.close();
                         alertsService.add({

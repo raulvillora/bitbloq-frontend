@@ -210,7 +210,6 @@
                     },
                     parent = $rootScope,
                     modalOptions = parent.$new();
-                // student = $scope.student && $scope.student.firstName ? $scope.student.firstName + $scope.student.lastName : $scope.student.username;
                 _.extend(modalOptions, {
                     title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
                     confirmButton: 'button_delete',

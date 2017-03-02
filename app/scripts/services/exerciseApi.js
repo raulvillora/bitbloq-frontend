@@ -29,10 +29,10 @@ angular.module('bitbloqApp')
             userIsHeadmaster: userIsHeadmaster
         };
 
-        function assignGroups(idExercise, assignedGroups, removedGroups) {
+        function assignGroups(assignedGroups, removedGroups) {
             return $http({
                 method: 'PUT',
-                url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/assign',
+                url: envData.config.centerModeUrl + 'assignment/',
                 data: {
                     'assign': assignedGroups,
                     'remove': removedGroups
