@@ -592,147 +592,82 @@ angular.module('bitbloqApp')
                 'sp'
             ],
             "pinSize": {
-                "digital": {
-                    "w": 9,
-                    "h": 15
+                "red": {
+                    "w": 45,
+                    "h": 45
                 },
-                "analog": {
-                    "w": 9,
-                    "h": 15
+                "grey": {
+                    "w": 45,
+                    "h": 45
+                },
+                "yellow blue black white": {
+                    "w": 45,
+                    "h": 45
                 },
                 "serial": {
-                    "w": 33,
-                    "h": 66
-                },
-                "i2c-4": {
-                    "w": 9,
-                    "h": 9
-                },
-                "i2c-5": {
-                    "w": 9,
-                    "h": 9
+                    "w": 46,
+                    "h": 40
                 }
             },
             "pins": {
-                "digital": [{
-                    "x": 0.478,
-                    "y": 0.098,
-                    "name": "13",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad00"
-                }, {
-                    "x": 0.508,
-                    "y": 0.098,
-                    "name": "12",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad01"
-                }, {
-                    "x": 0.545,
-                    "y": 0.098,
-                    "name": "11",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad02"
-                }, {
-                    "x": 0.58,
-                    "y": 0.098,
-                    "name": "10",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad03"
-                }, {
-                    "x": 0.615,
-                    "y": 0.098,
-                    "name": "9",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad04"
-                }, {
-                    "x": 0.649,
-                    "y": 0.098,
-                    "name": "8",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad05"
-                }, {
-                    "x": 0.695,
-                    "y": 0.098,
-                    "name": "7",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad06"
-                }, {
-                    "x": 0.73,
-                    "y": 0.098,
-                    "name": "6",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad07"
-                }, {
-                    "x": 0.765,
-                    "y": 0.098,
-                    "name": "5",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad08"
-                }, {
-                    "x": 0.795,
-                    "y": 0.098,
-                    "name": "4",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad9"
-                }, {
-                    "x": 0.832,
-                    "y": 0.098,
-                    "name": "3",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad10"
-                }, {
-                    "x": 0.869,
-                    "y": 0.098,
-                    "name": "2",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad11"
-                }, {
-                    "x": 0.9,
-                    "y": 0.098,
+                "red": [{
+                    "x": 0.33,
+                    "y": 0.86,
                     "name": "1",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad12"
+                    "uid": "meauriga-red-1"
                 }, {
-                    "x": 0.935,
-                    "y": 0.098,
-                    "name": "0",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad13"
+                    "x": 0.48,
+                    "y": 0.86,
+                    "name": "2",
+                    "uid": "meauriga-red-2"
+                }, {
+                    "x": 0.63,
+                    "y": 0.86,
+                    "name": "3",
+                    "uid": "meauriga-red-3"
+                }, {
+                    "x": 0.78,
+                    "y": 0.86,
+                    "name": "4",
+                    "uid": "meauriga-red-4"
                 }],
-                "analog": [{
-                    "x": 0.763,
-                    "y": 0.92,
-                    "name": "A0",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa00"
+                "grey": [{
+                    "x": 0.925,
+                    "y": 0.86,
+                    "name": "5",
+                    "uid": "meauriga-grey-5"
+                }],
+                "yellow blue black white": [{
+                    "x": 0.925,
+                    "y": 0.13,
+                    "name": "6",
+                    "uid": "meauriga-yellowBlueBlackWhite-6"
                 }, {
-                    "x": 0.795,
-                    "y": 0.92,
-                    "name": "A1",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa01"
+                    "x": 0.78,
+                    "y": 0.13,
+                    "name": "7",
+                    "uid": "meauriga-yellowBlueBlackWhite-7"
                 }, {
-                    "x": 0.83,
-                    "y": 0.92,
-                    "name": "A2",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa02"
+                    "x": 0.63,
+                    "y": 0.13,
+                    "name": "8",
+                    "uid": "meauriga-yellowBlueBlackWhite-8"
                 }, {
-                    "x": 0.862,
-                    "y": 0.92,
-                    "name": "A3",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa03"
+                    "x": 0.48,
+                    "y": 0.13,
+                    "name": "9",
+                    "uid": "meauriga-yellowBlueBlackWhite-9"
                 }, {
-                    "x": 0.895,
-                    "y": 0.92,
-                    "name": "A4",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa04"
-                }, {
-                    "x": 0.935,
-                    "y": 0.92,
-                    "name": "A5",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53aa05"
+                    "x": 0.33,
+                    "y": 0.13,
+                    "name": "10",
+                    "uid": "meauriga-yellowBlueBlackWhite-10"
                 }],
                 "serial": [{
-                    "x": 0.045,
-                    "y": 0.315,
+                    "x": 0.08,
+                    "y": 0.585,
                     "name": "serial",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ac05"
-                }],
-                "i2c-4": [{
-                    "x": 0.903,
-                    "y": 0.925,
-                    "name": "A4-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a201"
-                }],
-                "i2c-5": [{
-                    "x": 0.933,
-                    "y": 0.925,
-                    "name": "A5-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a200"
+                    "uid": "meauriga-serial"
                 }]
             }
         }, {
