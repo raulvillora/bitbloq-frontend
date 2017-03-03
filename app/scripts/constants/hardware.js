@@ -580,9 +580,17 @@ angular.module('bitbloqApp')
             "name": "Me Auriga",
             "id": "meauriga",
             "mcu": "mega",
+            "manufacter": "makeblock",
             "vendorIds": [""],
             "productIds": [""],
             "underDevelopment": true,
+            "availableComponents": [
+                'mkb_infrared',
+                'mkb_lightsensor',
+                'mkb_linefollower',
+                'mkb_ultrasound',
+                'sp'
+            ],
             "pinSize": {
                 "digital": {
                     "w": 9,
@@ -771,53 +779,53 @@ angular.module('bitbloqApp')
             },
             "pins": {
                 "red": [{
-                    "x": 0.57,
-                    "y": 0.171,
+                    "x": 0.34,
+                    "y": 0.1,
                     "name": "1",
                     "uid": "morion-red-1"
                 }, {
-                    "x": 0.701,
-                    "y": 0.171,
+                    "x": 0.498,
+                    "y": 0.1,
                     "name": "2",
                     "uid": "morion-red-2"
                 }],
                 "yellow blue white": [{
-                    "x": 0.57,
-                    "y": 0.171,
+                    "x": 0.656,
+                    "y": 0.1,
                     "name": "3",
                     "uid": "morion-yellowBlueWhite-3"
                 }, {
-                    "x": 0.701,
-                    "y": 0.171,
+                    "x": 0.81,
+                    "y": 0.1,
                     "name": "4",
                     "uid": "morion-yellowBlueWhite-4"
                 }],
                 "yellow blue grey": [{
-                    "x": 0.57,
-                    "y": 0.171,
+                    "x": 0.81,
+                    "y": 0.885,
                     "name": "5",
                     "uid": "morion-yellowBlueGrey-5"
                 }],
                 "yellow blue black white": [{
-                    "x": 0.701,
-                    "y": 0.9,
+                    "x": 0.656,
+                    "y": 0.885,
                     "name": "6",
                     "uid": "morion-yellowBlueBlackWhite-6"
                 }],
                 "yellow black white": [{
-                    "x": 0.57,
-                    "y": 0.171,
+                    "x": 0.498,
+                    "y": 0.885,
                     "name": "7",
                     "uid": "morion-yellowBlackWhite-7"
                 }, {
-                    "x": 0.701,
-                    "y": 0.171,
+                    "x": 0.34,
+                    "y": 0.885,
                     "name": "8",
                     "uid": "morion-yellowBlackWhite-8"
                 }],
                 "serial": [{
-                    "x": 0.35,
-                    "y": 0.9,
+                    "x": 0.1,
+                    "y": 0.71,
                     "name": "serial",
                     "uid": "morion-serial"
                 }]
