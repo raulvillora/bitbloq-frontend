@@ -44,6 +44,13 @@
                     </svg>
                 </button>
             </li>
+            <li class="tabs__header__item--vertical toolbox-starterthreewheels" ng-class="{'selected--tab': selectedBloqsToolbox==='starterthreewheels'}" ng-show="currentProject.hardware.robot==='starterthreewheels' || currentProject.hardware.showRobotImage==='starterthreewheels'" data-element="toolbox-starterthreewheels">
+                <button class="btn-svg element-toolbox" ng-click="changeBloqsToolbox('starterthreewheels')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#robot"></use>
+                    </svg>
+                </button>
+            </li>
             <li class="tabs__header__item--vertical toolbox-phone" ng-class="{'selected--tab': selectedBloqsToolbox==='phone'}" ng-show="currentProject.useBitbloqConnect" data-element="toolbox-phone">
                 <button class="btn-svg element-toolbox" ng-click="changeBloqsToolbox('phone')">
                     <svg class="svg-icon">
@@ -125,7 +132,14 @@
             <li class="tabs__header__item--vertical toolbox-startertank" ng-class="{'selected--tab': selectedBloqsToolbox==='startertank'}" ng-show="currentProject.hardware.robot==='startertank' || currentProject.hardware.showRobotImage === 'startertank'" data-element="toolbox-startertank">
                 <button class="btn-svg element-toolbox">
                     <span class="input input--checkbox">
-                        <input type="checkbox" class="element-toolbox" id="allStaterTankBloqs" ng-model="starterTankCheckModel" data-indeterminate-checkbox data-counter-check="starterTankCheckCounter" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-basic-tab="startertank" data-advanced-tab="advancedStarterTank" data-update-state="statusGeneralCheck" />
+                        <input type="checkbox" class="element-toolbox" id="allStarterTankBloqs" ng-model="starterTankCheckModel" data-indeterminate-checkbox data-counter-check="starterTankCheckCounter" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-basic-tab="startertank" data-advanced-tab="advancedStarterTank" data-update-state="statusGeneralCheck" />
+                    </span>
+                </button>
+            </li>
+            <li class="tabs__header__item--vertical toolbox-starterthreewheels" ng-class="{'selected--tab': selectedBloqsToolbox==='starterthreewheels'}" ng-show="currentProject.hardware.robot==='starterthreewheels' || currentProject.hardware.showRobotImage === 'starterthreewheels'" data-element="toolbox-starterthreewheels">
+                <button class="btn-svg element-toolbox">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="allStarterThreeWheelsBloqs" ng-model="starterThreeWheelsCheckModel" data-indeterminate-checkbox data-counter-check="starterThreeWheelsCheckCounter" data-change-function="addChecks" data-selected-tab="selectedBloqsToolbox" data-basic-tab="starterhreewheels" data-advanced-tab="advancedstarterthreewheels" data-update-state="statusGeneralCheck" />
                     </span>
                 </button>
             </li>
@@ -233,6 +247,14 @@
             <li class="toolbox__item" ng-show="currentProject.hardware.robot==='startertank' || currentProject.hardware.showRobotImage === 'startertank'">
                 <button class="btn btn-text element-toolbox" ng-click="changeBloqsToolbox('startertank')">
                     {{'make-swtoolbox-startertank' | translate}}
+                    <svg class="svg-icon svg-icon--right">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
+            </li>
+            <li class="toolbox__item" ng-show="currentProject.hardware.robot==='starterthreewheels' || currentProject.hardware.showRobotImage === 'starterthreewheels'">
+                <button class="btn btn-text element-toolbox" ng-click="changeBloqsToolbox('starterthreewheels')">
+                    {{'make-swtoolbox-starterthreewheels' | translate}}
                     <svg class="svg-icon svg-icon--right">
                         <use xlink:href="#arrow"></use>
                     </svg>
@@ -386,6 +408,14 @@
                 <li id="{{'bloq' + startertank.name}}" data-ng-class="startertank.addClass" data-ng-repeat="startertank in common.properties.bloqsSortTree.startertank" ng-show="showMBotComponents(startertank.name) && common.section !== 'task' || currentProject.selectedBloqs.startertank.indexOf(startertank.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.startertank[$index].name]" data-components-array="currentProjectService.componentsArray">
                     <span class="input input--checkbox">
                         <input type="checkbox" class="element-toolbox" id="{{startertank.name + 'Check'}}" ng-model="checkModel[startertank.name]" ng-click="addChecks('startertank', checkModel[startertank.name], startertank.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.startertank" />
+                    </span>
+                </li>
+            </ul>
+            <!-- starterthreewheels-->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='starterthreewheels' && currentProject.hardware.showRobotImage">
+                <li id="{{'bloq' + starterthreewheels.name}}" data-ng-class="starterthreewheels.addClass" data-ng-repeat="starterthreewheels in common.properties.bloqsSortTree.starterthreewheels" ng-show="showMBotComponents(starterthreewheels.name) && common.section !== 'task' || currentProject.selectedBloqs.starterthreewheels.indexOf(starterthreewheels.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.starterthreewheels[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{starterthreewheels.name + 'Check'}}" ng-model="checkModel[starterthreewheels.name]" ng-click="addChecks('starterthreewheels', checkModel[starterthreewheels.name], starterthreewheels.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.starterthreewheels" />
                     </span>
                 </li>
             </ul>
