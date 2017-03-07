@@ -70,10 +70,10 @@ module.exports = function(config) {
             '../bower_components/angular-datepicker/dist/angular-datepicker.js',
             '../bower_components/wickedpicker/dist/wickedpicker.min.js',
             '../bower_components/wickedpicker/src/wickedpicker.js',
+            '../bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js',
             '../bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js',
             '../bower_components/autogrow/autogrow.js',
             '../bower_components/bloqs/dist/bloqs.min.js',
-            '../bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js',
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
             '../app/scripts/**/*.js',

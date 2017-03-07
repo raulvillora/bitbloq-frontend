@@ -335,9 +335,16 @@ angular.module('bitbloqApp')
         };
 
         $scope.performFactoryReset = function() {
-            var robot = $scope.currentProject.hardware.robot,
-                version = $scope.common.properties.robotsFirmwareVersion[robot];
-            robotFirmwareApi.getFirmware(robot, version).then(function(result) {
+            var base = $scope.currentProject.hardware.robot,
+                version;
+            if (base) {
+                version = $scope.common.properties.robotsFirmwareVersion[base];
+            } else {
+                base = $scope.currentProject.hardware.board;
+                version = $scope.common.properties.boardsFirmwareVersion[base];
+            }
+
+            robotFirmwareApi.getFirmware(base, version).then(function(result) {
                 if ($scope.common.useChromeExtension()) {
                     web2boardOnline.upload({
                         hex: result.data,
