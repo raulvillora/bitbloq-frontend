@@ -190,8 +190,8 @@
             {{'share' | translate}}
         </button>
         <ul data-ng-class="{actions__menu__dropdown:true, 'actions--share':true, hidden:dropdown !== 'share', 'actions__menu--selected':dropdown === 'share'}">
-            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':!isRobotActivated()?'activate-robot-explore':'publish-project') | translate}}" data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section) || !isRobotActivated()}}">
-                <div class="dropdown__item" data-ng-click="publishProject()" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id || !isRobotActivated()" data-ng-if="!currentProject._acl.ALL" data-element="makeactions-menushare-publish">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':isThirdPartyRobot()?'activate-robot-explore':'publish-project') | translate}}" data-tooltips="{{!currentProject._id || !common.user || !utils.userIsOwner(currentProject, common.user._id, common.section) || isThirdPartyRobot()}}">
+                <div class="dropdown__item" data-ng-click="publishProject()" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id || isThirdPartyRobot()" data-ng-if="!currentProject._acl.ALL" data-element="makeactions-menushare-publish">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#publish"></use>
                     </svg>
