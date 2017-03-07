@@ -130,13 +130,6 @@
         }, {
             "name": "return"
         }],
-        "advancedMBot": [{
-            "name": "mBotBuzzerAdvanced"
-        }, {
-            "name": "mBotMoveAdvanced"
-        }, {
-            "name": "mBotSetLedAdvanced"
-        }],
         "advancedMRanger": [{
             "name": "mRangerBuzzerAdvanced"
         }, {
@@ -213,6 +206,8 @@
         }, {
             "name": "buzzer"
         }, {
+            "name": "mBotBuzzer-v2"
+        }, {
             "name": "continuousServoStart"
         }, {
             "name": "continuousServoStop"
@@ -246,6 +241,8 @@
             "name": "oscillatorStop"
         }, {
             "name": "readSensor"
+        }, {
+            "name": "mBotGetDistance-v2"
         }, {
             "name": "servoNormal"
         }, {
@@ -333,6 +330,41 @@
             "name": "mBotSetLed"
         }, {
             "name": "mBotLineFollower"
+        }],
+        "mBotV2": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
+        "startertank": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
+        "starterthreewheels": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
+        "advancedMBot": [{
+            "name": "mBotBuzzerAdvanced"
+        }, {
+            "name": "mBotMoveAdvanced"
+        }, {
+            "name": "mBotSetLedAdvanced"
+        }],
+        "advancedMBotV2": [{
+            "name": "mBotBuzzerAdvanced"
+        }, {
+            "name": "mBotMoveAdvanced"
+        }, {
+            "name": "mBotSetLedAdvanced"
         }],
         "mRanger": [{
             "name": "mRangerBuzzer"

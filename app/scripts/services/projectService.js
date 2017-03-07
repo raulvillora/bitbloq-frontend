@@ -160,7 +160,7 @@ angular.module('bitbloqApp')
 
         exports.getBoardMetaData = function() {
             return _.find(hardwareConstants.boards, function(board) {
-                return board.name === exports.project.hardware.board;
+                return (board.id === exports.project.hardware.board || board.name === exports.project.hardware.board);
             });
         };
 
@@ -200,7 +200,7 @@ angular.module('bitbloqApp')
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
-                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
+                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true),
                 }, hardware);
             }
             return code;
@@ -347,8 +347,11 @@ angular.module('bitbloqApp')
         };
         //temp fix to code refactor, sensor types
         var sensorsTypes = {};
-        for (var i = 0; i < hardwareConstants.components.sensors.length; i++) {
-            sensorsTypes[hardwareConstants.components.sensors[i].id] = hardwareConstants.components.sensors[i].dataReturnType;
+        var sensorsArray = _.filter(hardwareConstants.components, {
+            category: 'sensors'
+        });
+        for (var i = 0; i < sensorsArray.length; i++) {
+            sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
             if (newproject.hardware.components) {
@@ -548,8 +551,12 @@ angular.module('bitbloqApp')
                         return newElem;
                     });
 
-                    exports.project.hardware.components = _.cloneDeep(schema.components);
                     exports.project.hardware.connections = _.cloneDeep(schema.connections);
+
+                    //concat integrated hardware and connected hardware
+                    exports.project.hardware.components = _.filter(exports.project.hardware.components, {
+                        integratedComponent: true
+                    }).concat(schema.components);
                 }
             }
         }

@@ -490,10 +490,13 @@ angular.module('bitbloqApp')
 
             }
         };
-        //temp fix to code refactor, sensor types
+        ///temp fix to code refactor, sensor types
         var sensorsTypes = {};
-        for (var i = 0; i < hardwareConstants.components.sensors.length; i++) {
-            sensorsTypes[hardwareConstants.components.sensors[i].id] = hardwareConstants.components.sensors[i].dataReturnType;
+        var sensorsArray = _.filter(hardwareConstants.components, {
+            category: 'sensors'
+        });
+        for (var i = 0; i < sensorsArray.length; i++) {
+            sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
 
         exports.setExercise = function(newExercise) {

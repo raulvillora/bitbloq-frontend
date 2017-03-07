@@ -1,4 +1,5 @@
 // Modals
+
 .ngdialog-close:before {
     color: #c0c3c9;
     position: relative;
@@ -7,7 +8,6 @@
 
 .modal--container {
     text-align: center;
-
     /* May want to do this if there is risk the container may be narrower than the element inside */
     white-space: nowrap;
 
@@ -30,12 +30,12 @@
         vertical-align: middle;
     }
 
-    &.password-reset--modal,
+    &.modal--feedback-error,
     &.modal--input,
     &.modal--publish,
+    &.modal--send-comments,
     &.modal--share-no-users,
-    &.modal--feedback-error,
-    &.modal--send-comments {
+    &.password-reset--modal {
         .ngdialog-content {
             width: 500px;
         }
@@ -45,6 +45,7 @@
         .ngdialog-content {
             width: 580px;
         }
+
         .modal--information {
             .btn {
                 width: 187px;
@@ -238,13 +239,16 @@
         .ngdialog-content {
             width: 560px;
         }
+
         .modal {
             text-align: center;
         }
+
         .btn {
             padding-left: 3em;
             padding-right: 3em;
         }
+
         .tour--reject {
             margin-top: 24px;
         }
@@ -253,6 +257,21 @@
     &.modal--share-with-users {
         tags-input {
             margin-top: 20px;
+        }
+    }
+
+    &.modal--activate-robot {
+        .ngdialog-content {
+            width: 670px;
+
+            .btn--reject {
+                margin-left: 30px;
+            }
+        }
+
+        form {
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
     }
 
@@ -436,9 +455,11 @@
     .modal__dialog {
         height: 100%;
     }
+
     .modal__dialog__content {
         height: 100%;
     }
+
     .modal__header {
         width: 100%;
         height: 60px;
@@ -451,8 +472,8 @@
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
 
-        h1,
-        .modal--close {
+        .modal--close,
+        h1 {
             display: inline-block;
             border-top-right-radius: 5px;
         }
@@ -492,8 +513,10 @@
 
     .modal__body {
         padding: 30px;
+
         .modal__parraph {
             margin-bottom: 17px;
+
             & + .modal__input {
                 margin-top: 27px;
             }
@@ -567,6 +590,7 @@
     padding: 17px;
     text-align: center;
     background-color: #f1f1f1;
+
     .link--modal {
         color: #373b44;
     }
@@ -577,19 +601,23 @@
         width: 546px;
         padding: 50px;
     }
+
     .modal--web2board-errors--title {
         text-align: center;
         margin: 20px 0;
     }
+
     .modal--web2board-errors--content {
         margin: 30px;
     }
+
     .modal--web2board-errors--text {
         margin: 20px 0;
     }
 
     .modal--web2board-errors--list {
         margin: 5px 0;
+
         .svg-icon {
             fill: #82ad3a;
             width: 15px;
@@ -614,15 +642,14 @@
 .modal_input_secondaryText {
     font-size: 25px;
     margin-top: 15px;
+
     &::before {
-        content: 'ID '
+        content: 'ID ';
     }
 }
-
 /*
 * simple and information modals
 */
-
 .modal--information {
     text-align: center;
     display: block;
@@ -631,11 +658,13 @@
         padding-top: 30px;
         border-bottom: none;
         padding-left: 0;
+
         h1 {
             border-right: 0;
             padding-left: 0;
         }
     }
+
     .modal--title {
         font-size: 21px;
         font-weight: bold;
@@ -650,14 +679,15 @@
 
     .modal_alert > *:not(.btn) {
         display: block;
-        margin: 37px auto 25px auto;
+        margin: 37px auto 25px;
     }
+
     .modal_alert > *:first-child {
         margin-top: 10px;
     }
 
     .modal_alert .text-content {
-        margin: 25px auto 15px auto;
+        margin: 25px auto 15px;
     }
 
     .modal--buttons button {
@@ -670,6 +700,7 @@
 
     .objective-list {
         text-align: left;
+
         li {
             vertical-align: middle;
             margin: 10px 0;
@@ -677,10 +708,11 @@
             padding-left: 1.8em;
             line-height: 1.57;
         }
+
         li::before {
             content: '';
             margin-right: 11.5px;
-            background-image: url(../images/common/tickGreen.svg);
+            background-image: url("../images/common/tickGreen.svg");
             background-size: 13px 10px;
             background-repeat: no-repeat;
             display: inline-block;
@@ -693,12 +725,14 @@
         .row {
             margin-top: 10px;
         }
+
         label {
             text-align: right;
             height: 35px;
             line-height: 2.5;
             font-size: 13px;
         }
+
         & input {
             width: 324px;
             height: 35px;
@@ -706,6 +740,7 @@
             background-color: #ffffff;
             border: solid 1px #cfcfcf;
         }
+
         small {
             padding-left: 0;
         }
@@ -718,5 +753,4 @@
     .modal__body {
         padding: 25px 52px;
     }
-
 }

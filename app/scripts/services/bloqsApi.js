@@ -42,6 +42,7 @@ angular.module('bitbloqApp')
                 } else {
                     requestBloqs(pageSize, ++page);
                 }
+
             }).error(function(error) {
                 loadedBloqsPromise.reject(error);
             });
