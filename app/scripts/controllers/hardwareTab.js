@@ -286,14 +286,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.deleteBTComponent();
                 _addRobot(data);
                 if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
-                    //if (false) {
-                    commonModals.activateRobot(robotFamily).then(function(res) {
-                        if (res === 'activate') {
-                            $scope.daysLeft = null;
-                        } else if (res === 'trial') {
-                            $scope.daysLeft = 2;
-                        }
-                    });
+                    $scope.showActivationModal(false, robotFamily);
                 } else {
                     var endDate = thirdPartyRobots[robotFamily].expirationDate;
                     $scope.daysLeft = endDate ? getDaysleft(endDate) : null;
@@ -326,11 +319,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         return parseInt(moment(expirationDate).diff(moment(), 'days'));
     }
 
-    $scope.showActivationModal = function() {
-        var showRobotImage = $scope.currentProject.hardware.showRobotImage;
-        commonModals.activateRobot($scope.robotsMap[showRobotImage].family, true).then(function(res) {
+    $scope.showActivationModal = function(trialUsed, robotFamily) {
+        var robotModal = robotFamily ? robotFamily : $scope.robotsMap[$scope.currentProject.hardware.showRobotImage].family;
+        commonModals.activateRobot(robotModal, trialUsed).then(function(res) {
             if (res === 'activate') {
                 $scope.daysLeft = null;
+                projectService.startAutosave(true);
             } else if (res === 'trial') {
                 $scope.daysLeft = 2;
             }
@@ -965,7 +959,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.hwBasicsLoaded.promise.then(function() {
             if ($scope.currentProject.hardware.robot) {
-                //
                 var robotReference = currentProjectService.getRobotMetaData();
                 hwSchema.robot = robotReference; //The whole board object is passed
             } else if ($scope.currentProject.hardware.board) {
