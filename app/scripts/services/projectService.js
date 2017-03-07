@@ -43,6 +43,7 @@ angular.module('bitbloqApp')
          * 2 = Save correct
          * 3 = Saved Error
          * 4 = Dont Allowed to do Save
+         * 5 = Robot not activated, dont allow to do save
          * @type {Number}
          */
         exports.saveStatus = 0;
@@ -52,7 +53,8 @@ angular.module('bitbloqApp')
             1: 'make-saving',
             2: 'make-project-saved-ok',
             3: 'make-project-saved-ko',
-            4: 'make-project-not-allow-to-save'
+            4: 'make-project-not-allow-to-save',
+            5: 'make-project-not-saving-activated'
         };
 
         exports.tempImage = {};
@@ -418,6 +420,10 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        exports.isRobotActivated = function() {
+            return canUseThirdParty(getFamilyName(exports.project.hardware.showRobotImage));
+        };
+
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //----------------- Private functions ---------------------------------
@@ -464,20 +470,25 @@ angular.module('bitbloqApp')
 
                 if (exports.project._id) {
                     if (!exports.project._acl || (exports.project._acl['user:' + common.user._id] && exports.project._acl['user:' + common.user._id].permission === 'ADMIN')) {
-                        return projectApi.update(exports.project._id, exports.getCleanProject()).then(function(response) {
-                            if (response.status === 200) {
-                                exports.saveStatus = 2;
-                                exports.saveOldProject();
-                                localStorage.projectsChange = true;
-                            } else {
-                                exports.saveStatus = 3;
-                            }
-                            if (exports.tempImage.file) {
-                                imageApi.save(exports.project._id, exports.tempImage.file).then(function() {
-                                    exports.tempImage = {};
-                                });
-                            }
-                        });
+                        if (exports.project.hardware.showRobotImage && !exports.isRobotActivated()) {
+                            exports.saveStatus = 5;
+                            defered.reject();
+                        } else {
+                            return projectApi.update(exports.project._id, exports.getCleanProject()).then(function(response) {
+                                if (response.status === 200) {
+                                    exports.saveStatus = 2;
+                                    exports.saveOldProject();
+                                    localStorage.projectsChange = true;
+                                } else {
+                                    exports.saveStatus = 3;
+                                }
+                                if (exports.tempImage.file) {
+                                    imageApi.save(exports.project._id, exports.tempImage.file).then(function() {
+                                        exports.tempImage = {};
+                                    });
+                                }
+                            });
+                        }
                     } else {
                         exports.saveStatus = 4;
                         defered.reject();
@@ -677,6 +688,28 @@ angular.module('bitbloqApp')
             if (_thereIsWatcher('project.code')) {
                 codeWatcher();
             }
+        }
+
+        function getFamilyName(robot) {
+            var robotFamily;
+            hardwareConstants.robots.forEach(function(value) {
+                if (value.id === robot) {
+                    robotFamily = value.family;
+                }
+            });
+
+            return robotFamily;
+        }
+
+        function canUseThirdParty(robot) {
+            var canUse = false;
+            if (common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment().isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
+                canUse = true;
+            } else {
+                canUse = false;
+            }
+            return canUse;
+
         }
 
         $rootScope.$on('$locationChangeStart', function(event) {

@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils) {
+    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils, userRobotsApi) {
 
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -181,8 +181,12 @@ angular.module('bitbloqApp')
                 if (user.username) {
                     delete user.$promise;
                     delete user.$resolved;
-                    exports.setUser(user);
-                    exports.userIsLoaded = true;
+                    userRobotsApi.getUserRobots(user._id).then(function(res) {
+                        user.thirdPartyRobots = res.data;
+                    }).finally(function() {
+                        exports.setUser(user);
+                        exports.userIsLoaded = true;
+                    });
                 } else {
                     exports.userIsLoaded = true;
                     exports.setUser(null);

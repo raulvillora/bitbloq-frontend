@@ -23,6 +23,11 @@ angular.module('bitbloqApp')
             translateChangeStartEvent,
             bloqsTabsEvent;
 
+        var consumerKeyWatcher,
+            consumerSecretWatcher,
+            tokenWatcher,
+            tokenSecretWatcher;
+
         $scope.bloqsApi = bloqsApi;
         $scope.currentProject = $scope.currentProject || projectService.project;
         $scope.lastPosition = 0;
@@ -365,6 +370,11 @@ angular.module('bitbloqApp')
         };
         $scope.clickTwitterConfig = function() {
             $scope.twitterSettings = !$scope.twitterSettings;
+            if ($scope.twitterSettings) {
+                startTwitterWatchers();
+            } else {
+                deleteTwitterWatchers();
+            }
         };
 
         $scope.setSoftwareTab = function(tab) {
@@ -476,6 +486,7 @@ angular.module('bitbloqApp')
 
             if ($('#twitter-config-button:hover').length === 0 && $('#twitter-content:hover').length === 0) {
                 $scope.twitterSettings = false;
+                deleteTwitterWatchers();
                 if (!$scope.$$phase) {
                     $scope.$digest();
                 }
@@ -704,6 +715,7 @@ angular.module('bitbloqApp')
                 $scope.toolbox.level = 1;
                 $timeout(function() {
                     $scope.twitterSettings = true;
+                    startTwitterWatchers();
                 }, 500);
             }
             _.throttle(setScrollsDimension, 1000);
@@ -742,29 +754,46 @@ angular.module('bitbloqApp')
         $document.on('contextmenu', contextMenuDocumentHandler);
         $document.on('click', clickDocumentHandler);
 
-        $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                currentProjectService.saveTwitterApp();
-            }
-        });
+        function startTwitterWatchers() {
+            consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    currentProjectService.saveTwitterApp();
+                }
+            });
 
-        $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                currentProjectService.saveTwitterApp();
-            }
-        });
+            consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    currentProjectService.saveTwitterApp();
+                }
+            });
 
-        $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                currentProjectService.saveTwitterApp();
-            }
-        });
+            tokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    currentProjectService.saveTwitterApp();
+                }
+            });
 
-        $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
-            if (oldValue && oldValue !== newValue) {
-                currentProjectService.saveTwitterApp();
+            tokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    currentProjectService.saveTwitterApp();
+                }
+            });
+        }
+
+        function deleteTwitterWatchers() {
+            if (consumerKeyWatcher) {
+                consumerKeyWatcher();
             }
-        });
+            if (consumerSecretWatcher) {
+                consumerSecretWatcher();
+            }
+            if (tokenWatcher) {
+                tokenWatcher();
+            }
+            if (tokenSecretWatcher) {
+                tokenSecretWatcher();
+            }
+        }
 
         $window.onresize = function() {
             $timeout(function() {

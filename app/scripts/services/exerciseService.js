@@ -28,8 +28,7 @@ angular.module('bitbloqApp')
             confirmDeleteModal;
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {
-        };
+        exports.editDate = function() {};
 
         exports.clone = function(exercise) {
             if (!exercise) {
@@ -620,8 +619,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && exports.exercise.teacher === common.user._id) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;

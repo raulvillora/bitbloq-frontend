@@ -21,6 +21,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.selectedToolbox = '';
     $scope.currentProject = $scope.currentProject || projectService.project;
     $scope.isEmptyComponentArray = currentProjectService.isEmptyComponentArray;
+    $scope.daysLeft = null;
 
     $scope.changeToolbox = function(tab, event) {
         if (tab !== '') {
@@ -251,6 +252,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
+                $scope.daysLeft = null;
                 var board = _.find($scope.hardware.boardList, function(board) {
                     return board.id === data.id;
                 });
@@ -277,16 +279,28 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addComponent(data);
                 break;
             case 'robots':
+                $scope.daysLeft = null;
                 var robotFamily = $scope.robotsMap[data.id].family;
+                var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
                 $scope.hardware.cleanSchema();
                 $scope.deleteBTComponent();
                 _addRobot(data);
-                //  if (robotFamily && (!$scope.common.user.thirdPartyRobots || !$scope.common.user.thirdPartyRobots[robotFamily])) {
-                if (false) {
-                    commonModals.activateRobot(robotFamily);
+                if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
+                    //if (false) {
+                    commonModals.activateRobot(robotFamily).then(function(res) {
+                        if (res === 'activate') {
+                            $scope.daysLeft = null;
+                        } else if (res === 'trial') {
+                            $scope.daysLeft = 2;
+                        }
+                    });
+                } else {
+                    var endDate = thirdPartyRobots[robotFamily].expirationDate;
+                    $scope.daysLeft = endDate ? getDaysleft(endDate) : null;
                 }
                 break;
             case 'btComponent':
+                $scope.daysLeft = null;
                 if (!$scope.currentProject.hardware.board) {
                     $scope.subMenuHandler('boards', 'open', 1);
                     alertsService.add({
@@ -306,6 +320,25 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 break;
         }
 
+    };
+
+    function getDaysleft(expirationDate) {
+        return parseInt(moment(expirationDate).diff(moment(), 'days'));
+    }
+
+    $scope.showActivationModal = function() {
+        var showRobotImage = $scope.currentProject.hardware.showRobotImage;
+        commonModals.activateRobot($scope.robotsMap[showRobotImage].family, true).then(function(res) {
+            if (res === 'activate') {
+                $scope.daysLeft = null;
+            } else if (res === 'trial') {
+                $scope.daysLeft = 2;
+            }
+        });
+    };
+
+    $scope.closeActivationWarning = function() {
+        $scope.daysLeft = null;
     };
 
     function _addBtComponent() {
@@ -932,10 +965,16 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.hwBasicsLoaded.promise.then(function() {
             if ($scope.currentProject.hardware.robot) {
+                //
                 var robotReference = currentProjectService.getRobotMetaData();
                 hwSchema.robot = robotReference; //The whole board object is passed
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
+                var showRobotImage = $scope.currentProject.hardware.showRobotImage;
+                if (showRobotImage) {
+                    var endDate = $scope.common.user.thirdPartyRobots[$scope.robotsMap[showRobotImage].family].expirationDate;
+                    $scope.daysLeft = endDate ? getDaysleft(endDate) : null;
+                }
                 hwSchema.board = boardReference; //The whole board object is passed
             }
 

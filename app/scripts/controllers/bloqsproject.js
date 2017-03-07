@@ -10,9 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-                                             $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-                                             projectService, hardwareConstants, chromeAppApi)
-    {
+        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        projectService, hardwareConstants, chromeAppApi) {
 
         /*************************************************
          Project save / edit
@@ -500,7 +499,26 @@ angular.module('bitbloqApp')
             return code;
         }
 
+        $scope.isRobotActivated = projectService.isRobotActivated;
+
         $scope.verify = function() {
+            if (projectService.project.hardware.showRobotImage) {
+                if ($scope.isRobotActivated()) {
+                    compile();
+                } else {
+                    alertsService.add({
+                        text: 'robots-not-activated-compile',
+                        id: 'thirdPartyError',
+                        type: 'error',
+                        time: 'infinite'
+                    });
+                }
+            } else {
+                compile();
+            }
+        };
+
+        function compile() {
             if ($scope.common.useChromeExtension()) {
                 web2boardOnline.compile({
                     board: projectService.getBoardMetaData(),
@@ -513,12 +531,29 @@ angular.module('bitbloqApp')
                     verifyW2b1();
                 }
             }
-
-        };
+        }
         var warningShown;
 
         $scope.upload = function(code) {
+            if (projectService.project.hardware.showRobotImage) {
+                if ($scope.isRobotActivated()) {
+                    upload(code);
+                } else {
+                    alertsService.add({
+                        text: 'robots-not-activated-upload',
+                        id: 'thirdPartyError',
+                        type: 'error',
+                        time: 'infinite'
+                    });
+                }
+            } else {
+                upload(code);
+            }
+        };
+
+        function upload(code) {
             var viewer;
+
             viewer = !!code;
             if (projectService.project.hardware.board) {
                 if (projectService.project.hardware.robot === 'mBot') {
@@ -547,7 +582,6 @@ angular.module('bitbloqApp')
                         }
                     }
                 } else {
-
                     if (showCompileWarning(projectService.project) && !warningShown) {
                         alertsService.add({
                             text: 'connect_alert_01',
@@ -599,7 +633,7 @@ angular.module('bitbloqApp')
                 });
             }
 
-        };
+        }
 
         function showCompileWarning(project) {
             var compileWarning;
@@ -886,11 +920,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -1064,8 +1098,7 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
 
                 event.preventDefault();
             }
