@@ -964,7 +964,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
-                if (showRobotImage) {
+                if ($scope.common.user && showRobotImage) {
                     var endDate = $scope.common.user.thirdPartyRobots[$scope.robotsMap[showRobotImage].family].expirationDate;
                     $scope.daysLeft = endDate ? getDaysleft(endDate) : null;
                 }

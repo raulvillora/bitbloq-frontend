@@ -234,6 +234,10 @@ angular.module('bitbloqApp')
             });
         };
 
+        $scope.isThirdPartyRobot = function() {
+            return $scope.currentProject.hardware.showRobotImage ? true : false;
+        };
+
         $rootScope.$on('viewer-code:ready', function() {
             if (show) {
                 var componentsJSON = $scope.getComponents($scope.currentProject.hardware.components);

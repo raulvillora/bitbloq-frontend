@@ -650,6 +650,7 @@ angular.module('bitbloqApp')
                     if (newVal !== oldVal) {
                         exports.startAutosave();
                     }
+                    canUseThirdParty
                 });
                 exports.addWatchers();
             }
@@ -703,7 +704,7 @@ angular.module('bitbloqApp')
 
         function canUseThirdParty(robot) {
             var canUse = false;
-            if (common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment().isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
+            if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment().isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
                 canUse = true;
             } else {
                 canUse = false;
