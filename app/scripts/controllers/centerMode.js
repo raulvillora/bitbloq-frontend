@@ -735,7 +735,17 @@
             };
 
             $scope.common.itsUserLoaded().then(function() {
-                _checkUrl();
+                $scope.common.itsRoleLoaded().then(function() {
+                    switch ($scope.common.userRole) {
+                        case 'headmaster':
+                        case 'teacher':
+                        case 'student':
+                            _checkUrl();
+                            break;
+                        default:
+                            $location.path('/projects');
+                    }
+                });
             }, function() {
                 $scope.common.setUser();
                 alertsService.add({

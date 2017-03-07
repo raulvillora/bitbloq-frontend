@@ -161,7 +161,7 @@ angular
         function getMyRole() {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'user/role'
+                url: envData.config.centerModeUrl + 'member/role'
             });
         }
 
@@ -182,7 +182,7 @@ angular
         function isHeadmaster() {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'user/headmaster'
+                url: envData.config.centerModeUrl + 'member/headmaster'
             });
         }
 
