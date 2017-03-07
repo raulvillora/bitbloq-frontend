@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate, utils) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate) {
         $scope.focusHandler = function(evt) {
             $scope.focus = evt.currentTarget.name;
         };
@@ -68,7 +68,13 @@ angular.module('bitbloqApp')
         };
         $scope.checkAge = function(form) {
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                $scope.userUnder14Years = utils.userIsUnder14(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY');
+                var validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
+                if (!validBirthday) {
+                    var userBirthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
+                    var older = new Date();
+                    older.setYear(older.getFullYear() - 14);
+                    $scope.userUnder14Years = userBirthday >= older && userBirthday <= new Date();
+                }
             }
         };
 
@@ -101,8 +107,7 @@ angular.module('bitbloqApp')
             $scope.errors.disconnect = false;
 
             if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
-                    .isValid();
+                $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY').isValid();
                 if (!$scope.errors.register.validBirthday) {
                     if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
                         $scope.errors.register.validBirthday = true;
@@ -131,9 +136,14 @@ angular.module('bitbloqApp')
             }
 
             function _validateRegister() {
-                return !form.email.$invalid && !form.password.$invalid && !$scope.username.invalid && !form.username.$error.required &&
+                return !form.email.$invalid &&
+                    !form.password.$invalid &&
+                    !$scope.username.invalid &&
+                    !form.username.$error.required &&
                     $scope.username.free &&
-                    $scope.user.cookiePolicyAccepted && !$scope.errors.register.emptyBirthday && !$scope.errors.register.validBirthday &&
+                    $scope.user.cookiePolicyAccepted &&
+                    !$scope.errors.register.emptyBirthday &&
+                    !$scope.errors.register.validBirthday &&
                     (!$scope.userUnder14Years || ($scope.userUnder14Years && !form.tutorName.$invalid && !form.tutorSurname.$invalid && !form.tutorEmail.$invalid && !$scope.errors.register.sameTutorEmail));
             }
 
@@ -167,32 +177,12 @@ angular.module('bitbloqApp')
         };
 
         $scope.registerSocial = function(form) {
-            form.readServiceTerm.submitted = true;
-            if (form.birthday) {
-                form.birthday.submitted = true;
-            }
-            form.tutorName.submitted = true;
-            form.tutorSurname.submitted = true;
-            form.tutorEmail.submitted = true;
-            $scope.errors.register = {
-                email: false,
-                birthday: false,
-                emptyBirthday: false,
-                validBirthday: false,
-                disconnect: false,
-                sameTutorEmail: false
-            };
-
-            $scope.errors.login.emailUserName = false;
-            $scope.errors.login.password = false;
-            $scope.errors.disconnect = false;
-            //no hacer el check name si $scope.username.free
-            var user = $scope.common.user || {};
-
             $scope.checkUserName().then(function() {
                 if ($scope.username.search && $scope.username.free && !$scope.username.invalid && !form.readServiceTerm.$error.required && !form.usernameSocial.$error.required) {
+                    var user = $scope.common.user || {};
                     user.username = form.usernameSocial.$modelValue;
                     user.hasBeenAskedIfTeacher = true;
+
                     _.extend($scope.providerOptions, {
                         'register': true
                     }, {
@@ -200,71 +190,23 @@ angular.module('bitbloqApp')
                     }, {
                         'hasBeenAskedIfTeacher': user.hasBeenAskedIfTeacher
                     });
-                }
-            });
 
-            if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
-                    .isValid();
-                if (!$scope.errors.register.validBirthday) {
-                    if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
-                        $scope.errors.register.validBirthday = true;
-                    }
-                    user.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
-                    var older = new Date();
-                    older.setYear(older.getFullYear() - 14);
-                    $scope.userUnder14Years = $scope.user.birthday >= older && $scope.user.birthday <= new Date();
+                    userApi.loginBySocialNetwork($scope.providerOptions).then(function(response) {
+                        $cookieStore.put('token', response.data.token);
+                        userApi.currentUser = User.get();
+                        userApi.currentUser.$promise.then(function(user) {
+                            $scope.common.setUser(user);
+                            if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                _goToHome();
+                            } else {
+                                teacherModal();
+                            }
+                        });
+                    });
                 } else {
                     fireShakeEffect();
                 }
-            } else {
-                fireShakeEffect();
-                if (!form.year.$error.minlength) {
-                    $scope.errors.register.emptyBirthday = true;
-                    $scope.errors.register.validBirthday = false;
-                } else {
-                    $scope.errors.register.validBirthday = true;
-                }
-            }
-
-            if ($scope.userUnder14Years && $scope.user.tutor) {
-                if ($scope.user.email === $scope.user.tutor.email) {
-                    $scope.errors.register.sameTutorEmail = true;
-                }
-            }
-
-            function _validateRegister() {
-                return !form.username.$error.required &&
-                    $scope.username.free &&
-                    $scope.user.cookiePolicyAccepted && !$scope.errors.register.emptyBirthday && !$scope.errors.register.validBirthday &&
-                    (!$scope.userUnder14Years || ($scope.userUnder14Years && !form.tutorName.$invalid && !form.tutorSurname.$invalid && !form.tutorEmail.$invalid && !$scope.errors.register.sameTutorEmail));
-            }
-
-            if (_validateRegister()) {
-                if ($scope.userUnder14Years) {
-                    $scope.user.needValidation = true;
-                }
-
-                _.extend($scope.providerOptions, {
-                    'birthday': user.birthday
-                });
-
-                userApi.loginBySocialNetwork($scope.providerOptions).then(function(response) {
-                    $cookieStore.put('token', response.data.token);
-                    userApi.currentUser = User.get();
-                    userApi.currentUser.$promise.then(function(user) {
-                        $scope.common.setUser(user);
-                        if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                            _goToHome();
-                        } else {
-                            teacherModal();
-                        }
-                    });
-                });
-
-            } else {
-                fireShakeEffect();
-            }
+            });
         };
 
         $scope.checkUserName = function() {
@@ -461,11 +403,7 @@ angular.module('bitbloqApp')
 
         function isUserName() {
             var regexp = /^[0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/;
-            if ($scope.user.username.search(regexp) === -1) {
-                return false;
-            } else {
-                return true;
-            }
+            return $scope.user.username.search(regexp) !== -1;
         }
 
         function fireShakeEffect() {
