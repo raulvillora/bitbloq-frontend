@@ -856,14 +856,11 @@ angular.module('bitbloqApp')
                 modalButtons: true,
                 confirmButton: 'activate',
                 confirmAction: confirmAction,
-                extraButton: 'modal-activate-robot-test',
+                extraButton: trialUsed ? '' : 'modal-activate-robot-test',
                 extraAction: trialAction,
                 value: robotName,
                 handlePaste: handlePaste,
                 activationCode: activationCode,
-                conditionExtra: function() {
-                    return !trialUsed;
-                },
                 errorMessage: errorMessage,
                 rejectButton: 'modal-button-cancel',
                 contentTemplate: '/views/modals/activateRobot.html'
