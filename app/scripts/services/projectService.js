@@ -650,7 +650,6 @@ angular.module('bitbloqApp')
                     if (newVal !== oldVal) {
                         exports.startAutosave();
                     }
-                    canUseThirdParty
                 });
                 exports.addWatchers();
             }
