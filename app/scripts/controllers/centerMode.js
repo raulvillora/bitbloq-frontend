@@ -361,7 +361,7 @@
                 $log.debug('sortInstances', type);
                 switch (type) {
                     case 'explore-sortby-recent':
-                        $scope.orderInstance = 'dateCreated';
+                        $scope.orderInstance = 'createdAt';
                         $scope.reverseOrder = true;
                         break;
                     case 'email':
