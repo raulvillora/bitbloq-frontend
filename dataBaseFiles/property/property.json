@@ -338,6 +338,27 @@
         }, {
             "name": "mBotSomethingNear"
         }],
+        "rangerlandraider": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
+        "rangerraptor": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
+        "rangernervousbird": [{
+            "name": "mBotMove-v2"
+        }, {
+            "name": "mBotStop-v2"
+        }, {
+            "name": "mBotSomethingNear"
+        }],
         "startertank": [{
             "name": "mBotMove-v2"
         }, {
