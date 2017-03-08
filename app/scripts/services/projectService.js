@@ -390,6 +390,7 @@ angular.module('bitbloqApp')
                 common.session.save = true;
             }
         };
+
         exports.saveTwitterApp = function() {
             var defered = $q.defer();
 
@@ -557,6 +558,10 @@ angular.module('bitbloqApp')
             exports.project.hardware.components.forEach(function(comp) {
                 newHardwareTags.push(comp.id);
             });
+
+            if(exports.project.useBitbloqConnect){
+              newHardwareTags.push('bitbloqconnect');
+            }
             exports.project.hardwareTags = _.uniq(newHardwareTags);
         }
 

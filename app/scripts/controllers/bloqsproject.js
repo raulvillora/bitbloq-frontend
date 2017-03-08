@@ -446,6 +446,7 @@ angular.module('bitbloqApp')
                 code = code.substring(0, code.length - 1) + '\n\r';
                 serialName = components.sp;
                 code = generateViewerBloqCode(components, serialName, code);
+                code = code + '}';
             } else {
                 var serialCode = originalCode.split('/***   Included libraries  ***/');
                 serialCode[1] = '\n\r#include <SoftwareSerial.h>\n\r#include <BitbloqSoftwareSerial.h>' + serialCode[1];
@@ -454,8 +455,6 @@ angular.module('bitbloqApp')
                 code = code[0].substring(0, code[0].length - 1) + 'bqSoftwareSerial puerto_serie_0(0, 1, 9600);' + '\n\r' + '\n/***   Setup  ***/' + code[1];
                 code = generateViewerBloqCode(components, 'puerto_serie_0', code);
             }
-
-            code = code + '}';
             return code;
         }
 
@@ -554,6 +553,7 @@ angular.module('bitbloqApp')
             }
 
         };
+        var warningShown;
 
         $scope.upload = function(code) {
             var viewer;
@@ -585,6 +585,15 @@ angular.module('bitbloqApp')
                         }
                     }
                 } else {
+                    if (showCompileWarning(projectService.project) && !warningShown) {
+                        alertsService.add({
+                            text: 'connect_alert_01',
+                            id: 'connect-error',
+                            type: 'warning',
+                        });
+                        warningShown = true;
+                    }
+
                     if ($scope.common.useChromeExtension()) {
                         if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
                             web2boardOnline.compileAndUpload({
@@ -629,6 +638,23 @@ angular.module('bitbloqApp')
             }
 
         };
+
+        function showCompileWarning(project) {
+            var compileWarning;
+            var result;
+            _.forEach(project.hardware.components, function(component) {
+                compileWarning = _.findKey(component.pin, function(o) {
+                    return o === '1' || o === '0';
+                });
+            });
+
+            if (compileWarning) {
+                result = true;
+            } else {
+                result = false;
+            }
+            return result;
+        }
 
         function uploadWithWeb2board(code) {
             if (web2board.isWeb2boardV2()) {
@@ -742,6 +768,18 @@ angular.module('bitbloqApp')
             });
         };
 
+        function _resetDropdown(element, list) {
+            if (list[0]) {
+                element.dataset.reference = list[0].uid;
+                element.dataset.value = list[0].name;;
+                element.value = list[0].name;
+            } else {
+                delete element.dataset.reference;
+                delete element.dataset.value;
+            }
+            element.selectedIndex = 0;
+        };
+
         $scope.updateBloqs = function() {
 
             if (projectService.bloqs.varsBloq) {
@@ -774,11 +812,13 @@ angular.module('bitbloqApp')
                             element.value = componentRef.name;
                             element.dataset.reference = componentRef.uid;
                             element.dataset.value = componentRef.name;
+                        } else {
+                            _resetDropdown(element, list);
                         }
 
                     } else {
                         $log.debug('dropdown not selected');
-                        element.selectedIndex = 0;
+                        _resetDropdown(element, list);
                     }
                 };
                 var bloqCanvasEl = null;

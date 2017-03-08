@@ -1,6 +1,6 @@
 'use strict';
 angular.module('bitbloqApp')
-    .service('authInterceptor', function($log, $cookieStore, $q, $routeParams, alertsService) {
+    .service('authInterceptor', function($log, $cookieStore, $q, $routeParams, alertsService, $location, $window) {
         return {
             // Add authorization token to headers
             'request': function(config) {
@@ -18,15 +18,20 @@ angular.module('bitbloqApp')
                 switch (rejection.status) {
                     case 0: //server null
                         alertsService.add({
-                            text: 'generic_alert_errorServerNull',
+                            text: 'generic_alert_errorServerNull-2',
                             id: 'generic-error',
                             type: 'error'
                         });
                         break;
                     case 500: //Internal Server Error
                         alertsService.add({
-                            text: 'generic_alert_errorInternalServer',
+                            text: 'generic_alert_errorInternalServer-2',
                             id: 'generic-error',
+                            linkText: 'from-here',
+                            link: function() {
+                                $window.open('#/bitbloq-help/', '_blank');
+                                alertsService.closeByTag('generic-error');
+                            },
                             type: 'error'
                         });
                         break;
