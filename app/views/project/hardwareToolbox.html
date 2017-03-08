@@ -89,7 +89,7 @@
     <div class="toolbox__content" ng-show="selectedToolbox==='boards'">
         <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
         <ul class="toolbox__content-container">
-            <li class="toolbox__content__list" ng-if="!board.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="board in hardware.boardList track by board.id" data-ng-click="drop({type:'boards', id:board.id})">
+            <li class="toolbox__content__list" ng-if="board.showInToolbox && (!board.underDevelopment || common.user.seeBoardsUnderDevelopment)" ng-repeat="board in hardware.boardList track by board.id" data-ng-click="drop({type:'boards', id:board.id})">
                 <h1 class="list-name">{{board.name}}</h1>
                 <img draggable dragid="{{board.id}}" dragtype="boards" ng-src="/images/boards/{{board.id}}.png">
             </li>
@@ -113,7 +113,7 @@
         <ul class="toolbox__content-container">
             <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.id})">
                 <h1 class="list-name">{{robot.name}}</h1>
-                <img  ng-if="!robot.thirdParty && !common.user || common.user" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
+                <img ng-if="!robot.thirdParty && !common.user || common.user" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
                 <div ng-if="robot.thirdParty === true && !common.user" data-tooltips="true" data-tooltip="{{'need-to-be-logged-robot' | translate}}" data-tooltip-position="bottom">
                     <img class="component-image--device" draggable dragid="{{robot.id}}" dragtype="robots" ng-src="/images/robots/{{robot.id}}.svg" ng-style="{width:robot.width + 'px'}">
                 </div>
