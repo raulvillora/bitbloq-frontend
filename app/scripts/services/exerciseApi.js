@@ -14,6 +14,7 @@ angular.module('bitbloqApp')
             assignGroups: assignGroups,
             clone: clone,
             delete: deleteExercise,
+            deleteTask: deleteTask,
             get: get,
             getTask: getTask,
             getTasks: getTasks,
@@ -29,10 +30,10 @@ angular.module('bitbloqApp')
             userIsHeadmaster: userIsHeadmaster
         };
 
-        function assignGroups(idExercise, assignedGroups, removedGroups) {
+        function assignGroups(assignedGroups, removedGroups) {
             return $http({
                 method: 'PUT',
-                url: envData.config.centerModeUrl + 'exercise/' + idExercise + '/assign',
+                url: envData.config.centerModeUrl + 'assignment/',
                 data: {
                     'assign': assignedGroups,
                     'remove': removedGroups
@@ -55,6 +56,13 @@ angular.module('bitbloqApp')
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'exercise/' + idExercise
+            });
+        }
+
+        function deleteTask(idTask) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.centerModeUrl + 'task/' + idTask
             });
         }
 

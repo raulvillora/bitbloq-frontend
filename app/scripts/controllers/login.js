@@ -428,11 +428,7 @@ angular.module('bitbloqApp')
 
         function isUserName() {
             var regexp = /^[0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/;
-            if ($scope.user.username.search(regexp) === -1) {
-                return false;
-            } else {
-                return true;
-            }
+            return $scope.user.username.search(regexp) !== -1;
         }
 
         function fireShakeEffect() {

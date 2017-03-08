@@ -9,7 +9,6 @@ angular
             createGroup: createGroup,
             deleteGroup: deleteGroup,
             deleteStudent: deleteStudent,
-            deleteTask: deleteTask,
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
             getExercisesCount: getExercisesCount,
@@ -67,13 +66,6 @@ angular
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'group/' + groupId + '/student/' + studentId
-            });
-        }
-
-        function deleteTask(taskId) {
-            return $http({
-                method: 'DELETE',
-                url: envData.config.centerModeUrl + 'task/' + taskId
             });
         }
 
@@ -148,7 +140,7 @@ angular
         function getGroupsByExercise(exerciseId) {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'group/exercise/' + exerciseId
+                url: envData.config.centerModeUrl + 'assignment/exercise/' + exerciseId
             });
         }
 
@@ -169,7 +161,7 @@ angular
         function getMyRole() {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'user/role'
+                url: envData.config.centerModeUrl + 'member/role'
             });
         }
 
@@ -190,7 +182,7 @@ angular
         function isHeadmaster() {
             return $http({
                 method: 'HEAD',
-                url: envData.config.centerModeUrl + 'user/headmaster'
+                url: envData.config.centerModeUrl + 'member/headmaster'
             });
         }
 

@@ -148,7 +148,7 @@
 
             $scope.deleteTask = function(task) {
                 var confirmAction = function() {
-                        centerModeApi.deleteTask(task._id).then(function() {
+                        exerciseApi.deleteTask(task._id).then(function() {
                             _.remove($scope.tasks, task);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteTask',
@@ -210,7 +210,6 @@
                     },
                     parent = $rootScope,
                     modalOptions = parent.$new();
-                // student = $scope.student && $scope.student.firstName ? $scope.student.firstName + $scope.student.lastName : $scope.student.username;
                 _.extend(modalOptions, {
                     title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
                     confirmButton: 'button_delete',
@@ -362,7 +361,7 @@
                 $log.debug('sortInstances', type);
                 switch (type) {
                     case 'explore-sortby-recent':
-                        $scope.orderInstance = 'dateCreated';
+                        $scope.orderInstance = 'createdAt';
                         $scope.reverseOrder = true;
                         break;
                     case 'email':
@@ -736,7 +735,17 @@
             };
 
             $scope.common.itsUserLoaded().then(function() {
-                _checkUrl();
+                $scope.common.itsRoleLoaded().then(function() {
+                    switch ($scope.common.userRole) {
+                        case 'headmaster':
+                        case 'teacher':
+                        case 'student':
+                            _checkUrl();
+                            break;
+                        default:
+                            $location.path('/projects');
+                    }
+                });
             }, function() {
                 $scope.common.setUser();
                 alertsService.add({

@@ -73,6 +73,7 @@ angular.module('bitbloqApp')
             zh: 'en-GB'
         };
         var loadedUserPromise = $q.defer();
+        var loadedRolePromise = $q.defer();
 
         exports.setUser = function(user) {
             if (loadedUserPromise.promise.$$state.status !== 0) {
@@ -98,8 +99,11 @@ angular.module('bitbloqApp')
         };
 
         exports.itsUserLoaded = function() {
-            // loadedUserPromise.resolve();
             return loadedUserPromise.promise;
+        };
+
+        exports.itsRoleLoaded = function() {
+            return loadedRolePromise.promise;
         };
 
         var md = new MobileDetect(window.navigator.userAgent);
@@ -170,8 +174,13 @@ angular.module('bitbloqApp')
 
         function getUserRole() {
             centerModeApi.getMyRole().then(function(result) {
-                exports.userRole = result.data;
-            });
+                if (result.data && result.data !== '') {
+                    exports.userRole = result.data;
+                } else {
+                    exports.userRole = exports.user.role;
+                }
+                loadedRolePromise.resolve();
+            }).catch(loadedRolePromise.reject);
         }
 
         if (!exports.user) {

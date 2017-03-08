@@ -473,18 +473,27 @@ angular.module('bitbloqApp')
         };
 
         $scope.common.itsUserLoaded().then(function() {
-            $log.debug('There is a registed user');
-            if ($routeParams.id) {
-                loadExercise($routeParams.id).finally(function() {
-                    addExerciseWatchersAndListener();
-                });
-            } else {
-                addExerciseWatchersAndListener();
-                $scope.hwBasicsLoaded.promise.then(function() {
-                    $scope.$emit('drawHardware');
-                });
-                $scope.currentProjectLoaded.resolve();
-            }
+            $scope.common.itsRoleLoaded().then(function(){
+                switch ($scope.common.userRole) {
+                    case 'headmaster':
+                    case 'teacher':
+                    case 'student':
+                        if ($routeParams.id) {
+                            loadExercise($routeParams.id).finally(function() {
+                                addExerciseWatchersAndListener();
+                            });
+                        } else {
+                            addExerciseWatchersAndListener();
+                            $scope.hwBasicsLoaded.promise.then(function() {
+                                $scope.$emit('drawHardware');
+                            });
+                            $scope.currentProjectLoaded.resolve();
+                        }
+                        break;
+                    default:
+                        $location.path('/projects');
+                }
+            });
         }, function() {
             $scope.common.setUser();
             alertsService.add({

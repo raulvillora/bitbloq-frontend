@@ -442,6 +442,9 @@
 }
 
 .projects--view {
+  .tabs-layout__aside {
+    box-sizing: content-box;
+  }
   .tabs-layout__aside, .tabs-layout__content {
     padding: 0 30px;
   }
