@@ -21,6 +21,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.selectedToolbox = '';
     $scope.currentProject = $scope.currentProject || projectService.project;
     $scope.isEmptyComponentArray = currentProjectService.isEmptyComponentArray;
+    $scope.daysLeft = null;
 
     $scope.changeToolbox = function(tab, event) {
         if (tab !== '') {
@@ -251,6 +252,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
+                $scope.daysLeft = null;
                 var board = _.find($scope.hardware.boardList, function(board) {
                     return board.id === data.id;
                 });
@@ -277,16 +279,21 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addComponent(data);
                 break;
             case 'robots':
+                $scope.daysLeft = null;
                 var robotFamily = $scope.robotsMap[data.id].family;
+                var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
                 $scope.hardware.cleanSchema();
                 $scope.deleteBTComponent();
                 _addRobot(data);
-                //  if (robotFamily && (!$scope.common.user.thirdPartyRobots || !$scope.common.user.thirdPartyRobots[robotFamily])) {
-                if (false) {
-                    commonModals.activateRobot(robotFamily);
+                if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
+                    $scope.showActivationModal(false, robotFamily);
+                } else {
+                    var endDate = thirdPartyRobots[robotFamily].expirationDate;
+                    $scope.daysLeft = endDate ? getDaysleft(endDate) : null;
                 }
                 break;
             case 'btComponent':
+                $scope.daysLeft = null;
                 if (!$scope.currentProject.hardware.board) {
                     $scope.subMenuHandler('boards', 'open', 1);
                     alertsService.add({
@@ -306,6 +313,26 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 break;
         }
 
+    };
+
+    function getDaysleft(expirationDate) {
+        return parseInt(moment(expirationDate).diff(moment(), 'days'));
+    }
+
+    $scope.showActivationModal = function(trialUsed, robotFamily) {
+        var robotModal = robotFamily ? robotFamily : $scope.robotsMap[$scope.currentProject.hardware.showRobotImage].family;
+        commonModals.activateRobot(robotModal, trialUsed).then(function(res) {
+            if (res === 'activate') {
+                $scope.daysLeft = null;
+                projectService.startAutosave(true);
+            } else if (res === 'trial') {
+                $scope.daysLeft = 2;
+            }
+        });
+    };
+
+    $scope.closeActivationWarning = function() {
+        $scope.daysLeft = null;
     };
 
     function _addBtComponent() {
@@ -667,147 +694,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     }
 
-    function getZowiComponents() {
-        var components = [];
-
-        var buzzer = getComponentData('buzz', 'buzzers');
-        buzzer.name = $scope.common.translate('default-var-name-buzz').toLowerCase() + '_zowi';
-        buzzer.category = 'buzzers';
-        buzzer.pin = {
-            s: 10
-        };
-
-        var sp = getComponentData('sp', 'serialElements');
-        sp.name = $scope.common.translate('default-var-name-sp').toLowerCase() + '_zowi';
-        sp.category = 'serialElements';
-        sp.pin = {
-            s: 'serial'
-        };
-
-        var bt = getComponentData('bt', 'serialElements');
-        bt.name = $scope.common.translate('default-var-name-bt').toLowerCase() + '_zowi';
-        bt.category = 'serialElements';
-        bt.pin = {
-            rx: 0,
-            tx: 1
-        };
-
-        var sound = getComponentData('sound', 'sensors');
-        sound.name = $scope.common.translate('default-var-name-sound').toLowerCase() + '_zowi';
-        sound.category = 'sensors';
-        sound.pin = {
-            s: 'A6'
-        };
-
-        var us = getComponentData('us', 'sensors');
-        us.name = $scope.common.translate('default-var-name-us').toLowerCase() + '_zowi';
-        us.category = 'sensors';
-        us.pin = {
-            echo: 9,
-            trigger: 8
-        };
-
-        var buttonA = getComponentData('button', 'sensors');
-        buttonA.name = $scope.common.translate('default-var-name-button').toLowerCase() + 'A_zowi';
-        buttonA.category = 'sensors';
-        buttonA.pin = {
-            s: 6
-        };
-
-        var buttonB = getComponentData('button', 'sensors');
-        buttonB.name = $scope.common.translate('default-var-name-button').toLowerCase() + 'B_zowi';
-        buttonB.category = 'sensors';
-        buttonB.pin = {
-            s: 7
-        };
-
-        var servo0 = getComponentData('servo', 'servos');
-        servo0.name = $scope.common.translate('default-var-name-servo').toLowerCase() + '0_zowi';
-        servo0.category = 'servos';
-        servo0.pin = {
-            s: 2
-        };
-
-        var oscillator0 = getComponentData('servo', 'servos');
-        oscillator0.name = $scope.common.translate('oscillator').toLowerCase() + '0_zowi';
-        oscillator0.category = 'servos';
-        oscillator0.oscillator = true;
-        oscillator0.pin = {
-            s: 2
-        };
-
-        var servo1 = getComponentData('servo', 'servos');
-        servo1.name = $scope.common.translate('default-var-name-servo').toLowerCase() + '1_zowi';
-        servo1.category = 'servos';
-        servo1.pin = {
-            s: 3
-        };
-
-        var oscillator1 = getComponentData('servo', 'servos');
-        oscillator1.name = $scope.common.translate('oscillator').toLowerCase() + '1_zowi';
-        oscillator1.category = 'servos';
-        oscillator1.oscillator = true;
-        oscillator1.pin = {
-            s: 3
-        };
-
-        var servo2 = getComponentData('servo', 'servos');
-        servo2.name = $scope.common.translate('default-var-name-servo').toLowerCase() + '2_zowi';
-        servo2.category = 'servos';
-        servo2.pin = {
-            s: 4
-        };
-
-        var oscillator2 = getComponentData('servo', 'servos');
-        oscillator2.name = $scope.common.translate('oscillator').toLowerCase() + '2_zowi';
-        oscillator2.category = 'servos';
-        oscillator2.oscillator = true;
-        oscillator2.pin = {
-            s: 4
-        };
-
-        var servo3 = getComponentData('servo', 'servos');
-        servo3.name = $scope.common.translate('default-var-name-servo').toLowerCase() + '3_zowi';
-        servo3.category = 'servos';
-        servo3.pin = {
-            s: 5
-        };
-
-        var oscillator3 = getComponentData('servo', 'servos');
-        oscillator3.name = $scope.common.translate('oscillator').toLowerCase() + '3_zowi';
-        oscillator3.category = 'servos';
-        oscillator3.oscillator = true;
-        oscillator3.pin = {
-            s: 5
-        };
-
-        /*components.push(buzzer);
-         components.push(sp);
-         components.push(bt);
-         components.push(sound);
-         components.push(us);
-         components.push(buttonA);
-         components.push(buttonB);
-         components.push(servo0);
-         components.push(servo1);
-         components.push(servo2);
-         components.push(servo3);
-         components.push(oscillator0);
-         components.push(oscillator1);
-         components.push(oscillator2);
-         components.push(oscillator3);*/
-
-        return components;
-    }
-
-    function getComponentData(id, category) {
-        var searchResult = _.find(hardwareConstants.components[category], function(component) {
-            return component.id === id;
-        });
-
-        return _.cloneDeep(searchResult);
-    }
-
     function _addComponent(data) {
         var component = $scope.componentsMap[data.id];
 
@@ -936,6 +822,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 hwSchema.robot = robotReference; //The whole board object is passed
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
+                var showRobotImage = $scope.currentProject.hardware.showRobotImage;
+                if ($scope.common.user && showRobotImage) {
+                    var endDate = $scope.common.user.thirdPartyRobots[$scope.robotsMap[showRobotImage].family].expirationDate;
+                    $scope.daysLeft = endDate ? getDaysleft(endDate) : null;
+                }
                 hwSchema.board = boardReference; //The whole board object is passed
             }
 

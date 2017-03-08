@@ -1,30 +1,43 @@
 $tabsTitleHeight: 50px;
 $toolboxWidthClosed: 210px;
-
 .bloqs-tab {
     height: 100%;
     width: 100%;
-
     .tabs--title {
         height: $tabsTitleHeight;
-
-        .btn--zowi-firmware {
+        .bloq--field--list {
+            display: block;
+            height: 100%;
+            float: left;
+            padding: 1em;
+            font-weight: bold;
+            .active {
+                color: #3b3e45;
+            }
+            li {
+                display: inline-block;
+                margin-right: 2em;
+                color: #b6bbbe;
+                cursor: pointer;
+                float: left;
+            }
+        }
+        .btn--factory-firmware {
             background-color: white;
             border-radius: 3px;
             height: 30px;
             padding-left: 10px;
             padding-right: 10px;
-            position: absolute;
-            right: 206px;
-            top: 10px;
             transition: background-color 250ms;
+            margin-top: 10px;
+            margin-right: 235px;
+            position: relative;
+            float: right;
             &:hover {
                 background-color: #fbfbfb;
             }
             & > * {
-                display: inline-block;
                 vertical-align: -webkit-baseline-middle;
-                margin-top: 4px;
                 color: #373b44;
                 font-size: 14px;
                 font-weight: 700;
@@ -37,31 +50,12 @@ $toolboxWidthClosed: 210px;
                 height: 15px;
             }
         }
-
-        .bloq--field--list {
-            padding: 1em;
-            font-weight: bold;
-
-            .active {
-                color: #3b3e45;
-            }
-
-            li {
-                display: inline-block;
-                margin-right: 2em;
-                color: #b6bbbe;
-                cursor: pointer;
-                float: left;
-            }
-        }
     }
-
     .software--tab {
         color: #cfcfcf;
         height: calc(100% - #{$tabsTitleHeight});
         z-index: 0;
     }
-
     .console--main {
         margin: 0 1em;
         background-color: white;
@@ -69,7 +63,6 @@ $toolboxWidthClosed: 210px;
         height: 100%;
         overflow: auto;
     }
-
     #bloqs--field {
         height: calc(100% - 20px);
         overflow: hidden;
@@ -78,7 +71,6 @@ $toolboxWidthClosed: 210px;
         background-color: #EBEBEB;
         padding-bottom: 100px;
     }
-
     #empty {
         position: absolute;
         top: 0;
@@ -93,13 +85,11 @@ $toolboxWidthClosed: 210px;
         margin: 0 1em 1em;
         border-radius: .4em;
         table-layout: fixed;
-
         .field--header {
             overflow: hidden;
             border-bottom: 1px solid #ebebeb;
         }
     }
-
     .software__edit-code {
         z-index: 1;
         line-height: initial;
@@ -109,7 +99,6 @@ $toolboxWidthClosed: 210px;
         color: #b6bbbe;
         cursor: pointer;
         text-decoration: initial;
-
         .svg-icon {
             fill: #b6bbbe;
         }
@@ -148,7 +137,6 @@ $toolboxWidthClosed: 210px;
     overflow-x: auto;
     max-width: calc(100% - 300px);
     bottom: 0;
-
     & > div {
         height: 17px;
     }
@@ -177,7 +165,6 @@ $toolboxWidthClosed: 210px;
     transition: opacity 250ms;
     opacity: 0;
     pointer-events: none;
-
     &.active {
         opacity: 1;
         pointer-events: all;
@@ -211,44 +198,34 @@ $toolboxWidthClosed: 210px;
     }
 }
 
-.twitter-config {
-    display: inline-block;
-    border-radius: 3px;
-    height: 30px;
-    padding-left: 10px;
-    position: absolute;
-    right: 206px;
-    top: 10px;
-
-    & > * {
-        display: inline-block;
-        vertical-align: -webkit-baseline-middle;
-        margin-top: 4px;
-        color: #373b44;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-    }
-
+.twitter-config-button {
+    float: right;
+    margin-right: 235px;
+    margin-top: 20px;
+    cursor: pointer;
+    color: $font-color-heading;
     .svg-icon {
         margin-right: 7px;
-        fill: #373b44;
+        fill: $font-color-heading;
         width: 15px;
         height: 15px;
+    }
+    &.no-margin-right {
+        margin-right: 6px;
     }
 }
 
 .twitter-config__content {
     position: absolute;
+    font-size: 15px;
+    font-weight: 700;
     background-color: #ffffff;
     min-width: 300px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 8;
-    left: auto;
-    right: 0;
-    margin-top: 12px;
-
+    right: 257px;
+    top: 38px;
     .form-control:last-child {
         text-align: left;
     }
@@ -262,17 +239,15 @@ $toolboxWidthClosed: 210px;
     padding-left: 10px;
     float: right !important;
     margin-right: 0 !important;
-
     & > * {
         display: inline-block;
         vertical-align: -webkit-baseline-middle;
         margin-top: 4px;
-        color: #373b44;
+        color: $font-color-heading;
         font-size: 14px;
         font-weight: 700;
         cursor: pointer;
     }
-
     .svg-icon {
         margin-right: 7px;
         fill: #373b44;

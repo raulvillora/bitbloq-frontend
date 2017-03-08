@@ -13,6 +13,7 @@ angular.module('bitbloqApp')
             "mcu": "bt328",
             "vendorIds": ["0x403"],
             "productIds": ["0x6001"],
+            "showInToolbox": true,
             "pinSize": {
                 "digital": {
                     "w": 9,
@@ -173,6 +174,7 @@ angular.module('bitbloqApp')
             "mcu": "uno",
             "vendorIds": ["0x2341"],
             "productIds": ["0x1"],
+            "showInToolbox": true,
             "pinSize": {
                 "digital": {
                     "w": 9,
@@ -333,6 +335,7 @@ angular.module('bitbloqApp')
             "mcu": "uno",
             "vendorIds": ["0x2341"],
             "productIds": ["0x43"],
+            "showInToolbox": true,
             "pinSize": {
                 "digital": {
                     "w": 9,
@@ -484,7 +487,8 @@ angular.module('bitbloqApp')
             "manufacter": "makeblock",
             "vendorIds": [""],
             "productIds": [""],
-            "underDevelopment": true,
+            "showInToolbox": false,
+            "underDevelopment": false,
             "availableComponents": [
                 'mkb_infrared',
                 'mkb_lightsensor',
@@ -583,7 +587,8 @@ angular.module('bitbloqApp')
             "manufacter": "makeblock",
             "vendorIds": [""],
             "productIds": [""],
-            "underDevelopment": true,
+            "underDevelopment": false,
+            "showInToolbox": false,
             "availableComponents": [
                 'mkb_infrared',
                 'mkb_lightsensor',
@@ -677,7 +682,8 @@ angular.module('bitbloqApp')
             "vendorIds": ["0x1A86"],
             "productIds": ["0x7523"],
             "manufacter": "makeblock",
-            "underDevelopment": true,
+            "underDevelopment": false,
+            "showInToolbox": false,
             "availableComponents": [
                 'mkb_infrared',
                 'mkb_lightsensor',
@@ -770,6 +776,7 @@ angular.module('bitbloqApp')
             "id": "ArduinoMEGA2560",
             "mcu": "mega",
             "underDevelopment": true,
+            "showInToolbox": true,
             "vendorIds": ["0x2341"],
             "productIds": ["0x10", "0x0042", "0x6001", "0x0010"],
             "pinSize": {
@@ -1171,6 +1178,7 @@ angular.module('bitbloqApp')
             "id": "ArduinoLeonardo",
             "mcu": "leonardo",
             "underDevelopment": true,
+            "showInToolbox": true,
             "vendorIds": ["0x2341"],
             "productIds": ['0x0036', '0x8036', '0x800c'],
             "pinSize": {
@@ -1322,6 +1330,7 @@ angular.module('bitbloqApp')
             "id": "ArduinoNano",
             "mcu": "nano",
             "underDevelopment": true,
+            "showInToolbox": true,
             "vendorIds": ["0x2341"],
             "productIds": ['0x6001', '0x7523'],
             "pinSize": {
@@ -1842,7 +1851,7 @@ angular.module('bitbloqApp')
             }
         }, {
             "id": "mkb_integrated_buzz",
-            "manufacter": "standard",
+            "manufacter": "makeblock",
             "category": "mkb_integrated_buzz",
             "width": 0,
             "height": 0,

@@ -10,9 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-                                             $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-                                             projectService, hardwareConstants, chromeAppApi)
-    {
+        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        projectService, hardwareConstants, chromeAppApi) {
 
         /*************************************************
          Project save / edit
@@ -500,105 +499,124 @@ angular.module('bitbloqApp')
             return code;
         }
 
+        $scope.isRobotActivated = projectService.isRobotActivated;
+
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension()) {
-                web2boardOnline.compile({
-                    board: projectService.getBoardMetaData(),
-                    code: $scope.getPrettyCode()
+            if (projectService.project.hardware.showRobotImage && !$scope.isRobotActivated()) {
+                alertsService.add({
+                    text: 'robots-not-activated-compile',
+                    id: 'activatedError',
+                    type: 'error',
+                    time: 'infinite'
                 });
             } else {
-                if (web2board.isWeb2boardV2()) {
-                    verifyW2b2();
+                if ($scope.common.useChromeExtension()) {
+                    web2boardOnline.compile({
+                        board: projectService.getBoardMetaData(),
+                        code: $scope.getPrettyCode()
+                    });
                 } else {
-                    verifyW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        verifyW2b2();
+                    } else {
+                        verifyW2b1();
+                    }
                 }
             }
-
         };
+
         var warningShown;
 
         $scope.upload = function(code) {
-            var viewer;
-            viewer = !!code;
-            if (projectService.project.hardware.board) {
-                if (projectService.project.hardware.robot === 'mBot') {
-                    if ($scope.common.os === 'ChromeOS') {
-                        alertsService.add({
-                            text: 'mbot-not-compatible-chromebook',
-                            id: 'mbotChromebooks',
-                            type: 'error',
-                            time: 'infinite'
-                        });
-                    } else {
-                        if ($scope.common.user && $scope.common.user.chromeapp) {
+            if (projectService.project.hardware.showRobotImage && !$scope.isRobotActivated()) {
+                alertsService.add({
+                    text: 'robots-not-activated-upload',
+                    id: 'activatedError',
+                    type: 'error',
+                    time: 'infinite'
+                });
+            } else {
+                var viewer;
+
+                viewer = !!code;
+                if (projectService.project.hardware.board) {
+                    if (projectService.project.hardware.robot === 'mBot') {
+                        if ($scope.common.os === 'ChromeOS') {
                             alertsService.add({
-                                text: 'mbot-not-compatible-chromeextension',
+                                text: 'mbot-not-compatible-chromebook',
                                 id: 'mbotChromebooks',
                                 type: 'error',
-                                time: 'infinite',
-                                linkText: 'click-here-load-with-web2board',
-                                link: function() {
-                                    alertsService.closeByTag('mbotChromebooks');
-                                    uploadWithWeb2board();
-                                }
+                                time: 'infinite'
                             });
                         } else {
-                            uploadWithWeb2board();
+                            if ($scope.common.user && $scope.common.user.chromeapp) {
+                                alertsService.add({
+                                    text: 'mbot-not-compatible-chromeextension',
+                                    id: 'mbotChromebooks',
+                                    type: 'error',
+                                    time: 'infinite',
+                                    linkText: 'click-here-load-with-web2board',
+                                    link: function() {
+                                        alertsService.closeByTag('mbotChromebooks');
+                                        uploadWithWeb2board();
+                                    }
+                                });
+                            } else {
+                                uploadWithWeb2board();
+                            }
+                        }
+                    } else {
+                        if (showCompileWarning(projectService.project) && !warningShown) {
+                            alertsService.add({
+                                text: 'connect_alert_01',
+                                id: 'connect-error',
+                                type: 'warning',
+                            });
+                            warningShown = true;
+                        }
+                        if ($scope.common.useChromeExtension()) {
+                            if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                                    viewer: viewer
+                                });
+                            } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                                    viewer: viewer
+                                });
+
+                            } else {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(code),
+                                    viewer: viewer
+                                });
+                            }
+
+                        } else {
+                            if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                                uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                            } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                                uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                            } else {
+                                uploadWithWeb2board();
+                            }
+
                         }
                     }
                 } else {
-
-                    if (showCompileWarning(projectService.project) && !warningShown) {
-                        alertsService.add({
-                            text: 'connect_alert_01',
-                            id: 'connect-error',
-                            type: 'warning',
-                        });
-                        warningShown = true;
-                    }
-                    if ($scope.common.useChromeExtension()) {
-                        if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
-                            web2boardOnline.compileAndUpload({
-                                board: projectService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
-                                viewer: viewer
-                            });
-                        } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
-                            web2boardOnline.compileAndUpload({
-                                board: projectService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),
-                                viewer: viewer
-                            });
-
-                        } else {
-                            web2boardOnline.compileAndUpload({
-                                board: projectService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(code),
-                                viewer: viewer
-                            });
-                        }
-
-                    } else {
-                        if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
-                            uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
-                        } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
-                            uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
-                        } else {
-                            uploadWithWeb2board();
-                        }
-
-                    }
+                    $scope.currentTab = 0;
+                    $scope.levelOne = 'boards';
+                    alertsService.add({
+                        text: 'alert-web2board-boardNotReady',
+                        id: 'web2board',
+                        type: 'warning'
+                    });
                 }
-            } else {
-                $scope.currentTab = 0;
-                $scope.levelOne = 'boards';
-                alertsService.add({
-                    text: 'alert-web2board-boardNotReady',
-                    id: 'web2board',
-                    type: 'warning'
-                });
             }
-
         };
 
         function showCompileWarning(project) {
@@ -886,11 +904,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -1064,8 +1082,7 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
 
                 event.preventDefault();
             }

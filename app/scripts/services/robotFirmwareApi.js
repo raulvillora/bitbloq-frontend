@@ -9,14 +9,12 @@
  */
 angular.module('bitbloqApp')
     .service('robotFirmwareApi', function($http, envData) {
-        // AngularJS will instantiate a singleton by calling "new" on this function
 
         var api = {};
 
         function getFirmwareUrl(robot, version) {
-            return envData.config.serverUrl + 'robotsFirmware/'+ robot +'/' + version;
+            return envData.config.serverUrl + 'robotsFirmware/' + robot + '/' + version;
         }
-
 
         api.getFirmware = function(robot, version) {
             return $http({

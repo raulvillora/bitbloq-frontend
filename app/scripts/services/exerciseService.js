@@ -28,9 +28,6 @@ angular.module('bitbloqApp')
             confirmDeleteModal;
         scope.exercise = exports.exercise;
 
-        exports.editDate = function() {
-        };
-
         exports.clone = function(exercise) {
             if (!exercise) {
                 exercise = exports.exercise;

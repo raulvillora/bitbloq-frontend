@@ -161,9 +161,6 @@ angular.module('bitbloqApp')
                 },
                 translate: function(language) {
                     modalOptions.lang = language;
-                },
-                condition: function() {
-                    return true;
                 }
             });
 
@@ -787,12 +784,13 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.activateRobot = function(robot) {
+        exports.activateRobot = function(robot, trialUsed) {
             var activateModal,
                 modalScope = $rootScope.$new(),
                 robotName = robot,
                 activationCode = {},
-                errorMessage = '';
+                errorMessage = '',
+                defered = $q.defer();
 
             var confirmAction = function() {
                 var actCode = '';
@@ -801,8 +799,9 @@ angular.module('bitbloqApp')
                 });
 
                 thirdPartyRobotsApi.exchangeCode(actCode, robot).then(function(res) {
-                    common.setUser(res.data);
+                    common.user.thirdPartyRobots = res.data;
                     activateModal.close();
+                    defered.resolve('activate');
                 }).catch(function(err) {
                     switch (err.status) {
                         case 404:
@@ -815,10 +814,21 @@ angular.module('bitbloqApp')
                             modalScope.errorMessage = common.translate('modal-activate-error--generic');
                             break;
                     }
+                    defered.reject();
                 });
             };
 
-            var testAction = function() {};
+            var trialAction = function() {
+                thirdPartyRobotsApi.startTrial(robot).then(function(res) {
+                    common.user.thirdPartyRobots = res.data;
+                    //  common.setUser(res.data);
+                    activateModal.close();
+                    defered.resolve('trial');
+                }).catch(function() {
+                    modalScope.errorMessage = common.translate('modal-activate-error--trial');
+                    defered.reject();
+                });
+            };
 
             var handlePaste = function($event) {
                 if (typeof $event.originalEvent.clipboardData !== 'undefined') {
@@ -846,8 +856,8 @@ angular.module('bitbloqApp')
                 modalButtons: true,
                 confirmButton: 'activate',
                 confirmAction: confirmAction,
-                extraButton: 'modal-activate-robot-test',
-                extraAction: testAction,
+                extraButton: trialUsed ? '' : 'modal-activate-robot-test',
+                extraAction: trialAction,
                 value: robotName,
                 handlePaste: handlePaste,
                 activationCode: activationCode,
@@ -861,6 +871,8 @@ angular.module('bitbloqApp')
                 className: 'modal--container modal--activate-robot',
                 scope: modalScope
             });
+
+            return defered.promise;
         };
         return exports;
     });

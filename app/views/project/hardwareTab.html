@@ -75,4 +75,18 @@
             </li>
         </ul>
     </div>
+    <div class="robot-info" ng-show="daysLeft !== null">
+        <div class="robot-info__container" ng-click="showActivationModal(true)">
+            <svg class="svg-icon robot-info__icon">
+                <use xlink:href="#info"></use>
+            </svg>
+            <span class="robot-info__text">
+                <p class="robot-info__text--days">{{daysLeft >= 2 ? (('robot-trial-left' | translate) + daysLeft + ' ' + ('robot-trial-days' | translate)) : (('robot-trial-expired' | translate) + ' ') }}{{currentProject.hardware.showRobotImage}}</p>
+                <p class="robot-info__text--activate">{{daysLeft >=  2 ? 'robot-trial-introduce' : 'robot-trial-introduce-compile'  | translate}}</p>
+            </span>
+        </div>
+        <svg class="svg-icon robot-info__close" ng-click="closeActivationWarning()">
+            <use xlink:href="#erase"></use>
+        </svg>
+    </div>
 </div>
