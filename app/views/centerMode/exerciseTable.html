@@ -135,6 +135,6 @@
     </div>
 </div>
 <div class="center-mode--empty" ng-if="(common.userRole==='teacher' || common.userRole==='headmaster') && exercises.length===0">
-    <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty' | translate}}</h1>
-    <p class="center-mode--empty__info">{{'centerMode_exercises_emptyInfo' | translate}}</p>
+    <h1 class="center-mode--empty__title">{{common.urlType==='center-teacher'? 'centerMode_headmaster_exerciseEmpty' :'centerMode_exercises_empty' | translate}}</h1>
+    <p class="center-mode--empty__info">{{common.urlType==='center-teacher'? 'centerMode_headmaster_exerciseEmpty' : 'centerMode_exercises_emptyInfo' | translate}}</p>
 </div>
