@@ -21,6 +21,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.selectedToolbox = '';
     $scope.currentProject = $scope.currentProject || projectService.project;
     $scope.isEmptyComponentArray = currentProjectService.isEmptyComponentArray;
+    $scope.closeActivation = false;
 
     $scope.changeToolbox = function(tab, event) {
         if (tab !== '') {
@@ -249,6 +250,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
     $scope.drop = function(data) {
         $scope.currentProjectService.showActivation = false;
+        $scope.closeActivation = false;
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
@@ -285,6 +287,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addRobot(data);
                 if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
                     $scope.currentProjectService.showActivation = true;
+                    $scope.closeActivation = false;
                     $scope.showActivationModal(robotFamily);
                 }
                 break;
@@ -314,7 +317,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var robotModal = robotFamily ? robotFamily : $scope.robotsMap[$scope.currentProject.hardware.showRobotImage].family;
         commonModals.activateRobot(robotModal).then(function() {
             $scope.currentProjectService.showActivation = false;
+            $scope.closeActivation = false;
         });
+    };
+
+    $scope.closeActivationWarning = function() {
+        $scope.closeActivation = !$scope.closeActivation;
     };
 
     function _addBtComponent() {
@@ -808,6 +816,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
                 if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
                     $scope.currentProjectService.showActivation = true;
+                    $scope.closeActivation = false;
                 }
 
                 hwSchema.board = boardReference; //The whole board object is passed
