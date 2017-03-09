@@ -81,6 +81,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.deleteBoard = function() {
         hw2Bloqs.removeBoard();
+        currentProjectService.showActivation = false;
+        $scope.closeActivation = false;
         $scope.boardSelected = false;
         $scope.currentProject.hardware.board = null;
         currentProjectService.startAutosave();
