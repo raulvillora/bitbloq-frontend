@@ -400,10 +400,18 @@ angular.module('bitbloqApp')
             if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
                 var connectedComponents = $scope.currentProject.hardware.components;
                 if (stopWord.indexOf(bloqName) === -1) {
-                    if (bloqName === 'mBotSomethingNear') {
-                        result = existComponent(['mkb_ultrasound'], connectedComponents);
-                    } else {
-                        result = false;
+                    switch (bloqName) {
+                        case 'mBotSomethingNear':
+                            result = existComponent(['mkb_ultrasound'], connectedComponents);
+                            break;
+                        case 'mBotIfThereIsALotOfLight':
+                            result = existComponent(['mkb_lightsensor', 'mkb_integrated_lightsensor'], connectedComponents);
+                            break;
+                        case 'mBotIfFollowLines':
+                            result = existComponent(['mkb_linefollower'], connectedComponents);
+                            break;
+                        default:
+                            result = false;
                     }
                 } else {
                     result = true;

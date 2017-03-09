@@ -337,6 +337,10 @@
             "name": "mBotStop-v2"
         }, {
             "name": "mBotSomethingNear"
+        }, {
+            "name": "mBotIfThereIsALotOfLight"
+        }, {
+            "name": "mBotIfFollowLines"
         }],
         "rangerlandraider": [{
             "name": "mBotMove-v2"
@@ -386,17 +390,6 @@
             "name": "mBotMoveAdvanced"
         }, {
             "name": "mBotSetLedAdvanced"
-        }],
-        "mRanger": [{
-            "name": "mRangerBuzzer"
-        }, {
-            "name": "mRangerGetDistance"
-        }, {
-            "name": "mRangerGetLightSensor"
-        }, {
-            "name": "mRangerSetLed"
-        }, {
-            "name": "mRangerLineFollower"
         }],
         "mathematics": [{
             "name": "number"
