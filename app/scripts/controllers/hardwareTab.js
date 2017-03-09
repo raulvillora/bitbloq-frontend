@@ -812,11 +812,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 hwSchema.robot = robotReference; //The whole board object is passed
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
-                var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
-                if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
-                    $scope.currentProjectService.showActivation = true;
-                    $scope.closeActivation = false;
+                if ($scope.common.user) {
+                    var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
+                    if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
+                        $scope.currentProjectService.showActivation = true;
+                        $scope.closeActivation = false;
+                    }
                 }
 
                 hwSchema.board = boardReference; //The whole board object is passed
