@@ -35,6 +35,7 @@ angular.module('bitbloqApp')
         exports.project = {};
 
         exports.showActivation = false;
+        exports.closeActivation = false;
 
         var scope = $rootScope.$new();
         scope.project = exports.project;
@@ -72,6 +73,14 @@ angular.module('bitbloqApp')
 
         exports.isEmptyComponentArray = function() {
             return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
+        };
+
+        exports.showActivationModal = function(robotFamily) {
+            var robotModal = robotFamily ? robotFamily : robotsMap[exports.project.hardware.showRobotImage].family;
+            commonModals.activateRobot(robotModal).then(function() {
+                exports.showActivation = false;
+                exports.closeActivation = false;
+            });
         };
 
         exports.checkPublish = function(type) {
@@ -165,6 +174,14 @@ angular.module('bitbloqApp')
             return _.find(hardwareConstants.boards, function(board) {
                 return (board.id === exports.project.hardware.board || board.name === exports.project.hardware.board);
             });
+        };
+
+        exports.getRobotsMap = function(hardwareConstants) {
+            var map = {};
+            for (var i = 0; i < hardwareConstants.robots.length; i++) {
+                map[hardwareConstants.robots[i].id] = hardwareConstants.robots[i];
+            }
+            return map;
         };
 
         exports.getRobotMetaData = function() {
@@ -736,5 +753,8 @@ angular.module('bitbloqApp')
                 }
             }
         });
+
+        var robotsMap = exports.getRobotsMap(hardwareConstants);
+
         return exports;
     });

@@ -16,7 +16,7 @@ angular.module('bitbloqApp')
             serialMonitorAlert;
 
         projectService.saveStatus = 0;
-
+        $scope.robotsMap = projectService.getRobotsMap(hardwareConstants);
         // The ui-ace option
         $scope.aceOptions = {
             mode: 'c_cpp',
@@ -98,6 +98,8 @@ angular.module('bitbloqApp')
 
         $scope.setBoard = function(boardName, showRobotImage) {
             var elementSelected;
+            $scope.projectService.showActivation = false;
+            $scope.projectService.closeActivation = true;
             if (!showRobotImage) {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
                     return o.name === boardName || o.id === boardName;
@@ -117,6 +119,7 @@ angular.module('bitbloqApp')
             if (elementSelected[0]) {
                 projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].id; //Default board is ZUM
                 projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].id : null;
+                handleActivateAlert();
                 $scope.boardImage = elementSelected[0].board ? ('robots/' + elementSelected[0].id) : ('boards/' + elementSelected[0].id);
             } else {
                 projectService.project.hardware.board = 'bqZUM';
@@ -189,6 +192,10 @@ angular.module('bitbloqApp')
             }
         };
 
+        $scope.showActivationModal = function(robotFamily) {
+            $scope.projectService.showActivationModal(robotFamily);
+        };
+
         //---------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------
         //---------------- PRIVATE FUNCTIONS ----------------------------------------------
@@ -201,6 +208,16 @@ angular.module('bitbloqApp')
                 closeMessage = $scope.common.translate('leave-without-save');
             }
             return closeMessage;
+        }
+
+        function handleActivateAlert() {
+            if ($scope.common.user) {
+                var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
+                if (!thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[$scope.currentProject.hardware.showRobotImage].family] && $scope.currentProject.hardware.showRobotImage) {
+                    $scope.projectService.showActivation = true;
+                    $scope.projectService.closeActivation = false;
+                }
+            }
         }
 
         function serialMonitorW2b1() {
@@ -343,9 +360,14 @@ angular.module('bitbloqApp')
                         response.data.hardwareTags = [];
                     }
                     projectService.setProject(response.data, 'code');
-                    if ($scope.common.user && projectService.project._acl['user:    ' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
-                        $scope.disablePublish = true;
-                    }
+
+                    $scope.common.itsUserLoaded().then(function() {
+                        if ($scope.common.user && projectService.project._acl['user:    ' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
+                            $scope.disablePublish = true;
+                        }
+                        handleActivateAlert();
+
+                    });
 
                     $scope.setBoard(projectService.project.hardware.board, projectService.project.hardware.showRobotImage);
 
@@ -400,7 +422,6 @@ angular.module('bitbloqApp')
                         projectService.addCodeWatchers();
                     });
                 }).catch(function() {
-
                     if ($scope.common.session.project.code) {
                         projectService.setProject($scope.common.session.project, 'code');
                     }
