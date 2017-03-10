@@ -88,12 +88,16 @@ angular.module('bitbloqApp')
         };
 
         $scope.getNameFromId = function(elementId) {
-            var robotName;
-            robotName = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
+            var robot, robotName;
+            robot = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
                 return o.id === elementId;
             });
 
-            return robotName[0].name;
+            if (robot) {
+                robotName = robot[0].name;
+            }
+
+            return robotName;
         };
 
         $scope.setBoard = function(boardName, showRobotImage) {
@@ -119,7 +123,9 @@ angular.module('bitbloqApp')
             if (elementSelected[0]) {
                 projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].id; //Default board is ZUM
                 projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].id : null;
-                handleActivateAlert();
+                if (projectService.project.hardware.showRobotImage) {
+                    handleActivateAlert();
+                }
                 $scope.boardImage = elementSelected[0].board ? ('robots/' + elementSelected[0].id) : ('boards/' + elementSelected[0].id);
             } else {
                 projectService.project.hardware.board = 'bqZUM';
@@ -157,37 +163,46 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension()) {
-                var board = projectService.getBoardMetaData();
-                if (!board) {
-                    board = 'bt328';
-                } else {
-                    board = board.mcu;
-                }
-                compilerApi.compile({
-                    board: board,
-                    code: utils.prettyCode(projectService.project.code)
-                }).then(function(response) {
-                    if (response.data.error) {
-                        alertsService.add({
-                            id: 'web2board',
-                            type: 'warning',
-                            translatedText: utils.parseCompileError(response.data.error)
-                        });
-                    } else {
-                        alertsService.add({
-                            text: 'alert-web2board-compile-verified',
-                            id: 'web2board',
-                            type: 'ok',
-                            time: 5000
-                        });
-                    }
+            if (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated()) || !isValidMakeblockCode()) {
+                alertsService.add({
+                    text: 'robots-not-activated-compile',
+                    id: 'activatedError',
+                    type: 'error',
+                    time: 'infinite'
                 });
             } else {
-                if (web2board.isWeb2boardV2()) {
-                    verifyW2b2();
+                if ($scope.common.useChromeExtension()) {
+                    var board = projectService.getBoardMetaData();
+                    if (!board) {
+                        board = 'bt328';
+                    } else {
+                        board = board.mcu;
+                    }
+                    compilerApi.compile({
+                        board: board,
+                        code: utils.prettyCode(projectService.project.code)
+                    }).then(function(response) {
+                        if (response.data.error) {
+                            alertsService.add({
+                                id: 'web2board',
+                                type: 'warning',
+                                translatedText: utils.parseCompileError(response.data.error)
+                            });
+                        } else {
+                            alertsService.add({
+                                text: 'alert-web2board-compile-verified',
+                                id: 'web2board',
+                                type: 'ok',
+                                time: 5000
+                            });
+                        }
+                    });
                 } else {
-                    verifyW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        verifyW2b2();
+                    } else {
+                        verifyW2b1();
+                    }
                 }
             }
         };
@@ -208,6 +223,32 @@ angular.module('bitbloqApp')
                 closeMessage = $scope.common.translate('leave-without-save');
             }
             return closeMessage;
+        }
+
+        function isValidMakeblockCode() {
+            var robotActivated = true;
+            var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
+            if (thirdPartyRobots) {
+                if ($scope.currentProject.code.search('<BitbloqMBot.h>') > -1) {
+                    robotActivated = false;
+                    if (thirdPartyRobots.mBot) {
+                        robotActivated = true;
+                    }
+                } else if ($scope.currentProject.code.search('<BitbloqMBotRanger.h>') > -1 && $scope.currentProject.code.search('<BitbloqMStarter.h>') > -1) {
+                    robotActivated = false;
+
+                    if (thirdPartyRobots.starterKit) {
+                        robotActivated = true;
+                    }
+                } else if ($scope.currentProject.code.search('<BitbloqMBotRanger.h>') > -1) {
+                    robotActivated = false;
+
+                    if (thirdPartyRobots.mRanger) {
+                        robotActivated = true;
+                    }
+                }
+            }
+            return robotActivated;
         }
 
         function handleActivateAlert() {
@@ -365,7 +406,9 @@ angular.module('bitbloqApp')
                         if ($scope.common.user && projectService.project._acl['user:    ' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
                             $scope.disablePublish = true;
                         }
-                        handleActivateAlert();
+                        if (response.data.hardware.showRobotImage) {
+                            handleActivateAlert();
+                        }
 
                     });
 
