@@ -440,8 +440,8 @@
                 });
             };
             $scope.registerInGroup = function() {
-                function confirmAction(groupId) {
-                    centerModeApi.registerInGroup(groupId).then(function() {
+                function confirmAction(accessId) {
+                    centerModeApi.registerInGroup(accessId).then(function() {
                         currentModal.close();
                         _getGroups('student');
                         _getTasks();

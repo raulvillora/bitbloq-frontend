@@ -197,10 +197,13 @@ angular
             });
         }
 
-        function registerInGroup(groupId) {
+        function registerInGroup(accessId) {
             return $http({
                 method: 'POST',
-                url: envData.config.centerModeUrl + 'group/' + groupId + '/register'
+                url: envData.config.centerModeUrl + 'member/student',
+                data: {
+                    accessId: accessId
+                }
             });
         }
 
