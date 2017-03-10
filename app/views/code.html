@@ -78,6 +78,20 @@
         <div data-ng-class="{'tab--container tab-code':true,'container-without-user': !common.user}">
             <div id="codeIde" class="code-ide" data-ng-show="currentTab==='code'" ui-ace="aceOptions" ng-model="projectService.project.code"></div>
             <div class="tab--make" data-ng-show="currentTab==='info'" data-ng-include="'views/project/infoTab.html'"></div>
+            <div class="robot-info" ng-show="false">
+                <div class="robot-info__container" ng-click="showActivationModal()">
+                    <svg class="svg-icon robot-info__icon">
+                        <use xlink:href="#info"></use>
+                    </svg>
+                    <span class="robot-info__text">
+                        <p class="robot-info__text--days">{{'robot-activate' | translate}}</p>
+                        <p class="robot-info__text--activate">{{'robot-trial-introduce-compile' | translate}}</p>
+                    </span>
+                </div>
+                <svg class="svg-icon robot-info__close" ng-click="closeActivationWarning()">
+                    <use xlink:href="#erase"></use>
+                </svg>
+            </div>
         </div>
     </div>
 </div>

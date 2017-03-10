@@ -21,7 +21,8 @@ angular.module('bitbloqApp')
             codeWatcher,
             nameWatcher,
             descriptionWatcher,
-            videoUrlWatcher;
+            videoUrlWatcher,
+            showRobotImageWatcher;
 
         exports.bloqs = {
             varsBloq: null,
@@ -629,8 +630,19 @@ angular.module('bitbloqApp')
                         exports.startAutosave();
                     }
                 });
+                showRobotImageWatcher = scope.$watch('project.hardware.showRobotImage', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.startAutosave();
+                    }
+                });
             } else if (!_thereIsWatcher('project.hardware.board')) {
                 boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.startAutosave();
+                    }
+                });
+            } else if (exports.project.hardware.showRobotImage && !_thereIsWatcher('project.hardware.board')) {
+                showRobotImageWatcher = scope.$watch('project.hardware.showRobotImage', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         exports.startAutosave();
                     }
@@ -673,6 +685,12 @@ angular.module('bitbloqApp')
             if (_thereIsWatcher('project.videoUrl')) {
                 videoUrlWatcher();
             }
+            if (_thereIsWatcher('project.videoUrl')) {
+                videoUrlWatcher();
+            }
+            if (_thereIsWatcher('project.hardware.showRobotImage')) {
+                showRobotImageWatcher();
+            }
         }
 
         function _unBlindCodeProjectWatchers() {
@@ -682,6 +700,9 @@ angular.module('bitbloqApp')
             }
             if (_thereIsWatcher('project.code')) {
                 codeWatcher();
+            }
+            if (_thereIsWatcher('project.hardware.showRobotImage')) {
+                showRobotImageWatcher();
             }
         }
 

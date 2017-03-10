@@ -87,10 +87,26 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.setBoard = function(boardName) {
-            var elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                return o.name === boardName;
+        $scope.getNameFromId = function(elementId) {
+            var robotName;
+            robotName = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
+                return o.id === elementId;
             });
+
+            return robotName[0].name;
+        };
+
+        $scope.setBoard = function(boardName, showRobotImage) {
+            var elementSelected;
+            if (!showRobotImage) {
+                elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
+                    return o.name === boardName || o.id === boardName;
+                });
+            } else {
+                elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
+                    return o.id === showRobotImage;
+                });
+            }
 
             var indexTag = projectService.project.hardwareTags.indexOf(projectService.project.hardware.board);
 
@@ -100,6 +116,7 @@ angular.module('bitbloqApp')
 
             if (elementSelected[0]) {
                 projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].id; //Default board is ZUM
+                projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].id : null;
                 $scope.boardImage = elementSelected[0].board ? ('robots/' + elementSelected[0].id) : ('boards/' + elementSelected[0].id);
             } else {
                 projectService.project.hardware.board = 'bqZUM';
@@ -107,7 +124,6 @@ angular.module('bitbloqApp')
             }
 
             projectService.project.hardwareTags.push(projectService.project.hardware.board);
-            console.log(projectService.project.hardwareTags);
         };
 
         $scope.toggleCollapseHeader = function() {
@@ -149,8 +165,6 @@ angular.module('bitbloqApp')
                     board: board,
                     code: utils.prettyCode(projectService.project.code)
                 }).then(function(response) {
-                    console.log('response');
-                    console.log(response);
                     if (response.data.error) {
                         alertsService.add({
                             id: 'web2board',
@@ -333,7 +347,7 @@ angular.module('bitbloqApp')
                         $scope.disablePublish = true;
                     }
 
-                    $scope.setBoard(projectService.project.hardware.board);
+                    $scope.setBoard(projectService.project.hardware.board, projectService.project.hardware.showRobotImage);
 
                     _prettyCode().then(function() {
                         projectService.addCodeWatchers();
