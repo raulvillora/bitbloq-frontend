@@ -5,6 +5,7 @@ angular
 
         var centerModeApi = {
             addTeachers: addTeachers,
+            activateStudentMode: activateStudentMode,
             createCenter: createCenter,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
@@ -33,6 +34,13 @@ angular
                     teachers: teachers,
                     centerId: centerId
                 }
+            });
+        }
+
+        function activateStudentMode() {
+            return $http({
+                method: 'POST',
+                url: envData.config.centerModeUrl + 'member/activate'
             });
         }
 

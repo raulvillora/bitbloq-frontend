@@ -71,8 +71,7 @@ angular.module('bitbloqApp')
 
                 function createStudent() {
                     console.log(modalOptions.center);
-                    userApi.update({studentMode: true}).then(function() {
-                        $scope.common.user.studentMode = true;
+                    centerModeApi.activateStudentMode().then(function() {
                         ngDialog.close(centerModal);
                         $scope.common.userRole = 'student';
                         $location.url('/center-mode/student');
