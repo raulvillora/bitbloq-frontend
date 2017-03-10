@@ -21,7 +21,8 @@ angular.module('bitbloqApp')
             codeWatcher,
             nameWatcher,
             descriptionWatcher,
-            videoUrlWatcher;
+            videoUrlWatcher,
+            showRobotImageWatcher;
 
         exports.bloqs = {
             varsBloq: null,
@@ -34,6 +35,7 @@ angular.module('bitbloqApp')
         exports.project = {};
 
         exports.showActivation = false;
+        exports.closeActivation = false;
 
         var scope = $rootScope.$new();
         scope.project = exports.project;
@@ -71,6 +73,14 @@ angular.module('bitbloqApp')
 
         exports.isEmptyComponentArray = function() {
             return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
+        };
+
+        exports.showActivationModal = function(robotFamily) {
+            var robotModal = robotFamily ? robotFamily : robotsMap[exports.project.hardware.showRobotImage].family;
+            commonModals.activateRobot(robotModal).then(function() {
+                exports.showActivation = false;
+                exports.closeActivation = false;
+            });
         };
 
         exports.checkPublish = function(type) {
@@ -164,6 +174,14 @@ angular.module('bitbloqApp')
             return _.find(hardwareConstants.boards, function(board) {
                 return (board.id === exports.project.hardware.board || board.name === exports.project.hardware.board);
             });
+        };
+
+        exports.getRobotsMap = function(hardwareConstants) {
+            var map = {};
+            for (var i = 0; i < hardwareConstants.robots.length; i++) {
+                map[hardwareConstants.robots[i].id] = hardwareConstants.robots[i];
+            }
+            return map;
         };
 
         exports.getRobotMetaData = function() {
@@ -629,8 +647,19 @@ angular.module('bitbloqApp')
                         exports.startAutosave();
                     }
                 });
+                showRobotImageWatcher = scope.$watch('project.hardware.showRobotImage', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.startAutosave();
+                    }
+                });
             } else if (!_thereIsWatcher('project.hardware.board')) {
                 boardWatcher = scope.$watch('project.hardware.board', function(newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        exports.startAutosave();
+                    }
+                });
+            } else if (exports.project.hardware.showRobotImage && !_thereIsWatcher('project.hardware.board')) {
+                showRobotImageWatcher = scope.$watch('project.hardware.showRobotImage', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
                         exports.startAutosave();
                     }
@@ -673,6 +702,12 @@ angular.module('bitbloqApp')
             if (_thereIsWatcher('project.videoUrl')) {
                 videoUrlWatcher();
             }
+            if (_thereIsWatcher('project.videoUrl')) {
+                videoUrlWatcher();
+            }
+            if (_thereIsWatcher('project.hardware.showRobotImage')) {
+                showRobotImageWatcher();
+            }
         }
 
         function _unBlindCodeProjectWatchers() {
@@ -682,6 +717,9 @@ angular.module('bitbloqApp')
             }
             if (_thereIsWatcher('project.code')) {
                 codeWatcher();
+            }
+            if (_thereIsWatcher('project.hardware.showRobotImage')) {
+                showRobotImageWatcher();
             }
         }
 
@@ -715,5 +753,8 @@ angular.module('bitbloqApp')
                 }
             }
         });
+
+        var robotsMap = exports.getRobotsMap(hardwareConstants);
+
         return exports;
     });

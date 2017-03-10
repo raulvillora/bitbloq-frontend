@@ -21,7 +21,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.selectedToolbox = '';
     $scope.currentProject = $scope.currentProject || projectService.project;
     $scope.isEmptyComponentArray = currentProjectService.isEmptyComponentArray;
-    $scope.closeActivation = false;
 
     $scope.changeToolbox = function(tab, event) {
         if (tab !== '') {
@@ -82,7 +81,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.deleteBoard = function() {
         hw2Bloqs.removeBoard();
         currentProjectService.showActivation = false;
-        $scope.closeActivation = false;
+        $scope.currentProjectService.closeActivation = false;
         $scope.boardSelected = false;
         $scope.currentProject.hardware.board = null;
         currentProjectService.startAutosave();
@@ -252,7 +251,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
     $scope.drop = function(data) {
         $scope.currentProjectService.showActivation = false;
-        $scope.closeActivation = false;
+        $scope.currentProjectService.closeActivation = false;
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
@@ -289,7 +288,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addRobot(data);
                 if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
                     $scope.currentProjectService.showActivation = true;
-                    $scope.closeActivation = false;
+                    $scope.currentProjectService.closeActivation = false;
                     $scope.showActivationModal(robotFamily);
                 }
                 break;
@@ -316,15 +315,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.showActivationModal = function(robotFamily) {
-        var robotModal = robotFamily ? robotFamily : $scope.robotsMap[$scope.currentProject.hardware.showRobotImage].family;
-        commonModals.activateRobot(robotModal).then(function() {
-            $scope.currentProjectService.showActivation = false;
-            $scope.closeActivation = false;
-        });
+        $scope.currentProjectService.showActivationModal(robotFamily);
     };
 
     $scope.closeActivationWarning = function() {
-        $scope.closeActivation = !$scope.closeActivation;
+        $scope.currentProjectService.closeActivation = !$scope.currentProjectService.closeActivation;
     };
 
     function _addBtComponent() {
@@ -414,7 +409,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
      ****************************************/
 
     function _initialize() {
-        $scope.robotsMap = _getRobotsMap(hardwareConstants);
+        $scope.robotsMap = projectService.getRobotsMap(hardwareConstants);
         $scope.boardsMap = _getBoardsMap(hardwareConstants);
         $scope.componentsMap = _getComponentsMap(hardwareConstants);
 
@@ -431,14 +426,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $document.on('click', _clickDocumentHandler);
 
         container.addEventListener('connectionEvent', connectionEventHandler);
-    }
-
-    function _getRobotsMap(hardwareConstants) {
-        var map = {};
-        for (var i = 0; i < hardwareConstants.robots.length; i++) {
-            map[hardwareConstants.robots[i].id] = hardwareConstants.robots[i];
-        }
-        return map;
     }
 
     function _getBoardsMap(hardwareConstants) {
@@ -819,7 +806,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
                     if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
                         $scope.currentProjectService.showActivation = true;
-                        $scope.closeActivation = false;
+                        $scope.currentProjectService.closeActivation = false;
                     }
                 }
 

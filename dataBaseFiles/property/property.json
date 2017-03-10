@@ -1,5 +1,5 @@
 [{
-    "bitbloqLibsVersion": "1.0.0",
+    "bitbloqLibsVersion": "1.1.0",
     "bloqsSortTree": {
         "advancedClasses": [{
             "name": "classChildren"
@@ -244,6 +244,8 @@
         }, {
             "name": "mBotGetDistance-v2"
         }, {
+            "name": "mBotSetRGBLed"
+        }, {
             "name": "servoNormal"
         }, {
             "name": "serialReceive"
@@ -341,6 +343,10 @@
             "name": "mBotIfThereIsALotOfLight"
         }, {
             "name": "mBotIfFollowLines"
+        }, {
+            "name": "mBotSetRGBLedSimple"
+        }, {
+            "name": "mBotRGBLedOff"
         }],
         "rangerlandraider": [{
             "name": "mBotMove-v2"

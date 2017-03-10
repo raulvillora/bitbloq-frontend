@@ -410,6 +410,10 @@ angular.module('bitbloqApp')
                         case 'mBotIfFollowLines':
                             result = existComponent(['mkb_linefollower'], connectedComponents);
                             break;
+                        case 'mBotSetRGBLedSimple':
+                        case 'mBotRGBLedOff':
+                            result = existComponent(['mkb_integrated_RGB'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }
@@ -472,6 +476,8 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_ultrasound'], connectedComponents);
                     } else if (item === 'mBotBuzzer-v2') {
                         result = existComponent(['mkb_integrated_buzz'], connectedComponents);
+                    } else if (item === 'mBotSetRGBLed') {
+                        result = existComponent(['mkb_integrated_RGB'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
