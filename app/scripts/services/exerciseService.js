@@ -84,14 +84,6 @@ angular.module('bitbloqApp')
                         };
 
                     selectedGroups.forEach(function(group) {
-                        if (group.students.length === 0) {
-                            alertsService.add({
-                                text: 'centerMode__alert__assignGroup-empty',
-                                id: 'centerMode-assignGroup',
-                                type: 'info',
-                                time: 5000
-                            });
-                        }
                         if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
                             groupsToAssign.push({
                                 group: group._id,
@@ -133,7 +125,7 @@ angular.module('bitbloqApp')
                         alertsService.add({
                             text: 'centerMode__alert__assignGroup-error',
                             id: 'centerMode-assignGroup',
-                            type: 'info',
+                            type: 'warning',
                             time: 5000
                         });
                     });

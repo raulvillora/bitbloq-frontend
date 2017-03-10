@@ -28,8 +28,11 @@ angular
         function addTeachers(teachers, centerId) {
             return $http({
                 method: 'POST',
-                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher',
-                data: teachers
+                url: envData.config.centerModeUrl + 'member/teacher',
+                data: {
+                    teachers: teachers,
+                    centerId: centerId
+                }
             });
         }
 
@@ -72,7 +75,7 @@ angular
         function deleteTeacher(teacherId, centerId) {
             return $http({
                 method: 'DELETE',
-                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher/' + teacherId
+                url: envData.config.centerModeUrl + 'member/teacher/' + teacherId + '/center/' + centerId
             });
         }
 
@@ -168,14 +171,14 @@ angular
         function getTeacher(teacherId, centerId) {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher/' + teacherId
+                url: envData.config.centerModeUrl + 'member/teacher/' + teacherId + '/center/' + centerId
             });
         }
 
         function getTeachers(centerId) {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'center/' + centerId + '/teacher'
+                url: envData.config.centerModeUrl + 'member/teachers/center/' + centerId
             });
         }
 
@@ -188,7 +191,7 @@ angular
 
         function registerInGroup(groupId) {
             return $http({
-                method: 'HEAD',
+                method: 'POST',
                 url: envData.config.centerModeUrl + 'group/' + groupId + '/register'
             });
         }
