@@ -36,19 +36,14 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="projectService.project._acl.ALL && projectService.project._id && utils.userIsOwner(projectService.project, common.user._id)"
-                data-tooltips="{{!projectService.project._id || !common.user || !utils.userIsOwner(projectService.project, common.user._id)}}"
-                data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}"
-                data-tooltip-position="bottom">
-                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}"
-                        data-ng-click="commonModals.doPrivateProject(projectService.project)()">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="projectService.project._acl.ALL && projectService.project._id && utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="{{!projectService.project._id || !common.user || !utils.userIsOwner(projectService.project, common.user._id)}}" data-tooltip="{{(!common.user?'need-to-be-logged':!projectService.project._id?'empty-project':!utils.userIsOwner(projectService.project, common.user._id)?'you-are-not-the-admin-copy-it':'do-private') | translate}}" data-tooltip-position="bottom">
+                <button ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(projectService.project, common.user._id)}" data-ng-click="commonModals.doPrivateProject(projectService.project)()">
                     <svg class="svg-icon">
                         <use xlink:href="#private"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="disablePublish || projectService.project._acl.ALL && projectService.project._id && !utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="true"
-                data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltip-position="bottom">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="disablePublish || projectService.project._acl.ALL && projectService.project._id && !utils.userIsOwner(projectService.project, common.user._id)" data-tooltips="true" data-tooltip="{{ 'project-addto-myprojects' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="commonModals.clone(projectService.project, true)">
                     <svg class="svg-icon">
                         <use xlink:href="#plusCircle"></use>
@@ -62,8 +57,7 @@
     <div data-ng-class="{'content--main':true, 'content--main--collapse':collapsedHeader || !common.user}" data-ng-click="dropdown = false">
         <aside data-ng-class="{'aside-code tabs--make--left':true, 'content--main--collapse':collapsedHeader}" ng-init="currentTab='code'">
             <ul class="tabs__menu">
-                <li data-walkthrough="software-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab==='code'}" data-ng-click="currentTab='code'" data-tooltips="true" data-tooltip="{{ 'software' | translate }}" data-tooltip-position="right"
-                    data-element="software-tab">
+                <li data-walkthrough="software-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab==='code'}" data-ng-click="currentTab='code'" data-tooltips="true" data-tooltip="{{ 'software' | translate }}" data-tooltip-position="right" data-element="software-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#code"></use>
                     </svg>
@@ -78,7 +72,7 @@
         <div data-ng-class="{'tab--container tab-code':true,'container-without-user': !common.user}">
             <div id="codeIde" class="code-ide" data-ng-show="currentTab==='code'" ui-ace="aceOptions" ng-model="projectService.project.code"></div>
             <div class="tab--make" data-ng-show="currentTab==='info'" data-ng-include="'views/project/infoTab.html'"></div>
-            <div class="robot-info" ng-show="false">
+            <div class="robot-info" data-ng-show="currentTab==='code' && projectService.showActivation && !projectService.closeActivation">
                 <div class="robot-info__container" ng-click="showActivationModal()">
                     <svg class="svg-icon robot-info__icon">
                         <use xlink:href="#info"></use>
@@ -88,7 +82,7 @@
                         <p class="robot-info__text--activate">{{'robot-trial-introduce-compile' | translate}}</p>
                     </span>
                 </div>
-                <svg class="svg-icon robot-info__close" ng-click="closeActivationWarning()">
+                <svg class="svg-icon robot-info__close" ng-click="projectService.closeActivation = !projectService.closeActivation">
                     <use xlink:href="#erase"></use>
                 </svg>
             </div>
