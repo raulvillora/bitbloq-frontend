@@ -485,8 +485,8 @@ angular.module('bitbloqApp')
             "id": "mcore",
             "mcu": "uno",
             "manufacter": "makeblock",
-            "vendorIds": [""],
-            "productIds": [""],
+            "vendorIds": ["0x1A86"],
+            "productIds": ["0x7523"],
             "showInToolbox": false,
             "underDevelopment": false,
             "availableComponents": [
@@ -511,23 +511,26 @@ angular.module('bitbloqApp')
                 },
                 "uid": "mkb-mcore-ldrs"
             }, {
-                "id": "RGBled",
-                "name": "default-var-name-RGBled_left",
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_both",
                 "pin": {
-                    "r": 2,
-                    "g": 3,
-                    "b": 4
+                    "s": 0
                 },
                 "uid": "mkb-mcore-RGBled-0"
             }, {
-                "id": "RGBled",
-                "name": "default-var-name-RGBled_right",
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_right",
                 "pin": {
-                    "r": 2,
-                    "g": 3,
-                    "b": 4
+                    "s": 1
                 },
                 "uid": "mkb-mcore-RGBled-1"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_left",
+                "pin": {
+                    "s": 2
+                },
+                "uid": "mkb-mcore-RGBled-2"
             }, {
                 "id": "mkb_integrated_buzz",
                 "name": "default-var-name-mkb_integrated_buzz",
@@ -1853,6 +1856,18 @@ angular.module('bitbloqApp')
             "id": "mkb_integrated_buzz",
             "manufacter": "makeblock",
             "category": "mkb_integrated_buzz",
+            "width": 0,
+            "height": 0,
+            "pins": {
+                "digital": [
+                    "s"
+                ]
+            }
+        }, {
+            "id": "mkb_integrated_RGB",
+            "manufacter": "makeblock",
+            "category": "mkb_integrated_RGB",
+            "type": "mkb_integrated",
             "width": 0,
             "height": 0,
             "pins": {
