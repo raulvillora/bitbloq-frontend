@@ -354,6 +354,14 @@
             "name": "mBotStop-v2"
         }, {
             "name": "mBotSomethingNear"
+        }, {
+            "name": "mBotIfThereIsALotOfLight"
+        }, {
+            "name": "mBotIfFollowLines"
+        }, {
+            "name": "mBotSetRGBLedSimple"
+        }, {
+            "name": "mBotRGBLedOff"
         }],
         "rangerraptor": [{
             "name": "mBotMove-v2"
@@ -361,6 +369,14 @@
             "name": "mBotStop-v2"
         }, {
             "name": "mBotSomethingNear"
+        }, {
+            "name": "mBotIfThereIsALotOfLight"
+        }, {
+            "name": "mBotIfFollowLines"
+        }, {
+            "name": "mBotSetRGBLedSimple"
+        }, {
+            "name": "mBotRGBLedOff"
         }],
         "rangernervousbird": [{
             "name": "mBotMove-v2"
@@ -368,6 +384,14 @@
             "name": "mBotStop-v2"
         }, {
             "name": "mBotSomethingNear"
+        }, {
+            "name": "mBotIfThereIsALotOfLight"
+        }, {
+            "name": "mBotIfFollowLines"
+        }, {
+            "name": "mBotSetRGBLedSimple"
+        }, {
+            "name": "mBotRGBLedOff"
         }],
         "startertank": [{
             "name": "mBotMove-v2"
@@ -375,6 +399,14 @@
             "name": "mBotStop-v2"
         }, {
             "name": "mBotSomethingNear"
+        }, {
+            "name": "mBotIfThereIsALotOfLight"
+        }, {
+            "name": "mBotIfFollowLines"
+        }, {
+            "name": "mBotSetRGBLedSimple"
+        }, {
+            "name": "mBotRGBLedOff"
         }],
         "starterthreewheels": [{
             "name": "mBotMove-v2"
@@ -382,6 +414,14 @@
             "name": "mBotStop-v2"
         }, {
             "name": "mBotSomethingNear"
+        }, {
+            "name": "mBotIfThereIsALotOfLight"
+        }, {
+            "name": "mBotIfFollowLines"
+        }, {
+            "name": "mBotSetRGBLedSimple"
+        }, {
+            "name": "mBotRGBLedOff"
         }],
         "advancedMBot": [{
             "name": "mBotBuzzerAdvanced"

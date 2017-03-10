@@ -773,8 +773,9 @@ angular.module('bitbloqApp')
                     var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
 
                     if (type === 'sensors') {
+                        /*jshint camelcase: true */
                         componentsList = projectService.componentsArray.sensors.concat(projectService.componentsArray.mkb_lightsensor.concat(projectService.componentsArray.mkb_linefollower));
-
+                        /*jshint camelcase: false */
                     } else {
                         componentsList = projectService.componentsArray[type];
                     }

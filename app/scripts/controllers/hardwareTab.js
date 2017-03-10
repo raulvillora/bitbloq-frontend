@@ -78,20 +78,50 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     };
 
+    function _removeIntegratedComponents() {
+        if ($scope.boardsMap[$scope.currentProject.hardware.board].integratedComponents) {
+            var boardIntegratedComponentsList = $scope.boardsMap[$scope.currentProject.hardware.board].integratedComponents,
+                j,
+                found,
+                finalComponentsList = [];
+            for (var i = 0; i < $scope.currentProject.hardware.components.length; i++) {
+
+                found = false;
+                j = 0;
+                while (!found && (j <= boardIntegratedComponentsList.length)) {
+                    if ($scope.currentProject.hardware.components[i].uid === boardIntegratedComponentsList[j].uid) {
+                        found = true;
+                    }
+                    j++;
+                }
+                if (!found) {
+                    finalComponentsList.push($scope.currentProject.hardware.components[i]);
+                } else {
+                    currentProjectService.removeComponentInComponentsArray($scope.currentProject.hardware.components[i].category, $scope.currentProject.hardware.components[i].name);
+                }
+            }
+            $scope.currentProject.hardware.components = finalComponentsList;
+        }
+    }
+
     $scope.deleteBoard = function() {
-        hw2Bloqs.removeBoard();
-        currentProjectService.showActivation = false;
-        $scope.currentProjectService.closeActivation = false;
-        $scope.boardSelected = false;
-        $scope.currentProject.hardware.board = null;
-        currentProjectService.startAutosave();
+        if ($scope.currentProject.hardware.board) {
+            hw2Bloqs.removeBoard();
+            _removeIntegratedComponents();
+            currentProjectService.showActivation = false;
+            $scope.currentProjectService.closeActivation = false;
+            $scope.boardSelected = false;
+            $scope.currentProject.hardware.board = null;
+            currentProjectService.startAutosave();
+        }
     };
 
     $scope.deleteRobot = function() {
         $scope.currentProject.hardware.showRobotImage = null;
         $scope.currentProject.hardware.robot = null;
+
+        $scope.deleteBoard();
         $scope.currentProject.hardware.board = null;
-        currentProjectService.componentsArray.robot = [];
         $scope.robotSelected = false;
         currentProjectService.startAutosave();
     };
