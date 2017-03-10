@@ -10,7 +10,7 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, hw2Bloqs, web2boardOnline, commonModals,
         projectService, hardwareConstants, chromeAppApi) {
 
         /*************************************************
@@ -773,9 +773,9 @@ angular.module('bitbloqApp')
                     var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
 
                     if (type === 'sensors') {
-                        /*jshint camelcase: true */
-                        componentsList = projectService.componentsArray.sensors.concat(projectService.componentsArray.mkb_lightsensor.concat(projectService.componentsArray.mkb_linefollower));
                         /*jshint camelcase: false */
+                        componentsList = projectService.componentsArray.sensors.concat(projectService.componentsArray.mkb_lightsensor.concat(projectService.componentsArray.mkb_linefollower));
+                        /*jshint camelcase: true */
                     } else {
                         componentsList = projectService.componentsArray[type];
                     }

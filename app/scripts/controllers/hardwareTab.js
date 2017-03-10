@@ -9,7 +9,7 @@
 angular.module('bitbloqApp')
     .controller('hardwareTabCtrl', hardwareTabCtrl);
 
-function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi, projectService, commonModals) {
+function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi, projectService) {
 
     var container = utils.getDOMElement('.protocanvas'),
         $componentContextMenu = $('#component-context-menu'),
