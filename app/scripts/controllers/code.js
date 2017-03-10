@@ -43,7 +43,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.boardNameList = _.map(hardwareConstants.boards, 'name');
+        $scope.boardNameList = _.concat(_.map(hardwareConstants.boards, 'name'), _.map(hardwareConstants.robots, 'name'));
         $scope.currentProject = projectService.project;
 
         $scope.common.isLoading = true;
@@ -54,7 +54,6 @@ angular.module('bitbloqApp')
         $scope.projectService = projectService;
         $scope.urlGetImage = $scope.common.urlImage + 'project/';
         $scope.utils = utils;
-
 
         $scope.onFieldKeyUp = function(event) {
             if ((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase() === 's') { //Ctrl + S
@@ -89,14 +88,26 @@ angular.module('bitbloqApp')
         };
 
         $scope.setBoard = function(boardName) {
+            var elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
+                return o.name === boardName;
+            });
+
             var indexTag = projectService.project.hardwareTags.indexOf(projectService.project.hardware.board);
+
             if (indexTag !== -1) {
                 projectService.project.hardwareTags.splice(indexTag, 1);
             }
-            projectService.project.hardware.board = boardName || 'bq ZUM'; //Default board is ZUM
-            var boardMetadata = projectService.getBoardMetaData();
-            $scope.boardImage = boardMetadata && boardMetadata.id;
+
+            if (elementSelected[0]) {
+                projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].id; //Default board is ZUM
+                $scope.boardImage = elementSelected[0].board ? ('robots/' + elementSelected[0].id) : ('boards/' + elementSelected[0].id);
+            } else {
+                projectService.project.hardware.board = 'bqZUM';
+                $scope.boardImage = 'boards/bqZUM';
+            }
+
             projectService.project.hardwareTags.push(projectService.project.hardware.board);
+            console.log(projectService.project.hardwareTags);
         };
 
         $scope.toggleCollapseHeader = function() {

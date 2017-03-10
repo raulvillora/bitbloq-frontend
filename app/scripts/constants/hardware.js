@@ -1787,7 +1787,7 @@ angular.module('bitbloqApp')
             "pins": {}
         }, {
             "id": "mkb_lightsensor",
-            "category": "sensors",
+            "category": "mkb_lightsensor",
             "type": "analog",
             "manufacter": "makeblock",
             "width": 84.5,
@@ -1800,7 +1800,7 @@ angular.module('bitbloqApp')
             }
         }, {
             "id": "mkb_linefollower",
-            "category": "sensors",
+            "category": "mkb_linefollower",
             "manufacter": "makeblock",
             "type": "mkb_linefollower",
             "width": 84.5,
@@ -1839,7 +1839,7 @@ angular.module('bitbloqApp')
         }, {
             "id": "mkb_integrated_lightsensor",
             "manufacter": "makeblock",
-            "category": "sensors",
+            "category": "mkb_lightsensor",
             "type": "mkb_integrated_lightsensor",
             "width": 0,
             "height": 0,

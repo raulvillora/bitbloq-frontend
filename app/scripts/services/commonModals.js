@@ -784,7 +784,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.activateRobot = function(robot, trialUsed) {
+        exports.activateRobot = function(robot) {
             var activateModal,
                 modalScope = $rootScope.$new(),
                 robotName = robot,
@@ -818,18 +818,6 @@ angular.module('bitbloqApp')
                 });
             };
 
-            var trialAction = function() {
-                thirdPartyRobotsApi.startTrial(robot).then(function(res) {
-                    common.user.thirdPartyRobots = res.data;
-                    //  common.setUser(res.data);
-                    activateModal.close();
-                    defered.resolve('trial');
-                }).catch(function() {
-                    modalScope.errorMessage = common.translate('modal-activate-error--trial');
-                    defered.reject();
-                });
-            };
-
             var handlePaste = function($event) {
                 if (typeof $event.originalEvent.clipboardData !== 'undefined') {
                     splitActivationCode($event.originalEvent.clipboardData.getData('text/plain'));
@@ -856,8 +844,6 @@ angular.module('bitbloqApp')
                 modalButtons: true,
                 confirmButton: 'activate',
                 confirmAction: confirmAction,
-                extraButton: trialUsed ? '' : 'modal-activate-robot-test',
-                extraAction: trialAction,
                 value: robotName,
                 handlePaste: handlePaste,
                 activationCode: activationCode,

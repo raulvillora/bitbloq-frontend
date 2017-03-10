@@ -765,13 +765,21 @@ angular.module('bitbloqApp')
                         _resetDropdown(element, list);
                     }
                 };
-                var bloqCanvasEl = null;
+                var bloqCanvasEl = null,
+                    componentsList;
                 //Update dropdowns values from bloqs canvas
                 for (var type in projectService.componentsArray) {
                     bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
                     var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
+
+                    if (type === 'sensors') {
+                        componentsList = projectService.componentsArray.sensors.concat(projectService.componentsArray.mkb_lightsensor.concat(projectService.componentsArray.mkb_linefollower));
+
+                    } else {
+                        componentsList = projectService.componentsArray[type];
+                    }
                     for (var i = 0, len = nodeList.length; i < len; i++) {
-                        updateBloq(nodeList[i], projectService.componentsArray[type]);
+                        updateBloq(nodeList[i], componentsList);
                     }
                     allComponents = allComponents.concat(projectService.componentsArray[type]);
                 }
