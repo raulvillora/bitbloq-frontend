@@ -588,8 +588,8 @@ angular.module('bitbloqApp')
             "id": "meauriga",
             "mcu": "mega",
             "manufacter": "makeblock",
-            "vendorIds": [""],
-            "productIds": [""],
+            "vendorIds": ["0x1A86"],
+            "productIds": ["0x7523"],
             "underDevelopment": false,
             "showInToolbox": false,
             "availableComponents": [
@@ -599,6 +599,119 @@ angular.module('bitbloqApp')
                 'mkb_ultrasound',
                 'sp'
             ],
+            "integratedComponents": [{
+                "id": "mkb_integrated_lightsensor",
+                "name": "default-var-name-mkb_integrated_lightsensor_1",
+                "pin": {
+                    "s": "A1"
+                },
+                "uid": "mkb-meauriga-ldrs-1"
+            }, {
+                "id": "mkb_integrated_lightsensor",
+                "name": "default-var-name-mkb_integrated_lightsensor_2",
+                "pin": {
+                    "s": "A3"
+                },
+                "uid": "mkb-meauriga-ldrs-2"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_all",
+                "pin": {
+                    "s": 0
+                },
+                "uid": "mkb-meauriga-RGBled-0"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_1",
+                "pin": {
+                    "s": 1
+                },
+                "uid": "mkb-meauriga-RGBled-1"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_2",
+                "pin": {
+                    "s": 2
+                },
+                "uid": "mkb-meauriga-RGBled-2"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_3",
+                "pin": {
+                    "s": 3
+                },
+                "uid": "mkb-meauriga-RGBled-3"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_4",
+                "pin": {
+                    "s": 4
+                },
+                "uid": "mkb-meauriga-RGBled-4"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_5",
+                "pin": {
+                    "s": 5
+                },
+                "uid": "mkb-meauriga-RGBled-5"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_6",
+                "pin": {
+                    "s": 6
+                },
+                "uid": "mkb-meauriga-RGBled-6"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_7",
+                "pin": {
+                    "s": 7
+                },
+                "uid": "mkb-meauriga-RGBled-7"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_8",
+                "pin": {
+                    "s": 8
+                },
+                "uid": "mkb-meauriga-RGBled-8"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_9",
+                "pin": {
+                    "s": 9
+                },
+                "uid": "mkb-meauriga-RGBled-9"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_10",
+                "pin": {
+                    "s": 10
+                },
+                "uid": "mkb-meauriga-RGBled-10"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_11",
+                "pin": {
+                    "s": 11
+                },
+                "uid": "mkb-meauriga-RGBled-11"
+            }, {
+                "id": "mkb_integrated_RGB",
+                "name": "default-var-name-mkb_integrated_rgb_12",
+                "pin": {
+                    "s": 12
+                },
+                "uid": "mkb-meauriga-RGBled-12"
+            }, {
+                "id": "mkb_integrated_buzz",
+                "name": "default-var-name-mkb_integrated_buzz",
+                "pin": {
+                    "s": 45
+                },
+                "uid": "mkb-meauriga-buzz"
+            }],
             "pinSize": {
                 "red": {
                     "w": 45,

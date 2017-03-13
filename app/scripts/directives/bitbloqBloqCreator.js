@@ -26,6 +26,7 @@ angular.module('bitbloqApp')
 
                     element.append(bloq.$bloq);
                     bloq.$bloq[0].addEventListener('bloq:connectable', bloqItsConnectable);
+                    bloqs.startBloqsUpdate(scope.componentsArray);
 
                 }
 

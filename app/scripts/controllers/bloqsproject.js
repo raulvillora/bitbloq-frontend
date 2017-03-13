@@ -722,83 +722,9 @@ angular.module('bitbloqApp')
             return prettyCode;
         };
 
-        /* ****** */
-
-        function _resetDropdown(element, list) {
-            if (list[0]) {
-                element.dataset.reference = list[0].uid;
-                element.dataset.value = list[0].name;
-                element.value = list[0].name;
-            } else {
-                delete element.dataset.reference;
-                delete element.dataset.value;
-            }
-            element.selectedIndex = 0;
-        }
-
         $scope.updateBloqs = function() {
-
             if (projectService.bloqs.varsBloq) {
-
-                var allBloqs = bloqs.bloqs;
-                var allComponents = [];
-
-                //Why?
-                for (var bloq in allBloqs) {
-                    allBloqs[bloq].componentsArray = projectService.componentsArray;
-                }
-
-                var updateBloq = function(element, list) {
-
-                    var componentRef = list.find(function(comp) {
-                        return comp.uid === element.dataset.reference;
-                    });
-
-                    bloqsUtils.drawDropdownOptions($(element), list);
-
-                    if (componentRef) {
-                        element.value = componentRef.name;
-                        element.dataset.reference = componentRef.uid;
-                        element.dataset.value = componentRef.name;
-                    } else {
-                        $log.debug('dropdown not selected or reference was lost');
-                        _resetDropdown(element, list);
-                    }
-                };
-                var bloqCanvasEl = null,
-                    componentsList;
-                //Update dropdowns values from bloqs canvas
-                for (var type in projectService.componentsArray) {
-                    bloqCanvasEl = document.getElementsByClassName('bloqs-tab')[0];
-                    var nodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="' + type + '"]');
-
-                    if (type === 'sensors') {
-                        /*jshint camelcase: false */
-                        componentsList = projectService.componentsArray.sensors.concat(projectService.componentsArray.mkb_lightsensor.concat(projectService.componentsArray.mkb_linefollower));
-                        /*jshint camelcase: true */
-                    } else {
-                        componentsList = projectService.componentsArray[type];
-                    }
-                    for (var i = 0, len = nodeList.length; i < len; i++) {
-                        updateBloq(nodeList[i], componentsList);
-                    }
-                    allComponents = allComponents.concat(projectService.componentsArray[type]);
-                }
-                //Update dropdowns from bloqs of toolbox
-                if (bloqCanvasEl) {
-                    var toolboxNodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="varComponents"]');
-                    for (var j = 0, len2 = toolboxNodeList.length; j < len2; j++) {
-                        updateBloq(toolboxNodeList[j], allComponents);
-                    }
-
-                    var varServos = [];
-                    varServos = varServos.concat(projectService.componentsArray.servos, projectService.componentsArray.oscillators, projectService.componentsArray.continuousServos);
-                    var servosNodeList = bloqCanvasEl.querySelectorAll('select[data-dropdowncontent="allServos"]');
-                    for (var y = 0, lenServo = servosNodeList.length; y < lenServo; y++) {
-                        updateBloq(servosNodeList[y], varServos);
-                    }
-                }
-
+                bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
             }
         };
 
