@@ -280,11 +280,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
     $scope.drop = function(data) {
-        $scope.currentProjectService.showActivation = false;
-        $scope.currentProjectService.closeActivation = false;
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
+                $scope.currentProjectService.showActivation = false;
+                $scope.currentProjectService.closeActivation = false;
                 var board = _.find($scope.hardware.boardList, function(board) {
                     return board.id === data.id;
                 });
@@ -311,6 +311,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addComponent(data);
                 break;
             case 'robots':
+                $scope.currentProjectService.showActivation = false;
+                $scope.currentProjectService.closeActivation = false;
                 var robotFamily = $scope.robotsMap[data.id].family;
                 var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
                 $scope.hardware.cleanSchema();
@@ -323,6 +325,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
                 break;
             case 'btComponent':
+                $scope.currentProjectService.showActivation = false;
+                $scope.currentProjectService.closeActivation = false;
                 if (!$scope.currentProject.hardware.board) {
                     $scope.subMenuHandler('boards', 'open', 1);
                     alertsService.add({
@@ -832,7 +836,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
-                if ($scope.common.user) {
+                if ($scope.common.user && showRobotImage) {
                     var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
                     if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
                         $scope.currentProjectService.showActivation = true;
