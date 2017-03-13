@@ -507,7 +507,7 @@ angular.module('bitbloqApp')
                 "id": "mkb_integrated_lightsensor",
                 "name": "default-var-name-mkb_integrated_lightsensor",
                 "pin": {
-                    "s": "A6"
+                    "s": 0
                 },
                 "uid": "mkb-mcore-ldrs"
             }, {
@@ -603,14 +603,14 @@ angular.module('bitbloqApp')
                 "id": "mkb_integrated_lightsensor",
                 "name": "default-var-name-mkb_integrated_lightsensor_1",
                 "pin": {
-                    "s": "A1"
+                    "s": 1
                 },
                 "uid": "mkb-meauriga-ldrs-1"
             }, {
                 "id": "mkb_integrated_lightsensor",
                 "name": "default-var-name-mkb_integrated_lightsensor_2",
                 "pin": {
-                    "s": "A3"
+                    "s": 2
                 },
                 "uid": "mkb-meauriga-ldrs-2"
             }, {
