@@ -282,6 +282,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
     $scope.drop = function(data) {
+
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
@@ -313,17 +314,19 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addComponent(data);
                 break;
             case 'robots':
-                $scope.currentProjectService.showActivation = false;
-                $scope.currentProjectService.closeActivation = false;
-                var robotFamily = $scope.robotsMap[data.id].family;
-                var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
-                $scope.hardware.cleanSchema();
-                $scope.deleteBTComponent();
-                _addRobot(data);
-                if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
-                    $scope.currentProjectService.showActivation = true;
+                if (data.robot.thirdParty === true && !$scope.common.user) {} else {
+                    $scope.currentProjectService.showActivation = false;
                     $scope.currentProjectService.closeActivation = false;
-                    $scope.showActivationModal(robotFamily);
+                    var robotFamily = $scope.robotsMap[data.id].family;
+                    var thirdPartyRobots = $scope.common.user ? $scope.common.user.thirdPartyRobots : false;
+                    $scope.hardware.cleanSchema();
+                    $scope.deleteBTComponent();
+                    _addRobot(data);
+                    if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
+                        $scope.currentProjectService.showActivation = true;
+                        $scope.currentProjectService.closeActivation = false;
+                        $scope.showActivationModal(robotFamily);
+                    }
                 }
                 break;
             case 'btComponent':
