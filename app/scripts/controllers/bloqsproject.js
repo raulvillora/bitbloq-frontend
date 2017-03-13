@@ -1250,6 +1250,10 @@ angular.module('bitbloqApp')
                 if ($scope.common.session.save) {
                     $scope.common.session.save = false;
                     projectService.setProject($scope.common.session.project);
+                    if (projectService.project.hardware.showRobotImage && $scope.isRobotActivated()) {
+                        $scope.currentProjectService.showActivation = false;
+                        $scope.currentProjectService.closeActivation = false;
+                    }
                     projectService.startAutosave();
                     $scope.hardware.firstLoad = false;
                 }

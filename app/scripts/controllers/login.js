@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate, userRobotsApi) {
         $scope.focusHandler = function(evt) {
             $scope.focus = evt.currentTarget.name;
         };
@@ -33,12 +33,16 @@ angular.module('bitbloqApp')
                             $cookieStore.put('token', loginResponse.data.token);
                             userApi.currentUser = User.get();
                             userApi.currentUser.$promise.then(function(user) {
-                                $scope.common.setUser(user);
-                                if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                                    _goToHome();
-                                } else {
-                                    teacherModal();
-                                }
+                                userRobotsApi.getUserRobots(user._id).then(function(res) {
+                                    user.thirdPartyRobots = res.data;
+                                }).finally(function() {
+                                    $scope.common.setUser(user);
+                                    if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                        _goToHome();
+                                    } else {
+                                        teacherModal();
+                                    }
+                                });
                             });
                         }
                     },
@@ -368,12 +372,17 @@ angular.module('bitbloqApp')
                 password: $scope.user.password
             };
             userApi.loginUser(options).then(function(user) {
-                $scope.common.setUser(user);
-                if (user.hasBeenAskedIfTeacher || user.newsletter || register) {
-                    _goToHome();
-                } else {
-                    teacherModal();
-                }
+                userRobotsApi.getUserRobots(user._id).then(function(res) {
+                    user.thirdPartyRobots = res.data;
+                }).finally(function() {
+                    $scope.common.setUser(user);
+                    if (user.hasBeenAskedIfTeacher || user.newsletter || register) {
+                        _goToHome();
+                    } else {
+                        teacherModal();
+                    }
+                });
+
             }).catch(function(error) {
                 console.log('Error loggin in', error);
                 fireShakeEffect();
