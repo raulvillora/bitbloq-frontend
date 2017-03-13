@@ -891,7 +891,7 @@ angular.module('bitbloqApp')
             "name": "Arduino MEGA 2560",
             "id": "ArduinoMEGA2560",
             "mcu": "mega",
-            "underDevelopment": true,
+            "underDevelopment": false,
             "showInToolbox": true,
             "vendorIds": ["0x2341"],
             "productIds": ["0x10", "0x0042", "0x6001", "0x0010"],
