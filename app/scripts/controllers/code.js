@@ -104,6 +104,7 @@ angular.module('bitbloqApp')
             var elementSelected;
             $scope.projectService.showActivation = false;
             $scope.projectService.closeActivation = true;
+            projectService.project.hardwareTags = [];
             $scope.robotImage = null;
             $scope.boardImage = null;
 
@@ -116,9 +117,7 @@ angular.module('bitbloqApp')
                     return o.id === showRobotImage;
                 });
             }
-
-            var indexTag = projectService.project.hardwareTags.indexOf(projectService.project.hardware.board);
-
+            var indexTag = projectService.project.hardwareTags.indexOf(elementSelected[0].board ? elementSelected[0].id : projectService.project.hardware.board);
             if (indexTag !== -1) {
                 projectService.project.hardwareTags.splice(indexTag, 1);
             }
@@ -139,8 +138,7 @@ angular.module('bitbloqApp')
                 projectService.project.hardware.board = 'bqZUM';
                 $scope.boardImage = 'bqZUM';
             }
-
-            projectService.project.hardwareTags.push(projectService.project.hardware.board);
+            projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].id : projectService.project.hardware.board));
         };
 
         $scope.toggleCollapseHeader = function() {
