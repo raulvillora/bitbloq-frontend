@@ -1,26 +1,28 @@
-<h1 class="table__title" ng-if="common.urlType==='exercise-info'">
-    <svg class="svg-icon svg-icon--text">
-        <use xlink:href="#user"></use>
-    </svg>
-    {{'centerMode_column_students' | translate}}
-</h1>
-<h1 class="table__title" ng-if="common.urlType==='group'">
-    <svg class="svg-icon svg-icon--text">
-        <use xlink:href="#exercise"></use>
-    </svg>
-    {{'centerMode_exercises' | translate}}
-</h1>
+<div class="row">
+    <h1 class="table__title col-vsmall-5" ng-if="common.urlType==='exercise-info'">
+        <svg class="svg-icon svg-icon--text">
+            <use xlink:href="#user"></use>
+        </svg>
+        {{'centerMode_column_students' | translate}}
+    </h1>
+    <h1 class="table__title col-vsmall-5" ng-if="common.urlType==='group'">
+        <svg class="svg-icon svg-icon--text">
+            <use xlink:href="#exercise"></use>
+        </svg>
+        {{'centerMode_exercises' | translate}}
+    </h1>
+    <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
+        <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
+            <svg class="svg-icon">
+                <use xlink:href="#delete"></use>
+            </svg>
+            {{ 'centerMode_button_deleteStudent' | translate}}
+        </button>
+    </div>
+</div>
 <div ng-if="tasks.length>0">
     <div class="dropdown-group table__added clearfix">
         <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
-        <div class="button-group col-vsmall-6" ng-if="urlSubType==='student'">
-            <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
-                <svg class="svg-icon">
-                    <use xlink:href="#delete"></use>
-                </svg>
-                {{ 'centerMode_button_deleteStudent' | translate}}
-            </button>
-        </div>
     </div>
     <div class="center-mode__table">
         <div class="center-mode__table-title row">
@@ -46,12 +48,12 @@
                         {{task.mark || '-'}}
                     </span>
                 </div>
-                <div class="table__block__item table__column--centered col-vsmall-3">
+                <div class="table__block__item table__column--centered col-vsmall-2">
                     <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected' || (task.status==='delivered' && task.mark)}" data-element="{{'centerMode-task-status' + task._id}}">
                         {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : ''  | translate}}
                     </span>
                 </div>
-                <div class="table__block__item table__column--hover table__column--right col-vsmall-3">
+                <div class="table__block__item table__column--hover table__column--right col-vsmall-4">
                     <button class="btn btn--tertiary btn--small btn--delete table__item__btn" ng-if="common.urlType==='group'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
                         <svg class="svg-icon">
                             <use xlink:href="#delete"></use>
