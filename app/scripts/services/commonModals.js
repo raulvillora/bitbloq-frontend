@@ -801,6 +801,12 @@ angular.module('bitbloqApp')
                 thirdPartyRobotsApi.exchangeCode(actCode, robot).then(function(res) {
                     common.user.thirdPartyRobots = res.data;
                     activateModal.close();
+                    alertsService.add({
+                        text: 'modal-activate-robot-ok',
+                        id: 'activatedError',
+                        type: 'ok',
+                        time: 5000
+                    });
                     defered.resolve('activate');
                 }).catch(function(err) {
                     switch (err.status) {

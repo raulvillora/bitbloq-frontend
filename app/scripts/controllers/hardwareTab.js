@@ -359,9 +359,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _addBtComponent() {
         if (!$scope.currentProject.useBitbloqConnect) {
             $scope.currentProject.useBitbloqConnect = true;
-            if ($scope.currentProject.hardware.board === 'bq ZUM') {
+            if ($scope.currentProject.hardware.board === 'bqZUM') {
                 //added on get code too
-                var bTComponent = _.cloneDeep(_.find(hardwareConstants.components.serialElements, {
+                var bTComponent = _.cloneDeep(_.find(hardwareConstants.components, {
                     id: 'bt'
                 }));
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';

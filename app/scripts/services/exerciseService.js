@@ -361,7 +361,7 @@ angular.module('bitbloqApp')
             var code;
             _updateHardwareSchema();
             var hardware = _.cloneDeep(exports.exercise.hardware);
-            if (exports.exercise.useBitbloqConnect && exports.exercise.hardware.board === 'bq ZUM' && exports.exercise.bitbloqConnectBT) {
+            if (exports.exercise.useBitbloqConnect && exports.exercise.hardware.board === 'bqZUM' && exports.exercise.bitbloqConnectBT) {
                 hardware.components.push(exports.exercise.bitbloqConnectBT);
             }
             code = arduinoGeneration.getCode({
@@ -473,7 +473,7 @@ angular.module('bitbloqApp')
                     }
                 });
 
-                if (exports.exercise.useBitbloqConnect && (exports.exercise.hardware.board === 'bq ZUM') && exports.exercise.bitbloqConnectBT) {
+                if (exports.exercise.useBitbloqConnect && (exports.exercise.hardware.board === 'bqZUM') && exports.exercise.bitbloqConnectBT) {
                     exports.addComponentInComponentsArray('serialElements', exports.exercise.bitbloqConnectBT);
                 }
 
@@ -611,8 +611,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;

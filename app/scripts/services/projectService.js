@@ -214,7 +214,7 @@ angular.module('bitbloqApp')
             } else {
                 _updateHardwareSchema();
                 var hardware = _.cloneDeep(exports.project.hardware);
-                if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bq ZUM' && exports.project.bitbloqConnectBT) {
+                if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bqZUM' && exports.project.bitbloqConnectBT) {
                     hardware.components.push(exports.project.bitbloqConnectBT);
                 }
                 code = arduinoGeneration.getCode({
@@ -239,7 +239,7 @@ angular.module('bitbloqApp')
             };
             if (code === 'code') {
                 project.hardware = {
-                    board: 'bq ZUM'
+                    board: 'bqZUM'
                 };
                 project.code = '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/\n\nvoid setup(){\n\n}\n\n/***   Loop  ***/\n\nvoid loop(){\n\n}';
             } else {
@@ -320,7 +320,7 @@ angular.module('bitbloqApp')
                 exports.project = _.extend(exports.project, exports.getDefaultProject('code'));
             } else if (_.isEqual(exports.getDefaultProject(), exports.project) || exports.project.code === '') {
                 exports.project.hardware = {
-                    board: 'bq ZUM'
+                    board: 'bqZUM'
                 };
                 exports.project.code = '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/\n\nvoid setup(){\n\n}\n\n/***   Loop  ***/\n\nvoid loop(){\n\n}';
                 exports.project.codeProject = true;
@@ -361,7 +361,7 @@ angular.module('bitbloqApp')
                 });
             }
 
-            if (exports.project.useBitbloqConnect && (exports.project.hardware.board === 'bq ZUM') && exports.project.bitbloqConnectBT) {
+            if (exports.project.useBitbloqConnect && (exports.project.hardware.board === 'bqZUM') && exports.project.bitbloqConnectBT) {
                 exports.addComponentInComponentsArray('serialElements', exports.project.bitbloqConnectBT);
             }
         };
