@@ -93,7 +93,7 @@ angular.module('bitbloqApp')
                 return o.id === elementId;
             });
 
-            if (robot) {
+            if (robot.length > 0) {
                 robotName = robot[0].name;
             }
 
@@ -104,6 +104,9 @@ angular.module('bitbloqApp')
             var elementSelected;
             $scope.projectService.showActivation = false;
             $scope.projectService.closeActivation = true;
+            $scope.robotImage = null;
+            $scope.boardImage = null;
+
             if (!showRobotImage) {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
                     return o.name === boardName || o.id === boardName;
@@ -126,10 +129,15 @@ angular.module('bitbloqApp')
                 if (projectService.project.hardware.showRobotImage) {
                     handleActivateAlert();
                 }
-                $scope.boardImage = elementSelected[0].board ? ('robots/' + elementSelected[0].id) : ('boards/' + elementSelected[0].id);
+
+                if (elementSelected[0].board) {
+                    $scope.robotImage = elementSelected[0].id;
+                } else {
+                    $scope.boardImage = elementSelected[0].id;
+                }
             } else {
                 projectService.project.hardware.board = 'bqZUM';
-                $scope.boardImage = 'boards/bqZUM';
+                $scope.boardImage = 'bqZUM';
             }
 
             projectService.project.hardwareTags.push(projectService.project.hardware.board);

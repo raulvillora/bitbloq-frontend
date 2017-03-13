@@ -154,7 +154,9 @@
             <div class="form--section choose--theme">
                 <common-dropdown options="boardNameList" heading-option="currentProject.hardware.showRobotImage ? getNameFromId(currentProject.hardware.showRobotImage) : getNameFromId(currentProject.hardware.board)" options-click="setBoard" ng-model="currentProject.hardware.name"
                                  data-element="'infotab_chooseboard'"></common-dropdown>
-                <img ng-src="/images/{{boardImage}}.svg"/>
+                <img ng-if="boardImage" ng-src="/images/boards/{{boardImage}}.png"/>
+                <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png"/>
+
             </div>
         </fieldset>
         <fieldset ng-if="common.section==='exercise'" class="fieldset--right" data-ng-init="focus = false">
