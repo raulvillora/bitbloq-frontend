@@ -313,7 +313,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 _addComponent(data);
                 break;
             case 'robots':
-                if (data.robot.thirdParty === true && !$scope.common.user) {} else {
+                if ($scope.common.user || !data.robot || !data.robot.thirdParty) {
                     $scope.currentProjectService.showActivation = false;
                     $scope.currentProjectService.closeActivation = false;
                     var robotFamily = $scope.robotsMap[data.id].family;
