@@ -298,13 +298,13 @@ angular.module('bitbloqApp')
         ];
         $scope.boardFilters = '';
         $scope.boardsFilterOptions = [{
-            option: 'bq ZUM',
+            option: 'bqZUM',
             value: false
         }, {
-            option: 'Freaduino UNO',
+            option: 'FreaduinoUNO',
             value: false
         }, {
-            option: 'Arduino UNO',
+            option: 'ArduinoUNO',
             value: false
         }, {
             option: 'Zowi',
