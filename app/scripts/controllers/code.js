@@ -148,16 +148,25 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if ($scope.common.useChromeExtension()) {
-                web2boardOnline.compileAndUpload({
-                    board: projectService.getBoardMetaData(),
-                    code: utils.prettyCode(projectService.project.code)
+            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
+                alertsService.add({
+                    text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-upload',
+                    id: 'activatedError',
+                    type: 'error',
+                    time: 'infinite'
                 });
             } else {
-                if (web2board.isWeb2boardV2()) {
-                    uploadW2b2();
+                if ($scope.common.useChromeExtension()) {
+                    web2boardOnline.compileAndUpload({
+                        board: projectService.getBoardMetaData(),
+                        code: utils.prettyCode(projectService.project.code)
+                    });
                 } else {
-                    uploadW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        uploadW2b2();
+                    } else {
+                        uploadW2b1();
+                    }
                 }
             }
         };
@@ -171,9 +180,9 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            if (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated()) || !isValidMakeblockCode()) {
+            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
                 alertsService.add({
-                    text: 'robots-not-activated-compile',
+                    text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-compile',
                     id: 'activatedError',
                     type: 'error',
                     time: 'infinite'
@@ -235,23 +244,24 @@ angular.module('bitbloqApp')
 
         function isValidMakeblockCode() {
             var robotActivated = true;
-            var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
-            if (thirdPartyRobots) {
+            var thirdPartyRobots = $scope.common.user ? $scope.common.user.thirdPartyRobots : false;
+
+            if (thirdPartyRobots || !$scope.common.user) {
                 if ($scope.currentProject.code.search('<BitbloqMBot.h>') > -1) {
                     robotActivated = false;
-                    if (thirdPartyRobots.mBot) {
+                    if (thirdPartyRobots && thirdPartyRobots.mBot) {
                         robotActivated = true;
                     }
                 } else if ($scope.currentProject.code.search('<BitbloqMBotRanger.h>') > -1 && $scope.currentProject.code.search('<BitbloqMStarter.h>') > -1) {
                     robotActivated = false;
 
-                    if (thirdPartyRobots.starterKit) {
+                    if (thirdPartyRobots && thirdPartyRobots.starterKit) {
                         robotActivated = true;
                     }
                 } else if ($scope.currentProject.code.search('<BitbloqMBotRanger.h>') > -1) {
                     robotActivated = false;
 
-                    if (thirdPartyRobots.mRanger) {
+                    if (thirdPartyRobots && thirdPartyRobots.mRanger) {
                         robotActivated = true;
                     }
                 }
@@ -479,6 +489,7 @@ angular.module('bitbloqApp')
                     if ($scope.common.session.project.hardware && $scope.common.session.project.hardware.board) {
                         $scope.setBoard($scope.common.session.project.hardware.board);
                     }
+                    $scope.setBoard();
                     _prettyCode().then(function() {
                         projectService.addCodeWatchers();
                     });
