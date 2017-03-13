@@ -440,10 +440,10 @@ angular.module('bitbloqApp')
                         }
                     });
                 }).error(function() {
-                    _.extend(modalOptions, {
-                        shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
-                    });
+                _.extend(modalOptions, {
+                    shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
                 });
+            });
 
             shareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
@@ -843,6 +843,10 @@ angular.module('bitbloqApp')
                 document.getElementById('code-4').focus();
             }
 
+            function focusFunction() {
+                modalScope.errorMessage = '';
+            }
+
             _.extend(modalScope, {
                 title: common.translate('modal-activate-robot-title', {
                     value: robotName
@@ -852,6 +856,7 @@ angular.module('bitbloqApp')
                 confirmAction: confirmAction,
                 value: robotName,
                 handlePaste: handlePaste,
+                focusFunction: focusFunction,
                 activationCode: activationCode,
                 errorMessage: errorMessage,
                 rejectButton: 'modal-button-cancel',
