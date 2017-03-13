@@ -461,7 +461,7 @@
                             id: 'groupId',
                             name: 'groupId',
                             placeholder: 'centerMode_modal_groupIdPlaceholder',
-                            errorText: 'Este ID no existe o no está disponible para registrarse en estos momentos.',
+                            errorText: 'centerMode_modal_registerInGroup-error',
                             showError: false
                         },
                         confirmButton: 'centerMode_button_registerInGroup',
