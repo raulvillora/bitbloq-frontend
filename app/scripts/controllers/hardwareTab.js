@@ -79,7 +79,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _removeIntegratedComponents() {
-        if ($scope.boardsMap[$scope.currentProject.hardware.board].integratedComponents) {
+        if ($scope.boardsMap[$scope.currentProject.hardware.board] && $scope.boardsMap[$scope.currentProject.hardware.board].integratedComponents) {
             var boardIntegratedComponentsList = $scope.boardsMap[$scope.currentProject.hardware.board].integratedComponents,
                 j,
                 found,
