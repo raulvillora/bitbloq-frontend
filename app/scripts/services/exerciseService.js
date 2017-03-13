@@ -336,9 +336,10 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getRobotMetaData = function() {
+        exports.getRobotMetaData = function(robotId) {
+            robotId = robotId || exports.exercise.hardware.robot;
             return _.find(hardwareConstants.robots, function(robot) {
-                return robot.id === exports.exercise.hardware.robot;
+                return robot.id === robotId;
             });
         };
 

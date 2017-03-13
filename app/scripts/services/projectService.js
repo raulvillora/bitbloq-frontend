@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
+    {
 
         var exports = {},
             thereAreWatchers = false,
@@ -184,9 +185,10 @@ angular.module('bitbloqApp')
             return map;
         };
 
-        exports.getRobotMetaData = function() {
+        exports.getRobotMetaData = function(robotId) {
+            robotId = robotId || exports.exercise.hardware.robot;
             return _.find(hardwareConstants.robots, function(robot) {
-                return robot.id === exports.project.hardware.robot;
+                return robot.id === robotId;
             });
         };
 
@@ -488,20 +490,21 @@ angular.module('bitbloqApp')
 
                 if (exports.project._id) {
                     if (!exports.project._acl || (exports.project._acl['user:' + common.user._id] && exports.project._acl['user:' + common.user._id].permission === 'ADMIN')) {
-                        return projectApi.update(exports.project._id, exports.getCleanProject()).then(function(response) {
-                            if (response.status === 200) {
-                                exports.saveStatus = 2;
-                                exports.saveOldProject();
-                                localStorage.projectsChange = true;
-                            } else {
-                                exports.saveStatus = 3;
-                            }
-                            if (exports.tempImage.file) {
-                                imageApi.save(exports.project._id, exports.tempImage.file).then(function() {
-                                    exports.tempImage = {};
-                                });
-                            }
-                        });
+                        return projectApi.update(exports.project._id, exports.getCleanProject())
+                            .then(function(response) {
+                                if (response.status === 200) {
+                                    exports.saveStatus = 2;
+                                    exports.saveOldProject();
+                                    localStorage.projectsChange = true;
+                                } else {
+                                    exports.saveStatus = 3;
+                                }
+                                if (exports.tempImage.file) {
+                                    imageApi.save(exports.project._id, exports.tempImage.file).then(function() {
+                                        exports.tempImage = {};
+                                    });
+                                }
+                            });
                     } else {
                         exports.saveStatus = 4;
                         defered.reject();
@@ -736,7 +739,9 @@ angular.module('bitbloqApp')
 
         function canUseThirdParty(robot) {
             var canUse = false;
-            if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment().isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
+            if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment()
+                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate)))
+            {
                 canUse = true;
             } else {
                 canUse = false;

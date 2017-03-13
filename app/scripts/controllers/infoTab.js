@@ -103,9 +103,10 @@ angular.module('bitbloqApp')
         };
 
         $scope.editGroups = function(currentProject, groups) {
-            $scope.currentProjectService.assignGroup(currentProject, $scope.common.user._id, groups).then(function(response) {
-                $scope.setGroups(response);
-            });
+            $scope.currentProjectService.assignGroup(currentProject, $scope.common.user._id, groups)
+                .then(function(response) {
+                    $scope.setGroups(response);
+                });
         };
 
         function composeImage() {
@@ -116,22 +117,21 @@ angular.module('bitbloqApp')
             canvas.width = 775;
             canvas.height = 411;
             if ($scope.currentProject.hardware.board) {
-                if ($scope.currentProject.hardware.robot) {
-                    var robotRef = currentProjectService.getRobotMetaData();
-                    var robotIcon = robotRef.id;
-                    imageObj.src = '/images/robots/' + robotIcon + '.png';
+                if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage) {
+                    var robotRef = currentProjectService.getRobotMetaData($scope.currentProject.hardware.showRobotImage);
+                    imageObj.src = '/images/robots/' + robotRef.id + '.png';
                 } else {
                     var boardRef = currentProjectService.getBoardMetaData();
-                    var boardIcon = boardRef.id;
-                    imageObj.src = '/images/boards/' + boardIcon + '.png';
+                    imageObj.src = '/images/boards/' + boardRef.id + '.png';
                 }
             }
+
             var components = $scope.currentProject.hardware.components;
             var useBitbloqConnect = $scope.currentProject.useBitbloqConnect;
 
             imageObj.onload = function() {
-                if ($scope.currentProject.hardware.robot) {
-                    setMainImage(canvas, context, imageObj, $scope.currentProject.hardware.robot);
+                if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage) {
+                    setMainImage(canvas, context, imageObj, $scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage);
                 } else {
                     setMainImage(canvas, context, imageObj, false);
                 }
