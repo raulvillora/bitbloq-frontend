@@ -108,6 +108,7 @@ angular.module('bitbloqApp')
                     $scope.setGroups(response);
                 });
         };
+        $scope.composeImage = composeImage;
 
         function composeImage() {
             var canvas = document.getElementById('testcanvas');
@@ -149,13 +150,15 @@ angular.module('bitbloqApp')
             var limitedComponents = components.slice(0, 4);
             var counter = 0;
             limitedComponents.forEach(function(component) {
-                var componentImage = new Image();
-                componentImage.src = '/images/components/' + component.id + '.png';
-                componentImage.onload = function() {
-                    setComponentImage(canvas, context, componentImage, counter);
-                    counter++;
-                    generateImage(canvas);
-                };
+                if (component.id.indexOf('integrated') === -1) {
+                    var componentImage = new Image();
+                    componentImage.src = '/images/components/' + component.id + '.png';
+                    componentImage.onload = function() {
+                        setComponentImage(canvas, context, componentImage, counter);
+                        counter++;
+                        generateImage(canvas);
+                    };
+                }
             });
         }
 
@@ -191,6 +194,7 @@ angular.module('bitbloqApp')
             var xStart = (canvas.width - 530) / 2;
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
+
             if (robot) {
                 switch (robot) {
                     case 'mbot':
@@ -198,6 +202,21 @@ angular.module('bitbloqApp')
                         break;
                     case 'evolution':
                         context.drawImage(imageObj, xStart, 60, 542, 325);
+                        break;
+                    case 'rangerlandraider':
+                        context.drawImage(imageObj, xStart, 30, 533, 350);
+                        break;
+                    case 'rangerraptor':
+                        context.drawImage(imageObj, xStart, 10, 490, 400);
+                        break;
+                    case 'rangernervousbird':
+                        context.drawImage(imageObj, 145, 12, 450, 400);
+                        break;
+                    case 'startertank':
+                        context.drawImage(imageObj, 80, -70, 600, 550);
+                        break;
+                    case 'starterthreewheels':
+                        context.drawImage(imageObj, 110, -70, 500, 600);
                         break;
                     default:
                         context.drawImage(imageObj, xStart, -60, 542, 542);

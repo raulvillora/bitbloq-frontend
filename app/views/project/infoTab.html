@@ -12,8 +12,7 @@
                 <div class="form-control">
                     <label>{{ 'name' | translate }}*</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname', 'input--error': form.projectname.$error.required && publishProjectError}">
-                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-ng-model="currentProject.name" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()"
-                               data-ng-disabled="!common.user" data-element="info-project-name" required>
+                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-ng-model="currentProject.name" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user" data-element="info-project-name" required>
                     </span>
                     <span class="form--error" ng-show="form.projectname.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-nameError' | translate }}</small>
@@ -23,8 +22,7 @@
                 <div class="form-control project__description">
                     <label>{{ common.section !== 'exercise'? 'description' : 'centerMode_title_exerciseContent' | translate }}*</label>
                     <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
-                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="currentProject.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'"
-                                  data-ng-disabled="!common.user" data-element="infotab-description" required> </textarea>
+                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="currentProject.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description" required> </textarea>
                     </span>
                     <span class="form--error" ng-show="form.textarea.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-descriptionError' | translate }}</small>
@@ -36,9 +34,7 @@
                 <div class="form-control">
                     <label>{{ 'video' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'videourl'}">
-                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="currentProject.videoUrl"
-                               data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" value="{{currentProject.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-disabled="!common.user"
-                               data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-element="infotab-youtubevideo">
+                        <input type="text" id="videourl" name="videourl" placeholder="{{'infotab-videourl' | translate}}" data-ng-model="currentProject.videoUrl" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" value="{{currentProject.videoUrl}}" data-ng-focus="focus = 'videourl'" data-ng-disabled="!common.user" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-element="infotab-youtubevideo">
                     </span>
                 </div>
             </div>
@@ -49,11 +45,12 @@
                         <label>{{ 'info-tab-first-image' | translate }}</label>
                         <small>{{ 'info-tab-image-requisites' | translate }}</small>
                     </div>
+                    <!--<button class="btn btn-primary btn-small" ng-click="composeImage()">Crear imagen</button>-->
                     <div class="imagecontainer">
                         <div class="main--project--image" id="main-image">
                             <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
                         </div>
-                        <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput"/>
+                        <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput" />
                         <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
                             {{'upload-image' | translate}}
                         </button>
@@ -78,8 +75,7 @@
                 <div class="form-control  form--tags">
                     <label>{{ 'tags' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
-                        <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)"
-                               data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
+                        <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
                         <button type="button" class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" tabindex="1" data-element="infotab-taginput-button">{{ 'add' | translate }}</button>
                     </span>
                 </div>
@@ -143,8 +139,8 @@
             </div>
             <div class="form--section choose--theme">
                 <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" data-element="'infotab_choosetheme'"></common-dropdown>
-                <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg" alt=""/>
-                <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt=""/>
+                <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg" alt="" />
+                <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt="" />
             </div>
         </fieldset>
         <fieldset ng-if="currentProject.codeProject" class="fieldset--right" data-ng-init="focus = false">
@@ -152,11 +148,9 @@
                 <legend class="h3">{{ 'boards_and_robots' | translate }}</legend>
             </div>
             <div class="form--section choose--theme">
-                <common-dropdown options="boardNameList" heading-option="currentProject.hardware.showRobotImage ? getNameFromId(currentProject.hardware.showRobotImage) : getNameFromId(currentProject.hardware.board)" options-click="setBoard" ng-model="currentProject.hardware.name"
-                                 data-element="'infotab_chooseboard'"></common-dropdown>
-                <img ng-if="boardImage" ng-src="/images/boards/{{boardImage}}.png"/>
-                <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png"/>
-
+                <common-dropdown options="boardNameList" heading-option="currentProject.hardware.showRobotImage ? getNameFromId(currentProject.hardware.showRobotImage) : getNameFromId(currentProject.hardware.board)" options-click="setBoard" ng-model="currentProject.hardware.name" data-element="'infotab_chooseboard'"></common-dropdown>
+                <img ng-if="boardImage" ng-src="/images/boards/{{boardImage}}.png" />
+                <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png" />
             </div>
         </fieldset>
         <fieldset ng-if="common.section==='exercise'" class="fieldset--right" data-ng-init="focus = false">
