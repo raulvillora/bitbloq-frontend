@@ -620,10 +620,50 @@
                 </li>
             </ul>
             <!-- mBot V2 -->
-            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='mBot' && !currentProject.hardware.showRobotImage">
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='mBot' && currentProject.hardware.showRobotImage">
                 <li id="{{'bloq' + advancedMBot.name}}" data-ng-class="advancedMBot.addClass" data-ng-repeat="advancedMBot in common.properties.bloqsSortTree.advancedMBotV2" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedMBot.indexOf(advancedMBot.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMBotV2[$index].name]" data-components-array="currentProjectService.componentsArray">
                     <span class="input input--checkbox">
                         <input type="checkbox" class="element-toolbox" id="{{advancedMBot.name + 'Check'}}" ng-model="checkModel[advancedMBot.name]" ng-click="addChecks('advancedMBot', checkModel[advancedMBot.name], advancedMBot.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.advancedMBot" />
+                    </span>
+                </li>
+            </ul>
+            <!-- rangerlandraider -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='rangerlandraider'">
+                <li id="{{'bloq' + advancedRangerlandraider.name}}" data-ng-class="advancedRangerlandraider.addClass" data-ng-repeat="advancedRangerlandraider in common.properties.bloqsSortTree.advancedRangerlandraider" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedRangerlandraider.indexOf(advancedRangerlandraider.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedRangerlandraider[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{advancedRangerlandraider.name + 'Check'}}" ng-model="checkModel[advancedRangerlandraider.name]" ng-click="addChecks('advancedRangerlandraider', checkModel[advancedRangerlandraider.name], advancedRangerlandraider.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.advancedRangerlandraider" />
+                    </span>
+                </li>
+            </ul>
+            <!-- rangerraptor -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='rangerraptor'">
+                <li id="{{'bloq' + advancedRangerraptor.name}}" data-ng-class="advancedRangerraptor.addClass" data-ng-repeat="advancedRangerraptor in common.properties.bloqsSortTree.advancedRangerraptor" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedRangerraptor.indexOf(advancedRangerraptor.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedRangerraptor[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{advancedRangerraptor.name + 'Check'}}" ng-model="checkModel[advancedRangerraptor.name]" ng-click="addChecks('advancedRangerraptor', checkModel[advancedRangerraptor.name], advancedRangerraptor.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.advancedRangerraptor" />
+                    </span>
+                </li>
+            </ul>
+            <!-- rangernervousbird -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='rangernervousbird'">
+                <li id="{{'bloq' + advancedRangernervousbird.name}}" data-ng-class="advancedRangernervousbird.addClass" data-ng-repeat="advancedRangernervousbird in common.properties.bloqsSortTree.advancedRangernervousbird" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedRangernervousbird.indexOf(advancedRangernervousbird.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedRangernervousbird[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{advancedRangernervousbird.name + 'Check'}}" ng-model="checkModel[advancedRangernervousbird.name]" ng-click="addChecks('advancedRangernervousbird', checkModel[advancedRangernervousbird.name], advancedRangernervousbird.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.advancedRangernervousbird" />
+                    </span>
+                </li>
+            </ul>
+            <!-- starterTank -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='startertank'">
+                <li id="{{'bloq' + advancedStartertank.name}}" data-ng-class="advancedStartertank.addClass" data-ng-repeat="advancedStartertank in common.properties.bloqsSortTree.advancedStartertank" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedStartertank.indexOf(advancedStartertank.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedStartertank[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{advancedStartertank.name + 'Check'}}" ng-model="checkModel[advancedStartertank.name]" ng-click="addChecks('advancedStartertank', checkModel[advancedStartertank.name], advancedStartertank.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.advancedStartertank" />
+                    </span>
+                </li>
+            </ul>
+            <!-- starterthreewheels -->
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='starterthreewheels'">
+                <li id="{{'bloq' + advancedStarterthreewheels.name}}" data-ng-class="advancedStarterthreewheels.addClass" data-ng-repeat="advancedStarterthreewheels in common.properties.bloqsSortTree.advancedStarterthreewheels" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedStarterthreewheels.indexOf(advancedStarterthreewheels.name)>-1" data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedStarterthreewheels[$index].name]" data-components-array="currentProjectService.componentsArray">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" class="element-toolbox" id="{{advancedStarterthreewheels.name + 'Check'}}" ng-model="checkModel[advancedStarterthreewheels.name]" ng-click="addChecks('advancedStarterthreewheels', checkModel[advancedStarterthreewheels.name], advancedStarterthreewheels.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.advancedStarterthreewheels" />
                     </span>
                 </li>
             </ul>

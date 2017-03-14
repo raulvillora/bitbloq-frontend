@@ -474,9 +474,9 @@ angular.module('bitbloqApp')
                         }
                     } else if (item === 'mBotGetDistance-v2') {
                         result = existComponent(['mkb_ultrasound'], connectedComponents);
-                    } else if (item === 'mBotBuzzer-v2') {
+                    } else if ((item === 'mBotBuzzer-v2') || (item === 'mBotBuzzerAdvanced-v2')) {
                         result = existComponent(['mkb_integrated_buzz'], connectedComponents);
-                    } else if (item === 'mBotSetRGBLed') {
+                    } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
                         result = existComponent(['mkb_integrated_RGB'], connectedComponents);
                     } else {
                         i = 0;
