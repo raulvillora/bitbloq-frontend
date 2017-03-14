@@ -251,12 +251,13 @@ angular.module('bitbloqApp')
                 type: 'loading'
             });
             web2board.setInProcess(true);
-
-            web2board.verify($scope.getPrettyCode());
+            var boardReference = projectService.getBoardMetaData();
+            web2board.verify($scope.getPrettyCode(), boardReference);
         }
 
         function verifyW2b2() {
-            web2board.verify($scope.getPrettyCode());
+            var boardReference = projectService.getBoardMetaData();
+            web2board.verify($scope.getPrettyCode(), boardReference);
         }
 
         function serialMonitorW2b1() {

@@ -20,7 +20,9 @@ angular.module('bitbloqApp')
             w2bToast = null,
             web2boarTimeOutResponse = 45000, //45 seconds
             serialMonitorPanel = null,
-            plotterMonitorPanel = null;
+            plotterMonitorPanel = null,
+            boardData = {},
+            w2bVersion;
 
         web2board.config = {
             wsHost: '127.0.0.1',
@@ -36,6 +38,10 @@ angular.module('bitbloqApp')
         function isWeb2boardUpToDate(version) {
             // todo: this has to be improved
             return parseInt(version.replace(/\./g, ''), 10) >= parseInt(common.properties.web2boardVersion.replace(/\./g, ''), 10);
+        }
+
+        function isLatestWeb2board(version) {
+            return parseInt(version.replace(/\./g, ''), 10) === parseInt(common.properties.currentweb2boardVersion.replace(/\./g, ''), 10);
         }
 
         function isWSNotConnected(wsClient) {
@@ -130,10 +136,21 @@ angular.module('bitbloqApp')
         function onOpenConnectionTrigger(callback) {
             return api.VersionsHandlerHub.server.getVersion()
                 .then(function(version) {
+                    w2bVersion = version;
                     if (!isWeb2boardUpToDate(version)) {
                         removeInProgressFlag();
                         alertsService.add({
                             text: 'alert-web2board-exitsNewVersion',
+                            id: 'web2board',
+                            type: 'warning',
+                            time: 5000,
+                            linkText: 'download',
+                            link: showWeb2BoardUploadModal
+                        });
+                    } else if (!isLatestWeb2board(version) && boardData.mcu === 'mega') {
+                        removeInProgressFlag();
+                        alertsService.add({
+                            text: 'alert-web2board-exitsLatestVersion',
                             id: 'web2board',
                             type: 'warning',
                             time: 5000,
@@ -205,7 +222,19 @@ angular.module('bitbloqApp')
                     }
                 );
             } else {
-                return callback();
+                if (!isLatestWeb2board(w2bVersion) && boardData.mcu === 'mega') {
+                    removeInProgressFlag();
+                    alertsService.add({
+                        text: 'alert-web2board-exitsLatestVersion',
+                        id: 'web2board',
+                        type: 'warning',
+                        time: 5000,
+                        linkText: 'download',
+                        link: showWeb2BoardUploadModal
+                    });
+                } else {
+                    return callback();
+                }
             }
         }
 
@@ -356,8 +385,9 @@ angular.module('bitbloqApp')
 
         /*Public functions */
 
-        web2board.verify = function(code) {
+        web2board.verify = function(code, board) {
             //It is not mandatory to have a board connected to verify the code
+            boardData = board ? _.extend(boardData, board) : boardData;
             if (!inProgress) {
                 inProgress = true;
                 openCommunication(function() {
@@ -376,6 +406,7 @@ angular.module('bitbloqApp')
         };
 
         web2board.upload = function(boardMcu, code) {
+            boardData = _.extend(boardData, boardMcu);
             if (!inProgress) {
                 if (!code || !boardMcu) {
                     alertsService.add({

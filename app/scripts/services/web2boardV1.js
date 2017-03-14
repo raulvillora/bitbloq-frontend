@@ -419,10 +419,10 @@ angular.module('bitbloqApp')
 
         /** Public functions */
 
-        web2board.verify = function(code) {
+        web2board.verify = function(code, boardData) {
             if (isWeb2boardV2Flag === null) {
                 firstFunctionCalled.name = 'verify';
-                firstFunctionCalled.args = [code];
+                firstFunctionCalled.args = [code, boardData];
                 firstFunctionCalled.alertServiceTag = 'compile';
             }
             //It is not mandatory to have a board connected to verify the code

@@ -366,11 +366,13 @@ angular.module('bitbloqApp')
             });
             web2board.setInProcess(true);
 
-            web2board.verify(utils.prettyCode(projectService.project.code));
+            var boardReference = projectService.getBoardMetaData();
+            web2board.verify(utils.prettyCode(projectService.project.code), boardReference);
         }
 
         function verifyW2b2() {
-            web2board.verify(utils.prettyCode(projectService.project.code));
+            var boardReference = projectService.getBoardMetaData();
+            web2board.verify(utils.prettyCode(projectService.project.code), boardReference);
         }
 
         function _goToBloqs() {

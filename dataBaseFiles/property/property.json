@@ -529,5 +529,6 @@
         "meauriga": "1.0.0",
         "meorion": "1.0.0"
     },
-    "web2boardVersion": "1.0.0"
+    "web2boardVersion": "1.0.0",
+    "currentweb2boardVersion":"2.1.3"
 }]
