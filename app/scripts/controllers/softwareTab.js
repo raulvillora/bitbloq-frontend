@@ -313,7 +313,7 @@ angular.module('bitbloqApp')
                     break;
                 case 86:
                     //$log.debug('ctrl + v');
-                    if (event.ctrlKey && localStorage.bloqInClipboard) {
+                    if (event.ctrlKey && localStorage.bloqInClipboard && $document[0].activeElement.attributes['data-bloq-id']) {
                         copyBloq(JSON.parse(localStorage.bloqInClipboard));
                     }
                     break;

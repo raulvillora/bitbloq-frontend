@@ -938,8 +938,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
      Shortcuts
      *************************************************/
     $scope.onKeyPress = function($event) {
-        console.log('$event.keyCode');
-        console.log($event.keyCode);
         switch ($event.keyCode) {
 
             case 67:
