@@ -692,7 +692,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             return r.id === robot.id;
         });
         hw2Bloqs.removeRobot(robotReference);
-
+        $scope.closeComponentInteraction();
         if (robotReference.useBoardImage) {
             var board = _.find($scope.hardware.boardList, function(board) {
                 return board.id === robotReference.board;
@@ -938,7 +938,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
      Shortcuts
      *************************************************/
     $scope.onKeyPress = function($event) {
-
+        console.log('$event.keyCode');
+        console.log($event.keyCode);
         switch ($event.keyCode) {
 
             case 67:
