@@ -109,6 +109,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             hw2Bloqs.removeBoard();
             $scope.currentProject.hardware.showRobotImage = null;
             _removeIntegratedComponents();
+            $scope.closeBluetoothInteraction();
             currentProjectService.showActivation = false;
             $scope.currentProjectService.closeActivation = false;
             $scope.boardSelected = false;
@@ -246,6 +247,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             c = _.remove(currentProjectService.componentsArray[category], currentProjectService.findComponentInComponentsArray($scope.componentSelected.uid)),
             componentToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
         $scope.componentSelected = false;
+        console.log(componentToRemove);
         hw2Bloqs.removeComponent(componentToRemove);
         currentProjectService.startAutosave();
     };
@@ -401,7 +403,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (projectService.project.bitbloqConnectBT && projectService.project.bitbloqConnectBT.name) {
             currentProjectService.removeComponentInComponentsArray('serialElements', $scope.currentProject.bitbloqConnectBT.name);
         }
+        $scope.closeBluetoothInteraction();
         $scope.currentProject.bitbloqConnectBT = null;
+        currentProjectService.startAutosave();
     };
 
     $scope.setBaudRate = function(baudRate) {
