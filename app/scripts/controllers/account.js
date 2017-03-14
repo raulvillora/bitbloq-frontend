@@ -243,6 +243,12 @@ angular.module('bitbloqApp')
                 }
             });
 
+            $scope.$watch('common.user.lastName', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    $scope.validateProfile();
+                }
+            });
+
             $scope.$watch('common.user.username', function(newValue, oldValue) {
                 if (oldValue && newValue && oldValue !== newValue) {
                     $scope.validateProfile();
