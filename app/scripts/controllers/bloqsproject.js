@@ -1266,6 +1266,7 @@ angular.module('bitbloqApp')
                 }
 
                 projectService.setProject(project, project.codeProject, true);
+                checkIfTwitterBloq(projectService.project);
                 $scope.saveBloqStep(_.clone(project.software));
                 projectService.saveOldProject();
                 $scope.hwBasicsLoaded.promise.then(function() {
