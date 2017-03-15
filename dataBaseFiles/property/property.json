@@ -145,7 +145,7 @@
         }, {
             "name": "round-v1"
         }],
-        "advancedText": [{
+        "advancedTexts": [{
             "name": "stringArrayAdvanced"
         }, {
             "name": "char"
