@@ -104,6 +104,7 @@ angular
 
             _loadBoard(board, boardDOMElement);
             _autoConnect(board.name);
+            exports.repaint();
         };
 
         exports.addComponent = function(newComponent) {
@@ -263,14 +264,23 @@ angular
             robot = null;
         };
 
+        var repaintTimer;
+
+        function _repaint() {
+            try {
+                jsPlumbInstance.repaintEverything();
+            } catch (e) {
+                $log.debug('protoboard container reference lost!. Re-engage', e);
+            }
+        }
+
         exports.repaint = function() {
-            setTimeout(function() {
-                try {
-                    jsPlumbInstance.repaintEverything();
-                } catch (e) {
-                    $log.debug('protoboard container reference lost!. Re-engage', e);
-                }
-            }, 100);
+            if (!repaintTimer) {
+                repaintTimer = setTimeout(function() {
+                    repaintTimer = null;
+                    _repaint();
+                }, 200);
+            }
         };
 
         exports.saveSchema = function() {
