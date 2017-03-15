@@ -75,6 +75,12 @@
             margin-top: 10px;
             margin-bottom: 20px;
         }
+        .modal--title{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-right: 10px;
+        }
     }
 
     &.modal--publish {
@@ -668,6 +674,9 @@
     .modal--title {
         font-size: 21px;
         font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .modal--sencond-title {

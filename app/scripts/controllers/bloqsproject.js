@@ -1265,6 +1265,7 @@ angular.module('bitbloqApp')
                     project.software.freeBloqs = project.software.freeBloqs || [];
                 }
 
+                project.hardware.board = project.hardware.board.replace(/\s+/g, '');
                 projectService.setProject(project, project.codeProject, true);
                 checkIfTwitterBloq(projectService.project);
                 $scope.saveBloqStep(_.clone(project.software));

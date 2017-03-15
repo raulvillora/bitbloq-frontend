@@ -332,7 +332,7 @@ angular.module('bitbloqApp')
 
         exports.getBoardMetaData = function() {
             return _.find(hardwareConstants.boards, function(board) {
-                return board.name === exports.exercise.hardware.board;
+                return (board.id === exports.exercise.hardware.board || board.name === exports.exercise.hardware.board);
             });
         };
 
@@ -663,6 +663,7 @@ angular.module('bitbloqApp')
                                 exports.exercise.userCanUpdate = true;
                                 var idExercise = response.data;
                                 exports.exercise._id = idExercise;
+                                exports.exercise.teacher = common.user._id;
                                 //to avoid reload
                                 $route.current.pathParams.id = idExercise;
                                 $location.url('/exercise/' + idExercise);

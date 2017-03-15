@@ -474,9 +474,9 @@ angular.module('bitbloqApp')
                         }
                     } else if (item === 'mBotGetDistance-v2') {
                         result = existComponent(['mkb_ultrasound'], connectedComponents);
-                    } else if (item === 'mBotBuzzer-v2') {
+                    } else if ((item === 'mBotBuzzer-v2') || (item === 'mBotBuzzerAdvanced-v2')) {
                         result = existComponent(['mkb_integrated_buzz'], connectedComponents);
-                    } else if (item === 'mBotSetRGBLed') {
+                    } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
                         result = existComponent(['mkb_integrated_RGB'], connectedComponents);
                     } else {
                         i = 0;
@@ -776,26 +776,42 @@ angular.module('bitbloqApp')
         $document.on('click', clickDocumentHandler);
 
         function startTwitterWatchers() {
-            consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
-            consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
-            tokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            tokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
-            tokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            tokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
