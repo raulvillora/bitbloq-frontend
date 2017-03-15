@@ -22,8 +22,8 @@
         "Tom Calvo <tomas.calvo@bq.com>",
         "Luis Antonio Gonzalez <luisantonio.gonzalez@bq.com>",
         "Natalia Gómez <natalia.gomez@bq.com>",
-        "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)",
-        "Alvaro Sanchez <alvaro.sanchez@bq.com>"
+                "Alvaro Sanchez <alvaro.sanchez@bq.com>",
+        "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)"
     ],
     "repository": {
         "type": "git",
