@@ -612,8 +612,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
@@ -664,6 +663,7 @@ angular.module('bitbloqApp')
                                 exports.exercise.userCanUpdate = true;
                                 var idExercise = response.data;
                                 exports.exercise._id = idExercise;
+                                exports.exercise.teacher = common.user._id;
                                 //to avoid reload
                                 $route.current.pathParams.id = idExercise;
                                 $location.url('/exercise/' + idExercise);
