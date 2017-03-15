@@ -5,24 +5,25 @@
                 <use xlink:href="#logoHorizontal"></use>
             </svg>
         </a>
-
+        
         <div ng-show="!isSocialRegister" data-ng-include="'views/loginForm.html'"></div>
         <div ng-show="!isSocialRegister" data-ng-include="'views/registerForm.html'"></div>
         <div ng-show="isSocialRegister" ng-class="{'form--login__container':true}" data-effect="shake">
             <h1 class="h3">{{ 'login-username-create' | translate }}</h1>
             <span class="form--subtitle">{{ 'login-username-explanation' | translate }}</span>
-
+            
             <div class="form">
                 <form name="formSocial" autocomplete="off" novalidate>
                     <fieldset class="form--data--center">
                         <legend class="invisible">Login Form</legend>
                         <!-- User social name -->
                         <div class="form-control">
-                            <span class="form--input input--default" data-ng-class="{'input--error':formSocial.submitted && (formSocial.usernameSocial.$error.required || username.invalid || (username.search && !username.free)), 'input--focused':focus === 'usernameSocial'}">
+                            <span class="form--input input--default" data-ng-class="{'input--error':formSocial.usernameSocial.submitted && (formSocial.usernameSocial.$error.required || username.invalid || (username.search && !username.free)), 'input--focused':focus === 'usernameSocial'}">
                                 <svg class="svg-icon form-icon--username icon--form--validating">
                                     <use xlink:href="#user"></use>
                                 </svg>
-                                <input type="text" id="usernameSocial" name="usernameSocial" maxlength="50" placeholder="{{'user-name' | translate}}" autocorrect="off" autocomplete="off" ng-class="{'input--login--username':true}" ng-model="user.username" ng-focus="formSocial.submitted = false; focusHandler($event)" ng-blur="focus = false" data-element="login-social-username-input" required>
+                                <input type="text" id="usernameSocial" name="usernameSocial" class="input--login--username" maxlength="50" placeholder="{{'user-name' | translate}}" autocorrect="off" autocomplete="off" ng-model="user.username" ng-focus="formSocial.usernameSocial.submitted = false; focus = 'usernameSocial'"
+                                       ng-blur="focus = false" data-element="login-social-username-input" required>
                                 <svg ng-show="username.searching" class="svg-icon icon--form--loading icon--form--validating icon--animated--spin">
                                     <use xlink:href="#loader"></use>
                                 </svg>
@@ -30,17 +31,42 @@
                                     <use xlink:href="#tickCircle"></use>
                                 </svg>
                             </span>
-                            <span class="form--error" ng-show="formSocial.submitted && formSocial.usernameSocial.$error.required">
+                            <span class="form--error" ng-show="formSocial.usernameSocial.submitted && formSocial.usernameSocial.$error.required">
                                 <small>{{ 'login-username-empty' | translate }}</small>
                             </span>
-                            <span class="form--error" ng-show="formSocial.submitted && username.search && !username.free">
+                            <span class="form--error" ng-show="formSocial.usernameSocial.submitted && username.search && !username.free">
                                 <small>{{ 'login-username-in-use' | translate }}</small>
                             </span>
-                            <span class="form--error" ng-show="formSocial.submitted && username.invalid">
+                            <span class="form--error" ng-show="formSocial.usernameSocial.submitted && username.invalid">
                                 <small>{{ 'login-alphanumeric-numeric-error' | translate }}</small>
                             </span>
                         </div>
-                        <button class="btn btn--default btn--check-user" ng-click="formSocial.submitted = true; checkUserName()" data-element="login-social-check-user-button">{{'login-check-username' | translate }}</button>
+                        <!-- User social email -->
+                        <div class="form-control" ng-if="showEmailForm">
+                            <span class="form--input input--default" data-ng-class="{'input--error':formSocial.emailSocial.submitted && (formSocial.emailSocial.$error.required || formSocial.emailSocial.$error.email || formSocial.emailSocial.$error.pattern || (email.search && !email.free)), 'input--focused':focus === 'emailSocial'}">
+                                <svg class="svg-icon form-icon--username icon--form--validating">
+                                    <use xlink:href="#mail"></use>
+                                </svg>
+                                <input id="emailSocial" name="emailSocial" type="email" class="input--login--username" data-ng-model="user.email" data-ng-focus="formSocial.emailSocial.submitted=false; focus = 'emailSocial'" data-ng-blur="focus = false" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off"
+                                       autocomplete="off" required>
+                                <svg ng-show="email.searching" class="svg-icon icon--form--loading icon--form--validating icon--animated--spin">
+                                    <use xlink:href="#loader"></use>
+                                </svg>
+                                <svg ng-show="email.search && email.free" class="svg-icon icon--form--validating icon--form--validated ">
+                                    <use xlink:href="#tickCircle"></use>
+                                </svg>
+                            </span>
+                            <span class="form--error" data-ng-show="formSocial.emailSocial.submitted && formSocial.emailSocial.$error.required" data-element="register-show-noemail">
+                                <small>{{ 'login-email-empty' | translate }}</small>
+                            </span>
+                            <span class="form--error" data-ng-show="formSocial.emailSocial.submitted && (formSocial.emailSocial.$error.email || formSocial.emailSocial.$error.pattern)" data-element="register-invalid-email">
+                                <small>{{ 'login-valid-email' | translate }}</small>
+                            </span>
+                            <span class="form--error" data-ng-show="formSocial.emailSocial.submitted && email.search && !email.free" data-element="login-duplicated-email">
+                                <small>{{ 'login-registered-email' | translate }}</small>
+                            </span>
+                        </div>
+                        <button class="btn btn--default btn--check-user" ng-click="formSocial.usernameSocial.submitted = true; formSocial.emailSocial.submitted = true; checkSocialForm()" data-element="login-social-check-user-button">{{showEmailForm? 'login-check-social' : 'login-check-username' | translate }}</button>
                     </fieldset>
                     <!-- Service terms -->
                     <div class="form-control service-terms">
@@ -59,7 +85,7 @@
                     </div>
                     <!-- Submit Form -->
                     <div class="form-control form--data--center">
-                        <input type="submit" name="submitform" class="btn btn--primary btn__login--submit" value="{{ 'enter' | translate }}" ng-click="formSocial.submitted = true; formSocial.readServiceTerm.submitted = true; registerSocial(formSocial)" data-element="login-social-enter-button" >
+                        <input type="submit" name="submitform" class="btn btn--primary btn__login--submit" value="{{ 'enter' | translate }}" ng-click="formSocial.usernameSocial.submitted = true; formSocial.emailSocial.submitted = true; formSocial.readServiceTerm.submitted = true; registerSocial(formSocial)" data-element="login-social-enter-button">
                     </div>
                 </form>
             </div>

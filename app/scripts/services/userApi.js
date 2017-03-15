@@ -119,8 +119,12 @@ angular.module('bitbloqApp')
             exports.currentUser = {};
         };
 
+        exports.validateEmail = function(email) {
+            return $http.head(envData.config.serverUrl + 'user/email/' + email);
+        };
+
         exports.validateUserName = function(username) {
-            return $http.head(envData.config.serverUrl + 'user/' + username);
+            return $http.head(envData.config.serverUrl + 'user/username/' + username);
         };
 
         exports.update = function(dataUser) {

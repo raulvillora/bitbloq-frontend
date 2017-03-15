@@ -67,7 +67,7 @@
                             <svg class="svg-icon">
                                 <use xlink:href="#mail"></use>
                             </svg>
-                            <input data-ng-model="user.email" data-ng-focus="form.email.submitted=false; focus = 'email'" data-ng-blur="focus = false" id="email" name="email" type="email" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off"
+                            <input id="email" name="email" type="email" data-ng-model="user.email" data-ng-focus="form.email.submitted=false; focus = 'email'" data-ng-blur="focus = false" data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off"
                                    autocomplete="off" required>
                         </span>
                         <span class="form--error" data-ng-show="form.email.submitted && form.email.$error.required" data-element="register-show-noemail">
