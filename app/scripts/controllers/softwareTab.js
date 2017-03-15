@@ -776,26 +776,42 @@ angular.module('bitbloqApp')
         $document.on('click', clickDocumentHandler);
 
         function startTwitterWatchers() {
-            consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
-            consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
-            tokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            tokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
-            tokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(oldValue, newValue) {
-                if (oldValue && oldValue !== newValue) {
+            tokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(newValue, oldValue) {
+                console.log('oldValue');
+                console.log(oldValue);
+                console.log('newValue');
+                console.log(newValue);
+                if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
