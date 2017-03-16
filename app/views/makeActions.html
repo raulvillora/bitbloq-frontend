@@ -88,8 +88,8 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li ng-if="common.section !== 'codeproject'" data-tooltip-position="right" data-tooltip="{{(!currentProject.hardware.board && !currentProject.hardware.robot?'empty-project':'') | translate}}" data-tooltips="{{!currentProject.hardware.board && !currentProject.hardware.robot}}">
-                <div class="dropdown__item" data-ng-click="currentProjectService.download()" data-ng-disabled="!currentProject.hardware.board && !currentProject.hardware.robot" data-element="menu-download">
+            <li ng-if="common.section !== 'codeproject'" data-tooltip-position="right" data-tooltip="{{(isEmptyProject()?'empty-project':'') | translate}}" data-tooltips="{{isEmptyProject()}}">
+                <div class="dropdown__item" data-ng-click="currentProjectService.download()" data-ng-disabled="isEmptyProject()" data-element="menu-download">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#download"></use>
                     </svg>

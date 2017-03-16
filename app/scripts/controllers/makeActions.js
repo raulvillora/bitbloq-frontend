@@ -23,6 +23,9 @@ angular.module('bitbloqApp')
 
         $scope.currentProject = $scope.currentProject || $scope.currentProject;
 
+        $scope.isEmptyProject = function() {
+            return _.isEqual(projectService.project, projectService.getDefaultProject());
+        };
         $scope.uploadProjectSelected = function(fileList) {
 
             // Only allow uploading one file.
