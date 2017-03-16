@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('InfoTabCtrl', function($scope, $rootScope, $log, alertsService, _, utils, projectService) {
+    .controller('InfoTabCtrl', function($scope, $rootScope, $log, alertsService, _, utils, projectService, $timeout) {
 
         var generateImageEvent,
             currentProjectService = $scope.currentProjectService || projectService;
@@ -55,9 +55,13 @@ angular.module('bitbloqApp')
             $log.debug('uploadImageTrigger');
             if (type === 'main') {
                 $log.debug($('.main-image--input'));
-                $('.main-image--input').click();
+                $timeout(function() {
+                    $('.main-image--input').click();
+                });
             } else {
-                $('.other-image--input').click();
+                $timeout(function() {
+                    $('.other-image--input').click();
+                });
             }
         };
 
