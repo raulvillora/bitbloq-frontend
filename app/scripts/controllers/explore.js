@@ -60,6 +60,9 @@ angular.module('bitbloqApp')
             }
         };
 
+        function elementHasBoard(element) {
+            return element.board ? element.board : element.option;
+        }
         $scope.boardFilter = function(newFilter, preventSearch) {
             $scope.boardsFilterOptions.forEach(function(item) {
                 if (item.option !== newFilter) {
@@ -68,8 +71,12 @@ angular.module('bitbloqApp')
             });
             $scope.boardFilters = _.map(_.filter($scope.boardsFilterOptions, {
                 value: true
-            }), 'option')[0];
+            }), elementHasBoard)[0];
+
+            console.log('$scope.boardFilters');
+            console.log($scope.boardFilters);
             $scope.filterParams.board = $scope.boardFilters;
+
             if (!preventSearch) {
                 $scope.search();
             }
@@ -298,24 +305,34 @@ angular.module('bitbloqApp')
         ];
         $scope.boardFilters = '';
         $scope.boardsFilterOptions = [{
-            option: 'bqZUM',
-            value: false
-        }, {
-            option: 'FreaduinoUNO',
-            value: false
-        }, {
-            option: 'ArduinoUNO',
-            value: false
-        }, {
-            option: 'Zowi',
-            value: false
-        }, {
-            option: 'Evolution',
-            value: false
-        }, {
-            option: 'mBot',
-            value: false
-        }];
+                option: 'bqZUM',
+                value: false
+            }, {
+                option: 'FreaduinoUNO',
+                value: false
+            }, {
+                option: 'ArduinoUNO',
+                value: false
+            }, {
+                option: 'Zowi',
+                value: false
+            }, {
+                option: 'Evolution',
+                value: false
+            }, {
+                option: 'mBot',
+                value: false
+            },
+            {
+                option: 'mRanger',
+                board: 'meauriga',
+                value: false
+            }, {
+                option: 'starter Kit',
+                board: 'meorion',
+                value: false
+            }
+        ];
         $scope.componentsFilters = [];
         $scope.componentsFilterOptions = [{
             option: 'without-components',
