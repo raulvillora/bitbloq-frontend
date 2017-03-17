@@ -121,6 +121,7 @@ angular.module('bitbloqApp')
 
             var confirmAction = function() {
                     languageModal.close();
+                    $translate.use(newLanguage);
                     // Apply changes
                     if (common.user) {
                         common.saveUserLanguage(newLanguage);
@@ -131,7 +132,6 @@ angular.module('bitbloqApp')
                 },
                 translateLanguage = function(language) {
                     newLanguage = language;
-                    $translate.use(language);
                 },
                 rejectAction = function() {
                     if (!common.user) {
@@ -440,10 +440,10 @@ angular.module('bitbloqApp')
                         }
                     });
                 }).error(function() {
-                _.extend(modalOptions, {
-                    shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
+                    _.extend(modalOptions, {
+                        shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
+                    });
                 });
-            });
 
             shareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
