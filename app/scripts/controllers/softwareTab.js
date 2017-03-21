@@ -500,7 +500,7 @@ angular.module('bitbloqApp')
             setScrollsDimension();
         }
 
-        function clickDocumentHandler() {
+        function clickDocumentHandler(evt) {
             $contextMenu.css({
                 display: 'none'
             });
@@ -508,10 +508,9 @@ angular.module('bitbloqApp')
             if ($('#twitter-config-button:hover').length === 0 && $('#twitter-content:hover').length === 0) {
                 $scope.twitterSettings = false;
                 deleteTwitterWatchers();
-                if (!$scope.$$phase) {
-                    $scope.$digest();
-                }
             }
+            $scope.hideBloqsMenu(evt);
+            utils.apply($scope);
         }
 
         function contextMenuDocumentHandler(event) {
