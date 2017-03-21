@@ -139,8 +139,8 @@ angular.module('bitbloqApp')
                     setMainImage(canvas, context, imageObj, $scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage);
                 } else {
                     setMainImage(canvas, context, imageObj, false);
+                    setComponentsImage(canvas, context, components, useBitbloqConnect);
                 }
-                setComponentsImage(canvas, context, components, useBitbloqConnect);
             };
         }
 
