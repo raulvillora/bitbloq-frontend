@@ -135,14 +135,6 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.getSocialProfile = function(provider, token) {
-            if (provider === 'google') {
-                return $http.get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + token);
-            } else if (provider === 'facebook') {
-                return $http.get('https://graph.facebook.com/me?access_token=' + token);
-            }
-        };
-
         exports.addSocialNetwork = function(dataProvider) {
             return exports.update(dataProvider);
         };

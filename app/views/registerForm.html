@@ -105,7 +105,7 @@
                     <div class="form-control">
                         <label for="birthday">{{ 'login-birth-day' | translate }}</label>
                         <span id="birthday" data-ng-class="{'input input--date':true, 'input--focused':focus === 'birthday'}">
-                            <div ng-init="form.birthday.submitted=false" class="input--group--date">
+                            <div class="input--group--date" ng-init="form.birthday.submitted=false">
                                 <input data-element="register-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="form.birthday.day" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
                                        data-ng-blur="focus = false; checkAge(form)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':form.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
                                 <input data-element="register-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="form.birthday.month" data-ng-focus="form.birthday.submitted=false; focusHandler($event)"
