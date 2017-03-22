@@ -28,6 +28,8 @@ angular.module('bitbloqApp')
             tokenWatcher,
             tokenSecretWatcher;
 
+        var resizeWatcher;
+
         $scope.bloqsApi = bloqsApi;
         $scope.currentProject = $scope.currentProject || projectService.project;
         $scope.lastPosition = 0;
@@ -721,7 +723,7 @@ angular.module('bitbloqApp')
         }
 
         function onDeleteBloq() {
-            _.throttle(setScrollsDimension, 250);
+            startScrollsDimension(250);
             var twitterConfigBloqs = _.filter(bloqs.bloqs, function(item) {
                 return item.bloqData.name === 'phoneConfigTwitter';
             });
@@ -738,7 +740,7 @@ angular.module('bitbloqApp')
                     startTwitterWatchers();
                 }, 500);
             }
-            _.throttle(setScrollsDimension, 1000);
+            startScrollsDimension(1000);
             var mouseItem = {
                 top: object.detail.mouseEvent.y - 5,
                 left: object.detail.mouseEvent.x - 5,
@@ -776,40 +778,24 @@ angular.module('bitbloqApp')
 
         function startTwitterWatchers() {
             consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(newValue, oldValue) {
-                console.log('oldValue');
-                console.log(oldValue);
-                console.log('newValue');
-                console.log(newValue);
                 if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
             consumerSecretWatcher = $scope.$watch('common.user.twitterApp.consumerSecret', function(newValue, oldValue) {
-                console.log('oldValue');
-                console.log(oldValue);
-                console.log('newValue');
-                console.log(newValue);
                 if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
             tokenWatcher = $scope.$watch('common.user.twitterApp.accessToken', function(newValue, oldValue) {
-                console.log('oldValue');
-                console.log(oldValue);
-                console.log('newValue');
-                console.log(newValue);
                 if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
             });
 
             tokenSecretWatcher = $scope.$watch('common.user.twitterApp.accessTokenSecret', function(newValue, oldValue) {
-                console.log('oldValue');
-                console.log(oldValue);
-                console.log('newValue');
-                console.log(newValue);
                 if (oldValue !== newValue) {
                     currentProjectService.saveTwitterApp();
                 }
@@ -831,16 +817,20 @@ angular.module('bitbloqApp')
             }
         }
 
+        function startScrollsDimension(timeout) {
+            if (!resizeWatcher) {
+                resizeWatcher = $timeout(function() {
+                    setScrollsDimension();
+                    resizeWatcher = null;
+                }, timeout);
+            }
+        }
         $window.onresize = function() {
-            $timeout(function() {
-                setScrollsDimension();
-            }, 10);
+            startScrollsDimension(200);
         };
 
         bloqsTabsEvent = $rootScope.$on('currenttab:bloqstab', function() {
-            $timeout(function() {
-                setScrollsDimension();
-            }, 0);
+            startScrollsDimension(0);
         });
 
         $scope.$field.on('scroll', scrollField);
