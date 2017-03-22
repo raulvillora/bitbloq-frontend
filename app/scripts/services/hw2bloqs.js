@@ -760,9 +760,7 @@ angular
                         if (epBoardReference.connections.length > 0 && (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5')) {
                             epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h') || epBoardReference;
                         }
-                    } else if (board.id === 'ArduinoUNO') {
-                        epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
-                    } else if (board.id === 'ArduinoMEGA2560') {
+                    } else if (board.id === 'ArduinoUNO' || board.id === 'ArduinoMEGA2560') {
                         epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                     }
 

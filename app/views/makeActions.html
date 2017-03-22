@@ -305,8 +305,8 @@
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-compile':'verify' | translate }}" data-tooltips="true">
-        <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || !common.user && isThirdPartyRobot()">
+    <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-compile':  currentProject.hardware.showRobotImage && !isRobotActivated() ? 'robots-not-activated-compile' :'verify' | translate }}" data-tooltips="true">
+        <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || !common.user && isThirdPartyRobot() || (currentProject.hardware.showRobotImage && !isRobotActivated())">
             <svg class="svg-icon">
                 <use xlink:href="#tick"></use>
             </svg>
