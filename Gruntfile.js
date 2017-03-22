@@ -318,16 +318,16 @@ module.exports = function(grunt) {
                 options: {
                     collapseWhitespace: true,
                     removeComments: true
-                        // preserveLineBreaks:true,
-                        // conservativeCollapse: true,
-                        // collapseBooleanAttributes: true,
-                        // removeCommentsFromCDATA: true,
-                        // removeOptionalTags: true
+                    // preserveLineBreaks:true,
+                    // conservativeCollapse: true,
+                    // collapseBooleanAttributes: true,
+                    // removeCommentsFromCDATA: true,
+                    // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
                     cwd: 'dist',
-                    src: ['*.html', 'views/{,*}{,*/}*.html', '!google0e0d0e0b7164c58a.html'],
+                    src: ['*.html', 'views/{,*}{,*/}*.html', '!google0e0d0e0b7164c58a.html', '!googlecfb2fde589b3f98c.html'],
                     dest: 'dist'
                 }]
             }
@@ -539,12 +539,12 @@ module.exports = function(grunt) {
             },
             files: {
                 src: ['app/index.html']
-                    //src: ['app/**/*.html']
+                //src: ['app/**/*.html']
             }
         },
         addTimestampToFiles: {
             dist: {
-                htmlFiles: ['dist/{,*}{,*/}*.html', '!dist/index.html', '!dist/google0e0d0e0b7164c58a.html'],
+                htmlFiles: ['dist/{,*}{,*/}*.html', '!dist/index.html', '!dist/google0e0d0e0b7164c58a.html', '!dist/googlecfb2fde589b3f98c.html'],
                 localeFiles: ['dist/res/locales/*.json'],
                 configFiles: ['dist/res/config/**/*.json'],
                 imageFiles: ['dist/images/**/*.{svg,png,jpg,ico}'],
