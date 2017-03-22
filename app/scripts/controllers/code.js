@@ -108,7 +108,6 @@ angular.module('bitbloqApp')
             $scope.robotImage = null;
             $scope.boardImage = null;
             projectService.project.hardware.robot = null;
-            //boardName: zowi
 
             if (!projectService.project.hardware.showRobotImage) {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
