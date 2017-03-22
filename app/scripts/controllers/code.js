@@ -100,21 +100,26 @@ angular.module('bitbloqApp')
             return robotName;
         };
 
-        $scope.setBoard = function(boardName, showRobotImage) {
+        $scope.setBoard = function(boardName) {
             var elementSelected;
             $scope.projectService.showActivation = false;
             $scope.projectService.closeActivation = true;
             projectService.project.hardwareTags = [];
             $scope.robotImage = null;
             $scope.boardImage = null;
+            projectService.project.hardware.robot = null;
+            //boardName: zowi
 
-            if (!showRobotImage) {
+            if (!projectService.project.hardware.showRobotImage) {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
                     return o.name === boardName || o.id === boardName;
                 });
+                if (elementSelected[0].board) {
+                    projectService.project.hardware.robot = elementSelected[0].id;
+                }
             } else {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.id === showRobotImage;
+                    return o.id === projectService.project.hardware.showRobotImage;
                 });
             }
             if (elementSelected[0]) {
@@ -433,7 +438,7 @@ angular.module('bitbloqApp')
 
                     });
 
-                    $scope.setBoard(projectService.project.hardware.robot ? projectService.project.hardware.robot : projectService.project.hardware.board, projectService.project.hardware.showRobotImage);
+                    $scope.setBoard(projectService.project.hardware.robot ? projectService.project.hardware.robot : projectService.project.hardware.board);
 
                     _prettyCode().then(function() {
                         projectService.addCodeWatchers();
