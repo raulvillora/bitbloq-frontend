@@ -762,6 +762,8 @@ angular
                         }
                     } else if (board.id === 'ArduinoUNO') {
                         epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
+                    } else if (board.id === 'ArduinoMEGA2560') {
+                        epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                     }
 
                     if (!epBoardReference) {

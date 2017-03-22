@@ -1021,12 +1021,12 @@ angular.module('bitbloqApp')
                 }, {
                     "x": 0.822,
                     "y": 0.05,
-                    "name": "20",
+                    "name": "i2c-4",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad20"
                 }, {
                     "x": 0.8447,
                     "y": 0.05,
-                    "name": "21",
+                    "name": "i2c-5",
                     "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53ad21"
                 }, {
                     "x": 0.911,
@@ -1279,14 +1279,14 @@ angular.module('bitbloqApp')
                 "i2c-4": [{
                     "x": 0.822,
                     "y": 0.05,
-                    "name": "20-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a220"
+                    "name": "A4-H",
+                    "uid": "6be0rd9d-2e52-4b7d-9dfc-c9edad53a220"
                 }],
                 "i2c-5": [{
                     "x": 0.8447,
                     "y": 0.05,
-                    "name": "21-H",
-                    "uid": "6be0dd9d-2e52-4b7d-9dfc-c9edad53a221"
+                    "name": "A5-H",
+                    "uid": "6be0dd9d-2e52-rb7d-9dfc-c9edad53a221"
                 }]
             }
         }, {
