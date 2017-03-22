@@ -240,7 +240,8 @@ angular.module('bitbloqApp')
             };
             if (code === 'code') {
                 project.hardware = {
-                    board: 'bqZUM'
+                    board: 'bqZUM',
+                    robot: ''
                 };
                 project.code = '/***   Included libraries  ***/\n\n\n/***   Global variables and function definition  ***/\n\n\n/***   Setup  ***/\n\nvoid setup(){\n\n}\n\n/***   Loop  ***/\n\nvoid loop(){\n\n}';
             } else {
