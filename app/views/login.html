@@ -1,11 +1,11 @@
 <div class="form form--login">
-    <div ng-class="{'form--container':true}">
+    <div ng-class="{'login-is-loading':common.isLoading}"></div>
+    <div ng-show="!common.isLoading" ng-class="{'form--container':true}">
         <a href="#/">
             <svg class="form--login__image">
                 <use xlink:href="#logoHorizontal"></use>
             </svg>
         </a>
-        
         <div ng-show="!isSocialRegister" data-ng-include="'views/loginForm.html'"></div>
         <div ng-show="!isSocialRegister" data-ng-include="'views/registerForm.html'"></div>
         <div ng-show="isSocialRegister" ng-class="{'form--login__container':true}" data-effect="shake">
@@ -108,7 +108,8 @@
                             <svg class="svg-icon form-icon--username icon--form--validating">
                                 <use xlink:href="#user"></use>
                             </svg>
-                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="formSocial.tutorName.submitted = false; focus = 'tutorName'" ng-blur="formSocial.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50" placeholder="{{'name' | translate}}"
+                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="formSocial.tutorName.submitted = false; focus = 'tutorName'" ng-blur="formSocial.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50"
+                                   placeholder="{{'name' | translate}}"
                                    autocorrect="off" autocomplete="off" required data-element="register-tutor-name">
                         </span>
                             <span class="form--error" data-ng-show="formSocial.tutorName.submitted && formSocial.tutorName.$error.required" data-element="show-nonametutor">

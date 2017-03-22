@@ -293,7 +293,7 @@ textarea:disabled {
     cursor: hand;
 }
 
-.loading--content {
+.loading--content, .login-is-loading {
     z-index: 9;
     &:before {
         content: '';
@@ -326,6 +326,12 @@ textarea:disabled {
         margin: auto;
         z-index: 10;
         opacity: 0.2;
+    }
+}
+
+.login-is-loading {
+    &:before {
+        background-color: transparent;
     }
 }
 

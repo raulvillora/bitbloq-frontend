@@ -75,6 +75,7 @@ angular.module('bitbloqApp')
                         accessToken: response.access_token
                     };
 
+                    $scope.common.isLoading = true;
                     $scope.providerOptions = options;
 
                     userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
@@ -94,13 +95,13 @@ angular.module('bitbloqApp')
                                                 userId: loginResponse.data.id
                                             });
                                             request.execute(function(resp) {
-                                                console.log('Retrieved profile for:' + resp.displayName);
                                                 $scope.isSocialRegister = true;
                                                 $scope.user.email = loginResponse.data.email;
                                                 $scope.showEmailForm = !loginResponse.data.email;
                                                 if (!resp.code && resp.code !== 404 && resp.code !== 403) {
                                                     $scope.isGoogleClassroom = true;
                                                 }
+                                                $scope.common.isLoading = false;
                                                 utils.apply($scope);
                                             });
                                         });
@@ -109,6 +110,7 @@ angular.module('bitbloqApp')
                                     $scope.isSocialRegister = true;
                                     $scope.user.email = loginResponse.data.email;
                                     $scope.showEmailForm = !loginResponse.data.email;
+                                    $scope.common.isLoading = false;
                                 }
                             } else {
                                 $cookieStore.put('token', loginResponse.data.token);
@@ -118,6 +120,7 @@ angular.module('bitbloqApp')
                                         user.thirdPartyRobots = res.data;
                                     }).finally(function() {
                                         $scope.common.setUser(user);
+                                        $scope.common.isLoading = false;
                                         if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
                                             _goToHome();
                                         } else {
@@ -372,6 +375,7 @@ angular.module('bitbloqApp')
             }
 
             $scope.registerSocial = function(form) {
+                $scope.common.isLoading = true;
                 form.usernameSocial.submitted = true;
                 form.readServiceTerm.submitted = true;
                 if ($scope.showEmailForm) {
