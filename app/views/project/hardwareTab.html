@@ -52,7 +52,7 @@
     <div id="board-context-menu" class="hw-context-menu">
         <ul class="menu">
             <li class="menu__item">
-                <button data-ng-show="anyComponent(true) || componentsArray.serialElements.length >0" data-ng-click="disconnectAllComponents()" data-element="hw-contextmenu-board-disconnect">{{'make-hardware-component-disconnect' | translate}}
+                <button data-ng-show="anyExternalComponent()" data-ng-click="disconnectAllComponents()" data-element="hw-contextmenu-board-disconnect">{{'make-hardware-component-disconnect' | translate}}
                 </button>
             </li>
             <hr>

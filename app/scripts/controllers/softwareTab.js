@@ -430,8 +430,14 @@ angular.module('bitbloqApp')
         };
 
         $scope.showComponents = function(item) {
+
+            if (item === 'serialSend-v1') {
+                console.log('s', $scope.currentProject.hardware.components);
+            }
             var result = false;
-            var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced', 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels'];
+            var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced',
+                'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels', 'convert'
+            ];
             if (stopWord.indexOf(item) === -1) {
                 var i;
                 if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
@@ -448,8 +454,7 @@ angular.module('bitbloqApp')
                             'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
-                        result = showCommunications(item);
-
+                        result = existComponent(['bt', 'sp', 'device'], connectedComponents);
                     } else if (item.indexOf('phone') > -1) {
                         result = $scope.currentProject.useBitbloqConnect;
                     } else if (item.includes('rgb')) {
@@ -578,6 +583,9 @@ angular.module('bitbloqApp')
                     j++;
                 }
                 i++;
+            }
+            if (found && !found.connected) {
+                found = false;
             }
 
             return found;
@@ -711,15 +719,6 @@ angular.module('bitbloqApp')
                     $scope.showHorizontalScroll = false;
                 }
             }, 50);
-        }
-
-        function showCommunications(item) {
-            var stopWord = ['convert'];
-            if (currentProjectService.componentsArray.serialElements) {
-                return !(stopWord.indexOf(item) === -1 && currentProjectService.componentsArray.serialElements.length === 0);
-            } else {
-                return false;
-            }
         }
 
         function onDeleteBloq() {

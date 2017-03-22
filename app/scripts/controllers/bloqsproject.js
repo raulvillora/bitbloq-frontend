@@ -30,25 +30,16 @@ angular.module('bitbloqApp')
         };
 
         $scope.twitterWheel = false;
-        $scope.anyComponent = function(forceCheck) {
-            if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
-                return false;
-            }
-            if (projectService.project.hardware.components.length === 0) {
-                if (projectService.project.useBitbloqConnect) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return true;
-            }
+        $scope.anyComponent = function(componentList) {
+            componentList = componentList || projectService.project.hardware.components;
+            return projectService.project.useBitbloqConnect || (componentList.length > 0);
         };
-        $scope.anyAdvancedComponent = function() {
-            return !_.isEqual(projectService.componentsArray, bloqsUtils.getEmptyComponentsArray());
-        };
-        $scope.anySerialComponent = function() {
-            return projectService.componentsArray.serialElements.length > 0;
+
+        $scope.anyExternalComponent = function() {
+            var connectedComponents = _.filter(projectService.project.hardware.components, function(item) {
+                return (item.id.indexOf('integrated') === -1)
+            });
+            return $scope.anyComponent(connectedComponents);
         };
 
         /*************************************************
@@ -725,6 +716,7 @@ angular.module('bitbloqApp')
 
         $scope.updateBloqs = function() {
             if (projectService.bloqs.varsBloq) {
+                console.log($scope.currentProjectService.componentsArray);
                 bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
             }
         };

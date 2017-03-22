@@ -226,7 +226,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.disconnectComponent = function(component) {
-        hw2Bloqs.disconnectComponent(component || $scope.componentSelected);
+        component = component || $scope.componentSelected;
+        hw2Bloqs.disconnectComponent(component);
+        //currentProjectService.removeComponentInComponentsArray(component.category, component.name);
         $scope.componentSelected.connected = false;
         currentProjectService.startAutosave();
         _closeContextMenu();
@@ -235,7 +237,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.disconnectAllComponents = function() {
         hw2Bloqs.disconnectAllComponents();
         $scope.currentProject.hardware.components.forEach(function(comp) {
-            comp.connected = false;
+            if (!comp.integratedComponent) {
+                comp.connected = false;
+            }
         });
         currentProjectService.startAutosave();
         _closeContextMenu();
@@ -657,6 +661,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
                 tempComponent.name = $scope.common.translate(board.integratedComponents[i].name);
                 tempComponent.integratedComponent = true;
+                tempComponent.connected = true;
                 $scope.currentProject.hardware.components.push(tempComponent);
                 projectService.addComponentInComponentsArray(tempComponent.category, tempComponent);
             }
@@ -771,7 +776,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.componentSelected = componentSelected;
         $scope.boardSelected = false;
 
-        $log.debug('focusComponent', $scope.componentSelected);
+        //$log.debug('focusComponent', $scope.componentSelected);
 
     }
 
