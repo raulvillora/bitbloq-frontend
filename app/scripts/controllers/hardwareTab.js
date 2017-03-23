@@ -288,7 +288,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
     $scope.drop = function(data) {
-
         hw2Bloqs.userInteraction = true;
         switch (data.type) {
             case 'boards':
@@ -336,23 +335,33 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
                 break;
             case 'btComponent':
-                $scope.currentProjectService.showActivation = false;
-                $scope.currentProjectService.closeActivation = false;
                 if (!$scope.currentProject.hardware.board) {
-                    $scope.subMenuHandler('boards', 'open', 1);
+                    $scope.changeToolbox('boards');
                     alertsService.add({
                         text: 'bloqs-project_alert_no-board',
                         id: 'error_noboard',
                         type: 'error'
                     });
-                } else if ($scope.currentProject.hardware.robot) {
-                    alertsService.add({
-                        text: 'bloqs-project_alert_only-robot',
-                        id: 'error_noboard',
-                        type: 'error'
-                    });
+                    return false;
                 } else {
-                    _addBtComponent(data);
+                    $scope.currentProjectService.showActivation = false;
+                    $scope.currentProjectService.closeActivation = false;
+                    if (!$scope.currentProject.hardware.board) {
+                        $scope.subMenuHandler('boards', 'open', 1);
+                        alertsService.add({
+                            text: 'bloqs-project_alert_no-board',
+                            id: 'error_noboard',
+                            type: 'error'
+                        });
+                    } else if ($scope.currentProject.hardware.robot) {
+                        alertsService.add({
+                            text: 'bloqs-project_alert_only-robot',
+                            id: 'error_noboard',
+                            type: 'error'
+                        });
+                    } else {
+                        _addBtComponent(data);
+                    }
                 }
                 break;
         }
