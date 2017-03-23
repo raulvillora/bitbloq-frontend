@@ -15,6 +15,7 @@
     &.fixed {
         position: fixed !important;
         top: 0;
+        width: calc(100% - 14.6px);
     }
 
     .icon-wrapper {
@@ -37,8 +38,8 @@
             .logo--icon--link {
                 margin-left: 20px;
                 display: inline-block;
-                width: 46px;
-                height: 45px;
+                width: 47px;
+                height: 47px;
                 vertical-align: middle;
 
                 .logo--icon {
@@ -91,7 +92,7 @@
                 li {
                     height: 100%;
                     float: left;
-                    line-height: 45px;
+                    line-height: 43px;
                     font-size: 12px;
 
                     &.active {
