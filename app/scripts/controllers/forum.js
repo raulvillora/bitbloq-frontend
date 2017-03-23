@@ -63,7 +63,7 @@
                     alertsService.add({
                         text: 'forumAdmin_alert_deletedTheme',
                         id: 'deleteThread',
-                        type: 'warning',
+                        type: 'ok',
                         time: 5000
                     });
                     $location.url('/forum/' + forum.themeCategory);
