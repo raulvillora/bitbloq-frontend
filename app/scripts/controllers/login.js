@@ -1,4 +1,5 @@
 /*jshint camelcase: false */
+/*globals gapi */
 'use strict';
 
 /**
@@ -79,7 +80,6 @@ angular.module('bitbloqApp')
                     $scope.providerOptions = options;
 
                     userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
-                            // Set user data
                             if (loginResponse.data.next === 'register') {
 
                                 if (loginResponse.data.id && $scope.providerOptions.provider === 'google') {
