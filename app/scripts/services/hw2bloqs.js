@@ -103,7 +103,7 @@ angular
             robotDOMElement.classList.remove('opaque');
 
             _loadBoard(board, boardDOMElement);
-            _autoConnect(board.name);
+            _autoConnect(board.id);
             exports.repaint();
         };
 
@@ -346,7 +346,7 @@ angular
 
         function _autoConnect(board) {
             if (oldConnections.length > 0) {
-                var i2cToFemale = (board === 'ArduinoUNO');
+                var i2cToFemale = (board === 'ArduinoUNO' || board === 'ArduinoMEGA2560');
                 oldConnections.forEach(function(connection) {
                     var pin = connection.pinNames[Object.keys(connection.pinNames)[0]].toLowerCase();
                     if (i2cToFemale && (pin === 'a4' || pin === 'a5')) {

@@ -253,7 +253,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             c = _.remove(currentProjectService.componentsArray[category], currentProjectService.findComponentInComponentsArray($scope.componentSelected.uid)),
             componentToRemove = $('[data-uid="' + c[0].uid + '"]')[0];
         $scope.componentSelected = false;
-        console.log(componentToRemove);
         hw2Bloqs.removeComponent(componentToRemove);
         currentProjectService.startAutosave();
     };
