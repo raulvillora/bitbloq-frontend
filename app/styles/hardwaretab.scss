@@ -582,6 +582,7 @@ $hw_toolbox: 210px;
 
 .robot-info {
     z-index: 20;
+    cursor: pointer;
     position: fixed;
     background-color: white;
     bottom: 0;
@@ -592,12 +593,14 @@ $hw_toolbox: 210px;
 
     .robot-info__container {
         display: inline-block;
+        cursor: pointer;
         width: calc(100% - 65px);
     }
 
     .robot-info__icon {
         display: inline-block;
         margin: 25px;
+        cursor: pointer;
         fill: #7CAD4B;
         width: 24px;
         height: 24px;
@@ -608,15 +611,18 @@ $hw_toolbox: 210px;
         display: inline-block;
         margin-top: 20px;
         font-size: 12px;
+        cursor: pointer;
 
         .robot-info__text--days {
             font-weight: bold;
             display: block;
+            cursor: pointer;
         }
 
         .robot-info__text--activate {
             color: #8c919b;
             display: block;
+            cursor: pointer;
         }
     }
 
@@ -626,5 +632,6 @@ $hw_toolbox: 210px;
         margin: 25px;
         fill: #8c919b;
         width: 15px;
+        cursor: pointer;
     }
 }
