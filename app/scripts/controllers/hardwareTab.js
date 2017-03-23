@@ -123,7 +123,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.currentProject.hardware.robot = null;
 
         $scope.deleteBoard();
-        //$scope.hardware.cleanSchema();
 
         $scope.currentProject.hardware.board = null;
         $scope.robotSelected = false;
@@ -147,7 +146,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 currentProjectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-            .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
+                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
+        {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -260,7 +260,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.hardware.cleanSchema = function() {
         hw2Bloqs.removeAllComponents();
         currentProjectService.setComponentsArray(bloqsUtils.getEmptyComponentsArray());
-        $scope.deleteBoard();
+        $scope.deleteRobot();
         currentProjectService.startAutosave();
     };
 
@@ -324,7 +324,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $scope.currentProjectService.closeActivation = false;
                     var robotFamily = $scope.robotsMap[data.id].family;
                     var thirdPartyRobots = $scope.common.user ? $scope.common.user.thirdPartyRobots : false;
-                    //    $scope.hardware.cleanSchema();
                     $scope.deleteBTComponent();
                     _addRobot(data);
                     if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
@@ -607,11 +606,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if (hw2Bloqs.userInteraction) {
                     if (_itsABoardWithProblemsInFirstPins($scope.currentProject.hardware.board) && _.findKey(componentReference.pin, function(o) {
                             return o === '1' || o === '0';
-                        })) {
+                        }))
+                    {
                         alertsService.add({
                             text: 'connect_alert_01',
                             id: 'connect-error',
-                            type: 'warning',
+                            type: 'warning'
                         });
                     }
                 }
@@ -673,12 +673,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     function _addBoard(board) {
         if ($scope.currentProject.hardware.board !== board.id || $scope.currentProject.hardware.robot) {
-            if ($scope.currentProject.hardware.showRobotImage) {
-                hw2Bloqs.removeAllComponents();
+            if ($scope.currentProject.hardware.showRobotImage || board.manufacter) {
+                $scope.hardware.cleanSchema();
+            } else if ($scope.currentProject.hardware.robot) {
+                $scope.deleteRobot();
             }
-            $scope.deleteRobot();
-
-            $scope.currentProject.hardware.showRobotImage = null;
 
             hw2Bloqs.addBoard(board);
 
@@ -972,20 +971,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if ($event.ctrlKey) {
-                //         $scope.undo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if ($event.ctrlKey) {
-                //         $scope.redo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if ($event.ctrlKey) {
+            //         $scope.undo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if ($event.ctrlKey) {
+            //         $scope.redo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
