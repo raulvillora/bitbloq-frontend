@@ -102,7 +102,7 @@
                         </span>
                     </div>
                     <!-- Age -->
-                    <div class="form-control">
+                    <div class="form-control form-birthday">
                         <label for="birthday">{{ 'login-birth-day' | translate }}</label>
                         <span id="birthday" data-ng-class="{'input input--date':true, 'input--focused':focus === 'birthday'}">
                             <div class="input--group--date" ng-init="form.birthday.submitted=false">
@@ -123,15 +123,9 @@
                     </div>
                     <!--Tutor-->
                     <div data-ng-show="userUnder14Years">
-                        <br>
-                        <br>
-                        <p>{{ 'under14-register-warning-1' | translate }}</p>
-                        <br>
-                        <p>{{ 'under14-register-warning-2' | translate }}</p>
-                        <br>
-                        <p>{{ 'under14-register-warning-3' | translate }}</p>
-                        <br>
-                        <br>
+                        <p class="login-paragraph">{{ 'under14-register-warning-1' | translate }}</p>
+                        <p class="login-paragraph">{{ 'under14-register-warning-2' | translate }}</p>
+                        <p class="login-paragraph">{{ 'under14-register-warning-3' | translate }}</p>
                     </div>
                     <!--Name-->
                     <div class="form-control" data-ng-show="userUnder14Years">

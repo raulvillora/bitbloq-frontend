@@ -70,6 +70,7 @@ angular.module('bitbloqApp')
                 localStorage.removeItem('satellizer_token');
                 $cookieStore.remove('token');
                 $scope.isGoogleClassroom = false;
+                $scope.userUnder14Years = false;
                 $auth.authenticate(prov).then(function(response) {
                     var options = {
                         provider: prov,
@@ -81,7 +82,6 @@ angular.module('bitbloqApp')
 
                     userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
                             if (loginResponse.data.next === 'register') {
-
                                 if (loginResponse.data.id && $scope.providerOptions.provider === 'google') {
                                     gapi.auth.authorize({
                                         'client_id': envData.google.clientId,

@@ -33,10 +33,6 @@
 }
 
 .form-control {
-    &.service-terms {
-        margin: 20px 40px;
-    }
-
     a,
     .btn--forgot,
     .btn--forgot-error {
@@ -224,7 +220,6 @@
     width: 220px;
     margin: 0 auto;
     display: block;
-    margin-bottom: 15px;
 }
 
 .form__span--error {
@@ -256,6 +251,19 @@
     box-shadow: 0 0 2px 2px rgba(255, 51, 51, 0.7);
     color: #cc0001;
     @include placeholder(rgba(203, 15, 16, 1));
+}
+
+iframe[src^="https://apis.google.com"] {
+    display: none;
+}
+
+.form-birthday {
+    margin: 15px 0 20px 0;
+}
+
+.login-paragraph {
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .input--login--username {
@@ -376,9 +384,4 @@
     100% {
         -webkit-transform: translate(1px, -2px) rotate(-1deg);
     }
-}
-
-
-iframe[src^="https://apis.google.com"] {
-    display: none;
 }
