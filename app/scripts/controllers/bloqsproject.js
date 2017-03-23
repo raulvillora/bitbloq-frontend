@@ -37,7 +37,7 @@ angular.module('bitbloqApp')
 
         $scope.anyExternalComponent = function() {
             var connectedComponents = _.filter(projectService.project.hardware.components, function(item) {
-                return (item.id.indexOf('integrated') === -1)
+                return (item.id.indexOf('integrated') === -1);
             });
             return $scope.anyComponent(connectedComponents);
         };

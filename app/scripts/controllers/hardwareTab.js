@@ -645,13 +645,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         return result;
     }
 
-    function projectComponentsHaveChanged(newComponentsJSON) {
-        var components = _.flattenDeep(_.filter(newComponentsJSON, function(item) {
-            return item.length > 0;
-        }));
-        return !_.isEqual(_.sortBy($scope.currentProject.hardware.components, 'name'), _.sortBy(components, 'name'));
-    }
-
     function _addIntegratedComponents(board) {
         if (board.integratedComponents) {
             var tempComponent;
