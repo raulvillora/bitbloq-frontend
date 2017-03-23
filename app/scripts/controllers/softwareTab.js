@@ -430,10 +430,6 @@ angular.module('bitbloqApp')
         };
 
         $scope.showComponents = function(item) {
-
-            if (item === 'serialSend-v1') {
-                console.log('s', $scope.currentProject.hardware.components);
-            }
             var result = false;
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced',
                 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels', 'convert'

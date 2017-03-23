@@ -123,6 +123,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.currentProject.hardware.robot = null;
 
         $scope.deleteBoard();
+        //$scope.hardware.cleanSchema();
+
         $scope.currentProject.hardware.board = null;
         $scope.robotSelected = false;
         currentProjectService.startAutosave();
@@ -324,7 +326,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $scope.currentProjectService.closeActivation = false;
                     var robotFamily = $scope.robotsMap[data.id].family;
                     var thirdPartyRobots = $scope.common.user ? $scope.common.user.thirdPartyRobots : false;
-                    $scope.hardware.cleanSchema();
+                    //    $scope.hardware.cleanSchema();
                     $scope.deleteBTComponent();
                     _addRobot(data);
                     if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
@@ -663,6 +665,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     function _addBoard(board) {
         if ($scope.currentProject.hardware.board !== board.id || $scope.currentProject.hardware.robot) {
+            if ($scope.currentProject.hardware.showRobotImage) {
+                hw2Bloqs.removeAllComponents();
+            }
             $scope.deleteRobot();
 
             $scope.currentProject.hardware.showRobotImage = null;
@@ -701,6 +706,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         } else {
             $scope.currentProject.hardware.robot = robot.id;
             $scope.currentProject.hardware.showRobotImage = null;
+            hw2Bloqs.removeAllComponents();
 
             hw2Bloqs.addRobot(robotReference);
             $scope.currentProject.hardware.board = robotReference.board;
