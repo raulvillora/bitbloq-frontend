@@ -113,7 +113,7 @@ angular.module('bitbloqApp')
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
                     return o.name === boardName || o.id === boardName;
                 });
-                if (elementSelected[0].board) {
+                if (elementSelected[0] && elementSelected[0].board) {
                     projectService.project.hardware.robot = elementSelected[0].id;
                 }
             } else {
