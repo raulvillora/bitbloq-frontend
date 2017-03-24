@@ -338,12 +338,16 @@ angular.module('bitbloqApp')
 
         $scope.performFactoryReset = function() {
             var base = $scope.currentProject.hardware.robot,
-                version;
-            if (base) {
+                version,
+                mcu;
+
+            if (base) { //Zowi
                 version = $scope.common.properties.robotsFirmwareVersion[base];
-            } else {
+                mcu = projectService.getBoardMetaData(projectService.getRobotMetaData(base).board).mcu;
+            } else { //Makeblock
                 base = $scope.currentProject.hardware.board;
                 version = $scope.common.properties.boardsFirmwareVersion[base];
+                mcu = projectService.getBoardMetaData(base).mcu;
             }
 
             robotFirmwareApi.getFirmware(base, version).then(function(result) {
@@ -351,11 +355,11 @@ angular.module('bitbloqApp')
                     web2boardOnline.upload({
                         hex: result.data,
                         board: {
-                            mcu: 'uno'
+                            mcu: mcu
                         }
                     });
                 } else {
-                    web2board.uploadHex('uno', result.data);
+                    web2board.uploadHex(mcu, result.data);
                 }
             }, function() {
                 // alert("Error"); todo: add toast
