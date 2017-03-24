@@ -82,7 +82,7 @@
                                        data-ng-blur="focus = false; checkAge(formSocial)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
                             </div>
                         </span>
-                            <span class="form--error" ng-show="formSocial.birthday.submitted && errors.register.emptyBirthday" data-element="show-no-birthdate">
+                            <span class="form--error" ng-show="formSocial.birthday.submitted && errors.register.emptyBirthday && !errors.register.validBirthday" data-element="show-no-birthdate">
                             <small>{{ 'login-introduce-birth-day' | translate }}</small>
                         </span>
                             <span class="form--error" ng-show="formSocial.birthday.submitted && errors.register.validBirthday" data-element="show-valid-birthdate">

@@ -333,6 +333,7 @@ angular.module('bitbloqApp')
                             $scope.errors.register.emptyBirthday = true;
                             $scope.errors.register.validBirthday = false;
                         } else {
+                            $scope.errors.register.emptyBirthday = false;
                             $scope.errors.register.validBirthday = true;
                         }
                     }
@@ -392,6 +393,7 @@ angular.module('bitbloqApp')
                     var thereAreErrors = _checkAndSetBirthday(form);
                     if (!$scope.username.invalid && !form.usernameSocial.$error.required && $scope.username.free && $scope.user.cookiePolicyAccepted) {
                         if (thereAreErrors) {
+                            $scope.common.isLoading = false;
                             fireShakeEffect();
                         } else {
                             $scope.checkEmail().then(function() {
@@ -401,11 +403,13 @@ angular.module('bitbloqApp')
                                     }
                                     _registerSocialNetwork(form);
                                 } else {
+                                    $scope.common.isLoading = false;
                                     fireShakeEffect();
                                 }
                             });
                         }
                     } else {
+                        $scope.common.isLoading = false;
                         fireShakeEffect();
                     }
                 });
