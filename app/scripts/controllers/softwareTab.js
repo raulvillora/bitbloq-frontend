@@ -362,7 +362,11 @@ angular.module('bitbloqApp')
                     web2board.uploadHex(mcu, result.data);
                 }
             }, function() {
-                // alert("Error"); todo: add toast
+                alertsService.add({
+                    text: 'make_infoError_performResetError',
+                    id: 'performError',
+                    type: 'warning'
+                });
             });
         };
 
