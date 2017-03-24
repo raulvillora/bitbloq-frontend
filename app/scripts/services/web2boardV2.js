@@ -166,14 +166,15 @@ angular.module('bitbloqApp')
                         });
                         return api.VersionsHandlerHub.server.setLibVersion(libVersion)
                             .then(function() {
+                                console.log('cooooolback!');
                                 callback();
                             }, function(error) {
                                 alertsService.add({
                                     text: 'alert-web2board-updatingLibraries-error',
-                                    id: 'web2board',
+                                    id: 'web2board-libs',
                                     type: 'warning'
                                 });
-                                removeInProgressFlag();
+                                callback();
                                 $log.error('Unable to update libraries due to: ' + JSON.stringify(error));
                             }).finally(function() {
                                 alertsService.close(librariesAlert);
