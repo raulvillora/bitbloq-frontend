@@ -166,7 +166,6 @@ angular.module('bitbloqApp')
                         });
                         return api.VersionsHandlerHub.server.setLibVersion(libVersion)
                             .then(function() {
-                                console.log('cooooolback!');
                                 callback();
                             }, function(error) {
                                 alertsService.add({
