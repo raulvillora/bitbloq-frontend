@@ -9,8 +9,8 @@
         <div ng-show="!isSocialRegister" data-ng-include="'views/loginForm.html'"></div>
         <div ng-show="!isSocialRegister" data-ng-include="'views/registerForm.html'"></div>
         <div ng-show="isSocialRegister" ng-class="{'form--login__container':true}" data-effect="shake">
-            <h1 class="h3">{{ isGoogleClassroom ? 'login-usernameBirthday-create' : 'login-username-create' | translate }}</h1>
-            <span class="form--subtitle">{{ isGoogleClassroom ? 'login-usernameBirthday-explanation' : 'login-username-explanation' | translate }}</span>
+            <h1 class="h3">{{ isLessThan18 ? 'login-usernameBirthday-create' : 'login-username-create' | translate }}</h1>
+            <span class="form--subtitle">{{ isLessThan18 ? 'login-usernameBirthday-explanation' : 'login-username-explanation' | translate }}</span>
             
             <div class="form">
                 <form name="formSocial" autocomplete="off" novalidate>
@@ -70,16 +70,17 @@
                         </div>
                         <button class="btn btn--default btn--check-user" ng-click="formSocial.usernameSocial.submitted = true; formSocial.emailSocial.submitted = true; checkSocialForm()" data-element="login-social-check-user-button">{{showEmailForm? 'login-check-social' : 'login-check-username' | translate }}</button>
                         <!-- Age -->
-                        <div class="form-control form-birthday" ng-show="isGoogleClassroom">
+                        <div class="form-control form-birthday" ng-show="isLessThan18">
                             <label for="birthday">{{ 'login-birth-day' | translate }}</label>
                             <span id="birthday" data-ng-class="{'input input--date':true, 'input--focused':focus === 'birthday'}">
                             <div class="input--group--date" ng-init="formSocial.birthday.submitted=false">
-                                <input data-element="register-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="formSocial.birthday.day" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
-                                       data-ng-blur="focus = false; checkAge(formSocial)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                                <input data-element="register-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="formSocial.birthday.month" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
-                                       data-ng-blur="focus = false; checkAge(formSocial)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                                <input data-element="register-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="formSocial.birthday.year" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
-                                       data-ng-blur="focus = false; checkAge(formSocial)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
+                                <input data-element="register-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="socialYounger.birthday.day" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
+                                       data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
+                                <input data-element="register-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="socialYounger.birthday.month" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
+                                       data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
+                                <input data-element="register-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="socialYounger.birthday.year"
+                                       data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
+                                       data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
                             </div>
                         </span>
                             <span class="form--error" ng-show="formSocial.birthday.submitted && errors.register.emptyBirthday && !errors.register.validBirthday" data-element="show-no-birthdate">

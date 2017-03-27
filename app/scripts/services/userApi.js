@@ -82,6 +82,7 @@ angular.module('bitbloqApp')
         exports.loginBySocialNetwork = function(options) {
             return $http.post(envData.config.serverUrl + 'user/social', options);
         };
+
         exports.turnSocialToLocal = function(password, callback) {
             return User.turnToLocal({
                 id: 'me'
