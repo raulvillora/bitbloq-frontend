@@ -440,9 +440,19 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.isRobotActivated = function() {
-            return canUseThirdParty(getFamilyName(exports.project.hardware.showRobotImage));
+        exports.isRobotActivated = function(projectHardware) {
+            return canUseThirdParty(getFamilyName(projectHardware ? projectHardware.showRobotImage : exports.project.hardware.showRobotImage));
         };
+
+        exports.projectHasRobotActivated = function(projectHardware) {
+            var canPublish;
+            if (projectHardware.showRobotImage) {
+                canPublish = canUseThirdParty(getFamilyName(projectHardware ? projectHardware.showRobotImage : exports.project.hardware.showRobotImage));
+            } else {
+                canPublish = true;
+            }
+            return canPublish;
+        }
 
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------

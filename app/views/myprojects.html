@@ -46,7 +46,7 @@
     <div ng-show="(userProjects.length !== 0 && filtered.projects.length !== 0) && projectSearched.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}
 
-        <p>
+            <p>
     </div>
     <li data-ng-repeat="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) |filter:{name: checkSearch(searchText)} | filter:userProjectsFilterFunction(userProjectsFilter)) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
@@ -85,11 +85,14 @@
                         </div>
                     </div>
                     <div class="footer__icons--right">
-                        <div data-ng-click="publishProject(project)" class="project--footer--icon" data-ng-if="!project._acl.ALL" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'publish-project' | translate }}" data-element="myprojects-footer-publish">
-                            <svg class="svg-icon">
-                                <use xlink:href="#publish"></use>
-                            </svg>
+                        <div class="project--footer--icon--general" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{(!utils.userIsOwner(project, common.user._id, common.section)?'you-are-not-the-admin-copy-it':!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-explore':'publish-project') | translate}}" data-element="myprojects-footer-publish">
+                            <div data-ng-disabled="!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)" data-ng-click="publishProject(project)" class="project--footer--icon--publish" data-ng-if="!project._acl.ALL">
+                                <svg class="svg-icon">
+                                    <use xlink:href="#publish"></use>
+                                </svg>
+                            </div>
                         </div>
+
                         <div data-ng-click="commonModals.doPrivateProject(project)" class="project--footer--icon" data-ng-if="project._acl.ALL" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'do-private' | translate }}" data-element="myprojects-footer-private">
                             <svg class="svg-icon">
                                 <use xlink:href="#private"></use>
