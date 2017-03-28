@@ -234,6 +234,7 @@ angular.module('bitbloqApp')
         $scope.tempAvatar = {};
         $scope.avatarUpdate = false;
         var usernameBackup = null;
+        $scope.selectedTab = 'settings';
 
         $scope.common.itsUserLoaded().then(function() {
             usernameBackup = $scope.common.user.username;
