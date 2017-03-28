@@ -255,6 +255,9 @@ angular.module('bitbloqApp')
             return $scope.currentProject.hardware.showRobotImage ? true : false;
         };
 
+        console.log('currentProject');
+        console.log($scope.currentProject);
+
         $rootScope.$on('viewer-code:ready', function() {
             if (show) {
                 var componentsJSON = $scope.getComponents($scope.currentProject.hardware.components);
