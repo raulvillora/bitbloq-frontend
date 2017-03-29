@@ -87,43 +87,49 @@ angular.module('bitbloqApp')
                     $scope.providerOptions = options;
 
                     userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
-                            if (loginResponse.data.next === 'register') {
-                                if (!loginResponse.data.user.social[prov].ageRange || loginResponse.data.user.social[prov].ageRange.max <= 18) {
-                                    $scope.isLessThan18 = true;
-                                    if(loginResponse.data.user.birthday){
-                                        var birthdaySplit = loginResponse.data.user.birthday.split('-');
-                                        $scope.socialYounger.birthday.day = birthdaySplit[2];
-                                        $scope.socialYounger.birthday.month = birthdaySplit[1];
-                                        $scope.socialYounger.birthday.year = birthdaySplit[0];
-                                        $scope.checkAge($scope.socialYounger);
-                                    }
+                        if (loginResponse.data.next === 'register') {
+                            if (!loginResponse.data.user.social[prov].ageRange || loginResponse.data.user.social[prov].ageRange.max <= 18) {
+                                $scope.isLessThan18 = true;
+                                if (loginResponse.data.user.birthday) {
+                                    var birthdaySplit = loginResponse.data.user.birthday.split('-');
+                                    $scope.socialYounger.birthday.day = birthdaySplit[2];
+                                    $scope.socialYounger.birthday.month = birthdaySplit[1];
+                                    $scope.socialYounger.birthday.year = birthdaySplit[0];
+                                    $scope.checkAge($scope.socialYounger);
                                 }
-                                $scope.isSocialRegister = true;
-                                $scope.user.email = loginResponse.data.user.email;
-                                $scope.showEmailForm = !loginResponse.data.user.email;
-                                $scope.common.isLoading = false;
-                            } else {
-                                $cookieStore.put('token', loginResponse.data.token);
-                                userApi.currentUser = User.get();
-                                userApi.currentUser.$promise.then(function(user) {
-                                    userRobotsApi.getUserRobots(user._id).then(function(res) {
-                                        user.thirdPartyRobots = res.data;
-                                    }).finally(function() {
-                                        $scope.common.setUser(user);
-                                        $scope.common.isLoading = false;
-                                        if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                                            _goToHome();
-                                        } else {
-                                            teacherModal();
-                                        }
-                                    });
-                                });
                             }
-                        },
-                        function(err) {
-                            $log.debug('register error: ', err);
+                            $scope.isSocialRegister = true;
+                            $scope.user.email = loginResponse.data.user.email;
+                            $scope.showEmailForm = !loginResponse.data.user.email;
                             $scope.common.isLoading = false;
-                        });
+                        } else {
+                            $cookieStore.put('token', loginResponse.data.token);
+                            userApi.currentUser = User.get();
+                            userApi.currentUser.$promise.then(function(user) {
+                                userRobotsApi.getUserRobots(user._id).then(function(res) {
+                                    user.thirdPartyRobots = res.data;
+                                }).finally(function() {
+                                    $scope.common.setUser(user);
+                                    $scope.common.isLoading = false;
+                                    if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                        _goToHome();
+                                    } else {
+                                        teacherModal();
+                                    }
+                                });
+                            }).catch(function() {
+                                $scope.common.isLoading = false;
+                                alertsService.add({
+                                    text: 'login-user-anon-error',
+                                    id: 'login-user-anon',
+                                    type: 'error'
+                                });
+                            });
+                        }
+                    }).catch(function(err) {
+                        $log.debug('register error: ', err);
+                        $scope.common.isLoading = false;
+                    });
                 });
             };
 
