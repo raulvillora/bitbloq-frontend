@@ -7,10 +7,9 @@
                     <li data-ng-repeat="project in ['1','2', '11','12', '21','22','31','32']" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
                         <div class="hardware--item">
                             <div class="hardware__image__container" data-element="over-project">
-                                <a class="hardware__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
                                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
-                                </a>
                             </div>
+                            <p class="hardware__image__container_name">Nombre</p>
                         </div>
                     </li>
                 </ol>

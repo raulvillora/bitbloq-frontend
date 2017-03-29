@@ -76,15 +76,12 @@
             width: calc(100% + 20px);
 
             .hardware--item {
-                box-shadow: 0 1px 1px 0 rgba(50, 50, 50, 0.25);
-                transition: box-shadow;
                 cursor: default;
             }
 
             .hardware-list__item {
                 border-radius: 4px;
                 position: relative;
-                height: 265px;
                 display: inline-block;
                 margin: 10px 0;
                 padding-right: 20px;
@@ -100,6 +97,7 @@
                     overflow: hidden;
                     background-color: #dadada;
 
+
                     img {
                         width: 100%;
                         height: 100%;
@@ -107,6 +105,11 @@
                         position: relative;
                     }
                 }
+
+                .hardware__image__container_name {
+                    margin-top: 10px;
+                }
+
             }
         }
     }
@@ -135,6 +138,7 @@
             font-size: 12px;
             font-weight: 400;
             padding-bottom: 15px;
+            border: 1px solid #eee;
 
             input {
                 margin-bottom: -2.8px;
