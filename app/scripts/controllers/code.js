@@ -145,7 +145,9 @@ angular.module('bitbloqApp')
                 $scope.boardImage = 'bqZUM';
                 projectService.project.hardwareTags.push($scope.common.translate(projectService.project.hardware.board));
             }
-            projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].id : projectService.project.hardware.board));
+            if (elementSelected[0]) {
+                projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].id : projectService.project.hardware.board));
+            }
         };
 
         $scope.toggleCollapseHeader = function() {
