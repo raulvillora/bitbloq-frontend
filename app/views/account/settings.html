@@ -2,17 +2,26 @@
     <form class="form--account" id="form--account">
         <div class="first-column">
             <div class="form--section">
-            <!-- My Hardware -->
-                <ol class="account__hardware-list" data-element="projects-list-project">
-                    <li data-ng-repeat="project in ['1','2', '11','12', '21','22','31','32']" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
-                        <div class="hardware--item">
-                            <div class="hardware__image__container" data-element="over-project">
+                <fieldset>
+                    <legend>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#component"></use>
+                        </svg>
+                        <span>{{ 'hardware-profile' | translate }}</span>
+                    </legend>
+                    <!-- My Hardware -->
+                    <ol class="account__hardware-list" data-element="projects-list-project">
+                        <li data-ng-repeat="project in ['1','2', '11','12', '21','22','31','32']" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+                            <div class="hardware--item">
+                                <div class="hardware__image__container" data-element="over-project">
                                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
+                                </div>
+                                <p class="hardware__image__container_name">Nombre</p>
                             </div>
-                            <p class="hardware__image__container_name">Nombre</p>
-                        </div>
-                    </li>
-                </ol>
+                        </li>
+                    </ol>
+                </fieldset>
+
 
                 <!--Online compilation + Google Extension-->
                 <fieldset ng-if="common.os !== 'ChromeOS'" class="user-options-checkbox">
