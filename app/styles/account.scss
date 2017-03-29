@@ -15,15 +15,47 @@
         }
     }
 }
+@media only screen and (min-width: 320px) and (max-width: 485px) {
+    .hardware-list__item {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 486px) and (max-width: 700px) {
+    .hardware-list__item {
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 701px) and (max-width: 1183px) {
+    .hardware-list__item {
+        width: 33.333%;
+    }
+}
+@media only screen and (min-width: 1184px) {
+    /* Styles */
+    .hardware-list__item {
+        width: 25%;
+    }
+}
 
 .view--account {
     height: 100%;
     overflow: hidden;
     overflow-y: auto;
 
-    .tabs-layout__aside,
+    .account__heading {
+        padding-left: 15px;
+    }
+
+    .tabs-layout__aside {
+        padding-left: 15px;
+    }
+
     .tabs-layout__content {
-        padding: 0 30px;
+        padding-left: 30px;
+    }
+
+    .tab .settings {
+        display: table;
     }
 
     .account__header {
@@ -32,6 +64,7 @@
         background-color: white;
         max-width: 1200px;
         margin: 0 auto;
+        padding-left: 0;
     }
 
     .account__content {
@@ -56,8 +89,6 @@
                 margin: 10px 0;
                 padding-right: 20px;
 
-                }
-
                 .hardware__image__container {
                     &:after {
                         content: "";
@@ -75,13 +106,6 @@
                         object-fit: cover;
                         position: relative;
                     }
-
-                }
-
-                .hardware__image__open {
-                    display: block;
-                    height: 100%;
-                    position: relative;
                 }
             }
         }
@@ -100,9 +124,10 @@
         }
 
         .second-column {
+            margin-left: 10px;
             padding-left: 10px;
             float: left;
-            width: 30%;
+            width: 27%;
         }
 
         .user-options-checkbox {
