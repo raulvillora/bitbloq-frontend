@@ -1,5 +1,4 @@
 /*jshint camelcase: false */
-/*globals gapi */
 'use strict';
 
 /**
@@ -10,13 +9,13 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate, userRobotsApi, utils) {
+    .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate, userRobotsApi) {
 
             $scope.envData = envData;
             $scope.isLogin = true;
             $scope.isSocialRegister = false;
             $scope.isForgotPassword = false;
-            $scope.isGoogleClassroom = false;
+            $scope.isLessThan18 = false;
             $scope.checked = false;
 
             $scope.user = {
@@ -62,6 +61,13 @@ angular.module('bitbloqApp')
                 error: false
             };
             $scope.providerOptions = {};
+            $scope.socialYounger = {
+                birthday: {
+                    day: null,
+                    month: null,
+                    year: null
+                }
+            };
 
             var userName,
                 email;
@@ -69,7 +75,7 @@ angular.module('bitbloqApp')
             $scope.authenticate = function(prov) {
                 localStorage.removeItem('satellizer_token');
                 $cookieStore.remove('token');
-                $scope.isGoogleClassroom = false;
+                $scope.isLessThan18 = false;
                 $scope.userUnder14Years = false;
                 $auth.authenticate(prov).then(function(response) {
                     var options = {
@@ -81,58 +87,49 @@ angular.module('bitbloqApp')
                     $scope.providerOptions = options;
 
                     userApi.loginBySocialNetwork($scope.providerOptions).then(function(loginResponse) {
-                            if (loginResponse.data.next === 'register') {
-                                if (loginResponse.data.id && $scope.providerOptions.provider === 'google') {
-                                    gapi.auth.authorize({
-                                        'client_id': envData.google.clientId,
-                                        'scope': 'https://www.googleapis.com/auth/classroom.rosters.readonly',
-                                        user_id: loginResponse.data.id,
-                                        authuser: -1,
-                                        'immediate': true
-                                    }, function() {
-                                        gapi.client.load('classroom', 'v1', function() {
-                                            var request = gapi.client.classroom.userProfiles.get({
-                                                userId: loginResponse.data.id
-                                            });
-                                            request.execute(function(resp) {
-                                                $scope.isSocialRegister = true;
-                                                $scope.user.email = loginResponse.data.email;
-                                                $scope.showEmailForm = !loginResponse.data.email;
-                                                if (!resp.code && resp.code !== 404 && resp.code !== 403) {
-                                                    $scope.isGoogleClassroom = true;
-                                                }
-                                                $scope.common.isLoading = false;
-                                                utils.apply($scope);
-                                            });
-                                        });
-                                    });
-                                } else {
-                                    $scope.isSocialRegister = true;
-                                    $scope.user.email = loginResponse.data.email;
-                                    $scope.showEmailForm = !loginResponse.data.email;
-                                    $scope.common.isLoading = false;
+                        if (loginResponse.data.next === 'register') {
+                            if (!loginResponse.data.user.social[prov].ageRange || loginResponse.data.user.social[prov].ageRange.max <= 18) {
+                                $scope.isLessThan18 = true;
+                                if (loginResponse.data.user.birthday) {
+                                    var birthdaySplit = loginResponse.data.user.birthday.split('-');
+                                    $scope.socialYounger.birthday.day = birthdaySplit[2];
+                                    $scope.socialYounger.birthday.month = birthdaySplit[1];
+                                    $scope.socialYounger.birthday.year = birthdaySplit[0];
+                                    $scope.checkAge($scope.socialYounger);
                                 }
-                            } else {
-                                $cookieStore.put('token', loginResponse.data.token);
-                                userApi.currentUser = User.get();
-                                userApi.currentUser.$promise.then(function(user) {
-                                    userRobotsApi.getUserRobots(user._id).then(function(res) {
-                                        user.thirdPartyRobots = res.data;
-                                    }).finally(function() {
-                                        $scope.common.setUser(user);
-                                        $scope.common.isLoading = false;
-                                        if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
-                                            _goToHome();
-                                        } else {
-                                            teacherModal();
-                                        }
-                                    });
-                                });
                             }
-                        },
-                        function(err) {
-                            console.log('LOGIN ERROR: ', err);
-                        });
+                            $scope.isSocialRegister = true;
+                            $scope.user.email = loginResponse.data.user.email;
+                            $scope.showEmailForm = !loginResponse.data.user.email;
+                            $scope.common.isLoading = false;
+                        } else {
+                            $cookieStore.put('token', loginResponse.data.token);
+                            userApi.currentUser = User.get();
+                            userApi.currentUser.$promise.then(function(user) {
+                                userRobotsApi.getUserRobots(user._id).then(function(res) {
+                                    user.thirdPartyRobots = res.data;
+                                }).finally(function() {
+                                    $scope.common.setUser(user);
+                                    $scope.common.isLoading = false;
+                                    if ($scope.common.user.hasBeenAskedIfTeacher || $scope.common.user.newsletter) {
+                                        _goToHome();
+                                    } else {
+                                        teacherModal();
+                                    }
+                                });
+                            }).catch(function() {
+                                $scope.common.isLoading = false;
+                                alertsService.add({
+                                    text: 'login-user-anon-error',
+                                    id: 'login-user-anon',
+                                    type: 'error'
+                                });
+                            });
+                        }
+                    }).catch(function(err) {
+                        $log.debug('register error: ', err);
+                        $scope.common.isLoading = false;
+                    });
                 });
             };
 
@@ -309,16 +306,16 @@ angular.module('bitbloqApp')
 
             function _checkAndSetBirthday(form) {
                 var thereAreErrors = false;
-                if ($scope.isGoogleClassroom) {
-                    if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                        $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
+                if ($scope.isLessThan18) {
+                    if ($scope.socialYounger.birthday && $scope.socialYounger.birthday.day && $scope.socialYounger.birthday.month && $scope.socialYounger.birthday.year) {
+                        $scope.errors.register.validBirthday = !moment($scope.socialYounger.birthday.day + ', ' + $scope.socialYounger.birthday.month + ', ' + $scope.socialYounger.birthday.year, 'DD, MM, YYYY')
                             .isValid();
                         if (!$scope.errors.register.validBirthday) {
-                            if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
+                            if (new Date($scope.socialYounger.birthday.year, $scope.socialYounger.birthday.month, $scope.socialYounger.birthday.day) > new Date()) {
                                 $scope.errors.register.validBirthday = true;
                                 thereAreErrors = true;
                             }
-                            $scope.user.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
+                            $scope.user.birthday = new Date($scope.socialYounger.birthday.year, $scope.socialYounger.birthday.month - 1, $scope.socialYounger.birthday.day);
                             var older = new Date();
                             older.setYear(older.getFullYear() - 14);
                             $scope.userUnder14Years = $scope.user.birthday >= older && $scope.user.birthday <= new Date();
@@ -363,7 +360,7 @@ angular.module('bitbloqApp')
                         break;
                     case 'social':
                         validate = !$scope.username.invalid && !form.usernameSocial.$error.required && $scope.username.free && $scope.user.cookiePolicyAccepted;
-                        if ($scope.isGoogleClassroom) {
+                        if ($scope.isLessThan18) {
                             validate = validate && !$scope.errors.register.emptyBirthday && !$scope.errors.register.validBirthday &&
                                 (!$scope.userUnder14Years || ($scope.userUnder14Years && !form.tutorName.$invalid && !form.tutorSurname.$invalid && !form.tutorEmail.$invalid && !$scope.errors.register.sameTutorEmail));
                         }
@@ -382,7 +379,7 @@ angular.module('bitbloqApp')
                 if ($scope.showEmailForm) {
                     form.emailSocial.submitted = true;
                 }
-                if ($scope.isGoogleClassroom) {
+                if ($scope.isLessThan18) {
                     form.birthday.submitted = true;
                     form.tutorName.submitted = true;
                     form.tutorSurname.submitted = true;
@@ -401,6 +398,7 @@ angular.module('bitbloqApp')
                                     if ($scope.userUnder14Years) {
                                         $scope.user.needValidation = true;
                                     }
+                                    form.birthday = $scope.socialYounger;
                                     _registerSocialNetwork(form);
                                 } else {
                                     $scope.common.isLoading = false;
@@ -433,7 +431,7 @@ angular.module('bitbloqApp')
                         });
                     }
 
-                    if ($scope.isGoogleClassroom) {
+                    if ($scope.isLessThan18) {
                         _.extend($scope.providerOptions, {
                             'birthday': $scope.user.birthday,
                             'needValidation': $scope.user.needValidation,

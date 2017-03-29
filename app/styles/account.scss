@@ -27,13 +27,13 @@
 }
 @media only screen and (min-width: 701px) and (max-width: 1183px) {
     .hardware-list__item {
-        width: 25%;
+        width: 24%;
     }
 }
 @media only screen and (min-width: 1184px) {
     /* Styles */
     .hardware-list__item {
-        width: 25%;
+        width: 24%;
     }
 }
 
@@ -54,10 +54,6 @@
         padding-left: 30px;
     }
 
-    .tab .settings {
-        display: table;
-    }
-
     .account__header {
         height: 71px;
         padding: 30px;
@@ -72,19 +68,52 @@
         margin-top: 31px;
 
         .account__hardware-list {
-            position: relative;
             width: calc(100% + 20px);
 
             .hardware--item {
                 cursor: default;
             }
 
+            .hardware--item--add {
+                height: 170px;
+            }
+
+            .hardware-list__item:last-child {
+                position: relative;
+                top: -70px;
+            }
+
             .hardware-list__item {
                 border-radius: 4px;
-                position: relative;
                 display: inline-block;
                 margin: 10px 0;
                 padding-right: 20px;
+
+                .hardware__add__container {
+                    &:after {
+                        content: "";
+                        transition: background-color 250ms;
+                        background-color: transparent;
+                    }
+                    height: 138px;
+                    width: 138px;
+                    overflow: hidden;
+                    background-color: #dadada;
+
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        fill: #9b9da1;
+                        margin-bottom: 20px;
+                    }
+                }
+
+                .hardware__add__container--text {
+                    font-weight: bold;
+                    text-align: center;
+                    color: #373b44;
+                    font-size: 13px;
+                }
 
                 .hardware__image__container {
                     &:after {
@@ -94,12 +123,12 @@
                     }
                     height: 138px;
                     width: 138px;
-                    position: relative;
                     overflow: hidden;
                     background-color: #dadada;
-
+                    border: 1px solid #cfcfcf;
 
                     img {
+                        border: 9px solid white;
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
@@ -110,7 +139,6 @@
                 .hardware__image__container_name {
                     margin-top: 10px;
                 }
-
             }
         }
     }
@@ -215,7 +243,7 @@
 
                 .form-control {
                     label {
-                        width: 40%;
+                        width: 30%;
                         float: left;
                         color: #5d6069;
                         font-size: 13px;
@@ -249,7 +277,7 @@
                     }
 
                     .btn--account--password {
-                        width: 50%;
+                        width: 40%;
                         float: left;
                     }
 
