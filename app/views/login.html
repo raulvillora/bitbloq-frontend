@@ -70,25 +70,25 @@
                         </div>
                         <button class="btn btn--default btn--check-user" ng-click="formSocial.usernameSocial.submitted = true; formSocial.emailSocial.submitted = true; checkSocialForm()" data-element="login-social-check-user-button">{{showEmailForm? 'login-check-social' : 'login-check-username' | translate }}</button>
                         <!-- Age -->
-                        <div class="form-control form-birthday" ng-show="isLessThan18">
+                        <div class="form-control form-birthday" ng-show="isLessThan18" ng-init="formSocial.userBirthday.submitted=false">
                             <label for="birthday">{{ 'login-birth-day' | translate }}</label>
                             <span id="birthday" data-ng-class="{'input input--date':true, 'input--focused':focus === 'birthday'}">
-                            <div class="input--group--date" ng-init="formSocial.birthday.submitted=false">
-                                <input data-element="register-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="socialYounger.birthday.day" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
-                                       data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                                <input data-element="register-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="socialYounger.birthday.month" data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
-                                       data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                                <input data-element="register-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="socialYounger.birthday.year"
-                                       data-ng-focus="formSocial.birthday.submitted=false; focusHandler($event)"
-                                       data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.birthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
-                            </div>
-                        </span>
-                            <span class="form--error" ng-show="formSocial.birthday.submitted && errors.register.emptyBirthday && !errors.register.validBirthday" data-element="show-no-birthdate">
-                            <small>{{ 'login-introduce-birth-day' | translate }}</small>
-                        </span>
-                            <span class="form--error" ng-show="formSocial.birthday.submitted && errors.register.validBirthday" data-element="show-valid-birthdate">
-                            <small>{{ 'login-valid-birth-day' | translate }}</small>
-                        </span>
+                                <div class="input--group--date">
+                                    <input data-element="register-day-input" type="text" id="birthdayDay" name="day" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'days' | translate}}" data-ng-model="socialYounger.birthday.day" data-ng-focus="formSocial.userBirthday.submitted=false; focusHandler($event)"
+                                           data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.userBirthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
+                                    <input data-element="register-month-input" type="text" id="birthdayMonth" name="month" autocomplete="off" pattern="[0-9]+" maxlength="2" placeholder="{{'months' | translate}}" data-ng-model="socialYounger.birthday.month" data-ng-focus="formSocial.userBirthday.submitted=false; focusHandler($event)"
+                                           data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.userBirthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
+                                    <input data-element="register-year-input" type="text" id="birthdayYear" name="year" autocomplete="off" pattern="[0-9]+" maxlength="4" minlength="4" placeholder="{{'years' | translate}}" data-ng-model="socialYounger.birthday.year"
+                                           data-ng-focus="formSocial.userBirthday.submitted=false; focusHandler($event)"
+                                           data-ng-blur="focus = false; checkAge(socialYounger)" autocorrect="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-ng-class="{'birthday--error':formSocial.userBirthday.submitted && (errors.register.emptyBirthday || errors.register.validBirthday)}" required>
+                                </div>
+                            </span>
+                            <span class="form--error" ng-show="formSocial.userBirthday.submitted && errors.register.emptyBirthday && !errors.register.validBirthday" data-element="show-no-birthdate">
+                                <small>{{ 'login-introduce-birth-day' | translate }}</small>
+                            </span>
+                            <span class="form--error" ng-show="formSocial.userBirthday.submitted && errors.register.validBirthday" data-element="show-valid-birthdate">
+                                <small>{{ 'login-valid-birth-day' | translate }}</small>
+                            </span>
                         </div>
                         <!--Tutor-->
                         <div data-ng-show="userUnder14Years">
@@ -100,50 +100,50 @@
                         <div class="form-control" data-ng-show="userUnder14Years">
                             <label for="tutorName">{{ 'login-tutor-name' | translate }}</label>
                             <span class="form--input input--default" ng-class="{'input--error':formSocial.tutorName.submitted && formSocial.tutorName.$error.required, 'input--focused':focus === 'tutorName'}">
-                            <svg class="svg-icon form-icon--username icon--form--validating">
-                                <use xlink:href="#user"></use>
-                            </svg>
-                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="formSocial.tutorName.submitted = false; focus = 'tutorName'" ng-blur="formSocial.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50"
-                                   placeholder="{{'name' | translate}}"
-                                   autocorrect="off" autocomplete="off" required data-element="register-tutor-name">
-                        </span>
+                                <svg class="svg-icon form-icon--username icon--form--validating">
+                                    <use xlink:href="#user"></use>
+                                </svg>
+                                <input ng-class="{'input--login--username':true}" ng-model="user.tutor.firstName" ng-focus="formSocial.tutorName.submitted = false; focus = 'tutorName'" ng-blur="formSocial.tutorName.submitted = true;focus = false" id="tutorName" name="tutorName" type="text" maxlength="50"
+                                       placeholder="{{'name' | translate}}"
+                                       autocorrect="off" autocomplete="off" required data-element="register-tutor-name">
+                            </span>
                             <span class="form--error" data-ng-show="formSocial.tutorName.submitted && formSocial.tutorName.$error.required" data-element="show-nonametutor">
-                            <small>{{ 'insert-name' | translate }}</small>
-                        </span>
+                                <small>{{ 'insert-name' | translate }}</small>
+                            </span>
                         </div>
                         <!--Surname-->
                         <div class="form-control" data-ng-show="userUnder14Years">
                             <label for="tutorSurname">{{ 'login-tutor-surname' | translate }}</label>
                             <span class="form--input input--default" ng-class="{'input--error':formSocial.tutorSurname.submitted && formSocial.tutorSurname.$error.required, 'input--focused':focus === 'tutorSurname'}">
-                            <svg class="svg-icon form-icon--username icon--form--validating">
-                                <use xlink:href="#user"></use>
-                            </svg>
-                            <input ng-class="{'input--login--username':true}" ng-model="user.tutor.lastName" ng-focus="formSocial.tutorSurname.submitted = false; focus = 'tutorSurname'" ng-blur="formSocial.tutorSurname.submitted = true;focus = false" id="tutorSurname" name="tutorSurname" type="text" maxlength="50"
-                                   placeholder="{{'surname' | translate}}" autocorrect="off" autocomplete="off" required data-element="register-tutor-lastname">
-                        </span>
+                                <svg class="svg-icon form-icon--username icon--form--validating">
+                                    <use xlink:href="#user"></use>
+                                </svg>
+                                <input ng-class="{'input--login--username':true}" ng-model="user.tutor.lastName" ng-focus="formSocial.tutorSurname.submitted = false; focus = 'tutorSurname'" ng-blur="formSocial.tutorSurname.submitted = true;focus = false" id="tutorSurname" name="tutorSurname" type="text" maxlength="50"
+                                       placeholder="{{'surname' | translate}}" autocorrect="off" autocomplete="off" required data-element="register-tutor-lastname">
+                            </span>
                             <span class="form--error" data-ng-show="formSocial.tutorSurname.submitted && formSocial.tutorSurname.$error.required" data-element="show-nosurname">
-                            <small>{{ 'insert-surname' | translate }}</small>
-                        </span>
+                                <small>{{ 'insert-surname' | translate }}</small>
+                            </span>
                         </div>
                         <!-- Email -->
                         <div class="form-control" data-ng-show="userUnder14Years">
                             <label for="tutorEmail">{{ 'login-tutor-email' | translate }}</label>
                             <span ng-class="{'input input--form--login input--default':true, 'input--focused':focus === 'tutorEmail', 'input--error':formSocial.tutorEmail.submitted && (formSocial.tutorEmail.$invalid || formSocial.tutorEmail.$error.required || errors.register.tutorEmail)}">
-                            <svg class="svg-icon">
-                                <use xlink:href="#mail"></use>
-                            </svg>
-                            <input data-ng-model="user.tutor.email" data-ng-focus="formSocial.tutorEmail.submitted=false; focus = 'tutorEmail'" data-ng-blur="focus = false;formSocial.tutorEmail.submitted=true;" id="tutorEmail" name="tutorEmail" type="email"
-                                   data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required data-element="register-tutor-email">
-                        </span>
+                                <svg class="svg-icon">
+                                    <use xlink:href="#mail"></use>
+                                </svg>
+                                <input data-ng-model="user.tutor.email" data-ng-focus="formSocial.tutorEmail.submitted=false; focus = 'tutorEmail'" data-ng-blur="focus = false;formSocial.tutorEmail.submitted=true;" id="tutorEmail" name="tutorEmail" type="email"
+                                       data-ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/" placeholder="{{'email' | translate}}" autocorrect="off" autocomplete="off" required data-element="register-tutor-email">
+                            </span>
                             <span class="form--error" data-ng-show="formSocial.tutorEmail.submitted && formSocial.tutorEmail.$error.required" data-element="register-show-notutoremail">
-                            <small>{{ 'login-email-empty' | translate }}</small>
-                        </span>
+                                <small>{{ 'login-email-empty' | translate }}</small>
+                            </span>
                             <span class="form--error" data-ng-show="formSocial.tutorEmail.submitted && (formSocial.tutorEmail.$error.email || formSocial.tutorEmail.$error.pattern)" data-element="register-invalid-tutoremail">
-                            <small>{{ 'login-valid-email' | translate }}</small>
-                        </span>
+                                <small>{{ 'login-valid-email' | translate }}</small>
+                            </span>
                             <span class="form--error" data-ng-show="errors.register.sameTutorEmail" data-element="register-same-email">
-                            <small>{{ 'login-tutor-same-email' | translate }}</small>
-                        </span>
+                                <small>{{ 'login-tutor-same-email' | translate }}</small>
+                            </span>
                         </div>
                         <!--FIN Tutor-->
                         <!-- Service terms -->
