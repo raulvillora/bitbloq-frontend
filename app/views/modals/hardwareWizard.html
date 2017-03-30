@@ -1,0 +1,36 @@
+<div class="tabs-layout">
+    <aside class="tabs-layout__aside">
+        <h1 class="invisible">Menú de Proyectos</h1>
+        <ul class="tabs__header">
+            <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'kits'}" ng-click="selectedTab = 'kits'">
+                <span class="menu__item__span">
+                    {{ 'kits' | translate }}
+                </span>
+            </li>
+            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'robots'}" data-element="projects-shared-projects" ng-click="selectedTab = 'robots'">
+                <span class="menu__item__span">
+                    {{'robots' | translate}}
+                </span>
+                </span>
+            </li>
+            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'boards'}" data-element="projects-shared-projects" ng-click="selectedTab = 'boards'">
+                <span class="menu__item__span">
+                    {{'boards' | translate}}
+                </span>
+                </span>
+            </li>
+            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'components'}" data-element="projects-shared-projects" ng-click="selectedTab = 'components'">
+                <span class="menu__item__span">
+                    {{'components' | translate}}
+                </span>
+                </span>
+            </li>
+        </ul>
+    </aside>
+    <div class="tabs-layout__content">
+        <div class="tab settings" ng-show="selectedTab === 'kits'" ng-include="'views/wizard/kits.html'"></div>
+        <div class="tab user" ng-show="selectedTab === 'robots'" ng-include="'views/wizard/robots.html'"></div>
+        <div class="tab settings" ng-show="selectedTab === 'boards'" ng-include="'views/wizard/boards.html'"></div>
+        <div class="tab user" ng-show="selectedTab === 'components'" ng-include="'views/wizard/components.html'"></div>
+    </div>
+</div>

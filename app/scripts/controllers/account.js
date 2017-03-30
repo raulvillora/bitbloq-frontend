@@ -72,6 +72,39 @@ angular.module('bitbloqApp')
             }
 
         };
+
+        $scope.selectHardware = function() {
+            var activateModal,
+                modalScope = $rootScope.$new(),
+                robotName = robot,
+                activationCode = {},
+                errorMessage = '',
+                selectedTab = 'kits';
+
+            var confirmAction = function() {
+
+            };
+
+            _.extend(modalScope, {
+                title: common.translate('modal-wizard-title'),
+                modalButtons: true,
+                confirmButton: 'save',
+                confirmAction: confirmAction,
+                activationCode: activationCode,
+                errorMessage: errorMessage,
+                selectedTab: selectedTab,
+                rejectButton: 'modal-button-cancel',
+                contentTemplate: '/views/modals/hardwareWizard.html'
+            });
+
+            activateModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--hardware-wizard',
+                scope: modalScope
+            });
+
+        }
+
         $scope.saveProfile = function() {
             var defered = $q.defer();
 
