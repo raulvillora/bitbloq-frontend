@@ -12,6 +12,7 @@ angular.module('bitbloqApp')
     .controller('LoginCtrl', function($scope, User, envData, $log, userApi, _, $cookieStore, $auth, $location, $q, moment, alertsService, ngDialog, $routeParams, $translate, userRobotsApi) {
 
             $scope.envData = envData;
+            $scope.common.isLoading = false;
             $scope.isLogin = true;
             $scope.isSocialRegister = false;
             $scope.isForgotPassword = false;
