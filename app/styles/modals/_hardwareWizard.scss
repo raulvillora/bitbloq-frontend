@@ -3,11 +3,23 @@
         min-width: 0;
     }
 
+    .tabs-layout__aside {
+        position: relative;
+        height: 59px;
+    }
+
     .modal__body {
         padding: 0;
     }
 
     .tab {}
+
+    .show-development {
+        float: right;
+        bottom: 0;
+        display: inline-block;
+        font-size: 12px;
+    }
 
     .wizard__hardware-list {
         width: 100%;
@@ -18,13 +30,13 @@
 
         .hardware--item {
             width: 140px;
-            height: 179px;
+            height: 185px;
             background-color: white;
             border-radius: 4px;
             padding-top: 10px;
 
             &:hover {
-                background-color: red;
+                background-color: #e8e8e8;
             }
             border: solid 1px #cfcfcf;
         }
@@ -36,6 +48,8 @@
             padding-right: 20px;
 
             .hardware__image__container {
+                position: relative;
+
                 &:after {
                     content: "";
                     transition: background-color 250ms;
@@ -47,6 +61,19 @@
                 overflow: hidden;
                 background-color: #dadada;
                 margin: 0 auto;
+
+                .hardware__development {
+                    position: absolute;
+                    width: 120px;
+                    height: 25px;
+                    bottom: 0;
+                    padding-top: 4px;
+                    z-index: 2;
+                    background-color: #82ad3a;
+                    color: white;
+                    font-size: 11px;
+                    text-align: center;
+                }
 
                 img {
                     width: 100%;

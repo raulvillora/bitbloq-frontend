@@ -279,8 +279,12 @@
 
     &.modal--hardware-wizard {
         .ngdialog-content {
-            width: 735px;
+            width: 835px;
         }
+        .modal--buttons{
+          padding-top: 20px;
+        }
+
       }
 
     &.modal--download-web2board {
