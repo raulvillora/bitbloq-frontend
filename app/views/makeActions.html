@@ -32,7 +32,7 @@
                     {{'open-project' | translate}}
                 </div>
             </li>
-            <li ng-if="common.section !== 'exercise' && common.section !== 'task'" class="dropdown__item" data-ng-click="openFileProject()" ng-if="common.section === 'bloqsproject'" data-element="menu-openprojectfromfile">
+            <li class="dropdown__item" ng-if="common.section !== 'exercise' && common.section !== 'task' && common.section === 'bloqsproject'"  data-ng-click="openFileProject()" data-element="menu-openprojectfromfile">
                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                     <use xlink:href="#upload"></use>
                 </svg>
