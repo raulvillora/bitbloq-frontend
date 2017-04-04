@@ -309,12 +309,15 @@ angular.module('bitbloqApp')
                 var thereAreErrors = false;
                 if (!skip) {
                     if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
+                        $scope.errors.register.emptyBirthday = false;
                         $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
                             .isValid();
                         if (!$scope.errors.register.validBirthday) {
                             if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
                                 $scope.errors.register.validBirthday = true;
                                 thereAreErrors = true;
+                            } else {
+                                $scope.errors.register.validBirthday = false;
                             }
                             $scope.user.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
                             var older = new Date();

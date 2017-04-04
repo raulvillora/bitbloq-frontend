@@ -144,6 +144,8 @@
             "name": "numConversion"
         }, {
             "name": "round-v1"
+        }, {
+            "name": "parenthesis"
         }],
         "advancedTexts": [{
             "name": "stringArrayAdvanced"
@@ -453,8 +455,6 @@
             "name": "numberArray"
         }, {
             "name": "basicOperations"
-        }, {
-            "name": "parenthesis"
         }, {
             "name": "map"
         }, {

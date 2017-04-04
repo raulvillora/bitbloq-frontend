@@ -4,7 +4,11 @@
 <div class="modal--activate-robot--code">
     {{'code' | translate}}
 </div>
-
+<a href="mailto:info@makeblock.es?subject=Información para usar Bitbloq" target="_blank">
+    <svg class="modal--activate-robot-info">
+        <use xlink:href="#info"></use>
+    </svg>
+</a>
 <form>
     <span class="form--input activate--input" data-ng-class="{'input--focused':focus === 'browser', 'input--error': errorMessage}">
         <input type="text" ng-paste="handlePaste($event)" name="code-1" id="code-1" maxlength="8" placeholder="XXXXXXXX" move-next-on-maxlength ng-model="activationCode.field1" ng-pattern-restrict="^[A-Za-z0-9]*$" data-ng-focus="focus = 'browser'; focusFunction()" data-ng-blur="focus = false" data-element="modal-activate-robot-code-1">
