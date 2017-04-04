@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi, hardwareApi) {
         var exports = {},
             shortUrl,
             serialMonitorPanel,
@@ -877,6 +877,73 @@ angular.module('bitbloqApp')
             });
 
             return defered.promise;
+        };
+
+        exports.selectHardware = function() {
+            var wizardModal,
+                modalScope = $rootScope.$new(),
+                boards,
+                components,
+                robots,
+                selectedTab = 'kits';
+
+            var confirmAction = function() {
+
+            };
+
+            function getComponents() {
+                var defered = $q.defer();
+                hardwareApi.getComponents().then(function(res) {
+                    defered.resolve(res.data);
+                });
+                return defered.promise;
+            }
+
+            function getRobots() {
+                var defered = $q.defer();
+                hardwareApi.getRobots().then(function(res) {
+                    defered.resolve(res.data);
+                });
+                return defered.promise;
+            }
+
+            function getBoards() {
+                var defered = $q.defer();
+                hardwareApi.getBoards().then(function(res) {
+                    defered.resolve(res.data);
+                });
+                return defered.promise;
+            }
+
+            $q.all([getComponents(), getRobots(), getBoards()]).then(function(values) {
+                components = values[0];
+                robots = values[1];
+                boards = values[2];
+                console.log('components');
+                console.log(components);
+                console.log('robots');
+                console.log(robots);
+                console.log('boards');
+                console.log(boards);
+                _.extend(modalScope, {
+                    title: common.translate('modal-wizard-title'),
+                    modalButtons: true,
+                    confirmButton: 'save',
+                    confirmAction: confirmAction,
+                    selectedTab: selectedTab,
+                    components: components,
+                    robots: robots,
+                    boards: boards,
+                    rejectButton: 'modal-button-cancel',
+                    contentTemplate: '/views/modals/hardwareWizard.html'
+                });
+            })
+
+            wizardModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--hardware-wizard',
+                scope: modalScope
+            });
         };
         return exports;
     });

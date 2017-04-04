@@ -1,10 +1,10 @@
 <ol class="wizard__hardware-list" data-element="projects-list-project">
-    <li data-ng-repeat="project in ['1','2', '11','12', '21','22','31', '41','42','43','44','45','46']" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+    <li data-ng-repeat="component in components" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
         <div class="hardware--item">
             <div class="hardware__image__container" data-element="over-project">
                 <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
             </div>
-            <p class="hardware__image__container_name">Nombre</p>
+            <p class="hardware__image__container_name">{{component._id | translate}}</p>
             <p class="hardware__image__container_product">Ver producto</p>
         </div>
     </li>

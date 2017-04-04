@@ -32,7 +32,7 @@ angular.module('bitbloqApp')
 
         function getBoards() {
             return $http({
-                method: 'POST',
+                method: 'GET',
                 url: envData.config.serverUrl + 'board'
             });
         }

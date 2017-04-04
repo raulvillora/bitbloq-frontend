@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common) {
+    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common, commonModals) {
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
                 var options = {
@@ -74,35 +74,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.selectHardware = function() {
-            var activateModal,
-                modalScope = $rootScope.$new(),
-                robotName = robot,
-                activationCode = {},
-                errorMessage = '',
-                selectedTab = 'kits';
-
-            var confirmAction = function() {
-
-            };
-
-            _.extend(modalScope, {
-                title: common.translate('modal-wizard-title'),
-                modalButtons: true,
-                confirmButton: 'save',
-                confirmAction: confirmAction,
-                activationCode: activationCode,
-                errorMessage: errorMessage,
-                selectedTab: selectedTab,
-                rejectButton: 'modal-button-cancel',
-                contentTemplate: '/views/modals/hardwareWizard.html'
-            });
-
-            activateModal = ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container modal--hardware-wizard',
-                scope: modalScope
-            });
-
+            commonModals.selectHardware();
         }
 
         $scope.saveProfile = function() {
