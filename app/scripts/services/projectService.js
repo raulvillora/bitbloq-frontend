@@ -614,6 +614,9 @@ angular.module('bitbloqApp')
             if (exports.project.useBitbloqConnect) {
                 newHardwareTags.push('bitbloqconnect');
             }
+            if (exports.project.hardware.showRobotImage) {
+                newHardwareTags.push(exports.project.hardware.showRobotImage);
+            }
             exports.project.hardwareTags = _.uniq(newHardwareTags);
         }
 

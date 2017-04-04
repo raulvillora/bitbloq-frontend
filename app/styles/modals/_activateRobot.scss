@@ -2,6 +2,16 @@
     margin-bottom: 50px;
 }
 
+.modal--activate-robot--code {
+    float: left;
+}
+
+.modal--activate-robot-info {
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+}
+
 .activate--input {
     display: inline-block;
     width: 90px;
@@ -9,32 +19,25 @@
     height: 35px;
     padding-left: 0;
     padding-right: 0.7em;
-
-
     &:last-child {
         margin-right: 0;
     }
-
     input {
         height: 100%;
-
         &::-webkit-input-placeholder {
             text-align: center;
             padding-left: 0;
         }
-
         &:-moz-placeholder {
             /* Firefox 18- */
             text-align: center;
             padding-left: 0;
         }
-
         &::-moz-placeholder {
             /* Firefox 19+ */
             text-align: center;
             padding-left: 0;
         }
-
         &:-ms-input-placeholder {
             text-align: center;
             padding-left: 0;

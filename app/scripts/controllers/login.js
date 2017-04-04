@@ -136,9 +136,9 @@ angular.module('bitbloqApp')
 
             $scope.checkAge = function(form) {
                 if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
-                    var validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
+                    var validBirthday = moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
                         .isValid();
-                    if (!validBirthday) {
+                    if (validBirthday) {
                         var userBirthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
                         var older = new Date();
                         older.setYear(older.getFullYear() - 14);
@@ -305,18 +305,21 @@ angular.module('bitbloqApp')
                 }
             };
 
-            function _checkAndSetBirthday(form) {
+            function _checkAndSetBirthday(form, skip) {
                 var thereAreErrors = false;
-                if ($scope.isLessThan18) {
-                    if ($scope.socialYounger.birthday && $scope.socialYounger.birthday.day && $scope.socialYounger.birthday.month && $scope.socialYounger.birthday.year) {
-                        $scope.errors.register.validBirthday = !moment($scope.socialYounger.birthday.day + ', ' + $scope.socialYounger.birthday.month + ', ' + $scope.socialYounger.birthday.year, 'DD, MM, YYYY')
+                if (!skip) {
+                    if (form.birthday && form.birthday.day && form.birthday.month && form.birthday.year) {
+                        $scope.errors.register.emptyBirthday = false;
+                        $scope.errors.register.validBirthday = !moment(form.birthday.day + ', ' + form.birthday.month + ', ' + form.birthday.year, 'DD, MM, YYYY')
                             .isValid();
                         if (!$scope.errors.register.validBirthday) {
-                            if (new Date($scope.socialYounger.birthday.year, $scope.socialYounger.birthday.month, $scope.socialYounger.birthday.day) > new Date()) {
+                            if (new Date(form.birthday.year, form.birthday.month, form.birthday.day) > new Date()) {
                                 $scope.errors.register.validBirthday = true;
                                 thereAreErrors = true;
+                            } else {
+                                $scope.errors.register.validBirthday = false;
                             }
-                            $scope.user.birthday = new Date($scope.socialYounger.birthday.year, $scope.socialYounger.birthday.month - 1, $scope.socialYounger.birthday.day);
+                            $scope.user.birthday = new Date(form.birthday.year, form.birthday.month - 1, form.birthday.day);
                             var older = new Date();
                             older.setYear(older.getFullYear() - 14);
                             $scope.userUnder14Years = $scope.user.birthday >= older && $scope.user.birthday <= new Date();
@@ -381,14 +384,15 @@ angular.module('bitbloqApp')
                     form.emailSocial.submitted = true;
                 }
                 if ($scope.isLessThan18) {
-                    form.birthday.submitted = true;
+                    form.userBirthday.submitted = true;
                     form.tutorName.submitted = true;
                     form.tutorSurname.submitted = true;
                     form.tutorEmail.submitted = true;
                 }
 
                 $scope.checkUserName().then(function() {
-                    var thereAreErrors = _checkAndSetBirthday(form);
+                    form.birthday = $scope.socialYounger.birthday;
+                    var thereAreErrors = _checkAndSetBirthday(form, !$scope.isLessThan18);
                     if (!$scope.username.invalid && !form.usernameSocial.$error.required && $scope.username.free && $scope.user.cookiePolicyAccepted) {
                         if (thereAreErrors) {
                             $scope.common.isLoading = false;

@@ -847,6 +847,10 @@ angular.module('bitbloqApp')
                 modalScope.errorMessage = '';
             }
 
+            function tryFunction() {
+                activateModal.close();
+            }
+
             _.extend(modalScope, {
                 title: common.translate('modal-activate-robot-title', {
                     value: robotName
@@ -858,6 +862,9 @@ angular.module('bitbloqApp')
                 handlePaste: handlePaste,
                 focusFunction: focusFunction,
                 activationCode: activationCode,
+                tryFunction: tryFunction,
+                extraButton: 'landing_link_testItNow',
+                extraAction: tryFunction,
                 errorMessage: errorMessage,
                 rejectButton: 'modal-button-cancel',
                 contentTemplate: '/views/modals/activateRobot.html'
