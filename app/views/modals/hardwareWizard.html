@@ -26,7 +26,12 @@
                 </span>
             </li>
         </ul>
-        <div class="show-development"> Mostrar harware en desarrollo.</div>
+        <fieldset class="user-options-checkbox show-development">
+            <span class="input input--checkbox">
+                <input type="checkbox" id="develCheckbox" name="develCheckbox" value="developmentHW" ng-checked="developmentHW === true" ng-model="developmentHW">
+                <label for="chromeappCheckbox">{{'show-hardware-development' | translate}}</label>
+            </span>
+        </fieldset>
     </aside>
     <div class="tabs-layout__content--invert">
         <div class="tab settings" ng-show="selectedTab === 'kits'" ng-include="'views/wizard/kits.html'"></div>

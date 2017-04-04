@@ -13,7 +13,8 @@ angular.module('bitbloqApp')
         var thirdPartyRobotsApi = {
             getComponents: getComponents,
             getRobots: getRobots,
-            getBoards: getBoards
+            getBoards: getBoards,
+            getKits: getKits
         };
 
         function getComponents() {
@@ -34,6 +35,13 @@ angular.module('bitbloqApp')
             return $http({
                 method: 'GET',
                 url: envData.config.serverUrl + 'board'
+            });
+        }
+
+        function getKits() {
+            return $http({
+                method: 'GET',
+                url: envData.config.serverUrl + 'kit'
             });
         }
         return thirdPartyRobotsApi;

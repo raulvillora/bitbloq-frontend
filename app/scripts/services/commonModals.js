@@ -885,6 +885,7 @@ angular.module('bitbloqApp')
                 boards,
                 components,
                 robots,
+                kits,
                 selectedTab = 'kits';
 
             var confirmAction = function() {
@@ -915,16 +916,19 @@ angular.module('bitbloqApp')
                 return defered.promise;
             }
 
-            $q.all([getComponents(), getRobots(), getBoards()]).then(function(values) {
+            function getKits() {
+                var defered = $q.defer();
+                hardwareApi.getKits().then(function(res) {
+                    defered.resolve(res.data);
+                });
+                return defered.promise;
+            }
+
+            $q.all([getComponents(), getRobots(), getBoards(), getKits()]).then(function(values) {
                 components = values[0];
                 robots = values[1];
                 boards = values[2];
-                console.log('components');
-                console.log(components);
-                console.log('robots');
-                console.log(robots);
-                console.log('boards');
-                console.log(boards);
+                kits = values[3];
                 _.extend(modalScope, {
                     title: common.translate('modal-wizard-title'),
                     modalButtons: true,
@@ -934,6 +938,7 @@ angular.module('bitbloqApp')
                     components: components,
                     robots: robots,
                     boards: boards,
+                    kits: kits,
                     rejectButton: 'modal-button-cancel',
                     contentTemplate: '/views/modals/hardwareWizard.html'
                 });

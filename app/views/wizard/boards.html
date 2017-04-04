@@ -2,7 +2,7 @@
     <li data-ng-repeat="board in boards" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
         <div class="hardware--item">
             <div class="hardware__image__container" data-element="over-project">
-                <div class="hardware__development">En desarrollo</div>
+                <div ng-if="board.underDevelopment" class="hardware__development">En desarrollo</div>
                 <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
             </div>
             <p class="hardware__image__container_name">{{board._id | translate }}</p>
