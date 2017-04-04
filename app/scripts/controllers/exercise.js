@@ -472,6 +472,10 @@ angular.module('bitbloqApp')
             $scope.hwBasicsLoaded = $q.defer();
         };
 
+        $scope.itsCurrentProjectLoaded = function() {
+            return $scope.currentProjectLoaded.promise;
+        };
+
         $scope.common.itsUserLoaded().then(function() {
             $scope.common.itsRoleLoaded().then(function(){
                 switch ($scope.common.userRole) {
