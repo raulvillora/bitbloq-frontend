@@ -807,7 +807,7 @@ angular.module('bitbloqApp')
                         type: 'ok',
                         time: 5000
                     });
-                    defered.resolve('activate');
+                    defered.resolve();
                 }).catch(function(err) {
                     switch (err.status) {
                         case 404:
@@ -820,7 +820,6 @@ angular.module('bitbloqApp')
                             modalScope.errorMessage = common.translate('modal-activate-error--generic');
                             break;
                     }
-                    defered.reject();
                 });
             };
 
@@ -849,6 +848,11 @@ angular.module('bitbloqApp')
 
             function tryFunction() {
                 activateModal.close();
+                defered.reject();
+            }
+
+            function rejectAction() {
+                defered.reject();
             }
 
             _.extend(modalScope, {
@@ -865,6 +869,7 @@ angular.module('bitbloqApp')
                 tryFunction: tryFunction,
                 extraButton: 'landing_link_testItNow',
                 extraAction: tryFunction,
+                rejectAction: rejectAction,
                 errorMessage: errorMessage,
                 rejectButton: 'modal-button-cancel',
                 contentTemplate: '/views/modals/activateRobot.html'

@@ -118,7 +118,7 @@ angular.module('bitbloqApp')
                 }
             } else {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.id === projectService.project.hardware.showRobotImage;
+                    return o.name === boardName;
                 });
             }
             if (elementSelected[0]) {
@@ -155,7 +155,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
+            if (!isValidMakeblockCode()) {
                 alertsService.add({
                     text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-upload',
                     id: 'activatedError',
@@ -187,7 +187,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
+            if (!isValidMakeblockCode()) {
                 alertsService.add({
                     text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-compile',
                     id: 'activatedError',
