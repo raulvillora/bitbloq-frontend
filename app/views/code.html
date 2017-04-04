@@ -29,8 +29,8 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="!projectService.project._acl.ALL && !disablePublish" data-tooltips="true" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(projectService, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-disabled="!projectService.project._id || disablePublish" data-ng-class="{'btn--make--disabled':!projectService.project._id || disablePublish}">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="!projectService.project._acl.ALL && !disablePublish" data-tooltips="true" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(projectService, common.user._id, common.section)?'you-are-not-the-admin-copy-it':projectService.showActivation?'activate-robot-explore':'publish-project') | translate}}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-disabled="!projectService.project._id || disablePublish || projectService.showActivation" data-ng-class="{'btn--make--disabled':!projectService.project._id || disablePublish}">
                     <svg class="svg-icon">
                         <use xlink:href="#cloud"></use>
                     </svg>
