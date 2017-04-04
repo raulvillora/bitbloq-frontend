@@ -305,34 +305,33 @@ angular.module('bitbloqApp')
         ];
         $scope.boardFilters = '';
         $scope.boardsFilterOptions = [{
-                option: 'bqZUM',
-                value: false
-            }, {
-                option: 'FreaduinoUNO',
-                value: false
-            }, {
-                option: 'ArduinoUNO',
-                value: false
-            }, {
-                option: 'Zowi',
-                value: false
-            }, {
-                option: 'Evolution',
-                value: false
-            }, {
-                option: 'mBot',
-                value: false
-            },
-            {
-                option: 'mRanger',
-                board: 'meauriga',
-                value: false
-            }, {
-                option: 'starter Kit',
-                board: 'meorion',
-                value: false
-            }
-        ];
+            option: 'bqZUM',
+            value: false
+        }, {
+            option: 'FreaduinoUNO',
+            value: false
+        }, {
+            option: 'ArduinoUNO',
+            value: false
+        }, {
+            option: 'Zowi',
+            value: false
+        }, {
+            option: 'Evolution',
+            value: false
+        }, {
+            option: 'mBot',
+            board: 'mcore',
+            value: false
+        }, {
+            option: 'mRanger',
+            board: 'meauriga',
+            value: false
+        }, {
+            option: 'starter Kit',
+            board: 'meorion',
+            value: false
+        }];
         $scope.componentsFilters = [];
         $scope.componentsFilterOptions = [{
             option: 'without-components',
