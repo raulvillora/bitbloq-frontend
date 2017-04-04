@@ -1158,6 +1158,10 @@ angular.module('bitbloqApp')
             $scope.hwBasicsLoaded = $q.defer();
         };
 
+        $scope.itsCurrentProjectLoaded = function() {
+            return $scope.currentProjectLoaded.promise;
+        };
+
         $scope.common.itsUserLoaded().then(function() {
             $log.debug('There is a registed user');
             if ($routeParams.id) {
