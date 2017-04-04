@@ -23,22 +23,22 @@
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{currentProjectService.getSavingStatusIdLabel()}}">{{ currentProjectService.getSavingStatusIdLabel() | translate }}</span>
             </li>
-            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-compile':  currentProject.hardware.showRobotImage && !isRobotActivated() ? 'robots-not-activated-compile' :'verify' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || !common.user && isThirdPartyRobot() || currentProject.hardware.showRobotImage && !isRobotActivated()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
+            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-compile':'verify' | translate }}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || !common.user && isThirdPartyRobot()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
                     <svg class="svg-icon">
                         <use xlink:href="#tick"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-upload':  currentProject.hardware.showRobotImage && !isRobotActivated() ? 'robots-not-activated-upload' :'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="upload()" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && isThirdPartyRobot() || currentProject.hardware.showRobotImage && !isRobotActivated()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-walkthrough="upload">
+            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-upload':'load' | translate }}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="upload()" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && isThirdPartyRobot()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-walkthrough="upload">
                     <svg class="svg-icon">
                         <use xlink:href="#load"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-ng-if="!currentProject._acl.ALL && utils.userIsOwner(currentProject, common.user._id)" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':currentProjectService.showActivation?'activate-robot-explore':'publish-project') | translate}}" data-tooltips="true" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!currentProject._id || !utils.userIsOwner(currentProject, common.user._id)}" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id || currentProjectService.showActivation">
+            <li class="nav__menu__item nav__item--white right" data-ng-if="!currentProject._acl.ALL && utils.userIsOwner(currentProject, common.user._id)" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="true" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="publishProject()" data-ng-class="{'btn--make--disabled':!currentProject._id || !utils.userIsOwner(currentProject, common.user._id)}" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id">
                     <svg class="svg-icon">
                         <use xlink:href="#cloud"></use>
                     </svg>
