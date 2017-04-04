@@ -270,7 +270,7 @@
     </svg>
 </button>
 <ul data-ng-class="{'little__actions right':true, 'header--transparent':!collapsedHeader && common.user}">
-    <li class="nav__menu__item right" data-ng-if="common.section !== 'task' && common.section !== 'exercise' && !currentProject._acl.ALL && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':'publish-project') | translate}}" data-tooltips="true">
+    <li class="nav__menu__item right" data-ng-if="common.section !== 'task' && common.section !== 'exercise' && !currentProject._acl.ALL && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':!utils.userIsOwner(currentProject, common.user._id, common.section)?'you-are-not-the-admin-copy-it':currentProjectService.showActivation?'activate-robot-explore':'publish-project') | translate}}" data-tooltips="true">
         <button data-ng-click="publishProject()" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!currentProject._id || !utils.userIsOwner(currentProject, common.user._id)}" data-ng-disabled="!utils.userIsOwner(currentProject, common.user._id, common.section) || !currentProject._id || currentProjectService.showActivation">
             <svg class="svg-icon">
                 <use xlink:href="#cloud"></use>
