@@ -108,7 +108,6 @@ angular
         };
 
         exports.addComponent = function(newComponent) {
-
             if (!newComponent) {
                 throw new Error('You need provide a component element :: addComponent');
             }
@@ -183,7 +182,7 @@ angular
 
                 //Add components
                 this.schema.components.forEach(function(component) {
-                    exports.addComponent(component);
+                    exports.addComponent(component, true);
                 });
 
                 //Add connections
