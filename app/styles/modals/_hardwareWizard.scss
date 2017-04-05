@@ -3,6 +3,12 @@
         min-width: 0;
     }
 
+    #develCheckbox {
+        position: relative;
+        top: 2px;
+        right: 2px;
+    }
+
     .tabs-layout__aside {
         position: relative;
         height: 59px;
@@ -37,11 +43,16 @@
             background-color: white;
             border-radius: 4px;
             padding-top: 10px;
+            cursor: pointer;
 
             &:hover {
                 background-color: #e8e8e8;
             }
             border: solid 1px #cfcfcf;
+        }
+
+        .hardware--item--selected {
+            background-color: #dddddd;
         }
 
         .hardware-list__item {

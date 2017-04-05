@@ -252,5 +252,14 @@ angular.module('bitbloqApp')
             });
         };
 
+        exports.addHardware = function(hardware) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'user/me/hardware/',
+                data: {
+                    hardware: hardware
+                }
+            });
+        }
         return exports;
     });

@@ -280,9 +280,14 @@
     &.modal--hardware-wizard {
         .ngdialog-content {
             width: 835px;
+            height: 628px;
         }
         .modal--buttons{
           padding-top: 20px;
+        }
+        .modal__footer{
+          position: absolute;
+          bottom: 0;
         }
 
       }

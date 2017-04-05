@@ -886,11 +886,44 @@ angular.module('bitbloqApp')
                 components,
                 robots,
                 kits,
-                selectedTab = 'kits';
+                developmentHW = {},
+                selectedTab = 'kits',
+                hardwareSelected = {
+                    'kits': [],
+                    'robots': [],
+                    'boards': [],
+                    'components': []
+                };
 
             var confirmAction = function() {
+                userApi.addHardware(hardwareSelected).then(function(res) {
+                    console.log('res');
+                    console.log(res);
+                })
 
             };
+
+            var addToUserHardware = function(id, category) {
+                if (_.includes(hardwareSelected[category], id)) {
+                    _.remove(hardwareSelected[category], function(n) {
+                        return n === id;
+                    });
+                } else {
+                    hardwareSelected[category].push(id);
+                }
+            }
+
+            var checkIfSelected = function(id, category) {
+                return _.includes(hardwareSelected[category], id);
+            }
+
+            function filterHardware(item) {
+                if (!developmentHW.checked) {
+                    return item.underDevelopment === false || !item.underDevelopment;
+                } else {
+                    return item;
+                }
+            }
 
             function getComponents() {
                 var defered = $q.defer();
@@ -939,6 +972,11 @@ angular.module('bitbloqApp')
                     robots: robots,
                     boards: boards,
                     kits: kits,
+                    filterHardware: filterHardware,
+                    developmentHW: developmentHW,
+                    hardwareSelected: hardwareSelected,
+                    checkIfSelected: checkIfSelected,
+                    addToUserHardware: addToUserHardware,
                     rejectButton: 'modal-button-cancel',
                     contentTemplate: '/views/modals/hardwareWizard.html'
                 });

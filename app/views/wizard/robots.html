@@ -1,10 +1,10 @@
 <ol class="wizard__hardware-list" data-element="projects-list-project">
-    <li data-ng-repeat="robot in robots" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
-        <div class="hardware--item">
+    <li ng-click="addToUserHardware(robot._id, 'robots')" data-ng-repeat="robot in robots |  filter: filterHardware" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+        <div ng-class="{'hardware--item--selected':hardwareSelected['robots'].indexOf(robot._id) > -1}" class="hardware--item">
             <div class="hardware__image__container" data-element="over-project">
                 <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
             </div>
-            <p class="hardware__image__container_name">{{robot._id | translate}}</p>
+            <p class="hardware__image__container_name">{{robot.uuid | translate}}</p>
             <a href="http://www.google.es" target="_blank" class="hardware__image__container_product">{{'show-product' | translate}}</a>
         </div>
     </li>
