@@ -977,6 +977,7 @@ angular.module('bitbloqApp')
                     hardwareSelected: hardwareSelected,
                     checkIfSelected: checkIfSelected,
                     addToUserHardware: addToUserHardware,
+                    urlImage: common.urlImage,
                     rejectButton: 'modal-button-cancel',
                     contentTemplate: '/views/modals/hardwareWizard.html'
                 });
