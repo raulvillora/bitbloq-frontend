@@ -896,10 +896,18 @@ angular.module('bitbloqApp')
                 };
 
             var confirmAction = function() {
+                var userUpdated = common.user;
                 userApi.addHardware(hardwareSelected).then(function(res) {
-                    console.log('res');
-                    console.log(res);
-                })
+                    userUpdated.hardware = res.data;
+                    console.log("res.data");
+                    console.log(res.data);
+
+                    console.log(userUpdated);
+                    common.setUser(userUpdated);
+                    console.log("common.user.hardware");
+                    console.log(common.user.hardware);
+                    wizardModal.close();
+                });
 
             };
 

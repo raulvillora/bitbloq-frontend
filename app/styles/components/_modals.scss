@@ -289,7 +289,12 @@
           position: absolute;
           bottom: 0;
         }
-
+        .ngdialog-close{
+          display: none;
+        }
+        .modal__header h1{
+          border-right: 0px;
+        }
       }
 
     &.modal--download-web2board {

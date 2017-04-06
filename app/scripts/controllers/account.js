@@ -238,11 +238,14 @@ angular.module('bitbloqApp')
         $scope.translate = $translate;
         $scope.tempAvatar = {};
         $scope.avatarUpdate = false;
+        $scope.userHardware = [];
         var usernameBackup = null;
         $scope.selectedTab = 'settings';
 
         $scope.common.itsUserLoaded().then(function() {
+
             usernameBackup = $scope.common.user.username;
+            $scope.userHardware = common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components);
             $scope.$watch('common.user.firstName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
                     $scope.validateProfile();
@@ -277,6 +280,7 @@ angular.module('bitbloqApp')
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
                     $scope.validateProfile();
                 }
+
             });
 
         }, function() {
