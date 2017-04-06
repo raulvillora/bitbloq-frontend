@@ -11,12 +11,12 @@
                     </legend>
                     <!-- My Hardware -->
                     <ol class="account__hardware-list" data-element="projects-list-project">
-                        <li data-ng-repeat="project in ['1','2', '11','12', '21','22','31']" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+                        <li data-ng-repeat="hardware in common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components)" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
                             <div class="hardware--item">
                                 <div class="hardware__image__container" data-element="over-project">
                                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
                                 </div>
-                                <p class="hardware__image__container_name">Nombre</p>
+                                <p class="hardware__image__container_name">{{hardware.uuid | translate}}</p>
                             </div>
                         </li>
                         <li class="hardware-list__item">

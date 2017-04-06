@@ -6,7 +6,7 @@
                 <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
             </div>
             <p class="hardware__image__container_name">{{board.uuid | translate }}</p>
-            <a href="http://www.google.es" target="_blank" class="hardware__image__container_product">{{'show-product' | translate}}</a>
+            <a href="{{board.purchaseUrl}}" target="_blank" ng-if="board.purchaseUrl" class="hardware__image__container_product">{{'show-product' | translate}}</a>
         </div>
     </li>
 </ol>

@@ -79,7 +79,7 @@
             }
 
             .hardware-list__item:last-child {
-                position: relative;
+                display: inline-table;
                 top: -70px;
             }
 
@@ -167,8 +167,13 @@
             color: #8c919b;
             font-size: 12px;
             font-weight: 400;
-            padding-bottom: 15px;
-            border: 1px solid #eee;
+            margin-bottom: 15px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            width: 90%;
+            margin: 31px;
+            position: relative;
+            bottom: 50px;
 
             input {
                 margin-bottom: -2.8px;
@@ -203,10 +208,6 @@
 
             fieldset {
                 padding: 31px;
-
-                &:not(:last-child) {
-                    border-bottom: 1px solid #eee;
-                }
 
                 .account__connect {
                     margin-bottom: 20px;
