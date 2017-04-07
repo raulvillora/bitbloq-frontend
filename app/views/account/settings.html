@@ -14,24 +14,23 @@
                         <li data-ng-repeat="hardware in userHardware" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
                             <div class="hardware--item">
                                 <div class="hardware__image__container" data-element="over-project">
-                                    <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
+                                    <img ng-src="{{common.urlImage + 'hardware/'+ hardware.category +'/'+ hardware.uuid +'.png'}}" err-src="../images/common/default-project.png">
                                 </div>
                                 <p class="hardware__image__container_name">{{hardware.uuid | translate}}</p>
                             </div>
                         </li>
                         <li class="hardware-list__item">
                             <div class="hardware--item--add">
-                                <button class="hardware__add__container"  ng-click="selectHardware()" data-element="over-project">
-                                  <svg class="svg-icon">
-                                      <use xlink:href="#plusCircle"></use>
-                                  </svg>
-                                  <p class="hardware__add__container--text">{{'account-add-hardware' | translate}} </p>
+                                <button class="hardware__add__container" ng-click="selectHardware()" data-element="over-project">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#plusCircle"></use>
+                                    </svg>
+                                    <p class="hardware__add__container--text">{{'account-add-hardware' | translate}} </p>
                                 </button>
                             </div>
                         </li>
                     </ol>
                 </fieldset>
-
 
 
                 <!--Online compilation + Google Extension-->

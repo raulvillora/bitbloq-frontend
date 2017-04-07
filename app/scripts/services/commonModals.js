@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi, hardwareApi) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi, hardwareService) {
         var exports = {},
             shortUrl,
             serialMonitorPanel,
@@ -926,6 +926,12 @@ angular.module('bitbloqApp')
                 } else {
                     hardwareSelected[category].push(id);
                 }
+
+                hardwareService.getUserKits(hardwareSelected).then(function(kits) {
+                    hardwareSelected['kits'] = kits;
+                    console.log('kits');
+                    console.log(kits);
+                });
             }
 
             var checkIfSelected = function(id, category) {
@@ -940,39 +946,7 @@ angular.module('bitbloqApp')
                 }
             }
 
-            function getComponents() {
-                var defered = $q.defer();
-                hardwareApi.getComponents().then(function(res) {
-                    defered.resolve(res.data);
-                });
-                return defered.promise;
-            }
-
-            function getRobots() {
-                var defered = $q.defer();
-                hardwareApi.getRobots().then(function(res) {
-                    defered.resolve(res.data);
-                });
-                return defered.promise;
-            }
-
-            function getBoards() {
-                var defered = $q.defer();
-                hardwareApi.getBoards().then(function(res) {
-                    defered.resolve(res.data);
-                });
-                return defered.promise;
-            }
-
-            function getKits() {
-                var defered = $q.defer();
-                hardwareApi.getKits().then(function(res) {
-                    defered.resolve(res.data);
-                });
-                return defered.promise;
-            }
-
-            $q.all([getComponents(), getRobots(), getBoards(), getKits()]).then(function(values) {
+            $q.all([hardwareService.getComponents(), hardwareService.getRobots(), hardwareService.getBoards(), hardwareService.getKits()]).then(function(values) {
                 components = values[0];
                 robots = values[1];
                 boards = values[2];
