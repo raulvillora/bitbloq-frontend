@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common, commonModals) {
+    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common, commonModals, hardwareApi) {
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
                 var options = {
@@ -74,7 +74,11 @@ angular.module('bitbloqApp')
         };
 
         $scope.selectHardware = function() {
-            commonModals.selectHardware();
+            $scope.common.itsUserLoaded().then(function() {
+                getUserKits(common.user.hardware).then(function(kits) {
+                    commonModals.selectHardware(kits);
+                });
+            });
         }
 
         $scope.saveProfile = function() {
@@ -233,22 +237,42 @@ angular.module('bitbloqApp')
             });
         };
 
+        function getUserKits(userHardware) {
+            var defered = $q.defer();
+            var userHW = _.map(userHardware.boards.concat(userHardware.components), '_id');
+            hardwareApi.getKits().then(function(res) {
+                var totalKit;
+                var kitDetected = [];
+                _.forEach(res.data, function(kit) {
+                    totalKit = kit.boards.concat(kit.components);
+                    if (_.differenceWith(totalKit, userHW, _.isEqual).length === 0) {
+                        kitDetected.push(kit);
+                    }
+                });
+                defered.resolve(kitDetected);
+            });
+            return defered.promise;
+        }
+
         $scope.common.oldTempAvatar = {};
         $scope.test = envData.config.supportedLanguages;
         $scope.translate = $translate;
         $scope.tempAvatar = {};
         $scope.avatarUpdate = false;
         $scope.userHardware = [];
+        $scope.userKits = [];
         var usernameBackup = null;
         $scope.selectedTab = 'settings';
 
         $scope.common.itsUserLoaded().then(function() {
 
             usernameBackup = $scope.common.user.username;
-            $scope.userHardware = common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components);
+            getUserKits(common.user.hardware).then(function(kits) {
+                $scope.userHardware = common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components).concat(kits);
+            });
             $scope.$watch('common.user.hardware', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
-                    $scope.userHardware = common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components);
+                    $scope.userHardware = $scope.userHardware.concat(common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components));
                 }
             });
             $scope.$watch('common.user.firstName', function(oldValue, newValue) {

@@ -879,7 +879,7 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.selectHardware = function() {
+        exports.selectHardware = function(userKits) {
             var wizardModal,
                 modalScope = $rootScope.$new(),
                 boards,
@@ -888,7 +888,16 @@ angular.module('bitbloqApp')
                 kits,
                 developmentHW = {},
                 selectedTab = 'kits',
-                hardwareSelected = {};
+                hardwareSelected = {
+                    'kits': [],
+                    'robots': [],
+                    'boards': [],
+                    'components': []
+                };
+
+            _.forEach(userKits, function(kit) {
+                hardwareSelected.kits.push(kit._id);
+            });
 
             var confirmAction = function() {
                 var userUpdated = common.user;
@@ -968,8 +977,6 @@ angular.module('bitbloqApp')
                 robots = values[1];
                 boards = values[2];
                 kits = values[3];
-                console.log('hardwareSelected');
-                console.log(hardwareSelected);
                 _.extend(modalScope, {
                     title: common.translate('modal-wizard-title'),
                     modalButtons: true,
