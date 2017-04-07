@@ -13,6 +13,16 @@ angular.module('bitbloqApp')
             "mcu": "bt328",
             "vendorIds": ["0x403"],
             "productIds": ["0x6001"],
+            "integratedComponents": [{
+                "id": "bt",
+                "name": "default-var-name-standard_integrated_bt",
+                "pin": {
+                    "rx": "0",
+                    "tx": "1"
+                },
+                "baudRate": "19200",
+                "uid": "bq-bqzum-bt"
+            }],
             "showInToolbox": true,
             "pinSize": {
                 "digital": {
@@ -1885,12 +1895,14 @@ angular.module('bitbloqApp')
             "width": 115,
             "height": 71,
             "pin": {
-                "s": "serial"
+                "s": "serial",
+                "rx": "0",
+                "tx": "1"
             },
             "pins": {
                 "serial": [
                     "s"
-                ]
+                ],
             }
         }, {
             "id": "device",
