@@ -246,6 +246,11 @@ angular.module('bitbloqApp')
 
             usernameBackup = $scope.common.user.username;
             $scope.userHardware = common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components);
+            $scope.$watch('common.user.hardware', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    $scope.userHardware = common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components);
+                }
+            });
             $scope.$watch('common.user.firstName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
                     $scope.validateProfile();

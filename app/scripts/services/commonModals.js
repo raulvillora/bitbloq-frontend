@@ -888,28 +888,26 @@ angular.module('bitbloqApp')
                 kits,
                 developmentHW = {},
                 selectedTab = 'kits',
-                hardwareSelected = {
-                    'kits': [],
-                    'robots': [],
-                    'boards': [],
-                    'components': []
-                };
+                hardwareSelected = {};
 
             var confirmAction = function() {
                 var userUpdated = common.user;
                 userApi.addHardware(hardwareSelected).then(function(res) {
                     userUpdated.hardware = res.data;
-                    console.log("res.data");
-                    console.log(res.data);
-
-                    console.log(userUpdated);
                     common.setUser(userUpdated);
-                    console.log("common.user.hardware");
-                    console.log(common.user.hardware);
                     wizardModal.close();
                 });
 
             };
+
+            _.forEach(common.user.hardware, function(hardware, category) {
+                var hwInCategory = hardware;
+                var idArray = [];
+                _.forEach(hwInCategory, function(element) {
+                    idArray.push(element._id);
+                });
+                hardwareSelected[category] = idArray;
+            });
 
             var addToUserHardware = function(id, category) {
                 if (_.includes(hardwareSelected[category], id)) {
@@ -970,6 +968,8 @@ angular.module('bitbloqApp')
                 robots = values[1];
                 boards = values[2];
                 kits = values[3];
+                console.log('hardwareSelected');
+                console.log(hardwareSelected);
                 _.extend(modalScope, {
                     title: common.translate('modal-wizard-title'),
                     modalButtons: true,
