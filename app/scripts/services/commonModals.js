@@ -919,19 +919,27 @@ angular.module('bitbloqApp')
             });
 
             var addToUserHardware = function(id, category) {
+                var idSelected = id,
+                    removed;
                 if (_.includes(hardwareSelected[category], id)) {
+                    removed = idSelected;
                     _.remove(hardwareSelected[category], function(n) {
                         return n === id;
                     });
                 } else {
                     hardwareSelected[category].push(id);
                 }
+                if (category !== 'kits') {
+                    hardwareService.getUserKits(hardwareSelected).then(function(kits) {
+                        hardwareSelected['kits'] = [];
+                        _.forEach(kits, function(kit) {
+                            hardwareSelected['kits'].push(kit._id);
+                        });
 
-                hardwareService.getUserKits(hardwareSelected).then(function(kits) {
-                    hardwareSelected['kits'] = kits;
-                    console.log('kits');
-                    console.log(kits);
-                });
+                    });
+                } else {
+                    hardwareSelected = hardwareService.manageKitHW(kits, hardwareSelected, removed);
+                }
             }
 
             var checkIfSelected = function(id, category) {
