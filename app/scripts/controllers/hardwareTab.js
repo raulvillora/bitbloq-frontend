@@ -435,27 +435,59 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.checkName = function() {
-        var componentsNames = [];
+        var usedComponentNames = {},
+            duplicatedNames = [];
+        var componentsList = [];
+
+        //now filled from componentsArray, when all components will be in hardware.components with
+        //the connected flag, change here
         _.forEach(currentProjectService.componentsArray, function(category) {
+
             if (category.length > 0) {
                 category.forEach(function(comp) {
-                    componentsNames.push(comp.name);
+                    componentsList.push(comp);
                 });
             }
+        })
 
-        });
+        //end of getting componentList
 
-        if (_.uniq(componentsNames).length !== componentsNames.length) {
-            $scope.componentSelected.name += '_copy';
+        for (var i = 0; i < componentsList.length; i++) {
+            if (usedComponentNames[componentsList[i].name]) {
+                //the componentSelected must be always a duplicated
+                if ($scope.componentSelected === usedComponentNames[componentsList[i].name]) {
+                    duplicatedNames.push($scope.componentSelected);
+                    usedComponentNames[componentsList[i].name] = componentsList[i];
+                } else {
+                    duplicatedNames.push(componentsList[i]);
+                }
+            } else {
+                usedComponentNames[componentsList[i].name] = componentsList[i];
+            }
         }
-        var nameFixed = _validName($scope.componentSelected.name);
-        nameFixed = utils.removeDiacritics(nameFixed);
-        if (nameFixed !== $scope.componentSelected.name) {
-            $scope.componentSelected.name = nameFixed;
+        //avoid watchers using a temp var
+        var tempName = '',
+            maxAttempts = 25,
+            attempt = 0;
+
+        for (var i = 0; i < duplicatedNames.length; i++) {
+
+            tempName = duplicatedNames[i].name + '_copy';
+            attempt = 0;
+            while ((attempt < maxAttempts) && usedComponentNames[tempName]) {
+                tempName += '_copy';
+                attempt++;
+            }
+            if (usedComponentNames[tempName]) {
+                tempName += 'to_the_sky_and_far_away';
+            }
+            tempName = utils.removeDiacritics(_validName(tempName));
+            duplicatedNames[i].name = tempName;
+            usedComponentNames[tempName] = true;
         }
-        if ($scope.componentSelected.connected || $scope.componentSelected.uid === 'btComponent') {
-            currentProjectService.startAutosave();
-        }
+
+        currentProjectService.startAutosave();
+
     };
 
     /***************************************
@@ -808,6 +840,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             currentProjectService.componentsArray[component.category].forEach(function(comp) {
                 componentsNames[comp.name] = true;
             });
+            if (component.category === 'oscillators') {
+                currentProjectService.componentsArray['servos'].forEach(function(comp) {
+                    componentsNames[comp.name] = true;
+                });
+            } else if (component.category === 'servos') {
+                currentProjectService.componentsArray['oscillators'].forEach(function(comp) {
+                    componentsNames[comp.name] = true;
+                });
+            }
         }
 
         var j = 0,
