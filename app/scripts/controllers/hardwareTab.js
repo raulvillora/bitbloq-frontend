@@ -700,6 +700,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var robotReference = _.find($scope.hardware.robotList, function(r) {
             return r.id === robot.id;
         });
+
         hw2Bloqs.removeRobot(robotReference);
         $scope.closeComponentInteraction();
         if (robotReference.useBoardImage) {
@@ -710,6 +711,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $scope.currentProject.hardware.showRobotImage = robot.id;
             $scope.changeToolbox('components');
         } else {
+            $scope.hardware.cleanSchema();
+            $scope.currentProject.hardware.components = [];
             $scope.currentProject.hardware.robot = robot.id;
             $scope.currentProject.hardware.showRobotImage = null;
             hw2Bloqs.removeAllComponents();
