@@ -260,6 +260,6 @@ angular.module('bitbloqApp')
                     hardware: hardware
                 }
             });
-        }
+        };
         return exports;
     });

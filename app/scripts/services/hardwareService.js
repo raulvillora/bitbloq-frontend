@@ -12,10 +12,6 @@ angular.module('bitbloqApp')
 
         var exports = {};
         exports.getUserHardware = function() {
-            var boards,
-                components,
-                robots;
-
             var defered = $q.defer();
             common.itsUserLoaded().then(function() {
                 _.forEach(common.user.hardware.boards, function(board) {
@@ -28,12 +24,16 @@ angular.module('bitbloqApp')
                     board.category = 'robots';
                 });
 
-                exports.getUserKits(common.user.hardware).then(function(kits) {
-                    defered.resolve(common.user.hardware.robots.concat(common.user.hardware.boards).concat(common.user.hardware.components).concat(kits));
+                exports.getRobots().then(function(robots) {
+                    exports.getUserKits(common.user.hardware).then(function(kits) {
+                        defered.resolve(groupRobotsByFamily(common.user.hardware.robots, robots).concat(common.user.hardware.boards).concat(common.user.hardware.components).concat(kits));
+
+                    });
                 });
+
             });
             return defered.promise;
-        }
+        };
 
         exports.getUserKits = function(userHardware) {
             var defered = $q.defer();
@@ -54,7 +54,7 @@ angular.module('bitbloqApp')
                 defered.resolve(kitDetected);
             });
             return defered.promise;
-        }
+        };
 
         exports.getComponents = function() {
             var defered = $q.defer();
@@ -62,7 +62,7 @@ angular.module('bitbloqApp')
                 defered.resolve(res.data);
             });
             return defered.promise;
-        }
+        };
 
         exports.getRobots = function() {
             var defered = $q.defer();
@@ -70,7 +70,7 @@ angular.module('bitbloqApp')
                 defered.resolve(res.data);
             });
             return defered.promise;
-        }
+        };
 
         exports.getBoards = function() {
             var defered = $q.defer();
@@ -78,7 +78,7 @@ angular.module('bitbloqApp')
                 defered.resolve(res.data);
             });
             return defered.promise;
-        }
+        };
 
         exports.getKits = function() {
             var defered = $q.defer();
@@ -86,12 +86,9 @@ angular.module('bitbloqApp')
                 defered.resolve(res.data);
             });
             return defered.promise;
-        }
+        };
 
         exports.manageKitHW = function(kits, hardwareSelected, removed) {
-            var boards,
-                components;
-
             if (removed) {
                 _.forEach(kits, function(kit) {
                     if (kit._id === removed) {
@@ -102,7 +99,7 @@ angular.module('bitbloqApp')
                             return kit.components.indexOf(item) === -1;
                         });
                     }
-                })
+                });
             }
             _.forEach(hardwareSelected.kits, function(kit) {
                 _.forEach(kits, function(element) {
@@ -113,7 +110,55 @@ angular.module('bitbloqApp')
                 });
             });
             return hardwareSelected;
+        };
+
+        function groupRobotsByFamily(userRobots, robots) {
+            var robotsCopy;
+
+            robotsCopy = _.cloneDeep(userRobots);
+
+            _.forEach(userRobots, function(robot) {
+                var family = _.without(_.map(_.filter(robots, function(r) {
+                    return r._id === robot._id;
+                }), 'family'), undefined);
+
+                if (family.length > 0) {
+                    _.remove(robotsCopy, function(r) {
+                        return r._id === robot._id;
+                    });
+
+                    var element = {
+                        'category': 'robots',
+                        'uuid': family[0]
+                    };
+                    robotsCopy = robotsCopy.concat(element);
+                }
+            });
+
+            return _.uniqBy(robotsCopy, 'uuid');
         }
+
+        exports.getFamilyFromRobots = function(userRobots, robots) {
+            var robotsCopy;
+
+            robotsCopy = _.cloneDeep(userRobots);
+
+            _.forEach(userRobots, function(robot) {
+                var family = _.without(_.map(_.filter(robots, function(r) {
+                    return r._id === robot;
+                }), 'family'), undefined);
+                if (family.length > 0) {
+                    _.remove(robotsCopy, function(r) {
+                        return r === robot;
+                    });
+                    if (robotsCopy.indexOf(family[0]) <= -1) {
+                        robotsCopy = robotsCopy.concat(family);
+                    }
+                }
+            });
+
+            return robotsCopy;
+        };
 
         return exports;
 

@@ -4,24 +4,24 @@
         <ul class="tabs__header--invert">
             <li class="tabs__header__item--invert tabs__header__main" ng-class="{'selected--tab':selectedTab === 'kits'}" ng-click="selectedTab = 'kits'">
                 <span class="menu__item__span">
-                    {{ 'kits' | translate }}
+                    {{ 'kits' | translate }}  ({{hardwareSelected['kits'].length}})
                 </span>
             </li>
             <li ng-class="{'tabs__header__item--invert':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'robots'}" data-element="projects-shared-projects" ng-click="selectedTab = 'robots'">
                 <span class="menu__item__span">
-                    {{'robots' | translate}}
+                    {{'robots' | translate}}  ({{hardwareSelected['robots'].length}})
                 </span>
                 </span>
             </li>
             <li ng-class="{'tabs__header__item--invert':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'boards'}" data-element="projects-shared-projects" ng-click="selectedTab = 'boards'">
                 <span class="menu__item__span">
-                    {{'boards' | translate}}
+                    {{'boards' | translate}}  ({{hardwareSelected['boards'].length}})
                 </span>
                 </span>
             </li>
             <li ng-class="{'tabs__header__item--invert':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'components'}" data-element="projects-shared-projects" ng-click="selectedTab = 'components'">
                 <span class="menu__item__span">
-                    {{'components' | translate}}
+                    {{'components' | translate}}  ({{hardwareSelected['components'].length}})
                 </span>
                 </span>
             </li>

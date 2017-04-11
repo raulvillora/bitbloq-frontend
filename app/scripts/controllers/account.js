@@ -79,7 +79,7 @@ angular.module('bitbloqApp')
                     commonModals.selectHardware(kits);
                 });
             });
-        }
+        };
 
         $scope.saveProfile = function() {
             var defered = $q.defer();

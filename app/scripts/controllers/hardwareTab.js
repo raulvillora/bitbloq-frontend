@@ -146,8 +146,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 currentProjectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
-        {
+            .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -266,26 +265,29 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.hardware.sortToolbox = function() {
         $log.log('sortToolbox');
+        $scope.common.itsUserLoaded().then(function() {
+            var filteredList;
+            if ($scope.currentProject.hardware.robot) {
+                filteredList = [];
 
-        var filteredList;
-        if ($scope.currentProject.hardware.robot) {
-            filteredList = [];
+            } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents) {
+                filteredList = _.filter($scope.common.user.hardware.components, function(component) {
+                    return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.id) !== -1;
+                });
+            } else {
+                filteredList = _.filter($scope.common.user.hardware.components, {
+                    manufacturer: 'standard'
+                });
+            }
 
-        } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents) {
-            filteredList = _.filter(hardwareConstants.components, function(component) {
-                return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.id) !== -1;
+            var translatedList = _.each(filteredList, function(item) {
+                item.name = $translate.instant(item.uuid);
             });
-        } else {
-            filteredList = _.filter(hardwareConstants.components, {
-                manufacter: 'standard'
-            });
-        }
 
-        var translatedList = _.each(filteredList, function(item) {
-            item.name = $translate.instant(item.id);
+            $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
+            console.log('$scope.hardware.componentSortered');
+            console.log($scope.hardware.componentSortered);
         });
-
-        $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
     $scope.drop = function(data) {
         hw2Bloqs.userInteraction = true;
@@ -294,8 +296,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.currentProjectService.showActivation = false;
                 $scope.currentProjectService.closeActivation = false;
                 var board = _.find($scope.hardware.boardList, function(board) {
-                    return board.id === data.id;
+                    return board.uuid === data.id;
                 });
+
+                console.log('board');
+                console.log(board);
                 _addBoard(board);
                 $scope.changeToolbox('components');
                 break;
@@ -468,8 +473,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.boardsMap = _getBoardsMap(hardwareConstants);
         $scope.componentsMap = _getComponentsMap(hardwareConstants);
 
-        $scope.hardware.boardList = hardwareConstants.boards;
-        $scope.hardware.robotList = hardwareConstants.robots;
+        $scope.common.itsUserLoaded().then(function() {
+            $scope.hardware.boardList = $scope.common.user.hardware.boards;
+            $scope.hardware.robotList = $scope.common.user.hardware.robots;
+            console.log('$scope.hardware.boardList');
+            console.log($scope.hardware.boardList);
+            console.log('$scope.hardware.robotList');
+            console.log($scope.hardware.robotList);
+        });
         $scope.hwBasicsLoaded.resolve();
         $scope.hardware.sortToolbox();
 
@@ -606,8 +617,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if (hw2Bloqs.userInteraction) {
                     if (_itsABoardWithProblemsInFirstPins($scope.currentProject.hardware.board) && _.findKey(componentReference.pin, function(o) {
                             return o === '1' || o === '0';
-                        }))
-                    {
+                        })) {
                         alertsService.add({
                             text: 'connect_alert_01',
                             id: 'connect-error',
@@ -672,8 +682,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addBoard(board) {
-        if ($scope.currentProject.hardware.board !== board.id || $scope.currentProject.hardware.robot) {
-            if ($scope.currentProject.hardware.showRobotImage || board.manufacter) {
+        if ($scope.currentProject.hardware.board !== board.uuid || $scope.currentProject.hardware.robot) {
+            if ($scope.currentProject.hardware.showRobotImage || board.manufacturer) {
                 $scope.hardware.cleanSchema();
             } else if ($scope.currentProject.hardware.robot) {
                 $scope.deleteRobot();
@@ -681,7 +691,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
             hw2Bloqs.addBoard(board);
 
-            $scope.currentProject.hardware.board = board.id;
+            $scope.currentProject.hardware.board = board.uuid;
 
             if (hw2Bloqs.checkIfOldConnections && $scope.currentProject.hardware.components > 0 || $scope.currentProject.useBitbloqConnect) {
                 $scope.deleteBTComponent();
@@ -697,15 +707,17 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addRobot(robot) {
-
         var robotReference = _.find($scope.hardware.robotList, function(r) {
-            return r.id === robot.id;
+            return r.uuid === robot.id;
         });
+
         hw2Bloqs.removeRobot(robotReference);
         $scope.closeComponentInteraction();
+        console.log('robotReference');
+        console.log(robotReference);
         if (robotReference.useBoardImage) {
             var board = _.find($scope.hardware.boardList, function(board) {
-                return board.id === robotReference.board;
+                return board.uuid === robotReference.board;
             });
             _addBoard(board);
             $scope.currentProject.hardware.showRobotImage = robot.id;
@@ -971,20 +983,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
@@ -1011,7 +1023,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if (criteria === '') {
                 return false;
             }
-            var translatedNameNormalized = utils.removeDiacritics($translate.instant(item.id), {
+            var translatedNameNormalized = utils.removeDiacritics($translate.instant(item.uuid), {
                 spaces: false
             }).toLowerCase();
             var criteriaNormalized = utils.removeDiacritics(criteria, {

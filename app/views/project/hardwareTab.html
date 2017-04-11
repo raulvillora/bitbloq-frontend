@@ -32,7 +32,7 @@
         <div id="boardSchema" class="board" ng-class="{'board--present':currentProject.hardware.board, 'board--selected':boardSelected, 'opaque':!currentProject.hardware.robot}">
             <p class="board__message">{{'make-hardware-board-container' | translate}}</p>
         </div>
-        <div id="robotSchema" class="robot" ng-class="{'robot--present':currentProject.hardware.robot , 'robot--selected':robotSelected, 'opaque':currentProject.hardware.robot}"></div>
+        <div id="robotSchema" class="robot" ng-class="{'robot--present':currentProject.hardware.robot , 'robot--selected':robotSelected, 'opaque':currentProject.hardware.robot}"></div>      
     </div>
     <div class="hw-toolbox tab--make__block" data-ng-include="'views/project/hardwareToolbox.html'"></div>
     <div id="component-context-menu" class="hw-context-menu">

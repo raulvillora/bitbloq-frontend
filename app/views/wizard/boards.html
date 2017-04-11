@@ -1,5 +1,5 @@
 <ol class="wizard__hardware-list" data-element="projects-list-project">
-    <li  data-ng-repeat="board in boards | filter: filterHardware" ng-click="addToUserHardware(board._id, 'boards')" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+    <li  data-ng-repeat="board in boards | filter: filterHardware" ng-click="addToUserHardware(board, 'boards')" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
         <div ng-class="{'hardware--item--selected':hardwareSelected['boards'].indexOf(board._id) > -1}" class="hardware--item">
             <div class="hardware__image__container" data-element="over-project">
                 <div ng-if="board.underDevelopment" class="hardware__development">En desarrollo</div>
