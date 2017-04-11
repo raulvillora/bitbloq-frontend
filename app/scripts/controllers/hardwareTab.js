@@ -448,7 +448,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     componentsList.push(comp);
                 });
             }
-        })
+        });
 
         //end of getting componentList
 
@@ -470,9 +470,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             maxAttempts = 25,
             attempt = 0;
 
-        for (var i = 0; i < duplicatedNames.length; i++) {
+        for (var j = 0; j < duplicatedNames.length; j++) {
 
-            tempName = duplicatedNames[i].name + '_copy';
+            tempName = duplicatedNames[j].name + '_copy';
             attempt = 0;
             while ((attempt < maxAttempts) && usedComponentNames[tempName]) {
                 tempName += '_copy';
@@ -482,7 +482,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 tempName += 'to_the_sky_and_far_away';
             }
             tempName = utils.removeDiacritics(_validName(tempName));
-            duplicatedNames[i].name = tempName;
+            duplicatedNames[j].name = tempName;
             usedComponentNames[tempName] = true;
         }
 
@@ -841,11 +841,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 componentsNames[comp.name] = true;
             });
             if (component.category === 'oscillators') {
-                currentProjectService.componentsArray['servos'].forEach(function(comp) {
+                currentProjectService.componentsArray.servos.forEach(function(comp) {
                     componentsNames[comp.name] = true;
                 });
             } else if (component.category === 'servos') {
-                currentProjectService.componentsArray['oscillators'].forEach(function(comp) {
+                currentProjectService.componentsArray.oscillators.forEach(function(comp) {
                     componentsNames[comp.name] = true;
                 });
             }
