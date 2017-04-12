@@ -906,7 +906,6 @@ angular.module('bitbloqApp')
 
             function getFamilyFromRobots() {
                 hardwareSelected.robots = hardwareService.getFamilyFromRobots(hardwareSelected.robots, robots);
-
             }
 
             var confirmAction = function() {
@@ -941,6 +940,10 @@ angular.module('bitbloqApp')
                 var idSelected = element._id,
                     removed;
 
+                console.log('element');
+                console.log(element);
+                console.log('category');
+                console.log(category);
                 if (_.includes(hardwareSelected[category], element._id)) {
                     removed = idSelected;
                     _.remove(hardwareSelected[category], function(n) {
@@ -956,6 +959,10 @@ angular.module('bitbloqApp')
                             hardwareSelected.kits.push(kit._id);
                         });
                     });
+                    if (element.robots) {
+                        console.log('entro aqui');
+                        hardwareSelected = hardwareService.managethirdPartyRobots(robots, hardwareSelected, removed);
+                    }
                 } else {
                     hardwareSelected = hardwareService.manageKitHW(kits, hardwareSelected, removed);
                 }

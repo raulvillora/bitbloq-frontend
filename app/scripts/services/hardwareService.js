@@ -60,8 +60,6 @@ angular.module('bitbloqApp')
             var defered = $q.defer();
             hardwareApi.getComponents().then(function(res) {
                 defered.resolve(res.data);
-                console.log('components');
-                console.log(res.data);
             });
             return defered.promise;
         };
@@ -102,12 +100,35 @@ angular.module('bitbloqApp')
                         });
                     }
                 });
+            } else {
+                _.forEach(hardwareSelected.kits, function(kit) {
+                    _.forEach(kits, function(element) {
+                        if (element._id === kit) {
+                            hardwareSelected.boards = _.merge(hardwareSelected.boards, element.boards);
+                            hardwareSelected.components = _.merge(hardwareSelected.components, element.components);
+                        }
+                    });
+                });
             }
-            _.forEach(hardwareSelected.kits, function(kit) {
-                _.forEach(kits, function(element) {
-                    if (element._id === kit) {
-                        hardwareSelected.boards = _.merge(hardwareSelected.boards, element.boards);
-                        hardwareSelected.components = _.merge(hardwareSelected.components, element.components);
+            return hardwareSelected;
+        };
+
+        exports.managethirdPartyRobots = function(robots, hardwareSelected, removed) {
+            if (removed) {
+                _.forEach(robots, function(robot) {
+                    if (robot.family === removed) {
+                        hardwareSelected.components = hardwareSelected.components.filter(function(item) {
+                            return robot.includedComponents.indexOf(item) === -1;
+                        });
+
+                    }
+                });
+            }
+            _.forEach(hardwareSelected.robots, function(robot) {
+                _.forEach(robots, function(element) {
+                    if (element.family === robot) {
+                        hardwareSelected.boards = _.merge(hardwareSelected.boards, element.board);
+                        hardwareSelected.components = _.merge(hardwareSelected.components, element.includedComponents);
                     }
                 });
             });
