@@ -60,6 +60,8 @@ angular.module('bitbloqApp')
             var defered = $q.defer();
             hardwareApi.getComponents().then(function(res) {
                 defered.resolve(res.data);
+                console.log('components');
+                console.log(res.data);
             });
             return defered.promise;
         };

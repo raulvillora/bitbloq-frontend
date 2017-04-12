@@ -950,7 +950,6 @@ angular.module('bitbloqApp')
                         _.forEach(kits, function(kit) {
                             hardwareSelected.kits.push(kit._id);
                         });
-
                     });
                 } else {
                     hardwareSelected = hardwareService.manageKitHW(kits, hardwareSelected, removed);
