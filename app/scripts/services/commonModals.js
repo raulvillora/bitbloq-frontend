@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi) {
+    .service('commonModals', function(feedbackApi, alertsService, $rootScope, $timeout, $translate, $compile, userApi, envData, _, ngDialog, $window, common, projectApi, exerciseApi, utils, $location, clipboard, $q, chromeAppApi, thirdPartyRobotsApi, hardwareService) {
         var exports = {},
             shortUrl,
             serialMonitorPanel,
@@ -882,6 +882,160 @@ angular.module('bitbloqApp')
             });
 
             return defered.promise;
+        };
+
+        exports.selectHardware = function(userKits) {
+            var wizardModal,
+                modalScope = $rootScope.$new(),
+                boards,
+                components,
+                robots,
+                kits,
+                developmentHW = {},
+                selectedTab = 'kits',
+                hardwareSelected = {
+                    'kits': [],
+                    'robots': [],
+                    'boards': [],
+                    'components': []
+                };
+
+            _.forEach(userKits, function(kit) {
+                hardwareSelected.kits.push(kit._id);
+            });
+
+            function getFamilyFromRobots() {
+                hardwareSelected.robots = hardwareService.getFamilyFromRobots(hardwareSelected.robots, robots);
+
+            }
+
+            var confirmAction = function() {
+                var userUpdated = common.user;
+                var familyRobots = [],
+                    finalRobots = _.cloneDeep(hardwareSelected.robots);
+
+                _.forEach(hardwareSelected.robots, function(robotAdded) {
+                    var robotsInFamily = _.map(_.filter(robots, function(r) {
+                        return r.family === robotAdded;
+                    }), '_id');
+
+                    if (robotsInFamily.length > 0) {
+                        _.remove(finalRobots, function(r) {
+                            return r === robotAdded;
+                        });
+                        familyRobots = familyRobots.concat(robotsInFamily);
+                    }
+                });
+
+                hardwareSelected.robots = finalRobots.concat(familyRobots);
+
+                userApi.addHardware(hardwareSelected).then(function(res) {
+                    userUpdated.hardware = res.data;
+                    common.setUser(userUpdated);
+                    wizardModal.close();
+                });
+
+            };
+
+            var addToUserHardware = function(element, category) {
+                var idSelected = element._id,
+                    removed;
+
+                if (_.includes(hardwareSelected[category], element._id)) {
+                    removed = idSelected;
+                    _.remove(hardwareSelected[category], function(n) {
+                        return n === element._id;
+                    });
+                } else {
+                    hardwareSelected[category].push(element._id);
+                }
+                if (category !== 'kits') {
+                    hardwareService.getUserKits(hardwareSelected).then(function(kits) {
+                        hardwareSelected.kits = [];
+                        _.forEach(kits, function(kit) {
+                            hardwareSelected.kits.push(kit._id);
+                        });
+                    });
+                } else {
+                    hardwareSelected = hardwareService.manageKitHW(kits, hardwareSelected, removed);
+                }
+
+            };
+
+            var checkIfSelected = function(id, category) {
+                return _.includes(hardwareSelected[category], id);
+            };
+
+            function filterHardware(item) {
+                if (!developmentHW.checked) {
+                    return item.underDevelopment === false || !item.underDevelopment;
+                } else {
+                    return item;
+                }
+            }
+
+            $q.all([hardwareService.getComponents(), hardwareService.getRobots(), hardwareService.getBoards(), hardwareService.getKits()]).then(function(values) {
+                components = values[0];
+                robots = values[1];
+                boards = values[2];
+                kits = values[3];
+                var robotsFiltered = _
+                    .chain(_.filter(robots, function(o) {
+                        return o.family;
+                    }))
+                    .groupBy('family')
+                    .map(function(value, key) {
+                        var result;
+                        if (key) {
+                            result = {
+                                uuid: key,
+                                _id: key,
+                                robots: value
+                            };
+                        }
+                        return result;
+                    })
+                    .value().concat(_.filter(robots, function(o) {
+                        return !o.family;
+                    }));
+
+                _.forEach(common.user.hardware, function(hardware, category) {
+                    var hwInCategory = hardware;
+                    var idArray = [];
+                    _.forEach(hwInCategory, function(element) {
+                        idArray.push(element._id);
+                    });
+                    hardwareSelected[category] = idArray;
+                });
+
+                getFamilyFromRobots();
+
+                _.extend(modalScope, {
+                    title: common.translate('modal-wizard-title'),
+                    modalButtons: true,
+                    confirmButton: 'save',
+                    confirmAction: confirmAction,
+                    selectedTab: selectedTab,
+                    components: components,
+                    robots: robotsFiltered,
+                    boards: boards,
+                    kits: kits,
+                    filterHardware: filterHardware,
+                    developmentHW: developmentHW,
+                    hardwareSelected: hardwareSelected,
+                    checkIfSelected: checkIfSelected,
+                    addToUserHardware: addToUserHardware,
+                    urlImage: common.urlImage,
+                    rejectButton: 'modal-button-cancel',
+                    contentTemplate: '/views/modals/hardwareWizard.html'
+                });
+            });
+
+            wizardModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--hardware-wizard',
+                scope: modalScope
+            });
         };
         return exports;
     });

@@ -334,15 +334,15 @@ angular.module('bitbloqApp')
             var components = {};
 
             var serialPort = _.find(componentsArray, function(o) {
-                return o.id === 'sp';
+                return o.uuid === 'sp';
             });
 
             var bluetooth = _.find(componentsArray, function(o) {
-                return o.id === 'bt';
+                return o.uuid === 'bt';
             });
 
             var phoneElements = _.find(componentsArray, function(o) {
-                return o.id === 'device';
+                return o.uuid === 'device';
             });
             if (serialPort) {
                 components.sp = serialPort.name;
@@ -419,7 +419,7 @@ angular.module('bitbloqApp')
 
         function generateMobileTwitterCode(componentsArray, originalCode) {
             var components = $scope.getComponents(projectService.project.hardware.components);
-            var board = projectService.getBoardMetaData().id;
+            var board = projectService.getBoardMetaData().uuid;
 
             var code = originalCode;
             var deviceName;
@@ -1138,6 +1138,10 @@ angular.module('bitbloqApp')
 
         $scope.initHardwarePromise = function() {
             $scope.hwBasicsLoaded = $q.defer();
+        };
+
+        $scope.itsCurrentProjectLoaded = function() {
+            return $scope.currentProjectLoaded.promise;
         };
 
         $scope.common.itsUserLoaded().then(function() {

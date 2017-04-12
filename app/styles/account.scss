@@ -2,10 +2,12 @@
     .form--section {
         legend {
             font-size: 12px !important;
+
             svg {
                 top: 2px !important;
             }
         }
+
         .form-control {
             small {
                 font-size: 11px !important;
@@ -13,58 +15,174 @@
         }
     }
 }
+@media only screen and (min-width: 320px) and (max-width: 485px) {
+    .hardware-list__item {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 486px) and (max-width: 700px) {
+    .hardware-list__item {
+        width: 51%;
+    }
+}
+@media only screen and (min-width: 701px) and (max-width: 1183px) {
+    .hardware-list__item {
+        width: 33%;
+    }
+}
+@media only screen and (min-width: 1184px) {
+    /* Styles */
+    .hardware-list__item {
+        width: 24%;
+    }
+}
+
 .view--account {
-    background-color: #eee;
     height: 100%;
     overflow: hidden;
     overflow-y: auto;
+
+    .account__heading {
+        padding-left: 15px;
+    }
+
+    .tabs-layout__aside {
+        padding-left: 15px;
+    }
+
+    .tabs-layout__content {
+        padding-left: 30px;
+    }
+
     .account__header {
+        height: 71px;
+        padding: 30px;
         background-color: white;
-        height: 70px;
-        .account__heading {
-            color: #373b44;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 70px;
-            margin-left: 28px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 0;
+    }
+
+    .account__content {
+        background-color: #ebebeb;
+        margin-top: 31px;
+
+        .account__hardware-list {
+            width: calc(100% + 20px);
+
+            .hardware--item {
+                cursor: default;
+            }
+
+            .hardware--item--add {
+                height: 170px;
+            }
+
+            .hardware-list__item:last-child {
+                position: relative;
+                vertical-align: top;
+            }
+
+            .hardware-list__item {
+                border-radius: 4px;
+                display: inline-block;
+                margin: 10px 0;
+                padding-right: 20px;
+
+                .hardware__add__container {
+                    &:after {
+                        content: "";
+                        transition: background-color 250ms;
+                        background-color: transparent;
+                    }
+                    height: 138px;
+                    width: 138px;
+                    overflow: hidden;
+                    background-color: #dadada;
+
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        fill: #9b9da1;
+                        margin-bottom: 20px;
+                    }
+                }
+
+                .hardware__add__container--text {
+                    font-weight: bold;
+                    text-align: center;
+                    color: #373b44;
+                    font-size: 13px;
+                }
+
+                .hardware__image__container {
+                    &:after {
+                        content: "";
+                        transition: background-color 250ms;
+                        background-color: transparent;
+                    }
+                    height: 138px;
+                    width: 138px;
+                    overflow: hidden;
+                    background-color: #dadada;
+                    border: 1px solid #cfcfcf;
+
+                    img {
+                        border: 9px solid white;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        position: relative;
+                    }
+                }
+
+                .hardware__image__container_name {
+                    margin-top: 10px;
+                    font-size: 13px;
+                }
+            }
         }
     }
-    .account__content {
-        padding: 28px;
-        background-color: #ebebeb;
-    }
+
     .form--account {
         .first-column,
         .second-column {
             display: inline-block;
         }
+
         .first-column {
             padding-right: 10px;
             float: left;
             width: 70%;
-            max-width: 530px;
         }
+
         .second-column {
+            margin-left: 10px;
             padding-left: 10px;
             float: left;
-            width: 30%;
-            max-width: 220px;
+            width: 27%;
         }
+
         .user-options-checkbox {
             color: #8c919b;
             font-size: 12px;
             font-weight: 400;
             padding-bottom: 15px;
+            border: 1px solid #eee;
+
             input {
                 margin-bottom: -2.8px;
             }
+
             label {
                 margin-left: 5px;
             }
+
             &.last {
                 padding-bottom: 50px;
             }
         }
+
         .account__delete {
             padding-top: 20px;
             padding-bottom: 20px;
@@ -72,31 +190,39 @@
             color: #8c919b;
             font-size: 12px;
             font-weight: 400;
+
             a {
                 color: #8c919b;
             }
         }
+
         .form--section {
             background-color: white;
             border-radius: 5px;
             margin-bottom: 20px;
+
             fieldset {
-                padding: 20px;
+                padding: 31px;
+
                 &:not(:last-child) {
                     border-bottom: 1px solid #eee;
                 }
+
                 .account__connect {
                     margin-bottom: 20px;
                     cursor: default;
                 }
+
                 .connect-to-SN-google {
                     color: #d82b32;
                     font-weight: 700;
                 }
+
                 .connect-to-SN-facebook {
                     color: #4573ba;
                     font-weight: 700;
                 }
+
                 legend {
                     &:first-child {
                         padding-top: 20px;
@@ -106,6 +232,7 @@
                     color: #373b44;
                     font-size: 16px;
                     font-weight: 700;
+
                     .svg-icon {
                         width: 13px;
                         height: 13px;
@@ -114,9 +241,10 @@
                         top: 5px;
                     }
                 }
+
                 .form-control {
                     label {
-                        width: 40%;
+                        width: 30%;
                         float: left;
                         color: #5d6069;
                         font-size: 13px;
@@ -124,9 +252,11 @@
                         line-height: 40px;
                         text-align: left;
                     }
+
                     .dropdown--bottom {
                         width: 100%;
                     }
+
                     .main--user--image {
                         border-radius: 100%;
                         overflow: hidden;
@@ -134,26 +264,32 @@
                         width: 160px;
                         height: 160px;
                         position: relative;
+
                         img {
                             object-fit: cover;
                             width: 100%;
                             height: 100%;
                         }
                     }
+
                     .btn--account-upload-image {
                         width: 100%;
                         margin-bottom: 20px;
                     }
+
                     .btn--account--password {
-                        width: 50%;
+                        width: 40%;
                         float: left;
                     }
+
                     &:last-child {
                         margin-top: 0;
                         text-align: left;
                     }
+
                     span {
                         width: 50%;
+
                         input {
                             color: #5d6069;
                             font-size: 13px;

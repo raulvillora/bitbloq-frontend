@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common) {
+    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common, commonModals, hardwareService) {
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
                 var options = {
@@ -72,6 +72,15 @@ angular.module('bitbloqApp')
             }
 
         };
+
+        $scope.selectHardware = function() {
+            $scope.common.itsUserLoaded().then(function() {
+                hardwareService.getUserKits(common.user.hardware).then(function(kits) {
+                    commonModals.selectHardware(kits);
+                });
+            });
+        };
+
         $scope.saveProfile = function() {
             var defered = $q.defer();
 
@@ -233,10 +242,23 @@ angular.module('bitbloqApp')
         $scope.translate = $translate;
         $scope.tempAvatar = {};
         $scope.avatarUpdate = false;
+        $scope.userHardware = [];
+        $scope.userKits = [];
         var usernameBackup = null;
+        $scope.selectedTab = 'settings';
 
         $scope.common.itsUserLoaded().then(function() {
             usernameBackup = $scope.common.user.username;
+            hardwareService.getUserHardware().then(function(res) {
+                $scope.userHardware = res;
+            });
+            $scope.$watch('common.user.hardware', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    hardwareService.getUserHardware().then(function(res) {
+                        $scope.userHardware = res;
+                    });
+                }
+            });
             $scope.$watch('common.user.firstName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
                     $scope.validateProfile();
@@ -271,6 +293,7 @@ angular.module('bitbloqApp')
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
                     $scope.validateProfile();
                 }
+
             });
 
         }, function() {

@@ -92,18 +92,20 @@ angular
         };
 
         exports.addBoard = function(newBoard) {
+            console.log('newBooooard');
+            console.log(newBoard);
             exports.removeBoard();
 
             board = newBoard;
 
             boardDOMElement = document.getElementById(boardContainerId);
-            boardDOMElement.classList.add(board.id);
+            boardDOMElement.classList.add(board.uuid || board.id);
             boardDOMElement.classList.add('opaque');
             robotDOMElement = document.getElementById(robotContainerId);
             robotDOMElement.classList.remove('opaque');
 
             _loadBoard(board, boardDOMElement);
-            _autoConnect(board.id);
+            _autoConnect(board.uuid || board.id);
             exports.repaint();
         };
 
@@ -143,8 +145,10 @@ angular
         };
 
         exports.addRobot = function(newRobot) {
+            console.log('newRobot');
+            console.log(newRobot);
             robotDOMElement = document.getElementById(robotContainerId);
-            robotDOMElement.classList.add(newRobot.id);
+            robotDOMElement.classList.add(newRobot.id || newRobot.uuid);
 
             robotDOMElement.classList.add('opaque');
             boardDOMElement = document.getElementById(boardContainerId);
@@ -213,7 +217,7 @@ angular
                 connections.forEach(function(connection) {
                     oldConnections.push(connection.getParameters());
                 });
-                boardDOMElement.classList.remove(board.id);
+                boardDOMElement.classList.remove(board.uuid);
                 jsPlumbInstance.removeAllEndpoints(boardDOMElement);
             }
             board = null;
@@ -257,8 +261,10 @@ angular
         };
 
         exports.removeRobot = function() {
+            console.log('robot a eliminaar');
+            console.log(robot);
             if (jsPlumbInstance && robot && robotDOMElement) {
-                robotDOMElement.classList.remove(robot.id);
+                robotDOMElement.classList.remove(robot.uuid);
                 jsPlumbInstance.removeAllEndpoints(robotDOMElement);
             }
             robot = null;
@@ -751,6 +757,8 @@ angular
 
                 });
 
+                console.log('board');
+                console.log(board);
                 //Connect automaticaly these pins
                 if (isMandatoryPin && mandatoryPins[type][element]) {
                     var epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase()),
@@ -760,7 +768,7 @@ angular
                         if (epBoardReference.connections.length > 0 && (mandatoryPins[type][element].toLowerCase() === 'a4' || mandatoryPins[type][element].toLowerCase() === 'a5')) {
                             epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h') || epBoardReference;
                         }
-                    } else if (board.id === 'ArduinoUNO' || board.id === 'ArduinoMEGA2560') {
+                    } else if (board.uuid === 'ArduinoUNO' || board.uuid === 'ArduinoMEGA2560') {
                         epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase() + '-h');
                     }
 

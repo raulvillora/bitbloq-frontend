@@ -1,0 +1,121 @@
+.modal--hardware-wizard {
+    .tabs-layout__aside .tabs__header__item {
+        min-width: 0;
+    }
+
+    #develCheckbox {
+        position: relative;
+        top: 2px;
+        right: 2px;
+    }
+
+    .tabs-layout__aside {
+        position: relative;
+        height: 59px;
+    }
+
+    .modal__body {
+        padding: 0;
+    }
+
+    .tab {}
+
+    .show-development {
+        float: right;
+        bottom: 0;
+        display: inline-block;
+        font-size: 12px;
+        font-size: 12px;
+        color: #373b44;
+        margin: 20px;
+    }
+
+    .wizard__hardware-list {
+        width: 100%;
+        padding-left: 31px;
+        overflow-y: auto;
+        max-height: 407px;
+        cursor: default;
+
+        .hardware--item {
+            width: 140px;
+            height: 200px;
+            background-color: white;
+            border-radius: 4px;
+            padding-top: 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e8e8e8;
+            }
+            border: solid 1px #cfcfcf;
+        }
+
+        .hardware--item--selected {
+            background-color: #dddddd;
+        }
+
+        .hardware-list__item {
+            border-radius: 4px;
+            display: inline-table;
+            margin: 10px 0;
+            padding-right: 20px;
+
+            .hardware__image__container {
+                position: relative;
+
+                &:after {
+                    content: "";
+                    transition: background-color 250ms;
+                    background-color: transparent;
+                }
+                cursor: pointer;
+                height: 120px;
+                width: 120px;
+                overflow: hidden;
+                background-color: #dadada;
+                margin: 0 auto;
+
+                .hardware__development {
+                    position: absolute;
+                    width: 120px;
+                    height: 25px;
+                    bottom: 0;
+                    padding-top: 4px;
+                    z-index: 2;
+                    background-color: #82ad3a;
+                    color: white;
+                    font-size: 11px;
+                    text-align: center;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: relative;
+
+                    &:hover {
+                        //border-top: 10px solid red;
+                    }
+                    //border-top: 10px solid white;
+                }
+            }
+
+            .hardware__image__container_name {
+                margin-left: 10px;
+                margin-top: 5px;
+                margin-right: 10px;
+                cursor: pointer;
+                font-size: 13px;
+            }
+
+            .hardware__image__container_product {
+                margin-left: 10px;
+                font-size: 12px;
+                color: #82ad3a;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -490,7 +490,6 @@ angular.module('bitbloqApp')
             "showInToolbox": false,
             "underDevelopment": false,
             "availableComponents": [
-                'mkb_infrared',
                 'mkb_lightsensor',
                 'mkb_linefollower',
                 'mkb_ultrasound',
@@ -593,7 +592,6 @@ angular.module('bitbloqApp')
             "underDevelopment": false,
             "showInToolbox": false,
             "availableComponents": [
-                'mkb_infrared',
                 'mkb_lightsensor',
                 'mkb_linefollower',
                 'mkb_ultrasound',
@@ -801,7 +799,6 @@ angular.module('bitbloqApp')
             "underDevelopment": false,
             "showInToolbox": false,
             "availableComponents": [
-                'mkb_infrared',
                 'mkb_lightsensor',
                 'mkb_linefollower',
                 'mkb_ultrasound',

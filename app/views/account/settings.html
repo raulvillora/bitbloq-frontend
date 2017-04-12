@@ -1,0 +1,64 @@
+<div class="account__content">
+    <form class="form--account" id="form--account">
+        <div class="first-column">
+            <div class="form--section">
+                <fieldset>
+                    <legend>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#component"></use>
+                        </svg>
+                        <span>{{ 'hardware-profile' | translate }}</span>
+                    </legend>
+                    <!-- My Hardware -->
+                    <ol class="account__hardware-list" data-element="projects-list-project">
+                        <li data-ng-repeat="hardware in userHardware" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+                            <div class="hardware--item">
+                                <div class="hardware__image__container" data-element="over-project">
+                                    <img ng-src="{{common.urlImage + 'hardware/'+ hardware.category +'/'+ hardware.uuid +'.png'}}" err-src="../images/common/default-project.png">
+                                </div>
+                                <p class="hardware__image__container_name">{{hardware.uuid | translate}}</p>
+                            </div>
+                        </li>
+                        <li class="hardware-list__item">
+                            <div class="hardware--item--add">
+                                <button class="hardware__add__container" ng-click="selectHardware()" data-element="over-project">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#plusCircle"></use>
+                                    </svg>
+                                    <p class="hardware__add__container--text">{{'account-add-hardware' | translate}} </p>
+                                </button>
+                            </div>
+                        </li>
+                    </ol>
+                </fieldset>
+
+
+                <!--Online compilation + Google Extension-->
+                <fieldset ng-if="common.os !== 'ChromeOS'" class="user-options-checkbox">
+                    <span class="input input--checkbox">
+                        <input type="checkbox" id="chromeappCheckbox" name="chromeappCheckbox" value="common.user.chromeapp" ng-checked="common.user.chromeapp === true" ng-model="common.user.chromeapp" data-element="chromeapp-checkbox">
+                        <label for="chromeappCheckbox">{{'account-checkbox-chromeapp' | translate}}</label>
+                    </span>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+    <form class="form--account" id="form--account__second-column">
+        <div class="second-column">
+            <div class="form--section">
+                <fieldset class="last--fieldset">
+                    <legend>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#earth"></use>
+                        </svg>
+                        <span>{{ 'language' | translate }}</span>
+                    </legend>
+                    <div class="form-control">
+                        <common-dropdown class="dropdown--small" data-heading-option="common.user.language | translate" data-options-click="changeLanguage" data-options="test" />
+                    </div>
+                </fieldset>
+            </div>
+            <!---->
+        </div>
+    </form>
+</div>
