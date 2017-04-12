@@ -709,9 +709,7 @@ angular.module('bitbloqApp')
         $scope.currentTab = 0;
 
         $scope.setTab = function(index) {
-            if (!_.isEqual(projectService.project, projectService.getDefaultProject())) {
-                projectService.startAutosave(true);
-            }
+
             if (index === 0) {
                 hw2Bloqs.repaint();
             } else if (index === 1) {
@@ -723,6 +721,9 @@ angular.module('bitbloqApp')
             }
 
             $scope.currentTab = index;
+            if (!_.isEqual(projectService.project, projectService.getDefaultProject())) {
+                projectService.startAutosave();
+            }
         };
 
         $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
