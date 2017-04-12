@@ -283,18 +283,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             var translatedList = _.each(filteredList, function(item) {
                 item.name = $translate.instant(item.uuid);
             });
-        } else {
-            filteredList = _.filter(hardwareConstants.components, {
-                manufacter: 'standard'
-            });
-        }
 
             $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
             console.log('$scope.hardware.componentSortered');
             console.log($scope.hardware.componentSortered);
         });
-
-        $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
     $scope.drop = function(data) {
         hw2Bloqs.userInteraction = true;
@@ -657,8 +650,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if (hw2Bloqs.userInteraction) {
                     if (_itsABoardWithProblemsInFirstPins($scope.currentProject.hardware.board) && _.findKey(componentReference.pin, function(o) {
                             return o === '1' || o === '0';
-                        }))
-                    {
+                        })) {
                         alertsService.add({
                             text: 'connect_alert_01',
                             id: 'connect-error',
@@ -1035,20 +1027,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if ($event.ctrlKey) {
-            //         $scope.undo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if ($event.ctrlKey) {
-            //         $scope.redo();
-            //         $event.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if ($event.ctrlKey) {
+                //         $scope.undo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if ($event.ctrlKey) {
+                //         $scope.redo();
+                //         $event.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
