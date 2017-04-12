@@ -486,6 +486,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             usedComponentNames[tempName] = true;
         }
 
+        $scope.updateBloqs();
+
         currentProjectService.startAutosave();
 
     };
@@ -1101,10 +1103,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         } else {
             if (newVal && oldVal && (newVal !== oldVal)) {
                 $scope.checkName();
+                $scope.updateBloqs();
             } else if (newVal === '') {
                 $timeout.cancel($scope.timeoutCode);
                 $scope.timeoutCode = $timeout(function() {
                     $scope.componentSelected.name = _createUniqueVarName($scope.componentSelected);
+                    $scope.updateBloqs();
                     currentProjectService.startAutosave();
                 }, 3000);
             }
