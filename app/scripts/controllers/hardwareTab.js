@@ -283,11 +283,18 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             var translatedList = _.each(filteredList, function(item) {
                 item.name = $translate.instant(item.uuid);
             });
+        } else {
+            filteredList = _.filter(hardwareConstants.components, {
+                manufacter: 'standard'
+            });
+        }
 
             $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
             console.log('$scope.hardware.componentSortered');
             console.log($scope.hardware.componentSortered);
         });
+
+        $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
     };
     $scope.drop = function(data) {
         hw2Bloqs.userInteraction = true;
@@ -441,27 +448,60 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.checkName = function() {
-        var componentsNames = [];
+        var usedComponentNames = {},
+            duplicatedNames = [];
+        var componentsList = [];
+
+        //now filled from componentsArray, when all components will be in hardware.components with
+        //the connected flag, change here
         _.forEach(currentProjectService.componentsArray, function(category) {
+
             if (category.length > 0) {
                 category.forEach(function(comp) {
-                    componentsNames.push(comp.name);
+                    componentsList.push(comp);
                 });
             }
 
         });
 
-        if (_.uniq(componentsNames).length !== componentsNames.length) {
-            $scope.componentSelected.name += '_copy';
+        //end of getting componentList
+
+        for (var i = 0; i < componentsList.length; i++) {
+            if (usedComponentNames[componentsList[i].name]) {
+                //the componentSelected must be always a duplicated
+                if ($scope.componentSelected === usedComponentNames[componentsList[i].name]) {
+                    duplicatedNames.push($scope.componentSelected);
+                    usedComponentNames[componentsList[i].name] = componentsList[i];
+                } else {
+                    duplicatedNames.push(componentsList[i]);
+                }
+            } else {
+                usedComponentNames[componentsList[i].name] = componentsList[i];
+            }
         }
-        var nameFixed = _validName($scope.componentSelected.name);
-        nameFixed = utils.removeDiacritics(nameFixed);
-        if (nameFixed !== $scope.componentSelected.name) {
-            $scope.componentSelected.name = nameFixed;
+        //avoid watchers using a temp var
+        var tempName = '',
+            maxAttempts = 25,
+            attempt = 0;
+
+        for (var j = 0; j < duplicatedNames.length; j++) {
+
+            tempName = duplicatedNames[j].name + '_copy';
+            attempt = 0;
+            while ((attempt < maxAttempts) && usedComponentNames[tempName]) {
+                tempName += '_copy';
+                attempt++;
+            }
+            if (usedComponentNames[tempName]) {
+                tempName += 'to_the_sky_and_far_away';
+            }
+            tempName = utils.removeDiacritics(_validName(tempName));
+            duplicatedNames[j].name = tempName;
+            usedComponentNames[tempName] = true;
         }
-        if ($scope.componentSelected.connected || $scope.componentSelected.uid === 'btComponent') {
-            currentProjectService.startAutosave();
-        }
+
+        currentProjectService.startAutosave();
+
     };
 
     /***************************************
@@ -617,7 +657,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if (hw2Bloqs.userInteraction) {
                     if (_itsABoardWithProblemsInFirstPins($scope.currentProject.hardware.board) && _.findKey(componentReference.pin, function(o) {
                             return o === '1' || o === '0';
-                        })) {
+                        }))
+                    {
                         alertsService.add({
                             text: 'connect_alert_01',
                             id: 'connect-error',
@@ -683,6 +724,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     function _addBoard(board) {
         if ($scope.currentProject.hardware.board !== board.uuid || $scope.currentProject.hardware.robot) {
+            $scope.deleteBoard();
             if ($scope.currentProject.hardware.showRobotImage || board.manufacturer) {
                 $scope.hardware.cleanSchema();
             } else if ($scope.currentProject.hardware.robot) {
@@ -707,14 +749,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addRobot(robot) {
+
         var robotReference = _.find($scope.hardware.robotList, function(r) {
             return r.uuid === robot.id;
         });
 
         hw2Bloqs.removeRobot(robotReference);
         $scope.closeComponentInteraction();
-        console.log('robotReference');
-        console.log(robotReference);
         if (robotReference.useBoardImage) {
             var board = _.find($scope.hardware.boardList, function(board) {
                 return board.uuid === robotReference.board;
@@ -723,6 +764,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             $scope.currentProject.hardware.showRobotImage = robot.id;
             $scope.changeToolbox('components');
         } else {
+            $scope.hardware.cleanSchema();
+            $scope.currentProject.hardware.components = [];
             $scope.currentProject.hardware.robot = robot.id;
             $scope.currentProject.hardware.showRobotImage = null;
             hw2Bloqs.removeAllComponents();
@@ -818,6 +861,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             currentProjectService.componentsArray[component.category].forEach(function(comp) {
                 componentsNames[comp.name] = true;
             });
+            if (component.category === 'oscillators') {
+                currentProjectService.componentsArray.servos.forEach(function(comp) {
+                    componentsNames[comp.name] = true;
+                });
+            } else if (component.category === 'servos') {
+                currentProjectService.componentsArray.oscillators.forEach(function(comp) {
+                    componentsNames[comp.name] = true;
+                });
+            }
         }
 
         var j = 0,
@@ -983,20 +1035,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $event.preventDefault();
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if ($event.ctrlKey) {
-                //         $scope.undo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if ($event.ctrlKey) {
-                //         $scope.redo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if ($event.ctrlKey) {
+            //         $scope.undo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if ($event.ctrlKey) {
+            //         $scope.redo();
+            //         $event.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
                 if ($scope.inputFocus) {
@@ -1023,7 +1075,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if (criteria === '') {
                 return false;
             }
-            var translatedNameNormalized = utils.removeDiacritics($translate.instant(item.uuid), {
+            var translatedNameNormalized = utils.removeDiacritics($translate.instant(item.id), {
                 spaces: false
             }).toLowerCase();
             var criteriaNormalized = utils.removeDiacritics(criteria, {
