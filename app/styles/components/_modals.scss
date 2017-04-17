@@ -608,6 +608,12 @@
     }
 }
 
+.modal--delete-group {
+    p:not(:first-child):not(:last-child){
+        margin: 15px 0;
+    }
+}
+
 .modal__footer--text {
     padding: 17px;
     text-align: center;

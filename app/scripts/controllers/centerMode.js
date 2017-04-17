@@ -88,7 +88,7 @@
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
                     title: 'closeGroup_modal_title',
-                    confirmButton: 'closeGroup_modal_acceptButton',
+                    confirmButton: 'archiveGroup_modal_acceptButton',
                     confirmAction: _closeGroupAction,
                     rejectButton: 'modal-button-cancel',
                     textContent: 'closeGroup_modal_info',
@@ -131,17 +131,17 @@
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
                     title: 'deleteGroup_modal_title',
-                    confirmButton: 'deleteGroup_modal_acceptButton',
+                    confirmButton: 'button_delete',
                     confirmAction: confirmAction,
                     rejectButton: 'modal-button-cancel',
                     contentTemplate: '/views/modals/centerMode/deleteGroup.html',
-                    finishAction: _closeGroupAction,
+                    finishAction: $scope.closeGroup,
                     modalButtons: true
                 });
 
                 currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
+                    className: 'modal--container modal--input modal--delete-group',
                     scope: modalOptions
                 });
             };
