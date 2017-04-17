@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="menu--user" ng-show="common.user"  ng-class="{'menu--user--reduced': (common.userRole==='headmaster' || common.userRole==='teacher' || common.userRole === 'student')}" >
-            <div class="menu--user__center-mode notification-info" ng-if="fakse" ng-if="common.user && (common.userRole!=='headmaster' && common.userRole!=='teacher' && common.userRole !== 'student')" ng-click="activateCenterMode()">
+            <div class="menu--user__center-mode notification-info" ng-if="common.user && (common.userRole!=='headmaster' && common.userRole!=='teacher' && common.userRole !== 'student')" ng-click="activateCenterMode()">
                 <p class="notification-alert">{{'new' | translate}}</p>
                 <div class="notification__content">
                     <p class="notification__title">{{'centerMode_modal_createCenterTitle' | translate}}</p>
