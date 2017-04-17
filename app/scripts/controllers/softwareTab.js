@@ -227,6 +227,7 @@ angular.module('bitbloqApp')
             currentProjectService.bloqs.loopBloq.doConnectable();
 
             bloqs.updateDropdowns();
+            bloqs.startBloqsUpdate(currentProjectService.componentsArray);
 
             $scope.$trashcan = $('#trashcan').last();
         };
