@@ -7,17 +7,17 @@
             <common-dropdown auto-collapse="true" heading-option="'choose_category' | translate" options-click="forum.setPublishCategory" options="forum.categories" selected-option="forum.selectedOption" data-element="forum_category_dropdown"></common-dropdown>
             <span class="label">{{'form_title' | translate}}
                 *</span>
-            <span class="form--input">
-                <input data-element="forum-new-theme-title" id="theme-title" name="themetitle" ng-model="forum.textEditorContent.title" placeholder="" required type="text">
+            <span class="form--input form--title">
+                <input id="theme-title" name="themetitle" type="text" ng-model="forum.textEditorContent.title" placeholder="" required data-element="forum-new-theme-title">
             </span>
             <span class="label">{{'description' | translate}}
                 *</span>
-            <text-angular data-element="forum-new-theme-description" name="newthemeeditor" ng-model="forum.textEditorContent.htmlContent" ng-mouseenter="forum.setFocusToEditor('newthemeeditor')" ta-toolbar="[['h1','h2','h3','p'], ['bold','italics','underline','ul','ol','undo','redo','clear'], ['uploadImage','insertLink','insertVideo']]"></text-angular>
+            <text-angular name="newthemeeditor" ng-model="forum.textEditorContent.htmlContent" ng-mouseenter="forum.setFocusToEditor('newthemeeditor')" ta-toolbar="[['h1','h2','h3','p'], ['bold','italics','underline','ul','ol','undo','redo','clear'], ['uploadImage','insertLink','insertVideo']]" data-element="forum-new-theme-description"></text-angular>
             <span class="last-span">*
                 {{'form_compulsoryFields' | translate}}</span>
             <div class="subscribe-div form-control">
                 <span class="subscribe-span input input--checkbox">
-                    <input data-element="subscribe-theme-input" data-ng-blur="focus = false" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-model="forum.textEditorContent.subscribe" id="subscribeThread" name="subscribeThread" type="checkbox">
+                    <input data-ng-blur="focus = false" data-ng-focus="form.readServiceTerm.submitted=false" data-ng-model="forum.textEditorContent.subscribe" id="subscribeThread" name="subscribeThread" type="checkbox" data-element="subscribe-theme-input">
                     <label for="subscribeThread">
                         {{'forum_button_new-topic_subscribe' | translate}}
                     </label>

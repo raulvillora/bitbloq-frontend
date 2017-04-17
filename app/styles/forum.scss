@@ -41,6 +41,11 @@
     .forum__header__admin{
       margin-bottom: 60px !important;
     }
+
+    .form--title{
+        width: 70%;
+    }
+
     .forum__bigsearch {
         &.searching {
             margin-bottom: 20px;
@@ -629,8 +634,14 @@ text-angular {
     max-width: 70%;
     min-height: 200px;
     .ta-editor {
+        resize: vertical;
+        overflow: auto;
         padding: 10px;
+        height: 200px;
         min-height: 100px;
+        &.ta-text {
+            height: 200px;
+        }
     }
     .ta-toolbar {
         background-color: #f0f0f0;
