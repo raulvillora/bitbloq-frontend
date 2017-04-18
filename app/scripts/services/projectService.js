@@ -193,7 +193,7 @@ angular.module('bitbloqApp')
 
         exports.getCleanProject = function(projectRef, download) {
             projectRef = projectRef || exports.project;
-            var cleanProject = _.cloneDeep(projectRef);
+            var cleanProject = JSON.parse(angular.toJson(_.cloneDeep(projectRef)));
             if (download) {
                 delete cleanProject._id;
                 delete cleanProject._acl;
