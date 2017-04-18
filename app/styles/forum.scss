@@ -1,8 +1,7 @@
 .forum {
-    height: 100%;
+    min-height: 100%;
     background-color: #eee;
-    overflow: hidden;
-    overflow-y: auto;
+    padding-bottom: 30px;
     .section__heading {
         color: #8c919b;
         font-size: 16px;
@@ -12,7 +11,7 @@
     }
     .forum__footer {
         display: block;
-        margin: 0 30px 30px;
+        margin: 0 30px;
         padding: 18px;
         text-align: center;
         background-color: #e1e1e1;
@@ -42,6 +41,11 @@
     .forum__header__admin{
       margin-bottom: 60px !important;
     }
+
+    .form--title{
+        width: 70%;
+    }
+
     .forum__bigsearch {
         &.searching {
             margin-bottom: 20px;
@@ -630,8 +634,14 @@ text-angular {
     max-width: 70%;
     min-height: 200px;
     .ta-editor {
+        resize: vertical;
+        overflow: auto;
         padding: 10px;
+        height: 200px;
         min-height: 100px;
+        &.ta-text {
+            height: 200px;
+        }
     }
     .ta-toolbar {
         background-color: #f0f0f0;

@@ -49,7 +49,7 @@ $hw_toolbox: 210px;
     }
 
     .tabs-layout__aside--vertical {
-        width: 27%;
+        width: 59px;
         height: 100%;
     }
 
@@ -75,7 +75,7 @@ $hw_toolbox: 210px;
 }
 
 .toolbox__content {
-    width: 73%;
+    width: calc(100% - 59px);
     float: right;
     height: 100%;
     background-color: white;
@@ -208,7 +208,7 @@ $hw_toolbox: 210px;
     }
 
     .toolbox__menu {
-        width: 174px;
+        width: 73%;
     }
 
     .toolbox__item {
