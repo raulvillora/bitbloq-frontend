@@ -272,7 +272,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
             } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents) {
                 filteredList = _.filter($scope.common.user.hardware.components, function(component) {
-                    return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.id) !== -1;
+                    return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.uuid) !== -1;
                 });
             } else {
                 filteredList = _.filter($scope.common.user.hardware.components, {
