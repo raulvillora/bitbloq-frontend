@@ -601,6 +601,11 @@
                 }).then(function(response) {
                     $scope.exercises = response.data;
                     if ($scope.urlSubType === 'student') {
+                        $scope.exercises.tasks.forEach(function(task) {
+                            if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
+                                task.status = 'notDelivered';
+                            }
+                        });
                         $scope.tertiaryBreadcrumb = true;
                         $scope.tasks = response.data.tasks;
                         $scope.group = response.data.group;
