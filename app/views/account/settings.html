@@ -10,10 +10,10 @@
                         <span>{{ 'hardware-profile' | translate }}</span>
                     </legend>
                     <!-- My Hardware -->
-                    <ol class="account__hardware-list" data-element="projects-list-project">
+                    <ol class="account__hardware-list" data-element="account-hardware-list">
                         <li data-ng-repeat="hardware in userHardware" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
                             <div class="hardware--item">
-                                <div class="hardware__image__container" data-element="over-project">
+                                <div class="hardware__image__container" data-element="account-hardware-elem">
                                     <img ng-src="{{common.urlImage + 'hardware/'+ hardware.category +'/'+ hardware.uuid +'.png'}}" err-src="../images/common/default-project.png">
                                 </div>
                                 <p class="hardware__image__container_name">{{hardware.uuid | translate}}</p>

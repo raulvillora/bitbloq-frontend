@@ -6,7 +6,7 @@
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Menú de Proyectos</h1>
             <ul class="tabs__header">
-                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'settings'}" ng-click="selectedTab = 'settings'">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'settings'}" ng-click="selectedTab = 'settings'" data-element="account-settings-tab">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#settings"></use>
                     </svg>
@@ -14,7 +14,7 @@
                         {{ 'account-settings' | translate }}
                     </span>
                 </li>
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'user'}" data-element="projects-shared-projects" ng-click="selectedTab = 'user'">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'user'}" data-element="account-user-tab" ng-click="selectedTab = 'user'">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#user"></use>
                     </svg>
