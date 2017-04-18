@@ -245,8 +245,8 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.editExerciseGroups = function(exercise, groups) {
-            $scope.currentProjectService.assignGroup(exercise, $scope.common.user._id, groups).then(function(response) {
+        $scope.editExerciseGroups = function(exercise, groups, onlyEdit) {
+            $scope.currentProjectService.assignGroup(exercise, $scope.common.user._id, groups, null, onlyEdit).then(function(response) {
                 $scope.setGroups(response);
             });
         };
