@@ -103,6 +103,10 @@
     .block__item__title--small {
         font-size: 1em;
         font-weight: initial;
+        white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
     }
     .block__item__explanation {
         display: inline-block;

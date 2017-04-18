@@ -298,9 +298,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 var board = _.find($scope.hardware.boardList, function(board) {
                     return board.uuid === data.id;
                 });
-
-                console.log('board');
-                console.log(board);
                 _addBoard(board);
                 $scope.changeToolbox('components');
                 break;
