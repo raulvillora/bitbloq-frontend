@@ -9,6 +9,7 @@
 .table__header {
     height: 93px;
     padding-top: 36px;
+
     .header__title {
         font-size: 20px;
         font-weight: 700;
@@ -19,37 +20,44 @@
 
 .table__block {
     border-top: 2px solid #dddddd;
+
     .table__block__list:nth-child(2n) {
         background-color: white;
     }
-
 }
 
 .table__block--invert {
     padding: 0 10px;
     background-color: white;
+
     .table__block__list:nth-child(2n + 1) {
         background-color: white;
     }
 }
 
-.table__block--invert, .table__block {
+.table__block,
+.table__block--invert {
     .table__block__list {
         padding: 10px;
         background-color: #eeeeee;
         min-height: 50px;
+
         &.table__block__hover:hover {
             background-color: #e2e2e2;
+
             .table__block__button--delete {
                 display: block;
             }
+
             .table__column--hover .btn {
                 display: inherit;
             }
         }
+
         &:last-child {
             border-bottom: 1px solid #dddddd;
         }
+
         .table__column--hover .btn {
             display: none;
         }
@@ -60,12 +68,14 @@
     padding: 0 10px 30px 0;
     font-size: 16px;
     color: #373b44;
+
     .svg-icon--text {
         height: 13px;
         width: 13px;
         margin-top: 5px;
         margin-right: 10px;
-        &.svg-icon--big{
+
+        &.svg-icon--big {
             height: 16px;
             width: 16px;
             margin-top: 4px;
@@ -75,8 +85,8 @@
 
 .table__block__item {
     margin: 0;
-    padding: 0;
-    padding-top: 0.7px;
+    padding: 0.7px 0 0;
+
     .table__item__text {
         color: #373b44;
         font-size: 16px;
@@ -87,8 +97,10 @@
         text-align: left;
         cursor: default;
     }
+
     .table__item__link:hover {
-        &, & > * {
+        &,
+        & > * {
             color: #82ad3a;
             cursor: pointer;
         }
@@ -104,16 +116,17 @@
         font-size: 1em;
         font-weight: initial;
         white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
     }
+
     .block__item__explanation {
         display: inline-block;
         font-size: 12px;
         color: #8c919b;
-
     }
+
     .block__item__explanation--subscript {
         font-size: 0.7em;
         font-weight: 100;
@@ -121,6 +134,7 @@
         display: block;
         cursor: default;
     }
+
     .table__item__btn {
         &:not(.btn--delete) {
             width: 95px;
@@ -138,13 +152,14 @@
     background-color: white;
     border: solid 1px #cfcfcf;
     border-radius: 4px;
+
     .svg-icon {
         fill: #d82b32;
     }
 }
 
 .table__main {
-    padding: 36px 30px 22px 30px;
+    padding: 36px 30px 22px;
     max-width: 1200px;
     margin: 0 auto;
 
@@ -200,6 +215,7 @@
     width: 30px;
     padding: 5px;
     line-height: 0;
+
     svg {
         width: 13px;
         height: 13px;
@@ -217,14 +233,12 @@
 .table__column--right {
     text-align: right;
 }
-
 // Actions menu
-
 .table__block__item--menu {
     position: absolute;
     height: auto;
     width: auto;
-    margin-right: 10px;
+    margin-right: 370px;
     margin-top: 40px;
     right: 0;
     background-color: white;
@@ -235,15 +249,16 @@
     border-left: 1px solid white;
     padding-top: 0.5em;
 
-    &.table__block__moreactions--menu{
-      margin-right: 0;
-      margin-top: 36px;
-      -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
-      box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
-      &:hover {
-          background-color: white;
-      }
+    &.table__block__moreactions--menu {
+        margin-right: 0;
+        margin-top: 36px;
+        -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            background-color: white;
+        }
     }
 
     li:last-child {

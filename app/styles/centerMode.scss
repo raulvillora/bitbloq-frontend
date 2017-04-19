@@ -33,6 +33,15 @@
 .center-mode__group {
     .tabs-layout__aside, .tabs-layout__content {
         padding: 0 30px;
+
+    }
+
+    .tabs-layout__content .tab{
+      padding: 0 30px;
+    }
+
+    .center-mode__table{
+      margin-top: 15px;
     }
     .group__header {
         padding: 20px 30px;
@@ -89,7 +98,7 @@
 .center-mode__table__header__exercise {
     top: 0;
     margin: 0;
-    padding: 0 2px 2px 3px;
+    padding: 20px 2px 2px 3px;
     width: 100%;
 }
 
