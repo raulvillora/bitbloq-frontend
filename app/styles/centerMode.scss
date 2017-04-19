@@ -33,11 +33,11 @@
 .center-mode__group {
     .tabs-layout__aside, .tabs-layout__content {
         padding: 0 30px;
-
     }
 
     .tabs-layout__content .tab{
       padding: 0 30px;
+      position: relative;
     }
 
     .center-mode__table{
