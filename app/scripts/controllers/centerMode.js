@@ -507,7 +507,6 @@
                             _getTasks($routeParams.id, $routeParams.subId);
                         } else {
                             _getGroup($routeParams.id);
-                            _getTasks($routeParams.id);
                         }
                         break;
                     case 'student':
@@ -571,6 +570,7 @@
                     $scope.secondaryBreadcrumb = true;
                     $scope.group = response.data;
                     $scope.students = $scope.group.students;
+                    $scope.exercises = $scope.group.exercises;
                     $scope.classStateCheck = $scope.group.status === 'open';
                 });
             }
