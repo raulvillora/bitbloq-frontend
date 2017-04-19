@@ -191,7 +191,13 @@
 
             $scope.deleteExercise = function(exercise) {
                 var confirmAction = function() {
-                        exerciseApi.delete(exercise._id).then(function() {
+                        var exerciseId;
+                        if (exercise.exercise) {
+                            exerciseId = exercise.exercise._id;
+                        } else {
+                            exerciseId = exercise._id;
+                        }
+                        exerciseApi.delete(exerciseId).then(function() {
                             _.remove($scope.exercises, exercise);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteExercise',
@@ -576,8 +582,12 @@
             }
 
             function _getGroups(role, exerciseId) {
+                console.log('exerciseId');
+                console.log(exerciseId);
                 if (exerciseId) {
                     centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
+                        console.log('responseee');
+                        console.log(response);
                         $scope.groups = response.data;
                         $scope.groupArray = $scope.groups;
                     });
