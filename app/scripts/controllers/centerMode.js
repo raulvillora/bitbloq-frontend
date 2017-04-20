@@ -189,6 +189,17 @@
                 });
             };
 
+            $scope.deleteExerciseInGroup = function(exerciseId) {
+                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
+                    _.remove($scope.exercises, function(n) {
+                        return n._id === exerciseId;
+                    });
+                    console.log('$scope.exercises');
+                    console.log($scope.exercises);
+                });
+
+            };
+
             $scope.deleteExercise = function(exercise) {
                 var confirmAction = function() {
                         var exerciseId;
