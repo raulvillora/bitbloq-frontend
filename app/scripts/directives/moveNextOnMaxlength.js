@@ -1,4 +1,5 @@
 /*jshint camelcase: false */
+/* jshint ignore:start */
 'use strict';
 
 /**
@@ -21,3 +22,4 @@ angular.module('bitbloqApp')
             }
         };
     });
+/* jshint ignore:end */
