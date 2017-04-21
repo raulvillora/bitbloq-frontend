@@ -15,15 +15,15 @@
                 </h1>
                 <span class="make--saving" data-element="project-save-label-{{projectService.getSavingStatusIdLabel()}}">{{ projectService.getSavingStatusIdLabel() | translate }}</span>
             </li>
-            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-compile':'verify' | translate }}">
-                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && currentProject.hardware.showRobotImage" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
+            <li class="nav__menu__item nav__item--white right--last" data-tooltips="true" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-compile':  currentProject.hardware.showRobotImage && !projectService.isRobotActivated() ? 'robots-not-activated-compile' :'verify' | translate }}">
+                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && currentProject.hardware.showRobotImage || currentProject.hardware.showRobotImage && !projectService.isRobotActivated()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
                     <svg class="svg-icon">
                         <use xlink:href="#tick"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-upload':'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="upload()" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && currentProject.hardware.showRobotImage" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-walkthrough="upload">
+            <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-upload':  currentProject.hardware.showRobotImage && !projectService.isRobotActivated() ? 'robots-not-activated-upload' :'load' | translate }}" data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="upload()" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && currentProject.hardware.showRobotImage || currentProject.hardware.showRobotImage && !projectService.isRobotActivated()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-walkthrough="upload">
                     <svg class="svg-icon">
                         <use xlink:href="#load"></use>
                     </svg>
@@ -80,10 +80,6 @@
                     <span class="robot-info__text">
                         <p class="robot-info__text--days">{{'robot-activate' | translate}}</p>
                         <p class="robot-info__text--activate">{{'robot-trial-introduce-compile' | translate}}</p>
-                        <div>
-                            <span class="robot-info__text--activate">{{'robot-trial-introduce-subtext' | translate}}</span>
-                            <span><a href="mailto:info@makeblock.es?subject=Solicitud de código de activación" target="_blank">info@makeblock.es</a></span>
-                        </div>
                     </span>
                 </div>
                 <svg class="svg-icon robot-info__close" ng-click="projectService.closeActivation = !projectService.closeActivation">

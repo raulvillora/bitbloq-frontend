@@ -586,7 +586,7 @@ $hw_toolbox: 210px;
     position: fixed;
     background-color: white;
     bottom: 0;
-    height: 85px;
+    height: 70px;
     margin-bottom: 20px;
     margin-left: 20px;
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.1);
@@ -621,7 +621,7 @@ $hw_toolbox: 210px;
 
         .robot-info__text--activate {
             color: #8c919b;
-            display: inline-block;
+            display: block;
             cursor: pointer;
         }
     }

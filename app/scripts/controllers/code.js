@@ -155,7 +155,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (!isValidMakeblockCode()) {
+            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
                 alertsService.add({
                     text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-upload',
                     id: 'activatedError',
@@ -187,7 +187,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            if (!isValidMakeblockCode()) {
+            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
                 alertsService.add({
                     text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-compile',
                     id: 'activatedError',

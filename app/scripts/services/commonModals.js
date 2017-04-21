@@ -846,11 +846,6 @@ angular.module('bitbloqApp')
                 modalScope.errorMessage = '';
             }
 
-            function tryFunction() {
-                activateModal.close();
-                defered.reject();
-            }
-
             function rejectAction() {
                 defered.reject();
             }
@@ -866,9 +861,6 @@ angular.module('bitbloqApp')
                 handlePaste: handlePaste,
                 focusFunction: focusFunction,
                 activationCode: activationCode,
-                tryFunction: tryFunction,
-                extraButton: 'landing_link_testItNow',
-                extraAction: tryFunction,
                 rejectAction: rejectAction,
                 errorMessage: errorMessage,
                 rejectButton: 'modal-button-cancel',
