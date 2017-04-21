@@ -77,6 +77,13 @@
                     <label for="teacherCheckbox">{{'account-checkbox-teacher' | translate}}</label>
                 </span>
             </fieldset>
+            <!--Online compilation + Google Extension-->
+            <fieldset ng-if="common.os !== 'ChromeOS'" class="user-options-checkbox">
+                <span class="input input--checkbox">
+                    <input type="checkbox" id="chromeappCheckbox" name="chromeappCheckbox" value="common.user.chromeapp" ng-checked="common.user.chromeapp === true" ng-model="common.user.chromeapp" data-element="chromeapp-checkbox">
+                    <label for="chromeappCheckbox">{{'account-checkbox-chromeapp' | translate}}</label>
+                </span>
+            </fieldset>
             <!--   <fieldset ng-if="common.os !== 'ChromeOS'" class="user-options-checkbox">
                    <span class="input input--checkbox">
                        <input type="checkbox" id="chromeappCheckbox" name="chromeappCheckbox" value="common.user.chromeapp" ng-checked="common.user.chromeapp === true" ng-model="common.user.chromeapp" data-element="chromeapp-checkbox">

@@ -5,15 +5,15 @@
     <div class="tabs-layout">
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Menú de Proyectos</h1>
-            <ul class="tabs__header">
-                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'settings'}" ng-click="selectedTab = 'settings'" data-element="account-settings-tab">
+            <ul class="tabs__header" ng-init="selectedTab = 'user'">
+                <!-- <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'settings'}" ng-click="selectedTab = 'settings'" data-element="account-settings-tab">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#settings"></use>
                     </svg>
                     <span class="menu__item__span">
                         {{ 'account-settings' | translate }}
                     </span>
-                </li>
+                </li> -->
                 <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'user'}" data-element="account-user-tab" ng-click="selectedTab = 'user'">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#user"></use>
@@ -26,11 +26,8 @@
             </ul>
         </aside>
         <div class="tabs-layout__content">
-            <div class="tab settings" ng-show="selectedTab === 'settings'" ng-include="'views/account/settings.html'"></div>
+            <!-- <div class="tab settings" ng-show="selectedTab === 'settings'" ng-include="'views/account/settings.html'"></div> -->
             <div class="tab user" ng-show="selectedTab === 'user'" ng-include="'views/account/user.html'"></div>
         </div>
     </div>
-
-
-    <!--   !-->
 </div>
