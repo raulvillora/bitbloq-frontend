@@ -13,7 +13,7 @@
             <div class="component-name__container" ng-class="{opaque:componentSelected, noborder:componentSelected.message}">
                 <span class="form--input form--input--reset">
                     <label for="componentName" ng-show="!componentSelected.message" class="component-name__label">{{'name' | translate}}</label>
-                    <input id="componentName" ng-show="!componentSelected.message" class="component-name__input" type="text" placeholder="{{'insert-name' | translate}}" data-ng-model="componentSelected.name" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }">
+                    <input id="componentName" ng-show="!componentSelected.message" class="component-name__input" type="text" placeholder="{{'insert-name' | translate}}" data-ng-model="componentSelected.name" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-element="hwtab-componentName-input">
                     <label ng-show="componentSelected.message" class="component-name__label">{{componentSelected.message | translate}}</label>
                     <span ng-if="componentSelected.oscillator !== undefined" class="input input--checkbox input--checkbox__oscillator form--input--reset">
                         <label for="sample--checkbox" class="component-name__label">{{'make-hardware-component-oscillator' | translate}}</label>

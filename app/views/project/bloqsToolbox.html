@@ -81,7 +81,7 @@
         -- BASIC BLOQS
         -->
         <div class="tabs-layout__content" ng-show="selectedToolboxTab === 'basic'">
-            <ul class="toolbox--bloqs--container" ng-repeat="(key, item) in generalToolboxOptions" ng-show="selectedBloqsToolbox===key && (!item.backgroundImage || currentProject.hardware.showRobotImage)">
+            <ul class="toolbox--bloqs--container" ng-repeat="(key, item) in generalToolboxOptions" ng-show="selectedBloqsToolbox===key && (!item.backgroundImage || currentProject.hardware.showRobotImage)" data-element="{{item.dataElement}}Container">
                 <li ng-repeat="bloq in common.properties.bloqsSortTree[item.properties.basicBloqs]" ng-id="{{'bloq' + bloq.name}}" data-ng-class="bloq.addClass" ng-show="(common.section !== 'task' || currentProject.selectedBloqs[key].indexOf(bloq.name)>-1) && (!item.showBasicBloqsCondition || item.showBasicBloqsCondition(bloq.name))"
                     data-bitbloq-bloq-creator data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree[item.properties.basicBloqs][$index].name]" data-components-array="currentProjectService.componentsArray">
                     <span class="input input--checkbox">
