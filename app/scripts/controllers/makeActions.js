@@ -107,7 +107,7 @@ angular.module('bitbloqApp')
                     }
                 },
                 userProjectsOrderBy: 'updatedAt',
-                userProjectsReverseOrder: false,
+                userProjectsReverseOrder: true,
                 orderOptions: ['explore-sortby-recent', 'explore-sortby-old', 'explore-sortby-name-az', 'explore-sortby-name-za'],
                 userProjectsFilter: 'all',
                 sortProjects: sortProjects(modalScope)
@@ -337,11 +337,11 @@ angular.module('bitbloqApp')
                 switch (type) {
                     case 'explore-sortby-recent':
                         modalScope.userProjectsOrderBy = 'updatedAt';
-                        modalScope.userProjectsReverseOrder = false;
+                        modalScope.userProjectsReverseOrder = true;
                         break;
                     case 'explore-sortby-old':
                         modalScope.userProjectsOrderBy = 'updatedAt';
-                        modalScope.userProjectsReverseOrder = true;
+                        modalScope.userProjectsReverseOrder = false;
                         break;
                     case 'explore-sortby-name-az':
                         modalScope.userProjectsOrderBy = 'name';
