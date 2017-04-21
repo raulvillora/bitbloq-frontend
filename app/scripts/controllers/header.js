@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService, utils) {
+    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService, utils, envData) {
         $scope.userApi = userApi;
 
         function clickDocumentHandler() {
@@ -22,6 +22,7 @@ angular.module('bitbloqApp')
         $scope.commonModals = commonModals;
         $scope.showHeader = false;
         $scope.common.session.save = false;
+        $scope.enableCenterMode = envData.config.enableCenterMode;
 
         $scope.activateCenterMode = function() {
             function tryCenter() {
@@ -32,7 +33,6 @@ angular.module('bitbloqApp')
                 modalOptions.extraButton = '';
                 modalOptions.confirmAction = createCenter;
                 modalOptions.center = {};
-
 
                 function createCenter() {
                     if (modalOptions.center.name && modalOptions.center.location && modalOptions.center.telephone) {
@@ -67,7 +67,6 @@ angular.module('bitbloqApp')
                 modalOptions.textContent = 'centerMode_modal_createStudent-content';
                 modalOptions.type = '';
                 modalOptions.confirmAction = createStudent;
-
 
                 function createStudent() {
                     console.log(modalOptions.center);
