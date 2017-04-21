@@ -14,19 +14,19 @@ angular.module('bitbloqApp')
         exports.getUserHardware = function() {
             var defered = $q.defer();
             common.itsUserLoaded().then(function() {
-                _.forEach(common.user.hardware.boards, function(board) {
+                _.forEach(common.userHardware.boards, function(board) {
                     board.category = 'boards';
                 });
-                _.forEach(common.user.hardware.components, function(board) {
+                _.forEach(common.userHardware.components, function(board) {
                     board.category = 'components';
                 });
-                _.forEach(common.user.hardware.robots, function(board) {
+                _.forEach(common.userHardware.robots, function(board) {
                     board.category = 'robots';
                 });
 
                 exports.getRobots().then(function(robots) {
-                    exports.getUserKits(common.user.hardware).then(function(kits) {
-                        defered.resolve(groupRobotsByFamily(common.user.hardware.robots, robots).concat(common.user.hardware.boards).concat(common.user.hardware.components).concat(kits));
+                    exports.getUserKits(common.userHardware).then(function(kits) {
+                        defered.resolve(groupRobotsByFamily(common.userHardware.robots, robots).concat(common.userHardware.boards).concat(common.userHardware.components).concat(kits));
 
                     });
                 });

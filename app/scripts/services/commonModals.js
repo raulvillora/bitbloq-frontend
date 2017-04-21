@@ -998,7 +998,7 @@ angular.module('bitbloqApp')
                         return !o.family;
                     }));
 
-                _.forEach(common.user.hardware, function(hardware, category) {
+                _.forEach(common.userHardware, function(hardware, category) {
                     var hwInCategory = hardware;
                     var idArray = [];
                     _.forEach(hwInCategory, function(element) {

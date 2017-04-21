@@ -158,7 +158,7 @@ angular.module('bitbloqApp')
 
         $scope.selectHardware = function() {
             $scope.common.itsUserLoaded().then(function() {
-                hardwareService.getUserKits(common.user.hardware).then(function(kits) {
+                hardwareService.getUserKits(common.userHardware).then(function(kits) {
                     commonModals.selectHardware(kits);
                 });
             });
@@ -259,7 +259,7 @@ angular.module('bitbloqApp')
             hardwareService.getUserHardware().then(function(res) {
                 $scope.userHardware = res;
             });
-            $scope.$watch('common.user.hardware', function(oldValue, newValue) {
+            $scope.$watch('common.userHardware', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
                     hardwareService.getUserHardware().then(function(res) {
                         $scope.userHardware = res;

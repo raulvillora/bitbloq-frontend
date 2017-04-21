@@ -265,17 +265,17 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.hardware.sortToolbox = function() {
         $log.log('sortToolbox');
-        $scope.common.itsUserLoaded().then(function() {
+        $scope.common.itsUserLoaded().finally(function() {
             var filteredList;
             if ($scope.currentProject.hardware.robot) {
                 filteredList = [];
 
             } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents) {
-                filteredList = _.filter($scope.common.user.hardware.components, function(component) {
+                filteredList = _.filter($scope.common.userHardware.components, function(component) {
                     return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.uuid) !== -1;
                 });
             } else {
-                filteredList = _.filter($scope.common.user.hardware.components, {
+                filteredList = _.filter($scope.common.userHardware.components, {
                     manufacturer: 'standard'
                 });
             }
@@ -285,8 +285,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             });
 
             $scope.hardware.componentSortered = _.sortBy(translatedList, 'name');
-            console.log('$scope.hardware.componentSortered');
-            console.log($scope.hardware.componentSortered);
         });
     };
     $scope.drop = function(data) {
@@ -505,13 +503,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.boardsMap = _getBoardsMap(hardwareConstants);
         $scope.componentsMap = _getComponentsMap(hardwareConstants);
 
-        $scope.common.itsUserLoaded().then(function() {
-            $scope.hardware.boardList = $scope.common.user.hardware.boards;
-            $scope.hardware.robotList = $scope.common.user.hardware.robots;
-            console.log('$scope.hardware.boardList');
-            console.log($scope.hardware.boardList);
-            console.log('$scope.hardware.robotList');
-            console.log($scope.hardware.robotList);
+        $scope.common.itsUserLoaded().finally(function() {
+            $scope.hardware.boardList = $scope.common.userHardware.boards;
+            $scope.hardware.robotList = $scope.common.userHardware.robots;
         });
         $scope.hwBasicsLoaded.resolve();
         $scope.hardware.sortToolbox();

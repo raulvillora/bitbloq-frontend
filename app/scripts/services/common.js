@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils, userRobotsApi) {
+    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils, userRobotsApi, hardwareApi) {
 
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -21,6 +21,7 @@ angular.module('bitbloqApp')
         exports.avatarChange = false;
         exports.draggingElement = {};
         exports.connectedWeb2Board = false;
+        exports.userHardware = {};
         exports.isLoading = false;
         exports.isLoggedIn = userApi.isLoggedIn;
         exports.isAdmin = userApi.isAdmin;
@@ -88,6 +89,7 @@ angular.module('bitbloqApp')
                     exports.cookiesAccepted = true;
                 }
                 exports.user = user;
+                exports.userHardware = user.hardware;
                 getUserRole();
                 loadedUserPromise.resolve();
             } else {
@@ -95,7 +97,9 @@ angular.module('bitbloqApp')
                 $translate.use(localStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
                 exports.userRole = 'user';
-                loadedUserPromise.reject();
+                hardwareApi.getAll().then(function(response) {
+                    exports.userHardware = response.data;
+                }).finally(loadedUserPromise.reject);
             }
         };
 

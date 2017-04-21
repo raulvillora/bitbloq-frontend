@@ -171,7 +171,7 @@ angular.module('bitbloqApp')
         };
 
         exports.getBoardMetaData = function() {
-            return _.find(common.user.hardware.boards, function(board) {
+            return _.find(common.userHardware.boards, function(board) {
                 return (board.uuid === exports.project.hardware.board || board.name === exports.project.hardware.board);
             });
         };

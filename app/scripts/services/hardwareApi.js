@@ -11,11 +11,19 @@ angular.module('bitbloqApp')
     .service('hardwareApi', function($http, envData) {
 
         var thirdPartyRobotsApi = {
+            getAll: getAll,
             getComponents: getComponents,
             getRobots: getRobots,
             getBoards: getBoards,
             getKits: getKits
         };
+
+        function getAll() {
+            return $http({
+                method: 'GET',
+                url: envData.config.serverUrl + 'hardware'
+            });
+        }
 
         function getComponents() {
             return $http({
