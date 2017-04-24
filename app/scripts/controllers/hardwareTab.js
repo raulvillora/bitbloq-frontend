@@ -720,10 +720,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
             $scope.currentProject.hardware.board = board.uuid;
 
-            if (hw2Bloqs.checkIfOldConnections && $scope.currentProject.hardware.components > 0 || $scope.currentProject.useBitbloqConnect) {
+            if ($scope.currentProject.hardware.components.length > 0 && $scope.currentProject.useBitbloqConnect) {
                 $scope.deleteBTComponent();
                 _addBtComponent();
             }
+            _changeBaudRate();
             $scope.hardware.sortToolbox();
             _addIntegratedComponents(board);
 
@@ -808,6 +809,26 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var componentDOMRef = hw2Bloqs.addComponent(newComponent);
         _focusComponent(componentDOMRef);
         $scope.boardSelected = false;
+    }
+
+    function _changeBaudRate() {
+        if ($scope.currentProject.hardware.components.length > 0) {
+            _.find($scope.currentProject.hardware.components, function(item) {
+                if (item.uuid === 'bt') {
+                    switch (currentProjectService.getBoardMetaData().uuid) {
+                        case 'bqZUM':
+                            item.baudRate = 19200;
+                            break;
+                        case 'FreaduinoUNO':
+                            item.baudRate = 38400;
+                            break;
+                        case 'ArduinoUNO':
+                            item.baudRate = 38400;
+                            break;
+                    }
+                }
+            });
+        }
     }
 
     function _focusComponent(component) {
