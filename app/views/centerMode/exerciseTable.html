@@ -99,8 +99,7 @@
                                 {{'navigation_text_file_downloadArduinoCode' | translate}}
                             </li>
                             <li class="dropdown__item--separator--thick"></li>
-
-                            <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="deleteExerciseInGroup(exercise._id)">
+                            <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="common.urlType!=='teacher'" ng-click="deleteExerciseInGroup(exercise._id)">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#delete"></use>
                                 </svg>
