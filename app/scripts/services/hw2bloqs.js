@@ -92,8 +92,6 @@ angular
         };
 
         exports.addBoard = function(newBoard) {
-            console.log('newBooooard');
-            console.log(newBoard);
             exports.removeBoard();
 
             board = newBoard;
@@ -144,8 +142,6 @@ angular
         };
 
         exports.addRobot = function(newRobot) {
-            console.log('newRobot');
-            console.log(newRobot);
             robotDOMElement = document.getElementById(robotContainerId);
             robotDOMElement.classList.add(newRobot.id || newRobot.uuid);
 
@@ -260,8 +256,6 @@ angular
         };
 
         exports.removeRobot = function() {
-            console.log('robot a eliminaar');
-            console.log(robot);
             if (jsPlumbInstance && robot && robotDOMElement) {
                 robotDOMElement.classList.remove(robot.uuid);
                 jsPlumbInstance.removeAllEndpoints(robotDOMElement);
@@ -756,8 +750,6 @@ angular
 
                 });
 
-                console.log('board');
-                console.log(board);
                 //Connect automaticaly these pins
                 if (isMandatoryPin && mandatoryPins[type][element]) {
                     var epBoardReference = _getPinBoardReference('.board_ep-' + type + '.pin-' + mandatoryPins[type][element].toLowerCase()),

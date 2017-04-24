@@ -194,8 +194,6 @@
                     _.remove($scope.exercises, function(n) {
                         return n._id === exerciseId;
                     });
-                    console.log('$scope.exercises');
-                    console.log($scope.exercises);
                 });
 
             };
@@ -593,12 +591,8 @@
             }
 
             function _getGroups(role, exerciseId) {
-                console.log('exerciseId');
-                console.log(exerciseId);
                 if (exerciseId) {
                     centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
-                        console.log('responseee');
-                        console.log(response);
                         $scope.groups = response.data;
                         $scope.groupArray = $scope.groups;
                     });

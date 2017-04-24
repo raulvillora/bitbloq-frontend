@@ -129,8 +129,6 @@ angular.module('bitbloqApp')
                         });
                     }
                 }).catch(function(err) {
-                    console.log('lust for loveeee');
-                    console.log(err);
                     if (err.status === 503) {
                         facebookErrorToast = alertsService.add({
                             text: 'login-user-facebook-error',

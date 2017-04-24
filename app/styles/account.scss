@@ -153,7 +153,7 @@
         .first-column {
             padding-right: 10px;
             float: left;
-            width: 70%;
+            width: 60%;
         }
 
         .second-column {
@@ -264,6 +264,8 @@
                         width: 160px;
                         height: 160px;
                         position: relative;
+                        margin: 0 auto;
+
 
                         img {
                             object-fit: cover;
@@ -275,6 +277,7 @@
                     .btn--account-upload-image {
                         width: 100%;
                         margin-bottom: 20px;
+                        margin-top: 20px;
                     }
 
                     .btn--account--password {

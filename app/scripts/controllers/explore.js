@@ -73,8 +73,6 @@ angular.module('bitbloqApp')
                 value: true
             }), elementHasBoard)[0];
 
-            console.log('$scope.boardFilters');
-            console.log($scope.boardFilters);
             $scope.filterParams.board = $scope.boardFilters;
 
             if (!preventSearch) {

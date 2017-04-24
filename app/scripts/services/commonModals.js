@@ -932,10 +932,6 @@ angular.module('bitbloqApp')
                 var idSelected = element._id,
                     removed;
 
-                console.log('element');
-                console.log(element);
-                console.log('category');
-                console.log(category);
                 if (_.includes(hardwareSelected[category], element._id)) {
                     removed = idSelected;
                     _.remove(hardwareSelected[category], function(n) {
@@ -952,7 +948,6 @@ angular.module('bitbloqApp')
                         });
                     });
                     if (element.robots) {
-                        console.log('entro aqui');
                         hardwareSelected = hardwareService.managethirdPartyRobots(robots, hardwareSelected, removed);
                     }
                 } else {
