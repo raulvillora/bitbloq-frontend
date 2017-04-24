@@ -23,7 +23,7 @@
                 return false;
             }, false);
 
-            function dragstart(e){
+            function dragstart(e) {
                 e.dataTransfer.effectAllowed = 'move';
 
                 e.dataTransfer.setData('mouseOffsetX', e.offsetX);
@@ -108,7 +108,7 @@
                     };
                     var droppingEvent = {
                         type: e.dataTransfer.getData('dragtype'),
-                        id: e.dataTransfer.getData('dragid'),
+                        uuid: e.dataTransfer.getData('dragid'),
                         coordinates: coordinates,
                         category: e.dataTransfer.getData('dragcategory')
                     };

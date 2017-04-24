@@ -126,7 +126,7 @@ angular
             DOMComponent.classList.add('component');
             DOMComponent.style.top = newComponent.coordinates.y + '%';
             DOMComponent.style.left = newComponent.coordinates.x + '%';
-            DOMComponent.src = '/images/components/' + newComponent.id + '.svg';
+            DOMComponent.src = '/images/components/' + newComponent.uuid + '.svg';
             DOMComponent.style.width = newComponent.width + 'px';
             DOMComponent.style.height = newComponent.height + 'px';
             DOMComponent.draggable = true;

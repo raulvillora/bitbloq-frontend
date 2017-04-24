@@ -89,7 +89,7 @@
     <div class="toolbox__content" ng-show="selectedToolbox==='boards'">
         <h1 class="h3 submenu__title">{{'boards' | translate}}</h1>
         <ul class="toolbox__content-container">
-            <li class="toolbox__content__list" ng-if="board.showInToolbox && (!board.underDevelopment || common.user.seeBoardsUnderDevelopment)" ng-repeat="board in hardware.boardList track by board.uuid" data-ng-click="drop({type:'boards', id:board.uuid})">
+            <li class="toolbox__content__list" ng-if="board.showInToolbox && (!board.underDevelopment || common.user.seeBoardsUnderDevelopment)" ng-repeat="board in hardware.boardList track by board.uuid" data-ng-click="drop({type:'boards', uuid:board.uuid})">
                 <h1 class="list-name" translate>{{board.uuid}}</h1>
                 <img draggable dragid="{{board.uuid}}" dragtype="boards" ng-src="/images/boards/{{board.uuid}}.png">
             </li>
@@ -111,7 +111,7 @@
     <div class="toolbox__content" ng-show="selectedToolbox==='robots'">
         <h1 class="h3 submenu__title">{{'robots' | translate}}</h1>
         <ul class="toolbox__content-container">
-            <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', id:robot.uuid, robot: robot})">
+            <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robot in hardware.robotList" data-ng-click="drop({type:'robots', uuid:robot.uuid, robot: robot})">
                 <h1 class="list-name" translate>{{robot.uuid}}</h1>
                 <img ng-if="!robot.thirdParty && !common.user || common.user" draggable dragid="{{robot.uuid}}" dragtype="robots" ng-src="/images/robots/{{robot.uuid}}.svg" ng-style="{width:robot.width + 'px'}">
                 <div ng-if="robot.thirdParty === true && !common.user" data-tooltips="true" data-tooltip="{{'need-to-be-logged-robot' | translate}}" data-tooltip-position="bottom">
@@ -123,9 +123,9 @@
     <div class="toolbox__content" ng-show="selectedToolbox==='robotsComponents' && envData.robotComponents[currentProject.hardware.robot]">
         <h1 class="h3 submenu__title">{{'robotsComponents' | translate}}</h1>
         <ul class="toolbox__content-container">
-            <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robotComponent in envData.robotComponents[currentProject.hardware.robot]" data-ng-click="drop({type:'robotsComponents', id:robotComponent.id})">
+            <li class="toolbox__content__list" ng-if="!robot.underDevelopment || common.user.seeBoardsUnderDevelopment" ng-repeat="robotComponent in envData.robotComponents[currentProject.hardware.robot]" data-ng-click="drop({type:'robotsComponents', uuid:robotComponent.id})">
                 <h1 class="list-name">{{robotComponent.name}}</h1>
-                <img draggable dragid="{{robotComponent.id}}" dragtype="robotsComponents" ng-src="/images/robotscomponents/{{robotComponent.id}}.svg" ng-style="{width:robotComponent.width + 'px'}">
+                <img draggable dragid="{{robotComponent.id}}" dragtype="robotsComponents" ng-src="/images/robotscomponents/{{robotComponent.uuid}}.svg" ng-style="{width:robotComponent.width + 'px'}">
             </li>
         </ul>
     </div>

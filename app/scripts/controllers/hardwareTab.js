@@ -294,7 +294,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.currentProjectService.showActivation = false;
                 $scope.currentProjectService.closeActivation = false;
                 var board = _.find($scope.hardware.boardList, function(board) {
-                    return board.uuid === data.id;
+                    return board.uuid === data.uuid;
                 });
                 _addBoard(board);
                 $scope.changeToolbox('components');
@@ -322,7 +322,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 if ($scope.common.user || !data.robot || !data.robot.thirdParty) {
                     $scope.currentProjectService.showActivation = false;
                     $scope.currentProjectService.closeActivation = false;
-                    var robotFamily = $scope.robotsMap[data.id].family;
+                    var robotFamily = $scope.robotsMap[data.uuid].family;
                     var thirdPartyRobots = $scope.common.user ? $scope.common.user.thirdPartyRobots : false;
                     $scope.deleteBTComponent();
                     _addRobot(data);
@@ -381,7 +381,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if ($scope.currentProject.hardware.board === 'bqZUM') {
                 //added on get code too
                 var bTComponent = _.cloneDeep(_.find(hardwareConstants.components, {
-                    id: 'bt'
+                    uuid: 'bt'
                 }));
                 bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
                 bTComponent.baudRate = 19200;
@@ -399,7 +399,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 };
 
                 var btConnected = _.find(currentProjectService.componentsArray.serialElements, function(component) {
-                    return component.id === 'bt';
+                    return component.uuid === 'bt';
                 });
                 if (!btConnected) {
                     $scope.isMobileConnected = true;
@@ -523,7 +523,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _getBoardsMap(hardwareConstants) {
         var map = {};
         for (var i = 0; i < hardwareConstants.boards.length; i++) {
-            map[hardwareConstants.boards[i].id] = hardwareConstants.boards[i];
+            map[hardwareConstants.boards[i].uuid] = hardwareConstants.boards[i];
         }
         return map;
     }
@@ -531,7 +531,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _getComponentsMap(hardwareConstants) {
         var map = {};
         for (var i = 0; i < hardwareConstants.components.length; i++) {
-            map[hardwareConstants.components[i].id] = hardwareConstants.components[i];
+            map[hardwareConstants.components[i].uuid] = hardwareConstants.components[i];
         }
         return map;
     }
@@ -627,7 +627,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         componentReference = currentProjectService.findComponentInComponentsArray(e.componentData.uid);
         $scope.closeComponentInteraction(componentReference.pin, e.componentData.pin);
-        if (($scope.isMobileConnected || $scope.isMobileConnected === undefined) && componentReference.id === 'bt') {
+        if (($scope.isMobileConnected || $scope.isMobileConnected === undefined) && componentReference.uuid === 'bt') {
             $scope.closeBluetoothInteraction(componentReference.pin, e.componentData.pin);
         }
 
@@ -695,7 +695,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (board.integratedComponents) {
             var tempComponent;
             for (var i = 0; i < board.integratedComponents.length; i++) {
-                tempComponent = _.clone($scope.componentsMap[board.integratedComponents[i].id], true);
+                tempComponent = _.clone($scope.componentsMap[board.integratedComponents[i].uuid], true);
                 _.extend(tempComponent, board.integratedComponents[i]);
 
                 tempComponent.name = $scope.common.translate(board.integratedComponents[i].name);
@@ -736,7 +736,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _addRobot(robot) {
 
         var robotReference = _.find($scope.hardware.robotList, function(r) {
-            return r.uuid === robot.id;
+            return r.uuid === robot.uuid;
         });
 
         hw2Bloqs.removeRobot(robotReference);
@@ -746,12 +746,12 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 return board.uuid === robotReference.board;
             });
             _addBoard(board);
-            $scope.currentProject.hardware.showRobotImage = robot.id;
+            $scope.currentProject.hardware.showRobotImage = robot.uuid;
             $scope.changeToolbox('components');
         } else {
             $scope.hardware.cleanSchema();
             $scope.currentProject.hardware.components = [];
-            $scope.currentProject.hardware.robot = robot.id;
+            $scope.currentProject.hardware.robot = robot.uuid;
             $scope.currentProject.hardware.showRobotImage = null;
             hw2Bloqs.removeAllComponents();
 
@@ -767,11 +767,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _addComponent(data) {
-        var component = $scope.componentsMap[data.id];
+        var component = $scope.componentsMap[data.uuid];
 
         if (!component.pin || !component.pin[Object.keys(component.pin)[0]]) { // if !autoConnected
             $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
-            if ($scope.currentProject.useBitbloqConnect && data.id === 'bt') {
+            if ($scope.currentProject.useBitbloqConnect && data.uuid === 'bt') {
                 $scope.isMobileConnected = !($scope.isMobileConnected === undefined || ($scope.common.user && $scope.common.user.isMobileConnected)) ? true : $scope.isMobileConnected;
             }
         }
@@ -779,8 +779,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         var newComponent = _.cloneDeep(component);
 
-        if (newComponent.id === 'device' || newComponent.id === 'bt') {
-            switch (boardMetadata.id) {
+        if (newComponent.uuid === 'device' || newComponent.uuid === 'bt') {
+            switch (boardMetadata.uuid) {
                 case 'bqZUM':
                     newComponent.baudRate = 19200;
                     break;
@@ -835,7 +835,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _createUniqueVarName(component) {
-        var componentBasicName = $translate.instant('default-var-name-' + component.id),
+        var componentBasicName = $translate.instant('default-var-name-' + component.uuid),
             componentsNames = [];
 
         if (component.uid === 'btComponent') {
@@ -935,7 +935,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     function _fixComponentsDimension(compRef) {
         var c = _.find(hardwareConstants.components, {
-            'id': compRef.id
+            'uuid': compRef.uuid
         });
         var componentDOM = document.querySelector('[data-uid="' + compRef.uid + '"]');
         componentDOM.style.width = c.width + 'px';
@@ -1060,7 +1060,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if (criteria === '') {
                 return false;
             }
-            var translatedNameNormalized = utils.removeDiacritics($translate.instant(item.id), {
+            var translatedNameNormalized = utils.removeDiacritics($translate.instant(item.uuid), {
                 spaces: false
             }).toLowerCase();
             var criteriaNormalized = utils.removeDiacritics(criteria, {

@@ -179,7 +179,7 @@ angular.module('bitbloqApp')
         exports.getRobotsMap = function(hardwareConstants) {
             var map = {};
             for (var i = 0; i < hardwareConstants.robots.length; i++) {
-                map[hardwareConstants.robots[i].id] = hardwareConstants.robots[i];
+                map[hardwareConstants.robots[i].uuid] = hardwareConstants.robots[i];
             }
             return map;
         };

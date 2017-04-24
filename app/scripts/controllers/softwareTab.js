@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-                                            utils)
-    {
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -376,7 +375,7 @@ angular.module('bitbloqApp')
                     } else if (item.includes('oscillator')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if ((connectedComponents[i].id === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
+                            if ((connectedComponents[i].uuid === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
                                 result = true;
                             }
                             i++;
@@ -388,7 +387,7 @@ angular.module('bitbloqApp')
                     } else if (item.includes('servo')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if ((connectedComponents[i].id === 'servo') && (connectedComponents[i].oscillator !== true)) {
+                            if ((connectedComponents[i].uuid === 'servo') && (connectedComponents[i].oscillator !== true)) {
                                 result = true;
                             }
                             i++;
@@ -402,9 +401,8 @@ angular.module('bitbloqApp')
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].id.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].id))
-                            {
+                            if (connectedComponents[i].uuid.includes(item) ||
+                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
                                 result = true;
                             }
                             i++;
@@ -492,7 +490,7 @@ angular.module('bitbloqApp')
             while (!found && (i < componentsToSearch.length)) {
                 j = 0;
                 while (!found && (j < components.length)) {
-                    if (componentsToSearch[i] === components[j].id) {
+                    if (componentsToSearch[i] === components[j].uuid) {
                         found = components[j];
                     }
                     j++;
@@ -1030,7 +1028,6 @@ angular.module('bitbloqApp')
             }
         };
 
-
         $scope.addChecks = function(type, value, bloqName) {
             $scope.currentProject.selectedBloqs[type] = $scope.currentProject.selectedBloqs[type] || [];
             switch (bloqName) {
@@ -1127,7 +1124,6 @@ angular.module('bitbloqApp')
         /***********************************
          end indeterminate checkbox
          ***********************************/
-
 
         loadBloqs();
 
