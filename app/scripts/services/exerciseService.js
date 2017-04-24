@@ -36,6 +36,27 @@ angular.module('bitbloqApp')
             commonModals.clone(exercise, true, 'exercise');
         };
 
+        exports.showActivationModal = function(robotFamily) {
+            var robotModal = robotFamily ? robotFamily : robotsMap[exports.exercise.hardware.showRobotImage].family;
+            commonModals.activateRobot(robotModal).then(function() {
+                exports.showActivation = false;
+                exports.closeActivation = false;
+            });
+        };
+
+        exports.getRobotsMap = function(hardwareConstants) {
+            var map = {};
+            for (var i = 0; i < hardwareConstants.robots.length; i++) {
+                map[hardwareConstants.robots[i].uuid] = hardwareConstants.robots[i];
+            }
+            return map;
+        };
+
+        var robotsMap = exports.getRobotsMap(hardwareConstants);
+
+        exports.showActivation = false;
+        exports.closeActivation = false;
+
         exports.completedExercise = function() {
             if (exports.bloqs.varsBloq) {
                 exports.exercise.software = {
@@ -331,8 +352,8 @@ angular.module('bitbloqApp')
         };
 
         exports.getBoardMetaData = function() {
-            return _.find(hardwareConstants.boards, function(board) {
-                return (board.id === exports.exercise.hardware.board || board.name === exports.exercise.hardware.board);
+            return _.find(common.userHardware.boards, function(board) {
+                return (board.uuid === exports.exercise.hardware.board || board.name === exports.exercise.hardware.board);
             });
         };
 

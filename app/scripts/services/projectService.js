@@ -742,7 +742,7 @@ angular.module('bitbloqApp')
         function getFamilyName(robot) {
             var robotFamily;
             hardwareConstants.robots.forEach(function(value) {
-                if (value.id === robot) {
+                if (value.uuid === robot) {
                     robotFamily = value.family;
                 }
             });

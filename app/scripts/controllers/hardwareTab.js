@@ -695,14 +695,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (board.integratedComponents) {
             var tempComponent;
             for (var i = 0; i < board.integratedComponents.length; i++) {
-                tempComponent = _.clone($scope.componentsMap[board.integratedComponents[i].uuid], true);
+                tempComponent = _.clone($scope.componentsMap[board.integratedComponents[i].id], true);
                 _.extend(tempComponent, board.integratedComponents[i]);
 
                 tempComponent.name = $scope.common.translate(board.integratedComponents[i].name);
                 tempComponent.integratedComponent = true;
                 tempComponent.connected = true;
                 $scope.currentProject.hardware.components.push(tempComponent);
-                projectService.addComponentInComponentsArray(tempComponent.category, tempComponent);
+                currentProjectService.addComponentInComponentsArray(tempComponent.category, tempComponent);
             }
         }
     }
@@ -771,7 +771,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         if (!component.pin || !component.pin[Object.keys(component.pin)[0]]) { // if !autoConnected
             $scope.firstComponent = ($scope.firstComponent === undefined || ($scope.common.user && $scope.common.user.hasFirstComponent)) ? true : $scope.firstComponent;
-            if ($scope.currentProject.useBitbloqConnect && data.uuid === 'bt') {
+            if ($scope.currentProject.useBitbloqConnect && data.id === 'bt') {
                 $scope.isMobileConnected = !($scope.isMobileConnected === undefined || ($scope.common.user && $scope.common.user.isMobileConnected)) ? true : $scope.isMobileConnected;
             }
         }
