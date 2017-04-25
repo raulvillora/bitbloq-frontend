@@ -376,8 +376,6 @@ angular.module('bitbloqApp')
             sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
-            console.log('settingProject');
-            console.log(newproject);
             if (newproject.hardware.components) {
                 for (var i = 0; i < newproject.hardware.components.length; i++) {
                     if (newproject.hardware.components[i].id) {
