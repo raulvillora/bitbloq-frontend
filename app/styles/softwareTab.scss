@@ -119,7 +119,7 @@ $toolboxWidthClosed: 210px;
     width: 17px;
     display: block;
     position: absolute;
-    left: calc(100% - #{$toolboxWidthClosed} - 20px);
+    left: calc(100% - #{$toolboxWidthClosed} - 36px);
     z-index: 1;
     overflow: hidden;
     overflow-y: auto;
