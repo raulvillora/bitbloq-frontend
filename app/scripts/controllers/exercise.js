@@ -877,7 +877,7 @@ angular.module('bitbloqApp')
             }
             _.forEach(componentsArray, function(value) {
                 if (hardwareConstants.viewerSensors.indexOf(value.uuid) !== -1) {
-                    if (components[value.id]) {
+                    if (components[value.uuid]) {
                         components[value.uuid].names.push(value.name);
                     } else {
                         components[value.uuid] = {};

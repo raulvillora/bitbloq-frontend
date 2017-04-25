@@ -24,7 +24,7 @@ angular.module('bitbloqApp')
             'ldrs': {
                 name: common.translate('ldrs'),
                 value: '--',
-                range: '0-800'
+                range: '0-1023'
             },
             'us': {
                 name: common.translate('us'),
@@ -50,6 +50,11 @@ angular.module('bitbloqApp')
             },
             'irs': {
                 name: common.translate('irs'),
+                value: '--',
+                range: '0/1'
+            },
+            'button': {
+                name: common.translate('button'),
                 value: '--',
                 range: '0/1'
             }

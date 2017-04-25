@@ -2057,6 +2057,7 @@ angular.module('bitbloqApp')
             "ldrs",
             "sound",
             "us",
-            "irs"
+            "irs",
+            "button"
         ]
     });
