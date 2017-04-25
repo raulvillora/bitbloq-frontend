@@ -178,6 +178,7 @@ angular.module('bitbloqApp')
             $http.get(envData.config.serverUrl + 'property').success(function(items) {
                 $log.debug('properties', items);
                 exports.properties = items[0];
+
                 loadedPropertyPromise.resolve();
             });
         }
