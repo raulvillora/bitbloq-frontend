@@ -39,6 +39,7 @@
             };
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
+            $scope.moment = moment;
 
             var currentModal;
 
