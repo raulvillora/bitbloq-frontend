@@ -86,7 +86,7 @@ angular.module('bitbloqApp')
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
-            centerModeApi.getGroups('teacher').then(function(response) {
+            centerModeApi.getGroups('teacher', null, null, true).then(function(response) {
                 var groups = response.data;
                 _.forEach(groups, function(group) {
                     group.selected = !!oldGroups[group._id];

@@ -127,7 +127,7 @@ angular
             });
         }
 
-        function getGroups(role, teacherId, centerId) {
+        function getGroups(role, teacherId, centerId, withoutClosed) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
@@ -143,7 +143,8 @@ angular
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/',
                     params: {
-                        role: role
+                        role: role,
+                        withoutClosed: withoutClosed
                     }
                 });
             }
