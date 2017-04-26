@@ -59,6 +59,7 @@
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
                     exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
                         _getGroups('teacher');
+                        _getExercises();
                     });
                 });
             };
