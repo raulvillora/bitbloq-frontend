@@ -530,13 +530,24 @@ angular.module('bitbloqApp')
         function loadBloqs() {
             bloqsLoadTimes++;
             bloqsApi.itsLoaded().then(function() {
-                    bloqs.setOptions({
+                    var bloqsOptions = {
                         fieldOffsetLeft: 70,
                         fieldOffsetRight: 216,
                         fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                         bloqSchemas: bloqsApi.schemas,
                         suggestionWindowParent: $scope.$field[0]
-                    });
+                    };
+
+                    if (currentProjectService.exercise) {
+                        var availableBloqs = [];
+                        _.forEach(currentProjectService.exercise.selectedBloqs, function(value) {
+                            availableBloqs = availableBloqs.concat(value);
+                        });
+                        bloqsOptions.availableBloqs = availableBloqs;
+                    }
+
+                    bloqs.setOptions(bloqsOptions);
+
                     $scope.groupBloqs = angular.element('.field--content');
                     $scope.groupBloqs.on('scroll', scrollHorizontalField);
                     $scope.horizontalScrollBarContainer = angular.element('#make--horizontal-scrollbar');
