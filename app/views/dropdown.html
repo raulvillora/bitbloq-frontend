@@ -1,7 +1,7 @@
 <span class="form--select dropdown--bottom" data-ng-class="{'dropdown--disabled':disabled}">
     <button ng-if="!behavior" ng-click="triggerSelect()" class="btn btn--dropdown" data-ng-class="{'btn--dropdown--active':selected}" data-element="{{element}}">
         <span ng-if="preHeading" class="{{ preHeadingClass }}" data-element="{{element + '-preheading'}}">{{ preHeading | translate }}</span>
-        <span class="dropdown__heading" data-element="{{element + '-heading'}}">{{ shownOption || selected.name || selected || headingOption }}</span>
+        <span class="dropdown__heading" data-element="{{element + '-heading'}}">{{ (shownOption || selected.name || selected || headingOption) | translate }}</span>
         <span ng-if="preHeading" class="{{ postHeadingClass }}" data-element="{{element + '-preheading'}}">{{ postHeading | translate }}</span>
         <svg class="dropdown__icon">
             <use xlink:href="#dropdown"></use>
