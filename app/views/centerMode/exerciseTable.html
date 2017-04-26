@@ -45,7 +45,7 @@
                 </div>
                 <div class="table__block__item col-vsmall-3">
                     <p class="fist-uppercase" data-element="{{'centerMode-endDate' + exercise.name}}">
-                        {{''}}
+                        {{exercise.endDate? moment(exercise.endDate).fromNow() : ('time-unlimited' | translate)}}
                     </p>
                 </div>
                 <div class="table__block__item table__column--right col-vsmall-1 center-mode__table__menu">

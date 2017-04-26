@@ -1886,7 +1886,9 @@ angular.module('bitbloqApp')
             "width": 115,
             "height": 71,
             "pin": {
-                "s": "serial"
+                "s": "serial",
+                "rx": "0",
+                "tx": "1"
             },
             "pins": {
                 "serial": [
