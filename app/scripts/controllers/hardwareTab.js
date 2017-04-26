@@ -275,8 +275,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.uuid) !== -1;
                 });
             } else {
-                filteredList = _.filter($scope.common.userHardware.components, {
-                    manufacturer: 'standard'
+                filteredList = _.filter($scope.common.userHardware.components, function(component) {
+                    return component.manufacturer === 'standard' || component.manufacter === 'standard';
                 });
             }
 
@@ -710,7 +710,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _addBoard(board) {
         if ($scope.currentProject.hardware.board !== board.uuid || $scope.currentProject.hardware.robot) {
             $scope.deleteBoard();
-            if ($scope.currentProject.hardware.showRobotImage || board.manufacturer) {
+            if ($scope.currentProject.hardware.showRobotImage || board.manufacturer || board.manufacter) {
                 $scope.hardware.cleanSchema();
             } else if ($scope.currentProject.hardware.robot) {
                 $scope.deleteRobot();
