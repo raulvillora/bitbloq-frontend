@@ -194,6 +194,11 @@ angular.module('bitbloqApp')
         exports.getCleanProject = function(projectRef, download) {
             projectRef = projectRef || exports.project;
             var cleanProject = JSON.parse(angular.toJson(_.cloneDeep(projectRef)));
+            //hand made remove $$haskey properties
+            for (var i = 0; i < cleanProject.hardware.components.length; i++) {
+                delete cleanProject.hardware.components[i].$$hashKey;
+            }
+
             if (download) {
                 delete cleanProject._id;
                 delete cleanProject._acl;
