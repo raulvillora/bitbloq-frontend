@@ -187,7 +187,7 @@ angular.module('bitbloqApp')
         exports.getRobotMetaData = function(robotId) {
             robotId = robotId || exports.project.hardware.robot;
             return _.find(hardwareConstants.robots, function(robot) {
-                return robot.id === robotId;
+                return robot.uuid === robotId;
             });
         };
 

@@ -97,8 +97,6 @@ angular
             board = newBoard;
 
             boardDOMElement = document.getElementById(boardContainerId);
-            console.log('boaard');
-            console.log(board);
             boardDOMElement.classList.add(board.uuid || board.id);
             boardDOMElement.classList.add('opaque');
             robotDOMElement = document.getElementById(robotContainerId);
