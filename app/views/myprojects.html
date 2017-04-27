@@ -103,7 +103,7 @@
                                 <use xlink:href="#user"></use>
                             </svg>
                         </div>
-                        <div class="project--footer--icon" data-ng-click="publishProject(project, 'Social')" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-social-networks' | translate }}">
+                        <div class="project--footer--icon" data-ng-click="publishProject(project, 'Social')" data-ng-disabled="!projectService.projectHasRobotActivated(project.hardware)" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ !projectService.projectHasRobotActivated(project.hardware)?'activate-robot-social':'share-social-networks' | translate }}">
                             <svg class="svg-icon">
                                 <use xlink:href="#share"></use>
                             </svg>
