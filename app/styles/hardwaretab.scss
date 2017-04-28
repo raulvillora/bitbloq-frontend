@@ -557,7 +557,8 @@ $hw_toolbox: 210px;
 
 .first-component--device {
     .component-interaction {
-        top: 210px;
+        top: 105px;
+        z-index: 20;
     }
 }
 
