@@ -558,7 +558,7 @@ angular.module('bitbloqApp')
                             }
                         }
                     } else {
-                        if (showCompileWarning(projectService.project) && !warningShown) {
+                        if (_showCompileWarning(projectService.project) && !warningShown) {
                             alertsService.add({
                                 text: 'connect_alert_01',
                                 id: 'connect-error',
@@ -611,22 +611,26 @@ angular.module('bitbloqApp')
             }
         };
 
-        function showCompileWarning(project) {
-            var compileWarning;
-            var result;
-            _.forEach(project.hardware.components, function(component) {
-                compileWarning = _.findKey(component.pin, function(o) {
-                    return o === '1' || o === '0';
-                });
-            });
+        function _showCompileWarning(project) {
+            var compileWarning = false,
+                i = 0;
+            while (!compileWarning && project.hardware.components && (i < project.hardware.components.length)) {
+                compileWarning = $scope.showCompileWarningByComponent(project.hardware.components[i]);
+                i++;
+            }
 
-            if (compileWarning) {
-                result = true;
-            } else {
-                result = false;
+            return compileWarning;
+        }
+
+        $scope.showCompileWarningByComponent = function(component, pin) {
+            var result = false;
+            if ((component.uuid !== 'sp') && !component.integratedComponent) {
+                result = _.findKey(pin || component.pin, function(o) {
+                    return ((o === '1') || (o === '0'));
+                });
             }
             return result;
-        }
+        };
 
         function uploadWithWeb2board(code) {
             if (web2board.isWeb2boardV2()) {

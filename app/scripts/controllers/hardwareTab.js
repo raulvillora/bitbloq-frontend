@@ -641,9 +641,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $rootScope.$emit('component-connected');
 
                 if (hw2Bloqs.userInteraction) {
-                    if ((componentReference.uuid !== 'sp') && _itsABoardWithProblemsInFirstPins($scope.currentProject.hardware.board) && _.findKey(componentReference.pin, function(o) {
-                            return o === '1' || o === '0';
-                        })) {
+                    if ($scope.showCompileWarningByComponent(componentReference, e.componentData.pin)) {
                         alertsService.add({
                             text: 'connect_alert_01',
                             id: 'connect-error',
