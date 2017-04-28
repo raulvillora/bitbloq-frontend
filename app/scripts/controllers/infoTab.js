@@ -148,7 +148,7 @@ angular.module('bitbloqApp')
 
             if (useBitbloqConnect) {
                 components.unshift({
-                    id: 'device'
+                    uuid: 'device'
                 });
             }
             var limitedComponents = components.slice(0, 4);
