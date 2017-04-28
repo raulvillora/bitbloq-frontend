@@ -614,9 +614,6 @@ angular.module('bitbloqApp')
             if (mainTag) {
                 newHardwareTags.push(mainTag);
             }
-            if (exports.project.bitbloqConnectBT) {
-                newHardwareTags.push('Bitbloq Connect');
-            }
             exports.project.hardware.components.forEach(function(comp) {
                 newHardwareTags.push(comp.uuid);
             });
