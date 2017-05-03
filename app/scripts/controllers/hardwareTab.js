@@ -674,21 +674,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         }
     }
 
-    function _itsABoardWithProblemsInFirstPins(board) {
-        var result;
-        switch (board) {
-            case 'bqZUM':
-            case 'FreaduinoUNO':
-            case 'ArduinoUNO':
-            case 'ArduinoMEGA2560':
-                result = true;
-                break;
-            default:
-                result = false;
-        }
-        return result;
-    }
-
     function _addIntegratedComponents(board) {
         if (board.integratedComponents) {
             var tempComponent;

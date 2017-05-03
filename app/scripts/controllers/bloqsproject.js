@@ -1280,7 +1280,7 @@ angular.module('bitbloqApp')
 
         function confirmExit() {
             var closeMessage;
-            chromeAppApi.stopSerialCommunication();
+
             $scope.$apply();
 
             if (projectService.saveStatus === 1) {
@@ -1294,6 +1294,7 @@ angular.module('bitbloqApp')
 
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);
+            chromeAppApi.stopSerialCommunication();
             $window.onbeforeunload = null;
             _destroyWeb2boardEvents();
         });
