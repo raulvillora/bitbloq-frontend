@@ -43,7 +43,9 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.boardNameList = _.concat(_.map(hardwareConstants.boards, 'uuid'), _.map(hardwareConstants.robots, 'uuid'));
+        $scope.common.itsUserLoaded().finally(function() {
+            $scope.boardNameList = _.concat(_.map($scope.common.userHardware.boards, 'uuid'), _.map($scope.common.userHardware.robots, 'uuid'));
+        });
         $scope.currentProject = projectService.project;
 
         $scope.common.isLoading = true;
