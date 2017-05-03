@@ -357,13 +357,13 @@ angular.module('bitbloqApp')
             }
 
             _.forEach(componentsArray, function(value) {
-                if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
-                    if (components[value.id]) {
-                        components[value.id].names.push(value.name);
+                if (hardwareConstants.viewerSensors.indexOf(value.uuid) !== -1) {
+                    if (components[value.uuid]) {
+                        components[value.uuid].names.push(value.name);
                     } else {
-                        components[value.id] = {};
-                        components[value.id].type = value.type;
-                        components[value.id].names = [value.name];
+                        components[value.uuid] = {};
+                        components[value.uuid].type = value.type;
+                        components[value.uuid].names = [value.name];
                     }
                 }
             });
