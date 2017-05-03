@@ -154,7 +154,7 @@ angular.module('bitbloqApp')
             var limitedComponents = components.slice(0, 4);
             var counter = 0;
             limitedComponents.forEach(function(component) {
-                if (component.uuid.indexOf('integrated') === -1) {
+                if (!component.integratedComponent) {
                     var componentImage = new Image();
                     componentImage.src = '/images/components/' + component.uuid + '.png';
                     componentImage.onload = function() {
