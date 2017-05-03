@@ -665,7 +665,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 componentReference.connected = false;
             }
 
-            if ($scope.currentProjectLoaded.promise.$$state.status === 1 && hw2Bloqs.userInteraction) {
+            if (($scope.common.session.save || $scope.currentProjectLoaded.promise.$$state.status === 1) && hw2Bloqs.userInteraction) {
                 currentProjectService.startAutosave();
             }
 
