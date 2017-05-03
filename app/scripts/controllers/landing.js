@@ -49,7 +49,7 @@ angular.module('bitbloqApp')
 
         $scope.translateGuest = function(language) {
             $translate.use(language);
-            localStorage.guestLanguage = language;
+            sessionStorage.guestLanguage = language;
         };
 
         $scope.closeMenu = function($event) {

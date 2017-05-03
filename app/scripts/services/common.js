@@ -82,7 +82,7 @@ angular.module('bitbloqApp')
                 loadedUserPromise = $q.defer();
             }
             if (user !== null && typeof user === 'object') {
-                var lng = user.language || localStorage.guestLanguage || navigatorLang || 'es-ES';
+                var lng = user.language || sessionStorage.guestLanguage || navigatorLang || 'es-ES';
                 $translate.use(lng);
                 if (user.cookiePolicyAccepted) {
                     $sessionStorage.cookiesAccepted = true;
@@ -94,7 +94,7 @@ angular.module('bitbloqApp')
                 loadedUserPromise.resolve();
             } else {
                 exports.user = null;
-                $translate.use(localStorage.guestLanguage || navigatorLang);
+                $translate.use(sessionStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
                 exports.userRole = 'user';
                 hardwareApi.getAll().then(function(response) {

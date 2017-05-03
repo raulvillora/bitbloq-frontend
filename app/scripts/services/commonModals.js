@@ -126,7 +126,7 @@ angular.module('bitbloqApp')
                     if (common.user) {
                         common.saveUserLanguage(newLanguage);
                     } else {
-                        localStorage.guestLanguage = newLanguage;
+                        sessionStorage.guestLanguage = newLanguage;
                     }
                     $translate.use(newLanguage);
                 },
