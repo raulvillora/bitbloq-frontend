@@ -265,6 +265,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.registerSubmit = function(form) {
+            $scope.isRegistering = true;
             form.username.submitted = true;
             form.password.submitted = true;
             form.email.submitted = true;
@@ -560,6 +561,7 @@ angular.module('bitbloqApp')
         }
 
         function fireShakeEffect() {
+            $scope.isRegistering = false;
             angular.element('[data-effect="shake"]').addClass('shake');
             setTimeout(function() {
                 angular.element('[data-effect="shake"]').removeClass('shake');
@@ -583,6 +585,7 @@ angular.module('bitbloqApp')
                 userRobotsApi.getUserRobots(user._id).then(function(res) {
                     user.thirdPartyRobots = res.data;
                 }).finally(function() {
+                    $scope.isRegistering = false;
                     $scope.common.setUser(user);
                     if (user.hasBeenAskedIfTeacher || user.newsletter || register) {
                         _goToHome();
