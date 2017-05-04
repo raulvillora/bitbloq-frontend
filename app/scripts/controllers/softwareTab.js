@@ -46,6 +46,9 @@ angular.module('bitbloqApp')
 
         $scope.changeBloqsToolbox = function(tab) {
             $scope.selectedBloqsToolbox = tab;
+            if (tab === 'components' && $scope.common.section === 'bloqsproject') {
+                $scope.handleTour(6);
+            }
         };
 
         $scope.duplicateBloqFromContextMenu = function(bloq) {
