@@ -1053,7 +1053,7 @@ angular.module('bitbloqApp')
                 case 3:
                     if ($scope.tourCurrentStep === 2) {
                         if (!$scope.currentProject.hardware.board) {
-                            $scope.tourCurrentStep === 1;
+                            $scope.tourCurrentStep = 1;
                             $scope.handleTour(2);
                         } else {
                             $scope.tourCurrentStep = 3;
