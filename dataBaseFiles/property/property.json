@@ -535,7 +535,7 @@
         "zowi": "1.0.0"
     },
     "boardsFirmwareVersion": {
-        "mcore": "1.0.0",
+        "mcore": "1.0.1",
         "meauriga": "1.0.0",
         "meorion": "1.0.0"
     },
