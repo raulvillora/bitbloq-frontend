@@ -378,32 +378,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     function _addBtComponent() {
         if (!$scope.currentProject.useBitbloqConnect) {
             $scope.currentProject.useBitbloqConnect = true;
-            if ($scope.currentProject.hardware.board === 'bqZUM') {
-                //added on get code too
-                var bTComponent = _.cloneDeep(_.find(hardwareConstants.components, {
-                    uuid: 'bt'
-                }));
-                bTComponent.name = $scope.common.translate('device').toLowerCase() + '_0';
-                bTComponent.baudRate = 19200;
-                bTComponent.category = 'serialElements';
-                bTComponent.pin = {
-                    rx: 0,
-                    tx: 1
-                };
-                bTComponent.uid = 'btComponent';
-                currentProjectService.addComponentInComponentsArray('serialElements', bTComponent);
-                $scope.currentProject.bitbloqConnectBT = bTComponent;
-            } else {
-                $scope.currentProject.bitbloqConnectBT = {
-                    message: $scope.common.translate('device-needs-bluetooth')
-                };
+            $scope.currentProject.bitbloqConnectBT = {
+                message: $scope.currentProject.hardware.board === 'bqZUM' ? $scope.common.translate('device-has-bluetooth') : $scope.common.translate('device-needs-bluetooth')
+            };
 
-                var btConnected = _.find(currentProjectService.componentsArray.serialElements, function(component) {
-                    return component.uuid === 'bt';
-                });
-                if (!btConnected) {
-                    $scope.isMobileConnected = true;
-                }
+            var btConnected = _.find(currentProjectService.componentsArray.serialElements, function(component) {
+                return component.uuid === 'bt';
+            });
+            if (!btConnected) {
+                $scope.isMobileConnected = true;
             }
 
         }
@@ -416,6 +399,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (projectService.project.bitbloqConnectBT && projectService.project.bitbloqConnectBT.name) {
             currentProjectService.removeComponentInComponentsArray('serialElements', $scope.currentProject.bitbloqConnectBT.name);
         }
+
         $scope.closeBluetoothInteraction();
         $scope.currentProject.bitbloqConnectBT = null;
         currentProjectService.startAutosave();
@@ -704,13 +688,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
             $scope.currentProject.hardware.board = board.uuid;
 
-            if ($scope.currentProject.hardware.components.length > 0 && $scope.currentProject.useBitbloqConnect) {
-                $scope.deleteBTComponent();
-                _addBtComponent();
-            }
             _changeBaudRate();
             $scope.hardware.sortToolbox();
             _addIntegratedComponents(board);
+
+            if ($scope.currentProject.useBitbloqConnect) {
+                $scope.deleteBTComponent();
+                _addBtComponent();
+            }
 
             currentProjectService.startAutosave();
         } else {
