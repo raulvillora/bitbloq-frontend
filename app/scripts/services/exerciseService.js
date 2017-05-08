@@ -194,10 +194,16 @@ angular.module('bitbloqApp')
                 }
 
                 function allCheckWatchers(groups) {
+                    var cloneGroups = _.cloneDeep(groups);
                     _.forEach(groups, function(group, index) {
                         checkWatchers[index] = modalOptions.$watch('groups[' + index + '].selected', function(newVal, oldVal) {
                             if (oldVal && newVal !== oldVal) {
-                                deleteTaskConfirm(group, index, modalOptions);
+                                var oldGroup = _.find(cloneGroups, function(item) {
+                                    return item._id === group._id;
+                                });
+                                if (oldGroup.selected) {
+                                    deleteTaskConfirm(group, index, modalOptions);
+                                }
                             }
                         });
                     });
@@ -791,7 +797,6 @@ angular.module('bitbloqApp')
                 className: 'modal--container modal--input',
                 scope: modalOptions
             });
-
         }
 
         /*************************************************
