@@ -133,7 +133,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $scope.changeToolbox('');
         //If component, check it out if component has been moved
         if (ev.target.classList.contains('component')) {
-            $scope.unsetInputFocus();
             var componentDOM = ev.target;
             var componentReference = currentProjectService.findComponentInComponentsArray(componentDOM.dataset.uid);
 
@@ -146,14 +145,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 currentProjectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-            .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
+                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
+        {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
             $scope.robotSelected = true;
         } else if (ev.target.classList.contains('board') || $(ev.target).closest('.board').length) {
             $scope.boardSelected = true;
-
             //Unselect selected components
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
@@ -172,58 +171,50 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     $scope.changeToolbox('components');
                 }
             }
-
-        } else if (ev.target.classList.contains('oscillator--checkbox')) {
-            $scope.unsetInputFocus();
         } else if ($(ev.target).closest('.baudrate__dropdown').length) {
-            $scope.unsetInputFocus();
             ev.preventDefault();
-        } else if (ev.target.classList.contains('component-name__input')) {
-            $scope.setInputFocus();
-        } else if ($(ev.target).closest('.component-name__container').length) {
-            $scope.unsetInputFocus();
         } else if (ev.target.classList.contains('bitbloqconnect-icon')) {
-            $scope.inputFocus = false;
             hw2Bloqs.unselectAllConnections();
             $scope.robotSelected = $scope.boardSelected = false;
             $('.component').removeClass('component-selected');
             if ($scope.currentProject.bitbloqConnectBT) {
                 $scope.componentSelected = $scope.currentProject.bitbloqConnectBT;
             }
-        } else {
+        } else if (!ev.target.classList.contains('component-name__input') && !ev.target.classList.contains('oscillator--checkbox') && !$(ev.target)
+                .closest('.component-name__container').length)
+        {
             $scope.robotSelected = $scope.boardSelected = $scope.componentSelected = false;
             $('.component').removeClass('component-selected');
             hw2Bloqs.unselectAllConnections();
         }
     };
 
-    $scope.duplicateComponent = function() {
-        if (!$scope.componentSelected) {
-            throw Error('componentSelected undefined');
+    $scope.duplicateComponent = function(copiedComponent) {
+        copiedComponent = copiedComponent || $scope.hardware.clonComponent;
+        if (copiedComponent) {
+            var newComponent = _.cloneDeep(copiedComponent);
+            delete newComponent.endpoints;
+            delete newComponent.pin;
+            delete newComponent.uid;
+            newComponent.connected = false;
+            $scope.currentProject.hardware.components.push(newComponent);
+
+            var coordinates = {
+                x: newComponent.coordinates.x > 85 ? 85 + 3 : newComponent.coordinates.x + 3,
+                y: newComponent.coordinates.y > 85 ? 85 + 3 : newComponent.coordinates.y + 3
+            };
+            newComponent.coordinates = coordinates;
+            newComponent.name = _createUniqueVarName(newComponent); //Generate unique name
+
+            currentProjectService.addComponentInComponentsArray(newComponent.category, newComponent);
+
+            var componentDOM = hw2Bloqs.addComponent(newComponent);
+            if (!$scope.$$phase) {
+                $scope.$digest();
+            }
+            _focusComponent(componentDOM);
+            hw2Bloqs.unselectAllConnections();
         }
-        var newComponent = _.cloneDeep($scope.componentSelected);
-        delete newComponent.endpoints;
-        delete newComponent.pin;
-        delete newComponent.uid;
-        newComponent.connected = false;
-        $scope.currentProject.hardware.components.push(newComponent);
-
-        var coordinates = {
-            x: newComponent.coordinates.x > 85 ? 85 + 3 : newComponent.coordinates.x + 3,
-            y: newComponent.coordinates.y > 85 ? 85 + 3 : newComponent.coordinates.y + 3,
-        };
-        newComponent.coordinates = coordinates;
-        newComponent.name = _createUniqueVarName(newComponent); //Generate unique name
-
-        currentProjectService.addComponentInComponentsArray(newComponent.category, newComponent);
-
-        var componentDOM = hw2Bloqs.addComponent(newComponent);
-        if (!$scope.$$phase) {
-            $scope.$digest();
-        }
-        _focusComponent(componentDOM);
-        hw2Bloqs.unselectAllConnections();
-
     };
 
     $scope.disconnectComponent = function(component) {
@@ -408,15 +399,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     $scope.setBaudRate = function(baudRate) {
         $scope.componentSelected.baudRate = baudRate;
         currentProjectService.startAutosave();
-    };
-
-    $scope.setInputFocus = function() {
-        $scope.inputFocus = true;
-    };
-
-    $scope.unsetInputFocus = function() {
-        $scope.inputFocus = false;
-        container.focus();
     };
 
     $scope.checkName = function() {
@@ -974,71 +956,59 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     }
 
     function _getClonComponent() {
-        $scope.hardware.clonComponent = $scope.componentSelected;
-    }
-
-    function _setClonComponent() {
-        if ($scope.hardware.clonComponent) {
-            $scope.duplicateComponent();
-            $scope.hardware.clonComponent = $scope.componentSelected;
-        }
+        $scope.hardware.clonComponent = _.cloneDeep($scope.componentSelected);
     }
 
     /*************************************************
      Shortcuts
      *************************************************/
-    $scope.onKeyPress = function($event) {
-        switch ($event.keyCode) {
-
+    $scope.onKeyPress = function(evt) {
+        switch (evt.keyCode) {
             case 67:
                 //ctrl+c
-                if ($event.ctrlKey) {
-                    if ($scope.inputFocus) {
-                        return false;
+                if (evt.ctrlKey) {
+                    if (!evt.target.classList.contains('component-name__input')) {
+                        _getClonComponent();
+                        evt.preventDefault();
                     }
-                    _getClonComponent();
-                    $event.preventDefault();
                 }
                 break;
             case 86:
                 //ctrl+v
-                if ($event.ctrlKey) {
-                    if ($scope.inputFocus) {
-                        return false;
+                if (evt.ctrlKey) {
+                    if (!evt.target.classList.contains('component-name__input')) {
+                        $scope.duplicateComponent();
+                        evt.preventDefault();
                     }
-                    _setClonComponent();
-                    $event.preventDefault();
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if ($event.ctrlKey) {
-                //         $scope.undo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if ($event.ctrlKey) {
-                //         $scope.redo();
-                //         $event.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if (evt.ctrlKey) {
+            //         $scope.undo();
+            //         evt.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if (evt.ctrlKey) {
+            //         $scope.redo();
+            //         evt.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
-                if ($scope.inputFocus) {
-                    return false;
+                if (!evt.target.classList.contains('component-name__input')) {
+                    _removeElementFromKeyboard(evt.target);
+                    evt.preventDefault();
                 }
-                _removeElementFromKeyboard($event.target);
-                $event.preventDefault();
                 break;
             case 46:
                 //Supr
-                if ($scope.inputFocus) {
-                    return false;
+                if (!evt.target.classList.contains('component-name__input')) {
+                    _removeElementFromKeyboard(evt.target);
+                    evt.preventDefault();
                 }
-                _removeElementFromKeyboard($event.target);
-                $event.preventDefault();
                 break;
         }
     };
@@ -1064,7 +1034,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
     $scope.baudRates = ['300', '1200', '2400', '4800', '9600', '14400', '19200', '28800', '38400', '57600', '115200'];
     $scope.componentSelected = null;
-    $scope.inputFocus = false;
 
     $scope.offsetTop = ['header', 'nav--make', 'actions--make', 'tabs--title'];
     $scope.firstComponent = undefined;
