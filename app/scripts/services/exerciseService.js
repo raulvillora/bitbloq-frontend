@@ -169,8 +169,9 @@ angular.module('bitbloqApp')
                 function getTime(initDate) {
                     var dateString;
                     if (initDate) {
-                        var momentDate = moment(initDate);
-                        dateString = momentDate.hour() + ':' + momentDate.minute();
+                        var momentDate = moment(initDate),
+                            minutes = momentDate.minute();
+                        dateString = momentDate.hour() + ':' + (String(minutes).length === 1 ? '0' : '') + minutes;
                     }
                     return dateString;
                 }
@@ -633,7 +634,8 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
