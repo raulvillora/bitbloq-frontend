@@ -607,7 +607,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $rootScope.$emit('component-connected');
 
                 if (hw2Bloqs.userInteraction) {
-                    if ($scope.showCompileWarningByComponent(componentReference, e.componentData.pin)) {
+                    if ($scope.showCompileWarningByComponent($scope.currentProject.hardware.board, componentReference, e.componentData.pin)) {
                         alertsService.add({
                             text: 'connect_alert_01',
                             id: 'connect-error',
