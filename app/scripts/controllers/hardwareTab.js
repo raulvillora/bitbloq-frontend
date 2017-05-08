@@ -807,11 +807,19 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     function _createUniqueVarName(component) {
-        var componentBasicName = $translate.instant('default-var-name-' + component.uuid),
+        var componentBasicName = component.name ? component.name.replace(/[0-9]*/, '') : '',
             componentsNames = [];
 
-        if (component.uid === 'btComponent') {
-            componentBasicName = $scope.common.translate('device').toLowerCase();
+        if (componentBasicName) {
+            if (parseInt(componentBasicName.substring(componentBasicName.lastIndexOf('_') + 1, componentBasicName.length))) {
+                componentBasicName = componentBasicName.substring(0, componentBasicName.lastIndexOf('_'));
+            }
+        } else {
+            if (component.uid === 'btComponent') {
+                componentBasicName = $scope.common.translate('device').toLowerCase();
+            } else {
+                componentBasicName = $translate.instant('default-var-name-' + component.uuid);
+            }
         }
 
         if (component.category) {
@@ -828,16 +836,18 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 });
             }
         }
-
-        var j = 0,
-            finalName = null;
-        while (!finalName) {
-            if (!componentsNames[componentBasicName + '_' + j]) {
-                finalName = componentBasicName + '_' + j;
+        if (componentsNames[componentBasicName]) {
+            var j = 2,
+                finalName = null;
+            while (!finalName) {
+                if (!componentsNames[componentBasicName + '_' + j]) {
+                    finalName = componentBasicName + '_' + j;
+                }
+                j++;
             }
-            j++;
+            componentBasicName = finalName || componentBasicName;
         }
-        return finalName;
+        return componentBasicName;
     }
 
     function _removeElementFromKeyboard(focusedElement) {
