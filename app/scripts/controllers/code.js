@@ -120,7 +120,7 @@ angular.module('bitbloqApp')
                 }
             } else {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.name === boardName;
+                    return o.name === boardName || o.uuid === boardName;
                 });
             }
             if (elementSelected[0]) {
