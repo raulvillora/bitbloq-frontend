@@ -421,6 +421,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         //end of getting componentList
 
         for (var i = 0; i < componentsList.length; i++) {
+            componentsList[i].name = componentsList[i].name.replace(/[0-9]*/, '');
+            if (!componentsList[i].name) {
+                componentsList[i].name = _createUniqueVarName(componentsList[i]);
+            }
             if (usedComponentNames[componentsList[i].name]) {
                 //the componentSelected must be always a duplicated
                 if ($scope.componentSelected === usedComponentNames[componentsList[i].name]) {
