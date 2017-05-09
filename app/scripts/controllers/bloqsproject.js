@@ -419,17 +419,12 @@ angular.module('bitbloqApp')
 
         function generateMobileTwitterCode(componentsArray, originalCode) {
             var components = $scope.getComponents(projectService.project.hardware.components);
-            var board = projectService.getBoardMetaData().uuid;
 
             var code = originalCode;
             var deviceName;
             //bqZUM
 
-            if (board === 'bqZUM') {
-                deviceName = projectService.project.bitbloqConnectBT.name;
-            } else {
-                deviceName = components.bt;
-            }
+            deviceName = components.bt;
 
             code = generateTwitterBloqCode(deviceName, code);
             return code;
