@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
+    {
 
         var exports = {},
             thereAreWatchers = false,
@@ -383,15 +384,24 @@ angular.module('bitbloqApp')
             sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
+            //check board
+            newproject.hardware.board = newproject.hardware.board ? newproject.hardware.board.replace(/\s+/g, '') : '';
+
+            //check old components
             if (newproject.hardware.components) {
-                for (var i = 0; i < newproject.hardware.components.length; i++) {
-                    if (newproject.hardware.components[i].id) {
-                        newproject.hardware.components[i].uuid = newproject.hardware.components[i].id;
+                newproject.hardware.components.forEach(function(item) {
+                    if (item.id) {
+                        item.uuid = item.id;
                     }
-                    if (newproject.hardware.components[i].category === 'sensors') {
-                        newproject.hardware.components[i].dataReturnType = sensorsTypes[newproject.hardware.components[i].id];
+                    if (item.category === 'sensors') {
+                        item.dataReturnType = sensorsTypes[item.id];
                     }
-                }
+                    //check serial port
+                    if (item.uuid === 'sp') {
+                        item.pin.rx = '0';
+                        item.pin.tx = '1';
+                    }
+                });
             }
 
             //end temp fix
@@ -762,7 +772,8 @@ angular.module('bitbloqApp')
         function canUseThirdParty(robot) {
             var canUse = false;
             if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment()
-                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
+                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate)))
+            {
                 canUse = true;
             } else {
                 canUse = false;

@@ -10,8 +10,9 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, hw2Bloqs, web2boardOnline, commonModals,
-        projectService, hardwareConstants, chromeAppApi) {
+                                             $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, hw2Bloqs, web2boardOnline, commonModals,
+                                             projectService, hardwareConstants, chromeAppApi)
+    {
 
         /*************************************************
          Project save / edit
@@ -851,17 +852,17 @@ angular.module('bitbloqApp')
          UNDO / REDO
          *************************************************/
 
-        //Stores one step in the history
+            //Stores one step in the history
         $scope.saveBloqStep = function(step) {
             //$log.debug('Guardamos Estado de Bloqs');
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -1035,7 +1036,8 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
 
                 event.preventDefault();
             }
@@ -1290,8 +1292,6 @@ angular.module('bitbloqApp')
                 if (project.software) {
                     project.software.freeBloqs = project.software.freeBloqs || [];
                 }
-
-                project.hardware.board = project.hardware.board ? project.hardware.board.replace(/\s+/g, '') : '';
                 projectService.setProject(project, project.codeProject, true);
                 checkIfTwitterBloq(projectService.project);
                 $scope.saveBloqStep(_.clone(project.software));
