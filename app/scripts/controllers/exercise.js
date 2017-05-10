@@ -69,6 +69,40 @@ angular.module('bitbloqApp')
             $scope.groups = groups;
         };
 
+        function itsABoardWithCompileWarning(board) {
+            var result = false;
+            switch (board) {
+                case 'mcore':
+                case 'meauriga':
+                case 'meorion':
+                    result = false;
+                    break;
+                case 'bqZUM':
+                case 'FreaduinoUNO':
+                case 'ArduinoMEGA2560':
+                case 'ArduinoUNO':
+                case 'ArduinoLeonardo':
+                case 'ArduinoNano':
+                    result = true;
+                    break;
+                default:
+                    $log.log('this board never define if show a compile warnings');
+            }
+            return result;
+        }
+        $scope.showCompileWarningByComponent = function(board, component, pin) {
+            var result = false;
+            if (itsABoardWithCompileWarning(board)) {
+                if ((component.uuid !== 'sp') && !component.integratedComponent) {
+                    result = _.findKey(pin || component.pin, function(o) {
+                        return ((o === '1') || (o === '0'));
+                    });
+                }
+            }
+
+            return result;
+        };
+
         $scope.sendTask = function(task) {
             var dialog,
                 parent = $rootScope,

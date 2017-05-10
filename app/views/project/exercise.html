@@ -26,7 +26,7 @@
                 </button>
             </li>
             <li class="nav__menu__item nav__item--white right" data-tooltips="true" data-tooltip="{{ (!common.user && isThirdPartyRobot())?'robots-not-activated-guest-upload':  currentProject.hardware.showRobotImage && !isRobotActivated() ? 'robots-not-activated-upload' :'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && isThirdPartyRobot() || currentProject.hardware.showRobotImage && !isRobotActivated()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-walkthrough="upload">
+                <button class="nav__menu__btn btn" data-ng-disabled="isWeb2BoardInProgress()|| !common.user && isThirdPartyRobot() || currentProject.hardware.showRobotImage && !isRobotActivated()" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" ng-click="upload()" data-walkthrough="upload">
                     <svg class="svg-icon">
                         <use xlink:href="#load"></use>
                     </svg>
