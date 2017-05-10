@@ -308,6 +308,12 @@ angular.module('bitbloqApp')
             exports.componentsArray[category].push(newComponent);
         };
 
+        exports.removeComponentInComponentsArray = function(category, componentName) {
+            _.remove(exports.componentsArray[category], {
+                name: componentName
+            });
+        };
+
         exports.isEmptyComponentArray = function() {
             return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
         };
@@ -640,8 +646,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
@@ -741,8 +746,12 @@ angular.module('bitbloqApp')
                     return newElem;
                 });
 
-                exports.exercise.hardware.components = _.cloneDeep(schema.components);
                 exports.exercise.hardware.connections = _.cloneDeep(schema.connections);
+
+                //concat integrated hardware and connected hardware
+                exports.exercise.hardware.components = _.filter(exports.exercise.hardware.components, {
+                    integratedComponent: true
+                }).concat(schema.components);
             }
         }
 
