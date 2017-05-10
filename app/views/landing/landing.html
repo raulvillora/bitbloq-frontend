@@ -1,5 +1,6 @@
 <div data-element="landing" ng-class="{'landing--ru':translate.use() === 'ru-RU', 'landing--home--ru':translate.use() === 'de-DE'}" ng-click="closeMenu($event)" class="view view--landing view--landing--home">
-    <aside id="banner-top" data-ng-if="common.properties.bannerHTML" ng-class="[common.properties.bannerClass]" data-ng-show="translate.use() === 'es-ES'" data-ng-include="'views/banners/' + common.properties.bannerHTML + '.html'"></aside>
+    <aside id="banner-top" data-ng-if="common.properties.bannerHTML" ng-class="[common.properties.bannerClass]" data-ng-show="translate.use() === 'es-ES'" data-ng-include="'views/banners/campusverano2017.html'">
+    </aside>
     <div ng-class="{'landing--header':true, 'opaque':windowScroll || menuVisible, 'fixed':windowScroll}" data-ng-include="'views/landing/landing-header.html'"></div>
     <div class="landing--masthead">
         <div class="max-width">
@@ -31,7 +32,7 @@
                 <img src="../images/landing/aula.jpg" alt="">
                 <h2 class="h2">{{'landing-secondary-section-classroom' | translate}}</h2>
                 <p>{{'landing_text_forWho' | translate}}</p>
-                <a ng-href="{{'http://diwo.bq.com/cam15/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningPlan ' | translate}}</a>
+                <a ng-href="{{'http://diwo.bq.com/cam15/'}}" target="_blank" class="landing--link--small">{{'landing_link_learningPlan' | translate}}</a>
             </div>
         </div>
     </div>
