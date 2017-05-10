@@ -374,7 +374,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             var btConnected = _.find(currentProjectService.componentsArray.serialElements, function(component) {
                 return component.uuid === 'bt';
             });
-            if (!btConnected.connected) {
+            if (!btConnected || !btConnected.connected) {
                 $scope.isMobileConnected = true;
             }
 
