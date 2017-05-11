@@ -498,6 +498,7 @@ angular.module('bitbloqApp')
             "availableComponents": [
                 'mkb_infrared',
                 'mkb_lightsensor',
+                'mkb_joystick',
                 'mkb_linefollower',
                 'mkb_ultrasound',
                 'sp'
@@ -600,6 +601,7 @@ angular.module('bitbloqApp')
             "availableComponents": [
                 'mkb_infrared',
                 'mkb_lightsensor',
+                'mkb_joystick',
                 'mkb_linefollower',
                 'mkb_ultrasound',
                 'sp'
@@ -807,6 +809,7 @@ angular.module('bitbloqApp')
             "availableComponents": [
                 'mkb_infrared',
                 'mkb_lightsensor',
+                'mkb_joystick',
                 'mkb_linefollower',
                 'mkb_ultrasound',
                 'sp'
@@ -1904,6 +1907,19 @@ angular.module('bitbloqApp')
             "width": 74,
             "height": 102,
             "pins": {}
+        }, {
+            "uuid": "mkb_joystick",
+            "category": "mkb_joystick",
+            "type": "analog",
+            "manufacturer": "makeblock",
+            "width": 84.5,
+            "height": 128,
+            "dataReturnType": "float",
+            "pins": {
+                "black": [
+                    "s"
+                ]
+            }
         }, {
             "uuid": "mkb_lightsensor",
             "category": "mkb_lightsensor",

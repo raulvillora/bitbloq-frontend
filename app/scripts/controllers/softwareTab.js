@@ -327,7 +327,7 @@ angular.module('bitbloqApp')
                             result = existComponent(['mkb_ultrasound'], connectedComponents);
                             break;
                         case 'mBotIfThereIsALotOfLight':
-                            result = existComponent(['mkb_lightsensor', 'mkb_integrated_lightsensor'], connectedComponents);
+                            result = existComponent(['mkb_lightsensor', 'mkb_integrated_lightsensor', 'mkb_joystick'], connectedComponents);
                             break;
                         case 'mBotIfFollowLines':
                             result = existComponent(['mkb_linefollower'], connectedComponents);
@@ -366,7 +366,7 @@ angular.module('bitbloqApp')
                         result = existComponent([
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
-                            'joystick', 'ldrs', 'pot', 'mkb_lightsensor',
+                            'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
                             'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
