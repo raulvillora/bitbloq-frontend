@@ -142,9 +142,10 @@
                                 if (!$scope.common.user.bannedInForum) {
                                     _goToSection(section);
                                 } else {
+                                    //este es el de new tema
                                     alertsService.add({
                                         text: 'forum_alert_accessBannedUser',
-                                        id: 'bannedUser',
+                                        id: 'creatingAnswer',
                                         type: 'error'
                                     });
                                 }

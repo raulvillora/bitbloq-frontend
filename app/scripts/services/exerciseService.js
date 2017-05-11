@@ -36,6 +36,27 @@ angular.module('bitbloqApp')
             commonModals.clone(exercise, true, 'exercise');
         };
 
+        exports.showActivationModal = function(robotFamily) {
+            var robotModal = robotFamily ? robotFamily : robotsMap[exports.exercise.hardware.showRobotImage].family;
+            commonModals.activateRobot(robotModal).then(function() {
+                exports.showActivation = false;
+                exports.closeActivation = false;
+            });
+        };
+
+        exports.getRobotsMap = function(hardwareConstants) {
+            var map = {};
+            for (var i = 0; i < hardwareConstants.robots.length; i++) {
+                map[hardwareConstants.robots[i].uuid] = hardwareConstants.robots[i];
+            }
+            return map;
+        };
+
+        var robotsMap = exports.getRobotsMap(hardwareConstants);
+
+        exports.showActivation = false;
+        exports.closeActivation = false;
+
         exports.completedExercise = function() {
             if (exports.bloqs.varsBloq) {
                 exports.exercise.software = {
@@ -65,7 +86,7 @@ angular.module('bitbloqApp')
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
-            centerModeApi.getGroups('teacher').then(function(response) {
+            centerModeApi.getGroups('teacher', null, null, true).then(function(response) {
                 var groups = response.data;
                 _.forEach(groups, function(group) {
                     group.selected = !!oldGroups[group._id];
@@ -148,8 +169,9 @@ angular.module('bitbloqApp')
                 function getTime(initDate) {
                     var dateString;
                     if (initDate) {
-                        var momentDate = moment(initDate);
-                        dateString = momentDate.hour() + ':' + momentDate.minute();
+                        var momentDate = moment(initDate),
+                            minutes = momentDate.minute();
+                        dateString = momentDate.hour() + ':' + (String(minutes).length === 1 ? '0' : '') + minutes;
                     }
                     return dateString;
                 }
@@ -172,10 +194,16 @@ angular.module('bitbloqApp')
                 }
 
                 function allCheckWatchers(groups) {
+                    var cloneGroups = _.cloneDeep(groups);
                     _.forEach(groups, function(group, index) {
                         checkWatchers[index] = modalOptions.$watch('groups[' + index + '].selected', function(newVal, oldVal) {
                             if (oldVal && newVal !== oldVal) {
-                                deleteTaskConfirm(group, index, modalOptions);
+                                var oldGroup = _.find(cloneGroups, function(item) {
+                                    return item._id === group._id;
+                                });
+                                if (oldGroup.selected) {
+                                    deleteTaskConfirm(group, index, modalOptions);
+                                }
                             }
                         });
                     });
@@ -280,6 +308,12 @@ angular.module('bitbloqApp')
             exports.componentsArray[category].push(newComponent);
         };
 
+        exports.removeComponentInComponentsArray = function(category, componentName) {
+            _.remove(exports.componentsArray[category], {
+                name: componentName
+            });
+        };
+
         exports.isEmptyComponentArray = function() {
             return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
         };
@@ -331,8 +365,8 @@ angular.module('bitbloqApp')
         };
 
         exports.getBoardMetaData = function() {
-            return _.find(hardwareConstants.boards, function(board) {
-                return (board.id === exports.exercise.hardware.board || board.name === exports.exercise.hardware.board);
+            return _.find(common.userHardware.boards, function(board) {
+                return (board.uuid === exports.exercise.hardware.board || board.name === exports.exercise.hardware.board);
             });
         };
 
@@ -712,8 +746,12 @@ angular.module('bitbloqApp')
                     return newElem;
                 });
 
-                exports.exercise.hardware.components = _.cloneDeep(schema.components);
                 exports.exercise.hardware.connections = _.cloneDeep(schema.connections);
+
+                //concat integrated hardware and connected hardware
+                exports.exercise.hardware.components = _.filter(exports.exercise.hardware.components, {
+                    integratedComponent: true
+                }).concat(schema.components);
             }
         }
 
@@ -768,7 +806,6 @@ angular.module('bitbloqApp')
                 className: 'modal--container modal--input',
                 scope: modalOptions
             });
-
         }
 
         /*************************************************

@@ -124,10 +124,10 @@ angular.module('bitbloqApp')
             if ($scope.currentProject.hardware.board) {
                 if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage) {
                     var robotRef = currentProjectService.getRobotMetaData($scope.currentProject.hardware.showRobotImage);
-                    imageObj.src = '/images/robots/' + robotRef.id + '.png';
+                    imageObj.src = '/images/robots/' + robotRef.uuid + '.png';
                 } else {
                     var boardRef = currentProjectService.getBoardMetaData();
-                    imageObj.src = '/images/boards/' + boardRef.id + '.png';
+                    imageObj.src = '/images/boards/' + boardRef.uuid + '.png';
                 }
             }
 
@@ -148,15 +148,15 @@ angular.module('bitbloqApp')
 
             if (useBitbloqConnect) {
                 components.unshift({
-                    id: 'device'
+                    uuid: 'device'
                 });
             }
             var limitedComponents = components.slice(0, 4);
             var counter = 0;
             limitedComponents.forEach(function(component) {
-                if (component.id.indexOf('integrated') === -1) {
+                if (!component.integratedComponent) {
                     var componentImage = new Image();
-                    componentImage.src = '/images/components/' + component.id + '.png';
+                    componentImage.src = '/images/components/' + component.uuid + '.png';
                     componentImage.onload = function() {
                         setComponentImage(canvas, context, componentImage, counter);
                         counter++;

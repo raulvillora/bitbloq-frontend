@@ -268,7 +268,7 @@
 
     &.modal--activate-robot {
         .ngdialog-content {
-            width: 670px;            
+            width: 670px;
         }
 
         form {
@@ -276,6 +276,26 @@
             margin-bottom: 10px;
         }
     }
+
+    &.modal--hardware-wizard {
+        .ngdialog-content {
+            width: 835px;
+            height: 628px;
+        }
+        .modal--buttons{
+          padding-top: 20px;
+        }
+        .modal__footer{
+          position: absolute;
+          bottom: 0;
+        }
+        .ngdialog-close{
+          display: none;
+        }
+        .modal__header h1{
+          border-right: 0px;
+        }
+      }
 
     &.modal--download-web2board {
         .ngdialog-content {
@@ -585,6 +605,12 @@
             cursor: pointer;
             text-decoration: underline;
         }
+    }
+}
+
+.modal--delete-group {
+    p:not(:first-child):not(:last-child){
+        margin: 15px 0;
     }
 }
 

@@ -27,7 +27,7 @@
                 <svg class="svg-icon svg-icon--text">
                     <use xlink:href="#store"></use>
                 </svg>
-                {{ 'centerMode_button_closeGroup' | translate }}
+                {{ 'closeGroup_modal_title' | translate }}
             </button>
         </div>
     </div>
@@ -37,7 +37,7 @@
             <ul class="tabs__header" ng-init="selectedTab = 'students'">
                 <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'students'}" ng-click="selectedTab = 'students'">
                     <svg class="svg-icon--aside--menu">
-                        <use xlink:href="#students"></use>
+                        <use xlink:href="#people"></use>
                     </svg>
                     <span class="menu__item__span">
                         {{ 'centerMode_column_students' | translate }} ({{ students.length || 0}})

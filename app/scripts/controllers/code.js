@@ -43,7 +43,9 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.boardNameList = _.concat(_.map(hardwareConstants.boards, 'name'), _.map(hardwareConstants.robots, 'name'));
+        $scope.common.itsUserLoaded().finally(function() {
+            $scope.boardNameList = _.concat(_.map($scope.common.userHardware.boards, 'uuid'), _.map($scope.common.userHardware.robots, 'uuid'));
+        });
         $scope.currentProject = projectService.project;
 
         $scope.common.isLoading = true;
@@ -90,11 +92,11 @@ angular.module('bitbloqApp')
         $scope.getNameFromId = function(elementId) {
             var robot, robotName;
             robot = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                return o.id === elementId;
+                return o.uuid === elementId;
             });
 
             if (robot.length > 0) {
-                robotName = robot[0].name;
+                robotName = robot[0].uuid;
             }
 
             return robotName;
@@ -111,34 +113,34 @@ angular.module('bitbloqApp')
 
             if (!projectService.project.hardware.showRobotImage) {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.name === boardName || o.id === boardName;
+                    return o.name === boardName || o.uuid === boardName;
                 });
                 if (elementSelected[0] && elementSelected[0].board) {
-                    projectService.project.hardware.robot = elementSelected[0].id;
+                    projectService.project.hardware.robot = elementSelected[0].uuid;
                 }
             } else {
                 elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.name === boardName;
+                    return o.name === boardName || o.uuid === boardName;
                 });
             }
             if (elementSelected[0]) {
-                var indexTag = projectService.project.hardwareTags.indexOf(elementSelected[0].board ? elementSelected[0].id : projectService.project.hardware.board);
+                var indexTag = projectService.project.hardwareTags.indexOf(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board);
                 if (indexTag !== -1) {
                     projectService.project.hardwareTags.splice(indexTag, 1);
                 }
             }
 
             if (elementSelected[0]) {
-                projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].id; //Default board is ZUM
-                projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].id : null;
+                projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].uuid; //Default board is ZUM
+                projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].uuid : null;
                 if (projectService.project.hardware.showRobotImage) {
                     handleActivateAlert();
                 }
 
                 if (elementSelected[0].board) {
-                    $scope.robotImage = elementSelected[0].id;
+                    $scope.robotImage = elementSelected[0].uuid;
                 } else {
-                    $scope.boardImage = elementSelected[0].id;
+                    $scope.boardImage = elementSelected[0].uuid;
                 }
             } else {
                 projectService.project.hardware.board = 'bqZUM';
@@ -146,7 +148,7 @@ angular.module('bitbloqApp')
                 projectService.project.hardwareTags.push($scope.common.translate(projectService.project.hardware.board));
             }
             if (elementSelected[0]) {
-                projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].id : projectService.project.hardware.board));
+                projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board));
             }
         };
 
@@ -155,7 +157,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.upload = function() {
-            if (!isValidMakeblockCode()) {
+            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
                 alertsService.add({
                     text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-upload',
                     id: 'activatedError',
@@ -187,7 +189,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.verify = function() {
-            if (!isValidMakeblockCode()) {
+            if (!isValidMakeblockCode() || ($scope.common.user && (($scope.projectService.project.hardware.showRobotImage && !$scope.projectService.isRobotActivated())))) {
                 alertsService.add({
                     text: $scope.common.user ? 'robots-not-activated-compile' : 'robots-not-activated-guest-compile',
                     id: 'activatedError',

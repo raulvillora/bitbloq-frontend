@@ -1,0 +1,12 @@
+<ol class="wizard__hardware-list" data-element="projects-list-project">
+    <li  data-ng-repeat="board in boards | filter: filterHardware" ng-click="addToUserHardware(board, 'boards')" ng-init="sectionIndex = $index" class="hardware-list__item" data-element="projects-project">
+        <div ng-class="{'hardware--item--selected':hardwareSelected['boards'].indexOf(board._id) > -1}" class="hardware--item">
+            <div class="hardware__image__container" data-element="over-project">
+                <div ng-if="board.underDevelopment" class="hardware__development">En desarrollo</div>
+                <img ng-src="{{urlImage + 'hardware/boards/' + board.uuid +'.png'}}" err-src="../images/common/default-project.png">
+            </div>
+            <p class="hardware__image__container_name">{{board.uuid | translate }}</p>
+            <a href="{{board.purchaseUrl}}" target="_blank" ng-if="board.purchaseUrl" class="hardware__image__container_product">{{'show-product' | translate}}</a>
+        </div>
+    </li>
+</ol>

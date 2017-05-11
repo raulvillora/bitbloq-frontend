@@ -10,9 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-                                         $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-                                         exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi)
-    {
+        $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi) {
 
         /*************************************************
          Exercise settings
@@ -68,6 +67,40 @@ angular.module('bitbloqApp')
 
         $scope.setGroups = function(groups) {
             $scope.groups = groups;
+        };
+
+        function itsABoardWithCompileWarning(board) {
+            var result = false;
+            switch (board) {
+                case 'mcore':
+                case 'meauriga':
+                case 'meorion':
+                    result = false;
+                    break;
+                case 'bqZUM':
+                case 'FreaduinoUNO':
+                case 'ArduinoMEGA2560':
+                case 'ArduinoUNO':
+                case 'ArduinoLeonardo':
+                case 'ArduinoNano':
+                    result = true;
+                    break;
+                default:
+                    $log.log('this board never define if show a compile warnings');
+            }
+            return result;
+        }
+        $scope.showCompileWarningByComponent = function(board, component, pin) {
+            var result = false;
+            if (itsABoardWithCompileWarning(board)) {
+                if ((component.uuid !== 'sp') && !component.integratedComponent) {
+                    result = _.findKey(pin || component.pin, function(o) {
+                        return ((o === '1') || (o === '0'));
+                    });
+                }
+            }
+
+            return result;
         };
 
         $scope.sendTask = function(task) {
@@ -361,11 +394,11 @@ angular.module('bitbloqApp')
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
+                setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
+                loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
@@ -439,8 +472,7 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
 
                 event.preventDefault();
             }
@@ -472,8 +504,12 @@ angular.module('bitbloqApp')
             $scope.hwBasicsLoaded = $q.defer();
         };
 
+        $scope.itsCurrentProjectLoaded = function() {
+            return $scope.currentProjectLoaded.promise;
+        };
+
         $scope.common.itsUserLoaded().then(function() {
-            $scope.common.itsRoleLoaded().then(function(){
+            $scope.common.itsRoleLoaded().then(function() {
                 switch ($scope.common.userRole) {
                     case 'headmaster':
                     case 'teacher':
@@ -868,19 +904,19 @@ angular.module('bitbloqApp')
             var components = {};
 
             var serialPort = _.find(componentsArray, function(o) {
-                return o.id === 'sp';
+                return o.uuid === 'sp';
             });
             if (serialPort) {
                 components.sp = serialPort.name;
             }
             _.forEach(componentsArray, function(value) {
-                if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
-                    if (components[value.id]) {
-                        components[value.id].names.push(value.name);
+                if (hardwareConstants.viewerSensors.indexOf(value.uuid) !== -1) {
+                    if (components[value.uuid]) {
+                        components[value.uuid].names.push(value.name);
                     } else {
-                        components[value.id] = {};
-                        components[value.id].type = value.type;
-                        components[value.id].names = [value.name];
+                        components[value.uuid] = {};
+                        components[value.uuid].type = value.type;
+                        components[value.uuid].names = [value.name];
                     }
                 }
             });
@@ -1131,9 +1167,13 @@ angular.module('bitbloqApp')
             return exerciseService.getCode();
         };
 
-        $scope.getPrettyCode = function() {
+        $scope.getPrettyCode = function(code) {
             var prettyCode;
-            prettyCode = utils.prettyCode($scope.getCode());
+            if (code) {
+                prettyCode = utils.prettyCode(code);
+            } else {
+                prettyCode = utils.prettyCode($scope.getCode());
+            }
             return prettyCode;
         };
 

@@ -32,8 +32,8 @@
             </ul>
         </aside>
         <div class="tabs-layout__content">
-            <div class="tab myprojects" ng-show="selectedTab === 'projects'" ng-include="'views/myprojects.html'"></div>
-            <div class="tab mysharedprojects" ng-show="selectedTab === 'releases'" class="myprojects--tab projects--tab">
+            <div class="tab" ng-show="selectedTab === 'projects'" ng-include="'views/myprojects.html'"></div>
+            <div class="tab" ng-show="selectedTab === 'releases'" class="myprojects--tab projects--tab">
                 <div ng-include="'views/mysharedprojects.html'"></div>
             </div>
         </div>

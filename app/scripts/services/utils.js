@@ -281,8 +281,8 @@ angular.module('bitbloqApp')
 
         exports.removeDiacritics = function(str, config, defaultName) {
             var configDefault = config || {
-                        spaces: true
-                    },
+                    spaces: true
+                },
                 newStr;
             newStr = str.replace(/[^\u0000-\u007E]/g, function(a) {
                 return diacriticsMap[a] || a;
@@ -523,7 +523,7 @@ angular.module('bitbloqApp')
                 boardFound = exports.getBoardByPort(ports[i], boards);
 
                 if (boardFound) {
-                    ports[i].portName = boardFound.name.toUpperCase() + '(' + ports[i].comName + ')';
+                    ports[i].portName = boardFound.uuid.toUpperCase() + '(' + ports[i].comName + ')';
                 } else {
                     ports[i].portName = ports[i].comName;
                 }

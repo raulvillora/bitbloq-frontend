@@ -72,8 +72,9 @@ angular
                     controller: 'LandingCtrl'
                 })
                 .when('/account', {
-                    templateUrl: 'views/account.html',
-                    controller: 'AccountCtrl'
+                    templateUrl: 'views/account/account.html',
+                    controller: 'AccountCtrl',
+                    authenticate: true
                 })
                 .when('/bloqsproject/:id?', {
                     templateUrl: 'views/project/bloqsproject.html',
@@ -81,7 +82,7 @@ angular
                     reloadOnSearch: false
                 })
 
-            .when('/codeproject/:id?', {
+                .when('/codeproject/:id?', {
                     templateUrl: 'views/code.html',
                     controller: 'CodeCtrl',
                     reloadOnSearch: false
@@ -125,11 +126,6 @@ angular
                 .when('/terms', {
                     templateUrl: 'views/terms.html',
                     controller: 'TermsCtrl'
-                })
-                .when('/account', {
-                    templateUrl: 'views/account.html',
-                    controller: 'AccountCtrl',
-                    authenticate: true
                 })
                 .when('/project/:id', {
                     templateUrl: 'views/project.html',

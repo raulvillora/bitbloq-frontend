@@ -39,6 +39,7 @@
             };
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
+            $scope.moment = moment;
 
             var currentModal;
 
@@ -58,6 +59,7 @@
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
                     exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
                         _getGroups('teacher');
+                        _getExercises();
                     });
                 });
             };
@@ -88,7 +90,7 @@
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
                     title: 'closeGroup_modal_title',
-                    confirmButton: 'closeGroup_modal_acceptButton',
+                    confirmButton: 'archiveGroup_modal_acceptButton',
                     confirmAction: _closeGroupAction,
                     rejectButton: 'modal-button-cancel',
                     textContent: 'closeGroup_modal_info',
@@ -131,17 +133,17 @@
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
                     title: 'deleteGroup_modal_title',
-                    confirmButton: 'deleteGroup_modal_acceptButton',
+                    confirmButton: 'button_delete',
                     confirmAction: confirmAction,
                     rejectButton: 'modal-button-cancel',
                     contentTemplate: '/views/modals/centerMode/deleteGroup.html',
-                    finishAction: _closeGroupAction,
+                    finishAction: $scope.closeGroup,
                     modalButtons: true
                 });
 
                 currentModal = ngDialog.open({
                     template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
+                    className: 'modal--container modal--input modal--delete-group',
                     scope: modalOptions
                 });
             };
@@ -189,9 +191,24 @@
                 });
             };
 
+            $scope.deleteExerciseInGroup = function(exerciseId) {
+                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
+                    _.remove($scope.exercises, function(n) {
+                        return n._id === exerciseId;
+                    });
+                });
+
+            };
+
             $scope.deleteExercise = function(exercise) {
                 var confirmAction = function() {
-                        exerciseApi.delete(exercise._id).then(function() {
+                        var exerciseId;
+                        if (exercise.exercise) {
+                            exerciseId = exercise.exercise._id;
+                        } else {
+                            exerciseId = exercise._id;
+                        }
+                        exerciseApi.delete(exerciseId).then(function() {
                             _.remove($scope.exercises, exercise);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteExercise',
@@ -507,7 +524,6 @@
                             _getTasks($routeParams.id, $routeParams.subId);
                         } else {
                             _getGroup($routeParams.id);
-                            _getTasks($routeParams.id);
                         }
                         break;
                     case 'student':
@@ -571,6 +587,7 @@
                     $scope.secondaryBreadcrumb = true;
                     $scope.group = response.data;
                     $scope.students = $scope.group.students;
+                    $scope.exercises = $scope.group.exercises;
                     $scope.classStateCheck = $scope.group.status === 'open';
                 });
             }
@@ -601,6 +618,11 @@
                 }).then(function(response) {
                     $scope.exercises = response.data;
                     if ($scope.urlSubType === 'student') {
+                        $scope.exercises.tasks.forEach(function(task) {
+                            if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
+                                task.status = 'notDelivered';
+                            }
+                        });
                         $scope.tertiaryBreadcrumb = true;
                         $scope.tasks = response.data.tasks;
                         $scope.group = response.data.group;

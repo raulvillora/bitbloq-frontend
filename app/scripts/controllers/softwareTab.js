@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-        utils) {
+                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+                                            utils)
+    {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -44,100 +45,11 @@ angular.module('bitbloqApp')
 
         $scope.$trashcan = null;
 
-        /***********************************
-         ***********************************
-         *  Indeterminate checkbox functions
-         ***********************************
-         ***********************************/
-
-        $scope.addChecks = function(type, value, bloqName) {
-            $scope.currentProject.selectedBloqs[type] = $scope.currentProject.selectedBloqs[type] || [];
-            switch (bloqName) {
-                case 'all':
-                    _.forEach($scope.common.properties.bloqsSortTree[type], function(item) {
-                        if ($scope.currentProject.selectedBloqs[type].indexOf(item.name) === -1) {
-                            $scope.currentProject.selectedBloqs[type].push(item.name);
-                        }
-                    });
-                    break;
-                case 'any':
-                    $scope.currentProject.selectedBloqs[type].splice(0, $scope.currentProject.selectedBloqs[type].length);
-                    break;
-                default:
-                    var indexBloq = $scope.currentProject.selectedBloqs[type].indexOf(bloqName);
-                    if (value) {
-                        if (indexBloq === -1) {
-                            $scope.currentProject.selectedBloqs[type].push(bloqName);
-                        }
-                    } else {
-                        if (indexBloq > -1) {
-                            $scope.currentProject.selectedBloqs[type].splice(indexBloq, 1);
-                        }
-                    }
-            }
-            var isAdvance = type.indexOf('advance') > -1;
-            if ($scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
-                if (isAdvance) {
-                    $scope.checkAdvanceTab = 'full';
-                } else {
-                    $scope.checkBasicTab = 'full';
-                }
-                if ($scope.checkAdvanceTab === 'full' && $scope.checkBasicTab === 'full') {
-                    $scope.checkFunction = 'full';
-                }
-            } else {
-                if (isAdvance) {
-                    $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[type].length;
-                    $scope.checkFunction = $scope.checkAdvanceTab + $scope.checkBasicTab;
-                } else {
-                    $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type].length;
-                    $scope.checkFunction = $scope.checkBasicTab;
-                }
-            }
-            currentProjectService.startAutosave();
-            utils.apply($scope);
-        };
-
-        $scope.statusGeneralCheck = function(type, counter) {
-            if ($scope.currentProject.selectedBloqs) {
-                var newcheckBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0,
-                    advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1),
-                    newcheckAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
-                if (counter || counter === 0) {
-                    if (newcheckBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
-                        //basic tab is full
-                        if (!$scope.currentProject.selectedBloqs[advancedType] || (newcheckAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length)) {
-                            //advanced tab is full
-                            counter = counter === 'full' ? 'complete' : 'full';
-                        } else {
-                            counter = newcheckBasicTab + (typeof newcheckAdvanceTab === 'number' ? newcheckAdvanceTab : 0);
-                        }
-                    } else {
-                        counter = newcheckBasicTab + (typeof newcheckAdvanceTab === 'number' ? newcheckAdvanceTab : 0);
-                    }
-                } else {
-                    if (newcheckBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
-                        $scope.checkBasicTab = $scope.checkBasicTab === 'full' ? 'complete' : 'full';
-
-                    } else {
-                        $scope.checkBasicTab = newcheckBasicTab;
-                    }
-                    if (newcheckAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
-                        $scope.checkAdvanceTab = $scope.checkAdvanceTab === 'full' ? 'complete' : 'full';
-                    } else {
-                        $scope.checkAdvanceTab = newcheckAdvanceTab;
-                    }
-                }
-            }
-            return counter;
-        };
-
-        /***********************************
-         end indeterminate checkbox
-         ***********************************/
-
         $scope.changeBloqsToolbox = function(tab) {
             $scope.selectedBloqsToolbox = tab;
+            if (tab === 'components' && $scope.common.section === 'bloqsproject') {
+                $scope.handleTour(6);
+            }
         };
 
         $scope.duplicateBloqFromContextMenu = function(bloq) {
@@ -227,6 +139,7 @@ angular.module('bitbloqApp')
             currentProjectService.bloqs.loopBloq.doConnectable();
 
             bloqs.updateDropdowns();
+            bloqs.startBloqsUpdate(currentProjectService.componentsArray);
 
             $scope.$trashcan = $('#trashcan').last();
         };
@@ -404,9 +317,8 @@ angular.module('bitbloqApp')
         };
 
         $scope.showMBotComponents = function(bloqName) {
-
             var result = false;
-            var stopWord = ['mBotMove-v2', 'mBotStop-v2'];
+            var stopWord = ['mBotMove-v2', 'mBotStop-v2', 'mBotMoveAdvanced-v2'];
             if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
                 var connectedComponents = $scope.currentProject.hardware.components;
                 if (stopWord.indexOf(bloqName) === -1) {
@@ -466,7 +378,7 @@ angular.module('bitbloqApp')
                     } else if (item.includes('oscillator')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if ((connectedComponents[i].id === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
+                            if ((connectedComponents[i].uuid === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
                                 result = true;
                             }
                             i++;
@@ -478,7 +390,7 @@ angular.module('bitbloqApp')
                     } else if (item.includes('servo')) {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if ((connectedComponents[i].id === 'servo') && (connectedComponents[i].oscillator !== true)) {
+                            if ((connectedComponents[i].uuid === 'servo') && (connectedComponents[i].oscillator !== true)) {
                                 result = true;
                             }
                             i++;
@@ -492,8 +404,9 @@ angular.module('bitbloqApp')
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].id.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].id)) {
+                            if (connectedComponents[i].uuid.includes(item) ||
+                                item.toLowerCase().includes(connectedComponents[i].uuid))
+                            {
                                 result = true;
                             }
                             i++;
@@ -581,7 +494,7 @@ angular.module('bitbloqApp')
             while (!found && (i < componentsToSearch.length)) {
                 j = 0;
                 while (!found && (j < components.length)) {
-                    if (componentsToSearch[i] === components[j].id) {
+                    if (componentsToSearch[i] === components[j].uuid) {
                         found = components[j];
                     }
                     j++;
@@ -621,13 +534,24 @@ angular.module('bitbloqApp')
         function loadBloqs() {
             bloqsLoadTimes++;
             bloqsApi.itsLoaded().then(function() {
-                    bloqs.setOptions({
+                    var bloqsOptions = {
                         fieldOffsetLeft: 70,
                         fieldOffsetRight: 216,
                         fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                         bloqSchemas: bloqsApi.schemas,
                         suggestionWindowParent: $scope.$field[0]
-                    });
+                    };
+
+                    if (currentProjectService.exercise) {
+                        var availableBloqs = [];
+                        _.forEach(currentProjectService.exercise.selectedBloqs, function(value) {
+                            availableBloqs = availableBloqs.concat(value);
+                        });
+                        bloqsOptions.availableBloqs = availableBloqs;
+                    }
+
+                    bloqs.setOptions(bloqsOptions);
+
                     $scope.groupBloqs = angular.element('.field--content');
                     $scope.groupBloqs.on('scroll', scrollHorizontalField);
                     $scope.horizontalScrollBarContainer = angular.element('#make--horizontal-scrollbar');
@@ -774,11 +698,6 @@ angular.module('bitbloqApp')
             $scope.$apply();
         }
 
-        loadBloqs();
-
-        $document.on('contextmenu', contextMenuDocumentHandler);
-        $document.on('click', clickDocumentHandler);
-
         function startTwitterWatchers() {
             consumerKeyWatcher = $scope.$watch('common.user.twitterApp.consumerKey', function(newValue, oldValue) {
                 if (oldValue !== newValue) {
@@ -828,6 +747,404 @@ angular.module('bitbloqApp')
                 }, timeout);
             }
         }
+
+        /***********************************
+         ***********************************
+         *  Indeterminate checkbox functions
+         ***********************************
+         ***********************************/
+
+        $scope.generalToolboxOptions = {
+            zowi: {
+                id: 'allZowiBloqs',
+                basicTab: 'zowi',
+                advancedTab: 'advancedZowi',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'zowi';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-zowi',
+                dataElement: 'toolbox-zowi',
+                properties: {
+                    basicBloqs: 'zowi',
+                    advancedBloqs: 'advancedZowi'
+                }
+            },
+            evolution: {
+                id: 'allEvolutionBloqs',
+                basicTab: 'evolution',
+                advancedTab: 'advancedEvolution',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'evolution';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-evolution',
+                dataElement: 'toolbox-evolution',
+                properties: {
+                    basicBloqs: 'evolution',
+                    advancedBloqs: 'advancedEvolution'
+                }
+            },
+            mbot: {
+                id: 'allMBotBloqs',
+                basicTab: 'mBot',
+                advancedTab: 'advancedMBot',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'mbot' || $scope.currentProject.hardware.showRobotImage === 'mbot';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-mbot',
+                dataElement: 'toolbox-mbot',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showMBotComponents(name);
+                },
+                backgroundImage: true,
+                properties: {
+                    basicBloqs: 'mBotV2',
+                    advancedBloqs: 'advancedMBotV2'
+                }
+            },
+            rangerlandraider: {
+                id: 'allRangerLandRaiderBloqs',
+                basicTab: 'rangerlandraider',
+                advancedTab: 'advancedRangerLandRaider',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'rangerlandraider' || $scope.currentProject.hardware.showRobotImage === 'rangerlandraider';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-rangerlandraider',
+                dataElement: 'toolbox-rangerlandraider',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showMBotComponents(name);
+                },
+                backgroundImage: true,
+                properties: {
+                    basicBloqs: 'rangerlandraider',
+                    advancedBloqs: 'advancedRangerlandraider'
+                }
+            },
+            rangerraptor: {
+                id: 'allRangerRaptorBloqs',
+                basicTab: 'rangerraptor',
+                advancedTab: 'advancedRangerRaptor',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'rangerraptor' || $scope.currentProject.hardware.showRobotImage === 'rangerraptor';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-rangerraptor',
+                dataElement: 'toolbox-rangerraptor',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showMBotComponents(name);
+                },
+                backgroundImage: true,
+                properties: {
+                    basicBloqs: 'rangerraptor',
+                    advancedBloqs: 'advancedRangerraptor'
+                }
+            },
+            rangernervousbird: {
+                id: 'allRangerNervousBirdBloqs',
+                basicTab: 'rangernervousbird',
+                advancedTab: 'advancedRangerNervousBird',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'rangernervousbird' || $scope.currentProject.hardware.showRobotImage === 'rangernervousbird';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-rangernervousbird',
+                dataElement: 'toolbox-rangernervousbird',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showMBotComponents(name);
+                },
+                backgroundImage: true,
+                properties: {
+                    basicBloqs: 'rangernervousbird',
+                    advancedBloqs: 'advancedRangernervousbird'
+                }
+            },
+            startertank: {
+                id: 'allStarterTankBloqs',
+                basicTab: 'startertank',
+                advancedTab: 'advancedStarterTank',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'startertank' || $scope.currentProject.hardware.showRobotImage === 'startertank';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-startertank',
+                dataElement: 'toolbox-startertank',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showMBotComponents(name);
+                },
+                backgroundImage: true,
+                properties: {
+                    basicBloqs: 'startertank',
+                    advancedBloqs: 'advancedStartertank'
+                }
+            },
+            starterthreewheels: {
+                id: 'allStarterThreeWheelsBloqs',
+                basicTab: 'starterthreewheels',
+                advancedTab: 'advancedstarterthreewheels',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'starterthreewheels' || $scope.currentProject.hardware.showRobotImage === 'starterthreewheels';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-starterthreewheels',
+                dataElement: 'toolbox-starterthreewheels',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showMBotComponents(name);
+                },
+                backgroundImage: true,
+                properties: {
+                    basicBloqs: 'starterthreewheels',
+                    advancedBloqs: 'advancedStarterthreewheels'
+                }
+            },
+            phone: {
+                id: 'allPhoneBloqs',
+                basicTab: 'phone',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.useBitbloqConnect;
+                },
+                icon: '#mobile',
+                'literal': 'make-swtoolbox-bitbloqConnect',
+                dataElement: 'toolbox-phone',
+                properties: {
+                    basicBloqs: 'phone',
+                    advancedBloqs: 'advancedPhone'
+                }
+            },
+            components: {
+                id: 'allComponentsBloqs',
+                basicTab: 'components',
+                advancedTab: 'advancedComponents',
+                counter: 0,
+                model: null,
+                icon: '#component',
+                literal: 'components',
+                dataElement: 'toolbox-components',
+                showBasicBloqsCondition: function(name) {
+                    return $scope.showComponents(name);
+                },
+                properties: {
+                    basicBloqs: 'components',
+                    advancedBloqs: 'advancedComponents'
+                }
+            },
+            functions: {
+                id: 'allFunctionsBloqs',
+                basicTab: 'functions',
+                advancedTab: 'advancedFunctions',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-functions',
+                dataElement: 'toolbox-functions',
+                properties: {
+                    basicBloqs: 'functions',
+                    advancedBloqs: 'advancedFunctions'
+                }
+            },
+            variables: {
+                id: 'allVariablesBloqs',
+                basicTab: 'variables',
+                advancedTab: 'advancedVariables',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-variables',
+                properties: {
+                    basicBloqs: 'variables',
+                    advancedBloqs: 'advancedVariables'
+                }
+            },
+            codes: {
+                id: 'allCodeBloqs',
+                basicTab: 'codes',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-code',
+                properties: {
+                    basicBloqs: 'codes'
+                }
+            },
+            mathematics: {
+                id: 'allMathematicsBloqs',
+                basicTab: 'mathematics',
+                advancedTab: 'advancedMathematics',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-mathematics',
+                properties: {
+                    basicBloqs: 'mathematics',
+                    advancedBloqs: 'advancedMathematics'
+                }
+            },
+            texts: {
+                id: 'allTextBloqs',
+                basicTab: 'texts',
+                advancedTab: 'advancedTexts',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-text',
+                properties: {
+                    basicBloqs: 'texts',
+                    advancedBloqs: 'advancedTexts'
+                }
+            },
+            controls: {
+                id: 'allControlBloqs',
+                basicTab: 'controls',
+                advancedTab: 'advancedControls',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-control',
+                properties: {
+                    basicBloqs: 'controls',
+                    advancedBloqs: 'advancedControls'
+                }
+            },
+            logics: {
+                id: 'allLogicBloqs',
+                basicTab: 'logics',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-logic',
+                properties: {
+                    basicBloqs: 'logics'
+                }
+            },
+            classes: {
+                id: 'allClassesBloqs',
+                basicTab: 'classes',
+                advancedTab: 'advancedClasses',
+                counter: 0,
+                model: null,
+                literal: 'make-swtoolbox-classes',
+                properties: {
+                    basicBloqs: 'classes',
+                    advancedBloqs: 'advancedClasses'
+                }
+            }
+        };
+
+        $scope.addChecks = function(type, value, bloqName) {
+            $scope.currentProject.selectedBloqs[type] = $scope.currentProject.selectedBloqs[type] || [];
+            switch (bloqName) {
+                case 'all':
+                    _.forEach($scope.common.properties.bloqsSortTree[type], function(item) {
+                        if ($scope.currentProject.selectedBloqs[type].indexOf(item.name) === -1) {
+                            $scope.currentProject.selectedBloqs[type].push(item.name);
+                        }
+                    });
+                    break;
+                case 'any':
+                    $scope.currentProject.selectedBloqs[type].splice(0, $scope.currentProject.selectedBloqs[type].length);
+                    break;
+                default:
+                    var indexBloq = $scope.currentProject.selectedBloqs[type].indexOf(bloqName);
+                    if (value) {
+                        if (indexBloq === -1) {
+                            $scope.currentProject.selectedBloqs[type].push(bloqName);
+                        }
+                    } else {
+                        if (indexBloq > -1) {
+                            $scope.currentProject.selectedBloqs[type].splice(indexBloq, 1);
+                        }
+                    }
+            }
+            var isAdvance = type.indexOf('advance') > -1;
+            if ($scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                if (isAdvance) {
+                    $scope.checkAdvanceTab = 'full';
+                } else {
+                    $scope.checkBasicTab = 'full';
+                }
+                if ($scope.checkAdvanceTab === 'full' && $scope.checkBasicTab === 'full') {
+                    $scope.checkFunction = 'full';
+                }
+            } else {
+                if (isAdvance) {
+                    $scope.checkAdvanceTab = $scope.currentProject.selectedBloqs[type].length;
+                    $scope.checkFunction = $scope.checkAdvanceTab + $scope.checkBasicTab;
+                } else {
+                    $scope.checkBasicTab = $scope.currentProject.selectedBloqs[type].length;
+                    $scope.checkFunction = $scope.checkBasicTab;
+                }
+            }
+            currentProjectService.startAutosave();
+            utils.apply($scope);
+        };
+
+        $scope.statusGeneralCheck = function(type, counter, force) {
+            if ($scope.currentProject.selectedBloqs) {
+                var newcheckBasicTab = $scope.currentProject.selectedBloqs[type] ? $scope.currentProject.selectedBloqs[type].length : 0,
+                    advancedType = 'advanced' + type.charAt(0).toUpperCase() + type.slice(1),
+                    newcheckAdvanceTab = $scope.currentProject.selectedBloqs[advancedType] ? $scope.currentProject.selectedBloqs[advancedType].length : 0;
+                if (counter || counter === 0 || force) {
+                    if (newcheckBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                        //basic tab is full
+                        if (!$scope.currentProject.selectedBloqs[advancedType] || (newcheckAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length)) {
+                            //advanced tab is full
+                            counter = counter === 'full' ? 'complete' : 'full';
+                        } else {
+                            counter = newcheckBasicTab + (typeof newcheckAdvanceTab === 'number' ? newcheckAdvanceTab : 0);
+                        }
+                    } else {
+                        counter = newcheckBasicTab + (typeof newcheckAdvanceTab === 'number' ? newcheckAdvanceTab : 0);
+                    }
+                } else {
+                    if (newcheckBasicTab !== 0 && $scope.currentProject.selectedBloqs[type].length === $scope.common.properties.bloqsSortTree[type].length) {
+                        $scope.checkBasicTab = $scope.checkBasicTab === 'full' ? 'complete' : 'full';
+
+                    } else {
+                        $scope.checkBasicTab = newcheckBasicTab;
+                    }
+                    if (newcheckAdvanceTab !== 0 && $scope.currentProject.selectedBloqs[advancedType].length === $scope.common.properties.bloqsSortTree[advancedType].length) {
+                        $scope.checkAdvanceTab = $scope.checkAdvanceTab === 'full' ? 'complete' : 'full';
+                    } else {
+                        $scope.checkAdvanceTab = newcheckAdvanceTab;
+                    }
+                }
+            }
+            return counter;
+        };
+
+        $scope.common.itsPropertyLoaded().then(function() {
+            $scope.itsCurrentProjectLoaded().then(function() {
+                _.keys($scope.currentProject.selectedBloqs).forEach(function(type) {
+                    if (type.indexOf('advanced') === -1) {
+                        $scope.generalToolboxOptions[type].counter = $scope.statusGeneralCheck(type, null, 'force');
+                    }
+                });
+                utils.apply($scope);
+            });
+        });
+
+        /***********************************
+         end indeterminate checkbox
+         ***********************************/
+
+        loadBloqs();
+
+        $document.on('contextmenu', contextMenuDocumentHandler);
+        $document.on('click', clickDocumentHandler);
+
         $window.onresize = function() {
             startScrollsDimension(200);
         };

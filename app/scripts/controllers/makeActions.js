@@ -107,7 +107,7 @@ angular.module('bitbloqApp')
                     }
                 },
                 userProjectsOrderBy: 'updatedAt',
-                userProjectsReverseOrder: false,
+                userProjectsReverseOrder: true,
                 orderOptions: ['explore-sortby-recent', 'explore-sortby-old', 'explore-sortby-name-az', 'explore-sortby-name-za'],
                 userProjectsFilter: 'all',
                 sortProjects: sortProjects(modalScope)
@@ -245,8 +245,8 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.editExerciseGroups = function(exercise, groups) {
-            $scope.currentProjectService.assignGroup(exercise, $scope.common.user._id, groups).then(function(response) {
+        $scope.editExerciseGroups = function(exercise, groups, onlyEdit) {
+            $scope.currentProjectService.assignGroup(exercise, $scope.common.user._id, groups, null, onlyEdit).then(function(response) {
                 $scope.setGroups(response);
             });
         };
@@ -254,9 +254,6 @@ angular.module('bitbloqApp')
         $scope.isThirdPartyRobot = function() {
             return $scope.currentProject.hardware.showRobotImage ? true : false;
         };
-
-        console.log('currentProject');
-        console.log($scope.currentProject);
 
         $rootScope.$on('viewer-code:ready', function() {
             if (show) {
@@ -337,11 +334,11 @@ angular.module('bitbloqApp')
                 switch (type) {
                     case 'explore-sortby-recent':
                         modalScope.userProjectsOrderBy = 'updatedAt';
-                        modalScope.userProjectsReverseOrder = false;
+                        modalScope.userProjectsReverseOrder = true;
                         break;
                     case 'explore-sortby-old':
                         modalScope.userProjectsOrderBy = 'updatedAt';
-                        modalScope.userProjectsReverseOrder = true;
+                        modalScope.userProjectsReverseOrder = false;
                         break;
                     case 'explore-sortby-name-az':
                         modalScope.userProjectsOrderBy = 'name';

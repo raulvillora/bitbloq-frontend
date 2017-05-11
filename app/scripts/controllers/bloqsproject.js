@@ -10,8 +10,9 @@
 
 angular.module('bitbloqApp')
     .controller('BloqsprojectCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-        $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, hw2Bloqs, web2boardOnline, commonModals,
-        projectService, hardwareConstants, chromeAppApi) {
+                                             $q, web2board, alertsService, ngDialog, _, projectApi, bloqs, bloqsUtils, utils, userApi, hw2Bloqs, web2boardOnline, commonModals,
+                                             projectService, hardwareConstants, chromeAppApi)
+    {
 
         /*************************************************
          Project save / edit
@@ -37,7 +38,7 @@ angular.module('bitbloqApp')
 
         $scope.anyExternalComponent = function() {
             var connectedComponents = _.filter(projectService.project.hardware.components, function(item) {
-                return (item.id.indexOf('integrated') === -1);
+                return (item.uuid.indexOf('integrated') === -1);
             });
             return $scope.anyComponent(connectedComponents);
         };
@@ -334,15 +335,15 @@ angular.module('bitbloqApp')
             var components = {};
 
             var serialPort = _.find(componentsArray, function(o) {
-                return o.id === 'sp';
+                return o.uuid === 'sp';
             });
 
             var bluetooth = _.find(componentsArray, function(o) {
-                return o.id === 'bt';
+                return o.uuid === 'bt';
             });
 
             var phoneElements = _.find(componentsArray, function(o) {
-                return o.id === 'device';
+                return o.uuid === 'device';
             });
             if (serialPort) {
                 components.sp = serialPort.name;
@@ -357,13 +358,13 @@ angular.module('bitbloqApp')
             }
 
             _.forEach(componentsArray, function(value) {
-                if (hardwareConstants.viewerSensors.indexOf(value.id) !== -1) {
-                    if (components[value.id]) {
-                        components[value.id].names.push(value.name);
+                if (hardwareConstants.viewerSensors.indexOf(value.uuid) !== -1) {
+                    if (components[value.uuid]) {
+                        components[value.uuid].names.push(value.name);
                     } else {
-                        components[value.id] = {};
-                        components[value.id].type = value.type;
-                        components[value.id].names = [value.name];
+                        components[value.uuid] = {};
+                        components[value.uuid].type = value.type;
+                        components[value.uuid].names = [value.name];
                     }
                 }
             });
@@ -419,17 +420,12 @@ angular.module('bitbloqApp')
 
         function generateMobileTwitterCode(componentsArray, originalCode) {
             var components = $scope.getComponents(projectService.project.hardware.components);
-            var board = projectService.getBoardMetaData().id;
 
             var code = originalCode;
             var deviceName;
             //bqZUM
 
-            if (board === 'bqZUM') {
-                deviceName = projectService.project.bitbloqConnectBT.name;
-            } else {
-                deviceName = components.bt;
-            }
+            deviceName = components.bt;
 
             code = generateTwitterBloqCode(deviceName, code);
             return code;
@@ -494,16 +490,25 @@ angular.module('bitbloqApp')
         $scope.isRobotActivated = projectService.isRobotActivated;
 
         $scope.verify = function() {
-            if ($scope.common.useChromeExtension()) {
-                web2boardOnline.compile({
-                    board: projectService.getBoardMetaData(),
-                    code: $scope.getPrettyCode()
+            if (projectService.project.hardware.showRobotImage && !$scope.isRobotActivated()) {
+                alertsService.add({
+                    text: 'robots-not-activated-compile',
+                    id: 'activatedError',
+                    type: 'error',
+                    time: 'infinite'
                 });
             } else {
-                if (web2board.isWeb2boardV2()) {
-                    verifyW2b2();
+                if ($scope.common.useChromeExtension()) {
+                    web2boardOnline.compile({
+                        board: projectService.getBoardMetaData(),
+                        code: $scope.getPrettyCode()
+                    });
                 } else {
-                    verifyW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        verifyW2b2();
+                    } else {
+                        verifyW2b1();
+                    }
                 }
             }
         };
@@ -511,104 +516,143 @@ angular.module('bitbloqApp')
         var warningShown;
 
         $scope.upload = function(code) {
-            var viewer;
+            if (projectService.project.hardware.showRobotImage && !$scope.isRobotActivated()) {
+                alertsService.add({
+                    text: 'robots-not-activated-upload',
+                    id: 'activatedError',
+                    type: 'error',
+                    time: 'infinite'
+                });
+            } else {
+                var viewer;
 
-            viewer = !!code;
-            if (projectService.project.hardware.board) {
-                if (projectService.project.hardware.robot === 'mBot') {
-                    if ($scope.common.os === 'ChromeOS') {
-                        alertsService.add({
-                            text: 'mbot-not-compatible-chromebook',
-                            id: 'mbotChromebooks',
-                            type: 'error',
-                            time: 'infinite'
-                        });
-                    } else {
-                        if ($scope.common.user && $scope.common.user.chromeapp) {
+                viewer = !!code;
+                if (projectService.project.hardware.board) {
+                    if (projectService.project.hardware.robot === 'mBot') {
+                        if ($scope.common.os === 'ChromeOS') {
                             alertsService.add({
-                                text: 'mbot-not-compatible-chromeextension',
+                                text: 'mbot-not-compatible-chromebook',
                                 id: 'mbotChromebooks',
                                 type: 'error',
-                                time: 'infinite',
-                                linkText: 'click-here-load-with-web2board',
-                                link: function() {
-                                    alertsService.closeByTag('mbotChromebooks');
-                                    uploadWithWeb2board();
-                                }
+                                time: 'infinite'
                             });
                         } else {
-                            uploadWithWeb2board();
+                            if ($scope.common.user && $scope.common.user.chromeapp) {
+                                alertsService.add({
+                                    text: 'mbot-not-compatible-chromeextension',
+                                    id: 'mbotChromebooks',
+                                    type: 'error',
+                                    time: 'infinite',
+                                    linkText: 'click-here-load-with-web2board',
+                                    link: function() {
+                                        alertsService.closeByTag('mbotChromebooks');
+                                        uploadWithWeb2board();
+                                    }
+                                });
+                            } else {
+                                uploadWithWeb2board();
+                            }
+                        }
+                    } else {
+                        if (_showCompileWarning(projectService.project) && !warningShown) {
+                            alertsService.add({
+                                text: 'connect_alert_01',
+                                id: 'connect-error',
+                                type: 'warning',
+                            });
+                            warningShown = true;
+                        }
+                        if ($scope.common.useChromeExtension()) {
+                            if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                                    viewer: viewer
+                                });
+                            } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),
+                                    viewer: viewer
+                                });
+
+                            } else {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(code),
+                                    viewer: viewer
+                                });
+                            }
+
+                        } else {
+                            if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                                uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                            } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                                uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                            } else {
+                                uploadWithWeb2board();
+                            }
+
                         }
                     }
                 } else {
-                    if (showCompileWarning(projectService.project) && !warningShown) {
-                        alertsService.add({
-                            text: 'connect_alert_01',
-                            id: 'connect-error',
-                            type: 'warning',
-                        });
-                        warningShown = true;
-                    }
-                    if ($scope.common.useChromeExtension()) {
-                        if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
-                            web2boardOnline.compileAndUpload({
-                                board: projectService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())),
-                                viewer: viewer
-                            });
-                        } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
-                            web2boardOnline.compileAndUpload({
-                                board: projectService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())),
-                                viewer: viewer
-                            });
-
-                        } else {
-                            web2boardOnline.compileAndUpload({
-                                board: projectService.getBoardMetaData(),
-                                code: $scope.getPrettyCode(code),
-                                viewer: viewer
-                            });
-                        }
-
-                    } else {
-                        if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
-                            uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
-                        } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
-                            uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
-                        } else {
-                            uploadWithWeb2board();
-                        }
-
-                    }
+                    $scope.currentTab = 0;
+                    $scope.levelOne = 'boards';
+                    alertsService.add({
+                        text: 'alert-web2board-boardNotReady',
+                        id: 'web2board',
+                        type: 'warning'
+                    });
                 }
-            } else {
-                $scope.currentTab = 0;
-                $scope.levelOne = 'boards';
-                alertsService.add({
-                    text: 'alert-web2board-boardNotReady',
-                    id: 'web2board',
-                    type: 'warning'
-                });
             }
         };
 
-        function showCompileWarning(project) {
-            var compileWarning;
-            var result;
-            _.forEach(project.hardware.components, function(component) {
-                compileWarning = _.findKey(component.pin, function(o) {
-                    return o === '1' || o === '0';
-                });
-            });
-
-            if (compileWarning) {
-                result = true;
-            } else {
-                result = false;
+        function itsABoardWithCompileWarning(board) {
+            var result = false;
+            switch (board) {
+                case 'mcore':
+                case 'meauriga':
+                case 'meorion':
+                    result = false;
+                    break;
+                case 'bqZUM':
+                case 'FreaduinoUNO':
+                case 'ArduinoMEGA2560':
+                case 'ArduinoUNO':
+                case 'ArduinoLeonardo':
+                case 'ArduinoNano':
+                    result = true;
+                    break;
+                default:
+                    $log.log('this board never define if show a compile warnings');
             }
             return result;
         }
+
+        function _showCompileWarning(project) {
+            var compileWarning = false,
+                i = 0;
+            if (itsABoardWithCompileWarning(project.hardware.board)) {
+                while (!compileWarning && project.hardware.components && (i < project.hardware.components.length)) {
+                    compileWarning = $scope.showCompileWarningByComponent(project.hardware.board, project.hardware.components[i]);
+                    i++;
+                }
+            }
+            return compileWarning;
+        }
+
+        $scope.showCompileWarningByComponent = function(board, component, pin) {
+            var result = false;
+            if (itsABoardWithCompileWarning(board)) {
+                if ((component.uuid !== 'sp') && !component.integratedComponent) {
+                    result = _.findKey(pin || component.pin, function(o) {
+                        return ((o === '1') || (o === '0'));
+                    });
+                }
+            }
+
+            return result;
+        };
 
         function uploadWithWeb2board(code) {
             if (web2board.isWeb2boardV2()) {
@@ -698,7 +742,6 @@ angular.module('bitbloqApp')
 
         $scope.updateBloqs = function() {
             if (projectService.bloqs.varsBloq) {
-                console.log($scope.currentProjectService.componentsArray);
                 bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
             }
         };
@@ -709,9 +752,7 @@ angular.module('bitbloqApp')
         $scope.currentTab = 0;
 
         $scope.setTab = function(index) {
-            if (!_.isEqual(projectService.project, projectService.getDefaultProject())) {
-                projectService.startAutosave(true);
-            }
+
             if (index === 0) {
                 hw2Bloqs.repaint();
             } else if (index === 1) {
@@ -723,6 +764,9 @@ angular.module('bitbloqApp')
             }
 
             $scope.currentTab = index;
+            if (!_.isEqual(projectService.project, projectService.getDefaultProject())) {
+                projectService.startAutosave();
+            }
         };
 
         $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
@@ -808,17 +852,17 @@ angular.module('bitbloqApp')
          UNDO / REDO
          *************************************************/
 
-        //Stores one step in the history
+            //Stores one step in the history
         $scope.saveBloqStep = function(step) {
             //$log.debug('Guardamos Estado de Bloqs');
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: projectService.bloqs.varsBloq.getBloqsStructure(),
-                setup: projectService.bloqs.setupBloq.getBloqsStructure(),
-                loop: projectService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: projectService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: projectService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: projectService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             //showProjectResumeOnConsole(step);
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
@@ -992,7 +1036,8 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
 
                 event.preventDefault();
             }
@@ -1027,11 +1072,16 @@ angular.module('bitbloqApp')
                     break;
                 case 3:
                     if ($scope.tourCurrentStep === 2) {
-                        $scope.tourCurrentStep = 3;
-                        var runStepFour = $rootScope.$on('component-connected', function() {
-                            $scope.handleTour(4);
-                            runStepFour();
-                        });
+                        if (!$scope.currentProject.hardware.board) {
+                            $scope.tourCurrentStep = 1;
+                            $scope.handleTour(2);
+                        } else {
+                            $scope.tourCurrentStep = 3;
+                            var runStepFour = $rootScope.$on('component-connected', function() {
+                                $scope.handleTour(4);
+                                runStepFour();
+                            });
+                        }
                     }
                     break;
                 case 4:
@@ -1140,6 +1190,10 @@ angular.module('bitbloqApp')
             $scope.hwBasicsLoaded = $q.defer();
         };
 
+        $scope.itsCurrentProjectLoaded = function() {
+            return $scope.currentProjectLoaded.promise;
+        };
+
         $scope.common.itsUserLoaded().then(function() {
             $log.debug('There is a registed user');
             if ($routeParams.id) {
@@ -1238,8 +1292,6 @@ angular.module('bitbloqApp')
                 if (project.software) {
                     project.software.freeBloqs = project.software.freeBloqs || [];
                 }
-
-                project.hardware.board = project.hardware.board ? project.hardware.board.replace(/\s+/g, '') : '';
                 projectService.setProject(project, project.codeProject, true);
                 checkIfTwitterBloq(projectService.project);
                 $scope.saveBloqStep(_.clone(project.software));
@@ -1253,7 +1305,7 @@ angular.module('bitbloqApp')
 
         function confirmExit() {
             var closeMessage;
-            chromeAppApi.stopSerialCommunication();
+
             $scope.$apply();
 
             if (projectService.saveStatus === 1) {
@@ -1267,6 +1319,7 @@ angular.module('bitbloqApp')
 
         $scope.$on('$destroy', function() {
             $document.off('keydown', checkBackspaceKey);
+            chromeAppApi.stopSerialCommunication();
             $window.onbeforeunload = null;
             _destroyWeb2boardEvents();
         });

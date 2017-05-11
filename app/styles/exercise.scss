@@ -20,4 +20,43 @@
 
 .table__block__exercise {
     height: 540px;
+
+    .table__block__list {
+        position: relative;
+    }
+
+    .table__block__item--menu {
+        position: absolute;
+        height: auto;
+        width: auto;
+        margin-right: 3.5%;
+        margin-top: 3.5%;
+        right: 0;
+        background-color: white;
+        border: 1px solid #dadada;
+        border-top: 0;
+        white-space: nowrap;
+        z-index: 8;
+        border-left: 1px solid white;
+        padding-top: 0.5em;
+
+        &.table__block__moreactions--menu {
+            margin-right: 0;
+            margin-top: 36px;
+            -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+
+            &:hover {
+                background-color: white;
+            }
+        }
+
+        li:last-child {
+            margin-bottom: 0.5em;
+        }
+        -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
+    }
 }

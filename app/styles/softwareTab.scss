@@ -119,7 +119,7 @@ $toolboxWidthClosed: 210px;
     width: 17px;
     display: block;
     position: absolute;
-    left: calc(100% - #{$toolboxWidthClosed} - 20px);
+    left: calc(100% - #{$toolboxWidthClosed} - 36px);
     z-index: 1;
     overflow: hidden;
     overflow-y: auto;
@@ -200,7 +200,7 @@ $toolboxWidthClosed: 210px;
 
 .twitter-config-button {
     float: right;
-    margin-right: 235px;
+    margin-right: 242px;
     margin-top: 20px;
     cursor: pointer;
     color: $font-color-heading;

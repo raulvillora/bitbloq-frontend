@@ -22,7 +22,7 @@
                 <div class="form-control project__description">
                     <label>{{ common.section !== 'exercise'? 'description' : 'centerMode_title_exerciseContent' | translate }}*</label>
                     <span data-ng-class="{'form--textarea':true, 'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
-                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infotab-project-description' | translate}}" data-ng-model="currentProject.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description" required> </textarea>
+                        <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'exercise'?'infotab-exercise-description':'infotab-project-description' | translate}}" data-ng-model="currentProject.description" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-description" required> </textarea>
                     </span>
                     <span class="form--error" ng-show="form.textarea.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-descriptionError' | translate }}</small>
@@ -161,15 +161,13 @@
                 <legend class="h3">{{ 'infotab_title_groups' | translate }}</legend>
             </div>
             <ul class="table__block--invert">
-                <li class="table__block__list table__block__hover" ng-repeat="group in groups">
+                <li class="table__block__list" ng-repeat="group in groups">
                     <span class="table__block__item">
-                        <a ng-href="{{'#/center-mode/group/' + group._id}}">
-                            <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
-                                {{group.name}}
-                            </h2>
-                            <span class="block__item__explanation--subscript">{{group.initDate ? ('date_from' | translate)+' '+(group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
-                            <span class="block__item__explanation--subscript">{{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
-                        </a>
+                        <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
+                            {{group.name}}
+                        </h2>
+                        <span class="block__item__explanation--subscript">{{group.initDate ? ('date_from' | translate)+' '+(group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
+                        <span class="block__item__explanation--subscript">{{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
                     </span>
                 </li>
             </ul>

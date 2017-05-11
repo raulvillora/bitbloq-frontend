@@ -85,12 +85,13 @@
 // admin user
 @import "adminUser";
 // Banners
-@import "banners/campamentos2016";
+@import "banners/campamentos";
 //modals
 @import "modals/_serialMonitor.scss";
 @import "modals/_plotterMonitor.scss";
 @import "modals/_viewerMonitor.scss";
 @import "modals/_assignGroup.scss";
 @import "modals/_activateRobot.scss";
+@import "modals/_hardwareWizard.scss";
 //jspanel
 @import "jspanel/_serialmonitor.scss";

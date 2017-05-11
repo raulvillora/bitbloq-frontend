@@ -1,4 +1,5 @@
 /*jshint camelcase: false */
+/* jshint ignore:start */
 'use strict';
 
 /**
@@ -11,7 +12,7 @@ angular.module('bitbloqApp')
             restrict: 'A',
             link: function($scope, element) {
                 element.on('input', function() {
-                    if (element.val().length === element.attr('maxlength')) {
+                    if (element.val().length == element.attr('maxlength')) {
                         var $nextElement = element.parent().next().children();
                         if ($nextElement.length) {
                             $nextElement[0].focus();
@@ -21,3 +22,4 @@ angular.module('bitbloqApp')
             }
         };
     });
+/* jshint ignore:end */

@@ -8,11 +8,20 @@
 angular.module('bitbloqApp')
     .constant("hardwareConstants", {
         "boards": [{
-            "name": "bq ZUM",
-            "id": "bqZUM",
+            "uuid": "bqZUM",
             "mcu": "bt328",
             "vendorIds": ["0x403"],
             "productIds": ["0x6001"],
+            "integratedComponents": [{
+                "uuid": "bt",
+                "name": "default-var-name-standard_integrated_bt",
+                "pin": {
+                    "rx": "0",
+                    "tx": "1"
+                },
+                "baudRate": "19200",
+                "uid": "bq-bqzum-bt"
+            }],
             "showInToolbox": true,
             "pinSize": {
                 "digital": {
@@ -169,8 +178,7 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Freaduino UNO",
-            "id": "FreaduinoUNO",
+            "uuid": "FreaduinoUNO",
             "mcu": "uno",
             "vendorIds": ["0x2341"],
             "productIds": ["0x1"],
@@ -330,8 +338,7 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Arduino UNO",
-            "id": "ArduinoUNO",
+            "uuid": "ArduinoUNO",
             "mcu": "uno",
             "vendorIds": ["0x2341"],
             "productIds": ["0x43"],
@@ -481,10 +488,9 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "MCore",
-            "id": "mcore",
+            "uuid": "mcore",
             "mcu": "uno",
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "vendorIds": ["0x1A86"],
             "productIds": ["0x7523"],
             "showInToolbox": false,
@@ -584,10 +590,9 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Me Auriga",
-            "id": "meauriga",
+            "uuid": "meauriga",
             "mcu": "mega",
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "vendorIds": ["0x1A86"],
             "productIds": ["0x7523"],
             "underDevelopment": false,
@@ -792,12 +797,11 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Me Orion",
-            "id": "meorion",
+            "uuid": "meorion",
             "mcu": "uno",
             "vendorIds": ["0x1A86"],
             "productIds": ["0x7523"],
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "underDevelopment": false,
             "showInToolbox": false,
             "availableComponents": [
@@ -888,8 +892,7 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Arduino MEGA 2560",
-            "id": "ArduinoMEGA2560",
+            "uuid": "ArduinoMEGA2560",
             "mcu": "mega",
             "underDevelopment": false,
             "showInToolbox": true,
@@ -1290,8 +1293,7 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Arduino Leonardo",
-            "id": "ArduinoLeonardo",
+            "uuid": "ArduinoLeonardo",
             "mcu": "leonardo",
             "underDevelopment": true,
             "showInToolbox": true,
@@ -1442,8 +1444,7 @@ angular.module('bitbloqApp')
                 }]
             }
         }, {
-            "name": "Arduino Nano",
-            "id": "ArduinoNano",
+            "uuid": "ArduinoNano",
             "mcu": "nano",
             "underDevelopment": true,
             "showInToolbox": true,
@@ -1595,8 +1596,8 @@ angular.module('bitbloqApp')
             }
         }],
         "components": [{
-            "id": "led",
-            "manufacter": "standard",
+            "uuid": "led",
+            "manufacturer": "standard",
             "category": "leds",
             "width": 55,
             "height": 83,
@@ -1606,8 +1607,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "RGBled",
-            "manufacter": "standard",
+            "uuid": "RGBled",
+            "manufacturer": "standard",
             "category": "rgbs",
             "width": 67,
             "height": 79,
@@ -1619,8 +1620,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "us",
-            "manufacter": "standard",
+            "uuid": "us",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "US",
             "width": 120,
@@ -1633,8 +1634,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "button",
-            "manufacter": "standard",
+            "uuid": "button",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "digital",
             "width": 90,
@@ -1646,8 +1647,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "limitswitch",
-            "manufacter": "standard",
+            "uuid": "limitswitch",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "digital",
             "width": 100,
@@ -1659,8 +1660,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "encoder",
-            "manufacter": "standard",
+            "uuid": "encoder",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "encoder",
             "width": 74,
@@ -1678,8 +1679,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "sound",
-            "manufacter": "standard",
+            "uuid": "sound",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "digital",
             "width": 100,
@@ -1691,8 +1692,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "buttons",
-            "manufacter": "standard",
+            "uuid": "buttons",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "ButtonPad",
             "width": 165,
@@ -1704,8 +1705,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "irs",
-            "manufacter": "standard",
+            "uuid": "irs",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "digital",
             "width": 90,
@@ -1717,8 +1718,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "irs2",
-            "manufacter": "standard",
+            "uuid": "irs2",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "LineFollower",
             "width": 97,
@@ -1731,8 +1732,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "joystick",
-            "manufacter": "standard",
+            "uuid": "joystick",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "Joystick",
             "width": 100,
@@ -1748,8 +1749,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "ldrs",
-            "manufacter": "standard",
+            "uuid": "ldrs",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "analog",
             "width": 90,
@@ -1761,8 +1762,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "pot",
-            "manufacter": "standard",
+            "uuid": "pot",
+            "manufacturer": "standard",
             "category": "sensors",
             "type": "analog",
             "width": 74,
@@ -1774,8 +1775,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "rtc",
-            "manufacter": "standard",
+            "uuid": "rtc",
+            "manufacturer": "standard",
             "category": "clocks",
             "type": "analog",
             "width": 128,
@@ -1793,8 +1794,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "hts221",
-            "manufacter": "standard",
+            "uuid": "hts221",
+            "manufacturer": "standard",
             "category": "hts221",
             "type": "digital",
             "width": 107,
@@ -1812,8 +1813,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "buzz",
-            "manufacter": "standard",
+            "uuid": "buzz",
+            "manufacturer": "standard",
             "category": "buzzers",
             "type": "digital",
             "width": 85,
@@ -1824,8 +1825,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "servo",
-            "manufacter": "standard",
+            "uuid": "servo",
+            "manufacturer": "standard",
             "category": "servos",
             "width": 125,
             "height": 106,
@@ -1836,8 +1837,8 @@ angular.module('bitbloqApp')
             },
             "oscillator": false
         }, {
-            "id": "servocont",
-            "manufacter": "standard",
+            "uuid": "servocont",
+            "manufacturer": "standard",
             "category": "continuousServos",
             "width": 125,
             "height": 106,
@@ -1847,8 +1848,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "lcd",
-            "manufacter": "standard",
+            "uuid": "lcd",
+            "manufacturer": "standard",
             "category": "lcds",
             "width": 170,
             "height": 93,
@@ -1865,10 +1866,10 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "bt",
-            "manufacter": "standard",
+            "uuid": "bt",
+            "manufacturer": "standard",
             "category": "serialElements",
-            "baudRate": "9600",
+            "baudRate": 9600,
             "width": 115,
             "height": 88,
             "pins": {
@@ -1878,14 +1879,16 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "sp",
-            "manufacter": "standard",
+            "uuid": "sp",
+            "manufacturer": "standard",
             "category": "serialElements",
-            "baudRate": "9600",
+            "baudRate": 9600,
             "width": 115,
             "height": 71,
             "pin": {
-                "s": "serial"
+                "s": "serial",
+                "rx": "0",
+                "tx": "1"
             },
             "pins": {
                 "serial": [
@@ -1893,19 +1896,19 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "device",
-            "manufacter": "standard",
+            "uuid": "device",
+            "manufacturer": "standard",
             "category": "serialElements",
-            "baudRate": "9600",
+            "baudRate": 19200,
             "dragType": "btComponent",
             "width": 74,
             "height": 102,
             "pins": {}
         }, {
-            "id": "mkb_lightsensor",
+            "uuid": "mkb_lightsensor",
             "category": "mkb_lightsensor",
             "type": "analog",
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "width": 84.5,
             "height": 128,
             "dataReturnType": "float",
@@ -1915,9 +1918,9 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_linefollower",
+            "uuid": "mkb_linefollower",
             "category": "mkb_linefollower",
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "type": "mkb_linefollower",
             "width": 84.5,
             "height": 128,
@@ -1928,9 +1931,9 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_ultrasound",
+            "uuid": "mkb_ultrasound",
             "category": "mkb_ultrasound",
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "width": 134.5,
             "height": 106.2,
             "dataReturnType": "float",
@@ -1940,8 +1943,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_integrated_analogPinButton",
-            "manufacter": "makeblock",
+            "uuid": "mkb_integrated_analogPinButton",
+            "manufacturer": "makeblock",
             "category": "sensors",
             "type": "mkb_integrated_analogPinButton",
             "width": 0,
@@ -1953,8 +1956,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_integrated_lightsensor",
-            "manufacter": "makeblock",
+            "uuid": "mkb_integrated_lightsensor",
+            "manufacturer": "makeblock",
             "category": "mkb_lightsensor",
             "type": "mkb_integrated_lightsensor",
             "width": 0,
@@ -1966,8 +1969,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_integrated_buzz",
-            "manufacter": "makeblock",
+            "uuid": "mkb_integrated_buzz",
+            "manufacturer": "makeblock",
             "category": "mkb_integrated_buzz",
             "width": 0,
             "height": 0,
@@ -1977,8 +1980,8 @@ angular.module('bitbloqApp')
                 ]
             }
         }, {
-            "id": "mkb_integrated_RGB",
-            "manufacter": "makeblock",
+            "uuid": "mkb_integrated_RGB",
+            "manufacturer": "makeblock",
             "category": "mkb_integrated_RGB",
             "type": "mkb_integrated",
             "width": 0,
@@ -1990,30 +1993,26 @@ angular.module('bitbloqApp')
             }
         }],
         "robots": [{
-            "id": "zowi",
-            "name": "Zowi",
+            "uuid": "zowi",
             "board": "ArduinoUNO",
             "width": 75,
             "height": 86
         }, {
-            "id": "evolution",
-            "name": "Evolution",
+            "uuid": "evolution",
             "board": "bqZUM",
             "width": 75,
             "height": 86
         }, {
-            "id": "mbot",
-            "name": "mBot",
+            "uuid": "mbot",
             "board": "mcore",
             "family": "mBot",
             "thirdParty": true,
-            "manufacter": "makeblock",
+            "manufacturer": "makeblock",
             "useBoardImage": true,
             "width": 75,
             "height": 86
         }, {
-            "id": "rangerlandraider",
-            "name": "mRanger Land Raider",
+            "uuid": "rangerlandraider",
             "board": "meauriga",
             "family": "mRanger",
             "thirdParty": true,
@@ -2021,8 +2020,7 @@ angular.module('bitbloqApp')
             "width": 75,
             "height": 86
         }, {
-            "id": "rangerraptor",
-            "name": "mRanger Raptor",
+            "uuid": "rangerraptor",
             "board": "meauriga",
             "family": "mRanger",
             "thirdParty": true,
@@ -2030,8 +2028,7 @@ angular.module('bitbloqApp')
             "width": 75,
             "height": 86
         }, {
-            "id": "rangernervousbird",
-            "name": "mRanger Nervous bird",
+            "uuid": "rangernervousbird",
             "board": "meauriga",
             "family": "mRanger",
             "thirdParty": true,
@@ -2039,8 +2036,7 @@ angular.module('bitbloqApp')
             "width": 75,
             "height": 86
         }, {
-            "id": "startertank",
-            "name": "Starter kit Modo tanke",
+            "uuid": "startertank",
             "board": "meorion",
             "family": "starterKit",
             "thirdParty": true,
@@ -2048,8 +2044,7 @@ angular.module('bitbloqApp')
             "width": 75,
             "height": 86
         }, {
-            "id": "starterthreewheels",
-            "name": "Starter kit Modo 3 ruedas",
+            "uuid": "starterthreewheels",
             "family": "starterKit",
             "thirdParty": true,
             "board": "meorion",
@@ -2064,6 +2059,7 @@ angular.module('bitbloqApp')
             "ldrs",
             "sound",
             "us",
-            "irs"
+            "irs",
+            "button"
         ]
     });

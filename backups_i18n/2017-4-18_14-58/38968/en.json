@@ -1,0 +1,322 @@
+[
+    {
+        "term": "bitbloq-faq-title-1",
+        "definition": "What is Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-1",
+        "definition": "Bitbloq is an online tool that allows you to create programs for a microcontroller and load them onto it easily.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-2",
+        "definition": "How does Bitbloq work?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-2",
+        "definition": "Bitbloq allows you to program using blocks in a quick and intuitive way. You can also create your own projects and share them with the community. Electronics and programming have never been so much fun!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-3",
+        "definition": "What can I do with Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-3",
+        "definition": "Using Bitbloq and BQ electronics, you can create anything you can think of, from robots, home automation projects to electronic games. Your imagination truly has no limits!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-4",
+        "definition": "Who is behind this project?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-4",
+        "definition": "This project is being designed and developed at BQ. You can see the great team that makes Bitbloq a reality here.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-5",
+        "definition": "Who is Bitbloq for?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-5",
+        "definition": "For parents want to introduce their kids to robotics, electronics or programming; Bitbloq provides them with the necessary tools to enter this exciting world. For teachers that want to teach children how to create technology. For children that want to learn how technology works and how to create it for themselves, without limitations.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-6",
+        "definition": "Which boards are supported?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-6",
+        "definition": "At the moment the supported boards are : Freaduino UNO, Arduino UNO and BQ Zum, but we will add more soon, many more!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-7",
+        "definition": "Where are the projects I already had in the old Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-7",
+        "definition": "The projects that were developed using the old Bitbloq are not compatible with the new tool and we were not able to transfer them. You will have to create them from scratch in this new Bitbloq 2. We apologise for any inconvenience.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-8",
+        "definition": "Bitbloq and Scratch",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-8",
+        "definition": "Bitbloq uses the same programming paradigm as Scratch, meaning that it uses blocks to build programs which fit together like pieces of a puzzle. This makes programming accessible to kids, as they don\u00b4t have to worry about the syntax (i.e. they don\u00b4t need to learn how to write code in a literal programming language such as Processing, C++ or Java). Bitbloq uses this paradigm because it has been proven to be effective among children, and also because Scratch is already used in many schools and education centres. Our philosophy is that it\u00b4s better to join forces than to reinvent the wheel. We have developed Bitbloq using open source software libraries, primarily Bloqs, a library developed by BQ for creating online applications using blocks.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-9",
+        "definition": "Can video games be made using Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-9",
+        "definition": "It\u00b4s not possible to make video games on the computer, but it can be done using electronics with My First Robotics Kit, or any other electronics that use Zum or another board compatible with Arduino. Scratch has been designed to teach to kids to program by making video games, whereas Bitbloq is designed to teach to them through electronics, by creating robotics projects, domotics and home inventions, etc.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-10",
+        "definition": "Privacy Policy",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-10",
+        "definition": "The personal data that you provide will be included in a file owned and managed by Mundo Reader, S.L., pursuant to the Spanish data protections laws, for the purpose of providing this service to users, in accordance with the General Conditions currently in force. Consult our Privacy Policy at www.bq.com. By creating an account, the user acknowledges having read and accepted the terms and conditions of the Privacy Policy. If you have any doubts regarding this policy or the processing of your personal data, please write to lopd@bq.com",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-11",
+        "definition": "Web2Board won\u00b4t open on Windows",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-11",
+        "definition": "Reinstall Web2Board as administrator. To do this, right-click the executable file and select the option \"Run as administrator\"",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-12",
+        "definition": "I can\u00b4t log in to Bitbloq",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-12",
+        "definition": "Check that your computer's time and date are correct. If not, change them and try again.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-13",
+        "definition": "The unconnected blocks do not generate code",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-13",
+        "definition": "The new programming structure of Bitbloq 2 has been developed in such a way that your blocks need to be connected to a project block (\"Global variables and functions\", \"Setup\" or \"Loop\"). Unconnected blocks will not generate any code.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-14",
+        "definition": "The blocks that are not connected have disappeared from my project",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-14",
+        "definition": "The new programming structure of Bitbloq 2 has been developed in such a way that your blocks need to be connected to a project block (\"Global variables and functions\", \"Setup\" or \"Loop\"). Unconnected blocks will not be stored in the project.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-15",
+        "definition": "Why can\u00b4t children under 14 years old create an account?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-15",
+        "definition": "Due to the Spanish law \"Ley Org\u00e1nica de Protecci\u00f3n de Datos de Car\u00e1cter Personal\",  we would need an explicit permit from the father, mother or legal guardian in order to create an account. Because of this, we cannot allow them to create accounts. Instead, they must use an account owned by somebody older than 14, and be supervised by the latter when doing so.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-16",
+        "definition": "The board is not being detected",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-16",
+        "definition": "The board may not be detected for different reasons. Try the solutions listed below:\n1.- If the board you are using is a Zum, check that the switch is \"ON\".\n2.- Disconnect all the hardware components that could be connected and try to upload the program again.\n3.- Disconnect the board from the computer and connect it again. \n4.- Press the reset button when clicking on \"Load\". Release the reset button just before the programming starts.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-17",
+        "definition": "The LCD is not showing anything in the BQ Zum board",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-17",
+        "definition": "Check that the switch on the board is \"ON\". If it is \"OFF\", some components may work, whereas others that need higher current will not.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-18",
+        "definition": "I can\u00b4t log in via Google Plus on Chrome",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-18",
+        "definition": "Update Chrome to the latest version. If there are any updates pending, you may not be able to log in.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-19",
+        "definition": "How can I connect the LCD to the board?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-19",
+        "definition": "Connect the SCL cable and the SDA cable to the \"S\" analogue pins that are shown in Bitbloq. \nThe VCC pin is connected to any \"V\" analogue pin and the GND pin to any \"G\" analogue pin.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-20",
+        "definition": "The LCD is showing strange characters",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-20",
+        "definition": "The LCD may show strange characters when: \n1.- We are trying to write special characters such as  \u201c\u00a1\u201d, \u201c\u00bf\u201d o \u201c\u00f1\u201d or accented characters. \n2.- The switch behind the LCD is in \"ISP\". Change it to \"IIC\" and reset the board for it to work correctly.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    }
+]

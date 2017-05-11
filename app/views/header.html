@@ -12,7 +12,7 @@
                     </a>
                 </li>
             </ul>
-            <ul ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher' || common.userRole=== 'student')" class="nav__menu nav__menu__center-mode">
+            <ul ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher' || common.userRole=== 'student') && (enableCenterMode || common.user.properties.hasCenterModeEnabled)" class="nav__menu nav__menu__center-mode">
                 <li ng-if="common.user && common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
@@ -21,7 +21,7 @@
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher')" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
+                <li ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher') && (enableCenterMode || common.user.properties.hasCenterModeEnabled)" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/center-mode/teacher">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#people"></use>
@@ -29,7 +29,7 @@
                         <span>{{ 'header_tab_myClass' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && common.userRole=== 'student'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-exercise">
+                <li ng-if="common.user && common.userRole=== 'student' && (enableCenterMode || common.user.properties.hasCenterModeEnabled)" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-exercise">
                     <a class="nav__menu__link" href="#/center-mode/student">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#exercise"></use>
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="menu--user" ng-show="common.user"  ng-class="{'menu--user--reduced': (common.userRole==='headmaster' || common.userRole==='teacher' || common.userRole === 'student')}" >
-            <div class="menu--user__center-mode notification-info" ng-if="fakse" ng-if="common.user && (common.userRole!=='headmaster' && common.userRole!=='teacher' && common.userRole !== 'student')" ng-click="activateCenterMode()">
+            <div class="menu--user__center-mode notification-info" ng-if="common.user && (common.userRole!=='headmaster' && common.userRole!=='teacher' && common.userRole !== 'student') && (enableCenterMode || common.user.properties.hasCenterModeEnabled)" ng-click="activateCenterMode()">
                 <p class="notification-alert">{{'new' | translate}}</p>
                 <div class="notification__content">
                     <p class="notification__title">{{'centerMode_modal_createCenterTitle' | translate}}</p>

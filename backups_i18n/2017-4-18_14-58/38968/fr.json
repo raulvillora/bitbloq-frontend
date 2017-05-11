@@ -1,0 +1,322 @@
+[
+    {
+        "term": "bitbloq-faq-title-1",
+        "definition": "Bitbloq, qu\u00e9saco\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-1",
+        "definition": "Bitbloq est un outil en ligne qui te permet de cr\u00e9er des programmes et de les charger facilement sur une carte contr\u00f4leur. Le tout sans connaissances pr\u00e9alables.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-2",
+        "definition": "Comment \u00e7a marche\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-2",
+        "definition": "Avec Bitbloq, tu programmes par blocs. C\u2019est rapide et intuitif.  Tu peux cr\u00e9er tes propres projets et les partager avec la communaut\u00e9.  L\u2019\u00e9lectronique et la programmation n\u2019ont jamais \u00e9t\u00e9 aussi amusantes !",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-3",
+        "definition": "Qu'est-ce que je peux faire avec Bitbloq\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-3",
+        "definition": "Avec Bitbloq et l\u2019\u00e9lectronique BQ, tu peux cr\u00e9er tout ce que tu veux : des robots, des projets de domotique pour la maison, ou encore des jeux \u00e9lectroniques. Laisse parler ton imagination\u00a0!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-4",
+        "definition": "Qui se cache derri\u00e8re Bitbloq\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-4",
+        "definition": "Ce projet a \u00e9t\u00e9 con\u00e7u et d\u00e9velopp\u00e9 par BQ. Tu peux voir ici l'\u00e9quipe gr\u00e2ce \u00e0 qui ce projet a pris vie.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-5",
+        "definition": "\u00c0 qui s'adresse Bitbloq\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-5",
+        "definition": "Aux parents qui souhaitent initier leurs enfants \u00e0 la robotique, l\u2019\u00e9lectronique ou encore \u00e0 la programmation. Gr\u00e2ce \u00e0 Bitbloq, ils disposeront des outils n\u00e9cessaires pour d\u00e9couvrir ce monde passionnant. Aux enseignants qui souhaitent apprendre aux enfants \u00e0 devenir des cr\u00e9ateurs de technologie. Aux enfants qui veulent comprendre le fonctionnement de la technologie et cr\u00e9er librement leurs propres inventions.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-6",
+        "definition": "Quelles cartes contr\u00f4leurs puis-je utiliser\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-6",
+        "definition": "Pour le moment Bitbloq est compatible avec les cartes contr\u00f4leurs Freaduino UNO, Arduino UNO et BQ Zum, mais reste connect\u00e9, nous avons programm\u00e9 l'ajout de nouvelles cartes\u00a0!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-7",
+        "definition": "Que deviennent mes projets cr\u00e9\u00e9s dans l'ancien Bitbloq\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-7",
+        "definition": "Les projets cr\u00e9\u00e9s dans l'ancien Bitbloq ne sont pas compatibles avec la nouvelle version. C'est pourquoi nous n'avons malheureusement pas pu les transf\u00e9rer. Tu devras donc recr\u00e9er tes projets dans le nouveau Bitbloq. D\u00e9sol\u00e9s de te d\u00e9cevoir...",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-8",
+        "definition": "Bitbloq et Scratch",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-8",
+        "definition": "Bitbloq utilise le m\u00eame paradigme de programmation que Scratch, c\u2019est-\u00e0-dire que Bitbloq emploie des blocs s\u2019embo\u00eetant les uns dans les autres, comme les pi\u00e8ces d\u2019un puzzle, pour construire des programmes. La programmation est ainsi accessible aux enfants car ils n\u2019ont pas \u00e0 se pr\u00e9occuper de la syntaxe (c\u2019est-\u00e0-dire qu\u2019ils n\u2019ont pas besoin d\u2019apprendre \u00e0 \u00e9crire le code dans un langage de programmation litt\u00e9ral tel que Processing, C++ ou Java). Bitbloq utilise ce paradigme car son efficacit\u00e9 chez les enfants a \u00e9t\u00e9 d\u00e9montr\u00e9e. De plus, Scratch est d\u00e9j\u00e0 utilis\u00e9 dans de nombreux \u00e9tablissements scolaires et centres \u00e9ducatifs. Notre philosophie est qu\u2019il vaut mieux unir nos forces que r\u00e9inventer ce qui existe d\u00e9j\u00e0. Nous avons d\u00e9velopp\u00e9 Bitbloq en utilisant des biblioth\u00e8ques de logiciels sous licence libre. Nous nous sommes appuy\u00e9s principalement sur bloqs, une biblioth\u00e8que d\u00e9velopp\u00e9e par BQ pour la cr\u00e9ation d\u2019applications en ligne bas\u00e9es sur des blocs. ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-9",
+        "definition": "Peut-on r\u00e9aliser des jeux vid\u00e9o avec Bitbloq\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-9",
+        "definition": "On ne peut pas r\u00e9aliser de jeux vid\u00e9o sur ordinateur, mais on peut r\u00e9aliser des jeux en utilisant les composants \u00e9lectroniques de Mon premier kit de robotique ou d'autres composants compatibles avec la carte ZUM ou une carte compatible avec Arduino. Scratch a \u00e9t\u00e9 con\u00e7u pour apprendre aux enfants \u00e0 programmer en r\u00e9alisant des jeux vid\u00e9o, alors que Bitbloq a \u00e9t\u00e9 con\u00e7u pour apprendre aux enfants \u00e0 programmer en utilisant l\u2019\u00e9lectronique, et en r\u00e9alisant des projets robotiques et domotiques, des inventions maison, etc.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-10",
+        "definition": "Politique de confidentialit\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-10",
+        "definition": "Les donn\u00e9es \u00e0 caract\u00e8re personnel fournies int\u00e8greront un fichier g\u00e9r\u00e9 par Mundo Reader, S.L., conform\u00e9ment \u00e0 la r\u00e8glementation espagnole de protection des donn\u00e9es, dans le but de pouvoir fournir ce service aux utilisateurs en accord avec les conditions g\u00e9n\u00e9rales en vigueur. Notre politique de confidentialit\u00e9 est \u00e0 consulter sur www.bq.com. En cr\u00e9ant un compte, l'utilisateur reconna\u00eet qu'il a lu et accept\u00e9 les conditions de la politique de confidentialit\u00e9. Pour toute question au sujet de notre politique ou du traitement des donn\u00e9es personnelles, envoyer un message \u00e0 lopd@bq.com.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-11",
+        "definition": "Web2Board ne s'ouvre pas dans Windows",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-11",
+        "definition": "R\u00e9installe Web2Board en tant qu'administrateur. Pour cela, fais un clic droit sur l'ex\u00e9cutable et s\u00e9lectionne \u00ab\u00a0Ex\u00e9cuter en tant qu'administrateur\u00a0\u00bb.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-12",
+        "definition": "Je n'arrive pas ouvrir ma session Bitbloq",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-12",
+        "definition": "Regarde si la date et l'heure affich\u00e9es par ton ordinateur sont correctes. Si ce n'est pas le cas, corrige-les puis r\u00e9essaie.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-13",
+        "definition": "Les blocs isol\u00e9s ne g\u00e9n\u00e8rent pas de code",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-13",
+        "definition": "Avec la nouvelle structure de programmation de Bitbloq 2, tu dois connecter les blocs \u00e0 un bloc de projet (Variables globales et fonctions, Instructions de d\u00e9part (Setup) ou Boucle (Loop)). Si un bloc est isol\u00e9, il ne g\u00e9n\u00e8rera pas de code et par cons\u00e9quent il n'aura pas d'effet sur la carte ou le robot.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-14",
+        "definition": "Les blocs isol\u00e9s ont disparu de mon projet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-14",
+        "definition": "Avec la nouvelle structure de programmation de Bitbloq 2, tu dois connecter les blocs \u00e0 un bloc de projet (Variables globales et fonctions, Instructions de d\u00e9part (Setup) ou Boucle (Loop)). Les blocs isol\u00e9s dispara\u00eetront du projet.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-15",
+        "definition": "Pourquoi les enfants de moins de 14 ans ne peuvent pas se cr\u00e9er un compte\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-15",
+        "definition": "Conform\u00e9ment \u00e0 la loi organique espagnole de protection des donn\u00e9es \u00e0 caract\u00e8re personnel, pour qu'un enfant de moins de 14 ans puisse se cr\u00e9er un compte, nous devons obtenir l'accord explicite de ses parents ou de son tuteur, et ces derniers doivent nous fournir des papiers d\u00e9taill\u00e9s. C'est pourquoi nous ne pouvons pas laisser des enfants de moins de 14 ans se cr\u00e9er de compte utilisateur. Ils devront utiliser un compte cr\u00e9\u00e9 par un utilisateur de plus de 14 ans et ce sous la supervision de ce dernier.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-16",
+        "definition": "Ma carte contr\u00f4leur n'est pas d\u00e9tect\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-16",
+        "definition": "Ce probl\u00e8me peut avoir diff\u00e9rentes causes. Voici quelques possibilit\u00e9s. Si le probl\u00e8me persiste, \u00e9cris-nous.\n1.- Si tu utilises une carte ZUM, v\u00e9rifie que l'interrupteur est sur la position ON.\n2.- D\u00e9connecte tous les composants connect\u00e9s et r\u00e9essaie de charger le programme\n3.- D\u00e9branche le c\u00e2ble USB de la carte puis rebranche-le.\n4.- Appuie sur le bouton reset de ta carte tout en cliquant sur Charger. Rel\u00e2che le bouton juste avant que ne d\u00e9marre la programmation de la carte.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-17",
+        "definition": "L'\u00e9cran LCD ne s'allume pas avec ma BQ ZUM",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-17",
+        "definition": "V\u00e9rifie que le bouton ON\/OFF de ta carte est sur ON. Dans le cas contraire les composants de base fonctionnent mais ce n'est pas le cas des composants n\u00e9cessitant plus de puissance.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-18",
+        "definition": "Chrome ne me laisse pas me connecter via Google plus",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-18",
+        "definition": "Mets \u00e0 jour Chrome. Si tu as des mises \u00e0 jour en attente, il est possible que tu n'arrives pas \u00e0 te connecter.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-19",
+        "definition": "Comment dois-je connecter l'\u00e9cran LCD \u00e0 la carte\u00a0?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-19",
+        "definition": "Connecte le c\u00e2ble SCL \u00e0 la broche analogique S indiqu\u00e9e sur Bitbloq (dans le cas d'une BQ ZUM, il s'agit de la broche bleue A5), puis le c\u00e2ble SDA \u00e0 la broche analogique S indiqu\u00e9e sur Bitbloq (dans le cas d'une BQ ZUM, il s'agit de la broche bleue A4).\nTu peux connecter la broche VCC \u00e0 n'importe quelle broche analogique V et tu peux connecter la broche GND \u00e0 n'importe quelle broche analogique G.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-20",
+        "definition": "L'\u00e9cran LCD affiche de dr\u00f4les de caract\u00e8res ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-20",
+        "definition": "Il y a deux explications \u00e0 cela\u00a0: \n1.- L'\u00e9cran LCD n'accepte pas certains caract\u00e8res sp\u00e9ciaux, par exemple les caract\u00e8res accentu\u00e9s. Il les remplace par des caract\u00e8res \u00e9tranges. \n2.- L'interrupteur situ\u00e9 \u00e0 l'arri\u00e8re de l'\u00e9cran LCD doit \u00eatre sur la position IIC. Sinon de dr\u00f4les de caract\u00e8res apparaissent\u00a0!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    }
+]

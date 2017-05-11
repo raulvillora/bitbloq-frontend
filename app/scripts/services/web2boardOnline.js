@@ -185,7 +185,7 @@ angular.module('bitbloqApp')
             if (params.viewer) {
                 alertsService.add({
                     text: 'alert-viewer-reconfigure',
-                    id: 'reconfigure',
+                    id: 'upload',
                     type: 'loading'
                 });
             } else {
@@ -208,7 +208,7 @@ angular.module('bitbloqApp')
                         web2board.setInProcess(true);
                         alertsService.add({
                             text: 'alert-viewer-reconfigured',
-                            id: 'reconfigure',
+                            id: 'upload',
                             type: 'ok',
                             time: 5000
                         });

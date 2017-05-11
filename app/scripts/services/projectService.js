@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
+    {
 
         var exports = {},
             thereAreWatchers = false,
@@ -171,15 +172,15 @@ angular.module('bitbloqApp')
         };
 
         exports.getBoardMetaData = function() {
-            return _.find(hardwareConstants.boards, function(board) {
-                return (board.id === exports.project.hardware.board || board.name === exports.project.hardware.board);
+            return _.find(common.userHardware.boards, function(board) {
+                return (board.uuid === exports.project.hardware.board || board.name === exports.project.hardware.board);
             });
         };
 
         exports.getRobotsMap = function(hardwareConstants) {
             var map = {};
             for (var i = 0; i < hardwareConstants.robots.length; i++) {
-                map[hardwareConstants.robots[i].id] = hardwareConstants.robots[i];
+                map[hardwareConstants.robots[i].uuid] = hardwareConstants.robots[i];
             }
             return map;
         };
@@ -187,13 +188,20 @@ angular.module('bitbloqApp')
         exports.getRobotMetaData = function(robotId) {
             robotId = robotId || exports.project.hardware.robot;
             return _.find(hardwareConstants.robots, function(robot) {
-                return robot.id === robotId;
+                return robot.uuid === robotId;
             });
         };
 
         exports.getCleanProject = function(projectRef, download) {
             projectRef = projectRef || exports.project;
-            var cleanProject = _.cloneDeep(projectRef);
+            var cleanProject = JSON.parse(angular.toJson(_.cloneDeep(projectRef)));
+            //hand made remove $$haskey properties
+            if (cleanProject.hardware.components) {
+                for (var i = 0; i < cleanProject.hardware.components.length; i++) {
+                    delete cleanProject.hardware.components[i].$$hashKey;
+                }
+            }
+
             if (download) {
                 delete cleanProject._id;
                 delete cleanProject._acl;
@@ -376,12 +384,24 @@ angular.module('bitbloqApp')
             sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
+            //check board
+            newproject.hardware.board = newproject.hardware.board ? newproject.hardware.board.replace(/\s+/g, '') : '';
+
+            //check old components
             if (newproject.hardware.components) {
-                for (var i = 0; i < newproject.hardware.components.length; i++) {
-                    if (newproject.hardware.components[i].category === 'sensors') {
-                        newproject.hardware.components[i].dataReturnType = sensorsTypes[newproject.hardware.components[i].id];
+                newproject.hardware.components.forEach(function(item) {
+                    if (item.id) {
+                        item.uuid = item.id;
                     }
-                }
+                    if (item.category === 'sensors') {
+                        item.dataReturnType = sensorsTypes[item.id];
+                    }
+                    //check serial port
+                    if (item.uuid === 'sp') {
+                        item.pin.rx = '0';
+                        item.pin.tx = '1';
+                    }
+                });
             }
 
             //end temp fix
@@ -604,11 +624,10 @@ angular.module('bitbloqApp')
             if (mainTag) {
                 newHardwareTags.push(mainTag);
             }
-            if (exports.project.bitbloqConnectBT) {
-                newHardwareTags.push('Bitbloq Connect');
-            }
             exports.project.hardware.components.forEach(function(comp) {
-                newHardwareTags.push(comp.id);
+                if (!comp.integratedComponent) {
+                    newHardwareTags.push(comp.uuid);
+                }
             });
 
             if (exports.project.useBitbloqConnect) {
@@ -742,7 +761,7 @@ angular.module('bitbloqApp')
         function getFamilyName(robot) {
             var robotFamily;
             hardwareConstants.robots.forEach(function(value) {
-                if (value.id === robot) {
+                if (value.uuid === robot) {
                     robotFamily = value.family;
                 }
             });
@@ -753,7 +772,8 @@ angular.module('bitbloqApp')
         function canUseThirdParty(robot) {
             var canUse = false;
             if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment()
-                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
+                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate)))
+            {
                 canUse = true;
             } else {
                 canUse = false;

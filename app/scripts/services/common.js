@@ -9,7 +9,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils, userRobotsApi) {
+    .service('common', function($filter, $log, envData, packageData, userApi, User, centerModeApi, $location, $rootScope, $q, _, $sessionStorage, $translate, ngDialog, $http, amMoment, $window, $cookieStore, alertsService, utils, userRobotsApi, hardwareApi) {
 
         var exports = {},
             navigatorLang = $window.navigator.language || $window.navigator.userLanguage;
@@ -21,6 +21,7 @@ angular.module('bitbloqApp')
         exports.avatarChange = false;
         exports.draggingElement = {};
         exports.connectedWeb2Board = false;
+        exports.userHardware = {};
         exports.isLoading = false;
         exports.isLoggedIn = userApi.isLoggedIn;
         exports.isAdmin = userApi.isAdmin;
@@ -72,29 +73,33 @@ angular.module('bitbloqApp')
             ru: 'en-GB',
             zh: 'en-GB'
         };
-        var loadedUserPromise = $q.defer();
-        var loadedRolePromise = $q.defer();
+        var loadedUserPromise = $q.defer(),
+            loadedRolePromise = $q.defer(),
+            loadedPropertyPromise = $q.defer();
 
         exports.setUser = function(user) {
             if (loadedUserPromise.promise.$$state.status !== 0) {
                 loadedUserPromise = $q.defer();
             }
             if (user !== null && typeof user === 'object') {
-                var lng = user.language || localStorage.guestLanguage || navigatorLang || 'es-ES';
+                var lng = user.language || sessionStorage.guestLanguage || navigatorLang || 'es-ES';
                 $translate.use(lng);
                 if (user.cookiePolicyAccepted) {
                     $sessionStorage.cookiesAccepted = true;
                     exports.cookiesAccepted = true;
                 }
                 exports.user = user;
+                exports.userHardware = user.hardware;
                 getUserRole();
                 loadedUserPromise.resolve();
             } else {
                 exports.user = null;
-                $translate.use(localStorage.guestLanguage || navigatorLang);
+                $translate.use(sessionStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
                 exports.userRole = 'user';
-                loadedUserPromise.reject();
+                hardwareApi.getAll().then(function(response) {
+                    exports.userHardware = response.data;
+                }).finally(loadedUserPromise.reject);
             }
         };
 
@@ -104,6 +109,10 @@ angular.module('bitbloqApp')
 
         exports.itsRoleLoaded = function() {
             return loadedRolePromise.promise;
+        };
+
+        exports.itsPropertyLoaded = function() {
+            return loadedPropertyPromise.promise;
         };
 
         var md = new MobileDetect(window.navigator.userAgent);
@@ -169,6 +178,8 @@ angular.module('bitbloqApp')
             $http.get(envData.config.serverUrl + 'property').success(function(items) {
                 $log.debug('properties', items);
                 exports.properties = items[0];
+
+                loadedPropertyPromise.resolve();
             });
         }
 

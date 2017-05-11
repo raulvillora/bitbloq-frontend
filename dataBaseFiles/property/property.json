@@ -1,5 +1,5 @@
 [{
-    "bitbloqLibsVersion": "1.1.3",
+    "bitbloqLibsVersion": "1.1.4",
     "bloqsSortTree": {
         "advancedClasses": [{
             "name": "classChildren"
@@ -535,10 +535,12 @@
         "zowi": "1.0.0"
     },
     "boardsFirmwareVersion": {
-        "mcore": "1.0.0",
+        "mcore": "1.0.1",
         "meauriga": "1.0.0",
         "meorion": "1.0.0"
     },
     "web2boardVersion": "1.0.0",
-    "currentweb2boardVersion": "2.1.3"
+    "currentweb2boardVersion": "2.1.3",
+    "bannerClass": "campamentos",
+    "bannerHTML": "campusverano2017"
 }]

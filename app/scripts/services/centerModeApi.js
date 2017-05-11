@@ -23,7 +23,8 @@ angular
             getTeachers: getTeachers,
             isHeadmaster: isHeadmaster,
             registerInGroup: registerInGroup,
-            updateGroup: updateGroup
+            updateGroup: updateGroup,
+            unassignExerciseInGroup: unassignExerciseInGroup
         };
 
         function addTeachers(teachers, centerId) {
@@ -76,7 +77,7 @@ angular
         function deleteStudent(studentId, groupId) {
             return $http({
                 method: 'DELETE',
-                url: envData.config.centerModeUrl + 'group/' + groupId + '/student/' + studentId
+                url: envData.config.centerModeUrl + 'member/student/' + studentId + '/group/' + groupId
             });
         }
 
@@ -126,7 +127,7 @@ angular
             });
         }
 
-        function getGroups(role, teacherId, centerId) {
+        function getGroups(role, teacherId, centerId, withoutClosed) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
@@ -142,7 +143,8 @@ angular
                     method: 'GET',
                     url: envData.config.centerModeUrl + 'group/',
                     params: {
-                        role: role
+                        role: role,
+                        withoutClosed: withoutClosed
                     }
                 });
             }
@@ -152,6 +154,13 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'assignment/exercise/' + exerciseId
+            });
+        }
+
+        function unassignExerciseInGroup(exerciseId, groupId) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.centerModeUrl + 'assignment/exercise/' + exerciseId + '/group/' + groupId
             });
         }
 

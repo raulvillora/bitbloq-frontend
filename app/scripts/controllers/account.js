@@ -9,7 +9,17 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common) {
+    .controller('AccountCtrl', function($scope, $rootScope, $timeout, $translate, $location, $q, $auth, User, envData, imageApi, userApi, _, alertsService, ngDialog, utils, common, commonModals, hardwareService) {
+
+        $scope.common.oldTempAvatar = {};
+        $scope.test = envData.config.supportedLanguages;
+        $scope.translate = $translate;
+        $scope.tempAvatar = {};
+        $scope.avatarUpdate = false;
+        $scope.userHardware = [];
+        $scope.userKits = [];
+        var usernameBackup = null;
+
         $scope.authenticate = function(prov) {
             $auth.authenticate(prov).then(function(response) {
                 var options = {
@@ -37,41 +47,60 @@ angular.module('bitbloqApp')
             });
         };
 
-        function _isUserName(username) {
-            var regexp = /^[0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/;
-            if (username.search(regexp) === -1) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+        $scope.changeLanguage = function(language) {
+            $translate.use(language);
+            common.saveUserLanguage(language);
+        };
 
-        $scope.validateProfile = function() {
-            if (usernameBackup !== $scope.common.user.username) {
-                if (!_isUserName($scope.common.user.username)) {
-                    alertsService.add({
-                        text: 'account-change-username-alphanumeric-numeric-error',
-                        id: 'saved-user',
-                        type: 'error'
-                    });
-                } else {
-                    userApi.validateUserName($scope.common.user.username).then(function(res) {
-                        if (res.status === 200) {
-                            alertsService.add({
-                                text: 'account-change-username-repeated',
-                                id: 'saved-user',
-                                type: 'error'
+        $scope.changePassword = function() {
+            var dialog,
+                modalScope = $rootScope.$new(),
+                confirmAction = function(form) {
+                    modalScope.errorPassword = false;
+                    if (_.isEmpty(form.$error)) {
+                        if (form.passwordMain.$modelValue === form.passwordRepeat.$modelValue) {
+                            var newPassword = form.passwordMain.$modelValue;
+                            userApi.changePasswordAuthenticated(newPassword).then(function() {
+                                alertsService.add({
+                                    text: 'reset-password-saved',
+                                    id: 'saved-password',
+                                    type: 'ok',
+                                    time: 5000
+                                });
+                                dialog.close();
+                            }, function() {
+                                alertsService.add({
+                                    text: 'reset-password-saved-error',
+                                    id: 'error-password',
+                                    type: 'warning'
+                                });
                             });
                         } else {
-                            $scope.saveProfile();
+                            modalScope.errorPassword = true;
                         }
-                    });
-                }
-            } else {
-                $scope.saveProfile();
-            }
+                    }
+                };
 
+            _.extend(modalScope, {
+                title: 'modal-reset-password-title',
+                confirmButton: 'modal-reset-password-button-ok',
+                contentTemplate: 'views/modals/resetPassword.html',
+                confirmAction: confirmAction,
+                submitted: false,
+                errorPassword: false
+            });
+
+            dialog = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container password-reset--modal',
+                scope: modalScope
+            });
+
+            $('textarea.msd-elastic').autogrow({
+                onInitialize: true
+            });
         };
+
         $scope.saveProfile = function() {
             var defered = $q.defer();
 
@@ -127,9 +156,12 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        $scope.changeLanguage = function(language) {
-            $translate.use(language);
-            common.saveUserLanguage(language);
+        $scope.selectHardware = function() {
+            $scope.common.itsUserLoaded().then(function() {
+                hardwareService.getUserKits(common.userHardware).then(function(kits) {
+                    commonModals.selectHardware(kits);
+                });
+            });
         };
 
         $scope.uploadImageTrigger = function(type) {
@@ -179,64 +211,61 @@ angular.module('bitbloqApp')
                 }
             });
         };
-        $scope.changePassword = function() {
-            var dialog,
-                modalScope = $rootScope.$new(),
-                confirmAction = function(form) {
-                    modalScope.errorPassword = false;
-                    if (_.isEmpty(form.$error)) {
-                        if (form.passwordMain.$modelValue === form.passwordRepeat.$modelValue) {
-                            var newPassword = form.passwordMain.$modelValue;
-                            userApi.changePasswordAuthenticated(newPassword).then(function() {
-                                alertsService.add({
-                                    text: 'reset-password-saved',
-                                    id: 'saved-password',
-                                    type: 'ok',
-                                    time: 5000
-                                });
-                                dialog.close();
-                            }, function() {
-                                alertsService.add({
-                                    text: 'reset-password-saved-error',
-                                    id: 'error-password',
-                                    type: 'warning'
-                                });
+
+        $scope.validateProfile = function() {
+            if (usernameBackup !== $scope.common.user.username) {
+                if (!_isUserName($scope.common.user.username)) {
+                    alertsService.add({
+                        text: 'account-change-username-alphanumeric-numeric-error',
+                        id: 'saved-user',
+                        type: 'error'
+                    });
+                } else {
+                    userApi.validateUserName($scope.common.user.username).then(function(res) {
+                        if (res.status === 200) {
+                            alertsService.add({
+                                text: 'account-change-username-repeated',
+                                id: 'saved-user',
+                                type: 'error'
                             });
                         } else {
-                            modalScope.errorPassword = true;
+                            $scope.saveProfile();
                         }
-                    }
-                };
-
-            _.extend(modalScope, {
-                title: 'modal-reset-password-title',
-                confirmButton: 'modal-reset-password-button-ok',
-                contentTemplate: 'views/modals/resetPassword.html',
-                confirmAction: confirmAction,
-                submitted: false,
-                errorPassword: false
-            });
-
-            dialog = ngDialog.open({
-                template: '/views/modals/modal.html',
-                className: 'modal--container password-reset--modal',
-                scope: modalScope
-            });
-
-            $('textarea.msd-elastic').autogrow({
-                onInitialize: true
-            });
+                    });
+                }
+            } else {
+                $scope.saveProfile();
+            }
         };
 
-        $scope.common.oldTempAvatar = {};
-        $scope.test = envData.config.supportedLanguages;
-        $scope.translate = $translate;
-        $scope.tempAvatar = {};
-        $scope.avatarUpdate = false;
-        var usernameBackup = null;
+        /**********************
+         ***PRIVATE FUNCTIONS***
+         ***********************/
+        function _isUserName(username) {
+            var regexp = /^[0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/;
+            if (username.search(regexp) === -1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        /*************************
+         *********** INIT *********
+         **************************/
 
         $scope.common.itsUserLoaded().then(function() {
             usernameBackup = $scope.common.user.username;
+            hardwareService.getUserHardware().then(function(res) {
+                $scope.userHardware = res;
+            });
+            $scope.$watch('common.userHardware', function(oldValue, newValue) {
+                if (oldValue && oldValue !== newValue) {
+                    hardwareService.getUserHardware().then(function(res) {
+                        $scope.userHardware = res;
+                    });
+                }
+            });
             $scope.$watch('common.user.firstName', function(oldValue, newValue) {
                 if (oldValue && oldValue !== newValue) {
                     $scope.validateProfile();
@@ -271,6 +300,7 @@ angular.module('bitbloqApp')
                 if (newVal !== oldVal && newVal !== '' && $scope.common.user !== null) {
                     $scope.validateProfile();
                 }
+
             });
 
         }, function() {

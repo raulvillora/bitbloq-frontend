@@ -4,6 +4,7 @@ $titleWidth: 76px;
 $makeActionsHeightNumber: 40;
 $makeActionsHeight: $makeActionsHeightNumber + px;
 $leftBarWidth: 70px;
+
 .make-view {
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -13,6 +14,7 @@ $leftBarWidth: 70px;
     height: 100%;
     width: 100%;
     overflow: hidden;
+
     &.walkthrough {
         .tour-steps {
             & > * {
@@ -22,11 +24,13 @@ $leftBarWidth: 70px;
                 z-index: 10;
                 border-radius: 2px;
                 max-width: 220px;
+
                 small {
                     display: block;
                     color: #c0c3c9;
                     font-size: 12px;
                 }
+
                 span {
                     display: block;
                     color: white;
@@ -34,8 +38,10 @@ $leftBarWidth: 70px;
                     font-weight: 700;
                 }
             }
+
             .tour-step--left {
                 left: 85px;
+
                 &:after {
                     content: '';
                     position: absolute;
@@ -52,8 +58,10 @@ $leftBarWidth: 70px;
                     border-right: 10px solid #373b44;
                 }
             }
+
             .tour-step--right {
                 right: 240px;
+
                 &:after {
                     content: '';
                     position: absolute;
@@ -71,79 +79,98 @@ $leftBarWidth: 70px;
                     border-left: 10px solid #373b44;
                 }
             }
+
             .tour-step--first {
                 top: -4px;
             }
+
             .tour-step--second {
                 top: 40%;
+
                 :last-child {
                     color: #c0c3c9;
                     font-size: 12px;
                     font-style: italic;
                 }
             }
+
             .tour-step--third {
                 top: 36px;
             }
+
             .tour-step--fourth {
                 top: 59px;
             }
+
             .tour-step--fifth {
                 white-space: nowrap;
             }
+
             .tour-step--sixth {
-                right: 515px;
-                top: 84px;
+                right: 385px;
+                top: 64px;
                 min-width: 260px;
             }
+
             .tour-step--seventh {
                 top: -30px;
                 right: 145px;
                 min-width: 200px;
+
                 &:after {
                     top: 5px;
                     bottom: inherit;
                 }
             }
+
             .tour-step--seventh--logged {
                 min-width: 240px;
                 left: -189px;
                 top: -105px;
+
                 &:after {
                     top: 30%;
                     bottom: inherit;
                 }
             }
         }
+
         .toolbox-step {
             border: 2px solid #f1c933;
         }
+
         &.step-1 {
             [data-walkthrough="boards"] {
                 border: 2px solid #f1c933;
+
                 &.tabs__header__item--vertical {
                     border-right: none;
                 }
+
                 &:not(.tabs__header__item--vertical) {
                     border-left: none;
                 }
             }
         }
+
         &.step-3 {
             [dragid="led"] {
                 border: 2px solid #f1c933 !important;
             }
         }
+
         &.step-4 {
             [data-walkthrough="software-tab"] {
                 border: 2px solid #f1c933 !important;
             }
         }
+
         &.step-5 {
             [data-walkthrough="components"] {
                 border: 2px solid #f1c933 !important;
             }
         }
+
         &.step-6 {
             [data-walkthrough="components-container"] {
                 li {
@@ -153,18 +180,21 @@ $leftBarWidth: 70px;
                 }
             }
         }
+
         &.step-7 {
             [data-walkthrough="upload"] {
                 border: 2px solid #f1c933 !important;
             }
         }
     }
+
     .content--main {
         background-color: #ebebeb;
         position: relative;
         width: 100%;
         height: calc(100% - #{$titleHeightNumber + $makeActionsHeightNumber}px);
     }
+
     &.main--collapsed {
         .content--main {
             height: calc(100% - #{$makeActionsHeight});
@@ -185,11 +215,13 @@ $leftBarWidth: 70px;
     transition-duration: 250ms;
     position: relative;
     z-index: 10;
+
     .tour-steps {
         position: absolute;
         left: calc(100% - 210px);
         top: 109px;
     }
+
     .icon-wrapper {
         position: static;
         padding: 2em;
@@ -200,6 +232,7 @@ $leftBarWidth: 70px;
         height: $titleHeight;
         width: $titleHeight;
         background-color: #f33;
+
         .top {
             height: 5px;
             width: 26px;
@@ -211,6 +244,7 @@ $leftBarWidth: 70px;
             pointer-events: none;
             // -webkit-transition: all 120ms ease-in-out;
         }
+
         .middle {
             height: 5px;
             width: 26px;
@@ -222,6 +256,7 @@ $leftBarWidth: 70px;
             pointer-events: none;
             // -webkit-transition: all 120ms ease-in-out;
         }
+
         .bottom {
             height: 5px;
             width: 26px;
@@ -233,31 +268,37 @@ $leftBarWidth: 70px;
             pointer-events: none;
             border: none !important;
         }
+
         .rotatedown {
             transform: rotate(-45deg) !important;
             pointer-events: none;
             top: 30px;
         }
+
         .rotateup {
             transform: rotate(45deg) !important;
             pointer-events: none;
             top: 30px;
         }
     }
+
     .nav__menu {
         display: flex;
         width: 100%;
         height: $titleHeight;
         position: relative;
+
         .make--menu--trigger {
             z-index: 9;
         }
+
         .nav__menu__item {
             height: $titleHeight;
             width: $titleWidth;
             display: inline-block;
             vertical-align: middle;
             border-bottom: 1px solid #dadada;
+
             .nav__menu__btn {
                 color: white;
                 display: block;
@@ -265,17 +306,20 @@ $leftBarWidth: 70px;
                 width: 100%;
                 border-left: 1px solid #dadada;
                 cursor: pointer;
+
                 .svg-icon {
                     fill: #3b3e45;
                 }
             }
         }
+
         .project--title {
             border: 0;
             flex-grow: 1;
             flex-flow: row;
             display: flex;
             align-items: center;
+
             .h3 {
                 text-align: left;
                 color: #3a3d42;
@@ -285,6 +329,7 @@ $leftBarWidth: 70px;
                 max-width: 65%;
                 position: relative;
                 padding-right: 30px;
+
                 .project--name {
                     line-height: 70px;
                     font-style: italic;
@@ -294,12 +339,14 @@ $leftBarWidth: 70px;
                     width: 100%;
                     overflow: hidden;
                     padding-right: 3px;
+
                     &.project--name--editable:hover {
                         cursor: pointer;
+
                         :after {
                             content: '';
                             color: #82a445;
-                            font-size: .7em;
+                            font-size: 0.7em;
                             position: absolute;
                             margin-left: 1em;
                             width: 2em;
@@ -324,14 +371,17 @@ $leftBarWidth: 70px;
     align-items: center;
     position: relative;
     z-index: 8;
+
     .actions__menu {
         display: flex;
         align-items: center;
+
         .tour-steps {
             position: absolute;
             left: calc(100% - 20px);
             top: 40px;
         }
+
         .actions__menu__item {
             position: relative;
             float: left;
@@ -340,16 +390,19 @@ $leftBarWidth: 70px;
             color: #333;
             height: $makeActionsHeight;
         }
+
         &:first-child {
-            margin-left: .8em;
+            margin-left: 0.8em;
         }
     }
+
     .actions__collapse--header {
         position: absolute;
         width: 45px;
         height: 40px;
         right: 0;
         top: 0;
+
         .svg-icon {
             fill: black;
             width: 12px;
@@ -366,18 +419,23 @@ $leftBarWidth: 70px;
     background-color: #3b3e45;
     color: white;
     float: left;
+
     .tabs__menu {
         position: static;
+
         .tabs__menu__item {
             height: $leftBarWidth;
             border-bottom: 1px solid #797c81;
             white-space: nowrap;
+
             &:hover {
                 cursor: pointer;
             }
+
             &:hover .svg-icon {
                 fill: white;
             }
+
             .svg-icon {
                 fill: #797c81;
                 position: relative;
@@ -385,8 +443,10 @@ $leftBarWidth: 70px;
                 left: 22px;
             }
         }
+
         .selected {
             background-color: #1e1f21;
+
             .svg-icon {
                 fill: white;
             }
@@ -397,7 +457,7 @@ $leftBarWidth: 70px;
 .submenu__button--back {
     border-bottom: 1px solid #edf1f2;
     width: 100%;
-    padding: .5em;
+    padding: 0.5em;
     text-align: left;
     pointer-events: all;
     padding-left: 20px;
@@ -415,31 +475,37 @@ $leftBarWidth: 70px;
     white-space: nowrap;
     z-index: 8;
     border-left: 1px solid white;
-    padding-top: .5em;
+    padding-top: 0.5em;
+
     li:last-child {
-        margin-bottom: .5em;
+        margin-bottom: 0.5em;
     }
 }
 
 .dropdown__item {
     display: flex;
-    padding: .3em 1em;
+    padding: 0.3em 1em;
     align-items: center;
+
     a {
         text-decoration: none;
         color: #333;
     }
+
     &:hover {
         background-color: #ebebeb;
         cursor: pointer;
     }
+
     &[disabled] {
         pointer-events: none;
         color: gray;
+
         .svg-icon {
             fill: gray;
         }
     }
+
     .contact-us-email {
         text-align: left;
         width: 150px;
@@ -449,16 +515,15 @@ $leftBarWidth: 70px;
 
 .dropdown__item--separator {
     border-bottom: 1px solid #dadada;
-    margin-top: .5em;
-    margin-bottom: .5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .dropdown__item--separator--thick {
     border-bottom: 2px solid #dadada;
-    margin-top: .5em;
-    margin-bottom: .5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
-
 
 .actions__menu--selected {
     z-index: 8;
@@ -467,12 +532,14 @@ $leftBarWidth: 70px;
 .actions__menu__button {
     min-height: 19px;
     color: #333;
-    padding: .7em;
-    margin-top: .7em;
+    padding: 0.7em;
+    margin-top: 0.7em;
+
     &.actions__menu--selected {
         -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
         -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
         box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
+
         &:after {
             content: '';
             height: 10px;
@@ -483,6 +550,7 @@ $leftBarWidth: 70px;
             top: 25px;
             z-index: 10;
         }
+
         &:before {
             content: '';
             height: 10px;
@@ -494,6 +562,7 @@ $leftBarWidth: 70px;
             z-index: 10;
         }
     }
+
     &:hover {
         cursor: pointer;
         background-color: #ebebeb;
@@ -501,7 +570,7 @@ $leftBarWidth: 70px;
 }
 
 .submenu__title {
-    padding: .5em;
+    padding: 0.5em;
     text-align: left;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -536,6 +605,7 @@ $leftBarWidth: 70px;
     max-width: 525px;
     pointer-events: none;
     display: table;
+
     .submenu__button--back {
         pointer-events: all;
     }
@@ -551,12 +621,14 @@ $leftBarWidth: 70px;
     position: absolute;
     bottom: 0;
     width: 525px;
+
     .svg-icon {
         position: absolute;
         right: 15px;
         width: 10px;
         top: 1em;
     }
+
     &:hover {
         cursor: pointer;
     }
@@ -581,6 +653,7 @@ $leftBarWidth: 70px;
 
 .tab--make__block {
     height: 100%;
+
     &.first--flex {
         order: 0;
         flex: 1 0;
@@ -589,6 +662,7 @@ $leftBarWidth: 70px;
         align-items: center;
         flex-direction: column;
     }
+
     &.second--flex {
         order: 1;
         flex: 1 0;
@@ -612,6 +686,7 @@ $leftBarWidth: 70px;
 
 .nav__item--white {
     background-color: #fcfcfc;
+
     &:hover {
         background-color: #ebebeb;
     }
@@ -649,6 +724,7 @@ $leftBarWidth: 70px;
     transition-property: top;
     transition-duration: 250ms;
     top: #{$titleHeightNumber + $makeActionsHeightNumber}px;
+
     &.navbar--collapsed {
         top: #{$makeActionsHeightNumber}px;
     }
@@ -666,8 +742,8 @@ $leftBarWidth: 70px;
 
 &.btn--mbot,
 &.btn--rangerlandraider,
-&.btn--rangerraptor,
 &.btn--rangernervousbird,
+&.btn--rangerraptor,
 &.btn--startertank,
 &.btn--starterthreewheels {
     background-color: #0076b4;
@@ -678,6 +754,7 @@ $leftBarWidth: 70px;
     -webkit-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2);
+
     &:hover {
         background-color: white;
     }
@@ -688,7 +765,7 @@ $leftBarWidth: 70px;
     position: static;
     left: 5px;
     margin-top: -2px !important;
-    margin-right: 15px;
+    margin-right: 15px !important;
     fill: #3b3e45;
 }
 
@@ -712,19 +789,24 @@ $leftBarWidth: 70px;
     transition: opacity 250ms;
     opacity: 1;
     position: absolute;
+
     .nav__menu__item {
         border-left: 1px solid #dadada;
         height: 40px;
         width: 55px;
+
         &:hover {
             background-color: #ebebeb;
         }
+
         &:nth-child(1) {
             border-right: 1px solid #dadada;
         }
+
         .nav__menu__btn {
             width: 100%;
             height: 100%;
+
             &.btn--make--disabled {
                 background-color: #d1d1d1;
                 color: #3b3e45;
@@ -734,6 +816,7 @@ $leftBarWidth: 70px;
                 //     fill: #dbdee3;
                 // }
             }
+
             .svg-icon {
                 fill: #3b3e45;
                 width: 16px;
@@ -822,11 +905,11 @@ $leftBarWidth: 70px;
     //     fill: #dbdee3;
     // }
 }
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
