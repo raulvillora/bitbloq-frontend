@@ -88,31 +88,37 @@ angular.module('bitbloqApp')
         $scope.search = function() {
             $scope.exploraProjects = [];
             $scope.pageProjects = 0;
+            _.extend($scope.filterParams, {
+                'page': $scope.pagination.explora.current
+            });
             $location.search($scope.filterParams);
-            $scope.getPublicProjects();
+            $scope.getPublicProjects($scope.pagination.explora.current);
         };
 
-        $scope.getPublicProjects = function() {
+        $scope.getPublicProjects = function(page) {
             var queryParamsArray = getRequest(),
-                queryParams = queryParamsArray || {};
+                queryParams = queryParamsArray || {},
+                exploraPage = page ? page : 1;
 
-            if (!queryParams.page) {
-                var pageParams = {
-                    'page': $scope.pageProjects++
-                };
-                angular.extend(queryParams, pageParams);
-            }
+            /*      if (!queryParams.page) {
+                      var pageParams = {
+                          'page': $scope.pageProjects++
+                      };
+                      angular.extend(queryParams, pageParams);
+                  }*/
+            var pageParams = {
+                'page': exploraPage - 1
+            };
+            angular.extend(queryParams, pageParams);
             $log.debug('getPublicProjects', queryParams);
             projectApi.getPublic(queryParams).then(function(response) {
                 projectApi.getPublicCounter(queryParams).then(function(data) {
                     $scope.projectCount = $scope.exploraProjects.length + '/' + data.data.count;
+                    $scope.exploraCount = data.data.count;
                     $scope.common.isLoading = false;
                 });
-                if (queryParams['api:page'] === 0) {
-                    $scope.exploraProjects = response.data;
-                } else {
-                    $scope.exploraProjects.push.apply($scope.exploraProjects, response.data);
-                }
+                $scope.exploraProjects = response.data;
+                $location.search('page', exploraPage);
 
             }, function(error) {
                 $log.debug('Get public projects error: ' + error);
@@ -120,6 +126,8 @@ angular.module('bitbloqApp')
         };
 
         function _getUrlParams() {
+            console.log('$routeParams');
+            console.log($routeParams);
             if ($routeParams.board) {
                 $scope.boardsFilterOptions.forEach(function(board) {
                     if (board.option === $routeParams.board) {
@@ -151,6 +159,9 @@ angular.module('bitbloqApp')
             if ($routeParams.search) {
                 $scope.searchText = decodeURIComponent($routeParams.search);
                 $scope.filterParams.search = $scope.searchText;
+            }
+            if ($routeParams.page) {
+                $scope.pagination.explora.current = $routeParams.page;
             }
         }
 
@@ -399,12 +410,23 @@ angular.module('bitbloqApp')
             value: false
         }];
 
-        angular.element('.explore-view').bind('scroll', function(evt) {
-            if ((evt.currentTarget.scrollTop + evt.currentTarget.clientHeight + 100) >= evt.currentTarget.scrollHeight) {
-                $scope.getPublicProjects();
-                $scope.$apply();
+        $scope.pagination = {
+            'explora': {
+                'current': 1
             }
-        });
+        };
+
+        /*  angular.element('.explore-view').bind('scroll', function(evt) {
+              if ((evt.currentTarget.scrollTop + evt.currentTarget.clientHeight + 100) >= evt.currentTarget.scrollHeight) {
+                  $scope.getPublicProjects();
+                  $scope.$apply();
+              }
+          });*/
+        $scope.getPublicPaginated = function(page) {
+            $scope.getPublicProjects(page);
+        };
+
+        $scope.itemsPerPage = 20;
 
         $scope.$watch('searchText', function(newValue, oldValue) {
             if (newValue !== oldValue) {
