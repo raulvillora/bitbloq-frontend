@@ -520,13 +520,13 @@ angular.module('bitbloqApp')
             category: 'sensors'
         });
         for (var i = 0; i < sensorsArray.length; i++) {
-            sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
+            sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
         }
 
         exports.setExercise = function(newExercise) {
             for (var i = 0; i < newExercise.hardware.components.length; i++) {
                 if (newExercise.hardware.components[i].category === 'sensors') {
-                    newExercise.hardware.components[i].dataReturnType = sensorsTypes[newExercise.hardware.components[i].id];
+                    newExercise.hardware.components[i].dataReturnType = sensorsTypes[newExercise.hardware.components[i].uuid];
                 }
             }
             //end temp fix
