@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
-    {
+        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -381,7 +380,7 @@ angular.module('bitbloqApp')
             category: 'sensors'
         });
         for (var i = 0; i < sensorsArray.length; i++) {
-            sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
+            sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
             //check board
@@ -394,7 +393,7 @@ angular.module('bitbloqApp')
                         item.uuid = item.id;
                     }
                     if (item.category === 'sensors') {
-                        item.dataReturnType = sensorsTypes[item.id];
+                        item.dataReturnType = sensorsTypes[item.uuid];
                     }
                     //check serial port
                     if (item.uuid === 'sp') {
@@ -772,8 +771,7 @@ angular.module('bitbloqApp')
         function canUseThirdParty(robot) {
             var canUse = false;
             if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment()
-                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate)))
-            {
+                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
                 canUse = true;
             } else {
                 canUse = false;
