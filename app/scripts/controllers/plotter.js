@@ -9,7 +9,7 @@
  * Plotter controller
  */
 angular.module('bitbloqApp')
-    .controller('PlotterCtrl', function($element, web2boardV2, web2board, $timeout, $scope, $translate, common, chromeAppApi, utils, hardwareConstants, $rootScope, _) {
+    .controller('PlotterCtrl', function($element, web2boardV2, web2board, $timeout, $scope, $translate, common, chromeAppApi, utils, hardwareService, $rootScope, _) {
 
         var serialHub = web2boardV2.api.SerialMonitorHub,
             dataParser = {
@@ -140,7 +140,9 @@ angular.module('bitbloqApp')
             chromeAppApi.getPorts().then(function(response) {
                 console.log('ports SerialMonitorCtrl', response);
                 $scope.ports = filterPortsByOS(response.ports);
-                utils.getPortsPrettyNames($scope.ports, hardwareConstants.boards);
+                hardwareService.itsHardwareLoaded().then(function() {
+                    utils.getPortsPrettyNames($scope.ports, hardwareService.hardware.boards);
+                });
                 $scope.portNames = [];
 
                 for (var i = 0; i < $scope.ports.length; i++) {

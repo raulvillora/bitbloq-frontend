@@ -9,7 +9,7 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareConstants, projectApi, $route, $location,
+                                        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
                                         bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
     {
 
@@ -187,9 +187,12 @@ angular.module('bitbloqApp')
 
         exports.getRobotMetaData = function(robotId) {
             robotId = robotId || exports.project.hardware.robot;
-            return _.find(hardwareConstants.robots, function(robot) {
-                return robot.uuid === robotId;
+            hardwareService.itsHardwareLoaded().then(function() {
+                return _.find(hardwareService.hardware.robots, function(robot) {
+                    return robot.uuid === robotId;
+                });
             });
+
         };
 
         exports.getCleanProject = function(projectRef, download) {
@@ -377,8 +380,11 @@ angular.module('bitbloqApp')
         };
         //temp fix to code refactor, sensor types
         var sensorsTypes = {};
-        var sensorsArray = _.filter(hardwareConstants.components, {
-            category: 'sensors'
+        var sensorsArray = [];
+        hardwareService.itsHardwareLoaded().then(function() {
+            sensorsArray = _.filter(hardwareService.hardware.components, {
+                category: 'sensors'
+            });
         });
         for (var i = 0; i < sensorsArray.length; i++) {
             sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
@@ -760,7 +766,7 @@ angular.module('bitbloqApp')
 
         function getFamilyName(robot) {
             var robotFamily;
-            hardwareConstants.robots.forEach(function(value) {
+            hardwareService.hardware.robots.forEach(function(value) {
                 if (value.uuid === robot) {
                     robotFamily = value.family;
                 }
@@ -791,7 +797,10 @@ angular.module('bitbloqApp')
             }
         });
 
-        var robotsMap = exports.getRobotsMap(hardwareConstants);
+        var robotsMap = [];
+        hardwareService.itsHardwareLoaded().then(function() {
+            robotsMap = exports.getRobotsMap(hardwareService.hardware);
+        });
 
         return exports;
     });

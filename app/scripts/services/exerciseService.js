@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('exerciseService', function($log, $window, envData, $q, $rootScope, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareConstants, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
+    .service('exerciseService', function($log, $window, envData, $q, $rootScope, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
 
         var exports = {},
             savePromise,
@@ -52,7 +52,11 @@ angular.module('bitbloqApp')
             return map;
         };
 
-        var robotsMap = exports.getRobotsMap(hardwareConstants);
+        var robotsMap = [];
+
+        hardwareService.itsHardwareLoaded().then(function() {
+            robotsMap = exports.getRobotsMap(hardwareService.hardware);
+        });
 
         exports.showActivation = false;
         exports.closeActivation = false;
@@ -372,8 +376,10 @@ angular.module('bitbloqApp')
 
         exports.getRobotMetaData = function(robotId) {
             robotId = robotId || exports.exercise.hardware.robot;
-            return _.find(hardwareConstants.robots, function(robot) {
-                return robot.id === robotId;
+            hardwareService.itsHardwareLoaded().then(function() {
+                return _.find(hardwareService.hardware.robots, function(robot) {
+                    return robot.id === robotId;
+                });
             });
         };
 
@@ -516,9 +522,13 @@ angular.module('bitbloqApp')
         };
         ///temp fix to code refactor, sensor types
         var sensorsTypes = {};
-        var sensorsArray = _.filter(hardwareConstants.components, {
-            category: 'sensors'
+        var sensorsArray = [];
+        hardwareService.itsHardwareLoaded().then(function() {
+            sensorsArray = _.filter(hardwareService.hardware.components, {
+                category: 'sensors'
+            });
         });
+
         for (var i = 0; i < sensorsArray.length; i++) {
             sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
         }
