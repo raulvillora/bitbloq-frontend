@@ -269,18 +269,11 @@ angular.module('bitbloqApp')
             angular.extend(queryParams, pageParams);
             $log.debug('getProjects', queryParams);
 
-            console.log('vamos a imprimir queryParams');
-            console.log(queryParams);
-
             return projectApi.getMyProjects(queryParams).then(function(response) {
                 projectApi.getMyProjectsCounter(queryParams).then(function(data) {
                     $scope.projectsCount = data.data.count;
                     $scope.common.isLoading = false;
-                    console.log($scope.projectsCount);
-
                 });
-
-                console.log($scope.projectsCount);
 
                 $scope.userProjects = _.clone(response.data);
                 $scope.pagination.myprojects.current = newPageNumber;
@@ -307,8 +300,6 @@ angular.module('bitbloqApp')
 
             //$log.debug(sortParams);
             angular.extend(queryParams, sortParams);
-            console.log('queryParams en la función');
-            console.log(queryParams);
             return queryParams;
         }
 
