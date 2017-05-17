@@ -54,14 +54,19 @@
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
                 </a>
-                <span class="project--item--trash" ng-click="removeProject(project)" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                <span class="project--item--options" ng-click="showActions = true" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                    <svg class="svg-icon" data-element="eliminate-myproject">
+                        <use xlink:href="#ellipsis"></use>
+                    </svg>
+                </span>
+               <!--<span class="project--item--trash" ng-click="removeProject(project)" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
                     <svg class="svg-icon" data-element="eliminate-myproject">
                         <use xlink:href="#delete"></use>
                     </svg>
-                </span>
+                </span>-->
             </div>
             <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
-                <div ng-class="{'project__footer':true, 'project__footer--wide':itemsLayout === 'list'}">
+                <!--<div ng-class="{'project__footer':true, 'project__footer--wide':itemsLayout === 'list'}">
                     <div class="footer__icons--left">
                         <div ng-click="renameProject(project)" data-element="myprojects-rename-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'change-name' | translate }}">
                             <svg class="svg-icon">
@@ -111,6 +116,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
                 </div>
                 <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
                     <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
