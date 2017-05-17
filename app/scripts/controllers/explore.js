@@ -100,12 +100,6 @@ angular.module('bitbloqApp')
                 queryParams = queryParamsArray || {},
                 exploraPage = page ? page : 1;
 
-            /*      if (!queryParams.page) {
-                      var pageParams = {
-                          'page': $scope.pageProjects++
-                      };
-                      angular.extend(queryParams, pageParams);
-                  }*/
             var pageParams = {
                 'page': exploraPage - 1
             };
@@ -126,8 +120,6 @@ angular.module('bitbloqApp')
         };
 
         function _getUrlParams() {
-            console.log('$routeParams');
-            console.log($routeParams);
             if ($routeParams.board) {
                 $scope.boardsFilterOptions.forEach(function(board) {
                     if (board.option === $routeParams.board) {

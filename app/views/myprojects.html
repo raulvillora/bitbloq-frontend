@@ -1,6 +1,6 @@
 <div class="projects--actions">
     <div class="projects--action projects--action--sort">
-        <common-dropdown class="projects--sort-dropdown" options="orderOptions" options-click="sortProjects" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" data-element="myProyects_order_dropdown"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="orderOptions" options-click="sort" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" data-element="myProyects_order_dropdown"></common-dropdown>
     </div>
     <div class="projects--action grid-list">
         <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
@@ -26,7 +26,7 @@
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
             </svg>
-            <input type="search" name="search--normal" id="search--normal" ng-model="searchText" placeholder="{{'find'|translate}}" data-ng-focus="focus = 'search'" data-ng-class="{'input--focused':focus === 'search'}" data-ng-blur="focus = false" data-element="projects-find">
+            <input type="search" name="search--normal" id="search--normal" data-ng-model="searchText.text" placeholder="{{'find'|translate}}" data-ng-focus="focus = 'search'" data-ng-class="{'input--focused':focus === 'search'}" data-ng-blur="focus = false" data-element="projects-find">
         </span>
     </div>
 </div>
@@ -48,7 +48,7 @@
 
             <p>
     </div>
-    <li data-ng-repeat="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) |filter:{name: checkSearch(searchText)} | filter:userProjectsFilterFunction(userProjectsFilter)) | orderBy:userProjectsOrderBy:userProjectsReverseOrder track by project._id" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
+    <li dir-paginate="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.myprojects.current" total-items="{{projectsCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
@@ -138,4 +138,7 @@
             </span>
         </div>
     </li>
-</ol>
+    <div class="projects__paginator">
+        <dir-pagination-controls on-page-change="getMyProjectsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
+  </ol>

@@ -12,7 +12,6 @@ angular.module('bitbloqApp')
 
         var exports = {};
 
-
         function saveRequest(params) {
             return $http(params)
                 .then(function(response) {
@@ -80,18 +79,31 @@ angular.module('bitbloqApp')
             return exports.getPublic(queryParams);
         };
 
-        exports.getMyProjects = function(queryParams) {
+        exports.getMyProjectsCounter = function(queryParams) {
+            var params = queryParams ? queryParams : {};
+            angular.extend(params, {
+                'count': '*'
+            });
+            return exports.getMyProjects(params);
+        };
 
-            var myProjectArray = [],
-                params = {
-                    'page': 0,
-                    'pageSize': 30
-                };
+        exports.getMyProjects = function(queryParams) {
+            var params = {
+                'page': queryParams ? queryParams.page : 0,
+                'pageSize': 20
+            };
 
             queryParams = queryParams || {};
             _.extend(params, queryParams);
 
+            return $http({
+                method: 'GET',
+                url: envData.config.serverUrl + 'project/me',
+                params: params
+            });
+            /*
             return resource.getAll('project/me', params, myProjectArray);
+            */
         };
 
         exports.getMySharedProjects = function(queryParams) {
@@ -107,7 +119,6 @@ angular.module('bitbloqApp')
 
             return resource.getAll('project/shared', params, myProjectArray);
         };
-
 
         exports.private = function(project) {
             var defered = $q.defer();

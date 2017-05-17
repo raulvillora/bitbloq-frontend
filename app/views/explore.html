@@ -89,7 +89,7 @@
                 <div ng-show="exploraProjects.length === 0" class="project-shared--empty">
                     <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
                 </div>
-                <li ng-class="{'project-list__item':true, 'project--item--wide':itemsLayout === 'list'}" dir-paginate="project in exploraProjects | itemsPerPage: itemsPerPage track by project._id " dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.explora.current" total-items="{{exploraCount}}" data-element="explora-project-elem">
+                <li ng-class="{'project-list__item':true, 'project--item--wide':itemsLayout === 'list'}" dir-paginate="project in exploraProjects | itemsPerPage: itemsPerPage track by project._id " current-page="pagination.explora.current" total-items="{{exploraCount}}" data-element="explora-project-elem">
                     <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}" class="project--item">
                         <div class="img-container">
                             <a class="btn btn--secondary btn--small more-info" data-ng-href="#/project/{{project._id}}" data-element="explora-project-moreinfo">{{ 'more-info' | translate }}</a>
