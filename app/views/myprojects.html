@@ -44,9 +44,7 @@
     </a>
 
     <div ng-show="(userProjects.length !== 0 && filtered.projects.length !== 0) && projectSearched.length === 0" class="project-shared--empty">
-        <p class="empty__info">{{'projects_text_searchEmpty' | translate}}
-
-            <p>
+        <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
     </div>
     <li dir-paginate="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.myprojects.current" total-items="{{projectsCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
@@ -59,65 +57,8 @@
                         <use xlink:href="#ellipsis"></use>
                     </svg>
                 </span>
-               <!--<span class="project--item--trash" ng-click="removeProject(project)" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
-                    <svg class="svg-icon" data-element="eliminate-myproject">
-                        <use xlink:href="#delete"></use>
-                    </svg>
-                </span>-->
             </div>
             <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
-                <!--<div ng-class="{'project__footer':true, 'project__footer--wide':itemsLayout === 'list'}">
-                    <div class="footer__icons--left">
-                        <div ng-click="renameProject(project)" data-element="myprojects-rename-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'change-name' | translate }}">
-                            <svg class="svg-icon">
-                                <use xlink:href="#pencil"></use>
-                            </svg>
-                        </div>
-                        <div ng-click="createCopy(project)" data-element="myprojects-copy-project" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'create-copy' | translate }}">
-                            <svg class="svg-icon">
-                                <use xlink:href="#duplicate"></use>
-                            </svg>
-                        </div>
-                        <div data-ng-if="!project.codeProject" data-element="myprojects-download-project" data-ng-click="projectService.download(project)" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'download-project' | translate }}">
-                            <svg class="svg-icon">
-                                <use xlink:href="#download"></use>
-                            </svg>
-                        </div>
-                        <div data-element="myprojects-export-arduino-code-button" data-ng-click="projectService.download(project, 'arduino')" class="project--footer--icon" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide':'myprojects'}}" data-tooltip="{{ 'export-arduino-code' | translate }}">
-                            <svg class="svg-icon">
-                                <use xlink:href="#fileCode"></use>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="footer__icons--right">
-                        <div class="project--footer--icon--general" data-tooltips="true" ng-attr-data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{(!utils.userIsOwner(project, common.user._id, common.section)?'you-are-not-the-admin-copy-it':!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-explore':'publish-project') | translate}}" data-element="myprojects-footer-publish">
-                            <div data-ng-disabled="!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)" data-ng-click="publishProject(project)" class="project--footer--icon--publish" data-ng-if="!project._acl.ALL">
-                                <svg class="svg-icon">
-                                    <use xlink:href="#publish"></use>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div data-ng-click="commonModals.doPrivateProject(project)" class="project--footer--icon" data-ng-if="project._acl.ALL" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'do-private' | translate }}" data-element="myprojects-footer-private">
-                            <svg class="svg-icon">
-                                <use xlink:href="#private"></use>
-                            </svg>
-                        </div>
-                        <div class="project--footer--icon" data-ng-click="commonModals.modalShareWithUsers(project)" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{ 'share-with-users' | translate }}">
-                            <svg class="svg-icon">
-                                <use xlink:href="#user"></use>
-                            </svg>
-                        </div>
-                        <div class="project--footer--icon" data-tooltip-id="social-share" data-tooltips="true" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'myprojects--right'}}" data-tooltip="{{(project.hardware.showRobotImage?(!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-social':'share-social-networks'):'share-social-networks') | translate }}">
-                            <div  data-ng-click="publishProject(project, 'Social')" data-ng-disabled="project.hardware.showRobotImage && !projectService.projectHasRobotActivated(project.hardware)" class="project--footer--icon--publish">
-                                <svg class="svg-icon">
-                                    <use xlink:href="#share"></use>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                </div>
                 <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
                     <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
                         <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name}}</h3>
@@ -142,6 +83,69 @@
                     <use xlink:href="#code"></use>
                 </svg>
             </span>
+            <div ng-show="menuActive[$index]" class="table__block__item--menu">
+                <div ng-if="common.userRole!=='student'">
+                    <ul>
+                        <li class="table__block__item--menu__item" ng-click="renameProject(project)" data-element="myprojects-rename-project">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#pencil"></use>
+                            </svg>
+                            {{'button_rename' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item" ng-click="createCopy(project)" data-element="myprojects-copy-project">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#duplicate"></use>
+                            </svg>
+                            {{'button_duplicate' | translate}}
+                        </li>
+                        <li class="dropdown__item--separator"></li>
+                        <li class="table__block__item--menu__item" data-ng-if="!project.codeProject" ng-click="projectService.download(project)" data-element="myprojects-download-projec">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#download"></use>
+                            </svg>
+                            {{'button_download' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item" ng-click="projectService.download(project, 'arduino')" data-element="myprojects-export-arduino-code-button">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#fileCode"></use>
+                            </svg>
+                            {{'button_filecode' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item" data-ng-if="!project._acl.ALL" data-ng-disabled="!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)" data-ng-click="publishProject(project)">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#publish"></use>
+                            </svg>
+                            {{'button_publish' | translate}}
+                        </li>
+                        <li class="dropdown__item--separator--thick"></li>
+                        <li class="table__block__item--menu__item" ng-click="commonModals.doPrivateProject(project)" data-ng-if="project._acl.ALL">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#private"></use>
+                            </svg>
+                            {{'button_private' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item" ng-click="commonModals.modalShareWithUsers(project)">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#user"></use>
+                            </svg>
+                            {{'button_share-user' | translate}}
+                        </li>
+                        <li class="dropdown__item--separator--thick"></li>
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="publishProject(project, 'Social')" data-ng-disabled="project.hardware.showRobotImage && !projectService.projectHasRobotActivated(project.hardware)">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#share"></use>
+                            </svg>
+                            {{'button_share' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="removeProject(project)" data-element="eliminate-myproject">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#delete"></use>
+                            </svg>
+                            {{'button_delete' | translate}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </li>
     <div class="projects__paginator">
