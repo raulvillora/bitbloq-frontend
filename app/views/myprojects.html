@@ -85,7 +85,7 @@
                     <use xlink:href="#code"></use>
                 </svg>
             </span>
-            <div class="my-project__options" ng-mouseleave="menuActive[$index] = false">
+            <div class="my-project__options" ng-class="{'active-options': menuActive[$index]}" ng-mouseleave="menuActive[$index] = false">
                 <span class="my-project__button-options" ng-click="menuActive[$index] = !menuActive[$index]">
                     <svg class="svg-icon" data-element="eliminate-myproject">
                         <use xlink:href="#ellipsis"></use>
