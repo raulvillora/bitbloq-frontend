@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
-    {
+        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -186,13 +185,15 @@ angular.module('bitbloqApp')
         };
 
         exports.getRobotMetaData = function(robotId) {
+            var defered = $q.defer();
             robotId = robotId || exports.project.hardware.robot;
             hardwareService.itsHardwareLoaded().then(function() {
-                return _.find(hardwareService.hardware.robots, function(robot) {
+                defered.resolve(_.find(hardwareService.hardware.robots, function(robot) {
                     return robot.uuid === robotId;
-                });
+                }));
             });
 
+            return defered.promise;
         };
 
         exports.getCleanProject = function(projectRef, download) {
@@ -778,8 +779,7 @@ angular.module('bitbloqApp')
         function canUseThirdParty(robot) {
             var canUse = false;
             if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment()
-                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate)))
-            {
+                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
                 canUse = true;
             } else {
                 canUse = false;

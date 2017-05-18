@@ -888,8 +888,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.hwBasicsLoaded.promise.then(function() {
             if ($scope.currentProject.hardware.robot) {
-                var robotReference = currentProjectService.getRobotMetaData();
-                hwSchema.robot = robotReference; //The whole board object is passed
+                currentProjectService.getRobotMetaData().then(function(response) {
+                    hwSchema.robot = response; //The whole board object is passed
+                    loadComponentsSchema(hwSchema, conectableComponents);
+                });
+
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
@@ -902,24 +905,28 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
 
                 hwSchema.board = boardReference; //The whole board object is passed
-            }
-
-            if (hwSchema.robot || hwSchema.board) {
-                hw2Bloqs.loadSchema(hwSchema);
-                hw2Bloqs.repaint();
-                $scope.hardware.firstLoad = false;
-                //Fix components dimensions
-                _.forEach(conectableComponents, function(item) {
-                    item = bloqsUtils.checkPins(item);
-                    _fixComponentsDimension(item);
-                });
-
-                $scope.hardware.sortToolbox();
-            } else {
-                $log.debug('robot is undefined');
+                loadComponentsSchema(hwSchema, conectableComponents);
             }
 
         });
+    }
+
+    function loadComponentsSchema(hwSchema, conectableComponents) {
+        if (hwSchema.robot || hwSchema.board) {
+            hw2Bloqs.loadSchema(hwSchema);
+            hw2Bloqs.repaint();
+            $scope.hardware.firstLoad = false;
+            //Fix components dimensions
+            _.forEach(conectableComponents, function(item) {
+                item = bloqsUtils.checkPins(item);
+                _fixComponentsDimension(item);
+            });
+
+            $scope.hardware.sortToolbox();
+        } else {
+            $log.debug('robot is undefined');
+        }
+
     }
 
     function _fixComponentsDimension(compRef) {

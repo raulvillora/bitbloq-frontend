@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-                                            utils)
-    {
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -405,8 +404,7 @@ angular.module('bitbloqApp')
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
                             if (connectedComponents[i].uuid.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].uuid))
-                            {
+                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
                                 result = true;
                             }
                             i++;
@@ -913,6 +911,23 @@ angular.module('bitbloqApp')
                 properties: {
                     basicBloqs: 'starterthreewheels',
                     advancedBloqs: 'advancedStarterthreewheels'
+                }
+            },
+            freakscar: {
+                id: 'allFreakscarBloqs',
+                basicTab: 'freakscar',
+                advancedTab: 'advancedFreakscar',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'freakscar';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-freakscar',
+                dataElement: 'toolbox-freakscar',
+                properties: {
+                    basicBloqs: 'freakscar',
+                    advancedBloqs: 'advancedFreakscar'
                 }
             },
             phone: {
