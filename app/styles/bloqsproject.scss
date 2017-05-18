@@ -521,7 +521,7 @@ $leftBarWidth: 70px;
 }
 
 .dropdown__item--separator--thick {
-    border-bottom: 2px solid #dadada;
+    border-bottom: 1px solid #dadada;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -906,6 +906,7 @@ $leftBarWidth: 70px;
     //     fill: #dbdee3;
     // }
 }
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
