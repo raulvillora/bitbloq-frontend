@@ -331,6 +331,7 @@ $leftBarWidth: 70px;
                 padding-right: 30px;
 
                 .project--name {
+                    color: #3b3e45;
                     line-height: 70px;
                     font-style: italic;
                     font-weight: bold;
@@ -387,7 +388,7 @@ $leftBarWidth: 70px;
             float: left;
             margin-right: 1em;
             font-size: 14px;
-            color: #333;
+            color: #373b44;
             height: $makeActionsHeight;
         }
 
@@ -489,7 +490,7 @@ $leftBarWidth: 70px;
 
     a {
         text-decoration: none;
-        color: #333;
+        color: #373b44;
     }
 
     &:hover {
@@ -499,10 +500,10 @@ $leftBarWidth: 70px;
 
     &[disabled] {
         pointer-events: none;
-        color: gray;
+        color: #c0c3c9;
 
         .svg-icon {
-            fill: gray;
+            fill: #c0c3c9;
         }
     }
 
@@ -531,7 +532,7 @@ $leftBarWidth: 70px;
 
 .actions__menu__button {
     min-height: 19px;
-    color: #333;
+    color: #373b44;
     padding: 0.7em;
     margin-top: 0.7em;
 
