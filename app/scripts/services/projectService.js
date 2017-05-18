@@ -387,7 +387,7 @@ angular.module('bitbloqApp')
             });
         });
         for (var i = 0; i < sensorsArray.length; i++) {
-            sensorsTypes[sensorsArray[i].id] = sensorsArray[i].dataReturnType;
+            sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
         }
         exports.setProject = function(newproject, type, watcher) {
             //check board
@@ -400,7 +400,7 @@ angular.module('bitbloqApp')
                         item.uuid = item.id;
                     }
                     if (item.category === 'sensors') {
-                        item.dataReturnType = sensorsTypes[item.id];
+                        item.dataReturnType = sensorsTypes[item.uuid];
                     }
                     //check serial port
                     if (item.uuid === 'sp') {

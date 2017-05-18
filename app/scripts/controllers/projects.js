@@ -16,10 +16,14 @@ angular.module('bitbloqApp')
         $scope.pagination = {
             'myprojects': {
                 'current': 1
+            },
+            'sharedprojects': {
+                'current': 1
             }
         };
 
         $scope.projectsCount = 0;
+        $scope.sharedCount = 0;
 
         $scope.sortProjects = function(type) {
             $log.debug('sortProject', type);
@@ -123,37 +127,36 @@ angular.module('bitbloqApp')
                 currentProjectName,
                 projectsToDownload = [],
                 j = 1;
-            for (var i = 0; i < $scope.filtered.projects.length; i++) {
-                currentProject = projectService.getCleanProject($scope.filtered.projects[i], true);
-                currentProjectName = utils.removeDiacritics(currentProject.name).substring(0, 30);
-                if (projectsToDownload.indexOf(currentProjectName) > -1) {
-                    currentProjectName = currentProjectName + '_' + j;
+
+            projectApi.getMyProjects({
+                'pageSize': $scope.projectsCount
+            }).then(function(response) {
+                for (var i = 0; i < response.data.length; i++) {
+                    currentProject = projectService.getCleanProject(response.data[i], true);
+                    currentProjectName = utils.removeDiacritics(currentProject.name).substring(0, 30);
+                    if (projectsToDownload.indexOf(currentProjectName) > -1) {
+                        currentProjectName = currentProjectName + '_' + j;
+                    }
+                    projectsToDownload.push(currentProjectName);
+                    zip.file(currentProjectName + '.bitbloq', JSON.stringify(currentProject));
+                    j++;
                 }
-                projectsToDownload.push(currentProjectName);
-                zip.file(currentProjectName + '.bitbloq', JSON.stringify(currentProject));
-                j++;
-            }
-            var blob = zip.generate({
-                type: 'blob'
+                var blob = zip.generate({
+                    type: 'blob'
+                });
+                utils.downloadFile('Bitbloq_' + moment().format('YYYY_MM_DD-HH_mm') + '.zip', blob, 'data:application/zip;base64');
             });
-            utils.downloadFile('Bitbloq_' + moment().format('YYYY_MM_DD-HH_mm') + '.zip', blob, 'data:application/zip;base64');
+
         };
 
         $scope.refreshProjects = function(refresh) {
             $scope.common.isLoading = refresh;
             $scope.common.itsUserLoaded().then(function() {
+
                 $scope.tempUserProjects = [];
-
-                var getSharedProjects = projectApi.getMySharedProjects();
                 var page = $routeParams.page ? $routeParams.page : 1;
-                $q.all([$scope.getMyProjectsPage(page), getSharedProjects]).then(function(values) {
-                    $scope.sharedProjects = values[1];
-                    $scope.common.isLoading = false;
-
-                }).catch(function() {
-                    $scope.sharedProjects = [];
-                    $scope.common.isLoading = false;
-                });
+                $scope.getMyProjectsPage(page);
+                $scope.getMySharedProjectsPage(page);
 
             }).catch(function() {
                 $scope.common.isLoading = false;
@@ -239,25 +242,37 @@ angular.module('bitbloqApp')
             }
         }
 
-        /*  function _getProjects() {
-              return projectApi.getMyProjects().then(function(response) {
-                  projectApi.getMyProjectsCounter().then(function(data) {
-                      $scope.projectsCount = data.data.count;
-                      $scope.common.isLoading = false;
-                  });
+        $scope.getMySharedProjectsPage = function(newPageNumber) {
+            var queryParamsArray = getRequest(),
+                queryParams = queryParamsArray || {};
 
-                  $scope.userProjects = _.clone(response.data);
+            var pageParams = {
+                'page': newPageNumber - 1
+            };
+            angular.extend(queryParams, pageParams);
+            $log.debug('getSharedProjects', queryParams);
+            return projectApi.getMySharedProjects(queryParams).then(function(response) {
+                projectApi.getMySharedProjectsCounter(queryParams).then(function(data) {
+                    $scope.sharedCount = data.data.count;
+                    $scope.common.isLoading = false;
+                });
 
-              }).catch(function() {
-                  $scope.common.setUser();
-                  alertsService.add({
-                      text: 'projects-need-tobe-logged',
-                      id: 'projects-need-tobe-logged',
-                      type: 'error'
-                  });
-                  $location.path('/login');
-              });
-          }*/
+                $scope.sharedProjects = _.clone(response.data);
+                $scope.pagination.sharedprojects.current = newPageNumber;
+                //  $location.search('page', newPageNumber);
+
+            }).catch(function() {
+                $scope.sharedProjects = [];
+                $scope.common.isLoading = false;
+                $scope.common.setUser();
+                alertsService.add({
+                    text: 'projects-need-tobe-logged',
+                    id: 'projects-need-tobe-logged',
+                    type: 'error'
+                });
+                $location.path('/login');
+            });
+        };
 
         $scope.getMyProjectsPage = function(newPageNumber) {
             var queryParamsArray = getRequest(),
@@ -280,6 +295,8 @@ angular.module('bitbloqApp')
                 $location.search('page', newPageNumber);
 
             }).catch(function() {
+                $scope.userProjects = [];
+                $scope.common.isLoading = false;
                 $scope.common.setUser();
                 alertsService.add({
                     text: 'projects-need-tobe-logged',
@@ -436,8 +453,12 @@ angular.module('bitbloqApp')
             _.extend($scope.filterParams, {
                 'page': $scope.pagination.myprojects.current
             });
-            $location.search($scope.filterParams);
-            $scope.getMyProjectsPage($scope.pagination.myprojects.current);
+            if ($scope.selectedTab === 'projects') {
+                $location.search($scope.filterParams);
+                $scope.getMyProjectsPage($scope.pagination.myprojects.current);
+            } else {
+                $scope.getMySharedProjectsPage($scope.pagination.sharedprojects.current);
+            }
         };
         // Get projects
         $scope.refreshProjects(true);

@@ -46,13 +46,13 @@
     <div ng-show="(userProjects.length !== 0 && filtered.projects.length !== 0) && projectSearched.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
     </div>
-    <li dir-paginate="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.myprojects.current" total-items="{{projectsCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
+    <li pagination-id="myprojects" dir-paginate="project in projectSearched = (filtered.projects = (userProjects | filter:inRemoveProjects) | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.myprojects.current" total-items="{{projectsCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
                 <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
                 </a>
-                <span class="project--item--options" ng-click="showActions = true" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                <span class="project--item--options" ng-click="menuActive[$index] = !menuActive[$index]" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
                     <svg class="svg-icon" data-element="eliminate-myproject">
                         <use xlink:href="#ellipsis"></use>
                     </svg>
@@ -149,6 +149,6 @@
         </div>
     </li>
     <div class="projects__paginator">
-        <dir-pagination-controls on-page-change="getMyProjectsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+        <dir-pagination-controls  pagination-id="myprojects" on-page-change="getMyProjectsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
   </ol>

@@ -87,6 +87,13 @@ angular.module('bitbloqApp')
             return exports.getMyProjects(params);
         };
 
+        exports.getMySharedProjectsCounter = function(queryParams) {
+            var params = queryParams ? queryParams : {};
+            angular.extend(params, {
+                'count': '*'
+            });
+            return exports.getMySharedProjects(params);
+        };
         exports.getMyProjects = function(queryParams) {
             var params = {
                 'page': queryParams ? queryParams.page : 0,
@@ -107,17 +114,32 @@ angular.module('bitbloqApp')
         };
 
         exports.getMySharedProjects = function(queryParams) {
-
-            var myProjectArray = [],
-                params = {
-                    'page': 0,
-                    'pageSize': 30
-                };
+            var params = {
+                'page': queryParams ? queryParams.page : 0,
+                'pageSize': 20
+            };
 
             queryParams = queryParams || {};
             _.extend(params, queryParams);
 
-            return resource.getAll('project/shared', params, myProjectArray);
+            return $http({
+                method: 'GET',
+                url: envData.config.serverUrl + 'project/shared',
+                params: params
+            });
+
+            /*
+                        var myProjectArray = [],
+                            params = {
+                                'page': 0,
+                                'pageSize': 30
+                            };
+
+                        queryParams = queryParams || {};
+                        _.extend(params, queryParams);
+
+                        return resource.getAll('project/shared', params, myProjectArray);
+                        */
         };
 
         exports.private = function(project) {
