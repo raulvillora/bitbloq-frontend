@@ -335,6 +335,9 @@ angular.module('bitbloqApp')
                         case 'mBotRGBLedOff':
                             result = existComponent(['mkb_integrated_RGB'], connectedComponents);
                             break;
+                        case 'makeblockIfNoise':
+                            result = existComponent(['mkb_soundsensor'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }
@@ -400,6 +403,8 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_integrated_buzz'], connectedComponents);
                     } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
                         result = existComponent(['mkb_integrated_RGB'], connectedComponents);
+                    } else if (item === 'makeblockIfNoise') {
+                        result = existComponent(['mkb_soundsensor'], connectedComponents);
                     } else if (item === 'mBotLedMatrix') {
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else {

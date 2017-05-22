@@ -355,6 +355,8 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
+        },{
+            "name": "makeblockIfNoise"
         }],
         "advancedMBotV2": [{
             "name": "mBotMoveAdvanced-v2"
