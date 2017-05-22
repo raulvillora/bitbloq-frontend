@@ -259,7 +259,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if ($scope.currentProject.hardware.robot) {
                 filteredList = [];
 
-            } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents  && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.length > 0) {
+            } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.length > 0) {
+                console.log('$scope.common.userHardware.components');
+                console.log($scope.boardsMap[$scope.currentProject.hardware.board]);
                 filteredList = _.filter($scope.common.userHardware.components, function(component) {
                     return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.uuid) !== -1;
                 });
