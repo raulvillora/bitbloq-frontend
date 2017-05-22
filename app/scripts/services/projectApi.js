@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectApi', function($http, $log, envData, $q, _, alertsService, resource) {
+    .service('projectApi', function($http, $log, envData, $q, _, alertsService) {
 
         var exports = {};
 
