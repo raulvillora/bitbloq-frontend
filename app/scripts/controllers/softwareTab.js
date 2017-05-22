@@ -409,7 +409,7 @@ angular.module('bitbloqApp')
                     } else if (item === 'mBotLedMatrix') {
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else if (item === 'readJoystickXY') {
-                        result = existComponent(['mkb_joystick'], connectedComponents);
+                        result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
@@ -966,6 +966,9 @@ angular.module('bitbloqApp')
                 literal: 'components',
                 dataElement: 'toolbox-components',
                 showBasicBloqsCondition: function(name) {
+                    if(name === 'readJoystickXY') {
+                        console.log();
+                    }
                     return $scope.showComponents(name);
                 },
                 properties: {
