@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-        utils) {
+                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+                                            utils)
+    {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -407,11 +408,12 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_soundsensor'], connectedComponents);
                     } else if (item === 'mBotLedMatrix') {
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                    } else if (item === 'readJoystickXY') {
+                        result = existComponent(['mkb_joystick'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].uuid.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
+                            if (connectedComponents[i].uuid.includes(item) || item.toLowerCase().includes(connectedComponents[i].uuid)) {
                                 result = true;
                             }
                             i++;

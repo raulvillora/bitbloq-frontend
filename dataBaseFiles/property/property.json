@@ -254,6 +254,8 @@
             "name": "serialReceiveInt"
         }, {
             "name": "serialSend-v1"
+        }, {
+            "name": "readJoystickXY"
         }],
         "controls": [{
             "name": "wait"
