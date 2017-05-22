@@ -400,6 +400,8 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_integrated_buzz'], connectedComponents);
                     } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
                         result = existComponent(['mkb_integrated_RGB'], connectedComponents);
+                    } else if (item === 'mBotLedMatrix') {
+                        result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
@@ -537,7 +539,8 @@ angular.module('bitbloqApp')
                         fieldOffsetRight: 216,
                         fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                         bloqSchemas: bloqsApi.schemas,
-                        suggestionWindowParent: $scope.$field[0]
+                        suggestionWindowParent: $scope.$field[0],
+                        dotsMatrixWindowParent: $scope.$field[0]
                     };
 
                     if (currentProjectService.exercise) {

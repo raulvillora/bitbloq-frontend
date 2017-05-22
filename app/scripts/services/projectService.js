@@ -386,10 +386,11 @@ angular.module('bitbloqApp')
             sensorsArray = _.filter(hardwareService.hardware.components, {
                 category: 'sensors'
             });
+            for (var i = 0; i < sensorsArray.length; i++) {
+                sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
+            }
         });
-        for (var i = 0; i < sensorsArray.length; i++) {
-            sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
-        }
+
         exports.setProject = function(newproject, type, watcher) {
             //check board
             newproject.hardware.board = newproject.hardware.board ? newproject.hardware.board.replace(/\s+/g, '') : '';
