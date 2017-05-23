@@ -20,6 +20,7 @@ angular.module('bitbloqApp')
         });
 
         $scope.robotsMap = null;
+        $scope.robotName = '';
         projectService.saveStatus = 0;
         // The ui-ace option
         $scope.aceOptions = {
@@ -94,18 +95,18 @@ angular.module('bitbloqApp')
         };
 
         $scope.getNameFromId = function(elementId) {
-            var robot, robotName;
+            var robot;
             hardwareService.itsHardwareLoaded().then(function() {
+                console.log('hardwareService.hardware.boards');
+                console.log(hardwareService.hardware.boards);
                 robot = _.filter(_.concat(hardwareService.hardware.boards, hardwareService.hardware.robots), function(o) {
                     return o.uuid === elementId;
                 });
+                if (robot.length > 0) {
+                    $scope.robotName = robot[0].uuid;
+                }
             });
 
-            if (robot.length > 0) {
-                robotName = robot[0].uuid;
-            }
-
-            return robotName;
         };
 
         $scope.setBoard = function(boardName) {
