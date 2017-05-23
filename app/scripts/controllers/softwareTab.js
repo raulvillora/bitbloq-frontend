@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-                                            utils)
-    {
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -339,6 +338,13 @@ angular.module('bitbloqApp')
                         case 'makeblockIfNoise':
                             result = existComponent(['mkb_soundsensor'], connectedComponents);
                             break;
+                        case 'mBotLedMatrix':
+                        case 'mBotClearLedMatrix':
+                        case 'mBotShowTimeOnLedMatrix':
+                        case 'mBotShowNumberOnLedMatrix':
+                        case 'mBotShowStringOnLedMatrix':
+                            result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }
@@ -410,6 +416,8 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else if (item === 'readJoystickXY') {
                         result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
+                    } else if (item === 'mBotSetLedMatrixBrightness') {
+                        result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
@@ -966,7 +974,7 @@ angular.module('bitbloqApp')
                 literal: 'components',
                 dataElement: 'toolbox-components',
                 showBasicBloqsCondition: function(name) {
-                    if(name === 'readJoystickXY') {
+                    if (name === 'readJoystickXY') {
                         console.log();
                     }
                     return $scope.showComponents(name);

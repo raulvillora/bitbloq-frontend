@@ -244,7 +244,7 @@ angular.module('bitbloqApp')
                     id: 'web2board',
                     type: 'warning'
                 };
-            if (typeof(error) === 'object') {
+            if ((typeof(error) === 'object') && error.forEach) {
                 var errorLines = [];
                 error.forEach(function(errorLine) {
                     errorLines.push($translate.instant('alert-web2board-compile-line-error ', errorLine));
