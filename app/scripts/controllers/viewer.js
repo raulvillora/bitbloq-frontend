@@ -290,17 +290,17 @@ angular.module('bitbloqApp')
                 $scope.ports = filterPortsByOS(response.ports);
                 hardwareService.itsHardwareLoaded().then(function() {
                     utils.getPortsPrettyNames($scope.ports, hardwareService.hardware.boards);
+                    $scope.portNames = [];
+
+                    for (var i = 0; i < $scope.ports.length; i++) {
+                        $scope.portNames.push($scope.ports[i].portName);
+                    }
+
+                    var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
+                    if (portWithUserSelectedBoard) {
+                        $scope.setPort(portWithUserSelectedBoard.portName);
+                    }
                 });
-                $scope.portNames = [];
-
-                for (var i = 0; i < $scope.ports.length; i++) {
-                    $scope.portNames.push($scope.ports[i].portName);
-                }
-
-                var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
-                if (portWithUserSelectedBoard) {
-                    $scope.setPort(portWithUserSelectedBoard.portName);
-                }
 
             }).catch(function(error) {
                 console.log('error SerialMonitorCtrl', error);

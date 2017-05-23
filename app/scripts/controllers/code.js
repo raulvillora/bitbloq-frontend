@@ -97,8 +97,6 @@ angular.module('bitbloqApp')
         $scope.getNameFromId = function(elementId) {
             var robot;
             hardwareService.itsHardwareLoaded().then(function() {
-                console.log('hardwareService.hardware.boards');
-                console.log(hardwareService.hardware.boards);
                 robot = _.filter(_.concat(hardwareService.hardware.boards, hardwareService.hardware.robots), function(o) {
                     return o.uuid === elementId;
                 });
