@@ -375,6 +375,10 @@
         "advancedMBotV2": [{
             "name": "mBotMoveAdvanced-v2"
         }],
+        "freakscar": [{
+            "name": "freakscarBuzzer"
+        }],
+        "advancedFreakscar": [],
         "rangerlandraider": [{
             "name": "mBotMove-v2"
         }, {
