@@ -379,7 +379,7 @@ angular.module('bitbloqApp')
                             'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
-                        result = existComponent(['bt', 'sp', 'device'], connectedComponents);
+                        result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
                     } else if (item.indexOf('phone') > -1) {
                         result = $scope.currentProject.useBitbloqConnect;
                     } else if (item.includes('rgb')) {

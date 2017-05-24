@@ -505,13 +505,13 @@ angular
         function _getConnections() {
             return jsPlumbInstance.getAllConnections().map(function(connection) {
 
-                var connectionParams = connection.getParameters();
-                return ({
-                    pinSourceUid: connectionParams.pinSourceUid,
-                    pinTargetUid: connectionParams.pinTargetUid
-                });
+                    var connectionParams = connection.getParameters();
+                    return ({
+                        pinSourceUid: connectionParams.pinSourceUid,
+                        pinTargetUid: connectionParams.pinTargetUid
+                    });
 
-            }) || [];
+                }) || [];
         }
 
         function _getPinBoardReference(selector) {
@@ -608,24 +608,23 @@ angular
         //Adds a raw svg for a component
         function _loadComponent(DOMComponent, newComponent) {
             var spaceInterPin = {};
-            if (newComponent.pins.digital && newComponent.pins.analog) {
+            if (newComponent.manufacturer === 'makeblock') {
                 spaceInterPin = {
-                    digital: {
-                        x: newComponent.pins.digital && newComponent.width / (newComponent.pins.digital.length + 1) / newComponent.width,
-                        y: 0
-                    },
-                    analog: {
-                        x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
+                    blue: {
+                        x: 0.5,
                         y: 1
                     },
-                    'i2c-4': {
-                        x: newComponent.pins['i2c-4'] && newComponent.width / (newComponent.pins['i2c-4'].length + newComponent.pins.i2c5.length + 1) / newComponent.width,
-                        y: 0
+                    black: {
+                        x: 0.5,
+                        y: 1
                     },
-
-                    'i2c-5': {
-                        x: newComponent.pins['i2c-5'] && (newComponent.width / (newComponent.pins.i2c5.length + newComponent.pins['i2c-4'].length + 1) / newComponent.width) * 2,
-                        y: 0
+                    yellow: {
+                        x: 0.5,
+                        y: 1
+                    },
+                    wireless: {
+                        x: 1,
+                        y: 0.5
                     },
                     serial: {
                         x: 1,
@@ -633,42 +632,56 @@ angular
                     }
                 };
             } else {
-                spaceInterPin = {
-                    digital: {
-                        x: newComponent.pins.digital && newComponent.width / (newComponent.pins.digital.length + 1) / newComponent.width,
-                        y: 1
-                    },
-                    analog: {
-                        x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
-                        y: 0
-                    },
-                    'i2c-4': {
-                        x: newComponent.pins['i2c-4'] && newComponent.width / (newComponent.pins['i2c-4'].length + newComponent.pins['i2c-5'].length + 1) / newComponent.width,
-                        y: 0
-                    },
+                if (newComponent.pins.digital && newComponent.pins.analog) {
+                    spaceInterPin = {
+                        digital: {
+                            x: newComponent.pins.digital && newComponent.width / (newComponent.pins.digital.length + 1) / newComponent.width,
+                            y: 0
+                        },
+                        analog: {
+                            x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
+                            y: 1
+                        },
+                        'i2c-4': {
+                            x: newComponent.pins['i2c-4'] && newComponent.width / (newComponent.pins['i2c-4'].length + newComponent.pins.i2c5.length + 1) / newComponent.width,
+                            y: 0
+                        },
 
-                    'i2c-5': {
-                        x: newComponent.pins['i2c-5'] && (newComponent.width / (newComponent.pins['i2c-5'].length + newComponent.pins['i2c-4'].length + 1) / newComponent.width) * 2,
-                        y: 0
-                    },
-                    serial: {
-                        x: 1,
-                        y: 0.5
-                    }
-                };
+                        'i2c-5': {
+                            x: newComponent.pins['i2c-5'] && (newComponent.width / (newComponent.pins.i2c5.length + newComponent.pins['i2c-4'].length + 1) / newComponent.width) * 2,
+                            y: 0
+                        },
+                        serial: {
+                            x: 1,
+                            y: 0.5
+                        }
+                    };
+                } else {
+                    spaceInterPin = {
+                        digital: {
+                            x: newComponent.pins.digital && newComponent.width / (newComponent.pins.digital.length + 1) / newComponent.width,
+                            y: 1
+                        },
+                        analog: {
+                            x: newComponent.pins.analog && newComponent.width / (newComponent.pins.analog.length + 1) / newComponent.width,
+                            y: 0
+                        },
+                        'i2c-4': {
+                            x: newComponent.pins['i2c-4'] && newComponent.width / (newComponent.pins['i2c-4'].length + newComponent.pins['i2c-5'].length + 1) / newComponent.width,
+                            y: 0
+                        },
+
+                        'i2c-5': {
+                            x: newComponent.pins['i2c-5'] && (newComponent.width / (newComponent.pins['i2c-5'].length + newComponent.pins['i2c-4'].length + 1) / newComponent.width) * 2,
+                            y: 0
+                        },
+                        serial: {
+                            x: 1,
+                            y: 0.5
+                        }
+                    };
+                }
             }
-            spaceInterPin.blue = {
-                x: 0.5,
-                y: 1
-            };
-            spaceInterPin.black = {
-                x: 0.5,
-                y: 1
-            };
-            spaceInterPin.yellow = {
-                x: 0.5,
-                y: 1
-            };
 
             var mandatoryPins = {};
 
