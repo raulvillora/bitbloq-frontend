@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-                                            utils)
-    {
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -327,7 +326,7 @@ angular.module('bitbloqApp')
                             result = existComponent(['mkb_ultrasound'], connectedComponents);
                             break;
                         case 'mBotIfThereIsALotOfLight':
-                            result = existComponent(['mkb_lightsensor', 'mkb_integrated_lightsensor', 'mkb_joystick'], connectedComponents);
+                            result = existComponent(['mkb_lightsensor', 'mkb_integrated_lightsensor'], connectedComponents);
                             break;
                         case 'mBotIfFollowLines':
                             result = existComponent(['mkb_linefollower'], connectedComponents);
@@ -335,6 +334,16 @@ angular.module('bitbloqApp')
                         case 'mBotSetRGBLedSimple':
                         case 'mBotRGBLedOff':
                             result = existComponent(['mkb_integrated_RGB'], connectedComponents);
+                            break;
+                        case 'makeblockIfNoise':
+                            result = existComponent(['mkb_soundsensor'], connectedComponents);
+                            break;
+                        case 'mBotLedMatrix':
+                        case 'mBotClearLedMatrix':
+                        case 'mBotShowTimeOnLedMatrix':
+                        case 'mBotShowNumberOnLedMatrix':
+                        case 'mBotShowStringOnLedMatrix':
+                            result = existComponent(['mkb_ledmatrix'], connectedComponents);
                             break;
                         default:
                             result = false;
@@ -367,10 +376,10 @@ angular.module('bitbloqApp')
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
                             'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
-                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton'
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
-                        result = existComponent(['bt', 'sp', 'device'], connectedComponents);
+                        result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
                     } else if (item.indexOf('phone') > -1) {
                         result = $scope.currentProject.useBitbloqConnect;
                     } else if (item.includes('rgb')) {
@@ -401,12 +410,18 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_integrated_buzz'], connectedComponents);
                     } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
                         result = existComponent(['mkb_integrated_RGB'], connectedComponents);
+                    } else if (item === 'makeblockIfNoise') {
+                        result = existComponent(['mkb_soundsensor'], connectedComponents);
+                    } else if (item === 'mBotLedMatrix') {
+                        result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                    } else if (item === 'readJoystickXY') {
+                        result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
+                    } else if (item === 'mBotSetLedMatrixBrightness') {
+                        result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].uuid.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].uuid))
-                            {
+                            if (connectedComponents[i].uuid.includes(item) || item.toLowerCase().includes(connectedComponents[i].uuid)) {
                                 result = true;
                             }
                             i++;
@@ -539,7 +554,8 @@ angular.module('bitbloqApp')
                         fieldOffsetRight: 216,
                         fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                         bloqSchemas: bloqsApi.schemas,
-                        suggestionWindowParent: $scope.$field[0]
+                        suggestionWindowParent: $scope.$field[0],
+                        dotsMatrixWindowParent: $scope.$field[0]
                     };
 
                     if (currentProjectService.exercise) {
@@ -915,6 +931,23 @@ angular.module('bitbloqApp')
                     advancedBloqs: 'advancedStarterthreewheels'
                 }
             },
+            freakscar: {
+                id: 'allFreakscarBloqs',
+                basicTab: 'freakscar',
+                advancedTab: 'advancedFreakscar',
+                counter: 0,
+                model: null,
+                showCondition: function() {
+                    return $scope.currentProject.hardware.robot === 'freakscar';
+                },
+                icon: '#robot',
+                literal: 'make-swtoolbox-freakscar',
+                dataElement: 'toolbox-freakscar',
+                properties: {
+                    basicBloqs: 'freakscar',
+                    advancedBloqs: 'advancedFreakscar'
+                }
+            },
             phone: {
                 id: 'allPhoneBloqs',
                 basicTab: 'phone',
@@ -941,6 +974,9 @@ angular.module('bitbloqApp')
                 literal: 'components',
                 dataElement: 'toolbox-components',
                 showBasicBloqsCondition: function(name) {
+                    if (name === 'readJoystickXY') {
+                        console.log();
+                    }
                     return $scope.showComponents(name);
                 },
                 properties: {

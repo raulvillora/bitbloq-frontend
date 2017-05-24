@@ -8,15 +8,20 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, compilerApi, hardwareConstants, projectService) {
+    .controller('CodeCtrl', function($scope, $q, projectApi, $routeParams, _, alertsService, $timeout, utils, $location, web2board, $window, $rootScope, commonModals, $route, web2boardOnline, compilerApi, hardwareService, projectService) {
 
         var editInfo, editorRef,
             compilingAlert,
             settingBoardAlert,
             serialMonitorAlert;
 
+        hardwareService.itsHardwareLoaded().then(function() {
+            $scope.robotsMap = projectService.getRobotsMap(hardwareService.hardware);
+        });
+
+        $scope.robotsMap = null;
+        $scope.robotName = '';
         projectService.saveStatus = 0;
-        $scope.robotsMap = projectService.getRobotsMap(hardwareConstants);
         // The ui-ace option
         $scope.aceOptions = {
             mode: 'c_cpp',
@@ -90,16 +95,16 @@ angular.module('bitbloqApp')
         };
 
         $scope.getNameFromId = function(elementId) {
-            var robot, robotName;
-            robot = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                return o.uuid === elementId;
+            var robot;
+            hardwareService.itsHardwareLoaded().then(function() {
+                robot = _.filter(_.concat(hardwareService.hardware.boards, hardwareService.hardware.robots), function(o) {
+                    return o.uuid === elementId;
+                });
+                if (robot.length > 0) {
+                    $scope.robotName = robot[0].uuid;
+                }
             });
 
-            if (robot.length > 0) {
-                robotName = robot[0].uuid;
-            }
-
-            return robotName;
         };
 
         $scope.setBoard = function(boardName) {
@@ -111,45 +116,47 @@ angular.module('bitbloqApp')
             $scope.boardImage = null;
             projectService.project.hardware.robot = null;
 
-            if (!projectService.project.hardware.showRobotImage) {
-                elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.name === boardName || o.uuid === boardName;
-                });
-                if (elementSelected[0] && elementSelected[0].board) {
-                    projectService.project.hardware.robot = elementSelected[0].uuid;
-                }
-            } else {
-                elementSelected = _.filter(_.concat(hardwareConstants.boards, hardwareConstants.robots), function(o) {
-                    return o.name === boardName || o.uuid === boardName;
-                });
-            }
-            if (elementSelected[0]) {
-                var indexTag = projectService.project.hardwareTags.indexOf(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board);
-                if (indexTag !== -1) {
-                    projectService.project.hardwareTags.splice(indexTag, 1);
-                }
-            }
-
-            if (elementSelected[0]) {
-                projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].uuid; //Default board is ZUM
-                projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].uuid : null;
-                if (projectService.project.hardware.showRobotImage) {
-                    handleActivateAlert();
-                }
-
-                if (elementSelected[0].board) {
-                    $scope.robotImage = elementSelected[0].uuid;
+            hardwareService.itsHardwareLoaded().then(function() {
+                if (!projectService.project.hardware.showRobotImage) {
+                    elementSelected = _.filter(_.concat(hardwareService.hardware.boards, hardwareService.hardware.robots), function(o) {
+                        return o.name === boardName || o.uuid === boardName;
+                    });
+                    if (elementSelected[0] && elementSelected[0].board) {
+                        projectService.project.hardware.robot = elementSelected[0].uuid;
+                    }
                 } else {
-                    $scope.boardImage = elementSelected[0].uuid;
+                    elementSelected = _.filter(_.concat(hardwareService.hardware.boards, hardwareService.hardware.robots), function(o) {
+                        return o.name === boardName || o.uuid === boardName;
+                    });
                 }
-            } else {
-                projectService.project.hardware.board = 'bqZUM';
-                $scope.boardImage = 'bqZUM';
-                projectService.project.hardwareTags.push($scope.common.translate(projectService.project.hardware.board));
-            }
-            if (elementSelected[0]) {
-                projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board));
-            }
+                if (elementSelected[0]) {
+                    var indexTag = projectService.project.hardwareTags.indexOf(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board);
+                    if (indexTag !== -1) {
+                        projectService.project.hardwareTags.splice(indexTag, 1);
+                    }
+                }
+
+                if (elementSelected[0]) {
+                    projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].uuid; //Default board is ZUM
+                    projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].uuid : null;
+                    if (projectService.project.hardware.showRobotImage) {
+                        handleActivateAlert();
+                    }
+
+                    if (elementSelected[0].board) {
+                        $scope.robotImage = elementSelected[0].uuid;
+                    } else {
+                        $scope.boardImage = elementSelected[0].uuid;
+                    }
+                } else {
+                    projectService.project.hardware.board = 'bqZUM';
+                    $scope.boardImage = 'bqZUM';
+                    projectService.project.hardwareTags.push($scope.common.translate(projectService.project.hardware.board));
+                }
+                if (elementSelected[0]) {
+                    projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board));
+                }
+            });
         };
 
         $scope.toggleCollapseHeader = function() {

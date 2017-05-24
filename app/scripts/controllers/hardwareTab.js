@@ -9,7 +9,7 @@
 angular.module('bitbloqApp')
     .controller('hardwareTabCtrl', hardwareTabCtrl);
 
-function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $translate, $window, $timeout, bloqsUtils, hardwareConstants, userApi, projectService) {
+function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsService, _, utils, $translate, $window, $timeout, bloqsUtils, hardwareService, userApi, projectService) {
 
     var container = utils.getDOMElement('.protocanvas'),
         $componentContextMenu = $('#component-context-menu'),
@@ -259,7 +259,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
             if ($scope.currentProject.hardware.robot) {
                 filteredList = [];
 
-            } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents) {
+            } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.length > 0) {
+                console.log('$scope.common.userHardware.components');
+                console.log($scope.boardsMap[$scope.currentProject.hardware.board]);
                 filteredList = _.filter($scope.common.userHardware.components, function(component) {
                     return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.uuid) !== -1;
                 });
@@ -469,10 +471,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
      ****************************************/
 
     function _initialize() {
-        $scope.robotsMap = projectService.getRobotsMap(hardwareConstants);
-        $scope.boardsMap = _getBoardsMap(hardwareConstants);
-        $scope.componentsMap = _getComponentsMap(hardwareConstants);
-
+        hardwareService.itsHardwareLoaded().then(function() {
+            $scope.robotsMap = projectService.getRobotsMap(hardwareService.hardware);
+            $scope.boardsMap = _getBoardsMap(hardwareService.hardware);
+            $scope.componentsMap = _getComponentsMap(hardwareService.hardware);
+        });
         $scope.common.itsUserLoaded().finally(function() {
             $scope.hardware.boardList = $scope.common.userHardware.boards;
             $scope.hardware.robotList = $scope.common.userHardware.robots;
@@ -887,8 +890,11 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.hwBasicsLoaded.promise.then(function() {
             if ($scope.currentProject.hardware.robot) {
-                var robotReference = currentProjectService.getRobotMetaData();
-                hwSchema.robot = robotReference; //The whole board object is passed
+                currentProjectService.getRobotMetaData().then(function(response) {
+                    hwSchema.robot = response; //The whole board object is passed
+                    loadComponentsSchema(hwSchema, conectableComponents);
+                });
+
             } else if ($scope.currentProject.hardware.board) {
                 var boardReference = currentProjectService.getBoardMetaData();
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
@@ -901,33 +907,39 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 }
 
                 hwSchema.board = boardReference; //The whole board object is passed
-            }
-
-            if (hwSchema.robot || hwSchema.board) {
-                hw2Bloqs.loadSchema(hwSchema);
-                hw2Bloqs.repaint();
-                $scope.hardware.firstLoad = false;
-                //Fix components dimensions
-                _.forEach(conectableComponents, function(item) {
-                    item = bloqsUtils.checkPins(item);
-                    _fixComponentsDimension(item);
-                });
-
-                $scope.hardware.sortToolbox();
-            } else {
-                $log.debug('robot is undefined');
+                loadComponentsSchema(hwSchema, conectableComponents);
             }
 
         });
     }
 
+    function loadComponentsSchema(hwSchema, conectableComponents) {
+        if (hwSchema.robot || hwSchema.board) {
+            hw2Bloqs.loadSchema(hwSchema);
+            hw2Bloqs.repaint();
+            $scope.hardware.firstLoad = false;
+            //Fix components dimensions
+            _.forEach(conectableComponents, function(item) {
+                item = bloqsUtils.checkPins(item);
+                _fixComponentsDimension(item);
+            });
+
+            $scope.hardware.sortToolbox();
+        } else {
+            $log.debug('robot is undefined');
+        }
+
+    }
+
     function _fixComponentsDimension(compRef) {
-        var c = _.find(hardwareConstants.components, {
-            'uuid': compRef.uuid
+        hardwareService.itsHardwareLoaded().then(function() {
+            var c = _.find(hardwareService.hardware.components, {
+                'uuid': compRef.uuid
+            });
+            var componentDOM = document.querySelector('[data-uid="' + compRef.uid + '"]');
+            componentDOM.style.width = c.width + 'px';
+            componentDOM.style.height = c.height + 'px';
         });
-        var componentDOM = document.querySelector('[data-uid="' + compRef.uid + '"]');
-        componentDOM.style.width = c.width + 'px';
-        componentDOM.style.height = c.height + 'px';
     }
 
     function _validName(name) {

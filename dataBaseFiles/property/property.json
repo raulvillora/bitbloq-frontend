@@ -1,5 +1,5 @@
 [{
-    "bitbloqLibsVersion": "1.1.4",
+    "bitbloqLibsVersion": "1.2.1",
     "bloqsSortTree": {
         "advancedClasses": [{
             "name": "classChildren"
@@ -23,6 +23,8 @@
             "name": "setClassArrayVariable"
         }],
         "advancedComponents": [{
+            "name": "mBotSetLedMatrixBrightness"
+        }, {
             "name": "hwVariable"
         }, {
             "name": "buzzerAdvanced-v2"
@@ -254,6 +256,8 @@
             "name": "serialReceiveInt"
         }, {
             "name": "serialSend-v1"
+        }, {
+            "name": "readJoystickXY"
         }],
         "controls": [{
             "name": "wait"
@@ -355,10 +359,26 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
+        }, {
+            "name": "makeblockIfNoise"
+        }, {
+            "name": "mBotLedMatrix"
+        }, {
+            "name": "mBotClearLedMatrix"
+        }, {
+            "name": "mBotShowTimeOnLedMatrix"
+        }, {
+            "name": "mBotShowNumberOnLedMatrix"
+        }, {
+            "name": "mBotShowStringOnLedMatrix"
         }],
         "advancedMBotV2": [{
             "name": "mBotMoveAdvanced-v2"
         }],
+        "freakscar": [{
+            "name": "freakscarBuzzer"
+        }],
+        "advancedFreakscar": [],
         "rangerlandraider": [{
             "name": "mBotMove-v2"
         }, {

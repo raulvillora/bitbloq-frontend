@@ -263,6 +263,14 @@ $hw_toolbox: 210px;
         }
     }
 
+    .toolbox-freakscar {
+        background-color: #966F33;
+
+        &.selected--tab .btn-svg .svg-icon {
+            fill: #966F33;
+        }
+    }
+
     .toolbox-mbot,
     .toolbox-rangerlandraider,
     .toolbox-rangernervousbird,

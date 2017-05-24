@@ -10,7 +10,11 @@
 angular.module('bitbloqApp')
     .service('hardwareService', function(common, $q, _, hardwareApi) {
 
-        var exports = {};
+        var exports = {},
+            loadedHardwarePromise = $q.defer();
+
+        exports.hardware = null;
+
         exports.getUserHardware = function() {
             var defered = $q.defer();
             common.itsUserLoaded().then(function() {
@@ -26,7 +30,8 @@ angular.module('bitbloqApp')
 
                 exports.getRobots().then(function(robots) {
                     exports.getUserKits(common.userHardware).then(function(kits) {
-                        defered.resolve(groupRobotsByFamily(common.userHardware.robots, robots).concat(common.userHardware.boards).concat(common.userHardware.components).concat(kits));
+                        defered.resolve(groupRobotsByFamily(common.userHardware.robots, robots)
+                            .concat(common.userHardware.boards).concat(common.userHardware.components).concat(kits));
 
                     });
                 });
@@ -88,6 +93,10 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        exports.itsHardwareLoaded = function() {
+            return loadedHardwarePromise.promise;
+        };
+
         exports.manageKitHW = function(kits, hardwareSelected, removed) {
             if (removed) {
                 _.forEach(kits, function(kit) {
@@ -135,6 +144,32 @@ angular.module('bitbloqApp')
             return hardwareSelected;
         };
 
+        exports.getFamilyFromRobots = function(userRobots, robots) {
+            var robotsCopy;
+
+            robotsCopy = _.cloneDeep(userRobots);
+
+            _.forEach(userRobots, function(robot) {
+                var family = _.without(_.map(_.filter(robots, function(r) {
+                    return r._id === robot;
+                }), 'family'), undefined);
+                if (family.length > 0) {
+                    _.remove(robotsCopy, function(r) {
+                        return r === robot;
+                    });
+                    if (robotsCopy.indexOf(family[0]) <= -1) {
+                        robotsCopy = robotsCopy.concat(family);
+                    }
+                }
+            });
+
+            return robotsCopy;
+        };
+
+        /******************************
+         ***** PRIVATE FUNCTIONS ******
+         ******************************/
+
         function groupRobotsByFamily(userRobots, robots) {
             var robotsCopy;
 
@@ -161,27 +196,14 @@ angular.module('bitbloqApp')
             return _.uniqBy(robotsCopy, 'uuid');
         }
 
-        exports.getFamilyFromRobots = function(userRobots, robots) {
-            var robotsCopy;
+        /******************************
+         *********** INIT *************
+         ******************************/
 
-            robotsCopy = _.cloneDeep(userRobots);
-
-            _.forEach(userRobots, function(robot) {
-                var family = _.without(_.map(_.filter(robots, function(r) {
-                    return r._id === robot;
-                }), 'family'), undefined);
-                if (family.length > 0) {
-                    _.remove(robotsCopy, function(r) {
-                        return r === robot;
-                    });
-                    if (robotsCopy.indexOf(family[0]) <= -1) {
-                        robotsCopy = robotsCopy.concat(family);
-                    }
-                }
-            });
-
-            return robotsCopy;
-        };
+        hardwareApi.getAll().then(function(response) {
+            exports.hardware = response.data;
+            loadedHardwarePromise.resolve();
+        }).catch(loadedHardwarePromise.reject);
 
         return exports;
 

@@ -234,6 +234,7 @@
 .table__column--right {
     text-align: right;
 }
+
 // Actions menu
 .table__block__item--menu {
     position: absolute;
@@ -284,12 +285,12 @@
         cursor: pointer;
     }
 
-    &[disabled] {
+    &[disabled], & > div[disabled] {
         pointer-events: none;
-        color: gray;
+        color: #c0c3c9;
 
         .svg-icon {
-            fill: gray;
+            fill: #c0c3c9;
         }
     }
 

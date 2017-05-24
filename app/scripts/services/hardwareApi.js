@@ -8,15 +8,19 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('hardwareApi', function($http, envData) {
+    .service('hardwareApi', function($http, $q, envData) {
 
-        var thirdPartyRobotsApi = {
+        var hardwareApi = {
             getAll: getAll,
             getComponents: getComponents,
             getRobots: getRobots,
             getBoards: getBoards,
             getKits: getKits
         };
+
+        /******************************
+         ***** PRIVATE FUNCTIONS ******
+         ******************************/
 
         function getAll() {
             return $http({
@@ -52,5 +56,6 @@ angular.module('bitbloqApp')
                 url: envData.config.serverUrl + 'kit'
             });
         }
-        return thirdPartyRobotsApi;
+
+        return hardwareApi;
     });

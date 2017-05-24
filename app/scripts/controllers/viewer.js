@@ -9,7 +9,7 @@
  * Viewer controller
  */
 angular.module('bitbloqApp')
-    .controller('ViewerCtrl', function($element, web2boardV2, web2board, $timeout, $scope, common, $translate, chromeAppApi, utils, hardwareConstants, $rootScope, _) {
+    .controller('ViewerCtrl', function($element, web2boardV2, web2board, $timeout, $scope, common, $translate, chromeAppApi, utils, hardwareService, $rootScope, _) {
 
         $scope.sensorsList = {};
 
@@ -288,17 +288,19 @@ angular.module('bitbloqApp')
             chromeAppApi.getPorts().then(function(response) {
                 console.log('ports SerialMonitorCtrl', response);
                 $scope.ports = filterPortsByOS(response.ports);
-                utils.getPortsPrettyNames($scope.ports, hardwareConstants.boards);
-                $scope.portNames = [];
+                hardwareService.itsHardwareLoaded().then(function() {
+                    utils.getPortsPrettyNames($scope.ports, hardwareService.hardware.boards);
+                    $scope.portNames = [];
 
-                for (var i = 0; i < $scope.ports.length; i++) {
-                    $scope.portNames.push($scope.ports[i].portName);
-                }
+                    for (var i = 0; i < $scope.ports.length; i++) {
+                        $scope.portNames.push($scope.ports[i].portName);
+                    }
 
-                var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
-                if (portWithUserSelectedBoard) {
-                    $scope.setPort(portWithUserSelectedBoard.portName);
-                }
+                    var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
+                    if (portWithUserSelectedBoard) {
+                        $scope.setPort(portWithUserSelectedBoard.portName);
+                    }
+                });
 
             }).catch(function(error) {
                 console.log('error SerialMonitorCtrl', error);

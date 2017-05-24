@@ -7,20 +7,20 @@
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Menú de Proyectos</h1>
             <ul class="tabs__header">
-                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'projects'}" ng-click="selectedTab = 'projects'; refreshProjects()">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'projects'}" ng-click="selectedTab = 'projects'; refreshProjects();  searchText.text = ''">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#folderOpen"></use>
                     </svg>
                     <span class="menu__item__span">
-                        {{ 'my-projects' | translate }} ({{ filtered.projects.length}})
+                        {{ 'my-projects' | translate }} ({{projectsCount}})
                     </span>
                 </li>
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'releases'}" data-element="projects-shared-projects" ng-click="selectedTab = 'releases'">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'releases'}" data-element="projects-shared-projects" ng-click="selectedTab = 'releases'; searchText.text = ''">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#inbox"></use>
                     </svg>
                     <span class="menu__item__span">
-                        {{'shared' | translate}} ({{ sharedProjects.length || 0 }})
+                        {{'shared' | translate}} ({{ sharedCount }})
                     </span>
                     </span>
                 </li>

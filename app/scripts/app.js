@@ -113,7 +113,8 @@ angular
                 })
                 .when('/projects', {
                     templateUrl: 'views/projects.html',
-                    controller: 'ProjectsCtrl'
+                    controller: 'ProjectsCtrl',
+                    reloadOnSearch: false
                 })
                 .when('/styleguide', {
                     templateUrl: 'views/styleguide.html',

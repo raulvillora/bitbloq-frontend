@@ -9,7 +9,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board, hardwareConstants, utils) {
+    .controller('SerialMonitorCtrl', function($scope, _, web2boardV2, $translate, $timeout, $element, chromeAppApi, common, $rootScope, web2board, hardwareService, utils) {
         /*Private vars*/
         var serialHub = web2boardV2.api.SerialMonitorHub,
             textArea = $element.find('#serialData'),
@@ -102,17 +102,19 @@ angular.module('bitbloqApp')
             chromeAppApi.getPorts().then(function(response) {
                 console.log('ports SerialMonitorCtrl', response);
                 $scope.ports = filterPortsByOS(response.ports);
-                utils.getPortsPrettyNames($scope.ports, hardwareConstants.boards);
-                $scope.portNames = [];
+                hardwareService.itsHardwareLoaded().then(function() {
+                    utils.getPortsPrettyNames($scope.ports, hardwareService.hardware.boards);
+                    $scope.portNames = [];
 
-                for (var i = 0; i < $scope.ports.length; i++) {
-                    $scope.portNames.push($scope.ports[i].portName);
-                }
+                    for (var i = 0; i < $scope.ports.length; i++) {
+                        $scope.portNames.push($scope.ports[i].portName);
+                    }
 
-                var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
-                if (portWithUserSelectedBoard) {
-                    $scope.setPort(portWithUserSelectedBoard.portName);
-                }
+                    var portWithUserSelectedBoard = utils.getPortByBoard($scope.ports, $scope.board);
+                    if (portWithUserSelectedBoard) {
+                        $scope.setPort(portWithUserSelectedBoard.portName);
+                    }
+                });
 
             }).catch(function(error) {
                 console.log('error SerialMonitorCtrl', error);
