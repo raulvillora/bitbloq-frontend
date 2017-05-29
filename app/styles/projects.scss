@@ -66,10 +66,13 @@
             position: absolute;
             top: 0px;
             right: 20px;
-            height: 340px;
+            height: 100px;
             width: 254px;
+            display: none;
             &.active-options {
                 z-index: 2;
+                display: block;
+                height: 340px;
             }
         }
 
@@ -129,6 +132,9 @@
             }
             & ~ .project-list__item {
                 pointer-events: none;
+            }
+            .my-project__options {
+                display: block;
             }
         }
 
