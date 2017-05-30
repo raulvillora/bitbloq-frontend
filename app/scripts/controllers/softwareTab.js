@@ -345,6 +345,10 @@ angular.module('bitbloqApp')
                         case 'mBotShowStringOnLedMatrix':
                             result = existComponent(['mkb_ledmatrix'], connectedComponents);
                             break;
+
+                        case 'ifButtonPushed':
+                            result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }
@@ -418,6 +422,8 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
                     } else if (item === 'mBotSetLedMatrixBrightness') {
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                    } else if (item === 'ifButtonPushed') {
+                        result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {

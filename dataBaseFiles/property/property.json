@@ -361,6 +361,8 @@
             "name": "mBotRGBLedOff"
         }, {
             "name": "makeblockIfNoise"
+        },{
+            "name": "ifButtonPushed"
         }, {
             "name": "mBotLedMatrix"
         }, {
