@@ -225,8 +225,9 @@ angular.module('bitbloqApp')
                 code = exports.project.code;
             } else {
                 _updateHardwareSchema();
-                if (exports.project.useRemoteControl) {
-                    exports.project.hardware.components.push(exports.componentsArray.remoteControl[0]);
+                var wirelessComponents = _getWirelessConnectionComponents ();
+                if (wirelessComponents.length > 0) {
+                    _includeComponents(wirelessComponents);
                 }
                 var hardware = _.cloneDeep(exports.project.hardware);
                 if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bqZUM' && exports.project.bitbloqConnectBT) {
@@ -507,6 +508,23 @@ angular.module('bitbloqApp')
             var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
 
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(project), 'application/json');
+        }
+
+        function _getWirelessConnectionComponents (){
+            var fixedComponentArray = [];
+            _.forEach(exports.componentsArray, function(component){
+                var fixedComponent = _.filter(component, {fixed: true});
+                if(fixedComponent.length > 0){
+                    fixedComponentArray.push(fixedComponent);
+                }
+            });
+            return _.flattenDeep(fixedComponentArray);
+        }
+
+        function _includeComponents(components) {
+            _.forEach(components, function(component){
+                exports.project.hardware.components.push(component);
+            });
         }
 
         function _init() {

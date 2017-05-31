@@ -755,9 +755,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                         break;
                 }
                 break;
-            case 'mkb_remote':
-                $scope.currentProject.useRemoteControl = true;
-                break;
 
         }
 
@@ -777,7 +774,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var componentDOMRef = hw2Bloqs.addComponent(newComponent);
         _focusComponent(componentDOMRef);
         $scope.boardSelected = false;
-        if($scope.currentProject.useRemoteControl){
+        if(newComponent.wirelessConnection){
             currentProjectService.startAutosave();
         }
     }
@@ -813,8 +810,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         $scope.componentSelected = componentSelected;
         $scope.boardSelected = false;
-
-        //$log.debug('focusComponent', $scope.componentSelected);
 
     }
 
