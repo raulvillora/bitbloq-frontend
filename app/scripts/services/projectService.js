@@ -131,9 +131,8 @@ angular.module('bitbloqApp')
                     };
                 }
 
-                _updateHardwareSchema();
-                _updateHardwareTags();
                 exports.project.code = exports.getCode();
+                _updateHardwareTags();
             }
         };
 
@@ -226,6 +225,9 @@ angular.module('bitbloqApp')
                 code = exports.project.code;
             } else {
                 _updateHardwareSchema();
+                if (exports.project.useRemoteControl) {
+                    exports.project.hardware.components.push(exports.componentsArray.remoteControl[0]);
+                }
                 var hardware = _.cloneDeep(exports.project.hardware);
                 if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bqZUM' && exports.project.bitbloqConnectBT) {
                     hardware.components.push(exports.project.bitbloqConnectBT);
@@ -233,7 +235,7 @@ angular.module('bitbloqApp')
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
-                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true),
+                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
                 }, hardware);
             }
             return code;

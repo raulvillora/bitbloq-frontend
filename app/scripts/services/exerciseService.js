@@ -401,10 +401,14 @@ angular.module('bitbloqApp')
         exports.getCode = function() {
             var code;
             _updateHardwareSchema();
+            if (exports.exercise.useRemoteControl) {
+                exports.exercise.hardware.components.push(exports.componentsArray.remoteControl[0]);
+            }
             var hardware = _.cloneDeep(exports.exercise.hardware);
             if (exports.exercise.useBitbloqConnect && exports.exercise.hardware.board === 'bqZUM' && exports.exercise.bitbloqConnectBT) {
                 hardware.components.push(exports.exercise.bitbloqConnectBT);
             }
+
             code = arduinoGeneration.getCode({
                 varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                 setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
@@ -517,7 +521,6 @@ angular.module('bitbloqApp')
                 if (exports.exercise.useBitbloqConnect && (exports.exercise.hardware.board === 'bqZUM') && exports.exercise.bitbloqConnectBT) {
                     exports.addComponentInComponentsArray('serialElements', exports.exercise.bitbloqConnectBT);
                 }
-
             }
         };
         ///temp fix to code refactor, sensor types

@@ -145,7 +145,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 currentProjectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-            .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
+                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
+        {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -180,7 +181,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.componentSelected = $scope.currentProject.bitbloqConnectBT;
             }
         } else if (!ev.target.classList.contains('component-name__input') && !ev.target.classList.contains('oscillator--checkbox') && !$(ev.target)
-            .closest('.component-name__container').length) {
+                .closest('.component-name__container').length)
+        {
             $scope.robotSelected = $scope.boardSelected = $scope.componentSelected = false;
             $('.component').removeClass('component-selected');
             hw2Bloqs.unselectAllConnections();
@@ -260,8 +262,6 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 filteredList = [];
 
             } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.length > 0) {
-                console.log('$scope.common.userHardware.components');
-                console.log($scope.boardsMap[$scope.currentProject.hardware.board]);
                 filteredList = _.filter($scope.common.userHardware.components, function(component) {
                     return $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.indexOf(component.uuid) !== -1;
                 });
@@ -738,21 +738,29 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         var newComponent = _.cloneDeep(component);
 
-        if (newComponent.uuid === 'device' || newComponent.uuid === 'bt') {
-            switch (boardMetadata.uuid) {
-                case 'bqZUM':
-                    newComponent.baudRate = 19200;
-                    break;
-                case 'FreaduinoUNO':
-                    newComponent.baudRate = 38400;
-                    $scope.isMobileConnected = true;
-                    break;
-                case 'ArduinoUNO':
-                    newComponent.baudRate = 38400;
-                    $scope.isMobileConnected = true;
-                    break;
-            }
+        switch (newComponent.uuid) {
+            case 'device':
+            case 'bt':
+                switch (boardMetadata.uuid) {
+                    case 'bqZUM':
+                        newComponent.baudRate = 19200;
+                        break;
+                    case 'FreaduinoUNO':
+                        newComponent.baudRate = 38400;
+                        $scope.isMobileConnected = true;
+                        break;
+                    case 'ArduinoUNO':
+                        newComponent.baudRate = 38400;
+                        $scope.isMobileConnected = true;
+                        break;
+                }
+                break;
+            case 'mkb_remote':
+                $scope.currentProject.useRemoteControl = true;
+                break;
+
         }
+
         currentProjectService.addComponentInComponentsArray(data.category, newComponent);
 
         var relativeCoordinates = {
@@ -769,6 +777,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var componentDOMRef = hw2Bloqs.addComponent(newComponent);
         _focusComponent(componentDOMRef);
         $scope.boardSelected = false;
+        if($scope.currentProject.useRemoteControl){
+            currentProjectService.startAutosave();
+        }
     }
 
     function _changeBaudRate() {
@@ -1010,20 +1021,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     }
                 }
                 break;
-                // case 90:
-                //     //ctr+z
-                //     if (evt.ctrlKey) {
-                //         $scope.undo();
-                //         evt.preventDefault();
-                //     }
-                //     break;
-                // case 89:
-                //     //ctr+y
-                //     if (evt.ctrlKey) {
-                //         $scope.redo();
-                //         evt.preventDefault();
-                //     }
-                //     break;
+            // case 90:
+            //     //ctr+z
+            //     if (evt.ctrlKey) {
+            //         $scope.undo();
+            //         evt.preventDefault();
+            //     }
+            //     break;
+            // case 89:
+            //     //ctr+y
+            //     if (evt.ctrlKey) {
+            //         $scope.redo();
+            //         evt.preventDefault();
+            //     }
+            //     break;
             case 8:
                 //backspace
                 if (!evt.target.classList.contains('component-name__input')) {

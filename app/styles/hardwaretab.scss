@@ -529,7 +529,13 @@ $hw_toolbox: 210px;
         }
     }
 
-    .bitbloqconnect {
+    [src = "/images/components/mkb_remote.svg"] {
+        position: absolute !important;
+        top: 10% !important;
+        left: 10% !important;
+        height: 113px !important;
+    }
+    .fixed-component {
         position: absolute;
         top: 10%;
         left: 10%;
@@ -559,6 +565,9 @@ $hw_toolbox: 210px;
             &:hover {
                 display: block;
             }
+        }
+        .remote-control--icon {
+            width: 74px;
         }
     }
 }

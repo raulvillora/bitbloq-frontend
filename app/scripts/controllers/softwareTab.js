@@ -387,7 +387,7 @@ angular.module('bitbloqApp')
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
                             'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
-                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor'
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
