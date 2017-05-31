@@ -938,19 +938,19 @@ angular.module('bitbloqApp')
                 $scope.saveBloqStep();
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
-                $scope.$apply();
+                utils.apply($scope);
             });
 
             $window.addEventListener('bloqs:suggestedAdded', function() {
                 $scope.saveBloqStep();
                 $scope.hardware.firstLoad = false;
-                $scope.$apply();
+                utils.apply($scope);
             });
 
             $window.addEventListener('bloqs:connect', function() {
                 projectService.startAutosave();
                 $scope.hardware.firstLoad = false;
-                $scope.$apply();
+                utils.apply($scope);
             });
 
             $window.addEventListener('bloqs:change', function() {
@@ -958,7 +958,7 @@ angular.module('bitbloqApp')
                     $scope.saveBloqStep();
                     projectService.startAutosave();
                     $scope.hardware.firstLoad = false;
-                    $scope.$apply();
+                    utils.apply($scope);
                 }
 
             });
@@ -1304,7 +1304,7 @@ angular.module('bitbloqApp')
         function confirmExit() {
             var closeMessage;
 
-            $scope.$apply();
+            utils.apply($scope);
 
             if (projectService.saveStatus === 1) {
                 closeMessage = $scope.common.translate('leave-without-save');

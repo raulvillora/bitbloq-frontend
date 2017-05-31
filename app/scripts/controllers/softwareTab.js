@@ -479,9 +479,11 @@ angular.module('bitbloqApp')
 
             if (bloqUuid && !bloq.hasClass('bloq--group') && bloqs.bloqs[bloqUuid].isConnectable()) {
                 event.preventDefault();
-                $scope.$apply(function() {
-                    $scope.contextMenuBloq = bloqs.bloqs[bloqUuid];
-                });
+                if (!$scope.$$phase) {
+                    $scope.$apply(function() {
+                        $scope.contextMenuBloq = bloqs.bloqs[bloqUuid];
+                    });
+                }
                 if ((angular.element($window).height() - event.pageY) > $contextMenu.height()) {
                     $contextMenu.css({
                         display: 'block',
@@ -519,6 +521,7 @@ angular.module('bitbloqApp')
                     newBloq.varInputs[i].keyup();
                 }
             }
+            $scope.updateBloqs();
         }
 
         function existComponent(componentsToSearch, components, wirelessConnected) {
@@ -657,14 +660,10 @@ angular.module('bitbloqApp')
                 if ($scope.$field.height() < realScrollbarHeight) {
                     $scope.showScroll = true;
                     scrollBar.css('height', field[0].scrollHeight);
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
+                    utils.apply($scope);
                 } else {
                     $scope.showScroll = false;
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
+                    utils.apply($scope);
                 }
             }, 50);
         }
@@ -724,14 +723,14 @@ angular.module('bitbloqApp')
                 bloqs.removeBloq(object.detail.bloq.uuid, false, true);
             }
             $scope.showTrashcan = false;
-            $scope.$apply();
+            utils.apply($scope);
         }
 
         function onMoveBloq(bloq) {
             console.log(bloq);
             $scope.showTrashcan = true;
             // $scope.selectedBloqsToolbox = '';
-            $scope.$apply();
+            utils.apply($scope);
         }
 
         function startTwitterWatchers() {
