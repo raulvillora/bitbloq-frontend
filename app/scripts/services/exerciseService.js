@@ -401,10 +401,15 @@ angular.module('bitbloqApp')
         exports.getCode = function() {
             var code;
             _updateHardwareSchema();
+            var wirelessComponents = _getWirelessConnectionComponents ();
+            if (wirelessComponents.length > 0) {
+                _includeComponents(wirelessComponents);
+            }
             var hardware = _.cloneDeep(exports.exercise.hardware);
             if (exports.exercise.useBitbloqConnect && exports.exercise.hardware.board === 'bqZUM' && exports.exercise.bitbloqConnectBT) {
                 hardware.components.push(exports.exercise.bitbloqConnectBT);
             }
+
             code = arduinoGeneration.getCode({
                 varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                 setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
@@ -517,7 +522,6 @@ angular.module('bitbloqApp')
                 if (exports.exercise.useBitbloqConnect && (exports.exercise.hardware.board === 'bqZUM') && exports.exercise.bitbloqConnectBT) {
                     exports.addComponentInComponentsArray('serialElements', exports.exercise.bitbloqConnectBT);
                 }
-
             }
         };
         ///temp fix to code refactor, sensor types
@@ -612,6 +616,23 @@ angular.module('bitbloqApp')
             var filename = utils.removeDiacritics(exercise.name, undefined, $translate.instant('new-exercise'));
 
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(exercise), 'application/json');
+        }
+
+        function _getWirelessConnectionComponents (){
+            var wirelessComponentArray = [];
+            _.forEach(exports.componentsArray, function(component){
+                var wirelessComponent = _.filter(component, {wirelessConnection: true});
+                if(wirelessComponent.length > 0){
+                    wirelessComponentArray.push(wirelessComponent);
+                }
+            });
+            return _.flattenDeep(wirelessComponentArray);
+        }
+
+        function _includeComponents(components) {
+            _.forEach(components, function(component){
+                exports.project.hardware.components.push(component);
+            });
         }
 
         function _init() {

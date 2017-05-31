@@ -131,9 +131,8 @@ angular.module('bitbloqApp')
                     };
                 }
 
-                _updateHardwareSchema();
-                _updateHardwareTags();
                 exports.project.code = exports.getCode();
+                _updateHardwareTags();
             }
         };
 
@@ -226,6 +225,10 @@ angular.module('bitbloqApp')
                 code = exports.project.code;
             } else {
                 _updateHardwareSchema();
+                var wirelessComponents = _getWirelessConnectionComponents ();
+                if (wirelessComponents.length > 0) {
+                    _includeComponents(wirelessComponents);
+                }
                 var hardware = _.cloneDeep(exports.project.hardware);
                 if (exports.project.useBitbloqConnect && exports.project.hardware.board === 'bqZUM' && exports.project.bitbloqConnectBT) {
                     hardware.components.push(exports.project.bitbloqConnectBT);
@@ -233,7 +236,7 @@ angular.module('bitbloqApp')
                 code = arduinoGeneration.getCode({
                     varsBloq: exports.bloqs.varsBloq.getBloqsStructure(true),
                     setupBloq: exports.bloqs.setupBloq.getBloqsStructure(true),
-                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true),
+                    loopBloq: exports.bloqs.loopBloq.getBloqsStructure(true)
                 }, hardware);
             }
             return code;
@@ -505,6 +508,23 @@ angular.module('bitbloqApp')
             var filename = utils.removeDiacritics(project.name, undefined, $translate.instant('new-project'));
 
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(project), 'application/json');
+        }
+
+        function _getWirelessConnectionComponents (){
+            var wirelessComponentArray = [];
+            _.forEach(exports.componentsArray, function(component){
+                var wirelessComponent = _.filter(component, {wirelessConnection: true});
+                if(wirelessComponent.length > 0){
+                    wirelessComponentArray.push(wirelessComponent);
+                }
+            });
+            return _.flattenDeep(wirelessComponentArray);
+        }
+
+        function _includeComponents(components) {
+            _.forEach(components, function(component){
+                exports.project.hardware.components.push(component);
+            });
         }
 
         function _init() {

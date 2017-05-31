@@ -131,8 +131,8 @@ angular.module('bitbloqApp')
                 }
             }
 
-            var components = $scope.currentProject.hardware.components;
-            var useBitbloqConnect = $scope.currentProject.useBitbloqConnect;
+            var components = $scope.currentProject.hardware.components,
+                useBitbloqConnect = $scope.currentProject.useBitbloqConnect;
 
             imageObj.onload = function() {
                 if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage) {
@@ -151,6 +151,7 @@ angular.module('bitbloqApp')
                     uuid: 'device'
                 });
             }
+
             var limitedComponents = components.slice(0, 4);
             var counter = 0;
             limitedComponents.forEach(function(component) {

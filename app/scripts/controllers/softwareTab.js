@@ -343,7 +343,21 @@ angular.module('bitbloqApp')
                         case 'mBotShowTimeOnLedMatrix':
                         case 'mBotShowNumberOnLedMatrix':
                         case 'mBotShowStringOnLedMatrix':
+                        case 'mBotSetLedMatrixBrightnessAdvanced':
+                        case 'mBotShowNumberOnLedMatrixAdvanced':
+                        case 'mBotShowStringOnLedMatrixAdvanced':
+                        case 'mBotShowTimeOnLedMatrixAdvanced':
                             result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                            break;
+
+                        case 'ifButtonPushed':
+                            result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                            break;
+                        case 'remoteButtonPushed':
+                            result = existComponent(['mkb_remote'], connectedComponents, true);
+                            break;
+                        case 'displayNumber':
+                            result = existComponent(['mkb_display7seg'], connectedComponents);
                             break;
                         default:
                             result = false;
@@ -376,7 +390,7 @@ angular.module('bitbloqApp')
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
                             'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
-                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor'
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
@@ -416,8 +430,14 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else if (item === 'readJoystickXY') {
                         result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
-                    } else if (item === 'mBotSetLedMatrixBrightness') {
+                    } else if ((item === 'mBotSetLedMatrixBrightness') || (item === 'mBotSetLedMatrixBrightnessAdvanced') || (item === 'mBotShowNumberOnLedMatrixAdvanced') || (item === 'mBotShowStringOnLedMatrixAdvanced') || (item === 'mBotShowTimeOnLedMatrixAdvanced')) {
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                    } else if (item === 'ifButtonPushed') {
+                        result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                    } else if (item === 'remoteButtonPushed') {
+                        result = existComponent(['mkb_remote'], connectedComponents);
+                    } else if (item === 'displayNumber') {
+                        result = existComponent(['mkb_display7seg'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
@@ -504,7 +524,7 @@ angular.module('bitbloqApp')
             $scope.updateBloqs();
         }
 
-        function existComponent(componentsToSearch, components) {
+        function existComponent(componentsToSearch, components, wirelessConnected) {
             var found,
                 j,
                 i = 0;
@@ -519,7 +539,7 @@ angular.module('bitbloqApp')
                 }
                 i++;
             }
-            if (found && !found.connected) {
+            if (found && !found.connected && !wirelessConnected) {
                 found = false;
             }
 

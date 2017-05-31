@@ -35,23 +35,18 @@
         <p>
     </div>
     <li pagination-id="shared" dir-paginate="project in sharedProjects | filter:userProjectsFilterFunction(userProjectsFilter) |  itemsPerPage: itemsPerPage track by project._id"
-        current-page="pagination.sharedprojects.current" total-items="{{sharedCount}}" ng-init="sectionIndex = $index" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}">
+        current-page="pagination.sharedprojects.current" total-items="{{sharedCount}}" ng-init="sectionIndex = $index" class="project-list__item shared-projects__item" ng-class="{'project__item--wide':itemsLayout === 'list'}">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
-            <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
-                <a class="project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
-                    <img ng-src="{{common.urlImage + 'project/' + project._id}}" err-src="../images/common/default-project.png">
-                </a>
-            </div>
             <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
-                <div ng-class="{'project__footer':true, 'project__footer--wide':itemsLayout === 'list'}">
-                    <div class="footer__addtomyprojects">
-                        <div ng-click="createCopy(project)" class="project--footer--icon">
-                            <svg class="svg-icon">
-                                <use xlink:href="#plusCircle"></use>
-                            </svg>
-                            <span>{{ 'project-addto-myprojects' | translate }}</span>
-                        </div>
-                    </div>
+                <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
+                    <a class="project__image__container project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
+                        <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
+                    </a>
+                    <span class="project--item--options" ng-click="menuActive[$index] = !menuActive[$index]" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                        <svg class="svg-icon" data-element="eliminate-myproject">
+                            <use xlink:href="#ellipsis"></use>
+                        </svg>
+                    </span>
                 </div>
                 <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
                     <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
@@ -74,6 +69,25 @@
                     <use xlink:href="#code"></use>
                 </svg>
             </span>
+            <div class="my-project__options" ng-class="{'active-options': menuActive[$index]}" ng-mouseleave="menuActive[$index] = false">
+                <span class="my-project__button-options" ng-click="menuActive[$index] = !menuActive[$index]">
+                    <svg class="svg-icon" data-element="eliminate-myproject">
+                        <use xlink:href="#ellipsis"></use>
+                    </svg>
+                </span>
+                <div ng-show="menuActive[$index]" class="table__block__item--menu my-project__options-container">
+                    <div ng-if="common.userRole!=='student'">
+                        <ul>
+                            <li class="table__block__item--menu__item" ng-click="createCopy(project)">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#plusCircle"></use>
+                                </svg>
+                                {{'project-addto-myprojects' | translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </li>
     <div id="shared__paginator" class="projects__paginator">

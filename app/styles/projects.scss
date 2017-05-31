@@ -66,10 +66,13 @@
             position: absolute;
             top: 0px;
             right: 20px;
-            height: 370px;
+            height: 100px;
             width: 254px;
+            display: none;
             &.active-options {
                 z-index: 2;
+                display: block;
+                height: 340px;
             }
         }
 
@@ -81,6 +84,10 @@
             border-radius: 4px;
             box-shadow: 0px 3px 7px 0 rgba(0, 0, 0, 0.35);
             border: solid 1px #cfcfcf;
+        }
+
+        &.shared-projects__item .my-project__options {
+            height: 100px;
         }
 
         .my-project__button-options {
@@ -125,6 +132,9 @@
             }
             & ~ .project-list__item {
                 pointer-events: none;
+            }
+            .my-project__options {
+                display: block;
             }
         }
 
