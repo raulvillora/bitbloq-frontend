@@ -619,14 +619,14 @@ angular.module('bitbloqApp')
         }
 
         function _getWirelessConnectionComponents (){
-            var fixedComponentArray = [];
+            var wirelessComponentArray = [];
             _.forEach(exports.componentsArray, function(component){
-                var fixedComponent = _.filter(component, {fixed: true});
-                if(fixedComponent.length > 0){
-                    fixedComponentArray.push(fixedComponent);
+                var wirelessComponent = _.filter(component, {wirelessConnection: true});
+                if(wirelessComponent.length > 0){
+                    wirelessComponentArray.push(wirelessComponent);
                 }
             });
-            return _.flattenDeep(fixedComponentArray);
+            return _.flattenDeep(wirelessComponentArray);
         }
 
         function _includeComponents(components) {
