@@ -23,64 +23,69 @@
             "name": "setClassArrayVariable"
         }],
         "advancedComponents": [{
-            "name": "mBotSetLedMatrixBrightness"
-        }, {
-            "name": "hwVariable"
-        }, {
-            "name": "buzzerAdvanced-v2"
-        }, {
-            "name": "buzzerWithoutPause"
-        }, {
-            "name": "buzzerWithoutPauseAdvanced"
-        }, {
-            "name": "stopBuzzer"
-        }, {
-            "name": "mBotBuzzerAdvanced-v2"
-        }, {
-            "name": "continuousServoStartAdvanced-v1"
-        }, {
-            "name": "continuousServoStopAdvanced"
-        }, {
-            "name": "lcdTurnOnOffAdvanced"
-        }, {
-            "name": "lcdWriteAdvanced"
-        }, {
-            "name": "ledAdvanced"
-        }, {
-            "name": "rgbLedAdvanced"
-        }, {
-            "name": "mBotSetRGBLedAdvanced"
-        }, {
-            "name": "oscillatorAdvanced"
-        }, {
-            "name": "oscillatorStartAdvanced"
-        }, {
-            "name": "oscillatorStopAdvanced"
-        }, {
-            "name": "digitalReadAdvanced"
-        }, {
-            "name": "analogReadAdvanced"
-        }, {
-            "name": "analogWrite"
-        }, {
-            "name": "digitalWrite"
-        }, {
-            "name": "pinLevels"
-        }, {
-            "name": "readAdvanced"
-        }, {
-            "name": "servoNormalAdvanced-v2"
-        }, {
-            "name": "servoAttach"
-        }, {
-            "name": "servoDetach"
-        }, {
-            "name": "turnOnOffAdvanced"
-        }, {
-            "name": "lcdWritePositionAdvanced-v1"
-        }, {
-            "name": "viewer"
-        }],
+                "name": "mBotSetLedMatrixBrightness"
+            },
+            {
+                "name": "mBotSetLedMatrixBrightnessAdvanced"
+            },
+            {
+                "name": "hwVariable"
+            }, {
+                "name": "buzzerAdvanced-v2"
+            }, {
+                "name": "buzzerWithoutPause"
+            }, {
+                "name": "buzzerWithoutPauseAdvanced"
+            }, {
+                "name": "stopBuzzer"
+            }, {
+                "name": "mBotBuzzerAdvanced-v2"
+            }, {
+                "name": "continuousServoStartAdvanced-v1"
+            }, {
+                "name": "continuousServoStopAdvanced"
+            }, {
+                "name": "lcdTurnOnOffAdvanced"
+            }, {
+                "name": "lcdWriteAdvanced"
+            }, {
+                "name": "ledAdvanced"
+            }, {
+                "name": "rgbLedAdvanced"
+            }, {
+                "name": "mBotSetRGBLedAdvanced"
+            }, {
+                "name": "oscillatorAdvanced"
+            }, {
+                "name": "oscillatorStartAdvanced"
+            }, {
+                "name": "oscillatorStopAdvanced"
+            }, {
+                "name": "digitalReadAdvanced"
+            }, {
+                "name": "analogReadAdvanced"
+            }, {
+                "name": "analogWrite"
+            }, {
+                "name": "digitalWrite"
+            }, {
+                "name": "pinLevels"
+            }, {
+                "name": "readAdvanced"
+            }, {
+                "name": "servoNormalAdvanced-v2"
+            }, {
+                "name": "servoAttach"
+            }, {
+                "name": "servoDetach"
+            }, {
+                "name": "turnOnOffAdvanced"
+            }, {
+                "name": "lcdWritePositionAdvanced-v1"
+            }, {
+                "name": "viewer"
+            }
+        ],
         "advancedControls": [{
             "name": "waitAdvanced"
         }, {
@@ -361,7 +366,9 @@
             "name": "mBotRGBLedOff"
         }, {
             "name": "makeblockIfNoise"
-        },{
+        }, {
+            "name": "displayNumber"
+        }, {
             "name": "ifButtonPushed"
         }, {
             "name": "mBotLedMatrix"
@@ -375,8 +382,18 @@
             "name": "mBotShowStringOnLedMatrix"
         }],
         "advancedMBotV2": [{
-            "name": "mBotMoveAdvanced-v2"
-        }],
+                "name": "mBotMoveAdvanced-v2"
+            },
+            {
+                "name": "mBotShowNumberOnLedMatrixAdvanced"
+            },
+            {
+                "name": "mBotShowStringOnLedMatrixAdvanced"
+            },
+            {
+                "name": "mBotShowTimeOnLedMatrixAdvanced"
+            }
+        ],
         "freakscar": [{
             "name": "freakscarBuzzer"
         }],

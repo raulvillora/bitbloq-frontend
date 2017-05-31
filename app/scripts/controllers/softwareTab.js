@@ -343,11 +343,18 @@ angular.module('bitbloqApp')
                         case 'mBotShowTimeOnLedMatrix':
                         case 'mBotShowNumberOnLedMatrix':
                         case 'mBotShowStringOnLedMatrix':
+                        case 'mBotSetLedMatrixBrightnessAdvanced':
+                        case 'mBotShowNumberOnLedMatrixAdvanced':
+                        case 'mBotShowStringOnLedMatrixAdvanced':
+                        case 'mBotShowTimeOnLedMatrixAdvanced':
                             result = existComponent(['mkb_ledmatrix'], connectedComponents);
                             break;
 
                         case 'ifButtonPushed':
                             result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                            break;
+                        case 'displayNumber':
+                            result = existComponent(['mkb_display7seg'], connectedComponents);
                             break;
                         default:
                             result = false;
@@ -420,10 +427,12 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else if (item === 'readJoystickXY') {
                         result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
-                    } else if (item === 'mBotSetLedMatrixBrightness') {
+                    } else if ((item === 'mBotSetLedMatrixBrightness') || (item === 'mBotSetLedMatrixBrightnessAdvanced') || (item === 'mBotShowNumberOnLedMatrixAdvanced') || (item === 'mBotShowStringOnLedMatrixAdvanced') || (item === 'mBotShowTimeOnLedMatrixAdvanced')) {
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else if (item === 'ifButtonPushed') {
                         result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                    } else if (item === 'displayNumber') {
+                        result = existComponent(['mkb_display7seg'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
