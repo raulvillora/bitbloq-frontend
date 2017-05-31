@@ -353,6 +353,9 @@ angular.module('bitbloqApp')
                         case 'ifButtonPushed':
                             result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                             break;
+                        case 'remoteButtonPushed':
+                            result = existComponent(['mkb_remote'], connectedComponents, true);
+                            break;
                         case 'displayNumber':
                             result = existComponent(['mkb_display7seg'], connectedComponents);
                             break;
@@ -431,6 +434,8 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_ledmatrix'], connectedComponents);
                     } else if (item === 'ifButtonPushed') {
                         result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                    } else if (item === 'remoteButtonPushed') {
+                        result = existComponent(['mkb_remote'], connectedComponents);
                     } else if (item === 'displayNumber') {
                         result = existComponent(['mkb_display7seg'], connectedComponents);
                     } else {
@@ -516,7 +521,7 @@ angular.module('bitbloqApp')
             }
         }
 
-        function existComponent(componentsToSearch, components) {
+        function existComponent(componentsToSearch, components, wirelessConnected) {
             var found,
                 j,
                 i = 0;
@@ -531,7 +536,7 @@ angular.module('bitbloqApp')
                 }
                 i++;
             }
-            if (found && !found.connected) {
+            if (found && !found.connected && !wirelessConnected) {
                 found = false;
             }
 

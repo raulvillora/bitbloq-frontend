@@ -351,36 +351,41 @@
             "name": "mBotSetLedAdvanced"
         }],
         "mBotV2": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "ifButtonPushed"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }],
+                "name": "mBotMove-v2"
+            }, {
+                "name": "mBotStop-v2"
+            }, {
+                "name": "mBotSomethingNear"
+            }, {
+                "name": "mBotIfThereIsALotOfLight"
+            }, {
+                "name": "mBotIfFollowLines"
+            }, {
+                "name": "mBotSetRGBLedSimple"
+            }, {
+                "name": "mBotRGBLedOff"
+            }, {
+                "name": "makeblockIfNoise"
+            }, {
+                "name": "displayNumber"
+            }, {
+                "name": "ifButtonPushed"
+            },
+            {
+                "name": "remoteButtonPushed"
+            },
+            {
+                "name": "mBotLedMatrix"
+            }, {
+                "name": "mBotClearLedMatrix"
+            }, {
+                "name": "mBotShowTimeOnLedMatrix"
+            }, {
+                "name": "mBotShowNumberOnLedMatrix"
+            }, {
+                "name": "mBotShowStringOnLedMatrix"
+            }
+        ],
         "advancedMBotV2": [{
                 "name": "mBotMoveAdvanced-v2"
             },
