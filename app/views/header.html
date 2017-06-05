@@ -5,7 +5,7 @@
             <h1 class="invisible">Bitbloq Navigation</h1>
             <ul>
                 <li data-element="nav-logo">
-                    <a class="nav__menu__link" data-ng-href="#/{{common.user?'projects':''}}">
+                    <a class="nav__menu__link" data-ng-href="#/{{common.user?'projects/myprojects':''}}">
                         <svg class="svg-icon svg-icon-logo">
                             <use xlink:href="#logo"></use>
                         </svg>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'projects'}" data-element="nav-projects">
-                    <a class="nav__menu__link" href="#/projects">
+                    <a class="nav__menu__link" href="#/projects/myprojects">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#folder"></use>
                         </svg>

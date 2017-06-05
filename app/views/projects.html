@@ -7,7 +7,7 @@
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Menú de Proyectos</h1>
             <ul class="tabs__header">
-                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'projects'}" ng-click="selectedTab = 'projects'; refreshProjects();  searchText.text = ''">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'myprojects'}" ng-click="goTo('myprojects')">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#folderOpen"></use>
                     </svg>
@@ -15,7 +15,7 @@
                         {{ 'my-projects' | translate }} ({{projectsCount}})
                     </span>
                 </li>
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'releases'}" data-element="projects-shared-projects" ng-click="selectedTab = 'releases'; searchText.text = ''">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'sharedprojects'}" data-element="projects-shared-projects" ng-click="goTo('sharedprojects')">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#inbox"></use>
                     </svg>
@@ -32,8 +32,8 @@
             </ul>
         </aside>
         <div class="tabs-layout__content">
-            <div class="tab" ng-show="selectedTab === 'projects'" ng-include="'views/myprojects.html'"></div>
-            <div class="tab" ng-show="selectedTab === 'releases'" class="myprojects--tab projects--tab">
+            <div class="tab" ng-show="selectedTab === 'myprojects'" ng-include="'views/myprojects.html'"></div>
+            <div class="tab" ng-show="selectedTab === 'sharedprojects'" class="myprojects--tab projects--tab">
                 <div ng-include="'views/mysharedprojects.html'"></div>
             </div>
         </div>
