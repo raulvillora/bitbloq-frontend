@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .controller('SoftwareTabCtrl', function($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
-                                            $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
-                                            utils)
-    {
+        $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
+        utils) {
 
         var $contextMenu = $('#bloqs-context-menu'),
             field = angular.element('#bloqs--field'),
@@ -74,9 +73,6 @@ angular.module('bitbloqApp')
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
-            if ($scope.common.session.save) {
-                $scope.currentProject.code = $scope.code;
-            }
             if (!$scope.common.user || !$scope.common.user.hasBeenWarnedAboutChangeBloqsToCode) {
                 var modalCode = $rootScope.$new();
                 _.extend(modalCode, {
@@ -405,8 +401,7 @@ angular.module('bitbloqApp')
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
                             if (connectedComponents[i].uuid.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].uuid))
-                            {
+                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
                                 result = true;
                             }
                             i++;
@@ -540,7 +535,7 @@ angular.module('bitbloqApp')
                         fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                         bloqSchemas: bloqsApi.schemas,
                         suggestionWindowParent: $scope.$field[0],
-			dotsMatrixWindowParent: $scope.$field[0]
+                        dotsMatrixWindowParent: $scope.$field[0]
                     };
 
                     if (currentProjectService.exercise) {

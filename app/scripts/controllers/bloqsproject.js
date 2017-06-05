@@ -1154,8 +1154,6 @@ angular.module('bitbloqApp')
             settingBoardAlert,
             serialMonitorAlert;
 
-        $scope.code = '';
-
         $scope.hardware = {
             componentList: null,
             robotList: null,
