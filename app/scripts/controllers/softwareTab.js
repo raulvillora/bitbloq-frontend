@@ -320,7 +320,6 @@ angular.module('bitbloqApp')
             var stopWord = ['mBotMove-v2', 'mBotStop-v2', 'mBotMoveAdvanced-v2'];
             if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
                 var connectedComponents = $scope.currentProject.hardware.components;
-                console.log(bloqName);
                 if (stopWord.indexOf(bloqName) === -1) {
                     switch (bloqName) {
                         case 'mBotSomethingNear':
@@ -382,9 +381,6 @@ angular.module('bitbloqApp')
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced',
                 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels', 'convert'
             ];
-            if (item === 'setDisplayBrightness') {
-                console.log('estoy');
-            }
             if (stopWord.indexOf(item) === -1) {
                 var i;
                 if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
