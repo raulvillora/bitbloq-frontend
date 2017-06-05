@@ -320,6 +320,7 @@ angular.module('bitbloqApp')
             var stopWord = ['mBotMove-v2', 'mBotStop-v2', 'mBotMoveAdvanced-v2'];
             if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
                 var connectedComponents = $scope.currentProject.hardware.components;
+                console.log(bloqName);
                 if (stopWord.indexOf(bloqName) === -1) {
                     switch (bloqName) {
                         case 'mBotSomethingNear':
@@ -349,7 +350,6 @@ angular.module('bitbloqApp')
                         case 'mBotShowTimeOnLedMatrixAdvanced':
                             result = existComponent(['mkb_ledmatrix'], connectedComponents);
                             break;
-
                         case 'ifButtonPushed':
                             result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                             break;
@@ -357,6 +357,8 @@ angular.module('bitbloqApp')
                             result = existComponent(['mkb_remote'], connectedComponents, true);
                             break;
                         case 'displayNumber':
+                        case 'displayNumberInPosition':
+                        case 'clear7segment':
                             result = existComponent(['mkb_display7seg'], connectedComponents);
                             break;
                         default:
@@ -377,6 +379,9 @@ angular.module('bitbloqApp')
             var stopWord = ['analogWrite', 'viewer', 'digitalWrite', 'pinReadAdvanced', 'pinWriteAdvanced', 'turnOnOffAdvanced',
                 'digitalReadAdvanced', 'analogReadAdvanced', 'pinLevels', 'convert'
             ];
+            if (item === 'setDisplayBrightness') {
+                console.log('estoy');
+            }
             if (stopWord.indexOf(item) === -1) {
                 var i;
                 if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
@@ -436,7 +441,9 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                     } else if (item === 'remoteButtonPushed') {
                         result = existComponent(['mkb_remote'], connectedComponents);
-                    } else if (item === 'displayNumber') {
+                    } else if ((item === 'displayNumber') || (item === 'displayNumberInPosition') || ('item' === 'clear7segment')) {
+                        result = existComponent(['mkb_display7seg'], connectedComponents);
+                    } else if ((item === 'setDisplayBrightness') || (item === 'setDisplayBrightnessAdvanced')) {
                         result = existComponent(['mkb_display7seg'], connectedComponents);
                     } else {
                         i = 0;

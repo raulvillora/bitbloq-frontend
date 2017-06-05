@@ -24,11 +24,11 @@
         }],
         "advancedComponents": [{
                 "name": "mBotSetLedMatrixBrightness"
-            },
-            {
-                "name": "mBotSetLedMatrixBrightnessAdvanced"
-            },
-            {
+            },{
+                "name": "setDisplayBrightness"
+            },{
+                "name": "setDisplayBrightnessAdvanced"
+            },{
                 "name": "hwVariable"
             }, {
                 "name": "buzzerAdvanced-v2"
@@ -84,6 +84,8 @@
                 "name": "lcdWritePositionAdvanced-v1"
             }, {
                 "name": "viewer"
+            }, {
+                "name": "mBotSetLedMatrixBrightnessAdvanced"
             }
         ],
         "advancedControls": [{
@@ -369,9 +371,12 @@
             }, {
                 "name": "displayNumber"
             }, {
+                "name": "displayNumberInPosition"
+            }, {
+                "name": "clear7segment"
+            }, {
                 "name": "ifButtonPushed"
-            },
-            {
+            }, {
                 "name": "remoteButtonPushed"
             },
             {
