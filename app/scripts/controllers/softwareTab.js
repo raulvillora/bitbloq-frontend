@@ -361,6 +361,9 @@ angular.module('bitbloqApp')
                         case 'clear7segment':
                             result = existComponent(['mkb_display7seg'], connectedComponents);
                             break;
+                        case 'makeblockIfMotion':
+                            result = existComponent(['mkb_motionSensor'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }
