@@ -18,7 +18,7 @@ angular.module('bitbloqApp')
          *************************************************/
 
         $scope.setCode = function(code) {
-            $scope.code = code;
+            $scope.currentProject.code = code;
         };
 
         $scope.uploadFileProject = function(project) {
@@ -741,7 +741,7 @@ angular.module('bitbloqApp')
 
         $scope.updateBloqs = function() {
             if (projectService.bloqs.varsBloq) {
-                bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
+                return bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
             }
         };
 
@@ -1153,8 +1153,6 @@ angular.module('bitbloqApp')
         var compilingAlert,
             settingBoardAlert,
             serialMonitorAlert;
-
-        $scope.code = '';
 
         $scope.hardware = {
             componentList: null,

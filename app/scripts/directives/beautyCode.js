@@ -32,7 +32,7 @@ angular.module('bitbloqApp')
                 };
 
                 $scope.$watch('code', function(newVal, oldVal) {
-                    if (newVal !== oldVal) {
+                    if (newVal && ((newVal !== oldVal) || (codeTag.children.length === 0))) {
                         beautifier(codeTag, $scope.code);
                     }
                 });
