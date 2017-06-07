@@ -448,6 +448,9 @@
             "freakscar": [
                 {
                     "name": "freakscarBuzzer"
+                },
+                {
+                  "name": "freakscarIfDistance"
                 }
             ],
             "advancedFreakscar": [ ],

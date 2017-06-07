@@ -73,6 +73,7 @@ module.exports = function(config) {
             '../bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js',
             '../bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js',
             '../bower_components/autogrow/autogrow.js',
+            '../bower_components/q/q.js',
             '../bower_components/bloqs/dist/bloqs.min.js',
             '../bower_components/angular-mocks/angular-mocks.js',
             // endbower
