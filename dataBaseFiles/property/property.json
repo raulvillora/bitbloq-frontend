@@ -450,15 +450,20 @@
                     "name": "freakscarBuzzer"
                 },
                 {
-                  "name": "freakscarIfDistance"
+                    "name": "freakscarIfDistance"
                 },
                 {
-                  "name": "freakscarIfLight"
+                    "name": "freakscarIfLight"
                 }
             ],
-            "advancedFreakscar": [ {
-              "name": "freakscarDistance"
-              }],
+            "advancedFreakscar": [
+                {
+                    "name": "freakscarDistance"
+                },
+                {
+                    "name": "freakscarLight"
+                }
+            ],
             "rangerlandraider": [
                 {
                     "name": "mBotMove-v2"
