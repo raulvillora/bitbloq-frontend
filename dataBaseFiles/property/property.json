@@ -454,6 +454,12 @@
                 },
                 {
                     "name": "freakscarIfLight"
+                },
+                {
+                  "name": "freakscarIfRemote"
+                },
+                {
+                  "name": "freakscarMove"
                 }
             ],
             "advancedFreakscar": [
@@ -462,6 +468,12 @@
                 },
                 {
                     "name": "freakscarLight"
+                },
+                {
+                  "name":  "freakscarRemote"
+                },
+                {
+                  "name": "freakscarMoveSpeed"
                 }
             ],
             "rangerlandraider": [
