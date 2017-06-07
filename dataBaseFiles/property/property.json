@@ -453,7 +453,9 @@
                   "name": "freakscarIfDistance"
                 }
             ],
-            "advancedFreakscar": [ ],
+            "advancedFreakscar": [ {
+              "name": "freakscarDistance"
+              }],
             "rangerlandraider": [
                 {
                     "name": "mBotMove-v2"
