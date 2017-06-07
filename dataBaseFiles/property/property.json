@@ -451,6 +451,9 @@
                 },
                 {
                   "name": "freakscarIfDistance"
+                },
+                {
+                  "name": "freakscarIfLight"
                 }
             ],
             "advancedFreakscar": [ {
