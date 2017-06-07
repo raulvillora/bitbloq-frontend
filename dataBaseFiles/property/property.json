@@ -460,6 +460,9 @@
                 },
                 {
                   "name": "freakscarMove"
+                },
+                {
+                  "name": "freakscarCollision"
                 }
             ],
             "advancedFreakscar": [
