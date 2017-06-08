@@ -295,13 +295,6 @@ $hw_toolbox: 210px;
             width: 500px;
         }
 
-        &.freakscar {
-            background-image: url("/images/robots/freakscar.svg");
-            background-color: transparent;
-            height: 50%;
-            width: 500px;
-        }
-
         &.mbot {
             background-image: url("/images/robots/mbot.svg");
             background-color: transparent;
@@ -435,6 +428,11 @@ $hw_toolbox: 210px;
             background-image: url("/images/boards/meauriga.png");
             background-color: transparent;
         }
+
+        &.freakscar {
+            background-image: url("/images/boards/freakscar.svg");
+            background-color: transparent;
+        }
     }
 
     .component {
@@ -534,6 +532,7 @@ $hw_toolbox: 210px;
         top: 10% !important;
         left: 10% !important;
     }
+
     .fixed-component {
         position: absolute;
         top: 10%;
@@ -565,6 +564,7 @@ $hw_toolbox: 210px;
                 display: block;
             }
         }
+
         .remote-control--icon {
             width: 74px;
         }

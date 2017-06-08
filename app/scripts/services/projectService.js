@@ -225,7 +225,7 @@ angular.module('bitbloqApp')
                 code = exports.project.code;
             } else {
                 _updateHardwareSchema();
-                var wirelessComponents = _getWirelessConnectionComponents ();
+                var wirelessComponents = _getWirelessConnectionComponents();
                 if (wirelessComponents.length > 0) {
                     _includeComponents(wirelessComponents);
                 }
@@ -510,11 +510,13 @@ angular.module('bitbloqApp')
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(project), 'application/json');
         }
 
-        function _getWirelessConnectionComponents (){
+        function _getWirelessConnectionComponents() {
             var wirelessComponentArray = [];
-            _.forEach(exports.componentsArray, function(component){
-                var wirelessComponent = _.filter(component, {wirelessConnection: true});
-                if(wirelessComponent.length > 0){
+            _.forEach(exports.componentsArray, function(component) {
+                var wirelessComponent = _.filter(component, {
+                    wirelessConnection: true
+                });
+                if (wirelessComponent.length > 0) {
                     wirelessComponentArray.push(wirelessComponent);
                 }
             });
@@ -522,7 +524,7 @@ angular.module('bitbloqApp')
         }
 
         function _includeComponents(components) {
-            _.forEach(components, function(component){
+            _.forEach(components, function(component) {
                 exports.project.hardware.components.push(component);
             });
         }
@@ -799,11 +801,14 @@ angular.module('bitbloqApp')
 
         function canUseThirdParty(robot) {
             var canUse = false;
-            if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated || moment()
-                    .isBefore(common.user.thirdPartyRobots[robot].expirationDate))) {
-                canUse = true;
+            if (robot) {
+                if (common.user && common.user.thirdPartyRobots && common.user.thirdPartyRobots[robot] && (common.user.thirdPartyRobots[robot].activated)) {
+                    canUse = true;
+                } else {
+                    canUse = false;
+                }
             } else {
-                canUse = false;
+                canUse = true;
             }
             return canUse;
 
