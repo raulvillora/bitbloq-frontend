@@ -290,6 +290,12 @@
                     "name": "serialSend-v1"
                 },{
                     "name": "readJoystickXY"
+                },{
+                    "name": "freakscarBuzzer"
+                },{
+                    "name": "freakscarDistance"
+                },{
+                    "name": "freakscarLight"
                 }
             ],
             "controls": [
@@ -447,36 +453,27 @@
             ],
             "freakscar": [
                 {
-                    "name": "freakscarBuzzer"
-                },
-                {
                     "name": "freakscarIfDistance"
                 },
                 {
                     "name": "freakscarIfLight"
                 },
                 {
-                  "name": "freakscarIfRemote"
+                    "name": "freakscarIfRemote"
                 },
                 {
-                  "name": "freakscarMove"
+                    "name": "freakscarMove"
                 },
                 {
-                  "name": "freakscarCollision"
+                    "name": "freakscarCollision"
                 }
             ],
             "advancedFreakscar": [
                 {
-                    "name": "freakscarDistance"
+                    "name": "freakscarRemote"
                 },
                 {
-                    "name": "freakscarLight"
-                },
-                {
-                  "name":  "freakscarRemote"
-                },
-                {
-                  "name": "freakscarMoveSpeed"
+                    "name": "freakscarMoveSpeed"
                 }
             ],
             "rangerlandraider": [
