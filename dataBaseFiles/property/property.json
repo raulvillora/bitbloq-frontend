@@ -466,6 +466,9 @@
                 },
                 {
                     "name": "freakscarCollision"
+                },
+                {
+                    "name": "freakscarIfThereIsALotOfLightGlobal"
                 }
             ],
             "advancedFreakscar": [
@@ -474,6 +477,9 @@
                 },
                 {
                     "name": "freakscarMoveSpeed"
+                },
+                {
+                    "name": "freakscarIfThereIsALotOfLight"
                 }
             ],
             "rangerlandraider": [
