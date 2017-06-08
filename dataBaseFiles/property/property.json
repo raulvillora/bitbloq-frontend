@@ -456,9 +456,6 @@
                     "name": "freakscarIfDistance"
                 },
                 {
-                    "name": "freakscarIfLight"
-                },
-                {
                     "name": "freakscarIfRemote"
                 },
                 {
@@ -469,6 +466,9 @@
                 },
                 {
                     "name": "freakscarIfThereIsALotOfLightGlobal"
+                },
+                {
+                    "name": "freakscarIfLightGlobal"
                 }
             ],
             "advancedFreakscar": [
@@ -480,6 +480,9 @@
                 },
                 {
                     "name": "freakscarIfThereIsALotOfLight"
+                },
+                {
+                    "name": "freakscarIfLight"
                 }
             ],
             "rangerlandraider": [
