@@ -67,7 +67,7 @@
                 <div ng-show="menuActive[$index]" class="table__block__item--menu my-project__options-container">
                     <div ng-if="common.userRole!=='student'">
                         <ul>
-                            <li class="table__block__item--menu__item" ng-click="createCopy(project)" data-element="myprojects-copy-project">
+                            <li class="table__block__item--menu__item" ng-click="restoreProject(project)" data-element="myprojects-restore-project">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#undo"></use>
                                 </svg>

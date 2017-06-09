@@ -185,6 +185,13 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        exports.restore = function(idProject){
+            return $http({
+                method: 'PUT',
+                url: envData.config.serverUrl + 'project/' + idProject + '/restore'
+            });
+        };
+
         exports.save = function(dataProject) {
             return saveRequest({
                 method: 'POST',
