@@ -211,70 +211,68 @@
             "name": "code"
         }],
         "components": [{
-                "name": "freakscarBuzzer"
-            }, {
-                "name": "freakscarDistance"
-            }, {
-                "name": "freakscarLight"
-            },
-            {
-                "name": "hts221Temperature"
-            }, {
-                "name": "hts221Humidity"
-            }, {
-                "name": "buzzer"
-            }, {
-                "name": "mBotBuzzer-v2"
-            }, {
-                "name": "continuousServoStart"
-            }, {
-                "name": "continuousServoStop"
-            }, {
-                "name": "lcdTurnOnOff"
-            }, {
-                "name": "lcdWrite"
-            }, {
-                "name": "lcdWritePosition"
-            }, {
-                "name": "lcdClear"
-            }, {
-                "name": "led"
-            }, {
-                "name": "rgbLedSimple"
-            }, {
-                "name": "rgbLed"
-            }, {
-                "name": "rgbLedFade"
-            }, {
-                "name": "rgbLedOff"
-            }, {
-                "name": "clockRTCInit"
-            }, {
-                "name": "clockRTCAdvanced"
-            }, {
-                "name": "oscillator"
-            }, {
-                "name": "oscillatorStart"
-            }, {
-                "name": "oscillatorStop"
-            }, {
-                "name": "readSensor"
-            }, {
-                "name": "mBotGetDistance-v2"
-            }, {
-                "name": "mBotSetRGBLed"
-            }, {
-                "name": "servoNormal"
-            }, {
-                "name": "serialReceive"
-            }, {
-                "name": "serialReceiveInt"
-            }, {
-                "name": "serialSend-v1"
-            }, {
-                "name": "readJoystickXY"
-            }
-        ],
+            "name": "freakscarBuzzer"
+        }, {
+            "name": "freakscarDistance"
+        }, {
+            "name": "freakscarLight"
+        }, {
+            "name": "hts221Temperature"
+        }, {
+            "name": "hts221Humidity"
+        }, {
+            "name": "buzzer"
+        }, {
+            "name": "mBotBuzzer-v2"
+        }, {
+            "name": "continuousServoStart"
+        }, {
+            "name": "continuousServoStop"
+        }, {
+            "name": "lcdTurnOnOff"
+        }, {
+            "name": "lcdWrite"
+        }, {
+            "name": "lcdWritePosition"
+        }, {
+            "name": "lcdClear"
+        }, {
+            "name": "led"
+        }, {
+            "name": "rgbLedSimple"
+        }, {
+            "name": "rgbLed"
+        }, {
+            "name": "rgbLedFade"
+        }, {
+            "name": "rgbLedOff"
+        }, {
+            "name": "clockRTCInit"
+        }, {
+            "name": "clockRTCAdvanced"
+        }, {
+            "name": "oscillator"
+        }, {
+            "name": "oscillatorStart"
+        }, {
+            "name": "oscillatorStop"
+        }, {
+            "name": "readSensor"
+        }, {
+            "name": "mBotGetDistance-v2"
+        }, {
+            "name": "mBotSetRGBLed"
+        }, {
+            "name": "servoNormal"
+        }, {
+            "name": "serialReceive"
+        }, {
+            "name": "serialReceiveInt"
+        }, {
+            "name": "serialSend-v1"
+        }, {
+            "name": "readJoystickXY"
+        }],
         "controls": [{
             "name": "wait"
         }, {
@@ -401,47 +399,34 @@
             "name": "makeblockIfMotion"
         }],
         "advancedMBotV2": [{
-                "name": "mBotMoveAdvanced-v2"
-            },
-            {
-                "name": "mBotShowNumberOnLedMatrixAdvanced"
-            },
-            {
-                "name": "mBotShowStringOnLedMatrixAdvanced"
-            },
-            {
-                "name": "mBotShowTimeOnLedMatrixAdvanced"
-            }
-        ],
+            "name": "mBotMoveAdvanced-v2"
+        }, {
+            "name": "mBotShowNumberOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowStringOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowTimeOnLedMatrixAdvanced"
+        }],
         "freakscar": [{
-                "name": "freakscarIfDistance"
-            },
-            {
-                "name": "freakscarIfRemote"
-            },
-            {
-                "name": "freakscarMove"
-            },
-            {
-                "name": "freakscarCollision"
-            },
-            {
-                "name": "freakscarIfThereIsALotOfLightGlobal"
-            },
-            {
-                "name": "freakscarIfLightGlobal"
-            }
-        ],
+            "name": "freakscarIfDistance"
+        }, {
+            "name": "freakscarIfRemote"
+        }, {
+            "name": "freakscarMove"
+        }, {
+            "name": "freakscarCollision"
+        }, {
+            "name": "freakscarIfThereIsALotOfLightGlobal"
+        }, {
+            "name": "freakscarIfLightGlobal"
+        }],
         "advancedFreakscar": [{
-                "name": "freakscarMoveSpeed"
-            },
-            {
-                "name": "freakscarIfThereIsALotOfLight"
-            },
-            {
-                "name": "freakscarIfLight"
-            }
-        ],
+            "name": "freakscarMoveSpeed"
+        }, {
+            "name": "freakscarIfThereIsALotOfLight"
+        }, {
+            "name": "freakscarIfLight"
+        }],
         "rangerlandraider": [{
             "name": "mBotMove-v2"
         }, {
@@ -456,8 +441,6 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfMotion"
         }],
         "advancedRangerlandraider": [{
             "name": "mBotMoveAdvanced-v2"
@@ -476,8 +459,6 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfMotion"
         }],
         "advancedRangerraptor": [{
             "name": "mBotMoveAdvanced-v2"
@@ -496,8 +477,6 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfMotion"
         }],
         "advancedRangernervousbird": [{
             "name": "mBotMoveAdvanced-v2"
@@ -516,8 +495,6 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfMotion"
         }],
         "advancedStartertank": [{
             "name": "mBotMoveAdvanced-v2"
@@ -536,8 +513,6 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfMotion"
         }],
         "advancedStarterthreewheels": [{
             "name": "mBotMoveAdvanced-v2"
