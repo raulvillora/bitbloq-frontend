@@ -17,7 +17,6 @@ angular.module('bitbloqApp')
         };
         $scope.projectApi = projectApi;
         $scope.commonModals = commonModals;
-        $scope.removeAlert = [];
 
         $scope.currentProjectService = $scope.currentProjectService || projectService;
 
@@ -180,20 +179,20 @@ angular.module('bitbloqApp')
                     break;
                 default:
                     if (project._id) {
-                        $scope.common.removeProjects[project._id] = true;
-                        $scope.removeAlert[project._id] = alertsService.add({
-                            text: 'make-deleted-project',
-                            id: 'deleted-project' + project._id,
-                            type: 'warning',
-                            time: 7000,
-                            linkText: 'undo',
-                            link: _undoRemoveProject,
-                            linkParams: project._id,
-                            closeFunction: _deleteProject,
-                            closeParams: {
-                                _id: project._id,
-                                imageType: project.imageType
-                            }
+                        projectApi.delete(project._id).then(function() {
+                            alertsService.add({
+                                text: 'make-deleted-project',
+                                id: 'deleted-project' + project._id,
+                                type: 'info',
+                                time: 7000
+                            });
+                        }, function(error) {
+                            $log.log('Delete error: ', error);
+                            alertsService.add({
+                                text: 'make-delete-project-error',
+                                id: 'deleted-project',
+                                type: 'warning'
+                            });
                         });
                         $location.path('projects/myprojects');
                     } else {
@@ -313,21 +312,6 @@ angular.module('bitbloqApp')
 
         };
 
-        function _deleteProject(project) {
-            if ($scope.common.removeProjects[project._id]) {
-                projectApi.delete(project._id).then(function() {
-                    $log.log('we delete this project');
-                }, function(error) {
-                    $log.log('Delete error: ', error);
-                    alertsService.add({
-                        text: 'make-delete-project-error',
-                        id: 'deleted-project',
-                        type: 'warning'
-                    });
-                });
-            }
-        }
-
         function sortProjects(modalScope) {
             return function(type) {
                 $log.debug('sortProject', type);
@@ -350,11 +334,6 @@ angular.module('bitbloqApp')
                         break;
                 }
             };
-        }
-
-        function _undoRemoveProject(projectId) {
-            alertsService.close($scope.removeAlert[projectId]);
-            $scope.common.removeProjects[projectId] = false;
         }
 
         function clickDocumentHandler(evt) {
