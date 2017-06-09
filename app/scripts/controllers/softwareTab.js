@@ -380,7 +380,7 @@ angular.module('bitbloqApp')
             ];
             if (stopWord.indexOf(item) === -1) {
                 var i;
-                if ($scope.currentProject.hardware.robot === 'freakscar') {
+                if ($scope.currentProject.hardware.board === 'freakscar') {
                     var bloqsArray = _.map($scope.common.properties.bloqsSortTree.components, 'name');
                     result = bloqsArray.indexOf(item) > -1 && item.indexOf('freakscar') > -1;
                 } else {

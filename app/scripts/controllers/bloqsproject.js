@@ -32,7 +32,7 @@ angular.module('bitbloqApp')
         $scope.twitterWheel = false;
         $scope.anyComponent = function(componentList) {
             componentList = componentList || projectService.project.hardware.components;
-            return projectService.project.useBitbloqConnect || projectService.project.hardware.robot === 'freakscar' || (componentList.length > 0);
+            return projectService.project.useBitbloqConnect || projectService.project.hardware.board === 'freakscar' || (componentList.length > 0);
         };
 
         $scope.anyExternalComponent = function() {
@@ -503,7 +503,7 @@ angular.module('bitbloqApp')
                         code: $scope.getPrettyCode()
                     });
                 } else {
-                    if (projectService.project.hardware.robot === 'freakscar') {
+                    if (projectService.project.hardware.board === 'freakscar') {
                         web2boardOnline.compile({
                             board: projectService.getBoardMetaData(),
                             code: $scope.getPrettyCode()
@@ -590,7 +590,7 @@ angular.module('bitbloqApp')
                             }
 
                         } else {
-                            if (projectService.project.hardware.robot === 'freakscar') {
+                            if (projectService.project.hardware.board === 'freakscar') {
                                 web2boardOnline.compileAndUpload({
                                     board: projectService.getBoardMetaData(),
                                     code: $scope.getPrettyCode(code),
