@@ -168,6 +168,12 @@ angular.module('bitbloqApp')
             });
         };
 
+        $scope.removePermanentProject = function(project) {
+            projectApi.deletePermanent(project._id).then(function() {
+
+            });
+        };
+
         $scope.filterProjects = function(type) {
             $log.debug('filterProjects', type);
             $scope.userProjectsFilter = type;

@@ -54,6 +54,13 @@ angular.module('bitbloqApp')
             });
         };
 
+        exports.deletePermanent = function(idProject) {
+            return $http({
+                method: 'DELETE',
+                url: envData.config.serverUrl + 'project/' + idProject + '/permanent'
+            });
+        };
+
         exports.get = function(id, params) {
             params = params || {};
             return $http({
@@ -185,7 +192,7 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.restore = function(idProject){
+        exports.restore = function(idProject) {
             return $http({
                 method: 'PUT',
                 url: envData.config.serverUrl + 'project/' + idProject + '/restore'
