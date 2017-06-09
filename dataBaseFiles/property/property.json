@@ -473,9 +473,6 @@
             ],
             "advancedFreakscar": [
                 {
-                    "name": "freakscarRemote"
-                },
-                {
                     "name": "freakscarMoveSpeed"
                 },
                 {
