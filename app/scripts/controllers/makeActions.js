@@ -195,7 +195,7 @@ angular.module('bitbloqApp')
                                 imageType: project.imageType
                             }
                         });
-                        $location.path('projects');
+                        $location.path('projects/myprojects');
                     } else {
                         alertsService.add({
                             text: 'make-delete-project-not-changed',
