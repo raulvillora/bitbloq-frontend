@@ -87,10 +87,14 @@ angular.module('bitbloqApp')
         };
 
         $scope.serialMonitor = function() {
-            if (web2board.isWeb2boardV2()) {
-                serialMonitorW2b2();
+            if ($scope.common.useChromeExtension()) {
+                commonModals.launchSerialWindow(projectService.getBoardMetaData());
             } else {
-                serialMonitorW2b1();
+                if (web2board.isWeb2boardV2()) {
+                    serialMonitorW2b2();
+                } else {
+                    serialMonitorW2b1();
+                }
             }
         };
 

@@ -73,9 +73,6 @@ angular.module('bitbloqApp')
 
         $scope.goToCodeModal = function() {
             $scope.common.session.bloqTab = true;
-            if ($scope.common.session.save) {
-                $scope.currentProject.code = $scope.code;
-            }
             if (!$scope.common.user || !$scope.common.user.hasBeenWarnedAboutChangeBloqsToCode) {
                 var modalCode = $rootScope.$new();
                 _.extend(modalCode, {
@@ -349,7 +346,6 @@ angular.module('bitbloqApp')
                         case 'mBotShowTimeOnLedMatrixAdvanced':
                             result = existComponent(['mkb_ledmatrix'], connectedComponents);
                             break;
-
                         case 'ifButtonPushed':
                             result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                             break;
@@ -357,7 +353,12 @@ angular.module('bitbloqApp')
                             result = existComponent(['mkb_remote'], connectedComponents, true);
                             break;
                         case 'displayNumber':
+                        case 'displayNumberInPosition':
+                        case 'clear7segment':
                             result = existComponent(['mkb_display7seg'], connectedComponents);
+                            break;
+                        case 'makeblockIfMotion':
+                            result = existComponent(['mkb_motionSensor'], connectedComponents);
                             break;
                         default:
                             result = false;
@@ -390,7 +391,7 @@ angular.module('bitbloqApp')
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
                             'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
-                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote'
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote', 'freakscar_integrated_remote', 'freakscar_integrated_lightsensor'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
@@ -436,19 +437,23 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                     } else if (item === 'remoteButtonPushed') {
                         result = existComponent(['mkb_remote'], connectedComponents);
-                    } else if (item === 'displayNumber') {
+                    } else if ((item === 'displayNumber') || (item === 'displayNumberInPosition') || ('item' === 'clear7segment')) {
                         result = existComponent(['mkb_display7seg'], connectedComponents);
+                    } else if ((item === 'setDisplayBrightness') || (item === 'setDisplayBrightnessAdvanced')) {
+                        result = existComponent(['mkb_display7seg'], connectedComponents);
+                    } else if ((item === 'freakscarBuzzer') || (item === 'freakscarDistance') || (item === 'freakscarLight')) {
+                        result = existComponent(['freakscar_integrated_lightsensor'], connectedComponents);
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].uuid.includes(item) || item.toLowerCase().includes(connectedComponents[i].uuid)) {
+                            if (connectedComponents[i].uuid.includes(item) ||
+                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
                                 result = true;
                             }
                             i++;
                         }
                     }
                 }
-
             } else {
                 result = true;
             }
@@ -957,7 +962,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'freakscar';
+                    return $scope.currentProject.hardware.board === 'freakscar';
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-freakscar',
@@ -993,9 +998,6 @@ angular.module('bitbloqApp')
                 literal: 'components',
                 dataElement: 'toolbox-components',
                 showBasicBloqsCondition: function(name) {
-                    if (name === 'readJoystickXY') {
-                        console.log();
-                    }
                     return $scope.showComponents(name);
                 },
                 properties: {

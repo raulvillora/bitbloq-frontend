@@ -123,9 +123,13 @@ angular.module('bitbloqApp')
             canvas.height = 411;
             if ($scope.currentProject.hardware.board) {
                 if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage) {
-                    var robotRef = currentProjectService.getRobotMetaData($scope.currentProject.hardware.showRobotImage);
-                    imageObj.src = '/images/robots/' + robotRef.uuid + '.png';
+                    currentProjectService.getRobotMetaData($scope.currentProject.hardware.showRobotImage).then(function(robotRef) {
+                        imageObj.src = '/images/robots/' + robotRef.uuid + '.png';
+                    });
                 } else {
+                    if ($scope.currentProject.hardware.board === 'freakscar') {
+                        imageObj.src = '/images/robots/freakscar.png';
+                    }
                     var boardRef = currentProjectService.getBoardMetaData();
                     imageObj.src = '/images/boards/' + boardRef.uuid + '.png';
                 }
@@ -135,8 +139,8 @@ angular.module('bitbloqApp')
                 useBitbloqConnect = $scope.currentProject.useBitbloqConnect;
 
             imageObj.onload = function() {
-                if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage) {
-                    setMainImage(canvas, context, imageObj, $scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage);
+                if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage || $scope.currentProject.hardware.board === 'freakscar') {
+                    setMainImage(canvas, context, imageObj, $scope.currentProject.hardware.robot || $scope.currentProject.hardware.showRobotImage || $scope.currentProject.hardware.board);
                 } else {
                     setMainImage(canvas, context, imageObj, false);
                     setComponentsImage(canvas, context, components, useBitbloqConnect);
@@ -199,7 +203,8 @@ angular.module('bitbloqApp')
             var xStart = (canvas.width - 530) / 2;
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
-
+            console.log('robot');
+            console.log(robot);
             if (robot) {
                 switch (robot) {
                     case 'mbot':
@@ -222,6 +227,9 @@ angular.module('bitbloqApp')
                         break;
                     case 'starterthreewheels':
                         context.drawImage(imageObj, 110, -70, 500, 600);
+                        break;
+                    case 'freakscar':
+                        context.drawImage(imageObj, 150, 50, 400, 300);
                         break;
                     default:
                         context.drawImage(imageObj, xStart, -60, 542, 542);

@@ -145,8 +145,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 currentProjectService.startAutosave();
             }
         } else if ($(ev.target).closest('.jsplumb-connector', container).length || $(ev.target)
-                .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length)
-        {
+            .closest('.board_ep', container).length || $(ev.target).closest('.component_ep', container).length) {
             $scope.componentSelected = null;
             $('.component').removeClass('component-selected');
         } else if (ev.target.classList.contains('robot')) {
@@ -181,8 +180,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 $scope.componentSelected = $scope.currentProject.bitbloqConnectBT;
             }
         } else if (!ev.target.classList.contains('component-name__input') && !ev.target.classList.contains('oscillator--checkbox') && !$(ev.target)
-                .closest('.component-name__container').length)
-        {
+            .closest('.component-name__container').length) {
             $scope.robotSelected = $scope.boardSelected = $scope.componentSelected = false;
             $('.component').removeClass('component-selected');
             hw2Bloqs.unselectAllConnections();
@@ -700,12 +698,14 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
         hw2Bloqs.removeRobot(robotReference);
         $scope.closeComponentInteraction();
-        if (robotReference.useBoardImage) {
+        if (robotReference.useBoardImage || robotReference.uuid === 'freakscar') {
             var board = _.find($scope.hardware.boardList, function(board) {
                 return board.uuid === robotReference.board;
             });
             _addBoard(board);
-            $scope.currentProject.hardware.showRobotImage = robot.uuid;
+            if (robot.robot.manufacturer === 'makeblock') {
+                $scope.currentProject.hardware.showRobotImage = robot.uuid;
+            }
             $scope.changeToolbox('components');
         } else {
             $scope.hardware.cleanSchema();
@@ -774,7 +774,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         var componentDOMRef = hw2Bloqs.addComponent(newComponent);
         _focusComponent(componentDOMRef);
         $scope.boardSelected = false;
-        if(newComponent.wirelessConnection){
+        if (newComponent.wirelessConnection) {
             currentProjectService.startAutosave();
         }
     }
@@ -1016,20 +1016,20 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     }
                 }
                 break;
-            // case 90:
-            //     //ctr+z
-            //     if (evt.ctrlKey) {
-            //         $scope.undo();
-            //         evt.preventDefault();
-            //     }
-            //     break;
-            // case 89:
-            //     //ctr+y
-            //     if (evt.ctrlKey) {
-            //         $scope.redo();
-            //         evt.preventDefault();
-            //     }
-            //     break;
+                // case 90:
+                //     //ctr+z
+                //     if (evt.ctrlKey) {
+                //         $scope.undo();
+                //         evt.preventDefault();
+                //     }
+                //     break;
+                // case 89:
+                //     //ctr+y
+                //     if (evt.ctrlKey) {
+                //         $scope.redo();
+                //         evt.preventDefault();
+                //     }
+                //     break;
             case 8:
                 //backspace
                 if (!evt.target.classList.contains('component-name__input')) {
@@ -1101,7 +1101,10 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         } else {
             if (newVal && oldVal && (newVal !== oldVal)) {
                 $scope.checkName();
-                $scope.updateBloqs();
+                $scope.updateBloqs().then(function() {
+                    currentProjectService.completedProject();
+                    utils.apply($scope);
+                });
             } else if (newVal === '') {
                 $timeout.cancel($scope.timeoutCode);
                 $scope.timeoutCode = $timeout(function() {

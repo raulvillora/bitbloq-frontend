@@ -1,0 +1,92 @@
+<div class="projects--actions">
+    <div class="projects--action projects--action--sort">
+        <common-dropdown class="projects--sort-dropdown" options="orderOptions" options-click="sort" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" data-element="myProyects_order_dropdown"></common-dropdown>
+    </div>
+    <div class="projects--action grid-list">
+        <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
+            <svg class="svg-icon">
+                <use xlink:href="#grid"></use>
+            </svg>
+        </button>
+        <button data-element="myprojects-item-layout-list-button" ng-click="itemsLayout = 'list'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'list', 'grid--right':true}">
+            <svg class="svg-icon">
+                <use xlink:href="#list"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="projects--action">
+        <span class="form--input">
+            <svg class="svg-icon--search">
+                <use xlink:href="#search"></use>
+            </svg>
+            <input type="search" name="search--normal" id="search--normal" data-ng-model="searchText.text" placeholder="{{'find'|translate}}" data-ng-focus="focus = 'search'" data-ng-class="{'input--focused':focus === 'search'}" data-ng-blur="focus = false" data-element="trash-find">
+        </span>
+    </div>
+</div>
+<ol class="projects__project-list" data-element="trash-list-project">
+    <div ng-show="(trashProjects.length !== 0 && filtered.projects.length !== 0) && projectSearched.length === 0" class="project-shared--empty">
+        <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
+    </div>
+    <li pagination-id="mytrash" dir-paginate="project in projectSearched = (filtered.projects = trashProjects | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.mytrash.current"
+        total-items="{{trashCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-trash">
+        <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
+            <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
+                <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
+                <span class="project--item--options" ng-click="menuActive[$index] = !menuActive[$index]" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                    <svg class="svg-icon" data-element="eliminate-myproject">
+                        <use xlink:href="#ellipsis"></use>
+                    </svg>
+                </span>
+            </div>
+            <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
+                <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
+                    <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name}}</h3>
+
+                    <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>
+                    <div class="project__info__header__data">
+                        <time class="text--secondary project__info--time" data-element="myprojects-time-tag">{{ project.updatedAt | amDateFormat:'DD/MM/YY - HH:mm[h]' }}</time>
+                        <div class="project__info__header__icons">
+                            <svg class="svg-icon" ng-if="project._acl.ALL">
+                                <use xlink:href="#publish"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span ng-if="project.codeProject" class="project--item--code" data-tooltips="true" data-tooltip-position="right" data-tooltip="{{ 'my-project_placeholder_code-project' | translate }}">
+                <svg class="svg-icon">
+                    <use xlink:href="#code"></use>
+                </svg>
+            </span>
+            <div class="my-project__options" ng-class="{'active-options': menuActive[$index]}" ng-mouseleave="menuActive[$index] = false">
+                <span class="my-project__button-options" ng-click="menuActive[$index] = !menuActive[$index]">
+                    <svg class="svg-icon" data-element="eliminate-myproject">
+                        <use xlink:href="#ellipsis"></use>
+                    </svg>
+                </span>
+                <div ng-show="menuActive[$index]" class="table__block__item--menu my-project__options-container">
+                    <div ng-if="common.userRole!=='student'">
+                        <ul>
+                            <li class="table__block__item--menu__item" ng-click="restoreProject(project)" data-element="myprojects-restore-project">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#undo"></use>
+                                </svg>
+                                {{'restore' | translate}}
+                            </li>
+                            <li class="dropdown__item--separator--thick"></li>
+                            <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="removePermanentProject(project)" data-element="eliminate-4ever">
+                                <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                    <use xlink:href="#delete"></use>
+                                </svg>
+                                {{'delete4ever' | translate}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <div class="projects__paginator">
+        <dir-pagination-controls pagination-id="mytrash" on-page-change="getMyTrashPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
+</ol>

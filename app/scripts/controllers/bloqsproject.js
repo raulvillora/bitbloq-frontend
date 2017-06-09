@@ -18,7 +18,7 @@ angular.module('bitbloqApp')
          *************************************************/
 
         $scope.setCode = function(code) {
-            $scope.code = code;
+            $scope.currentProject.code = code;
         };
 
         $scope.uploadFileProject = function(project) {
@@ -32,7 +32,7 @@ angular.module('bitbloqApp')
         $scope.twitterWheel = false;
         $scope.anyComponent = function(componentList) {
             componentList = componentList || projectService.project.hardware.components;
-            return projectService.project.useBitbloqConnect || (componentList.length > 0);
+            return projectService.project.useBitbloqConnect || projectService.project.hardware.board === 'freakscar' || (componentList.length > 0);
         };
 
         $scope.anyExternalComponent = function() {
@@ -503,6 +503,12 @@ angular.module('bitbloqApp')
                         code: $scope.getPrettyCode()
                     });
                 } else {
+                    if (projectService.project.hardware.board === 'freakscar') {
+                        web2boardOnline.compile({
+                            board: projectService.getBoardMetaData(),
+                            code: $scope.getPrettyCode()
+                        });
+                    }
                     if (web2board.isWeb2boardV2()) {
                         verifyW2b2();
                     } else {
@@ -584,12 +590,20 @@ angular.module('bitbloqApp')
                             }
 
                         } else {
-                            if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
-                                uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
-                            } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
-                                uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                            if (projectService.project.hardware.board === 'freakscar') {
+                                web2boardOnline.compileAndUpload({
+                                    board: projectService.getBoardMetaData(),
+                                    code: $scope.getPrettyCode(code),
+                                    viewer: viewer
+                                });
                             } else {
-                                uploadWithWeb2board();
+                                if ($scope.thereIsSerialBlock($scope.getPrettyCode())) {
+                                    uploadWithWeb2board($scope.getPrettyCode(generateSerialViewerBloqCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                                } else if ($scope.thereIsTwitterBlock($scope.getPrettyCode())) {
+                                    uploadWithWeb2board($scope.getPrettyCode(generateMobileTwitterCode(projectService.project.hardware.components, $scope.getPrettyCode())));
+                                } else {
+                                    uploadWithWeb2board();
+                                }
                             }
 
                         }
@@ -741,7 +755,7 @@ angular.module('bitbloqApp')
 
         $scope.updateBloqs = function() {
             if (projectService.bloqs.varsBloq) {
-                bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
+                return bloqs.startBloqsUpdate($scope.currentProjectService.componentsArray);
             }
         };
 
@@ -1153,8 +1167,6 @@ angular.module('bitbloqApp')
         var compilingAlert,
             settingBoardAlert,
             serialMonitorAlert;
-
-        $scope.code = '';
 
         $scope.hardware = {
             componentList: null,

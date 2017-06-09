@@ -541,7 +541,7 @@ angular.module('bitbloqApp')
             if ($routeParams.init) {
                 $location.url(decodeURIComponent($routeParams.init));
             } else {
-                $location.path('projects');
+                $location.path('projects/myprojects');
             }
         }
 

@@ -111,7 +111,7 @@ angular
                     templateUrl: 'views/landing/landing-offline.html',
                     controller: 'LandingCtrl'
                 })
-                .when('/projects', {
+                .when('/projects/:tab?', {
                     templateUrl: 'views/projects.html',
                     controller: 'ProjectsCtrl',
                     reloadOnSearch: false
