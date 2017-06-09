@@ -19,11 +19,15 @@ angular.module('bitbloqApp')
             },
             'sharedprojects': {
                 'current': 1
+            },
+            'mytrash': {
+                'current': 1
             }
         };
 
         $scope.projectsCount = 0;
         $scope.sharedCount = 0;
+        $scope.trashCount = 0;
 
         $scope.timestamp = new Date().getTime();
         $scope.commonModals = commonModals;
@@ -209,6 +213,7 @@ angular.module('bitbloqApp')
                 var page = $routeParams.page ? $routeParams.page : 1;
                 $scope.getMyProjectsPage(page);
                 $scope.getMySharedProjectsPage(page);
+                $scope.getMyTrashPage(page);
 
             }).catch(function() {
                 $scope.common.isLoading = false;
@@ -344,6 +349,39 @@ angular.module('bitbloqApp')
 
         };
 
+        $scope.getMyTrashPage = function(newPageNumber) {
+            var queryParamsArray = getRequest(),
+                queryParams = queryParamsArray || {};
+
+            var pageParams = {
+                'page': newPageNumber - 1
+            };
+            angular.extend(queryParams, pageParams);
+            return projectApi.getMyTrash(queryParams).then(function(response) {
+                projectApi.getMyTrashProjectsCounter(queryParams).then(function(data) {
+                    $scope.trashCount = data.data.count;
+                    $scope.common.isLoading = false;
+                });
+
+                console.log($scope.trashProjects);
+                console.log(response.data);
+                $scope.trashProjects = _.clone(response.data);
+                $scope.pagination.mytrash.current = newPageNumber;
+                $location.search('page', newPageNumber);
+
+            }).catch(function() {
+                $scope.trashProjects = [];
+                $scope.common.isLoading = false;
+                $scope.common.setUser();
+                alertsService.add({
+                    text: 'projects-need-tobe-logged',
+                    id: 'projects-need-tobe-logged',
+                    type: 'error'
+                });
+                $location.path('/login');
+            });
+        };
+
         $scope.goTo = function(tab) {
             $scope.searchText.text = '';
             $route.current.pathParams.tab = tab;
@@ -375,10 +413,16 @@ angular.module('bitbloqApp')
                 'page': $scope.pagination.myprojects.current
             });
             $location.search($scope.filterParams);
-            if ($scope.selectedTab === 'myprojects') {
-                $scope.getMyProjectsPage($scope.pagination.myprojects.current);
-            } else {
-                $scope.getMySharedProjectsPage($scope.pagination.sharedprojects.current);
+            switch ($scope.filterParams) {
+                case 'myprojects':
+                    $scope.getMyProjectsPage($scope.pagination.myprojects.current);
+                    break;
+                case 'sharedprojects':
+                    $scope.getMySharedProjectsPage($scope.pagination.sharedprojects.current);
+                    break;
+                case 'mytrash':
+                    $scope.getMyTrashPage($scope.pagination.mytrash.current);
+                    break;
             }
         };
 
@@ -435,12 +479,18 @@ angular.module('bitbloqApp')
                     case 'myprojects':
                         $scope.pagination.myprojects.current = $routeParams.page;
                         $scope.pagination.sharedprojects.current = 1;
+                        $scope.pagination.mytrash.current = 1;
                         break;
                     case 'sharedprojects':
                         $scope.pagination.myprojects.current = 1;
                         $scope.pagination.sharedprojects.current = $routeParams.page;
+                        $scope.pagination.mytrash.current = 1;
                         break;
-
+                    case 'mytrash':
+                        $scope.pagination.myprojects.current = 1;
+                        $scope.pagination.sharedprojects.current = 1;
+                        $scope.pagination.mytrash.current = $routeParams.page;
+                        break;
                 }
             }
         }
@@ -485,6 +535,9 @@ angular.module('bitbloqApp')
         function _init() {
             if ($location.path().indexOf('sharedproject') > -1) {
                 $scope.selectedTab = 'sharedprojects';
+            }
+            if ($location.path().indexOf('trash') > -1) {
+                $scope.selectedTab = 'trash';
             }
             $route.current.pathParams.tab = $scope.selectedTab;
             _getUrlParams();

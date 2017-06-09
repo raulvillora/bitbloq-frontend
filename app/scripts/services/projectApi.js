@@ -87,6 +87,14 @@ angular.module('bitbloqApp')
             return exports.getMyProjects(params);
         };
 
+        exports.getMyTrashProjectsCounter = function(queryParams) {
+            var params = queryParams ? queryParams : {};
+            angular.extend(params, {
+                'count': '*'
+            });
+            return exports.getMyTrash(params);
+        };
+
         exports.getMySharedProjectsCounter = function(queryParams) {
             var params = queryParams ? queryParams : {};
             angular.extend(params, {
@@ -94,6 +102,7 @@ angular.module('bitbloqApp')
             });
             return exports.getMySharedProjects(params);
         };
+
         exports.getMyProjects = function(queryParams) {
             var params = {
                 'page': queryParams ? queryParams.page : 0,
@@ -108,9 +117,6 @@ angular.module('bitbloqApp')
                 url: envData.config.serverUrl + 'project/me',
                 params: params
             });
-            /*
-            return resource.getAll('project/me', params, myProjectArray);
-            */
         };
 
         exports.getMySharedProjects = function(queryParams) {
@@ -127,19 +133,23 @@ angular.module('bitbloqApp')
                 url: envData.config.serverUrl + 'project/shared',
                 params: params
             });
+        };
 
-            /*
-                        var myProjectArray = [],
-                            params = {
-                                'page': 0,
-                                'pageSize': 30
-                            };
 
-                        queryParams = queryParams || {};
-                        _.extend(params, queryParams);
+        exports.getMyTrash = function(queryParams) {
+            var params = {
+                'page': queryParams ? queryParams.page : 0,
+                'pageSize': 20
+            };
 
-                        return resource.getAll('project/shared', params, myProjectArray);
-                        */
+            queryParams = queryParams || {};
+            _.extend(params, queryParams);
+
+            return $http({
+                method: 'GET',
+                url: envData.config.serverUrl + 'project/trash',
+                params: params
+            });
         };
 
         exports.private = function(project) {
