@@ -380,80 +380,77 @@ angular.module('bitbloqApp')
             ];
             if (stopWord.indexOf(item) === -1) {
                 var i;
-                if ($scope.currentProject.hardware.board === 'freakscar') {
-                    var bloqsArray = _.map($scope.common.properties.bloqsSortTree.components, 'name');
-                    result = bloqsArray.indexOf(item) > -1 && item.indexOf('freakscar') > -1;
-                } else {
-                    if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
-                        var connectedComponents = $scope.currentProject.hardware.components;
-                        if (item === 'hwVariable' && connectedComponents.length !== 0) {
-                            result = true;
-                        } else if (item === 'led') {
-                            result = existComponent(['led'], connectedComponents);
-                        } else if (item === 'readSensor') {
-                            result = existComponent([
-                                'us', 'button', 'limitswitch', 'encoder',
-                                'sound', 'buttons', 'irs', 'irs2',
-                                'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
-                                'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote', 'freakscar_integrated_remote'
-                            ], connectedComponents);
-                        } else if (item.indexOf('serial') > -1) {
-                            result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
-                        } else if (item.indexOf('phone') > -1) {
-                            result = $scope.currentProject.useBitbloqConnect;
-                        } else if (item.includes('rgb')) {
-                            result = existComponent(['RGBled'], connectedComponents);
-                        } else if (item.includes('oscillator')) {
-                            i = 0;
-                            while (!result && (i < connectedComponents.length)) {
-                                if ((connectedComponents[i].uuid === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
-                                    result = true;
-                                }
-                                i++;
+                if ($scope.currentProject.hardware.board && $scope.currentProject.hardware.components) {
+                    var connectedComponents = $scope.currentProject.hardware.components;
+                    if (item === 'hwVariable' && connectedComponents.length !== 0) {
+                        result = true;
+                    } else if (item === 'led') {
+                        result = existComponent(['led'], connectedComponents);
+                    } else if (item === 'readSensor') {
+                        result = existComponent([
+                            'us', 'button', 'limitswitch', 'encoder',
+                            'sound', 'buttons', 'irs', 'irs2',
+                            'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote', 'freakscar_integrated_remote', 'freakscar_integrated_lightsensor'
+                        ], connectedComponents);
+                    } else if (item.indexOf('serial') > -1) {
+                        result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
+                    } else if (item.indexOf('phone') > -1) {
+                        result = $scope.currentProject.useBitbloqConnect;
+                    } else if (item.includes('rgb')) {
+                        result = existComponent(['RGBled'], connectedComponents);
+                    } else if (item.includes('oscillator')) {
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if ((connectedComponents[i].uuid === 'servo') && connectedComponents[i].oscillator && (connectedComponents[i].oscillator !== 'false')) {
+                                result = true;
                             }
-                        } else if (item.includes('continuousServo')) {
-                            result = existComponent(['servocont'], connectedComponents);
-                        } else if ((item === 'servoAttach') || (item === 'servoDetach')) {
-                            result = existComponent(['servo', 'servocont'], connectedComponents);
-                        } else if (item.includes('servo')) {
-                            i = 0;
-                            while (!result && (i < connectedComponents.length)) {
-                                if ((connectedComponents[i].uuid === 'servo') && (connectedComponents[i].oscillator !== true)) {
-                                    result = true;
-                                }
-                                i++;
+                            i++;
+                        }
+                    } else if (item.includes('continuousServo')) {
+                        result = existComponent(['servocont'], connectedComponents);
+                    } else if ((item === 'servoAttach') || (item === 'servoDetach')) {
+                        result = existComponent(['servo', 'servocont'], connectedComponents);
+                    } else if (item.includes('servo')) {
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if ((connectedComponents[i].uuid === 'servo') && (connectedComponents[i].oscillator !== true)) {
+                                result = true;
                             }
-                        } else if (item === 'mBotGetDistance-v2') {
-                            result = existComponent(['mkb_ultrasound'], connectedComponents);
-                        } else if ((item === 'mBotBuzzer-v2') || (item === 'mBotBuzzerAdvanced-v2')) {
-                            result = existComponent(['mkb_integrated_buzz'], connectedComponents);
-                        } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
-                            result = existComponent(['mkb_integrated_RGB'], connectedComponents);
-                        } else if (item === 'makeblockIfNoise') {
-                            result = existComponent(['mkb_soundsensor'], connectedComponents);
-                        } else if (item === 'mBotLedMatrix') {
-                            result = existComponent(['mkb_ledmatrix'], connectedComponents);
-                        } else if (item === 'readJoystickXY') {
-                            result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
-                        } else if ((item === 'mBotSetLedMatrixBrightness') || (item === 'mBotSetLedMatrixBrightnessAdvanced') || (item === 'mBotShowNumberOnLedMatrixAdvanced') || (item === 'mBotShowStringOnLedMatrixAdvanced') || (item === 'mBotShowTimeOnLedMatrixAdvanced')) {
-                            result = existComponent(['mkb_ledmatrix'], connectedComponents);
-                        } else if (item === 'ifButtonPushed') {
-                            result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
-                        } else if (item === 'remoteButtonPushed') {
-                            result = existComponent(['mkb_remote'], connectedComponents);
-                        } else if ((item === 'displayNumber') || (item === 'displayNumberInPosition') || ('item' === 'clear7segment')) {
-                            result = existComponent(['mkb_display7seg'], connectedComponents);
-                        } else if ((item === 'setDisplayBrightness') || (item === 'setDisplayBrightnessAdvanced')) {
-                            result = existComponent(['mkb_display7seg'], connectedComponents);
-                        } else {
-                            i = 0;
-                            while (!result && (i < connectedComponents.length)) {
-                                if (connectedComponents[i].uuid.includes(item) ||
-                                    item.toLowerCase().includes(connectedComponents[i].uuid)) {
-                                    result = true;
-                                }
-                                i++;
+                            i++;
+                        }
+                    } else if (item === 'mBotGetDistance-v2') {
+                        result = existComponent(['mkb_ultrasound'], connectedComponents);
+                    } else if ((item === 'mBotBuzzer-v2') || (item === 'mBotBuzzerAdvanced-v2')) {
+                        result = existComponent(['mkb_integrated_buzz'], connectedComponents);
+                    } else if ((item === 'mBotSetRGBLed') || (item === 'mBotSetRGBLedAdvanced')) {
+                        result = existComponent(['mkb_integrated_RGB'], connectedComponents);
+                    } else if (item === 'makeblockIfNoise') {
+                        result = existComponent(['mkb_soundsensor'], connectedComponents);
+                    } else if (item === 'mBotLedMatrix') {
+                        result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                    } else if (item === 'readJoystickXY') {
+                        result = existComponent(['mkb_joystick'], connectedComponents) || existComponent(['joystick'], connectedComponents);
+                    } else if ((item === 'mBotSetLedMatrixBrightness') || (item === 'mBotSetLedMatrixBrightnessAdvanced') || (item === 'mBotShowNumberOnLedMatrixAdvanced') || (item === 'mBotShowStringOnLedMatrixAdvanced') || (item === 'mBotShowTimeOnLedMatrixAdvanced')) {
+                        result = existComponent(['mkb_ledmatrix'], connectedComponents);
+                    } else if (item === 'ifButtonPushed') {
+                        result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
+                    } else if (item === 'remoteButtonPushed') {
+                        result = existComponent(['mkb_remote'], connectedComponents);
+                    } else if ((item === 'displayNumber') || (item === 'displayNumberInPosition') || ('item' === 'clear7segment')) {
+                        result = existComponent(['mkb_display7seg'], connectedComponents);
+                    } else if ((item === 'setDisplayBrightness') || (item === 'setDisplayBrightnessAdvanced')) {
+                        result = existComponent(['mkb_display7seg'], connectedComponents);
+                    } else if ((item === 'freakscarBuzzer') || (item === 'freakscarDistance') || (item === 'freakscarLight')) {
+                        result = existComponent(['freakscar_integrated_lightsensor'], connectedComponents);
+                    } else {
+                        i = 0;
+                        while (!result && (i < connectedComponents.length)) {
+                            if (connectedComponents[i].uuid.includes(item) ||
+                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
+                                result = true;
                             }
+                            i++;
                         }
                     }
                 }
