@@ -227,6 +227,12 @@ angular.module('bitbloqApp')
             });
         };
 
+        $scope.restoreProject = function(project) {
+            projectApi.restore(project._id).then(function() {
+
+            });
+        };
+
         $scope.checkSearch = function(textSearch) {
             if (textSearch) {
                 while (textSearch[0] === '!') {
