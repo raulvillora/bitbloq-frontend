@@ -382,13 +382,17 @@ angular.module('bitbloqApp')
                 projectApi.getMyTrashProjectsCounter(queryParams).then(function(data) {
                     $scope.trashCount = data.data.count;
                     $scope.common.isLoading = false;
+                }).catch(function(){
+                    $scope.trashCount = 0;
                 });
+
                 $scope.trashProjects = _.clone(response.data);
                 $scope.pagination.mytrash.current = newPageNumber;
                 $location.search('page', newPageNumber);
 
             }).catch(function() {
                 $scope.trashProjects = [];
+                $scope.trashCount = 0;
                 $scope.common.isLoading = false;
                 $scope.common.setUser();
                 alertsService.add({
@@ -408,8 +412,8 @@ angular.module('bitbloqApp')
             $scope.selectedTab = tab;
             $location.path('/projects/' + tab);
             $location.search('page', 1);
-            _getUrlParams();
-            $scope.search();
+            // Get projects
+            $scope.refreshProjects();
         };
 
         $scope.sort = function(option) {
@@ -459,8 +463,8 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                'query': {}
-            };
+                    'query': {}
+                };
             if ($scope.searchText.text) {
                 queryParams.query = {
                     name: {

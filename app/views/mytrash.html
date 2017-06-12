@@ -24,10 +24,10 @@
     </div>
 </div>
 <ol class="projects__project-list" data-element="trash-list-project">
-    <div ng-show="(trashProjects.length !== 0 && filtered.projects.length !== 0) && projectSearched.length === 0" class="project-shared--empty">
+    <div ng-show="trashProjects.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
     </div>
-    <li pagination-id="mytrash" dir-paginate="project in projectSearched = (filtered.projects = trashProjects | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.mytrash.current"
+    <li pagination-id="mytrash" dir-paginate="project in trashProjects | filter:userProjectsFilterFunction(userProjectsFilter) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.mytrash.current"
         total-items="{{trashCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-trash">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
