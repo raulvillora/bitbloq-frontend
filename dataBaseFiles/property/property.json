@@ -441,9 +441,35 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
+        }, {
+            "name": "makeblockIfNoise"
+        }, {
+            "name": "displayNumber"
+        }, {
+            "name": "displayNumberInPosition"
+        }, {
+            "name": "clear7segment"
+        }, {
+            "name": "mBotLedMatrix"
+        }, {
+            "name": "mBotClearLedMatrix"
+        }, {
+            "name": "mBotShowTimeOnLedMatrix"
+        }, {
+            "name": "mBotShowNumberOnLedMatrix"
+        }, {
+            "name": "mBotShowStringOnLedMatrix"
+        }, {
+            "name": "makeblockIfMotion"
         }],
         "advancedRangerlandraider": [{
             "name": "mBotMoveAdvanced-v2"
+        }, {
+            "name": "mBotShowNumberOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowStringOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowTimeOnLedMatrixAdvanced"
         }],
         "rangerraptor": [{
             "name": "mBotMove-v2"
@@ -459,9 +485,35 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
+        }, {
+            "name": "makeblockIfNoise"
+        }, {
+            "name": "displayNumber"
+        }, {
+            "name": "displayNumberInPosition"
+        }, {
+            "name": "clear7segment"
+        }, {
+            "name": "mBotLedMatrix"
+        }, {
+            "name": "mBotClearLedMatrix"
+        }, {
+            "name": "mBotShowTimeOnLedMatrix"
+        }, {
+            "name": "mBotShowNumberOnLedMatrix"
+        }, {
+            "name": "mBotShowStringOnLedMatrix"
+        }, {
+            "name": "makeblockIfMotion"
         }],
         "advancedRangerraptor": [{
             "name": "mBotMoveAdvanced-v2"
+        }, {
+            "name": "mBotShowNumberOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowStringOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowTimeOnLedMatrixAdvanced"
         }],
         "rangernervousbird": [{
             "name": "mBotMove-v2"
@@ -477,9 +529,35 @@
             "name": "mBotSetRGBLedSimple"
         }, {
             "name": "mBotRGBLedOff"
+        }, {
+            "name": "makeblockIfNoise"
+        }, {
+            "name": "displayNumber"
+        }, {
+            "name": "displayNumberInPosition"
+        }, {
+            "name": "clear7segment"
+        }, {
+            "name": "mBotLedMatrix"
+        }, {
+            "name": "mBotClearLedMatrix"
+        }, {
+            "name": "mBotShowTimeOnLedMatrix"
+        }, {
+            "name": "mBotShowNumberOnLedMatrix"
+        }, {
+            "name": "mBotShowStringOnLedMatrix"
+        }, {
+            "name": "makeblockIfMotion"
         }],
         "advancedRangernervousbird": [{
             "name": "mBotMoveAdvanced-v2"
+        }, {
+            "name": "mBotShowNumberOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowStringOnLedMatrixAdvanced"
+        }, {
+            "name": "mBotShowTimeOnLedMatrixAdvanced"
         }],
         "startertank": [{
             "name": "mBotMove-v2"
