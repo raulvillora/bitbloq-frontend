@@ -555,6 +555,10 @@ angular.module('bitbloqApp')
                     exports.project.image = 'custom';
                 }
 
+                if (!utils.isYoutubeURL(exports.project.videoUrl)) {
+                    exports.project.videoUrl = '';
+                }
+
                 if (exports.project._id) {
                     if (!exports.project._acl || (exports.project._acl['user:' + common.user._id] && exports.project._acl['user:' + common.user._id].permission === 'ADMIN')) {
                         return projectApi.update(exports.project._id, exports.getCleanProject())
