@@ -122,7 +122,7 @@ angular.module('bitbloqApp')
             userApi.logout();
             $scope.common.setUser(null);
             localStorage.projectsChange = false;
-            $location.path('/');
+            $location.url('/');
         };
 
         $scope.openMenu = function($event) {
