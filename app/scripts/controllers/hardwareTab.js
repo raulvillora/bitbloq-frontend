@@ -256,7 +256,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         $log.log('sortToolbox');
         $scope.common.itsUserLoaded().finally(function() {
             var filteredList;
-            if ($scope.currentProject.hardware.robot) {
+            if ($scope.currentProject.hardware.robot || $scope.currentProject.hardware.board === 'freakscar') {
                 filteredList = [];
 
             } else if ($scope.currentProject.hardware.board && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents && $scope.boardsMap[$scope.currentProject.hardware.board].availableComponents.length > 0) {
