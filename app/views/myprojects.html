@@ -32,8 +32,7 @@
     </div>
 </div>
 <ol class="projects__project-list" data-element="projects-list-project">
-    <!-- <h2 class="ng-hide">Lista de proyectos</h2> -->
-    <a href="#/bloqsproject" target="_blank" ng-show="userProjects.length === 0 || filtered.projects.length === 0" ng-class="{'project-list__item':true, 'new--project':true, 'project-list__item--wide':itemsLayout === 'list'}">
+    <a href="#/bloqsproject" target="_blank" ng-show="searchText.text==='' && userProjects.length === 0" ng-class="{'project-list__item':true, 'new--project':true, 'project-list__item--wide':itemsLayout === 'list'}">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container--new':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover">
                 <svg class="svg-icon">
@@ -43,8 +42,7 @@
             <h3 data-element="projects-new-project" class="h3 project__info--title create__project">{{'create-new-project' | translate}}</h3>
         </div>
     </a>
-
-    <div ng-show="(userProjects.length !== 0 && filtered.projects.length !== 0) && projectSearched.length === 0" class="project-shared--empty">
+    <div ng-show="searchText.text!=='' && projectSearched.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
     </div>
     <li pagination-id="myprojects" dir-paginate="project in projectSearched = (filtered.projects = userProjects | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.myprojects.current"

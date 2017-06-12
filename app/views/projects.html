@@ -22,7 +22,6 @@
                     <span class="menu__item__span">
                         {{'shared' | translate}} ({{ sharedCount }})
                     </span>
-                    </span>
                 </li>
                 <li class="tabs__header__item aside--menu__item--releases" ng-class="{'selected--tab':selectedTab === 'trash'}" data-element="projects-trash-projects" ng-click="goTo('trash')">
                     <svg class="svg-icon--aside--menu">
@@ -31,13 +30,13 @@
                     <span class="menu__item__span">
                         {{'trash' | translate}} ({{ trashCount }})
                     </span>
-                    </span>
                 </li>
                 <a href="#/bloqsproject" target="_blank" class="btn btn--primary btn--small btn--new-project" data-element="projects-new-project">
                     <svg class="svg-icon svg-icon--text">
                         <use xlink:href="#plusCircle"></use>
                     </svg>
-                    {{ 'create-new-project' | translate }}</a>
+                    {{ 'create-new-project' | translate }}
+                </a>
             </ul>
         </aside>
         <div class="tabs-layout__content">
