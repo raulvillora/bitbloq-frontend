@@ -72,7 +72,14 @@ angular.module('bitbloqApp')
         };
 
         exports.isEmptyComponentArray = function() {
-            return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
+            var isEmptyComponentArray;
+            if (exports.project.hardware.board === 'freakscar') {
+                isEmptyComponentArray = false;
+            } else {
+                isEmptyComponentArray = _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
+            }
+
+            return isEmptyComponentArray;
         };
 
         exports.showActivationModal = function(robotFamily) {

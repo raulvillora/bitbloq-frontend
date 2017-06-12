@@ -181,8 +181,8 @@ angular.module('bitbloqApp')
                     if (project._id) {
                         projectApi.delete(project._id).then(function() {
                             alertsService.add({
-                                text: 'make-deleted-project',
-                                id: 'deleted-project' + project._id,
+                                text: 'projects_toast_send-to-trash',
+                                id: 'deleted-project',
                                 type: 'info',
                                 time: 7000
                             });

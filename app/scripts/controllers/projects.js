@@ -152,6 +152,12 @@ angular.module('bitbloqApp')
         $scope.removeProject = function(project) {
             projectApi.delete(project._id).then(function() {
                 $scope.refreshProjects();
+                alertsService.add({
+                    text: 'projects_toast_send-to-trash',
+                    id: 'deleted-project',
+                    type: 'info',
+                    time: 7000
+                });
             }, function(error) {
                 $log.log('Delete error: ', error);
                 alertsService.add({
@@ -166,6 +172,12 @@ angular.module('bitbloqApp')
         $scope.removePermanentProject = function(project) {
             projectApi.deletePermanent(project._id).then(function() {
                 $scope.refreshProjects();
+                alertsService.add({
+                    text: 'make-deleted-project',
+                    id: 'deleted-project',
+                    type: 'info',
+                    time: 7000
+                });
             });
         };
 
@@ -226,6 +238,12 @@ angular.module('bitbloqApp')
 
         $scope.restoreProject = function(project) {
             projectApi.restore(project._id).then(function() {
+                alertsService.add({
+                    text: 'projects_toast_restore',
+                    id: 'deleted-project',
+                    type: 'info',
+                    time: 7000
+                });
                 $scope.refreshProjects();
             });
         };
