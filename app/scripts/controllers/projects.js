@@ -383,9 +383,6 @@ angular.module('bitbloqApp')
                     $scope.trashCount = data.data.count;
                     $scope.common.isLoading = false;
                 });
-
-                console.log($scope.trashProjects);
-                console.log(response.data);
                 $scope.trashProjects = _.clone(response.data);
                 $scope.pagination.mytrash.current = newPageNumber;
                 $location.search('page', newPageNumber);
@@ -405,6 +402,7 @@ angular.module('bitbloqApp')
 
         $scope.goTo = function(tab) {
             $scope.searchText.text = '';
+            $routeParams.search = null;
             $route.current.pathParams.tab = tab;
             $routeParams.page = 1;
             $scope.selectedTab = tab;
@@ -434,14 +432,14 @@ angular.module('bitbloqApp')
                 'page': $scope.pagination.myprojects.current
             });
             $location.search($scope.filterParams);
-            switch ($scope.filterParams) {
+            switch ($scope.selectedTab) {
                 case 'myprojects':
                     $scope.getMyProjectsPage($scope.pagination.myprojects.current);
                     break;
                 case 'sharedprojects':
                     $scope.getMySharedProjectsPage($scope.pagination.sharedprojects.current);
                     break;
-                case 'mytrash':
+                case 'trash':
                     $scope.getMyTrashPage($scope.pagination.mytrash.current);
                     break;
             }
@@ -461,8 +459,8 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
             if ($scope.searchText.text) {
                 queryParams.query = {
                     name: {
@@ -543,7 +541,6 @@ angular.module('bitbloqApp')
             _getUrlParams();
             $scope.search();
         }
-
 
         _init();
 
