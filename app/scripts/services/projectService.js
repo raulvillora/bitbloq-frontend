@@ -72,11 +72,19 @@ angular.module('bitbloqApp')
         };
 
         exports.isEmptyComponentArray = function() {
-            var isEmptyComponentArray;
+            var isEmptyComponentArray, externalComponents = [];
+            _.forEach(exports.componentsArray, function(components) {
+                _.forEach(components, function(component) {
+                    if (!component.integratedComponent) {
+                        externalComponents.push(component);
+                    }
+                });
+            });
+
             if (exports.project.hardware.board === 'freakscar') {
                 isEmptyComponentArray = false;
-            } else {
-                isEmptyComponentArray = _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
+            } else if (_.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray()) || externalComponents.length === 0) {
+                isEmptyComponentArray = true;
             }
 
             return isEmptyComponentArray;
