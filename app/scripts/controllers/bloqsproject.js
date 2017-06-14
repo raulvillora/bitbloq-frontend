@@ -31,15 +31,7 @@ angular.module('bitbloqApp')
 
         $scope.twitterWheel = false;
         $scope.anyComponent = function(componentList) {
-            var externalComponents = [];
-
-            componentList = componentList || projectService.project.hardware.components;
-            _.forEach(componentList, function(component) {
-                if (!component.integratedComponent) {
-                    externalComponents.push(component);
-                }
-            });
-            return projectService.project.useBitbloqConnect || projectService.project.hardware.board === 'freakscar' || (externalComponents.length > 0);
+            return projectService.project.useBitbloqConnect || projectService.project.hardware.board === 'freakscar' || (componentList.length > 0);
         };
 
         $scope.anyExternalComponent = function() {
