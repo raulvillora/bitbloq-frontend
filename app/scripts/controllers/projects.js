@@ -320,8 +320,10 @@ angular.module('bitbloqApp')
                 });
 
                 $scope.sharedProjects = _.clone(response.data);
-                $scope.pagination.sharedprojects.current = newPageNumber;
-                $location.search('page', newPageNumber);
+                if ($route.current.pathParams.tab === 'sharedprojects') {
+                    $scope.pagination.sharedprojects.current = newPageNumber;
+                    $location.search('page', newPageNumber);
+                }
 
             }).catch(function() {
                 $scope.sharedProjects = [];
@@ -353,8 +355,10 @@ angular.module('bitbloqApp')
                 });
 
                 $scope.userProjects = _.clone(response.data);
-                $scope.pagination.myprojects.current = newPageNumber;
-                $location.search('page', newPageNumber);
+                if ($route.current.pathParams.tab === 'myprojects') {
+                    $scope.pagination.myprojects.current = newPageNumber;
+                    $location.search('page', newPageNumber);
+                }
 
             }).catch(function() {
                 $scope.userProjects = [];
@@ -382,13 +386,15 @@ angular.module('bitbloqApp')
                 projectApi.getMyTrashProjectsCounter(queryParams).then(function(data) {
                     $scope.trashCount = data.data.count;
                     $scope.common.isLoading = false;
-                }).catch(function(){
+                }).catch(function() {
                     $scope.trashCount = 0;
                 });
 
                 $scope.trashProjects = _.clone(response.data);
-                $scope.pagination.mytrash.current = newPageNumber;
-                $location.search('page', newPageNumber);
+                if ($route.current.pathParams.tab === 'trash') {
+                    $scope.pagination.mytrash.current = newPageNumber;
+                    $location.search('page', newPageNumber);
+                }
 
             }).catch(function() {
                 $scope.trashProjects = [];
@@ -432,10 +438,6 @@ angular.module('bitbloqApp')
         $scope.search = function() {
             $scope.exploraProjects = [];
             $scope.pageProjects = 0;
-            _.extend($scope.filterParams, {
-                'page': $scope.pagination.myprojects.current
-            });
-            $location.search($scope.filterParams);
             switch ($scope.selectedTab) {
                 case 'myprojects':
                     $scope.getMyProjectsPage($scope.pagination.myprojects.current);
