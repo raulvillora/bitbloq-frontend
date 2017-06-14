@@ -112,7 +112,7 @@ angular.module('bitbloqApp')
                 sortProjects: sortProjects(modalScope)
             });
 
-            projectApi.getMyProjects().then(function(projects) {
+            projectApi.getAllMyProjects().then(function(projects) {
                 modalScope.projects = projects;
             }, function() {
                 alertsService.add({

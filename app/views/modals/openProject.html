@@ -27,7 +27,7 @@
     </div>
     <div class="modal--open--tab" ng-show="selectedTab === 1">
         <ul class="modal--project--list">
-            <li ng-repeat="project in filteredSharedProjects = (sharedProjects | filter:{name: searchText} | orderBy:userProjectsOrderBy:userProjectsReverseOrder )" ng-click="selectedProject.project = project" ng-class="{'modal--project--item':true, 'selected--item':selectedProject.project === project}">
+            <li ng-repeat="project in filteredSharedProjects = (projects | filter:{name: searchText} | orderBy:userProjectsOrderBy:userProjectsReverseOrder )" ng-click="selectedProject.project = project" ng-class="{'modal--project--item':true, 'selected--item':selectedProject.project === project}">
                 <div>
                     <span class="modal--project--name">{{project.name}}</span>
                     <time class="modal--project--date">{{ project.updatedAt | amDateFormat:'DD[ ]MMMM[ ]YYYY' }}</time>

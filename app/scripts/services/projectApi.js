@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('projectApi', function($http, $log, envData, $q, _, alertsService) {
+    .service('projectApi', function($http, $log, envData, $q, _, alertsService, resource) {
 
         var exports = {};
 
@@ -124,6 +124,19 @@ angular.module('bitbloqApp')
                 url: envData.config.serverUrl + 'project/me',
                 params: params
             });
+        };
+
+        exports.getAllMyProjects = function(queryParams) {
+            var myProjectArray = [],
+                params = {
+                    'page': 0,
+                    'pageSize': 30
+                };
+
+            queryParams = queryParams || {};
+            _.extend(params, queryParams);
+
+            return resource.getAll('project/me', params, myProjectArray);
         };
 
         exports.getMySharedProjects = function(queryParams) {
