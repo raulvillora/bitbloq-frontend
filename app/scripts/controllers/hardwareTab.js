@@ -703,7 +703,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 return board.uuid === robotReference.board;
             });
             _addBoard(board);
-            if (robot.robot.manufacturer === 'makeblock') {
+            if (robotReference.manufacturer === 'makeblock') {
                 $scope.currentProject.hardware.showRobotImage = robot.uuid;
             }
             $scope.changeToolbox('components');

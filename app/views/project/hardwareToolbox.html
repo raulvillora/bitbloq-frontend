@@ -106,6 +106,7 @@
                 </div>
             </li>
             <li data-ng-show="currentProject.hardware.robot === 'mbot' && !currentProject.hardware.showRobotImage" class="toolbox-info">{{'hardware-toolbox-no-mbot-components' | translate}}</li>
+            <li data-ng-show="currentProject.hardware.robot || (hardware.componentSortered.length === 0)" class="toolbox-info">{{'robot-not-available-components' | translate}}</li>
         </ul>
     </div>
     <div class="toolbox__content" ng-show="selectedToolbox==='robots'">
