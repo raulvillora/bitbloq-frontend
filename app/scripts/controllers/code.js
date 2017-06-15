@@ -93,10 +93,14 @@ angular.module('bitbloqApp')
             if ($scope.common.useChromeExtension()) {
                 commonModals.launchSerialWindow(projectService.getBoardMetaData());
             } else {
-                if (web2board.isWeb2boardV2()) {
-                    serialMonitorW2b2();
+                if (projectService.project.hardware.board === 'freakscar') {
+                    commonModals.launchSerialWindow(projectService.getBoardMetaData(), true);
                 } else {
-                    serialMonitorW2b1();
+                    if (web2board.isWeb2boardV2()) {
+                        serialMonitorW2b2();
+                    } else {
+                        serialMonitorW2b1();
+                    }
                 }
             }
         };
@@ -185,10 +189,17 @@ angular.module('bitbloqApp')
                         code: utils.prettyCode(projectService.project.code)
                     });
                 } else {
-                    if (web2board.isWeb2boardV2()) {
-                        uploadW2b2();
+                    if (projectService.project.hardware.board === 'freakscar') {
+                        web2boardOnline.compileAndUpload({
+                            board: projectService.getBoardMetaData(),
+                            code: utils.prettyCode(projectService.project.code)
+                        });
                     } else {
-                        uploadW2b1();
+                        if (web2board.isWeb2boardV2()) {
+                            uploadW2b2();
+                        } else {
+                            uploadW2b1();
+                        }
                     }
                 }
             }
@@ -214,34 +225,25 @@ angular.module('bitbloqApp')
                 if ($scope.common.useChromeExtension()) {
                     var board = projectService.getBoardMetaData();
                     if (!board) {
-                        board = 'bt328';
-                    } else {
-                        board = board.mcu;
+                        projectService.project.hardware.board = 'bqZUM';
                     }
-                    compilerApi.compile({
+
+                    web2boardOnline.compile({
                         board: board,
                         code: utils.prettyCode(projectService.project.code)
-                    }).then(function(response) {
-                        if (response.data.error) {
-                            alertsService.add({
-                                id: 'web2board',
-                                type: 'warning',
-                                translatedText: utils.parseCompileError(response.data.error)
-                            });
-                        } else {
-                            alertsService.add({
-                                text: 'alert-web2board-compile-verified',
-                                id: 'web2board',
-                                type: 'ok',
-                                time: 5000
-                            });
-                        }
                     });
                 } else {
-                    if (web2board.isWeb2boardV2()) {
-                        verifyW2b2();
+                    if (projectService.project.hardware.board === 'freakscar') {
+                        web2boardOnline.compile({
+                            board: projectService.getBoardMetaData(),
+                            code: utils.prettyCode(projectService.project.code)
+                        });
                     } else {
-                        verifyW2b1();
+                        if (web2board.isWeb2boardV2()) {
+                            verifyW2b2();
+                        } else {
+                            verifyW2b1();
+                        }
                     }
                 }
             }

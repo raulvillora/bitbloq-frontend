@@ -662,7 +662,7 @@ angular.module('bitbloqApp')
             viewerMonitorPanel.scope = scope;
         };
 
-        exports.launchSerialWindow = function(board) {
+        exports.launchSerialWindow = function(board, useChromeExtension) {
             if (serialMonitorPanel) {
                 serialMonitorPanel.normalize();
                 serialMonitorPanel.reposition('center');
@@ -670,6 +670,7 @@ angular.module('bitbloqApp')
             }
             var scope = $rootScope.$new();
             scope.board = board;
+            scope.forceChromeExtension = useChromeExtension;
             scope.setOnUploadFinished = function(callback) {
                 scope.uploadFinished = callback;
             };

@@ -508,11 +508,12 @@ angular.module('bitbloqApp')
                             board: projectService.getBoardMetaData(),
                             code: $scope.getPrettyCode()
                         });
-                    }
-                    if (web2board.isWeb2boardV2()) {
-                        verifyW2b2();
                     } else {
-                        verifyW2b1();
+                        if (web2board.isWeb2boardV2()) {
+                            verifyW2b2();
+                        } else {
+                            verifyW2b1();
+                        }
                     }
                 }
             }
@@ -680,10 +681,15 @@ angular.module('bitbloqApp')
                 if ($scope.common.useChromeExtension()) {
                     commonModals.launchSerialWindow(projectService.getBoardMetaData());
                 } else {
-                    if (web2board.isWeb2boardV2()) {
-                        serialMonitorW2b2();
+                    if (projectService.project.hardware.board === 'freakscar') {
+                        console.log('debo entrar aqui');
+                        commonModals.launchSerialWindow(projectService.getBoardMetaData(), true);
                     } else {
-                        serialMonitorW2b1();
+                        if (web2board.isWeb2boardV2()) {
+                            serialMonitorW2b2();
+                        } else {
+                            serialMonitorW2b1();
+                        }
                     }
                 }
             } else {
