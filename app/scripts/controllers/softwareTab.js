@@ -391,7 +391,9 @@ angular.module('bitbloqApp')
                             'us', 'button', 'limitswitch', 'encoder',
                             'sound', 'buttons', 'irs', 'irs2',
                             'joystick', 'ldrs', 'pot', 'mkb_lightsensor', 'mkb_joystick',
-                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton', 'mkb_soundsensor', 'mkb_remote', 'freakscar_integrated_remote', 'freakscar_integrated_lightsensor'
+                            'mkb_integrated_lightsensor', 'mkb_integrated_analogPinButton',
+                            'mkb_soundsensor', 'mkb_remote', 'freakscar_integrated_remote',
+                            'freakscar_integrated_lightsensor', 'mkb_pot', 'mkb_4buttonKeyPad'
                         ], connectedComponents);
                     } else if (item.indexOf('serial') > -1) {
                         result = existComponent(['bt', 'sp', 'device', 'mkb_bluetooth'], connectedComponents);
