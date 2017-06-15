@@ -724,10 +724,10 @@ angular.module('bitbloqApp')
                 height: $scope.$trashcan[0].clientHeight
             };
             var bloqToDelete = utils.itsOver(mouseItem, trashcanItem);
+            $scope.showTrashcan = false;
             if (bloqToDelete) {
                 bloqs.removeBloq(object.detail.bloq.uuid, false, true);
             }
-            $scope.showTrashcan = false;
             utils.apply($scope);
         }
 
