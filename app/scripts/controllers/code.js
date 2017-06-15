@@ -445,6 +445,7 @@ angular.module('bitbloqApp')
                         });
                         response.data.hardwareTags = [];
                     }
+
                     projectService.setProject(response.data, 'code');
 
                     $scope.common.itsUserLoaded().then(function() {
@@ -457,7 +458,7 @@ angular.module('bitbloqApp')
 
                     });
 
-                    $scope.setBoard(projectService.project.hardware.robot ? projectService.project.hardware.robot : projectService.project.hardware.board);
+                    $scope.setBoard(projectService.project.hardware.showRobotImage ? projectService.project.hardware.showRobotImage : projectService.project.hardware.robot ? projectService.project.hardware.robot : projectService.project.hardware.board);
 
                     _prettyCode().then(function() {
                         projectService.addCodeWatchers();

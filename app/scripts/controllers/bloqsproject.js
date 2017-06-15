@@ -682,7 +682,6 @@ angular.module('bitbloqApp')
                     commonModals.launchSerialWindow(projectService.getBoardMetaData());
                 } else {
                     if (projectService.project.hardware.board === 'freakscar') {
-                        console.log('debo entrar aqui');
                         commonModals.launchSerialWindow(projectService.getBoardMetaData(), true);
                     } else {
                         if (web2board.isWeb2boardV2()) {
