@@ -505,13 +505,13 @@ angular
         function _getConnections() {
             return jsPlumbInstance.getAllConnections().map(function(connection) {
 
-                    var connectionParams = connection.getParameters();
-                    return ({
-                        pinSourceUid: connectionParams.pinSourceUid,
-                        pinTargetUid: connectionParams.pinTargetUid
-                    });
+                var connectionParams = connection.getParameters();
+                return ({
+                    pinSourceUid: connectionParams.pinSourceUid,
+                    pinTargetUid: connectionParams.pinTargetUid
+                });
 
-                }) || [];
+            }) || [];
         }
 
         function _getPinBoardReference(selector) {
@@ -608,7 +608,7 @@ angular
         //Adds a raw svg for a component
         function _loadComponent(DOMComponent, newComponent) {
             var spaceInterPin = {};
-            if (newComponent.manufacturer === 'makeblock') {
+            if ((newComponent.manufacturer === 'makeblock') || (newComponent.manufacter === 'makeblock')) {
                 spaceInterPin = {
                     blue: {
                         x: 0.5,
