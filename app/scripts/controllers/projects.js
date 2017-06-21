@@ -319,10 +319,10 @@ angular.module('bitbloqApp')
                     $scope.common.isLoading = false;
                 });
 
-                $scope.sharedProjects = _.clone(response.data);
                 if ($route.current.pathParams.tab === 'sharedprojects') {
-                    $scope.pagination.sharedprojects.current = newPageNumber;
+                    $scope.sharedProjects = _.clone(response.data);
                     $location.search('page', newPageNumber);
+                    $scope.pagination.sharedprojects.current = newPageNumber;
                 }
 
             }).catch(function() {
@@ -354,10 +354,10 @@ angular.module('bitbloqApp')
                     $scope.common.isLoading = false;
                 });
 
-                $scope.userProjects = _.clone(response.data);
                 if ($route.current.pathParams.tab === 'myprojects') {
-                    $scope.pagination.myprojects.current = newPageNumber;
+                    $scope.userProjects = _.clone(response.data);
                     $location.search('page', newPageNumber);
+                    $scope.pagination.myprojects.current = newPageNumber;
                 }
 
             }).catch(function() {
@@ -390,10 +390,10 @@ angular.module('bitbloqApp')
                     $scope.trashCount = 0;
                 });
 
-                $scope.trashProjects = _.clone(response.data);
                 if ($route.current.pathParams.tab === 'trash') {
-                    $scope.pagination.mytrash.current = newPageNumber;
+                    $scope.trashProjects = _.clone(response.data);
                     $location.search('page', newPageNumber);
+                    $scope.pagination.mytrash.current = newPageNumber;
                 }
 
             }).catch(function() {
@@ -465,8 +465,8 @@ angular.module('bitbloqApp')
 
         function getSearchRequest(queryParams) {
             queryParams = queryParams || {
-                    'query': {}
-                };
+                'query': {}
+            };
             if ($scope.searchText.text) {
                 queryParams.query = {
                     name: {
