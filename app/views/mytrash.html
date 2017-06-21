@@ -24,8 +24,11 @@
     </div>
 </div>
 <ol class="projects__project-list" data-element="trash-list-project">
-    <div ng-show="trashProjects.length === 0" class="project-shared--empty">
+    <div ng-show="trashProjects.length === 0 && (searchText.text!=='' && searchText.text!==undefined)" class="project-shared--empty">
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
+    </div>
+    <div ng-show="trashProjects.length === 0  && (searchText.text==='' || searchText.text===undefined)" class="project-shared--empty">
+        <p class="empty__info">{{'projects_text_trashEmpty' | translate}}</p>
     </div>
     <li pagination-id="mytrash" dir-paginate="project in trashProjects | filter:userProjectsFilterFunction(userProjectsFilter) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.mytrash.current"
         total-items="{{trashCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-trash">
