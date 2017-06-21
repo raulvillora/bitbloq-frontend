@@ -20,7 +20,7 @@ angular.module('bitbloqApp')
             'sharedprojects': {
                 'current': 1
             },
-            'mytrash': {
+            'trash': {
                 'current': 1
             }
         };
@@ -393,7 +393,7 @@ angular.module('bitbloqApp')
                 if ($route.current.pathParams.tab === 'trash') {
                     $scope.trashProjects = _.clone(response.data);
                     $location.search('page', newPageNumber);
-                    $scope.pagination.mytrash.current = newPageNumber;
+                    $scope.pagination.trash.current = newPageNumber;
                 }
 
             }).catch(function() {
@@ -446,7 +446,7 @@ angular.module('bitbloqApp')
                     $scope.getMySharedProjectsPage($scope.pagination.sharedprojects.current);
                     break;
                 case 'trash':
-                    $scope.getMyTrashPage($scope.pagination.mytrash.current);
+                    $scope.getMyTrashPage($scope.pagination.trash.current);
                     break;
             }
         };
@@ -488,17 +488,17 @@ angular.module('bitbloqApp')
                     case 'myprojects':
                         $scope.pagination.myprojects.current = $routeParams.page;
                         $scope.pagination.sharedprojects.current = 1;
-                        $scope.pagination.mytrash.current = 1;
+                        $scope.pagination.trash.current = 1;
                         break;
                     case 'sharedprojects':
                         $scope.pagination.myprojects.current = 1;
                         $scope.pagination.sharedprojects.current = $routeParams.page;
-                        $scope.pagination.mytrash.current = 1;
+                        $scope.pagination.trash.current = 1;
                         break;
-                    case 'mytrash':
+                    case 'trash':
                         $scope.pagination.myprojects.current = 1;
                         $scope.pagination.sharedprojects.current = 1;
-                        $scope.pagination.mytrash.current = $routeParams.page;
+                        $scope.pagination.trash.current = $routeParams.page;
                         break;
                 }
             }
