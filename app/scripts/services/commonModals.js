@@ -760,7 +760,7 @@ angular.module('bitbloqApp')
                 confirmText: 'activate',
                 confirmAction: function() {
                     ngDialog.closeAll();
-                    chromeAppApi.installChromeApp(function(err) {
+                    /*chromeAppApi.installChromeApp(function(err) {
                         if (!err) {
                             callback(null);
                         } else {
@@ -771,11 +771,12 @@ angular.module('bitbloqApp')
                             });
                             callback(err);
                         }
-                    });
+                    });*/
                     common.user.chromeapp = true;
                     userApi.update({
                         chromeapp: true
                     });
+                    callback();
                 }
             });
             ngDialog.open({

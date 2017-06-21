@@ -277,7 +277,7 @@ angular.module('bitbloqApp')
                     if (thirdPartyRobots && thirdPartyRobots.mBot) {
                         robotActivated = true;
                     }
-                } else if ($scope.currentProject.code.search('<BitbloqMBotRanger.h>') > -1 && $scope.currentProject.code.search('<BitbloqMStarter.h>') > -1) {
+                } else if ($scope.currentProject.code.search('<BitbloqMStarter.h>') > -1) {
                     robotActivated = false;
 
                     if (thirdPartyRobots && thirdPartyRobots.starterKit) {
