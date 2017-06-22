@@ -160,7 +160,7 @@
             </div>
         </div>
     </li>
-    <div class="projects__paginator">
+    <div ng-class="{'projects-disable': projectsDisable}" class="projects__paginator">
         <dir-pagination-controls pagination-id="myprojects" on-page-change="getMyProjectsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </ol>

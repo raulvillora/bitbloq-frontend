@@ -88,7 +88,7 @@
             </div>
         </div>
     </li>
-    <div id="shared__paginator" class="projects__paginator">
+    <div id="shared__paginator" class="projects__paginator" ng-class="{'projects-disable': projectsDisable}" >
         <dir-pagination-controls pagination-id="shared" on-page-change="getMySharedProjectsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </ol>

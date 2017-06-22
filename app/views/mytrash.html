@@ -84,7 +84,7 @@
             </div>
         </div>
     </li>
-    <div class="projects__paginator">
+    <div class="projects__paginator" ng-class="{'projects-disable': projectsDisable}">
         <dir-pagination-controls pagination-id="mytrash" on-page-change="getMyTrashPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </ol>
