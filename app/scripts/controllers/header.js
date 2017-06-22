@@ -22,7 +22,6 @@ angular.module('bitbloqApp')
         $scope.commonModals = commonModals;
         $scope.showHeader = false;
         $scope.common.session.save = false;
-        $scope.enableCenterMode = envData.config.enableCenterMode;
 
         $scope.activateCenterMode = function() {
             function tryCenter() {
