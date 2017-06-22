@@ -18,6 +18,9 @@
         input {
             line-height: 30px;
         }
+        button{
+          margin-right: 10px;
+        }
 
         &:last-child {
             float: right;
@@ -561,4 +564,8 @@
 
 .projects-disable{
   pointer-events: none;
+}
+
+.prueba > input{
+  display: none;
 }

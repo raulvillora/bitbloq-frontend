@@ -460,6 +460,68 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        exports.uploadProjects = function(e, properties) {
+            var defered = $q.defer(),
+                files = e,
+                fileSize,
+                img;
+            _.forEach(files, function(file) {
+                if (file.name.match(/\.(bitbloq)$/g) || file.name.match(/\.(json)$/g)) {
+                    fileSize = file.size;
+                    console.log('correcto');
+                    if (properties.without && file.type.match(properties.without)) {
+                        defered.reject({
+                            error: 'no-image'
+                        });
+                    } else {
+                        if (fileSize > 1000000) {
+                            defered.reject({
+                                error: 'heavy'
+                            });
+                        } else {
+                            var reader = new FileReader();
+
+                            reader.onload = function() {
+
+                                var blob = new Blob([reader.result], {
+                                    type: file.type
+                                });
+                                var urlCreator = window.URL || window.webkitURL;
+                                img = new Image();
+                                img.src = urlCreator.createObjectURL(blob);
+                                img.onload = function() {
+                                    // access image size here
+                                    if ((properties.minWidth && properties.minHeight) && (this.width < properties.minWidth || this.height < properties.minHeight)) {
+                                        defered.reject({
+                                            error: 'small'
+                                        });
+                                    } else {
+                                        if (properties.containerDest) {
+                                            var dest = document.getElementById(properties.containerDest);
+                                            $(dest)[0].src = img.src;
+                                        }
+                                        defered.resolve({
+                                            blob: blob,
+                                            img: img,
+                                            file: file
+                                        });
+                                    }
+                                };
+                            };
+                            reader.readAsArrayBuffer(file);
+                        }
+                    }
+                } else {
+                    console.log('incorrecto');
+                    defered.reject({
+                        error: 'no-image'
+                    });
+                }
+            });
+
+            return defered.promise;
+        };
+
         /* jshint ignore:start */
 
         exports.prettyCode = function(code) {
