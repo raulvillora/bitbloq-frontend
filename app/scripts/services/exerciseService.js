@@ -644,6 +644,7 @@ angular.module('bitbloqApp')
         function _saveExercise() {
             var defered = $q.defer();
             exports.completedExercise();
+            exports.exercise.name = exports.exercise.name ||'';
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
                     var newMark = _.join(exports.exercise.newMark, '.');
