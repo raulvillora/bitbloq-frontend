@@ -67,7 +67,7 @@
             <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
                 <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
                     <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
-                        <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name}}</h3>
+                        <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name || common.translate('new-project')}}</h3>
                     </a>
 
                     <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>

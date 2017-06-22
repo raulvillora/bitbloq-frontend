@@ -440,10 +440,10 @@ angular.module('bitbloqApp')
                         }
                     });
                 }).error(function() {
-                    _.extend(modalOptions, {
-                        shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
-                    });
+                _.extend(modalOptions, {
+                    shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
                 });
+            });
 
             shareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
@@ -455,16 +455,11 @@ angular.module('bitbloqApp')
         exports.clone = function(project, openInTab, type) {
             type = type || 'project';
             var modalTitle,
-                defaultTitle,
                 mainText,
                 currentApi,
                 modalOptions = $rootScope.$new(),
                 defered = $q.defer(),
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
-
-            if (!project.name) {
-                project.name = common.translate(defaultTitle);
-            }
 
             function confirmAction(newName) {
                 alertsService.add({
@@ -492,14 +487,13 @@ angular.module('bitbloqApp')
             if (type === 'project') {
                 currentApi = projectApi;
                 modalTitle = 'modal-change-project-name-title';
-                defaultTitle = 'new-project';
                 mainText = 'modal-change-project-name-maintext';
             } else {
                 currentApi = exerciseApi;
                 modalTitle = 'centerMode_modal_cloneExercise-title';
-                defaultTitle = 'new-exercise';
                 mainText = 'centerMode_modal_cloneExercise-maintext';
             }
+            //placeholder="{{'infotab-project-name' | translate}}"
 
             _.extend(modalOptions, {
                 title: modalTitle,
@@ -535,7 +529,6 @@ angular.module('bitbloqApp')
         exports.rename = function(project, type) {
             type = type || 'project';
             var modalTitle,
-                defaultTitle,
                 mainText,
                 renameModal,
                 defered = $q.defer(),
@@ -543,18 +536,16 @@ angular.module('bitbloqApp')
                 modalOptions = $rootScope.$new();
 
             function confirmAction() {
-                project.name = modalOptions.project.name || $translate.instant(defaultTitle);
+                project.name = modalOptions.input.value || '';
                 renameModal.close();
                 defered.resolve();
             }
 
             if (type === 'project') {
                 modalTitle = 'modal-change-project-name-title';
-                defaultTitle = 'new-project';
                 mainText = 'modal-change-project-name-maintext';
             } else {
                 modalTitle = 'centerMode_modal_renameExercise-title';
-                defaultTitle = 'new-exercise';
                 mainText = 'centerMode_modal_renameExercise-maintext';
             }
 
@@ -563,17 +554,18 @@ angular.module('bitbloqApp')
                 modalButtons: true,
                 confirmButton: 'save',
                 rejectButton: 'cancel',
-                changeName: true,
                 modalInput: true,
                 confirmAction: confirmAction,
                 contentTemplate: '/views/modals/input.html',
                 mainText: mainText,
-                project: {
-                    name: currentProjectName
+                input: {
+                    id: 'projectCloneName',
+                    name: 'projectCloneName',
+                    placeholder: mainText,
+                    value: currentProjectName
                 },
                 condition: function() {
-                    /* jshint validthis: true */
-                    return !!this.$parent.project.name;
+                    return !!modalOptions.input.value;
                 }
             });
 
@@ -761,17 +753,17 @@ angular.module('bitbloqApp')
                 confirmAction: function() {
                     ngDialog.closeAll();
                     /*chromeAppApi.installChromeApp(function(err) {
-                        if (!err) {
-                            callback(null);
-                        } else {
-                            alertsService.add({
-                                text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                                id: 'chromeapp',
-                                type: 'error'
-                            });
-                            callback(err);
-                        }
-                    });*/
+                     if (!err) {
+                     callback(null);
+                     } else {
+                     alertsService.add({
+                     text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
+                     id: 'chromeapp',
+                     type: 'error'
+                     });
+                     callback(err);
+                     }
+                     });*/
                     common.user.chromeapp = true;
                     userApi.update({
                         chromeapp: true

@@ -9,8 +9,9 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
-        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
+                                        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
+                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
+    {
 
         var exports = {},
             thereAreWatchers = false,
@@ -260,7 +261,7 @@ angular.module('bitbloqApp')
         exports.getDefaultProject = function(code) {
             var project = {
                 creator: '',
-                name: common.translate('new-project'),
+                name: '',
                 description: '',
                 userTags: [],
                 hardwareTags: [],
@@ -554,9 +555,8 @@ angular.module('bitbloqApp')
         function _saveProject() {
             var defered = $q.defer();
             exports.completedProject();
+            exports.project.name = exports.project.name || '';
             if (exports.projectHasChanged() || exports.tempImage.file) {
-
-                exports.project.name = exports.project.name || common.translate('new-project');
 
                 $log.debug('Auto saving project...');
 
@@ -699,7 +699,6 @@ angular.module('bitbloqApp')
                 thereAreWatchers = true;
                 nameWatcher = scope.$watch('project.name', function(newVal, oldVal) {
                     if (newVal !== oldVal) {
-                        exports.project.name = exports.project.name || common.translate('new-project');
                         exports.startAutosave();
                     }
                 });

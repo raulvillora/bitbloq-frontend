@@ -401,7 +401,7 @@ angular.module('bitbloqApp')
         exports.getCode = function() {
             var code;
             _updateHardwareSchema();
-            var wirelessComponents = _getWirelessConnectionComponents ();
+            var wirelessComponents = _getWirelessConnectionComponents();
             if (wirelessComponents.length > 0) {
                 _includeComponents(wirelessComponents);
             }
@@ -421,7 +421,7 @@ angular.module('bitbloqApp')
         exports.getDefaultExercise = function() {
             var exercise = {
                 creator: '',
-                name: common.translate('new-exercise'),
+                name: '',
                 description: '',
                 hardwareTags: [],
                 defaultTheme: 'infotab_option_colorTheme',
@@ -618,11 +618,11 @@ angular.module('bitbloqApp')
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(exercise), 'application/json');
         }
 
-        function _getWirelessConnectionComponents (){
+        function _getWirelessConnectionComponents() {
             var wirelessComponentArray = [];
-            _.forEach(exports.componentsArray, function(component){
+            _.forEach(exports.componentsArray, function(component) {
                 var wirelessComponent = _.filter(component, {wirelessConnection: true});
-                if(wirelessComponent.length > 0){
+                if (wirelessComponent.length > 0) {
                     wirelessComponentArray.push(wirelessComponent);
                 }
             });
@@ -630,7 +630,7 @@ angular.module('bitbloqApp')
         }
 
         function _includeComponents(components) {
-            _.forEach(components, function(component){
+            _.forEach(components, function(component) {
                 exports.project.hardware.components.push(component);
             });
         }
@@ -666,9 +666,6 @@ angular.module('bitbloqApp')
                 }
             } else {
                 if (exports.exerciseHasChanged() || exports.tempImage.file) {
-
-                    exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
-
                     $log.debug('Auto saving exercise...');
 
                     if (exports.tempImage.file && !exports.tempImage.generate) {
@@ -677,7 +674,8 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
@@ -847,7 +845,6 @@ angular.module('bitbloqApp')
         exports.addWatchers = function() {
             scope.$watch('exercise.name', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
                     exports.startAutosave();
                 }
             });
