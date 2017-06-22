@@ -30,9 +30,9 @@
                         </svg>
                     </div>
                 </div>
-                <div class="group__content" ng-show="expandedItem[group._id]" ng-init="group.calendar={}">
+                <div class="group__content" ng-show="expandedItem[group._id]" ng-init="group.calendar={}" ng-click="group.selected=group.selected?group.selected:(!!group.calendar.from.date || !!group.calendar.from.time  || !!group.calendar.to.date || !!group.calendar.to.time)">
                     <span class="checkbox" ng-init="group.withoutDate=(oldGroups[group._id]&&!oldGroups[group._id][0].endDate)">
-                        <input type="checkbox" name="date" id="{{'withoutDate' + group._id}}" ng-model="group.withoutDate"/>
+                        <input type="checkbox" name="date" id="{{'withoutDate' + group._id}}" ng-model="group.withoutDate" ng-click="group.selected=true"/>
                         <label class="without-date" for="{{'withoutDate' + group._id}}">{{'centerMode_exerciseWithoutDate' | translate}}</label>
                     </span>
                     <div ng-show="!group.withoutDate">
