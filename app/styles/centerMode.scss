@@ -35,13 +35,13 @@
         padding: 0 30px;
     }
 
-    .tabs-layout__content .tab{
-      padding: 0 30px;
-      position: relative;
+    .tabs-layout__content .tab {
+        padding: 0 30px;
+        position: relative;
     }
 
-    .center-mode__table{
-      margin-top: 15px;
+    .center-mode__table {
+        margin-top: 15px;
     }
     .group__header {
         padding: 20px 30px;
@@ -115,7 +115,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            &.block__item__short{
+            &.block__item__short {
                 max-width: 70%;
             }
         }
@@ -164,6 +164,7 @@
 
     .center-mode--empty__info {
         color: #676a71;
+        margin-bottom: 35px;
     }
 
     &[disabled] {
