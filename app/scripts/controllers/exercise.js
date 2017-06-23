@@ -10,8 +10,9 @@
 
 angular.module('bitbloqApp')
     .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-        $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi) {
+                                         $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+                                         exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi)
+    {
 
         /*************************************************
          Exercise settings
@@ -90,6 +91,7 @@ angular.module('bitbloqApp')
             }
             return result;
         }
+
         $scope.showCompileWarningByComponent = function(board, component, pin) {
             var result = false;
             if (itsABoardWithCompileWarning(board)) {
@@ -108,22 +110,24 @@ angular.module('bitbloqApp')
                 parent = $rootScope,
                 modalOptions = parent.$new(),
                 confirmAction = function() {
-                    exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function() {
-                        alertsService.add({
-                            text: 'centerMode__alert__sendTask-ok',
-                            id: 'publishing-project',
-                            type: 'info',
-                            time: 5000
-                        });
-                        $scope.currentProject.status = 'delivered';
-                    }).catch(function() {
-                        alertsService.add({
-                            text: 'centerMode__alert__sendTask-error',
-                            id: 'publishing-project',
-                            type: 'warning'
+                    dialog.close();
+                    exerciseService.getSavePromise().then(function() {
+                        exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function() {
+                            alertsService.add({
+                                text: 'centerMode__alert__sendTask-ok',
+                                id: 'publishing-project',
+                                type: 'info',
+                                time: 5000
+                            });
+                            $scope.currentProject.status = 'delivered';
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode__alert__sendTask-error',
+                                id: 'publishing-project',
+                                type: 'warning'
+                            });
                         });
                     });
-                    dialog.close();
                 };
 
             _.extend(modalOptions, {
@@ -388,17 +392,17 @@ angular.module('bitbloqApp')
          UNDO / REDO
          *************************************************/
 
-        //Stores one step in the history
+            //Stores one step in the history
         $scope.saveBloqStep = function(step) {
             //$log.debug('Guardamos Estado de Bloqs');
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
-                setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
-                loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
-                freeBloqs: freeBloqs
-            };
+                    vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
+                    setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
+                    loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
+                    freeBloqs: freeBloqs
+                };
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
@@ -472,7 +476,8 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
+            {
 
                 event.preventDefault();
             }
