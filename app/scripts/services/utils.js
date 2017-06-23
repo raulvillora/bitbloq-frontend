@@ -460,62 +460,60 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.uploadProjects = function(e, properties) {
+        exports.uploadProjects = function(e) {
             var defered = $q.defer(),
                 files = e,
                 fileSize,
-                img;
-            _.forEach(files, function(file) {
+                filesParsed = [],
+                filesCounter = 0;
+
+            _.forEach(files, function(file, index) {
                 if (file.name.match(/\.(bitbloq)$/g) || file.name.match(/\.(json)$/g)) {
                     fileSize = file.size;
-                    console.log('correcto');
-                    if (properties.without && file.type.match(properties.without)) {
-                        defered.reject({
-                            error: 'no-image'
-                        });
-                    } else {
-                        if (fileSize > 1000000) {
-                            defered.reject({
-                                error: 'heavy'
-                            });
-                        } else {
-                            var reader = new FileReader();
-
-                            reader.onload = function() {
-
-                                var blob = new Blob([reader.result], {
-                                    type: file.type
-                                });
-                                var urlCreator = window.URL || window.webkitURL;
-                                img = new Image();
-                                img.src = urlCreator.createObjectURL(blob);
-                                img.onload = function() {
-                                    // access image size here
-                                    if ((properties.minWidth && properties.minHeight) && (this.width < properties.minWidth || this.height < properties.minHeight)) {
-                                        defered.reject({
-                                            error: 'small'
-                                        });
-                                    } else {
-                                        if (properties.containerDest) {
-                                            var dest = document.getElementById(properties.containerDest);
-                                            $(dest)[0].src = img.src;
-                                        }
-                                        defered.resolve({
-                                            blob: blob,
-                                            img: img,
-                                            file: file
-                                        });
-                                    }
-                                };
-                            };
-                            reader.readAsArrayBuffer(file);
+                    if (fileSize > 1000000) {
+                        console.log('heavy');
+                        filesParsed[index] = {
+                            'name': file.name,
+                            'reject': 'heavy'
+                        };
+                        if (index === files.length - 1) {
+                            defered.resolve(filesParsed);
                         }
+                    } else {
+                        var reader = new FileReader();
+                        //On load call
+                        reader.onloadend = function(event) {
+                            var target = event.target,
+                                fileParsed;
+                            if (target.readyState === FileReader.DONE) {
+                                try {
+                                    fileParsed = JSON.parse(target.result);
+                                    filesParsed[index] = fileParsed;
+                                    filesCounter++;
+                                } catch (e) {
+                                    filesParsed[index] = {
+                                        'name': file.name,
+                                        'reject': 'parse'
+                                    };
+                                }
+                                if (index === files.length - 1) {
+                                    defered.resolve(filesParsed);
+                                }
+                            }
+                        };
+                        reader.readAsText(file);
+
                     }
+
                 } else {
-                    console.log('incorrecto');
-                    defered.reject({
-                        error: 'no-image'
-                    });
+                    console.log('wrong extension');
+                    filesParsed[index] = {
+                        'name': file.name,
+                        'reject': 'extension'
+                    };
+                    if (index === files.length - 1) {
+                        defered.resolve(filesParsed);
+                    }
                 }
             });
 

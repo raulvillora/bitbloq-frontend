@@ -1025,5 +1025,28 @@ angular.module('bitbloqApp')
                 scope: modalScope
             });
         };
+
+        exports.modalExportProjectsError = function(errorProjects) {
+            var noShareModal, confirmAction = function() {
+                    noShareModal.close();
+                },
+                modalScope = $rootScope.$new();
+
+            _.extend(modalScope, {
+                title: 'import-projects',
+                modalButtons: true,
+                confirmButton: 'modal__understood-button',
+                confirmAction: confirmAction,
+                contentTemplate: '/views/modals/importErrors.html',
+                errorProjects: errorProjects
+            });
+
+            noShareModal = ngDialog.open({
+                template: '/views/modals/modal.html',
+                className: 'modal--container modal--share-no-users',
+                scope: modalScope
+            });
+        };
+
         return exports;
     });

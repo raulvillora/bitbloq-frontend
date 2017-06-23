@@ -20,13 +20,12 @@
                 <use xlink:href="#download"></use>
             </svg>
         </button>
-        <input id="file-input" onchange="angular.element(this).scope().uploadProjects(this.files)" type="file" style="display:none;" multiple/>
-        <button onclick="document.getElementById('file-input').click()" ng-class="{'btn btn--projects--actions grid--right grid--left':true}" data-tooltips="true" data-tooltip-position="right" data-tooltip="{{'upload-projects' | translate}}">
+        <input type="file" id="file-input" accept=".json, .bitbloq" class="hide" name="uploadProject"  onchange="angular.element(this).scope().uploadProjects(this.files)" data-element="input-upload-files" multiple/>
+        <button ng-if="common.user.properties.hasImportProjectsEnabled" onclick="document.getElementById('file-input').click()" class="btn btn--projects--actions btn--projects--upload grid--right grid--left"  data-tooltips="true" data-tooltip-position="right" data-tooltip="{{'upload-projects' | translate}}">
             <svg class="svg-icon">
-                <use xlink:href="#download"></use>
+                <use xlink:href="#upload"></use>
             </svg>
         </button>
-
 
     </div>
     <div class="projects--action">

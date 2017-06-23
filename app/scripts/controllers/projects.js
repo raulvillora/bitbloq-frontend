@@ -215,19 +215,31 @@ angular.module('bitbloqApp')
         };
 
         $scope.uploadProjects = function(e) {
-            var properties = {
-                minWidth: 600,
-                minHeight: 400,
-                containerDest: 'projectImage',
-                without: /image.gif/
-            };
-            utils.uploadProjects(e, properties).then(function() {
-                /*  currentProjectService.tempImage.blob = response.blob;
-                  currentProjectService.tempImage.file = response.file;
-                  currentProjectService.tempImage.img = response.img;
-                  currentProjectService.tempImage.generate = false;
-                  $scope.currentProject.image = 'custom';
-                  currentProjectService.startAutosave();*/
+            var validProjects = [],
+                rejectedProjects = [];
+            utils.uploadProjects(e).then(function(projects) {
+                _.forEach(projects, function(project) {
+                    if (!project.reject) {
+                        validProjects.push(project);
+                    } else {
+                        rejectedProjects.push(project);
+                    }
+                });
+
+                if (validProjects.length > 0) {
+                    projectApi.save(validProjects).then(function(response) {
+                        $scope.refreshProjects();
+                        rejectedProjects = rejectedProjects.concat(response.data.notSaved);
+                        if (rejectedProjects.length > 0) {
+                            commonModals.modalExportProjectsError(rejectedProjects);
+                        }
+                    });
+                } else {
+                    if (rejectedProjects.length > 0) {
+                        commonModals.modalExportProjectsError(rejectedProjects);
+                    }
+                }
+                angular.element('#file-input')[0].value = '';
             }).catch(function(response) {
                 switch (response.error) {
                     case 'heavy':
