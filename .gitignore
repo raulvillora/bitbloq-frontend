@@ -26,3 +26,7 @@ app/scripts/config.js
 .gitconfig
 gruntconfig.json
 backupsDB
+
+
+bower-template.json
+package-template.json
