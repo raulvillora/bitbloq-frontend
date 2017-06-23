@@ -105,7 +105,7 @@
                                 </svg>
                                 {{'button_delete_in_group' | translate}}
                             </li>
-                            <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="deleteExercise(exercise)">
+                            <li ng-if="common.userRole!=='headmaster'" class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="deleteExercise(exercise)">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#delete"></use>
                                 </svg>
