@@ -460,6 +460,66 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
+        exports.uploadProjects = function(e) {
+            var defered = $q.defer(),
+                files = e,
+                fileSize,
+                filesParsed = [],
+                filesCounter = 0;
+
+            _.forEach(files, function(file, index) {
+                if (file.name.match(/\.(bitbloq)$/g) || file.name.match(/\.(json)$/g)) {
+                    fileSize = file.size;
+                    if (fileSize > 1000000) {
+                        console.log('heavy');
+                        filesParsed[index] = {
+                            'name': file.name,
+                            'reject': 'heavy'
+                        };
+                        if (index === files.length - 1) {
+                            defered.resolve(filesParsed);
+                        }
+                    } else {
+                        var reader = new FileReader();
+                        //On load call
+                        reader.onloadend = function(event) {
+                            var target = event.target,
+                                fileParsed;
+                            if (target.readyState === FileReader.DONE) {
+                                try {
+                                    fileParsed = JSON.parse(target.result);
+                                    filesParsed[index] = fileParsed;
+                                    filesCounter++;
+                                } catch (e) {
+                                    filesParsed[index] = {
+                                        'name': file.name,
+                                        'reject': 'parse'
+                                    };
+                                }
+                                if (index === files.length - 1) {
+                                    defered.resolve(filesParsed);
+                                }
+                            }
+                        };
+                        reader.readAsText(file);
+
+                    }
+
+                } else {
+                    console.log('wrong extension');
+                    filesParsed[index] = {
+                        'name': file.name,
+                        'reject': 'extension'
+                    };
+                    if (index === files.length - 1) {
+                        defered.resolve(filesParsed);
+                    }
+                }
+            });
+
+            return defered.promise;
+        };
+
         /* jshint ignore:start */
 
         exports.prettyCode = function(code) {

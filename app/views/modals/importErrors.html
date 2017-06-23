@@ -1,0 +1,7 @@
+<p>{{ 'modalImport_text_importErrorIntro' | translate }}</p>
+<div class="import-modal__error-files">
+    <ul class="files">
+        <li ng-repeat="project in errorProjects">{{project.name}}</li>
+    </ul>
+</div>
+<p>{{ 'modalImport_text_importErrorInfo' | translate }}</p>

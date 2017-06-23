@@ -215,6 +215,35 @@ angular.module('bitbloqApp')
 
         };
 
+        $scope.uploadProjects = function(e) {
+            var validProjects = [],
+                rejectedProjects = [];
+            utils.uploadProjects(e).then(function(projects) {
+                _.forEach(projects, function(project) {
+                    if (!project.reject) {
+                        validProjects.push(project);
+                    } else {
+                        rejectedProjects.push(project);
+                    }
+                });
+
+                if (validProjects.length > 0) {
+                    projectApi.save(validProjects).then(function(response) {
+                        $scope.refreshProjects();
+                        rejectedProjects = rejectedProjects.concat(response.data.notSaved);
+                        if (rejectedProjects.length > 0) {
+                            commonModals.modalExportProjectsError(rejectedProjects);
+                        }
+                    });
+                } else {
+                    if (rejectedProjects.length > 0) {
+                        commonModals.modalExportProjectsError(rejectedProjects);
+                    }
+                }
+                angular.element('#file-input')[0].value = '';
+            });
+        };
+
         $scope.refreshProjects = function(refresh) {
             $scope.common.isLoading = refresh;
             $scope.common.itsUserLoaded().then(function() {

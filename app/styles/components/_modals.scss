@@ -75,11 +75,12 @@
             margin-top: 10px;
             margin-bottom: 20px;
         }
-        .modal--title{
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          padding-right: 10px;
+
+        .modal--title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 10px;
         }
     }
 
@@ -282,20 +283,24 @@
             width: 835px;
             height: 628px;
         }
-        .modal--buttons{
-          padding-top: 20px;
+
+        .modal--buttons {
+            padding-top: 20px;
         }
-        .modal__footer{
-          position: absolute;
-          bottom: 0;
+
+        .modal__footer {
+            position: absolute;
+            bottom: 0;
         }
-        .ngdialog-close{
-          display: none;
+
+        .ngdialog-close {
+            display: none;
         }
-        .modal__header h1{
-          border-right: 0px;
+
+        .modal__header h1 {
+            border-right: 0;
         }
-      }
+    }
 
     &.modal--download-web2board {
         .ngdialog-content {
@@ -562,6 +567,15 @@
         }
     }
 
+    .import-modal__error-files {
+        background-color: #e2e2e2;
+        padding: 20px 48px;
+
+        .files {
+            list-style: initial;
+        }
+    }
+
     .share-modal__emails-no-user {
         background-color: #e2e2e2;
         padding: 20px 30px;
@@ -609,7 +623,7 @@
 }
 
 .modal--delete-group {
-    p:not(:first-child):not(:last-child){
+    p:not(:first-child):not(:last-child) {
         margin: 15px 0;
     }
 }
