@@ -18,6 +18,21 @@
     }
 }
 
+.center-mode__table__menu {
+    .table__block__item--parent {
+        width: 231px;
+        height: 296px;
+        position: absolute;
+        right: 0;
+        top: 16px;
+    }
+    .table__block__item--menu {
+        position: relative;
+        top: 9px;
+        left: 4px;
+    }
+}
+
 .table__block__exercise {
     height: 540px;
 
