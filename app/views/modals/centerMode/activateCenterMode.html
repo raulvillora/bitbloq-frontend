@@ -14,17 +14,17 @@
     <form ng-if="type==='form'" name="formActivateCenter" class="input-list row" novalidate>
         <div class="row">
             <label for="centerName" class="col-vsmall-4">{{'centerMode_modal_createCenter-centerName' | translate }}</label>
-            <input type="text" id="centerName" name="centerName" class="col-vsmall-8" ng-class="{'input--error': errors && !center.name}" data-ng-model="center.name" autofocus data-element="modals-center-name">
+            <input type="text" id="centerName" name="centerName" class="col-vsmall-8" ng-class="{'input--error': errors && !centerModeService.nter.name}" data-ng-model="center.name" autofocus data-element="modals-center-name">
         </div>
         <div class="row">
             <label for="centerLocation" class="col-vsmall-4">{{'centerMode_modal_createCenter-location' | translate }}</label>
-            <input type="text" id="centerLocation" name="centerLocation" class="col-vsmall-8" ng-class="{'input--error': errors && !center.location}" data-ng-model="center.location" autofocus data-element="modals-center-location">
+            <input type="text" id="centerLocation" name="centerLocation" class="col-vsmall-8" ng-class="{'input--error': errors && !centerModeService.center.location}" data-ng-model="center.location" autofocus data-element="modals-center-location">
         </div>
         <div class="row">
             <label for="centerTelephone" class="col-vsmall-4">{{'centerMode_modal_createCenter-telephone' | translate }}</label>
-            <input type="number" id="centerTelephone" name="centerTelephone" class="col-vsmall-8" ng-class="{'input--error': errors && !center.telephone}" data-ng-model="center.telephone" autofocus data-element="modals-center-telephone">
+            <input type="number" id="centerTelephone" name="centerTelephone" class="col-vsmall-8" ng-class="{'input--error': errors && !centerModeService.center.telephone}" data-ng-model="center.telephone" autofocus data-element="modals-center-telephone">
         </div>
-        <span class="row form--error" ng-show="errors && (!center.name || !center.location || !center.telephone)">
+        <span class="row form--error" ng-show="errors && (!centerModeService.center.name || !centerModeService.center.location || !centerModeService.center.telephone)">
             <small class="col-vsmall-push-4">{{ 'centerMode_modal_createCenter-error' | translate }}</small>
         </span>
     </form>

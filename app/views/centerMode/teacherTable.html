@@ -1,6 +1,10 @@
-<div class="dropdown-group table__added clearfix">
+<div class="dropdown-group table__added table--header__teachers clearfix">
     <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="sortArray[0] | translate" data-element="my_center_dropdown_order"></common-dropdown>
+    <button ng-if="common.urlType==='center'" class="btn btn--primary btn--small btn--newteacher" ng-click="newTeacher()" data-element="centerMode_button_newTeacher">
+        <span>{{'centerMode_button_newTeacher' | translate}}</span>
+    </button>
 </div>
+
 <div class="center-mode__table">
     <div class="center-mode__table-title row">
         <div class="col-vsmall-7">

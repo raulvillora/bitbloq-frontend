@@ -1,0 +1,33 @@
+<div class="center__content robots__content">
+    <form class="form--account" id="form--account">
+        <div class="first-column">
+            <div class="form--section">
+                <fieldset>
+                    <legend>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#robot"></use>
+                        </svg>
+                        <span>{{ 'robots-with-license' | translate }}</span>
+                    </legend>
+                    <!-- My Hardware -->
+                    <ol class="account__hardware-list" data-element="account-hardware-list">
+                        <li data-ng-repeat="robot in activableRobots" ng-init="sectionIndex = $index" class="robots-list__item" data-element="projects-project">
+                            <div class="hardware--item">
+                                <div class="hardware__image__container" data-element="account-hardware-elem">
+                                    <img ng-src="{{'../images/robots/' + robot.image + '.png'}}" />
+                                </div>
+                                <p class="hardware__image__container_name">{{robot.uuid | translate}}</p>
+                            </div>
+                            <a ng-href="{{robot.link}}">{{'more-info' | translate}}</a>
+                            <button class="btn btn--primary btn--small btn--activate" ng-disabled="centerModeService.center.activatedRobots.indexOf(robot.uuid) > -1" ng-click="centerActivateRobot(robot.uuid)">
+                                <span>{{centerModeService.center.activatedRobots.indexOf(robot.uuid) > -1 ? 'activated' :'activate' | translate}}</span>
+                            </button>
+
+                        </li>
+                    </ol>
+                </fieldset>
+
+            </div>
+        </div>
+    </form>
+</div>

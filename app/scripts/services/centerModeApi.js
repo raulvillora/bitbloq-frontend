@@ -7,6 +7,7 @@ angular
             addTeachers: addTeachers,
             activateStudentMode: activateStudentMode,
             createCenter: createCenter,
+            updateCenter: updateCenter,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
             deleteStudent: deleteStudent,
@@ -48,6 +49,14 @@ angular
         function createCenter(center) {
             return $http({
                 method: 'POST',
+                url: envData.config.centerModeUrl + 'center',
+                data: center
+            });
+        }
+
+        function updateCenter(center) {
+            return $http({
+                method: 'PUT',
                 url: envData.config.centerModeUrl + 'center',
                 data: center
             });

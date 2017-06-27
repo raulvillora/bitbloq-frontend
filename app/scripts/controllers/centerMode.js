@@ -8,8 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils) {
-            $scope.center = {}; // when user is headmaster
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout) {
             $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
@@ -40,6 +39,23 @@
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
             $scope.moment = moment;
+            $scope.selectedTab = 'teachers';
+            $scope.activableRobots = [{
+                    'uuid': 'mBot',
+                    'image': 'mbot',
+                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+                },
+                {
+                    'uuid': 'mRanger',
+                    'image': 'rangerlandraider',
+                    'link': 'https://www.makeblock.es/productos/mbot_ranger/'
+                },
+                {
+                    'uuid': 'starterKit',
+                    'image': 'startertank',
+                    'link': 'https://www.makeblock.es/productos/robot_starter_kit/'
+                }
+            ];
 
             var currentModal;
 
@@ -48,7 +64,7 @@
             };
 
             $scope.editGroup = function() {
-                exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
+                exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, centerModeService.center._id)
                     .then(function() {
                         _getTasksByExercise($routeParams.id);
                         _getGroups('teacher', $routeParams.id);
@@ -247,7 +263,7 @@
 
             $scope.deleteTeacher = function(teacher) {
                 var confirmAction = function() {
-                        centerModeApi.deleteTeacher(teacher._id, $scope.center._id).then(function() {
+                        centerModeApi.deleteTeacher(teacher._id, centerModeService.center._id).then(function() {
                             _.remove($scope.teachers, teacher);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteTeacher',
@@ -407,8 +423,10 @@
 
             };
 
+            $scope.centerModeService = centerModeService;
+
             $scope.newGroup = function() {
-                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
+                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, centerModeService.center._id)
                     .then(function() {
                         _getGroups('teacher');
                     });
@@ -418,7 +436,7 @@
                 var confirmAction = function() {
                         var teachers = _.map(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
-                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function(response) {
+                            centerModeApi.addTeachers(teachers, centerModeService.center._id).then(function(response) {
                                 if (response.data.teachersNotAdded) {
                                     commonModals.noAddTeachers(response.data.teachersNotAdded, response.data.teachersAdded.length);
                                 }
@@ -510,13 +528,14 @@
 
             function _checkUrl() {
                 $scope.common.urlType = $routeParams.type;
+                checkWatchers();
                 switch ($scope.common.urlType) {
                     case 'center':
                         _getCenter();
                         break;
                     case 'center-teacher':
                     case 'teacher':
-                        $scope.center = {};
+                        centerModeService.setCenter();
                         _getTeacher($routeParams.id);
                         break;
                     case 'group':
@@ -527,7 +546,7 @@
                         }
                         break;
                     case 'student':
-                        $scope.center = {};
+                        centerModeService.setCenter();
                         _getGroups('student');
                         _getMyExercises();
                         break;
@@ -538,6 +557,54 @@
                         break;
                 }
             }
+
+            $scope.uploadImageTrigger = function(type) {
+                $timeout(function() {
+                    if (type === 'main') {
+                        $('.main-image--input').click();
+
+                    } else {
+                        $('.other-image--input').click();
+                    }
+                }, 0);
+            };
+
+            $scope.uploadImage = function(e) {
+                var properties = {
+                    minWidth: 100,
+                    minHeight: 100,
+                    containerDest: 'centerImage',
+                    without: /image.gif/
+                };
+                utils.uploadImage(e, properties).then(function(response) {
+                    $scope.tempAvatar = response.blob;
+                    //  $scope.saveProfile();
+                }).catch(function(response) {
+                    switch (response.error) {
+                        case 'heavy':
+                            alertsService.add({
+                                text: 'account-image-heavy-error',
+                                id: 'user-avatar',
+                                type: 'warning'
+                            });
+                            break;
+                        case 'small':
+                            alertsService.add({
+                                text: 'account-image-small-error',
+                                id: 'user-avatar',
+                                type: 'warning'
+                            });
+                            break;
+                        case 'no-image':
+                            alertsService.add({
+                                text: 'account-image-read-error',
+                                id: 'user-avatar',
+                                type: 'warning'
+                            });
+                            break;
+                    }
+                });
+            };
 
             function _closeGroupAction() {
                 $scope.classStateCheck = false;
@@ -561,8 +628,8 @@
 
             function _getCenter() {
                 return centerModeApi.getMyCenter().then(function(response) {
-                    $scope.center = response.data;
-                    _getTeachers($scope.center._id);
+                    centerModeService.setCenter(response.data);
+                    _getTeachers(centerModeService.center._id);
                 });
             }
 
@@ -603,7 +670,7 @@
                     if ($scope.teacher._id !== $scope.common.user._id) {
                         teacherId = $scope.teacher._id; // if user is student, it will be undefined
                     }
-                    centerModeApi.getGroups(role, teacherId, $scope.center._id).then(function(response) {
+                    centerModeApi.getGroups(role, teacherId, centerModeService.center._id).then(function(response) {
                         $scope.groups = response.data;
                         $scope.groupArray = $scope.groups;
                     });
@@ -681,8 +748,8 @@
                 if (teacherId) {
                     // user is headmaster
                     centerModeApi.getMyCenter().then(function(response) {
-                        $scope.center = response.data;
-                        centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
+                        centerModeService.setCenter(response.data);
+                        centerModeApi.getTeacher(teacherId, centerModeService.center._id).then(function(response) {
                             $scope.secondaryBreadcrumb = true;
                             $scope.teacher = _.extend($scope.teacher, response.data);
                             _getExercisesCount();
@@ -783,6 +850,25 @@
                 _getExercisesCount($scope.filterExercisesParams);
             };
 
+            function checkWatchers() {
+                if ($scope.selectedTab === 'info') {
+                    centerModeService.addWatchers();
+                } else {
+                    centerModeService.unBlindAllWatchers();
+                }
+            }
+
+            $scope.setTab = function(tab) {
+                $scope.selectedTab = tab;
+                checkWatchers();
+            };
+
+            $scope.centerActivateRobot = function(robot) {
+                commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
+                    centerModeService.setCenter(response.data);
+                });
+            };
+
             $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {
                 if (newValue !== oldValue && (oldValue || oldValue === '') || (!oldValue && newValue)) {
                     if (newValue || newValue === '') {
@@ -804,6 +890,7 @@
             $scope.$on('$destroy', function() {
                 $window.onfocus = null;
                 $document.off('click', clickDocumentHandler);
+                centerModeService.unBlindAllWatchers();
             });
         });
 })();

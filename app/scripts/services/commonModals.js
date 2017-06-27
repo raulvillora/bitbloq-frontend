@@ -440,10 +440,10 @@ angular.module('bitbloqApp')
                         }
                     });
                 }).error(function() {
-                _.extend(modalOptions, {
-                    shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
+                    _.extend(modalOptions, {
+                        shortUrl: $location.protocol() + '://' + $location.host() + '/#/project/' + project._id
+                    });
                 });
-            });
 
             shareModal = ngDialog.open({
                 template: '/views/modals/modal.html',
@@ -778,13 +778,14 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.activateRobot = function(robot) {
+        exports.activateRobot = function(robot, center) {
             var activateModal,
                 modalScope = $rootScope.$new(),
                 robotName = robot,
                 activationCode = {},
                 errorMessage = '',
-                defered = $q.defer();
+                defered = $q.defer(),
+                centerId = center;
 
             var confirmAction = function() {
                 var actCode = '';
@@ -792,7 +793,11 @@ angular.module('bitbloqApp')
                     actCode = actCode + value;
                 });
 
-                thirdPartyRobotsApi.exchangeCode(actCode, robot).then(function(res) {
+                if (centerId) {
+                    robot = robot + '-centermode';
+                }
+
+                thirdPartyRobotsApi.exchangeCode(actCode, robot, centerId).then(function(res) {
                     common.user.thirdPartyRobots = res.data;
                     activateModal.close();
                     alertsService.add({
@@ -801,7 +806,7 @@ angular.module('bitbloqApp')
                         type: 'ok',
                         time: 5000
                     });
-                    defered.resolve();
+                    defered.resolve(res);
                 }).catch(function(err) {
                     switch (err.status) {
                         case 404:
@@ -857,6 +862,7 @@ angular.module('bitbloqApp')
                 activationCode: activationCode,
                 rejectAction: rejectAction,
                 errorMessage: errorMessage,
+                centerId: centerId,
                 rejectButton: 'modal-button-cancel',
                 contentTemplate: '/views/modals/activateRobot.html'
             });

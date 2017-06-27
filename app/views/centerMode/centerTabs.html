@@ -1,0 +1,38 @@
+<div class="tabs-layout">
+    <aside class="tabs-layout__aside">
+        <h1 class="invisible">Menú de Centro</h1>
+        <ul class="tabs__header">
+            <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'teachers'}" ng-click="setTab('teachers');" data-element="account-settings-tab">
+                <svg class="svg-icon--aside--menu">
+                    <use xlink:href="#people"></use>
+                </svg>
+                <span class="menu__item__span">
+                    {{ 'centerMode_teacher' | translate }}
+                </span>
+            </li>
+            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'settings'}" data-element="account-user-tab" ng-click="setTab('settings');">
+                <svg class="svg-icon--aside--menu">
+                    <use xlink:href="#settings"></use>
+                </svg>
+                <span class="menu__item__span">
+                    {{'center-settings' | translate}}
+                </span>
+                </span>
+            </li>
+            <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'info'}" data-element="account-user-tab" ng-click="setTab('info');">
+                <svg class="svg-icon--aside--menu">
+                    <use xlink:href="#info"></use>
+                </svg>
+                <span class="menu__item__span">
+                    {{'info' | translate}}
+                </span>
+                </span>
+            </li>
+        </ul>
+    </aside>
+    <div class="tabs-layout__content">
+        <div class="tab teachers" ng-show="selectedTab === 'teachers'" ng-include="'views/centerMode/center.html'"></div>
+        <div class="tab settings" ng-show="selectedTab === 'settings'" ng-include="'views/centerMode/robots.html'"></div>
+        <div class="tab settings" ng-show="selectedTab === 'info'" ng-include="'views/centerMode/info.html'"></div>
+    </div>
+</div>
