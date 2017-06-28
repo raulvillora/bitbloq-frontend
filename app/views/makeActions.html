@@ -299,15 +299,15 @@
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-upload':currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated() ? 'robots-not-activated-upload' :'load' | translate }}" data-tooltips="true">
-        <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="upload();" data-ng-disabled="isWeb2BoardInProgress() || !common.user &&  currentProject.hardware.showRobotImage || (currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated())" data-walkthrough="upload">
+    <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-upload':(currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated() && (common.section === 'bloqsproject') || common.section === 'codeproject') ? 'robots-not-activated-upload' : currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-upload' :'load' | translate }}" data-tooltips="true">
+        <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="upload();" data-ng-disabled="isWeb2BoardInProgress() || !common.user && currentProject.hardware.showRobotImage || ( (common.section === 'bloqsproject' || common.section === 'codeproject') && currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated()) || ((common.section === 'exercise' || common.section === 'task') && currentProject.hardware.showRobotImage && !robotActivatedInCenter)" data-walkthrough="upload">
             <svg class="svg-icon">
                 <use xlink:href="#load"></use>
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-compile':  currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated() ? 'robots-not-activated-compile' :'verify' | translate }}" data-tooltips="true">
-        <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || !common.user && currentProject.hardware.showRobotImage || (currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated())">
+    <li class="nav__menu__item right" data-tooltip-position="bottom" data-tooltip="{{ (!common.user && currentProject.hardware.showRobotImage)?'robots-not-activated-guest-compile': (currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated() && (common.section === 'bloqsproject') || common.section === 'codeproject')? 'robots-not-activated-compile' : currentProject.hardware.showRobotImage && !robotActivatedInCenter ?  'robots-not-activated-center-compile': 'verify' | translate }}" data-tooltips="true">
+        <button class="nav__menu__btn btn" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || !common.user && currentProject.hardware.showRobotImage || ( (common.section === 'bloqsproject' || common.section === 'codeproject') && currentProject.hardware.showRobotImage && !currentProjectService.isRobotActivated()) || ((common.section === 'exercise' || common.section === 'task') && currentProject.hardware.showRobotImage && !robotActivatedInCenter)">
             <svg class="svg-icon">
                 <use xlink:href="#tick"></use>
             </svg>

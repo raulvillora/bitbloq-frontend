@@ -914,9 +914,13 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                 var showRobotImage = $scope.currentProject.hardware.showRobotImage;
                 if ($scope.common.user && showRobotImage) {
                     var thirdPartyRobots = $scope.common.user.thirdPartyRobots;
-                    if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
-                        $scope.currentProjectService.showActivation = true;
-                        $scope.currentProjectService.closeActivation = false;
+                    console.log($scope.common.section);
+                    if ($scope.common.section === 'bloqsproject') {
+                        if ($scope.common.user && !thirdPartyRobots || !thirdPartyRobots[$scope.robotsMap[showRobotImage].family] && showRobotImage) {
+                            console.log('entro aquii');
+                            $scope.currentProjectService.showActivation = true;
+                            $scope.currentProjectService.closeActivation = false;
+                        }
                     }
                 }
 

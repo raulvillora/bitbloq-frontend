@@ -63,11 +63,16 @@ angular.module('bitbloqApp')
             hardwareService.itsHardwareLoaded().then(function() {
                 robotsMap = exerciseService.getRobotsMap(hardwareService.hardware);
                 var robotsActivated = [];
-                _.forEach($scope.groups, function(group) {
-                    if (group.center.activatedRobots) {
-                        robotsActivated = robotsActivated.concat(group.center.activatedRobots);
-                    }
-                });
+
+                if ($scope.common.section === 'exercise') {
+                    _.forEach($scope.groups, function(group) {
+                        if (group.center.activatedRobots) {
+                            robotsActivated = robotsActivated.concat(group.center.activatedRobots);
+                        }
+                    });
+                } else {
+                    robotsActivated = exerciseService.exercise.group.center.activatedRobots;
+                }
 
                 if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
                     $scope.robotActivatedInCenter = true;
@@ -578,8 +583,11 @@ angular.module('bitbloqApp')
                 _canUpdate().then(function() {
                     _generateMark();
                 });
+
                 if ($scope.common.section === 'exercise') {
                     $scope.getGroups();
+                } else {
+                    $scope.isRobotActivatedInCenter();
                 }
                 $scope.currentProjectLoaded.resolve();
             }, function(error) {
