@@ -10,9 +10,8 @@
 
 angular.module('bitbloqApp')
     .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-                                         $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-                                         exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi)
-    {
+        $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi, hardwareService) {
 
         /*************************************************
          Exercise settings
@@ -39,6 +38,7 @@ angular.module('bitbloqApp')
         $scope.currentProject.userCanUpdate = false;
         $scope.currentProject.newMark = [];
         $scope.urlGetImage = $scope.common.urlImage + 'exercise/';
+        $scope.robotActivatedInCenter = false;
 
         exerciseService.saveStatus = 0;
 
@@ -48,7 +48,35 @@ angular.module('bitbloqApp')
         $scope.getGroups = function() {
             centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
                 $scope.groups = response.data;
+                if ($scope.currentProject.hardware.showRobotImage) {
+                    $scope.isRobotActivatedInCenter();
+                }
+
             });
+        };
+
+        $scope.isRobotActivatedInCenter = function() {
+            var robotsMap;
+            $scope.robotActivatedInCenter = false;
+            $scope.currentProjectService.showActivation = false;
+            $scope.currentProjectService.closeActivation = false;
+            hardwareService.itsHardwareLoaded().then(function() {
+                robotsMap = exerciseService.getRobotsMap(hardwareService.hardware);
+                var robotsActivated = [];
+                _.forEach($scope.groups, function(group) {
+                    if (group.center.activatedRobots) {
+                        robotsActivated = robotsActivated.concat(group.center.activatedRobots);
+                    }
+                });
+
+                if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
+                    $scope.robotActivatedInCenter = true;
+                } else {
+                    $scope.currentProjectService.showActivation = true;
+                    $scope.currentProjectService.closeActivation = false;
+                }
+            });
+
         };
 
         $scope.onTime = function() {
@@ -68,6 +96,7 @@ angular.module('bitbloqApp')
 
         $scope.setGroups = function(groups) {
             $scope.groups = groups;
+            $scope.isRobotActivatedInCenter();
         };
 
         function itsABoardWithCompileWarning(board) {
@@ -182,7 +211,6 @@ angular.module('bitbloqApp')
         /*************************************************
          exercise save / edit
          *************************************************/
-
         $scope.anyComponent = function(forceCheck) {
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
@@ -392,17 +420,17 @@ angular.module('bitbloqApp')
          UNDO / REDO
          *************************************************/
 
-            //Stores one step in the history
+        //Stores one step in the history
         $scope.saveBloqStep = function(step) {
             //$log.debug('Guardamos Estado de Bloqs');
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
+                setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
+                loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
@@ -476,8 +504,7 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
 
                 event.preventDefault();
             }

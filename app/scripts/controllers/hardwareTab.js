@@ -278,6 +278,7 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
     $scope.drop = function(data) {
         hw2Bloqs.userInteraction = true;
+
         switch (data.type) {
             case 'boards':
                 $scope.currentProjectService.showActivation = false;
@@ -315,10 +316,15 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
                     var thirdPartyRobots = $scope.common.user ? $scope.common.user.thirdPartyRobots : false;
                     $scope.deleteBTComponent();
                     _addRobot(data);
-                    if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
-                        $scope.currentProjectService.showActivation = true;
-                        $scope.currentProjectService.closeActivation = false;
-                        $scope.showActivationModal(robotFamily);
+                    if ($scope.common.section === 'bloqsproject') {
+                        if (robotFamily && (!thirdPartyRobots || !thirdPartyRobots[robotFamily])) {
+                            $scope.currentProjectService.showActivation = true;
+                            $scope.currentProjectService.closeActivation = false;
+                            $scope.showActivationModal(robotFamily);
+
+                        }
+                    } else {
+                        $scope.isRobotActivatedInCenter();
                     }
                 }
                 break;
@@ -357,7 +363,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
     };
 
     $scope.showActivationModal = function(robotFamily) {
-        $scope.currentProjectService.showActivationModal(robotFamily);
+        if ($scope.common.section !== 'exercise') {
+            $scope.currentProjectService.showActivationModal(robotFamily);
+        }
     };
 
     $scope.closeActivationWarning = function() {

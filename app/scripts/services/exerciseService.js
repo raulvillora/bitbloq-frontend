@@ -51,7 +51,6 @@ angular.module('bitbloqApp')
             }
             return map;
         };
-
         var robotsMap = [];
 
         hardwareService.itsHardwareLoaded().then(function() {
@@ -621,7 +620,9 @@ angular.module('bitbloqApp')
         function _getWirelessConnectionComponents() {
             var wirelessComponentArray = [];
             _.forEach(exports.componentsArray, function(component) {
-                var wirelessComponent = _.filter(component, {wirelessConnection: true});
+                var wirelessComponent = _.filter(component, {
+                    wirelessConnection: true
+                });
                 if (wirelessComponent.length > 0) {
                     wirelessComponentArray.push(wirelessComponent);
                 }
@@ -644,7 +645,7 @@ angular.module('bitbloqApp')
         function _saveExercise() {
             var defered = $q.defer();
             exports.completedExercise();
-            exports.exercise.name = exports.exercise.name ||'';
+            exports.exercise.name = exports.exercise.name || '';
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
                     var newMark = _.join(exports.exercise.newMark, '.');
@@ -675,8 +676,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;

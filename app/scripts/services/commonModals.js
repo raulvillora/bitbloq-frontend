@@ -785,6 +785,7 @@ angular.module('bitbloqApp')
                 activationCode = {},
                 errorMessage = '',
                 defered = $q.defer(),
+                type,
                 centerId = center;
 
             var confirmAction = function() {
@@ -794,10 +795,10 @@ angular.module('bitbloqApp')
                 });
 
                 if (centerId) {
-                    robot = robot + '-centermode';
+                    type = 'center';
                 }
 
-                thirdPartyRobotsApi.exchangeCode(actCode, robot, centerId).then(function(res) {
+                thirdPartyRobotsApi.exchangeCode(actCode, robot, centerId, type).then(function(res) {
                     common.user.thirdPartyRobots = res.data;
                     activateModal.close();
                     alertsService.add({
