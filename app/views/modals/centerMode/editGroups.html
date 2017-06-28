@@ -47,7 +47,7 @@
                                 </button>
                             </div>
                             <span ng-show="{{'datePicker0' + group._id + '.$error.required'}} &&{{'datePicker0' + group._id + '.$error.touched'}} ">Required<br></span>
-                            <div class="time-picker" ng-init="initTimePicker(); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
+                            <div class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
                                 <input type="text" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" required/>
                                 <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)">
                                     <svg class="svg-icon">
@@ -66,7 +66,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div class="time-picker" ng-init="initTimePicker(); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
+                            <div class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
                                 <input type="text" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" required/>
 
                                 <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event)">

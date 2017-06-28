@@ -179,11 +179,15 @@ angular.module('bitbloqApp')
                     return dateString;
                 }
 
-                function initTimePicker() {
-                    var options = {
-                        twentyFour: true //Display 24 hour format, defaults to falseç
-
+                function initTimePicker(time) {
+                    var options = { //Display 24 hour format, defaults to false
+                        twentyFour: true,
                     };
+
+                    if (time) {
+                        options.now = time;
+                    }
+
                     $('.timepicker').wickedpicker(options);
                 }
 
