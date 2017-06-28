@@ -41,10 +41,10 @@
             $scope.moment = moment;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                    'uuid': 'mBot',
-                    'image': 'mbot',
-                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-                },
+                'uuid': 'mBot',
+                'image': 'mbot',
+                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+            },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -837,11 +837,11 @@
             }, function() {
                 $scope.common.setUser();
                 alertsService.add({
-                    text: 'projects-need-tobe-logged',
-                    id: 'projects-need-tobe-logged',
+                    text: 'view-need-tobe-logged',
+                    id: 'view-need-tobe-logged',
                     type: 'error'
                 });
-                $location.path('/login');
+                $scope.common.goToLogin();
             });
 
             $scope.searchExercises = function() {
