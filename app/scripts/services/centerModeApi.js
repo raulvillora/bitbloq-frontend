@@ -8,6 +8,7 @@ angular
             activateStudentMode: activateStudentMode,
             createCenter: createCenter,
             updateCenter: updateCenter,
+            confirmAddTeacher: confirmAddTeacher,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
             deleteStudent: deleteStudent,
@@ -43,6 +44,14 @@ angular
             return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'member/activate'
+            });
+        }
+
+        function confirmAddTeacher(token) {
+            return $http({
+                method: 'POST',
+                url: envData.config.centerModeUrl + 'member/confirm-teacher',
+                data: {'token': token}
             });
         }
 

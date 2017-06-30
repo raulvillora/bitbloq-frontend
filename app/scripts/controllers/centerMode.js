@@ -438,10 +438,18 @@
                         if (teachers.length > 0) {
                             centerModeApi.addTeachers(teachers, centerModeService.center._id).then(function(response) {
                                 if (response.data.teachersWithError) {
-                                    commonModals.noAddTeachers(response.data.teachersWithError, response.data.teachersWaitingConfirmation.length);
+                                    commonModals.noAddTeachers(response.data.teachersWithError);
                                 }
                                 if (response.data.teachersWaitingConfirmation) {
+                                    var alertText = response.data.teachersWaitingConfirmation.length === 1 ? 'centerMode_alert_sendInvitation' : 'centerMode_alert_sendInvitations';
+                                    alertsService.add({
+                                        text: alertText,
+                                        id: 'addTeacher',
+                                        type: 'info',
+                                        time: 5000
+                                    });
                                     _.forEach(response.data.teachersWaitingConfirmation, function(teacher) {
+                                        teacher.notConfirmed = true;
                                         $scope.teachers.push(teacher);
                                     });
                                 }
@@ -555,9 +563,46 @@
                         _getTasksByExerciseCount($routeParams.id);
                         _getGroups(null, $routeParams.id);
                         break;
+                    case 'add-teacher':
+                        _congratulations($routeParams.id);
+                        break;
                 }
             }
 
+            function _congratulations(token) {
+                centerModeApi.confirmAddTeacher(token).then(function(center) {
+                    var modalOptions = $rootScope.$new(),
+                        extraButton = 'centerMode_button_createCenter-try';
+                    if ($scope.common.user.birthday && utils.userIsUnder14($scope.common.user.birthday)) {
+                        extraButton = null;
+                    }
+                    _.extend(modalOptions, {
+                        title: 'welcome',
+                        contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
+                        customClass: 'modal--information',
+                        confirmButton: 'centerMode_modal_confirmation-button',
+                        confirmAction: function() {
+                            ngDialog.close(centerModal);
+                        },
+                        modalButtons: true,
+                        errors: false
+                    });
+
+                    var centerModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--centerMode',
+                        scope: modalOptions
+
+                    });
+                    $location.path('/center-mode/teacher');
+                }).catch(function() {
+                    alertsService.add({
+                        text: 'centerMode_modal_confirmation-error',
+                        id: 'addTeacher',
+                        type: 'error'
+                    });
+                });
+            }
 
             $scope.uploadImageTrigger = function(type) {
                 $timeout(function() {

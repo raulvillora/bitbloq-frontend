@@ -686,24 +686,17 @@ angular.module('bitbloqApp')
             });
             serialMonitorPanel.scope = scope;
         };
-        exports.noAddTeachers = function(teachers, added) {
-            var noShareModal, confirmAction = function() {
-                    noShareModal.close();
-                    alertsService.add({
-                        text: 'modalShare_alert_addTeacher ',
-                        id: 'private-project',
-                        type: 'ok',
-                        time: 5000,
-                        value: added
-                    });
-                },
+        exports.noAddTeachers = function(teachers) {
+            var noShareModal,
                 modalScope = $rootScope.$new();
 
             _.extend(modalScope, {
                 title: 'newTeacher_modal_aceptButton',
                 modalButtons: true,
                 confirmButton: 'modal__understood-button',
-                confirmAction: confirmAction,
+                confirmAction: function() {
+                    noShareModal.close();
+                },
                 contentTemplate: '/views/modals/centerMode/noAddTeachers.html',
                 teachers: teachers
             });
