@@ -1,31 +1,10 @@
 <div class="modal_alert">
-    <p>{{mainText | translate}}</p>
-    <p class="text-content" ng-if="textContent">{{textContent | translate}}</p>
-    <div ng-if="type==='information'">
-        <h1 class="modal--sencond-title">{{'centerMode_modal_createCenter-content' | translate}}</h1>
-        <ul class="objective-list">
-            <li>{{'centerMode_modal_createCenter-item1' | translate}}</li>
-            <li>{{'centerMode_modal_createCenter-item2' | translate}}</li>
-            <li>{{'centerMode_modal_createCenter-item3' | translate}}</li>
-            <li>{{'centerMode_modal_createCenter-item4' | translate}}</li>
-            <li>{{'centerMode_modal_createCenter-item5' | translate}}</li>
-        </ul>
-    </div>
-    <form ng-if="type==='form'" name="formActivateCenter" class="input-list row" novalidate>
-        <div class="row">
-            <label for="centerName" class="col-vsmall-4">{{'centerMode_modal_createCenter-centerName' | translate }}</label>
-            <input type="text" id="centerName" name="centerName" class="col-vsmall-8" ng-class="{'input--error': errors && !centerModeService.nter.name}" data-ng-model="center.name" autofocus data-element="modals-center-name">
-        </div>
-        <div class="row">
-            <label for="centerLocation" class="col-vsmall-4">{{'centerMode_modal_createCenter-location' | translate }}</label>
-            <input type="text" id="centerLocation" name="centerLocation" class="col-vsmall-8" ng-class="{'input--error': errors && !centerModeService.center.location}" data-ng-model="center.location" autofocus data-element="modals-center-location">
-        </div>
-        <div class="row">
-            <label for="centerTelephone" class="col-vsmall-4">{{'centerMode_modal_createCenter-telephone' | translate }}</label>
-            <input type="number" id="centerTelephone" name="centerTelephone" class="col-vsmall-8" ng-class="{'input--error': errors && !centerModeService.center.telephone}" data-ng-model="center.telephone" autofocus data-element="modals-center-telephone">
-        </div>
-        <span class="row form--error" ng-show="errors && (!centerModeService.center.name || !centerModeService.center.location || !centerModeService.center.telephone)">
-            <small class="col-vsmall-push-4">{{ 'centerMode_modal_createCenter-error' | translate }}</small>
-        </span>
-    </form>
+    <p><b>{{'centerMode_modal_confirmation-title' | translate}}</b></p>
+    <p>{{'centerMode_modal_confirmation-subtitle' | translate}}</p>
+    <ul class="objective-list">
+        <li translate="centerMode_modal_confirmation-item1"/>
+        <li translate="centerMode_modal_confirmation-item2"/>
+        <li translate="centerMode_modal_confirmation-item3"/>
+        <li translate="centerMode_modal_confirmation-item4"/>
+    </ul>
 </div>
