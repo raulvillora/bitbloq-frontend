@@ -181,7 +181,7 @@ angular.module('bitbloqApp')
 
                 function initTimePicker(time) {
                     var options = { //Display 24 hour format, defaults to false
-                        twentyFour: true,
+                        twentyFour: true
                     };
 
                     if (time) {

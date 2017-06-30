@@ -26,12 +26,18 @@
                 <span class="block__item__explanation">{{item.email}}</span>
                 <!--<a ng-href="{{'#/center-mode/center-teacher/' + item._id}}" data-element="centerMode-teacher-link-{{$index}}"></a>-->
             </div>
-            <div class="able__block__item col-vsmall-2 ">
+            <div class="table__block__item table__block__item--information col-vsmall-4" ng-if="item.notConfirmed">
+                <span>
+                    {{'centerMode_notConfirmedTeacher' | translate }}
+                    <button class="link--default">{{'centerMode_forwardInvitation' | translate }}</button>
+                </span>
+            </div>
+            <div class="table__block__item col-vsmall-2" ng-if="!item.notConfirmed">
                 <span data-element="{{'centerMode-groups' + item.name}}">
                     {{item.groups || 0}}
                 </span>
             </div>
-            <div class="table__block__item col-vsmall-2">
+            <div class="table__block__item col-vsmall-2" ng-if="!item.notConfirmed">
                 <span>{{item.students || 0}}</span>
             </div>
             <div class="table__block__item table__column--right col-vsmall-1" ng-if="item._id !== common.user._id">

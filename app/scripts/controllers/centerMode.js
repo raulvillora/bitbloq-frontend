@@ -437,11 +437,11 @@
                         var teachers = _.map(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
                             centerModeApi.addTeachers(teachers, centerModeService.center._id).then(function(response) {
-                                if (response.data.teachersNotAdded) {
-                                    commonModals.noAddTeachers(response.data.teachersNotAdded, response.data.teachersAdded.length);
+                                if (response.data.teachersWithError) {
+                                    commonModals.noAddTeachers(response.data.teachersWithError, response.data.teachersWaitingConfirmation.length);
                                 }
-                                if (response.data.teachersAdded) {
-                                    _.forEach(response.data.teachersAdded, function(teacher) {
+                                if (response.data.teachersWaitingConfirmation) {
+                                    _.forEach(response.data.teachersWaitingConfirmation, function(teacher) {
                                         $scope.teachers.push(teacher);
                                     });
                                 }
@@ -557,6 +557,7 @@
                         break;
                 }
             }
+
 
             $scope.uploadImageTrigger = function(type) {
                 $timeout(function() {
