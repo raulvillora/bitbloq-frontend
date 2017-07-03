@@ -381,12 +381,15 @@ angular.module('bitbloqApp')
         };
 
         exports.getRobotMetaData = function(robotId) {
+            var defered = $q.defer();
             robotId = robotId || exports.exercise.hardware.robot;
             hardwareService.itsHardwareLoaded().then(function() {
-                return _.find(hardwareService.hardware.robots, function(robot) {
-                    return robot.id === robotId;
-                });
+                defered.resolve(_.find(hardwareService.hardware.robots, function(robot) {
+                    return robot.uuid === robotId;
+                }));
             });
+
+            return defered.promise;
         };
 
         exports.getCleanExercise = function(exerciseRef, download) {
