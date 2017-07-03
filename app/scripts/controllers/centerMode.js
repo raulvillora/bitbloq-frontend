@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
             $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
@@ -41,10 +41,10 @@
             $scope.moment = moment;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                    'uuid': 'mBot',
-                    'image': 'mbot',
-                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-                },
+                'uuid': 'mBot',
+                'image': 'mbot',
+                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+            },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -587,15 +587,19 @@
             }
 
             function _congratulations(token) {
-                centerModeApi.confirmAddTeacher(token).then(function(center) {
+                centerModeApi.confirmAddTeacher(token).then(function(response) {
                     var modalOptions = $rootScope.$new(),
                         extraButton = 'centerMode_button_createCenter-try';
                     if ($scope.common.user.birthday && utils.userIsUnder14($scope.common.user.birthday)) {
                         extraButton = null;
                     }
+                    var confirmationTitle = $translate.instant('centerMode_modal_confirmation-title', {
+                        value: response.data
+                    });
                     _.extend(modalOptions, {
                         title: 'welcome',
                         contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
+                        confirmationTitle: confirmationTitle,
                         customClass: 'modal--information',
                         confirmButton: 'centerMode_modal_confirmation-button',
                         confirmAction: function() {
