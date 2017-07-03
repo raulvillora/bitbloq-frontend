@@ -11,7 +11,7 @@
 angular.module('bitbloqApp')
     .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
         $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi) {
+        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi, hardwareService) {
 
         /*************************************************
          Exercise settings
@@ -38,6 +38,7 @@ angular.module('bitbloqApp')
         $scope.currentProject.userCanUpdate = false;
         $scope.currentProject.newMark = [];
         $scope.urlGetImage = $scope.common.urlImage + 'exercise/';
+        $scope.robotActivatedInCenter = false;
 
         exerciseService.saveStatus = 0;
 
@@ -47,7 +48,41 @@ angular.module('bitbloqApp')
         $scope.getGroups = function() {
             centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
                 $scope.groups = response.data;
+                if ($scope.currentProject.hardware.showRobotImage) {
+                    $scope.isRobotActivatedInCenter();
+                }
+
             });
+        };
+
+        $scope.isRobotActivatedInCenter = function() {
+            var robotsMap;
+            $scope.robotActivatedInCenter = false;
+            $scope.currentProjectService.showActivation = false;
+            $scope.currentProjectService.closeActivation = false;
+            hardwareService.itsHardwareLoaded().then(function() {
+                robotsMap = exerciseService.getRobotsMap(hardwareService.hardware);
+                var robotsActivated = [];
+
+                if ($scope.common.section === 'exercise') {
+                    _.forEach($scope.groups, function(group) {
+                        if (group.center.activatedRobots) {
+                            robotsActivated = robotsActivated.concat(group.center.activatedRobots);
+                        }
+                    });
+                } else {
+                    robotsActivated = exerciseService.exercise.group.center.activatedRobots;
+                }
+                if ($scope.currentProject.hardware.showRobotImage) {
+                    if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
+                        $scope.robotActivatedInCenter = true;
+                    } else {
+                        $scope.currentProjectService.showActivation = true;
+                        $scope.currentProjectService.closeActivation = false;
+                    }
+                }
+            });
+
         };
 
         $scope.onTime = function() {
@@ -67,6 +102,7 @@ angular.module('bitbloqApp')
 
         $scope.setGroups = function(groups) {
             $scope.groups = groups;
+            $scope.isRobotActivatedInCenter();
         };
 
         function itsABoardWithCompileWarning(board) {
@@ -90,6 +126,7 @@ angular.module('bitbloqApp')
             }
             return result;
         }
+
         $scope.showCompileWarningByComponent = function(board, component, pin) {
             var result = false;
             if (itsABoardWithCompileWarning(board)) {
@@ -108,22 +145,24 @@ angular.module('bitbloqApp')
                 parent = $rootScope,
                 modalOptions = parent.$new(),
                 confirmAction = function() {
-                    exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function() {
-                        alertsService.add({
-                            text: 'centerMode__alert__sendTask-ok',
-                            id: 'publishing-project',
-                            type: 'info',
-                            time: 5000
-                        });
-                        $scope.currentProject.status = 'delivered';
-                    }).catch(function() {
-                        alertsService.add({
-                            text: 'centerMode__alert__sendTask-error',
-                            id: 'publishing-project',
-                            type: 'warning'
+                    dialog.close();
+                    exerciseService.getSavePromise().then(function() {
+                        exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function() {
+                            alertsService.add({
+                                text: 'centerMode__alert__sendTask-ok',
+                                id: 'publishing-project',
+                                type: 'info',
+                                time: 5000
+                            });
+                            $scope.currentProject.status = 'delivered';
+                        }).catch(function() {
+                            alertsService.add({
+                                text: 'centerMode__alert__sendTask-error',
+                                id: 'publishing-project',
+                                type: 'warning'
+                            });
                         });
                     });
-                    dialog.close();
                 };
 
             _.extend(modalOptions, {
@@ -178,7 +217,6 @@ angular.module('bitbloqApp')
         /*************************************************
          exercise save / edit
          *************************************************/
-
         $scope.anyComponent = function(forceCheck) {
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
@@ -546,8 +584,11 @@ angular.module('bitbloqApp')
                 _canUpdate().then(function() {
                     _generateMark();
                 });
+
                 if ($scope.common.section === 'exercise') {
                     $scope.getGroups();
+                } else {
+                    $scope.isRobotActivatedInCenter();
                 }
                 $scope.currentProjectLoaded.resolve();
             }, function(error) {

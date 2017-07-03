@@ -1,0 +1,107 @@
+// /*------------------------------------*\
+//     #GLOBAL COLORS
+// \*------------------------------------*/
+
+
+// Basic
+$color-green: #82ad3a;
+$color-black: #373b44;
+$color-grey-dark: #5d6069;
+$color-grey-medium: #8c919b;
+$color-grey-light: #c0c3c9;
+$color-grey-lighter: #f1f1f1;
+$color-white: #ffffff;
+
+// Alerts - imput - actions
+$color-red: #cc0000;
+$color-red-background: #ff3333;
+$color-border: #cfcfcf;
+$color-border-red: $color-red-background;
+$color-disabled: $color-grey-light;
+$color-disabled-background: #ebebeb;
+
+
+// Radio buttons
+$color-radio-button-selected-border: $color-grey-dark;
+$color-radio-button-selected-background: $color-grey-dark;
+$color-radio-button-hover-border: $color-grey-dark;
+$color-radio-button-border: $color-grey-light;
+$color-radio-button-disabled-border: $color-grey-light;
+$color-radio-button-disabled-background: $color-grey-light;
+$color-radio-button-indeterminate-line: $color-grey-dark;
+
+
+// Switch
+$color-switch-activated: $color-green;
+$color-switch-deactivated: $color-grey-medium;
+$color-switch-border: #dddddd;
+$color-switch-background: $color-white;
+
+
+// Tooltip
+$color-tooltip-text: $color-white;
+$color-tooltip-background: $color-black;
+
+
+// Modals
+$color-modal-title: $color-black;
+$color-modal-text: $color-grey-dark;
+$color-modal-background: $color-white;
+
+
+// Texts
+$color-text-title: $color-black;
+$color-text-link: $color-green;
+$color-text: $color-grey-dark;
+$color-text-secondly: $color-grey-medium;
+$color-text-small: $color-grey-medium;
+$color-text-disabled: $color-grey-light;
+
+
+// Icons
+$color-icon: $color-black;
+
+
+// Tabs
+// To be continued...
+
+
+
+
+// /*------------------------------------*\
+// /*------------------------------------*\
+//     OLDER
+// /*------------------------------------*\
+// /*------------------------------------*\
+
+$font-color-heading: #373b44;
+$font-color-base: #5d6069;
+$font-color-secondary: #8c919b;
+$font-color-disabled: #c0c3c9;
+
+// Brand colors
+$brand-primary            : #82ad3a;
+$brand-primary-text       : $font-color-base;
+$brand-secondary          : #dddddd;
+$brand-secondary-text     : $brand-secondary;
+
+//icons
+$brand-icons-default-color: #3b3e45;
+
+// Links
+$link-color               : $brand-primary;
+
+// Text
+$selection-text-color-bg  : $brand-secondary;
+$selection-text-color     : invert($brand-primary);
+
+// Scaffolding
+$body-font-size           : $font-size-base;
+$body-bg                  : white;
+$body-color               : $brand-primary-text;
+
+// Print
+$print-text-color         : $brand-primary-text;
+$print-link-visited-color : $brand-primary ;
+$print-border-color       : $brand-secondary;
+$print-page-margin        : 0.5cm;

@@ -47,30 +47,11 @@ $font-size-h1: 24px;
 $font-size-h2: 20px;
 $font-size-h3: 16px;
 
-$font-color-heading: #373b44;
-$font-color-base: #5d6069;
-$font-color-secondary: #8c919b;
-$font-color-disabled: #c0c3c9;
-
-// Brand colors
-$brand-primary            : #82ad3a;
-$brand-primary-text       : $font-color-base;
-$brand-secondary          : #dddddd;
-$brand-secondary-text     : $brand-secondary;
-
-//icons
-$brand-icons-default-color: #3b3e45;
-
 // Links
-$link-color               : $brand-primary;
 $link-hover-color         : false;
 $link-active-color        : false;
 $link-visited-color       : false;
 $link-focus-color         : false;
-
-// Text
-$selection-text-color-bg  : $brand-secondary;
-$selection-text-color     : invert($brand-primary);
 
 // Typography
 $font-family-base         : "Roboto", sans-serif;
@@ -80,15 +61,8 @@ $font-size-medium         : 18;
 $font-size-large          : 20;
 $line-height-base         : 22;
 
-// Scaffolding
-$body-font-size           : $font-size-base;
-$body-bg                  : white;
-$body-color               : $brand-primary-text;
 
 // Print
-$print-text-color         : $brand-primary-text;
-$print-link-visited-color : $brand-primary ;
-$print-border-color       : $brand-secondary;
 $print-page-margin        : 0.5cm;
 
 // Breakpoints

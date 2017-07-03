@@ -203,8 +203,6 @@ angular.module('bitbloqApp')
             var xStart = (canvas.width - 530) / 2;
             context.fillStyle = '#f3f3f3';
             context.fillRect(0, 0, canvas.width, canvas.height);
-            console.log('robot');
-            console.log(robot);
             if (robot) {
                 switch (robot) {
                     case 'mbot':

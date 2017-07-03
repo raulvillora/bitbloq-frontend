@@ -1,0 +1,79 @@
+<div class="center__content">
+    <form class="form--center" id="form--center">
+        <div class="first-column">
+            <div class="form--section">
+                <fieldset>
+                    <legend>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#home"></use>
+                        </svg>
+                        <span>{{ 'center-info' | translate }}</span>
+                    </legend>
+                    <div class="form-control">
+                        <label for="name">{{ 'centerMode_modal_createCenter-centerName' | translate }}</label>
+                        <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'name'}">
+                            <input type="text" id="name" name="name" placeholder="{{'centerMode_modal_createCenter-centerName' | translate}}" tabindex="0" aria-invalid="false" data-ng-blur="focus = false" data-ng-focus="focus = 'name'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="centerModeService.center.name" data-element="name">
+                        </span>
+                    </div>
+                    <div class="form-control">
+                        <label for="surname">{{ 'center-address' | translate }}</label>
+                        <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'address'}">
+                            <input type="text" id="address" name="address" placeholder="{{'centerMode_modal_createCenter-location' | translate}}" tabindex="0" aria-invalid="false" data-ng-blur="focus = false" data-ng-focus="focus = 'address'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="centerModeService.center.location" data-element="address">
+                        </span>
+                    </div>
+                    <div class="form-control">
+                        <label for="email">{{ 'email' | translate }}</label>
+                        <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'email'}">
+                            <input type="email" id="email" name="email" placeholder="mail@mail.com" tabindex="0" aria-invalid="false" data-ng-blur="focus = false" data-ng-focus="focus = 'email'" data-ng-model="common.user.email" data-element="email" disabled>
+                        </span>
+                    </div>
+                    <div class="form-control">
+                        <label for="username">{{ 'center-phone' | translate }}</label>
+                        <span class="form--input" data-ng-class="{'form--input':true, 'input--focused':focus === 'username'}">
+                            <input type="number" id="username" name="phone" placeholder="{{'center-phone' | translate}}" tabindex="0" maxlength="50" aria-invalid="false" data-ng-blur="focus = false" data-ng-focus="focus = 'phone'" data-ng-model-options="{ debounce: { 'default': 2000, 'blur': 0 } }" data-ng-model="centerModeService.center.telephone" data-element="username">
+                        </span>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+    <form ng-show="false" class="form--center" id="form--center__second-column">
+        <div class="second-column">
+            <div class="form--section">
+                <fieldset>
+                    <legend>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#imageDefault"></use>
+                        </svg>
+                        <span>{{ 'center-image' | translate }}</span>
+                    </legend>
+                    <div class="form-control">
+                        <div>
+                            <div class="main--user--image" id="main-image" ng-click="uploadImageTrigger('main')">
+                                <img id="avatarUser" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png" data-element="account-image">
+                            </div>
+                            <input type="file" name="projectimage" class="btn btn--primary btn--small hidden main-image--input" data-ng-blur="focus = false" data-ng-focus="focus='projectimage'" onchange="angular.element(this).scope().uploadImage(this.files)" data-element="center-fileinput" />
+                            <input type="button" value="{{ 'upload-image' | translate }}" class="btn btn--secondary btn--small btn--account-upload-image" data-ng-click="uploadImageTrigger('main')" />
+                            <div>
+                                <small>{{ 'account-avatar-requisites' | translate }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!--<div class="form--section">
+                   <fieldset class="last--fieldset">
+                       <legend>
+                           <svg class="svg-icon svg-icon--text">
+                               <use xlink:href="#earth"></use>
+                           </svg>
+                           <span>{{ 'language' | translate }}</span>
+                       </legend>
+                       <div class="form-control">
+                           <common-dropdown class="dropdown--small" data-heading-option="common.user.language | translate" data-options-click="changeLanguage" data-options="test"/>
+                       </div>
+                   </fieldset>
+               </div>-->
+        </div>
+    </form>
+</div>

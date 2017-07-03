@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('centerModeService', function($log, $q, $rootScope, _, centerModeApi, ngDialog) {
+    .service('centerModeService', function($log, $q, $rootScope, _, centerModeApi, ngDialog, alertsService) {
 
         var exports = {};
 
@@ -84,10 +84,102 @@ angular.module('bitbloqApp')
                 });
             }
 
-
             return def.promise;
         };
 
+        var thereAreCenterModeWatchers = false,
+            nameWatcher,
+            addressWatcher,
+            telephoneWatcher,
+            scope = $rootScope.$new();
+
+        exports.center = {};
+        scope.center = exports.center;
+
+        exports.saveCenter = function() {
+            var defered = $q.defer();
+            alertsService.add({
+                text: 'account-saving',
+                id: 'saved-user',
+                type: 'info',
+                time: 5000
+            });
+            centerModeApi.updateCenter(scope.center).then(function() {
+                alertsService.add({
+                    text: 'account-saved',
+                    id: 'saved-user',
+                    type: 'ok',
+                    time: 5000
+                });
+                defered.resolve();
+            }, function(error) {
+                alertsService.add({
+                    text: 'account-saved-error',
+                    id: 'saved-user',
+                    type: 'warning'
+                });
+                defered.reject(error);
+            });
+            return defered.promise;
+        };
+
+        exports.setCenter = function(center) {
+            if (center) {
+                exports.center = center;
+            } else {
+                exports.center = {};
+            }
+            scope.center = exports.center;
+        };
+
+        exports.addWatchers = function() {
+            if (!thereAreCenterModeWatchers) {
+                thereAreCenterModeWatchers = true;
+                nameWatcher = scope.$watch('center.name', function(newVal, oldVal) {
+                    if (oldVal && newVal !== oldVal) {
+                        exports.saveCenter();
+                    }
+                });
+
+                addressWatcher = scope.$watch('center.location', function(newVal, oldVal) {
+                    if (oldVal && newVal !== oldVal) {
+                        exports.saveCenter();
+                    }
+                });
+
+                telephoneWatcher = scope.$watch('center.telephone', function(newVal, oldVal) {
+                    if (oldVal && newVal !== oldVal) {
+                        exports.saveCenter();
+                    }
+                });
+            }
+        };
+
+        exports.unBlindAllWatchers = function() {
+            if (thereAreCenterModeWatchers) {
+                _unBlindGenericWatchers();
+            }
+        };
+
+        function _unBlindGenericWatchers() {
+            thereAreCenterModeWatchers = false;
+            if (_thereIsWatcher('center.name')) {
+                nameWatcher();
+            }
+            if (_thereIsWatcher('center.location')) {
+                addressWatcher();
+            }
+            if (_thereIsWatcher('center.telephone')) {
+                telephoneWatcher();
+            }
+        }
+
+        function _thereIsWatcher(variable) {
+            var result = _.find(scope.$$watchers, function(item) {
+                return item.exp === variable;
+            });
+            return !!result;
+        }
 
         return exports;
     });

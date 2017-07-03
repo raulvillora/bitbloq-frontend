@@ -7,8 +7,11 @@ angular
             addTeachers: addTeachers,
             activateStudentMode: activateStudentMode,
             createCenter: createCenter,
+            updateCenter: updateCenter,
+            confirmAddTeacher: confirmAddTeacher,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
+            deleteInvitation: deleteInvitation,
             deleteStudent: deleteStudent,
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
@@ -23,6 +26,7 @@ angular
             getTeachers: getTeachers,
             isHeadmaster: isHeadmaster,
             registerInGroup: registerInGroup,
+            resendInvitation: resendInvitation,
             updateGroup: updateGroup,
             unassignExerciseInGroup: unassignExerciseInGroup
         };
@@ -45,9 +49,25 @@ angular
             });
         }
 
+        function confirmAddTeacher(token) {
+            return $http({
+                method: 'POST',
+                url: envData.config.centerModeUrl + 'member/confirm-teacher',
+                data: {'token': token}
+            });
+        }
+
         function createCenter(center) {
             return $http({
                 method: 'POST',
+                url: envData.config.centerModeUrl + 'center',
+                data: center
+            });
+        }
+
+        function updateCenter(center) {
+            return $http({
+                method: 'PUT',
                 url: envData.config.centerModeUrl + 'center',
                 data: center
             });
@@ -71,6 +91,13 @@ angular
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'group/' + groupId
+            });
+        }
+
+        function deleteInvitation(teacherId, centerId){
+            return $http({
+                method: 'DELETE',
+                url: envData.config.centerModeUrl + 'member/invitation/teacher/' + teacherId + '/center/' + centerId
             });
         }
 
@@ -212,6 +239,17 @@ angular
                 url: envData.config.centerModeUrl + 'member/student',
                 data: {
                     accessId: accessId
+                }
+            });
+        }
+
+        function resendInvitation(teacherId, centerId) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'member/send-invitation',
+                data: {
+                    teacherId: teacherId,
+                    centerId: centerId
                 }
             });
         }

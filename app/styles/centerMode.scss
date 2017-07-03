@@ -1,6 +1,8 @@
 .menu--user__center-mode {
     cursor: pointer;
-    .notification-alert, .notification__title {
+
+    .notification-alert,
+    .notification__title {
         pointer-events: none;
     }
 }
@@ -11,16 +13,17 @@
     [class*="col-"] {
         padding-left: 0;
     }
+
     .svg-icon {
         fill: #373b44;
     }
-
     // task status
     .status-notCorrected {
         color: #dd1010;
     }
 
-    .status-corrected, .centerMode_status_delivered {
+    .centerMode_status_delivered,
+    .status-corrected {
         color: #82ad3a;
     }
 
@@ -31,28 +34,33 @@
 }
 
 .center-mode__group {
-    .tabs-layout__aside, .tabs-layout__content {
+    .tabs-layout__aside,
+    .tabs-layout__content {
         padding: 0 30px;
     }
 
-    .tabs-layout__content .tab{
-      padding: 0 30px;
-      position: relative;
+    .tabs-layout__content .tab {
+        padding: 0 30px;
+        position: relative;
     }
 
-    .center-mode__table{
-      margin-top: 15px;
+    .center-mode__table {
+        margin-top: 15px;
     }
+
     .group__header {
         padding: 20px 30px;
         max-width: 1200px;
         margin: 0 auto;
     }
+
     .tabs-layout__aside .tabs__header__item {
         border-color: #dddddd;
+
         &.selected--tab {
             border-top: 1px solid #dddddd;
             border-right: 1px solid #dddddd;
+
             &:after {
                 content: '';
                 display: block;
@@ -64,10 +72,12 @@
                 width: 158%;
             }
         }
+
         &:first-child {
             border-left: 1px solid #dddddd;
         }
     }
+
     .tabs-layout__content {
         border-top: 1px solid #dddddd;
     }
@@ -102,23 +112,29 @@
     width: 100%;
 }
 
-.table__block__list, .center-mode__table-title {
+.center-mode__table-title,
+.table__block__list {
     &.row {
         margin: 0;
     }
+
     .table__item__link {
         width: 100%;
     }
-    .table__item__link, .table__item__ellipsis {
+
+    .table__item__ellipsis,
+    .table__item__link {
         .block__item__title {
             max-width: 95%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            &.block__item__short{
+
+            &.block__item__short {
                 max-width: 70%;
             }
         }
+
         .block__item__explanation {
             margin-left: 3px;
             position: relative;
@@ -128,16 +144,23 @@
 }
 
 .center-mode__table {
-    [class*="col-"]:not(:first-child) {
+    [class*="col-"]:not(:first-child):not(.table__block__item--information) {
         text-align: center;
+    }
+    .table__block__item.table__block__item--information {
+        text-align: left;
+        color: $color-text-secondly;
+        font-size: 14px;
     }
 }
 
 .center-mode__table-title {
     padding: 0 10px;
+
     span:first-child {
         padding-left: 0;
     }
+
     [class*="col-"]:not(:first-child) {
         text-align: center;
     }
@@ -164,6 +187,7 @@
 
     .center-mode--empty__info {
         color: #676a71;
+        margin-bottom: 35px;
     }
 
     &[disabled] {
@@ -197,4 +221,368 @@
         display: inline;
         color: #8c919b;
     }
+}
+
+.robots__content {
+    width: 60%;
+}
+
+.center__content {
+    .form--section {
+        background-color: white;
+        border-radius: 5px;
+        margin-bottom: 20px;
+
+        fieldset {
+            padding: 20px 31px 31px;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid #eee;
+            }
+
+            .account__connect {
+                margin-bottom: 20px;
+                cursor: default;
+            }
+
+            .connect-to-SN-google {
+                color: #d82b32;
+                font-weight: 700;
+            }
+
+            .connect-to-SN-facebook {
+                color: #4573ba;
+                font-weight: 700;
+            }
+
+            legend {
+                &:first-child {
+                    padding-top: 20px;
+                }
+                display: block;
+                padding-bottom: 10px;
+                color: #373b44;
+                font-size: 16px;
+                font-weight: 700;
+
+                .svg-icon {
+                    width: 13px;
+                    height: 13px;
+                    fill: #373b44;
+                    position: relative;
+                    top: 5px;
+                }
+            }
+
+            .form-control {
+                label {
+                    width: 30%;
+                    float: left;
+                    color: #5d6069;
+                    font-size: 13px;
+                    font-weight: 400;
+                    line-height: 40px;
+                    text-align: left;
+                }
+
+                .dropdown--bottom {
+                    width: 100%;
+                }
+
+                .main--user--image {
+                    border-radius: 100%;
+                    overflow: hidden;
+                    width: 160px;
+                    height: 160px;
+                    position: relative;
+                    margin: 0 auto;
+
+                    img {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .btn--account-upload-image {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    margin-top: 20px;
+                }
+
+                .btn--account--password {
+                    width: 40%;
+                    float: left;
+                }
+
+                &:last-child {
+                    margin-top: 0;
+                    text-align: left;
+                }
+
+                span {
+                    width: 50%;
+
+                    input {
+                        color: #5d6069;
+                        font-size: 13px;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+    background-color: #ebebeb;
+    margin-top: 31px;
+    padding: 0 30px;
+
+    .form--center {
+        .first-column,
+        .second-column {
+            display: inline-block;
+        }
+
+        .first-column {
+            padding-right: 10px;
+            float: left;
+            width: 60%;
+        }
+
+        .second-column {
+            margin-left: 10px;
+            padding-left: 10px;
+            float: left;
+            width: 27%;
+        }
+
+        .user-options-checkbox {
+            color: #8c919b;
+            font-size: 12px;
+            font-weight: 400;
+            padding-bottom: 15px;
+            border: 1px solid #eee;
+
+            input {
+                margin-bottom: -2.8px;
+            }
+
+            label {
+                margin-left: 5px;
+            }
+
+            &.last {
+                padding-bottom: 50px;
+            }
+        }
+
+        .account__delete {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-top: 1px solid #cfcfcf;
+            color: #8c919b;
+            font-size: 12px;
+            font-weight: 400;
+
+            a {
+                color: #8c919b;
+            }
+        }
+
+        .form--section {
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+
+            fieldset {
+                padding: 20px 31px 31px;
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid #eee;
+                }
+
+                .account__connect {
+                    margin-bottom: 20px;
+                    cursor: default;
+                }
+
+                .connect-to-SN-google {
+                    color: #d82b32;
+                    font-weight: 700;
+                }
+
+                .connect-to-SN-facebook {
+                    color: #4573ba;
+                    font-weight: 700;
+                }
+
+                legend {
+                    &:first-child {
+                        padding-top: 20px;
+                    }
+                    display: block;
+                    padding-bottom: 10px;
+                    color: #373b44;
+                    font-size: 16px;
+                    font-weight: 700;
+
+                    .svg-icon {
+                        width: 13px;
+                        height: 13px;
+                        fill: #373b44;
+                        position: relative;
+                        top: 5px;
+                    }
+                }
+
+                .form-control {
+                    label {
+                        width: 30%;
+                        float: left;
+                        color: #5d6069;
+                        font-size: 13px;
+                        font-weight: 400;
+                        line-height: 40px;
+                        text-align: left;
+                    }
+
+                    .dropdown--bottom {
+                        width: 100%;
+                    }
+
+                    .main--user--image {
+                        border-radius: 100%;
+                        overflow: hidden;
+                        width: 160px;
+                        height: 160px;
+                        position: relative;
+                        margin: 0 auto;
+
+                        img {
+                            object-fit: cover;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .btn--account-upload-image {
+                        width: 100%;
+                        margin-bottom: 20px;
+                        margin-top: 20px;
+                    }
+
+                    .btn--account--password {
+                        width: 40%;
+                        float: left;
+                    }
+
+                    &:last-child {
+                        margin-top: 0;
+                        text-align: left;
+                    }
+
+                    span {
+                        width: 50%;
+
+                        input {
+                            color: #5d6069;
+                            font-size: 13px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .account__hardware-list {
+        width: calc(100% + 20px);
+
+        .hardware--item {
+            cursor: default;
+        }
+
+        .hardware--item--add {
+            height: 170px;
+        }
+
+        .robots-list__item {
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+            padding-right: 20px;
+            width: 28%;
+
+            .hardware__add__container {
+                &:after {
+                    content: "";
+                    transition: background-color 250ms;
+                    background-color: transparent;
+                }
+                height: 138px;
+                width: 138px;
+                overflow: hidden;
+                background-color: #dadada;
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    fill: #9b9da1;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .hardware__add__container--text {
+                font-weight: bold;
+                text-align: center;
+                color: #373b44;
+                font-size: 13px;
+            }
+
+            .hardware__image__container {
+
+                &:after {
+                    content: "";
+                    transition: background-color 250ms;
+                    background-color: transparent;
+                }
+                height: 138px;
+                width: 138px;
+                overflow: hidden;
+                background-color: #dadada;
+                border: 1px solid #cfcfcf;
+
+                img {
+                    border: 9px solid white;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: relative;
+                    object-fit: contain;
+                }
+            }
+
+            .hardware__image__container_name {
+                margin-top: 10px;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.table--header__teachers {
+    margin-bottom: 29px;
+}
+
+.btn--newteacher {
+    float: right;
+}
+
+.btn--activate {
+    min-width: 138px;
+    margin-top: 10px;
+    display: block;
+}
+
+.center-mode__tabs{
+  background-color: white;
 }

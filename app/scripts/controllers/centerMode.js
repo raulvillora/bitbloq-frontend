@@ -8,8 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils) {
-            $scope.center = {}; // when user is headmaster
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
             $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
@@ -40,6 +39,23 @@
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
             $scope.moment = moment;
+            $scope.selectedTab = 'teachers';
+            $scope.activableRobots = [{
+                'uuid': 'mBot',
+                'image': 'mbot',
+                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+            },
+                {
+                    'uuid': 'mRanger',
+                    'image': 'rangerlandraider',
+                    'link': 'https://www.makeblock.es/productos/mbot_ranger/'
+                },
+                {
+                    'uuid': 'starterKit',
+                    'image': 'startertank',
+                    'link': 'https://www.makeblock.es/productos/robot_starter_kit/'
+                }
+            ];
 
             var currentModal;
 
@@ -48,7 +64,7 @@
             };
 
             $scope.editGroup = function() {
-                exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, $scope.center._id)
+                exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, centerModeService.center._id)
                     .then(function() {
                         _getTasksByExercise($routeParams.id);
                         _getGroups('teacher', $routeParams.id);
@@ -246,43 +262,49 @@
             };
 
             $scope.deleteTeacher = function(teacher) {
-                var confirmAction = function() {
-                        centerModeApi.deleteTeacher(teacher._id, $scope.center._id).then(function() {
-                            _.remove($scope.teachers, teacher);
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteTeacher',
-                                id: 'deleteTeacher',
-                                type: 'ok',
-                                time: 5000
+                if(teacher.notConfirmed){
+                    centerModeApi.deleteInvitation(teacher._id, centerModeService.center._id).then(function(){
+                        _.remove($scope.teachers, teacher);
+                    });
+                } else {
+                    var confirmAction = function() {
+                            centerModeApi.deleteTeacher(teacher._id, centerModeService.center._id).then(function() {
+                                _.remove($scope.teachers, teacher);
+                                alertsService.add({
+                                    text: 'centerMode_alert_deleteTeacher',
+                                    id: 'deleteTeacher',
+                                    type: 'ok',
+                                    time: 5000
+                                });
+                            }).catch(function() {
+                                alertsService.add({
+                                    text: 'centerMode_alert_deleteTeacher-Error',
+                                    id: 'deleteTeacher',
+                                    type: 'error'
+                                });
                             });
-                        }).catch(function() {
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteTeacher-Error',
-                                id: 'deleteTeacher',
-                                type: 'error'
-                            });
-                        });
-                        teacherModal.close();
-                    },
-                    parent = $rootScope,
-                    modalOptions = parent.$new();
+                            teacherModal.close();
+                        },
+                        parent = $rootScope,
+                        modalOptions = parent.$new();
 
-                _.extend(modalOptions, {
-                    title: 'deleteTeacher_modal_title',
-                    confirmButton: 'button_delete ',
-                    rejectButton: 'cancel',
-                    confirmAction: confirmAction,
-                    contentTemplate: '/views/modals/information.html',
-                    textContent: 'deleteTeacher_modal_information',
-                    secondaryContent: 'deleteTeacher_modal_information-explain',
-                    modalButtons: true
-                });
+                    _.extend(modalOptions, {
+                        title: 'deleteTeacher_modal_title',
+                        confirmButton: 'button_delete ',
+                        rejectButton: 'cancel',
+                        confirmAction: confirmAction,
+                        contentTemplate: '/views/modals/information.html',
+                        textContent: 'deleteTeacher_modal_information',
+                        secondaryContent: 'deleteTeacher_modal_information-explain',
+                        modalButtons: true
+                    });
 
-                var teacherModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions
-                });
+                    var teacherModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--input',
+                        scope: modalOptions
+                    });
+                }
             };
 
             $scope.deleteStudent = function(student) {
@@ -407,8 +429,10 @@
 
             };
 
+            $scope.centerModeService = centerModeService;
+
             $scope.newGroup = function() {
-                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, $scope.center._id)
+                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, centerModeService.center._id)
                     .then(function() {
                         _getGroups('teacher');
                     });
@@ -418,12 +442,20 @@
                 var confirmAction = function() {
                         var teachers = _.map(modalOptions.newTeachersModel, 'text');
                         if (teachers.length > 0) {
-                            centerModeApi.addTeachers(teachers, $scope.center._id).then(function(response) {
-                                if (response.data.teachersNotAdded) {
-                                    commonModals.noAddTeachers(response.data.teachersNotAdded, response.data.teachersAdded.length);
+                            centerModeApi.addTeachers(teachers, centerModeService.center._id).then(function(response) {
+                                if (response.data.teachersWithError) {
+                                    commonModals.noAddTeachers(response.data.teachersWithError);
                                 }
-                                if (response.data.teachersAdded) {
-                                    _.forEach(response.data.teachersAdded, function(teacher) {
+                                if (response.data.teachersWaitingConfirmation) {
+                                    var alertText = response.data.teachersWaitingConfirmation.length === 1 ? 'centerMode_alert_sendInvitation' : 'centerMode_alert_sendInvitations';
+                                    alertsService.add({
+                                        text: alertText,
+                                        id: 'addTeacher',
+                                        type: 'info',
+                                        time: 5000
+                                    });
+                                    _.forEach(response.data.teachersWaitingConfirmation, function(teacher) {
+                                        teacher.notConfirmed = true;
                                         $scope.teachers.push(teacher);
                                     });
                                 }
@@ -503,6 +535,23 @@
                 });
             };
 
+            $scope.resendInvitation = function(teacher) {
+                centerModeApi.resendInvitation(teacher._id, centerModeService.center._id).then(function() {
+                    alertsService.add({
+                        text: 'centerMode_alert_sendInvitation',
+                        id: 'addTeacher',
+                        type: 'info',
+                        time: 5000
+                    });
+                }).catch(function() {
+                    alertsService.add({
+                        text: 'centerMode_alert_addTeacher-Error',
+                        id: 'addTeacher',
+                        type: 'error'
+                    });
+                });
+            };
+
             $scope.saveUrl = function(newUrl) {
                 $scope.common.lastUrl = $location.url();
                 $location.url(newUrl);
@@ -510,13 +559,14 @@
 
             function _checkUrl() {
                 $scope.common.urlType = $routeParams.type;
+                checkWatchers();
                 switch ($scope.common.urlType) {
                     case 'center':
                         _getCenter();
                         break;
                     case 'center-teacher':
                     case 'teacher':
-                        $scope.center = {};
+                        centerModeService.setCenter();
                         _getTeacher($routeParams.id);
                         break;
                     case 'group':
@@ -527,7 +577,7 @@
                         }
                         break;
                     case 'student':
-                        $scope.center = {};
+                        centerModeService.setCenter();
                         _getGroups('student');
                         _getMyExercises();
                         break;
@@ -536,8 +586,99 @@
                         _getTasksByExerciseCount($routeParams.id);
                         _getGroups(null, $routeParams.id);
                         break;
+                    case 'add-teacher':
+                        _congratulations($routeParams.id);
+                        break;
                 }
             }
+
+            function _congratulations(token) {
+                centerModeApi.confirmAddTeacher(token).then(function(response) {
+                    var modalOptions = $rootScope.$new(),
+                        extraButton = 'centerMode_button_createCenter-try';
+                    if ($scope.common.user.birthday && utils.userIsUnder14($scope.common.user.birthday)) {
+                        extraButton = null;
+                    }
+                    var confirmationTitle = $translate.instant('centerMode_modal_confirmation-title', {
+                        value: response.data
+                    });
+                    _.extend(modalOptions, {
+                        title: 'welcome',
+                        contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
+                        confirmationTitle: confirmationTitle,
+                        customClass: 'modal--information',
+                        confirmButton: 'centerMode_modal_confirmation-button',
+                        confirmAction: function() {
+                            ngDialog.close(centerModal);
+                        },
+                        modalButtons: true,
+                        errors: false
+                    });
+
+                    var centerModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--centerMode',
+                        scope: modalOptions
+
+                    });
+                    $location.path('/center-mode/teacher');
+                    $scope.common.userRole = 'teacher';
+                }).catch(function() {
+                    alertsService.add({
+                        text: 'centerMode_modal_confirmation-error',
+                        id: 'addTeacher',
+                        type: 'error'
+                    });
+                });
+            }
+
+            $scope.uploadImageTrigger = function(type) {
+                $timeout(function() {
+                    if (type === 'main') {
+                        $('.main-image--input').click();
+
+                    } else {
+                        $('.other-image--input').click();
+                    }
+                }, 0);
+            };
+
+            $scope.uploadImage = function(e) {
+                var properties = {
+                    minWidth: 100,
+                    minHeight: 100,
+                    containerDest: 'centerImage',
+                    without: /image.gif/
+                };
+                utils.uploadImage(e, properties).then(function(response) {
+                    $scope.tempAvatar = response.blob;
+                    //  $scope.saveProfile();
+                }).catch(function(response) {
+                    switch (response.error) {
+                        case 'heavy':
+                            alertsService.add({
+                                text: 'account-image-heavy-error',
+                                id: 'user-avatar',
+                                type: 'warning'
+                            });
+                            break;
+                        case 'small':
+                            alertsService.add({
+                                text: 'account-image-small-error',
+                                id: 'user-avatar',
+                                type: 'warning'
+                            });
+                            break;
+                        case 'no-image':
+                            alertsService.add({
+                                text: 'account-image-read-error',
+                                id: 'user-avatar',
+                                type: 'warning'
+                            });
+                            break;
+                    }
+                });
+            };
 
             function _closeGroupAction() {
                 $scope.classStateCheck = false;
@@ -561,8 +702,8 @@
 
             function _getCenter() {
                 return centerModeApi.getMyCenter().then(function(response) {
-                    $scope.center = response.data;
-                    _getTeachers($scope.center._id);
+                    centerModeService.setCenter(response.data);
+                    _getTeachers(centerModeService.center._id);
                 });
             }
 
@@ -603,7 +744,7 @@
                     if ($scope.teacher._id !== $scope.common.user._id) {
                         teacherId = $scope.teacher._id; // if user is student, it will be undefined
                     }
-                    centerModeApi.getGroups(role, teacherId, $scope.center._id).then(function(response) {
+                    centerModeApi.getGroups(role, teacherId, centerModeService.center._id).then(function(response) {
                         $scope.groups = response.data;
                         $scope.groupArray = $scope.groups;
                     });
@@ -681,8 +822,8 @@
                 if (teacherId) {
                     // user is headmaster
                     centerModeApi.getMyCenter().then(function(response) {
-                        $scope.center = response.data;
-                        centerModeApi.getTeacher(teacherId, $scope.center._id).then(function(response) {
+                        centerModeService.setCenter(response.data);
+                        centerModeApi.getTeacher(teacherId, centerModeService.center._id).then(function(response) {
                             $scope.secondaryBreadcrumb = true;
                             $scope.teacher = _.extend($scope.teacher, response.data);
                             _getExercisesCount();
@@ -752,6 +893,11 @@
                         localStorage.exercisesChange = false;
                         _checkUrl();
                     }
+                } else if ($routeParams.type === 'exercise-info') {
+                    if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
+                        localStorage.exercisesChange = false;
+                        _getExercise($routeParams.id);
+                    }
                 }
             };
 
@@ -770,17 +916,36 @@
             }, function() {
                 $scope.common.setUser();
                 alertsService.add({
-                    text: 'projects-need-tobe-logged',
-                    id: 'projects-need-tobe-logged',
+                    text: 'view-need-tobe-logged',
+                    id: 'view-need-tobe-logged',
                     type: 'error'
                 });
-                $location.path('/login');
+                $scope.common.goToLogin();
             });
 
             $scope.searchExercises = function() {
                 $location.search($scope.filterExercisesParams);
                 getTeacherExercisesPaginated($scope.pageno, $scope.filterExercisesParams);
                 _getExercisesCount($scope.filterExercisesParams);
+            };
+
+            function checkWatchers() {
+                if ($scope.selectedTab === 'info') {
+                    centerModeService.addWatchers();
+                } else {
+                    centerModeService.unBlindAllWatchers();
+                }
+            }
+
+            $scope.setTab = function(tab) {
+                $scope.selectedTab = tab;
+                checkWatchers();
+            };
+
+            $scope.centerActivateRobot = function(robot) {
+                commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
+                    centerModeService.setCenter(response.data);
+                });
             };
 
             $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {
@@ -804,6 +969,7 @@
             $scope.$on('$destroy', function() {
                 $window.onfocus = null;
                 $document.off('click', clickDocumentHandler);
+                centerModeService.unBlindAllWatchers();
             });
         });
 })();

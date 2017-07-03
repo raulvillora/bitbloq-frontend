@@ -20,7 +20,7 @@ angular.module('bitbloqApp')
             'sharedprojects': {
                 'current': 1
             },
-            'trash': {
+            'mytrash': {
                 'current': 1
             }
         };
@@ -242,6 +242,30 @@ angular.module('bitbloqApp')
                     }
                 }
                 angular.element('#file-input')[0].value = '';
+            }).catch(function(response) {
+                switch (response.error) {
+                    case 'heavy':
+                        alertsService.add({
+                            text: 'info-tab-image-heavy-error',
+                            id: 'info-tab-image',
+                            type: 'warning'
+                        });
+                        break;
+                    case 'small':
+                        alertsService.add({
+                            text: 'info-tab-image-small-error',
+                            id: 'info-tab-image',
+                            type: 'warning'
+                        });
+                        break;
+                    case 'no-image':
+                        alertsService.add({
+                            text: 'info-tab-image-read-error',
+                            id: 'info-tab-image',
+                            type: 'warning'
+                        });
+                        break;
+                }
             });
         };
 
@@ -357,6 +381,7 @@ angular.module('bitbloqApp')
                     $location.search('page', newPageNumber);
                     $scope.pagination.sharedprojects.current = newPageNumber;
                 }
+
             }).catch(function() {
                 $scope.sharedProjects = [];
                 $scope.common.isLoading = false;
@@ -433,7 +458,7 @@ angular.module('bitbloqApp')
                 if ($route.current.pathParams.tab === 'trash') {
                     $scope.trashProjects = _.clone(response.data);
                     $location.search('page', newPageNumber);
-                    $scope.pagination.trash.current = newPageNumber;
+                    $scope.pagination.mytrash.current = newPageNumber;
                 }
 
             }).catch(function() {
@@ -488,7 +513,7 @@ angular.module('bitbloqApp')
                     $scope.getMySharedProjectsPage($scope.pagination.sharedprojects.current);
                     break;
                 case 'trash':
-                    $scope.getMyTrashPage($scope.pagination.trash.current);
+                    $scope.getMyTrashPage($scope.pagination.mytrash.current);
                     break;
             }
         };
@@ -530,17 +555,17 @@ angular.module('bitbloqApp')
                     case 'myprojects':
                         $scope.pagination.myprojects.current = $routeParams.page;
                         $scope.pagination.sharedprojects.current = 1;
-                        $scope.pagination.trash.current = 1;
+                        $scope.pagination.mytrash.current = 1;
                         break;
                     case 'sharedprojects':
                         $scope.pagination.myprojects.current = 1;
                         $scope.pagination.sharedprojects.current = $routeParams.page;
-                        $scope.pagination.trash.current = 1;
+                        $scope.pagination.mytrash.current = 1;
                         break;
-                    case 'trash':
+                    case 'mytrash':
                         $scope.pagination.myprojects.current = 1;
                         $scope.pagination.sharedprojects.current = 1;
-                        $scope.pagination.trash.current = $routeParams.page;
+                        $scope.pagination.mytrash.current = $routeParams.page;
                         break;
                 }
             }

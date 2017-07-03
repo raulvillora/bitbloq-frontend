@@ -12,7 +12,7 @@
                 <div class="form-control">
                     <label>{{ 'name' | translate }}*</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'projectname', 'input--error': form.projectname.$error.required && publishProjectError}">
-                        <input type="text" id="projectname" name="projectname" placeholder="{{'infotab-project-name' | translate}}" data-ng-model="currentProject.name" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user" data-element="info-project-name" required>
+                        <input type="text" id="projectname" name="projectname" placeholder="{{ common.section !== 'exercise'? 'infotab-project-name': 'infotab-exercise-name' | translate}}" data-ng-model="currentProject.name" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'projectname'" data-ng-blur="checkPojectName()" data-ng-disabled="!common.user" data-element="info-project-name" required>
                     </span>
                     <span class="form--error" ng-show="form.projectname.$error.required && publishProjectError">
                         <small>{{ 'infotab-project-nameError' | translate }}</small>

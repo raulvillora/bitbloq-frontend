@@ -455,16 +455,11 @@ angular.module('bitbloqApp')
         exports.clone = function(project, openInTab, type) {
             type = type || 'project';
             var modalTitle,
-                defaultTitle,
                 mainText,
                 currentApi,
                 modalOptions = $rootScope.$new(),
                 defered = $q.defer(),
                 newProjectName = common.translate('modal-clone-project-name') + project.name;
-
-            if (!project.name) {
-                project.name = common.translate(defaultTitle);
-            }
 
             function confirmAction(newName) {
                 alertsService.add({
@@ -492,14 +487,13 @@ angular.module('bitbloqApp')
             if (type === 'project') {
                 currentApi = projectApi;
                 modalTitle = 'modal-change-project-name-title';
-                defaultTitle = 'new-project';
                 mainText = 'modal-change-project-name-maintext';
             } else {
                 currentApi = exerciseApi;
                 modalTitle = 'centerMode_modal_cloneExercise-title';
-                defaultTitle = 'new-exercise';
                 mainText = 'centerMode_modal_cloneExercise-maintext';
             }
+            //placeholder="{{'infotab-project-name' | translate}}"
 
             _.extend(modalOptions, {
                 title: modalTitle,
@@ -535,7 +529,6 @@ angular.module('bitbloqApp')
         exports.rename = function(project, type) {
             type = type || 'project';
             var modalTitle,
-                defaultTitle,
                 mainText,
                 renameModal,
                 defered = $q.defer(),
@@ -543,18 +536,16 @@ angular.module('bitbloqApp')
                 modalOptions = $rootScope.$new();
 
             function confirmAction() {
-                project.name = modalOptions.project.name || $translate.instant(defaultTitle);
+                project.name = modalOptions.input.value || '';
                 renameModal.close();
                 defered.resolve();
             }
 
             if (type === 'project') {
                 modalTitle = 'modal-change-project-name-title';
-                defaultTitle = 'new-project';
                 mainText = 'modal-change-project-name-maintext';
             } else {
                 modalTitle = 'centerMode_modal_renameExercise-title';
-                defaultTitle = 'new-exercise';
                 mainText = 'centerMode_modal_renameExercise-maintext';
             }
 
@@ -563,17 +554,18 @@ angular.module('bitbloqApp')
                 modalButtons: true,
                 confirmButton: 'save',
                 rejectButton: 'cancel',
-                changeName: true,
                 modalInput: true,
                 confirmAction: confirmAction,
                 contentTemplate: '/views/modals/input.html',
                 mainText: mainText,
-                project: {
-                    name: currentProjectName
+                input: {
+                    id: 'projectCloneName',
+                    name: 'projectCloneName',
+                    placeholder: mainText,
+                    value: currentProjectName
                 },
                 condition: function() {
-                    /* jshint validthis: true */
-                    return !!this.$parent.project.name;
+                    return !!modalOptions.input.value;
                 }
             });
 
@@ -694,24 +686,17 @@ angular.module('bitbloqApp')
             });
             serialMonitorPanel.scope = scope;
         };
-        exports.noAddTeachers = function(teachers, added) {
-            var noShareModal, confirmAction = function() {
-                    noShareModal.close();
-                    alertsService.add({
-                        text: 'modalShare_alert_addTeacher ',
-                        id: 'private-project',
-                        type: 'ok',
-                        time: 5000,
-                        value: added
-                    });
-                },
+        exports.noAddTeachers = function(teachers) {
+            var noShareModal,
                 modalScope = $rootScope.$new();
 
             _.extend(modalScope, {
                 title: 'newTeacher_modal_aceptButton',
                 modalButtons: true,
                 confirmButton: 'modal__understood-button',
-                confirmAction: confirmAction,
+                confirmAction: function() {
+                    noShareModal.close();
+                },
                 contentTemplate: '/views/modals/centerMode/noAddTeachers.html',
                 teachers: teachers
             });
@@ -761,17 +746,17 @@ angular.module('bitbloqApp')
                 confirmAction: function() {
                     ngDialog.closeAll();
                     /*chromeAppApi.installChromeApp(function(err) {
-                        if (!err) {
-                            callback(null);
-                        } else {
-                            alertsService.add({
-                                text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
-                                id: 'chromeapp',
-                                type: 'error'
-                            });
-                            callback(err);
-                        }
-                    });*/
+                     if (!err) {
+                     callback(null);
+                     } else {
+                     alertsService.add({
+                     text: $translate.instant('error-chromeapp-install') + ': ' + $translate.instant(err.error),
+                     id: 'chromeapp',
+                     type: 'error'
+                     });
+                     callback(err);
+                     }
+                     });*/
                     common.user.chromeapp = true;
                     userApi.update({
                         chromeapp: true
@@ -786,13 +771,15 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.activateRobot = function(robot) {
+        exports.activateRobot = function(robot, center) {
             var activateModal,
                 modalScope = $rootScope.$new(),
                 robotName = robot,
                 activationCode = {},
                 errorMessage = '',
-                defered = $q.defer();
+                defered = $q.defer(),
+                type,
+                centerId = center;
 
             var confirmAction = function() {
                 var actCode = '';
@@ -800,7 +787,11 @@ angular.module('bitbloqApp')
                     actCode = actCode + value;
                 });
 
-                thirdPartyRobotsApi.exchangeCode(actCode, robot).then(function(res) {
+                if (centerId) {
+                    type = 'center';
+                }
+
+                thirdPartyRobotsApi.exchangeCode(actCode, robot, centerId, type).then(function(res) {
                     common.user.thirdPartyRobots = res.data;
                     activateModal.close();
                     alertsService.add({
@@ -809,7 +800,7 @@ angular.module('bitbloqApp')
                         type: 'ok',
                         time: 5000
                     });
-                    defered.resolve();
+                    defered.resolve(res);
                 }).catch(function(err) {
                     switch (err.status) {
                         case 404:
@@ -865,6 +856,7 @@ angular.module('bitbloqApp')
                 activationCode: activationCode,
                 rejectAction: rejectAction,
                 errorMessage: errorMessage,
+                centerId: centerId,
                 rejectButton: 'modal-button-cancel',
                 contentTemplate: '/views/modals/activateRobot.html'
             });

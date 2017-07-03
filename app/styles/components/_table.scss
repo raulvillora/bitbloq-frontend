@@ -38,7 +38,7 @@
 .table__block,
 .table__block--invert {
     .table__block__list {
-        padding: 10px;
+        padding: 11px 10px 9px;
         background-color: #eeeeee;
         min-height: 50px;
 
@@ -302,7 +302,8 @@
 }
 
 .table__block__item--menu__item--open {
-    padding: 0;
+    padding: 0 29px;
+    text-align: left;
 }
 
 .table__block__item--menu__link {

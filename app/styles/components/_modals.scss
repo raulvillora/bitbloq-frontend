@@ -579,7 +579,9 @@
     .share-modal__emails-no-user {
         background-color: #e2e2e2;
         padding: 20px 30px;
-
+        .files{
+            list-style: initial;
+        }
         .email:last-child {
             .colon {
                 display: none;

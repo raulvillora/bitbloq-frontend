@@ -15,13 +15,15 @@ angular.module('bitbloqApp')
             startTrial: startTrial
         };
 
-        function exchangeCode(code, robotFamily) {
+        function exchangeCode(code, robotFamily, centerId, type) {
             return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'third-party-robots/activate',
                 data: {
                     code: code,
-                    robot: robotFamily
+                    robot: robotFamily,
+                    centerId: centerId,
+                    type: type
                 }
             });
         }

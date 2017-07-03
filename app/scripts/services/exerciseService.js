@@ -38,10 +38,12 @@ angular.module('bitbloqApp')
 
         exports.showActivationModal = function(robotFamily) {
             var robotModal = robotFamily ? robotFamily : robotsMap[exports.exercise.hardware.showRobotImage].family;
-            commonModals.activateRobot(robotModal).then(function() {
-                exports.showActivation = false;
-                exports.closeActivation = false;
-            });
+            if (common.section !== 'task' && common.section !== 'exercise') {
+                commonModals.activateRobot(robotModal).then(function() {
+                    exports.showActivation = false;
+                    exports.closeActivation = false;
+                });
+            }
         };
 
         exports.getRobotsMap = function(hardwareConstants) {
@@ -51,7 +53,6 @@ angular.module('bitbloqApp')
             }
             return map;
         };
-
         var robotsMap = [];
 
         hardwareService.itsHardwareLoaded().then(function() {
@@ -165,13 +166,14 @@ angular.module('bitbloqApp')
                     }, 0);
                 }
 
-                function showTimePicker(timePickerId, event) {
+                function showTimePicker(timePickerId, event, time) {
                     $('#' + timePickerId).click();
                     event.stopPropagation();
                 }
 
                 function getTime(initDate) {
                     var dateString;
+                    console.log('get time');
                     if (initDate) {
                         var momentDate = moment(initDate),
                             minutes = momentDate.minute();
@@ -180,12 +182,17 @@ angular.module('bitbloqApp')
                     return dateString;
                 }
 
-                function initTimePicker() {
-                    var options = {
-                        twentyFour: true //Display 24 hour format, defaults to falseç
-
+                function initTimePicker(time) {
+                    var options = { //Display 24 hour format, defaults to false
+                        twentyFour: true
                     };
+
+                    if (time) {
+                        options.now = time;
+                    }
+
                     $('.timepicker').wickedpicker(options);
+
                 }
 
                 function _newGroup() {
@@ -234,6 +241,7 @@ angular.module('bitbloqApp')
                     getTime: getTime,
                     oldGroups: oldGroups,
                     onlyEdit: onlyEdit,
+                    moment: moment,
                     rejectButton: 'modal-button-cancel',
                     rejectAction: defered.reject,
                     confirmAction: confirmAction,
@@ -375,12 +383,15 @@ angular.module('bitbloqApp')
         };
 
         exports.getRobotMetaData = function(robotId) {
+            var defered = $q.defer();
             robotId = robotId || exports.exercise.hardware.robot;
             hardwareService.itsHardwareLoaded().then(function() {
-                return _.find(hardwareService.hardware.robots, function(robot) {
-                    return robot.id === robotId;
-                });
+                defered.resolve(_.find(hardwareService.hardware.robots, function(robot) {
+                    return robot.uuid === robotId;
+                }));
             });
+
+            return defered.promise;
         };
 
         exports.getCleanExercise = function(exerciseRef, download) {
@@ -401,7 +412,7 @@ angular.module('bitbloqApp')
         exports.getCode = function() {
             var code;
             _updateHardwareSchema();
-            var wirelessComponents = _getWirelessConnectionComponents ();
+            var wirelessComponents = _getWirelessConnectionComponents();
             if (wirelessComponents.length > 0) {
                 _includeComponents(wirelessComponents);
             }
@@ -421,7 +432,7 @@ angular.module('bitbloqApp')
         exports.getDefaultExercise = function() {
             var exercise = {
                 creator: '',
-                name: common.translate('new-exercise'),
+                name: '',
                 description: '',
                 hardwareTags: [],
                 defaultTheme: 'infotab_option_colorTheme',
@@ -618,11 +629,13 @@ angular.module('bitbloqApp')
             utils.downloadFile(filename.substring(0, 30) + '.bitbloq', JSON.stringify(exercise), 'application/json');
         }
 
-        function _getWirelessConnectionComponents (){
+        function _getWirelessConnectionComponents() {
             var wirelessComponentArray = [];
-            _.forEach(exports.componentsArray, function(component){
-                var wirelessComponent = _.filter(component, {wirelessConnection: true});
-                if(wirelessComponent.length > 0){
+            _.forEach(exports.componentsArray, function(component) {
+                var wirelessComponent = _.filter(component, {
+                    wirelessConnection: true
+                });
+                if (wirelessComponent.length > 0) {
                     wirelessComponentArray.push(wirelessComponent);
                 }
             });
@@ -630,7 +643,7 @@ angular.module('bitbloqApp')
         }
 
         function _includeComponents(components) {
-            _.forEach(components, function(component){
+            _.forEach(components, function(component) {
                 exports.project.hardware.components.push(component);
             });
         }
@@ -644,6 +657,7 @@ angular.module('bitbloqApp')
         function _saveExercise() {
             var defered = $q.defer();
             exports.completedExercise();
+            exports.exercise.name = exports.exercise.name || '';
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
                     var newMark = _.join(exports.exercise.newMark, '.');
@@ -654,6 +668,7 @@ angular.module('bitbloqApp')
                             exports.exercise.mark = newMark;
                             exports.exercise.remark = exports.exercise.newRemark;
                             exports.saveStatus = 5;
+                            localStorage.exercisesChange = true;
                             defered.resolve();
                         }).catch(function() {
                             exports.saveStatus = 3;
@@ -666,9 +681,6 @@ angular.module('bitbloqApp')
                 }
             } else {
                 if (exports.exerciseHasChanged() || exports.tempImage.file) {
-
-                    exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
-
                     $log.debug('Auto saving exercise...');
 
                     if (exports.tempImage.file && !exports.tempImage.generate) {
@@ -847,7 +859,6 @@ angular.module('bitbloqApp')
         exports.addWatchers = function() {
             scope.$watch('exercise.name', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    exports.exercise.name = exports.exercise.name || common.translate('new-exercise');
                     exports.startAutosave();
                 }
             });
