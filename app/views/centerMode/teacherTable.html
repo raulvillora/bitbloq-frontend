@@ -29,7 +29,7 @@
             <div class="table__block__item table__block__item--information col-vsmall-4" ng-if="item.notConfirmed">
                 <span>
                     {{'centerMode_notConfirmedTeacher' | translate }}
-                    <button class="link--default">{{'centerMode_forwardInvitation' | translate }}</button>
+                    <button class="link--default" ng-click="resendInvitation(item)">{{'centerMode_resendInvitation' | translate }}</button>
                 </span>
             </div>
             <div class="table__block__item col-vsmall-2" ng-if="!item.notConfirmed">

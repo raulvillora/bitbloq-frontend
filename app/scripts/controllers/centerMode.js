@@ -529,6 +529,23 @@
                 });
             };
 
+            $scope.resendInvitation = function(teacher) {
+                centerModeApi.resendInvitation(teacher._id, centerModeService.center._id).then(function() {
+                    alertsService.add({
+                        text: 'centerMode_alert_sendInvitation',
+                        id: 'addTeacher',
+                        type: 'info',
+                        time: 5000
+                    });
+                }).catch(function() {
+                    alertsService.add({
+                        text: 'centerMode_alert_addTeacher-Error',
+                        id: 'addTeacher',
+                        type: 'error'
+                    });
+                });
+            };
+
             $scope.saveUrl = function(newUrl) {
                 $scope.common.lastUrl = $location.url();
                 $location.url(newUrl);

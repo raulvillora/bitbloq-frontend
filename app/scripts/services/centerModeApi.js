@@ -25,6 +25,7 @@ angular
             getTeachers: getTeachers,
             isHeadmaster: isHeadmaster,
             registerInGroup: registerInGroup,
+            resendInvitation: resendInvitation,
             updateGroup: updateGroup,
             unassignExerciseInGroup: unassignExerciseInGroup
         };
@@ -230,6 +231,17 @@ angular
                 url: envData.config.centerModeUrl + 'member/student',
                 data: {
                     accessId: accessId
+                }
+            });
+        }
+
+        function resendInvitation(teacherId, centerId) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'member/send-invitation',
+                data: {
+                    teacherId: teacherId,
+                    centerId: centerId
                 }
             });
         }
