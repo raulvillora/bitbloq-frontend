@@ -52,6 +52,7 @@ angular.module('bitbloqApp')
         $scope.filtered = {
             projects: []
         };
+        $scope.projectsDisable = true;
 
         var softwareProjectDefault = {
             vars: {
@@ -367,6 +368,8 @@ angular.module('bitbloqApp')
             };
             angular.extend(queryParams, pageParams);
             $log.debug('getSharedProjects', queryParams);
+            $scope.projectsDisable = true;
+            $('#projects__view').scrollTop(0);
             return projectApi.getMySharedProjects(queryParams).then(function(response) {
                 projectApi.getMySharedProjectsCounter(queryParams).then(function(data) {
                     $scope.sharedCount = data.data.count;
@@ -389,6 +392,8 @@ angular.module('bitbloqApp')
                     type: 'error'
                 });
                 $location.path('/login');
+            }).finally(function() {
+                $scope.projectsDisable = false;
             });
         };
 
@@ -402,6 +407,8 @@ angular.module('bitbloqApp')
             angular.extend(queryParams, pageParams);
             $log.debug('getProjects', queryParams);
 
+            $scope.projectsDisable = true;
+            $('#projects__view').scrollTop(0);
             return projectApi.getMyProjects(queryParams).then(function(response) {
                 projectApi.getMyProjectsCounter(queryParams).then(function(data) {
                     $scope.projectsCount = data.data.count;
@@ -424,6 +431,8 @@ angular.module('bitbloqApp')
                     type: 'error'
                 });
                 $location.path('/login');
+            }).finally(function() {
+                $scope.projectsDisable = false;
             });
 
         };
@@ -436,6 +445,8 @@ angular.module('bitbloqApp')
                 'page': newPageNumber - 1
             };
             angular.extend(queryParams, pageParams);
+            $('#projects__view').scrollTop(0);
+            $scope.projectsDisable = true;
             return projectApi.getMyTrash(queryParams).then(function(response) {
                 projectApi.getMyTrashProjectsCounter(queryParams).then(function(data) {
                     $scope.trashCount = data.data.count;
@@ -461,6 +472,8 @@ angular.module('bitbloqApp')
                     type: 'error'
                 });
                 $location.path('/login');
+            }).finally(function() {
+                $scope.projectsDisable = false;
             });
         };
 
