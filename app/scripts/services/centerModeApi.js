@@ -11,6 +11,7 @@ angular
             confirmAddTeacher: confirmAddTeacher,
             createGroup: createGroup,
             deleteGroup: deleteGroup,
+            deleteInvitation: deleteInvitation,
             deleteStudent: deleteStudent,
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
@@ -90,6 +91,13 @@ angular
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'group/' + groupId
+            });
+        }
+
+        function deleteInvitation(teacherId, centerId){
+            return $http({
+                method: 'DELETE',
+                url: envData.config.centerModeUrl + 'member/invitation/teacher/' + teacherId + '/center/' + centerId
             });
         }
 

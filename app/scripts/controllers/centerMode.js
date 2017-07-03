@@ -262,43 +262,49 @@
             };
 
             $scope.deleteTeacher = function(teacher) {
-                var confirmAction = function() {
-                        centerModeApi.deleteTeacher(teacher._id, centerModeService.center._id).then(function() {
-                            _.remove($scope.teachers, teacher);
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteTeacher',
-                                id: 'deleteTeacher',
-                                type: 'ok',
-                                time: 5000
+                if(teacher.notConfirmed){
+                    centerModeApi.deleteInvitation(teacher._id, centerModeService.center._id).then(function(){
+                        _.remove($scope.teachers, teacher);
+                    });
+                } else {
+                    var confirmAction = function() {
+                            centerModeApi.deleteTeacher(teacher._id, centerModeService.center._id).then(function() {
+                                _.remove($scope.teachers, teacher);
+                                alertsService.add({
+                                    text: 'centerMode_alert_deleteTeacher',
+                                    id: 'deleteTeacher',
+                                    type: 'ok',
+                                    time: 5000
+                                });
+                            }).catch(function() {
+                                alertsService.add({
+                                    text: 'centerMode_alert_deleteTeacher-Error',
+                                    id: 'deleteTeacher',
+                                    type: 'error'
+                                });
                             });
-                        }).catch(function() {
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteTeacher-Error',
-                                id: 'deleteTeacher',
-                                type: 'error'
-                            });
-                        });
-                        teacherModal.close();
-                    },
-                    parent = $rootScope,
-                    modalOptions = parent.$new();
+                            teacherModal.close();
+                        },
+                        parent = $rootScope,
+                        modalOptions = parent.$new();
 
-                _.extend(modalOptions, {
-                    title: 'deleteTeacher_modal_title',
-                    confirmButton: 'button_delete ',
-                    rejectButton: 'cancel',
-                    confirmAction: confirmAction,
-                    contentTemplate: '/views/modals/information.html',
-                    textContent: 'deleteTeacher_modal_information',
-                    secondaryContent: 'deleteTeacher_modal_information-explain',
-                    modalButtons: true
-                });
+                    _.extend(modalOptions, {
+                        title: 'deleteTeacher_modal_title',
+                        confirmButton: 'button_delete ',
+                        rejectButton: 'cancel',
+                        confirmAction: confirmAction,
+                        contentTemplate: '/views/modals/information.html',
+                        textContent: 'deleteTeacher_modal_information',
+                        secondaryContent: 'deleteTeacher_modal_information-explain',
+                        modalButtons: true
+                    });
 
-                var teacherModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions
-                });
+                    var teacherModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--input',
+                        scope: modalOptions
+                    });
+                }
             };
 
             $scope.deleteStudent = function(student) {
