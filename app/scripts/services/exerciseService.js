@@ -165,36 +165,8 @@ angular.module('bitbloqApp')
                 }
 
                 function showTimePicker(timePickerId, event, time) {
-                    console.log('timeshowTimePicker');
-                    console.log(time);
-                    /*var test = $("#" + timePickerId).remove();
-                    $('#time-picker-to').prepend(test); // later
-                    $("#" + timePickerId).wickedpicker({
-                        twentyFour: true,
-                        now: time
-                    });*/
                     $('#' + timePickerId).click();
                     event.stopPropagation();
-                }
-
-                function allowInput(groupId, timePicker, time) {
-                    $timeout($('.wickedpicker').hide(), 0);
-                    $('#timePicker' + timePicker + groupId).removeAttr('onkeypress');
-                }
-
-                function checkTimeFormat(time, timePickerId) {
-                    console.log(time);
-                    if (time && time.match(/^([01]\d|2[0-3])[ ]*:[ ]*?([0-5]\d)$/g)) {
-                        console.log('match');
-                        var test = $("#" + timePickerId).remove();
-                        $('#time-picker-to').prepend(test); // later
-                        $("#" + timePickerId).wickedpicker({
-                            twentyFour: true,
-                            now: time
-                        });
-                    } else {
-                        console.log('no match!!!');
-                    }
                 }
 
                 function getTime(initDate) {
@@ -263,8 +235,6 @@ angular.module('bitbloqApp')
                     showDatePicker: showDatePicker,
                     showTimePicker: showTimePicker,
                     initTimePicker: initTimePicker,
-                    checkTimeFormat: checkTimeFormat,
-                    allowInput: allowInput,
                     newGroup: _newGroup,
                     getTime: getTime,
                     oldGroups: oldGroups,
