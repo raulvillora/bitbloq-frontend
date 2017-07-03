@@ -616,6 +616,7 @@
 
                     });
                     $location.path('/center-mode/teacher');
+                    $scope.common.userRole = 'teacher';
                 }).catch(function() {
                     alertsService.add({
                         text: 'centerMode_modal_confirmation-error',
