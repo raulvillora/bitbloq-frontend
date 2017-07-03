@@ -75,18 +75,18 @@
             </li>
         </ul>
     </div>
-    <div class="robot-info" ng-class="{'cursor-hand':(common.section !=='exercise' || common.section !=='task')}" ng-show="currentProjectService.showActivation && !currentProjectService.closeActivation">
-        <div class="robot-info__container" ng-class="{'cursor-hand':(common.section !=='exercise' || common.section !=='task')}" ng-click="showActivationModal()">
-            <svg class="svg-icon robot-info__icon" ng-class="{'cursor-hand':(common.section !=='exercise' || common.section !=='task')}">
+    <div class="robot-info" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}" ng-show="currentProjectService.showActivation && !currentProjectService.closeActivation">
+        <div class="robot-info__container" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}" ng-click="showActivationModal()">
+            <svg class="svg-icon robot-info__icon" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}">
                 <use xlink:href="#info"></use>
             </svg>
-            <span class="robot-info__text" ng-class="{'cursor-hand':(common.section !=='exercise' || common.section !=='task' )}">
+            <span class="robot-info__text" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task' )}">
 
-                <p class="robot-info__text--days" ng-class="{'cursor-hand':(common.section !=='exercise') || common.section !=='task'}">{{common.section ==='exercise'  ? groups.length > 0 ? 'robot-center-activate' : 'robot-activate-exercise': common.section ==='task' ? 'robot-center-activate' : 'robot-activate'| translate}}</p>
-                <p class="robot-info__text--activate" ng-class="{'cursor-hand':(common.section !=='exercise' || common.section !=='task')}">{{ common.section ==='exercise' ? groups.length > 0  ? 'robot-contact' : 'robot-center-assign': common.section ==='task' ? 'robot-center-task': 'robot-trial-introduce-compile' | translate}}</p>
+                <p class="robot-info__text--days" ng-class="{'cursor-hand':(common.section !=='exercise') && common.section !=='task'}">{{common.section ==='exercise'  ? groups.length > 0 ? 'robot-center-activate' : 'robot-activate-exercise': common.section ==='task' ? 'robot-center-activate' : 'robot-activate'| translate}}</p>
+                <p class="robot-info__text--activate" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}">{{ common.section ==='exercise' ? groups.length > 0  ? 'robot-contact' : 'robot-center-assign': common.section ==='task' ? 'robot-center-task': 'robot-trial-introduce-compile' | translate}}</p>
             </span>
         </div>
-        <svg class="svg-icon robot-info__close" ng-click="closeActivationWarning()" ng-class="{'cursor-hand':(common.section !=='exercise' || common.section !=='task')}">
+        <svg class="svg-icon robot-info__close" ng-click="closeActivationWarning()" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}">
             <use xlink:href="#erase"></use>
         </svg>
     </div>

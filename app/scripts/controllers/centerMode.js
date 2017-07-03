@@ -41,10 +41,10 @@
             $scope.moment = moment;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                'uuid': 'mBot',
-                'image': 'mbot',
-                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-            },
+                    'uuid': 'mBot',
+                    'image': 'mbot',
+                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+                },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -857,6 +857,8 @@
             }
 
             $window.onfocus = function() {
+                console.log('focus on me...fo-fo-focus on me! oh!');
+                console.log($routeParams.type);
                 if ($routeParams.type === 'teacher') {
                     $scope.$apply(function() {
                         $scope.timestamp = Date.now();
@@ -865,6 +867,8 @@
                         localStorage.exercisesChange = false;
                         _checkUrl();
                     }
+                } else if ($routeParams.type === 'exercise-info') {
+
                 }
             };
 

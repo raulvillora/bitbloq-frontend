@@ -6,7 +6,7 @@
             </svg>
             {{'centerMode_exercises' | translate}}
         </h1>
-        <button class="center-mode__table__header__element-right filter-button" ng-click="changeFilter()">
+        <button ng-hide="true" class="center-mode__table__header__element-right filter-button" ng-click="changeFilter()">
             {{!showFilters? 'centerMode_exercises_showFilters' : 'centerMode_exercises_hideFilters' | translate}}
             <svg class="svg-icon filter-arrow" ng-class="{'filter-arrow--reversed' : showFilters}">
                 <use xlink:href="#arrowDown"></use>

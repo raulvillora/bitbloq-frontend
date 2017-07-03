@@ -73,12 +73,13 @@ angular.module('bitbloqApp')
                 } else {
                     robotsActivated = exerciseService.exercise.group.center.activatedRobots;
                 }
-
-                if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
-                    $scope.robotActivatedInCenter = true;
-                } else {
-                    $scope.currentProjectService.showActivation = true;
-                    $scope.currentProjectService.closeActivation = false;
+                if ($scope.currentProject.hardware.showRobotImage) {
+                    if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
+                        $scope.robotActivatedInCenter = true;
+                    } else {
+                        $scope.currentProjectService.showActivation = true;
+                        $scope.currentProjectService.closeActivation = false;
+                    }
                 }
             });
 

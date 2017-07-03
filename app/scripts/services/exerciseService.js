@@ -38,10 +38,12 @@ angular.module('bitbloqApp')
 
         exports.showActivationModal = function(robotFamily) {
             var robotModal = robotFamily ? robotFamily : robotsMap[exports.exercise.hardware.showRobotImage].family;
-            commonModals.activateRobot(robotModal).then(function() {
-                exports.showActivation = false;
-                exports.closeActivation = false;
-            });
+            if (common.section !== 'task' && common.section !== 'exercise') {
+                commonModals.activateRobot(robotModal).then(function() {
+                    exports.showActivation = false;
+                    exports.closeActivation = false;
+                });
+            }
         };
 
         exports.getRobotsMap = function(hardwareConstants) {
