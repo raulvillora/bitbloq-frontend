@@ -857,8 +857,6 @@
             }
 
             $window.onfocus = function() {
-                console.log('focus on me...fo-fo-focus on me! oh!');
-                console.log($routeParams.type);
                 if ($routeParams.type === 'teacher') {
                     $scope.$apply(function() {
                         $scope.timestamp = Date.now();
@@ -868,7 +866,10 @@
                         _checkUrl();
                     }
                 } else if ($routeParams.type === 'exercise-info') {
-
+                    if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
+                        localStorage.exercisesChange = false;
+                        _getExercise($routeParams.id);
+                    }
                 }
             };
 

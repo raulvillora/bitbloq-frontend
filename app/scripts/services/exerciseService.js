@@ -668,6 +668,7 @@ angular.module('bitbloqApp')
                             exports.exercise.mark = newMark;
                             exports.exercise.remark = exports.exercise.newRemark;
                             exports.saveStatus = 5;
+                            localStorage.exercisesChange = true;
                             defered.resolve();
                         }).catch(function() {
                             exports.saveStatus = 3;
