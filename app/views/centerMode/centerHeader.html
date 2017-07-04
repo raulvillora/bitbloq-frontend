@@ -19,18 +19,12 @@
         {{exercise.name || common.translate('new-exercise')}}
     </a>
 </div>
-<div ng-if="common.urlType==='student'" class="breadcrumb header__title col-vsmall-7" data-element="centerMode-header-breadcrumb">
-    <h1><a href="#/center-mode/student">{{'header_tab_myExercises' | translate}}</a></h1>
-</div>
 <div ng-if="urlSubType!=='student'" class="button-group col-vsmall-5">
     <a ng-if="common.urlType==='teacher' && groups.length > 0 && exercises.length!==0" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
         <span>{{'centerMode_button_newExercise' | translate}}</span>
     </a>
     <button ng-if="common.urlType.indexOf('teacher') > -1 && (exercises.length!==0 || groups.length!==0)" class="btn btn--small" ng-class="{'btn--primary': groups.length === 0, 'btn--secondary': groups.length > 0 }" ng-click="newGroup()" data-element="centerMode_button_newGroup">
         <span>{{'centerMode_button_newGroup' | translate}}</span>
-    </button>
-    <button ng-if="common.urlType==='student' && common.user && common.userRole=== 'student'" class="btn btn--primary btn--small" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
-        <span>{{'centerMode_button_registerInGroup' | translate}}</span>
     </button>
 </div>
 <div class="center-mode__average" ng-if="urlSubType==='student' && student.average">

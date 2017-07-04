@@ -56,7 +56,7 @@
                     </button>
 
                     <div ng-show="menuActive[$index]" class="table__block__item--parent">
-                        <div class="table__block__item--menu ejemplo2" ng-if="common.userRole!=='student'">
+                        <div class="table__block__item--menu" ng-if="common.userRole!=='student'">
                             <ul>
                                 <li class="table__block__item--menu__item table__block__item--menu__item--open">
                                     <a class="table__block__item--menu__link" data-ng-href="#/center-mode/exercise-info/{{exercise._id}}" target="_blank">
@@ -110,14 +110,12 @@
                                 </li>
                             </ul>
                         </div>
-                        <div ng-if="common.userRole==='student'">
+                        <div class="table__block__item--menu" ng-if="common.userRole==='student'">
                             <ul>
                                 <li class="table__block__item--menu__item table__block__item--menu__item--open">
                                     <a class="table__block__item--menu__link" data-ng-href="#/task/{{exercise._id}}" target="_blank">
-                                        <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                            <use xlink:href=""></use>
-                                        </svg>
-                                        {{'open' | translate}}</a>
+                                        {{'open' | translate}}
+                                    </a>
                                 </li>
                                 <li class="dropdown__item--separator"></li>
                                 <li class="table__block__item--menu__item" ng-click="exerciseService.saveInMyProjects(exercise._id)" data-element="menu-save-in-projects">

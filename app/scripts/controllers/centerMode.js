@@ -487,47 +487,6 @@
                     scope: modalOptions
                 });
             };
-            $scope.registerInGroup = function() {
-                function confirmAction(accessId) {
-                    centerModeApi.registerInGroup(accessId).then(function() {
-                        currentModal.close();
-                        _getGroups('student');
-                        _getTasks();
-                    }).catch(function() {
-                        modal.input.showError = true;
-                    });
-                }
-
-                var modalOptions = $rootScope.$new(),
-                    modal = _.extend(modalOptions, {
-                        title: 'centerMode_modal_registerInGroupTitle',
-                        contentTemplate: 'views/modals/input.html',
-                        mainText: 'centerMode_modal_registerInGroupInfo',
-                        modalInput: true,
-                        secondaryText: false,
-                        input: {
-                            id: 'groupId',
-                            name: 'groupId',
-                            placeholder: 'centerMode_modal_groupIdPlaceholder',
-                            errorText: 'centerMode_modal_registerInGroup-error',
-                            showError: false
-                        },
-                        confirmButton: 'centerMode_button_registerInGroup',
-                        condition: function() {
-                            return this.input.value;
-                        },
-                        rejectButton: 'modal-button-cancel',
-                        confirmAction: confirmAction,
-                        modalButtons: true
-                    });
-
-                currentModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input modal--register-in-group',
-                    scope: modalOptions
-
-                });
-            };
 
             $scope.renameExercise = function(exercise) {
                 commonModals.rename(exercise, 'exercise').then(function() {
@@ -604,7 +563,7 @@
                     });
                     _.extend(modalOptions, {
                         title: 'welcome',
-                        contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
+                        contentTemplate: 'views/modals/centerMode/informationCenterMode.html',
                         confirmationTitle: confirmationTitle,
                         customClass: 'modal--information',
                         confirmButton: 'centerMode_modal_confirmation-button',

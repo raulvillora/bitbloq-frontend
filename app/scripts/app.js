@@ -188,6 +188,11 @@ angular
                     controller: 'CenterCtrl',
                     reloadOnSearch: false
                 })
+                .when('/tasks', {
+                    templateUrl: 'views/centerMode/tasksDashboard.html',
+                    controller: 'TasksCtrl',
+                    reloadOnSearch: false
+                })
                 .when('/exercise/:id?', {
                     templateUrl: 'views/project/exercise.html',
                     controller: 'ExerciseCtrl',
