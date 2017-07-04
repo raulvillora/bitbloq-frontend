@@ -39,14 +39,6 @@
                 </li>
             </ul>
             <ul class="nav__menu">
-                <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'tasks'}" data-element="nav-exercise">
-                    <a class="nav__menu__link" href="#/tasks">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#exercise"></use>
-                        </svg>
-                        <span>{{ 'header_tab_tasks' | translate }}</span>
-                    </a>
-                </li>
                 <li ng-if="!common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
                     <a class="nav__menu__link" href="#/bloqsproject">
                         <svg class="svg-icon svg-icon--text">
@@ -61,6 +53,14 @@
                             <use xlink:href="#folder"></use>
                         </svg>
                         <span>{{ 'projects' | translate }}</span>
+                    </a>
+                </li>
+                <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'tasks'}" data-element="nav-exercise">
+                    <a class="nav__menu__link" href="#/tasks">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#exercise"></use>
+                        </svg>
+                        <span>{{ 'header_tab_tasks' | translate }}</span>
                     </a>
                 </li>
                 <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'explore'}" data-element="nav-explore">
