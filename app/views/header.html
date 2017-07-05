@@ -127,8 +127,8 @@
                             {{ 'header-close-session' | translate }}
                         </button>
                     </li>
-                    <li class="menu--overlay__item menu--overlay__item--stand-out">
-                        <button ng-click="" data-element="header-menu-create-center">
+                    <li class="menu--overlay__item menu--overlay__item--stand-out" ng-if="common.user.birthday && !utils.userIsUnder14(common.user.birthday)">
+                        <button ng-click="createCenter()" data-element="header-menu-create-center">
                             {{ 'header-create-center' | translate }}
                         </button>
                     </li>
