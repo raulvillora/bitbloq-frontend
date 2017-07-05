@@ -13,6 +13,7 @@ angular.module('bitbloqApp')
         $scope.utils = utils;
         $scope.translate = $translate;
         $scope.showHeader = false;
+        $scope.showUserHeader = false;
         $scope.common.session.save = false;
 
         $scope.createCenter = function() {
@@ -79,16 +80,24 @@ angular.module('bitbloqApp')
             $location.url('/');
         };
 
+        $scope.openUserMenu = function($event) {
+            $event.stopPropagation();
+            $scope.showUserHeader = !$scope.showUserHeader;
+        };
+
         $scope.openMenu = function($event) {
             $event.stopPropagation();
             $scope.showHeader = !$scope.showHeader;
         };
 
         function clickDocumentHandler() {
+            if ($scope.showUserHeader) {
+                $scope.showUserHeader = false;
+            }
             if ($scope.showHeader) {
                 $scope.showHeader = false;
-                $scope.$apply();
             }
+            $scope.$apply();
         }
 
         $document.on('click', clickDocumentHandler);
