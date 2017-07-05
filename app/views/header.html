@@ -100,38 +100,40 @@
                     <img class="img--avatar" image-change="common.avatarChange" err-src="../images/common/avatar.png" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" data-element="open-header-menu">
                 </span>
             </div>
-            <ul class="menu--user__content" ng-show="showHeader">
-                <li class="menu--user__item">
-                    <span>
-                        {{ 'welcome-male' | translate }}
-                        {{common.user.username}}
-                    </span>
-                </li>
-                <li class="menu--user__item">
-                    <a href="/#/account">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#settings"></use>
-                        </svg>
-                        {{ 'header-account-config' | translate }}
-                    </a>
-                </li>
-                <li class="menu--user__item">
-                    <button ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#earth"></use>
-                        </svg>
-                        {{ 'header-change-language' | translate }}
-                    </button>
-                </li>
-                <li class="menu--user__item">
-                    <button href ng-click="logout()" data-element="header-menu-logout">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#logOut"></use>
-                        </svg>
-                        {{ 'header-close-session' | translate }}
-                    </button>
-                </li>
-            </ul>
+            <div class="menu--overlay" ng-show="showHeader">
+                <h3 class="menu--overlay__title" translate="hi-username" translate-values="{ value:'{{common.user.username}}' }"></h3>
+                <ul class="menu--overlay__content">
+                    <li class="menu--overlay__item">
+                        <a href="/#/account">
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#settings"></use>
+                            </svg>
+                            {{ 'header-account-config' | translate }}
+                        </a>
+                    </li>
+                    <li class="menu--overlay__item">
+                        <button ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#earth"></use>
+                            </svg>
+                            {{ 'header-change-language' | translate }}
+                        </button>
+                    </li>
+                    <li class="menu--overlay__item">
+                        <button ng-click="logout()" data-element="header-menu-logout">
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#logOut"></use>
+                            </svg>
+                            {{ 'header-close-session' | translate }}
+                        </button>
+                    </li>
+                    <li class="menu--overlay__item menu--overlay__item--stand-out">
+                        <button ng-click="" data-element="header-menu-create-center">
+                            {{ 'header-create-center' | translate }}
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>
