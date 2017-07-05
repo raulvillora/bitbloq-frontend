@@ -112,14 +112,6 @@
                         </a>
                     </li>
                     <li class="menu--overlay__item">
-                        <button ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
-                            <svg class="svg-icon svg-icon--text">
-                                <use xlink:href="#earth"></use>
-                            </svg>
-                            {{ 'header-change-language' | translate }}
-                        </button>
-                    </li>
-                    <li class="menu--overlay__item">
                         <button ng-click="logout()" data-element="header-menu-logout">
                             <svg class="svg-icon svg-icon--text">
                                 <use xlink:href="#logOut"></use>
@@ -127,7 +119,7 @@
                             {{ 'header-close-session' | translate }}
                         </button>
                     </li>
-                    <li class="menu--overlay__item menu--overlay__item--stand-out" ng-if="common.user.birthday && !utils.userIsUnder14(common.user.birthday)">
+                    <li class="menu--overlay__item menu--overlay__item--stand-out" ng-if="(!common.user.birthday || !utils.userIsUnder14(common.user.birthday)) && common.userRole!=='headmaster'">
                         <button ng-click="createCenter()" data-element="header-menu-create-center">
                             {{ 'header-create-center' | translate }}
                         </button>

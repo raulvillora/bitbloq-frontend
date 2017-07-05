@@ -8,11 +8,10 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService, utils) {
+    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, $document, $translate, centerModeApi, alertsService, utils) {
         $scope.userApi = userApi;
         $scope.utils = utils;
         $scope.translate = $translate;
-        $scope.commonModals = commonModals;
         $scope.showHeader = false;
         $scope.common.session.save = false;
 
@@ -97,6 +96,4 @@ angular.module('bitbloqApp')
         $scope.$on('$destroy', function() {
             $document.off('click', clickDocumentHandler);
         });
-
-
     });
