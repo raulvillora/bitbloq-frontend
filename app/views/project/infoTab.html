@@ -158,7 +158,7 @@
                 <svg class="svg-icon svg-icon--text svg-icon--big">
                     <use xlink:href="#people"></use>
                 </svg>
-                <legend class="h3">{{ 'infotab_title_groups' | translate }}</legend>
+                <legend class="h3">{{ 'infotab_title_classes' | translate }}</legend>
             </div>
             <ul class="table__block--invert">
                 <li class="table__block__list" ng-repeat="group in groups">
@@ -171,9 +171,9 @@
                     </span>
                 </li>
             </ul>
-            <div class="form--section">
+            <div class="form--section edit-classes">
                 <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="editGroups(currentProject, groups);" data-element="exercise_button_editGroups">
-                    {{ 'centerMode_editGroups' | translate }}
+                    {{ 'centerMode_assignToClasses' | translate }}
                 </button>
             </div>
         </fieldset>
