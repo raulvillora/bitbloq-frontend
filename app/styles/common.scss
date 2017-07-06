@@ -495,7 +495,7 @@ textarea:disabled {
     &.menu--overlay__content {
         position: relative;
         right: inherit;
-        left: -54px;
+        left: -74px;
         top: 74px;
         padding: 5px;
         background-color: #373b44;
@@ -562,7 +562,7 @@ textarea:disabled {
     }
 
     .menu--overlay__content {
-        .menu--overlay__item:hover {
+        .menu--overlay__item:not(.menu--overlay__item--stand-out):hover {
             background-color: #5d6069;
         }
     }

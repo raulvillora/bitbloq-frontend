@@ -13,7 +13,7 @@
                 </li>
             </ul>
             <ul class="nav__menu" ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher')">
-                <li ng-if="common.user && common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
+                <li ng-if="common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
                     <a class="nav__menu__link" href="#/center-mode/center">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#home"></use>
@@ -21,7 +21,7 @@
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher')" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/center-mode/teacher">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#people"></use>
@@ -29,7 +29,7 @@
                         <span>{{ 'header_tab_myClass' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && common.userRole=== 'teacher' || common.userRole=== 'headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-exercise">
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-exercise">
                     <a class="nav__menu__link" href="#/center-mode/student">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#exercise"></use>
@@ -39,7 +39,9 @@
                 </li>
                 <li ng-class="{'nav__menu__item':true}">
                     <button class="nav__menu__link" ng-click="openMenu($event)" data-element="nav-show-menu">
-                        <span>{{ '...' | translate }}</span>
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#ellipsis"></use>
+                        </svg>
                     </button>
                 </li>
             </ul>
