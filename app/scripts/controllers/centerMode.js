@@ -262,8 +262,8 @@
             };
 
             $scope.deleteTeacher = function(teacher) {
-                if(teacher.notConfirmed){
-                    centerModeApi.deleteInvitation(teacher._id, centerModeService.center._id).then(function(){
+                if (teacher.notConfirmed) {
+                    centerModeApi.deleteInvitation(teacher._id, centerModeService.center._id).then(function() {
                         _.remove($scope.teachers, teacher);
                     });
                 } else {
@@ -548,6 +548,8 @@
                     case 'add-teacher':
                         _congratulations($routeParams.id);
                         break;
+                    default:
+                        $location.path('/projects');
                 }
             }
 
@@ -865,11 +867,14 @@
                     switch ($scope.common.userRole) {
                         case 'headmaster':
                         case 'teacher':
-                        case 'student':
                             _checkUrl();
                             break;
                         default:
-                            $location.path('/projects');
+                            if ($scope.common.urlType === 'add-teacher') {
+                                _congratulations($routeParams.id);
+                            } else {
+                                $location.path('/projects');
+                            }
                     }
                 });
             }, function() {
