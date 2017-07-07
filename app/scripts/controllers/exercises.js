@@ -62,15 +62,6 @@
                 localStorage.exercisesChange = true;
             };
 
-            $scope.deleteExerciseInGroup = function(exerciseId) {
-                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
-                    _.remove($scope.exercises, function(item) {
-                        return item._id === exerciseId;
-                    });
-                });
-
-            };
-
             $scope.deleteExercise = function(exercise) {
                 var currentModal,
                     confirmAction = function() {

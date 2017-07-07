@@ -50,7 +50,7 @@
                 </div>
                 <div class="table__block__item table__column--centered col-vsmall-2">
                     <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected' || (task.status==='delivered' && task.mark)}" data-element="{{'centerMode-task-status' + task._id}}">
-                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : ''  | translate}}
+                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending'  | translate}}
                     </span>
                 </div>
                 <div class="table__block__item table__column--hover table__column--right col-vsmall-4">

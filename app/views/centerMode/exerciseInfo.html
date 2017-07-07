@@ -1,15 +1,18 @@
 <div class="table__main">
     <div class="center-mode__block row">
-        <p class="col-vsmall-6">
-            <span>{{'centerMode_createdAt' | translate}}</span>
-            {{exercise.createdAt | date:'dd MMM yyyy'}}
+        <p class="center-mode__date col-vsmall-6">
+            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                <use xlink:href="#clock"></use>
+            </svg>
+            <span>{{'centerMode_finishAt' | translate}}</span>
+            ({{('date_from' | translate) + ' ' + (exercise.initDate | date:'dd MMM yyyy') + ('date_to' | translate) + ' ' +(exercise.endDate | date:'dd MMM yyyy')}})
         </p>
         <div class="button-group col-vsmall-6">
             <button class="btn btn--tertiary btn--small btn--showMoreActions" ng-click="setMoreOptions()" data-element="centerMode_button_moreActions">
                 <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
             </button>
             <a class="btn btn--primary btn--small" ng-href="{{'#/exercise/' + exercise._id}}" target="_blank" data-element="centerMode_openExercise">
-                <span class="block__item__title">{{ 'centerMode_openExercise' | translate}}</span>
+                <span class="block__item__title">{{ 'centerMode_editExercise' | translate}}</span>
             </a>
             <div ng-show="showMoreActions" class="table__block__item--menu table__block__moreactions--menu">
                 <ul>
@@ -19,7 +22,7 @@
                         </svg>
                         {{'change-name' | translate}}
                     </li>
-                    <li class="table__block__item--menu__item" ng-if="common.urlType!=='center-teacher'" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
+                    <li class="table__block__item--menu__item" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
                         <svg class="svg-icon svg-icon--text svg-icon--menu">
                             <use xlink:href="#duplicate"></use>
                         </svg>
@@ -42,11 +45,8 @@
             </div>
         </div>
     </div>
-    <div ng-if="groups.length>0 || tasks.length>0" class="center-mode row">
-        <div class="col-vsmall-3 table__item" ng-include="'views/centerMode/groupTable.html'"></div>
-        <div class="col-vsmall-9 table__item" ng-include="'views/centerMode/taskTable.html'"></div>
-    </div>
-    <div ng-if="groups.length===0 && tasks.length===0">
+    <div ng-if="tasks.length>0" class="center-mode" ng-include="'views/centerMode/taskTable.html'"></div>
+    <div ng-if="tasks.length===0">
         <div class="center-mode--empty">
             <h1 class="center-mode--empty__title">{{'centerMode_groups_empty' | translate}}</h1>
             <p class="center-mode--empty__info">{{'centerMode_groups_emptyInfo' | translate}}</p>
