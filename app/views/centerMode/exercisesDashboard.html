@@ -1,0 +1,27 @@
+<div class="section-header table__header center-mode__header">
+    <div class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer second-level': urlType}" data-element="centerMode-header-breadcrumb">
+        <h1><a href="#/exercises">{{'header_tab_myExercises' | translate}}</a></h1>
+        <a class="breadcrumb--secondary" ng-if="urlType" ng-href="#/center-mode/{{exercise._id}}">
+            {{exercise.name || common.translate('new-exercise')}}
+        </a>
+    </div>
+    <div class="button-group col-vsmall-5" ng-if="!urlType && exercises.length!==0">
+        <a class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
+            <span>{{'centerMode_button_newExercise' | translate}}</span>
+        </a>
+    </div>
+</div>
+
+<div class="table__page table__page--with-header" ng-if="!urlType">
+    <div class="center-mode table__main" ng-if="exercises.length>0 || search.searchExercisesText " ng-include="'views/centerMode/exerciseTable.html'"></div>
+    <div class="center-mode--empty" ng-if="exercises.length===0">
+        <h1 class="center-mode--empty__title">{{'exercises_empty' | translate}}</h1>
+        <p class="center-mode--empty__info">{{'centerMode_exercises_emptyInfo' | translate}}</p>
+        <a class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
+            <span>{{'centerMode_button_newExercise' | translate}}</span>
+        </a>
+    </div>
+</div>
+
+<div class="table__page table__page--with-header" ng-if="urlType" ng-include="'views/centerMode/exerciseInfo.html'"></div>
+

@@ -13,12 +13,6 @@
         {{student.firstName? student.firstName + student.lastName : student.username}}
     </a>
 </div>
-<div ng-if="common.urlType==='exercise-info'" class="breadcrumb breadcrumb-longer header__title col-vsmall-7 second-level" data-element="centerMode-header-breadcrumb">
-    <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl : '#/center-mode/teacher'}}">{{'centerMode_exercises' | translate}}</a></h1>
-    <a class="breadcrumb--secondary" ng-href="#/center-mode/{{exercise._id}}">
-        {{exercise.name || common.translate('new-exercise')}}
-    </a>
-</div>
 <div ng-if="urlSubType!=='student'" class="button-group col-vsmall-5">
     <a ng-if="common.urlType==='teacher' && groups.length > 0 && exercises.length!==0" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
         <span>{{'centerMode_button_newExercise' | translate}}</span>

@@ -94,18 +94,15 @@ angular
                 })
                 .when('/login:params?', {
                     templateUrl: 'views/login.html',
-                    controller: 'LoginCtrl',
-                    islogin: true
+                    controller: 'LoginCtrl'
                 })
                 .when('/register', {
                     templateUrl: 'views/login.html',
-                    controller: 'LoginCtrl',
-                    islogin: false
+                    controller: 'LoginCtrl'
                 })
                 .when('/resetpassword', {
                     templateUrl: 'views/login.html',
-                    controller: 'LoginCtrl',
-                    islogin: false
+                    controller: 'LoginCtrl'
                 })
                 .when('/offline', {
                     templateUrl: 'views/landing/landing-offline.html',
@@ -186,6 +183,11 @@ angular
                 .when('/center-mode/:type?/:id?/:subtype?/:subId?', {
                     templateUrl: 'views/centerMode/centerModeIndex.html',
                     controller: 'CenterCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/exercises/:child?/:id?', {
+                    templateUrl: 'views/centerMode/exercisesDashboard.html',
+                    controller: 'ExercisesCtrl',
                     reloadOnSearch: false
                 })
                 .when('/tasks', {

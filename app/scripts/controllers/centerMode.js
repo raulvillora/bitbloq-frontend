@@ -540,11 +540,6 @@
                         _getGroups('student');
                         _getMyExercises();
                         break;
-                    case 'exercise-info':
-                        _getExercise($routeParams.id);
-                        _getTasksByExerciseCount($routeParams.id);
-                        _getGroups(null, $routeParams.id);
-                        break;
                     case 'add-teacher':
                         _congratulations($routeParams.id);
                         break;
@@ -829,12 +824,6 @@
 
             function clickDocumentHandler(evt) {
                 switch ($scope.common.urlType) {
-                    case 'exercise-info':
-                        if (!angular.element(evt.target).hasClass('btn--showMoreActions')) {
-                            $scope.showMoreActions = false;
-                            utils.apply($scope);
-                        }
-                        break;
                     case 'teacher':
                         if (!$(evt.target).hasClass('btn--center-mode--table')) {
                             $scope.menuActive = {};
@@ -853,11 +842,6 @@
                     if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
                         localStorage.exercisesChange = false;
                         _checkUrl();
-                    }
-                } else if ($routeParams.type === 'exercise-info') {
-                    if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
-                        localStorage.exercisesChange = false;
-                        _getExercise($routeParams.id);
                     }
                 }
             };
