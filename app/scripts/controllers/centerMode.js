@@ -15,6 +15,7 @@
             $scope.teacher = {};
             $scope.teachers = [];
             $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
+            $scope.classesStatusArray = [];
             $scope.secondaryBreadcrumb = false;
             $scope.students = [];
             $scope.orderInstance = 'name';
@@ -22,12 +23,15 @@
             $scope.urlSubType = $routeParams.subtype;
             $scope.showMoreActions = false;
             $scope.pageno = 1;
+            $scope.classesArray = [];
             $scope.showFilters = false;
             $scope.exercisesCount = 0;
             $scope.itemsPerPage = 10;
+            $scope.groupsPerPage = 9;
             $scope.menuActive = {};
             $scope.search = {};
             $scope.filterExercisesParams = {};
+            $scope.filterClassesParams = {};
             $scope.pagination = {
                 'exercises': {
                     'current': 1
@@ -40,11 +44,14 @@
             $scope.exerciseService = exerciseService;
             $scope.moment = moment;
             $scope.selectedTab = 'teachers';
+            $scope.classesStatusArray = ['all-classes', 'closed-classes'];
+            $scope.sortSelected = 'last-classes';
+            $scope.sortClassesArray = ['name', 'last-classes', 'old-classes'];
             $scope.activableRobots = [{
-                'uuid': 'mBot',
-                'image': 'mbot',
-                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-            },
+                    'uuid': 'mBot',
+                    'image': 'mbot',
+                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+                },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -57,7 +64,10 @@
                 }
             ];
 
-            var currentModal;
+            $scope.colorPickerFlag = {};
+
+            var currentModal,
+                randomGroupColors = ['#82ad3a', '#3b91ad', '#ad3867', '#6e37b8', '#c03838', '#3d9980'];
 
             $scope.changeFilter = function() {
                 $scope.showFilters = !$scope.showFilters;
@@ -98,6 +108,12 @@
                         id: 'deleteGroup',
                         type: 'ko'
                     });
+                });
+            };
+
+            $scope.changeGroupColor = function() {
+                centerModeApi.updateGroup($scope.group).then(function() {
+                    $scope.colorPickerFlag.open = false;
                 });
             };
 
@@ -369,7 +385,7 @@
                 centerModeApi.getExercises($scope.teacher._id, {
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage,
-                    'searchParams': search
+                    'searchParams': search ? search : {}
                 }).then(function(response) {
                     $scope.exercises = response.data;
                     $location.search('page', pageno);
@@ -636,9 +652,46 @@
                 });
             };
 
+            $scope.getMyGroupsPage = function(page) {
+                var queryParamsArray = getRequest(),
+                    queryParams = queryParamsArray || {},
+                    groupPage = page ? page : 1;
+
+                var pageParams = {
+                    'page': groupPage
+                };
+                angular.extend(queryParams, pageParams);
+                $log.debug('getPublicProjects', queryParams);
+
+                $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
+                    'search': queryParams.searchParams
+                } : {}), _.cloneDeep(pageParams)));
+
+                centerModeApi.getGroups('teacher', null, centerModeService.center._id, null, queryParams).then(function(response) {
+                    $scope.groups = response.data.groups;
+                    $scope.groupsCount = response.data.counter;
+                    $location.search('page', groupPage);
+                });
+            };
+
+            $scope.getCenterGroups = function(center) {
+                centerModeService.setCenter(center);
+                $scope.getMyGroupsPage();
+            };
+
+            $scope.sortClasses = function(option) {
+                $scope.sortSelected = option;
+                $scope.searchClasses();
+            };
+            $scope.filterByStatus = function(option) {
+                $scope.statusSelected = option;
+                $scope.searchClasses();
+            };
+
             function _closeGroupAction() {
                 $scope.classStateCheck = false;
                 $scope.group.status = 'closed';
+                $scope.group.color = '#c0c3c9';
                 centerModeApi.updateGroup($scope.group).then(function() {
                     alertsService.add({
                         text: 'centerMode_alert_closeGroup',
@@ -700,10 +753,20 @@
                     if ($scope.teacher._id !== $scope.common.user._id) {
                         teacherId = $scope.teacher._id; // if user is student, it will be undefined
                     }
-                    centerModeApi.getGroups(role, teacherId, centerModeService.center._id).then(function(response) {
-                        $scope.groups = response.data;
-                        $scope.groupArray = $scope.groups;
+
+                    centerModeApi.getMyCentersAsTeacher().then(function(response) {
+                        centerModeService.setCenters(response.data);
+                        $scope.centersArray = [];
+                        _.forEach(centerModeService.centers, function(center) {
+                            $scope.centersArray.push(_.pick(center, ['_id', 'name']));
+                        });
+                        $scope.getCenterGroups(centerModeService.center._id ? centerModeService.center : $scope.centersArray[0]);
                     });
+
+                    /*    centerModeApi.getGroups(role, teacherId, centerModeService.center._id).then(function(response) {
+                            $scope.groups = response.data;
+                            $scope.groupArray = $scope.groups;
+                        });*/
                 }
 
             }
@@ -818,6 +881,70 @@
                 }
             }
 
+            function getRequest() {
+                var queryParams = {},
+                    sortParams = getSortRequest(),
+                    statusParams = getStatusRequest();
+                queryParams = getSearchRequest(queryParams);
+
+                queryParams = _.extend(queryParams, sortParams);
+                queryParams = _.extend(queryParams, statusParams);
+
+                return queryParams;
+
+            }
+
+            function getSearchRequest(queryParams) {
+                queryParams = queryParams || {};
+
+                if (($scope.search.searchClassesText && $scope.search.searchClassesText !== '')) {
+                    queryParams.searchParams = $scope.search.searchClassesText;
+                }
+
+                return queryParams;
+            }
+
+            function getSortRequest() {
+                var queryParams = {};
+
+                switch ($scope.sortSelected) {
+                    case 'name':
+                        queryParams.sortParams = {
+                            'name': 'asc'
+                        };
+                        break;
+                    case 'last-classes':
+                        queryParams.sortParams = {
+                            'updatedAt': 'desc'
+                        };
+                        break;
+                    case 'old-classes':
+                        queryParams.sortParams = {
+                            'updatedAt': 'asc'
+                        };
+                        break;
+                    default:
+                        queryParams.sortParams = {
+                            'updatedAt': 'desc'
+                        };
+                }
+
+                return queryParams;
+            }
+
+            function getStatusRequest() {
+                var queryParams = {};
+                switch ($scope.statusSelected) {
+                    case 'closed-classes':
+                        queryParams.statusParams = {
+                            'status': 'closed'
+                        };
+                        break;
+                }
+
+                return queryParams;
+            }
+
             $scope.setMoreOptions = function() {
                 $scope.showMoreActions = !$scope.showMoreActions;
             };
@@ -877,6 +1004,11 @@
                 _getExercisesCount($scope.filterExercisesParams);
             };
 
+            $scope.searchClasses = function() {
+                $location.search($scope.filterClassesParams);
+                $scope.getMyGroupsPage();
+            };
+
             function checkWatchers() {
                 if ($scope.selectedTab === 'info') {
                     centerModeService.addWatchers();
@@ -908,6 +1040,22 @@
                         $scope.searchExercises();
                     } else {
                         delete $scope.filterExercisesParams.name;
+                    }
+                }
+            });
+            $scope.$watch('search.searchClassesText', function(newValue, oldValue) {
+                if (newValue !== oldValue) {
+                    if (newValue) {
+                        $scope.filterClassesParams.search = newValue;
+                        $scope.searchClasses();
+                    } else {
+                        if (newValue === '') {
+                            $scope.filterClassesParams = {};
+                            $scope.searchClasses();
+                            $location.search('name', null);
+                            $location.search('page', 1);
+                        }
+                        delete $scope.filterClassesParams.search;
                     }
                 }
             });

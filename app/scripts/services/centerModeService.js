@@ -96,6 +96,12 @@ angular.module('bitbloqApp')
         exports.center = {};
         scope.center = exports.center;
 
+        exports.centers = [];
+
+        exports.setCenters = function(centers) {
+            exports.centers = centers;
+        };
+
         exports.saveCenter = function() {
             var defered = $q.defer();
             alertsService.add({

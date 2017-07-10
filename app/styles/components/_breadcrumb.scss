@@ -3,8 +3,68 @@
     font-size: 20px;
     display: inline-block;
     font-weight: 700;
+
     h1 {
         display: inline-block;
+    }
+
+    .color-swatch {
+        display: inline-block;
+        position: relative;
+        top: -5px;
+
+
+        .color-thumbnail {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 1px solid $color-black;
+        }
+
+        .menu--colorpicker {
+            position: absolute;
+            top: 31px;
+            left: -266px;
+            height: 320px;
+            width: 300px;
+            box-shadow: 0 0 13px #8c919b;
+            background-color: white;
+
+            button {
+                font-size: 14px;
+            }
+
+            input {
+                color: #5d6069;
+                font-size: 13px;
+                font-weight: 400;
+                border-radius: 0.3em;
+                padding-left: 0.7em;
+                width: 100%;
+                border-radius: 0.3em;
+                border: 1px solid #cfcfcf;
+                min-height: 34px;
+                max-height: 34px;
+                color: #8c919b;
+                width: 75px;
+                margin-left: 20px;
+                margin-right: 6px;
+            }
+
+            &::before {
+                left: 268px;
+                background-color: white;
+                box-shadow: none;
+            }
+
+            .angular-color-picker {
+                border: 0;
+            }
+
+            .angular-color-picker > ._hues > ._cursor {
+                margin-left: 4px;
+            }
+        }
     }
 
     .breadcrumb--subtext {
@@ -14,6 +74,7 @@
         display: inline-block;
         top: -10px;
         color: #8c919b;
+
         &::before {
             text-decoration: initial;
             content: 'ID';
@@ -22,21 +83,26 @@
             margin-top: 0;
         }
     }
+
     h1 {
         color: #8c919b;
         font-weight: 700;
         display: inline-block;
     }
+
     a {
         text-decoration: none;
         color: #373b44;
+
         &:hover {
             color: #82ad3a;
         }
     }
 
-    &.second-level, &.third-level {
-        h1, .breadcrumb__item {
+    &.second-level,
+    &.third-level {
+        .breadcrumb__item,
+        h1 {
             &:after {
                 content: '>';
                 margin-left: 5px;
@@ -46,21 +112,27 @@
     }
 
     &.second-level {
-        .breadcrumb--secondary{
+        .breadcrumb--secondary {
             pointer-events: none;
             color: #8c919b;
             cursor: default;
         }
     }
+
     &.breadcrumb-longer {
         width: 100%;
+
         a {
-            max-width: 88%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             display: inline-block;
+            overflow: hidden;
         }
+
+        a:not(:first-child) {
+            max-width: 75%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
         h1:after {
             position: relative;
             top: -8px;

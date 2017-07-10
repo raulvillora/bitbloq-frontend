@@ -478,6 +478,7 @@ textarea:disabled {
     padding: 0;
     border-radius: 4px;
     box-shadow: 0 3px 5px 0 rgba(0, 1, 1, 0.15);
+    z-index: 1;
 
     &:before {
         content: ' ';
@@ -567,4 +568,3 @@ textarea:disabled {
         }
     }
 }
-

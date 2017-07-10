@@ -53,7 +53,9 @@ angular
             return $http({
                 method: 'POST',
                 url: envData.config.centerModeUrl + 'member/confirm-teacher',
-                data: {'token': token}
+                data: {
+                    'token': token
+                }
             });
         }
 
@@ -94,7 +96,7 @@ angular
             });
         }
 
-        function deleteInvitation(teacherId, centerId){
+        function deleteInvitation(teacherId, centerId) {
             return $http({
                 method: 'DELETE',
                 url: envData.config.centerModeUrl + 'member/invitation/teacher/' + teacherId + '/center/' + centerId
@@ -154,7 +156,7 @@ angular
             });
         }
 
-        function getGroups(role, teacherId, centerId, withoutClosed) {
+        function getGroups(role, teacherId, centerId, withoutClosed, params) {
             if (teacherId) {
                 return $http({
                     method: 'GET',
@@ -163,7 +165,8 @@ angular
             } else if (centerId) {
                 return $http({
                     method: 'GET',
-                    url: envData.config.centerModeUrl + 'group/center/' + centerId
+                    url: envData.config.centerModeUrl + 'group/center/' + centerId,
+                    params: params
                 });
             } else {
                 return $http({
