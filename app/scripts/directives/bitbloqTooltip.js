@@ -34,7 +34,6 @@ angular.module('bitbloqApp')
 
                         var numCharacters = elem[0].getAttribute('data-tooltip').length;
                         var needTooltip = elem[0].offsetWidth <= (numCharacters * widthUsedPerChar);
-                        console.log('resize event!!', numCharacters, needTooltip, elem[0].offsetWidth);
                         if (needTooltip) {
                             elem[0].setAttribute('data-tooltips', true);
                         } else {
