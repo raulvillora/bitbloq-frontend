@@ -1,3 +1,4 @@
+
 <div ng-if="(common.urlType==='center' && teachers.length>0) || (common.urlType==='center-teacher')" class="breadcrumb header__title col-vsmall-7" ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
     <h1><a href="#/center-mode/center">{{centerModeService.center.name}}</a></h1>
     <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.firstName ? teacher.firstName + ' ' +teacher.lastName : teacher.username}}</a>
