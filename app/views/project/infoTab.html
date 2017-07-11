@@ -76,7 +76,7 @@
                     <label>{{ 'tags' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
                         <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
-                        <button type="button" class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" tabindex="1" data-element="infotab-taginput-button">{{ 'add' | translate }}</button>
+                        <button type="button" class="btn btn--tertiary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" tabindex="1" data-element="infotab-taginput-button">{{ 'add' | translate }}</button>
                     </span>
                 </div>
                 <div class="tags">

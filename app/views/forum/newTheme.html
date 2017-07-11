@@ -24,7 +24,7 @@
                 </span>
             </div>
             <button class="btn btn--primary btn--small" data-element="forum-publish-theme" ng-class="{'btn--disabled':(forum.textEditorContent.htmlContent==='' || newThemeForm.themetitle.$error.required || !forum.textEditorContent.category || forum.disabledNewTopic)}" ng-click="forum.submitNewTheme()" ng-disabled="(forum.textEditorContent.htmlContent==='' || newThemeForm.themetitle.$error.required || !forum.textEditorContent.category)" type="submit">{{'forum_button_publishTheme' | translate}}</button>
-            <button class="btn" ng-click="forum.goForumSection()">{{'cancel' | translate}}</button>
+            <button class="btn btn--tertiary btn--small" ng-click="forum.goForumSection()">{{'cancel' | translate}}</button>
             <input class="btn btn--primary btn--small main-image--input invisible" data-element="infotab-fileinput" data-ng-blur="focus = false" data-ng-focus="focus = 'projectimage'" id="projectimage" name="projectimage" onchange="angular.element(this).scope().forum.addImage(this.files)" placeholder="" tabindex="-1" type="file"/>
         </fieldset>
     </form>
