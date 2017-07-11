@@ -563,3 +563,11 @@ textarea:disabled {
         }
     }
 }
+
+.animated-rotate {
+    transition: transform 0.2s linear;
+}
+
+.rotate-90 {
+    transform: rotate(90deg);
+}

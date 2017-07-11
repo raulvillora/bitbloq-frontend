@@ -1,6 +1,6 @@
 <div class="modal_alert">
     <p>{{mainText | translate}}</p>
-    <h2 class="exercise-name">{{exerciseName}}</h2>
+    <h2 class="exercise-name" data-tooltip-position="bottom" data-tooltip="{{exerciseName}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">{{exerciseName}}</h2>
     <div class="assign-group">
         <div class="center-mode__table-title row">
             <span class="col-vsmall-8">{{'centerMode_column_group' | translate}}</span>
@@ -12,7 +12,7 @@
                     <span class="checkbox--general">
                         <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected" />
                     </span>
-                    <div class="group__head row" ng-click="expandedItem[group._id] = !expandedItem[group._id]">
+                    <div class="group__head row" ng-click="clickGroupHandler(group)">
                         <span class="col-vsmall-8 table__block__item handcursor" data-tooltip-position="table__block__item" data-tooltip="{{group.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                             <h2 class="block__item__title block__item__title--small handcursor" data-element="{{'centerMode_item_' + group.name}}">
                                 {{group.name}}
@@ -21,11 +21,8 @@
                         </span>
                         <span class="col-vsmall-3 table__block__item group__expanded--number">{{group.students.length || 0}}</span>
                         <div class="col-vsmall-1 table__block__item group__expanded--icon">
-                            <svg class="svg-icon svg-icon--text" ng-show="!expandedItem[group._id]">
-                                <use xlink:href="#plus"></use>
-                            </svg>
-                            <svg class="svg-icon svg-icon--text" ng-show="expandedItem[group._id]">
-                                <use xlink:href="#minus"></use>
+                            <svg class="svg-icon svg-icon--text animated-rotate" ng-class="{'rotate-90':expandedItem[group._id]}">
+                                <use xlink:href="#arrow"></use>
                             </svg>
                         </div>
                     </div>

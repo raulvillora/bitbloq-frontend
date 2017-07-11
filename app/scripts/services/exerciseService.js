@@ -226,6 +226,16 @@ angular.module('bitbloqApp')
                     });
                 }
 
+                function clickGroupHandler(group) {
+                    if (!modalOptions.expandedItem) {
+                        modalOptions.expandedItem = {};
+                    }
+                    if (!modalOptions.expandedItem[group._id]) {
+                        group.selected = true;
+                    }
+                    modalOptions.expandedItem[group._id] = !modalOptions.expandedItem[group._id];
+                }
+
                 _.extend(modalOptions, {
                     title: 'centerMode_editGroups',
                     contentTemplate: 'views/modals/centerMode/editGroups.html',
@@ -245,7 +255,8 @@ angular.module('bitbloqApp')
                     rejectButton: 'modal-button-cancel',
                     rejectAction: defered.reject,
                     confirmAction: confirmAction,
-                    modalButtons: true
+                    modalButtons: true,
+                    clickGroupHandler: clickGroupHandler
                 });
 
                 allCheckWatchers(modalOptions.groups);
