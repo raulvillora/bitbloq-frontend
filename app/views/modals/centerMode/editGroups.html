@@ -1,88 +1,87 @@
 <div class="modal_alert">
     <p>{{mainText | translate}}</p>
     <h2 class="exercise-name">{{exerciseName}}</h2>
-
     <div class="assign-group">
         <div class="center-mode__table-title row">
             <span class="col-vsmall-8">{{'centerMode_column_group' | translate}}</span>
             <span class="col-vsmall-3">{{'centerMode_column_students' | translate}}</span>
         </div>
         <ul class="table__block--invert assign-group__content">
-            <li class="table__block__list table__block__hover" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
-              <ng-form name="{{'form' + group._id}}">
-                <span class="checkbox--general">
-                    <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected"/>
-                </span>
-                <div class="group__head row" ng-click="expandedItem[group._id] = !expandedItem[group._id]">
-                    <span class="col-vsmall-8 table__block__item">
-                        <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
-                            {{group.name}}
-                        </h2>
-                        <span class="block__item__explanation--subscript text-ID">{{group.accessId}}</span>
+            <li class="table__block__list table__block__hover handcursor" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
+                <ng-form name="{{'form' + group._id}}">
+                    <span class="checkbox--general">
+                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected" />
                     </span>
-                    <span class="col-vsmall-3 table__block__item group__expanded--number">{{group.students.length || 0}}</span>
-                    <div class="col-vsmall-1 table__block__item group__expanded--icon">
-                        <svg class="svg-icon svg-icon--text" ng-show="!expandedItem[group._id]">
-                            <use xlink:href="#plus"></use>
-                        </svg>
-                        <svg class="svg-icon svg-icon--text" ng-show="expandedItem[group._id]">
-                            <use xlink:href="#minus"></use>
-                        </svg>
-                    </div>
-                </div>
-                <div class="group__content" ng-show="expandedItem[group._id]" ng-init="group.calendar={}" ng-click="group.selected=group.selected?group.selected:(!!group.calendar.from.date || !!group.calendar.from.time  || !!group.calendar.to.date || !!group.calendar.to.time)">
-                    <span class="checkbox" ng-init="group.withoutDate=(oldGroups[group._id]&&!oldGroups[group._id][0].endDate)">
-                        <input type="checkbox" name="date" id="{{'withoutDate' + group._id}}" ng-model="group.withoutDate" ng-click="group.selected=true"/>
-                        <label class="without-date" for="{{'withoutDate' + group._id}}">{{'centerMode_exerciseWithoutDate' | translate}}</label>
-                    </span>
-                    <div ng-show="!group.withoutDate">
-                        <div class="picker__container" ng-init="group.calendar.from={}">
-                            <span class="picker-title">{{'centerMode_date_from' | translate}}</span>
-                            <div class="date-picker" ng-init="group.calendar.from.date=oldGroups[group._id]?oldGroups[group._id][0].initDate:''">
-                                <input date-time readonly="readonly" name="{{'datePicker0' + group._id}}" id="{{'datePicker0' + group._id}}" ng-model="group.calendar.from.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" required/>
-                                <button class="btn btn--tertiary table__block__button" ng-click="group.calendar.from.date = moment(group.calendar.from.date, 'DD/MM/YYYY'); showDatePicker('datePicker0' + group._id)">
-                                    <svg class="svg-icon">
-                                        <use xlink:href="#calendar"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                            <span ng-show="{{'datePicker0' + group._id + '.$error.required'}} &&{{'datePicker0' + group._id + '.$error.touched'}} ">Required<br></span>
-                            <div class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:''),group._id, 0); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
-                                <input type="text" readonly="readonly" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" required/>
-                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)">
-                                    <svg class="svg-icon">
-                                        <use xlink:href="#clock"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="picker__container" ng-init="group.calendar.to={}">
-                            <span class="picker-title">{{'centerMode_date_to' | translate}}</span>
-                            <div class="date-picker" ng-init="initDatePicker();group.calendar.to.date=oldGroups[group._id]?oldGroups[group._id][0].endDate:''">
-                                <input date-time readonly="readonly" id="{{'datePicker1' + group._id}}" ng-model="group.calendar.to.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" required/>
-                                <button class="btn btn--tertiary table__block__button" ng-click="group.calendar.to.date = moment(group.calendar.to.date, 'DD/MM/YYYY');showDatePicker('datePicker1' + group._id)">
-                                    <svg class="svg-icon">
-                                        <use xlink:href="#calendar"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div id="time-picker-to" class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
-                                <input type="text" readonly="readonly" id="{{'timePicker1' + group._id}}"  class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm"  ng-pattern-restrict="^[0-9 ]{0,2}([: ])*([0-9 ]{0,2})?$" required/>
-
-                                <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event, group.calendar.to.time)">
-                                    <svg class="svg-icon">
-                                        <use xlink:href="#clock"></use>
-                                    </svg>
-                                </button>
-                            </div>
+                    <div class="group__head row" ng-click="expandedItem[group._id] = !expandedItem[group._id]">
+                        <span class="col-vsmall-8 table__block__item handcursor" data-tooltip-position="table__block__item" data-tooltip="{{group.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                            <h2 class="block__item__title block__item__title--small handcursor" data-element="{{'centerMode_item_' + group.name}}">
+                                {{group.name}}
+                            </h2>
+                            <span class="block__item__explanation--subscript text-ID handcursor">{{group.accessId}}</span>
+                        </span>
+                        <span class="col-vsmall-3 table__block__item group__expanded--number">{{group.students.length || 0}}</span>
+                        <div class="col-vsmall-1 table__block__item group__expanded--icon">
+                            <svg class="svg-icon svg-icon--text" ng-show="!expandedItem[group._id]">
+                                <use xlink:href="#plus"></use>
+                            </svg>
+                            <svg class="svg-icon svg-icon--text" ng-show="expandedItem[group._id]">
+                                <use xlink:href="#minus"></use>
+                            </svg>
                         </div>
                     </div>
-                </div>
-              </ng-form>
+                    <div class="group__content" ng-show="expandedItem[group._id]" ng-init="group.calendar={}" ng-click="group.selected=group.selected?group.selected:(!!group.calendar.from.date || !!group.calendar.from.time  || !!group.calendar.to.date || !!group.calendar.to.time)">
+                        <span class="checkbox" ng-init="group.withoutDate=(oldGroups[group._id]&&!oldGroups[group._id][0].endDate)">
+                            <input type="checkbox" name="date" id="{{'withoutDate' + group._id}}" ng-model="group.withoutDate" ng-click="group.selected=true" />
+                            <label class="without-date" for="{{'withoutDate' + group._id}}">{{'centerMode_exerciseWithoutDate' | translate}}</label>
+                        </span>
+                        <div ng-show="!group.withoutDate">
+                            <div class="picker__container" ng-init="group.calendar.from={}">
+                                <span class="picker-title">{{'centerMode_date_from' | translate}}</span>
+                                <div class="date-picker" ng-init="group.calendar.from.date=oldGroups[group._id]?oldGroups[group._id][0].initDate:''">
+                                    <input date-time readonly="readonly" name="{{'datePicker0' + group._id}}" id="{{'datePicker0' + group._id}}" ng-model="group.calendar.from.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" required/>
+                                    <button class="btn btn--tertiary table__block__button" ng-click="group.calendar.from.date = moment(group.calendar.from.date, 'DD/MM/YYYY'); showDatePicker('datePicker0' + group._id)">
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#calendar"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <span ng-show="{{'datePicker0' + group._id + '.$error.required'}} &&{{'datePicker0' + group._id + '.$error.touched'}} ">Required
+                                    <br>
+                                </span>
+                                <div class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:''),group._id, 0); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
+                                    <input type="text" readonly="readonly" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" required/>
+                                    <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)">
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#clock"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="picker__container" ng-init="group.calendar.to={}">
+                                <span class="picker-title">{{'centerMode_date_to' | translate}}</span>
+                                <div class="date-picker" ng-init="initDatePicker();group.calendar.to.date=oldGroups[group._id]?oldGroups[group._id][0].endDate:''">
+                                    <input date-time readonly="readonly" id="{{'datePicker1' + group._id}}" ng-model="group.calendar.to.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" required/>
+                                    <button class="btn btn--tertiary table__block__button" ng-click="group.calendar.to.date = moment(group.calendar.to.date, 'DD/MM/YYYY');showDatePicker('datePicker1' + group._id)">
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#calendar"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div id="time-picker-to" class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
+                                    <input type="text" readonly="readonly" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" ng-pattern-restrict="^[0-9 ]{0,2}([: ])*([0-9 ]{0,2})?$" required/>
+                                    <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event, group.calendar.to.time)">
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#clock"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-form>
             </li>
         </ul>
     </div>
-
     <button class="btn btn--secondary btn--small" ng-if="!onlyEdit" ng-click="newGroup()" data-element="centerMode-new-group">
         {{ 'centerMode_button_createNewGroup' | translate }}
     </button>

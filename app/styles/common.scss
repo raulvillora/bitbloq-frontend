@@ -291,9 +291,11 @@ textarea:disabled {
 
 .handcursor {
     cursor: hand;
+    cursor: pointer;
 }
 
-.loading--content, .login-is-loading {
+.loading--content,
+.login-is-loading {
     z-index: 9;
     &:before {
         content: '';
@@ -425,17 +427,14 @@ textarea:disabled {
         color: #373b44;
         font-size: 0.8em;
     }
-
     .notification__content {
         float: right;
     }
-
     .notification__title {
         color: white;
         font-weight: bold;
         font-size: 14px;
     }
-
     .notification__link {
         color: #73767c;
         font-size: 12px;
@@ -479,7 +478,6 @@ textarea:disabled {
     border-radius: 4px;
     box-shadow: 0 3px 5px 0 rgba(0, 1, 1, 0.15);
     z-index: 1;
-
     &:before {
         content: ' ';
         position: absolute;
@@ -492,7 +490,6 @@ textarea:disabled {
         box-shadow: 0 3px 5px 0 rgba(0, 1, 1, 0.15);
         transform: rotate(135deg);
     }
-
     &.menu--overlay__content {
         position: relative;
         right: inherit;
@@ -507,7 +504,6 @@ textarea:disabled {
             background-color: #373b44;
         }
     }
-
     .menu--overlay__title {
         font-weight: bold;
         color: white;
@@ -520,7 +516,6 @@ textarea:disabled {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
-
     .menu--overlay__item {
         cursor: pointer;
         background-color: #373b44;
@@ -542,7 +537,8 @@ textarea:disabled {
                 background-color: #98c64a;
             }
         }
-        a, button {
+        a,
+        button {
             color: #fff;
             text-decoration: none;
             display: block;
@@ -561,7 +557,6 @@ textarea:disabled {
             fill: #fff;
         }
     }
-
     .menu--overlay__content {
         .menu--overlay__item:not(.menu--overlay__item--stand-out):hover {
             background-color: #5d6069;

@@ -4,7 +4,6 @@
         <span>{{'centerMode_button_newTeacher' | translate}}</span>
     </button>
 </div>
-
 <div class="center-mode__table">
     <div class="center-mode__table-title row">
         <div class="col-vsmall-7">
@@ -19,7 +18,7 @@
     </div>
     <div class="table__block">
         <div class="table__block__list table__block__hover row" ng-repeat="item in teachers | orderBy:orderInstance:reverseOrder">
-            <div class="table__block__item table__item__ellipsis col-vsmall-7">
+            <div class="table__block__item table__item__ellipsis col-vsmall-7" data-tooltip-position="table__block__list" data-tooltip="{{item.firstName? item.firstName + ' ' + item.lastName : item.username}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                 <h2 class="block__item__title block__item__short" data-element="{{'centerMode-item-' + item.username}}">
                     {{item.firstName? item.firstName + ' ' + item.lastName : item.username}}
                 </h2>
