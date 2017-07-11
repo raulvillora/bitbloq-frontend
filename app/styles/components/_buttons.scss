@@ -46,7 +46,7 @@
     @include button(#ebebeb, black);
 
     &:hover {
-        background-color: $brand-secondary;
+        background-color: #dddddd;
     }
 
     &:active {
