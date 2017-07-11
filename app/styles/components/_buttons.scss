@@ -31,33 +31,33 @@
 
 .btn--primary {
     font-weight: bold;
-    @include button($black-light, white);
+    @include button($button-primary, $button-primary-text);
 
     &:hover {
-        background-color: #26292f;
+        background-color: $button-primary-hover;
     }
 
     &:active {
-        background-color: #000;
+        background-color: $button-primary-pressed;
     }
 }
 
 .btn--secondary {
-    @include button(#ebebeb, black);
+    font-weight: bold;
+    @include button($button-secondary, $button-secondary-text);
 
     &:hover {
-        background-color: #dddddd;
+        background-color: $button-secondary-hover;
     }
 
     &:active {
-        background-color: #d1d1d1;
+        background-color: $button-secondary-pressed;
     }
 }
 
 .btn--tertiary {
-    @include button(#fff, #373b44);
-    border: 1px solid #dddddd;
     font-weight: bold;
+    @include button($button-tertiary, $button-tertiary-text);
 
     &.btn--showMoreActions {
         span {
@@ -66,11 +66,31 @@
     }
 
     &:hover {
-        background-color: #e8e8e8;
+        background-color: $button-tertiary-hover;
     }
 
     &:active {
-        background-color: #ddd;
+        background-color: $button-tertiary-pressed;
+    }
+}
+
+.btn--quaternary {
+    font-weight: bold;
+    @include button($button-quaternary, $button-quaternary-text);
+    border: 1px solid $button-quaternary-border;
+
+    &.btn--showMoreActions {
+        span {
+            pointer-events: none;
+        }
+    }
+
+    &:hover {
+        background-color: $button-quaternary-hover;
+    }
+
+    &:active {
+        background-color: $button-quaternary-pressed;
     }
 }
 
@@ -95,20 +115,20 @@
 }
 
 .btn--disabled {
-    background-color: #dbdee3;
-    color: $grey-light;
+    background-color: $button-disabled;
+    color: $button-disabled-text;
 
     .svg-icon {
-        fill: $grey-light;
+        fill: $button-disabled-text;
     }
 }
 
 .btn:disabled {
-    background-color: #dbdee3;
-    color: $grey-light;
+    background-color: $button-disabled;
+    color: $button-disabled-text;
 
     .svg-icon {
-        fill: $grey-light;
+        fill: $button-disabled-text;
     }
 }
 
@@ -137,7 +157,7 @@
     .svg-icon {
         width: 13px;
         height: 13px;
-        fill: #d82b32;
+        fill: $red;
     }
 }
 
