@@ -232,7 +232,7 @@
                             padding-top: 10px;
                             padding-left: 10px;
                             text-align: left;
-                            color: $font-color-base;
+                            color: $grey-dark;
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
@@ -314,7 +314,7 @@
                 }
                 li {
                     a {
-                        @include textGenerator(13px, 400, $font-color-base, 20px, 100%, false);
+                        @include textGenerator(13px, 400, $grey-dark, 20px, 100%, false);
                     }
                 }
             }
@@ -330,11 +330,11 @@
             width: 200px;
             span {
                 margin-right: 15px;
-                @include textGenerator(14px, 400, $font-color-base, 16px, 100%, false);
+                @include textGenerator(14px, 400, $grey-dark, 16px, 100%, false);
             }
             a {
                 margin-right: 15px;
-                @include textGenerator(18px, 400, $font-color-heading, 18px, 100%, false);
+                @include textGenerator(18px, 400, $black-light, 18px, 100%, false);
                 &:hover {
                     text-decoration: none;
                 }
@@ -356,17 +356,17 @@
                 float: left;
                 margin-left: 11px;
                 a {
-                    @include textGenerator(11px, 400, $font-color-base, 13px, 100%, false);
+                    @include textGenerator(11px, 400, $grey-dark, 13px, 100%, false);
                 }
             }
         }
         .copyright {
-            @include textGenerator(11px, 400, $font-color-secondary, 13px, 100%, false);
+            @include textGenerator(11px, 400, $grey-medium, 13px, 100%, false);
         }
         .bqproject {
             float: right;
             margin-left: 8px;
-            @include textGenerator(12px, 400, $font-color-secondary, 30px, 100%, false);
+            @include textGenerator(12px, 400, $grey-medium, 30px, 100%, false);
         }
         .bq-logo {
             float: right;

@@ -12,11 +12,11 @@
         -webkit-appearance: none;
         background-color: white;
         border-radius: .3em;
-        border: 2px solid $font-color-disabled;
+        border: 2px solid $grey-light;
 
         &:hover, &:focus {
             transition: background-color 250ms;
-            border: 2px solid $font-color-base;
+            border: 2px solid $grey-dark;
         }
 
         &:checked {
@@ -30,7 +30,7 @@
         }
 
         &:disabled {
-            background-color: $font-color-disabled;
+            background-color: $grey-light;
         }
 
         &:indeterminate {
@@ -72,7 +72,7 @@
     background-color: #F1F1F1;
 
     input {
-        border: 1px solid #dadada; //para seleccionar $font-color-base;
+        border: 1px solid #dadada; //para seleccionar $grey-dark;
         width: 25%;
         height: 34px;
         border-radius: .2em;
@@ -83,7 +83,7 @@
         }
 
         &:focus {
-            border: 1px solid $font-color-base;
+            border: 1px solid $grey-dark;
         }
     }
 }

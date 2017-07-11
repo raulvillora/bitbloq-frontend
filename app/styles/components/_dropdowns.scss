@@ -5,7 +5,7 @@ common-dropdown {
 .dropdown__icon {
     width: 10px;
     height: 10px;
-    fill: $font-color-secondary;
+    fill: $grey-medium;
     margin-right: .5em;
     margin-left: 1em;
     right: 2px;
@@ -61,7 +61,7 @@ common-dropdown {
     flex: 1 100%;
     padding-left: 1em;
     border-bottom: 1px solid #e4e4e4;
-    color: $font-color-base;
+    color: $grey-dark;
 
     &:last-child {
         border-bottom: 0;
@@ -127,10 +127,10 @@ common-dropdown {
         line-height: $box-height;
 
         .language--name {
-            @include textGenerator(14px, 400, $font-color-heading, auto, 100%, false);
+            @include textGenerator(14px, 400, $black-light, auto, 100%, false);
         }
         .arrow {
-            color: $font-color-base;
+            color: $grey-dark;
             font-size: 23px;
             font-weight: 700;
             float: right;

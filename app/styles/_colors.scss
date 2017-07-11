@@ -162,3 +162,29 @@ $toolbox-software-text: #0094cf;
 $toolbox-software-control: #114698;
 $toolbox-software-logic: #790cd7;
 $toolbox-software-class: #e10a98;
+
+// /*------------------------------------*\
+// /*------------------------------------*\
+//     Penguin dependencies
+// /*------------------------------------*\
+// /*------------------------------------*\
+
+
+// Brand colors
+$brand-primary            : $green;
+$brand-primary-text       : $grey-dark;
+$brand-secondary          : #dddddd;
+$brand-secondary-text     : $brand-secondary;
+
+// Text
+$selection-text-color-bg  : $brand-secondary;
+$selection-text-color     : invert($brand-primary);
+
+// Scaffolding
+$body-bg                  : $white;
+$body-color               : $brand-primary-text;
+
+// Print
+$print-text-color         : $brand-primary-text;
+$print-link-visited-color : $brand-primary ;
+$print-border-color       : $brand-secondary;
