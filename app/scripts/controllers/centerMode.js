@@ -66,8 +66,7 @@
 
             $scope.colorPickerFlag = {};
 
-            var currentModal,
-                randomGroupColors = ['#82ad3a', '#3b91ad', '#ad3867', '#6e37b8', '#c03838', '#3d9980'];
+            var currentModal;
 
             $scope.changeFilter = function() {
                 $scope.showFilters = !$scope.showFilters;
