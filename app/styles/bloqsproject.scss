@@ -10,7 +10,7 @@ $leftBarWidth: 70px;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #ebebeb;
+    background-color: $grey-item-hover;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -19,7 +19,7 @@ $leftBarWidth: 70px;
         .tour-steps {
             & > * {
                 position: absolute;
-                background-color: #373b44;
+                background-color: $black-light;
                 padding: 1em;
                 z-index: 10;
                 border-radius: 2px;
@@ -27,7 +27,7 @@ $leftBarWidth: 70px;
 
                 small {
                     display: block;
-                    color: #c0c3c9;
+                    color: $grey-light;
                     font-size: 12px;
                 }
 
@@ -55,7 +55,7 @@ $leftBarWidth: 70px;
                     height: 0;
                     border-top: 10px solid transparent;
                     border-bottom: 10px solid transparent;
-                    border-right: 10px solid #373b44;
+                    border-right: 10px solid $black-light;
                 }
             }
 
@@ -76,7 +76,7 @@ $leftBarWidth: 70px;
                     height: 0;
                     border-top: 10px solid transparent;
                     border-bottom: 10px solid transparent;
-                    border-left: 10px solid #373b44;
+                    border-left: 10px solid $black-light;
                 }
             }
 
@@ -88,7 +88,7 @@ $leftBarWidth: 70px;
                 top: 40%;
 
                 :last-child {
-                    color: #c0c3c9;
+                    color: $grey-light;
                     font-size: 12px;
                     font-style: italic;
                 }
@@ -189,7 +189,7 @@ $leftBarWidth: 70px;
     }
 
     .content--main {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
         position: relative;
         width: 100%;
         height: calc(100% - #{$titleHeightNumber + $makeActionsHeightNumber}px);
@@ -209,7 +209,7 @@ $leftBarWidth: 70px;
 }
 
 .nav--make {
-    background-color: #ebebeb;
+    background-color: $grey-item-hover;
     max-height: $titleHeight;
     transition-property: max-height;
     transition-duration: 250ms;
@@ -388,7 +388,7 @@ $leftBarWidth: 70px;
             float: left;
             margin-right: 1em;
             font-size: 14px;
-            color: #373b44;
+            color: $black-light;
             height: $makeActionsHeight;
         }
 
@@ -446,7 +446,7 @@ $leftBarWidth: 70px;
         }
 
         .selected {
-            background-color: #1e1f21;
+            background-color: $black;
 
             .svg-icon {
                 fill: white;
@@ -490,20 +490,20 @@ $leftBarWidth: 70px;
 
     a {
         text-decoration: none;
-        color: #373b44;
+        color: $black-light;
     }
 
     &:hover {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
         cursor: pointer;
     }
 
     &[disabled] {
         pointer-events: none;
-        color: #c0c3c9;
+        color: $grey-light;
 
         .svg-icon {
-            fill: #c0c3c9;
+            fill: $grey-light;
         }
     }
 
@@ -532,7 +532,7 @@ $leftBarWidth: 70px;
 
 .actions__menu__button {
     min-height: 19px;
-    color: #373b44;
+    color: $black-light;
     padding: 0.7em;
     margin-top: 0.7em;
 
@@ -566,7 +566,7 @@ $leftBarWidth: 70px;
 
     &:hover {
         cursor: pointer;
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
     }
 }
 
@@ -689,7 +689,7 @@ $leftBarWidth: 70px;
     background-color: #fcfcfc;
 
     &:hover {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
     }
 }
 
@@ -797,7 +797,7 @@ $leftBarWidth: 70px;
         width: 55px;
 
         &:hover {
-            background-color: #ebebeb;
+            background-color: $grey-item-hover;
         }
 
         &:nth-child(1) {
@@ -813,9 +813,6 @@ $leftBarWidth: 70px;
                 color: #3b3e45;
                 cursor: default;
                 pointer-events: none;
-                // .svg-icon {
-                //     fill: #dbdee3;
-                // }
             }
 
             .svg-icon {
@@ -840,7 +837,7 @@ $leftBarWidth: 70px;
     font-size: 12px;
     font-weight: bold;
     margin-left: 1.4em;
-    color: #8c919b;
+    color: $grey-medium;
 }
 
 .bloq--group {
@@ -891,7 +888,7 @@ $leftBarWidth: 70px;
 .error--text {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    color: #c0c3c9;
+    color: $grey-light;
     margin: 20px;
     font-style: italic;
     width: 80%;
@@ -902,9 +899,6 @@ $leftBarWidth: 70px;
     color: #3b3e45;
     cursor: default;
     pointer-events: none;
-    // .svg-icon {
-    //     fill: #dbdee3;
-    // }
 }
 
 @keyframes fadeIn {

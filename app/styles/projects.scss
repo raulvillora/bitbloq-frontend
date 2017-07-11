@@ -85,7 +85,7 @@
             width: 242px;
             border-radius: 4px;
             box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.35);
-            border: solid 1px #cfcfcf;
+            border: solid 1px $grey-border;
         }
 
         &.shared-projects__item .my-project__options {
@@ -105,12 +105,12 @@
             width: 35px;
             height: 35px;
             border-radius: 4px;
-            background-color: #ffffff;
-            border: solid 1px #cfcfcf;
+            background-color: $white;
+            border: solid 1px $grey-border;
             text-align: center;
 
             .svg-icon {
-                fill: #373b44;
+                fill: $black-light;
                 -ms-transform: rotate(90deg);
                 /* IE 9 */
                 -webkit-transform: rotate(90deg);
@@ -138,7 +138,7 @@
             }
 
             .project__info__header h3 {
-                color: #82ad3a;
+                color: $green;
             }
 
             & ~ .project-list__item {
@@ -200,7 +200,7 @@
                 padding: 0.5em;
                 font-size: 16px;
                 font-weight: 700;
-                color: #373b44;
+                color: $black-light;
                 padding-bottom: 0;
                 height: 40px;
                 max-width: 100%;
@@ -216,7 +216,7 @@
 
                 time {
                     width: 97px;
-                    color: #8c919b;
+                    color: $grey-medium;
                     font-size: 12px;
                     font-weight: 400;
                     display: inline-block;
@@ -423,7 +423,7 @@
 
                 .project__info--description {
                     height: 60px;
-                    color: #8c919b;
+                    color: $grey-medium;
                     overflow: hidden;
                     margin-top: -20px;
                     font-size: 12px;
@@ -478,7 +478,7 @@
 
         .project__image__container--new {
             height: 190px;
-            background-color: #373b44;
+            background-color: $black-light;
             position: relative;
             padding: 0.5em;
 

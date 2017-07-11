@@ -68,5 +68,5 @@ h3 {
 }
 
 .link--default {
-    @include link(#82ad3a, 14px, true, underline);
+    @include link($green, 14px, true, underline);
 }

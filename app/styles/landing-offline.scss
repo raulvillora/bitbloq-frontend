@@ -35,7 +35,7 @@
 
 .landing__offline__participate {
     h2 {
-        color: #373b44;
+        color: $black-light;
         font-size: 30px;
         font-weight: 500;
     }
@@ -48,26 +48,26 @@
 
 .offline_table__header {
     span {
-        color: #373b44;
+        color: $black-light;
         font-family: Roboto;
         font-size: 24px;
         font-weight: 500;
     }
-    border-bottom: 5px solid #f1f1f1;
+    border-bottom: 5px solid $grey-lighter;
     padding-top: 58px;
     padding-bottom: 10px;
 }
 
 .offline__table__row {
     padding: 15px;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid $grey-lighter;
     span {
-        color: #8c919b;
+        color: $grey-medium;
         font-size: 16px;
         font-weight: 400;
     }
     i {
-        color: #82ad3a;
+        color: $green;
         font-size: 20px;
     }
 }
@@ -81,7 +81,7 @@
     cursor: default;
     .btn--masthead {
         height: 41px;
-        background-color: #82ad3a;
+        background-color: $green;
         border-radius: 4px;
         padding-left: 20px;
         padding-right: 20px;

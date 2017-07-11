@@ -27,7 +27,7 @@
             left: -266px;
             height: 320px;
             width: 300px;
-            box-shadow: 0 0 13px #8c919b;
+            box-shadow: 0 0 13px $grey-medium;
             background-color: white;
 
             button {
@@ -35,17 +35,14 @@
             }
 
             input {
-                color: #5d6069;
                 font-size: 13px;
                 font-weight: 400;
-                border-radius: 0.3em;
                 padding-left: 0.7em;
-                width: 100%;
                 border-radius: 0.3em;
-                border: 1px solid #cfcfcf;
+                border: 1px solid $grey-border;
                 min-height: 34px;
                 max-height: 34px;
-                color: #8c919b;
+                color: $input-text;
                 width: 75px;
                 margin-left: 20px;
                 margin-right: 6px;
@@ -73,7 +70,7 @@
         position: relative;
         display: inline-block;
         top: -10px;
-        color: #8c919b;
+        color: $text-secondly;
 
         &::before {
             text-decoration: initial;
@@ -85,17 +82,17 @@
     }
 
     h1 {
-        color: #8c919b;
+        color: $text-secondly;
         font-weight: 700;
         display: inline-block;
     }
 
     a {
         text-decoration: none;
-        color: #373b44;
+        color:$text-title;
 
         &:hover {
-            color: #82ad3a;
+            color: $green;
         }
     }
 
@@ -114,7 +111,7 @@
     &.second-level {
         .breadcrumb--secondary {
             pointer-events: none;
-            color: #8c919b;
+            color: $grey-medium;
             cursor: default;
         }
     }

@@ -50,14 +50,14 @@
     margin-left: 25px;
     width: 151px;
     height: 15px;
-    color: #8c919b;
+    color: $grey-medium;
     font-size: 16px;
     font-weight: bold;
     line-height: 40px;
 }
 
 .banned-user__content {
-    background-color: #ffffff;
+    background-color: $white;
     margin: 25px 0;
     div {
         padding: 0 20px;
@@ -66,7 +66,7 @@
         text-align: center;
         clear: both;
         .banned-user__username {
-            color: #373b44;
+            color: $black-light;
             font-weight: bold;
             float: left;
         }

@@ -99,9 +99,9 @@ nvd3 {
         padding-bottom: 55px;
         .plotter__graphic {
             height: 100%;
-            border: 10px solid #c0c3c9;
+            border: 10px solid $grey-light;
             border-radius: 5px;
-            background-color: #c0c3c9;
+            background-color: $grey-light;
         }
         .chart-air {
             width: 100%;

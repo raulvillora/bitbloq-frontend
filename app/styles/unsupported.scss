@@ -68,12 +68,12 @@
                     width: 345px;
                     .unsupported-chrome--title {
                         margin-top: .5em;
-                        color: #373b44;
+                        color: $black-light;
                         font-size: 30px;
                         font-weight: 700;
                     }
                     p {
-                        color: #373b44;
+                        color: $black-light;
                         font-family: "Open Sans";
                         font-size: 16px;
                         margin-top: 1em;
@@ -81,7 +81,7 @@
                         opacity: .7;
                     }
                     .btn--download-chrome {
-                        background-color: #82ad3a;
+                        background-color: $green;
                         height: 50px;
                         padding-left: 2em;
                         padding-right: 2em;
@@ -114,7 +114,7 @@
             }
             p {
                 margin-bottom: 25px;
-                color: #373b44;
+                color: $black-light;
                 line-height: 24px;
             }
             .unsupported--images--container {
@@ -125,7 +125,7 @@
                 }
             }
             .btn--green {
-                background-color: #82ad3a;
+                background-color: $green;
             }
             button {
                 width: 45%;
@@ -139,7 +139,7 @@
         }
         .unsupported--tablet--header {
             height: 90px;
-            background-color: #373b44;
+            background-color: $black-light;
             text-align: center;
             .svg-logo--white--tablet {
                 fill: white;
@@ -172,7 +172,7 @@
                 margin-bottom: 20px;
             }
             .btn--green {
-                background-color: #82ad3a;
+                background-color: $green;
                 font-size: 14px;
             }
             p {
@@ -181,7 +181,7 @@
         }
         .unsupported--phone--header {
             height: 60px;
-            background-color: #373b44;
+            background-color: $black-light;
             text-align: center;
             .svg-logo--white--phone {
                 fill: white;

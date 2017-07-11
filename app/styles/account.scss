@@ -64,7 +64,7 @@
     }
 
     .account__content {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
         margin-top: 31px;
 
         .account__hardware-list {
@@ -111,7 +111,7 @@
                 .hardware__add__container--text {
                     font-weight: bold;
                     text-align: center;
-                    color: #373b44;
+                    color: $black-light;
                     font-size: 13px;
                 }
 
@@ -125,7 +125,7 @@
                     width: 138px;
                     overflow: hidden;
                     background-color: #dadada;
-                    border: 1px solid #cfcfcf;
+                    border: 1px solid $grey-border;
 
                     img {
                         border: 9px solid white;
@@ -164,7 +164,7 @@
         }
 
         .user-options-checkbox {
-            color: #8c919b;
+            color: $grey-medium;
             font-size: 12px;
             font-weight: 400;
             padding-bottom: 15px;
@@ -186,13 +186,13 @@
         .account__delete {
             padding-top: 20px;
             padding-bottom: 20px;
-            border-top: 1px solid #cfcfcf;
-            color: #8c919b;
+            border-top: 1px solid $grey-border;
+            color: $grey-medium;
             font-size: 12px;
             font-weight: 400;
 
             a {
-                color: #8c919b;
+                color: $grey-medium;
             }
         }
 
@@ -214,7 +214,7 @@
                 }
 
                 .connect-to-SN-google {
-                    color: #d82b32;
+                    color: $red;
                     font-weight: 700;
                 }
 
@@ -229,14 +229,14 @@
                     }
                     display: block;
                     padding-bottom: 10px;
-                    color: #373b44;
+                    color: $black-light;
                     font-size: 16px;
                     font-weight: 700;
 
                     .svg-icon {
                         width: 13px;
                         height: 13px;
-                        fill: #373b44;
+                        fill: $black-light;
                         position: relative;
                         top: 5px;
                     }
@@ -246,7 +246,7 @@
                     label {
                         width: 30%;
                         float: left;
-                        color: #5d6069;
+                        color: $grey-dark;
                         font-size: 13px;
                         font-weight: 400;
                         line-height: 40px;
@@ -294,7 +294,7 @@
                         width: 50%;
 
                         input {
-                            color: #5d6069;
+                            color: $grey-dark;
                             font-size: 13px;
                             font-weight: 400;
                         }

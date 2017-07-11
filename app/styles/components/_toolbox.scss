@@ -7,7 +7,7 @@ $hw_toolbox: 210px;
 
 .toolbox--right {
     border-top: 1px solid #edf0f1;
-    border-left: 1px solid #cfcfcf;
+    border-left: 1px solid $grey-border;
     background-color: white;
     color: black;
     font-size: 13px;
@@ -85,7 +85,7 @@ $hw_toolbox: 210px;
     overflow-x: hidden;
     overflow-y: auto;
     transform: translate3d(0, 0, 0);
-    border-left: 1px solid #cfcfcf;
+    border-left: 1px solid $grey-border;
 
     .submenu__title {
         padding: 0.5em;
@@ -285,10 +285,10 @@ $hw_toolbox: 210px;
     }
 
     .toolbox-phone {
-        background-color: #5d6069;
+        background-color: $grey-dark;
 
         &.selected--tab .btn-svg .svg-icon {
-            fill: #5d6069;
+            fill: $grey-dark;
         }
     }
 

@@ -51,7 +51,7 @@
             padding: 20px;
 
             .tutorial--item--heading {
-                color: #373b44;
+                color: $black-light;
                 font-size: 16px;
                 font-weight: 700;
                 max-width: 100%;
@@ -63,7 +63,7 @@
             }
 
             .tutorial--item--text {
-                color: #8c919b;
+                color: $grey-medium;
                 font-size: 12px;
                 font-weight: 400;
                 margin-top: 10px;

@@ -1,6 +1,6 @@
 .svg-icon-logo {
     fill: white;
-    background-color: #82ad3a;
+    background-color: $green;
     width: 70px;
     height: 70px;
     padding: 20px;
@@ -142,7 +142,7 @@
         position: absolute;
         right: 15px;
         top: 70px;
-        background-color: #373b44;
+        background-color: $black-light;
         width: 220px;
         z-index: -1;
 
@@ -171,7 +171,7 @@
             font-style: italic;
 
             &:hover {
-                background-color: #373b44;
+                background-color: $black-light;
             }
         }
 

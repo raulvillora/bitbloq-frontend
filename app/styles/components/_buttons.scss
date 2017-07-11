@@ -132,7 +132,7 @@
 }
 
 .btn--center-mode--table {
-    @include button(rgba(0,0,0,0), #373b44);
+    @include button(rgba(0,0,0,0), $black-light);
     font-weight: bold;
     -ms-transform: rotate(90deg);
     /* IE 9 */
@@ -146,7 +146,7 @@
     }
 
     &:active {
-        background-color: #fff;
+        background-color: $white;
         border: 1px solid #dddddd;
     }
 }
@@ -218,7 +218,7 @@
         font-style: normal;
         display: inline-block;
         vertical-align: middle;
-        color: #5d6069;
+        color: $grey-dark;
         cursor: pointer;
         margin-left: 0.2em;
         font-weight: 400;

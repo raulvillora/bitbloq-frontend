@@ -6,7 +6,7 @@
             content: attr(data-tooltip);
             display: none;
             position: absolute;
-            background-color: #373b44;
+            background-color: $black-light;
             font-size: 12px;
             font-weight: 700;
             min-width: 100px;
@@ -28,7 +28,7 @@
             border-color: transparent;
             border-style: solid;
             border-width: 5px 5px 0;
-            border-top-color: #373b44;
+            border-top-color: $black-light;
             animation: ngdialog-fadein 250ms;
         }
         &:hover {
@@ -168,7 +168,7 @@
                 height: 10px;
                 left: calc(100% + 15px);
                 top: 43%;
-                border: 5px solid #373b44;
+                border: 5px solid $black-light;
                 transform: rotate(45deg);
             }
         }
@@ -186,7 +186,7 @@
             &:after {
                 right: calc(100% + 15px);
                 top: 43%;
-                border: 5px solid #373b44;
+                border: 5px solid $black-light;
                 transform: rotate(45deg);
                 height: 0;
             }

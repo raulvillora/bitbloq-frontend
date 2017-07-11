@@ -26,8 +26,8 @@ common-dropdown {
     flex: 1 100%;
     display: flex;
     flex-flow: row wrap;
-    border-right: 1px solid #cfcfcf;
-    border-left: 1px solid #cfcfcf;
+    border-right: 1px solid $grey-border;
+    border-left: 1px solid $grey-border;
     background-color: white;
     max-height: 275px;
     overflow-y: auto;
@@ -35,7 +35,7 @@ common-dropdown {
 }
 
 .dropdown__menu__down {
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid $grey-border;
     -webkit-border-bottom-right-radius: .3em;
     -webkit-border-bottom-left-radius: .3em;
     -moz-border-radius-bottomright: .3em;
@@ -45,7 +45,7 @@ common-dropdown {
 }
 
 .dropdown__menu__up {
-    border-top: 1px solid #cfcfcf;
+    border-top: 1px solid $grey-border;
     -webkit-border-top-right-radius: .3em;
     -webkit-border-top-left-radius: .3em;
     -moz-border-radius-topright: .3em;
@@ -60,7 +60,7 @@ common-dropdown {
 .dropdown__menu__item {
     flex: 1 100%;
     padding-left: 1em;
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid $grey-divider;
     color: $grey-dark;
 
     &:last-child {
@@ -68,7 +68,7 @@ common-dropdown {
     }
 
     &:hover {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
         cursor: pointer;
     }
 
@@ -86,7 +86,7 @@ common-dropdown {
 }
 
 .dropdown--disabled {
-    background-color: #ebebeb;
+    background-color: $grey-item-hover;
     pointer-events: none;
 }
 

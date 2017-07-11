@@ -30,7 +30,7 @@
         padding-left: 35px;
         padding-right: 35px;
         border-right: 1px solid #dddddd;
-        color: #8c919b;
+        color: $grey-medium;
         font-weight: bold;
         height: $tabsLayout-asideHeight;
         min-width: 112px;
@@ -47,25 +47,25 @@
         }
 
         &:hover {
-            color: #373b44;
+            color: $black-light;
             cursor: pointer;
 
             .svg-icon--aside--menu {
-                fill: #373b44;
+                fill: $black-light;
             }
         }
 
         .svg-icon--aside--menu {
-            fill: #8c919b;
+            fill: $grey-medium;
         }
 
         &.selected--tab {
             background-color: white;
-            color: #373b44;
+            color: $black-light;
             border-bottom: 1px solid white;
 
             &:hover {
-                color: #373b44;
+                color: $black-light;
             }
 
             .svg-icon--aside--menu {
@@ -85,7 +85,7 @@
         padding-right: 40px;
         border-right: 1px solid #eeeeee;
         border-top: 1px solid #eeeeee;
-        color: #8c919b;
+        color: $grey-medium;
         font-weight: bold;
         height: $tabsLayout-asideHeight;
         line-height: $tabsLayout-asideHeight;
@@ -101,25 +101,25 @@
         }
 
         &:hover {
-            color: #373b44;
+            color: $black-light;
             cursor: pointer;
 
             .svg-icon--aside--menu {
-                fill: #373b44;
+                fill: $black-light;
             }
         }
 
         .svg-icon--aside--menu {
-            fill: #8c919b;
+            fill: $grey-medium;
         }
 
         &.selected--tab {
             background-color: #eee;
-            color: #373b44;
+            color: $black-light;
             border: none;
 
             &:hover {
-                color: #373b44;
+                color: $black-light;
             }
 
             .svg-icon--aside--menu {

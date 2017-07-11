@@ -118,7 +118,7 @@
                     }
 
                     h2 {
-                        @include textGenerator(30px, 400, #373b44, 30px, 100%, false);
+                        @include textGenerator(30px, 400, $black-light, 30px, 100%, false);
                     }
 
                     img {
@@ -129,7 +129,7 @@
 
                     p {
                         font-size: 16px;
-                        color    : #8c919b;
+                        color    : $grey-medium;
                     }
                 }
             }
@@ -144,7 +144,7 @@
                 height  : 200px;
 
                 p {
-                    color: #8c919b;
+                    color: $grey-medium;
                 }
             }
 
@@ -162,11 +162,11 @@
                 }
 
                 h2 {
-                    @include textGenerator(30px, 400, #373b44, 30px, 100%, false);
+                    @include textGenerator(30px, 400, $black-light, 30px, 100%, false);
                 }
 
                 p {
-                    @include textGenerator(16px, 300, #8c919b, auto, 100%, false);
+                    @include textGenerator(16px, 300, $grey-medium, auto, 100%, false);
                 }
             }
 
@@ -242,13 +242,13 @@
                 padding-top: 50px;
 
                 h2 {
-                    color      : #373b44;
+                    color      : $black-light;
                     font-size  : 30px;
                     font-weight: 400;
                 }
 
                 p {
-                    color         : #8c919b;
+                    color         : $grey-medium;
                     font-size     : 16px;
                     font-weight   : 300;
                     padding-top   : 20px;
@@ -354,7 +354,7 @@
 
                             p {
                                 font-size: 14px;
-                                color    : #8c919b;
+                                color    : $grey-medium;
                             }
                         }
                     }

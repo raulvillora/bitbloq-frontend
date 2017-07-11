@@ -39,7 +39,7 @@
 }
 
 input:checked + .slider:before {
-    background-color: #82ad3a;
+    background-color: $green;
 }
 
 input:checked + .slider:before {
@@ -76,7 +76,7 @@ input:disabled + .slider {
         display: initial;
     }
     &:nth-child(2) {
-        fill: #82ad3a;
+        fill: $green;
         left: 44px;
         display: none;
     }

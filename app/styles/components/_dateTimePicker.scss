@@ -3,14 +3,14 @@
         display: inline-block;
         height: 35px;
         border-radius: 4px;
-        background-color: #ffffff;
-        border: solid 1px #cfcfcf;
+        background-color: $white;
+        border: solid 1px $grey-border;
         margin: 0;
         padding: 12px 20px 11px 10px;
         font-size: 13px;
         &:disabled {
-            color: #c0c3c9;
-            background-color: #ebebeb;
+            color: $grey-light;
+            background-color: $grey-item-hover;
         }
     }
     .btn {
@@ -18,7 +18,7 @@
         width: 40px;
         height: 35px;
         background-color: #eeeeee;
-        border: solid 1px #cfcfcf;
+        border: solid 1px $grey-border;
         padding: 0;
         margin: 0;
         position: relative;
@@ -47,7 +47,7 @@
 }
 
 .date-picker-date-time {
-    border: solid 1px #cfcfcf;
+    border: solid 1px $grey-border;
 }
 
 .picker__container {
@@ -56,7 +56,7 @@
     .picker-title {
         display: block;
         font-weight: bold;
-        color: #373b44;
+        color: $black-light;
         line-height: 2.43;
     }
 

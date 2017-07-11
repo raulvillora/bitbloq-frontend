@@ -3,7 +3,7 @@
     background-color: #eee;
     padding-bottom: 30px;
     .section__heading {
-        color: #8c919b;
+        color: $grey-medium;
         font-size: 16px;
         font-weight: 700;
         padding: 10px 20px;
@@ -56,7 +56,7 @@
             max-height: 45px;
             line-height: 44px;
             input {
-                box-shadow: inset 0 2px 2px #cfcfcf;
+                box-shadow: inset 0 2px 2px $grey-border;
                 padding-left: 40px;
                 padding-right: 12px;
             }
@@ -92,7 +92,7 @@
         margin: 0 auto;
         & > h1 {
             padding-bottom: 30px;
-            color: #8c919b;
+            color: $grey-medium;
             font-size: 16px;
             font-weight: 700;
         }
@@ -100,7 +100,7 @@
             padding: 30px;
             background-color: white;
             .label {
-                color: #373b44;
+                color: $black-light;
                 font-size: 16px;
                 font-weight: 700;
                 margin-bottom: 20px;
@@ -117,7 +117,7 @@
                 display: block;
                 margin-top: 10px;
                 margin-bottom: 30px;
-                color: #8c919b;
+                color: $grey-medium;
                 font-size: 12px;
                 font-weight: 400;
                 cursor: default;
@@ -138,7 +138,7 @@
                 margin-right: 20px;
             }
             .btn--secondary {
-                color: #5d6069;
+                color: $grey-dark;
                 font-size: 14px;
                 font-weight: 400;
             }
@@ -153,14 +153,14 @@
     cursor: default;
     margin-bottom: 30px;
     .row {
-        border-bottom: 1px solid #ebebeb;
+        border-bottom: 1px solid $grey-item-hover;
     }
     a {
         text-decoration: none;
         .block__last-theme__title {
             font-size: 14px;
             font-weight: 400;
-            color: #5d6069;
+            color: $grey-dark;
             white-space: nowrap;
             max-height: 100%;
             overflow: hidden;
@@ -169,17 +169,17 @@
         }
         &:hover {
             .block__last-theme__title {
-                color: #82ad3a;
+                color: $green;
             }
         }
     }
     time {
-        color: #8c919b;
+        color: $grey-medium;
     }
     .block__username {
         width: 100%;
         display: block;
-        color: #8c919b;
+        color: $grey-medium;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -191,13 +191,13 @@
             a {
                 text-decoration: none;
                 .block__item__title {
-                    color: #373b44;
+                    color: $black-light;
                     font-size: 16px;
                     font-weight: 700;
                     text-decoration: none;
                     transition: color 120ms;
                     &:hover {
-                        color: #82ad3a;
+                        color: $green;
                         cursor: pointer;
                     }
                 }
@@ -207,7 +207,7 @@
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
-                color: #8c919b;
+                color: $grey-medium;
                 font-size: 12px;
                 font-weight: 400;
                 padding-top: 7px;
@@ -243,13 +243,13 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         &:hover {
-                            color: #82ad3a;
+                            color: $green;
                         }
                     }
                 }
                 .block__item__description {
                     .block__item__owner {
-                        color: #82ad3a;
+                        color: $green;
                     }
                 }
                 &:not(:last-child) {
@@ -283,7 +283,7 @@
     .forum__answer-number {
         position: absolute;
         right: 20px;
-        color: #8c919b;
+        color: $grey-medium;
         font-size: 18px;
         font-weight: 700;
         font-style: italic;
@@ -311,7 +311,7 @@
             color: #8c9191;
         }
         h2 {
-            color: #373b44;
+            color: $black-light;
             font-size: 16px;
             font-weight: 700;
         }
@@ -336,7 +336,7 @@
             }
         }
         .theme__answer--title {
-            color: #373b44;
+            color: $black-light;
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 20px;
@@ -345,7 +345,7 @@
             margin-bottom: 20px;
             margin-right: 45px;
             .theme__title {
-                color: #373b44;
+                color: $black-light;
                 font-size: 20px;
                 font-weight: 700;
                 max-width: 100%;
@@ -354,12 +354,12 @@
                 padding-right: 20px;
             }
             .theme-by-user {
-                color: #8c919b;
+                color: $grey-medium;
                 font-size: 14px;
                 font-weight: 400;
                 cursor: default;
                 a {
-                    color: #82ad3a;
+                    color: $green;
                     text-decoration: none;
                 }
                 time {
@@ -372,7 +372,7 @@
 
 .forum__answer__not-logged {
     h2 {
-        color: #373b44;
+        color: $black-light;
         font-weight: 700;
         font-size: 16px;
         margin-bottom: 20px;
@@ -385,12 +385,12 @@
 .forum__table-title {
     height: 20px;
     margin-bottom: 10px;
-    color: #8c919b;
+    color: $grey-medium;
     cursor: default;
 }
 
 .block__username__link {
-    color: #82ad3a;
+    color: $green;
     text-decoration: none;
 }
 
@@ -418,8 +418,8 @@
         background-color: white;
         border: 1px solid #eee;
         &.active {
-            background-color: #dbdee3;
-            color: #8c919b;
+            background-color: $grey-disabled;
+            color: $grey-medium;
             cursor: default;
             border: 0;
         }
@@ -427,8 +427,8 @@
     .pagination__button {
         &.disabled {
             .btn--forum {
-                background-color: #dbdee3;
-                color: #8c919b;
+                background-color: $grey-disabled;
+                color: $grey-medium;
                 cursor: default;
             }
         }
@@ -438,7 +438,7 @@
             box-shadow: 0 1px 3px #c7c7c7;
             padding-left: 20px;
             padding-right: 20px;
-            color: #5d6069;
+            color: $grey-dark;
         }
     }
 }
@@ -556,7 +556,7 @@
     line-height: 1.42857143;
     text-align: left;
     white-space: normal;
-    background-color: #fff;
+    background-color: $white;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .2);
@@ -575,7 +575,7 @@
     margin: 0;
     font-size: 14px;
     background-color: #f7f7f7;
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid $grey-item-hover;
     border-radius: 5px 5px 0 0;
 }
 .popover-content {
@@ -609,7 +609,7 @@
     bottom: 1px;
     margin-left: -10px;
     content: ' ';
-    border-top-color: #fff;
+    border-top-color: $white;
     border-bottom-width: 0;
 }
 .popover.bottom > .arrow {
@@ -625,7 +625,7 @@
     margin-left: -10px;
     content: ' ';
     border-top-width: 0;
-    border-bottom-color: #fff;
+    border-bottom-color: $white;
 }
 
 // Text editor
@@ -658,7 +658,7 @@ text-angular {
                 margin-bottom: 0;
             }
             .btn-default {
-                border: 1px solid #cfcfcf;
+                border: 1px solid $grey-border;
                 padding: 10px;
                 color: #767676;
                 width: 38px;
@@ -685,7 +685,7 @@ text-angular {
         }
     }
     .active {
-        background-color: #ebebeb !important;
+        background-color: $grey-item-hover !important;
         box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
     }
 }
@@ -696,15 +696,15 @@ text-angular {
 .answer__content {
     h1 {
         font-size: 24px;
-        color: #373b44;
+        color: $black-light;
     }
     h2 {
         font-size: 20px;
-        color: #373b44;
+        color: $black-light;
     }
     h3 {
         font-size: 16px;
-        color: #373b44;
+        color: $black-light;
     }
     ul,
     ol {

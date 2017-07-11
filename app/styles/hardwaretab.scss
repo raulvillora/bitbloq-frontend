@@ -19,7 +19,7 @@ $hw_toolbox: 210px;
     left: 0;
     width: inherit;
     height: calc(90% - 54px);
-    background-color: #fff;
+    background-color: $white;
     overflow: auto;
 
     .sidebar-filter-title {
@@ -95,7 +95,7 @@ $hw_toolbox: 210px;
 
         .menu__item {
             &:hover {
-                background-color: #ebebeb;
+                background-color: $grey-item-hover;
             }
 
             button {
@@ -242,7 +242,7 @@ $hw_toolbox: 210px;
 
         &.component__container--visible {
             opacity: 0.4;
-            border: 4px dashed #c0c3c9;
+            border: 4px dashed $grey-light;
         }
 
         .component__message {
@@ -280,7 +280,7 @@ $hw_toolbox: 210px;
         background-color: #f3f3f3;
         height: 265px;
         width: 355px;
-        outline: 4px dashed #c0c3c9;
+        outline: 4px dashed $grey-light;
 
         &.zowi {
             background-image: url("/images/robots/zowi.svg");
@@ -360,7 +360,7 @@ $hw_toolbox: 210px;
         background-color: #f3f3f3;
         height: 265px;
         width: 355px;
-        outline: 4px dashed #c0c3c9;
+        outline: 4px dashed $grey-light;
 
         &.board--selected {
             outline: 4px solid $color !important;
@@ -636,7 +636,7 @@ $hw_toolbox: 210px;
         }
 
         .robot-info__text--activate {
-            color: #8c919b;
+            color: $grey-medium;
             display: block;
         }
     }
@@ -645,7 +645,7 @@ $hw_toolbox: 210px;
         display: inline-block;
         float: right;
         margin: 25px;
-        fill: #8c919b;
+        fill: $grey-medium;
         width: 15px;
     }
 }
