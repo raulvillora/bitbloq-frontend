@@ -4,20 +4,15 @@
 }
 
 .btn--delete-answer {
-    background-color: #b31120;
-    width: 52px;
-    border-radius: 4px;
-    padding-left: 19px;
-    .svg-icon {
-        width: 15px;
-        height: 15px;
-        fill: white;
+    font-size: 15px;
+    @include iconButton($red, $white);
+
+    &:hover {
+        background-color: $red-light;
     }
 }
 
 .btn--admin {
-    background-color: white;
-    color: black;
     float: left;
 }
 

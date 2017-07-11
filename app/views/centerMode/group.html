@@ -18,12 +18,12 @@
             <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
         </label>
         <div class="button-group">
-            <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
+            <button class="btn btn--quaternary btn--small btn--delete" ng-click="deleteGroup()" data-element="centerMode-delete-group">
                 <svg class="svg-icon">
                     <use xlink:href="#delete"></use>
                 </svg>
             </button>
-            <button class="btn btn--tertiary btn--small" ng-click="closeGroup()" ng-disabled="group.status==='closed'" data-element="centerMode-close-group">
+            <button class="btn btn--quaternary btn--small" ng-click="closeGroup()" ng-disabled="group.status==='closed'" data-element="centerMode-close-group">
                 <svg class="svg-icon svg-icon--text">
                     <use xlink:href="#store"></use>
                 </svg>

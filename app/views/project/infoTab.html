@@ -50,8 +50,8 @@
                         <div class="main--project--image" id="main-image">
                             <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
                         </div>
-                        <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput" />
-                        <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
+                        <input class="btn btn--tertiary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput" />
+                        <button type="button" ng-class="{'btn':true, 'btn--tertiary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
                             {{'upload-image' | translate}}
                         </button>
                     </div>

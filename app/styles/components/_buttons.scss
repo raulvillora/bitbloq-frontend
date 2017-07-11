@@ -2,6 +2,7 @@
 // BUTTONS //
 */
 @mixin button($backgroudColor, $textColor) {
+    font-weight: bold;
     background-color: $backgroudColor;
     color: $textColor;
     padding: 0.8em 1em;
@@ -29,8 +30,35 @@
     }
 }
 
-.btn--primary {
+@mixin iconButton($backgroudColor, $textColor) {
     font-weight: bold;
+    background-color: $backgroudColor;
+    color: $textColor;
+    width: 52px;
+    padding: 0 1.25em;
+    border-radius: 0.3em;
+    line-height: 27px;
+    transition: background-color 250ms;
+    text-decoration: none;
+
+    &:hover {
+        transition: background-color 250ms;
+        text-decoration: none;
+    }
+
+    &:active {
+        text-decoration: none;
+    }
+
+    .svg-icon {
+        fill: $textColor;
+        width: 1em;
+        height: 1em;
+        pointer-events: none;
+    }
+}
+
+.btn--primary {
     @include button($button-primary, $button-primary-text);
 
     &:hover {
@@ -43,7 +71,6 @@
 }
 
 .btn--secondary {
-    font-weight: bold;
     @include button($button-secondary, $button-secondary-text);
 
     &:hover {
@@ -56,7 +83,6 @@
 }
 
 .btn--tertiary {
-    font-weight: bold;
     @include button($button-tertiary, $button-tertiary-text);
 
     &.btn--showMoreActions {
@@ -75,7 +101,6 @@
 }
 
 .btn--quaternary {
-    font-weight: bold;
     @include button($button-quaternary, $button-quaternary-text);
     border: 1px solid $button-quaternary-border;
 
@@ -91,6 +116,18 @@
 
     &:active {
         background-color: $button-quaternary-pressed;
+    }
+}
+
+
+.btn--delete {
+    float: right;
+    min-width: 50px;
+
+    .svg-icon {
+        width: 13px;
+        height: 13px;
+        fill: $red;
     }
 }
 
@@ -148,22 +185,6 @@
     float: right;
     padding-right: 40.5px;
     padding-left: 40.5px;
-}
-
-.btn--delete {
-    float: right;
-    min-width: 50px;
-
-    .svg-icon {
-        width: 13px;
-        height: 13px;
-        fill: $red;
-    }
-}
-
-.btn--subscribe-theme {
-    background-color: #ffffff;
-    font-weight: bold;
 }
 
 .btn--social {

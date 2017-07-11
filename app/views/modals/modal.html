@@ -9,7 +9,7 @@
                 <div class="modal--buttons" ng-if="!footerText">
                     <button ng-if="confirmButton" type="submit" ng-click="confirmAction(input.value || groups) && closeThisDialog()" ng-disabled="condition && !condition()" ng-class="{'btn--disabled':condition && !condition()}" class="btn btn--primary btn__modal--footer btn--confirm" data-element="modal-ok-dialog">{{confirmButton | translate}}</button>
                     <button ng-if="extraButton" type="submit" ng-click="extraAction(input.value) && closeThisDialog()" ng-disabled="conditionExtra && !conditionExtra()" ng-class="{'btn--disabled':conditionExtra && !condition()}" class="btn btn--primary btn__modal--footer btn--confirm" data-element="modal-extra-ok-dialog">{{extraButton | translate}}</button>
-                    <button ng-if="rejectButton" type="button" ng-click="rejectAction(); closeThisDialog()" class="btn btn--secondary btn__modal--footer btn--reject" data-element="modal-cancel-dialog">{{rejectButton | translate}}</button>
+                    <button ng-if="rejectButton" type="button" ng-click="rejectAction(); closeThisDialog()" class="btn btn--tertiary btn__modal--footer btn--reject" data-element="modal-cancel-dialog">{{rejectButton | translate}}</button>
                 </div>
                 <div class="modal__footer--text" ng-if="footerText">
                     <button class="link--default link--modal" ng-click="footerLink()">{{footerText | translate}}</button>

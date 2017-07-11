@@ -60,8 +60,4 @@
     <div ng-class="{'projects-disable': projectsDisable}" class="projects__paginator">
         <dir-pagination-controls pagination-id="mygroups" on-page-change="getMyGroupsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
-
-    <button class="btn btn--small btn--tertiary btn--row" ng-if="urlType==='exercise-info'" ng-click="editGroup()">
-        {{'centerMode_editGroups' | translate}}
-    </button>
 </div>

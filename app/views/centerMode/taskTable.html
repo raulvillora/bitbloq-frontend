@@ -12,7 +12,7 @@
         {{'centerMode_exercises' | translate}}
     </h1>
     <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
-        <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
+        <button class="btn btn--quaternary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
             <svg class="svg-icon">
                 <use xlink:href="#delete"></use>
             </svg>
@@ -54,12 +54,12 @@
                     </span>
                 </div>
                 <div class="table__block__item table__column--hover table__column--right col-vsmall-4">
-                    <button class="btn btn--tertiary btn--small btn--delete table__item__btn" ng-if="common.urlType==='group'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
+                    <button class="btn btn--quaternary btn--small btn--delete table__item__btn" ng-if="common.urlType==='group'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
                         <svg class="svg-icon">
                             <use xlink:href="#delete"></use>
                         </svg>
                     </button>
-                    <a class="btn btn--tertiary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="{{'centerMode-button-showTask' + task._id}}">
+                    <a class="btn btn--quaternary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="{{'centerMode-button-showTask' + task._id}}">
                         {{(task.status!=='delivered' || task.status==='corrected' || (task.status==='delivered' && task.mark))? 'see': 'centerMode_button_correct' | translate}}
                     </a>
                 </div>
