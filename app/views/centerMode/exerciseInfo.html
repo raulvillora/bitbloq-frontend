@@ -1,13 +1,25 @@
 <div class="table__main">
     <div class="center-mode__block row">
-        <p class="center-mode__date col-vsmall-6">
+        <!--<p class="center-mode__date col-vsmall-6">
             <svg class="svg-icon svg-icon--text svg-icon--menu">
                 <use xlink:href="#clock"></use>
             </svg>
             <span>{{'centerMode_finishAt' | translate}}</span>
             ({{('date_from' | translate) + ' ' + (exercise.initDate | date:'dd MMM yyyy') + ('date_to' | translate) + ' ' +(exercise.endDate | date:'dd MMM yyyy')}})
-        </p>
-        <div class="button-group col-vsmall-6">
+        </p>-->
+
+        <div class="col-vsmall-5 exercise-info__classes">
+            <div class="exercise-info__class">
+                <svg class="svg-icon svg-icon--text svg-icon--menu svg-icon-classes">
+                    <use xlink:href="#people"></use>
+                </svg>
+                <span class="exercise-info--text">{{'classes' | translate}}</span>
+            </div>
+            <div class="exercise-info--dropdown">
+            <common-dropdown class="" options="groupArray" options-click="getTasksByGroup" heading-option="groupArray[0].name"></common-dropdown>
+          </div>
+        </div>
+        <div class="button-group col-vsmall-7">
             <button class="btn btn--tertiary btn--small btn--showMoreActions" ng-click="setMoreOptions()" data-element="centerMode_button_moreActions">
                 <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
             </button>

@@ -8,8 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ExercisesCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
-
+        .controller('ExercisesCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $q) {
 
             $scope.exercises = [];
             $scope.menuActive = {};
@@ -34,6 +33,8 @@
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
             $scope.centerModeService = centerModeService;
+
+            var groupSelected;
 
             // option menu in exercise table
             $scope.changeExerciseMenu = function(index) {
@@ -113,13 +114,12 @@
                 $location.url(newUrl);
             };
 
-
             $scope.getExercisesPaginated = function(pageno) {
                 getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
             };
 
             $scope.getTasksPaginated = function(pageno) {
-                exerciseApi.getTasksByExercise($scope.exercise._id, {
+                exerciseApi.getTasksByExerciseAndGroup($scope.exercise._id, groupSelected._id, {
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage
                 }).then(function(response) {
@@ -135,7 +135,6 @@
                     $location.search('page', pageno);
                 });
             };
-
 
             $scope.sortInstances = function(type) {
                 $log.debug('sortInstances', type);
@@ -183,6 +182,10 @@
                 $scope.showMoreActions = !$scope.showMoreActions;
             };
 
+            $scope.getTasksByGroup = function(group) {
+                groupSelected = group;
+                $scope.getTasksPaginated($scope.pageno);
+            };
 
             function _init() {
                 $scope.common.itsUserLoaded().then(function() {
@@ -209,9 +212,10 @@
 
             function _checkUrl() {
                 if ($scope.urlType === 'exercise-info') {
-                    _getExercise($routeParams.id);
-                    _getTasksByExerciseCount($routeParams.id);
-                    _getGroups($routeParams.id);
+                    _getGroups($routeParams.id).then(function() {
+                        _getExercise($routeParams.id);
+                        _getTasksByExerciseCount($routeParams.id);
+                    });
 
                     $document.on('click', clickDocumentHandler);
 
@@ -246,17 +250,23 @@
             }
 
             function _getGroups(exerciseId) {
+                var defered = $q.defer();
                 if (exerciseId) {
                     centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
                         $scope.groups = response.data;
                         $scope.groupArray = $scope.groups;
+                        groupSelected = $scope.groups[0];
+                        defered.resolve();
                     });
                 } else {
                     centerModeApi.getGroups('teacher', null, centerModeService.center._id).then(function(response) {
                         $scope.groups = response.data;
                         $scope.groupArray = $scope.groups;
+                        defered.resolve();
                     });
                 }
+
+                return defered.promise;
 
             }
 
@@ -270,7 +280,7 @@
             }
 
             function _getTasksByExerciseCount(exerciseId) {
-                exerciseApi.getTasksByExerciseCount(exerciseId).then(function(response) {
+                exerciseApi.getTasksByExerciseAndGroupCount(exerciseId, groupSelected._id).then(function(response) {
                     $scope.tasksCount = response.data.count;
                 });
             }

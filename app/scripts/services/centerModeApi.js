@@ -28,7 +28,7 @@ angular
             registerInGroup: registerInGroup,
             resendInvitation: resendInvitation,
             updateGroup: updateGroup,
-            unassignExerciseInGroup: unassignExerciseInGroup
+            unassignExerciseInGroup: unassignExerciseInGroup,
         };
 
         function addTeachers(teachers, centerId) {
