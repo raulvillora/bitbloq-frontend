@@ -9,6 +9,15 @@
      */
     angular.module('bitbloqApp')
         .controller('CenterModeCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
+
+            /*  Warnnig!!!!!!
+             * Si estas aquí dentro es porque quieres meter código aquí...
+             * NOOOO! ESTAS MUY EQUIVOCADO
+             * ESTE ARCHIVO ESTA OBSOLETO (habla con Laura, por favor)
+             * y pensarás.... "pues lo borro, total está obsoleto..."
+             * NOOOO! de verdad, habla con Laura ;)
+            */
+
             $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
