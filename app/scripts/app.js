@@ -183,7 +183,17 @@ angular
                 })
                 .when('/center-mode/:type?/:id?/:subtype?/:subId?', {
                     templateUrl: 'views/centerMode/centerModeIndex.html',
-                    controller: 'CenterCtrl',
+                    controller: 'CenterModeCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/class/:child?/:id?', {
+                    templateUrl: 'views/centerMode/centerModeIndex.html',
+                    controller: 'ClassesCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/classes', {
+                    templateUrl: 'views/centerMode/classes.html',
+                    controller: 'ClassesCtrl',
                     reloadOnSearch: false
                 })
                 .when('/exercises/:child?/:id?', {
@@ -198,7 +208,7 @@ angular
                 })
                 .when('/center/', {
                     templateUrl: 'views/centerMode/centerDashboard.html',
-                    controller: 'Center2Ctrl',
+                    controller: 'CenterCtrl',
                     reloadOnSearch: false
                 })
                 .when('/exercise/:id?', {

@@ -1,0 +1,14 @@
+
+<div class="section-header table__header center-mode__header">
+  <h1 class="header__title classes__title" ng-if="centersArray.length > 1">{{'header_title_myClass_multiple' | translate}}</h1>
+  <common-dropdown ng-if="centersArray.length > 1" class="centers-dropdown" options="centersArray" options-click="getCenterGroups" heading-option="centersArray[0].name"></common-dropdown>
+  <h1 class="header__title classes__title" ng-if="centersArray.length === 1" translate="header_title_myClass_one" translate-values="{ name :'{{centersArray[0].name}}' }"></h1>
+  <div class="button-group col-vsmall-5">
+    <button ng-if="groups.length!==0" class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
+      <span>{{'centerMode_button_newClass' | translate}}</span>
+    </button>
+  </div>
+</div>
+<div class="table__page table__page--with-header" ng-click="colorPickerFlag.open = false">
+    <div class="center-mode" ng-include="'views/centerMode/teacherDashboard.html'"></div>
+</div>

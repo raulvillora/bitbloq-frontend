@@ -2,13 +2,13 @@
     'use strict';
     /**
      * @ngdoc function
-     * @name bitbloqApp.controller:Center2Ctrl
+     * @name bitbloqApp.controller:CenterCtrl
      * @description
      * # CenterCtrl
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('Center2Ctrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window) {
+        .controller('CenterCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window) {
             $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
             $scope.secondaryBreadcrumb = false;
             $scope.orderInstance = 'name';
