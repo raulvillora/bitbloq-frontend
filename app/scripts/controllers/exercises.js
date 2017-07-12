@@ -49,6 +49,15 @@
                 $scope.menuActive[index] = !previousState;
             };
 
+            $scope.assignToGroup = function(exercise) {
+                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
+                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
+                        _getGroups(exercise._id).then(function() {
+                            _getExercise(exercise._id);
+                        });
+                    });
+                });
+            };
             // Assign groups
             $scope.editGroups = function(exercise) {
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {

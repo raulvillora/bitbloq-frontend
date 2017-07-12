@@ -17,7 +17,7 @@
             </div>
             <div class="exercise-info--dropdown">
                 <common-dropdown ng-if="groupArray.length>0" class="" options="groupArray" options-click="getTasksByGroup" heading-option="groupArray[0].name"></common-dropdown>
-                <button class="btn btn--primary btn--small" ng-if="groupArray.length===0" ng-click="editGroups(exercise)">{{'centerMode_assignToClasses' | translate}}</button>
+                <button class="btn btn--primary btn--small" ng-if="groupArray.length===0" ng-click="assignToGroup(exercise)">{{'centerMode_assignToClasses' | translate}}</button>
             </div>
         </div>
         <div class="button-group col-vsmall-7">
