@@ -13,7 +13,7 @@
     //by Jose
     angular.module('bitbloqApp')
         .controller('TasksCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
-            $scope.exercises = [];
+            $scope.tasks = [];
             $scope.pageno = 1;
             $scope.exercisesCount = 0;
             $scope.itemsPerPage = 10;
@@ -130,7 +130,7 @@
                 _getMyExercisesCount();
                 if ($routeParams.page) {
                     _getTasksWithParams($routeParams.page);
-                    $scope.pagination.exercises.current = $routeParams.page;
+                    $scope.pagination.tasks.current = $routeParams.page;
                 } else {
                     _getTasksWithParams($scope.pageno);
                 }
@@ -148,8 +148,8 @@
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage
                 }).then(function(response) {
-                    $scope.exercises = response.data;
-                    $scope.exercises.tasks.forEach(function(task) {
+                    var exercises = response.data;
+                    exercises.tasks.forEach(function(task) {
                         if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
                             task.status = 'notDelivered';
                         }
@@ -171,7 +171,7 @@
                             task.status = 'notDelivered';
                         }
                     });
-                    $scope.exercises = response.data;
+                    $scope.tasks = response.data;
                     $location.search('page', pageno);
                 });
             }

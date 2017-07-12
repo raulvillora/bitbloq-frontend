@@ -1,4 +1,20 @@
 <div ng-if="urlSubType==='student'" class="table__main">
+    <div class="row">
+        <h1 class="table__title col-vsmall-5">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#exercise"></use>
+            </svg>
+            {{'centerMode_exercises' | translate}}
+        </h1>
+        <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
+            <button class="btn btn--quaternary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
+                <svg class="svg-icon">
+                    <use xlink:href="#delete"></use>
+                </svg>
+                {{ 'centerMode_button_deleteStudent' | translate}}
+            </button>
+        </div>
+    </div>
     <div class="center-mode" ng-include="'views/centerMode/taskTable.html'"></div>
 </div>
 <div class="center-mode__group" ng-if="urlSubType!=='student'">

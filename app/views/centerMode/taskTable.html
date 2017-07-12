@@ -1,29 +1,3 @@
-<div class="row">
-    <h1 class="table__title tasks-students" ng-if="urlType==='exercise-info'">
-        <svg class="svg-icon svg-icon--text">
-            <use xlink:href="#user"></use>
-        </svg>
-        {{'centerMode_column_students' | translate}}
-    </h1>
-    <div class="tasks-dropdown__group">
-        <common-dropdown class="task--sort-dropdown" ng-if="urlType==='exercise-info' && (tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected)))" options="taskSortArray" options-click="sortTasks" pre-heading="'explore-sortby'" heading-option="taskSortArray[0] | translate"></common-dropdown>
-        <common-dropdown class="task--sort-dropdown" ng-if="urlType==='exercise-info' && (tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected)))" options="taskStatusArray" options-click="filterTasksByStatus" pre-heading="'classes-status'" heading-option="taskStatusArray[0] | translate"></common-dropdown>
-    </div>
-    <h1 class="table__title col-vsmall-5" ng-if="common.urlType==='group'">
-        <svg class="svg-icon svg-icon--text">
-            <use xlink:href="#exercise"></use>
-        </svg>
-        {{'centerMode_exercises' | translate}}
-    </h1>
-    <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
-        <button class="btn btn--quaternary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
-            <svg class="svg-icon">
-                <use xlink:href="#delete"></use>
-            </svg>
-            {{ 'centerMode_button_deleteStudent' | translate}}
-        </button>
-    </div>
-</div>
 <div ng-if="tasks.length>0">
     <div class="center-mode__table">
         <div class="center-mode__table-title row">
@@ -41,7 +15,7 @@
             <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | orderBy:'orderInstance' | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
                 <div class="table__block__item table__item__ellipsis col-vsmall-5">
                     <h2 class="block__item__title">
-                        {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name}}
+                        {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name}}
                     </h2>
                 </div>
                 <div class="table__block__item col-vsmall-1">
