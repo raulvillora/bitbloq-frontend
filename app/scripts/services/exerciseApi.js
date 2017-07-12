@@ -136,10 +136,11 @@ angular.module('bitbloqApp')
             });
         }
 
-        function getTasksByExerciseAndGroupCount(exerciseId, groupId) {
+        function getTasksByExerciseAndGroupCount(exerciseId, groupId, params) {
             return $http({
                 method: 'GET',
-                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId + '/group/' + groupId + '/count'
+                url: envData.config.centerModeUrl + 'task/exercise/' + exerciseId + '/group/' + groupId + '/count',
+                params: params
             });
         }
 

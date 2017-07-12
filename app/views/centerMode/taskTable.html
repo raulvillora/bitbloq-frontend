@@ -1,10 +1,14 @@
 <div class="row">
-    <h1 class="table__title col-vsmall-5" ng-if="urlType==='exercise-info'">
+    <h1 class="table__title tasks-students" ng-if="urlType==='exercise-info'">
         <svg class="svg-icon svg-icon--text">
             <use xlink:href="#user"></use>
         </svg>
         {{'centerMode_column_students' | translate}}
     </h1>
+    <div class="tasks-dropdown__group">
+        <common-dropdown class="task--sort-dropdown" ng-if="urlType==='exercise-info' && (tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected)))" options="taskSortArray" options-click="sortTasks" pre-heading="'explore-sortby'" heading-option="taskSortArray[0] | translate"></common-dropdown>
+        <common-dropdown class="task--sort-dropdown" ng-if="urlType==='exercise-info' && (tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected)))" options="taskStatusArray" options-click="filterTasksByStatus" pre-heading="'classes-status'" heading-option="taskStatusArray[0] | translate"></common-dropdown>
+    </div>
     <h1 class="table__title col-vsmall-5" ng-if="common.urlType==='group'">
         <svg class="svg-icon svg-icon--text">
             <use xlink:href="#exercise"></use>
@@ -21,18 +25,15 @@
     </div>
 </div>
 <div ng-if="tasks.length>0">
-    <div class="dropdown-group table__added clearfix">
-        <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
-    </div>
     <div class="center-mode__table">
         <div class="center-mode__table-title row">
             <div class="col-vsmall-5">
                 <span>{{'centerMode_column_name' | translate}}</span>
             </div>
-            <div class="table__column--centered col-vsmall-1">
+            <div class="col-vsmall-1">
                 <span>{{'centerMode_column_mark' | translate}}</span>
             </div>
-            <div class="table__column--centered col-vsmall-3">
+            <div class="col-vsmall-3">
                 <span>{{'centerMode_column_status' | translate}}</span>
             </div>
         </div>
@@ -43,14 +44,14 @@
                         {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name}}
                     </h2>
                 </div>
-                <div class="table__block__item table__column--centered col-vsmall-1">
+                <div class="table__block__item col-vsmall-1">
                     <span data-element="{{'centerMode-task-mark' + task._id}}">
                         {{task.mark || '-'}}
                     </span>
                 </div>
-                <div class="table__block__item table__column--centered col-vsmall-2">
+                <div class="table__block__item col-vsmall-2">
                     <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected' || (task.status==='delivered' && task.mark)}" data-element="{{'centerMode-task-status' + task._id}}">
-                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending'  | translate}}
+                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending' | translate}}
                     </span>
                 </div>
                 <div class="table__block__item table__column--hover table__column--right col-vsmall-4">
@@ -70,7 +71,11 @@
         <dir-pagination-controls on-page-change="getTasksPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty" ng-if="tasks.length===0">
+<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected">
     <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty' | translate}}</h1>
     <p class="center-mode--empty__info">{{'centerMode_tasks_emptyInfo' | translate}}</p>
+</div>
+
+<div class="center-mode--empty" ng-if="tasks.length===0 && taskStatusSelected">
+    <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty_search' | translate}}</h1>
 </div>

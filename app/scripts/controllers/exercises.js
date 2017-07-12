@@ -9,7 +9,6 @@
      */
     angular.module('bitbloqApp')
         .controller('ExercisesCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $q) {
-
             $scope.exercises = [];
             $scope.menuActive = {};
             $scope.tasks = [];
@@ -21,6 +20,8 @@
             $scope.orderInstance = 'name';
             $scope.showMoreActions = false;
             $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
+            $scope.taskSortArray = ['tasks-sortby-name-az', 'tasks-sortby-name-za', 'tasks-sortby-mark-high', 'tasks-sortby-mark-low'];
+            $scope.taskStatusArray = ['tasks-status-all', 'tasks-status-not-delivered', 'tasks-status-not-corrected', 'tasks-status-corrected'];
             $scope.exercisesCount = 0;
             $scope.pagination = {
                 'exercises': {
@@ -117,23 +118,34 @@
             $scope.getExercisesPaginated = function(pageno) {
                 getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
             };
-
             $scope.getTasksPaginated = function(pageno) {
-                exerciseApi.getTasksByExerciseAndGroup($scope.exercise._id, groupSelected._id, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage
-                }).then(function(response) {
-                    response.data.forEach(function(task) {
-                        var taskId = task._id;
-                        _.extend(task, task.student);
-                        if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
-                            task.status = 'notDelivered';
-                        }
-                        task._id = taskId;
+                var queryParamsArray = getRequest(),
+                    queryParams = queryParamsArray || {},
+                    groupPage = pageno ? pageno : 1,
+                    groupId;
+
+                var pageParams = {
+                    'page': groupPage
+                };
+                angular.extend(queryParams, pageParams);
+                $log.debug('getPublicProjects', queryParams);
+
+                groupId = groupSelected ? groupSelected._id : null;
+                if (groupId) {
+                    exerciseApi.getTasksByExerciseAndGroup($scope.exercise._id, groupId, queryParams).then(function(response) {
+                        response.data.forEach(function(task) {
+                            var taskId = task._id;
+                            _.extend(task, task.student);
+                            if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
+                                task.status = 'notDelivered';
+                            }
+                            task._id = taskId;
+                        });
+                        _getTasksByExerciseCount($routeParams.id, queryParams);
+                        $scope.tasks = response.data;
+                        $location.search('page', pageno);
                     });
-                    $scope.tasks = response.data;
-                    $location.search('page', pageno);
-                });
+                }
             };
 
             $scope.sortInstances = function(type) {
@@ -187,6 +199,16 @@
                 $scope.getTasksPaginated($scope.pageno);
             };
 
+            $scope.sortTasks = function(option) {
+                $scope.sortSelected = option;
+                $scope.getTasksPaginated($scope.pageno);
+            };
+
+            $scope.filterTasksByStatus = function(option) {
+                $scope.taskStatusSelected = option;
+                $scope.getTasksPaginated($scope.pageno);
+            };
+
             function _init() {
                 $scope.common.itsUserLoaded().then(function() {
                     $scope.common.itsRoleLoaded().then(function() {
@@ -214,7 +236,6 @@
                 if ($scope.urlType === 'exercise-info') {
                     _getGroups($routeParams.id).then(function() {
                         _getExercise($routeParams.id);
-                        _getTasksByExerciseCount($routeParams.id);
                     });
 
                     $document.on('click', clickDocumentHandler);
@@ -267,7 +288,6 @@
                 }
 
                 return defered.promise;
-
             }
 
             function _getTasksByExercise() {
@@ -279,10 +299,13 @@
                 }
             }
 
-            function _getTasksByExerciseCount(exerciseId) {
-                exerciseApi.getTasksByExerciseAndGroupCount(exerciseId, groupSelected._id).then(function(response) {
-                    $scope.tasksCount = response.data.count;
-                });
+            function _getTasksByExerciseCount(exerciseId, params) {
+                var groupId = groupSelected ? groupSelected._id : null;
+                if (groupId) {
+                    exerciseApi.getTasksByExerciseAndGroupCount(exerciseId, groupId, params).then(function(response) {
+                        $scope.tasksCount = response.data.count;
+                    });
+                }
             }
 
             function _getExercises() {
@@ -303,7 +326,6 @@
             }
 
             function getTeacherExercisesPaginated(pageno, search) {
-
                 centerModeApi.getExercises(null, {
                     'page': pageno,
                     'pageSize': $scope.itemsPerPage,
@@ -339,6 +361,75 @@
                     }
                 }
             };
+
+            function getRequest() {
+                var queryParams = {},
+                    sortParams = getSortRequest(),
+                    statusParams = getStatusRequest();
+
+                queryParams = _.extend(queryParams, sortParams);
+                queryParams = _.extend(queryParams, statusParams);
+
+                return queryParams;
+            }
+
+            function getSortRequest() {
+                var queryParams = {};
+                switch ($scope.sortSelected) {
+                    case 'tasks-sortby-name-az':
+                        queryParams.sortParams = {
+                            'name': 'asc'
+                        };
+                        break;
+                    case 'tasks-sortby-name-za':
+                        queryParams.sortParams = {
+                            'name': 'desc'
+                        };
+                        break;
+                    case 'tasks-sortby-mark-high':
+                        queryParams.sortParams = {
+                            'mark': 'desc'
+                        };
+                        break;
+                    case 'tasks-sortby-mark-low':
+                        queryParams.sortParams = {
+                            'mark': 'asc'
+                        };
+                        break;
+
+                    default:
+                        queryParams.sortParams = {
+                            'name': 'asc'
+                        };
+                        break;
+                }
+
+                return queryParams;
+            }
+
+            function getStatusRequest() {
+                var queryParams = {};
+
+                switch ($scope.taskStatusSelected) {
+                    case 'tasks-status-not-delivered':
+                        queryParams.statusParams = {
+                            'status': 'pending'
+                        };
+                        break;
+                    case 'tasks-status-not-corrected':
+                        queryParams.statusParams = {
+                            'status': 'delivered'
+                        };
+                        break;
+                    case 'tasks-status-corrected':
+                        queryParams.statusParams = {
+                            'status': 'corrected'
+                        };
+                        break;
+                }
+
+                return queryParams;
+            }
 
             _init();
         });

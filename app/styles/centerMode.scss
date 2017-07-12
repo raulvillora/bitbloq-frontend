@@ -144,10 +144,9 @@
 }
 
 .center-mode__table {
-    [class*="col-"]:not(:first-child):not(.table__block__item--information) {
-        text-align: center;
-    }
-
+    /*  [class*="col-"]:not(:first-child):not(.table__block__item--information) {
+      //  text-align: center;
+    }*/
     .table__block__item.table__block__item--information {
         text-align: left;
         color: $text-secondly;
@@ -161,10 +160,9 @@
     span:first-child {
         padding-left: 0;
     }
-
-    [class*="col-"]:not(:first-child) {
-        text-align: center;
-    }
+    /*    [class*="col-"]:not(:first-child) {
+    //    text-align: center;
+  }*/
 }
 
 .center-mode__table-title--exercises {
@@ -891,6 +889,8 @@
 }
 
 .exercise-info__classes {
+    padding-left: 0;
+
     .exercise-info--text {
         font-family: Roboto;
         font-size: 16px;
@@ -914,6 +914,22 @@
         display: inline-block;
         width: 20%;
     }
+}
+
+.tasks-dropdown__group {
+    float: right;
+
+    .task--sort-dropdown {
+        width: 190px;
+        display: inline-block;
+        &:first-child {
+            margin-right: 10px;
+        }
+    }
+}
+
+.tasks-students {
+    float: left;
 }
 @media only screen and (min-width: 320px) and (max-width: 485px) {
     .group-list__item {
