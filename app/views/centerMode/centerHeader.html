@@ -6,7 +6,7 @@
 <common-dropdown ng-if="common.urlType==='teacher' && (centersArray.length > 1)" class="centers-dropdown" options="centersArray" options-click="getCenterGroups" heading-option="centersArray[0].name"></common-dropdown>
 <h1 class="header__title classes__title" ng-if="common.urlType==='teacher' && (centersArray.length === 1)" translate="header_title_myClass_one" translate-values="{ name :'{{centersArray[0].name}}' }"></h1>
 <div ng-if="common.urlType==='group'" class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer':!student.average, 'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
-    <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl: '#/center-mode/teacher'}}">{{'groups' | translate}}</a></h1>
+    <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl: '#/center-mode/teacher'}}">{{'header_tab_myClass' | translate}}</a></h1>
     <a ng-if="secondaryBreadcrumb || tertiaryBreadcrumb" ng-class="{'breadcrumb--secondary': secondaryBreadcrumb, 'breadcrumb__item': tertiaryBreadcrumb}" ng-href="#/center-mode/group/{{group._id}}">
         {{group.name}}
     </a>

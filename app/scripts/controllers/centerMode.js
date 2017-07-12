@@ -18,10 +18,12 @@
             $scope.classesStatusArray = [];
             $scope.secondaryBreadcrumb = false;
             $scope.students = [];
+            $scope.studentsJSON = [];
             $scope.orderInstance = 'name';
             $scope.common.urlType = $routeParams.type;
             $scope.urlSubType = $routeParams.subtype;
             $scope.showMoreActions = false;
+            $scope.showMoreActionsInGroup = false;
             $scope.pageno = 1;
             $scope.classesArray = [];
             $scope.showFilters = false;
@@ -780,6 +782,11 @@
                     $scope.students = $scope.group.students;
                     $scope.exercises = $scope.group.exercises;
                     $scope.classStateCheck = $scope.group.status === 'open';
+                    _.forEach($scope.students, function(student) {
+                        console.log('student');
+                        console.log(student);
+                        $scope.studentsJSON.push(_.pick(student, 'username', 'email', 'firstName', 'lastName', 'averageMark'));
+                    });
                 });
             }
 
@@ -985,6 +992,10 @@
                 $scope.showMoreActions = !$scope.showMoreActions;
             };
 
+            $scope.setMoreOptionsInGroup = function() {
+                $scope.showMoreActionsInGroup = !$scope.showMoreActionsInGroup;
+            };
+
             function clickDocumentHandler(evt) {
                 switch ($scope.common.urlType) {
                     case 'teacher':
@@ -1062,6 +1073,17 @@
                 commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
                     centerModeService.setCenter(response.data);
                 });
+            };
+            $scope.getCsvHeaders = function() {
+                var translations = $scope.common.translate(['user-name', 'email', 'name', 'surname', 'centerMode_column_averageMark']),
+                    headers = [];
+
+                _.forEach(translations, function(element) {
+                    headers.push(element);
+                });
+
+                return headers;
+
             };
 
             $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {

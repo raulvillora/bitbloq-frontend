@@ -37,7 +37,8 @@ angular
         'angularUtils.directives.dirPagination',
         'nvd3',
         'datePicker',
-        'ngPatternRestrict', 'mp.colorPicker'
+        'ngPatternRestrict', 'mp.colorPicker',
+        'ngCsv'
     ])
     .config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
