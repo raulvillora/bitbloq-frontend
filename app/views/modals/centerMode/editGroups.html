@@ -1,10 +1,10 @@
-<div class="modal_alert">
+<div class="modal_alert editgroup">
     <p>{{mainText | translate}}</p>
     <h2 class="exercise-name" data-tooltip-position="bottom" data-tooltip="{{exerciseName}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">{{exerciseName}}</h2>
     <div class="assign-group">
         <div class="center-mode__table-title row">
-            <span class="col-vsmall-8">{{'centerMode_column_group' | translate}}</span>
-            <span class="col-vsmall-3">{{'centerMode_column_students' | translate}}</span>
+            <span class="col-vsmall-7">{{'centerMode_column_group' | translate}}</span>
+            <span class="col-vsmall-4">{{'centerMode_column_students' | translate}}</span>
         </div>
         <ul class="table__block--invert assign-group__content">
             <li class="table__block__list table__block__hover handcursor" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
@@ -13,7 +13,7 @@
                         <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected" />
                     </span>
                     <div class="group__head row" ng-click="clickGroupHandler(group)">
-                        <span class="col-vsmall-8 table__block__item handcursor" data-tooltip-position="table__block__item" data-tooltip="{{group.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                        <span class="col-vsmall-7 table__block__item handcursor" data-tooltip-position="table__block__item" data-tooltip="{{group.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                             <h2 class="block__item__title block__item__title--small handcursor" data-element="{{'centerMode_item_' + group.name}}">
                                 {{group.name}}
                             </h2>
@@ -21,7 +21,7 @@
                         </span>
                         <span class="col-vsmall-3 table__block__item group__expanded--number">{{group.students.length || 0}}</span>
                         <div class="col-vsmall-1 table__block__item group__expanded--icon">
-                            <svg class="svg-icon svg-icon--text animated-rotate" ng-class="{'rotate-90':expandedItem[group._id]}">
+                            <svg class="svg-icon svg-icon--text animated-rotate" ng-class="{'rotate-90':expandedItem[group._id],'rotate90':!expandedItem[group._id]}">
                                 <use xlink:href="#arrow"></use>
                             </svg>
                         </div>
@@ -80,6 +80,6 @@
         </ul>
     </div>
     <button class="btn btn--secondary btn--small" ng-if="!onlyEdit" ng-click="newGroup()" data-element="centerMode-new-group">
-        {{ 'centerMode_button_createNewGroup' | translate }}
+        {{ 'centerMode_button_newClass' | translate }}
     </button>
 </div>

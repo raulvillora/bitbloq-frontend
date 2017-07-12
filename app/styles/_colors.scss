@@ -21,6 +21,7 @@ $grey-disabled: #dbdee3;
 $grey-disabled-text: #bdc0c6;
 $grey-item-hover: #ebebeb;
 $grey-pressed: #dedede;
+$grey-light:#dddddd;
 
 // Input
 $input-text: $grey-medium;
@@ -139,7 +140,7 @@ $button-tertiary-pressed: $grey-pressed;
 
 $button-quaternary: $white;
 $button-quaternary-text: $black-light;
-$button-quaternary-border: #dddddd;
+$button-quaternary-border: $grey-light;
 $button-quaternary-hover: $grey-item-hover;
 $button-quaternary-pressed: $grey-pressed;
 
@@ -173,7 +174,7 @@ $toolbox-software-class: #e10a98;
 // Brand colors
 $brand-primary            : $green;
 $brand-primary-text       : $grey-dark;
-$brand-secondary          : #dddddd;
+$brand-secondary          : $grey-light;
 $brand-secondary-text     : $brand-secondary;
 
 // Text

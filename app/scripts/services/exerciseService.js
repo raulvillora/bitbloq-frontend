@@ -237,7 +237,7 @@ angular.module('bitbloqApp')
                 }
 
                 _.extend(modalOptions, {
-                    title: 'centerMode_editGroups',
+                    title: 'centerMode_assignToClasses',
                     contentTemplate: 'views/modals/centerMode/editGroups.html',
                     mainText: 'centerMode_editGroups_info',
                     exerciseName: project.name,
