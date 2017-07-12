@@ -7,6 +7,10 @@
      * # CenterCtrl
      * Controller of the bitbloqApp
      */
+    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+    //by Jose
     angular.module('bitbloqApp')
         .controller('TasksCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
             $scope.exercises = [];
@@ -23,7 +27,6 @@
             $scope.centerModeService = centerModeService;
 
             var currentModal;
-
 
             $scope.changeExerciseMenu = function(index) {
                 var previousState;
@@ -116,7 +119,6 @@
                     $scope.common.goToLogin();
                 });
             }
-
 
             function _getMyExercisesCount() {
                 exerciseApi.getTasksCount().then(function(response) {
