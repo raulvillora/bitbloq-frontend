@@ -27,9 +27,6 @@
     </a>
 </div>
 <div ng-if="urlSubType!=='student'" class="button-group col-vsmall-5">
-    <!--  // NEW EXERCISE <a ng-if="common.urlType==='teacher' && groups.length > 0 && exercises.length!==0" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
-        <span>{{'centerMode_button_newExercise' | translate}}</span>
-    </a> -->
     <button ng-if="common.urlType.indexOf('teacher') > -1 && (exercises.length!==0 || groups.length!==0)" class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
         <span>{{'centerMode_button_newClass' | translate}}</span>
     </button>

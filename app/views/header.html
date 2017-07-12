@@ -13,8 +13,8 @@
                 </li>
             </ul>
             <ul class="nav__menu" ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher')">
-                <li ng-if="common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
-                    <a class="nav__menu__link" href="#/center-mode/center">
+                <li ng-if="common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" data-element="nav-center">
+                    <a class="nav__menu__link" href="#/center">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#home"></use>
                         </svg>
