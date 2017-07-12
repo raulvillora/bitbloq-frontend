@@ -38,6 +38,9 @@
                 },
                 'tasks': {
                     'current': 1
+                },
+                'mygroups': {
+                    'current': 1
                 }
             };
             $scope.groupArray = {};
@@ -541,6 +544,7 @@
                     case 'center-teacher':
                     case 'teacher':
                         centerModeService.setCenter();
+
                         _getTeacher($routeParams.id);
                         break;
                     case 'group':
@@ -603,6 +607,30 @@
                 });
             }
 
+            function getSortOption(parameter) {
+                var sortOption;
+                switch (parameter) {
+                    case 'asc':
+                        sortOption = 'old-classes';
+                        break;
+                    case 'desc':
+                        sortOption = 'last-classes';
+                        break;
+                }
+
+                return sortOption;
+            }
+
+            function getStatusOption(parameter) {
+                var statusOption;
+                switch (parameter) {
+                    case 'closed':
+                        statusOption = 'closed-classes';
+                        break;
+                }
+
+                return statusOption;
+            }
             $scope.uploadImageTrigger = function(type) {
                 $timeout(function() {
                     if (type === 'main') {
@@ -659,23 +687,37 @@
                 var pageParams = {
                     'page': groupPage
                 };
+
+                console.log($routeParams);
                 angular.extend(queryParams, pageParams);
                 $log.debug('getPublicProjects', queryParams);
-
-                $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
-                    'search': queryParams.searchParams
-                } : {}), _.cloneDeep(pageParams)));
 
                 centerModeApi.getGroups('teacher', null, centerModeService.center._id, null, queryParams).then(function(response) {
                     $scope.groups = response.data.groups;
                     $scope.groupsCount = response.data.counter;
-                    $location.search('page', groupPage);
+                    $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
+                        'search': queryParams.searchParams
+                    } : {}), _.cloneDeep(pageParams)));
                 });
             };
 
             $scope.getCenterGroups = function(center) {
+                var page;
                 centerModeService.setCenter(center);
-                $scope.getMyGroupsPage();
+                if ($routeParams.updatedAt) {
+                    $scope.sortSelected = getSortOption($routeParams.updatedAt);
+                }
+                if ($routeParams.status) {
+                    $scope.statusSelected = getStatusOption($routeParams.status);
+                }
+                if ($routeParams.search) {
+                    $scope.search.searchClassesText = $routeParams.search;
+                }
+                if ($routeParams.page) {
+                    page = $routeParams.page;
+                    $scope.pagination.mygroups.current = $routeParams.page;
+                }
+                $scope.getMyGroupsPage(page);
             };
 
             $scope.sortClasses = function(option) {
@@ -761,11 +803,6 @@
                         });
                         $scope.getCenterGroups(centerModeService.center._id ? centerModeService.center : $scope.centersArray[0]);
                     });
-
-                    /*    centerModeApi.getGroups(role, teacherId, centerModeService.center._id).then(function(response) {
-                            $scope.groups = response.data;
-                            $scope.groupArray = $scope.groups;
-                        });*/
                 }
 
             }
@@ -922,10 +959,10 @@
                             'updatedAt': 'asc'
                         };
                         break;
-                    default:
-                        queryParams.sortParams = {
-                            'updatedAt': 'desc'
-                        };
+                        /*  default:
+                              queryParams.sortParams = {
+                                  'updatedAt': 'desc'
+                              };*/
                 }
 
                 return queryParams;
