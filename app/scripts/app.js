@@ -186,9 +186,9 @@ angular
                     controller: 'CenterModeCtrl',
                     reloadOnSearch: false
                 })
-                .when('/class/:child?/:id?', {
-                    templateUrl: 'views/centerMode/centerModeIndex.html',
-                    controller: 'ClassesCtrl',
+                .when('/class/:id?/:child?/:studentId?', {
+                    templateUrl: 'views/centerMode/class.html',
+                    controller: 'ClassCtrl',
                     reloadOnSearch: false
                 })
                 .when('/classes', {

@@ -21,7 +21,7 @@
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'classes' || common.section === 'class'}" data-element="nav-class">
                     <a class="nav__menu__link" href="#/classes">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#people"></use>

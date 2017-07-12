@@ -18,7 +18,7 @@
 <ul class="table__block">
     <li class="table__block__list row" ng-class="{'table__block__hover': common.userRole!=='student'}" ng-repeat="group in groups" data-element="centerMode-groups-link-{{$index}}">
         <span class="col-vsmall-11 table__block__item">
-            <button class="table__item__text" ng-class="{'table__item__link': common.userRole!=='student'}" ng-click="common.userRole!=='student' && saveUrl('/center-mode/group/' + group._id)">
+            <button class="table__item__text" ng-class="{'table__item__link': common.userRole!=='student'}" ng-click="common.userRole!=='student' && saveUrl('/class/' + group._id)">
                 <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
                     {{group.name}}
                 </h2>
@@ -33,7 +33,7 @@
     <div ng-show="(search.searchClassesText!='' && search.searchClassesText!=undefined) && groups.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'classes_text_searchEmpty' | translate}}</p>
     </div>
-    <li pagination-id="mygroups" dir-paginate="group in groups | itemsPerPage: groupsPerPage track by group._id " ng-click=" saveUrl('/center-mode/group/' + group._id)" ng-init="sectionIndex = $index" current-page="pagination.mygroups.current" total-items="{{groupsCount}}" class="group-list__item" data-element="projects-project">
+    <li pagination-id="mygroups" dir-paginate="group in groups | itemsPerPage: groupsPerPage track by group._id " ng-click=" saveUrl('/class/' + group._id)" ng-init="sectionIndex = $index" current-page="pagination.mygroups.current" total-items="{{groupsCount}}" class="group-list__item" data-element="projects-project">
         <div class="group--item">
             <div id="{{'group__image__container_' + group._id}}" ng-style="{'background-color': group.color}" class="group__image__container" data-element="over-project">
                 <div class="group__image__name">
