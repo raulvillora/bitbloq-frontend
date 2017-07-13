@@ -329,6 +329,13 @@
                     'searchParams': search
                 }).then(function(response) {
                     $scope.exercises = response.data;
+                    _.forEach($scope.exercises, function(exercise) {
+                        centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
+                            exercise.groups = response.data;
+                            var groups = _.map(response.data, 'name');
+                            exercise.groups = groups.join(', ');
+                        });
+                    });
                     $location.search('page', pageno);
                 });
             }

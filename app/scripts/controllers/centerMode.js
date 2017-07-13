@@ -16,7 +16,7 @@
              * ESTE ARCHIVO ESTA OBSOLETO (habla con Laura, por favor)
              * y pensarás.... "pues lo borro, total está obsoleto..."
              * NOOOO! de verdad, habla con Laura ;)
-            */
+             */
 
             $scope.exercises = [];
             $scope.group = {};
@@ -1092,7 +1092,6 @@
                 });
 
                 return headers;
-
             };
 
             $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {

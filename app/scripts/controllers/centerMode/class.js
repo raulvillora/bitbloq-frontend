@@ -422,7 +422,6 @@
                     'page': groupPage
                 };
 
-                console.log($routeParams);
                 angular.extend(queryParams, pageParams);
                 $log.debug('getPublicProjects', queryParams);
 
@@ -491,6 +490,7 @@
                     centerModeService.setCenter(response.data);
                 });
             };
+
             $scope.getCsvHeaders = function() {
                 var translations = $scope.common.translate(['surname', 'name', 'centerMode_column_averageMark', 'email', 'user-name']),
                     headers = [];
@@ -577,8 +577,6 @@
                     $scope.exercises = $scope.group.exercises;
                     $scope.classStateCheck = $scope.group.status === 'open';
                     _.forEach($scope.students, function(student) {
-                        console.log('student');
-                        console.log(student);
                         $scope.studentsJSON.push(_.pick(student, 'lastName', 'firstName', 'averageMark', 'email', 'username'));
                     });
                 });
@@ -706,10 +704,6 @@
                             'updatedAt': 'asc'
                         };
                         break;
-                        /*  default:
-                         queryParams.sortParams = {
-                         'updatedAt': 'desc'
-                         };*/
                 }
 
                 return queryParams;

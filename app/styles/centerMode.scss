@@ -147,6 +147,13 @@
     /*  [class*="col-"]:not(:first-child):not(.table__block__item--information) {
       //  text-align: center;
     }*/
+    .table__block__item--groups {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 20px;
+    }
+
     .table__block__item.table__block__item--information {
         text-align: left;
         color: $text-secondly;
@@ -921,6 +928,7 @@
     .task--sort-dropdown {
         width: 190px;
         display: inline-block;
+
         &:first-child {
             margin-right: 10px;
         }

@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $location, $window, $document, utils) {
+        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $location) {
             $scope.groups = [];
             $scope.teacher = {};
             $scope.centerModeService = centerModeService;
@@ -98,17 +98,14 @@
                 $scope.searchClasses();
             };
 
-
             $scope.searchClasses = function() {
                 $location.search($scope.filterClassesParams);
                 $scope.getMyGroupsPage();
             };
 
-
             /**************************
              ***  PRIVATE FUNCTIONS ***
              **************************/
-
 
             function _init() {
                 $scope.common.itsUserLoaded().then(function() {
@@ -187,10 +184,6 @@
                             'updatedAt': 'asc'
                         };
                         break;
-                    /*  default:
-                     queryParams.sortParams = {
-                     'updatedAt': 'desc'
-                     };*/
                 }
 
                 return queryParams;
@@ -214,7 +207,6 @@
                 $scope.secondaryBreadcrumb = true;
                 _getGroups();
             }
-
 
             function getSortOption(parameter) {
                 var sortOption;
@@ -240,7 +232,6 @@
 
                 return statusOption;
             }
-
 
             /************************
              **  INIT && WATCHERS ***
