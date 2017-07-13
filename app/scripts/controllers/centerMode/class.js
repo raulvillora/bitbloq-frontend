@@ -492,7 +492,7 @@
                 });
             };
             $scope.getCsvHeaders = function() {
-                var translations = $scope.common.translate(['user-name', 'email', 'name', 'surname', 'centerMode_column_averageMark']),
+                var translations = $scope.common.translate(['surname', 'name', 'centerMode_column_averageMark', 'email', 'user-name']),
                     headers = [];
 
                 _.forEach(translations, function(element) {
@@ -502,11 +502,9 @@
                 return headers;
             };
 
-
             /**************************
              ***  PRIVATE FUNCTIONS ***
              **************************/
-
 
             function _checkUrl() {
                 if ($scope.urlSubType && $scope.urlSubType === 'student') {
@@ -562,7 +560,6 @@
                 currentModal.close();
             }
 
-
             function _getExercisesCount(searchText) {
                 var searchParams = searchText ? searchText : ($routeParams.name ? {
                     'name': $routeParams.name
@@ -582,7 +579,7 @@
                     _.forEach($scope.students, function(student) {
                         console.log('student');
                         console.log(student);
-                        $scope.studentsJSON.push(_.pick(student, 'username', 'email', 'firstName', 'lastName', 'averageMark'));
+                        $scope.studentsJSON.push(_.pick(student, 'lastName', 'firstName', 'averageMark', 'email', 'username'));
                     });
                 });
             }
@@ -650,7 +647,6 @@
                 }
             }
 
-
             function _getExercises() {
                 var searchParams;
                 searchParams = $routeParams.name ? $routeParams.name : '';
@@ -710,10 +706,10 @@
                             'updatedAt': 'asc'
                         };
                         break;
-                    /*  default:
-                     queryParams.sortParams = {
-                     'updatedAt': 'desc'
-                     };*/
+                        /*  default:
+                         queryParams.sortParams = {
+                         'updatedAt': 'desc'
+                         };*/
                 }
 
                 return queryParams;
@@ -754,7 +750,6 @@
                     $scope.common.goToLogin();
                 });
             }
-
 
             /************************
              **  INIT && WATCHERS ***
