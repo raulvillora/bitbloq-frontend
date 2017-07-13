@@ -2,9 +2,9 @@
     'use strict';
     /**
      * @ngdoc function
-     * @name bitbloqApp.controller:CenterCtrl
+     * @name bitbloqApp.controller:TasksCtrl
      * @description
-     * # CenterCtrl
+     * # TasksCtrl
      * Controller of the bitbloqApp
      */
     //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO

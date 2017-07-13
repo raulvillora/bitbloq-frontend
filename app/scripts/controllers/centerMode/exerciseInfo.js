@@ -2,30 +2,22 @@
     'use strict';
     /**
      * @ngdoc function
-     * @name bitbloqApp.controller:CenterCtrl
+     * @name bitbloqApp.controller:ExerciseInfoCtrl
      * @description
-     * # CenterCtrl
+     * # ExerciseInfoCtrl
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
         .controller('ExerciseInfoCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $q) {
-            $scope.exercises = [];
-            $scope.menuActive = {};
             $scope.tasks = [];
             $scope.groups = [];
             $scope.pageno = 1;
             $scope.itemsPerPage = 10;
-            $scope.filterExercisesParams = {};
-            $scope.orderInstance = 'name';
             $scope.showMoreActions = false;
-            $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
             $scope.taskSortArray = ['tasks-sortby-name-az', 'tasks-sortby-name-za', 'tasks-sortby-mark-high', 'tasks-sortby-mark-low'];
             $scope.taskStatusArray = ['tasks-status-all', 'tasks-status-not-delivered', 'tasks-status-not-corrected', 'tasks-status-corrected'];
             $scope.exercisesCount = 0;
             $scope.pagination = {
-                'exercises': {
-                    'current': 1
-                },
                 'tasks': {
                     'current': 1
                 }
@@ -36,17 +28,6 @@
 
             var groupSelected;
 
-            // option menu in exercise table
-            $scope.changeExerciseMenu = function(index) {
-                var previousState;
-                if ($scope.menuActive[index]) {
-                    previousState = $scope.menuActive[index];
-                } else {
-                    previousState = false;
-                }
-                $scope.menuActive = {};
-                $scope.menuActive[index] = !previousState;
-            };
 
             $scope.assignToGroup = function(exercise) {
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
@@ -57,75 +38,12 @@
                     });
                 });
             };
-            // Assign groups
-            $scope.editGroups = function(exercise) {
-                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
-                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
-                        _getGroups();
-                        _getExercises();
-                    });
-                });
-            };
 
             $scope.createExerciseCopy = function(exercise) {
                 exerciseService.clone(exercise);
                 localStorage.exercisesChange = true;
             };
 
-            $scope.deleteExercise = function(exercise) {
-                var currentModal,
-                    confirmAction = function() {
-                        var exerciseId;
-                        if (exercise.exercise) {
-                            exerciseId = exercise.exercise._id;
-                        } else {
-                            exerciseId = exercise._id;
-                        }
-                        exerciseApi.delete(exerciseId).then(function() {
-                            _.remove($scope.exercises, exercise);
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteExercise',
-                                id: 'deleteTask',
-                                type: 'ok',
-                                time: 5000
-                            });
-                        }).catch(function() {
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteExercise-error',
-                                id: 'deleteTask',
-                                type: 'ko'
-                            });
-                        });
-                        currentModal.close();
-                    },
-                    parent = $rootScope,
-                    modalOptions = parent.$new();
-                _.extend(modalOptions, {
-                    title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
-                    confirmButton: 'button_delete',
-                    confirmAction: confirmAction,
-                    rejectButton: 'modal-button-cancel',
-                    contentTemplate: '/views/modals/information.html',
-                    textContent: $scope.common.translate('deleteExercise_modal_information'),
-                    secondaryContent: 'deleteExercise_modal_information-explain',
-                    modalButtons: true
-                });
-
-                currentModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions
-                });
-            };
-
-            $scope.saveUrl = function(newUrl) {
-                $scope.common.lastUrl = $location.url();
-                $location.url(newUrl);
-            };
-
-            $scope.getExercisesPaginated = function(pageno) {
-                getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
-            };
             $scope.getTasksPaginated = function(pageno) {
                 var queryParamsArray = getRequest(),
                     queryParams = queryParamsArray || {},
@@ -156,46 +74,10 @@
                 }
             };
 
-            $scope.sortInstances = function(type) {
-                $log.debug('sortInstances', type);
-                switch (type) {
-                    case 'explore-sortby-recent':
-                        $scope.orderInstance = 'createdAt';
-                        $scope.reverseOrder = true;
-                        break;
-                    case 'email':
-                        $scope.orderInstance = 'email';
-                        $scope.reverseOrder = false;
-                        break;
-                    case 'name':
-                        $scope.orderInstance = 'firstName';
-                        $scope.reverseOrder = false;
-                        break;
-                    case 'surname':
-                        $scope.orderInstance = 'lastName';
-                        $scope.reverseOrder = false;
-                        break;
-                    case 'centerMode_column_groups':
-                        $scope.orderInstance = 'groups';
-                        $scope.reverseOrder = false;
-                        break;
-                    case 'centerMode_column_students':
-                        $scope.orderInstance = 'students';
-                        $scope.reverseOrder = false;
-                        break;
-                }
-            };
-
             $scope.renameExercise = function(exercise) {
                 commonModals.rename(exercise, 'exercise').then(function() {
                     exerciseApi.update(exercise._id, exercise);
                 });
-            };
-
-            $scope.searchExercises = function() {
-                $location.search($scope.filterExercisesParams);
-                getTeacherExercisesPaginated($scope.pageno, $scope.filterExercisesParams);
-                _getExercisesCount($scope.filterExercisesParams);
             };
 
             $scope.setMoreOptions = function() {
@@ -245,8 +127,6 @@
                 });
             }
 
-
-            //ok
             function _checkUrl() {
                 $scope.urlType = 'exercise-info';
                 _getGroups($routeParams.id).then(function() {
@@ -261,31 +141,15 @@
                 });
             }
 
-            function _getExercisesCount(searchText) {
-                var searchParams = searchText ? searchText : ($routeParams.name ? {
-                    'name': $routeParams.name
-                } : '');
-                centerModeApi.getExercisesCount(null, searchParams).then(function(response) {
-                    $scope.exercisesCount = response.data.count;
-                });
-            }
 
             function _getGroups(exerciseId) {
                 var defered = $q.defer();
-                if (exerciseId) {
-                    centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
-                        $scope.groups = response.data;
-                        $scope.groupArray = $scope.groups;
-                        groupSelected = $scope.groups[0];
-                        defered.resolve();
-                    });
-                } else {
-                    centerModeApi.getGroups('teacher', null, centerModeService.center._id).then(function(response) {
-                        $scope.groups = response.data;
-                        $scope.groupArray = $scope.groups;
-                        defered.resolve();
-                    });
-                }
+                centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
+                    $scope.groups = response.data;
+                    $scope.groupArray = $scope.groups;
+                    groupSelected = $scope.groups[0];
+                    defered.resolve();
+                });
 
                 return defered.promise;
             }
@@ -307,37 +171,6 @@
                     });
                 }
             }
-
-            function _getExercises() {
-                var searchParams;
-                searchParams = $routeParams.name ? $routeParams.name : '';
-                if (searchParams) {
-                    $scope.showFilters = true;
-                    $scope.search.searchExercisesText = searchParams;
-                }
-                if ($routeParams.page) {
-                    getTeacherExercisesPaginated($routeParams.page, {
-                        'name': searchParams
-                    });
-                    $scope.pagination.exercises.current = $routeParams.page;
-                } else {
-                    getTeacherExercisesPaginated($scope.pageno);
-                }
-            }
-
-            function getTeacherExercisesPaginated(pageno, search) {
-                centerModeApi.getExercises(null, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage,
-                    'searchParams': search
-                }).then(function(response) {
-                    $scope.exercises = response.data;
-                    $location.search('page', pageno);
-
-                });
-            }
-
-            //ok
 
             function clickDocumentHandler(evt) {
                 if (!angular.element(evt.target).hasClass('btn--showMoreActions')) {
@@ -416,11 +249,11 @@
                 return queryParams;
             }
 
+
             /************************
              **  INIT && WATCHERS ***
              ************************/
 
-                //ok
             $window.onfocus = function() {
                 if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
                     localStorage.exercisesChange = false;

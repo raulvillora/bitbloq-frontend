@@ -118,7 +118,7 @@
     &.breadcrumb-longer {
         width: 100%;
 
-        a {
+        a, .breadcrumb--secondary {
             display: inline-block;
             overflow: hidden;
         }

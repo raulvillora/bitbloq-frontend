@@ -2,9 +2,9 @@
     'use strict';
     /**
      * @ngdoc function
-     * @name bitbloqApp.controller:CenterCtrl
+     * @name bitbloqApp.controller:ClassesCtrl
      * @description
-     * # CenterCtrl
+     * # ClassesCtrl
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')

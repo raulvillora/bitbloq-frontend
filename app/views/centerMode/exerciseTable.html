@@ -31,7 +31,7 @@
     <div class="table__block table__block__exercise">
         <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}">
             <div  ng-class="common.urlType==='group' ? 'col-vsmall-8' : 'col-vsmall-5'" class="table__block__item">
-                <button class="table__item__text table__item__link" ng-click="saveUrl('/exercises/exercise-info/' + exercise._id)" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                <button class="table__item__text table__item__link" ng-click="saveUrl('/exercise-info/' + exercise._id)" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                     <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                         {{exercise.name || 'new-exercise' | translate}}</h2>
                 </button>
