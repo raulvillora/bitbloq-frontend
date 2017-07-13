@@ -31,7 +31,7 @@
         <div class="table__block table__block__exercise">
             <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}">
                 <div class="table__block__item col-vsmall-8">
-                    <button class="table__item__text table__item__link" ng-click="saveUrl('/exercises/exercise-info/' + exercise._id)" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                    <button class="table__item__text table__item__link" ng-click="saveUrl('/exercise-info/' + exercise._id)" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                         <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                             {{exercise.name || 'new-exercise' | translate}}</h2>
                     </button>
@@ -50,7 +50,7 @@
                     <div ng-show="menuActive[$index]" class="table__block__item--parent">
                         <ul class="table__block__item--menu">
                             <li class="table__block__item--menu__item table__block__item--menu__item--open">
-                                <a class="table__block__item--menu__link" data-ng-href="#/exercises/exercise-info/{{exercise._id}}" target="_blank">
+                                <a class="table__block__item--menu__link" data-ng-href="#/exercise-info/{{exercise._id}}" target="_blank">
                                     {{'open' | translate}}</a>
                             </li>
                             <li class="dropdown__item--separator"></li>

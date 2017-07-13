@@ -196,9 +196,14 @@ angular
                     controller: 'ClassesCtrl',
                     reloadOnSearch: false
                 })
-                .when('/exercises/:child?/:id?', {
+                .when('/exercises', {
                     templateUrl: 'views/centerMode/exercisesDashboard.html',
                     controller: 'ExercisesCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/exercise-info/:id?', {
+                    templateUrl: 'views/centerMode/exerciseInfo.html',
+                    controller: 'ExerciseInfoCtrl',
                     reloadOnSearch: false
                 })
                 .when('/tasks', {

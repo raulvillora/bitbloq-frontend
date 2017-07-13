@@ -8,12 +8,11 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ExercisesCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $q) {
+        .controller('ExerciseInfoCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $q) {
             $scope.exercises = [];
             $scope.menuActive = {};
             $scope.tasks = [];
             $scope.groups = [];
-            $scope.urlType = $routeParams.child;
             $scope.pageno = 1;
             $scope.itemsPerPage = 10;
             $scope.filterExercisesParams = {};
@@ -218,6 +217,11 @@
                 $scope.getTasksPaginated($scope.pageno);
             };
 
+
+            /**************************
+             ***  PRIVATE FUNCTIONS ***
+             **************************/
+
             function _init() {
                 $scope.common.itsUserLoaded().then(function() {
                     $scope.common.itsRoleLoaded().then(function() {
@@ -241,13 +245,12 @@
                 });
             }
 
+
             //ok
             function _checkUrl() {
-                centerModeApi.getMyCenter().then(function(response) {
-                    centerModeService.setCenter(response.data);
-                    _getExercisesCount();
-                    _getGroups();
-                    _getExercises();
+                $scope.urlType = 'exercise-info';
+                _getGroups($routeParams.id).then(function() {
+                    _getExercise($routeParams.id);
                 });
             }
 
@@ -330,19 +333,19 @@
                 }).then(function(response) {
                     $scope.exercises = response.data;
                     $location.search('page', pageno);
+
                 });
             }
 
             //ok
-            $window.onfocus = function() {
-                $scope.$apply(function() {
-                    $scope.timestamp = Date.now();
-                });
-                if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
-                    localStorage.exercisesChange = false;
-                    _checkUrl();
+
+            function clickDocumentHandler(evt) {
+                if (!angular.element(evt.target).hasClass('btn--showMoreActions')) {
+                    $scope.showMoreActions = false;
+                    utils.apply($scope);
                 }
-            };
+            }
+
 
             function getRequest() {
                 var queryParams = {},
@@ -412,6 +415,25 @@
 
                 return queryParams;
             }
+
+            /************************
+             **  INIT && WATCHERS ***
+             ************************/
+
+                //ok
+            $window.onfocus = function() {
+                if (localStorage.exercisesChange && JSON.parse(localStorage.exercisesChange) && $scope.common.itsUserLoaded()) {
+                    localStorage.exercisesChange = false;
+                    _getExercise($routeParams.id);
+                }
+            };
+
+            $document.on('click', clickDocumentHandler);
+
+            $scope.$on('$destroy', function() {
+                $window.onfocus = null;
+                $document.off('click', clickDocumentHandler);
+            });
 
             _init();
         });

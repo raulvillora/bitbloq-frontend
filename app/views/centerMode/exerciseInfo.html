@@ -1,3 +1,12 @@
+<div class="section-header table__header center-mode__header">
+    <div class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer second-level': urlType}" data-element="centerMode-header-breadcrumb">
+        <h1><a href="#/exercises">{{'header_tab_myExercises' | translate}}</a></h1>
+        <a class="breadcrumb--secondary" ng-if="urlType" ng-href="#/center-mode/{{exercise._id}}">
+            {{exercise.name || common.translate('new-exercise')}}
+        </a>
+    </div>
+</div>
+<div class="table__page table__page--with-header">
 <div class="table__main">
     <div class="center-mode__block row">
         <!--<p class="center-mode__date col-vsmall-6">
@@ -59,16 +68,17 @@
         </div>
     </div>
     <div class="row">
-        <h1 class="table__title tasks-students" ng-if="urlType==='exercise-info'">
+        <h1 class="table__title tasks-students">
             <svg class="svg-icon svg-icon--text">
                 <use xlink:href="#user"></use>
             </svg>
             {{'centerMode_column_students' | translate}}
         </h1>
         <div class="tasks-dropdown__group">
-            <common-dropdown class="task--sort-dropdown" ng-if="urlType==='exercise-info' && (tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected)))" options="taskSortArray" options-click="sortTasks" pre-heading="'explore-sortby'" heading-option="taskSortArray[0] | translate"></common-dropdown>
-            <common-dropdown class="task--sort-dropdown" ng-if="urlType==='exercise-info' && (tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected)))" options="taskStatusArray" options-click="filterTasksByStatus" pre-heading="'classes-status'" heading-option="taskStatusArray[0] | translate"></common-dropdown>
+            <common-dropdown class="task--sort-dropdown" ng-if="tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected))" options="taskSortArray" options-click="sortTasks" pre-heading="'explore-sortby'" heading-option="taskSortArray[0] | translate"></common-dropdown>
+            <common-dropdown class="task--sort-dropdown" ng-if="tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected))" options="taskStatusArray" options-click="filterTasksByStatus" pre-heading="'classes-status'" heading-option="taskStatusArray[0] | translate"></common-dropdown>
         </div>
     </div>
     <div class="center-mode" ng-include="'views/centerMode/taskTable.html'"></div>
+</div>
 </div>
