@@ -349,7 +349,9 @@ angular.module('bitbloqApp')
                         case 'ifButtonPushed':
                             result = existComponent(['mkb_4buttonKeyPad'], connectedComponents);
                             break;
-                        case 'remoteButtonPushed':
+                        case 'remoteButtonPushedSwitch':
+                        case 'remoteButtonPushedCase':
+                        case 'remoteButtonPushedCaseDefault':
                             result = existComponent(['mkb_remote'], connectedComponents, true);
                             break;
                         case 'displayNumber':
