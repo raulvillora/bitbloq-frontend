@@ -9,11 +9,11 @@
      */
     angular.module('bitbloqApp')
         .controller('ClassCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
+
+            $scope.moment = moment;
             $scope.exercises = [];
             $scope.group = {};
             $scope.groups = [];
-            $scope.teacher = {};
-            $scope.teachers = [];
             $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
             $scope.classesStatusArray = [];
             $scope.secondaryBreadcrumb = false;
@@ -21,18 +21,15 @@
             $scope.studentsJSON = [];
             $scope.orderInstance = 'name';
             $scope.urlSubType = $routeParams.child;
-            $scope.showMoreActions = false;
-            $scope.showMoreActionsInGroup = false;
+            $scope.showMoreActionsInClass = false;
             $scope.pageno = 1;
             $scope.classesArray = [];
             $scope.showFilters = false;
             $scope.exercisesCount = 0;
             $scope.itemsPerPage = 10;
-            $scope.groupsPerPage = 9;
             $scope.menuActive = {};
             $scope.search = {};
             $scope.filterExercisesParams = {};
-            $scope.filterClassesParams = {};
             $scope.pagination = {
                 'exercises': {
                     'current': 1
@@ -43,32 +40,15 @@
             };
             $scope.groupArray = {};
             $scope.exerciseService = exerciseService;
-            $scope.moment = moment;
-            $scope.selectedTab = 'teachers';
-            $scope.classesStatusArray = ['all-classes', 'closed-classes'];
-            $scope.sortSelected = 'last-classes';
-            $scope.sortClassesArray = ['name', 'last-classes', 'old-classes'];
-
+            $scope.centerModeService = centerModeService;
             $scope.colorPickerFlag = {};
 
             var currentModal;
 
-            $scope.changeFilter = function() {
-                $scope.showFilters = !$scope.showFilters;
-            };
-
-            $scope.editGroup = function() {
-                exerciseService.assignGroup($scope.exercise, $scope.common.user._id, $scope.groups, centerModeService.center._id)
-                    .then(function() {
-                        _getTasksByExercise($routeParams.id);
-                        _getGroups('teacher', $routeParams.id);
-                    });
-            };
-
             $scope.editGroups = function(exercise) {
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
                     exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
-                        _getGroups('teacher');
+                        _getGroups();
                         _getExercises();
                     });
                 });
@@ -304,24 +284,11 @@
                 });
             };
 
-            // get Exercises paginated
             $scope.getExercisesPaginated = function(pageno) {
                 getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
             };
 
-            function getTeacherExercisesPaginated(pageno, search) {
 
-                centerModeApi.getExercises($scope.teacher._id, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage,
-                    'searchParams': search ? search : {}
-                }).then(function(response) {
-                    $scope.exercises = response.data;
-                    $location.search('page', pageno);
-                });
-            }
-
-            // getTasksPaginated
             $scope.getTasksPaginated = function(pageno) {
                 exerciseApi.getTasksByExercise($scope.exercise._id, {
                     'page': pageno,
@@ -370,35 +337,9 @@
                 }
             };
 
-            $scope.centerModeService = centerModeService;
-
-            $scope.newGroup = function() {
-                centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, centerModeService.center._id)
-                    .then(function() {
-                        _getGroups('teacher');
-                    });
-            };
-
             $scope.renameExercise = function(exercise) {
                 commonModals.rename(exercise, 'exercise').then(function() {
                     exerciseApi.update(exercise._id, exercise);
-                });
-            };
-
-            $scope.resendInvitation = function(teacher) {
-                centerModeApi.resendInvitation(teacher._id, centerModeService.center._id).then(function() {
-                    alertsService.add({
-                        text: 'centerMode_alert_sendInvitation',
-                        id: 'addTeacher',
-                        type: 'info',
-                        time: 5000
-                    });
-                }).catch(function() {
-                    alertsService.add({
-                        text: 'centerMode_alert_addTeacher-Error',
-                        id: 'addTeacher',
-                        type: 'error'
-                    });
                 });
             };
 
@@ -407,61 +348,8 @@
                 $location.url(newUrl);
             };
 
-            $scope.getMyGroupsPage = function(page) {
-                var queryParamsArray = getRequest(),
-                    queryParams = queryParamsArray || {},
-                    groupPage = page ? page : 1;
-
-                var pageParams = {
-                    'page': groupPage
-                };
-
-                angular.extend(queryParams, pageParams);
-                $log.debug('getPublicProjects', queryParams);
-
-                centerModeApi.getGroups('teacher', null, centerModeService.center._id, null, queryParams).then(function(response) {
-                    $scope.groups = response.data.groups;
-                    $scope.groupsCount = response.data.counter;
-                    $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
-                        'search': queryParams.searchParams
-                    } : {}), _.cloneDeep(pageParams)));
-                });
-            };
-
-            $scope.getCenterGroups = function(center) {
-                var page;
-                centerModeService.setCenter(center);
-                if ($routeParams.updatedAt) {
-                    $scope.sortSelected = getSortOption($routeParams.updatedAt);
-                }
-                if ($routeParams.status) {
-                    $scope.statusSelected = getStatusOption($routeParams.status);
-                }
-                if ($routeParams.search) {
-                    $scope.search.searchClassesText = $routeParams.search;
-                }
-                if ($routeParams.page) {
-                    page = $routeParams.page;
-                    $scope.pagination.mygroups.current = $routeParams.page;
-                }
-                $scope.getMyGroupsPage(page);
-            };
-
-            $scope.sortClasses = function(option) {
-                $scope.sortSelected = option;
-                $scope.searchClasses();
-            };
-            $scope.filterByStatus = function(option) {
-                $scope.statusSelected = option;
-                $scope.searchClasses();
-            };
-
-            $scope.setMoreOptions = function() {
-                $scope.showMoreActions = !$scope.showMoreActions;
-            };
-
-            $scope.setMoreOptionsInGroup = function() {
-                $scope.showMoreActionsInGroup = !$scope.showMoreActionsInGroup;
+            $scope.setMoreOptionsInClass = function() {
+                $scope.showMoreActionsInClass = !$scope.showMoreActionsInClass;
             };
 
             $scope.searchExercises = function() {
@@ -470,19 +358,8 @@
                 _getExercisesCount($scope.filterExercisesParams);
             };
 
-            $scope.searchClasses = function() {
-                $location.search($scope.filterClassesParams);
-                $scope.getMyGroupsPage();
-            };
-
             $scope.setTab = function(tab) {
                 $scope.selectedTab = tab;
-            };
-
-            $scope.centerActivateRobot = function(robot) {
-                commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
-                    centerModeService.setCenter(response.data);
-                });
             };
 
             $scope.getCsvHeaders = function() {
@@ -508,29 +385,15 @@
                 }
             }
 
-            function getSortOption(parameter) {
-                var sortOption;
-                switch (parameter) {
-                    case 'asc':
-                        sortOption = 'old-classes';
-                        break;
-                    case 'desc':
-                        sortOption = 'last-classes';
-                        break;
-                }
-
-                return sortOption;
-            }
-
-            function getStatusOption(parameter) {
-                var statusOption;
-                switch (parameter) {
-                    case 'closed':
-                        statusOption = 'closed-classes';
-                        break;
-                }
-
-                return statusOption;
+            function getTeacherExercisesPaginated(pageno, search) {
+                centerModeApi.getExercises($scope.common.user._id, {
+                    'page': pageno,
+                    'pageSize': $scope.itemsPerPage,
+                    'searchParams': search ? search : {}
+                }).then(function(response) {
+                    $scope.exercises = response.data;
+                    $location.search('page', pageno);
+                });
             }
 
             function _closeGroupAction() {
@@ -558,7 +421,7 @@
                 var searchParams = searchText ? searchText : ($routeParams.name ? {
                     'name': $routeParams.name
                 } : '');
-                centerModeApi.getExercisesCount($scope.teacher._id, searchParams).then(function(response) {
+                centerModeApi.getExercisesCount($scope.common.user._id, searchParams).then(function(response) {
                     $scope.exercisesCount = response.data.count;
                 });
             }
@@ -576,23 +439,15 @@
                 });
             }
 
-            function _getGroups(role, exerciseId) {
-                if (exerciseId) {
-                    centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
-                        $scope.groups = response.data;
-                        $scope.groupArray = $scope.groups;
+            function _getGroups() {
+                centerModeApi.getMyCentersAsTeacher().then(function(response) {
+                    centerModeService.setCenters(response.data);
+                    $scope.centersArray = [];
+                    _.forEach(centerModeService.centers, function(center) {
+                        $scope.centersArray.push(_.pick(center, ['_id', 'name']));
                     });
-                } else {
-                    centerModeApi.getMyCentersAsTeacher().then(function(response) {
-                        centerModeService.setCenters(response.data);
-                        $scope.centersArray = [];
-                        _.forEach(centerModeService.centers, function(center) {
-                            $scope.centersArray.push(_.pick(center, ['_id', 'name']));
-                        });
-                        $scope.getCenterGroups(centerModeService.center._id ? centerModeService.center : $scope.centersArray[0]);
-                    });
-                }
-
+                    $scope.getCenterGroups(centerModeService.center._id ? centerModeService.center : $scope.centersArray[0]);
+                });
             }
 
             function _getTasks(groupId, studentId, pageno) {
@@ -615,30 +470,6 @@
                 });
             }
 
-            function getTasksWithParams(pageno) {
-                exerciseApi.getTasks(null, null, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage
-                }).then(function(response) {
-                    response.data.forEach(function(task) {
-                        if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
-                            task.status = 'notDelivered';
-                        }
-                    });
-                    $scope.exercises = response.data;
-                    $location.search('page', pageno);
-                });
-            }
-
-            function _getTasksByExercise() {
-                if ($routeParams.page) {
-                    $scope.getTasksPaginated($routeParams.page);
-                    $scope.pagination.tasks.current = $routeParams.page;
-                } else {
-                    $scope.getTasksPaginated($scope.pageno);
-                }
-            }
-
             function _getExercises() {
                 var searchParams;
                 searchParams = $routeParams.name ? $routeParams.name : '';
@@ -654,66 +485,6 @@
                 } else {
                     getTeacherExercisesPaginated($scope.pageno);
                 }
-            }
-
-            function getRequest() {
-                var queryParams = {},
-                    sortParams = getSortRequest(),
-                    statusParams = getStatusRequest();
-                queryParams = getSearchRequest(queryParams);
-
-                queryParams = _.extend(queryParams, sortParams);
-                queryParams = _.extend(queryParams, statusParams);
-
-                return queryParams;
-
-            }
-
-            function getSearchRequest(queryParams) {
-                queryParams = queryParams || {};
-
-                if (($scope.search.searchClassesText && $scope.search.searchClassesText !== '')) {
-                    queryParams.searchParams = $scope.search.searchClassesText;
-                }
-
-                return queryParams;
-            }
-
-            function getSortRequest() {
-                var queryParams = {};
-
-                switch ($scope.sortSelected) {
-                    case 'name':
-                        queryParams.sortParams = {
-                            'name': 'asc'
-                        };
-                        break;
-                    case 'last-classes':
-                        queryParams.sortParams = {
-                            'updatedAt': 'desc'
-                        };
-                        break;
-                    case 'old-classes':
-                        queryParams.sortParams = {
-                            'updatedAt': 'asc'
-                        };
-                        break;
-                }
-
-                return queryParams;
-            }
-
-            function getStatusRequest() {
-                var queryParams = {};
-                switch ($scope.statusSelected) {
-                    case 'closed-classes':
-                        queryParams.statusParams = {
-                            'status': 'closed'
-                        };
-                        break;
-                }
-
-                return queryParams;
             }
 
             function _init() {

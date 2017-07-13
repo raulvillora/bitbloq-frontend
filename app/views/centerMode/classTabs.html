@@ -34,10 +34,10 @@
                 <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
             </label>
         <div class="button-group col-vsmall-7">
-            <button class="btn btn--quaternary btn--small btn--showMoreActions" ng-click="setMoreOptionsInGroup()" data-element="centerMode_button_moreActions">
+            <button class="btn btn--quaternary btn--small btn--showMoreActions" ng-click="setMoreOptionsInClass()" data-element="centerMode_button_moreActions">
                 <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
             </button>
-            <div ng-show="showMoreActionsInGroup" class="table__block__item--menu table__block__moreactions--menu">
+            <div ng-show="showMoreActionsInClass" class="table__block__item--menu table__block__moreactions--menu">
                 <ul>
                     <li class="table__block__item--menu__item" ng-csv="studentsJSON" csv-header="getCsvHeaders();" filename="{{group.name + '.csv'}}" data-element="menu-change-name">
                         <svg class="svg-icon svg-icon--text svg-icon--menu">
