@@ -45,11 +45,6 @@
                     });
             };
 
-            $scope.saveUrl = function(newUrl) {
-                $scope.common.lastUrl = $location.url();
-                $location.url(newUrl);
-            };
-
             $scope.getMyGroupsPage = function(page) {
                 var queryParamsArray = getRequest(),
                     queryParams = queryParamsArray || {},

@@ -100,11 +100,6 @@
                 });
             };
 
-            $scope.saveUrl = function(newUrl) {
-                $scope.common.lastUrl = $location.url();
-                $location.url(newUrl);
-            };
-
             $scope.getExercisesPaginated = function(pageno) {
                 getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
             };

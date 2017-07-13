@@ -180,11 +180,6 @@
                 });
             };
 
-            $scope.saveUrl = function(newUrl) {
-                $scope.common.lastUrl = $location.url();
-                $location.url(newUrl);
-            };
-
             $scope.setTab = function(tab) {
                 $scope.selectedTab = tab;
                 _checkWatchers();
