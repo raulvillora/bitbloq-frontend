@@ -1,7 +1,6 @@
 <div class="section-header table__header center-mode__header">
-    <div ng-if="teachers.length>0" class="breadcrumb header__title col-vsmall-7" ng-class="{'second-level':secondaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
-        <h1><a href="#/center-mode/center">{{centerModeService.center.name}}</a></h1>
-        <a ng-if="secondaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{teacher._id}}">{{teacher.firstName ? teacher.firstName + ' ' +teacher.lastName : teacher.username}}</a>
+    <div class="breadcrumb header__title col-vsmall-7">
+        <h1 class="breadcrumb__title">{{centerModeService.center.name}}</h1>
     </div>
 </div>
 <div class="table__page table__page--with-header">

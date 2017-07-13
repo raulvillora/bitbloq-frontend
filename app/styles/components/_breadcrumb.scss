@@ -4,10 +4,6 @@
     display: inline-block;
     font-weight: 700;
 
-    h1 {
-        display: inline-block;
-    }
-
     .color-swatch {
         display: inline-block;
         position: relative;
@@ -94,6 +90,9 @@
         &:hover {
             color: $green;
         }
+    }
+    .breadcrumb__title {
+        color: $text-title;
     }
 
     &.second-level,

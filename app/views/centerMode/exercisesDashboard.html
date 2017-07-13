@@ -1,9 +1,6 @@
 <div class="section-header table__header center-mode__header">
-    <div class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer second-level': urlType}" data-element="centerMode-header-breadcrumb">
-        <h1><a href="#/exercises">{{'header_tab_myExercises' | translate}}</a></h1>
-        <a class="breadcrumb--secondary" ng-if="urlType" ng-href="#/center-mode/{{exercise._id}}">
-            {{exercise.name || common.translate('new-exercise')}}
-        </a>
+    <div class="breadcrumb header__title col-vsmall-7">
+        <h1 class="breadcrumb__title">{{'header_tab_myExercises' | translate}}</h1>
     </div>
     <div class="button-group col-vsmall-5" ng-if="exercises.length!==0">
         <a class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
