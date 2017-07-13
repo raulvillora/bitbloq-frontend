@@ -6,7 +6,7 @@
     <div class="center-mode--empty" ng-if="exercises.length===0 && groups.length===0">
         <h1 class="center-mode--empty__title">{{'centerMode_groups_empty' | translate}}</h1>
         <p class="center-mode--empty__info">{{'centerMode_groups_emptyInfo' | translate}}</p>
-        <button ng-if="common.urlType.indexOf('teacher') > -1" class="btn btn--small" ng-class="{'btn--primary': groups.length === 0, 'btn--secondary': groups.length > 0 }" ng-click="newGroup()" data-element="centerMode_button_newGroup">
+        <button class="btn btn--small" ng-class="{'btn--primary': groups.length === 0, 'btn--secondary': groups.length > 0 }" ng-click="newGroup()" data-element="centerMode_button_newGroup">
             <span>{{'centerMode_button_newGroup' | translate}}</span>
         </button>
     </div>

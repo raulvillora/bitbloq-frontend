@@ -39,7 +39,6 @@ angular.module('bitbloqApp')
         exports.translate = $filter('translate');
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
-        exports.urlType = null;
         exports.user = null;
         exports.userRole = 'student';
         exports.warnedOfIncompatibility = false;

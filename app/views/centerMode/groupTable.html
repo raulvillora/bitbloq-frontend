@@ -9,27 +9,6 @@
             <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchClassesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
         </span>
     </div>
-
-
-    <!--<div class="center-mode__table-title row">
-    <span class="col-vsmall-9">{{'centerMode_column_group' | translate}}</span>
-    <span class="col-vsmall-3" ng-if="common.urlType==='teacher'">{{'centerMode_column_students' | translate}}</span>
-</div>
-<ul class="table__block">
-    <li class="table__block__list row" ng-class="{'table__block__hover': common.userRole!=='student'}" ng-repeat="group in groups" data-element="centerMode-groups-link-{{$index}}">
-        <span class="col-vsmall-11 table__block__item">
-            <button class="table__item__text" ng-class="{'table__item__link': common.userRole!=='student'}" ng-click="common.userRole!=='student' && saveUrl('/class/' + group._id)">
-                <h2 class="block__item__title block__item__title--small" data-element="{{'centerMode_item_' + group.name}}">
-                    {{group.name}}
-                </h2>
-                <span class="block__item__explanation--subscript" ng-class="{'text-ID': group.status!=='closed'}" ng-if="urlType!=='exercise-info'">{{group.status==='closed'? ('centerMode_status_groupClosed' |translate): group.accessId}}</span>
-                <span class="block__item__explanation--subscript" ng-if="urlType==='exercise-info'">{{group.initDate ? ('date_from' | translate)+' '+(group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
-                <span class="block__item__explanation--subscript" ng-if="urlType==='exercise-info'"> {{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
-            </button>
-        </span>
-        <span class="col-vsmall-1 table__block__item" ng-if="urlType!=='exercise-info' && common.userRole!=='student'">{{group.students.length || 0}}</span>
-    </li>
-</ul>-->
     <div ng-show="(search.searchClassesText!='' && search.searchClassesText!=undefined) && groups.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'classes_text_searchEmpty' | translate}}</p>
     </div>

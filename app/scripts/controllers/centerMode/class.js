@@ -20,7 +20,6 @@
             $scope.students = [];
             $scope.studentsJSON = [];
             $scope.orderInstance = 'name';
-            $scope.common.urlType = 'group';
             $scope.urlSubType = $routeParams.child;
             $scope.showMoreActions = false;
             $scope.showMoreActionsInGroup = false;
@@ -306,13 +305,8 @@
             };
 
             // get Exercises paginated
-
             $scope.getExercisesPaginated = function(pageno) {
-                switch ($scope.common.urlType) {
-                    case 'student':
-                        getTasksWithParams(pageno);
-                        break;
-                }
+                getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
             };
 
             function getTeacherExercisesPaginated(pageno, search) {

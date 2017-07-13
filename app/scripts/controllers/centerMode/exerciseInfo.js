@@ -128,7 +128,6 @@
             }
 
             function _checkUrl() {
-                $scope.urlType = 'exercise-info';
                 _getGroups($routeParams.id).then(function() {
                     _getExercise($routeParams.id);
                 });

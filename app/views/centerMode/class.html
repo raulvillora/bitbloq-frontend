@@ -1,8 +1,23 @@
-<div class="section-header table__header center-mode__header" ng-include="'views/centerMode/centerHeader.html'"></div>
-<!-- <div ng-if="common.urlType.indexOf('center') > -1" ng-include="'views/centerMode/centerTabs.html'"></div> -->
-<div class="table__page table__page--with-header" ng-click="colorPickerFlag.open = false">
-  <div class="center-mode__tabs" ng-if="common.urlType.indexOf('center') > -1" ng-include="'views/centerMode/centerTabs.html'"></div>
-    <!-- <div class="center-mode" ng-if="common.urlType.indexOf('center') > -1" ng-include="'views/centerMode/center.html'"></div> -->
-    <div class="center-mode" ng-if="common.urlType==='teacher'" ng-include="'views/centerMode/teacherDashboard.html'"></div>
-    <div class="center-mode" ng-if="common.urlType==='group'" ng-include="'views/centerMode/group.html'"></div>
+<div class="section-header table__header center-mode__header">
+  <div class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer':!student.average, 'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
+    <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl: '#/center-mode/teacher'}}">{{'header_tab_myClass' | translate}}</a></h1>
+    <a ng-if="secondaryBreadcrumb || tertiaryBreadcrumb" ng-class="{'breadcrumb--secondary': secondaryBreadcrumb, 'breadcrumb__item': tertiaryBreadcrumb}" ng-href="#/center-mode/group/{{group._id}}">
+      {{group.name}}
+    </a>
+    <div class="color-swatch" ng-if="!tertiaryBreadcrumb">
+      <div class="color-thumbnail" ng-style="{'background-color': group.color}" ng-click="colorPickerFlag.open = !colorPickerFlag.open;"></div>
+      <div class="nav__menu menu--overlay menu--overlay__content menu--colorpicker" ng-if="colorPickerFlag.open">
+        <color-picker ng-model="group.color">
+        </color-picker>
+        <input type="text" maxlength="7" ng-pattern-restrict="^#([0-9a-fA-F])*" ng-model="group.color">
+        <button class="btn btn--primary btn--small" ng-click="changeGroupColor()">{{'save' | translate}}</button>
+      </div>
+    </div>
+
+    <p class="breadcrumb--subtext" ng-if="!tertiaryBreadcrumb">{{group.accessId}}</p>
+    <a ng-if="tertiaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/center-mode/{{group._id}}">
+      {{student.firstName? student.firstName + student.lastName : student.username}}
+    </a>
+  </div>
 </div>
+<div class="table__page table__page--with-header" ng-click="colorPickerFlag.open = false" ng-include="'views/centerMode/classTabs.html'"></div>

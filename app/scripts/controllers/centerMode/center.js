@@ -196,7 +196,6 @@
              *****************************/
 
             function _checkUrl() {
-                $scope.common.urlType = $routeParams.type;
                 _checkWatchers();
                 _getCenter();
             }
