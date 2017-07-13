@@ -181,11 +181,6 @@ angular
                     templateUrl: 'views/under14authorization.html',
                     controller: 'Under14AuthorizationCtrl'
                 })
-                .when('/center-mode/:type?/:id?/:subtype?/:subId?', {
-                    templateUrl: 'views/centerMode/centerModeIndex.html',
-                    controller: 'CenterModeCtrl',
-                    reloadOnSearch: false
-                })
                 .when('/class/:id?/:child?/:studentId?', {
                     templateUrl: 'views/centerMode/class.html',
                     controller: 'ClassCtrl',
