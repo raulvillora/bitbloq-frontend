@@ -548,6 +548,14 @@
                 margin-top: 27px;
             }
         }
+
+        .modal__input {
+            margin-top: 27px;
+        }
+
+        .modal__limit {
+            padding-bottom: 17px;
+        }
     }
 
     .modal--buttons {
@@ -579,9 +587,11 @@
     .share-modal__emails-no-user {
         background-color: #e2e2e2;
         padding: 20px 30px;
-        .files{
+
+        .files {
             list-style: initial;
         }
+
         .email:last-child {
             .colon {
                 display: none;

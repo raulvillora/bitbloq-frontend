@@ -15,10 +15,10 @@
             $scope.centerModeService = centerModeService;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                'uuid': 'mBot',
-                'image': 'mbot',
-                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-            },
+                    'uuid': 'mBot',
+                    'image': 'mbot',
+                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+                },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -112,23 +112,44 @@
                         break;
                 }
             };
-
+            console.log('$scope.envData');
+            console.log($scope.envData);
             $scope.newTeacher = function() {
+                var maxTeachers = centerModeService.center.maxTeachers ? centerModeService.center.maxTeachers : $scope.envData.config.maxTeachers;
                 var confirmAction = function() {
                         var teachers = _.map(modalOptions.newTeachersModel, 'text');
+                        var excedeedLimit = false;
                         if (teachers.length > 0) {
+                            if (($scope.teachers.length + teachers.length) > maxTeachers) {
+                                teachers = teachers.slice(0, maxTeachers - $scope.teachers.length);
+                                excedeedLimit = true;
+                            }
                             centerModeApi.addTeachers(teachers, centerModeService.center._id).then(function(response) {
                                 if (response.data.teachersWithError) {
                                     commonModals.noAddTeachers(response.data.teachersWithError);
                                 }
                                 if (response.data.teachersWaitingConfirmation) {
-                                    var alertText = response.data.teachersWaitingConfirmation.length === 1 ? 'centerMode_alert_sendInvitation' : 'centerMode_alert_sendInvitations';
-                                    alertsService.add({
-                                        text: alertText,
-                                        id: 'addTeacher',
-                                        type: 'info',
-                                        time: 5000
-                                    });
+                                    if (!excedeedLimit) {
+                                        var alertText = response.data.teachersWaitingConfirmation.length === 1 ? 'centerMode_alert_sendInvitation' : 'centerMode_alert_sendInvitations';
+                                        alertsService.add({
+                                            text: alertText,
+                                            id: 'addTeacher',
+                                            type: 'info',
+                                            value: response.data.teachersWaitingConfirmation.length,
+                                            time: 5000
+                                        });
+                                    } else {
+                                        var alertTextWithError = response.data.teachersWaitingConfirmation.length === 1 ? 'centerMode_alert_sendInvitation_with_error' : 'centerMode_alert_sendInvitations_with_error';
+                                        alertsService.add({
+                                            text: $scope.common.translate(alertTextWithError, {
+                                                'value': response.data.teachersWaitingConfirmation.length,
+                                                'maxTeachers': maxTeachers
+                                            }),
+                                            id: 'addTeacher',
+                                            type: 'info',
+                                            time: 5000
+                                        });
+                                    }
                                     _.forEach(response.data.teachersWaitingConfirmation, function(teacher) {
                                         teacher.notConfirmed = true;
                                         $scope.teachers.push(teacher);
@@ -147,6 +168,7 @@
                     parent = $rootScope,
                     modalOptions = parent.$new();
 
+                modalOptions.center = centerModeService.center;
                 _.extend(modalOptions, {
                     title: 'newTeacher_modal_title',
                     confirmButton: 'newTeacher_modal_aceptButton',
@@ -156,11 +178,20 @@
                     newTeachersModel: []
                 });
 
-                var newTeacherModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions
-                });
+                if ($scope.teachers.length <= maxTeachers) {
+                    var newTeacherModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--input',
+                        scope: modalOptions
+                    });
+                } else {
+                    alertsService.add({
+                        text: 'newTeacher_modal_numberlimit_toast',
+                        id: 'addTeacher',
+                        type: 'error',
+                        value: maxTeachers
+                    });
+                }
             };
 
             $scope.resendInvitation = function(teacher) {
@@ -184,7 +215,6 @@
                 $scope.selectedTab = tab;
                 _checkWatchers();
             };
-
 
             /****************************
              ******PRIVATE FUNCTIONS******
