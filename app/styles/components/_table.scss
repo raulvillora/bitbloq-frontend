@@ -1,5 +1,9 @@
 .table__page {
     background-color: #eeeeee;
+    div[class^="col-"] {
+        padding-left: 0;
+    }
+
 }
 
 .table__page--with-header {

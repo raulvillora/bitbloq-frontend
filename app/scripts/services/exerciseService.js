@@ -166,7 +166,7 @@ angular.module('bitbloqApp')
                     }, 0);
                 }
 
-                function showTimePicker(timePickerId, event, time) {
+                function showTimePicker(timePickerId, event) {
                     $('#' + timePickerId).click();
                     event.stopPropagation();
                 }

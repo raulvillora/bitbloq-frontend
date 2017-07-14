@@ -8,7 +8,7 @@
  */
 
 angular.module('bitbloqApp')
-    .directive('bitbloqTooltip', function($log, utils) {
+    .directive('bitbloqTooltip', function() {
         return {
             restrict: 'A',
             scope: {
@@ -20,7 +20,7 @@ angular.module('bitbloqApp')
             link: function(scope, elem, attr) {
                 var widthUsedPerChar = 8;
                 //console.log("im a tooltip!", scope, elem, attr);
-                if (attr['bitbloqTooltipShowonellipsis']) {
+                if (attr.bitbloqTooltipShowonellipsis) {
                     elem[0].setAttribute('data-tooltips', false);
 
                     scope.$watchGroup([
@@ -30,7 +30,7 @@ angular.module('bitbloqApp')
                         function() {
                             return elem[0].offsetHeight;
                         }
-                    ], function(values) {
+                    ], function() {
 
                         var numCharacters = elem[0].getAttribute('data-tooltip').length;
                         var needTooltip = elem[0].offsetWidth <= (numCharacters * widthUsedPerChar);
