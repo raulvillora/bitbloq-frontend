@@ -634,9 +634,27 @@
     }
 }
 
+.class-dropdown {
+    min-height: 35px;
+    height: 35px;
+    @extend .centers-dropdown;
+
+    button{
+      padding-left: 0px;
+    }
+    .dropdown__heading{
+      margin-right: 12px;
+    }
+}
+
 .classes__title {
     display: inline-block;
     margin-right: 10px;
+}
+
+.class__title {
+    vertical-align: middle;
+    @extend .classes__title;
 }
 
 .group-list__item {
@@ -938,8 +956,6 @@
 .tasks-students {
     float: left;
 }
-
-
 @media only screen and (min-width: 320px) and (max-width: 485px) {
     .group-list__item {
         width: 100%;

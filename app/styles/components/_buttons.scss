@@ -29,7 +29,6 @@
         pointer-events: none;
     }
 }
-
 @mixin iconButton($backgroudColor, $textColor) {
     font-weight: bold;
     background-color: $backgroudColor;
@@ -118,7 +117,6 @@
         background-color: $button-quaternary-pressed;
     }
 }
-
 
 .btn--delete {
     float: right;
@@ -257,4 +255,33 @@
 .btn--row {
     width: 100%;
     margin-top: 21px;
+}
+
+.btn--add {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    background-color: $button-primary;
+
+    &:hover {
+        background-color: $button-primary-hover;
+    }
+
+    &:active {
+        background-color: $button-primary-pressed;
+    }
+
+    svg {
+        fill: white;
+        width: 12px;
+        height: 12px;
+    }
+}
+
+.btn---addclass{
+  svg{
+    width: 11px;
+    height: 11px;
+  }
+  font-size: 14px;
 }
