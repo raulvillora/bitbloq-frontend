@@ -212,6 +212,35 @@
     }
 }
 
+.center-mode--empty-tasks {
+    margin-top: 218px;
+
+    .svg-task {
+        height: 140px;
+        fill: $grey-light;
+        width: 108px;
+    }
+
+    .svg-plus {
+        fill: white;
+    }
+
+    h1 {
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: $grey-light;
+        width: 451px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    button{
+      margin-top: 30px;
+    }
+}
+
 .center-mode__average {
     line-height: 0.6;
     float: right;
@@ -639,11 +668,12 @@
     height: 35px;
     @extend .centers-dropdown;
 
-    button{
-      padding-left: 0px;
+    button {
+        padding-left: 0;
     }
-    .dropdown__heading{
-      margin-right: 12px;
+
+    .dropdown__heading {
+        margin-right: 12px;
     }
 }
 
