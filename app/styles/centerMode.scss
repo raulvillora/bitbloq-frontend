@@ -992,6 +992,12 @@
         .exercise-button-wide {
             width: 114px;
             height: 70px;
+            &:before{
+              margin-left: 25px;
+            }
+            &:after{
+              margin-left: 25px;
+            }
         }
     }
 }
