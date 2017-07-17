@@ -1,6 +1,6 @@
 <div class="section-header table__header center-mode__header">
   <div class="breadcrumb header__title col-vsmall-7" ng-class="{'breadcrumb-longer':!student.average, 'second-level':secondaryBreadcrumb || tertiaryBreadcrumb}" data-element="centerMode-header-breadcrumb">
-    <h1><a ng-href="{{common.lastUrl ? '#' + common.lastUrl: '#/class'}}">{{'header_tab_myClass' | translate}}</a></h1>
+    <h1><a href="#/classes">{{'header_tab_myClass' | translate}}</a></h1>
     <a ng-if="secondaryBreadcrumb || tertiaryBreadcrumb" ng-class="{'breadcrumb--secondary': secondaryBreadcrumb, 'breadcrumb__item': tertiaryBreadcrumb}" ng-href="#/class/{{group._id}}">
       {{group.name}}
     </a>

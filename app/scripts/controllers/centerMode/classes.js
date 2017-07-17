@@ -84,6 +84,12 @@
                 $scope.getMyGroupsPage(page);
             };
 
+            $scope.goTo = function(url, event){
+                if(event.target.className.indexOf('group__info__header__id')===-1) {
+                    $location.path(url);
+                }
+            };
+
             $scope.sortClasses = function(option) {
                 $scope.sortSelected = option;
                 $scope.searchClasses();
