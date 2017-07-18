@@ -1,7 +1,7 @@
 .component-interaction {
     width: 317px;
     height: 268px;
-    border: 2px solid #373b44;
+    border: 2px solid $black-light;
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
     position: absolute;
@@ -19,12 +19,12 @@
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        border-left: 10px solid #373b44;
+        border-left: 10px solid $black-light;
     }
 
     .component-interaction__head {
         height: 38px;
-        background-color: #373b44;
+        background-color: $black-light;
         color: white;
         padding: 8px 11px;
         .component-interaction__title {

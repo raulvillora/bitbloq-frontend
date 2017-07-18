@@ -74,7 +74,7 @@
                 <li ng-class="{'projects__item':true, 'projects__item--explore':true, 'project__item--wide':itemsLayout === 'list'}" data-ng-repeat="project in userProjects">
                     <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
                         <div ng-class="{'project__image--container':true, 'project__image--container--wide':itemsLayout === 'list'}">
-                            <button class="btn btn--secondary btn--small more-info--button" ng-click="openPublicProject(project._id)">{{ 'more-info' | translate }}</button>
+                            <button class="btn btn--tertiary btn--small more-info--button" ng-click="openPublicProject(project._id)">{{ 'more-info' | translate }}</button>
                             <img class="explore__project-item__project-image" alt="Project image" href="#data" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png"/>
                         </div>
                         <div class="explore__project-item__info">

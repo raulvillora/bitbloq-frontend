@@ -5,11 +5,11 @@
     width: 100%;
     z-index: 9;
     transition: background-color 250ms;
-    border-top: 3px solid $brand-primary;
+    border-top: 3px solid $green;
 
     &.opaque {
         transition: background-color 250ms;
-        background-color: #373b44;
+        background-color: $black-light;
     }
 
     &.fixed {
@@ -51,7 +51,7 @@
 
                 &:hover {
                     .logo--icon {
-                        fill: #82ad3a;
+                        fill: $green;
                         transition: fill 250ms;
                     }
                 }
@@ -70,7 +70,7 @@
                     margin-right: 20px;
 
                     .register {
-                        color: #82ad3a;
+                        color: $green;
 
                         &:hover {
                             color: #96cb3c;
@@ -78,7 +78,7 @@
                     }
 
                     .login {
-                        color: #c0c3c9;
+                        color: $grey-light;
 
                         &:hover {
                             color: white;
@@ -105,7 +105,7 @@
 
                     a {
                         text-decoration: none;
-                        color: #8c919b;
+                        color: $grey-medium;
                         font-size: 12px;
                         transition: color 250ms;
 
@@ -172,7 +172,7 @@
             li {
                 display: block;
                 float: none;
-                background-color: #373b44;
+                background-color: $black-light;
                 margin-right: 0;
                 text-align: center;
                 border-bottom: 1px solid #797c81;

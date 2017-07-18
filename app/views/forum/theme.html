@@ -1,11 +1,11 @@
 <div ng-include="'views/forum/forumSearcher.html'"></div>
 <div class="forum__theme">
     <div class="forum__theme__header" ng-if="common.user">
-        <button class="btn btn--secondary btn--medium btn--subscribe-theme" data-element="forum-subscribe-button" ng-click="forum.subscribeToThread(forum.currentThread._id)">
+        <button class="btn btn--quaternary btn--medium" data-element="forum-subscribe-button" ng-click="forum.subscribeToThread(forum.currentThread._id)">
             <span ng-if="!forum.currentThread.subscribed">{{'forum_button_topic_subscribe' | translate}}</span>
             <span ng-if="forum.currentThread.subscribed">{{'forum_button_topic_unsubscribe' | translate}}</span>
         </button>
-        <button class="btn btn--primary btn--medium" ng-click="forum.goToReply()" data-element="forum-new-reply-button">
+        <button class="btn btn--secondary btn--medium" ng-click="forum.goToReply()" data-element="forum-new-reply-button">
             <span>{{'forum_button_newReply' | translate}}</span>
         </button>
     </div>
@@ -31,7 +31,7 @@
                 </button>
             </div>
             <div class="forum__admin__action forum__move-theme">
-                <button class="btn btn--secondary btn--small btn--admin" ng-click="forum.moveThread(forum.currentThread._id)">
+                <button class="btn btn--quaternary btn--small btn--admin" ng-click="forum.moveThread(forum.currentThread._id)">
                     <svg class="svg-icon svg-icon--text">
                         <use xlink:href="#undo"></use>
                     </svg>
@@ -103,9 +103,8 @@
                     <img class="img--avatar" src="../images/common/avatar.png">
                 </div>
             </div>
-            <h2>{{'info_enterOrCreateAccount' | translate}}</h2>
-            <button class="btn btn--secondary btn--small" ng-click="common.goToLogin()">{{'enter' | translate}}</button>
-            <button class="btn btn--primary btn--small" ng-click="common.goToRegister()">{{'button_createAccount' | translate}}</button>
+            <h2>{{'info_createAccount' | translate}}</h2>
+            <button class="btn btn--primary btn--small" ng-click="common.goToLogin()">{{'enter' | translate}}</button>
         </div>
     </div>
     <div class="forum__paginator">

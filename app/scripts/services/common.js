@@ -39,9 +39,8 @@ angular.module('bitbloqApp')
         exports.translate = $filter('translate');
 
         exports.urlImage = envData.config.gCloudUrl + '/images/';
-        exports.urlType = null;
         exports.user = null;
-        exports.userRole = 'user';
+        exports.userRole = 'student';
         exports.warnedOfIncompatibility = false;
 
         exports.langToBQ = {
@@ -96,7 +95,7 @@ angular.module('bitbloqApp')
                 exports.user = null;
                 $translate.use(sessionStorage.guestLanguage || navigatorLang);
                 $cookieStore.remove('token');
-                exports.userRole = 'user';
+                exports.userRole = 'student';
                 hardwareApi.getAll().then(function(response) {
                     exports.userHardware = response.data;
                 }).finally(loadedUserPromise.reject);

@@ -37,7 +37,8 @@ angular
         'angularUtils.directives.dirPagination',
         'nvd3',
         'datePicker',
-        'ngPatternRestrict'
+        'ngPatternRestrict', 'mp.colorPicker',
+        'ngCsv'
     ])
     .config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
         function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
@@ -94,18 +95,15 @@ angular
                 })
                 .when('/login:params?', {
                     templateUrl: 'views/login.html',
-                    controller: 'LoginCtrl',
-                    islogin: true
+                    controller: 'LoginCtrl'
                 })
                 .when('/register', {
                     templateUrl: 'views/login.html',
-                    controller: 'LoginCtrl',
-                    islogin: false
+                    controller: 'LoginCtrl'
                 })
                 .when('/resetpassword', {
                     templateUrl: 'views/login.html',
-                    controller: 'LoginCtrl',
-                    islogin: false
+                    controller: 'LoginCtrl'
                 })
                 .when('/offline', {
                     templateUrl: 'views/landing/landing-offline.html',
@@ -183,8 +181,33 @@ angular
                     templateUrl: 'views/under14authorization.html',
                     controller: 'Under14AuthorizationCtrl'
                 })
-                .when('/center-mode/:type?/:id?/:subtype?/:subId?', {
-                    templateUrl: 'views/centerMode/centerModeIndex.html',
+                .when('/class/:id?/:child?/:studentId?', {
+                    templateUrl: 'views/centerMode/class.html',
+                    controller: 'ClassCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/classes', {
+                    templateUrl: 'views/centerMode/classes.html',
+                    controller: 'ClassesCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/exercises', {
+                    templateUrl: 'views/centerMode/exercisesDashboard.html',
+                    controller: 'ExercisesCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/exercise-info/:id?', {
+                    templateUrl: 'views/centerMode/exerciseInfo.html',
+                    controller: 'ExerciseInfoCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/tasks', {
+                    templateUrl: 'views/centerMode/tasksDashboard.html',
+                    controller: 'TasksCtrl',
+                    reloadOnSearch: false
+                })
+                .when('/center/', {
+                    templateUrl: 'views/centerMode/centerDashboard.html',
                     controller: 'CenterCtrl',
                     reloadOnSearch: false
                 })

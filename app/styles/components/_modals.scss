@@ -1,7 +1,7 @@
 // Modals
 
 .ngdialog-close:before {
-    color: #c0c3c9;
+    color: $grey-light;
     position: relative;
     right: 4px;
 }
@@ -62,7 +62,7 @@
 
                 label {
                     margin-bottom: 10px;
-                    color: #5d6069;
+                    color: $grey-dark;
                     font-size: 14px;
                     font-weight: 400;
                 }
@@ -98,7 +98,7 @@
             textarea {
                 resize: none;
                 border-radius: 10px;
-                color: #8c919b;
+                color: $grey-medium;
                 font-size: 13px;
                 font-style: italic;
             }
@@ -106,7 +106,7 @@
 
         .form--input {
             input {
-                color: #8c919b;
+                color: $grey-medium;
                 font-size: 13px;
                 font-style: italic;
                 border-radius: 4px;
@@ -123,13 +123,13 @@
         textarea {
             resize: none;
             border-radius: 10px;
-            color: #8c919b;
+            color: $grey-medium;
             font-size: 13px;
             font-style: italic;
         }
 
         input {
-            color: #8c919b;
+            color: $grey-medium;
             font-size: 13px;
             font-style: italic;
             border-radius: 4px;
@@ -153,7 +153,7 @@
                 }
 
                 .modal--not-logged-alert {
-                    color: #373b44;
+                    color: $black-light;
                     font-size: 24px;
                     font-weight: 700;
                     font-family: 'PT Sans', sans-serif;
@@ -210,12 +210,12 @@
                 span {
                     height: 50px;
                     min-width: 236px;
-                    background-color: #ebebeb;
+                    background-color: $grey-item-hover;
                     display: block;
                     line-height: 50px;
                     padding-left: 20px;
                     border-radius: 4px;
-                    color: #373b44;
+                    color: $black-light;
                     font-size: 14px;
                     font-weight: 700;
                     text-align: left;
@@ -358,7 +358,7 @@
 
             span {
                 height: 13px;
-                color: #373b44;
+                color: $black-light;
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 22px;
@@ -370,7 +370,7 @@
         .btn--webtoboard {
             width: 139px;
             height: 36px;
-            background-color: #373b44;
+            background-color: $black-light;
             border-radius: 4px;
             margin-top: 17px;
         }
@@ -386,7 +386,7 @@
 
                     .open-project--tabs {
                         padding: 20px 30px;
-                        color: #5d6069;
+                        color: $grey-dark;
                         font-size: 14px;
                         font-weight: 700;
                     }
@@ -426,7 +426,7 @@
                                 float: right;
                                 width: 30%;
                                 float: right;
-                                color: #8c919b;
+                                color: $grey-medium;
                                 font-size: 12px;
                                 text-align: right;
                                 text-overflow: ellipsis;
@@ -435,7 +435,7 @@
                             }
 
                             &:hover {
-                                background-color: #ebebeb;
+                                background-color: $grey-item-hover;
                                 cursor: pointer;
                             }
 
@@ -443,7 +443,7 @@
                                 background-color: #f6f6f6;
 
                                 &:hover {
-                                    background-color: #ebebeb;
+                                    background-color: $grey-item-hover;
                                     cursor: pointer;
                                 }
                             }
@@ -492,7 +492,7 @@
         height: 60px;
         border-bottom: 1px solid #e2e2e2;
         line-height: 60px;
-        color: #373b44;
+        color: $black-light;
         font-size: 16px;
         font-weight: 700;
         font-family: 'PT Sans', sans-serif;
@@ -523,7 +523,7 @@
             }
 
             .svg-icon__modal--close {
-                fill: $font-color-disabled;
+                fill: $grey-light;
                 width: 13px;
                 height: 13px;
                 transition: fill 250ms;
@@ -547,6 +547,14 @@
             & + .modal__input {
                 margin-top: 27px;
             }
+        }
+
+        .modal__input {
+            margin-top: 27px;
+        }
+
+        .modal__limit {
+            padding-bottom: 17px;
         }
     }
 
@@ -579,9 +587,11 @@
     .share-modal__emails-no-user {
         background-color: #e2e2e2;
         padding: 20px 30px;
-        .files{
+
+        .files {
             list-style: initial;
         }
+
         .email:last-child {
             .colon {
                 display: none;
@@ -604,7 +614,7 @@
         height: 28px;
         text-align: center;
         padding-right: 10px;
-        border-right: 1px solid #cfcfcf;
+        border-right: 1px solid $grey-border;
         min-width: calc(100% - 60px);
     }
 
@@ -633,10 +643,10 @@
 .modal__footer--text {
     padding: 17px;
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: $grey-lighter;
 
     .link--modal {
-        color: #373b44;
+        color: $black-light;
     }
 }
 
@@ -663,7 +673,7 @@
         margin: 5px 0;
 
         .svg-icon {
-            fill: #82ad3a;
+            fill: $green;
             width: 15px;
         }
     }
@@ -742,7 +752,7 @@
     }
 
     a {
-        color: #5d6069;
+        color: $grey-dark;
     }
 
     .objective-list {
@@ -784,8 +794,8 @@
             width: 324px;
             height: 35px;
             border-radius: 4px;
-            background-color: #ffffff;
-            border: solid 1px #cfcfcf;
+            background-color: $white;
+            border: solid 1px $grey-border;
         }
 
         small {

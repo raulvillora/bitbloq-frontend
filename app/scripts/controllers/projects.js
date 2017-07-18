@@ -54,6 +54,10 @@ angular.module('bitbloqApp')
         };
         $scope.projectsDisable = true;
 
+        $scope.avoidDoubleClick = function() {
+            return false;
+        };
+
         var softwareProjectDefault = {
             vars: {
                 enable: true,
@@ -171,6 +175,7 @@ angular.module('bitbloqApp')
         };
 
         $scope.removePermanentProject = function(project) {
+
             projectApi.deletePermanent(project._id).then(function() {
                 $scope.refreshProjects();
                 alertsService.add({

@@ -18,27 +18,27 @@
             </div>
         </div>
         <a class="download-button" ng-if="common.os === 'Mac'" data-ng-href="{{envData.config.web2boardLinkMac}}">
-            <button class="btn btn--tertiary btn--medium">
+            <button class="btn btn--quaternary btn--medium">
                 {{ 'landing_link_download' | translate }} Mac OS X
             </button>
         </a>
         <a class="download-button" ng-if="common.os === 'Windows'" data-ng-href="{{envData.config.web2boardLinkWindows}}">
-            <button class="btn btn--tertiary btn--medium">
+            <button class="btn btn--quaternary btn--medium">
                 {{ 'landing_link_download' | translate }} Windows 32/64 bits
             </button>
         </a>
         <a class="download-button" ng-if="common.os === 'Linux'" data-ng-href="{{envData.config.web2boardLinkLinux}}">
-            <button class="btn btn--tertiary btn--medium">
+            <button class="btn btn--quaternary btn--medium">
                 {{ 'landing_link_download' | translate }} Linux 64-bits
             </button>
         </a>
         <a class="download-button" ng-if="common.os === 'Linux'" data-ng-href="{{envData.config.web2boardLinkLinux32}}">
-            <button class="btn btn--tertiary btn--medium">
+            <button class="btn btn--quaternary btn--medium">
                 {{ 'landing_link_download' | translate }} Linux 32-bits
             </button>
         </a>
         <div class="download-button" ng-if="common.os === 'ChromeOS'" ng-click="installChromeApp()">
-            <button class="btn btn--tertiary btn--medium">
+            <button class="btn btn--quaternary btn--medium">
                 {{ 'landing_link_download' | translate }} Chrome OS
             </button>
         </div>

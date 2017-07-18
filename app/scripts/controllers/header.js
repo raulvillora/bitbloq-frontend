@@ -8,26 +8,19 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, commonModals, $document, $translate, centerModeApi, alertsService, utils) {
+    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, $document, $translate, centerModeApi, alertsService, utils) {
         $scope.userApi = userApi;
-
-        function clickDocumentHandler() {
-            if ($scope.showHeader) {
-                $scope.showHeader = false;
-                $scope.$apply();
-            }
-        }
-
+        $scope.utils = utils;
         $scope.translate = $translate;
-        $scope.commonModals = commonModals;
         $scope.showHeader = false;
+        $scope.showUserHeader = false;
         $scope.common.session.save = false;
 
-        $scope.activateCenterMode = function() {
+        $scope.createCenter = function() {
             function tryCenter() {
                 modalOptions.title = 'centerMode_modal_createCenter-title';
                 modalOptions.mainText = 'centerMode_modal_createCenter-mainText';
-                modalOptions.confirmButton = 'centerMode_button_createCenter-confirm';
+                modalOptions.confirmButton = 'create_button';
                 modalOptions.type = 'form';
                 modalOptions.extraButton = '';
                 modalOptions.confirmAction = createCenter;
@@ -58,52 +51,15 @@ angular.module('bitbloqApp')
                 }
             }
 
-            function studentAction() {
-                modalOptions.title = 'centerMode_button_createStudentProfile-title';
-                modalOptions.mainText = 'centerMode_modal_createStudentProfile-mainText';
-                modalOptions.confirmButton = 'centerMode_button_createStudentProfile-confirm';
-                modalOptions.extraButton = '';
-                modalOptions.textContent = 'centerMode_modal_createStudent-content';
-                modalOptions.type = '';
-                modalOptions.confirmAction = createStudent;
-
-                function createStudent() {
-                    console.log(modalOptions.center);
-                    centerModeApi.activateStudentMode().then(function() {
-                        ngDialog.close(centerModal);
-                        $scope.common.userRole = 'student';
-                        $location.url('/center-mode/student');
-                        alertsService.add({
-                            text: 'centerMode_alert_createStudent',
-                            id: 'createStudent',
-                            type: 'ok',
-                            time: 5000
-                        });
-                    }).catch(function() {
-                        alertsService.add({
-                            text: 'centerMode_alert_createStudent-Error',
-                            id: 'createCenter',
-                            type: 'ko'
-                        });
-                    });
-                }
-            }
-
-            var modalOptions = $rootScope.$new(),
-                extraButton = 'centerMode_button_createCenter-try';
-            if ($scope.common.user.birthday && utils.userIsUnder14($scope.common.user.birthday)) {
-                extraButton = null;
-            }
+            var modalOptions = $rootScope.$new();
 
             _.extend(modalOptions, {
                 title: 'centerMode_modal_createCenterTitle',
                 contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
                 customClass: 'modal--information',
                 mainText: 'centerMode_modal_createCenter-introText',
-                confirmButton: 'centerMode_button_createCenter-student',
-                confirmAction: studentAction,
-                extraButton: extraButton,
-                extraAction: tryCenter,
+                confirmButton: 'centerMode_modal_confirmation-button',
+                confirmAction: tryCenter,
                 modalButtons: true,
                 type: 'information',
                 errors: false
@@ -124,10 +80,25 @@ angular.module('bitbloqApp')
             $location.url('/');
         };
 
+        $scope.openUserMenu = function($event) {
+            $event.stopPropagation();
+            $scope.showUserHeader = !$scope.showUserHeader;
+        };
+
         $scope.openMenu = function($event) {
             $event.stopPropagation();
             $scope.showHeader = !$scope.showHeader;
         };
+
+        function clickDocumentHandler() {
+            if ($scope.showUserHeader) {
+                $scope.showUserHeader = false;
+            }
+            if ($scope.showHeader) {
+                $scope.showHeader = false;
+            }
+            $scope.$apply();
+        }
 
         $document.on('click', clickDocumentHandler);
 

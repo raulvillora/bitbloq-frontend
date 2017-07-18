@@ -15,10 +15,10 @@
 .form--input,
 .form--select {
     border-radius: .3em;
-    border: 1px solid #cfcfcf;
+    border: 1px solid $grey-border;
     min-height: 34px;
     max-height: 34px;
-    color: $font-color-secondary;
+    color: $grey-medium;
     display: flex;
 }
 
@@ -32,7 +32,7 @@
     }
 
     input[disabled] {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
     }
 
     input[type=search] {
@@ -55,12 +55,12 @@
     }
 
     &:focus {
-        border: 1px solid $font-color-base;
-        color: $font-color-base;
+        border: 1px solid $grey-dark;
+        color: $grey-dark;
     }
 
     .icon--form--loading {
-        fill: $font-color-base;
+        fill: $grey-dark;
     }
 
     .icon--form--validated {
@@ -69,7 +69,7 @@
 
     .input--mark {
         width: 38px;
-        border: 1px solid #cfcfcf;
+        border: 1px solid $grey-border;
         text-align: center;
     }
 }
@@ -86,14 +86,14 @@
 
         &:first-child {
             font-style: italic;
-            color: $font-color-secondary;
+            color: $grey-medium;
         }
     }
 }
 
 .input--focused {
-    border: 1px solid $font-color-base !important;
-    color: $font-color-base;
+    border: 1px solid $grey-dark !important;
+    color: $grey-dark;
 }
 
 input[type="radio"] {
@@ -102,18 +102,18 @@ input[type="radio"] {
     width: 16px !important;
     height: 17px;
     background-color: white;
-    border: 2px solid $font-color-disabled;
+    border: 2px solid $grey-light;
     border-radius: 100%;
     vertical-align: sub;
 
     &:hover {
-        border: 2px solid $font-color-base;
+        border: 2px solid $grey-dark;
     }
 
     &:checked {
         background-color: white;
         position: relative;
-        border: 1px solid $font-color-base;
+        border: 1px solid $grey-dark;
 
         &:before {
             content: '';
@@ -121,7 +121,7 @@ input[type="radio"] {
             height: 11px;
             background-color: white;
             border-radius: 100%;
-            background-color: $font-color-base;
+            background-color: $grey-dark;
             position: absolute;
             top: 2px;
             left: 2px;
@@ -129,10 +129,10 @@ input[type="radio"] {
     }
 
     &:disabled {
-        border: 1px solid $font-color-disabled;
+        border: 1px solid $grey-light;
 
         &:before {
-            background-color: $font-color-disabled;
+            background-color: $grey-light;
         }
     }
 }

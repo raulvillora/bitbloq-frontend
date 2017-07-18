@@ -24,7 +24,7 @@
             cursor: default;
             .btn--masthead {
                 height: 41px;
-                background-color: #82ad3a;
+                background-color: $green;
                 border-radius: 4px;
                 padding-left: 20px;
                 padding-right: 20px;
@@ -73,13 +73,13 @@
         padding-right: 30px;
         display: block;
         h2 {
-            @include textGenerator(20px, 700, #373b44, auto, 100%, false);
+            @include textGenerator(20px, 700, $black-light, auto, 100%, false);
             padding-top: 30px;
             padding-bottom: 30px;
             display: block;
         }
         span {
-            @include textGenerator(14px, 300, #5d6069, auto, 100%, false);
+            @include textGenerator(14px, 300, $grey-dark, auto, 100%, false);
             cursor: default;
         }
         .image--container {
@@ -117,7 +117,7 @@
             }
         }
         h2 {
-            color: #373b44;
+            color: $black-light;
             font-size: 30px;
             font-weight: 500;
             padding-top: 70px;
@@ -126,16 +126,16 @@
         li {
             margin-bottom: 20px;
             &:not(:first-child):not(:last-child) {
-                border-right: 1px solid #f1f1f1;
-                border-left: 1px solid #f1f1f1;
+                border-right: 1px solid $grey-lighter;
+                border-left: 1px solid $grey-lighter;
             }
             i {
                 font-size: 35px;
                 font-weight: 400;
-                color: #8c919b;
+                color: $grey-medium;
             }
             h3 {
-                color: #373b44;
+                color: $black-light;
                 font-size: 20px;
                 font-weight: 700;
                 padding-top: 10px;
@@ -148,7 +148,7 @@
                 span {
                     @include textGenerator(12px,
                     400,
-                    #c0c3c9,
+                    $grey-light,
                     24px,
                     100%,
                     false);
@@ -156,7 +156,7 @@
                 }
                 a {
                     float: left;
-                    color: #82ad3a;
+                    color: $green;
                     font-weight: 400;
                     text-align: center;
                     display: block;

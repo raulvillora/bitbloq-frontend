@@ -2,6 +2,7 @@
 // BUTTONS //
 */
 @mixin button($backgroudColor, $textColor) {
+    font-weight: bold;
     background-color: $backgroudColor;
     color: $textColor;
     padding: 0.8em 1em;
@@ -28,36 +29,60 @@
         pointer-events: none;
     }
 }
-
-.btn--primary {
+@mixin iconButton($backgroudColor, $textColor) {
     font-weight: bold;
-    @include button($font-color-heading, white);
+    background-color: $backgroudColor;
+    color: $textColor;
+    width: 52px;
+    padding: 0 1.25em;
+    border-radius: 0.3em;
+    line-height: 27px;
+    transition: background-color 250ms;
+    text-decoration: none;
 
     &:hover {
-        background-color: #26292f;
+        transition: background-color 250ms;
+        text-decoration: none;
     }
 
     &:active {
-        background-color: #000;
+        text-decoration: none;
+    }
+
+    .svg-icon {
+        fill: $textColor;
+        width: 1em;
+        height: 1em;
+        pointer-events: none;
+    }
+}
+
+.btn--primary {
+    @include button($button-primary, $button-primary-text);
+
+    &:hover {
+        background-color: $button-primary-hover;
+    }
+
+    &:active {
+        background-color: $button-primary-pressed;
     }
 }
 
 .btn--secondary {
-    @include button(#ebebeb, black);
+    @include button($button-secondary, $button-secondary-text);
 
     &:hover {
-        background-color: $brand-secondary;
+        background-color: $button-secondary-hover;
     }
 
     &:active {
-        background-color: #d1d1d1;
+        background-color: $button-secondary-pressed;
     }
 }
 
 .btn--tertiary {
-    @include button(#fff, #373b44);
-    border: 1px solid #dddddd;
-    font-weight: bold;
+    @include button($button-tertiary, $button-tertiary-text);
 
     &.btn--showMoreActions {
         span {
@@ -66,16 +91,46 @@
     }
 
     &:hover {
-        background-color: #e8e8e8;
+        background-color: $button-tertiary-hover;
     }
 
     &:active {
-        background-color: #ddd;
+        background-color: $button-tertiary-pressed;
+    }
+}
+
+.btn--quaternary {
+    @include button($button-quaternary, $button-quaternary-text);
+    border: 1px solid $button-quaternary-border;
+
+    &.btn--showMoreActions {
+        span {
+            pointer-events: none;
+        }
+    }
+
+    &:hover {
+        background-color: $button-quaternary-hover;
+    }
+
+    &:active {
+        background-color: $button-quaternary-pressed;
+    }
+}
+
+.btn--delete {
+    float: right;
+    min-width: 50px;
+
+    .svg-icon {
+        width: 13px;
+        height: 13px;
+        fill: $red!important;
     }
 }
 
 .btn--center-mode--table {
-    @include button(rgba(0,0,0,0), #373b44);
+    @include button(rgba(0,0,0,0), $black-light);
     font-weight: bold;
     -ms-transform: rotate(90deg);
     /* IE 9 */
@@ -89,26 +144,26 @@
     }
 
     &:active {
-        background-color: #fff;
+        background-color: $white;
         border: 1px solid #dddddd;
     }
 }
 
 .btn--disabled {
-    background-color: #dbdee3;
-    color: $font-color-disabled;
+    background-color: $button-disabled;
+    color: $button-disabled-text;
 
     .svg-icon {
-        fill: $font-color-disabled;
+        fill: $button-disabled-text;
     }
 }
 
 .btn:disabled {
-    background-color: #dbdee3;
-    color: $font-color-disabled;
+    background-color: $button-disabled;
+    color: $button-disabled-text;
 
     .svg-icon {
-        fill: $font-color-disabled;
+        fill: $button-disabled-text;
     }
 }
 
@@ -130,22 +185,6 @@
     padding-left: 40.5px;
 }
 
-.btn--delete {
-    float: right;
-    min-width: 50px;
-
-    .svg-icon {
-        width: 13px;
-        height: 13px;
-        fill: #d82b32;
-    }
-}
-
-.btn--subscribe-theme {
-    background-color: #ffffff;
-    font-weight: bold;
-}
-
 .btn--social {
     width: 110px;
     font-size: 0.9375em;
@@ -158,7 +197,7 @@
 }
 
 .btn--dropdown {
-    color: $font-color-secondary;
+    color: $grey-medium;
     flex: 1;
     text-align: left;
     height: 34px;
@@ -177,7 +216,7 @@
         font-style: normal;
         display: inline-block;
         vertical-align: middle;
-        color: #5d6069;
+        color: $grey-dark;
         cursor: pointer;
         margin-left: 0.2em;
         font-weight: 400;
@@ -195,7 +234,7 @@
 }
 
 .btn--dropdown--active {
-    color: $font-color-base;
+    color: $grey-dark;
 }
 
 .button-group {
@@ -216,4 +255,33 @@
 .btn--row {
     width: 100%;
     margin-top: 21px;
+}
+
+.btn--add {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+    background-color: $button-primary;
+
+    &:hover {
+        background-color: $button-primary-hover;
+    }
+
+    &:active {
+        background-color: $button-primary-pressed;
+    }
+
+    svg {
+        fill: white;
+        width: 12px;
+        height: 12px;
+    }
+}
+
+.btn---addclass{
+  svg{
+    width: 11px;
+    height: 11px;
+  }
+  font-size: 14px;
 }

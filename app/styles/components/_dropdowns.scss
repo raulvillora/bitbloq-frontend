@@ -5,7 +5,7 @@ common-dropdown {
 .dropdown__icon {
     width: 10px;
     height: 10px;
-    fill: $font-color-secondary;
+    fill: $grey-medium;
     margin-right: .5em;
     margin-left: 1em;
     right: 2px;
@@ -26,8 +26,8 @@ common-dropdown {
     flex: 1 100%;
     display: flex;
     flex-flow: row wrap;
-    border-right: 1px solid #cfcfcf;
-    border-left: 1px solid #cfcfcf;
+    border-right: 1px solid $grey-border;
+    border-left: 1px solid $grey-border;
     background-color: white;
     max-height: 275px;
     overflow-y: auto;
@@ -35,7 +35,7 @@ common-dropdown {
 }
 
 .dropdown__menu__down {
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid $grey-border;
     -webkit-border-bottom-right-radius: .3em;
     -webkit-border-bottom-left-radius: .3em;
     -moz-border-radius-bottomright: .3em;
@@ -45,7 +45,7 @@ common-dropdown {
 }
 
 .dropdown__menu__up {
-    border-top: 1px solid #cfcfcf;
+    border-top: 1px solid $grey-border;
     -webkit-border-top-right-radius: .3em;
     -webkit-border-top-left-radius: .3em;
     -moz-border-radius-topright: .3em;
@@ -60,15 +60,15 @@ common-dropdown {
 .dropdown__menu__item {
     flex: 1 100%;
     padding-left: 1em;
-    border-bottom: 1px solid #e4e4e4;
-    color: $font-color-base;
+    border-bottom: 1px solid $grey-divider;
+    color: $grey-dark;
 
     &:last-child {
         border-bottom: 0;
     }
 
     &:hover {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
         cursor: pointer;
     }
 
@@ -86,7 +86,7 @@ common-dropdown {
 }
 
 .dropdown--disabled {
-    background-color: #ebebeb;
+    background-color: $grey-item-hover;
     pointer-events: none;
 }
 
@@ -127,10 +127,10 @@ common-dropdown {
         line-height: $box-height;
 
         .language--name {
-            @include textGenerator(14px, 400, $font-color-heading, auto, 100%, false);
+            @include textGenerator(14px, 400, $black-light, auto, 100%, false);
         }
         .arrow {
-            color: $font-color-base;
+            color: $grey-dark;
             font-size: 23px;
             font-weight: 700;
             float: right;

@@ -1,9 +1,14 @@
 .table__page {
     background-color: #eeeeee;
+    div[class^="col-"] {
+        padding-left: 0;
+    }
+
 }
 
 .table__page--with-header {
     height: calc(100% - 93px);
+    //padding-top: 1px;
 }
 
 .table__header {
@@ -13,7 +18,7 @@
     .header__title {
         font-size: 20px;
         font-weight: 700;
-        color: #373b44;
+        color: $black-light;
         padding: 0;
     }
 }
@@ -67,7 +72,7 @@
 .table__title {
     padding: 0 10px 30px 0;
     font-size: 16px;
-    color: #373b44;
+    color: $black-light;
 
     .svg-icon--text {
         height: 13px;
@@ -88,7 +93,8 @@
     padding: 0.7px 0 0;
 
     .table__item__text {
-        color: #373b44;
+        width: 100%;
+        color: $black-light;
         font-size: 16px;
         font-weight: 700;
         text-decoration: none;
@@ -101,7 +107,7 @@
     .table__item__link:hover {
         &,
         & > * {
-            color: #82ad3a;
+            color: $green;
             cursor: pointer;
         }
     }
@@ -124,7 +130,7 @@
     .block__item__explanation {
         display: inline-block;
         font-size: 12px;
-        color: #8c919b;
+        color: $grey-medium;
         margin-left: 3px;
     }
 
@@ -151,11 +157,11 @@
     height: 35px;
     display: none;
     background-color: white;
-    border: solid 1px #cfcfcf;
+    border: solid 1px $grey-border;
     border-radius: 4px;
 
     .svg-icon {
-        fill: #d82b32;
+        fill: $red;
     }
 }
 
@@ -224,7 +230,7 @@
 }
 
 .table__block--separated {
-    border-top: 5px solid #ebebeb;
+    border-top: 5px solid $grey-item-hover;
 }
 
 .table__column--centered {
@@ -281,16 +287,16 @@
     }
 
     &:hover {
-        background-color: #ebebeb;
+        background-color: $grey-item-hover;
         cursor: pointer;
     }
 
     &[disabled], & > div[disabled] {
         pointer-events: none;
-        color: #c0c3c9;
+        color: $grey-light;
 
         .svg-icon {
-            fill: #c0c3c9;
+            fill: $grey-light;
         }
     }
 
@@ -307,7 +313,7 @@
 }
 
 .table__block__item--menu__link {
-    color: #5d6069;
+    color: $grey-dark;
     padding: 0.3em 1em;
     width: 100%;
 }

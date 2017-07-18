@@ -39,7 +39,7 @@
             .subheader--item {
                 float         : left;
                 padding-right : 10px;
-                color         : #8c919b;
+                color         : $grey-medium;
                 font-size     : 12px;
                 vertical-align: text-top;
 
@@ -50,7 +50,7 @@
                 .svg-icon {
                     width         : 13px;
                     height        : 13px;
-                    fill          : #c0c3c9;
+                    fill          : $grey-light;
                     vertical-align: text-top;
                 }
             }
@@ -60,13 +60,13 @@
                 line-height: 14px;
 
                 .project--header--username__link {
-                  color          : #82ad3a;
+                  color          : $green;
                   font-weight    : 700;
                 }
 
                 a {
                     text-decoration: none;
-                    color          : #82ad3a;
+                    color          : $green;
                     font-weight    : 700;
                 }
 
@@ -117,7 +117,7 @@
                     width                     : 100%;
                     height                    : 50px;
                     background-color          : white;
-                    border                    : 1px solid #cfcfcf;
+                    border                    : 1px solid $grey-border;
                     border-bottom-right-radius: .3em;
                     border-bottom-left-radius : .3em;
                     padding-left              : 1em;
@@ -127,7 +127,7 @@
                     transition                : background-color 250ms;
 
                     &:hover {
-                        background-color: #ebebeb;
+                        background-color: $grey-item-hover;
                     }
 
                     &:active {
@@ -181,7 +181,7 @@
             cursor          : default;
 
             span {
-                color       : #373b44;
+                color       : $black-light;
                 font-weight : 700;
                 display     : inline-block;
                 float       : left;

@@ -3,15 +3,15 @@
     position: relative;
     width: 100%;
     display: block;
-    border-top: 3px solid #82ad3a;
+    border-top: 3px solid $green;
 }
 
 .landing--link {
-    @include link(#82ad3a, 16px, false, underline);
+    @include link($green, 16px, false, underline);
 }
 
 .landing--link--small {
-    @include link(#82ad3a, 14px, false, underline);
+    @include link($green, 14px, false, underline);
 }
 
 .view--landing {
@@ -63,7 +63,7 @@
                 position: relative;
                 min-width: 220px;
                 height: 40px;
-                background-color: #82ad3a;
+                background-color: $green;
                 border-radius: 4px;
                 margin: 40px auto;
                 display: inline-block;
@@ -107,14 +107,14 @@
                 display: block;
                 margin-top: 10px;
                 a {
-                    color: #82ad3a;
+                    color: $green;
                     font-style: italic;
                 }
             }
         }
         .landing--testimonials {
             text-align: center;
-            background-color: #f1f1f1;
+            background-color: $grey-lighter;
             padding-top: 50px;
             padding-bottom: 50px;
             .testimonials--container {
@@ -135,7 +135,7 @@
                         }
                         display: none;
                         span {
-                            @include textGenerator(18px, 300, #5d6069, auto, 100%, false);
+                            @include textGenerator(18px, 300, $grey-dark, auto, 100%, false);
                             font-style: italic;
                         }
                     }
@@ -147,19 +147,19 @@
                         height: 10px;
                         width: 10px;
                         border-radius: 100%;
-                        background-color: #c0c3c9;
+                        background-color: $grey-light;
                         margin-right: 10px;
                         &:hover {
-                            background-color: #5d6069;
+                            background-color: $grey-dark;
                         }
                         &.active {
-                            background-color: #82ad3a;
+                            background-color: $green;
                         }
                     }
                 }
                 .testimonials--people {
                     span {
-                        @include textGenerator(14px, 300, #8c919b, auto, 100%, false);
+                        @include textGenerator(14px, 300, $grey-medium, auto, 100%, false);
                     }
                 }
             }
@@ -184,7 +184,7 @@
                     text-align: center;
                     display: block;
                     padding-bottom: 50px;
-                    color: #82ad3a;
+                    color: $green;
                 }
             }
             h1 {
@@ -202,7 +202,7 @@
                     position: relative;
                     border-radius: .4px;
                     transition: all 250ms;
-                    background-color: #fff;
+                    background-color: $white;
                     height: 270px;
                     margin-bottom: 50px;
                     .project--item {
@@ -232,7 +232,7 @@
                             padding-top: 10px;
                             padding-left: 10px;
                             text-align: left;
-                            color: $font-color-base;
+                            color: $grey-dark;
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
@@ -242,7 +242,7 @@
                             display: block;
                             width: 100%;
                             height: 48px;
-                            color: #8c919b;
+                            color: $grey-medium;
                             font-size: 12px;
                             font-weight: 400;
                             .left {
@@ -257,7 +257,7 @@
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 a {
-                                    color: #82ad3a;
+                                    color: $green;
                                     text-decoration: none;
                                 }
                             }
@@ -280,7 +280,7 @@
             }
             & > .row > a {
                 width: 457px;
-                color: #82ad3a;
+                color: $green;
                 font-size: 16px;
                 font-weight: 300;
                 margin: 0 auto;
@@ -295,7 +295,7 @@
         }
     }
     .landing--footer {
-        background-color: #f1f1f1;
+        background-color: $grey-lighter;
         padding: 0 30px;
         .content {
             max-width: 1200px;
@@ -314,7 +314,7 @@
                 }
                 li {
                     a {
-                        @include textGenerator(13px, 400, $font-color-base, 20px, 100%, false);
+                        @include textGenerator(13px, 400, $grey-dark, 20px, 100%, false);
                     }
                 }
             }
@@ -330,11 +330,11 @@
             width: 200px;
             span {
                 margin-right: 15px;
-                @include textGenerator(14px, 400, $font-color-base, 16px, 100%, false);
+                @include textGenerator(14px, 400, $grey-dark, 16px, 100%, false);
             }
             a {
                 margin-right: 15px;
-                @include textGenerator(18px, 400, $font-color-heading, 18px, 100%, false);
+                @include textGenerator(18px, 400, $black-light, 18px, 100%, false);
                 &:hover {
                     text-decoration: none;
                 }
@@ -356,17 +356,17 @@
                 float: left;
                 margin-left: 11px;
                 a {
-                    @include textGenerator(11px, 400, $font-color-base, 13px, 100%, false);
+                    @include textGenerator(11px, 400, $grey-dark, 13px, 100%, false);
                 }
             }
         }
         .copyright {
-            @include textGenerator(11px, 400, $font-color-secondary, 13px, 100%, false);
+            @include textGenerator(11px, 400, $grey-medium, 13px, 100%, false);
         }
         .bqproject {
             float: right;
             margin-left: 8px;
-            @include textGenerator(12px, 400, $font-color-secondary, 30px, 100%, false);
+            @include textGenerator(12px, 400, $grey-medium, 30px, 100%, false);
         }
         .bq-logo {
             float: right;
@@ -444,7 +444,7 @@
                 }
             }
             .btn--call--register {
-                color: #373b44;
+                color: $black-light;
                 background-color: white;
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.8);
@@ -460,7 +460,7 @@
         &.for--who--section::after {
             display: inline-block;
             width: 100%;
-            border-bottom: 1px solid #f1f1f1;
+            border-bottom: 1px solid $grey-lighter;
         }
     }
 }
@@ -519,7 +519,7 @@
 .landing--heading {
     @include textGenerator(30px,
     500,
-    #373b44,
+    $black-light,
     auto,
     100%,
     false);
@@ -528,7 +528,7 @@
 .landing--text--big {
     @include textGenerator(16px,
     300,
-    #8c919b,
+    $grey-medium,
     auto,
     100%,
     false);
@@ -537,7 +537,7 @@
 .landing--text--big--dark {
     @include textGenerator(16px,
     300,
-    #c0c3c9,
+    $grey-light,
     auto,
     100%,
     false);
@@ -546,7 +546,7 @@
 .landing--text--big--dark {
     @include textGenerator(16px,
     300,
-    #c0c3c9,
+    $grey-light,
     auto,
     100%,
     false);
@@ -555,7 +555,7 @@
 .landing--text--big--light {
     @include textGenerator(16px,
     400,
-    #373b44,
+    $black-light,
     auto,
     100%,
     false);

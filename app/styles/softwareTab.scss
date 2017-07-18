@@ -38,21 +38,21 @@ $toolboxWidthClosed: 210px;
             }
             & > * {
                 vertical-align: -webkit-baseline-middle;
-                color: #373b44;
+                color: $black-light;
                 font-size: 14px;
                 font-weight: 700;
                 cursor: pointer;
             }
             .svg-icon {
                 margin-right: 7px;
-                fill: #373b44;
+                fill: $black-light;
                 width: 15px;
                 height: 15px;
             }
         }
     }
     .software--tab {
-        color: #cfcfcf;
+        color: $grey-border;
         height: calc(100% - #{$tabsTitleHeight});
         z-index: 0;
     }
@@ -87,7 +87,7 @@ $toolboxWidthClosed: 210px;
         table-layout: fixed;
         .field--header {
             overflow: hidden;
-            border-bottom: 1px solid #ebebeb;
+            border-bottom: 1px solid $grey-item-hover;
         }
     }
     .software__edit-code {
@@ -194,7 +194,7 @@ $toolboxWidthClosed: 210px;
     .svg-icon {
         width: 71.1px;
         height: 76%;
-        fill: #82ad3a;
+        fill: $green;
     }
 }
 
@@ -203,10 +203,10 @@ $toolboxWidthClosed: 210px;
     margin-right: 242px;
     margin-top: 20px;
     cursor: pointer;
-    color: $font-color-heading;
+    color: $black-light;
     .svg-icon {
         margin-right: 7px;
-        fill: $font-color-heading;
+        fill: $black-light;
         width: 15px;
         height: 15px;
     }
@@ -219,7 +219,7 @@ $toolboxWidthClosed: 210px;
     position: absolute;
     font-size: 15px;
     font-weight: 700;
-    background-color: #ffffff;
+    background-color: $white;
     min-width: 300px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
@@ -243,14 +243,14 @@ $toolboxWidthClosed: 210px;
         display: inline-block;
         vertical-align: -webkit-baseline-middle;
         margin-top: 4px;
-        color: $font-color-heading;
+        color: $black-light;
         font-size: 14px;
         font-weight: 700;
         cursor: pointer;
     }
     .svg-icon {
         margin-right: 7px;
-        fill: #373b44;
+        fill: $black-light;
         width: 15px;
         height: 15px;
     }

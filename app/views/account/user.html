@@ -43,7 +43,7 @@
                     </legend>
                     <div class="form-control">
                         <label>{{ 'account-change-password' | translate }}</label>
-                        <input type="button" id="password" value="{{ 'account-restore-password' | translate }}" class="btn btn--secondary btn--small btn--account--password" data-ng-click="changePassword($event)" data-element="account-reset-password-button" />
+                        <input type="button" id="password" value="{{ 'account-restore-password' | translate }}" class="btn btn--tertiary btn--small btn--account--password" data-ng-click="changePassword($event)" data-element="account-reset-password-button" />
                     </div>
                 </fieldset>
                 <fieldset>
@@ -117,7 +117,7 @@
                                 <img id="avatarUser" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" err-src="../images/common/avatar.png" data-element="account-image">
                             </div>
                             <input type="file" name="projectimage" class="btn btn--primary btn--small hidden main-image--input" data-ng-blur="focus = false" data-ng-focus="focus='projectimage'" onchange="angular.element(this).scope().uploadImage(this.files)" data-element="account-fileinput" />
-                            <input type="button" value="{{ 'upload-image' | translate }}" class="btn btn--secondary btn--small btn--account-upload-image" data-ng-click="uploadImageTrigger('main')" />
+                            <input type="button" value="{{ 'upload-image' | translate }}" class="btn btn--tertiary btn--small btn--account-upload-image" data-ng-click="uploadImageTrigger('main')" />
                             <div>
                                 <small>{{ 'account-avatar-requisites' | translate }}</small>
                             </div>

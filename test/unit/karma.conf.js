@@ -71,6 +71,8 @@ module.exports = function(config) {
             '../bower_components/wickedpicker/dist/wickedpicker.min.js',
             '../bower_components/wickedpicker/src/wickedpicker.js',
             '../bower_components/ng-pattern-restrict/src/ng-pattern-restrict.js',
+            '../bower_components/angular-color-picker/angular-color-picker.js',
+            '../bower_components/ng-csv/build/ng-csv.min.js',
             '../bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js',
             '../bower_components/autogrow/autogrow.js',
             '../bower_components/q/q.js',

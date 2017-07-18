@@ -2,106 +2,190 @@
 //     #GLOBAL COLORS
 // \*------------------------------------*/
 
-
 // Basic
-$color-green: #82ad3a;
-$color-black: #373b44;
-$color-grey-dark: #5d6069;
-$color-grey-medium: #8c919b;
-$color-grey-light: #c0c3c9;
-$color-grey-lighter: #f1f1f1;
-$color-white: #ffffff;
+$green: #82ad3a;
+$black: #1e1f21;
+$black-light: #373b44;
+$grey-dark: #5d6069;
+$grey-medium: #8c919b;
+$grey-light: #c0c3c9;
+$grey-lighter: #f1f1f1;
+$white: #ffffff;
 
-// Alerts - imput - actions
-$color-red: #cc0000;
-$color-red-background: #ff3333;
-$color-border: #cfcfcf;
-$color-border-red: $color-red-background;
-$color-disabled: $color-grey-light;
-$color-disabled-background: #ebebeb;
+// Other colors
+$red: #d82b32;
+$red-light: #ff3333;
+$grey-border: #cfcfcf;
+$grey-divider: #e4e4e4;
+$grey-disabled: #dbdee3;
+$grey-disabled-text: #bdc0c6;
+$grey-item-hover: #ebebeb;
+$grey-pressed: #dedede;
+$grey-light:#dddddd;
 
+// Input
+$input-text: $grey-medium;
+$input-border: $grey-border;
+$input-background: $white;
 
-// Radio buttons
-$color-radio-button-selected-border: $color-grey-dark;
-$color-radio-button-selected-background: $color-grey-dark;
-$color-radio-button-hover-border: $color-grey-dark;
-$color-radio-button-border: $color-grey-light;
-$color-radio-button-disabled-border: $color-grey-light;
-$color-radio-button-disabled-background: $color-grey-light;
-$color-radio-button-indeterminate-line: $color-grey-dark;
+$input-disabled-text: $grey-disabled-text;
+$input-disabled-background: $grey-disabled;
 
+$input-focused-text: $grey-dark;
+$input-focused-border: $grey-dark;
 
-// Switch
-$color-switch-activated: $color-green;
-$color-switch-deactivated: $color-grey-medium;
-$color-switch-border: #dddddd;
-$color-switch-background: $color-white;
+$input-error-text: $red;
+$input-error-background: $red-light;
+$input-error-border: $red;
 
+// Radio buttons - checkbox
+$radio-button-selected-border: $grey-dark;
+$radio-button-selected-background: $grey-dark;
+$radio-button-hover-border: $grey-dark;
+$radio-button-border: $grey-light;
+$radio-button-disabled-border: $grey-light;
+$radio-button-disabled-background: $grey-light;
+$radio-button-indeterminate-line: $grey-dark;
 
 // Tooltip
-$color-tooltip-text: $color-white;
-$color-tooltip-background: $color-black;
+$tooltip-text: $white;
+$tooltip-background: $black-light;
 
+// Drop-down
+$dropdown-background: $white;
+$dropdown-text: $grey-medium;
+$dropdown-text-active: $grey-dark;
+$dropdown-border: $grey-border;
+$dropdown-disabled-background: $grey-disabled;
+$dropdown-disabled-text: $grey-disabled-text;
+$dropdown-separating: $grey-divider;
+$dropdown-item-hover: $grey-item-hover;
+$dropdown-item-red: $red;
+
+// Switch
+$switch-activated: $green;
+$switch-deactivated: $grey-medium;
+$switch-border: $grey-border;
+$switch-background: $white;
 
 // Modals
-$color-modal-title: $color-black;
-$color-modal-text: $color-grey-dark;
-$color-modal-background: $color-white;
-
+$modal-title: $black-light;
+$modal-text: $grey-dark;
+$modal-background: $white;
+$modal-close-icon: $grey-medium;
 
 // Texts
-$color-text-title: $color-black;
-$color-text-link: $color-green;
-$color-text: $color-grey-dark;
-$color-text-secondly: $color-grey-medium;
-$color-text-small: $color-grey-medium;
-$color-text-disabled: $color-grey-light;
-
-
-// Icons
-$color-icon: $color-black;
-
-
-// Tabs
-// To be continued...
-
-
-
-
-// /*------------------------------------*\
-// /*------------------------------------*\
-//     OLDER
-// /*------------------------------------*\
-// /*------------------------------------*\
-
-$font-color-heading: #373b44;
-$font-color-base: #5d6069;
-$font-color-secondary: #8c919b;
-$font-color-disabled: #c0c3c9;
-
-// Brand colors
-$brand-primary            : #82ad3a;
-$brand-primary-text       : $font-color-base;
-$brand-secondary          : #dddddd;
-$brand-secondary-text     : $brand-secondary;
-
-//icons
-$brand-icons-default-color: #3b3e45;
+$text-title: $black-light;
+$text-link: $green;
+$text: $grey-dark;
+$text-secondly: $grey-medium;
+$text-small: $grey-medium;
+$text-disabled: $grey-disabled-text;
 
 // Links
-$link-color               : $brand-primary;
+$link-color: $green;
+
+// Icons
+$icon-color: $black-light;
+
+// Tabs
+$tab-on-text: $grey-medium;
+$tab-on-background: $grey-lighter;
+$tab-off-text: $black-light;
+$tab-off-background: $white;
+$tab-hover-text: $grey-medium;
+$tab-hover-background: $white;
+
+// Action buttons (top bar)
+$action-button-icon: $black-light;
+$action-button-icon-disabled: $grey-disabled-text;
+$action-button-background: $white;
+$action-button-background-hover: $black-light;
+$action-button-background-pressed: $grey-pressed;
+$action-button-background-disabled: $grey-disabled;
+
+// Action buttons (aside left bar)
+$aside-bar-icon: $grey-medium;
+$aside-bar-icon-hover: $white;
+$aside-bar-icon-active: $white;
+$aside-bar-background: $black-light;
+$aside-bar-background-active: $black;
+
+// Social buttons
+$facebook-button: #4573ba;
+$facebook-button-hover: #5386d4;
+$facebook-button-pressed: #3b629e;
+$google-button: $red;
+$google-button-hover: #f93940;
+$google-button-pressed: #b8262b;
+
+// Buttons
+$button-disabled: $grey-disabled;
+$button-disabled-text: $grey-disabled-text;
+
+$button-primary: $green;
+$button-primary-text: $white;
+$button-primary-hover: #98c64a;
+$button-primary-pressed: #739834;
+
+$button-secondary: $black-light;
+$button-secondary-text: $white;
+$button-secondary-hover: $grey-dark;
+$button-secondary-pressed: $black;
+
+$button-tertiary: #ebebeb;
+$button-tertiary-text: $black-light;
+$button-tertiary-hover: #f6f5f5;
+$button-tertiary-pressed: $grey-pressed;
+
+$button-quaternary: $white;
+$button-quaternary-text: $black-light;
+$button-quaternary-border: $grey-light;
+$button-quaternary-hover: $grey-item-hover;
+$button-quaternary-pressed: $grey-pressed;
+
+// Alerts
+$alert-background: $black-light;
+$alert-text: $white;
+$alert-ok-icon: $green;
+$alert-error-icon: $red-light;
+
+// Toolbox
+$toolbox-hardware: #b9bdc8;
+$toolbox-hardware-icon: $white;
+$toolbox-software-icon: $white;
+$toolbox-software-zowi: #60bcc8;
+$toolbox-software-components: #ce1c23;
+$toolbox-software-functions: #dd5b0c;
+$toolbox-software-code: #59b52e;
+$toolbox-software-maths: #00c1c7;
+$toolbox-software-text: #0094cf;
+$toolbox-software-control: #114698;
+$toolbox-software-logic: #790cd7;
+$toolbox-software-class: #e10a98;
+
+// /*------------------------------------*\
+// /*------------------------------------*\
+//     Penguin dependencies
+// /*------------------------------------*\
+// /*------------------------------------*\
+
+
+// Brand colors
+$brand-primary            : $green;
+$brand-primary-text       : $grey-dark;
+$brand-secondary          : $grey-light;
+$brand-secondary-text     : $brand-secondary;
 
 // Text
 $selection-text-color-bg  : $brand-secondary;
 $selection-text-color     : invert($brand-primary);
 
 // Scaffolding
-$body-font-size           : $font-size-base;
-$body-bg                  : white;
+$body-bg                  : $white;
 $body-color               : $brand-primary-text;
 
 // Print
 $print-text-color         : $brand-primary-text;
 $print-link-visited-color : $brand-primary ;
 $print-border-color       : $brand-secondary;
-$print-page-margin        : 0.5cm;

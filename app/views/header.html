@@ -12,34 +12,41 @@
                     </a>
                 </li>
             </ul>
-            <ul ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher' || common.userRole=== 'student')" class="nav__menu nav__menu__center-mode">
-                <li ng-if="common.user && common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType.indexOf('center') > -1}" data-element="nav-center">
-                    <a class="nav__menu__link" href="#/center-mode/center">
+            <ul class="nav__menu" ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher')">
+                <li ng-if="common.userRole==='headmaster'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center'}" data-element="nav-center">
+                    <a class="nav__menu__link" href="#/center">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#home"></use>
                         </svg>
                         <span>{{ 'header_tab_myCenter' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && (common.userRole==='headmaster' || common.userRole==='teacher')" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'center-mode' && common.urlType === 'teacher'}" data-element="nav-class">
-                    <a class="nav__menu__link" href="#/center-mode/teacher">
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected': common.section === 'classes' || common.section === 'class'}" data-element="nav-class">
+                    <a class="nav__menu__link" href="#/classes">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#people"></use>
                         </svg>
-                        <span>{{ 'header_tab_myClass' | translate }}</span>
+                        <span>{{ 'header_tab_myClasses' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user && common.userRole=== 'student'" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'center-mode' && common.urlType==='student'}" data-element="nav-exercise">
-                    <a class="nav__menu__link" href="#/center-mode/student">
+                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'exercises'}" data-element="nav-exercises">
+                    <a class="nav__menu__link" href="#/exercises">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#exercise"></use>
                         </svg>
                         <span>{{ 'header_tab_myExercises' | translate }}</span>
                     </a>
                 </li>
+                <li ng-class="{'nav__menu__item':true}">
+                    <button class="nav__menu__link" ng-click="openMenu($event)" data-element="nav-show-menu">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#ellipsis"></use>
+                        </svg>
+                    </button>
+                </li>
             </ul>
-            <ul class="nav__menu">
-                <li ng-if="!common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
+            <ul class="nav__menu" ng-class="{'menu--overlay menu--overlay__content':common.user && (common.userRole==='headmaster' || common.userRole==='teacher')}" ng-show="!common.user || (common.userRole!=='headmaster' && common.userRole!=='teacher') || showHeader">
+                <li class="nav__menu__item menu--overlay__item" ng-if="!common.user" ng-class="{'nav__menu__item--selected':(common.section === 'bloqsproject' || common.section === 'codeproject')}" data-element="nav-make">
                     <a class="nav__menu__link" href="#/bloqsproject">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#build"></use>
@@ -47,7 +54,7 @@
                         <span>{{ 'make' | translate }}</span>
                     </a>
                 </li>
-                <li ng-if="common.user" ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'projects'}" data-element="nav-projects">
+                <li class="nav__menu__item menu--overlay__item" ng-if="common.user" ng-class="{'nav__menu__item--selected':common.section === 'projects'}" data-element="nav-projects">
                     <a class="nav__menu__link" href="#/projects/myprojects">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#folder"></use>
@@ -55,7 +62,15 @@
                         <span>{{ 'projects' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'explore'}" data-element="nav-explore">
+                <li class="nav__menu__item menu--overlay__item" ng-if="common.user" ng-class="{'nav__menu__item--selected':common.section === 'tasks'}" data-element="nav-exercise">
+                    <a class="nav__menu__link" href="#/tasks">
+                        <svg class="svg-icon svg-icon--text">
+                            <use xlink:href="#exercise"></use>
+                        </svg>
+                        <span>{{ 'header_tab_tasks' | translate }}</span>
+                    </a>
+                </li>
+                <li class="nav__menu__item menu--overlay__item" ng-class="{'nav__menu__item--selected':common.section === 'explore'}" data-element="nav-explore">
                     <a class="nav__menu__link" href="#/explore">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#cloud"></use>
@@ -63,7 +78,7 @@
                         <span>{{ 'explore' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'learn'}" data-element="nav-learn">
+                <li class="nav__menu__item menu--overlay__item" ng-class="{'nav__menu__item--selected':common.section === 'learn'}" data-element="nav-learn">
                     <a class="nav__menu__link" href="#/learn">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#book"></use>
@@ -71,7 +86,7 @@
                         <span data-element="header-menu-learn">{{ 'learn' | translate }}</span>
                     </a>
                 </li>
-                <li ng-class="{'nav__menu__item':true, 'nav__menu__item--selected':common.section === 'forum'}" data-element="nav-forum">
+                <li class="nav__menu__item menu--overlay__item" ng-class="{'nav__menu__item--selected':common.section === 'forum'}" data-element="nav-forum">
                     <a class="nav__menu__link" href="#/forum">
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#forum"></use>
@@ -83,54 +98,41 @@
         </nav>
         <div class="menu--user" ng-show="!common.user">
             <div class="menu--user__header">
-                <button class="btn btn--secondary btn--small" ng-click="common.goToLogin()" data-element="header-enterbutton">{{ 'enter' | translate }}</button>
+                <button class="btn btn--tertiary btn--small" ng-click="common.goToLogin()" data-element="header-enterbutton">{{ 'enter' | translate }}</button>
             </div>
         </div>
-        <div class="menu--user" ng-show="common.user"  ng-class="{'menu--user--reduced': (common.userRole==='headmaster' || common.userRole==='teacher' || common.userRole === 'student')}" >
-            <div class="menu--user__center-mode notification-info" ng-if="common.user && (common.userRole!=='headmaster' && common.userRole!=='teacher' && common.userRole !== 'student')" ng-click="activateCenterMode()">
-                <p class="notification-alert">{{'new' | translate}}</p>
-                <div class="notification__content">
-                    <p class="notification__title">{{'centerMode_modal_createCenterTitle' | translate}}</p>
-                    <button class="notification__link" data-element="header-centermode">{{'centerMode_header_info' | translate}}</button>
-                </div>
-            </div>
+        <div class="menu--user" ng-show="common.user">
             <div class="menu--user__header">
-                <span class="menu--user__avatar" ng-click="openMenu($event)">
+                <span class="menu--user__avatar" ng-click="openUserMenu($event)">
                     <img class="img--avatar" image-change="common.avatarChange" err-src="../images/common/avatar.png" ng-src="{{common.urlImage + 'avatar/' + common.user._id}}" data-element="open-header-menu">
                 </span>
             </div>
-            <ul class="menu--user__content" ng-show="showHeader">
-                <li class="menu--user__item">
-                    <span>
-                        {{ 'welcome-male' | translate }}
-                        {{common.user.username}}
-                    </span>
-                </li>
-                <li class="menu--user__item">
-                    <a href="/#/account">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#settings"></use>
-                        </svg>
-                        {{ 'header-account-config' | translate }}
-                    </a>
-                </li>
-                <li class="menu--user__item">
-                    <button ng-click="commonModals.launchChangeLanguageModal()" data-element="header-change-language">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#earth"></use>
-                        </svg>
-                        {{ 'header-change-language' | translate }}
-                    </button>
-                </li>
-                <li class="menu--user__item">
-                    <button href ng-click="logout()" data-element="header-menu-logout">
-                        <svg class="svg-icon svg-icon--text">
-                            <use xlink:href="#logOut"></use>
-                        </svg>
-                        {{ 'header-close-session' | translate }}
-                    </button>
-                </li>
-            </ul>
+            <div class="menu--overlay" ng-show="showUserHeader">
+                <h3 class="menu--overlay__title" translate="hi-username" translate-values="{ value:'{{common.user.username}}' }"></h3>
+                <ul class="menu--overlay__content">
+                    <li class="menu--overlay__item menu--overlay__item--border">
+                        <a href="/#/account">
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#settings"></use>
+                            </svg>
+                            {{ 'header-account-config' | translate }}
+                        </a>
+                    </li>
+                    <li class="menu--overlay__item menu--overlay__item--border">
+                        <button ng-click="logout()" data-element="header-menu-logout">
+                            <svg class="svg-icon svg-icon--text">
+                                <use xlink:href="#logOut"></use>
+                            </svg>
+                            {{ 'header-close-session' | translate }}
+                        </button>
+                    </li>
+                    <li class="menu--overlay__item menu--overlay__item--stand-out" ng-if="(!common.user.birthday || !utils.userIsUnder14(common.user.birthday)) && common.userRole!=='headmaster'">
+                        <button ng-click="createCenter()" data-element="header-menu-create-center">
+                            {{ 'header-create-center' | translate }}
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </header>

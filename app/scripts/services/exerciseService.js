@@ -166,7 +166,7 @@ angular.module('bitbloqApp')
                     }, 0);
                 }
 
-                function showTimePicker(timePickerId, event, time) {
+                function showTimePicker(timePickerId, event) {
                     $('#' + timePickerId).click();
                     event.stopPropagation();
                 }
@@ -226,8 +226,18 @@ angular.module('bitbloqApp')
                     });
                 }
 
+                function clickGroupHandler(group) {
+                    if (!modalOptions.expandedItem) {
+                        modalOptions.expandedItem = {};
+                    }
+                    if (!modalOptions.expandedItem[group._id]) {
+                        group.selected = true;
+                    }
+                    modalOptions.expandedItem[group._id] = !modalOptions.expandedItem[group._id];
+                }
+
                 _.extend(modalOptions, {
-                    title: 'centerMode_editGroups',
+                    title: 'centerMode_assignToClasses',
                     contentTemplate: 'views/modals/centerMode/editGroups.html',
                     mainText: 'centerMode_editGroups_info',
                     exerciseName: project.name,
@@ -245,7 +255,8 @@ angular.module('bitbloqApp')
                     rejectButton: 'modal-button-cancel',
                     rejectAction: defered.reject,
                     confirmAction: confirmAction,
-                    modalButtons: true
+                    modalButtons: true,
+                    clickGroupHandler: clickGroupHandler
                 });
 
                 allCheckWatchers(modalOptions.groups);

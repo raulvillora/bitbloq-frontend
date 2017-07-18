@@ -6,7 +6,7 @@ $margin-left:55px;
     overflow: auto;
     position: relative;
     &.campamentos {
-        background-color: #ffffff;
+        background-color: $white;
         img {
             float: right;
         }

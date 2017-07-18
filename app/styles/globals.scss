@@ -103,10 +103,10 @@ body {
 * Selection
 */
  ::selection {
-    color: #fff !important;
-    background-color: #8c919b !important;
+    color: $white !important;
+    background-color: $grey-medium !important;
 }
  ::-moz-selection {
-    color: #fff !important;
-    background-color: #8c919b !important;
+    color: $white !important;
+    background-color: $grey-medium !important;
 }

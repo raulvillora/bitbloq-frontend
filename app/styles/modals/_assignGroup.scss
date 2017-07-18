@@ -3,54 +3,64 @@
         width: 680px;
     }
     .exercise-name {
+        color: $black;
         font-size: 16px;
         line-height: 1.38;
         font-weight: bold;
-        margin-top: 26px;
+        margin-top: 20px;
         margin-bottom: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
 .assign-group {
     margin-bottom: 20px;
+    .center-mode__table-title {
+        font-size: 12px;
+        border-bottom: 2px solid $grey-light;
+        span:first-child {
+            padding: 0;
+            margin-left: 32px;
+        }
+    }
 }
 
 .assign-group__content {
     color: #3b3e45;
+    padding: 0;
     .group__head {
         float: left;
         height: 50px;
         width: calc(100% - 28px);
         padding-left: 4px;
         .group__expanded--number {
-            text-align: center;
+            padding-left: 58px;
             margin-top: 4px
         }
         .group__expanded--icon {
             margin-top: 10px
         }
     }
-
     .checkbox--general {
         float: left;
-        margin-top: 11px;
         margin-right: 15px;
-    }ç
-
+    }
     .checkbox {
         display: block;
         clear: both;
         label {
             line-height: 2.43;
-            color: #373b44;
+            color: $black-light;
         }
     }
     .block__item__title {
         font-weight: bold;
     }
     .table__block__item svg {
-        width: 11px;
-        height: 11px;
+        margin-left: 70px;
+        width: 14px;
+        height: 14px;
         fill: #3b3e45;
     }
     .table__block__list {

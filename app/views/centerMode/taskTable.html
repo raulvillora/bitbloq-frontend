@@ -1,38 +1,13 @@
-<div class="row">
-    <h1 class="table__title col-vsmall-5" ng-if="common.urlType==='exercise-info'">
-        <svg class="svg-icon svg-icon--text">
-            <use xlink:href="#user"></use>
-        </svg>
-        {{'centerMode_column_students' | translate}}
-    </h1>
-    <h1 class="table__title col-vsmall-5" ng-if="common.urlType==='group'">
-        <svg class="svg-icon svg-icon--text">
-            <use xlink:href="#exercise"></use>
-        </svg>
-        {{'centerMode_exercises' | translate}}
-    </h1>
-    <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
-        <button class="btn btn--tertiary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
-            <svg class="svg-icon">
-                <use xlink:href="#delete"></use>
-            </svg>
-            {{ 'centerMode_button_deleteStudent' | translate}}
-        </button>
-    </div>
-</div>
 <div ng-if="tasks.length>0">
-    <div class="dropdown-group table__added clearfix">
-        <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
-    </div>
     <div class="center-mode__table">
         <div class="center-mode__table-title row">
             <div class="col-vsmall-5">
                 <span>{{'centerMode_column_name' | translate}}</span>
             </div>
-            <div class="table__column--centered col-vsmall-1">
+            <div class="col-vsmall-1">
                 <span>{{'centerMode_column_mark' | translate}}</span>
             </div>
-            <div class="table__column--centered col-vsmall-3">
+            <div class="col-vsmall-3">
                 <span>{{'centerMode_column_status' | translate}}</span>
             </div>
         </div>
@@ -40,26 +15,26 @@
             <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | orderBy:'orderInstance' | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
                 <div class="table__block__item table__item__ellipsis col-vsmall-5">
                     <h2 class="block__item__title">
-                        {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name}}
+                        {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name}}
                     </h2>
                 </div>
-                <div class="table__block__item table__column--centered col-vsmall-1">
+                <div class="table__block__item col-vsmall-1">
                     <span data-element="{{'centerMode-task-mark' + task._id}}">
                         {{task.mark || '-'}}
                     </span>
                 </div>
-                <div class="table__block__item table__column--centered col-vsmall-2">
+                <div class="table__block__item col-vsmall-2">
                     <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected' || (task.status==='delivered' && task.mark)}" data-element="{{'centerMode-task-status' + task._id}}">
-                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : ''  | translate}}
+                        {{(task.status==='corrected' || (task.status==='delivered' && task.mark))? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending' | translate}}
                     </span>
                 </div>
                 <div class="table__block__item table__column--hover table__column--right col-vsmall-4">
-                    <button class="btn btn--tertiary btn--small btn--delete table__item__btn" ng-if="common.urlType==='group'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
+                    <button class="btn btn--quaternary btn--small btn--delete table__item__btn" ng-if="common.section==='class'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
                         <svg class="svg-icon">
                             <use xlink:href="#delete"></use>
                         </svg>
                     </button>
-                    <a class="btn btn--tertiary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="{{'centerMode-button-showTask' + task._id}}">
+                    <a class="btn btn--quaternary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="{{'centerMode-button-showTask' + task._id}}">
                         {{(task.status!=='delivered' || task.status==='corrected' || (task.status==='delivered' && task.mark))? 'see': 'centerMode_button_correct' | translate}}
                     </a>
                 </div>
@@ -70,7 +45,19 @@
         <dir-pagination-controls on-page-change="getTasksPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty" ng-if="tasks.length===0">
-    <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty' | translate}}</h1>
-    <p class="center-mode--empty__info">{{'centerMode_tasks_emptyInfo' | translate}}</p>
+<div class="center-mode--empty center-mode--empty-tasks" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected">
+  <svg class="svg-icon svg-task">
+      <use xlink:href="#exercise"></use>
+  </svg>
+    <h1>{{'centerMode_tasks_no_class' | translate}}</h1>
+    <button class="btn btn--primary btn--small btn---addclass"  ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
+      <svg class="svg-icon svg-icon--text svg-plus">
+          <use xlink:href="#plus"></use>
+      </svg>
+   {{'centerMode_button_addNewClass' | translate}}
+</button>
+</div>
+
+<div class="center-mode--empty" ng-if="tasks.length===0 && taskStatusSelected">
+    <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty_search' | translate}}</h1>
 </div>

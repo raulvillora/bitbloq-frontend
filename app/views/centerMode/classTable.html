@@ -1,0 +1,39 @@
+<div ng-if=" common.userRole!=='student'">
+    <div class="classes-dropdown--group">
+        <common-dropdown class="classes-dropdown" options="sortClassesArray" options-click="sortClasses" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="classesStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
+            <svg class="svg-icon--search">
+                <use xlink:href="#search"></use>
+            </svg>
+            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchClassesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
+        </span>
+    </div>
+    <div ng-show="(search.searchClassesText!='' && search.searchClassesText!=undefined) && groups.length === 0" class="project-shared--empty">
+        <p class="empty__info">{{'classes_text_searchEmpty' | translate}}</p>
+    </div>
+    <ol>
+        <li pagination-id="mygroups" dir-paginate="group in groups | itemsPerPage: groupsPerPage track by group._id " ng-init="sectionIndex = $index" current-page="pagination.mygroups.current" total-items="{{groupsCount}}" class="group-list__item" data-element="classes">
+            <div class="group--item" ng-click="goTo('/class/' + group._id, $event)">
+                <div id="{{'group__image__container_' + group._id}}" ng-style="{'background-color': group.color}" class="group__image__container" data-element="class-item">
+                    <div class="group__image__name">
+                        <p> {{group.name}}</p>
+                    </div>
+                    <img class="group__image__open" src="../images/common/default-group.png">
+                </div>
+                <div class="group__info__container group__info__header">
+                    <div class="group__info__header__data">
+                        <p class="text--secondary group__info--data group__info__header__id">ID {{ group.accessId }} </p>
+                        <p class="text--secondary group__info--data">{{ group.students.length }}{{' '+ ('centerMode_column_students' | translate).toLowerCase()}}</p>
+                    </div>
+                    <div class="group__info__header__closed" ng-if="group.status === 'closed'">
+                        <p>{{'class-closed'|translate}}</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+    <div ng-class="{'projects-disable': projectsDisable}" class="projects__paginator">
+        <dir-pagination-controls pagination-id="mygroups" on-page-change="getMyGroupsPage(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
+    </div>
+</div>

@@ -50,8 +50,8 @@
                         <div class="main--project--image" id="main-image">
                             <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
                         </div>
-                        <input class="btn btn--primary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput" />
-                        <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
+                        <input class="btn btn--tertiary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput" />
+                        <button type="button" ng-class="{'btn':true, 'btn--tertiary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
                             {{'upload-image' | translate}}
                         </button>
                     </div>
@@ -76,7 +76,7 @@
                     <label>{{ 'tags' | translate }}</label>
                     <span data-ng-class="{'form--input':true, 'input--focused':focus === 'tagsinput'}">
                         <input type="text" id="tagsinput" name="tagsinput" maxlength="25" placeholder="{{ 'tag-input-placeholder' | translate }}" data-ng-keyup="addTag(form.tag, $event)" data-ng-focus="focus = 'tagsinput'" data-ng-blur="focus = false" data-ng-disabled="!common.user" data-ng-model="form.tag" data-element="infotab-taginput-text">
-                        <button type="button" class="btn btn--secondary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" tabindex="1" data-element="infotab-taginput-button">{{ 'add' | translate }}</button>
+                        <button type="button" class="btn btn--tertiary btn--small btn--addtag" data-ng-disabled="!common.user" data-ng-click="addTag(form.tag)" tabindex="1" data-element="infotab-taginput-button">{{ 'add' | translate }}</button>
                     </span>
                 </div>
                 <div class="tags">
@@ -153,12 +153,12 @@
                 <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png" />
             </div>
         </fieldset>
-        <fieldset ng-if="common.section==='exercise'" class="fieldset--right" data-ng-init="focus = false">
+        <fieldset ng-if="common.section==='exercise'" class="fieldset--right fieldset--groups" data-ng-init="focus = false">
             <div class="field--title">
                 <svg class="svg-icon svg-icon--text svg-icon--big">
                     <use xlink:href="#people"></use>
                 </svg>
-                <legend class="h3">{{ 'infotab_title_groups' | translate }}</legend>
+                <legend class="h3">{{ 'infotab_title_classes' | translate }}</legend>
             </div>
             <ul class="table__block--invert">
                 <li class="table__block__list" ng-repeat="group in groups">
@@ -171,9 +171,9 @@
                     </span>
                 </li>
             </ul>
-            <div class="form--section">
+            <div class="form--section edit-classes">
                 <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="editGroups(currentProject, groups);" data-element="exercise_button_editGroups">
-                    {{ 'centerMode_editGroups' | translate }}
+                    {{ 'centerMode_assignToClasses' | translate }}
                 </button>
             </div>
         </fieldset>
