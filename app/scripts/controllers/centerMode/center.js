@@ -165,6 +165,9 @@
                         }
                         newTeacherModal.close();
                     },
+                    closeAction = function() {
+                        newTeacherModal.close();
+                    },
                     parent = $rootScope,
                     modalOptions = parent.$new();
 
@@ -173,6 +176,8 @@
                     title: 'newTeacher_modal_title',
                     confirmButton: 'newTeacher_modal_aceptButton',
                     confirmAction: confirmAction,
+                    rejectButton: 'cancel',
+                    rejectAction: closeAction,
                     contentTemplate: '/views/modals/centerMode/newTeacher.html',
                     modalButtons: true,
                     newTeachersModel: []

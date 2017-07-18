@@ -9,7 +9,7 @@
             <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchClassesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
         </span>
     </div>
-    <div ng-show="(search.searchClassesText!='' && search.searchClassesText!=undefined) && groups.length === 0" class="project-shared--empty">
+    <div ng-show="((search.searchClassesText!='' && search.searchClassesText!=undefined) || statusSelected) && groups.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'classes_text_searchEmpty' | translate}}</p>
     </div>
     <ol>

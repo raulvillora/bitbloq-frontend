@@ -1,9 +1,9 @@
 .table__page {
     background-color: #eeeeee;
+
     div[class^="col-"] {
         padding-left: 0;
     }
-
 }
 
 .table__page--with-header {
@@ -156,7 +156,6 @@
     width: 35px;
     height: 35px;
     display: none;
-    background-color: white;
     border: solid 1px $grey-border;
     border-radius: 4px;
 
@@ -240,8 +239,8 @@
 .table__column--right {
     text-align: right;
 }
-
 // Actions menu
+
 .table__block__item--menu {
     position: absolute;
     height: auto;
@@ -291,7 +290,8 @@
         cursor: pointer;
     }
 
-    &[disabled], & > div[disabled] {
+    & > div[disabled],
+    &[disabled] {
         pointer-events: none;
         color: $grey-light;
 
