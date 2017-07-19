@@ -183,11 +183,11 @@
 
 .center-mode--empty {
     text-align: center;
+    padding-top: 60px;
 
     .center-mode--empty__title {
         font-size: 20px;
         font-weight: bold;
-        margin-top: 60px;
         margin-bottom: 15px;
     }
 
@@ -213,8 +213,6 @@
 }
 
 .center-mode--empty-tasks {
-    margin-top: 218px;
-
     .svg-task {
         height: 140px;
         fill: $grey-light;
