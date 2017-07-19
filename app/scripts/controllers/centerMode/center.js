@@ -248,7 +248,6 @@
                     $scope.common.itsRoleLoaded().then(function() {
                         switch ($scope.common.userRole) {
                             case 'headmaster':
-                            case 'teacher':
                                 _checkUrl();
                                 break;
                             default:

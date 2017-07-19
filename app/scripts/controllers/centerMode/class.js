@@ -115,7 +115,7 @@
                                 type: 'ok',
                                 time: 5000
                             });
-                            $location.path('center-mode/teacher');
+                            $location.path('classes');
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteGroup-Error',
@@ -250,7 +250,7 @@
                                 type: 'ok',
                                 time: 5000
                             });
-                            $location.path('center-mode/group/' + $scope.group._id);
+                            $location.path('class' + $scope.group._id);
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteStudent-error',

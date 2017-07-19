@@ -162,7 +162,7 @@ angular.module('bitbloqApp')
                             type: 'warning'
                         });
                     });
-                    $location.path('center-mode/teacher');
+                    $location.path('classes');
                     break;
                 case 'task':
                     exerciseApi.deleteTask(project._id).then(function() {
@@ -175,7 +175,7 @@ angular.module('bitbloqApp')
                             type: 'warning'
                         });
                     });
-                    $location.path('center-mode/teacher');
+                    $location.path('classes');
                     break;
                 default:
                     if (project._id) {
