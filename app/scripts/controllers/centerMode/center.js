@@ -15,10 +15,10 @@
             $scope.centerModeService = centerModeService;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                    'uuid': 'mBot',
-                    'image': 'mbot',
-                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-                },
+                'uuid': 'mBot',
+                'image': 'mbot',
+                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+            },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -30,6 +30,7 @@
                     'link': 'https://www.makeblock.es/productos/robot_starter_kit/'
                 }
             ];
+            $scope.sendingInvitation = false;
 
             $scope.centerActivateRobot = function(robot) {
                 commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
@@ -117,6 +118,12 @@
             $scope.newTeacher = function() {
                 var maxTeachers = centerModeService.center.maxTeachers ? centerModeService.center.maxTeachers : $scope.envData.config.maxTeachers;
                 var confirmAction = function() {
+                        $scope.sendingInvitation = true;
+                        alertsService.add({
+                            text: 'mandando invitación...',
+                            id: 'addTeacher',
+                            type: 'loading'
+                        });
                         var teachers = _.map(modalOptions.newTeachersModel, 'text');
                         var excedeedLimit = false;
                         if (teachers.length > 0) {
@@ -161,6 +168,8 @@
                                     id: 'addTeacher',
                                     type: 'error'
                                 });
+                            }).finally(function() {
+                                $scope.sendingInvitation = false;
                             });
                         }
                         newTeacherModal.close();

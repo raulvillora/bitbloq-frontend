@@ -1,6 +1,6 @@
 <div class="dropdown-group table__added table--header__teachers clearfix">
     <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="sortArray[0] | translate" data-element="my_center_dropdown_order"></common-dropdown>
-    <button class="btn btn--primary btn--small btn--newteacher" ng-click="newTeacher()" data-element="centerMode_button_newTeacher">
+    <button class="btn btn--primary btn--small btn--newteacher" ng-click="newTeacher()" ng-disabled="sendingInvitation" data-element="centerMode_button_newTeacher">
         <span>{{'centerMode_button_newTeacher' | translate}}</span>
     </button>
 </div>
@@ -23,7 +23,6 @@
                     {{item.firstName? item.firstName + ' ' + item.lastName : item.username}}
                 </h2>
                 <span class="block__item__explanation">{{item.email}}</span>
-                <!--<a ng-href="{{'#/center-mode/center-teacher/' + item._id}}" data-element="centerMode-teacher-link-{{$index}}"></a>-->
             </div>
             <div class="table__block__item table__block__item--information col-vsmall-4" ng-if="item.notConfirmed">
                 <span>
