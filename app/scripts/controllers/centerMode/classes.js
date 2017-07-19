@@ -31,6 +31,7 @@
             $scope.sortClassesArray = ['name', 'last-classes', 'old-classes'];
 
             $scope.colorPickerFlag = {};
+            $scope.common.isLoading = true;
 
             $scope.changeGroupColor = function() {
                 centerModeApi.updateGroup($scope.group).then(function() {
@@ -62,6 +63,8 @@
                     $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
                         'search': queryParams.searchParams
                     } : {}), _.cloneDeep(pageParams)));
+                }).finally(function() {
+                    $scope.common.isLoading = false;
                 });
             };
 
@@ -104,6 +107,7 @@
                 $scope.getMyGroupsPage();
             };
 
+            $scope.isLoading = true;
             /**************************
              ***  PRIVATE FUNCTIONS ***
              **************************/
@@ -168,13 +172,15 @@
                     $scope.common.userRole = 'teacher';
                 }).catch(function(err) {
                     console.log(err);
-                    if(err.data) {
+                    if (err.data) {
                         switch (err.data.code) {
                             case 403:
                                 //otro user
                                 $location.path('/projects');
                                 alertsService.add({
-                                    text: $scope.common.translate('centerMode_alert_confirmTeacherError1', {value: err.data.center}),
+                                    text: $scope.common.translate('centerMode_alert_confirmTeacherError1', {
+                                        value: err.data.center
+                                    }),
                                     id: 'addTeacher',
                                     type: 'error',
                                     linkText: 'Cerrar esta sesión',
@@ -192,7 +198,9 @@
                                 //otro user
                                 $location.path('/projects');
                                 alertsService.add({
-                                    text: $scope.common.translate('centerMode_alert_confirmTeacherError2', {value: err.data.center}),
+                                    text: $scope.common.translate('centerMode_alert_confirmTeacherError2', {
+                                        value: err.data.center
+                                    }),
                                     id: 'addTeacher',
                                     type: 'error'
                                 });
@@ -217,7 +225,6 @@
                     }
                 });
             }
-
 
             function _getGroups() {
                 centerModeApi.getMyCentersAsTeacher().then(function(response) {

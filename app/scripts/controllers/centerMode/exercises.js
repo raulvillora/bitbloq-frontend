@@ -22,6 +22,7 @@
                 }
             };
             $scope.groupArray = {};
+            $scope.sortExercisesArray = ['centerMode_endDate', 'centerMode_initDate', 'exercises-sortby-created-recent', 'exercises-sortby-created-old', 'tasks-sortby-name-az', 'tasks-sortby-name-za'];
             $scope.exerciseService = exerciseService;
             $scope.centerModeService = centerModeService;
 
@@ -114,6 +115,7 @@
                 $scope.showMoreActions = !$scope.showMoreActions;
             };
 
+            $scope.common.isLoading = true;
 
             /**************************
              ***  PRIVATE FUNCTIONS ***
@@ -212,9 +214,10 @@
                         });
                     });
                     $location.search('page', pageno);
+                }).finally(function() {
+                    $scope.common.isLoading = false;
                 });
             }
-
 
             /************************
              **  INIT && WATCHERS ***

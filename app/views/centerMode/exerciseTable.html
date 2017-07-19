@@ -1,16 +1,15 @@
-<div class="center-mode__table__header center-mode__table__header__exercise">
-    <h1 class="table__title center-mode__table__header__element-left" ng-if="common.section!=='class'">
-        <svg class="svg-icon svg-icon--text">
-            <use xlink:href="#exercise"></use>
-        </svg>
-        {{'centerMode_exercises' | translate}}
-    </h1>
-    <button ng-hide="true" class="center-mode__table__header__element-right filter-button" ng-click="changeFilter()">
-        {{!showFilters? 'centerMode_exercises_showFilters' : 'centerMode_exercises_hideFilters' | translate}}
-        <svg class="svg-icon filter-arrow" ng-class="{'filter-arrow--reversed' : showFilters}">
-            <use xlink:href="#arrowDown"></use>
-        </svg>
-    </button>
+<div class="center-mode__table__header center-mode__table__header__exercise" ng-if="common.section!=='class'">
+  <div class="classes-dropdown--group">
+      <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
+      <common-dropdown class="classes-dropdown" options="exerciseClassesArray" options-click="filterByClass" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+      <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+      <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
+          <svg class="svg-icon--search">
+              <use xlink:href="#search"></use>
+          </svg>
+          <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
+      </span>
+  </div>
 </div>
 <div class="dropdown-group table__added__exercise clearfix" ng-if="common.section!=='class'" ng-show="showFilters">
     <span class="form--input searcher" ng-class="{'input--focused':focus === 'search'}">
@@ -22,7 +21,8 @@
     <common-dropdown class="projects--sort-dropdown" options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
     <common-dropdown class="projects--sort-dropdown" options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate"></common-dropdown>
 </div>
-<div class="center-mode__table">
+<div ng-class="{'loading--content':common.isLoading}"></div>
+<div class="center-mode__table" ng-if="exercises.length > 0">
     <div class="center-mode__table-title center-mode__table-title--exercises row">
         <span ng-class="common.section==='class' ? 'col-vsmall-8' : 'col-vsmall-5'">{{'centerMode_column_name' | translate}}</span>
         <span class="col-vsmall-3" ng-if="common.section !== 'class'">{{'centerMode_column_classes' | translate}}</span>
@@ -105,8 +105,8 @@
     </div>
 </div>
 <div class="center-mode--empty" ng-if="(common.userRole==='teacher' || common.userRole==='headmaster') && exercises.length===0">
-    <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty' | translate}}</h1>
-    <p class="center-mode--empty__info">{{'centerMode_exercises_emptyInfo' | translate}}</p>
+    <h1 class="center-mode--empty__title">{{'centerMode_exercises_group_empty' | translate}}</h1>
+    <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
     <a ng-if="groups.length > 0" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
         <span>{{'centerMode_button_newExercise' | translate}}</span>
     </a>

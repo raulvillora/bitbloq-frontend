@@ -13,7 +13,7 @@
         <div class="center-mode row">
             <div class="col-vsmall-12 table__item" ng-include="'views/centerMode/classTable.html'"></div>
         </div>
-        <div class="center-mode--empty" ng-if="groups.length===0 && !statusSelected">
+        <div class="center-mode--empty" ng-if="groups.length===0 && (search.searchClassesText==='' || !search.searchClassesText) && !common.isLoading">
             <h1 class="center-mode--empty__title">{{'centerMode_classes_empty' | translate}}</h1>
             <p class="center-mode--empty__info">{{'centerMode_classes_emptyInfo' | translate}}</p>
             <button class="btn btn--primary btn--small" ng-click="newGroup()" data-element="centerMode_button_newGroup">
