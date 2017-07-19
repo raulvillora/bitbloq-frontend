@@ -16,6 +16,7 @@ angular
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
             getExercisesCount: getExercisesCount,
+            getExercisesByGroup: getExercisesByGroup,
             getGroup: getGroup,
             getGroups: getGroups,
             getGroupsByExercise: getGroupsByExercise,
@@ -184,6 +185,14 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'assignment/exercise/' + exerciseId
+            });
+        }
+
+        function getExercisesByGroup(groupId, params) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'assignment/group/' + groupId,
+                params: params
             });
         }
 

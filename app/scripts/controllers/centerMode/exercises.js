@@ -23,6 +23,7 @@
             };
             $scope.groupArray = {};
             $scope.sortExercisesArray = ['centerMode_endDate', 'centerMode_initDate', 'exercises-sortby-created-recent', 'exercises-sortby-created-old', 'tasks-sortby-name-az', 'tasks-sortby-name-za'];
+            $scope.exerciseStatusArray = ['filter-by-all', 'filter-by-open-tasks', 'filter-by-closed-tasks', 'filter-by-undefined-tasks'];
             $scope.exerciseService = exerciseService;
             $scope.centerModeService = centerModeService;
 
@@ -113,6 +114,22 @@
 
             $scope.setMoreOptions = function() {
                 $scope.showMoreActions = !$scope.showMoreActions;
+            };
+
+            $scope.filterByClass = function(c) {
+                var params = {
+                    'page': 1
+                };
+                centerModeApi.getExercisesByGroup(c._id, params).then(function(response) {
+                    $scope.exercises = response.data;
+                    _.forEach($scope.exercises, function(exercise) {
+                        centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
+                            exercise.groups = response.data;
+                            var groups = _.map(response.data, 'name');
+                            exercise.groups = groups.join(', ');
+                        });
+                    });
+                });
             };
 
             $scope.common.isLoading = true;

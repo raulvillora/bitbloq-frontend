@@ -6,7 +6,7 @@ common-dropdown {
     width: 10px;
     height: 10px;
     fill: $grey-medium;
-    margin-right: .5em;
+    margin-right: 0.5em;
     margin-left: 1em;
     right: 2px;
     position: absolute;
@@ -36,24 +36,24 @@ common-dropdown {
 
 .dropdown__menu__down {
     border-bottom: 1px solid $grey-border;
-    -webkit-border-bottom-right-radius: .3em;
-    -webkit-border-bottom-left-radius: .3em;
-    -moz-border-radius-bottomright: .3em;
-    -moz-border-radius-bottomleft: .3em;
-    border-bottom-right-radius: .3em;
-    border-bottom-left-radius: .3em;
+    -webkit-border-bottom-right-radius: 0.3em;
+    -webkit-border-bottom-left-radius: 0.3em;
+    -moz-border-radius-bottomright: 0.3em;
+    -moz-border-radius-bottomleft: 0.3em;
+    border-bottom-right-radius: 0.3em;
+    border-bottom-left-radius: 0.3em;
 }
 
 .dropdown__menu__up {
     border-top: 1px solid $grey-border;
-    -webkit-border-top-right-radius: .3em;
-    -webkit-border-top-left-radius: .3em;
-    -moz-border-radius-topright: .3em;
-    -moz-border-radius-topleft: .3em;
-    border-top-right-radius: .3em;
-    border-top-left-radius: .3em;
+    -webkit-border-top-right-radius: 0.3em;
+    -webkit-border-top-left-radius: 0.3em;
+    -moz-border-radius-topright: 0.3em;
+    -moz-border-radius-topleft: 0.3em;
+    border-top-right-radius: 0.3em;
+    border-top-left-radius: 0.3em;
     position: absolute;
-    left: 0px;
+    left: 0;
     width: 100%;
 }
 
@@ -62,6 +62,9 @@ common-dropdown {
     padding-left: 1em;
     border-bottom: 1px solid $grey-divider;
     color: $grey-dark;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     &:last-child {
         border-bottom: 0;
@@ -76,6 +79,9 @@ common-dropdown {
         min-height: 34px;
         width: 100%;
         text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -105,6 +111,7 @@ common-dropdown {
         border-bottom: none;
         width: 100%;
         transition: top 0.5s ease-in-out;
+
         li {
             margin: 0 auto;
             width: 90%;
@@ -112,6 +119,7 @@ common-dropdown {
             height: $box-height;
         }
     }
+
     .svg-icon {
         width: 20px;
         height: 11px;
@@ -119,6 +127,7 @@ common-dropdown {
         margin-right: 10px;
         margin-top: 12px;
     }
+
     .dropdown_selected {
         background-color: #FFFFFF;
         width: 200px;
@@ -129,6 +138,7 @@ common-dropdown {
         .language--name {
             @include textGenerator(14px, 400, $black-light, auto, 100%, false);
         }
+
         .arrow {
             color: $grey-dark;
             font-size: 23px;
@@ -151,6 +161,7 @@ common-dropdown {
                 }
             }
         }
+
         .arrow {
             transform: rotate(180deg);
         }
@@ -159,15 +170,17 @@ common-dropdown {
 
 .dropdown-group {
     padding: 0;
+
     common-dropdown {
         margin: 0 4.5px;
         float: right;
+
         &:first-child {
             margin-left: 0;
         }
     }
+
     .searcher {
-        margin: 7px;
-        margin-top: 0;
+        margin: 0 7px 7px;
     }
 }

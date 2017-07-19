@@ -1,7 +1,7 @@
 <div class="center-mode__table__header center-mode__table__header__exercise" ng-if="common.section!=='class'">
   <div class="classes-dropdown--group">
       <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
-      <common-dropdown class="classes-dropdown" options="exerciseClassesArray" options-click="filterByClass" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+      <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
       <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
       <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
           <svg class="svg-icon--search">
