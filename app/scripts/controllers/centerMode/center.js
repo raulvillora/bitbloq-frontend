@@ -112,8 +112,8 @@
                         break;
                 }
             };
-            console.log('$scope.envData');
-            console.log($scope.envData);
+
+
             $scope.newTeacher = function() {
                 var maxTeachers = centerModeService.center.maxTeachers ? centerModeService.center.maxTeachers : $scope.envData.config.maxTeachers;
                 var confirmAction = function() {

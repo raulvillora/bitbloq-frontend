@@ -191,6 +191,11 @@ angular
                     controller: 'ClassesCtrl',
                     reloadOnSearch: false
                 })
+                .when('/confirm-teacher/:token', {
+                    templateUrl: 'views/centerMode/classes.html',
+                    controller: 'ClassesCtrl',
+                    reloadOnSearch: false
+                })
                 .when('/exercises', {
                     templateUrl: 'views/centerMode/exercisesDashboard.html',
                     controller: 'ExercisesCtrl',
