@@ -250,7 +250,7 @@
                                 type: 'ok',
                                 time: 5000
                             });
-                            $location.path('class' + $scope.group._id);
+                            $location.path('class/' + $scope.group._id);
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteStudent-error',
