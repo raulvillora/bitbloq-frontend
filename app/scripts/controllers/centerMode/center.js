@@ -31,6 +31,7 @@
                 }
             ];
             $scope.sendingInvitation = false;
+            $scope.resendingInvitation = false;
 
             $scope.centerActivateRobot = function(robot) {
                 commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
@@ -209,6 +210,7 @@
             };
 
             $scope.resendInvitation = function(teacher) {
+                $scope.resendingInvitation = true;
                 centerModeApi.resendInvitation(teacher._id, centerModeService.center._id).then(function() {
                     alertsService.add({
                         text: 'centerMode_alert_sendInvitation',
@@ -222,6 +224,8 @@
                         id: 'addTeacher',
                         type: 'error'
                     });
+                }).finally(function(){
+                    $scope.resendingInvitation = false;
                 });
             };
 
