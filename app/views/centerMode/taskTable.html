@@ -45,17 +45,20 @@
         <dir-pagination-controls on-page-change="getTasksPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty center-mode--empty-tasks" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected">
-  <svg class="svg-icon svg-task">
-      <use xlink:href="#exercise"></use>
-  </svg>
+<div class="center-mode--empty center-mode--empty-tasks" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && common.section==='tasks'">
+    <svg class="svg-icon svg-task">
+        <use xlink:href="#exercise"></use>
+    </svg>
     <h1 class="center-mode--empty__title">{{'centerMode_tasks_no_class' | translate}}</h1>
-    <button class="btn btn--primary btn--small btn---addclass"  ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
-      <svg class="svg-icon svg-icon--text svg-plus">
-          <use xlink:href="#plus"></use>
-      </svg>
-   {{'centerMode_student_registerInClass' | translate}}
-</button>
+    <button class="btn btn--primary btn--small btn---addclass" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
+        <svg class="svg-icon svg-icon--text svg-plus">
+            <use xlink:href="#plus"></use>
+        </svg>
+        {{'centerMode_student_registerInClass' | translate}}
+    </button>
+</div>
+<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && common.section==='class'">
+    <h1 class="center-mode--empty__title">{{'centerMode_class_exerciseEmpty' | translate}}</h1>
 </div>
 
 <div class="center-mode--empty" ng-if="tasks.length===0 && taskStatusSelected">
