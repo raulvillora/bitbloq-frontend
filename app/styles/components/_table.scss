@@ -7,7 +7,7 @@
 }
 
 .table__page--with-header {
-    height: calc(100% - 93px);
+    min-height: calc(100% - 93px);
     //padding-top: 1px;
 }
 
