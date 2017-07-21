@@ -121,22 +121,30 @@ angular.module('bitbloqApp')
                         };
 
                     selectedGroups.forEach(function(group) {
-                        if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
+                        if (group.withoutDate || (!group.calendar.from.time && !group.calendar.to.time)) {
                             groupsToAssign.push({
                                 group: group._id,
                                 exercise: project._id
                             });
                         } else {
-                            group.calendar.from.date = moment(group.calendar.from.date);
-                            group.calendar.to.date = moment(group.calendar.to.date);
-                            var hourFrom = group.calendar.from.time.split(':')[0],
-                                minutesFrom = group.calendar.from.time.split(':')[1],
-                                hourTo = group.calendar.to.time.split(':')[0],
-                                minutesTo = group.calendar.to.time.split(':')[1];
-                            group.calendar.from.date.hour(hourFrom);
-                            group.calendar.from.date.minute(minutesFrom);
-                            group.calendar.to.date.hour(hourTo);
-                            group.calendar.to.date.minute(minutesTo);
+                            if (group.calendar.from.time) {
+                                group.calendar.from.date = moment(group.calendar.from.date);
+                                var hourFrom = group.calendar.from.time.split(':')[0],
+                                    minutesFrom = group.calendar.from.time.split(':')[1];
+                                group.calendar.from.date.hour(hourFrom);
+                                group.calendar.from.date.minute(minutesFrom);
+                            } else {
+                                group.calendar.from.date = moment();
+                            }
+
+                            if (group.calendar.to.time) {
+                                group.calendar.to.date = moment(group.calendar.to.date);
+                                var hourTo = group.calendar.to.time.split(':')[0],
+                                    minutesTo = group.calendar.to.time.split(':')[1];
+
+                                group.calendar.to.date.hour(hourTo);
+                                group.calendar.to.date.minute(minutesTo);
+                            }
 
                             groupsToAssign.push({
                                 group: group._id,

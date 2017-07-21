@@ -26,6 +26,7 @@
             $scope.exerciseStatusArray = ['filter-by-all', 'filter-by-open-tasks', 'filter-by-closed-tasks', 'filter-by-undefined-tasks'];
             $scope.exerciseService = exerciseService;
             $scope.centerModeService = centerModeService;
+            $scope.moment = moment;
 
             var groupSelected;
 
@@ -43,7 +44,7 @@
 
             // Assign groups
             $scope.editGroups = function(exercise) {
-                if(exercise._id) {
+                if (exercise._id) {
                     centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
                         exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
                             _getGroups();
