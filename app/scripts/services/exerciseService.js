@@ -101,7 +101,7 @@ angular.module('bitbloqApp')
                     if (!exercise._id) {
                         _saveExercise().then(function() {
                             assign(groups, exports.exercise);
-                        })
+                        });
                     } else {
                         assign(groups, exercise);
                     }

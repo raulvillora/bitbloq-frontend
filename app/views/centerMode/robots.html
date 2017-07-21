@@ -14,7 +14,7 @@
                         <li data-ng-repeat="robot in activableRobots" ng-init="sectionIndex = $index" class="robots-list__item" data-element="projects-project">
                             <div class="hardware--item">
                                 <div class="hardware__image__container" data-element="account-hardware-elem">
-                                    <img ng-src="{{'../images/robots/' + robot.image + '.png'}}" />
+                                    <img ng-src="{{common.urlImage + 'hardware/robots/' + robot.image + '.png'}}" />
                                 </div>
                                 <p class="hardware__image__container_name">{{robot.uuid | translate}}</p>
                             </div>
