@@ -10,7 +10,7 @@
             <li class="table__block__list table__block__hover handcursor" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
                 <ng-form name="{{'form' + group._id}}">
                     <span class="checkbox--general">
-                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected" />
+                        <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected" ng-click="expandedItem[group._id] = true"/>
                     </span>
                     <div class="group__head row" ng-click="clickGroupHandler(group)">
                         <span class="col-vsmall-7 table__block__item handcursor" data-tooltip-position="table__block__item" data-tooltip="{{group.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
