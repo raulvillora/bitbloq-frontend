@@ -87,7 +87,7 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.assignGroup = function(project, teacherId, oldGroups, centerId, onlyEdit) {
+        exports.assignGroup = function(exercise, teacherId, oldGroups, centerId, onlyEdit) {
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
@@ -98,6 +98,17 @@ angular.module('bitbloqApp')
                 });
 
                 function confirmAction(groups) {
+                    if (!exercise._id) {
+                        _saveExercise().then(function() {
+                            assign(groups, exports.exercise);
+                        })
+                    } else {
+                        assign(groups, exercise);
+                    }
+
+                }
+
+                function assign(groups, project) {
                     var selectedGroups = _.filter(groups, {
                             'selected': true
                         }),
@@ -135,7 +146,6 @@ angular.module('bitbloqApp')
                             });
                         }
                     });
-
                     exerciseApi.assignGroups(groupsToAssign, removedGroups).then(function(response) {
                         defered.resolve(response.data);
                         assignModal.close();
@@ -240,7 +250,7 @@ angular.module('bitbloqApp')
                     title: 'centerMode_assignToClasses',
                     contentTemplate: 'views/modals/centerMode/editGroups.html',
                     mainText: 'centerMode_editGroups_info',
-                    exerciseName: project.name,
+                    exerciseName: exercise.name,
                     groups: groups,
                     confirmButton: 'save',
                     today: new Date(),
@@ -700,7 +710,8 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;

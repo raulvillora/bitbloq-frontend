@@ -43,12 +43,19 @@
 
             // Assign groups
             $scope.editGroups = function(exercise) {
-                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
-                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
+                if(exercise._id) {
+                    centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
+                        exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
+                            _getGroups();
+                            _getExercises();
+                        });
+                    });
+                } else {
+                    exerciseService.assignGroup(exercise, $scope.common.user._id, []).then(function() {
                         _getGroups();
                         _getExercises();
                     });
-                });
+                }
             };
 
             $scope.createExerciseCopy = function(exercise) {
