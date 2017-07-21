@@ -143,6 +143,18 @@
     }
 }
 
+.assign-group .table__block__list {
+    .group__content {
+        label {
+            cursor: pointer;
+        }
+
+        .date-picker input {
+            cursor: pointer;
+        }
+    }
+}
+
 .center-mode__table {
     /*  [class*="col-"]:not(:first-child):not(.table__block__item--information) {
       //  text-align: center;
