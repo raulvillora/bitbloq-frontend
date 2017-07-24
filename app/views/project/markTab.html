@@ -12,11 +12,11 @@
                 <div class="form-control" ng-class="{'task__student-mark': common.userRole==='student'}">
                     <label>{{ 'infoTab_subTitle_exerciseMark' | translate }}</label>
                     <span class="form--input" ng-if="currentProject.canMark" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
-                        <span class="container-span" data-tooltip-position="bottom" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered'}}">
+                        <span class="container-span" data-tooltip-position="bottom" data-tooltip="{{(currentProject.status==='corrected'?'centerMode_tooltip_corrected': 'centerMode_tooltip_notDelivered') | translate}}" data-tooltips="{{currentProject.status!=='delivered'}}">
                             <input type="number" id="exerciseMark0" name="exerciseMark0" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark mark--integer" data-ng-class="{'input--focused':focus === 'exerciseMark0'}" data-ng-model="currentProject.newMark[0]"
                                    data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="currentProject.status!=='delivered'" data-element="info-exercise-mark0">
                         </span>
-                        <span class="container-span" data-tooltip-position="right" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered'}}">
+                        <span class="container-span" data-tooltip-position="right" data-tooltip="{{(currentProject.status==='corrected'?'centerMode_tooltip_corrected': 'centerMode_tooltip_notDelivered') | translate}}" data-tooltips="{{currentProject.status!=='delivered'}}">
                             <input type="number" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
                                    data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="currentProject.status!=='delivered'" data-element="info-exercise-mark1">
                         </span>
