@@ -121,7 +121,7 @@
                 var confirmAction = function() {
                         $scope.sendingInvitation = true;
                         alertsService.add({
-                            text: 'mandando invitación...',
+                            text: 'centerMode_sending-invitation',
                             id: 'addTeacher',
                             type: 'loading'
                         });
@@ -211,6 +211,11 @@
 
             $scope.resendInvitation = function(teacher) {
                 $scope.resendingInvitation = true;
+                alertsService.add({
+                    text: 'centerMode_sending-invitation',
+                    id: 'addTeacher',
+                    type: 'loading'
+                });
                 centerModeApi.resendInvitation(teacher._id, centerModeService.center._id).then(function() {
                     alertsService.add({
                         text: 'centerMode_alert_sendInvitation',
