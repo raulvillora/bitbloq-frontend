@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $rootScope, $location, userApi, utils) {
+        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $translate, $rootScope, $location, userApi, utils, ngDialog) {
             $scope.groups = [];
             $scope.teacher = {};
             $scope.centerModeService = centerModeService;
@@ -151,7 +151,7 @@
                     });
                     _.extend(modalOptions, {
                         title: 'welcome',
-                        contentTemplate: 'views/modals/centerMode/activateCenterMode.html',
+                        contentTemplate: 'views/modals/centerMode/informationCenterMode.html',
                         confirmationTitle: confirmationTitle,
                         customClass: 'modal--information',
                         confirmButton: 'centerMode_modal_confirmation-button',
@@ -183,7 +183,7 @@
                                     }),
                                     id: 'addTeacher',
                                     type: 'error',
-                                    linkText: 'Cerrar esta sesión',
+                                    linkText: 'close-session',
                                     link: function() {
                                         userApi.logout();
                                         $scope.common.setUser(null);
