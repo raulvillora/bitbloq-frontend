@@ -21,20 +21,26 @@
                                    data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="currentProject.status!=='delivered'" data-element="info-exercise-mark1">
                         </span>
                     </span>
-                    <p ng-class="{'form--show-mark': currentProject.mark}" ng-if="common.userRole==='student'">
-                        {{currentProject.mark || ('centerMode_task_withoutMark' | translate)}}
+                    <p ng-class="{'form--show-mark': currentProject.mark && currentProject.status==='corrected'}" ng-if="common.userRole==='student'">
+                        {{currentProject.status==='corrected' && currentProject.mark? currentProject.mark : ('centerMode_task_withoutMark' | translate)}}
                     </p>
                 </div>
                 <!-- textarea -->
                 <div class="form-control project__description" ng-class="{'task__student-mark': common.userRole==='student'}">
                     <label>{{ 'infoTab_subTitle_exerciseRemark' | translate }}</label>
-                    <span class="form--textarea" ng-if="currentProject.canMark" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
+                    <span class="form--textarea" ng-if="currentProject.canMark" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}" data-tooltip-position="bottom" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered' && currentProject.status!=='corrected'}}">
                         <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-init="currentProject.newRemark = currentProject.remark" data-ng-model="currentProject.newRemark" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
-                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user" data-element="infotab-exercise-remark"></textarea>
+                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user || currentProject.status!=='delivered'" data-element="infotab-exercise-remark"></textarea>
                     </span>
-                    <p ng-class="{'form--show-description': currentProject.remark}" ng-if="common.userRole==='student'">
-                        {{currentProject.remark || ('centerMode_task_withoutRemark' | translate)}}
+                    <p ng-class="{'form--show-description': currentProject.remark  && currentProject.status==='corrected'}" ng-if="common.userRole==='student'">
+                        {{currentProject.status==='corrected' && currentProject.remark? currentProject.remark: ('centerMode_task_withoutRemark' | translate)}}
                     </p>
+                </div>
+                <!-- button -->
+                <div class="form-control" ng-class="{'task__student-mark': common.userRole==='student'}" ng-if="currentProject.canMark">
+                    <span class="form--button" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}">
+                        <button class="btn btn--primary" ng-disabled="currentProject.status!=='delivered'" ng-click="currentProjectService.sendMark()"> {{currentProject.status==='corrected'? 'centerMode_task_sentMark' : 'centerMode_task_sendMark' | translate }}</button>
+                    </span>
                 </div>
             </div>
         </fieldset>

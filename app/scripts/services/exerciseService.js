@@ -611,6 +611,11 @@ angular.module('bitbloqApp')
             }
         };
 
+        exports.sendMark = function() {
+            exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
+                exports.exercise.status = 'corrected';
+            });
+        };
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //----------------- api communication ---------------------------------

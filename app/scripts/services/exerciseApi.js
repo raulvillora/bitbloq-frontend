@@ -28,6 +28,7 @@ angular.module('bitbloqApp')
             markTask: markTask,
             taskToProject: taskToProject,
             save: save,
+            sendMarkTask: sendMarkTask,
             sendTask: sendTask,
             update: update,
             updateTask: updateTask,
@@ -163,6 +164,14 @@ angular.module('bitbloqApp')
                     mark: _.join(task.newMark, '.'),
                     remark: task.newRemark
                 }
+            });
+        }
+
+
+        function sendMarkTask(taskId) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'task/' + taskId + '/send-mark'
             });
         }
 
