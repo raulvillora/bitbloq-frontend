@@ -53,8 +53,12 @@
                 <div ng-show="menuActive[$index]" class="table__block__item--parent">
                     <ul class="table__block__item--menu">
                         <li class="table__block__item--menu__item table__block__item--menu__item--open">
-                            <a class="table__block__item--menu__link" data-ng-href="#/exercises/exercise-info/{{exercise._id}}" target="_blank">
-                                {{'open' | translate}}</a>
+                            <a class="table__block__item--menu__link" data-ng-href="#/exercise/{{exercise._id}}" target="_blank">
+                                {{'edit' | translate}}</a>
+                        </li>
+                        <li class="table__block__item--menu__item table__block__item--menu__item--open">
+                            <a class="table__block__item--menu__link" data-ng-href="#/exercise-info/{{exercise._id}}" target="_blank">
+                                {{'show-detail' | translate}}</a>
                         </li>
                         <li class="dropdown__item--separator"></li>
                         <li class="table__block__item--menu__item" ng-click="editGroups(exercise)" data-element="menu-edit-groups">
