@@ -75,3 +75,57 @@
         box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.2), 0 15px 12px 1px rgba(0, 0, 0, 0.2);
     }
 }
+
+.nav--make .nav__menu .exercise--title {
+    padding: 15px 20px;
+    width: calc(100% - 298px);
+    border: 0;
+    .h3 {
+        display: inline-block;
+        font-size: 18px;
+        color: $text-title;
+        margin: 0;
+        text-align: left;
+        font-style: italic;
+        font-weight: bold;
+        max-width: 65%;
+        padding-right: 30px;
+        text-overflow: ellipsis;
+        height: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        float: left;
+        .project--name {
+            color: #3b3e45;
+            font-style: italic;
+            font-weight: bold;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            padding-right: 3px;
+        }
+    }
+    .task__student {
+        display: block;
+        height: 30%;
+        padding-right: 30px;
+        line-height: 1;
+        color: $text-small;
+        font-style: italic;
+        font-size: 14px;
+    }
+    .make--saving {
+        cursor: default;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 1.4em;
+        color: #8c919b;
+        display: block;
+        width: 30%;
+        height: 100%;
+        margin-top: 7px;
+        float: left;
+    }
+
+}
