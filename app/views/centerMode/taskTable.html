@@ -1,19 +1,19 @@
 <div ng-if="tasks.length>0">
     <div class="center-mode__table">
         <div class="center-mode__table-title row">
-            <div class="col-vsmall-5">
+            <div class="col-vsmall-6">
                 <span>{{'centerMode_column_name' | translate}}</span>
             </div>
             <div class="col-vsmall-1">
                 <span>{{'centerMode_column_mark' | translate}}</span>
             </div>
-            <div class="col-vsmall-3">
+            <div class="col-vsmall-2">
                 <span>{{'centerMode_column_status' | translate}}</span>
             </div>
         </div>
         <div class="table__block table__block__exercise">
             <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | orderBy:'orderInstance' | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
-                <div class="table__block__item table__item__ellipsis col-vsmall-5">
+                <div class="table__block__item table__item__ellipsis col-vsmall-6">
                     <h2 class="block__item__title">
                         {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name}}
                     </h2>
@@ -28,7 +28,7 @@
                         {{task.status==='corrected'? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending' | translate}}
                     </span>
                 </div>
-                <div class="table__block__item table__column--hover table__column--right col-vsmall-4">
+                <div class="table__block__item table__column--hover table__column--right col-vsmall-3">
                     <button class="btn btn--quaternary btn--small btn--delete table__item__btn" ng-if="common.section==='class'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
                         <svg class="svg-icon">
                             <use xlink:href="#delete"></use>
