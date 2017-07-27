@@ -9,7 +9,7 @@
                     </svg>
                 </a>
             </li>
-            <li class="nav__menu__item " ng-class="{'project--title': common.section==='exercise', 'exercise--title': common.section==='task'}">
+            <li class="nav__menu__item " ng-class="{'project--title': common.section==='exercise', 'exercise--title': common.section==='task', 'exercise--title-with-roles': common.user._id === currentProject.teacher && common.user._id===currentProject.student._id}">
                 <h1 id="currentproject" class="h3">
                     <button class="project--name project--name--editable" ng-if="common.section==='exercise'" ng-click="currentProjectService.rename()" data-element="exercise-name">
                         <span>{{currentProject.name || 'new-exercise' | translate}}</span>
@@ -19,7 +19,9 @@
                 </h1>
                 <div class="make--saving" data-element="project-save-label-{{currentProjectService.getSavingStatusIdLabel()}}">{{ currentProjectService.getSavingStatusIdLabel() | translate }}</div>
             </li>
-
+            <li class="center-mode__role-options" ng-if="common.user._id === currentProject.teacher && common.user._id === currentProject.student._id" ng-init="common.userRole='student'">
+                <common-dropdown class="task--sort-dropdown" options="roleOptions" options-click="changeRole" selected-option="common.userRole" pre-heading="'Ver como:'"></common-dropdown>
+            </li>
             <li class="nav__menu__item nav__item--white right--last" ng-class="{'exercise-button-wide': common.section==='exercise'  || (common.section ==='task' && common.user._id === currentProject.teacher)}" data-tooltips="true"
                 data-tooltip="{{ currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-compile' :'verify' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || currentProject.hardware.showRobotImage && !robotActivatedInCenter" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
@@ -28,7 +30,7 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" ng-class="{'exercise-button-wide': common.section==='exercise' || (common.section ==='task' && common.user._id === currentProject.teacher)}" data-tooltips="true"
+            <li class="nav__menu__item nav__item--white right" ng-class="{'exercise-button-wide': common.section==='exercise' || (common.section ==='task' && common.userRole === 'teacher')}" data-tooltips="true"
                 data-tooltip="{{currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-upload' :'load' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-disabled="isWeb2BoardInProgress()|| currentProject.hardware.showRobotImage && !robotActivatedInCenter" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" ng-click="upload()" data-walkthrough="upload">
                     <svg class="svg-icon">

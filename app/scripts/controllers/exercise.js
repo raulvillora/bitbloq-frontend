@@ -45,6 +45,13 @@ angular.module('bitbloqApp')
 
         exerciseService.initBloqsExercise();
         $scope.currentProjectLoaded = $q.defer();
+        $scope.roleOptions = ['student', 'teacher'];
+
+        $scope.changeRole = function(option) {
+            console.log('*** ', option);
+            $scope.common.userRole = option;
+            _canUpdate();
+        };
 
         $scope.getGroups = function() {
             centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
@@ -186,11 +193,11 @@ angular.module('bitbloqApp')
 
         function _canUpdate() {
             var defered = $q.defer();
-            if ($scope.common.section === 'task' && $scope.currentProject.student._id === $scope.common.user._id) {
+            if ($scope.common.userRole==='student' && $scope.common.section === 'task' && $scope.currentProject.student._id === $scope.common.user._id) {
                 $scope.currentProject.userCanUpdate = true;
                 defered.resolve();
             } else {
-                if ($scope.currentProject.student._id !== $scope.common.user._id && ($scope.currentProject.teacher === $scope.common.user._id || $scope.currentProject.owner !== $scope.common.user._id)) {
+                if ($scope.currentProject.teacher === $scope.common.user._id || $scope.currentProject.owner !== $scope.common.user._id) {
                     if ($scope.common.section === 'exercise') {
                         $scope.currentProject.userCanUpdate = true;
                     } else {
