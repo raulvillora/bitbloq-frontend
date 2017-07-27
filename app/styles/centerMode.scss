@@ -163,6 +163,7 @@
     /*  [class*="col-"]:not(:first-child):not(.table__block__item--information) {
       //  text-align: center;
     }*/
+    margin-top: 8px;
     .table__block__item--groups {
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -641,7 +642,7 @@
     .classes-dropdown {
         font-size: 13px;
         text-align: left;
-        width: 170px;
+        width: 214px;
         display: inline-block;
 
         .dropdown__menu__down {
@@ -650,8 +651,8 @@
 
         &:first-child {
             margin-right: 20px;
-            width: 214px;
         }
+
         &:nth-child(2) {
             margin-right: 20px;
         }
