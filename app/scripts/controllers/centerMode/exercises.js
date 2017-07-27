@@ -114,7 +114,7 @@
             };
 
             $scope.getExercisesPaginated = function(pageno) {
-                getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
+                getTeacherExercisesPaginated(pageno);
             };
 
             $scope.renameExercise = function(exercise) {
@@ -164,32 +164,14 @@
             function _checkUrl() {
                 centerModeApi.getMyCenter().then(function(response) {
                     centerModeService.setCenter(response.data);
-                    _getExercisesCount();
                     _getGroups();
                     _getExercises();
                 });
             }
 
-            function _getExercisesCount(searchText) {
-                var searchParams = searchText ? searchText : ($routeParams.name ? {
-                    'name': $routeParams.name
-                } : '');
-                centerModeApi.getExercisesCount(null, searchParams).then(function(response) {
-                    $scope.exercisesCount = response.data.count;
-                });
-            }
-
             function _getExercises() {
-                var searchParams;
-                searchParams = $routeParams.name ? $routeParams.name : '';
-                if (searchParams) {
-                    $scope.showFilters = true;
-                    $scope.search.searchExercisesText = searchParams;
-                }
                 if ($routeParams.page) {
-                    getTeacherExercisesPaginated($routeParams.page, {
-                        'name': searchParams
-                    });
+                    getTeacherExercisesPaginated($routeParams.page);
                     $scope.pagination.exercises.current = $routeParams.page;
                 } else {
                     getTeacherExercisesPaginated($scope.pageno);
@@ -229,7 +211,8 @@
 
                 if (!$scope.classFilter) {
                     centerModeApi.getExercises(null, queryParams).then(function(response) {
-                        $scope.exercises = response.data;
+                        $scope.exercises = response.data.exercises;
+                        $scope.exercisesCount = response.data.count;
                         _.forEach($scope.exercises, function(exercise) {
                             centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
                                 exercise.groups = response.data;
