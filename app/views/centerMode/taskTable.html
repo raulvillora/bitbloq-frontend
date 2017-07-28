@@ -45,7 +45,7 @@
         <dir-pagination-controls on-page-change="getTasksPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty center-mode--empty-tasks" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && common.section==='tasks'">
+<div class="center-mode--empty center-mode--empty-tasks" ng-if="groups.length===0 && !sortSelected && !taskStatusSelected && common.section==='tasks'">
     <svg class="svg-icon svg-task">
         <use xlink:href="#exercise"></use>
     </svg>
@@ -57,7 +57,7 @@
         {{'centerMode_student_registerInClass' | translate}}
     </button>
 </div>
-<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && common.section==='class'">
+<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && groups.length > 0">
     <h1 class="center-mode--empty__title">{{'centerMode_class_exerciseEmpty' | translate}}</h1>
 </div>
 
