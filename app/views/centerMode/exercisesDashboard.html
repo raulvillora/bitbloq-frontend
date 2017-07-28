@@ -10,8 +10,8 @@
 </div>
 
 <div class="table__page table__page--with-header">
-    <div class="center-mode table__main" ng-if="exercises.length>0 || search.searchExercisesText " ng-include="'views/centerMode/exerciseTable.html'"></div>
-    <div class="center-mode--empty" ng-if="exercises.length===0 && !common.isLoading">
+    <div class="center-mode table__main" ng-include="'views/centerMode/exerciseTable.html'"></div>
+    <div class="center-mode--empty" ng-if="exercises.length===0 && !common.isLoading && !search.searchExercisesText && !sortSelected && !statusSelected && !classFilter">
         <h1 class="center-mode--empty__title">{{'exercises_empty' | translate}}</h1>
         <p class="center-mode--empty__info">{{'centerMode_exercises_emptyInfo' | translate}}</p>
         <a class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">

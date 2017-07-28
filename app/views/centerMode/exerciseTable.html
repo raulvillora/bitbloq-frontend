@@ -11,7 +11,7 @@
       </span>
   </div>
 </div>
-<div class="dropdown-group table__added__exercise clearfix" ng-if="common.section!=='class'" ng-show="showFilters">
+<!--<div class="dropdown-group table__added__exercise clearfix" ng-if="common.section!=='class'" ng-show="showFilters">
     <span class="form--input searcher" ng-class="{'input--focused':focus === 'search'}">
         <svg class="svg-icon--search">
             <use xlink:href="#search"></use>
@@ -20,7 +20,7 @@
     </span>
     <common-dropdown class="projects--sort-dropdown" options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
     <common-dropdown class="projects--sort-dropdown" options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate"></common-dropdown>
-</div>
+</div>-->
 <div ng-class="{'loading--content':common.isLoading}"></div>
 <div class="center-mode__table" ng-if="exercises.length > 0">
     <div class="center-mode__table-title center-mode__table-title--exercises row">
@@ -104,10 +104,6 @@
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
 </div>
-<div class="center-mode--empty" ng-if="(common.userRole==='teacher' || common.userRole==='headmaster') && exercises.length===0">
-    <h1 class="center-mode--empty__title">{{'centerMode_exercises_group_empty' | translate}}</h1>
-    <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
-    <a ng-if="groups.length > 0" class="btn btn--primary btn--small" href="/#/exercise" target="_blank" data-element="centerMode_button_newExercise">
-        <span>{{'centerMode_button_newExercise' | translate}}</span>
-    </a>
+<div class="center-mode--empty" ng-if="exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)">
+    <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty_search' | translate}}</h1>
 </div>
