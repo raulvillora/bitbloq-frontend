@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="table__block table__block__exercise">
-            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | orderBy:'orderInstance' | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
+            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
                 <div class="table__block__item table__item__ellipsis col-vsmall-6">
                     <h2 class="block__item__title">
                         {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name}}

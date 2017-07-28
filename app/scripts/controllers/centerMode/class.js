@@ -288,7 +288,6 @@
                 getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
             };
 
-
             $scope.getTasksPaginated = function(pageno) {
                 exerciseApi.getTasksByExercise($scope.exercise._id, {
                     'page': pageno,
