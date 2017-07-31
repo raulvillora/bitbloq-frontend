@@ -87,12 +87,13 @@ angular.module('bitbloqApp')
             });
         }
 
-        function getTasks(groupId, studentId) {
+        function getTasks(groupId, studentId, params) {
             if (groupId) {
                 if (studentId) {
                     return $http({
                         method: 'GET',
-                        url: envData.config.centerModeUrl + 'task/group/' + groupId + '/student/' + studentId
+                        url: envData.config.centerModeUrl + 'task/group/' + groupId + '/student/' + studentId,
+                        params: params
                     });
                 } else {
                     return $http({
@@ -166,7 +167,6 @@ angular.module('bitbloqApp')
                 }
             });
         }
-
 
         function sendMarkTask(taskId) {
             return $http({

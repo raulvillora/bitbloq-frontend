@@ -15,10 +15,10 @@
             $scope.centerModeService = centerModeService;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                'uuid': 'mBot',
-                'image': 'mbot',
-                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-            },
+                    'uuid': 'mBot',
+                    'image': 'mbot',
+                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+                },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -114,7 +114,6 @@
                         break;
                 }
             };
-
 
             $scope.newTeacher = function() {
                 var maxTeachers = centerModeService.center.maxTeachers ? centerModeService.center.maxTeachers : $scope.envData.config.maxTeachers;
@@ -229,7 +228,7 @@
                         id: 'addTeacher',
                         type: 'error'
                     });
-                }).finally(function(){
+                }).finally(function() {
                     $scope.resendingInvitation = false;
                 });
             };
@@ -291,6 +290,10 @@
                     centerModeService.unBlindAllWatchers();
                 }
             }
+
+            $scope.$on('$destroy', function() {
+                centerModeService.unBlindAllWatchers();
+            });
 
             /*****************************
              *********** INIT ************

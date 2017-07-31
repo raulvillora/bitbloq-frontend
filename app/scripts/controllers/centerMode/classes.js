@@ -349,6 +349,10 @@
                 }
             });
 
+            $scope.$on('$destroy', function() {
+                $location.search({});
+            });
+
             _init();
         });
 })();

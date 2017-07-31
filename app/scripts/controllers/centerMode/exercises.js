@@ -114,6 +114,8 @@
             };
 
             $scope.getExercisesPaginated = function(pageno) {
+                console.log('este¿??¿¿¿¿');
+
                 getTeacherExercisesPaginated(pageno);
             };
 

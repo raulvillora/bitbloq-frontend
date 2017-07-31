@@ -16,7 +16,7 @@
 
     <p class="breadcrumb--subtext" ng-if="!tertiaryBreadcrumb">{{group.accessId}}</p>
     <a ng-if="tertiaryBreadcrumb" class="breadcrumb--secondary" ng-href="#/class/{{group._id}}">
-      {{student.firstName? student.firstName + student.lastName : student.username}}
+      {{student.firstName? student.firstName + ' ' + student.lastName : student.username}}
     </a>
   </div>
 </div>

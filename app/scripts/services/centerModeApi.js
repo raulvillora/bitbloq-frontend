@@ -18,6 +18,8 @@ angular
             getExercisesCount: getExercisesCount,
             getExercisesByGroup: getExercisesByGroup,
             getGroup: getGroup,
+            getStudentsGroup: getStudentsGroup,
+            getExercisesGroup: getExercisesGroup,
             getGroups: getGroups,
             getGroupsByExercise: getGroupsByExercise,
             getMyCenter: getMyCenter,
@@ -154,6 +156,21 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'group/' + groupId
+            });
+        }
+
+        function getStudentsGroup(groupId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'group/' + groupId + '/students'
+            });
+        }
+
+        function getExercisesGroup(groupId, params) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'group/' + groupId + '/exercises',
+                params: params
             });
         }
 
