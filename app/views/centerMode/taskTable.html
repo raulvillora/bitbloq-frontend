@@ -57,10 +57,12 @@
         {{'centerMode_student_registerInClass' | translate}}
     </button>
 </div>
-<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && groups.length > 0">
+<!--<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && groups.length > 0">
     <h1 class="center-mode--empty__title">{{'centerMode_class_exerciseEmpty' | translate}}</h1>
+</div>-->
+<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && groups.length > 0">
+    <h1 class="center-mode--empty__title">{{'centerMode_class_exerciseEmptyStudents' | translate}}</h1>
 </div>
-
 <div class="center-mode--empty" ng-if="tasks.length===0 && taskStatusSelected">
     <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty_search' | translate}}</h1>
 </div>
