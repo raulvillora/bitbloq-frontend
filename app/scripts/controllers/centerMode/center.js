@@ -181,6 +181,8 @@
                     modalOptions = parent.$new();
 
                 modalOptions.center = centerModeService.center;
+                modalOptions.maxTeachers = maxTeachers;
+
                 _.extend(modalOptions, {
                     title: 'newTeacher_modal_title',
                     confirmButton: 'newTeacher_modal_aceptButton',
@@ -192,7 +194,7 @@
                     newTeachersModel: []
                 });
 
-                if ($scope.teachers.length <= maxTeachers) {
+                if ($scope.teachers.length < maxTeachers) {
                     var newTeacherModal = ngDialog.open({
                         template: '/views/modals/modal.html',
                         className: 'modal--container modal--input',
