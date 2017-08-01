@@ -77,13 +77,13 @@
                             exerciseId = exercise._id;
                         }
                         exerciseApi.delete(exerciseId).then(function() {
-                            _.remove($scope.exercises, exercise);
                             alertsService.add({
                                 text: 'centerMode_alert_deleteExercise',
                                 id: 'deleteTask',
                                 type: 'ok',
                                 time: 5000
                             });
+                            getTeacherExercisesPaginated($routeParams.page);
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteExercise-error',
@@ -114,8 +114,6 @@
             };
 
             $scope.getExercisesPaginated = function(pageno) {
-                console.log('este¿??¿¿¿¿');
-
                 getTeacherExercisesPaginated(pageno);
             };
 

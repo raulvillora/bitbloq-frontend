@@ -1,4 +1,4 @@
-<div class="center-mode__table__header" ng-if="common.section!=='class'">
+<div class="center-mode__table__header" ng-if="common.section!=='class' && (exercises.length > 0 || (exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)))">
   <div class="classes-dropdown--group">
       <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
       <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
@@ -11,16 +11,6 @@
       </span>
   </div>
 </div>
-<!--<div class="dropdown-group table__added__exercise clearfix" ng-if="common.section!=='class'" ng-show="showFilters">
-    <span class="form--input searcher" ng-class="{'input--focused':focus === 'search'}">
-        <svg class="svg-icon--search">
-            <use xlink:href="#search"></use>
-        </svg>
-        <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="filter-searcher">
-    </span>
-    <common-dropdown class="projects--sort-dropdown" options="sortExerciseArray" options-click="sortInstancesByExercise" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate"></common-dropdown>
-    <common-dropdown class="projects--sort-dropdown" options="groupArray" options-click="sortInstancesByGroup" pre-heading="'centerMode_sortby_groups'" heading-option="orderOptions[0] | translate"></common-dropdown>
-</div>-->
 <div ng-class="{'loading--content':common.isLoading}"></div>
 <div class="center-mode__table" ng-if="exercises.length > 0">
     <div class="center-mode__table-title center-mode__table-title--exercises row">
@@ -103,6 +93,8 @@
     <div class="forum__paginator">
         <dir-pagination-controls on-page-change="getExercisesPaginated(newPageNumber)" max-size="7" template-url="views/forum/forumPagination.html"></dir-pagination-controls>
     </div>
+</div>
+<div class="center-mode--empty" ng-if="exercises.length===0 && !search.searchExercisesText && !statusSelected &&!classFilter">
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)">
     <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty_search' | translate}}</h1>
