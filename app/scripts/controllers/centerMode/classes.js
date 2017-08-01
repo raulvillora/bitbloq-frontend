@@ -350,7 +350,9 @@
             });
 
             $scope.$on('$destroy', function() {
-                $location.search({});
+                if ($location.path() !== '/login') {
+                    console.log($routeParams);
+                }
             });
 
             _init();
