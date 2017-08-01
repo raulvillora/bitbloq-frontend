@@ -85,11 +85,11 @@
                 var parent = $rootScope,
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
-                    title: 'closeGroup_modal_title',
+                    title: 'closeClass_modal_title',
                     confirmButton: 'archiveGroup_modal_acceptButton',
                     confirmAction: _closeGroupAction,
                     rejectButton: 'modal-button-cancel',
-                    textContent: 'closeGroup_modal_info',
+                    textContent: 'closeClass_modal_info',
                     contentTemplate: '/views/modals/information.html',
                     modalButtons: true
                 });
@@ -110,7 +110,7 @@
                 var confirmAction = function() {
                         centerModeApi.deleteGroup($scope.group._id).then(function() {
                             alertsService.add({
-                                text: 'centerMode_alert_deleteGroup',
+                                text: 'centerMode_alert_deleteClass', //La clase eliminada
                                 id: 'deleteGroup',
                                 type: 'ok',
                                 time: 5000
@@ -118,7 +118,7 @@
                             $location.path('classes');
                         }).catch(function() {
                             alertsService.add({
-                                text: 'centerMode_alert_deleteGroup-Error',
+                                text: 'centerMode_alert_deleteClass-Error', //Ha ocurrido un error borrando la clase
                                 id: 'deleteGroup',
                                 type: 'ko'
                             });
@@ -128,7 +128,7 @@
                     parent = $rootScope,
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
-                    title: 'deleteGroup_modal_title',
+                    title: 'deleteClass_modal_title',
                     confirmButton: 'button_delete',
                     confirmAction: confirmAction,
                     rejectButton: 'modal-button-cancel',
@@ -270,10 +270,9 @@
                     rejectButton: 'cancel',
                     confirmAction: confirmAction,
                     contentTemplate: '/views/modals/information.html',
-                    textContent: $scope.common.translate('deleteStudent_modal_information', {
+                    textContent: $scope.common.translate('deleteStudentClass_modal_information', {
                         value: studentName
                     }),
-                    secondaryContent: 'deleteStudent_modal_information-explain',
                     modalButtons: true
                 });
 

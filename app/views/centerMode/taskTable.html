@@ -4,10 +4,10 @@
             <div class="col-vsmall-6">
                 <span>{{'centerMode_column_name' | translate}}</span>
             </div>
-            <div class="col-vsmall-1">
+            <div class="col-vsmall-2">
                 <span>{{'centerMode_column_mark' | translate}}</span>
             </div>
-            <div class="col-vsmall-2">
+            <div class="col-vsmall-1">
                 <span>{{'centerMode_column_status' | translate}}</span>
             </div>
         </div>
@@ -18,12 +18,12 @@
                         {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name}}
                     </h2>
                 </div>
-                <div class="table__block__item col-vsmall-1">
+                <div class="table__block__item col-vsmall-2">
                     <span data-element="{{'centerMode-task-mark' + task._id}}">
                         {{task.mark || '-'}}
                     </span>
                 </div>
-                <div class="table__block__item col-vsmall-2">
+                <div class="table__block__item col-vsmall-1">
                     <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected'}" data-element="{{'centerMode-task-status' + task._id}}">
                         {{task.status==='corrected'? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending' | translate}}
                     </span>
@@ -60,6 +60,9 @@
 <!--<div class="center-mode--empty" ng-if="tasks.length===0 && !sortSelected && !taskStatusSelected && groups.length > 0">
     <h1 class="center-mode--empty__title">{{'centerMode_class_exerciseEmpty' | translate}}</h1>
 </div>-->
+<div class="center-mode--empty" ng-if="tasks.length===0 && common.section === 'class'">
+    <h1 class="center-mode--empty__title">{{'centerMode_tasks_student_empty' | translate}}</h1>
+</div>
 <div class="center-mode--empty" ng-if="tasks.length===0 && taskStatusSelected">
     <h1 class="center-mode--empty__title">{{'centerMode_tasks_empty_search' | translate}}</h1>
 </div>

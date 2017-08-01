@@ -4,7 +4,8 @@
             <svg class="svg-icon svg-icon--text">
                 <use xlink:href="#exercise"></use>
             </svg>
-            {{'centerMode_exercises' | translate}}
+            <span>{{'centerMode_exercises' | translate}}</span>
+            <span>({{tasksCount}})</span>
         </h1>
         <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
             <button class="btn btn--quaternary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
