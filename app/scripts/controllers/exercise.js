@@ -43,12 +43,10 @@ angular.module('bitbloqApp')
 
         exerciseService.saveStatus = 0;
 
-        exerciseService.initBloqsExercise();
         $scope.currentProjectLoaded = $q.defer();
         $scope.roleOptions = ['student', 'teacher'];
 
         $scope.changeRole = function(option) {
-            console.log('*** ', option);
             $scope.common.userRole = option;
             _canUpdate();
         };
@@ -193,24 +191,26 @@ angular.module('bitbloqApp')
 
         function _canUpdate() {
             var defered = $q.defer();
-            if ($scope.common.userRole==='student' && $scope.common.section === 'task' && $scope.currentProject.student._id === $scope.common.user._id) {
-                $scope.currentProject.userCanUpdate = true;
-                defered.resolve();
-            } else {
-                if ($scope.currentProject.teacher === $scope.common.user._id || $scope.currentProject.owner !== $scope.common.user._id) {
-                    if ($scope.common.section === 'exercise') {
-                        $scope.currentProject.userCanUpdate = true;
-                    } else {
-                        $scope.currentProject.canMark = true;
-                    }
+            $scope.common.itsUserLoaded().then(function(){
+                if ($scope.common.userRole==='student' && $scope.common.section === 'task' && $scope.currentProject.student._id === $scope.common.user._id) {
+                    $scope.currentProject.userCanUpdate = true;
                     defered.resolve();
                 } else {
-                    exerciseApi.userIsHeadmaster($scope.currentProject._id).then(function(response) {
-                        $scope.currentProject.canMark = response.data.headmaster;
+                    if ($scope.currentProject.teacher === $scope.common.user._id || $scope.currentProject.owner !== $scope.common.user._id) {
+                        if ($scope.common.section === 'exercise') {
+                            $scope.currentProject.userCanUpdate = true;
+                        } else {
+                            $scope.currentProject.canMark = true;
+                        }
                         defered.resolve();
-                    }).catch(defered.reject);
+                    } else {
+                        exerciseApi.userIsHeadmaster($scope.currentProject._id).then(function(response) {
+                            $scope.currentProject.canMark = response.data.headmaster;
+                            defered.resolve();
+                        }).catch(defered.reject);
+                    }
                 }
-            }
+            }).catch(defered.reject);
             return defered.promise;
         }
 
@@ -230,7 +230,7 @@ angular.module('bitbloqApp')
                 return false;
             }
 
-            if (exerciseService.exercise.hardware.components.length === 0) {
+            if (exerciseService.exercise.hardware && exerciseService.exercise.hardware.components.length === 0) {
                 if (exerciseService.exercise.useBitbloqConnect) {
                     return true;
                 } else {
@@ -332,23 +332,25 @@ angular.module('bitbloqApp')
         $scope.currentTab = 2;
 
         $scope.setTab = function(index) {
-            if ($scope.currentProject.userCanUpdate && !_.isEqual($scope.currentProject, exerciseService.getDefaultExercise())) {
-                exerciseService.startAutosave(true);
-            }
-            switch (index) {
-                case 0:
-                    hw2Bloqs.repaint();
-                    break;
-                case 1:
-                    if ($scope.toolbox.level !== 1) {
-                        $scope.toolbox.level = 1;
-                    }
-                    $scope.setCode($scope.getCode());
-                    $rootScope.$emit('currenttab:bloqstab');
-                    break;
-            }
+            exerciseService.getDefaultExercise().then(function(defaultExercise){
+                if ($scope.currentProject.userCanUpdate && !_.isEqual($scope.currentProject, defaultExercise)) {
+                    exerciseService.startAutosave(true);
+                }
+                switch (index) {
+                    case 0:
+                        hw2Bloqs.repaint();
+                        break;
+                    case 1:
+                        if ($scope.toolbox.level !== 1) {
+                            $scope.toolbox.level = 1;
+                        }
+                        $scope.setCode($scope.getCode());
+                        $rootScope.$emit('currenttab:bloqstab');
+                        break;
+                }
 
-            $scope.currentTab = index;
+                $scope.currentTab = index;
+            });
         };
 
         $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
@@ -407,23 +409,25 @@ angular.module('bitbloqApp')
         $scope.publishexercise = function(type) {
             type = type || '';
             exerciseService.checkPublish(type).then(function() {
-                var exerciseDefault = exerciseService.getDefaultExercise();
-                exerciseService.completedExercise();
-                delete exerciseDefault.software.freeBloqs;
-                if (_.isEqual(exerciseDefault.software, $scope.currentProject.software)) {
-                    alertsService.add({
-                        text: 'publishProject__alert__bloqsProjectEmpty' + type,
-                        id: 'publishing-project',
-                        type: 'warning'
-                    });
-                } else {
-                    $scope.publishExerciseError = false;
-                    if (type === 'Social') {
-                        commonModals.shareSocialModal($scope.currentProject);
+                exerciseService.getDefaultExercise().then(function(defaultExercise){
+                    exerciseService.completedExercise();
+                    delete defaultExercise.software.freeBloqs;
+                    if (_.isEqual(defaultExercise.software, $scope.currentProject.software)) {
+                        alertsService.add({
+                            text: 'publishProject__alert__bloqsProjectEmpty' + type,
+                            id: 'publishing-project',
+                            type: 'warning'
+                        });
                     } else {
-                        commonModals.publishModal($scope.currentProject);
+                        $scope.publishExerciseError = false;
+                        if (type === 'Social') {
+                            commonModals.shareSocialModal($scope.currentProject);
+                        } else {
+                            commonModals.publishModal($scope.currentProject);
+                        }
                     }
-                }
+                });
+
             }).catch(function() {
                 $scope.publishExerciseError = true;
                 $scope.setTab(2);
@@ -555,51 +559,56 @@ angular.module('bitbloqApp')
             return $scope.currentProjectLoaded.promise;
         };
 
-        $scope.common.itsUserLoaded().then(function() {
-            $scope.common.itsRoleLoaded().then(function() {
-                switch ($scope.common.userRole) {
-                    case 'headmaster':
-                    case 'teacher':
-                    case 'student':
-                        if ($routeParams.id) {
-                            loadExercise($routeParams.id).finally(function() {
-                                addExerciseWatchersAndListener();
-                            });
-                        } else {
-                            addExerciseWatchersAndListener();
-                            $scope.hwBasicsLoaded.promise.then(function() {
-                                $scope.$emit('drawHardware');
-                            });
-                            $scope.currentProjectLoaded.resolve();
+        function _init() {
+            exerciseService.initBloqsExercise().then(function(){
+                $scope.common.itsUserLoaded().then(function() {
+                    $scope.common.itsRoleLoaded().then(function() {
+                        switch ($scope.common.userRole) {
+                            case 'headmaster':
+                            case 'teacher':
+                            case 'student':
+                                if ($routeParams.id) {
+                                    loadExercise($routeParams.id).finally(function() {
+                                        addExerciseWatchersAndListener();
+                                    });
+                                } else {
+                                    $scope.hwBasicsLoaded.promise.then(function() {
+                                        $scope.$emit('drawHardware');
+                                    });
+                                    addExerciseWatchersAndListener();
+                                    $scope.currentProjectLoaded.resolve();
+                                }
+                                break;
+                            default:
+                                $location.path('/projects');
                         }
-                        break;
-                    default:
-                        $location.path('/projects');
-                }
+                    });
+                }, function() {
+                    $scope.common.setUser();
+                    alertsService.add({
+                        text: 'projects-need-tobe-logged',
+                        id: 'projects-need-tobe-logged',
+                        type: 'error'
+                    });
+                    $location.path('/login');
+                });
             });
-        }, function() {
-            $scope.common.setUser();
-            alertsService.add({
-                text: 'projects-need-tobe-logged',
-                id: 'projects-need-tobe-logged',
-                type: 'error'
-            });
-            $location.path('/login');
-        });
+        }
 
         function loadExercise(id) {
             return exerciseService.getExerciseOrTask(id).then(function(response) {
-                _uploadExercise(response.data);
-                _canUpdate().then(function() {
-                    _generateMark();
-                });
+                _uploadExercise(response.data).then(function(){
+                    _canUpdate().then(function() {
+                        _generateMark();
+                    });
 
-                if ($scope.common.section === 'exercise') {
-                    $scope.getGroups();
-                } else {
-                    $scope.isRobotActivatedInCenter();
-                }
-                $scope.currentProjectLoaded.resolve();
+                    if ($scope.common.section === 'exercise') {
+                        $scope.getGroups();
+                    } else {
+                        $scope.isRobotActivatedInCenter();
+                    }
+                    $scope.currentProjectLoaded.resolve();
+                });
             }, function(error) {
                 exerciseService.addWatchers();
                 $scope.currentProjectLoaded.reject();
@@ -630,17 +639,21 @@ angular.module('bitbloqApp')
         }
 
         function _uploadExercise(exercise) {
+            var defer =  $q.defer();
             if (exercise.software) {
                 exercise.software.freeBloqs = exercise.software.freeBloqs || [];
             }
 
-            exerciseService.setExercise(exercise);
-            $scope.saveBloqStep(_.clone(exercise.software));
-            exerciseService.saveOldExercise();
-            $scope.hwBasicsLoaded.promise.then(function() {
-                $scope.$emit('drawHardware');
-            });
-            $scope.$broadcast('refresh-bloqs');
+            exerciseService.setExercise(exercise).then(function(){
+                $scope.saveBloqStep(_.clone(exercise.software));
+                exerciseService.saveOldExercise();
+                $scope.hwBasicsLoaded.promise.then(function() {
+                    $scope.$emit('drawHardware');
+                });
+                $scope.$broadcast('refresh-bloqs');
+            }).finally(defer.resolve);
+
+            return defer.promise;
         }
 
         function confirmExit() {
@@ -1234,4 +1247,10 @@ angular.module('bitbloqApp')
             $window.removeEventListener('bloqs:change', onBloqsChangeHandler);
         });
 
+
+        /**********************
+        ****** INIT ***********
+        ***********************/
+
+        _init();
     });

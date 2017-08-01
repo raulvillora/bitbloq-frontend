@@ -191,7 +191,6 @@ angular.module('bitbloqApp')
 
                 function getTime(initDate) {
                     var dateString;
-                    console.log('get time');
                     if (initDate) {
                         var momentDate = moment(initDate),
                             minutes = momentDate.minute();
@@ -458,7 +457,30 @@ angular.module('bitbloqApp')
             return code;
         };
 
+        var defaultSelectedBloqs = {};
+
+        function getDefaultSelectedBloqs() {
+            var def = $q.defer();
+            if (_.isEmpty(defaultSelectedBloqs)) {
+                common.itsPropertyLoaded().then(function() {
+                    _.forEach(common.properties.bloqsSortTree, function(value, key) {
+                        var bloqsArray = [];
+                        _.forEach(value, function(item) {
+                            bloqsArray.push(item.name);
+                        });
+                        defaultSelectedBloqs[key] = bloqsArray;
+                    });
+                    def.resolve(defaultSelectedBloqs);
+                }).catch(def.reject);
+            } else {
+                def.resolve(defaultSelectedBloqs);
+            }
+            return def.promise;
+
+        }
+
         exports.getDefaultExercise = function() {
+            var def = $q.defer();
             var exercise = {
                 creator: '',
                 name: '',
@@ -498,10 +520,20 @@ angular.module('bitbloqApp')
                     robot: null,
                     components: [],
                     connections: []
-                }
+                },
+                canMark: false,
+                newMark: [],
+                userCanUpdate: true
             };
 
-            return exercise;
+            getDefaultSelectedBloqs().then(function(selectedBloqs) {
+                exercise.selectedBloqs = selectedBloqs;
+                def.resolve(exercise);
+            }).catch(function() {
+                def.reject(exercise);
+            });
+
+            return def.promise;
         };
 
         exports.getSavePromise = function() {
@@ -526,11 +558,15 @@ angular.module('bitbloqApp')
         };
 
         exports.initBloqsExercise = function(watchers) {
-            exports.exercise = _.extend(exports.exercise, exports.getDefaultExercise());
-            exports.setComponentsArray();
-            if (watchers) {
-                exports.addWatchers();
-            }
+            var def = $q.defer();
+            exports.getDefaultExercise().then(function(defaultExercise) {
+                exports.exercise = _.extend(exports.exercise, defaultExercise);
+                exports.setComponentsArray();
+                if (watchers) {
+                    exports.addWatchers();
+                }
+            }).finally(def.resolve);
+            return def.promise;
         };
 
         exports.exerciseHasChanged = function() {
@@ -578,6 +614,7 @@ angular.module('bitbloqApp')
         }
 
         exports.setExercise = function(newExercise) {
+            var defered = $q.defer();
             for (var i = 0; i < newExercise.hardware.components.length; i++) {
                 if (newExercise.hardware.components[i].category === 'sensors') {
                     newExercise.hardware.components[i].dataReturnType = sensorsTypes[newExercise.hardware.components[i].uuid];
@@ -586,11 +623,21 @@ angular.module('bitbloqApp')
             //end temp fix
 
             if (_.isEmpty(exports.exercise)) {
-                exports.exercise = exports.getDefaultExercise();
+                exports.getDefaultExercise().then(function(defaultExercise) {
+                    exports.exercise = defaultExercise;
+                    _.extend(exports.exercise, newExercise);
+                    exports.setComponentsArray();
+                    exports.addWatchers();
+                    defered.resolve();
+                }).catch(defered.reject);
+            } else {
+                _.extend(exports.exercise, newExercise);
+                exports.setComponentsArray();
+                exports.addWatchers();
+                defered.resolve();
             }
-            _.extend(exports.exercise, newExercise);
-            exports.setComponentsArray();
-            exports.addWatchers();
+
+            return defered.promise;
         };
 
         exports.startAutosave = function(hard) {

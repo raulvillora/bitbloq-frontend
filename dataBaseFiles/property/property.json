@@ -81,8 +81,6 @@
         }, {
             "name": "servoDetach"
         }, {
-            "name": "turnOnOffAdvanced"
-        }, {
             "name": "lcdWritePositionAdvanced-v1"
         }, {
             "name": "viewer"

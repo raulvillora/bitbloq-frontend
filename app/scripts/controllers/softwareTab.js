@@ -806,7 +806,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'zowi';
+                    return $scope.currentProject.hardware && $scope.currentProject.hardware.robot === 'zowi';
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-zowi',
@@ -823,7 +823,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'evolution';
+                    return $scope.currentProject.hardware && $scope.currentProject.hardware.robot === 'evolution';
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-evolution',
@@ -840,7 +840,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'mbot' || $scope.currentProject.hardware.showRobotImage === 'mbot';
+                    return $scope.currentProject.hardware && ($scope.currentProject.hardware.robot === 'mbot' || $scope.currentProject.hardware.showRobotImage === 'mbot');
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-mbot',
@@ -861,7 +861,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'rangerlandraider' || $scope.currentProject.hardware.showRobotImage === 'rangerlandraider';
+                    return $scope.currentProject.hardware && ($scope.currentProject.hardware.robot === 'rangerlandraider' || $scope.currentProject.hardware.showRobotImage === 'rangerlandraider');
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-rangerlandraider',
@@ -882,7 +882,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'rangerraptor' || $scope.currentProject.hardware.showRobotImage === 'rangerraptor';
+                    return $scope.currentProject.hardware && ($scope.currentProject.hardware.robot === 'rangerraptor' || $scope.currentProject.hardware.showRobotImage === 'rangerraptor');
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-rangerraptor',
@@ -903,7 +903,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'rangernervousbird' || $scope.currentProject.hardware.showRobotImage === 'rangernervousbird';
+                    return $scope.currentProject.hardware && ($scope.currentProject.hardware.robot === 'rangernervousbird' || $scope.currentProject.hardware.showRobotImage === 'rangernervousbird');
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-rangernervousbird',
@@ -924,7 +924,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'startertank' || $scope.currentProject.hardware.showRobotImage === 'startertank';
+                    return $scope.currentProject.hardware && ($scope.currentProject.hardware.robot === 'startertank' || $scope.currentProject.hardware.showRobotImage === 'startertank');
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-startertank',
@@ -945,7 +945,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.robot === 'starterthreewheels' || $scope.currentProject.hardware.showRobotImage === 'starterthreewheels';
+                    return $scope.currentProject.hardware && ($scope.currentProject.hardware.robot === 'starterthreewheels' || $scope.currentProject.hardware.showRobotImage === 'starterthreewheels');
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-starterthreewheels',
@@ -966,7 +966,7 @@ angular.module('bitbloqApp')
                 counter: 0,
                 model: null,
                 showCondition: function() {
-                    return $scope.currentProject.hardware.board === 'freakscar';
+                    return $scope.currentProject.hardware && $scope.currentProject.hardware.board === 'freakscar';
                 },
                 icon: '#robot',
                 literal: 'make-swtoolbox-freakscar',
@@ -1190,7 +1190,9 @@ angular.module('bitbloqApp')
             $scope.itsCurrentProjectLoaded().then(function() {
                 _.keys($scope.currentProject.selectedBloqs).forEach(function(type) {
                     if (type.indexOf('advanced') === -1) {
-                        $scope.generalToolboxOptions[type].counter = $scope.statusGeneralCheck(type, null, 'force');
+                        if($scope.generalToolboxOptions[type]) {
+                            $scope.generalToolboxOptions[type].counter = $scope.statusGeneralCheck(type, null, 'force');
+                        }
                     }
                 });
                 utils.apply($scope);
