@@ -20,6 +20,10 @@ angular.module('bitbloqApp')
             link: function(scope, element, attrs, ngModel) {
 
                 if (attrs.childrenCheckbox) {
+                    if (scope.childrenCheckbox.length > 0 && scope.childrenCheckbox.indexOf(attrs.id.split('Check')[0]) > -1) {
+                        ngModel.$setViewValue(true);
+                        element.prop('checked', true);
+                    }
                     scope.$watch('childrenCheckbox.length', function(newValue, oldValue) {
                         if (newValue !== oldValue) {
                             if (newValue && scope.childrenCheckbox.indexOf(attrs.id.split('Check')[0]) > -1) {
