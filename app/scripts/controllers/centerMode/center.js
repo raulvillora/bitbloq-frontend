@@ -15,10 +15,10 @@
             $scope.centerModeService = centerModeService;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                    'uuid': 'mBot',
-                    'image': 'mbot',
-                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-                },
+                'uuid': 'mBot',
+                'image': 'mbot',
+                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+            },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -118,15 +118,15 @@
             $scope.newTeacher = function() {
                 var maxTeachers = centerModeService.center.maxTeachers ? centerModeService.center.maxTeachers : $scope.envData.config.maxTeachers;
                 var confirmAction = function() {
-                        $scope.sendingInvitation = true;
-                        alertsService.add({
-                            text: 'centerMode_sending-invitation',
-                            id: 'addTeacher',
-                            type: 'loading'
-                        });
-                        var teachers = _.map(modalOptions.newTeachersModel, 'text');
-                        var excedeedLimit = false;
+                        var teachers = _.map(modalOptions.newTeachersModel, 'text'),
+                            excedeedLimit = false;
                         if (teachers.length > 0) {
+                            $scope.sendingInvitation = true;
+                            alertsService.add({
+                                text: 'centerMode_sending-invitation',
+                                id: 'addTeacher',
+                                type: 'loading'
+                            });
                             if (($scope.teachers.length + teachers.length) > maxTeachers) {
                                 teachers = teachers.slice(0, maxTeachers - $scope.teachers.length);
                                 excedeedLimit = true;
