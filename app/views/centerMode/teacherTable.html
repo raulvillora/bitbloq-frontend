@@ -24,7 +24,7 @@
                 </h2>
                 <span class="block__item__explanation">{{item.email}}</span>
             </div>
-            <div class="table__block__item table__block__item--information col-vsmall-4" ng-if="item.notConfirmed">
+            <div class="table__block__item table__block__item--information col-vsmall-4" ng-if="item.notConfirmed" data-element="centerMode-teacher-notconfirmed">
                 <span>
                     {{'centerMode_notConfirmedTeacher' | translate }}
                     <button class="link--default" ng-click="resendInvitation(item)" ng-disabled="resendingInvitation">{{'centerMode_resendInvitation' | translate }}</button>
