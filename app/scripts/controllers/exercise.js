@@ -191,8 +191,8 @@ angular.module('bitbloqApp')
 
         function _canUpdate() {
             var defered = $q.defer();
-            $scope.common.itsUserLoaded().then(function(){
-                if ($scope.common.userRole==='student' && $scope.common.section === 'task' && $scope.currentProject.student._id === $scope.common.user._id) {
+            $scope.common.itsUserLoaded().then(function() {
+                if ($scope.common.userRole === 'student' && $scope.common.section === 'task' && $scope.currentProject.student && $scope.currentProject.student._id === $scope.common.user._id) {
                     $scope.currentProject.userCanUpdate = true;
                     defered.resolve();
                 } else {
@@ -332,7 +332,7 @@ angular.module('bitbloqApp')
         $scope.currentTab = 2;
 
         $scope.setTab = function(index) {
-            exerciseService.getDefaultExercise().then(function(defaultExercise){
+            exerciseService.getDefaultExercise().then(function(defaultExercise) {
                 if ($scope.currentProject.userCanUpdate && !_.isEqual($scope.currentProject, defaultExercise)) {
                     exerciseService.startAutosave(true);
                 }
@@ -409,7 +409,7 @@ angular.module('bitbloqApp')
         $scope.publishexercise = function(type) {
             type = type || '';
             exerciseService.checkPublish(type).then(function() {
-                exerciseService.getDefaultExercise().then(function(defaultExercise){
+                exerciseService.getDefaultExercise().then(function(defaultExercise) {
                     exerciseService.completedExercise();
                     delete defaultExercise.software.freeBloqs;
                     if (_.isEqual(defaultExercise.software, $scope.currentProject.software)) {
@@ -560,7 +560,7 @@ angular.module('bitbloqApp')
         };
 
         function _init() {
-            exerciseService.initBloqsExercise().then(function(){
+            exerciseService.initBloqsExercise().then(function() {
                 $scope.common.itsUserLoaded().then(function() {
                     $scope.common.itsRoleLoaded().then(function() {
                         switch ($scope.common.userRole) {
@@ -597,7 +597,7 @@ angular.module('bitbloqApp')
 
         function loadExercise(id) {
             return exerciseService.getExerciseOrTask(id).then(function(response) {
-                _uploadExercise(response.data).then(function(){
+                _uploadExercise(response.data).then(function() {
                     _canUpdate().then(function() {
                         _generateMark();
                     });
@@ -639,12 +639,12 @@ angular.module('bitbloqApp')
         }
 
         function _uploadExercise(exercise) {
-            var defer =  $q.defer();
+            var defer = $q.defer();
             if (exercise.software) {
                 exercise.software.freeBloqs = exercise.software.freeBloqs || [];
             }
 
-            exerciseService.setExercise(exercise).then(function(){
+            exerciseService.setExercise(exercise).then(function() {
                 $scope.saveBloqStep(_.clone(exercise.software));
                 exerciseService.saveOldExercise();
                 $scope.hwBasicsLoaded.promise.then(function() {
@@ -1249,8 +1249,8 @@ angular.module('bitbloqApp')
 
 
         /**********************
-        ****** INIT ***********
-        ***********************/
+         ****** INIT ***********
+         ***********************/
 
         _init();
     });

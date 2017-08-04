@@ -785,7 +785,7 @@ angular.module('bitbloqApp')
                                     }
                                 });
                         }
-                        if (common.userRole === 'student' && exports.exercise.student === common.user._id) {
+                        if (common.userRole === 'student' && exports.exercise.student._id === common.user._id) {
                             if (exports.exercise.status === 'delivered') {
                                 exports.saveStatus = 6;
                                 defered.reject();
