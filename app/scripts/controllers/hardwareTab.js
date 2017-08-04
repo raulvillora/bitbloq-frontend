@@ -613,9 +613,8 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
         if (componentReference) {
             if (e.protoBoLaAction === 'attach') {
                 pinKey = Object.keys(e.componentData.pin)[0];
-                if (componentReference.pin.hasOwnProperty(pinKey)) {
-                    componentReference.pin[pinKey] = e.componentData.pin[pinKey];
-                }
+
+                componentReference.pin[pinKey] = e.componentData.pin[pinKey];
 
                 $rootScope.$emit('component-connected');
 
