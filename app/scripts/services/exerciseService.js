@@ -327,6 +327,10 @@ angular.module('bitbloqApp')
          * 2 = Save correct
          * 3 = Saved Error
          * 4 = Dont Allowed to do Save
+         * 5 = Mark is saved
+         * 6 = Saved Error because exercise is sent
+         * 7 = Saved Error because exercise is in out time
+         *
          * @type {Number}
          */
         exports.saveStatus = 0;
@@ -761,7 +765,10 @@ angular.module('bitbloqApp')
                     defered.resolve();
                 }
             } else {
-                if (exports.exerciseHasChanged() || exports.tempImage.file) {
+                if (exports.exercise.status === 'corrected') {
+                    exports.saveStatus = 6;
+                    defered.resolve();
+                } else if (exports.exerciseHasChanged() || exports.tempImage.file) {
                     $log.debug('Auto saving exercise...');
 
                     if (exports.tempImage.file && !exports.tempImage.generate) {
