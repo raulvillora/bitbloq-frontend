@@ -87,7 +87,7 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.assignGroup = function(project, teacherId, oldGroups, centerId, onlyEdit) {
+        exports.assignGroup = function(exercise, teacherId, oldGroups, centerId, onlyEdit) {
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
@@ -98,6 +98,17 @@ angular.module('bitbloqApp')
                 });
 
                 function confirmAction(groups) {
+                    if (!exercise._id) {
+                        _saveExercise().then(function() {
+                            assign(groups, exports.exercise);
+                        });
+                    } else {
+                        assign(groups, exercise);
+                    }
+
+                }
+
+                function assign(groups, project) {
                     var selectedGroups = _.filter(groups, {
                             'selected': true
                         }),
@@ -110,22 +121,30 @@ angular.module('bitbloqApp')
                         };
 
                     selectedGroups.forEach(function(group) {
-                        if (group.withoutDate || !group.calendar.from.time || !group.calendar.to.time) {
+                        if (group.withoutDate || (!group.calendar.from.time && !group.calendar.to.time)) {
                             groupsToAssign.push({
                                 group: group._id,
                                 exercise: project._id
                             });
                         } else {
-                            group.calendar.from.date = moment(group.calendar.from.date);
-                            group.calendar.to.date = moment(group.calendar.to.date);
-                            var hourFrom = group.calendar.from.time.split(':')[0],
-                                minutesFrom = group.calendar.from.time.split(':')[1],
-                                hourTo = group.calendar.to.time.split(':')[0],
-                                minutesTo = group.calendar.to.time.split(':')[1];
-                            group.calendar.from.date.hour(hourFrom);
-                            group.calendar.from.date.minute(minutesFrom);
-                            group.calendar.to.date.hour(hourTo);
-                            group.calendar.to.date.minute(minutesTo);
+                            if (group.calendar.from.time) {
+                                group.calendar.from.date = moment(group.calendar.from.date);
+                                var hourFrom = group.calendar.from.time.split(':')[0],
+                                    minutesFrom = group.calendar.from.time.split(':')[1];
+                                group.calendar.from.date.hour(hourFrom);
+                                group.calendar.from.date.minute(minutesFrom);
+                            } else {
+                                group.calendar.from.date = moment();
+                            }
+
+                            if (group.calendar.to.time) {
+                                group.calendar.to.date = moment(group.calendar.to.date);
+                                var hourTo = group.calendar.to.time.split(':')[0],
+                                    minutesTo = group.calendar.to.time.split(':')[1];
+
+                                group.calendar.to.date.hour(hourTo);
+                                group.calendar.to.date.minute(minutesTo);
+                            }
 
                             groupsToAssign.push({
                                 group: group._id,
@@ -135,7 +154,6 @@ angular.module('bitbloqApp')
                             });
                         }
                     });
-
                     exerciseApi.assignGroups(groupsToAssign, removedGroups).then(function(response) {
                         defered.resolve(response.data);
                         assignModal.close();
@@ -173,7 +191,6 @@ angular.module('bitbloqApp')
 
                 function getTime(initDate) {
                     var dateString;
-                    console.log('get time');
                     if (initDate) {
                         var momentDate = moment(initDate),
                             minutes = momentDate.minute();
@@ -240,7 +257,7 @@ angular.module('bitbloqApp')
                     title: 'centerMode_assignToClasses',
                     contentTemplate: 'views/modals/centerMode/editGroups.html',
                     mainText: 'centerMode_editGroups_info',
-                    exerciseName: project.name,
+                    exerciseName: exercise.name,
                     groups: groups,
                     confirmButton: 'save',
                     today: new Date(),
@@ -310,6 +327,10 @@ angular.module('bitbloqApp')
          * 2 = Save correct
          * 3 = Saved Error
          * 4 = Dont Allowed to do Save
+         * 5 = Mark is saved
+         * 6 = Saved Error because exercise is sent
+         * 7 = Saved Error because exercise is in out time
+         *
          * @type {Number}
          */
         exports.saveStatus = 0;
@@ -440,7 +461,30 @@ angular.module('bitbloqApp')
             return code;
         };
 
+        var defaultSelectedBloqs = {};
+
+        function getDefaultSelectedBloqs() {
+            var def = $q.defer();
+            if (_.isEmpty(defaultSelectedBloqs)) {
+                common.itsPropertyLoaded().then(function() {
+                    _.forEach(common.properties.bloqsSortTree, function(value, key) {
+                        var bloqsArray = [];
+                        _.forEach(value, function(item) {
+                            bloqsArray.push(item.name);
+                        });
+                        defaultSelectedBloqs[key] = bloqsArray;
+                    });
+                    def.resolve(defaultSelectedBloqs);
+                }).catch(def.reject);
+            } else {
+                def.resolve(defaultSelectedBloqs);
+            }
+            return def.promise;
+
+        }
+
         exports.getDefaultExercise = function() {
+            var def = $q.defer();
             var exercise = {
                 creator: '',
                 name: '',
@@ -480,10 +524,20 @@ angular.module('bitbloqApp')
                     robot: null,
                     components: [],
                     connections: []
-                }
+                },
+                canMark: false,
+                newMark: [],
+                userCanUpdate: true
             };
 
-            return exercise;
+            getDefaultSelectedBloqs().then(function(selectedBloqs) {
+                exercise.selectedBloqs = selectedBloqs;
+                def.resolve(exercise);
+            }).catch(function() {
+                def.reject(exercise);
+            });
+
+            return def.promise;
         };
 
         exports.getSavePromise = function() {
@@ -508,11 +562,15 @@ angular.module('bitbloqApp')
         };
 
         exports.initBloqsExercise = function(watchers) {
-            exports.exercise = _.extend(exports.exercise, exports.getDefaultExercise());
-            exports.setComponentsArray();
-            if (watchers) {
-                exports.addWatchers();
-            }
+            var def = $q.defer();
+            exports.getDefaultExercise().then(function(defaultExercise) {
+                exports.exercise = _.extend(exports.exercise, defaultExercise);
+                exports.setComponentsArray();
+                if (watchers) {
+                    exports.addWatchers();
+                }
+            }).finally(def.resolve);
+            return def.promise;
         };
 
         exports.exerciseHasChanged = function() {
@@ -560,6 +618,7 @@ angular.module('bitbloqApp')
         }
 
         exports.setExercise = function(newExercise) {
+            var defered = $q.defer();
             for (var i = 0; i < newExercise.hardware.components.length; i++) {
                 if (newExercise.hardware.components[i].category === 'sensors') {
                     newExercise.hardware.components[i].dataReturnType = sensorsTypes[newExercise.hardware.components[i].uuid];
@@ -568,11 +627,21 @@ angular.module('bitbloqApp')
             //end temp fix
 
             if (_.isEmpty(exports.exercise)) {
-                exports.exercise = exports.getDefaultExercise();
+                exports.getDefaultExercise().then(function(defaultExercise) {
+                    exports.exercise = defaultExercise;
+                    _.extend(exports.exercise, newExercise);
+                    exports.setComponentsArray();
+                    exports.addWatchers();
+                    defered.resolve();
+                }).catch(defered.reject);
+            } else {
+                _.extend(exports.exercise, newExercise);
+                exports.setComponentsArray();
+                exports.addWatchers();
+                defered.resolve();
             }
-            _.extend(exports.exercise, newExercise);
-            exports.setComponentsArray();
-            exports.addWatchers();
+
+            return defered.promise;
         };
 
         exports.startAutosave = function(hard) {
@@ -593,6 +662,11 @@ angular.module('bitbloqApp')
             }
         };
 
+        exports.sendMark = function() {
+            exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
+                exports.exercise.status = 'corrected';
+            });
+        };
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
         //----------------- api communication ---------------------------------
@@ -687,11 +761,14 @@ angular.module('bitbloqApp')
                         });
                     }
                 } else {
-                    exports.saveStatus = 0;
+                    exports.saveStatus = exports.saveStatus === 1 ? 2 : exports.saveStatus;
                     defered.resolve();
                 }
             } else {
-                if (exports.exerciseHasChanged() || exports.tempImage.file) {
+                if (exports.exercise.status === 'corrected') {
+                    exports.saveStatus = 6;
+                    defered.resolve();
+                } else if (exports.exerciseHasChanged() || exports.tempImage.file) {
                     $log.debug('Auto saving exercise...');
 
                     if (exports.tempImage.file && !exports.tempImage.generate) {
@@ -700,7 +777,8 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
+                        {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
@@ -714,7 +792,7 @@ angular.module('bitbloqApp')
                                     }
                                 });
                         }
-                        if (common.userRole === 'student' && exports.exercise.student === common.user._id) {
+                        if (common.userRole === 'student' && exports.exercise.student._id === common.user._id) {
                             if (exports.exercise.status === 'delivered') {
                                 exports.saveStatus = 6;
                                 defered.reject();
@@ -774,14 +852,14 @@ angular.module('bitbloqApp')
                                 defered.reject();
                             });
                         } else {
-                            exports.saveStatus = 0;
+                            exports.saveStatus = exports.saveStatus === 1 ? 2 : exports.saveStatus;
                             $log.debug('why we start to save if the user its not logged??, check startAutoSave');
                             defered.reject();
                         }
                     }
                 } else {
                     $log.debug('we cant save Exercise if there is no changes');
-                    exports.saveStatus = 0;
+                    exports.saveStatus = exports.saveStatus === 1 ? 2 : exports.saveStatus;
                     defered.resolve();
                 }
             }
@@ -843,12 +921,12 @@ angular.module('bitbloqApp')
             }
 
             _.extend(modalOptions, {
-                title: 'unassignGroup_modal_title',
+                title: 'unassignClass_modal_title',
                 confirmButton: 'unassignGroup_modal_acceptButton',
                 confirmAction: unCheckGroup,
                 rejectButton: 'modal-button-cancel',
                 rejectAction: checkGroup,
-                textContent: common.translate('unassignGroup_modal_info', {
+                textContent: common.translate('unassignClass_modal_info', {
                     value: group.name
                 }),
                 contentTemplate: '/views/modals/information.html',

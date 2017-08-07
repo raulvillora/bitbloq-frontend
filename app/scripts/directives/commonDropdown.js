@@ -55,17 +55,6 @@ angular.module('bitbloqApp')
                     scope.collapsed = true;
                     scope.optionsClick(scope.options[indexItem]);
                 };
-
-                /*if (attrs.autoCollapse) {
-                 element.parent().on('click', function(event) {
-                 if (el.find(event.target).length === 0) {
-                 scope.collapsed = true;
-                 }
-                 if (!scope.$$phase) {
-                 scope.$digest();
-                 }
-                 });
-                 }*/
             }
         };
     }]);

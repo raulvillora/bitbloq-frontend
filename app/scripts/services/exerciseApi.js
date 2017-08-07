@@ -28,6 +28,7 @@ angular.module('bitbloqApp')
             markTask: markTask,
             taskToProject: taskToProject,
             save: save,
+            sendMarkTask: sendMarkTask,
             sendTask: sendTask,
             update: update,
             updateTask: updateTask,
@@ -86,12 +87,13 @@ angular.module('bitbloqApp')
             });
         }
 
-        function getTasks(groupId, studentId) {
+        function getTasks(groupId, studentId, params) {
             if (groupId) {
                 if (studentId) {
                     return $http({
                         method: 'GET',
-                        url: envData.config.centerModeUrl + 'task/group/' + groupId + '/student/' + studentId
+                        url: envData.config.centerModeUrl + 'task/group/' + groupId + '/student/' + studentId,
+                        params: params
                     });
                 } else {
                     return $http({
@@ -163,6 +165,13 @@ angular.module('bitbloqApp')
                     mark: _.join(task.newMark, '.'),
                     remark: task.newRemark
                 }
+            });
+        }
+
+        function sendMarkTask(taskId) {
+            return $http({
+                method: 'PUT',
+                url: envData.config.centerModeUrl + 'task/' + taskId + '/send-mark'
             });
         }
 

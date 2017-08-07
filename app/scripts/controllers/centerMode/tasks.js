@@ -41,21 +41,7 @@
             };
 
             $scope.getTasksPaginated = function(pageno) {
-                exerciseApi.getTasksByExercise($scope.exercise._id, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage
-                }).then(function(response) {
-                    response.data.forEach(function(task) {
-                        var taskId = task._id;
-                        _.extend(task, task.student);
-                        if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
-                            task.status = 'notDelivered';
-                        }
-                        task._id = taskId;
-                    });
-                    $scope.tasks = response.data;
-                    $location.search('page', pageno);
-                });
+                _getTasksWithParams(pageno);
             };
 
             $scope.registerInGroup = function() {
@@ -73,19 +59,19 @@
 
                 var modalOptions = $rootScope.$new(),
                     modal = _.extend(modalOptions, {
-                        title: 'centerMode_modal_registerInGroupTitle',
+                        title: 'centerMode_student_registerInClass',
                         contentTemplate: 'views/modals/input.html',
-                        mainText: 'centerMode_modal_registerInGroupInfo',
+                        mainText: 'centerMode_modal_registerInClassInfo',
                         modalInput: true,
                         secondaryText: false,
                         input: {
                             id: 'groupId',
                             name: 'groupId',
-                            placeholder: 'centerMode_modal_groupIdPlaceholder',
+                            placeholder: 'centerMode_modal_classIdPlaceholder',
                             errorText: 'centerMode_modal_registerInGroup-error',
                             showError: false
                         },
-                        confirmButton: 'centerMode_button_registerInGroup',
+                        confirmButton: 'centerMode_student_registerInClass',
                         condition: function() {
                             return this.input.value;
                         },
@@ -106,7 +92,7 @@
                 if (group) {
                     groupSelected = group._id;
                 }
-                _getMyTasks();
+                _getTasksWithParams();
             };
 
             function _init() {
@@ -126,19 +112,9 @@
                 });
             }
 
-            function _getMyTasksCount() {
-                if (groupSelected) {
-                    exerciseApi.getMyTasksByGroupCount(groupSelected).then(function(response) {
-                        $scope.tasksCount = response.data.count;
-                    });
-                } else {
-                    $scope.tasksCount = 0;
-                }
-            }
-
             function _getMyTasks() {
-                _getMyTasksCount();
-                if ($routeParams.page) {
+                if ($routeParams.page && $routeParams.group) {
+                    groupSelected = $routeParams.group;
                     _getTasksWithParams($routeParams.page);
                     $scope.pagination.tasks.current = $routeParams.page;
                 } else {
@@ -166,13 +142,17 @@
                         'page': pageno,
                         'pageSize': $scope.itemsPerPage
                     }).then(function(response) {
-                        response.data.forEach(function(task) {
+                        response.data.tasks.forEach(function(task) {
                             if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
                                 task.status = 'notDelivered';
                             }
                         });
-                        $scope.tasks = response.data;
-                        $location.search('page', pageno);
+                        $scope.tasksCount = response.data.count;
+                        $scope.tasks = response.data.tasks;
+                        $location.search({
+                            'group': groupSelected,
+                            'page': pageno
+                        });
                     });
                 } else {
                     $scope.tasks = [];

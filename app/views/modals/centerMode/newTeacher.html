@@ -1,5 +1,5 @@
 <form ng-submit="confirmAction()">
     <p class="modal__parraph">{{ 'newTeacher_modal_information' | translate }}</p>
-    <span class="modal__limit" translate="newTeacher_modal_numberlimit"  translate-values="{ value:'{{center.maxTeachers? center.maxTeachers : '5'}}' }"></span> <a href="mailto:soporte.bitbloq@bq.com" target="_blank">{{ 'support_email' | translate }}.</a>
+    <span class="modal__limit" translate="newTeacher_modal_numberlimit"  translate-values="{ value:maxTeachers }"></span> <a href="mailto:soporte.bitbloq@bq.com" target="_blank">{{ 'support_email' | translate }}.</a>
     <tags-input class="modal__input" allowed-tags-pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b" ng-model="newTeachersModel" data-element="modals-new-teacher-input" placeholder="{{'centerMode_modal_instertEmails-placeholder' | translate}}"></tags-input>
 </form>

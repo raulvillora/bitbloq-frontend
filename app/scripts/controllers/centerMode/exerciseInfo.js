@@ -26,8 +26,8 @@
             $scope.exerciseService = exerciseService;
             $scope.centerModeService = centerModeService;
 
-            var groupSelected;
-
+            $scope.groupSelected;
+            $scope.moment = moment;
 
             $scope.assignToGroup = function(exercise) {
                 centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
@@ -56,7 +56,7 @@
                 angular.extend(queryParams, pageParams);
                 $log.debug('getPublicProjects', queryParams);
 
-                groupId = groupSelected ? groupSelected._id : null;
+                groupId = $scope.groupSelected ? $scope.groupSelected._id : null;
                 if (groupId) {
                     exerciseApi.getTasksByExerciseAndGroup($scope.exercise._id, groupId, queryParams).then(function(response) {
                         response.data.forEach(function(task) {
@@ -85,7 +85,7 @@
             };
 
             $scope.getTasksByGroup = function(group) {
-                groupSelected = group;
+                $scope.groupSelected = group;
                 $scope.getTasksPaginated($scope.pageno);
             };
 
@@ -98,7 +98,6 @@
                 $scope.taskStatusSelected = option;
                 $scope.getTasksPaginated($scope.pageno);
             };
-
 
             /**************************
              ***  PRIVATE FUNCTIONS ***
@@ -140,13 +139,12 @@
                 });
             }
 
-
             function _getGroups(exerciseId) {
                 var defered = $q.defer();
                 centerModeApi.getGroupsByExercise(exerciseId).then(function(response) {
                     $scope.groups = response.data;
                     $scope.groupArray = $scope.groups;
-                    groupSelected = $scope.groups[0];
+                    $scope.groupSelected = $scope.groups[0];
                     defered.resolve();
                 });
 
@@ -163,7 +161,7 @@
             }
 
             function _getTasksByExerciseCount(exerciseId, params) {
-                var groupId = groupSelected ? groupSelected._id : null;
+                var groupId = $scope.groupSelected ? $scope.groupSelected._id : null;
                 if (groupId) {
                     exerciseApi.getTasksByExerciseAndGroupCount(exerciseId, groupId, params).then(function(response) {
                         $scope.tasksCount = response.data.count;
@@ -177,7 +175,6 @@
                     utils.apply($scope);
                 }
             }
-
 
             function getRequest() {
                 var queryParams = {},
@@ -247,7 +244,6 @@
 
                 return queryParams;
             }
-
 
             /************************
              **  INIT && WATCHERS ***

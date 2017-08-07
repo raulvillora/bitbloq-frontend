@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ClassCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $timeout, $translate) {
+        .controller('ClassCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService) {
 
             $scope.moment = moment;
             $scope.exercises = [];
@@ -85,11 +85,11 @@
                 var parent = $rootScope,
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
-                    title: 'closeGroup_modal_title',
+                    title: 'closeClass_modal_title',
                     confirmButton: 'archiveGroup_modal_acceptButton',
                     confirmAction: _closeGroupAction,
                     rejectButton: 'modal-button-cancel',
-                    textContent: 'closeGroup_modal_info',
+                    textContent: 'closeClass_modal_info',
                     contentTemplate: '/views/modals/information.html',
                     modalButtons: true
                 });
@@ -110,15 +110,15 @@
                 var confirmAction = function() {
                         centerModeApi.deleteGroup($scope.group._id).then(function() {
                             alertsService.add({
-                                text: 'centerMode_alert_deleteGroup',
+                                text: 'centerMode_alert_deleteClass', //La clase eliminada
                                 id: 'deleteGroup',
                                 type: 'ok',
                                 time: 5000
                             });
-                            $location.path('center-mode/teacher');
+                            $location.path('classes');
                         }).catch(function() {
                             alertsService.add({
-                                text: 'centerMode_alert_deleteGroup-Error',
+                                text: 'centerMode_alert_deleteClass-Error', //Ha ocurrido un error borrando la clase
                                 id: 'deleteGroup',
                                 type: 'ko'
                             });
@@ -128,7 +128,7 @@
                     parent = $rootScope,
                     modalOptions = parent.$new();
                 _.extend(modalOptions, {
-                    title: 'deleteGroup_modal_title',
+                    title: 'deleteClass_modal_title',
                     confirmButton: 'button_delete',
                     confirmAction: confirmAction,
                     rejectButton: 'modal-button-cancel',
@@ -250,7 +250,7 @@
                                 type: 'ok',
                                 time: 5000
                             });
-                            $location.path('center-mode/group/' + $scope.group._id);
+                            $location.path('class/' + $scope.group._id);
                         }).catch(function() {
                             alertsService.add({
                                 text: 'centerMode_alert_deleteStudent-error',
@@ -270,10 +270,9 @@
                     rejectButton: 'cancel',
                     confirmAction: confirmAction,
                     contentTemplate: '/views/modals/information.html',
-                    textContent: $scope.common.translate('deleteStudent_modal_information', {
+                    textContent: $scope.common.translate('deleteStudentClass_modal_information', {
                         value: studentName
                     }),
-                    secondaryContent: 'deleteStudent_modal_information-explain',
                     modalButtons: true
                 });
 
@@ -285,26 +284,11 @@
             };
 
             $scope.getExercisesPaginated = function(pageno) {
-                getTeacherExercisesPaginated(pageno, $scope.filterExercisesParams);
+                _getExercisesGroup($routeParams.id, pageno);
             };
 
-
             $scope.getTasksPaginated = function(pageno) {
-                exerciseApi.getTasksByExercise($scope.exercise._id, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage
-                }).then(function(response) {
-                    response.data.forEach(function(task) {
-                        var taskId = task._id;
-                        _.extend(task, task.student);
-                        if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
-                            task.status = 'notDelivered';
-                        }
-                        task._id = taskId;
-                    });
-                    $scope.tasks = response.data;
-                    $location.search('page', pageno);
-                });
+                _getTasks($routeParams.id, $routeParams.studentId, pageno);
             };
 
             $scope.sortInstances = function(type) {
@@ -378,10 +362,18 @@
              **************************/
 
             function _checkUrl() {
+                var page;
+                if ($routeParams.page) {
+                    page = $routeParams.page;
+                }
                 if ($scope.urlSubType && $scope.urlSubType === 'student') {
-                    _getTasks($routeParams.id, $routeParams.studentId);
+                    $scope.pagination.tasks.current = $routeParams.page ? $routeParams.page : 1;
+                    _getTasks($routeParams.id, $routeParams.studentId, page);
                 } else {
+                    $scope.pagination.exercises.current = $routeParams.page ? $routeParams.page : 1;
                     _getGroup($routeParams.id);
+                    _getStudentsGroup($routeParams.id);
+                    _getExercisesGroup($routeParams.id, page);
                 }
             }
 
@@ -430,12 +422,28 @@
                 centerModeApi.getGroup(groupId).then(function(response) {
                     $scope.secondaryBreadcrumb = true;
                     $scope.group = response.data;
-                    $scope.students = $scope.group.students;
-                    $scope.exercises = $scope.group.exercises;
                     $scope.classStateCheck = $scope.group.status === 'open';
+                });
+            }
+
+            function _getStudentsGroup(groupId) {
+                centerModeApi.getStudentsGroup(groupId).then(function(response) {
+                    $scope.students = response.data;
                     _.forEach($scope.students, function(student) {
                         $scope.studentsJSON.push(_.pick(student, 'lastName', 'firstName', 'averageMark', 'email', 'username'));
                     });
+                });
+            }
+
+            function _getExercisesGroup(groupId, page) {
+                var pageno = page ? page : 1;
+                var pageParams = {
+                    'page': pageno
+                };
+                centerModeApi.getExercisesGroup(groupId, pageParams).then(function(response) {
+                    $scope.exercises = response.data.exercises;
+                    $scope.exercisesCount = response.data.count;
+                    $location.search('page', pageno);
                 });
             }
 
@@ -451,10 +459,11 @@
             }
 
             function _getTasks(groupId, studentId, pageno) {
-                exerciseApi.getTasks(groupId, studentId, {
-                    'page': pageno,
-                    'pageSize': $scope.itemsPerPage
-                }).then(function(response) {
+                var page = pageno ? pageno : 1,
+                    pageParams = {
+                        'page': page
+                    };
+                exerciseApi.getTasks(groupId, studentId, pageParams).then(function(response) {
                     $scope.exercises = response.data;
                     if ($scope.urlSubType === 'student') {
                         $scope.exercises.tasks.forEach(function(task) {
@@ -464,8 +473,10 @@
                         });
                         $scope.tertiaryBreadcrumb = true;
                         $scope.tasks = response.data.tasks;
+                        $scope.tasksCount = response.data.count;
                         $scope.group = response.data.group;
                         $scope.student = response.data.student;
+                        $location.search('page', page);
                     }
                 });
             }

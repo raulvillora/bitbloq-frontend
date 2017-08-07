@@ -140,14 +140,12 @@ angular.module('bitbloqApp')
                         return o.name === boardName || o.uuid === boardName;
                     });
                 }
+
                 if (elementSelected[0]) {
                     var indexTag = projectService.project.hardwareTags.indexOf(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board);
                     if (indexTag !== -1) {
                         projectService.project.hardwareTags.splice(indexTag, 1);
                     }
-                }
-
-                if (elementSelected[0]) {
                     projectService.project.hardware.board = elementSelected[0].board ? elementSelected[0].board : elementSelected[0].uuid; //Default board is ZUM
                     projectService.project.hardware.showRobotImage = elementSelected[0].useBoardImage ? elementSelected[0].uuid : null;
                     if (projectService.project.hardware.showRobotImage) {
@@ -159,14 +157,13 @@ angular.module('bitbloqApp')
                     } else {
                         $scope.boardImage = elementSelected[0].uuid;
                     }
+                    projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board));
                 } else {
                     projectService.project.hardware.board = 'bqZUM';
                     $scope.boardImage = 'bqZUM';
                     projectService.project.hardwareTags.push($scope.common.translate(projectService.project.hardware.board));
                 }
-                if (elementSelected[0]) {
-                    projectService.project.hardwareTags.push($scope.common.translate(elementSelected[0].board ? elementSelected[0].uuid : projectService.project.hardware.board));
-                }
+
             });
         };
 
@@ -206,10 +203,11 @@ angular.module('bitbloqApp')
         };
 
         $scope.uploadFileProject = function(project) {
-            projectService.setProject(project, 'code');
-            $scope.setBoard(projectService.project.board);
-            _prettyCode().then(function() {
-                projectService.addCodeWatchers();
+            projectService.setProject(project, 'code').then(function() {
+                $scope.setBoard(projectService.project.board);
+                _prettyCode().then(function() {
+                    projectService.addCodeWatchers();
+                });
             });
         };
 
@@ -446,22 +444,22 @@ angular.module('bitbloqApp')
                         response.data.hardwareTags = [];
                     }
 
-                    projectService.setProject(response.data, 'code');
+                    projectService.setProject(response.data, 'code').then(function() {
+                        $scope.common.itsUserLoaded().then(function() {
+                            if ($scope.common.user && projectService.project._acl['user:    ' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
+                                $scope.disablePublish = true;
+                            }
+                            if (response.data.hardware.showRobotImage) {
+                                handleActivateAlert();
+                            }
 
-                    $scope.common.itsUserLoaded().then(function() {
-                        if ($scope.common.user && projectService.project._acl['user:    ' + $scope.common.user._id] && projectService.project._acl['user:' + $scope.common.user._id].permission === 'READ') {
-                            $scope.disablePublish = true;
-                        }
-                        if (response.data.hardware.showRobotImage) {
-                            handleActivateAlert();
-                        }
+                        });
 
-                    });
+                        $scope.setBoard(projectService.project.hardware.showRobotImage ? projectService.project.hardware.showRobotImage : projectService.project.hardware.robot ? projectService.project.hardware.robot : projectService.project.hardware.board);
 
-                    $scope.setBoard(projectService.project.hardware.showRobotImage ? projectService.project.hardware.showRobotImage : projectService.project.hardware.robot ? projectService.project.hardware.robot : projectService.project.hardware.board);
-
-                    _prettyCode().then(function() {
-                        projectService.addCodeWatchers();
+                        _prettyCode().then(function() {
+                            projectService.addCodeWatchers();
+                        });
                     });
 
                 }, function(response) {
@@ -502,27 +500,44 @@ angular.module('bitbloqApp')
 
                 $scope.common.itsUserLoaded().then(function() {
                     if ($scope.common.session.save) {
-                        projectService.setProject($scope.common.session.project, 'code');
-                        $scope.common.session.save = false;
-                        projectService.startAutosave();
+                        projectService.setProject($scope.common.session.project, 'code').then(function() {
+                            $scope.common.session.save = false;
+                            projectService.startAutosave();
+                            finishLoadingWorkspace();
+                        });
+                    } else {
+                        finishLoadingWorkspace();
                     }
-                    $scope.setBoard(projectService.project.hardware.board);
-                    _prettyCode().then(function() {
-                        projectService.addCodeWatchers();
-                    });
+
                 }).catch(function() {
                     if ($scope.common.session.project.code) {
-                        projectService.setProject($scope.common.session.project, 'code');
+                        projectService.setProject($scope.common.session.project, 'code').then(function() {
+                            guestFinishLoadingWorkspace();
+                        });
+                    } else {
+                        guestFinishLoadingWorkspace();
                     }
-                    if ($scope.common.session.project.hardware && $scope.common.session.project.hardware.board) {
-                        $scope.setBoard($scope.common.session.project.hardware.board);
-                    }
-                    $scope.setBoard();
-                    _prettyCode().then(function() {
-                        projectService.addCodeWatchers();
-                    });
                 });
             }
+        }
+
+        function guestFinishLoadingWorkspace() {
+            if ($scope.common.session.project.hardware && $scope.common.session.project.hardware.board) {
+                $scope.setBoard($scope.common.session.project.hardware.board);
+            } else {
+                $scope.setBoard();
+            }
+
+            _prettyCode().then(function() {
+                projectService.addCodeWatchers();
+            });
+        }
+
+        function finishLoadingWorkspace() {
+            $scope.setBoard(projectService.project.hardware.board);
+            _prettyCode().then(function() {
+                projectService.addCodeWatchers();
+            });
         }
 
         $scope.showPlotter = function() {

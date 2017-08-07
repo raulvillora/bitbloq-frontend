@@ -183,6 +183,9 @@ angular.module('bitbloqApp')
         }
 
         function getUserRole() {
+            if (loadedRolePromise.promise.$$state.status !== 0) {
+                loadedRolePromise = $q.defer();
+            }
             centerModeApi.getMyRole().then(function(result) {
                 if (result.data && result.data !== '') {
                     exports.userRole = result.data;

@@ -17,6 +17,7 @@
     .svg-icon {
         fill: $black-light;
     }
+
     // task status
     .status-notCorrected {
         color: #dd1010;
@@ -87,6 +88,11 @@
     border-bottom: 1px solid #dddddd;
     padding-bottom: 20px;
     margin-bottom: 20px;
+
+    .row {
+        padding: 0 17px;
+        margin-bottom: 30px;
+    }
 }
 
 .center-mode__table__header {
@@ -143,10 +149,24 @@
     }
 }
 
+.assign-group .table__block__list {
+    .group__content {
+        label {
+            cursor: pointer;
+        }
+
+        .date-picker input {
+            cursor: pointer;
+        }
+    }
+}
+
 .center-mode__table {
     /*  [class*="col-"]:not(:first-child):not(.table__block__item--information) {
       //  text-align: center;
     }*/
+    margin-top: 8px;
+
     .table__block__item--groups {
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -183,11 +203,11 @@
 
 .center-mode--empty {
     text-align: center;
+    padding-top: 60px;
 
     .center-mode--empty__title {
         font-size: 20px;
         font-weight: bold;
-        margin-top: 60px;
         margin-bottom: 15px;
     }
 
@@ -213,8 +233,6 @@
 }
 
 .center-mode--empty-tasks {
-    margin-top: 218px;
-
     .svg-task {
         height: 140px;
         fill: $grey-light;
@@ -367,8 +385,6 @@
             }
         }
     }
-    margin-top: 31px;
-    padding: 0 30px;
 
     .form--center {
         .first-column,
@@ -627,7 +643,7 @@
     .classes-dropdown {
         font-size: 13px;
         text-align: left;
-        width: 170px;
+        width: 214px;
         display: inline-block;
 
         .dropdown__menu__down {
@@ -636,13 +652,16 @@
 
         &:first-child {
             margin-right: 20px;
-            width: 214px;
+        }
+
+        &:nth-child(2) {
+            margin-right: 20px;
         }
     }
 
     .classes--input {
         float: right;
-        width: 290px;
+        width: 240px;
         height: 35px;
         border-radius: 4px;
         background-color: $white;
@@ -691,13 +710,18 @@
     user-select: text;
 }
 
+.group-list {
+    margin: 0 -10px;
+}
+
 .group-list__item {
     border-radius: 4px;
     position: relative;
     height: 265px;
     display: inline-block;
     margin: 20px 0;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
 
     .group__image__container {
@@ -988,6 +1012,7 @@
 
 .tasks-students {
     float: left;
+    padding: 6px 0 0;
 }
 
 .nav--make {
@@ -995,33 +1020,66 @@
         .exercise-button-wide {
             width: 114px;
             height: 70px;
-            &:before{
-              margin-left: 25px;
+
+            &:before {
+                margin-left: 25px;
             }
-            &:after{
-              margin-left: 25px;
+
+            &:after {
+                margin-left: 25px;
             }
         }
     }
+}
+
+.center-mode__date {
+    font-size: 12px;
+    color: $text-secondly;
+
+    .svg-icon {
+        width: 14px;
+        position: static;
+        left: 5px;
+        margin-top: -2px;
+        margin-right: 10px;
+        fill: $text-title;
+    }
+
+    .center-mode__date--important {
+        font-weight: bold;
+        color: $text-title;
+    }
+}
+
+.center-mode__role-options {
+    padding-top: 16px;
+    padding-right: 22px;
+    width: 222px;
+}
+
+.exercise--title-with-roles {
+    width: calc(100% - 519px) !important;
+}
+
+.col-text-right {
+    text-align: right;
+    padding-right: 0;
 }
 @media only screen and (min-width: 320px) and (max-width: 485px) {
     .group-list__item {
         width: 100%;
     }
 }
-
 @media only screen and (min-width: 486px) and (max-width: 700px) {
     .group-list__item {
         width: 50%;
     }
 }
-
 @media only screen and (min-width: 701px) and (max-width: 1183px) {
     .group-list__item {
         width: 33.333%;
     }
 }
-
 @media only screen and (min-width: 1184px) {
     /* Styles */
     .group-list__item {

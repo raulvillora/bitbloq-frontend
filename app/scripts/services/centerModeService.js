@@ -31,20 +31,20 @@ angular.module('bitbloqApp')
             var modalOptions = $rootScope.$new();
 
             _.extend(modalOptions, {
-                title: 'centerMode_modal_createGroupTitle',
+                title: 'centerMode_modal_createClassTitle',
                 contentTemplate: 'views/modals/input.html',
-                mainText: 'centerMode_modal_createGroupInfo',
+                mainText: 'centerMode_modal_createClassInfo',
                 modalInput: true,
                 secondaryText: false,
                 input: {
                     id: 'groupName',
                     name: 'groupName',
-                    placeholder: 'centerMode_modal_createGroupPlaceholder'
+                    placeholder: 'centerMode_modal_createClassPlaceholder'
                 },
                 condition: function() {
                     return this.input.value && centerId;
                 },
-                confirmButton: 'centerMode_button_createGroup',
+                confirmButton: 'centerMode_button_createClass',
                 rejectButton: 'modal-button-cancel',
                 confirmAction: confirmAction,
                 modalButtons: true

@@ -16,7 +16,10 @@ angular
             deleteTeacher: deleteTeacher,
             getExercises: getExercises,
             getExercisesCount: getExercisesCount,
+            getExercisesByGroup: getExercisesByGroup,
             getGroup: getGroup,
+            getStudentsGroup: getStudentsGroup,
+            getExercisesGroup: getExercisesGroup,
             getGroups: getGroups,
             getGroupsByExercise: getGroupsByExercise,
             getMyCenter: getMyCenter,
@@ -156,6 +159,21 @@ angular
             });
         }
 
+        function getStudentsGroup(groupId) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'group/' + groupId + '/students'
+            });
+        }
+
+        function getExercisesGroup(groupId, params) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'group/' + groupId + '/exercises',
+                params: params
+            });
+        }
+
         function getGroups(role, teacherId, centerId, withoutClosed, params) {
             if (teacherId) {
                 return $http({
@@ -184,6 +202,14 @@ angular
             return $http({
                 method: 'GET',
                 url: envData.config.centerModeUrl + 'assignment/exercise/' + exerciseId
+            });
+        }
+
+        function getExercisesByGroup(groupId, params) {
+            return $http({
+                method: 'GET',
+                url: envData.config.centerModeUrl + 'assignment/group/' + groupId,
+                params: params
             });
         }
 

@@ -15,6 +15,8 @@ angular.module('bitbloqApp')
 
         exports.hardware = null;
 
+        exports.componentsMap = {};
+
         exports.getUserHardware = function() {
             var defered = $q.defer();
             common.itsUserLoaded().then(function() {
@@ -196,12 +198,21 @@ angular.module('bitbloqApp')
             return _.uniqBy(robotsCopy, 'uuid');
         }
 
+        function _generateComponentsMaps(componentsArray) {
+            exports.componentsMap = {};
+
+            for (var i = 0; i < componentsArray.length; i++) {
+                exports.componentsMap[componentsArray[i].uuid] = componentsArray[i];
+            }
+        }
+
         /******************************
          *********** INIT *************
          ******************************/
 
         hardwareApi.getAll().then(function(response) {
             exports.hardware = response.data;
+            _generateComponentsMaps(exports.hardware.components);
             loadedHardwarePromise.resolve();
         }).catch(loadedHardwarePromise.reject);
 

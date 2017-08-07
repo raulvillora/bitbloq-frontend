@@ -9,10 +9,10 @@
             <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchClassesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
         </span>
     </div>
-    <div ng-show="(search.searchClassesText!='' && search.searchClassesText!=undefined) && groups.length === 0" class="project-shared--empty">
+    <div ng-show="((search.searchClassesText!='' && search.searchClassesText!=undefined) || statusSelected) && groups.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'classes_text_searchEmpty' | translate}}</p>
     </div>
-    <ol>
+    <ol class="group-list">
         <li pagination-id="mygroups" dir-paginate="group in groups | itemsPerPage: groupsPerPage track by group._id " ng-init="sectionIndex = $index" current-page="pagination.mygroups.current" total-items="{{groupsCount}}" class="group-list__item" data-element="classes">
             <div class="group--item" ng-click="goTo('/class/' + group._id, $event)">
                 <div id="{{'group__image__container_' + group._id}}" ng-style="{'background-color': group.color}" class="group__image__container" data-element="class-item">

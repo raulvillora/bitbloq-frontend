@@ -15,10 +15,10 @@
             $scope.centerModeService = centerModeService;
             $scope.selectedTab = 'teachers';
             $scope.activableRobots = [{
-                    'uuid': 'mBot',
-                    'image': 'mbot',
-                    'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
-                },
+                'uuid': 'mBot',
+                'image': 'mbot',
+                'link': 'https://www.makeblock.es/productos/robot_educativo_mbot/'
+            },
                 {
                     'uuid': 'mRanger',
                     'image': 'rangerlandraider',
@@ -30,6 +30,8 @@
                     'link': 'https://www.makeblock.es/productos/robot_starter_kit/'
                 }
             ];
+            $scope.sendingInvitation = false;
+            $scope.resendingInvitation = false;
 
             $scope.centerActivateRobot = function(robot) {
                 commonModals.activateRobot(robot, centerModeService.center._id).then(function(response) {
@@ -112,14 +114,19 @@
                         break;
                 }
             };
-            console.log('$scope.envData');
-            console.log($scope.envData);
+
             $scope.newTeacher = function() {
                 var maxTeachers = centerModeService.center.maxTeachers ? centerModeService.center.maxTeachers : $scope.envData.config.maxTeachers;
                 var confirmAction = function() {
-                        var teachers = _.map(modalOptions.newTeachersModel, 'text');
-                        var excedeedLimit = false;
+                        var teachers = _.map(modalOptions.newTeachersModel, 'text'),
+                            excedeedLimit = false;
                         if (teachers.length > 0) {
+                            $scope.sendingInvitation = true;
+                            alertsService.add({
+                                text: 'centerMode_sending-invitation',
+                                id: 'addTeacher',
+                                type: 'loading'
+                            });
                             if (($scope.teachers.length + teachers.length) > maxTeachers) {
                                 teachers = teachers.slice(0, maxTeachers - $scope.teachers.length);
                                 excedeedLimit = true;
@@ -161,24 +168,33 @@
                                     id: 'addTeacher',
                                     type: 'error'
                                 });
+                            }).finally(function() {
+                                $scope.sendingInvitation = false;
                             });
                         }
+                        newTeacherModal.close();
+                    },
+                    closeAction = function() {
                         newTeacherModal.close();
                     },
                     parent = $rootScope,
                     modalOptions = parent.$new();
 
                 modalOptions.center = centerModeService.center;
+                modalOptions.maxTeachers = maxTeachers;
+
                 _.extend(modalOptions, {
                     title: 'newTeacher_modal_title',
                     confirmButton: 'newTeacher_modal_aceptButton',
                     confirmAction: confirmAction,
+                    rejectButton: 'cancel',
+                    rejectAction: closeAction,
                     contentTemplate: '/views/modals/centerMode/newTeacher.html',
                     modalButtons: true,
                     newTeachersModel: []
                 });
 
-                if ($scope.teachers.length <= maxTeachers) {
+                if ($scope.teachers.length < maxTeachers) {
                     var newTeacherModal = ngDialog.open({
                         template: '/views/modals/modal.html',
                         className: 'modal--container modal--input',
@@ -195,6 +211,12 @@
             };
 
             $scope.resendInvitation = function(teacher) {
+                $scope.resendingInvitation = true;
+                alertsService.add({
+                    text: 'centerMode_sending-invitation',
+                    id: 'addTeacher',
+                    type: 'loading'
+                });
                 centerModeApi.resendInvitation(teacher._id, centerModeService.center._id).then(function() {
                     alertsService.add({
                         text: 'centerMode_alert_sendInvitation',
@@ -208,6 +230,8 @@
                         id: 'addTeacher',
                         type: 'error'
                     });
+                }).finally(function() {
+                    $scope.resendingInvitation = false;
                 });
             };
 
@@ -243,7 +267,6 @@
                     $scope.common.itsRoleLoaded().then(function() {
                         switch ($scope.common.userRole) {
                             case 'headmaster':
-                            case 'teacher':
                                 _checkUrl();
                                 break;
                             default:
@@ -269,6 +292,10 @@
                     centerModeService.unBlindAllWatchers();
                 }
             }
+
+            $scope.$on('$destroy', function() {
+                centerModeService.unBlindAllWatchers();
+            });
 
             /*****************************
              *********** INIT ************

@@ -4,7 +4,8 @@
             <svg class="svg-icon svg-icon--text">
                 <use xlink:href="#exercise"></use>
             </svg>
-            {{'centerMode_exercises' | translate}}
+            <span>{{'centerMode_exercises' | translate}}</span>
+            <span>({{tasksCount}})</span>
         </h1>
         <div class="button-group col-vsmall-5" ng-if="urlSubType==='student'">
             <button class="btn btn--quaternary btn--small btn--delete" ng-click="deleteStudent(student)" data-element="centerMode_button_deleteStudent">
@@ -19,23 +20,26 @@
 </div>
 <div class="center-mode__group" ng-if="urlSubType!=='student'">
     <div class="group__header">
-            <label class="switch-button">
-                <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'; changeStatusClass();" ng-disabled="group.status==='closed'" checked>
-                <div class="slider round" data-element="centerMode-enrolment-button">
-                    <svg class="svg-icon">
-                        <use xlink:href="#close"></use>
-                    </svg>
-                    <svg class="svg-icon">
-                        <use xlink:href="#tick"></use>
-                    </svg>
-                </div>
-                <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
-                <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_closed' | translate}}</span>
-                <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
-            </label>
+        <label class="switch-button">
+            <input type="checkbox" ng-model="classStateCheck" ng-change="classStateCheck? group.status='open' : group.status='inProgress'; changeStatusClass();" ng-disabled="group.status==='closed'" checked>
+            <div class="slider round" data-element="centerMode-enrolment-button">
+                <svg class="svg-icon">
+                    <use xlink:href="#close"></use>
+                </svg>
+                <svg class="svg-icon">
+                    <use xlink:href="#tick"></use>
+                </svg>
+            </div>
+            <span ng-if="group.status==='open'">{{'centerMode_groupStatus_open' | translate}}</span>
+            <span ng-if="group.status==='inProgress'">{{'centerMode_groupStatus_closed' | translate}}</span>
+            <span ng-if="group.status==='closed'">{{'centerMode_groupStatus_closed' | translate}}</span>
+        </label>
         <div class="button-group col-vsmall-7">
             <button class="btn btn--quaternary btn--small btn--showMoreActions" ng-click="setMoreOptionsInClass()" data-element="centerMode_button_moreActions">
                 <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
+                <svg class="svg-icon svg-icon--text animated-rotate rotate90 svg-icon-moreactions">
+                    <use xlink:href="#arrow"></use>
+                </svg>
             </button>
             <div ng-show="showMoreActionsInClass" class="table__block__item--menu table__block__moreactions--menu">
                 <ul>
@@ -50,7 +54,7 @@
                         <svg class="svg-icon svg-icon--text svg-icon--menu">
                             <use xlink:href="#store"></use>
                         </svg>
-                        {{ 'closeGroup_modal_title' | translate }}
+                        {{ 'closeClass_modal_title' | translate }}
                     </li>
                     <li class="dropdown__item--separator--thick"></li>
                     <li class="table__block__item--menu__item" ng-click="deleteGroup()">
@@ -83,7 +87,7 @@
                         <use xlink:href="#exercise"></use>
                     </svg>
                     <span class="menu__item__span">
-                        {{'centerMode_exercises' | translate}} ({{ exercises.length || 0 }})
+                        {{'centerMode_exercises' | translate}} ({{ exercisesCount || 0 }})
                     </span>
                     </span>
                 </li>

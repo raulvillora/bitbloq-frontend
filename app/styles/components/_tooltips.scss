@@ -38,6 +38,8 @@
                 z-index: 9;
                 height: 30px;
                 width: auto;
+                word-wrap: break-word;
+                max-width: 500px;
             }
         }
     }

@@ -9,9 +9,8 @@
  */
 angular.module('bitbloqApp')
     .service('projectService', function($log, $window, envData, $q, $rootScope, _, alertsService, imageApi,
-                                        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
-                                        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi)
-    {
+        common, utils, $translate, bowerData, $timeout, hardwareService, projectApi, $route, $location,
+        bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, userApi) {
 
         var exports = {},
             thereAreWatchers = false,
@@ -399,55 +398,60 @@ angular.module('bitbloqApp')
                 exports.addComponentInComponentsArray('serialElements', exports.project.bitbloqConnectBT);
             }
         };
-        //temp fix to code refactor, sensor types
-        var sensorsTypes = {};
-        var sensorsArray = [];
-        hardwareService.itsHardwareLoaded().then(function() {
-            sensorsArray = _.filter(hardwareService.hardware.components, {
-                category: 'sensors'
-            });
-            for (var i = 0; i < sensorsArray.length; i++) {
-                sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
-            }
-        });
 
-        exports.setProject = function(newproject, type, watcher) {
-            //check board
-            newproject.hardware.board = newproject.hardware.board ? newproject.hardware.board.replace(/\s+/g, '') : '';
+        function fillHardwareSchemas(newProject) {
+            var defered = $q.defer();
+            if (newProject.hardware.components) {
+                hardwareService.itsHardwareLoaded().then(function() {
+                    if (newProject.hardware.components) {
+                        var newItem;
+                        for (var i = 0; i < newProject.hardware.components.length; i++) {
+                            newItem = _.cloneDeep(hardwareService.componentsMap[newProject.hardware.components[i].uuid || newProject.hardware.components[i].id]);
+                            newItem.coordinates = newProject.hardware.components[i].coordinates;
+                            newItem.connected = newProject.hardware.components[i].connected;
+                            newItem.name = newProject.hardware.components[i].name;
+                            newItem.pin = newProject.hardware.components[i].pin;
+                            newItem.endpoints = newProject.hardware.components[i].endpoints;
+                            newItem.uid = newProject.hardware.components[i].uid;
 
-            //check old components
-            if (newproject.hardware.components) {
-                newproject.hardware.components.forEach(function(item) {
-                    if (item.id) {
-                        item.uuid = item.id;
-                    }
-                    if (item.category === 'sensors') {
-                        item.dataReturnType = sensorsTypes[item.uuid];
-                    }
-                    //check serial port
-                    if (item.uuid === 'sp') {
-                        item.pin.rx = '0';
-                        item.pin.tx = '1';
+                            delete newItem.createdAt;
+                            delete newItem.updatedAt;
+                            delete newItem.__v;
+
+                            newProject.hardware.components[i] = newItem;
+                        }
+                        defered.resolve(newProject);
                     }
                 });
+            } else {
+                defered.resolve(newProject);
             }
+            return defered.promise;
+        }
 
-            //end temp fix
+        exports.setProject = function(newproject, type, watcher) {
+            var defered = $q.defer();
+            newproject.hardware.board = newproject.hardware.board ? newproject.hardware.board.replace(/\s+/g, '') : '';
 
-            _unBlindAllWatchers();
-            newproject.codeProject = type === 'code' ? true : newproject.codeProject;
-            if (_.isEmpty(exports.project)) {
-                exports.project = exports.getDefaultProject(newproject.codeProject);
-            }
-            exports.project = _.extend(exports.project, newproject);
-            exports.setComponentsArray();
-            if (watcher) {
-                if (type === 'code') {
-                    exports.addCodeWatchers();
-                } else {
-                    exports.addWatchers();
+            fillHardwareSchemas(newproject).then(function(newProjectFilled) {
+
+                _unBlindAllWatchers();
+                newproject.codeProject = type === 'code' ? true : newProjectFilled.codeProject;
+                if (_.isEmpty(exports.project)) {
+                    exports.project = exports.getDefaultProject(newProjectFilled.codeProject);
                 }
-            }
+                exports.project = _.extend(exports.project, newProjectFilled);
+                exports.setComponentsArray();
+                if (watcher) {
+                    if (type === 'code') {
+                        exports.addCodeWatchers();
+                    } else {
+                        exports.addWatchers();
+                    }
+                }
+                defered.resolve();
+            });
+            return defered.promise;
         };
 
         exports.startAutosave = function(hard) {

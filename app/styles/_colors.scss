@@ -21,7 +21,7 @@ $grey-disabled: #dbdee3;
 $grey-disabled-text: #bdc0c6;
 $grey-item-hover: #ebebeb;
 $grey-pressed: #dedede;
-$grey-light:#dddddd;
+$grey-border-light:#dddddd;
 
 // Input
 $input-text: $grey-medium;
@@ -140,7 +140,7 @@ $button-tertiary-pressed: $grey-pressed;
 
 $button-quaternary: $white;
 $button-quaternary-text: $black-light;
-$button-quaternary-border: $grey-light;
+$button-quaternary-border: $grey-border-light;
 $button-quaternary-hover: $grey-item-hover;
 $button-quaternary-pressed: $grey-pressed;
 

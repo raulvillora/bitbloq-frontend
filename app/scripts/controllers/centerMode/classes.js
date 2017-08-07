@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $location) {
+        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $translate, $rootScope, $location, userApi, utils, ngDialog) {
             $scope.groups = [];
             $scope.teacher = {};
             $scope.centerModeService = centerModeService;
@@ -31,6 +31,7 @@
             $scope.sortClassesArray = ['name', 'last-classes', 'old-classes'];
 
             $scope.colorPickerFlag = {};
+            $scope.common.isLoading = true;
 
             $scope.changeGroupColor = function() {
                 centerModeApi.updateGroup($scope.group).then(function() {
@@ -62,6 +63,8 @@
                     $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
                         'search': queryParams.searchParams
                     } : {}), _.cloneDeep(pageParams)));
+                }).finally(function() {
+                    $scope.common.isLoading = false;
                 });
             };
 
@@ -84,8 +87,8 @@
                 $scope.getMyGroupsPage(page);
             };
 
-            $scope.goTo = function(url, event){
-                if(event.target.className.indexOf('group__info__header__id')===-1) {
+            $scope.goTo = function(url, event) {
+                if (event.target.className.indexOf('group__info__header__id') === -1) {
                     $location.path(url);
                 }
             };
@@ -104,23 +107,27 @@
                 $scope.getMyGroupsPage();
             };
 
+            $scope.isLoading = true;
             /**************************
              ***  PRIVATE FUNCTIONS ***
              **************************/
 
             function _init() {
                 $scope.common.itsUserLoaded().then(function() {
-                    $scope.common.itsRoleLoaded().then(function() {
-                        console.log('$scope.common.userRole ', $scope.common.userRole);
-                        switch ($scope.common.userRole) {
-                            case 'headmaster':
-                            case 'teacher':
-                                _checkUrl();
-                                break;
-                            default:
-                                $location.path('/projects');
-                        }
-                    });
+                    if ($scope.common.section === 'confirm-teacher') {
+                        _congratulations($routeParams.token);
+                    } else {
+                        $scope.common.itsRoleLoaded().then(function() {
+                            switch ($scope.common.userRole) {
+                                case 'headmaster':
+                                case 'teacher':
+                                    _checkUrl();
+                                    break;
+                                default:
+                                    $location.path('/projects');
+                            }
+                        });
+                    }
                 }, function() {
                     $scope.common.setUser();
                     alertsService.add({
@@ -129,6 +136,93 @@
                         type: 'error'
                     });
                     $scope.common.goToLogin();
+                });
+            }
+
+            function _congratulations(token) {
+                centerModeApi.confirmAddTeacher(token).then(function(response) {
+                    var modalOptions = $rootScope.$new(),
+                        extraButton = 'centerMode_button_createCenter-try';
+                    if ($scope.common.user.birthday && utils.userIsUnder14($scope.common.user.birthday)) {
+                        extraButton = null;
+                    }
+                    var confirmationTitle = $translate.instant('centerMode_modal_confirmation-title', {
+                        value: response.data
+                    });
+                    _.extend(modalOptions, {
+                        title: 'welcome',
+                        contentTemplate: 'views/modals/centerMode/informationCenterMode.html',
+                        confirmationTitle: confirmationTitle,
+                        customClass: 'modal--information',
+                        confirmButton: 'centerMode_modal_confirmation-button',
+                        confirmAction: function() {
+                            ngDialog.close(centerModal);
+                        },
+                        modalButtons: true,
+                        errors: false
+                    });
+
+                    var centerModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--centerMode',
+                        scope: modalOptions
+
+                    });
+                    $location.path('/classes');
+                    $scope.common.userRole = 'teacher';
+                }).catch(function(err) {
+                    console.log(err);
+                    if (err.data) {
+                        switch (err.data.code) {
+                            case 403:
+                                //otro user
+                                $location.path('/projects');
+                                alertsService.add({
+                                    text: $scope.common.translate('centerMode_alert_confirmTeacherError1', {
+                                        value: err.data.center
+                                    }),
+                                    id: 'addTeacher',
+                                    type: 'error',
+                                    linkText: 'close-session',
+                                    link: function() {
+                                        userApi.logout();
+                                        $scope.common.setUser(null);
+                                        localStorage.projectsChange = false;
+                                        $location.url('/');
+                                        alertsService.closeByTag('addTeacher');
+                                    }
+                                });
+
+                                break;
+                            case 404:
+                                //otro user
+                                $location.path('/projects');
+                                alertsService.add({
+                                    text: $scope.common.translate('centerMode_alert_confirmTeacherError2', {
+                                        value: err.data.center
+                                    }),
+                                    id: 'addTeacher',
+                                    type: 'error'
+                                });
+
+                                break;
+                            case 409:
+                                $location.path('/classes');
+                                break;
+                            default:
+                                alertsService.add({
+                                    text: 'centerMode_modal_confirmation-error',
+                                    id: 'addTeacher',
+                                    type: 'error'
+                                });
+                        }
+                    } else {
+                        alertsService.add({
+                            text: 'centerMode_modal_confirmation-error',
+                            id: 'addTeacher',
+                            type: 'error'
+                        });
+                    }
                 });
             }
 
@@ -252,6 +346,12 @@
                         }
                         delete $scope.filterClassesParams.search;
                     }
+                }
+            });
+
+            $scope.$on('$destroy', function() {
+                if ($location.path() !== '/login') {
+                    console.log($routeParams);
                 }
             });
 

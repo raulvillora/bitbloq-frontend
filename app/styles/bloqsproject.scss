@@ -791,10 +791,12 @@ $leftBarWidth: 70px;
     opacity: 1;
     position: absolute;
 
+
     .nav__menu__item {
         border-left: 1px solid #dadada;
         height: 40px;
-        width: 55px;
+        width: 61px;
+
 
         &:hover {
             background-color: $grey-item-hover;
@@ -822,6 +824,10 @@ $leftBarWidth: 70px;
             }
         }
     }
+    .makeactions-button-wide {
+        width: 91px;
+    }
+
 }
 
 .image--container {
@@ -900,7 +906,6 @@ $leftBarWidth: 70px;
     cursor: default;
     pointer-events: none;
 }
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
