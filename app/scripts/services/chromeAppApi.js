@@ -155,9 +155,11 @@ angular.module('bitbloqApp')
         };
 
         exports.stopSerialCommunication = function() {
-            var message = {};
-            message.type = 'serial-disconnect';
-            openPort.postMessage(message);
+            if (openPort) {
+                var message = {};
+                message.type = 'serial-disconnect';
+                openPort.postMessage(message);
+            }
         };
 
         exports.getSerialData = function(port) {

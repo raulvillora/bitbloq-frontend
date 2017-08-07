@@ -1219,22 +1219,18 @@ angular.module('bitbloqApp')
             } else {
                 if ($scope.common.session.save) {
                     $scope.common.session.save = false;
-                    projectService.setProject($scope.common.session.project);
-                    if (projectService.project.hardware.showRobotImage && $scope.isRobotActivated()) {
-                        $scope.currentProjectService.showActivation = false;
-                        $scope.currentProjectService.closeActivation = false;
-                    }
-                    projectService.startAutosave();
-                    $scope.hardware.firstLoad = false;
+                    projectService.setProject($scope.common.session.project).then(function() {
+                        if (projectService.project.hardware.showRobotImage && $scope.isRobotActivated()) {
+                            $scope.currentProjectService.showActivation = false;
+                            $scope.currentProjectService.closeActivation = false;
+                        }
+                        projectService.startAutosave();
+                        $scope.hardware.firstLoad = false;
+                        finishLoadingWorkspace()
+                    });
+                } else {
+                    finishLoadingWorkspace()
                 }
-                if (!$scope.common.user.takeTour) {
-                    launchModalTour();
-                }
-                addProjectWatchersAndListener();
-                $scope.hwBasicsLoaded.promise.then(function() {
-                    $scope.$emit('drawHardware');
-                });
-                $scope.currentProjectLoaded.resolve();
             }
         }, function() {
             $log.debug('no registed user');
@@ -1247,6 +1243,17 @@ angular.module('bitbloqApp')
                 launchModalGuest();
             }
         });
+
+        function finishLoadingWorkspace() {
+            if (!$scope.common.user.takeTour) {
+                launchModalTour();
+            }
+            addProjectWatchersAndListener();
+            $scope.hwBasicsLoaded.promise.then(function() {
+                $scope.$emit('drawHardware');
+            });
+            $scope.currentProjectLoaded.resolve();
+        }
 
         function checkIfTwitterBloq(projectData) {
             projectData.software.loop.childs.forEach(function(element) {
@@ -1307,14 +1314,15 @@ angular.module('bitbloqApp')
                 if (project.software) {
                     project.software.freeBloqs = project.software.freeBloqs || [];
                 }
-                projectService.setProject(project, project.codeProject, true);
-                checkIfTwitterBloq(projectService.project);
-                $scope.saveBloqStep(_.clone(project.software));
-                projectService.saveOldProject();
-                $scope.hwBasicsLoaded.promise.then(function() {
-                    $scope.$emit('drawHardware');
+                projectService.setProject(project, project.codeProject, true).then(function() {
+                    checkIfTwitterBloq(projectService.project);
+                    $scope.saveBloqStep(_.clone(project.software));
+                    projectService.saveOldProject();
+                    $scope.hwBasicsLoaded.promise.then(function() {
+                        $scope.$emit('drawHardware');
+                    });
+                    $scope.$broadcast('refresh-bloqs');
                 });
-                $scope.$broadcast('refresh-bloqs');
             }
         }
 
