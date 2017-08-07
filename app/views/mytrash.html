@@ -28,6 +28,9 @@
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
     </div>
     <div ng-show="trashProjects.length === 0  && (searchText.text==='' || searchText.text===undefined)" class="project-shared--empty">
+        <svg class="svg-icon">
+            <use xlink:href="#inbox"></use>
+        </svg>
         <p class="empty__info">{{'projects_text_trashEmpty' | translate}}</p>
     </div>
     <li pagination-id="mytrash" dir-paginate="project in trashProjects | filter:userProjectsFilterFunction(userProjectsFilter) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.trash.current"
