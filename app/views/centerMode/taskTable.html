@@ -20,7 +20,7 @@
                 </div>
                 <div class="table__block__item col-vsmall-2">
                     <span data-element="{{'centerMode-task-mark' + task._id}}">
-                        {{task.mark || '-'}}
+                        {{task.status==='corrected'? task.mark || '-' : '-'}}
                     </span>
                 </div>
                 <div class="table__block__item col-vsmall-1">
