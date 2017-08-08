@@ -55,7 +55,7 @@
                 border: 0;
             }
 
-            .angular-color-picker > ._hues > ._cursor {
+            .angular-color-picker>._hues>._cursor {
                 margin-left: 4px;
             }
         }
@@ -86,7 +86,7 @@
 
     a {
         text-decoration: none;
-        color:$text-title;
+        color: $text-title;
 
         &:hover {
             color: $green;
@@ -119,11 +119,16 @@
     &.breadcrumb-longer {
         width: 100%;
 
-        a, .breadcrumb--secondary {
+        a,
+        .breadcrumb--secondary {
             display: inline-block;
             overflow: hidden;
         }
-
+        span {
+            text-overflow: ellipsis;
+            max-width: 50%;
+            white-space: nowrap;
+        }
         a:not(:first-child) {
             max-width: 75%;
             white-space: nowrap;
