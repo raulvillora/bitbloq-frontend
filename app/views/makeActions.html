@@ -292,7 +292,7 @@
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-ng-if="common.section === 'task' && common.user._id !== currentProject.teacher" data-tooltip-position="bottom" data-tooltip="{{(currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltips="true">
+    <li class="nav__menu__item right" data-ng-if="common.section === 'task' && common.user._id === currentProject.student._id  && common.userRole==='student'" data-tooltip-position="bottom" data-tooltip="{{(currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltips="true">
         <button data-ng-click="sendTask(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user || currentProject.status!=='pending'}" data-ng-disabled="currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]">
             <svg class="svg-icon">
                 <use xlink:href="#airplane"></use>

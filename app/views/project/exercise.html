@@ -30,7 +30,7 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" ng-class="{'exercise-button-wide': common.section==='exercise' || (common.section ==='task' && common.userRole === 'teacher')}" data-tooltips="true"
+            <li class="nav__menu__item nav__item--white right" ng-class="{'exercise-button-wide': common.section==='exercise' || (common.section ==='task' && common.user._id === currentProject.teacher)}" data-tooltips="true"
                 data-tooltip="{{currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-upload' :'load' | translate }}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-disabled="isWeb2BoardInProgress()|| currentProject.hardware.showRobotImage && !robotActivatedInCenter" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" ng-click="upload()" data-walkthrough="upload">
                     <svg class="svg-icon">
@@ -38,7 +38,7 @@
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" ng-if="common.section==='task' && common.user._id !== currentProject.teacher" data-tooltips="true"
+            <li class="nav__menu__item nav__item--white right" ng-if="common.section==='task' && common.user._id === currentProject.student._id && common.userRole==='student'" data-tooltips="true"
                 data-tooltip="{{(common.section!=='task'? 'send-to-teacher' : currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltip-position="bottom">
                 <button class="nav__menu__btn btn" data-ng-click="sendTask()" data-ng-disabled="common.section!=='task' || common.userRole!=='student' || currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]" data-ng-class="{'btn--make--disabled':currentProject.status!=='pending'}" data-walkthrough="upload">
                     <svg class="svg-icon">
