@@ -77,7 +77,7 @@ angular.module('bitbloqApp')
                         }
                     });
                 } else {
-                    robotsActivated = exerciseService.exercise.group.center.activatedRobots;
+                    robotsActivated = exerciseService.exercise.group && exerciseService.exercise.group.center ? exerciseService.exercise.group.center.activatedRobots: false;
                 }
                 if ($scope.currentProject.hardware.showRobotImage) {
                     if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
