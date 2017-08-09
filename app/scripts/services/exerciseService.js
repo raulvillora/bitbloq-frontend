@@ -26,6 +26,7 @@ angular.module('bitbloqApp')
 
         var scope = $rootScope.$new(),
             confirmDeleteModal;
+
         scope.exercise = exports.exercise;
 
         exports.clone = function(exercise) {
@@ -755,7 +756,8 @@ angular.module('bitbloqApp')
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
                     var newMark = _.join(exports.exercise.newMark, '.');
                     if (newMark === String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark) {
-                        exports.saveStatus = 4;
+                        exports.saveStatus = 5;
+                        defered.resolve();
                     } else {
                         exerciseApi.markTask(exports.exercise).then(function() {
                             exports.exercise.mark = newMark;
@@ -785,8 +787,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;
