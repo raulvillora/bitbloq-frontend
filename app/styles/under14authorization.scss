@@ -10,7 +10,7 @@
             &:last-child {
                 text-align: left;
             }
-            &.submit {
+            .submit {
                 &:last-child {
                     text-align: center;
                 }
@@ -20,5 +20,8 @@
                 }
             }
         }
+    }
+    input, button {
+        text-transform: capitalize;
     }
 }
