@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('exerciseService', function($log, $window, envData, $q, $rootScope, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
+    .service('exerciseService', function($log, $window, envData, $q, $rootScope, $routeParams, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
 
         var exports = {},
             savePromise,
@@ -121,7 +121,7 @@ angular.module('bitbloqApp')
                         };
 
                     selectedGroups.forEach(function(group) {
-                        if (group.withoutDate || (!group.calendar.from.date && !group.calendar.to.date)) {
+                        if (group.withoutDate || !group.calendar || (!group.calendar.from.date && !group.calendar.to.date)) {
                             groupsToAssign.push({
                                 group: group._id,
                                 exercise: project._id
@@ -275,6 +275,7 @@ angular.module('bitbloqApp')
                     getTime: getTime,
                     oldGroups: oldGroups,
                     onlyEdit: onlyEdit,
+                    onlyShowGroup: common.section === 'class' ? $routeParams.id : null,
                     moment: moment,
                     rejectButton: 'modal-button-cancel',
                     rejectAction: defered.reject,

@@ -7,7 +7,7 @@
             <span class="col-vsmall-4">{{'centerMode_column_students' | translate}}</span>
         </div>
         <ul class="table__block--invert assign-group__content">
-            <li class="table__block__list table__block__hover handcursor" ng-repeat="group in groups" ng-if="!onlyEdit || oldGroups[group._id]">
+            <li class="table__block__list table__block__hover handcursor" ng-repeat="group in groups" ng-show="!onlyEdit || (!onlyShowGroup && oldGroups[group._id]) || group._id === onlyShowGroup">
                 <ng-form name="{{'form' + group._id}}">
                     <span class="checkbox--general">
                         <input type="checkbox" name="groupCheck" id="{{'group_'+group._id}}" ng-show="!onlyEdit" ng-model="group.selected" ng-click="expandedItem[group._id] = true"/>
@@ -35,18 +35,15 @@
                             <div class="picker__container" ng-init="group.calendar.from={}">
                                 <span class="picker-title">{{'centerMode_date_from' | translate}}</span>
                                 <div class="date-picker" ng-init="group.calendar.from.date=oldGroups[group._id]?oldGroups[group._id][0].initDate:''">
-                                    <input date-time readonly="readonly" name="{{'datePicker0' + group._id}}" id="{{'datePicker0' + group._id}}" ng-model="group.calendar.from.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" required/>
-                                    <button class="btn btn--tertiary table__block__button" ng-click="group.calendar.from.date = moment(group.calendar.from.date, 'DD/MM/YYYY'); showDatePicker('datePicker0' + group._id)">
+                                    <input date-time readonly="readonly" name="{{'datePicker0' + group._id}}" id="{{'datePicker0' + group._id}}" ng-model="group.calendar.from.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date"/>
+                                    <button class="btn btn--tertiary table__block__button" ng-click=" showDatePicker('datePicker0' + group._id)">
                                         <svg class="svg-icon">
                                             <use xlink:href="#calendar"></use>
                                         </svg>
                                     </button>
                                 </div>
-                                <span ng-show="{{'datePicker0' + group._id + '.$error.required'}} &&{{'datePicker0' + group._id + '.$error.touched'}} ">Required
-                                    <br>
-                                </span>
                                 <div class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:''),group._id, 0); group.calendar.from.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].initDate:'')">
-                                    <input type="text" readonly="readonly" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm" required/>
+                                    <input type="text" readonly="readonly" id="{{'timePicker0' + group._id}}" class="timepicker" ng-model="group.calendar.from.time" placeholder="hh:mm"/>
                                     <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker0' + group._id, $event)">
                                         <svg class="svg-icon">
                                             <use xlink:href="#clock"></use>
@@ -57,15 +54,15 @@
                             <div class="picker__container" ng-init="group.calendar.to={}">
                                 <span class="picker-title">{{'centerMode_date_to' | translate}}</span>
                                 <div class="date-picker" ng-init="initDatePicker();group.calendar.to.date=oldGroups[group._id]?oldGroups[group._id][0].endDate:''">
-                                    <input date-time readonly="readonly" id="{{'datePicker1' + group._id}}" ng-model="group.calendar.to.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date" required/>
-                                    <button class="btn btn--tertiary table__block__button" ng-click="group.calendar.to.date = moment(group.calendar.to.date, 'DD/MM/YYYY');showDatePicker('datePicker1' + group._id)">
+                                    <input date-time readonly="readonly" id="{{'datePicker1' + group._id}}" ng-model="group.calendar.to.date" format="DD/MM/YYYY" placeholder="dd/mm/aaaa" min-view="date" max-view="year" view="date"/>
+                                    <button class="btn btn--tertiary table__block__button" ng-click="showDatePicker('datePicker1' + group._id)">
                                         <svg class="svg-icon">
                                             <use xlink:href="#calendar"></use>
                                         </svg>
                                     </button>
                                 </div>
                                 <div id="time-picker-to" class="time-picker" ng-init="initTimePicker(getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')); group.calendar.to.time = getTime(oldGroups[group._id]?oldGroups[group._id][0].endDate:'')">
-                                    <input type="text" readonly="readonly" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" ng-pattern-restrict="^[0-9 ]{0,2}([: ])*([0-9 ]{0,2})?$" required/>
+                                    <input type="text" readonly="readonly" id="{{'timePicker1' + group._id}}" class="timepicker" ng-model="group.calendar.to.time" placeholder="hh:mm" ng-pattern-restrict="^[0-9 ]{0,2}([: ])*([0-9 ]{0,2})?$"/>
                                     <button class="btn btn--tertiary table__block__button" ng-click="showTimePicker('timePicker1' + group._id, $event, group.calendar.to.time)">
                                         <svg class="svg-icon">
                                             <use xlink:href="#clock"></use>

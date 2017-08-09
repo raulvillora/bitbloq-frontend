@@ -47,19 +47,25 @@
                                 {{'centerMode_editExercise' | translate}}</a>
                         </li>
                         <li class="dropdown__item--separator"></li>
-                        <li class="table__block__item--menu__item" ng-click="editGroups(exercise)" data-element="menu-edit-groups">
+                        <li class="table__block__item--menu__item" ng-if="common.section === 'class'" ng-click="editExerciseGroup(exercise)" data-element="menu-edit-date">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#calendar"></use>
+                            </svg>
+                            {{'centerMode_editDate' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item" ng-if="common.section !== 'class'" ng-click="editGroups(exercise)" data-element="menu-edit-groups">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#people"></use>
                             </svg>
                             {{'centerMode_assignToClasses' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item" ng-click="renameExercise(exercise)" data-element="menu-change-name">
+                        <li class="table__block__item--menu__item" ng-if="common.section !== 'class'" ng-click="renameExercise(exercise)" data-element="menu-change-name">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#pencil"></use>
                             </svg>
                             {{'change-name' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
+                        <li class="table__block__item--menu__item" ng-if="common.section !== 'class'" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#duplicate"></use>
                             </svg>
