@@ -1,15 +1,15 @@
 <div class="center-mode__table__header" ng-if="common.section!=='class' && (exercises.length > 0 || (exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)))">
-  <div class="classes-dropdown--group">
-      <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
-      <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
-      <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
-      <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
-          <svg class="svg-icon--search">
-              <use xlink:href="#search"></use>
-          </svg>
-          <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
-      </span>
-  </div>
+    <div class="classes-dropdown--group">
+        <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
+            <svg class="svg-icon--search">
+                <use xlink:href="#search"></use>
+            </svg>
+            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
+        </span>
+    </div>
 </div>
 <div ng-class="{'loading--content':common.isLoading}"></div>
 <div class="center-mode__table" ng-if="exercises.length > 0">
@@ -51,7 +51,7 @@
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#people"></use>
                             </svg>
-                            {{'centerMode_assignGroup' | translate}}
+                            {{'centerMode_assignToClasses' | translate}}
                         </li>
                         <li class="table__block__item--menu__item" ng-click="renameExercise(exercise)" data-element="menu-change-name">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
@@ -95,8 +95,8 @@
     </div>
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && !search.searchExercisesText && !statusSelected &&!classFilter && common.section==='class'">
-  <h1 class="center-mode--empty__title">{{' centerMode_exercises_group_empty' | translate}}</h1>
-  <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
+    <h1 class="center-mode--empty__title">{{' centerMode_exercises_group_empty' | translate}}</h1>
+    <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)">
     <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty_search' | translate}}</h1>
