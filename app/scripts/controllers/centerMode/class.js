@@ -180,11 +180,35 @@
                 });
             };
 
+
             $scope.deleteExerciseInGroup = function(exerciseId) {
-                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
-                    _getExercisesGroup($routeParams.id, $routeParams.page);
+                var parent = $rootScope,
+                    modalOptions = parent.$new();
+
+                _.extend(modalOptions, {
+                    title: 'unassignClass_modal_title',
+                    confirmButton: 'unassignGroup_modal_acceptButton',
+                    confirmAction: _deleteTasks,
+                    rejectButton: 'modal-button-cancel',
+                    textContent: $scope.common.translate('unassignClass_modal_info', {
+                        value: $scope.group.name
+                    }),
+                    contentTemplate: '/views/modals/information.html',
+                    modalButtons: true
                 });
 
+                var confirmDeleteModal = ngDialog.open({
+                    template: '/views/modals/modal.html',
+                    className: 'modal--container modal--input',
+                    scope: modalOptions
+                });
+
+                function _deleteTasks() {
+                    centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
+                        confirmDeleteModal.close();
+                        _getExercisesGroup($routeParams.id, $routeParams.page);
+                    });
+                }
             };
 
             $scope.deleteStudent = function(student) {
