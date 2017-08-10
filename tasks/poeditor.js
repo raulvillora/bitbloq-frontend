@@ -459,6 +459,7 @@ module.exports = function(grunt) {
         done();
     }
 
+    //grunt getUntranslatedTextsFromProject:38967
     grunt.registerTask('getUntranslatedTextsFromProject', 'get untranslated texts from project', function(projectId, timestamp) {
         var date = new Date(),
             dateFormat = timestamp || date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
