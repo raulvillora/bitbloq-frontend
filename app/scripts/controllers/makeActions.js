@@ -152,17 +152,39 @@ angular.module('bitbloqApp')
         $scope.removeProject = function(project, type) {
             switch (type) {
                 case 'exercise':
-                    exerciseApi.delete(project._id).then(function() {
-                        $log.log('we delete this project');
-                    }, function(error) {
-                        $log.log('Delete error: ', error);
-                        alertsService.add({
-                            text: 'make-delete-project-error',
-                            id: 'deleted-project',
-                            type: 'warning'
-                        });
+                    var currentModal,
+                        parent = $rootScope,
+                        modalOptions = parent.$new();
+                    _.extend(modalOptions, {
+                        title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
+                        confirmButton: 'button_delete',
+                        confirmAction: function() {
+                            exerciseApi.delete(project._id).then(function() {
+                                $log.log('we delete this project');
+                            }, function(error) {
+                                $log.log('Delete error: ', error);
+                                alertsService.add({
+                                    text: 'make-delete-project-error',
+                                    id: 'deleted-project',
+                                    type: 'warning'
+                                });
+                            });
+                            currentModal.close();
+                            $location.path('exercises');
+                        },
+                        rejectButton: 'modal-button-cancel',
+                        contentTemplate: '/views/modals/information.html',
+                        textContent: $scope.common.translate('deleteExercise_modal_information'),
+                        secondaryContent: 'deleteExercise_modal_information-explain',
+                        modalButtons: true
                     });
-                    $location.path('classes');
+
+                    currentModal = ngDialog.open({
+                        template: '/views/modals/modal.html',
+                        className: 'modal--container modal--input',
+                        scope: modalOptions
+                    });
+
                     break;
                 case 'task':
                     exerciseApi.deleteTask(project._id).then(function() {
