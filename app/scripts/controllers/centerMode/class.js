@@ -182,18 +182,7 @@
 
             $scope.deleteExerciseInGroup = function(exerciseId) {
                 centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
-                    _.remove($scope.exercises, function(n) {
-                        return n._id === exerciseId;
-                    });
-                });
-
-            };
-
-            $scope.deleteExerciseInGroup = function(exerciseId) {
-                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
-                    _.remove($scope.exercises, function(n) {
-                        return n._id === exerciseId;
-                    });
+                    _getExercisesGroup($routeParams.id, $routeParams.page);
                 });
 
             };
