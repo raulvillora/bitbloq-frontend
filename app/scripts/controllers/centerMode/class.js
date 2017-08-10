@@ -13,7 +13,7 @@
             $scope.moment = moment;
             $scope.exercises = [];
             $scope.group = {};
-            $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
+            $scope.sortArray = []; //'explore-sortby-recent', 'email', 'name', 'surname'
             $scope.classesStatusArray = [];
             $scope.secondaryBreadcrumb = false;
             $scope.students = [];
