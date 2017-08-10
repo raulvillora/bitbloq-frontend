@@ -85,7 +85,13 @@
                             {{'navigation_text_file_downloadArduinoCode' | translate}}
                         </li>
                         <li class="dropdown__item--separator--thick"></li>
-                        <li ng-if="exercise.creator===common.user._id" class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="deleteExercise(exercise)">
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="common.section==='class'" ng-click="deleteExerciseInGroup(exercise._id); menuActive[$index] = false">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#delete"></use>
+                            </svg>
+                            {{'button_delete_in_group' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="exercise.creator===common.user._id && common.section !=='class'" ng-click="deleteExercise(exercise); menuActive[$index] = false">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#delete"></use>
                             </svg>

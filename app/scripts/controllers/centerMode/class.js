@@ -189,49 +189,13 @@
 
             };
 
-            $scope.deleteExercise = function(exercise) {
-                var confirmAction = function() {
-                        var exerciseId;
-                        if (exercise.exercise) {
-                            exerciseId = exercise.exercise._id;
-                        } else {
-                            exerciseId = exercise._id;
-                        }
-                        exerciseApi.delete(exerciseId).then(function() {
-                            _.remove($scope.exercises, exercise);
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteExercise',
-                                id: 'deleteTask',
-                                type: 'ok',
-                                time: 5000
-                            });
-                        }).catch(function() {
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteExercise-error',
-                                id: 'deleteTask',
-                                type: 'ko'
-                            });
-                        });
-                        currentModal.close();
-                    },
-                    parent = $rootScope,
-                    modalOptions = parent.$new();
-                _.extend(modalOptions, {
-                    title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
-                    confirmButton: 'button_delete',
-                    confirmAction: confirmAction,
-                    rejectButton: 'modal-button-cancel',
-                    contentTemplate: '/views/modals/information.html',
-                    textContent: $scope.common.translate('deleteExercise_modal_information'),
-                    secondaryContent: 'deleteExercise_modal_information-explain',
-                    modalButtons: true
+            $scope.deleteExerciseInGroup = function(exerciseId) {
+                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
+                    _.remove($scope.exercises, function(n) {
+                        return n._id === exerciseId;
+                    });
                 });
 
-                currentModal = ngDialog.open({
-                    template: '/views/modals/modal.html',
-                    className: 'modal--container modal--input',
-                    scope: modalOptions
-                });
             };
 
             $scope.deleteStudent = function(student) {
