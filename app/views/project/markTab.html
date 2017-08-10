@@ -14,11 +14,11 @@
                     <span class="form--input" ng-if="common.userRole!=='student' && currentProject.canMark" data-ng-class="{'input--error': form.projectname.$error.required && publishProjectError}">
                         <span class="container-span" data-tooltip-position="bottom" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered' && currentProject.status!=='corrected'}}">
                             <input type="number" id="exerciseMark0" name="exerciseMark0" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark mark--integer" data-ng-class="{'input--focused':focus === 'exerciseMark0'}" data-ng-model="currentProject.newMark[0]"
-                                   data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="currentProject.status!=='delivered'" data-element="info-exercise-mark0">
+                                   data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }" data-ng-focus="focus = 'exerciseMark0'" data-ng-disabled="currentProject.status!=='delivered' && currentProject.status!=='corrected'" data-element="info-exercise-mark0">
                         </span>
                         <span class="container-span" data-tooltip-position="right" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered' && currentProject.status!=='corrected'}}">
                             <input type="number" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
-                                   data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="currentProject.status!=='delivered'" data-element="info-exercise-mark1">
+                                   data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="currentProject.status!=='delivered' && currentProject.status!=='corrected'" data-element="info-exercise-mark1">
                         </span>
                     </span>
                     <p ng-class="{'form--show-mark': currentProject.mark && currentProject.status==='corrected'}" ng-if="common.userRole==='student'">
@@ -30,7 +30,7 @@
                     <label>{{ 'infoTab_subTitle_exerciseRemark' | translate }}</label>
                     <span class="form--textarea" ng-if="common.userRole!=='student' && currentProject.canMark" data-ng-class="{'input--focused':focus === 'textarea', 'input--error': form.textarea.$error.required && publishProjectError}" data-tooltip-position="bottom" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}" data-tooltips="{{currentProject.status!=='delivered' && currentProject.status!=='corrected'}}">
                         <textarea id="textarea" name="textarea" rows="6" cols="53" placeholder="{{'infoTab_subTitle_exerciseRemark-placeholder' | translate}}" data-ng-init="currentProject.newRemark = currentProject.remark" data-ng-model="currentProject.newRemark" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
-                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user || currentProject.status!=='delivered'" data-element="infotab-exercise-remark"></textarea>
+                                  data-ng-focus="focus = 'textarea'" data-ng-disabled="!common.user || (currentProject.status!=='delivered' && currentProject.status!=='corrected')" data-element="infotab-exercise-remark"></textarea>
                     </span>
                     <p ng-class="{'form--show-description': currentProject.remark  && currentProject.status==='corrected'}" ng-if="common.userRole==='student'">
                         {{currentProject.status==='corrected' && currentProject.remark? currentProject.remark: ('centerMode_task_withoutRemark' | translate)}}

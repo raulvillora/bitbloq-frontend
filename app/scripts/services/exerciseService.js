@@ -672,8 +672,10 @@ angular.module('bitbloqApp')
         };
 
         exports.sendMark = function() {
-            exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
-                exports.exercise.status = 'corrected';
+            exports.getSavePromise().then(function(){
+                exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
+                    exports.exercise.status = 'corrected';
+                });
             });
         };
         //---------------------------------------------------------------------
@@ -754,9 +756,10 @@ angular.module('bitbloqApp')
             exports.exercise.name = exports.exercise.name || '';
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
+                    exports.exercise.newMark[1] = exports.exercise.newMark[0] && !exports.exercise.newMark[1]? 0 : exports.exercise.newMark[1];
                     var newMark = _.join(exports.exercise.newMark, '.');
                     if (newMark === String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark) {
-                        exports.saveStatus = 5;
+                        exports.saveStatus = exports.saveStatus === 1 ? 5 : exports.saveStatus;
                         defered.resolve();
                     } else {
                         exerciseApi.markTask(exports.exercise).then(function() {
