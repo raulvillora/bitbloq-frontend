@@ -476,12 +476,12 @@ module.exports = function(grunt) {
                 async.waterfall([
                     function(done) {
                         async.each(languages, function(item, done) {
-                                exportFromPoeditor(projectId, item.code, 'xliff', 'untranslated', projectId + '_', folder, done);
+                                exportFromPoeditor(projectId, item.code, 'xls', 'untranslated', projectId + '_', folder, done);
                             },
                             done);
                     },
-                    async.apply(fixEnGBFile, projectId, folder),
-                    async.apply(fixPtFile, projectId, folder)
+                    //async.apply(fixEnGBFile, projectId, folder),
+                    //async.apply(fixPtFile, projectId, folder)
                 ], function(err) {
                     if (err) {
                         console.log('error :S ' + err);
