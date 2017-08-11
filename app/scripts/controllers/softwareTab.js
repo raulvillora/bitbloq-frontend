@@ -833,10 +833,10 @@ angular.module('bitbloqApp')
                     advancedBloqs: 'advancedEvolution'
                 }
             },
-            mbot: {
+            mBotV2: {
                 id: 'allMBotBloqs',
-                basicTab: 'mBot',
-                advancedTab: 'advancedMBot',
+                basicTab: 'mbot',
+                advancedTab: 'advancedMBotV2',
                 counter: 0,
                 model: null,
                 showCondition: function() {
@@ -1190,7 +1190,7 @@ angular.module('bitbloqApp')
             $scope.itsCurrentProjectLoaded().then(function() {
                 _.keys($scope.currentProject.selectedBloqs).forEach(function(type) {
                     if (type.indexOf('advanced') === -1) {
-                        if($scope.generalToolboxOptions[type]) {
+                        if ($scope.generalToolboxOptions[type]) {
                             $scope.generalToolboxOptions[type].counter = $scope.statusGeneralCheck(type, null, 'force');
                         }
                     }
