@@ -156,7 +156,7 @@ angular.module('bitbloqApp')
                         parent = $rootScope,
                         modalOptions = parent.$new();
                     _.extend(modalOptions, {
-                        title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
+                        title: $scope.common.translate('deleteExercise_modal_title') + ': ' + project.name,
                         confirmButton: 'button_delete',
                         confirmAction: function() {
                             exerciseApi.delete(project._id).then(function() {
