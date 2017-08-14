@@ -833,10 +833,10 @@ angular.module('bitbloqApp')
                     advancedBloqs: 'advancedEvolution'
                 }
             },
-            mBotV2: {
+            mbotV2: {
                 id: 'allMBotBloqs',
-                basicTab: 'mbot',
-                advancedTab: 'advancedMBotV2',
+                basicTab: 'mbotV2',
+                advancedTab: 'advancedMbotV2',
                 counter: 0,
                 model: null,
                 showCondition: function() {
@@ -850,8 +850,8 @@ angular.module('bitbloqApp')
                 },
                 backgroundImage: true,
                 properties: {
-                    basicBloqs: 'mBotV2',
-                    advancedBloqs: 'advancedMBotV2'
+                    basicBloqs: 'mbotV2',
+                    advancedBloqs: 'advancedMbotV2'
                 }
             },
             rangerlandraider: {
@@ -1190,7 +1190,7 @@ angular.module('bitbloqApp')
             $scope.itsCurrentProjectLoaded().then(function() {
                 _.keys($scope.currentProject.selectedBloqs).forEach(function(type) {
                     if (type.indexOf('advanced') === -1) {
-                        if ($scope.generalToolboxOptions[type]) {
+                        if($scope.generalToolboxOptions[type]) {
                             $scope.generalToolboxOptions[type].counter = $scope.statusGeneralCheck(type, null, 'force');
                         }
                     }
