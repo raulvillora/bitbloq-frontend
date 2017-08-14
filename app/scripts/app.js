@@ -181,6 +181,11 @@ angular
                     templateUrl: 'views/under14authorization.html',
                     controller: 'Under14AuthorizationCtrl'
                 })
+                .when('/class/:classId/exercise-info/:id', {
+                    templateUrl: 'views/centerMode/exerciseInfo.html',
+                    controller: 'ExerciseInfoCtrl',
+                    reloadOnSearch: false
+                })
                 .when('/class/:id?/:child?/:studentId?', {
                     templateUrl: 'views/centerMode/class.html',
                     controller: 'ClassCtrl',
@@ -201,7 +206,7 @@ angular
                     controller: 'ExercisesCtrl',
                     reloadOnSearch: false
                 })
-                .when('/exercise-info/:id?', {
+                .when('/exercise-info/:id', {
                     templateUrl: 'views/centerMode/exerciseInfo.html',
                     controller: 'ExerciseInfoCtrl',
                     reloadOnSearch: false
