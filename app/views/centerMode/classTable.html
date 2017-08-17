@@ -13,7 +13,7 @@
         <p class="empty__info">{{'classes_text_searchEmpty' | translate}}</p>
     </div>
     <ol class="group-list">
-        <li pagination-id="mygroups" dir-paginate="group in groups | itemsPerPage: groupsPerPage track by group._id " ng-init="sectionIndex = $index" current-page="pagination.mygroups.current" total-items="{{groupsCount}}" class="group-list__item" data-element="classes">
+        <li pagination-id="mygroups" dir-paginate="group in groups | itemsPerPage: groupsPerPage track by group._id " ng-init="sectionIndex = $index" current-page="pagination.mygroups.current" total-items="{{groupsCount}}" class="group-list__item" data-element="class-{{group.accessId}}">
             <div class="group--item" ng-click="goTo('/class/' + group._id, $event)">
                 <div id="{{'group__image__container_' + group._id}}" ng-style="{'background-color': group.color}" class="group__image__container" data-element="class-item">
                     <div class="group__image__name">
