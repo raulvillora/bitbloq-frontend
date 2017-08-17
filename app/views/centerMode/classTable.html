@@ -1,7 +1,7 @@
 <div ng-if=" common.userRole!=='student'">
     <div class="classes-dropdown--group">
-        <common-dropdown class="classes-dropdown" options="sortClassesArray" options-click="sortClasses" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
-        <common-dropdown class="classes-dropdown" options="classesStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="sortClassesArray" options-click="sortClasses" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate" data-element="order_dropdown"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="classesStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate" data-element="filter_dropdown"></common-dropdown>
         <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
@@ -17,13 +17,13 @@
             <div class="group--item" ng-click="goTo('/class/' + group._id, $event)">
                 <div id="{{'group__image__container_' + group._id}}" ng-style="{'background-color': group.color}" class="group__image__container" data-element="class-item">
                     <div class="group__image__name">
-                        <p> {{group.name}}</p>
+                        <p data-element="class-list-name"> {{group.name}}</p>
                     </div>
                     <img class="group__image__open" src="../images/common/default-group.png">
                 </div>
                 <div class="group__info__container group__info__header">
                     <div class="group__info__header__data">
-                        <p class="text--secondary group__info--data group__info__header__id">ID {{ group.accessId }} </p>
+                        <p class="text--secondary group__info--data group__info__header__id" data-element="classId-{{group.accessId}}">ID {{ group.accessId }} </p>
                         <p class="text--secondary group__info--data">{{ group.students.length }}{{' '+ ('centerMode_column_students' | translate).toLowerCase()}}</p>
                     </div>
                     <div class="group__info__header__closed" ng-if="group.status === 'closed'">
