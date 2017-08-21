@@ -15,10 +15,10 @@
             </div>
         </div>
         <div class="table__block table__block__exercise">
-            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
+            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}" data-element="task-{{task.name}}">
                 <div class="table__block__item table__item__ellipsis col-vsmall-6">
                     <a class="table__item__text table__item__link" ng-href="{{'#/task/' + task._id}}">
-                        <h2 class="block__item__title">
+                        <h2 class="block__item__title" data-element="task-name-{{task.exercise.name}}">
                             {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name || 'new-exercise' | translate}}
                         </h2>
                     </a>
