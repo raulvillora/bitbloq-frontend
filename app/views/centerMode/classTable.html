@@ -26,7 +26,7 @@
                         <p class="text--secondary group__info--data group__info__header__id" data-element="classId-{{group.accessId}}">ID {{ group.accessId }} </p>
                         <p class="text--secondary group__info--data">{{ group.students.length }}{{' '+ ('centerMode_column_students' | translate).toLowerCase()}}</p>
                     </div>
-                    <div class="group__info__header__closed" ng-if="group.status === 'closed'">
+                    <div class="group__info__header__closed" ng-if="group.status === 'closed'" data-element="archived-class">
                         <p>{{'class-closed'|translate}}</p>
                     </div>
                 </div>
