@@ -11,7 +11,8 @@
             </li>
             <li class="nav__menu__item " ng-class="{'project--title': common.section==='exercise', 'exercise--title': common.section==='task', 'exercise--title-with-roles': common.user._id === currentProject.teacher && common.user._id===currentProject.student._id}">
                 <h1 id="currentproject" class="h3">
-                    <button class="project--name project--name--editable" ng-if="common.section==='exercise'" ng-click="currentProjectService.rename()" data-element="exercise-name">
+                    <button class="project--name project--name--editable" ng-if="common.section==='exercise'" ng-click="currentProjectService.rename()"
+                        data-element="exercise-name">
                         <span>{{currentProject.name || 'new-exercise' | translate}}</span>
                     </button>
                     <span class="project--name" ng-if="common.section==='task'">{{currentProject.name || 'new-exercise' | translate}}</span>
@@ -19,28 +20,37 @@
                 </h1>
                 <div class="make--saving" data-element="project-save-label-{{currentProjectService.getSavingStatusIdLabel()}}">{{ currentProjectService.getSavingStatusIdLabel() | translate }}</div>
             </li>
-            <li class="center-mode__role-options" ng-if="common.user._id === currentProject.teacher && common.user._id === currentProject.student._id" ng-init="common.userRole='student'">
-                <common-dropdown class="task--sort-dropdown" options="roleOptions" options-click="changeRole" selected-option="common.userRole" pre-heading="'Ver como:'"></common-dropdown>
+            <li class="center-mode__role-options" ng-if="common.user._id === currentProject.teacher && common.user._id === currentProject.student._id"
+                ng-init="common.userRole='student'">
+                <common-dropdown class="task--sort-dropdown" options="roleOptions" options-click="changeRole" selected-option="common.userRole"
+                    pre-heading="'Ver como:'"></common-dropdown>
             </li>
-            <li class="nav__menu__item nav__item--white right--last" ng-class="{'exercise-button-wide': common.section==='exercise'  || (common.section ==='task' && common.user._id === currentProject.teacher)}" data-tooltips="true"
-                data-tooltip="{{ currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-compile' :'verify' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || currentProject.hardware.showRobotImage && !robotActivatedInCenter" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
+            <li class="nav__menu__item nav__item--white right--last" ng-class="{'exercise-button-wide': common.section==='exercise'  || (common.section ==='task' && common.user._id === currentProject.teacher)}"
+                data-tooltips="true" data-tooltip="{{ currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-compile' :'verify' | translate }}"
+                data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="verify()" data-ng-disabled="isWeb2BoardInProgress() || currentProject.hardware.showRobotImage && !robotActivatedInCenter"
+                    data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}">
                     <svg class="svg-icon">
                         <use xlink:href="#tick"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" ng-class="{'exercise-button-wide': common.section==='exercise' || (common.section ==='task' && common.user._id === currentProject.teacher)}" data-tooltips="true"
-                data-tooltip="{{currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-upload' :'load' | translate }}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-disabled="isWeb2BoardInProgress()|| currentProject.hardware.showRobotImage && !robotActivatedInCenter" data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}" ng-click="upload()" data-walkthrough="upload">
+            <li class="nav__menu__item nav__item--white right" ng-class="{'exercise-button-wide': common.section==='exercise' || (common.section ==='task' && common.user._id === currentProject.teacher)}"
+                data-tooltips="true" data-tooltip="{{currentProject.hardware.showRobotImage && !robotActivatedInCenter ? 'robots-not-activated-center-upload' :'load' | translate }}"
+                data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-disabled="isWeb2BoardInProgress()|| currentProject.hardware.showRobotImage && !robotActivatedInCenter"
+                    data-ng-disabled="isWeb2BoardInProgress()" data-ng-class="{'btn--make--disabled':isWeb2BoardInProgress()}"
+                    ng-click="upload()" data-walkthrough="upload">
                     <svg class="svg-icon">
                         <use xlink:href="#load"></use>
                     </svg>
                 </button>
             </li>
-            <li class="nav__menu__item nav__item--white right" ng-if="common.section==='task' && common.user._id === currentProject.student._id && common.userRole==='student'" data-tooltips="true"
-                data-tooltip="{{(common.section!=='task'? 'send-to-teacher' : currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltip-position="bottom">
-                <button class="nav__menu__btn btn" data-ng-click="sendTask()" data-ng-disabled="common.section!=='task' || common.userRole!=='student' || currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]" data-ng-class="{'btn--make--disabled':currentProject.status!=='pending'}" data-walkthrough="upload">
+            <li class="nav__menu__item nav__item--white right" ng-if="common.section==='task' && common.user._id === currentProject.student._id && common.userRole==='student'"
+                data-tooltips="true" data-tooltip="{{(common.section!=='task'? 'send-to-teacher' : currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}"
+                data-tooltip-position="bottom">
+                <button class="nav__menu__btn btn" data-ng-click="sendTask()" data-ng-disabled="common.section!=='task' || common.userRole!=='student' || currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]"
+                    data-ng-class="{'btn--make--disabled':currentProject.status!=='pending'}" data-walkthrough="upload" data-element="send-task">
                     <svg class="svg-icon">
                         <use xlink:href="#airplane"></use>
                     </svg>
@@ -54,22 +64,27 @@
     <div data-ng-class="{'content--main':true, 'content--main--collapse':collapsedHeader}" data-ng-click="dropdown = false">
         <aside data-ng-class="{'tabs--make--left':true, 'content--main--collapse':collapsedHeader}">
             <ul class="tabs__menu">
-                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltips="true" data-tooltip="{{ 'exercise-info' | translate }}" data-tooltip-position="right" data-element="info-tab">
+                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltips="true" data-tooltip="{{ 'exercise-info' | translate }}"
+                    data-tooltip-position="right" data-element="info-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#info"></use>
                     </svg>
                 </li>
-                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===0}" data-ng-click="setTab(0)" data-tooltips="true" data-tooltip="{{ 'hardware' | translate }}" data-tooltip-position="right" data-element="hardware-tab">
+                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===0}" data-ng-click="setTab(0)" data-tooltips="true" data-tooltip="{{ 'hardware' | translate }}"
+                    data-tooltip-position="right" data-element="hardware-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#hardware"></use>
                     </svg>
                 </li>
-                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===1}" data-ng-click="setTab(1); handleTour(5)" data-tooltips="true" data-tooltip="{{ 'software' | translate }}" data-tooltip-position="right" data-walkthrough="software-tab" data-element="software-tab">
+                <li data-ng-class="{tabs__menu__item:true, selected:currentTab===1}" data-ng-click="setTab(1); handleTour(5)" data-tooltips="true"
+                    data-tooltip="{{ 'software' | translate }}" data-tooltip-position="right" data-walkthrough="software-tab"
+                    data-element="software-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#software"></use>
                     </svg>
                 </li>
-                <li data-ng-if="common.section==='task'" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'exercise-mark' | translate }}" data-tooltip-position="right" data-element="info-tab">
+                <li data-ng-if="common.section==='task'" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3)"
+                    data-tooltips="true" data-tooltip="{{ 'exercise-mark' | translate }}" data-tooltip-position="right" data-element="correct-tab">
                     <svg class="svg-icon">
                         <use xlink:href="#tickCircle"></use>
                     </svg>
