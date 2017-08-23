@@ -331,7 +331,7 @@
         }, {
             "name": "logicOperations"
         }],
-        "mBot": [{
+        "mbot": [{
             "name": "mBotMove"
         }, {
             "name": "mBotStop"
@@ -348,14 +348,14 @@
         }, {
             "name": "mBotLineFollower"
         }],
-        "advancedMBot": [{
+        "advancedMbot": [{
             "name": "mBotBuzzerAdvanced"
         }, {
             "name": "mBotMoveAdvanced"
         }, {
             "name": "mBotSetLedAdvanced"
         }],
-        "mBotV2": [{
+        "mbotV2": [{
             "name": "mBotMove-v2"
         }, {
             "name": "mBotStop-v2"
@@ -400,7 +400,7 @@
             "addClass": "indent-1",
             "name": "remoteButtonPushedCaseDefault"
         }],
-        "advancedMBotV2": [{
+        "advancedMbotV2": [{
             "name": "mBotMoveAdvanced-v2"
         }, {
             "name": "mBotShowNumberOnLedMatrixAdvanced"

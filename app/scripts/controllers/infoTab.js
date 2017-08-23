@@ -107,10 +107,9 @@ angular.module('bitbloqApp')
         };
 
         $scope.editGroups = function(currentProject, groups) {
-            $scope.currentProjectService.assignGroup(currentProject, $scope.common.user._id, groups)
-                .then(function(response) {
-                    $scope.setGroups(response);
-                });
+            $scope.currentProjectService.assignGroup(currentProject, $scope.common.user._id, groups).then(function(response) {
+                $scope.setGroups(response);
+            });
         };
         $scope.composeImage = composeImage;
 

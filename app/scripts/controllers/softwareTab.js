@@ -833,10 +833,10 @@ angular.module('bitbloqApp')
                     advancedBloqs: 'advancedEvolution'
                 }
             },
-            mbot: {
+            mbotV2: {
                 id: 'allMBotBloqs',
-                basicTab: 'mBot',
-                advancedTab: 'advancedMBot',
+                basicTab: 'mbotV2',
+                advancedTab: 'advancedMbotV2',
                 counter: 0,
                 model: null,
                 showCondition: function() {
@@ -850,8 +850,8 @@ angular.module('bitbloqApp')
                 },
                 backgroundImage: true,
                 properties: {
-                    basicBloqs: 'mBotV2',
-                    advancedBloqs: 'advancedMBotV2'
+                    basicBloqs: 'mbotV2',
+                    advancedBloqs: 'advancedMbotV2'
                 }
             },
             rangerlandraider: {

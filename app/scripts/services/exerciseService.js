@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('exerciseService', function($log, $window, envData, $q, $rootScope, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
+    .service('exerciseService', function($log, $window, envData, $q, $rootScope, $routeParams, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
 
         var exports = {},
             savePromise,
@@ -26,6 +26,7 @@ angular.module('bitbloqApp')
 
         var scope = $rootScope.$new(),
             confirmDeleteModal;
+
         scope.exercise = exports.exercise;
 
         exports.clone = function(exercise) {
@@ -121,29 +122,36 @@ angular.module('bitbloqApp')
                         };
 
                     selectedGroups.forEach(function(group) {
-                        if (group.withoutDate || (!group.calendar.from.time && !group.calendar.to.time)) {
+                        if (group.withoutDate || !group.calendar || (!group.calendar.from.date && !group.calendar.to.date)) {
                             groupsToAssign.push({
                                 group: group._id,
                                 exercise: project._id
                             });
                         } else {
-                            if (group.calendar.from.time) {
+                            if (group.calendar.from.date) {
                                 group.calendar.from.date = moment(group.calendar.from.date);
-                                var hourFrom = group.calendar.from.time.split(':')[0],
-                                    minutesFrom = group.calendar.from.time.split(':')[1];
-                                group.calendar.from.date.hour(hourFrom);
-                                group.calendar.from.date.minute(minutesFrom);
+                                if (group.calendar.from.time) {
+                                    var hourFrom = group.calendar.from.time.split(':')[0],
+                                        minutesFrom = group.calendar.from.time.split(':')[1];
+                                    group.calendar.from.date.hour(hourFrom);
+                                    group.calendar.from.date.minute(minutesFrom);
+                                }
                             } else {
                                 group.calendar.from.date = moment();
                             }
 
-                            if (group.calendar.to.time) {
+                            if (group.calendar.to.date) {
                                 group.calendar.to.date = moment(group.calendar.to.date);
-                                var hourTo = group.calendar.to.time.split(':')[0],
-                                    minutesTo = group.calendar.to.time.split(':')[1];
-
-                                group.calendar.to.date.hour(hourTo);
-                                group.calendar.to.date.minute(minutesTo);
+                                if (group.calendar.to.time) {
+                                    var hourTo = group.calendar.to.time.split(':')[0],
+                                        minutesTo = group.calendar.to.time.split(':')[1];
+                                    group.calendar.to.date.hour(hourTo);
+                                    group.calendar.to.date.minute(minutesTo);
+                                } else {
+                                    group.calendar.to.date.hour(23);
+                                    group.calendar.to.date.minute(59);
+                                    group.calendar.to.date.second(59);
+                                }
                             }
 
                             groupsToAssign.push({
@@ -268,6 +276,7 @@ angular.module('bitbloqApp')
                     getTime: getTime,
                     oldGroups: oldGroups,
                     onlyEdit: onlyEdit,
+                    onlyShowGroup: common.section === 'class' ? $routeParams.id : null,
                     moment: moment,
                     rejectButton: 'modal-button-cancel',
                     rejectAction: defered.reject,
@@ -663,8 +672,10 @@ angular.module('bitbloqApp')
         };
 
         exports.sendMark = function() {
-            exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
-                exports.exercise.status = 'corrected';
+            exports.getSavePromise().then(function(){
+                exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
+                    exports.exercise.status = 'corrected';
+                });
             });
         };
         //---------------------------------------------------------------------
@@ -745,9 +756,11 @@ angular.module('bitbloqApp')
             exports.exercise.name = exports.exercise.name || '';
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
+                    exports.exercise.newMark[1] = exports.exercise.newMark[0] && !exports.exercise.newMark[1]? 0 : exports.exercise.newMark[1];
                     var newMark = _.join(exports.exercise.newMark, '.');
                     if (newMark === String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark) {
-                        exports.saveStatus = 4;
+                        exports.saveStatus = exports.saveStatus === 1 ? 5 : exports.saveStatus;
+                        defered.resolve();
                     } else {
                         exerciseApi.markTask(exports.exercise).then(function() {
                             exports.exercise.mark = newMark;
@@ -777,8 +790,7 @@ angular.module('bitbloqApp')
 
                     if (exports.exercise._id) {
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
-                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id)))
-                        {
+                            (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
                                 .then(function() {
                                     exports.saveStatus = 2;

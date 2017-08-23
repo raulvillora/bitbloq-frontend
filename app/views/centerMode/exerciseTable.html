@@ -1,15 +1,15 @@
 <div class="center-mode__table__header" ng-if="common.section!=='class' && (exercises.length > 0 || (exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)))">
-  <div class="classes-dropdown--group">
-      <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
-      <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
-      <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
-      <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
-          <svg class="svg-icon--search">
-              <use xlink:href="#search"></use>
-          </svg>
-          <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
-      </span>
-  </div>
+    <div class="classes-dropdown--group">
+        <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
+            <svg class="svg-icon--search">
+                <use xlink:href="#search"></use>
+            </svg>
+            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
+        </span>
+    </div>
 </div>
 <div ng-class="{'loading--content':common.isLoading}"></div>
 <div class="center-mode__table" ng-if="exercises.length > 0">
@@ -19,9 +19,9 @@
         <span class="col-vsmall-3 col-text-right">{{'centerMode_column_time' | translate}}</span>
     </div>
     <div class="table__block table__block__exercise">
-        <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}">
+        <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}" data-element="exercise-{{exercise.name}}">
             <div ng-class="common.section==='class' ? 'col-vsmall-8' : 'col-vsmall-5'" class="table__block__item">
-                <a class="table__item__text table__item__link" ng-href="{{'#/exercise-info/' + exercise._id}}" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                <a class="table__item__text table__item__link" ng-href="{{common.section==='class'? '#/class/'+group._id+'/exercise-info/' + exercise._id : '#/exercise-info/' + exercise._id}}" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                     <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                         {{exercise.name || 'new-exercise' | translate}}</h2>
                 </a>
@@ -47,19 +47,25 @@
                                 {{'centerMode_editExercise' | translate}}</a>
                         </li>
                         <li class="dropdown__item--separator"></li>
-                        <li class="table__block__item--menu__item" ng-click="editGroups(exercise)" data-element="menu-edit-groups">
+                        <li class="table__block__item--menu__item" ng-if="common.section === 'class'" ng-click="editExerciseGroup(exercise)" data-element="menu-edit-date">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#calendar"></use>
+                            </svg>
+                            {{'centerMode_editDate' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item" ng-if="common.section !== 'class'" ng-click="editGroups(exercise)" data-element="menu-edit-groups">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#people"></use>
                             </svg>
-                            {{'centerMode_assignGroup' | translate}}
+                            {{'centerMode_assignToClasses' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item" ng-click="renameExercise(exercise)" data-element="menu-change-name">
+                        <li class="table__block__item--menu__item" ng-if="common.section !== 'class'" ng-click="renameExercise(exercise)" data-element="menu-change-name">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#pencil"></use>
                             </svg>
                             {{'change-name' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
+                        <li class="table__block__item--menu__item" ng-if="common.section !== 'class'" ng-click="createExerciseCopy(exercise)" data-element="menu-duplicate">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#duplicate"></use>
                             </svg>
@@ -79,7 +85,13 @@
                             {{'navigation_text_file_downloadArduinoCode' | translate}}
                         </li>
                         <li class="dropdown__item--separator--thick"></li>
-                        <li ng-if="exercise.creator===common.user._id" class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="deleteExercise(exercise)">
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="common.section==='class'" ng-click="deleteExerciseInGroup(exercise._id); menuActive[$index] = false" data-element="menu-delete-exercise-from-class">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#delete"></use>
+                            </svg>
+                            {{'button_delete_in_class' | translate}}
+                        </li>
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="exercise.creator===common.user._id && common.section !=='class'" ng-click="deleteExercise(exercise); menuActive[$index] = false">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#delete"></use>
                             </svg>
@@ -95,8 +107,8 @@
     </div>
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && !search.searchExercisesText && !statusSelected &&!classFilter && common.section==='class'">
-  <h1 class="center-mode--empty__title">{{' centerMode_exercises_group_empty' | translate}}</h1>
-  <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
+    <h1 class="center-mode--empty__title">{{' centerMode_exercises_group_empty' | translate}}</h1>
+    <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)">
     <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty_search' | translate}}</h1>

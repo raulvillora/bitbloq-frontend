@@ -51,7 +51,7 @@
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#people"></use>
                     </svg>
-                    {{'centerMode_assignGroup' | translate}}
+                    {{'centerMode_assignToClasses' | translate}}
                 </div>
             </li>
             <li data-ng-if="common.section === 'task'" data-tooltip-position="right" data-tooltip="{{(currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltips="{{currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]}}">
@@ -216,7 +216,7 @@
                 </div>
             </li>
             <li class="dropdown__item--separator"></li>
-            <li data-tooltip-position="right"  data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':(!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)?'projectActions__text_privateProjectAndNoAdmin':currentProjectService.showActivation?'activate-robot-social':'') | translate}}" data-tooltips="{{!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL) || currentProjectService.showActivation}}">
+            <li data-tooltip-position="right" data-tooltip="{{(!common.user?'need-to-be-logged':!currentProject._id?'empty-project':(!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL)?'projectActions__text_privateProjectAndNoAdmin':currentProjectService.showActivation?'activate-robot-social':'') | translate}}" data-tooltips="{{!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL) || currentProjectService.showActivation}}">
                 <div class="dropdown__item" data-ng-click="publishProject('Social')" data-ng-disabled="!common.user || !currentProject._id || (!utils.userIsOwner(currentProject, common.user._id, common.section) && !currentProject._acl.ALL) || currentProjectService.showActivation" data-element="makeactions-menushare-share-social">
                     <svg class="svg-icon svg-icon--text svg-icon--menu">
                         <use xlink:href="#share"></use>
@@ -277,7 +277,6 @@
             </svg>
         </button>
     </li>
-
     <li class="nav__menu__item right" data-ng-if="currentProject._acl.ALL && currentProject._id && common.user && utils.userIsOwner(currentProject, common.user._id, common.section)" data-tooltip-position="bottom" data-tooltip="{{ 'do-private' | translate }}" data-tooltips="true">
         <button data-ng-click="commonModals.doPrivateProject(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!utils.userIsOwner(currentProject, common.user._id, common.section)}">
             <svg class="svg-icon">
@@ -292,7 +291,7 @@
             </svg>
         </button>
     </li>
-    <li class="nav__menu__item right" data-ng-if="common.section === 'task' && common.user._id !== currentProject.teacher" data-tooltip-position="bottom" data-tooltip="{{(currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltips="true">
+    <li class="nav__menu__item right" data-ng-if="common.section === 'task' && common.user._id === currentProject.student._id  && common.userRole==='student'" data-tooltip-position="bottom" data-tooltip="{{(currentProject.status!=='pending'?'centerMode_deliveredExercise': !onTime()[0]?'centerMode_send_initDateError': !onTime()[1]?'centerMode_send_endDateError' : 'send-to-teacher') | translate}}" data-tooltips="true">
         <button data-ng-click="sendTask(currentProject)" ng-class="{'nav__menu__btn':true, 'btn':true, 'btn--make--disabled':!common.user || currentProject.status!=='pending'}" data-ng-disabled="currentProject.status!=='pending' || !onTime()[0] || !onTime()[1]">
             <svg class="svg-icon">
                 <use xlink:href="#airplane"></use>

@@ -13,8 +13,7 @@
             $scope.moment = moment;
             $scope.exercises = [];
             $scope.group = {};
-            $scope.groups = [];
-            $scope.sortArray = ['explore-sortby-recent', 'email', 'name', 'surname', 'centerMode_column_groups', 'centerMode_column_students'];
+            $scope.sortArray = []; //'explore-sortby-recent', 'email', 'name', 'surname'
             $scope.classesStatusArray = [];
             $scope.secondaryBreadcrumb = false;
             $scope.students = [];
@@ -44,15 +43,6 @@
             $scope.colorPickerFlag = {};
 
             var currentModal;
-
-            $scope.editGroups = function(exercise) {
-                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
-                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data).then(function() {
-                        _getGroups();
-                        _getExercises();
-                    });
-                });
-            };
 
             $scope.changeExerciseMenu = function(index) {
                 var previousState;
@@ -101,16 +91,19 @@
                 });
             };
 
-            $scope.createExerciseCopy = function(exercise) {
-                exerciseService.clone(exercise);
-                localStorage.exercisesChange = true;
+            $scope.editExerciseGroup = function(exercise) {
+                centerModeApi.getGroupsByExercise(exercise._id).then(function(response) {
+                    exerciseService.assignGroup(exercise, $scope.common.user._id, response.data, null, true).then(function(response) {
+                        _getExercisesGroup($routeParams.id, $routeParams.page);
+                    });
+                });
             };
 
             $scope.deleteGroup = function() {
                 var confirmAction = function() {
                         centerModeApi.deleteGroup($scope.group._id).then(function() {
                             alertsService.add({
-                                text: 'centerMode_alert_deleteClass', //La clase eliminada
+                                text: 'centerMode_alert_deleteClass',
                                 id: 'deleteGroup',
                                 type: 'ok',
                                 time: 5000
@@ -118,7 +111,7 @@
                             $location.path('classes');
                         }).catch(function() {
                             alertsService.add({
-                                text: 'centerMode_alert_deleteClass-Error', //Ha ocurrido un error borrando la clase
+                                text: 'centerMode_alert_deleteClass-Error',
                                 id: 'deleteGroup',
                                 type: 'ko'
                             });
@@ -187,58 +180,35 @@
                 });
             };
 
+
             $scope.deleteExerciseInGroup = function(exerciseId) {
-                centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
-                    _.remove($scope.exercises, function(n) {
-                        return n._id === exerciseId;
-                    });
-                });
-
-            };
-
-            $scope.deleteExercise = function(exercise) {
-                var confirmAction = function() {
-                        var exerciseId;
-                        if (exercise.exercise) {
-                            exerciseId = exercise.exercise._id;
-                        } else {
-                            exerciseId = exercise._id;
-                        }
-                        exerciseApi.delete(exerciseId).then(function() {
-                            _.remove($scope.exercises, exercise);
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteExercise',
-                                id: 'deleteTask',
-                                type: 'ok',
-                                time: 5000
-                            });
-                        }).catch(function() {
-                            alertsService.add({
-                                text: 'centerMode_alert_deleteExercise-error',
-                                id: 'deleteTask',
-                                type: 'ko'
-                            });
-                        });
-                        currentModal.close();
-                    },
-                    parent = $rootScope,
+                var parent = $rootScope,
                     modalOptions = parent.$new();
+
                 _.extend(modalOptions, {
-                    title: $scope.common.translate('deleteExercise_modal_title') + ': ' + exercise.name,
-                    confirmButton: 'button_delete',
-                    confirmAction: confirmAction,
+                    title: 'unassignClass_modal_title',
+                    confirmButton: 'unassignGroup_modal_acceptButton',
+                    confirmAction: _deleteTasks,
                     rejectButton: 'modal-button-cancel',
+                    textContent: $scope.common.translate('unassignClass_modal_info', {
+                        value: $scope.group.name
+                    }),
                     contentTemplate: '/views/modals/information.html',
-                    textContent: $scope.common.translate('deleteExercise_modal_information'),
-                    secondaryContent: 'deleteExercise_modal_information-explain',
                     modalButtons: true
                 });
 
-                currentModal = ngDialog.open({
+                var confirmDeleteModal = ngDialog.open({
                     template: '/views/modals/modal.html',
                     className: 'modal--container modal--input',
                     scope: modalOptions
                 });
+
+                function _deleteTasks() {
+                    centerModeApi.unassignExerciseInGroup(exerciseId, $scope.group._id).then(function() {
+                        confirmDeleteModal.close();
+                        _getExercisesGroup($routeParams.id, $routeParams.page);
+                    });
+                }
             };
 
             $scope.deleteStudent = function(student) {
@@ -319,12 +289,6 @@
                         $scope.reverseOrder = false;
                         break;
                 }
-            };
-
-            $scope.renameExercise = function(exercise) {
-                commonModals.rename(exercise, 'exercise').then(function() {
-                    exerciseApi.update(exercise._id, exercise);
-                });
             };
 
             $scope.saveUrl = function(newUrl) {
@@ -447,17 +411,6 @@
                 });
             }
 
-            function _getGroups() {
-                centerModeApi.getMyCentersAsTeacher().then(function(response) {
-                    centerModeService.setCenters(response.data);
-                    $scope.centersArray = [];
-                    _.forEach(centerModeService.centers, function(center) {
-                        $scope.centersArray.push(_.pick(center, ['_id', 'name']));
-                    });
-                    $scope.getCenterGroups(centerModeService.center._id ? centerModeService.center : $scope.centersArray[0]);
-                });
-            }
-
             function _getTasks(groupId, studentId, pageno) {
                 var page = pageno ? pageno : 1,
                     pageParams = {
@@ -479,23 +432,6 @@
                         $location.search('page', page);
                     }
                 });
-            }
-
-            function _getExercises() {
-                var searchParams;
-                searchParams = $routeParams.name ? $routeParams.name : '';
-                if (searchParams) {
-                    $scope.showFilters = true;
-                    $scope.search.searchExercisesText = searchParams;
-                }
-                if ($routeParams.page) {
-                    getTeacherExercisesPaginated($routeParams.page, {
-                        'name': searchParams
-                    });
-                    $scope.pagination.exercises.current = $routeParams.page;
-                } else {
-                    getTeacherExercisesPaginated($scope.pageno);
-                }
             }
 
             function _init() {

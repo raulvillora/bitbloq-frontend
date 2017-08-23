@@ -1226,10 +1226,10 @@ angular.module('bitbloqApp')
                         }
                         projectService.startAutosave();
                         $scope.hardware.firstLoad = false;
-                        finishLoadingWorkspace()
+                        finishLoadingWorkspace();
                     });
                 } else {
-                    finishLoadingWorkspace()
+                    finishLoadingWorkspace();
                 }
             }
         }, function() {

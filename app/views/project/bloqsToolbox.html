@@ -92,11 +92,11 @@
                 <li ng-if="key==='components' && !anyComponent()" class="error--text">{{"no-components-connected" | translate}}</li>
             </ul>
             <!-- mBot V1-->
-            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='mBot' && !currentProject.hardware.showRobotImage">
-                <li id="{{'bloq' + mBot.name}}" data-ng-class="mBot.addClass" data-ng-repeat="mBot in common.properties.bloqsSortTree.mBot" ng-show="common.section !== 'task' || currentProject.selectedBloqs.mBot.indexOf(mBot.name)>-1" data-bitbloq-bloq-creator
-                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mBot[$index].name]" data-components-array="currentProjectService.componentsArray">
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='mbot' && !currentProject.hardware.showRobotImage">
+                <li id="{{'bloq' + mbot.name}}" data-ng-class="mbot.addClass" data-ng-repeat="mbot in common.properties.bloqsSortTree.mbot" ng-show="common.section !== 'task' || currentProject.selectedBloqs.mbot.indexOf(mbot.name)>-1" data-bitbloq-bloq-creator
+                    data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.mbot[$index].name]" data-components-array="currentProjectService.componentsArray">
                     <span class="input input--checkbox">
-                        <input type="checkbox" class="element-toolbox" id="{{mBot.name + 'Check'}}" ng-model="checkModel[mBot.name]" ng-click="addChecks('mBot', checkModel[mBot.name], mBot.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.mBot"/>
+                        <input type="checkbox" class="element-toolbox" id="{{mbot.name + 'Check'}}" ng-model="checkModel[mbot.name]" ng-click="addChecks('mbot', checkModel[mbot.name], mbot.name)" data-indeterminate-checkbox data-children-checkbox="currentProject.selectedBloqs.mbot"/>
                     </span>
                 </li>
             </ul>
@@ -116,7 +116,7 @@
                 </li>
             </ul>
             <!-- mBot V1-->
-            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='mBot' && !currentProject.hardware.showRobotImage">
+            <ul class="toolbox--bloqs--container" ng-show="selectedBloqsToolbox==='mbot' && !currentProject.hardware.showRobotImage">
                 <li id="{{'bloq' + advancedMBot.name}}" data-ng-class="advancedMBot.addClass" data-ng-repeat="advancedMBot in common.properties.bloqsSortTree.advancedMBot" ng-show="common.section !== 'task' || currentProject.selectedBloqs.advancedMBot.indexOf(advancedMBot.name)>-1" data-bitbloq-bloq-creator
                     data-bloq-schema="bloqsApi.schemas[common.properties.bloqsSortTree.advancedMBot[$index].name]" data-components-array="currentProjectService.componentsArray">
                     <span class="input input--checkbox">

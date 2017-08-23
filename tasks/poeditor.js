@@ -459,6 +459,7 @@ module.exports = function(grunt) {
         done();
     }
 
+    //grunt getUntranslatedTextsFromProject:38967
     grunt.registerTask('getUntranslatedTextsFromProject', 'get untranslated texts from project', function(projectId, timestamp) {
         var date = new Date(),
             dateFormat = timestamp || date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '_' + date.getHours() + '-' + date.getMinutes();
@@ -475,12 +476,12 @@ module.exports = function(grunt) {
                 async.waterfall([
                     function(done) {
                         async.each(languages, function(item, done) {
-                                exportFromPoeditor(projectId, item.code, 'xliff', 'untranslated', projectId + '_', folder, done);
+                                exportFromPoeditor(projectId, item.code, 'xls', 'untranslated', projectId + '_', folder, done);
                             },
                             done);
                     },
-                    async.apply(fixEnGBFile, projectId, folder),
-                    async.apply(fixPtFile, projectId, folder)
+                    //async.apply(fixEnGBFile, projectId, folder),
+                    //async.apply(fixPtFile, projectId, folder)
                 ], function(err) {
                     if (err) {
                         console.log('error :S ' + err);

@@ -1,6 +1,21 @@
 <div class="section-header table__header center-mode__header">
-    <div class="breadcrumb header__title breadcrumb-longer second-level col-vsmall-7" data-element="centerMode-header-breadcrumb">
-        <h1><a href="#/exercises">{{'header_tab_myExercises' | translate}}</a></h1>
+    <div ng-if="!class._id" class="breadcrumb header__title breadcrumb-longer second-level col-vsmall-7" data-element="centerMode-header-breadcrumb">
+        <h1>
+            <a href="#/exercises" ng-if="!class._id">{{'header_tab_myExercises' | translate}}</a>
+            <a href="#/classes" ng-if="class._id">{{'header_tab_myClass' | translate}}</a></h1>
+        </h1>
+        <a class="breadcrumb__item" ng-if="class._id" ng-href="#/class/{{class._id}}">
+            {{class.name}}
+        </a>
+        <span class="breadcrumb--secondary">
+            {{exercise.name || common.translate('new-exercise')}}
+        </span>
+    </div>
+    <div ng-if="class._id" class="breadcrumb header__title breadcrumb-longer second-level col-vsmall-7" data-element="centerMode-header-breadcrumb">
+        <h1><a href="#/classes">{{'header_tab_myClass' | translate}}</a></h1>
+        <a class="breadcrumb__item" ng-href="#/class/{{class._id}}">
+            {{class.name}}
+        </a>
         <span class="breadcrumb--secondary">
             {{exercise.name || common.translate('new-exercise')}}
         </span>
@@ -11,13 +26,13 @@
         <div class="center-mode__block row">
             <div class="row">
                 <div class="col-vsmall-5 exercise-info__classes">
-                    <div class="exercise-info__class">
+                    <div class="exercise-info__class" ng-if="!class._id">
                         <svg class="svg-icon svg-icon--text svg-icon--menu svg-icon-classes">
                             <use xlink:href="#people"></use>
                         </svg>
                         <span class="exercise-info--text">{{'classes' | translate}}</span>
                     </div>
-                    <div class="exercise-info--dropdown">
+                    <div class="exercise-info--dropdown" ng-if="!class._id">
                         <common-dropdown ng-if="groupArray.length>0" class="" options="groupArray" options-click="getTasksByGroup" heading-option="groupArray[0].name"></common-dropdown>
                         <button class="btn btn--primary btn--small" ng-if="groupArray.length===0" ng-click="assignToGroup(exercise)">{{'centerMode_assignToClasses' | translate}}</button>
                     </div>

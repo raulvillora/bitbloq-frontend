@@ -4,37 +4,55 @@
             <div class="col-vsmall-6">
                 <span>{{'centerMode_column_name' | translate}}</span>
             </div>
-            <div class="col-vsmall-2">
+            <div class="col-vsmall-2" ng-if="common.section==='exercise-info'">
                 <span>{{'centerMode_column_mark' | translate}}</span>
             </div>
             <div class="col-vsmall-1">
                 <span>{{'centerMode_column_status' | translate}}</span>
             </div>
+            <div class="col-vsmall-2 col-text-right" ng-if="common.section!=='exercise-info'">
+                <span>{{'centerMode_column_time' | translate}}</span>
+            </div>
         </div>
         <div class="table__block table__block__exercise">
-            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current" total-items="{{tasksCount}}">
+            <div class="table__block__list table__block__hover row" dir-paginate="task in tasks | itemsPerPage: itemsPerPage" current-page="pagination.tasks.current"
+                total-items="{{tasksCount}}" data-element="task-{{task.exercise.name}}">
                 <div class="table__block__item table__item__ellipsis col-vsmall-6">
-                    <h2 class="block__item__title">
-                        {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name || 'new-exercise' | translate}}
-                    </h2>
+                    <a class="table__item__text table__item__link" ng-href="{{'#/task/' + task._id}}">
+                        <h2 class="block__item__title" data-element="task-name-{{task.exercise.name}}">
+                            {{(task.firstName? task.firstName + ' ' + task.lastName : task.username) || task.name || task.exercise.name || 'new-exercise'
+                            | translate}}
+                        </h2>
+                    </a>
                 </div>
-                <div class="table__block__item col-vsmall-2">
+                <div class="table__block__item col-vsmall-2" ng-if="common.section==='exercise-info'">
                     <span data-element="{{'centerMode-task-mark' + task._id}}">
                         {{task.status==='corrected'? task.mark || '-' : '-'}}
                     </span>
                 </div>
                 <div class="table__block__item col-vsmall-1">
-                    <span ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected'}" data-element="{{'centerMode-task-status' + task._id}}">
+                    <span ng-if="common.section==='exercise-info'" ng-class="{'status-notCorrected': task.status==='delivered', 'status-corrected' : task.status==='corrected'}"
+                        data-element="centerMode-task-status-{{task.exercise.name}}">
                         {{task.status==='corrected'? 'centerMode_status_corrected' : task.status==='delivered'? 'centerMode_status_notCorrected' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending' | translate}}
                     </span>
+                    <span ng-if="common.section!=='exercise-info'" ng-class="{'centerMode_status_delivered': task.status==='delivered', 'status-mark' : task.status==='corrected', 'status-notCorrected': task.status==='notDelivered'}"
+                        data-element="centerMode-task-status-{{task.exercise.name}}">
+                        {{task.status==='corrected'? task.mark : task.status==='delivered'? 'centerMode_status_delivered' : task.status==='notDelivered' ? 'centerMode_status_notDelivered' : 'centerMode_status_pending' | translate}}
+                    </span>
+                </div>
+                <div class="table__block__item col-vsmall-2 col-text-right" ng-if="common.section!=='exercise-info'">
+                    <p class="fist-uppercase" data-element="{{'centerMode-endDate' + task.name}}">
+                        {{task.endDate? moment(task.endDate).fromNow() : ('time-unlimited' | translate)}}
+                    </p>
                 </div>
                 <div class="table__block__item table__column--hover table__column--right col-vsmall-3">
-                    <button class="btn btn--quaternary btn--small btn--delete table__item__btn" ng-if="common.section==='class'" ng-click="deleteTask(task)" data-element="{{'centerMode-button-deleteTask' + task._id}}">
+                    <button class="btn btn--quaternary btn--small btn--delete table__item__btn" ng-if="common.section==='class'" ng-click="deleteTask(task)"
+                        data-element="{{'centerMode-button-deleteTask' + task.exercise.name}}">
                         <svg class="svg-icon">
                             <use xlink:href="#delete"></use>
                         </svg>
                     </button>
-                    <a class="btn btn--quaternary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="{{'centerMode-button-showTask' + task._id}}">
+                    <a class="btn btn--quaternary btn--small table__item__btn" ng-href="{{'#/task/' + task._id}}" target="_blank" data-element="centerMode-button-showTask-{{task.exercise.name}}">
                         {{common.userRole==='student' || (task.status!=='delivered' || task.status==='corrected' || (task.status==='delivered' && task.mark))? 'see': 'centerMode_button_correct' | translate}}
                     </a>
                 </div>

@@ -1,26 +1,24 @@
 <div class="section-header table__header center-mode__header">
     <div class="breadcrumb header__title col-vsmall-7" data-element="centerMode-header-breadcrumb">
         <h1 class="breadcrumb__title">{{groupArray.length === 1 ? 'header_tab_tasks_of' : 'header_tab_tasks' | translate}}</h1>
-        <h1 class="breadcrumb__title" ng-if="groupArray.length === 1">{{groupArray[0].name}}</h1>
+        <h1 class="breadcrumb__title" ng-if="groupArray.length === 1" data-element="tasks-dashboard-class-name">{{groupArray[0].name}}</h1>
     </div>
     <div class="button-group">
-            <h1 class="header__title class__title" ng-if="groupArray.length > 1">{{'centermode-class' | translate}}</h1>
-            <common-dropdown ng-if="groupArray.length > 1" class="class-dropdown" options="groupArray" options-click="getTasksInGroup" heading-option="groupArray[0].name"></common-dropdown>
-
-            <button class="btn btn--add" ng-if="groupArray.length > 1" ng-click="registerInGroup()">
-                <svg class="svg-icon">
-                    <use xlink:href="#plus"></use>
-                </svg>
-            </button>
-             <button class="btn btn--primary btn--small btn---addclass"  ng-if="groupArray.length === 1" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
-               <svg class="svg-icon svg-icon--text">
-                   <use xlink:href="#plus"></use>
-               </svg>
+        <h1 class="header__title class__title" ng-if="groupArray.length > 1">{{'centermode-class' | translate}}</h1>
+        <common-dropdown ng-if="groupArray.length > 1" class="class-dropdown" options="groupArray" options-click="getTasksInGroup" heading-option="groupArray[0].name"></common-dropdown>
+        <button class="btn btn--add" ng-if="groupArray.length > 1" ng-click="registerInGroup()">
+            <svg class="svg-icon">
+                <use xlink:href="#plus"></use>
+            </svg>
+        </button>
+        <button class="btn btn--primary btn--small btn---addclass" ng-if="groupArray.length === 1" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
+            <svg class="svg-icon svg-icon--text">
+                <use xlink:href="#plus"></use>
+            </svg>
             {{'centerMode_student_registerInClass' | translate}}
         </button>
     </div>
 </div>
-
 <div class="table__page table__page--with-header">
     <div class="center-mode table__main">
         <div class="table__item" ng-include="'views/centerMode/taskTable.html'"></div>

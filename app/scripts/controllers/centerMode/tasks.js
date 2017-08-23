@@ -7,12 +7,12 @@
      * # TasksCtrl
      * Controller of the bitbloqApp
      */
-    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
-    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
-    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
-    //by Jose
+        //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+        //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+        //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+        //by Jose
     angular.module('bitbloqApp')
-        .controller('TasksCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $q) {
+        .controller('TasksCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $q, moment) {
             $scope.tasks = [];
             $scope.pageno = 1;
             $scope.tasksCount = 0;
@@ -25,6 +25,7 @@
             };
             $scope.exerciseService = exerciseService;
             $scope.centerModeService = centerModeService;
+            $scope.moment = moment;
 
             var currentModal,
                 groupSelected;

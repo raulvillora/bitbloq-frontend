@@ -10,6 +10,7 @@
     angular.module('bitbloqApp')
         .controller('ExerciseInfoCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $document, utils, $q) {
             $scope.tasks = [];
+            $scope.class = {};
             $scope.groups = [];
             $scope.pageno = 1;
             $scope.itemsPerPage = 10;
@@ -127,9 +128,18 @@
             }
 
             function _checkUrl() {
-                _getGroups($routeParams.id).then(function() {
-                    _getExercise($routeParams.id);
-                });
+                $scope.common.section = 'exercise-info';
+                if ($routeParams.classId) {
+                    centerModeApi.getGroup($routeParams.classId).then(function(response){
+                        $scope.class = response.data;
+                        $scope.groupSelected = $scope.class;
+                        _getExercise($routeParams.id);
+                    });
+                } else {
+                    _getGroups($routeParams.id).then(function() {
+                        _getExercise($routeParams.id);
+                    });
+                }
             }
 
             function _getExercise(exerciseId) {
