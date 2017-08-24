@@ -792,7 +792,10 @@ angular.module('bitbloqApp')
                 }
 
                 thirdPartyRobotsApi.exchangeCode(actCode, robot, centerId, type).then(function(res) {
-                    common.user.thirdPartyRobots = res.data;
+
+                    if (!centerId) {
+                        common.user.thirdPartyRobots = res.data;
+                    }
                     activateModal.close();
                     alertsService.add({
                         text: 'modal-activate-robot-ok',

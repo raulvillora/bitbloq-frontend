@@ -8,7 +8,7 @@
  * Service in the bitbloqApp.
  */
 angular.module('bitbloqApp')
-    .service('exerciseService', function($log, $window, envData, $q, $rootScope, $routeParams, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
+    .service('exerciseService', function ($log, $window, envData, $q, $rootScope, $routeParams, _, alertsService, centerModeService, ngDialog, imageApi, common, utils, $translate, bowerData, $timeout, hardwareService, exerciseApi, $route, $location, bloqsUtils, hw2Bloqs, commonModals, arduinoGeneration, centerModeApi) {
 
         var exports = {},
             savePromise,
@@ -29,7 +29,7 @@ angular.module('bitbloqApp')
 
         scope.exercise = exports.exercise;
 
-        exports.clone = function(exercise) {
+        exports.clone = function (exercise) {
             if (!exercise) {
                 exercise = exports.exercise;
                 exports.completedExercise();
@@ -37,17 +37,17 @@ angular.module('bitbloqApp')
             commonModals.clone(exercise, true, 'exercise');
         };
 
-        exports.showActivationModal = function(robotFamily) {
+        exports.showActivationModal = function (robotFamily) {
             var robotModal = robotFamily ? robotFamily : robotsMap[exports.exercise.hardware.showRobotImage].family;
             if (common.section !== 'task' && common.section !== 'exercise') {
-                commonModals.activateRobot(robotModal).then(function() {
+                commonModals.activateRobot(robotModal).then(function () {
                     exports.showActivation = false;
                     exports.closeActivation = false;
                 });
             }
         };
 
-        exports.getRobotsMap = function(hardwareConstants) {
+        exports.getRobotsMap = function (hardwareConstants) {
             var map = {};
             for (var i = 0; i < hardwareConstants.robots.length; i++) {
                 map[hardwareConstants.robots[i].uuid] = hardwareConstants.robots[i];
@@ -56,14 +56,14 @@ angular.module('bitbloqApp')
         };
         var robotsMap = [];
 
-        hardwareService.itsHardwareLoaded().then(function() {
+        hardwareService.itsHardwareLoaded().then(function () {
             robotsMap = exports.getRobotsMap(hardwareService.hardware);
         });
 
         exports.showActivation = false;
         exports.closeActivation = false;
 
-        exports.completedExercise = function() {
+        exports.completedExercise = function () {
             if (exports.bloqs.varsBloq) {
                 exports.exercise.software = {
                     vars: exports.bloqs.varsBloq.getBloqsStructure(),
@@ -77,7 +77,7 @@ angular.module('bitbloqApp')
             exports.exercise.code = exports.getCode();
         };
 
-        exports.download = function(exercise, type) {
+        exports.download = function (exercise, type) {
             exercise = exports.getCleanExercise(exercise || exports.exercise, true);
             type = type || 'json';
             if (type === 'arduino') {
@@ -88,19 +88,19 @@ angular.module('bitbloqApp')
 
         };
 
-        exports.assignGroup = function(exercise, teacherId, oldGroups, centerId, onlyEdit) {
+        exports.assignGroup = function (exercise, teacherId, oldGroups, centerId, onlyEdit) {
             var defered = $q.defer(),
                 checkWatchers = [];
             oldGroups = _.groupBy(oldGroups, '_id');
-            centerModeApi.getGroups('teacher', null, null, true).then(function(response) {
+            centerModeApi.getGroups('teacher', null, null, true).then(function (response) {
                 var groups = response.data;
-                _.forEach(groups, function(group) {
+                _.forEach(groups, function (group) {
                     group.selected = !!oldGroups[group._id];
                 });
 
                 function confirmAction(groups) {
                     if (!exercise._id) {
-                        _saveExercise().then(function() {
+                        _saveExercise().then(function () {
                             assign(groups, exports.exercise);
                         });
                     } else {
@@ -111,8 +111,8 @@ angular.module('bitbloqApp')
 
                 function assign(groups, project) {
                     var selectedGroups = _.filter(groups, {
-                            'selected': true
-                        }),
+                        'selected': true
+                    }),
                         groupsToAssign = [],
                         removedGroups = {
                             groupIds: _.map(_.filter(groups, {
@@ -121,7 +121,7 @@ angular.module('bitbloqApp')
                             exerciseId: project._id
                         };
 
-                    selectedGroups.forEach(function(group) {
+                    selectedGroups.forEach(function (group) {
                         if (group.withoutDate || !group.calendar || (!group.calendar.from.date && !group.calendar.to.date)) {
                             groupsToAssign.push({
                                 group: group._id,
@@ -162,7 +162,7 @@ angular.module('bitbloqApp')
                             });
                         }
                     });
-                    exerciseApi.assignGroups(groupsToAssign, removedGroups).then(function(response) {
+                    exerciseApi.assignGroups(groupsToAssign, removedGroups).then(function (response) {
                         defered.resolve(response.data);
                         assignModal.close();
                         alertsService.add({
@@ -171,7 +171,7 @@ angular.module('bitbloqApp')
                             type: 'info',
                             time: 5000
                         });
-                    }).catch(function() {
+                    }).catch(function () {
                         defered.reject();
                         assignModal.close();
                         alertsService.add({
@@ -187,7 +187,7 @@ angular.module('bitbloqApp')
                     assignModal;
 
                 function showDatePicker(datePickerId) {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#' + datePickerId).focus();
                     }, 0);
                 }
@@ -221,7 +221,7 @@ angular.module('bitbloqApp')
                 }
 
                 function _newGroup() {
-                    centerModeService.newGroup(teacherId, centerId).then(function(response) {
+                    centerModeService.newGroup(teacherId, centerId).then(function (response) {
                         groups.push(response.data);
                         _.extend(modalOptions, {
                             groups: groups
@@ -231,10 +231,10 @@ angular.module('bitbloqApp')
 
                 function allCheckWatchers(groups) {
                     var cloneGroups = _.cloneDeep(groups);
-                    _.forEach(groups, function(group, index) {
-                        checkWatchers[index] = modalOptions.$watch('groups[' + index + '].selected', function(newVal, oldVal) {
+                    _.forEach(groups, function (group, index) {
+                        checkWatchers[index] = modalOptions.$watch('groups[' + index + '].selected', function (newVal, oldVal) {
                             if (oldVal && newVal !== oldVal) {
-                                var oldGroup = _.find(cloneGroups, function(item) {
+                                var oldGroup = _.find(cloneGroups, function (item) {
                                     return item._id === group._id;
                                 });
                                 if (oldGroup.selected) {
@@ -246,7 +246,7 @@ angular.module('bitbloqApp')
                 }
 
                 function deleteAllWatchers() {
-                    _.forEach(checkWatchers, function(watcher) {
+                    _.forEach(checkWatchers, function (watcher) {
                         watcher();
                     });
                 }
@@ -297,7 +297,7 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.getDatetime = function(date, diff) {
+        exports.getDatetime = function (date, diff) {
             var now = moment(),
                 result = '';
             if (date) {
@@ -314,8 +314,8 @@ angular.module('bitbloqApp')
             return result;
         };
 
-        exports.saveInMyProjects = function(taskId) {
-            exerciseApi.taskToProject(taskId || exports.exercise._id).then(function() {
+        exports.saveInMyProjects = function (taskId) {
+            exerciseApi.taskToProject(taskId || exports.exercise._id).then(function () {
                 alertsService.add({
                     text: 'centerMode__alert__saveInMyProjects',
                     id: 'centerMode-saveInMyProjects',
@@ -325,7 +325,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        exports.rename = function() {
+        exports.rename = function () {
             commonModals.rename(exports.exercise, 'exercise').then(exports.startAutosave);
         };
 
@@ -357,21 +357,21 @@ angular.module('bitbloqApp')
 
         exports.tempImage = {};
 
-        exports.addComponentInComponentsArray = function(category, newComponent) {
+        exports.addComponentInComponentsArray = function (category, newComponent) {
             exports.componentsArray[category].push(newComponent);
         };
 
-        exports.removeComponentInComponentsArray = function(category, componentName) {
+        exports.removeComponentInComponentsArray = function (category, componentName) {
             _.remove(exports.componentsArray[category], {
                 name: componentName
             });
         };
 
-        exports.isEmptyComponentArray = function() {
+        exports.isEmptyComponentArray = function () {
             return _.isEqual(exports.componentsArray, bloqsUtils.getEmptyComponentsArray());
         };
 
-        exports.checkPublish = function(type) {
+        exports.checkPublish = function (type) {
             var defered = $q.defer();
             type = type || '';
             var exerciseEmptyName = common.translate('new-exercise');
@@ -404,10 +404,10 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.findComponentInComponentsArray = function(myUid) {
+        exports.findComponentInComponentsArray = function (myUid) {
             var myComponent;
-            _.forEach(exports.componentsArray, function(element) {
-                var tmpComponent = _.find(element, function(item) {
+            _.forEach(exports.componentsArray, function (element) {
+                var tmpComponent = _.find(element, function (item) {
                     return item.uid === myUid;
                 });
                 if (tmpComponent) {
@@ -417,17 +417,17 @@ angular.module('bitbloqApp')
             return myComponent;
         };
 
-        exports.getBoardMetaData = function() {
-            return _.find(common.userHardware.boards, function(board) {
+        exports.getBoardMetaData = function () {
+            return _.find(common.userHardware.boards, function (board) {
                 return (board.uuid === exports.exercise.hardware.board || board.name === exports.exercise.hardware.board);
             });
         };
 
-        exports.getRobotMetaData = function(robotId) {
+        exports.getRobotMetaData = function (robotId) {
             var defered = $q.defer();
             robotId = robotId || exports.exercise.hardware.robot;
-            hardwareService.itsHardwareLoaded().then(function() {
-                defered.resolve(_.find(hardwareService.hardware.robots, function(robot) {
+            hardwareService.itsHardwareLoaded().then(function () {
+                defered.resolve(_.find(hardwareService.hardware.robots, function (robot) {
                     return robot.uuid === robotId;
                 }));
             });
@@ -435,7 +435,7 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.getCleanExercise = function(exerciseRef, download) {
+        exports.getCleanExercise = function (exerciseRef, download) {
             exerciseRef = exerciseRef || exports.exercise;
             var cleanExercise = _.cloneDeep(exerciseRef);
             if (download) {
@@ -450,7 +450,7 @@ angular.module('bitbloqApp')
             return cleanExercise;
         };
 
-        exports.getCode = function() {
+        exports.getCode = function () {
             var code;
             _updateHardwareSchema();
             var wirelessComponents = _getWirelessConnectionComponents();
@@ -475,10 +475,10 @@ angular.module('bitbloqApp')
         function getDefaultSelectedBloqs() {
             var def = $q.defer();
             if (_.isEmpty(defaultSelectedBloqs)) {
-                common.itsPropertyLoaded().then(function() {
-                    _.forEach(common.properties.bloqsSortTree, function(value, key) {
+                common.itsPropertyLoaded().then(function () {
+                    _.forEach(common.properties.bloqsSortTree, function (value, key) {
                         var bloqsArray = [];
-                        _.forEach(value, function(item) {
+                        _.forEach(value, function (item) {
                             bloqsArray.push(item.name);
                         });
                         defaultSelectedBloqs[key] = bloqsArray;
@@ -492,7 +492,7 @@ angular.module('bitbloqApp')
 
         }
 
-        exports.getDefaultExercise = function() {
+        exports.getDefaultExercise = function () {
             var def = $q.defer();
             var exercise = {
                 creator: '',
@@ -539,25 +539,25 @@ angular.module('bitbloqApp')
                 userCanUpdate: true
             };
 
-            getDefaultSelectedBloqs().then(function(selectedBloqs) {
+            getDefaultSelectedBloqs().then(function (selectedBloqs) {
                 exercise.selectedBloqs = selectedBloqs;
                 def.resolve(exercise);
-            }).catch(function() {
+            }).catch(function () {
                 def.reject(exercise);
             });
 
             return def.promise;
         };
 
-        exports.getSavePromise = function() {
+        exports.getSavePromise = function () {
             return savePromise;
         };
 
-        exports.getSavingStatusIdLabel = function() {
+        exports.getSavingStatusIdLabel = function () {
             return exports.savingStatusIdLabels[exports.saveStatus];
         };
 
-        exports.isShared = function(exercise) {
+        exports.isShared = function (exercise) {
             var found = false,
                 i = 0,
                 propertyNames = Object.getOwnPropertyNames(exercise._acl);
@@ -570,9 +570,9 @@ angular.module('bitbloqApp')
             return found;
         };
 
-        exports.initBloqsExercise = function(watchers) {
+        exports.initBloqsExercise = function (watchers) {
             var def = $q.defer();
-            exports.getDefaultExercise().then(function(defaultExercise) {
+            exports.getDefaultExercise().then(function (defaultExercise) {
                 exports.exercise = _.extend(exports.exercise, defaultExercise);
                 exports.setComponentsArray();
                 if (watchers) {
@@ -582,16 +582,16 @@ angular.module('bitbloqApp')
             return def.promise;
         };
 
-        exports.exerciseHasChanged = function() {
+        exports.exerciseHasChanged = function () {
             var identicalExerciseObject = _.isEqual(exports.exercise, oldExercise);
             return !identicalExerciseObject || (exports.tempImage.file);
         };
 
-        exports.saveOldExercise = function() {
+        exports.saveOldExercise = function () {
             oldExercise = _.cloneDeep(exports.exercise);
         };
 
-        exports.setComponentsArray = function(components) {
+        exports.setComponentsArray = function (components) {
             if (components) {
                 exports.componentsArray = components;
             } else {
@@ -600,7 +600,7 @@ angular.module('bitbloqApp')
                     exports.exercise.hardware.components = [];
                     exports.exercise.hardware.connections = [];
                 }
-                exports.exercise.hardware.components.forEach(function(comp) {
+                exports.exercise.hardware.components.forEach(function (comp) {
                     if (comp.oscillator === true || comp.oscillator === 'true') {
                         exports.componentsArray.oscillators.push(_.cloneDeep(comp));
                     } else {
@@ -616,7 +616,7 @@ angular.module('bitbloqApp')
         ///temp fix to code refactor, sensor types
         var sensorsTypes = {};
         var sensorsArray = [];
-        hardwareService.itsHardwareLoaded().then(function() {
+        hardwareService.itsHardwareLoaded().then(function () {
             sensorsArray = _.filter(hardwareService.hardware.components, {
                 category: 'sensors'
             });
@@ -626,7 +626,7 @@ angular.module('bitbloqApp')
             sensorsTypes[sensorsArray[i].uuid] = sensorsArray[i].dataReturnType;
         }
 
-        exports.setExercise = function(newExercise) {
+        exports.setExercise = function (newExercise) {
             var defered = $q.defer();
             for (var i = 0; i < newExercise.hardware.components.length; i++) {
                 if (newExercise.hardware.components[i].category === 'sensors') {
@@ -636,7 +636,7 @@ angular.module('bitbloqApp')
             //end temp fix
 
             if (_.isEmpty(exports.exercise)) {
-                exports.getDefaultExercise().then(function(defaultExercise) {
+                exports.getDefaultExercise().then(function (defaultExercise) {
                     exports.exercise = defaultExercise;
                     _.extend(exports.exercise, newExercise);
                     exports.setComponentsArray();
@@ -653,7 +653,7 @@ angular.module('bitbloqApp')
             return defered.promise;
         };
 
-        exports.startAutosave = function(hard) {
+        exports.startAutosave = function (hard) {
             if (!exports.exercise._id || exports.exercise.userCanUpdate || exports.exercise.canMark) {
                 if (common.user) {
                     exports.saveStatus = 1;
@@ -671,9 +671,9 @@ angular.module('bitbloqApp')
             }
         };
 
-        exports.sendMark = function() {
-            exports.getSavePromise().then(function(){
-                exerciseApi.sendMarkTask(exports.exercise._id).then(function() {
+        exports.sendMark = function () {
+            exports.getSavePromise().then(function () {
+                exerciseApi.sendMarkTask(exports.exercise._id).then(function () {
                     exports.exercise.status = 'corrected';
                 });
             });
@@ -684,7 +684,7 @@ angular.module('bitbloqApp')
         //---------------------------------------------------------------------
         //---------------------------------------------------------------------
 
-        exports.getExerciseOrTask = function(id) {
+        exports.getExerciseOrTask = function (id) {
             if (common.section === 'task') {
                 return exerciseApi.getTask(id);
             } else {
@@ -727,7 +727,7 @@ angular.module('bitbloqApp')
 
         function _getWirelessConnectionComponents() {
             var wirelessComponentArray = [];
-            _.forEach(exports.componentsArray, function(component) {
+            _.forEach(exports.componentsArray, function (component) {
                 var wirelessComponent = _.filter(component, {
                     wirelessConnection: true
                 });
@@ -739,7 +739,7 @@ angular.module('bitbloqApp')
         }
 
         function _includeComponents(components) {
-            _.forEach(components, function(component) {
+            _.forEach(components, function (component) {
                 exports.project.hardware.components.push(component);
             });
         }
@@ -756,19 +756,19 @@ angular.module('bitbloqApp')
             exports.exercise.name = exports.exercise.name || '';
             if (exports.exercise.canMark) {
                 if (exports.exercise.newMark || exports.exercise.newRemark) {
-                    exports.exercise.newMark[1] = exports.exercise.newMark[0] && !exports.exercise.newMark[1]? 0 : exports.exercise.newMark[1];
+                    exports.exercise.newMark[1] = exports.exercise.newMark[0] && !exports.exercise.newMark[1] ? 0 : exports.exercise.newMark[1];
                     var newMark = _.join(exports.exercise.newMark, '.');
                     if (newMark === String(exports.exercise.mark) && exports.exercise.newRemark === exports.exercise.remark) {
                         exports.saveStatus = exports.saveStatus === 1 ? 5 : exports.saveStatus;
                         defered.resolve();
                     } else {
-                        exerciseApi.markTask(exports.exercise).then(function() {
+                        exerciseApi.markTask(exports.exercise).then(function () {
                             exports.exercise.mark = newMark;
                             exports.exercise.remark = exports.exercise.newRemark;
                             exports.saveStatus = 5;
                             localStorage.exercisesChange = true;
                             defered.resolve();
-                        }).catch(function() {
+                        }).catch(function () {
                             exports.saveStatus = 3;
                             defered.reject();
                         });
@@ -792,13 +792,13 @@ angular.module('bitbloqApp')
                         if ((common.userRole === 'teacher' && (exports.exercise.teacher === common.user._id || exports.exercise.teacher._id === common.user._id)) ||
                             (common.userRole === 'headmaster' && (exports.exercise.creator === common.user._id || exports.exercise.creator._id === common.user._id || exports.exercise.teacher === common.user._id))) {
                             return _updateExerciseOrTask(exports.exercise._id, exports.getCleanExercise())
-                                .then(function() {
+                                .then(function () {
                                     exports.saveStatus = 2;
                                     exports.saveOldExercise();
                                     localStorage.exercisesChange = true;
                                     if (exports.tempImage.file) {
                                         imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise')
-                                            .then(function() {
+                                            .then(function () {
                                                 exports.tempImage = {};
                                             });
                                     }
@@ -813,13 +813,13 @@ angular.module('bitbloqApp')
                                     date = moment(exports.exercise.endDate);
                                 if (!exports.exercise.endDate || date.diff(now) >= 0) {
                                     return exerciseApi.updateTask(exports.exercise._id, exports.getCleanExercise())
-                                        .then(function() {
+                                        .then(function () {
                                             exports.saveStatus = 2;
                                             exports.saveOldExercise();
                                             localStorage.exercisesChange = true;
                                             if (exports.tempImage.file) {
                                                 imageApi.save(exports.exercise._id, exports.tempImage.file, 'exercise')
-                                                    .then(function() {
+                                                    .then(function () {
                                                         exports.tempImage = {};
                                                     });
                                             }
@@ -836,7 +836,7 @@ angular.module('bitbloqApp')
                     } else {
                         if (common.user) {
                             exports.exercise.creator = common.user._id;
-                            return exerciseApi.save(exports.getCleanExercise()).then(function(response) {
+                            return exerciseApi.save(exports.getCleanExercise()).then(function (response) {
                                 exports.saveStatus = 2;
                                 exports.exercise.userCanUpdate = true;
                                 var idExercise = response.data;
@@ -853,13 +853,13 @@ angular.module('bitbloqApp')
                                 exports.saveOldExercise();
 
                                 if (exports.tempImage.file) {
-                                    imageApi.save(idExercise, exports.tempImage.file, 'exercise').then(function() {
+                                    imageApi.save(idExercise, exports.tempImage.file, 'exercise').then(function () {
                                         $log.debug('imageSaveok');
                                         localStorage.exercisesChange = true;
                                         exports.tempImage = {};
                                     });
                                 }
-                            }).catch(function() {
+                            }).catch(function () {
                                 exports.saveStatus = 3;
                                 defered.reject();
                             });
@@ -882,7 +882,7 @@ angular.module('bitbloqApp')
         function _updateHardwareSchema() {
             var schema = hw2Bloqs.saveSchema();
             if (schema) { //If exercise is loaded on protocanvas
-                schema.components = schema.components.map(function(elem) {
+                schema.components = schema.components.map(function (elem) {
                     var newElem = exports.findComponentInComponentsArray(elem.uid);
                     if (newElem) {
                         newElem = _.extend(newElem, elem);
@@ -908,7 +908,7 @@ angular.module('bitbloqApp')
             if (exports.exercise.bitbloqConnectBT) {
                 newHardwareTags.push('Bitbloq Connect');
             }
-            exports.exercise.hardware.components.forEach(function(comp) {
+            exports.exercise.hardware.components.forEach(function (comp) {
                 newHardwareTags.push(comp.id);
             });
             if (exports.exercise.useBitbloqConnect) {
@@ -957,14 +957,14 @@ angular.module('bitbloqApp')
          *************************************************/
         _init();
 
-        exports.addWatchers = function() {
-            scope.$watch('exercise.name', function(newVal, oldVal) {
+        exports.addWatchers = function () {
+            scope.$watch('exercise.name', function (newVal, oldVal) {
                 if (newVal !== oldVal) {
                     exports.startAutosave();
                 }
             });
 
-            scope.$watch('exercise.description', function(newVal, oldVal) {
+            scope.$watch('exercise.description', function (newVal, oldVal) {
                 if (newVal !== oldVal) {
                     if (!newVal) {
                         exports.exercise.description = '';
@@ -973,32 +973,32 @@ angular.module('bitbloqApp')
                 }
             });
 
-            scope.$watch('exercise.hardware.board', function(newVal, oldVal) {
+            scope.$watch('exercise.hardware.board', function (newVal, oldVal) {
                 if (newVal !== oldVal) {
                     exports.startAutosave();
                 }
             });
 
-            scope.$watch('exercise.newMark[0]', function(newVal, oldVal) {
+            scope.$watch('exercise.newMark[0]', function (newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== String(exports.exercise.mark).split('.')[0]) {
                     exports.startAutosave();
                 }
             });
 
-            scope.$watch('exercise.newMark[1]', function(newVal, oldVal) {
+            scope.$watch('exercise.newMark[1]', function (newVal, oldVal) {
                 if (newVal !== oldVal && newVal !== String(exports.exercise.mark).split('.')[1]) {
                     exports.startAutosave();
                 }
             });
 
-            scope.$watch('exercise.newRemark', function(newVal, oldVal) {
+            scope.$watch('exercise.newRemark', function (newVal, oldVal) {
                 if (newVal && newVal !== oldVal && newVal !== exports.exercise.remark) {
                     exports.startAutosave();
                 }
             });
         };
 
-        $rootScope.$on('$locationChangeStart', function(event) {
+        $rootScope.$on('$locationChangeStart', function (event) {
             if (exports.saveStatus === 1) {
                 var answer = $window.confirm($translate.instant('leave-without-save') + '\n\n' + $translate.instant('leave-page-question'));
                 if (!answer) {
