@@ -159,7 +159,7 @@
             </div>
             <div class="form--section choose--theme">
                 <common-dropdown options="boardNameList" heading-option="robotName" ng-init="currentProject.hardware.showRobotImage ? getNameFromId(currentProject.hardware.showRobotImage) : (projectService.project.hardware.robot ? getNameFromId(projectService.project.hardware.robot): getNameFromId(currentProject.hardware.board))"
-                    options-click="setBoard" ng-model="currentProject.hardware.name" data-element="'infotab_chooseboard'"></common-dropdown>
+                    options-click="setBoard" ng-model="currentProject.hardware.name" data-element="infotab_chooseboard"></common-dropdown>
                 <img ng-if="boardImage" ng-src="/images/boards/{{boardImage}}.png" />
                 <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png" />
             </div>
