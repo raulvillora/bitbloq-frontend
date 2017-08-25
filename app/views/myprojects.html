@@ -1,6 +1,7 @@
 <div class="projects--actions">
     <div class="projects--action projects--action--sort">
-        <common-dropdown class="projects--sort-dropdown" options="orderOptions" options-click="sort" pre-heading="'explore-sortby'" heading-option="orderOptions[0] | translate" data-element="myProyects_order_dropdown"></common-dropdown>
+        <common-dropdown class="projects--sort-dropdown" options="orderOptions" options-click="sort" pre-heading="'explore-sortby'"
+            heading-option="orderOptions[0] | translate" data-element="myProyects_order_dropdown"></common-dropdown>
     </div>
     <div class="projects--action grid-list">
         <button ng-click="itemsLayout = 'grid'" ng-class="{btn:true, 'btn--projects--actions':true, 'btn--selected':itemsLayout === 'grid', 'grid--left':true}">
@@ -15,14 +16,17 @@
         </button>
     </div>
     <div class="projects--action grid-list">
-        <button ng-click="downloadAllProjects()" ng-class="{'btn btn--projects--actions grid--right grid--left':true, 'btn-only-disabled': userProjects.length === 0 || filtered.projects.length === 0}" data-ng-disabled="userProjects.length === 0 || filtered.projects.length === 0" data-tooltips="true" data-tooltip-position="right"
-                data-tooltip="{{'download-all-projects' | translate}}">
+        <button ng-click="downloadAllProjects()" ng-class="{'btn btn--projects--actions grid--right grid--left':true, 'btn-only-disabled': userProjects.length === 0 || filtered.projects.length === 0}"
+            data-ng-disabled="userProjects.length === 0 || filtered.projects.length === 0" data-tooltips="true" data-tooltip-position="right"
+            data-tooltip="{{'download-all-projects' | translate}}">
             <svg class="svg-icon">
                 <use xlink:href="#download"></use>
             </svg>
         </button>
-        <input type="file" id="file-input" accept=".json, .bitbloq" class="hide" name="uploadProject" onchange="angular.element(this).scope().uploadProjects(this.files)" data-element="input-upload-files" multiple/>
-        <button ng-if="common.user.properties.hasImportProjectsEnabled" onclick="document.getElementById('file-input').click()" class="btn btn--projects--actions btn--projects--upload grid--right grid--left" data-tooltips="true" data-tooltip-position="right" data-tooltip="{{'upload-projects' | translate}}">
+        <input type="file" id="file-input" accept=".json, .bitbloq" class="hide" name="uploadProject" onchange="angular.element(this).scope().uploadProjects(this.files)"
+            data-element="input-upload-files" multiple/>
+        <button ng-if="common.user.properties.hasImportProjectsEnabled" onclick="document.getElementById('file-input').click()" class="btn btn--projects--actions btn--projects--upload grid--right grid--left"
+            data-tooltips="true" data-tooltip-position="right" data-tooltip="{{'upload-projects' | translate}}">
             <svg class="svg-icon">
                 <use xlink:href="#upload"></use>
             </svg>
@@ -38,7 +42,8 @@
     </div>
 </div>
 <ol class="projects__project-list" data-element="projects-list-project">
-    <a href="#/bloqsproject" target="_blank" ng-show="(searchText.text==='' || searchText.text===undefined) && userProjects.length === 0" ng-class="{'project-list__item':true, 'new--project':true, 'project-list__item--wide':itemsLayout === 'list'}">
+    <a href="#/bloqsproject" target="_blank" ng-show="(searchText.text==='' || searchText.text===undefined) && userProjects.length === 0"
+        ng-class="{'project-list__item':true, 'new--project':true, 'project-list__item--wide':itemsLayout === 'list'}">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
             <div ng-class="{'project__image__container--new':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover">
                 <svg class="svg-icon">
@@ -51,14 +56,18 @@
     <div ng-show="(searchText.text!='' && searchText.text!=undefined) && projectSearched.length === 0" class="project-shared--empty">
         <p class="empty__info">{{'projects_text_searchEmpty' | translate}}</p>
     </div>
-    <li pagination-id="myprojects" dir-paginate="project in projectSearched = (filtered.projects = userProjects | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id " ng-init="sectionIndex = $index" current-page="pagination.myprojects.current" total-items="{{projectsCount}}"
-        ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}" data-element="projects-project">
+    <li pagination-id="myprojects" dir-paginate="project in projectSearched = (filtered.projects = userProjects | filter:userProjectsFilterFunction(userProjectsFilter)) | itemsPerPage: itemsPerPage track by project._id "
+        ng-init="sectionIndex = $index" current-page="pagination.myprojects.current" total-items="{{projectsCount}}" ng-class="{'project-list__item':true, 'project__item--wide':itemsLayout === 'list'}"
+        data-element="projects-project" data-element2="project-{{project.name}}">
         <div ng-class="{'project--item':true, 'project--item--wide':itemsLayout === 'list'}">
-            <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover" data-element="over-project">
-                <a class="project__image__container project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank">
+            <div ng-class="{'project__image__container':true, 'project__image__container--wide':itemsLayout === 'list'}" ng-mouseover="itemHover"
+                data-element="over-project">
+                <a class="project__image__container project__image__open" data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}"
+                    target="_blank">
                     <img ng-src="{{common.urlImage + 'project/' + project._id + '?' + timestamp}}" err-src="../images/common/default-project.png">
                 </a>
-                <span class="project--item--options" ng-click="menuActive[$index] = !menuActive[$index]" data-tooltips="true" data-tooltip-position="left" data-tooltip="{{'delete-project' | translate}}">
+                <span class="project--item--options" ng-click="menuActive[$index] = !menuActive[$index]" data-tooltips="true" data-tooltip-position="left"
+                    data-tooltip="{{'delete-project' | translate}}">
                     <svg class="svg-icon" data-element="eliminate-myproject">
                         <use xlink:href="#ellipsis"></use>
                     </svg>
@@ -66,7 +75,8 @@
             </div>
             <div ng-class="{'project__info__container':true, 'project__info__container--wide':itemsLayout === 'list'}">
                 <div ng-class="{'project__info__header':true, 'project__info__header--wide':itemsLayout === 'list'}">
-                    <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank" data-tooltip-position="myprojects" data-tooltip="{{project.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                    <a data-ng-href="#/{{project.codeProject? 'codeproject/' : 'bloqsproject/'}}{{project._id}}" target="_blank" data-tooltip-position="myprojects"
+                        data-tooltip="{{project.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                         <h3 class="h3 project__info--title" data-element="projects-project-name">{{project.name || common.translate('new-project')}}</h3>
                     </a>
                     <div ng-if="itemsLayout === 'list'" class="project__info--description">{{project.description}}</div>
@@ -108,7 +118,8 @@
                             </svg>
                             {{'make-hardware-component-duplicate' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item" data-ng-if="!project.codeProject" ng-click="projectService.download(project)" data-element="myprojects-download-projec">
+                        <li class="table__block__item--menu__item" data-ng-if="!project.codeProject" ng-click="projectService.download(project)"
+                            data-element="myprojects-download-projec">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#download"></use>
                             </svg>
@@ -121,9 +132,10 @@
                             {{'export-arduino-code' | translate}}
                         </li>
                         <li class="dropdown__item--separator--thick"></li>
-                        <li class="table__block__item--menu__item" ng-if="!project._acl.ALL" data-tooltips="{{!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)}}" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'right'}}"
-                            data-tooltip="{{(!utils.userIsOwner(project, common.user._id, common.section)?'you-are-not-the-admin-copy-it':!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-explore':'publish-project') | translate}}">
-                            <div data-ng-disabled="!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)" data-ng-click="publishProject(project)" data-element="myprojects-footer-publish">
+                        <li class="table__block__item--menu__item" ng-if="!project._acl.ALL" data-tooltips="{{!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)}}"
+                            data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'right'}}" data-tooltip="{{(!utils.userIsOwner(project, common.user._id, common.section)?'you-are-not-the-admin-copy-it':!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-explore':'publish-project') | translate}}">
+                            <div data-ng-disabled="!utils.userIsOwner(project, common.user._id, common.section) || !projectService.projectHasRobotActivated(project.hardware)"
+                                data-ng-click="publishProject(project)" data-element="myprojects-footer-publish">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#publish"></use>
                                 </svg>
@@ -142,8 +154,8 @@
                             </svg>
                             {{'share-with-users' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item" data-tooltip-id="social-share" data-tooltips="{{project.hardware.showRobotImage && !projectService.projectHasRobotActivated(project.hardware)}}" data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'right'}}"
-                            data-tooltip="{{(project.hardware.showRobotImage?(!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-social':'share-social-networks'):'share-social-networks') | translate }}">
+                        <li class="table__block__item--menu__item" data-tooltip-id="social-share" data-tooltips="{{project.hardware.showRobotImage && !projectService.projectHasRobotActivated(project.hardware)}}"
+                            data-tooltip-position="{{(itemsLayout === 'list')?'myprojects--wide--right':'right'}}" data-tooltip="{{(project.hardware.showRobotImage?(!projectService.projectHasRobotActivated(project.hardware)?'activate-robot-social':'share-social-networks'):'share-social-networks') | translate }}">
                             <div data-ng-disabled="project.hardware.showRobotImage && !projectService.projectHasRobotActivated(project.hardware)" ng-click="publishProject(project, 'Social')">
                                 <svg class="svg-icon svg-icon--text svg-icon--menu">
                                     <use xlink:href="#share"></use>
