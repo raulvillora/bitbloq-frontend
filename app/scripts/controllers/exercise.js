@@ -70,8 +70,6 @@ angular.module('bitbloqApp')
                 var robotsActivated = [];
 
                 if ($scope.common.section === 'exercise') {
-                    console.log('groups');
-                    console.log($scope.groups);
                     _.forEach($scope.groups, function (group) {
                         if (group.center.activatedRobots) {
                             robotsActivated = robotsActivated.concat(group.center.activatedRobots);

@@ -51,10 +51,14 @@
                     <!--<button class="btn btn-primary btn-small" ng-click="composeImage()">Crear imagen</button>-->
                     <div class="imagecontainer">
                         <div class="main--project--image" id="main-image">
-                            <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + currentProject._id}}" err-src="../images/common/default-project.png" data-element="infotab-projectimage">
+                            <img id="projectImage" data-ng-disabled="!common.user" ng-src="{{urlGetImage + currentProject._id}}" err-src="../images/common/default-project.png"
+                                data-element="infotab-projectimage">
                         </div>
-                        <input class="btn btn--tertiary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)" type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'" tabindex="-1" data-element="infotab-fileinput"/>
-                        <button type="button" ng-class="{'btn':true, 'btn--tertiary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')" data-element="infotab-uploadimage">
+                        <input class="btn btn--tertiary btn--small main-image--input" onchange="angular.element(this).scope().uploadImage(this.files)"
+                            type="file" id="projectimage" name="projectimage" placeholder="" data-ng-focus="focus = 'projectimage'"
+                            tabindex="-1" data-element="infotab-fileinput" />
+                        <button type="button" ng-class="{'btn':true, 'btn--tertiary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="uploadImageTrigger('main')"
+                            data-element="infotab-uploadimage">
                             {{'upload-image' | translate}}
                         </button>
                     </div>
@@ -142,9 +146,11 @@
                 <legend class="h3">{{ 'infotab_title_theme' | translate }}</legend>
             </div>
             <div class="form--section choose--theme">
-                <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme" data-element="'infotab_choosetheme'"></common-dropdown>
-                <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg" alt=""/>
-                <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt=""/>
+                <common-dropdown options="availableThemes" heading-option="currentProject.defaultTheme | translate" options-click="setTheme"
+                    data-element="infotab_choosetheme"></common-dropdown>
+                <img ng-show="currentProject.defaultTheme === 'infotab_option_grayTheme' || !currentProject.defaultTheme" src="../../images/gray-theme.jpg"
+                    alt="" />
+                <img ng-show="currentProject.defaultTheme === 'infotab_option_colorTheme'" src="../../images/color-theme.jpg" alt="" />
             </div>
         </fieldset>
         <fieldset ng-if="currentProject.codeProject" class="fieldset--right" data-ng-init="focus = false">
@@ -153,9 +159,9 @@
             </div>
             <div class="form--section choose--theme">
                 <common-dropdown options="boardNameList" heading-option="robotName" ng-init="currentProject.hardware.showRobotImage ? getNameFromId(currentProject.hardware.showRobotImage) : (projectService.project.hardware.robot ? getNameFromId(projectService.project.hardware.robot): getNameFromId(currentProject.hardware.board))"
-                                 options-click="setBoard" ng-model="currentProject.hardware.name" data-element="'infotab_chooseboard'"></common-dropdown>
-                <img ng-if="boardImage" ng-src="/images/boards/{{boardImage}}.png"/>
-                <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png"/>
+                    options-click="setBoard" ng-model="currentProject.hardware.name" data-element="'infotab_chooseboard'"></common-dropdown>
+                <img ng-if="boardImage" ng-src="/images/boards/{{boardImage}}.png" />
+                <img ng-if="robotImage" ng-src="/images/robots/{{robotImage}}.png" />
             </div>
         </fieldset>
         <fieldset ng-if="common.section==='exercise'" class="fieldset--right fieldset--groups" data-ng-init="focus = false">
@@ -172,12 +178,13 @@
                             {{group.name}}
                         </h2>
                         <span class="block__item__explanation--subscript">{{group.initDate ? ('date_from' | translate)+' '+(group.initDate | date:'dd MMM yyyy - HH:mm') : 'date_without_initDate' | translate}}</span>
-                        <span class="block__item__explanation--subscript">{{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
+                    <span class="block__item__explanation--subscript">{{group.endDate ? ('date_to' | translate)+' '+(group.endDate | date:'dd MMM yyyy - HH:mm') : 'date_without_endDate' | translate}}</span>
                     </span>
                 </li>
             </ul>
             <div class="form--section edit-classes">
-                <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="editGroups(currentProject, groups);" data-element="exercise_button_editGroups">
+                <button type="button" ng-class="{'btn':true, 'btn--primary':true, 'btn--small':true, 'btn--disabled':!common.user}" data-ng-click="editGroups(currentProject, groups);"
+                    data-element="exercise_button_editGroups">
                     {{ 'centerMode_assignToClasses' | translate }}
                 </button>
             </div>
