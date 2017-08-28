@@ -9,10 +9,9 @@
  */
 
 angular.module('bitbloqApp')
-    .controller('ExerciseCtrl', function($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
-                                         $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
-                                         exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi, hardwareService)
-    {
+    .controller('ExerciseCtrl', function ($rootScope, $route, $scope, $log, $timeout, $routeParams, $document, $window, $location,
+        $q, web2board, alertsService, ngDialog, _, bloqs, bloqsUtils, utils, userApi, commonModals, hw2Bloqs, web2boardOnline,
+        exerciseService, hardwareConstants, chromeAppApi, centerModeApi, exerciseApi, hardwareService) {
 
         /*************************************************
          Exercise settings
@@ -46,13 +45,13 @@ angular.module('bitbloqApp')
         $scope.currentProjectLoaded = $q.defer();
         $scope.roleOptions = ['student', 'teacher'];
 
-        $scope.changeRole = function(option) {
+        $scope.changeRole = function (option) {
             $scope.common.userRole = option;
             _canUpdate();
         };
 
-        $scope.getGroups = function() {
-            centerModeApi.getGroupsByExercise($routeParams.id).then(function(response) {
+        $scope.getGroups = function () {
+            centerModeApi.getGroupsByExercise($routeParams.id).then(function (response) {
                 $scope.groups = response.data;
                 if ($scope.currentProject.hardware.showRobotImage) {
                     $scope.isRobotActivatedInCenter();
@@ -61,23 +60,23 @@ angular.module('bitbloqApp')
             });
         };
 
-        $scope.isRobotActivatedInCenter = function() {
+        $scope.isRobotActivatedInCenter = function () {
             var robotsMap;
             $scope.robotActivatedInCenter = false;
             $scope.currentProjectService.showActivation = false;
             $scope.currentProjectService.closeActivation = false;
-            hardwareService.itsHardwareLoaded().then(function() {
+            hardwareService.itsHardwareLoaded().then(function () {
                 robotsMap = exerciseService.getRobotsMap(hardwareService.hardware);
                 var robotsActivated = [];
 
                 if ($scope.common.section === 'exercise') {
-                    _.forEach($scope.groups, function(group) {
+                    _.forEach($scope.groups, function (group) {
                         if (group.center.activatedRobots) {
                             robotsActivated = robotsActivated.concat(group.center.activatedRobots);
                         }
                     });
                 } else {
-                    robotsActivated = exerciseService.exercise.group && exerciseService.exercise.group.center ? exerciseService.exercise.group.center.activatedRobots: false;
+                    robotsActivated = exerciseService.exercise.group && exerciseService.exercise.group.center ? exerciseService.exercise.group.center.activatedRobots : false;
                 }
                 if ($scope.currentProject.hardware.showRobotImage) {
                     if (robotsActivated.indexOf(robotsMap[$scope.currentProject.hardware.showRobotImage].family) > -1) {
@@ -91,7 +90,7 @@ angular.module('bitbloqApp')
 
         };
 
-        $scope.onTime = function() {
+        $scope.onTime = function () {
             var now = moment(),
                 isEarly = true,
                 isLate = false;
@@ -106,7 +105,7 @@ angular.module('bitbloqApp')
             return [!isEarly, !isLate];
         };
 
-        $scope.setGroups = function(groups) {
+        $scope.setGroups = function (groups) {
             $scope.groups = groups;
             $scope.isRobotActivatedInCenter();
         };
@@ -133,11 +132,11 @@ angular.module('bitbloqApp')
             return result;
         }
 
-        $scope.showCompileWarningByComponent = function(board, component, pin) {
+        $scope.showCompileWarningByComponent = function (board, component, pin) {
             var result = false;
             if (itsABoardWithCompileWarning(board)) {
                 if ((component.uuid !== 'sp') && !component.integratedComponent) {
-                    result = _.findKey(pin || component.pin, function(o) {
+                    result = _.findKey(pin || component.pin, function (o) {
                         return ((o === '1') || (o === '0'));
                     });
                 }
@@ -146,14 +145,14 @@ angular.module('bitbloqApp')
             return result;
         };
 
-        $scope.sendTask = function(task) {
+        $scope.sendTask = function (task) {
             var dialog,
                 parent = $rootScope,
                 modalOptions = parent.$new(),
-                confirmAction = function() {
+                confirmAction = function () {
                     dialog.close();
-                    exerciseService.getSavePromise().then(function() {
-                        exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function() {
+                    exerciseService.getSavePromise().then(function () {
+                        exerciseApi.sendTask(task ? task._id : $scope.currentProject._id).then(function () {
                             alertsService.add({
                                 text: 'centerMode__alert__sendTask-ok',
                                 id: 'publishing-project',
@@ -161,7 +160,7 @@ angular.module('bitbloqApp')
                                 time: 5000
                             });
                             $scope.currentProject.status = 'delivered';
-                        }).catch(function() {
+                        }).catch(function () {
                             alertsService.add({
                                 text: 'centerMode__alert__sendTask-error',
                                 id: 'publishing-project',
@@ -191,7 +190,7 @@ angular.module('bitbloqApp')
 
         function _canUpdate() {
             var defered = $q.defer();
-            $scope.common.itsUserLoaded().then(function() {
+            $scope.common.itsUserLoaded().then(function () {
                 if ($scope.common.userRole === 'student' && $scope.common.section === 'task' && $scope.currentProject.student && $scope.currentProject.student._id === $scope.common.user._id) {
                     $scope.currentProject.userCanUpdate = true;
                     defered.resolve();
@@ -204,7 +203,7 @@ angular.module('bitbloqApp')
                         }
                         defered.resolve();
                     } else {
-                        exerciseApi.userIsHeadmaster($scope.currentProject._id).then(function(response) {
+                        exerciseApi.userIsHeadmaster($scope.currentProject._id).then(function (response) {
                             $scope.currentProject.canMark = response.data.headmaster;
                             defered.resolve();
                         }).catch(defered.reject);
@@ -225,7 +224,7 @@ angular.module('bitbloqApp')
         /*************************************************
          exercise save / edit
          *************************************************/
-        $scope.anyComponent = function(forceCheck) {
+        $scope.anyComponent = function (forceCheck) {
             if ($scope.currentTab === 0 && !forceCheck) { //software Toolbox not visible
                 return false;
             }
@@ -240,18 +239,18 @@ angular.module('bitbloqApp')
                 return true;
             }
         };
-        $scope.anyAdvancedComponent = function() {
+        $scope.anyAdvancedComponent = function () {
             return !_.isEqual(exerciseService.componentsArray, bloqsUtils.getEmptyComponentsArray());
         };
-        $scope.anySerialComponent = function() {
+        $scope.anySerialComponent = function () {
             return exerciseService.componentsArray.serialElements.length > 0;
         };
 
-        $scope.setCode = function(code) {
+        $scope.setCode = function (code) {
             $scope.code = code;
         };
 
-        $scope.uploadFileExercise = function(exercise) {
+        $scope.uploadFileExercise = function (exercise) {
             if ($scope.hardware.cleanSchema) {
                 $scope.hardware.cleanSchema();
             }
@@ -259,7 +258,7 @@ angular.module('bitbloqApp')
             $scope.$broadcast('refresh-bloqs');
         };
 
-        $scope.updateBloqs = function() {
+        $scope.updateBloqs = function () {
 
             if (exerciseService.bloqs.varsBloq) {
 
@@ -271,7 +270,7 @@ angular.module('bitbloqApp')
                     allBloqs[bloq].componentsArray = exerciseService.componentsArray;
                 }
 
-                var updateBloq = function(element, list) {
+                var updateBloq = function (element, list) {
 
                     var tempValue,
                         tempRef;
@@ -283,7 +282,7 @@ angular.module('bitbloqApp')
 
                     if (tempRef && tempValue) {
 
-                        var componentRef = list.find(function(comp) {
+                        var componentRef = list.find(function (comp) {
                             return comp.uid === tempRef;
                         });
 
@@ -331,8 +330,8 @@ angular.module('bitbloqApp')
          *************************************************/
         $scope.currentTab = 2;
 
-        $scope.setTab = function(index) {
-            exerciseService.getDefaultExercise().then(function(defaultExercise) {
+        $scope.setTab = function (index) {
+            exerciseService.getDefaultExercise().then(function (defaultExercise) {
                 if ($scope.currentProject.userCanUpdate && !_.isEqual($scope.currentProject, defaultExercise)) {
                     exerciseService.startAutosave(true);
                 }
@@ -353,7 +352,7 @@ angular.module('bitbloqApp')
             });
         };
 
-        $scope.disableUndo = function(currentTab, hardwareHistory, bloqsHistory) {
+        $scope.disableUndo = function (currentTab, hardwareHistory, bloqsHistory) {
             var condition = false;
             switch (currentTab) {
                 case 0:
@@ -366,7 +365,7 @@ angular.module('bitbloqApp')
             return condition;
         };
 
-        $scope.disableRedo = function(currentTab, hardwareHistory, bloqsHistory) {
+        $scope.disableRedo = function (currentTab, hardwareHistory, bloqsHistory) {
             var condition = false;
             switch (currentTab) {
                 case 0:
@@ -379,7 +378,7 @@ angular.module('bitbloqApp')
             return condition;
         };
 
-        $scope.undo = function() {
+        $scope.undo = function () {
             switch ($scope.currentTab) {
                 case 0:
                     $scope.undoHardwareStep();
@@ -390,7 +389,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.redo = function() {
+        $scope.redo = function () {
             switch ($scope.currentTab) {
                 case 0:
                     $scope.redoHardwareStep();
@@ -401,15 +400,15 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.toggleCollapseHeader = function() {
+        $scope.toggleCollapseHeader = function () {
             $scope.collapsedHeader = !$scope.collapsedHeader;
             hw2Bloqs.repaint();
         };
 
-        $scope.publishexercise = function(type) {
+        $scope.publishexercise = function (type) {
             type = type || '';
-            exerciseService.checkPublish(type).then(function() {
-                exerciseService.getDefaultExercise().then(function(defaultExercise) {
+            exerciseService.checkPublish(type).then(function () {
+                exerciseService.getDefaultExercise().then(function (defaultExercise) {
                     exerciseService.completedExercise();
                     delete defaultExercise.software.freeBloqs;
                     if (_.isEqual(defaultExercise.software, $scope.currentProject.software)) {
@@ -428,7 +427,7 @@ angular.module('bitbloqApp')
                     }
                 });
 
-            }).catch(function() {
+            }).catch(function () {
                 $scope.publishExerciseError = true;
                 $scope.setTab(2);
             });
@@ -438,17 +437,17 @@ angular.module('bitbloqApp')
          UNDO / REDO
          *************************************************/
 
-            //Stores one step in the history
-        $scope.saveBloqStep = function(step) {
+        //Stores one step in the history
+        $scope.saveBloqStep = function (step) {
             //$log.debug('Guardamos Estado de Bloqs');
             var freeBloqs = bloqs.getFreeBloqs();
             //$log.debug(freeBloqs);
             step = step || {
-                    vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
-                    setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
-                    loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
-                    freeBloqs: freeBloqs
-                };
+                vars: exerciseService.bloqs.varsBloq.getBloqsStructure(),
+                setup: exerciseService.bloqs.setupBloq.getBloqsStructure(),
+                loop: exerciseService.bloqs.loopBloq.getBloqsStructure(),
+                freeBloqs: freeBloqs
+            };
             if ($scope.bloqsHistory.pointer !== ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.history = _.take($scope.bloqsHistory.history, $scope.bloqsHistory.pointer + 1);
             }
@@ -458,7 +457,7 @@ angular.module('bitbloqApp')
 
         };
 
-        $scope.undoBloqStep = function() {
+        $scope.undoBloqStep = function () {
             //$log.log('undo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
             if ($scope.bloqsHistory.pointer > 0) {
                 $scope.bloqsHistory.pointer--;
@@ -471,7 +470,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.redoBloqStep = function() {
+        $scope.redoBloqStep = function () {
             //$log.log('redo bloq', $scope.bloqsHistory.pointer, $scope.bloqsHistory.history.length);
             if ($scope.bloqsHistory.pointer < ($scope.bloqsHistory.history.length - 1)) {
                 $scope.bloqsHistory.pointer++;
@@ -522,8 +521,7 @@ angular.module('bitbloqApp')
             if (event.which === 8 &&
                 event.target.nodeName !== 'INPUT' &&
                 event.target.nodeName !== 'SELECT' &&
-                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id'])
-            {
+                event.target.nodeName !== 'TEXTAREA' && !$document[0].activeElement.attributes['data-bloq-id']) {
 
                 event.preventDefault();
             }
@@ -551,28 +549,28 @@ angular.module('bitbloqApp')
         $scope.common.isLoading = true;
         $scope.hwBasicsLoaded = $q.defer();
 
-        $scope.initHardwarePromise = function() {
+        $scope.initHardwarePromise = function () {
             $scope.hwBasicsLoaded = $q.defer();
         };
 
-        $scope.itsCurrentProjectLoaded = function() {
+        $scope.itsCurrentProjectLoaded = function () {
             return $scope.currentProjectLoaded.promise;
         };
 
         function _init() {
-            exerciseService.initBloqsExercise().then(function() {
-                $scope.common.itsUserLoaded().then(function() {
-                    $scope.common.itsRoleLoaded().then(function() {
+            exerciseService.initBloqsExercise().then(function () {
+                $scope.common.itsUserLoaded().then(function () {
+                    $scope.common.itsRoleLoaded().then(function () {
                         switch ($scope.common.userRole) {
                             case 'headmaster':
                             case 'teacher':
                             case 'student':
                                 if ($routeParams.id) {
-                                    loadExercise($routeParams.id).finally(function() {
+                                    loadExercise($routeParams.id).finally(function () {
                                         addExerciseWatchersAndListener();
                                     });
                                 } else {
-                                    $scope.hwBasicsLoaded.promise.then(function() {
+                                    $scope.hwBasicsLoaded.promise.then(function () {
                                         $scope.$emit('drawHardware');
                                     });
                                     addExerciseWatchersAndListener();
@@ -583,7 +581,7 @@ angular.module('bitbloqApp')
                                 $location.path('/projects');
                         }
                     });
-                }, function() {
+                }, function () {
                     $scope.common.setUser();
                     alertsService.add({
                         text: 'projects-need-tobe-logged',
@@ -596,9 +594,9 @@ angular.module('bitbloqApp')
         }
 
         function loadExercise(id) {
-            return exerciseService.getExerciseOrTask(id).then(function(response) {
-                _uploadExercise(response.data).then(function() {
-                    _canUpdate().then(function() {
+            return exerciseService.getExerciseOrTask(id).then(function (response) {
+                _uploadExercise(response.data).then(function () {
+                    _canUpdate().then(function () {
                         _generateMark();
                     });
 
@@ -609,7 +607,7 @@ angular.module('bitbloqApp')
                     }
                     $scope.currentProjectLoaded.resolve();
                 });
-            }, function(error) {
+            }, function (error) {
                 exerciseService.addWatchers();
                 $scope.currentProjectLoaded.reject();
                 switch (error.status) {
@@ -644,10 +642,10 @@ angular.module('bitbloqApp')
                 exercise.software.freeBloqs = exercise.software.freeBloqs || [];
             }
 
-            exerciseService.setExercise(exercise).then(function() {
+            exerciseService.setExercise(exercise).then(function () {
                 $scope.saveBloqStep(_.clone(exercise.software));
                 exerciseService.saveOldExercise();
-                $scope.hwBasicsLoaded.promise.then(function() {
+                $scope.hwBasicsLoaded.promise.then(function () {
                     $scope.$emit('drawHardware');
                 });
                 $scope.$broadcast('refresh-bloqs');
@@ -670,7 +668,7 @@ angular.module('bitbloqApp')
         $document.on('keydown', checkBackspaceKey);
         $window.onbeforeunload = confirmExit;
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             $document.off('keydown', checkBackspaceKey);
             $window.onbeforeunload = null;
             _destroyWeb2boardEvents();
@@ -680,21 +678,21 @@ angular.module('bitbloqApp')
          web2board communication
          *************************************************/
 
-        var w2bDisconnectedEvent = $rootScope.$on('web2board:disconnected', function() {
+        var w2bDisconnectedEvent = $rootScope.$on('web2board:disconnected', function () {
             web2board.setInProcess(false);
         });
 
-        var w2bVersionEvent = $rootScope.$on('web2board:wrong-version', function() {
+        var w2bVersionEvent = $rootScope.$on('web2board:wrong-version', function () {
             web2board.setInProcess(false);
         });
 
-        var w2bNow2bEvent = $rootScope.$on('web2board:no-web2board', function() {
+        var w2bNow2bEvent = $rootScope.$on('web2board:no-web2board', function () {
             alertsService.close(compilingAlert);
             alertsService.close(settingBoardAlert);
             web2board.setInProcess(false);
         });
 
-        var w2bCompileErrorEvent = $rootScope.$on('web2board:compile-error', function(event, error) {
+        var w2bCompileErrorEvent = $rootScope.$on('web2board:compile-error', function (event, error) {
             error = JSON.parse(error);
             alertsService.add({
                 text: 'alert-web2board-compile-error',
@@ -705,7 +703,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        var w2bCompileVerifiedEvent = $rootScope.$on('web2board:compile-verified', function() {
+        var w2bCompileVerifiedEvent = $rootScope.$on('web2board:compile-verified', function () {
             alertsService.add({
                 text: 'alert-web2board-compile-verified',
                 id: 'compile',
@@ -715,7 +713,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        var w2bBoardReadyEvent = $rootScope.$on('web2board:boardReady', function(evt, data) {
+        var w2bBoardReadyEvent = $rootScope.$on('web2board:boardReady', function (evt, data) {
             data = JSON.parse(data);
             if (data.length > 0) {
                 if (!alertsService.isVisible('uid', serialMonitorAlert)) {
@@ -736,7 +734,7 @@ angular.module('bitbloqApp')
             }
         });
 
-        var w2bBoardNotReadyEvent = $rootScope.$on('web2board: boardNotReady', function() {
+        var w2bBoardNotReadyEvent = $rootScope.$on('web2board: boardNotReady', function () {
             alertsService.add({
                 text: 'alert-web2board-boardNotReady',
                 id: 'upload',
@@ -745,7 +743,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        var w2bUploadingEvent = $rootScope.$on('web2board:uploading', function(evt, port) {
+        var w2bUploadingEvent = $rootScope.$on('web2board:uploading', function (evt, port) {
             alertsService.add({
                 text: 'alert-web2board-uploading',
                 id: 'upload',
@@ -755,7 +753,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(true);
         });
 
-        var w2bCodeUploadedEvent = $rootScope.$on('web2board:code-uploaded', function() {
+        var w2bCodeUploadedEvent = $rootScope.$on('web2board:code-uploaded', function () {
             alertsService.add({
                 text: 'alert-web2board-code-uploaded',
                 id: 'upload',
@@ -765,7 +763,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        var w2bUploadErrorEvent = $rootScope.$on('web2board:upload-error', function(evt, data) {
+        var w2bUploadErrorEvent = $rootScope.$on('web2board:upload-error', function (evt, data) {
             data = JSON.parse(data);
             if (!data.error) {
                 alertsService.add({
@@ -791,7 +789,7 @@ angular.module('bitbloqApp')
             web2board.setInProcess(false);
         });
 
-        var w2bNoPortFoundEvent = $rootScope.$on('web2board:no-port-found', function() {
+        var w2bNoPortFoundEvent = $rootScope.$on('web2board:no-port-found', function () {
             $scope.currentTab = 0;
             $scope.levelOne = 'boards';
             web2board.setInProcess(false);
@@ -803,7 +801,7 @@ angular.module('bitbloqApp')
             });
         });
 
-        var w2bSerialOpenedEvent = $rootScope.$on('web2board:serial-monitor-opened', function() {
+        var w2bSerialOpenedEvent = $rootScope.$on('web2board:serial-monitor-opened', function () {
             alertsService.close(serialMonitorAlert);
             web2board.setInProcess(false);
         });
@@ -963,16 +961,16 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.getComponents = function(componentsArray) {
+        $scope.getComponents = function (componentsArray) {
             var components = {};
 
-            var serialPort = _.find(componentsArray, function(o) {
+            var serialPort = _.find(componentsArray, function (o) {
                 return o.uuid === 'sp';
             });
             if (serialPort) {
                 components.sp = serialPort.name;
             }
-            _.forEach(componentsArray, function(value) {
+            _.forEach(componentsArray, function (value) {
                 if (hardwareConstants.viewerSensors.indexOf(value.uuid) !== -1) {
                     if (components[value.uuid]) {
                         components[value.uuid].names.push(value.name);
@@ -986,7 +984,7 @@ angular.module('bitbloqApp')
             return components;
         };
 
-        $scope.getViewerCode = function(componentsArray, originalCode) {
+        $scope.getViewerCode = function (componentsArray, originalCode) {
             var components = $scope.getComponents(componentsArray);
             var code = originalCode;
             var serialName;
@@ -1034,7 +1032,7 @@ angular.module('bitbloqApp')
             return code;
         }
 
-        $scope.thereIsSerialBlock = function(code) {
+        $scope.thereIsSerialBlock = function (code) {
             var serialBlock;
             if (code.indexOf('/*sendViewerData*/') > -1) {
                 serialBlock = true;
@@ -1046,15 +1044,15 @@ angular.module('bitbloqApp')
         };
 
         function generateSensorsCode(components, serialName, code) {
-            _.forEach(components, function(value, key) {
+            _.forEach(components, function (value, key) {
                 if (angular.isObject(value)) {
                     if (value.type === 'analog') {
-                        _.forEach(value.names, function(name) {
+                        _.forEach(value.names, function (name) {
                             code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(analogRead(' + name + '))));\n\r');
                             //  code = code + 'delay(500);\n\r';
                         });
                     } else {
-                        _.forEach(value.names, function(name) {
+                        _.forEach(value.names, function (name) {
                             if (key === 'us' || key === 'encoder') {
                                 code = code.concat(serialName + '.println(String("[' + key.toUpperCase() + ':' + name + ']:") + String(String(' + name + '.read())));\n\r');
                                 code = code + 'delay(50);\n\r';
@@ -1075,7 +1073,7 @@ angular.module('bitbloqApp')
             return code;
         }
 
-        $scope.verify = function() {
+        $scope.verify = function () {
             if ($scope.common.useChromeExtension()) {
                 web2boardOnline.compile({
                     board: exerciseService.getBoardMetaData(),
@@ -1091,7 +1089,7 @@ angular.module('bitbloqApp')
 
         };
 
-        $scope.upload = function(code) {
+        $scope.upload = function (code) {
             var viewer;
             viewer = !!code;
             if ($scope.currentProject.hardware.board) {
@@ -1111,7 +1109,7 @@ angular.module('bitbloqApp')
                                 type: 'error',
                                 time: 'infinite',
                                 linkText: 'click-here-load-with-web2board',
-                                link: function() {
+                                link: function () {
                                     alertsService.closeByTag('mbotChromebooks');
                                     uploadWithWeb2board();
                                 }
@@ -1162,7 +1160,7 @@ angular.module('bitbloqApp')
             }
         }
 
-        $scope.serialMonitor = function() {
+        $scope.serialMonitor = function () {
             if ($scope.currentProject.hardware.board) {
                 if ($scope.common.useChromeExtension()) {
                     commonModals.launchSerialWindow(exerciseService.getBoardMetaData());
@@ -1184,7 +1182,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.chartMonitor = function() {
+        $scope.chartMonitor = function () {
             if ($scope.currentProject.hardware.board) {
                 web2board.chartMonitor(exerciseService.getBoardMetaData());
             } else {
@@ -1198,11 +1196,11 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.showWeb2boardSettings = function() {
+        $scope.showWeb2boardSettings = function () {
             web2board.showSettings();
         };
 
-        $scope.showPlotter = function() {
+        $scope.showPlotter = function () {
             if ($scope.currentProject.hardware.board) {
                 if ($scope.common.useChromeExtension()) {
                     commonModals.launchPlotterWindow(exerciseService.getBoardMetaData());
@@ -1225,12 +1223,12 @@ angular.module('bitbloqApp')
 
         };
 
-        $scope.getCode = function() {
+        $scope.getCode = function () {
             $scope.updateBloqs();
             return exerciseService.getCode();
         };
 
-        $scope.getPrettyCode = function(code) {
+        $scope.getPrettyCode = function (code) {
             var prettyCode;
             if (code) {
                 prettyCode = utils.prettyCode(code);
@@ -1240,13 +1238,12 @@ angular.module('bitbloqApp')
             return prettyCode;
         };
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             $window.removeEventListener('bloqs:dragend', onBloqsDragEndHandler);
             $window.removeEventListener('bloqs:suggestedAdded', onBloqsSuggestedAddedHandler);
             $window.removeEventListener('bloqs:connect', onBloqsConnectHandler);
             $window.removeEventListener('bloqs:change', onBloqsChangeHandler);
         });
-
 
         /**********************
          ****** INIT ***********

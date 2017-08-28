@@ -1,8 +1,11 @@
 <div class="center-mode__table__header" ng-if="common.section!=='class' && (exercises.length > 0 || (exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)))">
     <div class="classes-dropdown--group">
-        <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'" heading-option="sortClassesArray[1] | translate"></common-dropdown>
-        <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
-        <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'" heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'"
+            heading-option="sortClassesArray[1] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'"
+            heading-option="classesStatusArray[0] | translate"></common-dropdown>
+        <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'"
+            heading-option="classesStatusArray[0] | translate"></common-dropdown>
         <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
@@ -19,9 +22,11 @@
         <span class="col-vsmall-3 col-text-right">{{'centerMode_column_time' | translate}}</span>
     </div>
     <div class="table__block table__block__exercise">
-        <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage" current-page="pagination.exercises.current" total-items="{{exercisesCount}}" data-element="exercise-{{exercise.name}}">
+        <div class="table__block__list table__block__hover row" dir-paginate="exercise in exercises | itemsPerPage: itemsPerPage"
+            current-page="pagination.exercises.current" total-items="{{exercisesCount}}" data-element="exercise-{{exercise.name}}">
             <div ng-class="common.section==='class' ? 'col-vsmall-8' : 'col-vsmall-5'" class="table__block__item">
-                <a class="table__item__text table__item__link" ng-href="{{common.section==='class'? '#/class/'+group._id+'/exercise-info/' + exercise._id : '#/exercise-info/' + exercise._id}}" data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                <a class="table__item__text table__item__link" ng-href="{{common.section==='class'? '#/class/'+group._id+'/exercise-info/' + exercise._id : '#/exercise-info/' + exercise._id}}"
+                    data-tooltip-position="bottom" data-tooltip="{{exercise.name}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
                     <h2 class="block__item__title" data-element="{{'centerMode-item-' + exercise.name}}">
                         {{exercise.name || 'new-exercise' | translate}}</h2>
                 </a>
@@ -34,7 +39,8 @@
                     {{exercise.endDate? moment(exercise.endDate).fromNow() : ('time-unlimited' | translate)}}
                 </p>
             </div>
-            <div class="table__block__item table__column--right col-vsmall-1 center-mode__table__menu" ng-class="{'active-options': menuActive[$index]}" ng-mouseleave="menuActive[$index] = false">
+            <div class="table__block__item table__column--right col-vsmall-1 center-mode__table__menu" ng-class="{'active-options': menuActive[$index]}"
+                ng-mouseleave="menuActive[$index] = false">
                 <button class="btn btn--center-mode--table table__block__button" ng-click="changeExerciseMenu($index)" data-element="centerMode-button-options">
                     <svg class="svg-icon">
                         <use xlink:href="#ellipsis"></use>
@@ -42,7 +48,7 @@
                 </button>
                 <div ng-show="menuActive[$index]" class="table__block__item--parent">
                     <ul class="table__block__item--menu">
-                        <li class="table__block__item--menu__item table__block__item--menu__item--open">
+                        <li class="table__block__item--menu__item table__block__item--menu__item--open" data-element="menu-edit-exercise">
                             <a class="table__block__item--menu__link" data-ng-href="#/exercise/{{exercise._id}}" target="_blank">
                                 {{'centerMode_editExercise' | translate}}</a>
                         </li>
@@ -85,13 +91,15 @@
                             {{'navigation_text_file_downloadArduinoCode' | translate}}
                         </li>
                         <li class="dropdown__item--separator--thick"></li>
-                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="common.section==='class'" ng-click="deleteExerciseInGroup(exercise._id); menuActive[$index] = false" data-element="menu-delete-exercise-from-class">
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="common.section==='class'" ng-click="deleteExerciseInGroup(exercise._id); menuActive[$index] = false"
+                            data-element="menu-delete-exercise-from-class">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#delete"></use>
                             </svg>
                             {{'button_delete_in_class' | translate}}
                         </li>
-                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="exercise.creator===common.user._id && common.section !=='class'" ng-click="deleteExercise(exercise); menuActive[$index] = false">
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-if="exercise.creator===common.user._id && common.section !=='class'"
+                            ng-click="deleteExercise(exercise); menuActive[$index] = false">
                             <svg class="svg-icon svg-icon--text svg-icon--menu">
                                 <use xlink:href="#delete"></use>
                             </svg>

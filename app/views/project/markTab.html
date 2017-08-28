@@ -18,9 +18,9 @@
                         </span>
                     <span class="container-span" data-tooltip-position="right" data-tooltip="{{'centerMode_tooltip_notDelivered' | translate}}"
                         data-tooltips="{{currentProject.status!=='delivered' && currentProject.status!=='corrected'}}">
-                            <input type="number" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
+                            <input type="text" ng-pattern-restrict="[0-9]*" pattern="[0-9]*" id="exerciseMark1" name="exerciseMark1" pattern="[0-9]+" maxlength="2" placeholder="00" class="input--mark" data-ng-class="{'input--focused':focus === 'exerciseMark1'}" data-ng-model="currentProject.newMark[1]" data-ng-model-options="{ debounce: { 'default': 1000, 'blur': 0 } }"
                                    data-ng-focus="focus = 'exerciseMark1'" data-ng-disabled="currentProject.status!=='delivered' && currentProject.status!=='corrected'" data-element="info-exercise-mark1">
-                        </span>
+                                </span>
                     </span>
                     <p ng-class="{'form--show-mark': currentProject.mark && currentProject.status==='corrected'}" ng-if="common.userRole==='student'">
                         {{currentProject.status==='corrected' && currentProject.mark? currentProject.mark : ('centerMode_task_withoutMark' | translate)}}
