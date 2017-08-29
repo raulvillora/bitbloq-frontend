@@ -1,5 +1,6 @@
 <div class="dropdown-group table__added table--header__teachers clearfix">
-    <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'" heading-option="sortArray[0] | translate" data-element="my_center_dropdown_order"></common-dropdown>
+    <common-dropdown class="projects--sort-dropdown" options="sortArray" options-click="sortInstances" pre-heading="'explore-sortby'"
+        heading-option="sortArray[0] | translate" data-element="my_center_dropdown_order"></common-dropdown>
     <button class="btn btn--primary btn--small btn--newteacher" ng-click="newTeacher()" ng-disabled="sendingInvitation" data-element="centerMode_button_newTeacher">
         <span>{{'centerMode_button_newTeacher' | translate}}</span>
     </button>
@@ -18,7 +19,8 @@
     </div>
     <div class="table__block">
         <div class="table__block__list table__block__hover row" ng-repeat="item in teachers | orderBy:orderInstance:reverseOrder">
-            <div class="table__block__item table__item__ellipsis col-vsmall-7" data-tooltip-position="table__block__list" data-tooltip="{{item.firstName? item.firstName + ' ' + item.lastName : item.username}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true" data-element="centerMode-teacher-link">
+            <div class="table__block__item table__item__ellipsis col-vsmall-7" data-tooltip-position="table__block__list" data-tooltip="{{item.firstName? item.firstName + ' ' + item.lastName : item.username}}"
+                data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true" data-element="centerMode-teacher-link">
                 <h2 class="block__item__title block__item__short" data-element="{{'centerMode-item-' + item.username}}">
                     {{item.firstName? item.firstName + ' ' + item.lastName : item.username}}
                 </h2>
@@ -27,7 +29,7 @@
             <div class="table__block__item table__block__item--information col-vsmall-4" ng-if="item.notConfirmed" data-element="centerMode-teacher-notconfirmed">
                 <span>
                     {{'centerMode_notConfirmedTeacher' | translate }}
-                    <button class="link--default" ng-click="resendInvitation(item)" ng-disabled="resendingInvitation">{{'centerMode_resendInvitation' | translate }}</button>
+                    <button class="link--default" ng-click="resendInvitation(item)" ng-disabled="resendingInvitation" data-element="resend-to-{{item.username}}">{{'centerMode_resendInvitation' | translate }}</button>
                 </span>
             </div>
             <div class="table__block__item col-vsmall-2" ng-if="!item.notConfirmed">
