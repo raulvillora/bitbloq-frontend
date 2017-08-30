@@ -1,11 +1,11 @@
 <div class="center-mode__table__header" ng-if="common.section!=='class' && (exercises.length > 0 || (exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)))">
     <div class="classes-dropdown--group">
         <common-dropdown class="classes-dropdown" options="sortExercisesArray" options-click="sortExercises" pre-heading="'classes-sortby'"
-            heading-option="sortClassesArray[1] | translate"></common-dropdown>
+            heading-option="sortClassesArray[1] | translate" data-element="sortexercises_dropdown"></common-dropdown>
         <common-dropdown class="classes-dropdown" options="groupArray" options-click="filterByClass" pre-heading="'class-dropdown-header'"
-            heading-option="classesStatusArray[0] | translate"></common-dropdown>
+            heading-option="classesStatusArray[0] | translate" data-element="filterbyclass_dropdown"></common-dropdown>
         <common-dropdown class="classes-dropdown" options="exerciseStatusArray" options-click="filterByStatus" pre-heading="'classes-status'"
-            heading-option="classesStatusArray[0] | translate"></common-dropdown>
+            heading-option="classesStatusArray[0] | translate" data-element="filterbystatus_dropdown"></common-dropdown>
         <span class="form--input classes--input searcher" ng-class="{'input--focused':focus === 'search'}">
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
@@ -31,7 +31,7 @@
                         {{exercise.name || 'new-exercise' | translate}}</h2>
                 </a>
             </div>
-            <div ng-if="common.section !== 'class'" class="table__block__item table__block__item--groups col-vsmall-3">
+            <div ng-if="common.section !== 'class'" class="table__block__item table__block__item--groups col-vsmall-3" data-element="exercisestable-classes-{{exercise.name}}">
                 {{exercise.groups}}
             </div>
             <div class="table__block__item col-vsmall-3 col-text-right">
