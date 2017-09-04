@@ -560,7 +560,7 @@
             display: inline-block;
             margin: 10px 0;
             padding-right: 20px;
-            width: 28%;
+            
 
             .hardware__add__container {
                 &:after {
@@ -597,7 +597,6 @@
                 height: 138px;
                 width: 138px;
                 overflow: hidden;
-                background-color: #dadada;
                 border: 1px solid $grey-border;
 
                 img {

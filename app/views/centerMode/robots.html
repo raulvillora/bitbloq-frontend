@@ -7,10 +7,22 @@
                         <svg class="svg-icon svg-icon--text">
                             <use xlink:href="#robot"></use>
                         </svg>
-                        <span>{{ 'robots-with-license' | translate }}</span>
+                        <span>{{ 'robots' | translate }}</span>
                     </legend>
                     <!-- My Hardware -->
                     <ol class="account__hardware-list" data-element="account-hardware-list">
+                        <li data-ng-repeat="robot in defaultActivatedRobots" class="robots-list__item">
+                            <div class="hardware--item">
+                                <div class="hardware__image__container">
+                                    <img ng-src="{{'images/robots/' + robot.image + '.png'}}" />
+                                </div>
+                                <p class="hardware__image__container_name">{{robot.uuid | translate}}</p>
+                            </div>
+                            <a target="_blank" ng-href="{{robot.link}}">{{'more-info' | translate}}</a>
+                            <button class="btn btn--primary btn--small btn--activate" ng-disabled="true">
+                                <span>{{'activated' | translate}}</span>
+                            </button>
+                        </li>
                         <li data-ng-repeat="robot in activableRobots" ng-init="sectionIndex = $index" class="robots-list__item">
                             <div class="hardware--item">
                                 <div class="hardware__image__container" data-element="account-hardware-elem">
@@ -19,7 +31,8 @@
                                 <p class="hardware__image__container_name">{{robot.uuid | translate}}</p>
                             </div>
                             <a target="_blank" ng-href="{{robot.link}}">{{'more-info' | translate}}</a>
-                            <button class="btn btn--primary btn--small btn--activate" ng-disabled="centerModeService.center.activatedRobots.indexOf(robot.uuid) > -1" ng-click="centerActivateRobot(robot.uuid)" data-element="activate-robot-{{robot.uuid}}">
+                            <button class="btn btn--primary btn--small btn--activate" ng-disabled="centerModeService.center.activatedRobots.indexOf(robot.uuid) > -1"
+                                ng-click="centerActivateRobot(robot.uuid)" data-element="activate-robot-{{robot.uuid}}">
                                 <span>{{centerModeService.center.activatedRobots.indexOf(robot.uuid) > -1 ? 'activated' :'activate' | translate}}</span>
                             </button>
                         </li>
