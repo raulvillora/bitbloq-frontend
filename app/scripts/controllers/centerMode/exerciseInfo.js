@@ -15,7 +15,7 @@
             $scope.pageno = 1;
             $scope.itemsPerPage = 10;
             $scope.showMoreActions = false;
-            $scope.taskSortArray = ['tasks-sortby-name-az', 'tasks-sortby-name-za', 'tasks-sortby-mark-high', 'tasks-sortby-mark-low'];
+            $scope.taskSortArray = ['tasks-sortby-mark-high', 'tasks-sortby-mark-low'];
             $scope.taskStatusArray = ['tasks-status-all', 'tasks-status-not-delivered', 'tasks-status-not-corrected', 'tasks-status-corrected'];
             $scope.exercisesCount = 0;
             $scope.pagination = {
@@ -130,7 +130,7 @@
             function _checkUrl() {
                 $scope.common.section = 'exercise-info';
                 if ($routeParams.classId) {
-                    centerModeApi.getGroup($routeParams.classId).then(function(response){
+                    centerModeApi.getGroup($routeParams.classId).then(function(response) {
                         $scope.class = response.data;
                         $scope.groupSelected = $scope.class;
                         _getExercise($routeParams.id);

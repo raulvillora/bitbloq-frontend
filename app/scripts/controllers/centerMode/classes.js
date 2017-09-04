@@ -171,11 +171,9 @@
                     $location.path('/classes');
                     $scope.common.userRole = 'teacher';
                 }).catch(function(err) {
-                    console.log(err);
                     if (err.data) {
                         switch (err.data.code) {
                             case 403:
-                                //otro user
                                 $location.path('/projects');
                                 alertsService.add({
                                     text: $scope.common.translate('centerMode_alert_confirmTeacherError1', {
@@ -195,7 +193,6 @@
 
                                 break;
                             case 404:
-                                //otro user
                                 $location.path('/projects');
                                 alertsService.add({
                                     text: $scope.common.translate('centerMode_alert_confirmTeacherError2', {

@@ -30,6 +30,33 @@
                 'link': 'https://www.makeblock.es/productos/robot_starter_kit/'
             }
             ];
+            $scope.defaultActivatedRobots = [
+                {
+                    'uuid': 'zowi',
+                    'image': 'zowi',
+                    'link': 'https://www.bq.com/es/zowi/'
+                },
+                {
+                    'uuid': 'evolution',
+                    'image': 'evolution',
+                    'link': 'https://www.bq.com/es/printbot-evolution'
+                },
+                {
+                    'uuid': 'Crab',
+                    'image': 'printbotcrab',
+                    'link': 'http://diwo.bq.com/montaje-del-printbot-crab/'
+                },
+                {
+                    'uuid': 'Beetle',
+                    'image': 'printbotbeetle',
+                    'link': 'http://diwo.bq.com/product/kit-printbot-beetle/'
+                },
+                {
+                    'uuid': 'Renacuajo',
+                    'image': 'printbottadpole',
+                    'link': 'http://diwo.bq.com/product/kit-printbot-renacuajo/'
+                }
+            ];
             $scope.sendingInvitation = false;
             $scope.resendingInvitation = false;
 

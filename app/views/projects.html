@@ -7,12 +7,13 @@
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Menú de Proyectos</h1>
             <ul class="tabs__header">
-                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'myprojects'}" ng-click="goTo('myprojects')">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'myprojects'}" ng-click="goTo('myprojects')" data-element="projects-myprojects-projects">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#folderOpen"></use>
                     </svg>
                     <span class="menu__item__span">
-                        {{ 'my-projects' | translate }} ({{projectsCount}})
+                        {{ 'my-projects' | translate }}
+                        <span data-element="projects-count">({{projectsCount}})</span>
                     </span>
                 </li>
                 <li class="tabs__header__item aside--menu__item--releases" ng-class="{'selected--tab':selectedTab === 'sharedprojects'}" data-element="projects-shared-projects" ng-click="goTo('sharedprojects')">
@@ -28,7 +29,8 @@
                         <use xlink:href="#delete"></use>
                     </svg>
                     <span class="menu__item__span">
-                        {{'trash' | translate}} ({{ trashCount }})
+                        {{'trash' | translate}}
+                        <span data-element="trash-count">({{ trashCount }})</span>
                     </span>
                 </li>
                 <a href="#/bloqsproject" target="_blank" class="btn btn--primary btn--small btn--new-project" data-element="projects-new-project">
