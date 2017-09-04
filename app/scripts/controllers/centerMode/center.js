@@ -42,14 +42,22 @@
                     'link': 'https://www.bq.com/es/printbot-evolution'
                 },
                 {
-                    'uuid': 'Crab',
-                    'image': 'printbotcrab',
-                    'link': 'http://diwo.bq.com/montaje-del-printbot-crab/'
-                },
+                    'uuid': 'FreaksCar',
+                    'image': 'freakscar',
+                    'link': 'http://www.elecfreaks.com/estore/freakscar-robot-kit.html'
+                }
+            ];
+
+            $scope.robotsNotAvailableYet = [
                 {
                     'uuid': 'Beetle',
                     'image': 'printbotbeetle',
                     'link': 'http://diwo.bq.com/product/kit-printbot-beetle/'
+                },
+                {
+                    'uuid': 'Crab',
+                    'image': 'printbotcrab',
+                    'link': 'http://diwo.bq.com/montaje-del-printbot-crab/'
                 },
                 {
                     'uuid': 'Renacuajo',
