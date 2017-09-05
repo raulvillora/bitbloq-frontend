@@ -64,23 +64,21 @@
                     </svg>
                 </span>
                 <div ng-show="menuActive[$index]" class="table__block__item--menu my-project__options-container">
-                    <div ng-if="common.userRole!=='student'">
-                        <ul>
-                            <li class="table__block__item--menu__item" ng-click="restoreProject(project)" data-element="myprojects-restore-project">
-                                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                    <use xlink:href="#undo"></use>
-                                </svg>
-                                {{'restore' | translate}}
-                            </li>
-                            <li class="dropdown__item--separator--thick"></li>
-                            <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="removePermanentProject(project)" ng-dblclick="avoidDoubleClick();" data-element="eliminate-4ever">
-                                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                    <use xlink:href="#delete"></use>
-                                </svg>
-                                {{'delete4ever' | translate}}
-                            </li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <li class="table__block__item--menu__item" ng-click="restoreProject(project)" data-element="myprojects-restore-project">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#undo"></use>
+                            </svg>
+                            {{'restore' | translate}}
+                        </li>
+                        <li class="dropdown__item--separator--thick"></li>
+                        <li class="table__block__item--menu__item table__block__item--menu__item-red" ng-click="removePermanentProject(project)" ng-dblclick="avoidDoubleClick();" data-element="eliminate-4ever">
+                            <svg class="svg-icon svg-icon--text svg-icon--menu">
+                                <use xlink:href="#delete"></use>
+                            </svg>
+                            {{'delete4ever' | translate}}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
