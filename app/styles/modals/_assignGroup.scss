@@ -31,15 +31,13 @@
     padding: 0;
     .group__head {
         float: left;
-        height: 50px;
         width: calc(100% - 28px);
         padding-left: 4px;
         .group__expanded--number {
             padding-left: 58px;
-            margin-top: 4px
         }
         .group__expanded--icon {
-            margin-top: 10px
+            margin-top: 4px
         }
     }
     .checkbox--general {
@@ -57,14 +55,17 @@
     .block__item__title {
         font-weight: bold;
     }
-    .table__block__item svg {
-        margin-left: 70px;
-        width: 14px;
-        height: 14px;
-        fill: #3b3e45;
-    }
+    .table__block__item{
+        padding: 0 0.7px 0 0;
+        svg {
+            margin-left: 70px;
+            width: 14px;
+            height: 14px;
+            fill: #3b3e45;
+        }
+    } 
     .table__block__list {
-        min-height: 55px;
+        min-height: 45px;
     }
 }
 
