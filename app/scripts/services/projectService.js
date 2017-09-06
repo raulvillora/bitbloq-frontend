@@ -408,6 +408,8 @@ angular.module('bitbloqApp')
                         for (var i = 0; i < newProject.hardware.components.length; i++) {
                             newItem = _.cloneDeep(hardwareService.componentsMap[newProject.hardware.components[i].uuid || newProject.hardware.components[i].id]);
                             newItem.integratedComponent = newProject.hardware.components[i].integratedComponent;
+                            newItem.oscillator = newProject.hardware.components[i].oscillator;
+                            newItem.baudRate = newProject.hardware.components[i].baudRate;
                             newItem.coordinates = newProject.hardware.components[i].coordinates;
                             newItem.connected = newProject.hardware.components[i].connected;
                             newItem.name = newProject.hardware.components[i].name;
