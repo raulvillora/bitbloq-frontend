@@ -1,7 +1,7 @@
 'use strict';
 angular
     .module('bitbloqApp')
-    .service('hw2Bloqs', function(jsPlumb, $log, $window, jsPlumbUtil) {
+    .service('hw2Bloqs', function (jsPlumb, $log, $window, jsPlumbUtil) {
         var exports = {},
 
             board = null,
@@ -26,7 +26,7 @@ angular
             };
 
         /*jshint validthis:true */
-        exports.initialize = function(container, boardContainerIdRef, robotContainerIdRef) {
+        exports.initialize = function (container, boardContainerIdRef, robotContainerIdRef) {
 
             if (!container) {
                 throw Error;
@@ -78,12 +78,12 @@ angular
             _connectionListeners();
 
             // window.removeEventListener('optimizedResize');
-            $window.addEventListener('optimizedResize', function() {
+            $window.addEventListener('optimizedResize', function () {
                 exports.repaint();
             }, false);
 
             // window.removeEventListener('focus');
-            $window.addEventListener('focus', function() {
+            $window.addEventListener('focus', function () {
                 exports.repaint();
             }, false);
 
@@ -91,7 +91,7 @@ angular
 
         };
 
-        exports.addBoard = function(newBoard) {
+        exports.addBoard = function (newBoard) {
             exports.removeBoard();
 
             board = newBoard;
@@ -107,7 +107,7 @@ angular
             exports.repaint();
         };
 
-        exports.addComponent = function(newComponent) {
+        exports.addComponent = function (newComponent) {
             if (!newComponent) {
                 throw new Error('You need provide a component element :: addComponent');
             }
@@ -141,7 +141,7 @@ angular
             return DOMComponent;
         };
 
-        exports.addRobot = function(newRobot) {
+        exports.addRobot = function (newRobot) {
             robotDOMElement = document.getElementById(robotContainerId);
             robotDOMElement.classList.add(newRobot.id || newRobot.uuid);
 
@@ -151,14 +151,14 @@ angular
             robot = newRobot;
         };
 
-        exports.disconnectComponent = function(component) {
+        exports.disconnectComponent = function (component) {
             var el = document.querySelector('[data-uid="' + component.uid + '"]');
             jsPlumbInstance.select({
                 source: el.id
             }).detach();
         };
 
-        exports.disconnectAllComponents = function() {
+        exports.disconnectAllComponents = function () {
             jsPlumbInstance.detachAllConnections(boardDOMElement);
         };
 
@@ -167,7 +167,7 @@ angular
          * @param  {[type]} schema [description]
          * @return {[type]}        [description]
          */
-        exports.loadSchema = function(newSchema) {
+        exports.loadSchema = function (newSchema) {
             $log.debug('start loading schema ');
             $log.debug(newSchema);
 
@@ -181,12 +181,12 @@ angular
                 exports.addBoard(ref.schema.board);
 
                 //Add components
-                this.schema.components.forEach(function(component) {
+                this.schema.components.forEach(function (component) {
                     exports.addComponent(component, true);
                 });
 
                 //Add connections
-                this.schema.connections.forEach(function(connection) {
+                this.schema.connections.forEach(function (connection) {
                     if (jsPlumbInstance.getEndpoint(connection.pinSourceUid).isFull()) {
                         return false;
                     }
@@ -205,11 +205,11 @@ angular
 
         };
 
-        exports.removeBoard = function() {
+        exports.removeBoard = function () {
             if (jsPlumbInstance && board && boardDOMElement) {
                 oldConnections = [];
                 var connections = jsPlumbInstance.getConnections();
-                connections.forEach(function(connection) {
+                connections.forEach(function (connection) {
                     oldConnections.push(connection.getParameters());
                 });
                 boardDOMElement.classList.remove(board.uuid);
@@ -218,21 +218,21 @@ angular
             board = null;
         };
 
-        exports.removeComponent = function(component) {
+        exports.removeComponent = function (component) {
             component.removeEventListener('mousedown', _onMouseDownHandler);
             component.removeEventListener('mouseup', _onMouseUpHandler);
 
-            jsPlumbInstance.getConnections(component).forEach(function(conn) {
+            jsPlumbInstance.getConnections(component).forEach(function (conn) {
                 conn.setType('removing');
             });
             jsPlumbInstance.detachAllConnections(component);
             jsPlumbInstance.remove(component);
         };
 
-        exports.removeAllComponents = function() {
+        exports.removeAllComponents = function () {
             jsPlumbInstance.deleteEveryEndpoint();
             var nodeList = containerDefault.querySelectorAll('.component');
-            [].forEach.call(nodeList, function(el) {
+            [].forEach.call(nodeList, function (el) {
                 el.removeEventListener('mousedown', _onMouseDownHandler);
                 el.removeEventListener('mouseup', _onMouseUpHandler);
 
@@ -240,11 +240,11 @@ angular
             });
         };
 
-        exports.removeSelectedConnection = function() {
+        exports.removeSelectedConnection = function () {
             var componentUid;
-            jsPlumbInstance.getAllConnections().forEach(function(con) {
+            jsPlumbInstance.getAllConnections().forEach(function (con) {
                 if (con.hasType('selected')) {
-                    con.endpoints.forEach(function(elem) {
+                    con.endpoints.forEach(function (elem) {
                         elem.removeType('selected');
                         elem.removeClass('selected');
                     });
@@ -255,7 +255,7 @@ angular
             return componentUid;
         };
 
-        exports.removeRobot = function() {
+        exports.removeRobot = function () {
             if (jsPlumbInstance && robot && robotDOMElement) {
                 robotDOMElement.classList.remove(robot.uuid);
                 jsPlumbInstance.removeAllEndpoints(robotDOMElement);
@@ -273,16 +273,16 @@ angular
             }
         }
 
-        exports.repaint = function() {
+        exports.repaint = function () {
             if (!repaintTimer) {
-                repaintTimer = setTimeout(function() {
+                repaintTimer = setTimeout(function () {
                     repaintTimer = null;
                     _repaint();
                 }, 200);
             }
         };
 
-        exports.saveSchema = function() {
+        exports.saveSchema = function () {
 
             var schema = {
                 components: [],
@@ -298,7 +298,7 @@ angular
             }
 
             var componentList = [].slice.call(containerDefault.querySelectorAll('.component'));
-            componentList.forEach(function(item) {
+            componentList.forEach(function (item) {
 
                 var endpoints = jsPlumbInstance.getEndpoints(item);
 
@@ -327,26 +327,26 @@ angular
             return schema;
         };
 
-        exports.unselectAllConnections = function() {
-            jsPlumbInstance.getAllConnections().forEach(function(con) {
+        exports.unselectAllConnections = function () {
+            jsPlumbInstance.getAllConnections().forEach(function (con) {
                 con.removeType('selected');
 
                 con.canvas.classList.remove('selected');
 
-                con.endpoints.forEach(function(ep) {
+                con.endpoints.forEach(function (ep) {
                     ep.removeType('selected');
                     ep.canvas.classList.remove('selected');
                 });
             });
         };
-        exports.checkIfOldConnections = function() {
+        exports.checkIfOldConnections = function () {
             return oldConnections.length > 0;
         };
 
         function _autoConnect(board) {
             if (oldConnections.length > 0) {
                 var i2cToFemale = (board === 'ArduinoUNO' || board === 'ArduinoMEGA2560');
-                oldConnections.forEach(function(connection) {
+                oldConnections.forEach(function (connection) {
                     var pin = connection.pinNames[Object.keys(connection.pinNames)[0]].toLowerCase();
                     if (i2cToFemale && (pin === 'a4' || pin === 'a5')) {
                         pin = pin + '-h';
@@ -441,7 +441,7 @@ angular
                 pin: pinAssignation
             };
 
-            connection.connection.bind('click', function(c) {
+            connection.connection.bind('click', function (c) {
                 exports.unselectAllConnections();
                 _selectConnection(c);
             });
@@ -503,7 +503,7 @@ angular
         }
 
         function _getConnections() {
-            return jsPlumbInstance.getAllConnections().map(function(connection) {
+            return jsPlumbInstance.getAllConnections().map(function (connection) {
 
                 var connectionParams = connection.getParameters();
                 return ({
@@ -578,20 +578,20 @@ angular
                 var epBoard = jsPlumbInstance.addEndpoint(boardDOMElement, options);
 
                 epBoard.unbind('click');
-                epBoard.bind('click', function(ep) {
+                epBoard.bind('click', function (ep) {
                     if (ep.hasType('selected')) {
                         return false;
                     }
                     //Remove other connections & ep selected
-                    jsPlumbInstance.getAllConnections().forEach(function(con) {
+                    jsPlumbInstance.getAllConnections().forEach(function (con) {
                         con.removeType('selected');
-                        con.endpoints.forEach(function(elem) {
+                        con.endpoints.forEach(function (elem) {
                             elem.removeType('selected');
                         });
                     });
-                    ep.connections.forEach(function(con) {
+                    ep.connections.forEach(function (con) {
                         con.setType('selected');
-                        con.endpoints.forEach(function(epAdjacent) {
+                        con.endpoints.forEach(function (epAdjacent) {
                             epAdjacent.setType('selected');
                         });
                     });
@@ -741,13 +741,13 @@ angular
                         strokeStyle: config.colorHover
                     }
                 }, {
-                    scope: type
-                });
+                        scope: type
+                    });
 
                 epComponent.canvas.classList.add('selected');
 
                 epComponent.unbind('click');
-                epComponent.bind('click', function(ep) {
+                epComponent.bind('click', function (ep) {
 
                     ep.canvas.classList.add('selected');
 
@@ -757,7 +757,7 @@ angular
                         return false;
                     }
 
-                    ep.connections.forEach(function(con) {
+                    ep.connections.forEach(function (con) {
                         _selectConnection(con);
                     });
 
@@ -812,7 +812,7 @@ angular
 
             exports.unselectAllConnections();
 
-            var connectionsArray = jsPlumbInstance.getConnections().filter(function(el) {
+            var connectionsArray = jsPlumbInstance.getConnections().filter(function (el) {
                 return el.sourceId === comp.id;
             });
 
@@ -821,7 +821,7 @@ angular
                 source: this
             }).addClass('selected');
 
-            connectionsArray.forEach(function(c) {
+            connectionsArray.forEach(function (c) {
                 _selectConnection(c);
             });
         }
@@ -884,7 +884,7 @@ angular
             element.setType('selected');
             element.canvas.classList.add('selected');
 
-            element.endpoints.forEach(function(ep) {
+            element.endpoints.forEach(function (ep) {
                 ep.setType('selected');
                 ep.canvas.classList.add('selected');
             });
@@ -902,12 +902,12 @@ angular
         function _throttle(type, name, obj) {
             obj = obj || $window;
             var running = false;
-            var func = function() {
+            var func = function () {
                 if (running) {
                     return;
                 }
                 running = true;
-                requestAnimationFrame(function() {
+                requestAnimationFrame(function () {
                     obj.dispatchEvent(new CustomEvent(name));
                     running = false;
                 });
@@ -920,7 +920,7 @@ angular
 
             element.canvas.classList.remove('selected');
 
-            element.endpoints.forEach(function(ep) {
+            element.endpoints.forEach(function (ep) {
                 ep.removeType('selected');
                 ep.canvas.classList.remove('selected');
             });
