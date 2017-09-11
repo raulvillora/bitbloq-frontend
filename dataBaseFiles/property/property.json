@@ -1,756 +1,1140 @@
-[{
-    "bitbloqLibsVersion": "1.3.6",
-    "bloqsSortTree": {
-        "advancedClasses": [{
-            "name": "classChildren"
-        }, {
-            "name": "constructorClassArguments"
-        }, {
-            "name": "invokeArgumentsClass"
-        }, {
-            "name": "public"
-        }, {
-            "name": "protected"
-        }, {
-            "name": "private"
-        }, {
-            "name": "invokeClassFunctionWithArguments"
-        }, {
-            "name": "invokeClassReturnFunctionWithArguments"
-        }, {
-            "name": "arrayClassVariable"
-        }, {
-            "name": "setClassArrayVariable"
-        }],
-        "advancedComponents": [{
-            "name": "mBotSetLedMatrixBrightness"
-        }, {
-            "name": "mBotSetLedMatrixBrightnessAdvanced"
-        }, {
-            "name": "setDisplayBrightness"
-        }, {
-            "name": "setDisplayBrightnessAdvanced"
-        }, {
-            "name": "hwVariable"
-        }, {
-            "name": "buzzerAdvanced-v2"
-        }, {
-            "name": "buzzerWithoutPause"
-        }, {
-            "name": "buzzerWithoutPauseAdvanced"
-        }, {
-            "name": "stopBuzzer"
-        }, {
-            "name": "mBotBuzzerAdvanced-v2"
-        }, {
-            "name": "continuousServoStartAdvanced-v1"
-        }, {
-            "name": "continuousServoStopAdvanced"
-        }, {
-            "name": "lcdTurnOnOffAdvanced"
-        }, {
-            "name": "lcdWriteAdvanced"
-        }, {
-            "name": "ledAdvanced"
-        }, {
-            "name": "rgbLedAdvanced"
-        }, {
-            "name": "mBotSetRGBLedAdvanced"
-        }, {
-            "name": "oscillatorAdvanced"
-        }, {
-            "name": "oscillatorStartAdvanced"
-        }, {
-            "name": "oscillatorStopAdvanced"
-        }, {
-            "name": "digitalReadAdvanced"
-        }, {
-            "name": "analogReadAdvanced"
-        }, {
-            "name": "analogWrite"
-        }, {
-            "name": "digitalWrite"
-        }, {
-            "name": "pinLevels"
-        }, {
-            "name": "readAdvanced"
-        }, {
-            "name": "servoNormalAdvanced-v2"
-        }, {
-            "name": "servoAttach"
-        }, {
-            "name": "servoDetach"
-        }, {
-            "name": "lcdWritePositionAdvanced-v1"
-        }, {
-            "name": "viewer"
-        }],
-        "advancedControls": [{
-            "name": "waitAdvanced"
-        }, {
-            "name": "ifAdvanced"
-        }, {
-            "addClass": "indent-1",
-            "name": "elseifAdvanced"
-        }, {
-            "addClass": "indent-1",
-            "name": "else"
-        }, {
-            "name": "magicForAdvanced"
-        }, {
-            "name": "forAdvanced-v1"
-        }, {
-            "name": "switchAdvanced-v2"
-        }, {
-            "addClass": "indent-1",
-            "name": "caseAdvanced-v1"
-        }, {
-            "addClass": "indent-1",
-            "name": "caseDefault"
-        }, {
-            "name": "whileAdvanced"
-        }, {
-            "addClass": "indent-1",
-            "name": "continue"
-        }, {
-            "addClass": "indent-1",
-            "name": "break"
-        }],
-        "advancedEvolution": [{
-            "name": "evolutionHeadAdvance"
-        }, {
-            "name": "evolutionLine"
-        }, {
-            "name": "evolutionLight"
-        }, {
-            "name": "evolutionDistance"
-        }],
-        "advancedFunctions": [{
-            "name": "voidFunctionWithArguments"
-        }, {
-            "name": "invokeFunctionWithArguments"
-        }, {
-            "name": "returnFunctionWithArguments"
-        }, {
-            "name": "invokeReturnFunctionWithArguments"
-        }, {
-            "name": "argument"
-        }, {
-            "name": "arguments"
-        }, {
-            "name": "return"
-        }],
-        "advancedMathematics": [{
-            "name": "mathOperations"
-        }, {
-            "name": "numberArrayAdvanced"
-        }, {
-            "name": "mapAdvanced"
-        }, {
-            "name": "numConversion"
-        }, {
-            "name": "round-v1"
-        }, {
-            "name": "parenthesis"
-        }],
-        "advancedTexts": [{
-            "name": "stringArrayAdvanced"
-        }, {
-            "name": "char"
-        }],
-        "advancedVariables": [{
-            "name": "arrayVariableAdvanced"
-        }, {
-            "name": "setArrayVariableAdvanced"
-        }, {
-            "name": "declareVariableAdvanced"
-        }, {
-            "name": "declareArrayAdvanced"
-        }],
-        "advancedZowi": [{
-            "name": "zowiMovementsFront"
-        }, {
-            "name": "zowiMovementsSides"
-        }, {
-            "name": "zowiMovementsHeightFront"
-        }, {
-            "name": "zowiMovementsHeightSides"
-        }, {
-            "name": "zowiMovementsNoDir-v1"
-        }, {
-            "name": "zowiButtons"
-        }, {
-            "name": "zowiSound"
-        }, {
-            "name": "zowiDistance"
-        }, {
-            "name": "zowiMouthAdvanced"
-        }],
-        "classes": [{
-            "name": "class"
-        }, {
-            "name": "invokeClass"
-        }, {
-            "name": "constructorClass"
-        }, {
-            "name": "invokeClassFunction"
-        }, {
-            "name": "invokeClassReturnFunction"
-        }, {
-            "name": "setClassVariable"
-        }, {
-            "name": "selectClassVariable"
-        }],
-        "codes": [{
-            "name": "comment"
-        }, {
-            "name": "code"
-        }],
-        "components": [{
-            "name": "freakscarBuzzer"
-        }, {
-            "name": "freakscarDistance"
-        }, {
-            "name": "freakscarLight"
-        }, {
-            "name": "hts221Temperature"
-        }, {
-            "name": "hts221Humidity"
-        }, {
-            "name": "buzzer"
-        }, {
-            "name": "mBotBuzzer-v2"
-        }, {
-            "name": "continuousServoStart"
-        }, {
-            "name": "continuousServoStop"
-        }, {
-            "name": "lcdTurnOnOff"
-        }, {
-            "name": "lcdWrite"
-        }, {
-            "name": "lcdWritePosition"
-        }, {
-            "name": "lcdClear"
-        }, {
-            "name": "led"
-        }, {
-            "name": "rgbLedSimple"
-        }, {
-            "name": "rgbLed"
-        }, {
-            "name": "rgbLedFade"
-        }, {
-            "name": "rgbLedOff"
-        }, {
-            "name": "clockRTCInit"
-        }, {
-            "name": "clockRTCAdvanced"
-        }, {
-            "name": "oscillator"
-        }, {
-            "name": "oscillatorStart"
-        }, {
-            "name": "oscillatorStop"
-        }, {
-            "name": "readSensor"
-        }, {
-            "name": "mBotGetDistance-v2"
-        }, {
-            "name": "mBotSetRGBLed"
-        }, {
-            "name": "servoNormal"
-        }, {
-            "name": "serialReceive"
-        }, {
-            "name": "serialReceiveInt"
-        }, {
-            "name": "serialSend-v1"
-        }, {
-            "name": "readJoystickXY"
-        }],
-        "controls": [{
-            "name": "wait"
-        }, {
-            "name": "millis"
-        }, {
-            "name": "if"
-        }, {
-            "addClass": "indent-1",
-            "name": "elseif"
-        }, {
-            "addClass": "indent-1",
-            "name": "else"
-        }, {
-            "name": "switch"
-        }, {
-            "addClass": "indent-1",
-            "name": "case"
-        }, {
-            "addClass": "indent-1",
-            "name": "caseDefault"
-        }, {
-            "name": "magicFor"
-        }, {
-            "name": "for-v1"
-        }, {
-            "name": "while"
-        }],
-        "evolution": [{
-            "name": "evolutionHome"
-        }, {
-            "name": "evolutionMovementsSimple"
-        }, {
-            "name": "evolutionHead"
-        }, {
-            "name": "evolutionBuzzer"
-        }, {
-            "name": "evolutionIfLine"
-        }, {
-            "name": "evolutionIfLight"
-        }, {
-            "name": "evolutionIfDistance"
-        }],
-        "functions": [{
-            "name": "voidFunction"
-        }, {
-            "name": "invokeFunction"
-        }, {
-            "name": "returnFunction"
-        }, {
-            "name": "invokeReturnFunction"
-        }],
-        "logics": [{
-            "name": "boolean"
-        }, {
-            "name": "boolArray"
-        }, {
-            "name": "not"
-        }, {
-            "name": "equalityOperations"
-        }, {
-            "name": "logicOperations"
-        }],
-        "mbot": [{
-            "name": "mBotMove"
-        }, {
-            "name": "mBotStop"
-        }, {
-            "name": "mBotBuzzer"
-        }, {
-            "name": "mBotGetDistance"
-        }, {
-            "name": "mBotGetButtonStatus"
-        }, {
-            "name": "mBotGetLightSensor"
-        }, {
-            "name": "mBotSetLed"
-        }, {
-            "name": "mBotLineFollower"
-        }],
-        "advancedMbot": [{
-            "name": "mBotBuzzerAdvanced"
-        }, {
-            "name": "mBotMoveAdvanced"
-        }, {
-            "name": "mBotSetLedAdvanced"
-        }],
-        "mbotV2": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "displayNumberInPosition"
-        }, {
-            "name": "clear7segment"
-        }, {
-            "name": "ifButtonPushed"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }, {
-            "name": "makeblockIfMotion"
-        }, {
-            "name": "remoteButtonPushedSwitch"
-        }, {
-            "addClass": "indent-1",
-            "name": "remoteButtonPushedCase"
-        }, {
-            "addClass": "indent-1",
-            "name": "remoteButtonPushedCaseDefault"
-        }],
-        "advancedMbotV2": [{
-            "name": "mBotMoveAdvanced-v2"
-        }, {
-            "name": "mBotShowNumberOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowStringOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowTimeOnLedMatrixAdvanced"
-        }],
-        "freakscar": [{
-            "name": "freakscarIfDistance"
-        }, {
-            "name": "freakscarIfRemote"
-        }, {
-            "name": "freakscarMove"
-        }, {
-            "name": "freakscarCollision"
-        }, {
-            "name": "freakscarIfThereIsALotOfLightGlobal"
-        }, {
-            "name": "freakscarIfLightGlobal"
-        }],
-        "advancedFreakscar": [{
-            "name": "freakscarMoveSpeed"
-        }, {
-            "name": "freakscarIfThereIsALotOfLight"
-        }, {
-            "name": "freakscarIfLight"
-        }],
-        "rangerlandraider": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "displayNumberInPosition"
-        }, {
-            "name": "clear7segment"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }, {
-            "name": "makeblockIfMotion"
-        }, {
-            "name": "ifButtonPushed"
-        }],
-        "advancedRangerlandraider": [{
-            "name": "mBotMoveAdvanced-v2"
-        }, {
-            "name": "mBotShowNumberOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowStringOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowTimeOnLedMatrixAdvanced"
-        }],
-        "rangerraptor": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "displayNumberInPosition"
-        }, {
-            "name": "clear7segment"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }, {
-            "name": "makeblockIfMotion"
-        }, {
-            "name": "ifButtonPushed"
-        }],
-        "advancedRangerraptor": [{
-            "name": "mBotMoveAdvanced-v2"
-        }, {
-            "name": "mBotShowNumberOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowStringOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowTimeOnLedMatrixAdvanced"
-        }],
-        "rangernervousbird": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "displayNumberInPosition"
-        }, {
-            "name": "clear7segment"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }, {
-            "name": "makeblockIfMotion"
-        }, {
-            "name": "ifButtonPushed"
-        }],
-        "advancedRangernervousbird": [{
-            "name": "mBotMoveAdvanced-v2"
-        }, {
-            "name": "mBotShowNumberOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowStringOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowTimeOnLedMatrixAdvanced"
-        }],
-        "startertank": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "displayNumberInPosition"
-        }, {
-            "name": "clear7segment"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }, {
-            "name": "makeblockIfMotion"
-        }, {
-            "name": "ifButtonPushed"
-        }],
-        "advancedStartertank": [{
-            "name": "mBotMoveAdvanced-v2"
-        }, {
-            "name": "mBotShowNumberOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowStringOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowTimeOnLedMatrixAdvanced"
-        }],
-        "starterthreewheels": [{
-            "name": "mBotMove-v2"
-        }, {
-            "name": "mBotStop-v2"
-        }, {
-            "name": "mBotSomethingNear"
-        }, {
-            "name": "mBotIfThereIsALotOfLight"
-        }, {
-            "name": "mBotIfFollowLines"
-        }, {
-            "name": "mBotSetRGBLedSimple"
-        }, {
-            "name": "mBotRGBLedOff"
-        }, {
-            "name": "makeblockIfNoise"
-        }, {
-            "name": "displayNumber"
-        }, {
-            "name": "displayNumberInPosition"
-        }, {
-            "name": "clear7segment"
-        }, {
-            "name": "mBotLedMatrix"
-        }, {
-            "name": "mBotClearLedMatrix"
-        }, {
-            "name": "mBotShowTimeOnLedMatrix"
-        }, {
-            "name": "mBotShowNumberOnLedMatrix"
-        }, {
-            "name": "mBotShowStringOnLedMatrix"
-        }, {
-            "name": "makeblockIfMotion"
-        }, {
-            "name": "ifButtonPushed"
-        }],
-        "advancedStarterthreewheels": [{
-            "name": "mBotMoveAdvanced-v2"
-        }, {
-            "name": "mBotShowNumberOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowStringOnLedMatrixAdvanced"
-        }, {
-            "name": "mBotShowTimeOnLedMatrixAdvanced"
-        }],
-        "mathematics": [{
-            "name": "number"
-        }, {
-            "name": "numberArray"
-        }, {
-            "name": "basicOperations"
-        }, {
-            "name": "map"
-        }, {
-            "name": "randomSeed"
-        }, {
-            "name": "random"
-        }],
-        "texts": [{
-            "name": "string"
-        }, {
-            "name": "stringArray"
-        }, {
-            "name": "length"
-        }, {
-            "name": "stringCreate"
-        }, {
-            "name": "stringSum"
-        }],
-        "variables": [{
-            "name": "declareVariable"
-        }, {
-            "name": "selectVariable"
-        }, {
-            "name": "setVariable"
-        }, {
-            "name": "declareArray"
-        }, {
-            "name": "arrayVariable"
-        }, {
-            "name": "setArrayVariable"
-        }],
-        "zowi": [{
-            "name": "zowiHome"
-        }, {
-            "name": "zowiMovementsSimple"
-        }, {
-            "name": "zowiGestures"
-        }, {
-            "name": "zowiMouth"
-        }, {
-            "name": "zowiSounds"
-        }, {
-            "name": "zowiIfButtons"
-        }, {
-            "name": "zowiIfSound"
-        }, {
-            "name": "zowiIfDistance"
-        }],
-        "phone": [{
-            "name": "phoneEmitSound"
-        }, {
-            "name": "phoneSendText"
-        }, {
-            "name": "phoneReceive"
-        }, {
-            "name": "phoneTurnOnLight"
-        }, {
-            "name": "phoneTurnOffLight"
-        }, {
-            "name": "phoneConfigTwitter"
-        }, {
-            "name": "phoneSendTweet"
-        }, {
-            "name": "phoneReadAccel"
-        }, {
-            "name": "phoneReadGyroscope"
-        }, {
-            "name": "phoneReadMagnetic"
-        }, {
-            "name": "phoneReadOrientation"
-        }, {
-            "name": "phoneisCovered"
-        }, {
-            "name": "phoneReadLight"
-        }]
-    },
-    "robotsFirmwareVersion": {
-        "zowi": "1.0.0"
-    },
-    "boardsFirmwareVersion": {
-        "mcore": "1.0.1",
-        "meauriga": "1.0.0",
-        "meorion": "1.0.0"
-    },
-    "web2boardVersion": "1.0.0",
-    "currentweb2boardVersion": "2.1.3",
-    "bannerClass": "campamentos",
-    "bannerHTML": "campusverano2017"
-}]
+[
+    {
+        "bitbloqLibsVersion": "1.3.7",
+        "bloqsSortTree": {
+            "advancedClasses": [
+                {
+                    "name": "classChildren"
+                },
+                {
+                    "name": "constructorClassArguments"
+                },
+                {
+                    "name": "invokeArgumentsClass"
+                },
+                {
+                    "name": "public"
+                },
+                {
+                    "name": "protected"
+                },
+                {
+                    "name": "private"
+                },
+                {
+                    "name": "invokeClassFunctionWithArguments"
+                },
+                {
+                    "name": "invokeClassReturnFunctionWithArguments"
+                },
+                {
+                    "name": "arrayClassVariable"
+                },
+                {
+                    "name": "setClassArrayVariable"
+                }
+            ],
+            "advancedComponents": [
+                {
+                    "name": "mBotSetLedMatrixBrightness"
+                },
+                {
+                    "name": "mBotSetLedMatrixBrightnessAdvanced"
+                },
+                {
+                    "name": "setDisplayBrightness"
+                },
+                {
+                    "name": "setDisplayBrightnessAdvanced"
+                },
+                {
+                    "name": "hwVariable"
+                },
+                {
+                    "name": "buzzerAdvanced-v2"
+                },
+                {
+                    "name": "buzzerWithoutPause"
+                },
+                {
+                    "name": "buzzerWithoutPauseAdvanced"
+                },
+                {
+                    "name": "stopBuzzer"
+                },
+                {
+                    "name": "mBotBuzzerAdvanced-v2"
+                },
+                {
+                    "name": "continuousServoStartAdvanced-v1"
+                },
+                {
+                    "name": "continuousServoStopAdvanced"
+                },
+                {
+                    "name": "lcdTurnOnOffAdvanced"
+                },
+                {
+                    "name": "lcdWriteAdvanced"
+                },
+                {
+                    "name": "ledAdvanced"
+                },
+                {
+                    "name": "rgbLedAdvanced"
+                },
+                {
+                    "name": "mBotSetRGBLedAdvanced"
+                },
+                {
+                    "name": "oscillatorAdvanced"
+                },
+                {
+                    "name": "oscillatorStartAdvanced"
+                },
+                {
+                    "name": "oscillatorStopAdvanced"
+                },
+                {
+                    "name": "digitalReadAdvanced"
+                },
+                {
+                    "name": "analogReadAdvanced"
+                },
+                {
+                    "name": "analogWrite"
+                },
+                {
+                    "name": "digitalWrite"
+                },
+                {
+                    "name": "pinLevels"
+                },
+                {
+                    "name": "readAdvanced"
+                },
+                {
+                    "name": "servoNormalAdvanced-v2"
+                },
+                {
+                    "name": "servoAttach"
+                },
+                {
+                    "name": "servoDetach"
+                },
+                {
+                    "name": "lcdWritePositionAdvanced-v1"
+                },
+                {
+                    "name": "viewer"
+                }
+            ],
+            "advancedControls": [
+                {
+                    "name": "waitAdvanced"
+                },
+                {
+                    "name": "ifAdvanced"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "elseifAdvanced"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "else"
+                },
+                {
+                    "name": "magicForAdvanced"
+                },
+                {
+                    "name": "forAdvanced-v1"
+                },
+                {
+                    "name": "switchAdvanced-v2"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "caseAdvanced-v1"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "caseDefault"
+                },
+                {
+                    "name": "whileAdvanced"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "continue"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "break"
+                }
+            ],
+            "advancedEvolution": [
+                {
+                    "name": "evolutionHeadAdvance"
+                },
+                {
+                    "name": "evolutionLine"
+                },
+                {
+                    "name": "evolutionLight"
+                },
+                {
+                    "name": "evolutionDistance"
+                }
+            ],
+            "advancedFunctions": [
+                {
+                    "name": "voidFunctionWithArguments"
+                },
+                {
+                    "name": "invokeFunctionWithArguments"
+                },
+                {
+                    "name": "returnFunctionWithArguments"
+                },
+                {
+                    "name": "invokeReturnFunctionWithArguments"
+                },
+                {
+                    "name": "argument"
+                },
+                {
+                    "name": "arguments"
+                },
+                {
+                    "name": "return"
+                }
+            ],
+            "advancedMathematics": [
+                {
+                    "name": "mathOperations"
+                },
+                {
+                    "name": "numberArrayAdvanced"
+                },
+                {
+                    "name": "mapAdvanced"
+                },
+                {
+                    "name": "numConversion"
+                },
+                {
+                    "name": "round-v1"
+                },
+                {
+                    "name": "parenthesis"
+                }
+            ],
+            "advancedTexts": [
+                {
+                    "name": "stringArrayAdvanced"
+                },
+                {
+                    "name": "char"
+                }
+            ],
+            "advancedVariables": [
+                {
+                    "name": "arrayVariableAdvanced"
+                },
+                {
+                    "name": "setArrayVariableAdvanced"
+                },
+                {
+                    "name": "declareVariableAdvanced"
+                },
+                {
+                    "name": "declareArrayAdvanced"
+                }
+            ],
+            "advancedZowi": [
+                {
+                    "name": "zowiMovementsFront"
+                },
+                {
+                    "name": "zowiMovementsSides"
+                },
+                {
+                    "name": "zowiMovementsHeightFront"
+                },
+                {
+                    "name": "zowiMovementsHeightSides"
+                },
+                {
+                    "name": "zowiMovementsNoDir-v1"
+                },
+                {
+                    "name": "zowiButtons"
+                },
+                {
+                    "name": "zowiSound"
+                },
+                {
+                    "name": "zowiDistance"
+                },
+                {
+                    "name": "zowiMouthAdvanced"
+                }
+            ],
+            "classes": [
+                {
+                    "name": "class"
+                },
+                {
+                    "name": "invokeClass"
+                },
+                {
+                    "name": "constructorClass"
+                },
+                {
+                    "name": "invokeClassFunction"
+                },
+                {
+                    "name": "invokeClassReturnFunction"
+                },
+                {
+                    "name": "setClassVariable"
+                },
+                {
+                    "name": "selectClassVariable"
+                }
+            ],
+            "codes": [
+                {
+                    "name": "comment"
+                },
+                {
+                    "name": "code"
+                }
+            ],
+            "components": [
+                {
+                    "name": "freakscarBuzzer"
+                },
+                {
+                    "name": "freakscarDistance"
+                },
+                {
+                    "name": "freakscarLight"
+                },
+                {
+                    "name": "hts221Temperature"
+                },
+                {
+                    "name": "hts221Humidity"
+                },
+                {
+                    "name": "buzzer"
+                },
+                {
+                    "name": "mBotBuzzer-v2"
+                },
+                {
+                    "name": "continuousServoStart"
+                },
+                {
+                    "name": "continuousServoStop"
+                },
+                {
+                    "name": "lcdTurnOnOff"
+                },
+                {
+                    "name": "lcdWrite"
+                },
+                {
+                    "name": "lcdWritePosition"
+                },
+                {
+                    "name": "lcdClear"
+                },
+                {
+                    "name": "led"
+                },
+                {
+                    "name": "rgbLedSimple"
+                },
+                {
+                    "name": "rgbLed"
+                },
+                {
+                    "name": "rgbLedFade"
+                },
+                {
+                    "name": "rgbLedOff"
+                },
+                {
+                    "name": "clockRTCInit"
+                },
+                {
+                    "name": "clockRTCAdvanced"
+                },
+                {
+                    "name": "oscillator"
+                },
+                {
+                    "name": "oscillatorStart"
+                },
+                {
+                    "name": "oscillatorStop"
+                },
+                {
+                    "name": "readSensor"
+                },
+                {
+                    "name": "mBotGetDistance-v2"
+                },
+                {
+                    "name": "mBotSetRGBLed"
+                },
+                {
+                    "name": "servoNormal"
+                },
+                {
+                    "name": "serialReceive"
+                },
+                {
+                    "name": "serialReceiveInt"
+                },
+                {
+                    "name": "serialSend-v1"
+                },
+                {
+                    "name": "readJoystickXY"
+                }
+            ],
+            "controls": [
+                {
+                    "name": "wait"
+                },
+                {
+                    "name": "millis"
+                },
+                {
+                    "name": "if"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "elseif"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "else"
+                },
+                {
+                    "name": "switch"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "case"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "caseDefault"
+                },
+                {
+                    "name": "magicFor"
+                },
+                {
+                    "name": "for-v1"
+                },
+                {
+                    "name": "while"
+                }
+            ],
+            "evolution": [
+                {
+                    "name": "evolutionHome"
+                },
+                {
+                    "name": "evolutionMovementsSimple"
+                },
+                {
+                    "name": "evolutionHead"
+                },
+                {
+                    "name": "evolutionBuzzer"
+                },
+                {
+                    "name": "evolutionIfLine"
+                },
+                {
+                    "name": "evolutionIfLight"
+                },
+                {
+                    "name": "evolutionIfDistance"
+                }
+            ],
+            "functions": [
+                {
+                    "name": "voidFunction"
+                },
+                {
+                    "name": "invokeFunction"
+                },
+                {
+                    "name": "returnFunction"
+                },
+                {
+                    "name": "invokeReturnFunction"
+                }
+            ],
+            "logics": [
+                {
+                    "name": "boolean"
+                },
+                {
+                    "name": "boolArray"
+                },
+                {
+                    "name": "not"
+                },
+                {
+                    "name": "equalityOperations"
+                },
+                {
+                    "name": "logicOperations"
+                }
+            ],
+            "mbot": [
+                {
+                    "name": "mBotMove"
+                },
+                {
+                    "name": "mBotStop"
+                },
+                {
+                    "name": "mBotBuzzer"
+                },
+                {
+                    "name": "mBotGetDistance"
+                },
+                {
+                    "name": "mBotGetButtonStatus"
+                },
+                {
+                    "name": "mBotGetLightSensor"
+                },
+                {
+                    "name": "mBotSetLed"
+                },
+                {
+                    "name": "mBotLineFollower"
+                }
+            ],
+            "advancedMbot": [
+                {
+                    "name": "mBotBuzzerAdvanced"
+                },
+                {
+                    "name": "mBotMoveAdvanced"
+                },
+                {
+                    "name": "mBotSetLedAdvanced"
+                }
+            ],
+            "mbotV2": [
+                {
+                    "name": "mBotMove-v2"
+                },
+                {
+                    "name": "mBotStop-v2"
+                },
+                {
+                    "name": "mBotSomethingNear"
+                },
+                {
+                    "name": "mBotIfThereIsALotOfLight"
+                },
+                {
+                    "name": "mBotIfFollowLines"
+                },
+                {
+                    "name": "mBotSetRGBLedSimple"
+                },
+                {
+                    "name": "mBotRGBLedOff"
+                },
+                {
+                    "name": "makeblockIfNoise"
+                },
+                {
+                    "name": "displayNumber"
+                },
+                {
+                    "name": "displayNumberInPosition"
+                },
+                {
+                    "name": "clear7segment"
+                },
+                {
+                    "name": "ifButtonPushed"
+                },
+                {
+                    "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mBotClearLedMatrix"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrix"
+                },
+                {
+                    "name": "makeblockIfMotion"
+                },
+                {
+                    "name": "remoteButtonPushedSwitch"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "remoteButtonPushedCase"
+                },
+                {
+                    "addClass": "indent-1",
+                    "name": "remoteButtonPushedCaseDefault"
+                }
+            ],
+            "advancedMbotV2": [
+                {
+                    "name": "mBotMoveAdvanced-v2"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrixAdvanced"
+                }
+            ],
+            "freakscar": [
+                {
+                    "name": "freakscarIfDistance"
+                },
+                {
+                    "name": "freakscarIfRemote"
+                },
+                {
+                    "name": "freakscarMove"
+                },
+                {
+                    "name": "freakscarCollision"
+                },
+                {
+                    "name": "freakscarIfThereIsALotOfLightGlobal"
+                },
+                {
+                    "name": "freakscarIfLightGlobal"
+                }
+            ],
+            "advancedFreakscar": [
+                {
+                    "name": "freakscarMoveSpeed"
+                },
+                {
+                    "name": "freakscarIfThereIsALotOfLight"
+                },
+                {
+                    "name": "freakscarIfLight"
+                }
+            ],
+            "rangerlandraider": [
+                {
+                    "name": "mBotMove-v2"
+                },
+                {
+                    "name": "mBotStop-v2"
+                },
+                {
+                    "name": "mBotSomethingNear"
+                },
+                {
+                    "name": "mBotIfThereIsALotOfLight"
+                },
+                {
+                    "name": "mBotIfFollowLines"
+                },
+                {
+                    "name": "mBotSetRGBLedSimple"
+                },
+                {
+                    "name": "mBotRGBLedOff"
+                },
+                {
+                    "name": "makeblockIfNoise"
+                },
+                {
+                    "name": "displayNumber"
+                },
+                {
+                    "name": "displayNumberInPosition"
+                },
+                {
+                    "name": "clear7segment"
+                },
+                {
+                    "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mBotClearLedMatrix"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrix"
+                },
+                {
+                    "name": "makeblockIfMotion"
+                },
+                {
+                    "name": "ifButtonPushed"
+                }
+            ],
+            "advancedRangerlandraider": [
+                {
+                    "name": "mBotMoveAdvanced-v2"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrixAdvanced"
+                }
+            ],
+            "rangerraptor": [
+                {
+                    "name": "mBotMove-v2"
+                },
+                {
+                    "name": "mBotStop-v2"
+                },
+                {
+                    "name": "mBotSomethingNear"
+                },
+                {
+                    "name": "mBotIfThereIsALotOfLight"
+                },
+                {
+                    "name": "mBotIfFollowLines"
+                },
+                {
+                    "name": "mBotSetRGBLedSimple"
+                },
+                {
+                    "name": "mBotRGBLedOff"
+                },
+                {
+                    "name": "makeblockIfNoise"
+                },
+                {
+                    "name": "displayNumber"
+                },
+                {
+                    "name": "displayNumberInPosition"
+                },
+                {
+                    "name": "clear7segment"
+                },
+                {
+                    "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mBotClearLedMatrix"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrix"
+                },
+                {
+                    "name": "makeblockIfMotion"
+                },
+                {
+                    "name": "ifButtonPushed"
+                }
+            ],
+            "advancedRangerraptor": [
+                {
+                    "name": "mBotMoveAdvanced-v2"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrixAdvanced"
+                }
+            ],
+            "rangernervousbird": [
+                {
+                    "name": "mBotMove-v2"
+                },
+                {
+                    "name": "mBotStop-v2"
+                },
+                {
+                    "name": "mBotSomethingNear"
+                },
+                {
+                    "name": "mBotIfThereIsALotOfLight"
+                },
+                {
+                    "name": "mBotIfFollowLines"
+                },
+                {
+                    "name": "mBotSetRGBLedSimple"
+                },
+                {
+                    "name": "mBotRGBLedOff"
+                },
+                {
+                    "name": "makeblockIfNoise"
+                },
+                {
+                    "name": "displayNumber"
+                },
+                {
+                    "name": "displayNumberInPosition"
+                },
+                {
+                    "name": "clear7segment"
+                },
+                {
+                    "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mBotClearLedMatrix"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrix"
+                },
+                {
+                    "name": "makeblockIfMotion"
+                },
+                {
+                    "name": "ifButtonPushed"
+                }
+            ],
+            "advancedRangernervousbird": [
+                {
+                    "name": "mBotMoveAdvanced-v2"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrixAdvanced"
+                }
+            ],
+            "startertank": [
+                {
+                    "name": "mBotMove-v2"
+                },
+                {
+                    "name": "mBotStop-v2"
+                },
+                {
+                    "name": "mBotSomethingNear"
+                },
+                {
+                    "name": "mBotIfThereIsALotOfLight"
+                },
+                {
+                    "name": "mBotIfFollowLines"
+                },
+                {
+                    "name": "mBotSetRGBLedSimple"
+                },
+                {
+                    "name": "mBotRGBLedOff"
+                },
+                {
+                    "name": "makeblockIfNoise"
+                },
+                {
+                    "name": "displayNumber"
+                },
+                {
+                    "name": "displayNumberInPosition"
+                },
+                {
+                    "name": "clear7segment"
+                },
+                {
+                    "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mBotClearLedMatrix"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrix"
+                },
+                {
+                    "name": "makeblockIfMotion"
+                },
+                {
+                    "name": "ifButtonPushed"
+                }
+            ],
+            "advancedStartertank": [
+                {
+                    "name": "mBotMoveAdvanced-v2"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrixAdvanced"
+                }
+            ],
+            "starterthreewheels": [
+                {
+                    "name": "mBotMove-v2"
+                },
+                {
+                    "name": "mBotStop-v2"
+                },
+                {
+                    "name": "mBotSomethingNear"
+                },
+                {
+                    "name": "mBotIfThereIsALotOfLight"
+                },
+                {
+                    "name": "mBotIfFollowLines"
+                },
+                {
+                    "name": "mBotSetRGBLedSimple"
+                },
+                {
+                    "name": "mBotRGBLedOff"
+                },
+                {
+                    "name": "makeblockIfNoise"
+                },
+                {
+                    "name": "displayNumber"
+                },
+                {
+                    "name": "displayNumberInPosition"
+                },
+                {
+                    "name": "clear7segment"
+                },
+                {
+                    "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mBotClearLedMatrix"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrix"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrix"
+                },
+                {
+                    "name": "makeblockIfMotion"
+                },
+                {
+                    "name": "ifButtonPushed"
+                }
+            ],
+            "advancedStarterthreewheels": [
+                {
+                    "name": "mBotMoveAdvanced-v2"
+                },
+                {
+                    "name": "mBotShowNumberOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowStringOnLedMatrixAdvanced"
+                },
+                {
+                    "name": "mBotShowTimeOnLedMatrixAdvanced"
+                }
+            ],
+            "mathematics": [
+                {
+                    "name": "number"
+                },
+                {
+                    "name": "numberArray"
+                },
+                {
+                    "name": "basicOperations"
+                },
+                {
+                    "name": "map"
+                },
+                {
+                    "name": "randomSeed"
+                },
+                {
+                    "name": "random"
+                }
+            ],
+            "texts": [
+                {
+                    "name": "string"
+                },
+                {
+                    "name": "stringArray"
+                },
+                {
+                    "name": "length"
+                },
+                {
+                    "name": "stringCreate"
+                },
+                {
+                    "name": "stringSum"
+                }
+            ],
+            "variables": [
+                {
+                    "name": "declareVariable"
+                },
+                {
+                    "name": "selectVariable"
+                },
+                {
+                    "name": "setVariable"
+                },
+                {
+                    "name": "declareArray"
+                },
+                {
+                    "name": "arrayVariable"
+                },
+                {
+                    "name": "setArrayVariable"
+                }
+            ],
+            "zowi": [
+                {
+                    "name": "zowiHome"
+                },
+                {
+                    "name": "zowiMovementsSimple"
+                },
+                {
+                    "name": "zowiGestures"
+                },
+                {
+                    "name": "zowiMouth"
+                },
+                {
+                    "name": "zowiSounds"
+                },
+                {
+                    "name": "zowiIfButtons"
+                },
+                {
+                    "name": "zowiIfSound"
+                },
+                {
+                    "name": "zowiIfDistance"
+                }
+            ],
+            "phone": [
+                {
+                    "name": "phoneEmitSound"
+                },
+                {
+                    "name": "phoneSendText"
+                },
+                {
+                    "name": "phoneReceive"
+                },
+                {
+                    "name": "phoneTurnOnLight"
+                },
+                {
+                    "name": "phoneTurnOffLight"
+                },
+                {
+                    "name": "phoneConfigTwitter"
+                },
+                {
+                    "name": "phoneSendTweet"
+                },
+                {
+                    "name": "phoneReadAccel"
+                },
+                {
+                    "name": "phoneReadGyroscope"
+                },
+                {
+                    "name": "phoneReadMagnetic"
+                },
+                {
+                    "name": "phoneReadOrientation"
+                },
+                {
+                    "name": "phoneisCovered"
+                },
+                {
+                    "name": "phoneReadLight"
+                }
+            ]
+        },
+        "robotsFirmwareVersion": {
+            "zowi": "1.0.0"
+        },
+        "boardsFirmwareVersion": {
+            "mcore": "1.0.1",
+            "meauriga": "1.0.0",
+            "meorion": "1.0.0"
+        },
+        "web2boardVersion": "1.0.0",
+        "currentweb2boardVersion": "2.1.3",
+        "bannerClass": "",
+        "bannerHTML": ""
+    }
+]
