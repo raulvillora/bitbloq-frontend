@@ -1,0 +1,6010 @@
+[
+    {
+        "term": "bloq-zowi-mouth-tongueOut",
+        "definition": "sourire avec la langue",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-confused",
+        "definition": "visage confus",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-bigSurprise",
+        "definition": "visage surpris",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-distance",
+        "definition": "Mesure la distance",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sound",
+        "definition": "\u00c9coute",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-OhOoh",
+        "definition": "oh-oh",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-surprise",
+        "definition": "surprise",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-sad",
+        "definition": "tristesse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-happy",
+        "definition": "joie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-sleeping",
+        "definition": "sommeil",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-cuddly",
+        "definition": "c\u00e2lin",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-confused",
+        "definition": "confusion",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-shakeLeg",
+        "definition": "bouge les jambes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-fart1",
+        "definition": "un pet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed-high",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-break-stopLoop",
+        "definition": "Interrompre la boucle",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-code-writeYourCode",
+        "definition": "\u00c9cris ton propre code",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-comment-comment",
+        "definition": "Commentaire \/\/",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-convert",
+        "definition": "Convertir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-to",
+        "definition": "En",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-dec",
+        "definition": "D\u00e9cimal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-hex",
+        "definition": "Hexad\u00e9cimal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-oct",
+        "definition": "Octal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-bin",
+        "definition": "Binaire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-receiver-receive",
+        "definition": "Recevoir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-send-send",
+        "definition": "Envoyer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-send-print",
+        "definition": "Sans saut de ligne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-send-println",
+        "definition": "Avec saut de ligne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-sound",
+        "definition": "Activer le buzzer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-note",
+        "definition": "avec la note",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-digital-read-advanced-readpin",
+        "definition": "Lire broche num\u00e9rique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-analog-read-advanced-readpin",
+        "definition": "Lire broche analogique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-turn",
+        "definition": "Faire tourner le servo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-direction",
+        "definition": "dans le sens",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-clockwise",
+        "definition": "des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-counterclockwise",
+        "definition": "contraire des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-stop-advanced-stop",
+        "definition": "Arr\u00eater le servo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-advanced-turnon",
+        "definition": "Allumer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-advanced-turnoff",
+        "definition": "\u00c9teindre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-advanced-lcdLigth",
+        "definition": "le r\u00e9tro\u00e9clairage de l\u2019\u00e9cran LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-clear",
+        "definition": "Effacer l'\u00e9cran LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-advanced-write",
+        "definition": "\u00c9crire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-advanced-inLCD",
+        "definition": "sur l\u2019\u00e9cran LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-advanced-inPosition",
+        "definition": "\u00e0 partir de (colonne, ligne)",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-advanced-turnon",
+        "definition": "Allumer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-advanced-turnoff",
+        "definition": "\u00c9teindre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-advanced-theLED",
+        "definition": "la LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-oscillate",
+        "definition": "Faire osciller le servo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-around",
+        "definition": "autour de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-amplitude",
+        "definition": "avec une amplitude de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-speed",
+        "definition": "avec une vitesse de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-start-advanced-oscillator",
+        "definition": "R\u00e9activer l\u2019oscillateur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-stop-advanced-stop",
+        "definition": "Arr\u00eater l\u2019oscillateur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-read-advanced-readpin",
+        "definition": "Lire la broche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-writte-advanced-writepin",
+        "definition": "\u00c9crire dans la broche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-writte-advanced-data",
+        "definition": "la donn\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-read-advanced-read",
+        "definition": "Lire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-advanced-move",
+        "definition": "Tourner",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-advanced-to",
+        "definition": "de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-advanced-degrees",
+        "definition": "degr\u00e9s",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-sound",
+        "definition": "Activer le buzzer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-note",
+        "definition": "avec la note",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-do",
+        "definition": "Do",
+        "context": "Musical note, in spanish DO, in english C4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-re",
+        "definition": "R\u00e9",
+        "context": "Musical note, in spanish RE, in english D4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-mi",
+        "definition": "Mi",
+        "context": "Musical note, in spanish MI, in english E4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-fa",
+        "definition": "Fa",
+        "context": "Musical note, in spanish FA, in english F4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-sol",
+        "definition": "Sol",
+        "context": "Musical note, in spanish SOL, in english G4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-la",
+        "definition": "La",
+        "context": "Musical note, in spanish LA, in english A4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-si",
+        "definition": "Si",
+        "context": "Musical note, in spanish SI, in english B4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-turn",
+        "definition": "Faire tourner le servo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-direction",
+        "definition": "dans le sens",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-clockwise",
+        "definition": "des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-counterclockwise",
+        "definition": "contraire des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-stop-stop",
+        "definition": "Arr\u00eater le servo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-turnon",
+        "definition": "Allumer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-turnoff",
+        "definition": "\u00c9teindre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-lcdLigth",
+        "definition": "le r\u00e9tro\u00e9clairage de l\u2019\u00e9cran LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-write",
+        "definition": "\u00c9crire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-inLCD",
+        "definition": "sur l\u2019\u00e9cran LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-turnon",
+        "definition": "Allumer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-turnoff",
+        "definition": "\u00c9teindre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-theLED",
+        "definition": "la LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-oscillate",
+        "definition": "Faire osciller le servo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-around",
+        "definition": "autour de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-amplitude",
+        "definition": "avec une amplitude de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-speed",
+        "definition": "avec une vitesse de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-times",
+        "definition": "fois",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-start-oscillator",
+        "definition": "R\u00e9activer l\u2019oscillateur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-stop-stop",
+        "definition": "Arr\u00eater l\u2019oscillateur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-read-read",
+        "definition": "Lire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-move",
+        "definition": "Tourner",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-to",
+        "definition": "de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-degrees",
+        "definition": "degr\u00e9s",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-case-ifSameTo",
+        "definition": "si \u00e9gal \u00e0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-case-exec",
+        "definition": "ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-case-default-inOtherCase",
+        "definition": "si autre cas, ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continue-continue",
+        "definition": "Continuer avec l\u2019it\u00e9ration suivante de la boucle",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-else-else",
+        "definition": "sinon, ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-else-if-if",
+        "definition": "ou bien, si",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-else-if-else",
+        "definition": "ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-count",
+        "definition": "Compter avec",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-from",
+        "definition": "de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-to",
+        "definition": "\u00e0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-add",
+        "definition": "additionner",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-subtract",
+        "definition": "soustraire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-exec",
+        "definition": "ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-if-if",
+        "definition": "Si",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-if-exec",
+        "definition": "ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-switch-check",
+        "definition": "V\u00e9rifier quelle est la valeur de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-wait-wait",
+        "definition": "Attendre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-while-while",
+        "definition": "Tant que",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-while-exec",
+        "definition": "ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-var",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-float",
+        "definition": "D\u00e9cimal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-string",
+        "definition": "Texte",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-bool",
+        "definition": "Bool\u00e9en",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-function-exec",
+        "definition": "Ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-return-function-exec",
+        "definition": "Ex\u00e9cuter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-function-args",
+        "definition": "avec les param\u00e8tres suivants\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-return",
+        "definition": "Renvoyer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-declare",
+        "definition": "D\u00e9clarer fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-return",
+        "definition": "Renvoyer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-with-arguments-declare",
+        "definition": "D\u00e9clarer fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-with-arguments-count",
+        "definition": "avec les param\u00e8tres suivants :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-with-arguments-return",
+        "definition": "Renvoyer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-void-function-declare",
+        "definition": "D\u00e9clarer fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-void-function-with-arguments-declare",
+        "definition": "D\u00e9clarer fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-void-function-with-arguments-count",
+        "definition": "avec les param\u00e8tres suivants :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-advanced-arraySize",
+        "definition": "Tableau de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-advanced-boolType",
+        "definition": "et de type bool\u00e9en",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-arraySize",
+        "definition": "Tableau de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-boolType",
+        "definition": "et de type bool\u00e9en",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolean-true",
+        "definition": "Vrai",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolean-false",
+        "definition": "Faux",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-and",
+        "definition": "et",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-or",
+        "definition": "ou",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-not-not",
+        "definition": "pas",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-loop-header",
+        "definition": "Boucle (Loop)",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-loop-description",
+        "definition": "Cr\u00e9e le programme qui va s\u2019ex\u00e9cuter en boucle apr\u00e8s le lancement (Setup).",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-setup-header",
+        "definition": "Instructions de d\u00e9part (Setup)",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-setup-description",
+        "definition": "Indique ce que tu veux ex\u00e9cuter au lancement du programme et seulement une fois.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-var-header",
+        "definition": "Variables globales et fonctions",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-var-description",
+        "definition": "D\u00e9finis les valeurs que tu vas utiliser dans les instructions de d\u00e9part (Setup) et la boucle (Loop). Tu peux \u00e9galement faire des fonctions pour regrouper des blocs.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-arraySize",
+        "definition": "Tableau de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-type",
+        "definition": "et de type",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-float",
+        "definition": "d\u00e9cimal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-int",
+        "definition": "entier",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-map",
+        "definition": "\u00c9chelonner",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-value",
+        "definition": "valeur entre [0 -",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-advanced-map",
+        "definition": "\u00c9chelonner",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-advanced-value",
+        "definition": "de [",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-advanced-and",
+        "definition": "] \u00e0 [",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-math-operations-sqrt",
+        "definition": "Racine carr\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-math-operations-abs",
+        "definition": "Valeur absolue",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-arraySize",
+        "definition": "Tableau de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-floatType",
+        "definition": " et de type float",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-random-random",
+        "definition": "Al\u00e9atoire entre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-random-and",
+        "definition": "et",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-arraySize",
+        "definition": "Tableau de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-type",
+        "definition": "et de type",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-string",
+        "definition": "String",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-char",
+        "definition": "Char",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-length-length",
+        "definition": "Longueur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-string-string",
+        "definition": "Texte",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-arraySize",
+        "definition": "Tableau de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-stringType",
+        "definition": "et de type texte",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-string-create-create",
+        "definition": "Cr\u00e9er texte avec",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hw-variable-advanced-variable",
+        "definition": "Variable (composants)",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-sw-variable-advanced-variable",
+        "definition": "Variable (composants)",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-array-variable-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare",
+        "definition": "D\u00e9clarer variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type",
+        "definition": "de type",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-int",
+        "definition": "entier",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-float",
+        "definition": "d\u00e9cimal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-text",
+        "definition": "texte",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-char",
+        "definition": "caract\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-bool",
+        "definition": "valeur logique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-select-variable-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-variableArray-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-variable-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-char",
+        "definition": "Caract\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-default",
+        "definition": "Bonjour\u00a0!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-comment-default",
+        "definition": "\u00c9cris un commentaire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-functions-default",
+        "definition": "Nom",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-wait-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "drag-bloq",
+        "definition": "Fais glisser un bloc ici pour d\u00e9buter ton programme",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-function-class",
+        "definition": "de l'objet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-arguments-class",
+        "definition": "Cr\u00e9er un objet de la classe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-arguments-class-name",
+        "definition": "avec le nom",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-arguments-args",
+        "definition": "avec les param\u00e8tres suivants",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-exec",
+        "definition": "Ex\u00e9cuter la fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-function-exec",
+        "definition": "Ex\u00e9cuter la fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-function-args",
+        "definition": "avec les param\u00e8tres suivants",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-args-exec",
+        "definition": "Ex\u00e9cuter la fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-args-class",
+        "definition": "de l'objet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-args-args",
+        "definition": "avec les param\u00e8tres suivants",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-class-variable-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-class-variableArray-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-select-class-variable-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-array-class-variable-variable",
+        "definition": "Variable",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-constructor",
+        "definition": "Constructeur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-constructor-arguments",
+        "definition": "Constructeur utilisant les param\u00e8tres suivants",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class",
+        "definition": "Cr\u00e9er un objet de la classe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-name",
+        "definition": "avec le nom",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class",
+        "definition": "D\u00e9clarer classe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-default",
+        "definition": "Nom",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-from",
+        "definition": "de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-type",
+        "definition": "h\u00e9ritant de mani\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-public",
+        "definition": "publique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-protected",
+        "definition": "prot\u00e9g\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-private",
+        "definition": "priv\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-public",
+        "definition": "Variables et fonctions publiques\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-protected",
+        "definition": "Variables et fonctions prot\u00e9g\u00e9es\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-private",
+        "definition": "Variables et fonctions priv\u00e9es\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-include-lib-exec",
+        "definition": "Inclure la biblioth\u00e8que",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write",
+        "definition": "\u00c9crire dans la broche analogique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-digital-write",
+        "definition": "\u00c9crire dans la broche num\u00e9rique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write-data",
+        "definition": "la donn\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-digital-write-data",
+        "definition": "la donn\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements",
+        "definition": "Zowi :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-walk",
+        "definition": "marche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-turn",
+        "definition": "tourne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-moonwalker",
+        "definition": "fais le moonwalk",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-crusaito",
+        "definition": "fais le pas crois\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-flapping",
+        "definition": "remue",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-shakeleg",
+        "definition": "bouge les jambes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-bend",
+        "definition": "penche-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-forward",
+        "definition": "en avant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-backward",
+        "definition": "en arri\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-left",
+        "definition": "\u00e0 gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-right",
+        "definition": "\u00e0 droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed",
+        "definition": "fois \u00e0 une vitesse de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth",
+        "definition": "Zowi\u00a0: dessine un",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-mouth",
+        "definition": "sur ta bouche",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-smile",
+        "definition": "sourire",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-sad",
+        "definition": "visage triste",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-happy",
+        "definition": "visage joyeux",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height",
+        "definition": "Zowi :",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-forward",
+        "definition": "en avant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-backward",
+        "definition": "en arri\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-left",
+        "definition": "\u00e0 gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-right",
+        "definition": "\u00e0 droite",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-speed",
+        "definition": "fois \u00e0 une vitesse de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-height",
+        "definition": "et \u00e0 une hauteur",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-big",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-medium",
+        "definition": "moyenne",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-small",
+        "definition": "faible",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir",
+        "definition": "Zowi :",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-updown",
+        "definition": "monte et descends",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-swing",
+        "definition": "balance-toi",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-tiptoeSwing",
+        "definition": "balance-toi sur la pointe des pieds",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jitter",
+        "definition": "tremble",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-ascendingTurn",
+        "definition": "tourne quand tu montes",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jump",
+        "definition": "saute",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-speed",
+        "definition": "fois \u00e0 une vitesse de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-height",
+        "definition": "et \u00e0 une hauteur",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-big",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-medium",
+        "definition": "moyenne",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-small",
+        "definition": "faible",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds",
+        "definition": "Zowi\u00a0: chante",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-humidity",
+        "definition": "Lire le capteur d\u2019humidit\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-temperature",
+        "definition": "Lire le capteur de temp\u00e9rature",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade-red",
+        "definition": "avec une valeur rouge de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt",
+        "definition": "Ex\u00e9cuter la fonction",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-rising",
+        "definition": "passe de 0 \u00e0 1",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-falling",
+        "definition": "passe de 1 \u00e0 0",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-change",
+        "definition": "passe",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-pin",
+        "definition": "quand l'entr\u00e9e de la broche",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-green",
+        "definition": ", une valeur verte de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade",
+        "definition": "Cr\u00e9er un d\u00e9grad\u00e9 sur la LED RGB",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-red",
+        "definition": "avec une valeur rouge de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-init",
+        "definition": "Mettre \u00e0 jour l\u2019heure et la date de l\u2019horloge",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-month",
+        "definition": "le mois",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-using-advanced",
+        "definition": "actuel en utilisant l\u2019horloge",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-year",
+        "definition": "l'ann\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-day",
+        "definition": "le jour",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-hour",
+        "definition": "l\u2019heure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-minute",
+        "definition": "la minute",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-second",
+        "definition": "la seconde",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-time",
+        "definition": "heure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-using",
+        "definition": "actuel en utilisant l\u2019horloge",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-advanced",
+        "definition": "Obtenir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc",
+        "definition": "Obtenir la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "default-var-name-rtc",
+        "definition": "horloge_temps_r\u00e9el",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-date",
+        "definition": "date",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "default-var-name-sound",
+        "definition": "capteur_son",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-blue",
+        "definition": "et une valeur bleue de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "default-var-name-RGBled",
+        "definition": "LED_RGB",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed",
+        "definition": "Allumer la LED RGB",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade-blue",
+        "definition": "et une valeur bleue de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade-green",
+        "definition": ", une valeur verte de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple",
+        "definition": "Allumer la LED RGB",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-color",
+        "definition": "avec couleur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-red",
+        "definition": "rouge",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-green",
+        "definition": "vert",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-blue",
+        "definition": "bleu",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth",
+        "definition": "Dessine une",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-mouth",
+        "definition": "sur ta bouche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-smile",
+        "definition": "sourire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-sad",
+        "definition": "visage triste",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-happy",
+        "definition": "visage joyeux",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height",
+        "definition": "Zowi,",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-right",
+        "definition": "\u00e0 droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-big",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-updown",
+        "definition": "monte et descends",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-swing",
+        "definition": "balance-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-tiptoeSwing",
+        "definition": "balance-toi sur la pointe des pieds",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jitter",
+        "definition": "tremble",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-ascendingTurn",
+        "definition": "tourne quand tu montes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jump",
+        "definition": "saute",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-big",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds",
+        "definition": "Fais le son de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-rising",
+        "definition": "passe de 0 \u00e0 1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-falling",
+        "definition": "passe de 1 \u00e0 0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-change",
+        "definition": "passe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-pin",
+        "definition": "quand l'entr\u00e9e de la broche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures",
+        "definition": "Fais l\u2019expression suivante",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiHappy",
+        "definition": "Heureux",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSuperHappy",
+        "definition": "Super Heureux",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSad",
+        "definition": "Triste",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSleeping",
+        "definition": "Zzzzzz",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFart",
+        "definition": "Prrr",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiConfused",
+        "definition": "Confus",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiLove",
+        "definition": "Love",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiAngry",
+        "definition": "F\u00e2ch\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFretful",
+        "definition": "Inquiet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiMagic",
+        "definition": "Magie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiWave",
+        "definition": "Onde",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiVictory",
+        "definition": "Victoire !!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFail",
+        "definition": "Game Over...",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple",
+        "definition": "Zowi,",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-steps",
+        "definition": "fois",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-walk",
+        "definition": "marche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-turn",
+        "definition": "tourne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-shakeLeg",
+        "definition": "bouge les jambes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-bend",
+        "definition": "penche-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-moonwalker",
+        "definition": "fais le moonwalk",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-crusaito",
+        "definition": "fais le pas crois\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-flapping",
+        "definition": "remue",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-updown",
+        "definition": "monte et descends",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-swing",
+        "definition": "balance-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-tiptoeSwing",
+        "definition": "balance-toi sur la pointe des pieds",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jitter",
+        "definition": "tremble",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-ascendingTurn",
+        "definition": "tourne quand tu montes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jump",
+        "definition": "saute",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-rest",
+        "definition": "repose-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-millis",
+        "definition": "Obtenir le temps d\u2019ex\u00e9cution",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-random-seed",
+        "definition": "D\u00e9marrer le g\u00e9n\u00e9rateur de nombres al\u00e9atoires",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-white",
+        "definition": "blanc",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-yellow",
+        "definition": "jaune",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-orange",
+        "definition": "orange",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-dark-green",
+        "definition": "vert fonc\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-dark-blue",
+        "definition": "bleu fonc\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-pink",
+        "definition": "rose",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-int",
+        "definition": "Entier",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-char",
+        "definition": "Caract\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons",
+        "definition": "bouton",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons-A",
+        "definition": "A",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons-B",
+        "definition": "B",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons-zowi",
+        "definition": "de Zowi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance",
+        "definition": "S\u2019il d\u00e9tecte une distance",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-less",
+        "definition": "inf\u00e9rieure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-more",
+        "definition": "sup\u00e9rieure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-than",
+        "definition": "\u00e0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-then",
+        "definition": "centim\u00e8tres, ex\u00e9cuter :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons",
+        "definition": "Si j'appuie sur le bouton",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-A",
+        "definition": "A",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-B",
+        "definition": "B",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-then",
+        "definition": ", ex\u00e9cuter :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-sound",
+        "definition": "S\u2019il entend un bruit, ex\u00e9cuter :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-rest",
+        "definition": "repose-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple",
+        "definition": "D\u00e9place-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-fordward",
+        "definition": "en avant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-backward",
+        "definition": "en arri\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-right",
+        "definition": "vers la droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-left",
+        "definition": "vers la gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-distance",
+        "definition": "Mesure la distance",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance",
+        "definition": "S\u2019il d\u00e9tecte une distance",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-less",
+        "definition": "inf\u00e9rieure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-more",
+        "definition": "sup\u00e9rieure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-than",
+        "definition": "\u00e0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-then",
+        "definition": "centim\u00e8tres, ex\u00e9cuter :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light",
+        "definition": "Mesure la lumi\u00e8re de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light-left",
+        "definition": "gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light-right",
+        "definition": "droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light-evolution",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line",
+        "definition": "D\u00e9tecte la ligne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line-left",
+        "definition": "\u00e0 gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line-right",
+        "definition": "\u00e0 droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line-evolution",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head",
+        "definition": "Regarde",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-left",
+        "definition": "\u00e0 gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-right",
+        "definition": "\u00e0 droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-center",
+        "definition": "en avant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-do",
+        "definition": "Do",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer",
+        "definition": "Appuie sur la note",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-re",
+        "definition": "R\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-mi",
+        "definition": "Mi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-fa",
+        "definition": "Fa",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-sol",
+        "definition": "Sol",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-la",
+        "definition": "La",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-si",
+        "definition": "Si",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance",
+        "definition": "Regarde",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance-deg",
+        "definition": "degr\u00e9s vers",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance-left",
+        "definition": "la gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance-right",
+        "definition": "la droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps",
+        "definition": "Tourner le moteur pas \u00e0 pas",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-stepper1",
+        "definition": "1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-stepper2",
+        "definition": "2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-stepper12",
+        "definition": "1 et 2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-degdir",
+        "definition": "degr\u00e9s dans le sens",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-CW",
+        "definition": "des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-CCW",
+        "definition": "contraire des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-at",
+        "definition": "a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-rpm",
+        "definition": "rpm",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line",
+        "definition": "S\u2019il d\u00e9tecte une ligne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-white",
+        "definition": "blanche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-black",
+        "definition": "noire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-and",
+        "definition": "sur la gauche et",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-then",
+        "definition": "sur la droite, ex\u00e9cuter :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light",
+        "definition": "S'il voit de la lumi\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-and",
+        "definition": "sur la gauche et",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-then",
+        "definition": "sur la droite, ex\u00e9cuter :",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-high",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-low",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced",
+        "definition": "Tourner le moteur pas \u00e0 pas",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced-degdir",
+        "definition": "degr\u00e9s dans le sens",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced-at",
+        "definition": "a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced-rpm",
+        "definition": "rpm",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin",
+        "definition": "Tourner le moteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-motor1",
+        "definition": "1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-motor2",
+        "definition": "2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-direction",
+        "definition": "dans le sens",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-CW",
+        "definition": "des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-CCW",
+        "definition": "contraire des aiguilles d\u2019une montre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-at",
+        "definition": "au",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-speed",
+        "definition": "% de sa vitesse maximum",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced",
+        "definition": "Tourner le moteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced-direction",
+        "definition": "dans le sens",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced-at",
+        "definition": "au",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced-speed",
+        "definition": "% de sa vitesse maximum",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop",
+        "definition": "Arr\u00eater le moteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop-motor1",
+        "definition": "1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop-motor2",
+        "definition": "2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop-advanced",
+        "definition": "Arr\u00eater le moteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-endtext",
+        "definition": " ",
+        "context": "Translate only in english language",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-endtext",
+        "definition": " ",
+        "context": "Translate only in english language",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-endtext",
+        "definition": " ",
+        "context": "Translate only in english language",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-rest-v1",
+        "definition": "Position initiale",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-v1",
+        "definition": "Fais l\u2019expression suivante",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiHappy-v1",
+        "definition": "Heureux",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSuperHappy-v1",
+        "definition": "Super Heureux",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSad-v1",
+        "definition": "Triste",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSleeping-v1",
+        "definition": "Zzzzzz",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFart-v1",
+        "definition": "Prrr",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiConfused-v1",
+        "definition": "Confus",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiLove-v1",
+        "definition": "Love",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiAngry-v1",
+        "definition": "F\u00e2ch\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFretful-v1",
+        "definition": "Inquiet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiVictory-v1",
+        "definition": "Victoire !!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFail-v1",
+        "definition": "Game Over...",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-then-v1",
+        "definition": ", fais\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-then-v1",
+        "definition": "cm, fais\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-sound-v1",
+        "definition": "S\u2019il entend un bruit, fais\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-v1",
+        "definition": "Montre une",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-walk-v1",
+        "definition": "Marche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-turn-v1",
+        "definition": "Tourne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-shakeLeg-v1",
+        "definition": "Bouge les jambes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-bend-v1",
+        "definition": "Penche-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-moonwalker-v1",
+        "definition": "Fais le moonwalk",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-crusaito-v1",
+        "definition": "Fais le pas crois\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-flapping-v1",
+        "definition": "Remue",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-updown-v1",
+        "definition": "Monte et descends",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-swing-v1",
+        "definition": "Balance-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-tiptoeSwing-v1",
+        "definition": "Balance-toi sur la pointe des pieds",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jitter-v1",
+        "definition": "Tremble",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-ascendingTurn-v1",
+        "definition": "Tourne quand tu montes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jump-v1",
+        "definition": "Saute",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-v1",
+        "definition": "Fais le son de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-fart1-v1",
+        "definition": "prrr",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-distance-v1",
+        "definition": "mesure la distance",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sound-v1",
+        "definition": "\u00e9coute avec attention",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front",
+        "definition": "Marche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-forward",
+        "definition": "en avant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-backward",
+        "definition": "en arri\u00e8re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed",
+        "definition": "fois \u00e0 une vitesse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed-high",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-endtext",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-turn",
+        "definition": "Tourne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-shakeLeg",
+        "definition": "Bouge les jambes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-bend",
+        "definition": "Penche-toi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-left",
+        "definition": "gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-right",
+        "definition": "droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed",
+        "definition": "fois \u00e0 une vitesse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed-high",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-endtext",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-moonwalker",
+        "definition": "Fais le moonwalk",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-crusaito",
+        "definition": "Fais le pas crois\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-left",
+        "definition": "gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-right",
+        "definition": "droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed",
+        "definition": "fois \u00e0 une vitesse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed-high",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-height",
+        "definition": "et \u00e0 une hauteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-small",
+        "definition": "faible",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-medium",
+        "definition": "moyenne",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-big",
+        "definition": "\u00e9lev\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-endtext",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion",
+        "definition": "convertir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion-to",
+        "definition": "a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion-int",
+        "definition": "entier",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion-float",
+        "definition": "d\u00e9cimal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-name-default",
+        "definition": "Nom",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array",
+        "definition": "D\u00e9clarer un ensemble de variables",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-size",
+        "definition": "avec la taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-type",
+        "definition": "et le type",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-detach",
+        "definition": "D\u00e9brancher le servo",
+        "context": "Detach servo",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-attach",
+        "definition": "Connecter le servo",
+        "context": "Attach servo",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221",
+        "definition": "Lire la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-read-temperature",
+        "definition": "temp\u00e9rature",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-read-humidity",
+        "definition": "humidit\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-sensor",
+        "definition": "du capteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor",
+        "definition": "Lire la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-pressure",
+        "definition": "pression",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-temperature",
+        "definition": "temp\u00e9rature",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-altitude",
+        "definition": "altitude",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-sensor",
+        "definition": "du capteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-calibration",
+        "definition": "D\u00e9finir la pression au niveau de la mer \u00e0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-calibration-sensor",
+        "definition": "Pa dans le capteur",
+        "context": "Pa =  pascals, pressure magnitude. Example: \"Set the pressure at 21349 Pa in the sensor\"",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-off",
+        "definition": "\u00c9teindre la LED RGB",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write-V1",
+        "definition": "\u00c9crire dans la broche num\u00e9rique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write-data-V1",
+        "definition": "la valeur analogique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-do-#",
+        "definition": "Do",
+        "context": "Musical note c# ",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-re-#",
+        "definition": "R\u00e9",
+        "context": "Musical Note d#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-fa-#",
+        "definition": "Fa",
+        "context": "Musical note f#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-sol-#",
+        "definition": "Sol",
+        "context": "Musical note g#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-la-#",
+        "definition": "La",
+        "context": "Musical note a#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-receiver-receive-number",
+        "definition": "Recevoir le num\u00e9ro",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-declare",
+        "definition": "D\u00e9clarer un ensemble",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-declare-type",
+        "definition": "de type",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-declare-size",
+        "definition": "et de taille",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-digital-write-data-V1",
+        "definition": "la valeur num\u00e9rique",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-roundto",
+        "definition": "Arrondir \u00e0",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-floor",
+        "definition": "en haut",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-ceil",
+        "definition": "en bas",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-round",
+        "definition": "le plus proche",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-thenumber",
+        "definition": "le nombre",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-date-2",
+        "definition": "ann\u00e9e\/mois\/jour",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-time-2",
+        "definition": "heures:minutes:secondes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pinlevel-high",
+        "definition": "Elev\u00e9",
+        "context": "https:\/\/www.arduino.cc\/en\/Reference\/Constants , Arduino pin level constant HIGH",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pinlevel-low",
+        "definition": "Faible",
+        "context": "https:\/\/www.arduino.cc\/en\/Reference\/Constants , Arduino pin level constant LOW",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "suggested",
+        "definition": "Suggestions",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-viewer",
+        "definition": "Envoyer les donn\u00e9es vers le viseur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-note",
+        "definition": "Faire retentit la sonnerie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getdistance-get",
+        "definition": "Obtenir la distance (en cm) des ultrasons dans le",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-1",
+        "definition": "port 1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-2",
+        "definition": "port 2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-3",
+        "definition": "port 3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-4",
+        "definition": "port 4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getbuttonstatus",
+        "definition": "Lire l'\u00e9tat du bouton",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getlightsensor",
+        "definition": "Lire le du capteur de luminosit\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-linefollower-text",
+        "definition": "Obtenir les informations du capteur d'infrarouges dans le",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-forward",
+        "definition": "Avancer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-backward",
+        "definition": "Reculer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-turnleft",
+        "definition": "Tourner \u00e0 gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-turnright",
+        "definition": "Tourner \u00e0 droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed",
+        "definition": "\u00e0 une vitesse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed-fast",
+        "definition": "tr\u00e8s rapide",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed-normal",
+        "definition": "normale",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed-slow",
+        "definition": "lente",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-set",
+        "definition": "Etablir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-led-all",
+        "definition": "toutes les led",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-led-right",
+        "definition": "la led droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-led-left",
+        "definition": "la led gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-colormix",
+        "definition": "avec ce m\u00e9lange de couleurs\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-green",
+        "definition": "vert\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-red",
+        "definition": "rouge\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-blue",
+        "definition": "bleu\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-stop",
+        "definition": "Arr\u00eater le robot",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-turnoffled-off",
+        "definition": "Eteindre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-advanced-play",
+        "definition": "Faire retentit la sonnerie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-advanced-speed",
+        "definition": "\u00e0 une vitesse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-set",
+        "definition": "Etablir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-colormix",
+        "definition": "avec ce m\u00e9lange de couleurs\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-red",
+        "definition": "rouge\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-green",
+        "definition": "vert\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-blue",
+        "definition": "bleu\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-advanced-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-advanced-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-magicfor-repeat",
+        "definition": "R\u00e9p\u00e9ter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-magicfor-times",
+        "definition": "fois",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds",
+        "definition": "Emettre un son",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-device",
+        "definition": "dans l'appareil",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-ambient-v1",
+        "definition": "ambiant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-bass-v1",
+        "definition": "basse",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-bongo-v1",
+        "definition": "bongo",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-highhat-v1",
+        "definition": "highhat",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-snare-v1",
+        "definition": "caisse claire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-write-show",
+        "definition": "Afficher \u00e0 l'\u00e9cran",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-receive",
+        "definition": "Recevoir les donn\u00e9es oralement ou par textos",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-toggle-light",
+        "definition": "Cligner des yeux \u00e0 une fr\u00e9quence de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-toggle-units",
+        "definition": "secondes",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-turnon-light",
+        "definition": "Allumer la lampe \u00e0 une intensit\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-turnoff-light",
+        "definition": "Eteindre la lampe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-twitter-config",
+        "definition": "Configurer l'application Twitter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-5",
+        "definition": "port 5",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-6",
+        "definition": "port 6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-7",
+        "definition": "port 7",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-8",
+        "definition": "port 8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-9",
+        "definition": "port 9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-10",
+        "definition": "port 10",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-send-tweet",
+        "definition": "Envoyer un tweet",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-ms",
+        "definition": "ms",
+        "context": "miliseconds",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-every",
+        "definition": "chaque",
+        "context": "every 2000 seconds",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-playnote",
+        "definition": "Faire retentit la sonnerie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-read",
+        "definition": "Lire dans",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-lacceleration",
+        "definition": "l'acc\u00e9l\u00e9ration lin\u00e9raire sur l'axe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis-x",
+        "definition": "x",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis-y",
+        "definition": "y",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis-z",
+        "definition": "z",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowicomponent-serial-send",
+        "definition": "Envoyer via port s\u00e9rie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowicomponent-serial-receive",
+        "definition": "Recevoir via port s\u00e9rie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowicomponent-serial-receive-int",
+        "definition": "Recevoir le num\u00e9ro via port s\u00e9rie",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-gyroscope",
+        "definition": "le giroscope sur l'axe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-is",
+        "definition": "est",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-covered",
+        "definition": "ferm\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-not-covered",
+        "definition": "pas ferm\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-acceleration",
+        "definition": "l'acc\u00e9l\u00e9ration sur l'axe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-gravity",
+        "definition": "l'acc\u00e9l\u00e9ration de la gravit\u00e9 sur l'axe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-light",
+        "definition": "la lumi\u00e8re ambiante",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-magnetic",
+        "definition": "le champ magn\u00e9tique sur l'axe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-meow-v1",
+        "definition": "miaou",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-joke-v1",
+        "definition": "se moque",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-value",
+        "definition": "Lire la valeur de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-orientation-azimuth",
+        "definition": "azimut",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-orientation-roll",
+        "definition": "rouleau",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-orientation-pitch",
+        "definition": "tonalit\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-custom",
+        "definition": "Dessinez sur votre bouche en suivant cette s\u00e9rie de num\u00e9ros\u00a0:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-screen",
+        "definition": "dans l'\u00e9cran de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-light-intensity",
+        "definition": "avec une intensit\u00e9 du",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-from-device",
+        "definition": "depuis le",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-the",
+        "definition": "Il",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis",
+        "definition": "dans l'axe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-of",
+        "definition": "de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stop-buzzer",
+        "definition": "Arr\u00eater le buzzer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-without-pause",
+        "definition": "sans pause",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "lateraldisplacement-moveto",
+        "definition": "Se d\u00e9placer lat\u00e9ralement vers la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "right",
+        "definition": "droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "left",
+        "definition": "gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "steps",
+        "definition": "pas",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "forward",
+        "definition": "Avancer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "backward",
+        "definition": "Reculer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "turn-right",
+        "definition": "Tourner \u00e0 droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "turn-left",
+        "definition": "Tourner \u00e0 gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "stop",
+        "definition": "arr\u00eater",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "benddown",
+        "definition": "S'accroupir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "rotate",
+        "definition": "Pivoter",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "rotate-grades-foot",
+        "definition": "\u00b0 sur le pied",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "upstairs",
+        "definition": "Monter les escaliers.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "can-move-to",
+        "definition": "Vous pouvez vous d\u00e9placer vers ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "move-to",
+        "definition": "Se d\u00e9placer vers",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "open",
+        "definition": "Ouvrir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "close",
+        "definition": "Fermer",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "the-clamp",
+        "definition": "la pince",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "move-joint",
+        "definition": "Bouger l'articulation",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "degrees",
+        "definition": "degr\u00e9s",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "move-for",
+        "definition": "pendant",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "roll-to",
+        "definition": "Tourner vers la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "read-sensor",
+        "definition": "Lire le capteur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "ms-at-speed-of",
+        "definition": "ms \u00e0 une vitesse de",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getdistance",
+        "definition": "Obtenir la distance des ultrasons",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in",
+        "definition": "en",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "inches",
+        "definition": "pouces",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "if",
+        "definition": "Si",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-somethingnear-operation-near",
+        "definition": "un obstacle proche est d\u00e9tect\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-somethingnear-operation-faraway",
+        "definition": "un obstacle \u00e9loign\u00e9 est d\u00e9tect\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-somethingnear-operation-nodetect",
+        "definition": "aucun obstacle n'est d\u00e9tect\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "with-the",
+        "definition": "avec le",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-ifthereisalotoflight-alot",
+        "definition": "une grande quantit\u00e9 de lumi\u00e8re est d\u00e9tect\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-ifthereisalotoflight-low",
+        "definition": "une petite quantit\u00e9 de lumi\u00e8re est d\u00e9tect\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-ifthereisalotoflight-operation-nodetect",
+        "definition": "aucune lumi\u00e8re n'est d\u00e9tect\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-iffollowlines-if",
+        "definition": "S'il d\u00e9tecte",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-iffollowlines-and",
+        "definition": "dans le capteur de gauche et",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-iffollowlines-withsensor",
+        "definition": "dans le capteur de droite du",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "white",
+        "definition": "blanc",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "black",
+        "definition": "noir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "no-suggested",
+        "definition": "Aucun bloc sugg\u00e9r\u00e9.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-read-mkb_joystick",
+        "definition": "Lire les coordonn\u00e9es",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-of-joystick",
+        "definition": "du joystick",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifnoise-alot",
+        "definition": "beaucoup de bruits sont d\u00e9tect\u00e9s",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifnoise-low",
+        "definition": "peu de bruits sont d\u00e9tect\u00e9s",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifnoise-nodetect",
+        "definition": "aucun bruit n\u2019est d\u00e9tect\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-buzzer",
+        "definition": "Appuyez sur une fr\u00e9quence",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "if-button-pressed",
+        "definition": "Si j\u2019appuie sur le bouton ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in-the",
+        "definition": "dans la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-display-show",
+        "definition": "Afficher la valeur",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-write",
+        "definition": "\u00c9crire",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-draw",
+        "definition": "Dessiner",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-clear",
+        "definition": "Nettoyer la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-writeNumber",
+        "definition": "Afficher le num\u00e9ro",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-writeTime",
+        "definition": "Afficher l\u2019heure",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-setLight",
+        "definition": "Configurer la lumi\u00e8re de la",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "to",
+        "definition": "\u00e0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "if-key-pressed",
+        "definition": "Si j\u2019appuie sur la touche ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-on-off",
+        "definition": "allum\u00e9\/\u00e9teint",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-return",
+        "definition": "revenir",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-up",
+        "definition": "fl\u00e8che vers le haut",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-down",
+        "definition": "fl\u00e8che vers le bas",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-right",
+        "definition": "fl\u00e8che vers la droite",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-left",
+        "definition": "fl\u00e8che vers la gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in-position",
+        "definition": "dans la position",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-7segment-clear",
+        "definition": "Nettoyer le",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-7segment-setLight",
+        "definition": "Configurer la lumi\u00e8re du",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifmotion-detect",
+        "definition": "d\u00e9tecte le mouvement",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifmotion-nodetect",
+        "definition": "ne d\u00e9tecte pas le mouvement",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-distance",
+        "definition": "Mesure la distance dans",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-read-remote",
+        "definition": "Lire le bouton du",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in-remote",
+        "definition": "dans la commande",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-if-collision",
+        "definition": "Si une collision est d\u00e9tect\u00e9e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-if-light",
+        "definition": "Si le capteur de lumi\u00e8re droite d\u00e9tecte",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-if-light-secondly",
+        "definition": "lumi\u00e8re que la gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-more",
+        "definition": "plus",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-less",
+        "definition": "moins",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-equals",
+        "definition": "\u00e9gal",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-light-right",
+        "definition": "dans le capteur droit",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-light-left",
+        "definition": "dans le capteur gauche",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "settings",
+        "definition": "r\u00e8glements",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-remote-switch-default",
+        "definition": "Si j\u2019ai appuy\u00e9 sur un autre",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-remote-switch-case",
+        "definition": "Si j\u2019ai appuy\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-remote-switch",
+        "definition": "V\u00e9rifier que le bouton a \u00e9t\u00e9 enfonc\u00e9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    }
+]

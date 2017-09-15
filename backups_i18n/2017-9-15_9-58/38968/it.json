@@ -1,0 +1,322 @@
+[
+    {
+        "term": "bitbloq-faq-title-1",
+        "definition": "Che cos'\u00e8 Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-1",
+        "definition": "Bitbloq \u00e8 uno strumento che consente di creare programmi per microcontroller e caricarli in esso in modo semplice, senza che sia necessario avere conoscenze di programmazione.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-2",
+        "definition": "Come funziona Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-2",
+        "definition": "Con Bitbloq potrai programmare per blocchi in modo rapido e intuitivo. Potrai creare i tuoi progetti e condividerli con la comunit\u00e0. L'elettronica e la programmazione non sono mai state cos\u00ec divertenti!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-3",
+        "definition": "Cosa posso fare in Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-3",
+        "definition": "Con Bitbloq e l'elettronica di BQ potrai creare tutto ci\u00f2 che immagini, dai robot ai progetti di domotica per la casa, passando per i giochi elettronici. La tua immaginazione non avr\u00e0 limiti!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-4",
+        "definition": "Chi c'\u00e8 dietro al progetto?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-4",
+        "definition": "Il progetto \u00e8 ideato e sviluppato da BQ. Qui puoi vedere il grande team che rende disponibile questo progetto.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-5",
+        "definition": "A chi \u00e8 rivolto?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-5",
+        "definition": "Ai genitori che desiderano iniziare i propri figli alla robotica, all'elettronica o alla programmazione: Bitbloq fornir\u00e0 loro gli strumenti necessari affinch\u00e9 possano esplorare questo mondo appassionante. Ai professori che desiderino insegnare ai ragazzi a diventare creatori di tecnologia. Ai ragazzi che desiderino imparare come funziona la tecnologia e crearne a loro volta senza limiti di sorta.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-6",
+        "definition": "Quali schede sono supportate?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-6",
+        "definition": "Al momento sono supportate le schede Freaduino UNO, Arduino UNO e BQ Zum, ma presto ne aggiungeremo altre!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-7",
+        "definition": "Dove si trovano i progetti del vecchio Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-7",
+        "definition": "I progetti del vecchio Bitbloq non sono compatibili con il nuovo strumento, e non \u00e8 stato possibile quindi realizzare il trasferimento. Dovrai creare di nuovo tali progetti nel nuovo strumento. Ci scusiamo per il disagio.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-8",
+        "definition": "Bitbloq e Scratch",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-8",
+        "definition": "Bitbloq usa lo stesso paradigma di programmazione di Scratch, ovvero, impiega blocchi che si incastrano gli uni negli altri, come in un puzzle, per costruire programmi. Ci\u00f2 rende la programmazione accessibile ai bambini, che non devono preoccuparsi della sintassi (non devono imparare a scrivere in un linguaggio di programmazione letterale come Processing, C++ o Java). Bitbloq utilizza questo paradigma perch\u00e9 \u00e8 dimostrata la sua efficacia tra i bambini e perch\u00e9, inoltre, Scratch \u00e8 gi\u00e0 utilizzato in molte scuole e in molti centri educativi. La nostra filosofia \u00e8: meglio unire le forze, che impegnarsi da soli per scoprire l'acqua calda! Abbiamo sviluppato Bitbloq utilizzando biblioteche software con licenza free, fondamentalmente Bloqs, una biblioteca sviluppata da BQ per la creazione di applicazioni online basate su blocchi.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-9",
+        "definition": "Si possono realizzare videogiochi con Bitbloq?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-9",
+        "definition": "Non \u00e8 possibile realizzare videogiochi nel computer; \u00e8 possibile realizzarli, invece, tramite Il mio primo kit di robotica o qualsiasi altro strumento elettronico che usi la scheda ZUM o una scheda compatibile con Arduino. Scratch \u00e8 stato pensato per insegnare ai bambini a programmare tramite la realizzazione di videogiochi, mentre Bitbloq \u00e8 stato pensato per insegnare ai bambini a programmare tramite strumenti elettronici e realizzando progetti di robotica, domotica, invenzioni fai da te, ecc.\",",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-10",
+        "definition": "Politica sulla privacy",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-10",
+        "definition": "I dati di carattere personale forniti fanno parte di un archivio di responsabilit\u00e0 di Mundo Reader, S.L., che viene gestito in conformit\u00e0 alla normativa spagnola sulla protezione dei dati al fine di garantire che il servizio sia conforme alle condizioni generali vigenti. Consulta la nostra politica sulla privacy all'indirizzo www.bq.com Creando un account, l'utente dichiara di aver letto e accettato le condizioni della politica sulla privacy. Per qualsiasi dubbio relativo alla politica o al trattamento dei dati personali, \u00e8 possibile contattare lopd@bq.com.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-11",
+        "definition": "Web2Board non si apre in Windows",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-11",
+        "definition": "Reinstalla Web2Board come amministratore. A tal fine, fai clic con il tasto destro sul file eseguibile e seleziona \"Esegui come amministratore\".",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-12",
+        "definition": "Non riesco ad avviare la sessione in Bitbloq",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-12",
+        "definition": "Verifica se data e ora del tuo computer sono corrette. Diversamente, correggile e prova di nuovo.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-13",
+        "definition": "I blocchi scollegati non generano codice",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-13",
+        "definition": "La nuova struttura di programmazione di Bitbloq 2 \u00e8 pensata in modo tale che occorre collegare i blocchi a qualche blocco del progetto (\"Variabili globali e funzioni\", \"Istruzioni iniziali (Setup)\" o \"Loop principale (Loop)\"). Ogni blocco non collegato non generer\u00e0 codice e pertanto non se ne vedr\u00e0 l'effetto sulla scheda o sul robot.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-14",
+        "definition": "I blocchi scollegati sono scomparsi dal mio progetto",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-14",
+        "definition": "La nuova struttura di programmazione di Bitbloq 2 \u00e8 pensata in modo tale che occorre collegare i blocchi a qualche blocco del progetto (\"Variabili globali e funzioni\", \"Istruzioni iniziali (Setup)\" o \"Loop principale (Loop)\"). Ogni blocco non collegato non sar\u00e0 salvato nel progetto.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-15",
+        "definition": "Perch\u00e9 i minori di 14 anni non possono creare un account?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-15",
+        "definition": "A causa della Legge sulla Protezione dei dati personali, affinch\u00e9 un minore di 14 anni possa creare un account, occorre avere il consenso esplicito del pade\/madre\/tutore, che deve inviarci anche l'opportuna documentazione. Per tale ragione, i minori non possono creare account personali, ma dovranno utilizzare account creati da utenti con et\u00e0 superiore a 14 anni, e utilizzare Bitbloq accompagnati da tale persona.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-16",
+        "definition": "La mia scheda non viene rilevata",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-16",
+        "definition": "Possono esserci vari problemi per cui la scheda non viene rilevata. Eccone alcuni. Verificali e, se il problema continua, inviaci un messaggio.\n1.- Se si tratta di una scheda zum, verifica che l'interruttore sia su \"ON\"\n2.- Scollega tutti i componenti collegati e prova a caricare nuovamente il programma\n3.- Scollega il dispositivo usb dalla scheda e ricollegalo\n4.- Premi il pulsante di reset della scheda mentre avvii il \"caricamento\". Scollegalo appena prima che cominci a programmare la scheda",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-17",
+        "definition": "Nella bq ZUM, non si accende l'LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-17",
+        "definition": "Assicurati che il pulsante ON\/OFF della scheda sia collegato: in caso contrario, i componenti semplici funzioneranno, ma non quelli che necessitino di una maggiore potenza.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-18",
+        "definition": "Non riesco ad accedere a Google plus con Chrome",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-18",
+        "definition": "Aggiorna Chrome all'ultima versione: se ci sono degli aggiornamenti in sospeso, \u00e8 possibile che tu non riesca ad accedere. ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-19",
+        "definition": "Come si collega l'LCD alla scheda?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-19",
+        "definition": "Devi collegare il cavo SCL al pin \"S\" analogico indicato in Bitbloq (in una bq ZUM, bisognerebbe collegarlo al pin blu A5), poi il cavo SDA al pin \"S\" analogico indicato in Bitbloq (in una bq ZUM, bisognerebbe collegarlo al pin blu A4).\nIl pin VCC si collega a qualsiasi pin analogico \"V\" e il pin GND a qualsiasi pin analogico \"G\".",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-title-20",
+        "definition": "La scheda LCD visualizza caratteri strani",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-faq-content-20",
+        "definition": "Se l'LCD mostra caratteri strani, diversi da quelli programmati, possono esserci due cause:\n1.- L'LCD non accetta alcuni caratteri speciali come \u201c\u00a1\u201d, \u201c\u00bf\u201d o \u201c\u00f1\u201d o caratteri accentati. In uno di questi casi, apparirano caratteri strani.\n2.- Verifica che l'interruttore posteriore dell'LCD sia su \"IIC\". In caso contrario, appariranno caratteri strani.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    }
+]
