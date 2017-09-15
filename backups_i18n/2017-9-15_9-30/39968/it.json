@@ -1,0 +1,506 @@
+[
+    {
+        "term": "bitbloq-changelog-version-1",
+        "definition": "Bitbloq beta v2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-2",
+        "definition": "Bitbloq beta v2.0.7",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-1",
+        "definition": "Abbiamo sostituito blockly con la nostra libreria \"Bloqs\"",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-2",
+        "definition": "Abbiamo sostituito la Chrome App con la nostra applicazione nativa Web2board",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-3",
+        "definition": "Usabilit\u00e0 migliorata",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-4",
+        "definition": "Abbiamo sostituito backbone e marionette.js con AngularJS.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-5",
+        "definition": "Compilazione del codice in cliente.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-6",
+        "definition": "Rilevamento automatico della porta.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-7",
+        "definition": "Monitor serie.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-8",
+        "definition": "Introduzione della sezione di aiuto.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-9",
+        "definition": "Sezione hardware visiva grazie a ProtoBoLa.js.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-1-10",
+        "definition": "Login migliorato.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-1",
+        "definition": "Impaginazione modificata.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-2",
+        "definition": "Controllo del recupero password",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-3",
+        "definition": "Aggiornamento FAQ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-4",
+        "definition": "Risolti i problemi di aggiornamento di web2board su Mac OS X.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-5",
+        "definition": "Avvisi migliorati.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-6",
+        "definition": "Nuovi blocchi con classi.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-7",
+        "definition": "Browser o dispositivo non compatibile rilevato",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-2-8",
+        "definition": "Temi: ora gli utenti possono scegliere il tema di colori per bloqs.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-3",
+        "definition": "Bitbloq beta v2.0.8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-3-1",
+        "definition": "Condivisione con gli utenti! Ora puoi condividere i tuoi progetti con determinati utenti scrivendo la loro mail.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-3-2",
+        "definition": "Nuovo ambiente di sviluppo! Puoi gi\u00e0, a partire da un progetto a blocchi, programmare in un ambiente di sviluppo per Arduino con autocompletamento, scorciatoie da tastiera e altri miglioramenti che renderanno pi\u00f9 facile la programmazione del codice.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-3-3",
+        "definition": "Web2board aggiornato. Abbiamo corretto errori nell'installazione, e il monitor di serie \u00e8 gi\u00e0 disponibile su MAC.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-3-4",
+        "definition": "Miglioramenti nella ricerca di Esplora grazie all'inclusione di filtri.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-4",
+        "definition": "Bitbloq v2.1.0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-4-1",
+        "definition": "Si \u00e8 conclusa la fase Beta della nuova versione di Bitbloq. Ora che \u00e8 stabile, \u00e8 pronta per restare.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-4-2",
+        "definition": "Abbiamo migliorato molte cose, soprattutto grazie alle vostre risposte e ai vostri commenti. Poco a poco, stiamo cercando di essere compatibili al 100% con Firefox: contiamo di farcela in tempi brevi.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-4-3",
+        "definition": "Nuove traduzioni. Vogliamo che Bitbloq sia uno strumento globale, e per tale motivo stiamo traducendo l'applicazione in inglese, tedesco, francese, portoghese, russo, catalano, euskera, italiano e olandese.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-5",
+        "definition": "v2.1.1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-1",
+        "definition": "\u00c8 disponibile un nuovo pulsante per scaricare tutti i tuoi progetti. Puoi trovarlo nella sezione \"I miei progetti\".",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-2",
+        "definition": "Abbiamo risolto l'errore che a volte impediva ai blocchi di muoversi.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-3",
+        "definition": "Ora quando qualcuno condivide un progetto di codice con te, dall'IDE potrai fare una copia per modificarlo e salvarlo.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-4",
+        "definition": "Sistemato l'errore del blocco avanzato dei componenti, che impediva la visibilit\u00e0 delle modifiche realizzate dopo aver collocato il blocco nell'ambiente di lavoro.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-5",
+        "definition": "Sono gi\u00e0 disponibili le nuove lingue. Stiamo apportando ulteriori miglioramenti per far s\u00ec che la lingua non sia un ostacolo per il tuo rapporto con la tecnologia.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-6",
+        "definition": "Il link di Web2Board sul Mac della pagina di download \u00e8 stato gi\u00e0 sistemato.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-5-7",
+        "definition": "Abbiamo cambiato il colore dei pop-up per consentirne una pi\u00f9 facile lettura.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-6",
+        "definition": "Bitbloq v2.1.2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-6-1",
+        "definition": "Abbiamo aggiornato Web2Board su Windows affinch\u00e9 funzioni correttamente nelle versioni da 32 e 64 bit.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-6-2",
+        "definition": null,
+        "context": "\"Modal\" se refiere a una ventana modal que es una ventana emergente que impide hacer click al contenido que hay debajo hasta que se cierra. https:\/\/es.wikipedia.org\/wiki\/Ventana_(inform%C3%A1tica)#Modalidad",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-6-3",
+        "definition": "Nuova sezione nel registro, per sapere se l'utente \u00e8 un professore.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-6-4",
+        "definition": "Ora le ricerche con Esplora verranno realizzate secondo il nome del progetto e il nome dell'utente.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-6-5",
+        "definition": "Miglioramenti ai filtri di Esplora per consentire a un utente di condividere la propria ricerca.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-6-6",
+        "definition": "Miglioramenti nell'importazione dei progetti.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-7",
+        "definition": "v2.1.3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-7-1",
+        "definition": "Sistemato l'errore che impediva di salvare nei pop-up una variabile rinominata.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-7-2",
+        "definition": "Adesso, dalla sezione \"Il tuo account\", puoi indicare se sei un professore o se desideri ricevere tutte le notifiche che inviamo da Bitbloq.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-7-3",
+        "definition": "Sistemato l'errore che impediva il caricamento, durante il caricamento di un progetto, dei pop-up di componenti hardware.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-7-4",
+        "definition": "Zowi \u00e8 qui! Selezionalo nella scheda dell'hardware, nella sezione \"Robot\", e utilizza i nuovi blocchi per dargli vita, farlo ballare o programmarlo direttamente con il codice Arduino.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-7-5",
+        "definition": "Aggiunti nuovi componenti del Zum Extension Kit. Adesso sono disponibili l'Orologio in tempo reale, per ottenere la data e l'orario attuali, il led RGB, per poter cambiare i colori tramite il codice del tuo led, l'encoder, per misurare gli angoli, il sensore di umidit\u00e0 e temperatura per creare la tua prima stazione ambientale, il sensore di fine corsa, per rilevare urti, e il sensore audio per rilevare rumori.\n\nAggiungili al tuo robot o progetto!",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-8",
+        "definition": "v2.1.4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-8-1",
+        "definition": "Sistemato il collegamento della pagina di download di Ubuntu.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-9",
+        "definition": "v2.1.5",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-9-1",
+        "definition": "Sistemato l'errore per cui veniva posizionato sempre il simbolo della prima combo durante la generazione di codice con vari blocchi in un bloqInput con un dropdown.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-9-2",
+        "definition": "Sistemato l'errore per cui, quando un blocco di funzione con parametri aveva vari blocchi interni di selezione di variabili, veniva indicato male il tipo di comunicazione.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-9-3",
+        "definition": "Adesso il blocco dell'argomento consente di selezionare il tipo \"int\".",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-9-4",
+        "definition": "Il blocco di operazioni di base mette adesso l'operazione tra parentesi.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-10",
+        "definition": "v2.1.6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-10-1",
+        "definition": "Sistemati alcuni testi nel registro.",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-11",
+        "definition": "v2.1.7",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-11-1",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-version-12",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bitbloq-changelog-content-12-1",
+        "definition": "Nuovo forum! Hai dei dubbi? Consigli? Vuoi conoscere altri che come te stanno imparando? Accedi al nuovo Forum di Bitbloq tramite la sezione Aiuto. Cosa aspetti?",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    }
+]

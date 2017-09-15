@@ -1,0 +1,6010 @@
+[
+    {
+        "term": "bloq-zowi-mouth-tongueOut",
+        "definition": "\u5927\u7b11",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-confused",
+        "definition": "\u4e00\u8138\u7591\u60d1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-bigSurprise",
+        "definition": "\u4e00\u8138\u60ca\u8bb6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-distance",
+        "definition": "Zowi, \u6d4b\u91cf\u957f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sound",
+        "definition": "Zowi, \u4ed4\u7ec6\u542c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-OhOoh",
+        "definition": "\u54c7\u54e6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-surprise",
+        "definition": "\u60ca\u8bb6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-sad",
+        "definition": "\u60b2\u4f24",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-happy",
+        "definition": "\u9ad8\u5174",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-sleeping",
+        "definition": "\u7761\u610f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-cuddly",
+        "definition": "\u62e5\u62b1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-confused",
+        "definition": "\u56f0\u60d1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-shakeLeg",
+        "definition": "\u53ef\u79fb\u52a8\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-fart1",
+        "definition": "\u653e\u5c41",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed-high",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-break-stopLoop",
+        "definition": "\u4e2d\u65ad\u73af",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-code-writeYourCode",
+        "definition": "\u7f16\u5199\u81ea\u5df1\u7684\u4ee3\u7801",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-comment-comment",
+        "definition": "\u6ce8\u89e3 \/\/",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-convert",
+        "definition": "\u6362",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-to",
+        "definition": "\u4e58",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-dec",
+        "definition": "\u5341\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-hex",
+        "definition": "\u5341\u516d\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-oct",
+        "definition": "\u516b\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-convert-bin",
+        "definition": "\u4e8c\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-receiver-receive",
+        "definition": "\u63a5\u53d7",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-send-send",
+        "definition": "\u53d1\u9001",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-send-print",
+        "definition": "\u4e0d\u6362\u884c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-send-println",
+        "definition": "\u6362\u884c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-sound",
+        "definition": "\u8702\u9e23\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-note",
+        "definition": "\u4e0e\u97f3\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-for",
+        "definition": "\u5728",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-advance-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-digital-read-advanced-readpin",
+        "definition": "\u9605\u8bfb\u6570\u5b57\u5f15\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-analog-read-advanced-readpin",
+        "definition": "\u9605\u8bfb\u6a21\u62df\u5f15\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-turn",
+        "definition": "\u8f6c\u4f3a\u670d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-direction",
+        "definition": "\u53cd\u5411",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-clockwise",
+        "definition": "\u987a\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-advanced-counterclockwise",
+        "definition": "\u9006\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-stop-advanced-stop",
+        "definition": "\u505c\u6b62\u4f3a\u670d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-advanced-turnon",
+        "definition": "\u5f00",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-advanced-turnoff",
+        "definition": "\u5173",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-advanced-lcdLigth",
+        "definition": "LCD\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-clear",
+        "definition": "\u5220\u9664LCD\u7684\u5185\u5bb9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-advanced-write",
+        "definition": "\u5199",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-advanced-inLCD",
+        "definition": "\u5728LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-advanced-inPosition",
+        "definition": "\u5f00\u59cb\u4f4d\u7f6e\uff08\u5217\uff0c\u884c\uff09",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-advanced-turnon",
+        "definition": "\u5f00",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-advanced-turnoff",
+        "definition": "\u5173",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-advanced-theLED",
+        "definition": "LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-oscillate",
+        "definition": "\u6447\u52a8\u4f3a\u670d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-around",
+        "definition": "\u5468\u56f4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-amplitude",
+        "definition": "\u5e7f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-advanced-speed",
+        "definition": "\u901f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-start-advanced-oscillator",
+        "definition": "\u64ad\u653e\u632f\u8361\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-stop-advanced-stop",
+        "definition": "\u505c\u6b62\u632f\u8361\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-read-advanced-readpin",
+        "definition": "\u9605\u8bfb\u5f15\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-writte-advanced-writepin",
+        "definition": "\u5199\u5728\u5f15\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-writte-advanced-data",
+        "definition": "\u6570\u636e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-read-advanced-read",
+        "definition": "\u8bfb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-advanced-move",
+        "definition": "\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-advanced-to",
+        "definition": "\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-advanced-degrees",
+        "definition": "\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-sound",
+        "definition": "\u8702\u9e23\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-note",
+        "definition": "\u4e0e\u97f3\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-for",
+        "definition": "\u5728",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-do",
+        "definition": "Do",
+        "context": "Musical note, in spanish DO, in english C4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-re",
+        "definition": "Re",
+        "context": "Musical note, in spanish RE, in english D4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-mi",
+        "definition": "Mi",
+        "context": "Musical note, in spanish MI, in english E4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-fa",
+        "definition": "Fa",
+        "context": "Musical note, in spanish FA, in english F4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-sol",
+        "definition": "Sol",
+        "context": "Musical note, in spanish SOL, in english G4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-la",
+        "definition": "La",
+        "context": "Musical note, in spanish LA, in english A4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-si",
+        "definition": "Si",
+        "context": "Musical note, in spanish SI, in english B4",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-turn",
+        "definition": "\u8f6c\u4f3a\u670d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-direction",
+        "definition": "\u53cd\u5411",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-clockwise",
+        "definition": "\u987a\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-start-counterclockwise",
+        "definition": "\u9006\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continuous-servo-stop-stop",
+        "definition": "\u505c\u6b62\u4f3a\u670d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-turnon",
+        "definition": "\u5f00",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-turnoff",
+        "definition": "\u5173",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-turn-on-off-lcdLigth",
+        "definition": "LCD\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-write",
+        "definition": "\u5199",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-writte-inLCD",
+        "definition": "\u5728LCD",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-turnon",
+        "definition": "\u5f00",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-turnoff",
+        "definition": "\u5173",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-led-theLED",
+        "definition": "LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-oscillate",
+        "definition": "\u6447\u52a8\u4f3a\u670d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-around",
+        "definition": "\u5468\u56f4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-amplitude",
+        "definition": "\u5e7f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-speed",
+        "definition": "\u901f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-times",
+        "definition": "\u6b21",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-start-oscillator",
+        "definition": "\u64ad\u653e\u632f\u8361\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-oscillator-stop-stop",
+        "definition": "\u505c\u6b62\u632f\u8361\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-read-read",
+        "definition": "\u8bfb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-move",
+        "definition": "\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-to",
+        "definition": "\u4e58",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-degrees",
+        "definition": "\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-case-ifSameTo",
+        "definition": "\u5982\u679c\u5b83\u7b49\u4e8e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-case-exec",
+        "definition": "\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-case-default-inOtherCase",
+        "definition": "\u5426\u5219\uff0c\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-continue-continue",
+        "definition": "\u7ee7\u7eed\u672c\u5faa\u73af\u4e0b\u4e00\u4e2a\u8fed\u4ee3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-else-else",
+        "definition": "\u5426\u5219\uff0c\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-else-if-if",
+        "definition": "\u5426\u5219\uff0c\u5982\u679c:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-else-if-else",
+        "definition": "\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-count",
+        "definition": "\u52a0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-from",
+        "definition": "\u4ece",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-to",
+        "definition": "\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-add",
+        "definition": "\u52a0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-subtract",
+        "definition": "\u51cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-for-exec",
+        "definition": "\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-if-if",
+        "definition": "\u5982\u679c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-if-exec",
+        "definition": "\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-switch-check",
+        "definition": "\u68c0\u67e5\u6709\u4ec0\u4e48\u4ef7\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-wait-wait",
+        "definition": "\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-while-while",
+        "definition": "\u540c\u65f6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-while-exec",
+        "definition": "\u8dd1:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-var",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-float",
+        "definition": "\u5341\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-string",
+        "definition": "\u6587\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-bool",
+        "definition": "Boolean",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-function-exec",
+        "definition": "\u8dd1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-return-function-exec",
+        "definition": "\u8dd1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-function-args",
+        "definition": "\u4e0e\u4ee5\u4e0b\u53c2\u6570\uff1a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-return",
+        "definition": "\u6536",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-declare",
+        "definition": "\u5ba3\u544a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-return",
+        "definition": "\u6536",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-with-arguments-declare",
+        "definition": "\u5ba3\u544a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-with-arguments-count",
+        "definition": "\u4e0e\u4ee5\u4e0b\u53c2\u6570\uff1a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-return-function-with-arguments-return",
+        "definition": "\u6536",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-void-function-declare",
+        "definition": "\u5ba3\u544a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-void-function-with-arguments-declare",
+        "definition": "\u5ba3\u544a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-void-function-with-arguments-count",
+        "definition": "\u4e0e\u4ee5\u4e0b\u53c2\u6570\uff1a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-advanced-arraySize",
+        "definition": "\u6570\u7ec4\u5927\u5c0f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-advanced-boolType",
+        "definition": "\u5e03\u5c14",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-arraySize",
+        "definition": "\u6570\u7ec4\u5927\u5c0f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolArray-boolType",
+        "definition": "\u5e03\u5c14",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolean-true",
+        "definition": "\u771f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-boolean-false",
+        "definition": "\u5047",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-and",
+        "definition": "\u548c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-or",
+        "definition": "\u6216",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-not-not",
+        "definition": "\u4e0d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-loop-header",
+        "definition": "\u63a7\u5236\u6d41\u7a0b (loop)",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-loop-description",
+        "definition": "\u521b\u5efa\u8981\u5b89\u88c5\u540e\u7ee7\u7eed\u8fd0\u884c\u7684\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-setup-header",
+        "definition": "\u521d\u59cb\u6307\u4ee4\uff08\u8bbe\u7f6e\uff09",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-setup-description",
+        "definition": "\u8bf7\u8868\u793a\u5728\u7a0b\u5e8f\u7684\u5f00\u5934\u8981\u8fd0\u884c\u4e00\u6b21\u3002",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-var-header",
+        "definition": "\u5168\u5c40\u53d8\u91cf, \u5b50\u7a0b\u5e8f\u548c\u7c7b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-var-description",
+        "definition": "\u8bf7\u5b9a\u4e49\u4f7f\u7528\u5728\u8bbe\u7f6e\u548c\u5faa\u73af\u7684\u4ef7\u503c\u89c2, \u4f60\u4e5f\u53ef\u4ee5\u628a\u529f\u80fd\u7ec4\u5757\u5728\u4e00\u8d77\u3002",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-arraySize",
+        "definition": "\u6570\u7ec4\u5927\u5c0f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-type",
+        "definition": "\u548c\u7c7b\u578b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-float",
+        "definition": "\u5341\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-advanced-int",
+        "definition": "\u6574\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-map",
+        "definition": "\u5236\u56fe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-value",
+        "definition": "\u4ece[0 -",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-advanced-map",
+        "definition": "\u5236\u56fe",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-advanced-value",
+        "definition": "[",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-map-advanced-and",
+        "definition": "]\u5230[",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-math-operations-sqrt",
+        "definition": "\u5e73\u65b9\u6839",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-math-operations-abs",
+        "definition": "\u7edd\u5bf9\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-arraySize",
+        "definition": "\u6570\u7ec4\u5927\u5c0f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-numberArray-floatType",
+        "definition": "\u6d6e\u70b9\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-random-random",
+        "definition": "\u968f\u673a\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-random-and",
+        "definition": "\u548c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-arraySize",
+        "definition": "\u6570\u7ec4\u5927\u5c0f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-type",
+        "definition": "\u548c\u7c7b\u578b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-string",
+        "definition": "String",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-advanced-char",
+        "definition": "Char",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-length-length",
+        "definition": "\u957f\u77ed",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-string-string",
+        "definition": "\u6587\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-arraySize",
+        "definition": "\u6570\u7ec4\u5927\u5c0f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stringArray-stringType",
+        "definition": "\u548c\u6587\u5b57\u7c7b\u578b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-string-create-create",
+        "definition": "\u521b\u5efa\u6587\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hw-variable-advanced-variable",
+        "definition": "\u53d8\u91cf\uff08\u7ec4\u4ef6\uff09",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-sw-variable-advanced-variable",
+        "definition": "\u53d8\u91cf\uff08\u4ee3\u7801\uff09",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-array-variable-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare",
+        "definition": "\u5ba3\u544a\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type",
+        "definition": "\u548c\u7c7b\u578b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-int",
+        "definition": "\u6574\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-float",
+        "definition": "\u5341\u8fdb\u5236",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-text",
+        "definition": "\u6587\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-char",
+        "definition": "\u5b57\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-variable-declare-type-bool",
+        "definition": "\u5e03\u5c14",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-select-variable-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-variableArray-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-variable-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-char",
+        "definition": "\u5b57\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-lcd-default",
+        "definition": "\u60a8\u597d\uff01",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-comment-default",
+        "definition": "\u5199\u8bc4\u8bba",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-functions-default",
+        "definition": "\u540d\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-wait-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "drag-bloq",
+        "definition": "\u4e3a\u4e86\u5f00\u59cb\u4f60\u7684\u7a0b\u5e8f,\u8bf7\u62d6\u52a8\u4f60\u7684\u5757\u5230\u8fd9\u91cc",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-function-class",
+        "definition": "\u5bf9\u8c61",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-arguments-class",
+        "definition": "\u521b\u5efa\u4e00\u4e2a\u5728\u672c\u7c7b\u7684\u5bf9\u8c61",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-arguments-class-name",
+        "definition": "\u547d\u540d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-arguments-args",
+        "definition": "\u4ee5\u4e0b\u53c2\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-exec",
+        "definition": "\u8dd1\u8fd9\u4e2a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-function-exec",
+        "definition": "\u8dd1\u8fd9\u4e2a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-function-args",
+        "definition": "\u4ee5\u4e0b\u53c2\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-args-exec",
+        "definition": "\u8dd1\u8fd9\u4e2a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-args-class",
+        "definition": "\u5bf9\u8c61",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-return-function-args-args",
+        "definition": "\u4ee5\u4e0b\u53c2\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-class-variable-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-set-class-variableArray-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-select-class-variable-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-array-class-variable-variable",
+        "definition": "\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-constructor",
+        "definition": "\u6784\u9020\u51fd\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-constructor-arguments",
+        "definition": "\u4f7f\u7528\u4e0b\u5217\u53c2\u6570\u7684\u6784\u9020\u51fd\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class",
+        "definition": "\u521b\u5efa\u4e00\u4e2a\u5728\u672c\u7c7b\u7684\u5bf9\u8c61",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-invoke-class-name",
+        "definition": "\u547d\u540d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class",
+        "definition": "\u5ba3\u544a\u7c7b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-default",
+        "definition": "\u540d\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-from",
+        "definition": "\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-type",
+        "definition": "\u7ee7\u627f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-public",
+        "definition": "\u516c\u5f00",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-protected",
+        "definition": "\u4fdd\u62a4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-class-inheritance-private",
+        "definition": "\u79c1\u6709",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-public",
+        "definition": "\u53d8\u91cf\u548c\u516c\u5171\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-protected",
+        "definition": "\u53d8\u91cf\u548c\u4fdd\u62a4\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-private",
+        "definition": "\u53d8\u91cf\u548c\u79c1\u6709\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-include-lib-exec",
+        "definition": "\u5305\u62ec\u51fd\u5f0f\u5eab",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write",
+        "definition": "\u5199\u5728\u6a21\u62df\u5f15\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-digital-write",
+        "definition": "\u5199\u5728\u6570\u5b57\u5f15\u811a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write-data",
+        "definition": "\u6570\u636e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-digital-write-data",
+        "definition": "\u6570\u636e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements",
+        "definition": "Zowi:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-walk",
+        "definition": "\u8d70",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-turn",
+        "definition": "\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-moonwalker",
+        "definition": "\u6708\u7403\u6f2b\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-crusaito",
+        "definition": "\u675f\u4ea4\u53c9\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-flapping",
+        "definition": "\u6447\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-shakeleg",
+        "definition": "\u79fb\u52a8\u4f60\u7684\u817f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-bend",
+        "definition": "\u5f2f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-forward",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-backward",
+        "definition": "\u5411\u540e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth",
+        "definition": "Zowi: \u753b",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-mouth",
+        "definition": "\u4f60\u7684\u5634",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-smile",
+        "definition": "\u7b11",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-sad",
+        "definition": "\u54ed\u8138",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-happy",
+        "definition": "\u7b11\u8138",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height",
+        "definition": "Zowi:",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-forward",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-backward",
+        "definition": "\u5411\u540e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-right",
+        "definition": "\u53f3",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-height",
+        "definition": "\u548c\u4e00\u4e2a\u9ad8\u5ea6",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-big",
+        "definition": "\u9ad8",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-small",
+        "definition": "\u4f4e",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir",
+        "definition": "Zowi:",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-updown",
+        "definition": "\u9ad8\u4f4e",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-swing",
+        "definition": "\u6447\u6446",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-tiptoeSwing",
+        "definition": "\u8e2e\u7740\u811a\u5c16\u6447\u6446",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jitter",
+        "definition": "\u6447\u6296",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-ascendingTurn",
+        "definition": "\u5f53\u4f60\u8eab\u8bf7\u65cb\u8f6c",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jump",
+        "definition": "\u8df3",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-height",
+        "definition": "\u548c\u4e00\u4e2a\u9ad8\u5ea6",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-big",
+        "definition": "\u9ad8",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-small",
+        "definition": "\u4f4e",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds",
+        "definition": "Zowi:\u5531",
+        "context": "don't translate please",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-humidity",
+        "definition": "\u9605\u8bfb\u6e7f\u5ea6\u4f20\u611f\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-temperature",
+        "definition": "\u9605\u8bfb\u6e29\u5ea6\u4f20\u611f\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade-red",
+        "definition": "\u4e0e\u7ea2\u8272\u7684\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt",
+        "definition": "\u8dd1\u8fd9\u4e2a\u5b50\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-rising",
+        "definition": "\u4ece0\u66f4\u6539\u4e3a1",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-falling",
+        "definition": "\u4ece1\u66f4\u6539\u4e3a0",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-change",
+        "definition": "\u53d8",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-pin",
+        "definition": "\u5f53\u8f93\u5165\u5728\u5f15\u811a",
+        "context": "En el fichero de bloqs, muchas veces formamos frases a trozos, tanto \"cambie\" como \"cambie de 0 a 1\", como \"cuando la entrada del pin\", est\u00e1n por separado, pero luego se mostrar\u00e1n unidos.\nPongo un ejemplo de la frase que forman:\n Ejecutar la funci\u00f3n \"sumaMatematica\" cuando la entrada del pin cambie de 0 a 1.",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-green",
+        "definition": "\u7eff\u8272\u7684\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade",
+        "definition": "\u521b\u5efaRGB\u989c\u8272\u6e10\u53d8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-red",
+        "definition": "\u4e0e\u7ea2\u8272\u7684\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-init",
+        "definition": "\u66f4\u65b0\u65f6\u949f\u7684\u65e5\u671f\u548c\u65f6\u95f4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-month",
+        "definition": "\u6708",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-using-advanced",
+        "definition": "\u7528\u65f6\u949f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-year",
+        "definition": "\u5e74",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-day",
+        "definition": "\u65e5",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-hour",
+        "definition": "\u65f6\u95f4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-minute",
+        "definition": "\u5206",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-second",
+        "definition": "\u79d2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-time",
+        "definition": "\u65f6\u95f4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-using",
+        "definition": "\u7528\u65f6\u949f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-advanced",
+        "definition": "\u5f97\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc",
+        "definition": "\u5f97\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "default-var-name-rtc",
+        "definition": "\u5b9e\u65f6\u65f6\u949f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-date",
+        "definition": "\u65e5\u671f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "default-var-name-sound",
+        "definition": "\u58f0\u97f3\u4f20\u611f\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-blue",
+        "definition": "\u84dd\u8272\u7684\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "default-var-name-RGBled",
+        "definition": "led_RGB",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed",
+        "definition": "\u6253\u5f00RGB LED ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade-blue",
+        "definition": "\u84dd\u8272\u7684\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-fade-green",
+        "definition": "\u7eff\u8272\u7684\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple",
+        "definition": "\u6253\u5f00RGB LED ",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-color",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-red",
+        "definition": "\u7ea2\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-green",
+        "definition": "\u7eff\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-blue",
+        "definition": "\u84dd\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth",
+        "definition": "Zowi, \u753b\u4e00\u4e2a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-mouth",
+        "definition": "\u5728\u4f60\u7684\u5634\u91cc",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-smile",
+        "definition": "\u7b11\u5bb9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-sad",
+        "definition": "\u54ed\u8138",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-happy",
+        "definition": "\u7b11\u8138",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height",
+        "definition": "Zowi:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-big",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-updown",
+        "definition": "\u4e00\u4e0a\u4e00\u4e0b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-swing",
+        "definition": "\u6447\u6446",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-tiptoeSwing",
+        "definition": "\u8e2e\u7740\u811a\u5c16\u6447\u6446",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jitter",
+        "definition": "\u6296\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-ascendingTurn",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-jump",
+        "definition": "\u8df3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-big",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds",
+        "definition": "Zowi:\u53d1\u51fa\u8fd9\u4e2a\u58f0\u97f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-rising",
+        "definition": "\u4ece0\u66f4\u6539\u4e3a1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-falling",
+        "definition": "\u4ece1\u66f4\u6539\u4e3a0",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-change",
+        "definition": "\u6539\u53d8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-enable-interrupt-pin",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures",
+        "definition": "Zowi, \u5c55\u793a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiHappy",
+        "definition": "\u9ad8\u5174",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSuperHappy",
+        "definition": "\u975e\u5e38\u9ad8\u5174",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSad",
+        "definition": "\u60b2\u4f24",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSleeping",
+        "definition": "\u56f0\u5026",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFart",
+        "definition": "\u653e\u5c41",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiConfused",
+        "definition": "\u56f0\u60d1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiLove",
+        "definition": "\u76f8\u7231",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiAngry",
+        "definition": "\u751f\u6c14",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFretful",
+        "definition": "\u7126\u8651",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiMagic",
+        "definition": "\u9b54\u6cd5",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiWave",
+        "definition": "\u6325\u624b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiVictory",
+        "definition": "\u80dc\u5229",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFail",
+        "definition": "\u632b\u8d25",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple",
+        "definition": "Zowi:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-steps",
+        "definition": "\u6b21",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-walk",
+        "definition": "\u8d70",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-turn",
+        "definition": "\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-shakeLeg",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-bend",
+        "definition": "\u5f2f\u66f2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-moonwalker",
+        "definition": "\u6708\u7403\u6f2b\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-crusaito",
+        "definition": "\u8de8\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-flapping",
+        "definition": "\u62cd\u6253",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-updown",
+        "definition": "\u4e00\u4e0a\u4e00\u4e0b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-swing",
+        "definition": "\u6447\u6446",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-tiptoeSwing",
+        "definition": "\u8e2e\u7740\u811a\u5c16\u6447\u6446",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jitter",
+        "definition": "\u6296\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-ascendingTurn",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jump",
+        "definition": "\u8df3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-rest",
+        "definition": "Zowi, \u4f11\u606f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-millis",
+        "definition": "\u83b7\u53d6\u6267\u884c\u65f6\u95f4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-random-seed",
+        "definition": "\u5f00\u542f\u968f\u673a\u6570\u5b57\u751f\u6210\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-white",
+        "definition": "\u767d\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-yellow",
+        "definition": "\u9ec4\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-orange",
+        "definition": "\u6a59\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-dark-green",
+        "definition": "\u6df1\u7eff\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-dark-blue",
+        "definition": "\u6df1\u84dd\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-simple-pink",
+        "definition": "\u7c89\u7ea2\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-int",
+        "definition": "\u6574\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-argument-char",
+        "definition": "\u5b57\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons",
+        "definition": "\u6309\u952e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons-A",
+        "definition": "A",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons-B",
+        "definition": "B",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-buttons-zowi",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance",
+        "definition": "\u5982\u679c\u5b83\u63a2\u6d4b\u5230\u4e00\u4e2a\u8ddd\u79bb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-less",
+        "definition": "\u66f4\u5c11\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-more",
+        "definition": "\u66f4\u591a\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-than",
+        "definition": "\u6bd4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-then",
+        "definition": "\u5b83\u4f1a\u8fd9\u6837\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons",
+        "definition": "\u5982\u679c\u6211\u6309\u4e0b\u6309\u94ae",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-A",
+        "definition": "A",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-B",
+        "definition": "B",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-then",
+        "definition": "\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-sound",
+        "definition": "\u5982\u679c\u542c\u5230\u566a\u97f3,\u5b83\u4f1a\u8fd9\u6837\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-rest",
+        "definition": "\u505c\u6b62\u673a\u5668\u4eba",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple",
+        "definition": "\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-fordward",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-backward",
+        "definition": "\u5411\u540e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-movements-simple-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-distance",
+        "definition": "\u6d4b\u91cf\u8ddd\u79bb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance",
+        "definition": "\u5982\u679c\u5b83\u63a2\u6d4b\u5230\u4e00\u6bb5\u8ddd\u79bb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-less",
+        "definition": "\u66f4\u5c11\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-more",
+        "definition": "\u66f4\u591a\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-than",
+        "definition": "\u6bd4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-distance-then",
+        "definition": "\u5398\u7c73,\u5b83\u4f1a\u8fd9\u6837\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light",
+        "definition": "\u6d4b\u91cf\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-light-evolution",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line",
+        "definition": "\u68c0\u6d4b\u5230\u76f4\u7ebf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-line-evolution",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head",
+        "definition": "\u770b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-center",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-do",
+        "definition": "Do",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer",
+        "definition": "\u89e6\u78b0\u97f3\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-re",
+        "definition": "Re",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-mi",
+        "definition": "Mi",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-fa",
+        "definition": "Fa",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-sol",
+        "definition": "Sol",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-la",
+        "definition": "La",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-si",
+        "definition": "Si",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-for",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-buzzer-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance",
+        "definition": "\u770b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance-deg",
+        "definition": "\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-head-advance-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-stepper1",
+        "definition": "1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-stepper2",
+        "definition": "2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-stepper12",
+        "definition": "1\u548c2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-degdir",
+        "definition": "\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-CW",
+        "definition": "\u987a\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-CCW",
+        "definition": "\u9006\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-at",
+        "definition": "\u5728",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-rpm",
+        "definition": "\u6bcf\u5206\u949f\u8f6c\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-white",
+        "definition": "\u767d\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-black",
+        "definition": "\u9ed1\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-and",
+        "definition": "\u5728\u5de6\u8fb9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-line-then",
+        "definition": "\u5728\u53f3\u8fb9,\u5b83\u4f1a\u8fd9\u6837\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light",
+        "definition": "\u5982\u679c\u5b83\u770b\u5230\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-and",
+        "definition": "\u5728\u5de6\u8fb9",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-then",
+        "definition": "\u5728\u53f3\u8fb9,\u5b83\u4f1a\u8fd9\u6837\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-high",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-evolution-if-light-low",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced-degdir",
+        "definition": "\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced-at",
+        "definition": "\u5728",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-stepper-steps-advanced-rpm",
+        "definition": "\u6bcf\u5206\u949f\u8f6c\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-motor1",
+        "definition": "1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-motor2",
+        "definition": "2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-direction",
+        "definition": "\u65b9\u5411",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-CW",
+        "definition": "\u987a\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-CCW",
+        "definition": "\u9006\u65f6\u9488",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-at",
+        "definition": "\u5728",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spin-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced-direction",
+        "definition": "\u65b9\u5411",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced-at",
+        "definition": "\u5728",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-spinMotor-advanced-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop",
+        "definition": "\u505c\u6b62\u7535\u673a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop-motor1",
+        "definition": "1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop-motor2",
+        "definition": "2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-shield-DCmotor-stop-advanced",
+        "definition": "\u505c\u6b62\u7535\u673a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-endtext",
+        "definition": " ",
+        "context": "Translate only in english language",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-endtext",
+        "definition": " ",
+        "context": "Translate only in english language",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-no-dir-endtext",
+        "definition": " ",
+        "context": "Translate only in english language",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-rest-v1",
+        "definition": "\u521d\u59cb\u4f4d\u7f6e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-v1",
+        "definition": "\u505a\u8fd9\u4e2a\u52a8\u753b:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiHappy-v1",
+        "definition": "\u9ad8\u5174",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSuperHappy-v1",
+        "definition": "\u975e\u5e38\u9ad8\u5174",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSad-v1",
+        "definition": "\u60b2\u4f24",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiSleeping-v1",
+        "definition": "\uff08\u62df\u58f0\uff09\u56f0\u5026",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFart-v1",
+        "definition": "\uff08\u62df\u58f0\uff09\u653e\u5c41",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiConfused-v1",
+        "definition": "\u56f0\u60d1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiLove-v1",
+        "definition": "\u7231",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiAngry-v1",
+        "definition": "\u751f\u6c14",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFretful-v1",
+        "definition": "\u7126\u8651",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiVictory-v1",
+        "definition": "\u80dc\u5229",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-gestures-ZowiFail-v1",
+        "definition": "\u6e38\u620f\u7ed3\u675f\u2026\u2026",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-buttons-then-v1",
+        "definition": "\u505a:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-distance-then-v1",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-if-sound-v1",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-v1",
+        "definition": "\u5c55\u793a\u4e00\u4e2a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-walk-v1",
+        "definition": "\u8d70",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-turn-v1",
+        "definition": "\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-shakeLeg-v1",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-bend-v1",
+        "definition": "\u5f2f\u66f2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-moonwalker-v1",
+        "definition": "\u6708\u7403\u6f2b\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-crusaito-v1",
+        "definition": "\u5341\u5b57\u53f7",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-flapping-v1",
+        "definition": "\u6447\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-updown-v1",
+        "definition": "\u4e00\u4e0a\u4e00\u4e0b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-swing-v1",
+        "definition": "\u6447\u6446",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-tiptoeSwing-v1",
+        "definition": "\u8e2e\u7740\u811a\u5c16\u6447\u6446",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jitter-v1",
+        "definition": "\u98a4\u6296",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-ascendingTurn-v1",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-simple-jump-v1",
+        "definition": "\u8df3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-v1",
+        "definition": "\u53d1\u51fa\u8fd9\u4e2a\u58f0\u97f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sounds-fart1-v1",
+        "definition": "\uff08\u62df\u58f0\uff09\u653e\u5c41",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-distance-v1",
+        "definition": "\u6d4b\u91cf\u8ddd\u79bb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-sound-v1",
+        "definition": "\u4ed4\u7ec6\u542c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front",
+        "definition": "\u8d70",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-forward",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-backward",
+        "definition": "\u5411\u540e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-speed-high",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-front-endtext",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-turn",
+        "definition": "\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-shakeLeg",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-bend",
+        "definition": "\u5f2f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-speed-high",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-sides-endtext",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-moonwalker",
+        "definition": "\u6708\u7403\u6f2b\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-crusaito",
+        "definition": "\u5341\u5b57\u53f7",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-speed-high",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-height",
+        "definition": "\u548c\u4e00\u4e2a\u9ad8\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-small",
+        "definition": "\u4f4e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-medium",
+        "definition": "\u4e2d\u7b49",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-big",
+        "definition": "\u9ad8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-movements-height-sides-endtext",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion",
+        "definition": "\u8f6c\u6362",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion-to",
+        "definition": "\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion-int",
+        "definition": "\u6574\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-num-conversion-float",
+        "definition": "\u5c0f\u6570",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-name-default",
+        "definition": "\u540d\u5b57",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array",
+        "definition": "\u58f0\u660e\u6570\u7ec4\u53d8\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-size",
+        "definition": "\u5c3a\u5bf8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-type",
+        "definition": "\u548c\u7c7b\u578b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-detach",
+        "definition": "\u5206\u79bb\u4f3a\u670d",
+        "context": "Detach servo",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-servo-attach",
+        "definition": "\u8fde\u63a5\u4f3a\u670d",
+        "context": "Attach servo",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221",
+        "definition": "\u8bfb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-read-temperature",
+        "definition": "\u6e29\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-read-humidity",
+        "definition": "\u6e7f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-hts221-sensor",
+        "definition": "\u4f20\u611f\u5668\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor",
+        "definition": "\u8bfb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-pressure",
+        "definition": "\u538b\u529b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-temperature",
+        "definition": "\u6e29\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-altitude",
+        "definition": "\u9ad8\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-sensor",
+        "definition": "\u4f20\u611f\u5668\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-calibration",
+        "definition": "\u5b9a\u4e49\u6d77\u5e73\u9762\u7684\u538b\u529b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-PTsensor-calibration-sensor",
+        "definition": null,
+        "context": "Pa =  pascals, pressure magnitude. Example: \"Set the pressure at 21349 Pa in the sensor\"",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rgbLed-off",
+        "definition": "\u5173\u95edRGB LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write-V1",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-analog-write-data-V1",
+        "definition": "\u6a21\u62df\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-do-#",
+        "definition": "C#",
+        "context": "Musical note c# ",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-re-#",
+        "definition": "\n D#",
+        "context": "Musical Note d#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-fa-#",
+        "definition": "\n F#",
+        "context": "Musical note f#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-sol-#",
+        "definition": "G#",
+        "context": "Musical note g#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-la-#",
+        "definition": "A#",
+        "context": "Musical note a#",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-serial-receiver-receive-number",
+        "definition": "\u63a5\u6536\u6570\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-declare",
+        "definition": "\u58f0\u660e\u6570\u7ec4",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-declare-type",
+        "definition": "\u5206\u6790\u7c7b\u578b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-declare-array-declare-size",
+        "definition": "\u548c\u5c3a\u5bf8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pin-digital-write-data-V1",
+        "definition": "\u6570\u5b57\u91cf",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-roundto",
+        "definition": "\u4e0a\u820d\u5165",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-floor",
+        "definition": "\u4e0b",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-ceil",
+        "definition": "\u4e0a",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-round",
+        "definition": "\u6700\u8fd1\u7684",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-round-advanced-thenumber",
+        "definition": "\u6570\u5b57",
+        "context": "redondear hacia (abajo\/arriba\/el m\u00e1s cercano) el n\u00famero (X)",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-date-2",
+        "definition": "\u5e74\/\u6708\/\u65e5",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-rtc-time-2",
+        "definition": "\u65f6:\u5206:\u79d2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pinlevel-high",
+        "definition": "\u9ad8",
+        "context": "https:\/\/www.arduino.cc\/en\/Reference\/Constants , Arduino pin level constant HIGH",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-pinlevel-low",
+        "definition": "\u4f4e",
+        "context": "https:\/\/www.arduino.cc\/en\/Reference\/Constants , Arduino pin level constant LOW",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "suggested",
+        "definition": "\u5efa\u8bae\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-viewer",
+        "definition": "\u5c06\u6570\u636e\u53d1\u9001\u7ed9\u89c2\u4f17",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-note",
+        "definition": "\u64ad\u653e\u97f3\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-for",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getdistance-get",
+        "definition": "\u83b7\u5f97\u8d85\u58f0\u6ce2\u4f20\u611f\u5668\u8ddd\u79bb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-1",
+        "definition": "\u7aef\u53e31",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-2",
+        "definition": "\u7aef\u53e32",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-3",
+        "definition": "\u7aef\u53e33",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-4",
+        "definition": "\u7aef\u53e34",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getbuttonstatus",
+        "definition": "\u8bfb\u53d6\u6309\u94ae\u72b6\u6001",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getlightsensor",
+        "definition": "\u8bfb\u53d6\u5149\u4f20\u611f\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-linefollower-text",
+        "definition": "\u83b7\u5f97\u7ea2\u5916\u4f20\u611f\u5668\u6570\u636e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-forward",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-backward",
+        "definition": "\u5411\u540e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-turnleft",
+        "definition": "\u5de6\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-turnright",
+        "definition": "\u53f3\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed",
+        "definition": "\u8fc5\u901f\u5730",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed-fast",
+        "definition": "\u5feb\u901f\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed-normal",
+        "definition": "\u6b63\u5e38",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-speed-slow",
+        "definition": "\u6162\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-set",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-led-all",
+        "definition": "\u6240\u6709LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-led-right",
+        "definition": "\u53f3\u8fb9\u7684LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-led-left",
+        "definition": "\u5de6\u8fb9\u7684LED",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-colormix",
+        "definition": "\u7528\u8fd9\u4e2a\u989c\u8272\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-green",
+        "definition": "\u7eff\u8272\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-red",
+        "definition": "\u7ea2\u8272\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-blue",
+        "definition": "\u84dd\u8272\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-stop",
+        "definition": "\u505c\u6b62\u673a\u5668\u4eba",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-turnoffled-off",
+        "definition": "\u5173\u6389",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-advanced-play",
+        "definition": "\u64ad\u653e\u97f3\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-move-advanced-speed",
+        "definition": "\u8fc5\u901f\u5730",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-set",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-colormix",
+        "definition": "\u7528\u8fd9\u4e2a\u989c\u8272\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-red",
+        "definition": "\u7ea2\u8272\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-green",
+        "definition": "\u7eff\u8272\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-setled-advanced-blue",
+        "definition": "\u84dd\u8272\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-advanced-for",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-buzzer-advanced-ms",
+        "definition": "ms",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-magicfor-repeat",
+        "definition": "\u91cd\u590d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-magicfor-times",
+        "definition": "\u6b21",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds",
+        "definition": "\u53d1\u51fa\u58f0\u97f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-device",
+        "definition": "\u5728\u8bbe\u5907\u91cc",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-ambient-v1",
+        "definition": "\u6c1b\u56f4\u97f3\u4e50",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-bass-v1",
+        "definition": "\u8d1d\u65af",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-bongo-v1",
+        "definition": "\u5c0f\u624b\u9f13",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-highhat-v1",
+        "definition": "\u4e3e\u6b62\u50b2\u6162",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-snare-v1",
+        "definition": "\u5708\u5957",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-write-show",
+        "definition": "\u663e\u793a\u5728\u5c4f\u5e55\u4e0a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-receive",
+        "definition": "\u901a\u8fc7\u8bed\u97f3\u6216\u6587\u672c\u63a5\u6536\u6570\u636e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-toggle-light",
+        "definition": "\u4ee5\u2026\u2026\u7684\u9891\u7387\u95ea\u70c1",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-toggle-units",
+        "definition": "\u79d2",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-turnon-light",
+        "definition": "\u4ee5\u2026\u2026\u7684\u5f3a\u5ea6\u6253\u5f00\u624b\u7535\u7b52",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-turnoff-light",
+        "definition": "\u5173\u6389\u624b\u7535\u7b52",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-twitter-config",
+        "definition": "\u5efa\u7acb\u63a8\u7279\u7684\u5e94\u7528\u7a0b\u5e8f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-5",
+        "definition": "\u7aef\u53e35",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-6",
+        "definition": "\u7aef\u53e36",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-7",
+        "definition": "\u7aef\u53e37",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-8",
+        "definition": "\u7aef\u53e38",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-9",
+        "definition": "\u7aef\u53e39",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-port-10",
+        "definition": "\u7aef\u53e310",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-send-tweet",
+        "definition": "\u53d1\u9001\u63a8\u7279",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-ms",
+        "definition": "ms",
+        "context": "miliseconds",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-every",
+        "definition": "\u6bcf",
+        "context": "every 2000 seconds",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-playnote",
+        "definition": "\u64ad\u653e\u97f3\u7b26",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-common-for",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-read",
+        "definition": "\u4ece\u4e2d\u8bfb\u53d6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-lacceleration",
+        "definition": "\u8f74\u4e0a\u7684\u76f4\u7cfb\u52a0\u901f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis-x",
+        "definition": "x",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis-y",
+        "definition": "y",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis-z",
+        "definition": "z",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowicomponent-serial-send",
+        "definition": "\u901a\u8fc7\u4e32\u53e3\u53d1\u9001",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowicomponent-serial-receive",
+        "definition": "\u901a\u8fc7\u4e32\u53e3\u63a5\u6536",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowicomponent-serial-receive-int",
+        "definition": "\u901a\u8fc7\u4e32\u53e3\u63a5\u6536int",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-gyroscope",
+        "definition": "\u8f74\u4e0a\u7684\u9640\u87ba\u4eea",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-is",
+        "definition": "\u662f",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-covered",
+        "definition": "\u8986\u76d6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-not-covered",
+        "definition": "\u6ca1\u6709\u8986\u76d6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-acceleration",
+        "definition": "\u8f74\u4e0a\u7684\u52a0\u901f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-gravity",
+        "definition": "\u8f74\u4e0a\u7684\u91cd\u529b\u52a0\u901f\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-light",
+        "definition": "\u73af\u5883\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-magnetic",
+        "definition": "\u8f74\u7ebf\u4e0a\u7684\u78c1\u573a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-meow-v1",
+        "definition": "\u55b5",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-sounds-joke-v1",
+        "definition": "\u5f00\u73a9\u7b11",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-value",
+        "definition": "\u8bfb\u53d6\u2026\u2026\u7684\u4ef7\u503c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-orientation-azimuth",
+        "definition": "\u65b9\u4f4d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-orientation-roll",
+        "definition": "\u6eda\u52a8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-orientation-pitch",
+        "definition": "\u503e\u659c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-zowi-mouth-custom",
+        "definition": "\u6839\u636e\u8fd9\u4e00\u7cfb\u5217\u7684\u6570\u5b57\u753b\u5728\u4f60\u7684\u5634\u91cc:",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-screen",
+        "definition": "\u5728\u2026\u2026\u7684\u663e\u793a\u5c4f\u4e0a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-light-intensity",
+        "definition": "\u4ee5\u2026\u2026\u7684\u5f3a\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-from-device",
+        "definition": "\u4ece",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-the",
+        "definition": "\u8fd9\u4e2a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-axis",
+        "definition": "\u5728\u8f74\u4e0a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-phone-of",
+        "definition": "\u7684",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-stop-buzzer",
+        "definition": "\u505c\u6b62\u8702\u9e23\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-buzzer-without-pause",
+        "definition": "\u4e0d\u505c\u5730",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "lateraldisplacement-moveto",
+        "definition": "\u79fb\u52a8\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "right",
+        "definition": "\u53f3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "left",
+        "definition": "\u5de6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "steps",
+        "definition": "\u6b65",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "forward",
+        "definition": "\u5411\u524d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "backward",
+        "definition": "\u5411\u540e",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "turn-right",
+        "definition": "\u53f3\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "turn-left",
+        "definition": "\u5de6\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "stop",
+        "definition": "\u505c\u6b62",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "benddown",
+        "definition": "\u8e72\u4e0b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "rotate",
+        "definition": "\u65cb\u8f6c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "rotate-grades-foot",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "upstairs",
+        "definition": "\u697c\u4e0a",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "can-move-to",
+        "definition": "\u51f8\u8f6e\u79fb\u52a8\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "move-to",
+        "definition": "\u79fb\u52a8\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "open",
+        "definition": "\u5f00",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "close",
+        "definition": "\u5173",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "the-clamp",
+        "definition": "\u5939\u94b3",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "move-joint",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "degrees",
+        "definition": "\u5ea6",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "move-for",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "roll-to",
+        "definition": "\u6eda\u52a8\u5230",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "read-sensor",
+        "definition": "\u8bfb\u53d6\u4f20\u611f\u5668",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "ms-at-speed-of",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-getdistance",
+        "definition": "\u83b7\u53d6\u8d85\u58f0\u6ce2\u4f20\u611f\u5668\u8ddd\u79bb",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "inches",
+        "definition": "\u82f1\u5bf8",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "if",
+        "definition": "\u5982\u679c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-somethingnear-operation-near",
+        "definition": "\u68c0\u6d4b\u5230\u4e00\u4e2a\u9644\u8fd1\u7684\u969c\u788d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-somethingnear-operation-faraway",
+        "definition": "\u68c0\u6d4b\u5230\u4e00\u4e2a\u9065\u8fdc\u7684\u969c\u788d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-somethingnear-operation-nodetect",
+        "definition": "\u6ca1\u6709\u68c0\u6d4b\u5230\u969c\u788d",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "with-the",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-ifthereisalotoflight-alot",
+        "definition": "\u6709\u5f88\u591a\u7684\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-ifthereisalotoflight-low",
+        "definition": "\u68c0\u6d4b\u5230\u4f4e\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-ifthereisalotoflight-operation-nodetect",
+        "definition": "\u6ca1\u6709\u68c0\u6d4b\u5230\u5149",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-iffollowlines-if",
+        "definition": "\u5982\u679c\u68c0\u6d4b",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-iffollowlines-and",
+        "definition": "\u5728\u5de6\u8fb9\u7684\u4f20\u611f\u5668\u548c",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-mbot-iffollowlines-withsensor",
+        "definition": "\u5728\u53f3\u8fb9\u7684\u4f20\u611f\u5668\u4ece",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "white",
+        "definition": "\u767d\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "black",
+        "definition": "\u9ed1\u8272",
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "no-suggested",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-read-mkb_joystick",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-of-joystick",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifnoise-alot",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifnoise-low",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifnoise-nodetect",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-buzzer",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "if-button-pressed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in-the",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-display-show",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-write",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-draw",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-clear",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-writeNumber",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-writeTime",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ledmatrix-setLight",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "to",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "if-key-pressed",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-on-off",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-return",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-up",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-down",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-right",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "key-arrow-left",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in-position",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-7segment-clear",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-7segment-setLight",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifmotion-detect",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-ifmotion-nodetect",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-distance",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-read-remote",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "in-remote",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-if-collision",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-if-light",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-if-light-secondly",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-more",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-less",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-logic-operations-equals",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-light-right",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-freakscar-light-left",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "settings",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-remote-switch-default",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-remote-switch-case",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    },
+    {
+        "term": "bloq-makeblock-remote-switch",
+        "definition": null,
+        "context": "",
+        "term_plural": "",
+        "reference": "",
+        "comment": ""
+    }
+]
