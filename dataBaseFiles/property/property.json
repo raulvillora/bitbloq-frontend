@@ -51,6 +51,9 @@
                     "name": "hwVariable"
                 },
                 {
+                    "name": "mBotSetRGBLedAdvancedFull"
+                },
+                {
                     "name": "buzzerAdvanced-v2"
                 },
                 {
