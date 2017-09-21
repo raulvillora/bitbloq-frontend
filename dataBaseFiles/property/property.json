@@ -239,6 +239,9 @@
                 },
                 {
                     "name": "char"
+                },
+                {
+                    "name": "substringAdvanced"
                 }
             ],
             "advancedVariables": [
@@ -1037,6 +1040,9 @@
                 },
                 {
                     "name": "stringSum"
+                },
+                {
+                    "name": "substring"
                 }
             ],
             "variables": [
