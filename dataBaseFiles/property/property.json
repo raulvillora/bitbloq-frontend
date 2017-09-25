@@ -404,6 +404,12 @@
                     "name": "mBotSetRGBLed"
                 },
                 {
+                    "name": "mkbGyroscope"
+                },
+                {
+                    "name": "mkbIntegratedSoundSensor"
+                },
+                {
                     "name": "servoNormal"
                 },
                 {
