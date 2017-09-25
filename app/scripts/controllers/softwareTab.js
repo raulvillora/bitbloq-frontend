@@ -344,6 +344,7 @@ angular.module('bitbloqApp')
                         case 'mBotShowNumberOnLedMatrixAdvanced':
                         case 'mBotShowStringOnLedMatrixAdvanced':
                         case 'mBotShowTimeOnLedMatrixAdvanced':
+                        case 'mkbShowFaceOnLedMatrix':
                             result = existComponent(['mkb_ledmatrix'], connectedComponents);
                             break;
                         case 'ifButtonPushed':

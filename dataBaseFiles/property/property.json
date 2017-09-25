@@ -584,6 +584,9 @@
                     "name": "mBotLedMatrix"
                 },
                 {
+                    "name": "mkbShowFaceOnLedMatrix"
+                },
+                {
                     "name": "mBotClearLedMatrix"
                 },
                 {
@@ -693,6 +696,9 @@
                     "name": "mBotLedMatrix"
                 },
                 {
+                    "name": "mkbShowFaceOnLedMatrix"
+                },
+                {
                     "name": "mBotClearLedMatrix"
                 },
                 {
@@ -761,6 +767,9 @@
                 },
                 {
                     "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mkbShowFaceOnLedMatrix"
                 },
                 {
                     "name": "mBotClearLedMatrix"
@@ -833,6 +842,9 @@
                     "name": "mBotLedMatrix"
                 },
                 {
+                    "name": "mkbShowFaceOnLedMatrix"
+                },
+                {
                     "name": "mBotClearLedMatrix"
                 },
                 {
@@ -903,6 +915,9 @@
                     "name": "mBotLedMatrix"
                 },
                 {
+                    "name": "mkbShowFaceOnLedMatrix"
+                },
+                {
                     "name": "mBotClearLedMatrix"
                 },
                 {
@@ -971,6 +986,9 @@
                 },
                 {
                     "name": "mBotLedMatrix"
+                },
+                {
+                    "name": "mkbShowFaceOnLedMatrix"
                 },
                 {
                     "name": "mBotClearLedMatrix"
