@@ -448,6 +448,22 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_display7seg'], connectedComponents);
                     } else if ((item === 'freakscarBuzzer') || (item === 'freakscarDistance') || (item === 'freakscarLight')) {
                         result = existComponent(['freakscar_integrated_lightsensor'], connectedComponents);
+                    } else if ((item === 'robotSetMotorSpeed') || (item === 'robotSetMotorSpeedAdvanced')) {
+                        if (currentProjectService.project && currentProjectService.project.hardware) {
+                            switch (currentProjectService.project.hardware.board) {
+                                case 'meauriga':
+                                    //case 'mcore':
+                                    //case 'meorion':
+                                    result = true;
+                                    break;
+
+                                default:
+                                    result = false;
+                                    break;
+                            }
+                        } else {
+                            result = false;
+                        }
                     } else {
                         i = 0;
                         while (!result && (i < connectedComponents.length)) {

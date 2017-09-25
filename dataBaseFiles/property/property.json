@@ -1,6 +1,6 @@
 [
     {
-        "bitbloqLibsVersion": "1.3.7",
+        "bitbloqLibsVersion": "1.4.1",
         "bloqsSortTree": {
             "advancedClasses": [
                 {
@@ -67,6 +67,9 @@
                 },
                 {
                     "name": "mBotBuzzerAdvanced-v2"
+                },
+                {
+                    "name": "robotSetMotorSpeedAdvanced"
                 },
                 {
                     "name": "continuousServoStartAdvanced-v1"
@@ -339,6 +342,9 @@
                 },
                 {
                     "name": "mBotBuzzer-v2"
+                },
+                {
+                    "name": "robotSetMotorSpeed"
                 },
                 {
                     "name": "continuousServoStart"
