@@ -448,7 +448,7 @@ angular.module('bitbloqApp')
                         result = existComponent(['mkb_display7seg'], connectedComponents);
                     } else if ((item === 'freakscarBuzzer') || (item === 'freakscarDistance') || (item === 'freakscarLight')) {
                         result = existComponent(['freakscar_integrated_lightsensor'], connectedComponents);
-                    } else if ((item === 'mkbGyroscope') || (item === 'mkbIntegratedSoundSensor')) {
+                    } else if ((item === 'mkbGyroscope') || (item === 'mkbIntegratedSoundSensor') || (item === 'mkbAccelerometer')) {
                         result = currentProjectService.project && currentProjectService.project.hardware && (currentProjectService.project.hardware.board === 'meauriga');
                     } else if ((item === 'robotSetMotorSpeed') || (item === 'robotSetMotorSpeedAdvanced')) {
                         if (currentProjectService.project && currentProjectService.project.hardware) {

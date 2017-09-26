@@ -407,6 +407,9 @@
                     "name": "mkbGyroscope"
                 },
                 {
+                    "name": "mkbAccelerometer"
+                },
+                {
                     "name": "mkbIntegratedSoundSensor"
                 },
                 {
