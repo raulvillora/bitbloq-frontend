@@ -6,7 +6,7 @@
     <div class="button-group">
         <h1 class="header__title class__title" ng-if="groupArray.length > 1">{{'centermode-class' | translate}}</h1>
         <common-dropdown ng-if="groupArray.length > 1" class="class-dropdown" options="groupArray" options-click="getTasksInGroup"
-            heading-option="groupArray[0].name" data-element="classes_dropdown"></common-dropdown>
+            heading-option="groupSelectedName" data-element="classes_dropdown"></common-dropdown>
         <button class="btn btn--add" ng-if="groupArray.length > 1" ng-click="registerInGroup()" data-element="centerMode_button_registerInGroup">
             <svg class="svg-icon">
                 <use xlink:href="#plus"></use>

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     /**
      * @ngdoc function
@@ -7,12 +7,14 @@
      * # TasksCtrl
      * Controller of the bitbloqApp
      */
-        //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
-        //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
-        //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
-        //by Jose
+    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+    //QUE NO LLAMEIS TAREAS A LOS EJERCICIOS DE UN ALUMNO
+    //by Jose
     angular.module('bitbloqApp')
-        .controller('TasksCtrl', function($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService, $routeParams, $location, commonModals, $window, exerciseService, $q, moment) {
+        .controller('TasksCtrl', function ($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService,
+            $routeParams, $location, commonModals, $window, exerciseService, $q, moment, common) {
+
             $scope.tasks = [];
             $scope.pageno = 1;
             $scope.tasksCount = 0;
@@ -30,7 +32,7 @@
             var currentModal,
                 groupSelected;
 
-            $scope.changeExerciseMenu = function(index) {
+            $scope.changeExerciseMenu = function (index) {
                 var previousState;
                 if ($scope.menuActive[index]) {
                     previousState = $scope.menuActive[index];
@@ -41,19 +43,21 @@
                 $scope.menuActive[index] = !previousState;
             };
 
-            $scope.getTasksPaginated = function(pageno) {
+            $scope.getTasksPaginated = function (pageno) {
                 _getTasksWithParams(pageno);
             };
 
-            $scope.registerInGroup = function() {
+            $scope.registerInGroup = function () {
                 function confirmAction(accessId) {
-                    centerModeApi.registerInGroup(accessId).then(function() {
+                    centerModeApi.registerInGroup(accessId).then(function () {
+
                         currentModal.close();
-                        _getGroups().then(function() {
+                        sessionStorage.newClassAddedAccessId = accessId;
+                        _getGroups().then(function () {
                             _getMyTasks();
                         });
 
-                    }).catch(function() {
+                    }).catch(function () {
                         modal.input.showError = true;
                     });
                 }
@@ -73,7 +77,7 @@
                             showError: false
                         },
                         confirmButton: 'centerMode_student_registerInClass',
-                        condition: function() {
+                        condition: function () {
                             return this.input.value;
                         },
                         rejectButton: 'modal-button-cancel',
@@ -89,20 +93,21 @@
                 });
             };
 
-            $scope.getTasksInGroup = function(group) {
+            $scope.getTasksInGroup = function (group) {
                 if (group) {
                     groupSelected = group._id;
                 }
                 _getTasksWithParams();
+                sessionStorage['tasksViewSelectedGroup_' + common.user._id] = groupSelected;
             };
 
             function _init() {
-                $scope.common.itsUserLoaded().then(function() {
+                $scope.common.itsUserLoaded().then(function () {
                     centerModeService.setCenter();
-                    _getGroups().then(function() {
+                    _getGroups().then(function () {
                         _getMyTasks();
                     });
-                }, function() {
+                }, function () {
                     $scope.common.setUser();
                     alertsService.add({
                         text: 'view-need-tobe-logged',
@@ -125,11 +130,24 @@
 
             function _getGroups() {
                 var defered = $q.defer();
-                centerModeApi.getGroups('student').then(function(response) {
+                centerModeApi.getGroups('student').then(function (response) {
                     $scope.groups = response.data;
                     $scope.groupArray = $scope.groups;
                     if ($scope.groupArray.length > 0) {
-                        groupSelected = $scope.groupArray[0]._id;
+                        if (sessionStorage.newClassAddedAccessId) {
+                            var newGroup = _.find($scope.groupArray, { accessId: sessionStorage.newClassAddedAccessId });
+                            sessionStorage.removeItem('newClassAddedAccessId');
+                            if (newGroup && newGroup._id) {
+                                groupSelected = newGroup._id;
+                                $routeParams.group = newGroup._id;
+                                sessionStorage['tasksViewSelectedGroup_' + common.user._id] = newGroup._id;
+                            } else {
+                                groupSelected = sessionStorage['tasksViewSelectedGroup_' + common.user._id] || $scope.groupArray[0]._id;
+                            }
+                        } else {
+                            groupSelected = sessionStorage['tasksViewSelectedGroup_' + common.user._id] || $scope.groupArray[0]._id;
+                        }
+                        $scope.groupSelectedName = _.find($scope.groupArray, { _id: groupSelected }).name;
                     }
                     defered.resolve();
                 });
@@ -142,8 +160,8 @@
                     exerciseApi.getMyTasksByGroup(groupSelected, {
                         'page': pageno,
                         'pageSize': $scope.itemsPerPage
-                    }).then(function(response) {
-                        response.data.tasks.forEach(function(task) {
+                    }).then(function (response) {
+                        response.data.tasks.forEach(function (task) {
                             if (task.status === 'pending' && exerciseService.getDatetime(task.endDate, true)) {
                                 task.status = 'notDelivered';
                             }
@@ -162,7 +180,7 @@
 
             _init();
 
-            $scope.$watch('search.searchExercisesText', function(newValue, oldValue) {
+            $scope.$watch('search.searchExercisesText', function (newValue, oldValue) {
                 if (newValue !== oldValue && (oldValue || oldValue === '') || (!oldValue && newValue)) {
                     if (newValue || newValue === '') {
                         $scope.filterExercFisesParams.name = newValue;
