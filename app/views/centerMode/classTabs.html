@@ -43,7 +43,8 @@
             </button>
             <div ng-show="showMoreActionsInClass" class="table__block__item--menu table__block__moreactions--menu">
                 <ul>
-                    <li class="table__block__item--menu__item" ng-csv="studentsJSON" csv-header="getCsvHeaders();" filename="{{group.name + '.csv'}}" data-element="menu-change-name">
+                    <li class="table__block__item--menu__item" ng-csv="studentsJSON" csv-header="getCsvHeaders();" filename="{{group.name + '.csv'}}"
+                        data-element="menu-change-name">
                         <svg class="svg-icon svg-icon--text svg-icon--menu">
                             <use xlink:href="#download"></use>
                         </svg>
@@ -81,8 +82,9 @@
     <div class="tabs-layout">
         <aside class="tabs-layout__aside">
             <h1 class="invisible">Groups menu</h1>
-            <ul class="tabs__header" ng-init="selectedTab = 'exercises'">
-                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}" ng-click="selectedTab = 'exercises'" data-element="exercises-tab">
+            <ul class="tabs__header" ng-init="setTab()">
+                <li ng-class="{'tabs__header__item':true, 'aside--menu__item--releases':true, 'selected--tab':selectedTab === 'exercises'}"
+                    ng-click="setTab('exercises')" data-element="exercises-tab">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#exercise"></use>
                     </svg>
@@ -91,7 +93,8 @@
                     </span>
                     </span>
                 </li>
-                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'students'}" ng-click="selectedTab = 'students'" data-element="students-tab">
+                <li class="tabs__header__item tabs__header__main" ng-class="{'selected--tab':selectedTab === 'students'}" ng-click="setTab('students')"
+                    data-element="students-tab">
                     <svg class="svg-icon--aside--menu">
                         <use xlink:href="#people"></use>
                     </svg>
