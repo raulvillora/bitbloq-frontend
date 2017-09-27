@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('HeaderCtrl', function($scope, $location, $rootScope, _, ngDialog, userApi, $document, $translate, centerModeApi, alertsService, utils) {
+    .controller('HeaderCtrl', function ($scope, $location, $rootScope, _, ngDialog, userApi, $document, $translate, centerModeApi, alertsService, utils) {
         $scope.userApi = userApi;
         $scope.utils = utils;
         $scope.translate = $translate;
@@ -16,7 +16,7 @@ angular.module('bitbloqApp')
         $scope.showUserHeader = false;
         $scope.common.session.save = false;
 
-        $scope.createCenter = function() {
+        $scope.createCenter = function () {
             function tryCenter() {
                 modalOptions.title = 'centerMode_modal_createCenter-title';
                 modalOptions.mainText = 'centerMode_modal_createCenter-mainText';
@@ -28,7 +28,7 @@ angular.module('bitbloqApp')
 
                 function createCenter() {
                     if (modalOptions.center.name && modalOptions.center.location && modalOptions.center.telephone) {
-                        centerModeApi.createCenter(modalOptions.center).then(function() {
+                        centerModeApi.createCenter(modalOptions.center).then(function () {
                             ngDialog.close(centerModal);
                             $scope.common.userRole = 'headmaster';
                             $location.url('/center');
@@ -38,7 +38,7 @@ angular.module('bitbloqApp')
                                 type: 'ok',
                                 time: 5000
                             });
-                        }).catch(function() {
+                        }).catch(function () {
                             alertsService.add({
                                 text: 'centerMode_alert_createCenter-Error',
                                 id: 'createCenter',
@@ -73,19 +73,19 @@ angular.module('bitbloqApp')
             });
         };
 
-        $scope.logout = function() {
+        $scope.logout = function () {
             userApi.logout();
             $scope.common.setUser(null);
             localStorage.projectsChange = false;
             $location.url('/');
         };
 
-        $scope.openUserMenu = function($event) {
+        $scope.openUserMenu = function ($event) {
             $event.stopPropagation();
             $scope.showUserHeader = !$scope.showUserHeader;
         };
 
-        $scope.openMenu = function($event) {
+        $scope.openMenu = function ($event) {
             $event.stopPropagation();
             $scope.showHeader = !$scope.showHeader;
         };
@@ -97,12 +97,13 @@ angular.module('bitbloqApp')
             if ($scope.showHeader) {
                 $scope.showHeader = false;
             }
-            $scope.$apply();
+            utils.apply($scope);
+
         }
 
         $document.on('click', clickDocumentHandler);
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             $document.off('click', clickDocumentHandler);
         });
     });

@@ -223,8 +223,12 @@ angular.module('bitbloqApp')
                     }
                     break;
                 case 86:
-                    //$log.debug('ctrl + v');
-                    if (event.ctrlKey && localStorage.bloqInClipboard && $document[0].activeElement.attributes['data-bloq-id']) {
+                    //$log.debug('ctrl + v');tagNameTEXTAREA
+                    if (event.ctrlKey &&
+                        localStorage.bloqInClipboard &&
+                        ($scope.currentTab === 1) &&
+                        ($document[0].activeElement.tagName !== 'INPUT') &&
+                        ($document[0].activeElement.tagName !== 'TEXTAREA')) {
                         copyBloq(JSON.parse(localStorage.bloqInClipboard));
                     }
                     break;
