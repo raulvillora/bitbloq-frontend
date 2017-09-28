@@ -118,7 +118,7 @@
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && !search.searchExercisesText && !statusSelected &&!classFilter && common.section==='class'">
     <h1 class="center-mode--empty__title">{{' centerMode_exercises_group_empty' | translate}}</h1>
-    <p class="center-mode--empty__info">{{'centerMode_exercises_group_emptyInfo' | translate}}</p>
+    <a class="btn btn--primary btn--medium" href="#/exercises">{{'centerMode_exercises_group_emptyInfo' | translate}}</a>
 </div>
 <div class="center-mode--empty" ng-if="exercises.length===0 && (search.searchExercisesText || statusSelected || classFilter)">
     <h1 class="center-mode--empty__title">{{'centerMode_exercises_empty_search' | translate}}</h1>

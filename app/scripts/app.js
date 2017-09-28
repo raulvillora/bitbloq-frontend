@@ -41,13 +41,13 @@ angular
         'ngCsv'
     ])
     .config(['$provide', '$routeProvider', '$httpProvider', '$translateProvider', '$authProvider', '$logProvider', 'envData',
-        function($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
+        function ($provide, $routeProvider, $httpProvider, $translateProvider, $authProvider, $logProvider, envData) {
 
             if (envData.config.env === 'production') {
                 $logProvider.debugEnabled(false);
             }
 
-            $provide.decorator('mFormatFilter', function() {
+            $provide.decorator('mFormatFilter', function () {
                 return function newFilter(date, format, tz) {
                     var dateResult;
                     if (date) {
@@ -282,7 +282,7 @@ angular
             $translateProvider.fallbackLanguage('en-GB');
         }
     ])
-    .config(function(AnalyticsProvider, envData) {
+    .config(function (AnalyticsProvider, envData) {
         // initial configuration
         /* For more information about provider configuration: https://github.com/revolunet/angular-google-analytics#example */
         AnalyticsProvider.setAccount(envData.config.googleAnalyticsCode);
@@ -295,14 +295,14 @@ angular
         }
 
     })
-    .config(function($provide) {
-        $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions) {
+    .config(function ($provide) {
+        $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function (taRegisterTool, taOptions) {
             // $delegate is the taOptions we are decorating
             // register the tool with textAngular
             taRegisterTool('uploadImage', {
                 iconclass: 'fa fa-picture-o',
                 tooltiptext: '',
-                action: function() {
+                action: function () {
                     $('.main-image--input').click();
                 }
             });
@@ -311,8 +311,8 @@ angular
             return taOptions;
         }]);
     })
-    .config(function($provide) {
-        $provide.decorator('taTranslations', function($delegate) {
+    .config(function ($provide) {
+        $provide.decorator('taTranslations', function ($delegate) {
             $delegate.heading.tooltip = 'H';
             $delegate.quote.tooltip = '';
             $delegate.pre.tooltip = '';
@@ -333,16 +333,16 @@ angular
             return $delegate;
         });
     })
-    .filter('encode', function() {
+    .filter('encode', function () {
         return window.encodeURIComponent;
     })
-    .run(function(Analytics, _, jsPlumb, bloqs, bloqsUtils, bloqsLanguages) {
+    .run(function (Analytics, _, jsPlumb, bloqs, bloqsUtils, bloqsLanguages) {
         // Make sure _ is invoked at runtime. This does nothing but force the "_" to
         // be loaded after bootstrap. This is done so the "_" factory has a chance to
         // "erase" the global reference to the lodash library.
         // ...
 
     })
-    .run(function(amMoment, envData) {
+    .run(function (amMoment, envData) {
         amMoment.changeLocale(envData.config.defaultLang);
     });

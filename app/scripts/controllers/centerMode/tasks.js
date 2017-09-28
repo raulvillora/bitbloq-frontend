@@ -61,7 +61,7 @@
                                 alertText = $translate.instant('centermode-class-register-duplicated', {
                                     value: group.name
                                 });
-                                alertType = 'warning';
+                                alertType = 'info';
                             } else {
                                 group = _.find($scope.groups, { accessId: accessId });
                                 alertText = $translate.instant('centermode-class-register-sucessfully', {

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     /**
      * @ngdoc function
@@ -8,7 +8,7 @@
      * Controller of the bitbloqApp
      */
     angular.module('bitbloqApp')
-        .controller('ClassesCtrl', function($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $translate, $rootScope, $location, userApi, utils, ngDialog) {
+        .controller('ClassesCtrl', function ($log, $scope, _, alertsService, centerModeApi, centerModeService, $routeParams, $translate, $rootScope, $location, userApi, utils, ngDialog) {
             $scope.groups = [];
             $scope.teacher = {};
             $scope.centerModeService = centerModeService;
@@ -33,20 +33,20 @@
             $scope.colorPickerFlag = {};
             $scope.common.isLoading = true;
 
-            $scope.changeGroupColor = function() {
-                centerModeApi.updateGroup($scope.group).then(function() {
+            $scope.changeGroupColor = function () {
+                centerModeApi.updateGroup($scope.group).then(function () {
                     $scope.colorPickerFlag.open = false;
                 });
             };
 
-            $scope.newGroup = function() {
+            $scope.newGroup = function () {
                 centerModeService.newGroup($scope.teacher._id || $scope.common.user._id, centerModeService.center._id)
-                    .then(function() {
+                    .then(function () {
                         _getGroups();
                     });
             };
 
-            $scope.getMyGroupsPage = function(page) {
+            $scope.getMyGroupsPage = function (page) {
                 var queryParamsArray = getRequest(),
                     queryParams = queryParamsArray || {},
                     groupPage = page ? page : 1;
@@ -57,18 +57,18 @@
 
                 angular.extend(queryParams, pageParams);
 
-                centerModeApi.getGroups('teacher', null, centerModeService.center._id, null, queryParams).then(function(response) {
+                centerModeApi.getGroups('teacher', null, centerModeService.center._id, null, queryParams).then(function (response) {
                     $scope.groups = response.data.groups;
                     $scope.groupsCount = response.data.counter;
                     $location.search(_.extend(_.cloneDeep(queryParams.sortParams), _.cloneDeep(queryParams.statusParams), _.cloneDeep(queryParams.searchParams ? {
                         'search': queryParams.searchParams
                     } : {}), _.cloneDeep(pageParams)));
-                }).finally(function() {
+                }).finally(function () {
                     $scope.common.isLoading = false;
                 });
             };
 
-            $scope.getCenterGroups = function(center) {
+            $scope.getCenterGroups = function (center) {
                 var page;
                 centerModeService.setCenter(center);
                 if ($routeParams.updatedAt) {
@@ -87,22 +87,23 @@
                 $scope.getMyGroupsPage(page);
             };
 
-            $scope.goTo = function(url, event) {
+            $scope.goTo = function (url, event) {
                 if (event.target.className.indexOf('group__info__header__id') === -1) {
+                    $location.search({});
                     $location.path(url);
                 }
             };
 
-            $scope.sortClasses = function(option) {
+            $scope.sortClasses = function (option) {
                 $scope.sortSelected = option;
                 $scope.searchClasses();
             };
-            $scope.filterByStatus = function(option) {
+            $scope.filterByStatus = function (option) {
                 $scope.statusSelected = option;
                 $scope.searchClasses();
             };
 
-            $scope.searchClasses = function() {
+            $scope.searchClasses = function () {
                 $location.search($scope.filterClassesParams);
                 $scope.getMyGroupsPage();
             };
@@ -113,11 +114,11 @@
              **************************/
 
             function _init() {
-                $scope.common.itsUserLoaded().then(function() {
+                $scope.common.itsUserLoaded().then(function () {
                     if ($scope.common.section === 'confirm-teacher') {
                         _congratulations($routeParams.token);
                     } else {
-                        $scope.common.itsRoleLoaded().then(function() {
+                        $scope.common.itsRoleLoaded().then(function () {
                             switch ($scope.common.userRole) {
                                 case 'headmaster':
                                 case 'teacher':
@@ -128,7 +129,7 @@
                             }
                         });
                     }
-                }, function() {
+                }, function () {
                     $scope.common.setUser();
                     alertsService.add({
                         text: 'view-need-tobe-logged',
@@ -140,7 +141,7 @@
             }
 
             function _congratulations(token) {
-                centerModeApi.confirmAddTeacher(token).then(function(response) {
+                centerModeApi.confirmAddTeacher(token).then(function (response) {
                     var modalOptions = $rootScope.$new(),
                         extraButton = 'centerMode_button_createCenter-try';
                     if ($scope.common.user.birthday && utils.userIsUnder14($scope.common.user.birthday)) {
@@ -155,7 +156,7 @@
                         confirmationTitle: confirmationTitle,
                         customClass: 'modal--information',
                         confirmButton: 'centerMode_modal_confirmation-button',
-                        confirmAction: function() {
+                        confirmAction: function () {
                             ngDialog.close(centerModal);
                         },
                         modalButtons: true,
@@ -170,7 +171,7 @@
                     });
                     $location.path('/classes');
                     $scope.common.userRole = 'teacher';
-                }).catch(function(err) {
+                }).catch(function (err) {
                     if (err.data) {
                         switch (err.data.code) {
                             case 403:
@@ -182,7 +183,7 @@
                                     id: 'addTeacher',
                                     type: 'error',
                                     linkText: 'close-session',
-                                    link: function() {
+                                    link: function () {
                                         userApi.logout();
                                         $scope.common.setUser(null);
                                         localStorage.projectsChange = false;
@@ -224,10 +225,10 @@
             }
 
             function _getGroups() {
-                centerModeApi.getMyCentersAsTeacher().then(function(response) {
+                centerModeApi.getMyCentersAsTeacher().then(function (response) {
                     centerModeService.setCenters(response.data);
                     $scope.centersArray = [];
-                    _.forEach(centerModeService.centers, function(center) {
+                    _.forEach(centerModeService.centers, function (center) {
                         $scope.centersArray.push(_.pick(center, ['_id', 'name']));
                     });
                     $scope.getCenterGroups(centerModeService.center._id ? centerModeService.center : $scope.centersArray[0]);
@@ -329,7 +330,7 @@
              **  INIT && WATCHERS ***
              ************************/
 
-            $scope.$watch('search.searchClassesText', function(newValue, oldValue) {
+            $scope.$watch('search.searchClassesText', function (newValue, oldValue) {
                 if (newValue !== oldValue) {
                     if (newValue) {
                         $scope.filterClassesParams.search = newValue;
@@ -346,7 +347,7 @@
                 }
             });
 
-            $scope.$on('$destroy', function() {
+            $scope.$on('$destroy', function () {
                 if ($location.path() !== '/login') {
                     console.log($routeParams);
                 }
