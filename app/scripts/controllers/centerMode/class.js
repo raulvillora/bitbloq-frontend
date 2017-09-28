@@ -296,8 +296,20 @@
                 $location.url(newUrl);
             };
 
+
+            function _moreOptionsDropdownGlobalClickHandler(e) {
+                console.log(e);
+                if (e.target.className.indexOf('btn--showMoreActions') === -1) {
+                    $scope.showMoreActionsInClass = false;
+                }
+                document.body.removeEventListener('click', _moreOptionsDropdownGlobalClickHandler, true);
+            }
+
             $scope.setMoreOptionsInClass = function () {
                 $scope.showMoreActionsInClass = !$scope.showMoreActionsInClass;
+                if ($scope.showMoreActionsInClass) {
+                    document.body.addEventListener('click', _moreOptionsDropdownGlobalClickHandler, true);
+                }
             };
 
             $scope.searchExercises = function () {
@@ -461,6 +473,10 @@
                     $scope.common.goToLogin();
                 });
             }
+
+            $scope.$on('$destroy', function () {
+                document.body.removeEventListener('click', _moreOptionsDropdownGlobalClickHandler, true);
+            });
 
             /************************
              **  INIT && WATCHERS ***

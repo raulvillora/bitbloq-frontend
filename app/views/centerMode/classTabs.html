@@ -37,7 +37,7 @@
         <div class="button-group col-vsmall-7">
             <button class="btn btn--quaternary btn--small btn--showMoreActions" ng-click="setMoreOptionsInClass()" data-element="centerMode_button_moreActions">
                 <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
-                <svg class="svg-icon svg-icon--text animated-rotate rotate90 svg-icon-moreactions">
+                <svg class="svg-icon svg-icon--text animated-rotate  svg-icon-moreactions" ng-class="{'rotate90':showMoreActionsInClass}">
                     <use xlink:href="#arrow"></use>
                 </svg>
             </button>
