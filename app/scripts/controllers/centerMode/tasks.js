@@ -13,7 +13,7 @@
     //by Jose
     angular.module('bitbloqApp')
         .controller('TasksCtrl', function ($log, $scope, $rootScope, _, ngDialog, alertsService, centerModeApi, exerciseApi, centerModeService,
-            $routeParams, $location, commonModals, $window, exerciseService, $q, moment, common) {
+            $routeParams, $location, commonModals, $window, exerciseService, $q, moment, common, $translate) {
 
             $scope.tasks = [];
             $scope.pageno = 1;
@@ -50,11 +50,30 @@
             $scope.registerInGroup = function () {
                 function confirmAction(accessId) {
                     centerModeApi.registerInGroup(accessId).then(function () {
-
+                        console.log($scope);
+                        var group = _.find($scope.groups, { accessId: accessId }),
+                            alertText, alertType;
                         currentModal.close();
                         sessionStorage.newClassAddedAccessId = accessId;
                         _getGroups().then(function () {
                             _getMyTasks();
+                            if (group) {
+                                alertText = $translate.instant('centermode-class-register-duplicated', {
+                                    value: group.name
+                                });
+                                alertType = 'warning';
+                            } else {
+                                group = _.find($scope.groups, { accessId: accessId });
+                                alertText = $translate.instant('centermode-class-register-sucessfully', {
+                                    value: group.name
+                                });
+                                alertType = 'ok';
+                            }
+                            alertsService.add({
+                                text: alertText,
+                                id: 'class-register-status',
+                                type: alertType
+                            });
                         });
 
                     }).catch(function () {
