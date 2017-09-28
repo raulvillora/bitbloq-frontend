@@ -10,7 +10,8 @@
             <svg class="svg-icon--search">
                 <use xlink:href="#search"></use>
             </svg>
-            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
+            <input type="search" name="search--normal" id="search--normal" placeholder="{{'find'|translate}}" data-ng-model="search.searchExercisesText" 
+            data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-ng-focus="focus = 'search'" data-ng-blur="focus = false" data-element="classes-searcher">
         </span>
     </div>
 </div>
@@ -31,8 +32,9 @@
                         {{exercise.name || 'new-exercise' | translate}}</h2>
                 </a>
             </div>
-            <div ng-if="common.section !== 'class'" class="table__block__item table__block__item--groups col-vsmall-3" data-element="exercisestable-classes-{{exercise.name}}">
-                {{exercise.groups}}
+            <div ng-if="common.section !== 'class'" class="table__block__item col-vsmall-3" data-element="exercisestable-classes-{{exercise.name}}"
+                data-tooltip-position="bottom" data-tooltip="{{exercise.groups}}" data-bitbloq-tooltip data-bitbloq-tooltip-showonellipsis="true">
+                <p class="ellipsis">{{exercise.groups}}</p>
             </div>
             <div class="table__block__item col-vsmall-3 col-text-right">
                 <p class="fist-uppercase" data-element="{{'centerMode-endDate' + exercise.name}}">

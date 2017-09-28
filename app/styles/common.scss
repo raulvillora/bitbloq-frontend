@@ -579,3 +579,9 @@ textarea:disabled {
 .rotate180 {
     transform: rotate(180deg);
 }
+
+.ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
