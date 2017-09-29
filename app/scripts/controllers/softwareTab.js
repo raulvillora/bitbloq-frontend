@@ -367,6 +367,9 @@ angular.module('bitbloqApp')
                         case 'makeblockIfMotion':
                             result = existComponent(['mkb_motionSensor'], connectedComponents);
                             break;
+                        case 'mkbfan':
+                            result = existComponent(['mkb_fan'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }

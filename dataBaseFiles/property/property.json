@@ -626,6 +626,9 @@
                 {
                     "addClass": "indent-1",
                     "name": "remoteButtonPushedCaseDefault"
+                },
+                {
+                    "name": "mkbfan"
                 }
             ],
             "advancedMbotV2": [
