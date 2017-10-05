@@ -374,6 +374,9 @@ angular.module('bitbloqApp')
                         case 'mkbfan':
                             result = existComponent(['mkb_fan'], connectedComponents);
                             break;
+                        case 'mkbSetExternalRGBLedSimple':
+                            result = existComponent(['mkb_RGBLed'], connectedComponents);
+                            break;
                         default:
                             result = false;
                     }
@@ -478,13 +481,23 @@ angular.module('bitbloqApp')
                             result = false;
                         }
                     } else {
-                        i = 0;
-                        while (!result && (i < connectedComponents.length)) {
-                            if (connectedComponents[i].uuid.includes(item) ||
-                                item.toLowerCase().includes(connectedComponents[i].uuid)) {
-                                result = true;
-                            }
-                            i++;
+                        switch (item) {
+                            case 'mkbSetExternalRGBLedAdvanced':
+                            case 'mkbSetExternalRGBLedAdvancedFull':
+                                result = existComponent(['mkb_RGBLed'], connectedComponents);
+                                break;
+                            case 'mkbReadMagneticField':
+                                result = existComponent(['mkb_compass'], connectedComponents);
+                                break;
+                            default:
+                                i = 0;
+                                while (!result && (i < connectedComponents.length)) {
+                                    if (connectedComponents[i].uuid.includes(item) ||
+                                        item.toLowerCase().includes(connectedComponents[i].uuid)) {
+                                        result = true;
+                                    }
+                                    i++;
+                                }
                         }
                     }
                 }

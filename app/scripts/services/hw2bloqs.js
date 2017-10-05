@@ -614,6 +614,10 @@ angular
                         x: 0.5,
                         y: 1
                     },
+                    white: {
+                        x: 0.5,
+                        y: 1
+                    },
                     black: {
                         x: 0.5,
                         y: 1

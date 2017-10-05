@@ -1,6 +1,6 @@
 [
     {
-        "bitbloqLibsVersion": "1.4.4",
+        "bitbloqLibsVersion": "1.4.9",
         "bloqsSortTree": {
             "advancedClasses": [
                 {
@@ -52,6 +52,15 @@
                 },
                 {
                     "name": "mBotSetRGBLedAdvancedFull"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedAdvanced"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedAdvancedFull"
+                },
+                {
+                    "name": "mkbReadMagneticField"
                 },
                 {
                     "name": "buzzerAdvanced-v2"
@@ -632,6 +641,9 @@
                 },
                 {
                     "name": "mkbfan"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedSimple"
                 }
             ],
             "advancedMbotV2": [
@@ -748,6 +760,12 @@
                 },
                 {
                     "name": "ifButtonPushed"
+                },
+                {
+                    "name": "mkbfan"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedSimple"
                 }
             ],
             "advancedRangerlandraider": [
@@ -833,6 +851,12 @@
                 },
                 {
                     "name": "ifButtonPushed"
+                },
+                {
+                    "name": "mkbfan"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedSimple"
                 }
             ],
             "advancedRangerraptor": [
@@ -918,6 +942,12 @@
                 },
                 {
                     "name": "ifButtonPushed"
+                },
+                {
+                    "name": "mkbfan"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedSimple"
                 }
             ],
             "advancedRangernervousbird": [
@@ -1003,6 +1033,12 @@
                 },
                 {
                     "name": "ifButtonPushed"
+                },
+                {
+                    "name": "mkbfan"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedSimple"
                 }
             ],
             "advancedStartertank": [
@@ -1088,6 +1124,12 @@
                 },
                 {
                     "name": "ifButtonPushed"
+                },
+                {
+                    "name": "mkbfan"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedSimple"
                 }
             ],
             "advancedStarterthreewheels": [
