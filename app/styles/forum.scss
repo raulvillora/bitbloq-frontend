@@ -322,6 +322,7 @@
     }
     .forun__theme__content {
         max-width: 70%;
+        word-break: break-all;
     }
     .theme__header {
         .theme__owner-avatar {
@@ -632,6 +633,7 @@ text-angular {
     display: block;
     max-width: 70%;
     min-height: 200px;
+    word-break: break-all;
     .ta-editor {
         resize: vertical;
         overflow: auto;
@@ -660,7 +662,7 @@ text-angular {
                 border: 1px solid $grey-border;
                 padding: 10px;
                 color: #767676;
-                width: 38px;
+                width: 41px;
                 background-color: white;
                 transition: background-color 120ms;
                 display: inline-block !important;
