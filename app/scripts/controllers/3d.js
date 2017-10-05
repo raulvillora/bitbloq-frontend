@@ -45,7 +45,7 @@ angular.module('bitbloqApp')
             bloqs.updateDropdowns();
             bloqs.startBloqsUpdate($scope.componentsArray);
             createBloq('sphere');
-            //createBloq('cube');
+            createBloq('cube');
         });
         function createBloq(name) {
             //Create a if bloq from the bloqsSchemas loaded
