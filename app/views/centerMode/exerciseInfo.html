@@ -41,7 +41,8 @@
                     <button class="btn btn--quaternary btn--small btn--showMoreActions" ng-click="setMoreOptions()" data-element="centerMode_button_moreActions">
                         <span class="block__item__title">{{ 'centerMode_button_moreActions' | translate}}</span>
                     </button>
-                    <a class="btn btn--small" ng-class="groupArray.length > 0 ? 'btn--primary' : 'btn--secondary'" ng-href="{{'#/exercise/' + exercise._id}}" target="_blank" data-element="centerMode_openExercise">
+                    <a class="btn btn--small" ng-class="groupArray.length > 0 ? 'btn--primary' : 'btn--secondary'" ng-href="{{'#/exercise/' + exercise._id}}"
+                        target="_blank" data-element="centerMode_openExercise">
                         <span class="block__item__title">{{ 'centerMode_editExercise' | translate}}</span>
                     </a>
                     <div ng-show="showMoreActions" class="table__block__item--menu table__block__moreactions--menu">
@@ -57,19 +58,6 @@
                                     <use xlink:href="#duplicate"></use>
                                 </svg>
                                 {{'centerMode_exercise_duplicate' | translate}}
-                            </li>
-                            <li class="dropdown__item--separator--thick"></li>
-                            <!--<li class="table__block__item&#45;&#45;menu__item" ng-click="exerciseService.download(exercise)">
-                                <svg class="svg-icon svg-icon&#45;&#45;text svg-icon&#45;&#45;menu">
-                                    <use xlink:href="#download"></use>
-                                </svg>
-                                {{'download' | translate}}
-                            </li>-->
-                            <li class="table__block__item--menu__item" ng-click="exerciseService.download(exercise, 'arduino')">
-                                <svg class="svg-icon svg-icon--text svg-icon--menu">
-                                    <use xlink:href="#fileCode"></use>
-                                </svg>
-                                {{'navigation_text_file_downloadArduinoCode' | translate}}
                             </li>
                         </ul>
                     </div>
@@ -91,8 +79,10 @@
                 {{'centerMode_column_students' | translate}}
             </h1>
             <div class="tasks-dropdown__group" ng-if="tasks.length>0 || (tasks.length === 0 && (sortSelected || taskStatusSelected))">
-                <common-dropdown class="task--sort-dropdown" options="taskSortArray" options-click="sortTasks" pre-heading="'explore-sortby'" heading-option="taskSortArray[0] | translate"></common-dropdown>
-                <common-dropdown class="task--sort-dropdown" options="taskStatusArray" options-click="filterTasksByStatus" pre-heading="'classes-status'" heading-option="taskStatusArray[0] | translate"></common-dropdown>
+                <common-dropdown class="task--sort-dropdown" options="taskSortArray" options-click="sortTasks" pre-heading="'explore-sortby'"
+                    heading-option="taskSortArray[0] | translate"></common-dropdown>
+                <common-dropdown class="task--sort-dropdown" options="taskStatusArray" options-click="filterTasksByStatus" pre-heading="'classes-status'"
+                    heading-option="taskStatusArray[0] | translate"></common-dropdown>
             </div>
         </div>
         <div class="center-mode--empty" ng-if="!groupSelected">
