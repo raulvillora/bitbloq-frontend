@@ -8,7 +8,7 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('Under14AuthorizationCtrl', function($scope, $routeParams, _, userApi, alertsService, $translate, $location) {
+    .controller('Under14AuthorizationCtrl', function ($scope, $routeParams, _, userApi, alertsService, $translate, $location) {
 
         function goToSupport() {
 
@@ -18,7 +18,7 @@ angular.module('bitbloqApp')
             $location.path('bitbloq-help');
         }
 
-        $scope.acceptSubmit = function(form) {
+        $scope.acceptSubmit = function (form) {
             if (_.isEmpty(form.$error) && $scope.user.cookiePolicyAccepted) {
                 alertsService.add({
                     text: 'under14-saving-data',
@@ -28,7 +28,7 @@ angular.module('bitbloqApp')
                 $scope.user.tutor.validation = {
                     result: true
                 };
-                userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function() {
+                userApi.authorizeUnder14User(updateUserToken, $scope.user).then(function () {
                     alertsService.add({
                         text: 'under14-auth-done',
                         id: 'under14-auth',
@@ -36,9 +36,10 @@ angular.module('bitbloqApp')
                         time: 5000
                     });
                     $location.path('');
-                }).catch(function(error) {
+                }).catch(function (error) {
+                    console.log(error.data);
                     alertId = alertsService.add({
-                        text: error.data + ' : ' + $translate.instant('error-under14-auth'),
+                        text: $translate.instant('error-under14-auth'),
                         id: 'under14-auth',
                         type: 'error',
                         linkText: $translate.instant('from-here'),
@@ -48,7 +49,7 @@ angular.module('bitbloqApp')
             }
         };
 
-        $scope.cancelSubmit = function() {
+        $scope.cancelSubmit = function () {
             var user = {
                 tutor: {
                     validation: {
@@ -56,7 +57,7 @@ angular.module('bitbloqApp')
                     }
                 }
             };
-            userApi.authorizeUnder14User(updateUserToken, user).then(function() {
+            userApi.authorizeUnder14User(updateUserToken, user).then(function () {
                 alertsService.add({
                     text: 'under14-auth-cancelbyuser',
                     id: 'under14-auth',
@@ -64,9 +65,10 @@ angular.module('bitbloqApp')
                     time: 5000
                 });
                 $location.path('');
-            }).catch(function(error) {
+            }).catch(function (error) {
+                console.log(error.data);
                 alertId = alertsService.add({
-                    text: error.data + ' : ' + $translate.instant('error-under14-auth'),
+                    text: $translate.instant('error-under14-auth'),
                     id: 'under14-auth',
                     type: 'error',
                     linkText: $translate.instant('from-here'),
@@ -86,15 +88,15 @@ angular.module('bitbloqApp')
             id: 'under14-auth',
             type: 'loading'
         });
-        userApi.getUnder14User(updateUserToken).then(function(response) {
+        userApi.getUnder14User(updateUserToken).then(function (response) {
             $scope.showForm = true;
 
             $scope.user = response.data;
             alertsService.closeByTag('under14-auth');
-        }).catch(function(error) {
-
+        }).catch(function (error) {
+            console.log(error.data);
             alertId = alertsService.add({
-                text: error.data + ' : ' + $translate.instant('error-under14-auth'),
+                text: $translate.instant('error-under14-auth'),
                 id: 'under14-auth',
                 type: 'error',
                 linkText: $translate.instant('from-here'),
