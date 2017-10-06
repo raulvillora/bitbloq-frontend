@@ -241,7 +241,14 @@
             }
         }
     }
-    .intotab__groups {}
+    .readonly-textarea{
+        padding-top: 5px;
+        padding-left: 10px;
+        width: 100%;
+        color: $grey-dark;
+        min-height: 200px;
+        resize: none;
+    }
 }
 
 .tags__item {
