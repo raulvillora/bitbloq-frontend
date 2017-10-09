@@ -1047,6 +1047,13 @@ angular.module('bitbloqApp')
                 showBasicBloqsCondition: function (name) {
                     return $scope.showComponents(name);
                 },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.components.length > 0) || ($scope.currentProject.selectedBloqs.advancedComponents.length > 0));
+                    } else {
+                        return true;
+                    }
+                },
                 properties: {
                     basicBloqs: 'components',
                     advancedBloqs: 'advancedComponents'
@@ -1060,6 +1067,13 @@ angular.module('bitbloqApp')
                 model: null,
                 literal: 'make-swtoolbox-functions',
                 dataElement: 'toolbox-functions',
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.functions.length > 0) || ($scope.currentProject.selectedBloqs.advancedFunctions.length > 0));
+                    } else {
+                        return true;
+                    }
+                },
                 properties: {
                     basicBloqs: 'functions',
                     advancedBloqs: 'advancedFunctions'
@@ -1075,6 +1089,13 @@ angular.module('bitbloqApp')
                 properties: {
                     basicBloqs: 'variables',
                     advancedBloqs: 'advancedVariables'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.variables.length > 0) || ($scope.currentProject.selectedBloqs.advancedVariables.length > 0));
+                    } else {
+                        return true;
+                    }
                 }
             },
             codes: {
@@ -1085,6 +1106,13 @@ angular.module('bitbloqApp')
                 literal: 'make-swtoolbox-code',
                 properties: {
                     basicBloqs: 'codes'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return ($scope.currentProject.selectedBloqs.codes.length > 0);
+                    } else {
+                        return true;
+                    }
                 }
             },
             mathematics: {
@@ -1097,6 +1125,13 @@ angular.module('bitbloqApp')
                 properties: {
                     basicBloqs: 'mathematics',
                     advancedBloqs: 'advancedMathematics'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.mathematics.length > 0) || ($scope.currentProject.selectedBloqs.advancedMathematics.length > 0));
+                    } else {
+                        return true;
+                    }
                 }
             },
             texts: {
@@ -1109,6 +1144,13 @@ angular.module('bitbloqApp')
                 properties: {
                     basicBloqs: 'texts',
                     advancedBloqs: 'advancedTexts'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.texts.length > 0) || ($scope.currentProject.selectedBloqs.advancedTexts.length > 0));
+                    } else {
+                        return true;
+                    }
                 }
             },
             controls: {
@@ -1121,6 +1163,13 @@ angular.module('bitbloqApp')
                 properties: {
                     basicBloqs: 'controls',
                     advancedBloqs: 'advancedControls'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.controls.length > 0) || ($scope.currentProject.selectedBloqs.advancedControls.length > 0));
+                    } else {
+                        return true;
+                    }
                 }
             },
             logics: {
@@ -1131,6 +1180,13 @@ angular.module('bitbloqApp')
                 literal: 'make-swtoolbox-logic',
                 properties: {
                     basicBloqs: 'logics'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return ($scope.currentProject.selectedBloqs.logics.length > 0);
+                    } else {
+                        return true;
+                    }
                 }
             },
             classes: {
@@ -1143,6 +1199,13 @@ angular.module('bitbloqApp')
                 properties: {
                     basicBloqs: 'classes',
                     advancedBloqs: 'advancedClasses'
+                },
+                showCondition: function () {
+                    if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                        return (($scope.currentProject.selectedBloqs.classes.length > 0) || ($scope.currentProject.selectedBloqs.advancedClasses.length > 0));
+                    } else {
+                        return true;
+                    }
                 }
             }
         };
@@ -1241,6 +1304,20 @@ angular.module('bitbloqApp')
                 utils.apply($scope);
             });
         });
+
+        $scope.showAdvancedTab = function (selectedBloqsToolbox) {
+
+            if ($scope.common.properties && $scope.common.properties.bloqsSortTree && $scope.generalToolboxOptions[selectedBloqsToolbox] &&
+                ($scope.common.properties.bloqsSortTree[$scope.generalToolboxOptions[selectedBloqsToolbox].properties.advancedBloqs])) {
+                if ($scope.currentProject.selectedBloqs && ($scope.common.userRole === 'student')) {
+                    return ($scope.currentProject.selectedBloqs[$scope.generalToolboxOptions[selectedBloqsToolbox].properties.advancedBloqs].length > 0);
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        };
 
         /***********************************
          end indeterminate checkbox
