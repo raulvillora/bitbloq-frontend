@@ -156,6 +156,19 @@
             }
         }
     }
+    &[data-tooltip-position="infotab_item"] {
+        &:before {
+            top: calc(100% - 5px);
+            transform: translateX(-5px);
+            height: auto!important;
+        }
+        &:hover {
+            &:after {
+                top: calc(100% - 35px);
+                transform: translateX(105px) rotate(180deg);
+            }
+        }
+    }
     &[data-tooltip-position="right"] {
         &:before {
             left: calc(100% + 20px);

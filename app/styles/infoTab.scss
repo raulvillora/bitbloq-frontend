@@ -249,6 +249,11 @@
         min-height: 200px;
         resize: none;
     }
+    .fieldset--groups{
+      h2 {
+        max-width: 230px;
+      }
+    }
 }
 
 .tags__item {
