@@ -226,6 +226,7 @@ angular.module('bitbloqApp')
                         _.extend(modalOptions, {
                             groups: groups
                         });
+                        clickGroupHandler(response.data);
                     });
                 }
 
