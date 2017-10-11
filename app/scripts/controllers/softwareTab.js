@@ -375,6 +375,7 @@ angular.module('bitbloqApp')
                             result = existComponent(['mkb_fan'], connectedComponents);
                             break;
                         case 'mkbSetExternalRGBLedSimple':
+                        case 'mkbSetExternalRGBLedOff':
                             result = existComponent(['mkb_RGBLed'], connectedComponents);
                             break;
                         default:
