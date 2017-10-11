@@ -51,6 +51,9 @@
                     "name": "hwVariable"
                 },
                 {
+                    "name": "mBotSetRGBLedAdvanced"
+                },
+                {
                     "name": "mBotSetRGBLedAdvancedFull"
                 },
                 {
@@ -97,9 +100,6 @@
                 },
                 {
                     "name": "rgbLedAdvanced"
-                },
-                {
-                    "name": "mBotSetRGBLedAdvanced"
                 },
                 {
                     "name": "oscillatorAdvanced"
@@ -644,6 +644,9 @@
                 },
                 {
                     "name": "mkbSetExternalRGBLedSimple"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedOff"
                 }
             ],
             "advancedMbotV2": [
@@ -766,6 +769,9 @@
                 },
                 {
                     "name": "mkbSetExternalRGBLedSimple"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedOff"
                 }
             ],
             "advancedRangerlandraider": [
@@ -857,6 +863,9 @@
                 },
                 {
                     "name": "mkbSetExternalRGBLedSimple"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedOff"
                 }
             ],
             "advancedRangerraptor": [
@@ -948,6 +957,9 @@
                 },
                 {
                     "name": "mkbSetExternalRGBLedSimple"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedOff"
                 }
             ],
             "advancedRangernervousbird": [
@@ -1039,6 +1051,9 @@
                 },
                 {
                     "name": "mkbSetExternalRGBLedSimple"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedOff"
                 }
             ],
             "advancedStartertank": [
@@ -1130,6 +1145,9 @@
                 },
                 {
                     "name": "mkbSetExternalRGBLedSimple"
+                },
+                {
+                    "name": "mkbSetExternalRGBLedOff"
                 }
             ],
             "advancedStarterthreewheels": [

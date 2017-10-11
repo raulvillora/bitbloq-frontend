@@ -79,7 +79,9 @@
     <div data-ng-view="" class="main">
     </div>
     <div ng-hide="common.cookiesAccepted" class="bitbloq--cookies" ng-class="{visible:common.userIsLoaded || common.user && !common.user.cookiePolicyAccepted}">
-        <p>{{ 'policies-cookies-info' | translate }} <a href="/#/cookies" data-element="cookies-link" target="_blank">{{ 'policies-cookies' | translate }}</a></p>
+        <p>{{ 'policies-cookies-info' | translate }}
+            <a href="/#/cookies" data-element="cookies-link" target="_blank">{{ 'policies-cookies' | translate }}</a>
+        </p>
         <button data-element="cookies" class="btn btn--close--cookies" ng-click="common.acceptCookies()">
             {{'accept' | translate}}
         </button>
@@ -144,7 +146,7 @@
     <script src="bower_components/jquery-auto-grow-input/jquery.auto-grow-input.min.js"></script>
     <script src="bower_components/autogrow/autogrow.js"></script>
     <script src="bower_components/q/q.js"></script>
-    <script src="bower_components/bloqs/dist/bloqs.min.js"></script>
+    <script src="bower_components/bloqs/dist/bloqs.js"></script>
     <!-- endbower -->
     <!-- jsrsasign: manual injection -->
     <script src="bower_components/ace-builds/src-min/ace.js"></script>

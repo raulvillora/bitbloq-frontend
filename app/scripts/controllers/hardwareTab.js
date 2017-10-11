@@ -424,7 +424,9 @@ function hardwareTabCtrl($rootScope, $scope, $document, $log, hw2Bloqs, alertsSe
 
             if (category.length > 0) {
                 category.forEach(function (comp) {
-                    componentsList.push(comp);
+                    if (!comp.integratedComponent) {
+                        componentsList.push(comp);
+                    }
                 });
             }
 
