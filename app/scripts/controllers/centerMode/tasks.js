@@ -166,7 +166,14 @@
                         } else {
                             groupSelected = sessionStorage['tasksViewSelectedGroup_' + common.user._id] || $scope.groupArray[0]._id;
                         }
-                        $scope.groupSelectedName = _.find($scope.groupArray, { _id: groupSelected }).name;
+                        var group = _.find($scope.groupArray, { _id: groupSelected });
+                        if (!group) {
+                            group = $scope.groupArray[0];
+                            $routeParams.group = group._id;
+                            groupSelected = group._id;
+                            sessionStorage['tasksViewSelectedGroup_' + common.user._id] = group._id;
+                        }
+                        $scope.groupSelectedName = group.name;
                     }
                     defered.resolve();
                 });
