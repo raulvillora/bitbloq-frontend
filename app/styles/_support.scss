@@ -15,6 +15,29 @@
             .support--content {
                 display: block;
                 padding: 30px;
+
+                p { padding: 5px; }
+
+                .support--next {
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  margin: 5px;
+                  padding: 5px;
+
+                  span {
+                    padding: 2px;
+
+                    .btn--no {
+                      background-color: #D92C32;
+
+                      &:hover {
+                        background-color: #f93940;
+                      }
+                    }
+                  }
+                }
             }
         }
     }

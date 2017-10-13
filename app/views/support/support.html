@@ -5,7 +5,7 @@
     <section>
         <div class="support--block">
             <div class="support--content">
-                <h1 class="h2 header__title">{{ card.tittle | translate}}</h1>
+                <h1 class="h2 header__title">{{ card.title }}</h1>
                 <div>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -17,9 +17,11 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </div>
-                <div class="support--next" data-ng-repeat="child in card.next">
-                    <span class="support--next-child">
-                        <a href="support/{{child._id}}">{{child.response}}</a>
+                <div class="support--next">
+                    <span class="support--next-child"  data-ng-repeat="child in card.next">
+                        <button class="btn" ng-class="child.class" ng-click="go(child._id)" data-element="support_next_child-{{child._id}}">
+                            <span>{{child.response | translate}}</span>
+                        </button>
                     </span>
                 </div>
             </div>
