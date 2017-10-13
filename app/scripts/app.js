@@ -231,6 +231,14 @@ angular
                     controller: 'ExerciseCtrl',
                     reloadOnSearch: false
                 })
+                .when('/support/:id', {
+                    templateUrl: 'views/support/support.html',
+                    controller: 'SupportCtrl'
+                })
+                .when('/support/', {
+                    templateUrl: 'views/support/support.html',
+                    controller: 'SupportCtrl'
+                })
                 .when('/404', {
                     templateUrl: '404.html'
                 })

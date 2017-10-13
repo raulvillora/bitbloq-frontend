@@ -1,0 +1,36 @@
+{
+  "_id": "0" ,
+  "title" : "Indice de FAQ",
+  "data": "",
+  "next": [
+    { "response": "", "_id": "1" },
+    { "response": "","_id": "3" },
+  ]
+},
+{
+  "_id": "1" ,
+  "title" : "¿La web no carga y/o aparece en blanco?",
+  "data": "",
+  "next": [
+    { "response": "si", "_id": "1" },
+    { "response": "no","_id": "2" },
+  ]
+},
+{
+  "_id": "2" ,
+  "title" : "¿Ha refrescado la caché?",
+  "data": "",
+  "next": [
+    { "response": "si", "_id": "" },
+    { "response": "no", "_id": "" },
+  ]
+},
+{
+  "_id": "3" ,
+  "title" : "¿Se instala web2board?",
+  "data": "",
+  "next": [
+    { "response": "si", "_id": "" },
+    { "response": "no", "_id": "" },
+  ]
+}

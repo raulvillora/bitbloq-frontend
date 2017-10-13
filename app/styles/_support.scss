@@ -1,0 +1,21 @@
+.support--pane {
+  min-height: 100%;
+  height: 100%;
+    section {
+        background: #eee;
+        min-height: calc(100% - 93px);
+        height: calc(100% - 93px);
+        .support--block {
+            max-width: 1200px;
+            min-height: calc(100% - 93px);
+            margin: 0 auto;
+            padding: 30px;
+            background: #eee;
+
+            .support--content {
+                display: block;
+                padding: 30px;
+            }
+        }
+    }
+}
