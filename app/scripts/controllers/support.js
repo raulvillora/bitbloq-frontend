@@ -12,8 +12,8 @@ angular.module('bitbloqApp')
         var db = [
           {
             '_id': '0',
-            'title': 'Indice de FAQ',
-            'data': '',
+            'title': '¡Bienvenido a la página de soporte de BitBloq!',
+            'data': '<p>Mediante una serie de preguntas y respuestas simples, te iremos guiando por nuestro sistema de soporte.</p><p>En la parte inferior tienes la lista de las preguntas más frecuentes</p>',
             'next': [{
                     '_id': '1',
                     'class': 'btn--secondary',
@@ -21,7 +21,7 @@ angular.module('bitbloqApp')
                 }, {
                     '_id': '3',
                     'class': 'btn--primary',
-                    'response': 'si'
+                    'response': 'Sí'
                 }, {
                     '_id': '100',
                     'class': 'btn--secondary',
@@ -29,20 +29,20 @@ angular.module('bitbloqApp')
                 }, {
                     '_id': '1000',
                     'class': 'btn--primary btn--no',
-                    'response': 'no'
+                    'response': 'No'
                 }]
           }, {
               '_id': '1',
               'title': '¿La web no carga y/o aparece en blanco?',
-              'data': '',
+              'data': '<p>Majavi <strong>daundebugi</strong> an de wini di pi?<p>',
               'next': [{
                       '_id': '2',
                       'class': 'btn--primary',
-                      'response': 'si',
+                      'response': 'Sí',
                   },
                   {
                       '_id': '3',
-                      'response': 'no',
+                      'response': 'No',
                       'class': 'btn--primary btn--no'
                   }
               ]
@@ -53,11 +53,11 @@ angular.module('bitbloqApp')
               'next': [{
                       '_id': '1',
                       'class': 'btn--primary',
-                      'response': 'si',
+                      'response': 'Sí',
                   },
                   {
                       '_id': '3',
-                      'response': 'no',
+                      'response': 'No',
                       'class': 'btn--primary btn--no'
                   }
               ]
@@ -68,30 +68,20 @@ angular.module('bitbloqApp')
               'next': [{
                       '_id': '1',
                       'class': 'btn--primary',
-                      'response': 'si',
+                      'response': 'Sí',
                   },
                   {
                       '_id': '2',
-                      'response': 'no',
+                      'response': 'No',
                       'class': 'btn--primary btn--no'
                   }
               ]
           }];
 
-        if ($routeParams.id !== undefined) {
-            $scope.card = db.filter(card => card._id === $routeParams.id).pop();
-            $scope.show_back = true;
-        } else {
-            $scope.card = db.filter(card => card._id === '0').pop();
-            $scope.show_back = false;
-        }
+        var currentId = ($routeParams.id !== undefined) ? `${$routeParams.id}` : '0'
 
-        $scope.go = function(childId) {
-          if(childId) {
-            $location.path(`/support/${childId}`);
-          } else {
-            $location.path(`/support/`);
-          }
-        };
-        console.log($scope.card);
+        $scope.card = db.filter(card => card._id === currentId).pop()
+        $scope.showBack = $routeParams.id !== undefined;
+
+        $scope.go = (childId) => $location.path((childId) ? `/support/${childId}` : `/support`)
     });
