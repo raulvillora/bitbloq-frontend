@@ -50,6 +50,11 @@
     content: "\f057";
 }
 
+.icon--check:before {
+    font-family: FontAwesome;
+    content: "\f00c";
+}
+
 //efectos especiales
 .icon--fx--keycap {
     border: 1px solid;

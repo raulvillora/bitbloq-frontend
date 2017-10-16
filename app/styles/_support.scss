@@ -18,11 +18,36 @@
                 margin-left: -15px;
             }
 
+            .support--icon--giga {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: center;
+              font-size: 128px;
+              svg {
+                width: 128px;
+                height: auto;
+              }
+            }
+            .support--icon--ok {
+              color: rgb(59, 145, 173);
+            }
+            .support--icon--no {
+              color: #114698;
+              svg {
+                fill: #114698;
+              }
+            }
+
             .support--content {
                 display: block;
                 padding: 15px;
                 margin: 15px;
                 border: 1px dashed #d6d6d6;
+
+                .support--tittle--centered {
+                    text-align: center;
+                }
 
                 p {
                     padding: 5px;
