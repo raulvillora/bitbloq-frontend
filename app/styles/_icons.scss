@@ -1,0 +1,62 @@
+.icon--big:before {
+  font-size: 24px;
+  padding-right: 5px;
+  float: left;
+}
+
+.icon--url:before {
+    font-family: FontAwesome;
+    content: "\f0c1";
+}
+
+.icon--cloud:before {
+    font-family: FontAwesome;
+    content: "\f0c2";
+}
+
+.icon--desktop:before {
+    font-family: FontAwesome;
+    content: "\f108";
+}
+
+.icon--home:before {
+    font-family: FontAwesome;
+    content: "\f015";
+}
+
+.icon--windows:before {
+    font-family: FontAwesome;
+    content:
+     "\f17a";
+}
+
+.icon--mac:before {
+    font-family: FontAwesome;
+    content: "\f179";
+}
+
+.icon--linux:before {
+    font-family: FontAwesome;
+    content: "\f17c";
+}
+
+.icon--ok:before {
+    font-family: FontAwesome;
+    content: "\f058";
+}
+
+.icon--no:before {
+    font-family: FontAwesome;
+    content: "\f057";
+}
+
+//efectos especiales
+.icon--fx--keycap {
+    border: 1px solid;
+    border-bottom-width: 2px;
+    border-color: #ddd #bbb #bbb #ddd;
+    background: #f9f9f9;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border-radius: 3px;
+}

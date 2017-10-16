@@ -17,6 +17,7 @@ angular.module('bitbloqApp')
         $log.log('Bitbloq version:', packageData.version);
 
         //See drag directives
+        exports.supportSteps = [];
         exports.appAlert = null;
         exports.avatarChange = false;
         exports.draggingElement = {};
