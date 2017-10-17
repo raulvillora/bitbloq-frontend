@@ -2,6 +2,7 @@
   font-size: 24px;
   padding-right: 5px;
   float: left;
+  font-weight: 300;
 }
 
 .icon--url:before {
@@ -55,13 +56,7 @@
     content: "\f00c";
 }
 
-//efectos especiales
-.icon--fx--keycap {
-    border: 1px solid;
-    border-bottom-width: 2px;
-    border-color: #ddd #bbb #bbb #ddd;
-    background: #f9f9f9;
-    padding: 1px 3px;
-    white-space: nowrap;
-    border-radius: 3px;
+.icon--chrome:before {
+    font-family: FontAwesome;
+    content: "\f268";
 }

@@ -19,24 +19,28 @@
             }
 
             .support--icon--giga {
-              display: flex;
-              flex-direction: row;
-              flex-wrap: wrap;
-              justify-content: center;
-              font-size: 128px;
-              svg {
-                width: 128px;
-                height: auto;
-              }
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 128px;
+
+                svg {
+                    width: 128px;
+                    height: auto;
+                }
             }
+
             .support--icon--ok {
-              color: rgb(59, 145, 173);
+                color: rgb(59, 145, 173);
             }
+
             .support--icon--no {
-              color: #114698;
-              svg {
-                fill: #114698;
-              }
+                color: #114698;
+
+                svg {
+                    fill: #114698;
+                }
             }
 
             .support--content {
@@ -47,6 +51,19 @@
 
                 .support--tittle--centered {
                     text-align: center;
+                }
+
+                .support--ok-warning {
+                  margin-top: 10px;
+                  margin-bottom: 15px;
+                  text-align: center;
+                  span {
+                    border: solid 3px rgb(59, 145, 173);
+                    background-color: $grey-lighter;
+                    color: rgb(59, 145, 173);
+                    padding: 10px;
+                    border-radius: 15px;
+                  }
                 }
 
                 p {
@@ -79,5 +96,17 @@
                 }
             }
         }
+    }
+    .support--grid--2 {
+      display: inline-block;
+      width: 100%;
+      .support--grid--2--l {
+        float: left;
+        width: 50%;
+      }
+      .support--grid--2--r {
+        float: right;
+        width: 50%;
+      }
     }
 }

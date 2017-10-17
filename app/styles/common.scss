@@ -4,7 +4,6 @@
     background-position: center center fixed;
     background-image: url($url);
 }
-
 @mixin absoluteCenter($maxWidth) {
     display: block;
     max-width: $maxWidth;
@@ -40,6 +39,7 @@ textarea:disabled {
     background-color: white;
     max-width: 1200px;
     margin: 0 auto;
+
     .h2 {
         display: inline-block;
         width: 70%;
@@ -50,6 +50,7 @@ textarea:disabled {
         overflow: hidden;
         cursor: default;
     }
+
     & > span {
         display: inline-block;
         float: right;
@@ -63,29 +64,29 @@ textarea:disabled {
         cursor: default;
     }
 }
-
 @-moz-keyframes spin {
     from {
         -moz-transform: rotate(0deg);
     }
+
     to {
         -moz-transform: rotate(360deg);
     }
 }
-
 @-webkit-keyframes spin {
     from {
         -webkit-transform: rotate(0deg);
     }
+
     to {
         -webkit-transform: rotate(360deg);
     }
 }
-
 @-webkit-keyframes spin {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -99,6 +100,7 @@ textarea:disabled {
 
 .common--textarea {
     max-height: none !important;
+
     textarea {
         width: 100%;
         overflow: hidden;
@@ -111,9 +113,11 @@ textarea:disabled {
     padding: 0;
     margin-right: 1em;
     width: 48%;
+
     &:last-child {
         margin-right: 0;
     }
+
     .form--input {
         span {
             width: 170px;
@@ -158,6 +162,7 @@ textarea:disabled {
     position: relative;
     margin-right: 0.5em;
     padding-left: 0.5em;
+
     .svg-icon {
         width: 1em;
         height: 1em;
@@ -165,12 +170,15 @@ textarea:disabled {
         top: 3px;
         margin-right: 7px;
     }
+
     .social--info-text {
         padding-right: 10px;
     }
+
     &.social--empty {
         padding-top: 0.25em;
     }
+
     &:after {
         content: '';
         transition: opacity 250ms;
@@ -182,14 +190,18 @@ textarea:disabled {
         top: 0;
         left: 0;
     }
+
     &:hover {
         text-decoration: none;
+
         &:after {
             opacity: 0.1;
         }
     }
+
     &:active {
         text-decoration: none;
+
         &:after {
             opacity: 0.15;
         }
@@ -204,6 +216,7 @@ textarea:disabled {
     padding: 1em;
     line-height: 0;
     position: relative;
+
     &:before {
         content: '';
         width: 10px;
@@ -214,6 +227,7 @@ textarea:disabled {
         top: 9px;
         border-radius: 100%;
     }
+
     &:after {
         content: '';
         width: 9px;
@@ -239,6 +253,7 @@ textarea:disabled {
     background-color: transparent !important;
     display: flex;
     width: 100%;
+
     span {
         background-color: transparent !important;
     }
@@ -263,25 +278,31 @@ textarea:disabled {
         border: 1px solid $grey-border;
         background-color: white;
         transition: background-color 250ms;
+
         &.grid--left {
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
         }
+
         &.grid--right {
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
         }
+
         .svg-icon {
             fill: $grey-dark;
             width: 15px;
             height: 15px;
         }
+
         &:hover {
             background-color: #e8e8e8;
         }
+
         &.btn--selected,
         &.btn-only-disabled {
             background-color: $grey-item-hover;
+
             .svg-icon {
                 opacity: 0.5;
             }
@@ -297,6 +318,7 @@ textarea:disabled {
 .loading--content,
 .login-is-loading {
     z-index: 9;
+
     &:before {
         content: '';
         width: 100%;
@@ -310,6 +332,7 @@ textarea:disabled {
         margin: auto;
         z-index: 9;
     }
+
     &:after {
         content: '';
         -webkit-animation-name: spin;
@@ -318,7 +341,7 @@ textarea:disabled {
         -webkit-animation-timing-function: linear;
         width: 64px;
         height: 64px;
-        background-image: url(../images/icons/loader.svg);
+        background-image: url("../images/icons/loader.svg");
         background-size: cover;
         position: absolute;
         top: 0;
@@ -352,29 +375,29 @@ textarea:disabled {
     bottom: 0;
     margin: auto;
 }
-
 @-moz-keyframes spin {
     from {
         -moz-transform: rotate(0deg);
     }
+
     to {
         -moz-transform: rotate(360deg);
     }
 }
-
 @-webkit-keyframes spin {
     from {
         -webkit-transform: rotate(0deg);
     }
+
     to {
         -webkit-transform: rotate(360deg);
     }
 }
-
 @keyframes spin {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -427,17 +450,21 @@ textarea:disabled {
         color: $black-light;
         font-size: 0.8em;
     }
+
     .notification__content {
         float: right;
     }
+
     .notification__title {
         color: white;
         font-weight: bold;
         font-size: 14px;
     }
+
     .notification__link {
         color: #73767c;
         font-size: 12px;
+
         &:hover {
             color: white;
         }
@@ -453,16 +480,18 @@ textarea:disabled {
 .fist-uppercase::first-letter {
     text-transform: uppercase;
 }
-
 // filter arrow
+
 .filter-button {
     color: $black-light;
+
     .filter-arrow {
         width: 9px;
         height: 9px;
         fill: $black-light;
         margin-left: 9px;
     }
+
     .filter-arrow--reversed {
         transform: rotate(180deg);
     }
@@ -478,6 +507,7 @@ textarea:disabled {
     border-radius: 4px;
     box-shadow: 0 3px 5px 0 rgba(0, 1, 1, 0.15);
     z-index: 1;
+
     &:before {
         content: ' ';
         position: absolute;
@@ -490,6 +520,7 @@ textarea:disabled {
         box-shadow: 0 3px 5px 0 rgba(0, 1, 1, 0.15);
         transform: rotate(135deg);
     }
+
     &.menu--overlay__content {
         position: relative;
         right: inherit;
@@ -498,12 +529,14 @@ textarea:disabled {
         padding: 5px;
         background-color: $black-light;
         height: 210px;
+
         &:before {
             right: inherit;
             left: 15px;
             background-color: $black-light;
         }
     }
+
     .menu--overlay__title {
         font-weight: bold;
         color: white;
@@ -516,6 +549,7 @@ textarea:disabled {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+
     .menu--overlay__item {
         cursor: pointer;
         background-color: $black-light;
@@ -524,19 +558,24 @@ textarea:disabled {
         color: white;
         height: 40px;
         line-height: 24px;
+
         &.menu--overlay__item--border {
             border-bottom: 1px solid #474e58;
         }
+
         &:last-child {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
         }
+
         &.menu--overlay__item--stand-out {
             background-color: $green;
+
             &:hover {
                 background-color: #98c64a;
             }
         }
+
         a,
         button {
             color: $white;
@@ -551,12 +590,14 @@ textarea:disabled {
             width: 100%;
             text-align: left;
         }
+
         .svg-icon {
             width: 1em !important;
             height: 100% !important;
             fill: $white;
         }
     }
+
     .menu--overlay__content {
         .menu--overlay__item:not(.menu--overlay__item--stand-out):hover {
             background-color: $grey-dark;
@@ -580,8 +621,74 @@ textarea:disabled {
     transform: rotate(180deg);
 }
 
-.ellipsis{
+.ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+// terminal text fx
+
+.common--text-term-fx {
+    background-color: $misc-terminal-bg-monokai;
+    color: $misc-terminal-font-monokai;
+    font-size: medium;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    display: inline-block;
+    margin-left: 10px;
+    width: 100%;
+
+    &:before {
+        font-family: FontAwesome;
+        content: "\f120";
+        padding-right: 5px;
+        margin-left: -10px;
+        color: $misc-terminal-promt-monokai;
+    }
+
+    &.little {
+        font-size: small;
+        width: auto;
+        padding-left: 15px;
+        padding-right: 5px;
+        margin-left: 0px;
+    }
+}
+
+.common--text-editor-fx {
+    background-color: $misc-terminal-bg-onelight;
+    color: $misc-terminal-font-onelight;
+    border: 1px double $misc-terminal-promt-onelight;
+    font-size: medium;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    width: 100%;
+    border-radius: 6px;
+
+    li {
+        counter-increment: item;
+    }
+
+    li:before {
+        font-size: medium;
+        font-style: italic;
+        margin-left: -10px;
+        margin-right: 10px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        content: counter(item);
+        color: $misc-terminal-promt-onelight;
+        width: 1.2em;
+        text-align: center;
+        display: inline-block;
+        border-right: 1px double $misc-terminal-promt-onelight;
+    }
+}
+
+.common--icon-keycap-fx {
+    border: 1px solid;
+    border-bottom-width: 2px;
+    border-color: #ddd #bbb #bbb #ddd;
+    background: #f9f9f9;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border-radius: 3px;
 }
