@@ -631,7 +631,8 @@ angular.module('bitbloqApp')
                     fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                     bloqSchemas: bloqsApi.schemas,
                     suggestionWindowParent: $scope.$field[0],
-                    dotsMatrixWindowParent: $scope.$field[0]
+                    dotsMatrixWindowParent: $scope.$field[0],
+                    suggestionOnStatements: true
                 };
 
                 if (currentProjectService.exercise) {
