@@ -631,8 +631,7 @@ angular.module('bitbloqApp')
                     fieldOffsetTopSource: ['header', 'nav--make', 'actions--make', 'tabs--title'],
                     bloqSchemas: bloqsApi.schemas,
                     suggestionWindowParent: $scope.$field[0],
-                    dotsMatrixWindowParent: $scope.$field[0],
-                    suggestionOnStatements: true
+                    dotsMatrixWindowParent: $scope.$field[0]
                 };
 
                 if (currentProjectService.exercise) {
@@ -781,7 +780,7 @@ angular.module('bitbloqApp')
         }
 
         function onMoveBloq(bloq) {
-            console.log(bloq);
+            //console.log(bloq);
             $scope.showTrashcan = true;
             // $scope.selectedBloqsToolbox = '';
             utils.apply($scope);
