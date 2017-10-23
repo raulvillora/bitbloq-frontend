@@ -433,6 +433,10 @@ $hw_toolbox: 210px;
             background-image: url("/images/boards/freakscar.svg");
             background-color: transparent;
         }
+        &.buildandcode {
+            background-image: url("/images/boards/buildandcode.png");
+            background-color: transparent;
+        }
     }
 
     .component {
