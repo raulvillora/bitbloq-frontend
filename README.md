@@ -10,16 +10,20 @@ To start you need to:
 
 1 . Clone the repo
 
-2 . Execute this command to install all dependencies
+2 . Install node dependencies
+
+    https://nodejs.org/en/
+
+3 . Execute this command to install bower dependencies
 ```
-npm install && bower install
+    bower install
 ```
 
-3 . Then you need to add the enviroment files:
+4 . Then you need to add the enviroment files:
 
-4 . Create a folder in app/res called config.
+5 . Create a folder in app/res called config.
 
-5 . Create a file in app/res/config called config.json with this content
+6 . Create a file in app/res/config called config.json with this content
 
 ```
 {
@@ -53,7 +57,7 @@ npm install && bower install
 }
 ```
 
-6 . Create a file in app/res/config called facebook.json with the oauth info of Facebook, you need to fill the clientId field.
+7 . Create a file in app/res/config called facebook.json with the oauth info of Facebook, you need to fill the clientId field.
 
 ```
 {
@@ -72,7 +76,7 @@ npm install && bower install
 }
 ```
 
-7 . Create a file in app/res/config called google.json with the oauth info of Facebook, you need to fill the clientId and apikey fields
+8 . Create a file in app/res/config called google.json with the oauth info of Facebook, you need to fill the clientId and apikey fields
 
 ```
 {
@@ -100,7 +104,11 @@ npm install && bower install
 }
 ```
 
-8 . Execute the command 
+9 . Update dependencies
+
+    npm install
+
+10 . Execute the command 
 
 ```
 grunt serve

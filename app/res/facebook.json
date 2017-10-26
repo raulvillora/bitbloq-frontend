@@ -1,0 +1,14 @@
+{
+    "clientId": "yourID",
+    "scope": [
+        "public_profile",
+        "email"
+    ],
+    "status": false,
+    "xfbml": false,
+    "display": "popup",
+    "popupOptions": {
+        "width": 500,
+        "height": 500
+    }
+}

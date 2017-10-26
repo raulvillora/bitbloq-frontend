@@ -1,0 +1,23 @@
+{
+    "clientId": "Your clientId",
+    "apikey": "Your Api Key",
+    "scope": [
+        "https://www.googleapis.com/auth/plus.login",
+        "https://www.googleapis.com/auth/plus.me",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/urlshortener",
+        "https://www.googleapis.com/auth/drive.file"
+    ],
+    "apis": [{
+        "name": "plus",
+        "version": "v1"
+    }],
+    "visibleActions": "http://schemas.google.com/AddActivity",
+    "responseType": "token",
+    "display": "popup",
+    "popupOptions": {
+        "width": 580,
+        "height": 400
+    }
+}
