@@ -87,6 +87,10 @@
         "getbloqsdev": "bower uninstall bloqs --save && bower install bloqs#dev --save && grunt getbloqs"
     },
     "dependencies": {
+        "angular-auth0": "^2.0.0",
+        "auth0-js": "^8.10.1",
+        "auth0-lock": "^10.23.1",
+        "http-server": "^0.10.0",
         "q": "^1.5.0"
     },
     "version": "v3.9.0"
