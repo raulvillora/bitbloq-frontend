@@ -262,7 +262,7 @@ angular
                     height: 400
                 }
             });
-            /*
+            
             // Facebook
             $authProvider.facebook({
                 clientId: envData.facebook.clientId,
@@ -274,7 +274,7 @@ angular
                     width: envData.facebook.popupOptions.width,
                     height: envData.facebook.popupOptions.height
                 }
-            });*/
+            });
 
             // $httpProvider.interceptors.push('httpInterceptor');
             $httpProvider.interceptors.push('authInterceptor');
