@@ -436,7 +436,7 @@ angular.module('bitbloqApp')
             var defered = $q.defer();
             newproject.hardware.board = newproject.hardware.board ? newproject.hardware.board.replace(/\s+/g, '') : '';
 
-            fillHardwareSchemas(newproject).then(function (newProjectFilled) {
+            utils.fillHardwareSchemas(newproject, hardwareService).then(function (newProjectFilled) {
 
                 _unBlindAllWatchers();
                 newproject.codeProject = type === 'code' ? true : newProjectFilled.codeProject;
