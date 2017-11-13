@@ -1,0 +1,99 @@
+<div class="hardware-tab tab--make" ng-controller="pruebasTabCtrl">
+    <div class="protocanvas" droppable drop="drop" drop-offset-left="70" drop-offset-top="offsetTop" ng-click="detectElement($event)"
+        data-ng-keydown="onKeyPress($event)">
+        <img class="robot-thumbnail" data-ng-show="currentProject.hardware.showRobotImage" data-ng-src="/images/robots/{{currentProject.hardware.showRobotImage}}.svg"
+        />
+        <div ng-class="{'first-component--device':currentProject.useBitbloqConnect}" ng-show="firstComponent && (!common.user || !common.user.hasFirstComponent)"
+            data-ng-include="'views/componentInteraction.html' "></div>
+        <div ng-show="isMobileConnected" data-ng-include="'views/bluetoothInteraction.html' "></div>
+        <div class="fixed-component">
+            <img class="bitbloqconnect-icon handcursor" tabindex="1" ng-show="currentProject.useBitbloqConnect" src="/images/components/device.svg"
+            />
+            <a class="bitbloqconnect--badge" target="_blank" ng-href='{{envData.config.playStoreUrl}}'>
+                <img alt='Get it on Google Play' ng-src="{{'https://play.google.com/intl/en_us/badges/images/generic/' + langToBadge[translate.use()] + '_badge_web_generic.png'}}" />
+            </a>
+        </div>
+        <div class="name--container">
+            <div class="component-name__container" ng-class="{opaque:componentSelected, noborder:componentSelected.message}">
+                <span class="form--input form--input--reset">
+                    <label for="componentName" ng-show="!componentSelected.message" class="component-name__label">{{'name' | translate}}</label>
+                    <input id="componentName" ng-show="!componentSelected.message" class="component-name__input" type="text" placeholder="{{'insert-name' | translate}}" data-ng-model="componentSelected.name" data-ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }" data-element="hwtab-componentName-input">
+                    <label ng-show="componentSelected.message" class="component-name__label">{{componentSelected.message | translate}}</label>
+                    <span ng-if="componentSelected.oscillator !== undefined" class="input input--checkbox input--checkbox__oscillator form--input--reset">
+                        <label for="sample--checkbox" class="component-name__label">{{'make-hardware-component-oscillator' | translate}}</label>
+                        <input type="checkbox" id="oscillator--checkbox" class="oscillator--checkbox" name="oscillator--checkbox" data-ng-model="componentSelected.oscillator">
+                    </span>
+                <span ng-if="componentSelected.baudRate" class="form--input--reset baudrate__container">
+                        <label for="componentBaudRate" class="component-name__label">{{'make-hardware-component-baudrate' | translate}}</label>
+                        <common-dropdown class="baudrate__dropdown form--input--reset" options="baudRates" options-click="setBaudRate" shown-option="componentSelected.baudRate" />
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="component__container" ng-class="{'component__container--visible':(isEmptyComponentArray() && currentProject.hardware.board) && !currentProject.hardware.robot ,'component__container--pseudovisible':(!isEmptyComponentArray()) && currentProject.hardware.board && !currentProject.hardware.robot}">
+            <p class="component__message">{{'make-hardware-component-container' | translate}}</p>
+        </div>
+        <div id="boardSchema" class="board" ng-class="{'board--present':currentProject.hardware.board, 'board--selected':boardSelected, 'opaque':!currentProject.hardware.robot}"
+            data-element="current-board-{{currentProject.hardware.board}}">
+            <p class="board__message">{{'make-hardware-board-container' | translate}}</p>
+        </div>
+        <div id="robotSchema" class="robot" ng-class="{'robot--present':currentProject.hardware.robot , 'robot--selected':robotSelected, 'opaque':currentProject.hardware.robot}"
+            data-element="current-robot-{{currentProject.hardware.robot}}"></div>
+    </div>
+    <div class="hw-toolbox tab--make__block" data-ng-include="'views/project/hardwareToolbox.html'"></div>
+    <div id="component-context-menu" class="hw-context-menu">
+        <ul class="menu">
+            <li class="menu__item">
+                <button data-ng-click="duplicateComponent(componentSelected)" tabindex="0" data-element="hw-contextmenu-component-duplicate">{{'make-hardware-component-duplicate' | translate}}</button>
+            </li>
+            <li class="menu__item">
+                <button data-ng-show="componentSelected.connected" data-ng-click="disconnectComponent()" data-element="hw-contextmenu-component-disconnect">{{'make-hardware-component-disconnect' | translate}}</button>
+            </li>
+            <hr>
+            <li class="menu__item">
+                <button data-ng-click="deleteComponent($event)" data-element="hw-contextmenu-component-delete">{{'make-hardware-component-delete' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+    <div id="board-context-menu" class="hw-context-menu">
+        <ul class="menu">
+            <li class="menu__item">
+                <button data-ng-show="anyExternalComponent()" data-ng-click="disconnectAllComponents()" data-element="hw-contextmenu-board-disconnect">{{'make-hardware-component-disconnect' | translate}}
+                </button>
+            </li>
+            <hr>
+            <li class="menu__item">
+                <button data-ng-click="deleteBoard($event)" data-element="hw-contextmenu-board-delete">{{'make-hardware-component-delete' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+    <div id="robot-context-menu" class="hw-context-menu">
+        <ul class="menu">
+            <li class="menu__item">
+                <button data-ng-click="deleteRobot($event)" data-element="hw-contextmenu-robot-delete">{{'make-hardware-component-delete' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+    <div id="btcomponent-context-menu" class="hw-context-menu">
+        <ul class="menu">
+            <li class="menu__item">
+                <button data-ng-click="deleteBTComponent()" data-element="hw-contextmenu-btcomponent-delete">{{'make-hardware-component-delete' | translate}}</button>
+            </li>
+        </ul>
+    </div>
+    <div class="robot-info" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}" ng-show="currentProjectService.showActivation && !currentProjectService.closeActivation">
+        <div class="robot-info__container" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}"
+            ng-click="showActivationModal()" data-element="robot-activation-info">
+            <svg class="svg-icon robot-info__icon" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}">
+                <use xlink:href="#info"></use>
+            </svg>
+            <span class="robot-info__text" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task' )}">
+                <p class="robot-info__text--days" ng-class="{'cursor-hand':(common.section !=='exercise') && common.section !=='task'}">{{common.section ==='exercise'  ? groups.length > 0 ? 'robot-center-activate' : 'robot-activate-exercise': common.section ==='task' ? 'robot-center-activate' : 'robot-activate'| translate}}</p>
+                <p class="robot-info__text--activate" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}">{{ common.section ==='exercise' ? groups.length > 0  ? 'robot-contact' : 'robot-center-assign': common.section ==='task' ? 'robot-center-task': 'robot-trial-introduce-compile' | translate}}</p>
+            </span>
+        </div>
+        <svg class="svg-icon robot-info__close" ng-click="closeActivationWarning()" ng-class="{'cursor-hand':(common.section !=='exercise' && common.section !=='task')}">
+            <use xlink:href="#erase"></use>
+        </svg>
+    </div>
+</div>
