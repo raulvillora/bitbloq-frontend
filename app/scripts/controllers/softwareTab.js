@@ -8,7 +8,8 @@
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SoftwareTabCtrl', function ($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
+    .controller('SoftwareTabCtrl',SoftwareTabCtrl);
+    function ($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
         $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
         utils) {
 
@@ -35,7 +36,7 @@ angular.module('bitbloqApp')
         $scope.lastPosition = 0;
         $scope.checkBasicTab = 0;
         $scope.checkAdvanceTab = 0;
-        // $scope.functionsCheckCounter = 0;
+        $scope.functionsCheckCounter = 0;
         $scope.selectedBloqsToolbox = '';
         $scope.twitterSettings = false;
 
