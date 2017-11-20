@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc function
- * @name bitbloqApp.controller:SoftwareTabCtrl
+ * @name bitbloqApp.controller:softwareTabCtrl
  * @description
- * # SoftwareTabCtrl
+ * # softwareTabCtrl
  * Controller of the bitbloqApp
  */
 angular.module('bitbloqApp')
-    .controller('SoftwareTabCtrl',SoftwareTabCtrl);
-    function ($rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
+    .controller('softwareTabCtrl',softwareTabCtrl);
+
+function softwareTabCtrl( $rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
         $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
         utils) {
 
