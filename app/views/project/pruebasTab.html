@@ -1,6 +1,6 @@
 <div class="pruebas-tab tab-make" ng-controller="pruebasTabCtrl">
 <div class="tab--make ng-scope" data-ng-show="currentTab===3" data-ng-include="'views/project/pruebasTab.html'" aria-hidden="false">
-   <div class="bloqs-tab ng-scope" data-ng-controller="PruebasTabCtrl" data-ng-keyup="onFieldKeyUp($event)" data-ng-keydown="onFieldKeyDown($event)" ng-init="setScrollHeight()">
+   <div class="bloqs-tab ng-scope" data-ng-controller="pruebasTabCtrl" data-ng-keyup="onFieldKeyUp($event)" data-ng-keydown="onFieldKeyDown($event)" ng-init="setScrollHeight()">
       <div class="tabs--title">
          <ul class="bloq--field--list text-strong">
             <li data-element="bloqs-tab" ng-click="setSoftwareTab('bloqs')" ng-class="{'active':softTab==='bloqs'}" class="ng-binding active" role="button" tabindex="0">Blocks</li>
