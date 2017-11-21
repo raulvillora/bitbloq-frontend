@@ -1,0 +1,257 @@
+$tabsTitleHeight: 50px;
+$toolboxWidthClosed: 210px;
+.bloqs-tab {
+    height: 100%;
+    width: 100%;
+    .tabs--title {
+        height: $tabsTitleHeight;
+        .bloq--field--list {
+            display: block;
+            height: 100%;
+            float: left;
+            padding: 1em;
+            font-weight: bold;
+            .active {
+                color: #3b3e45;
+            }
+            li {
+                display: inline-block;
+                margin-right: 2em;
+                color: #b6bbbe;
+                cursor: pointer;
+                float: left;
+            }
+        }
+        .btn--factory-firmware {
+            background-color: white;
+            border-radius: 3px;
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
+            transition: background-color 250ms;
+            margin-top: 10px;
+            margin-right: 235px;
+            position: relative;
+            float: right;
+            &:hover {
+                background-color: #fbfbfb;
+            }
+            & > * {
+                vertical-align: -webkit-baseline-middle;
+                color: $black-light;
+                font-size: 14px;
+                font-weight: 700;
+                cursor: pointer;
+            }
+            .svg-icon {
+                margin-right: 7px;
+                fill: $black-light;
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+    .pruebas--tab {
+        color: $grey-border;
+        height: calc(100% - #{$tabsTitleHeight});
+        z-index: 0;
+    }
+    .console--main {
+        margin: 0 1em;
+        background-color: white;
+        border-radius: .4em;
+        height: 100%;
+        overflow: auto;
+    }
+    #bloqs--field {
+        height: calc(100% - 20px);
+        overflow: hidden;
+        overflow-y: auto;
+        position: relative;
+        background-color: #EBEBEB;
+        padding-bottom: 100px;
+    }
+    #empty {
+        position: absolute;
+        top: 0;
+        height: 1px;
+        width: 1px;
+    }
+    //Bloqs specific css to bitbloq
+    .bloq--group {
+        //20px margin
+        width: calc(100% - #{$toolboxWidthClosed} - 24px);
+        cursor: initial;
+        margin: 0 1em 1em;
+        border-radius: .4em;
+        table-layout: fixed;
+        .field--header {
+            overflow: hidden;
+            border-bottom: 1px solid $grey-item-hover;
+        }
+    }
+    .pruebas---edit-code {
+        z-index: 1;
+        line-height: initial;
+        position: absolute;
+        right: 50px;
+        top: 65px;
+        color: #b6bbbe;
+        cursor: pointer;
+        text-decoration: initial;
+        .svg-icon {
+            fill: #b6bbbe;
+        }
+    }
+}
+
+.components--container {
+    max-height: calc(100% - 140px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.submenu--item--bottom {
+    margin: 0;
+}
+
+.make--scrollbar {
+    width: 17px;
+    display: block;
+    position: absolute;
+    left: calc(100% - #{$toolboxWidthClosed} - 36px);
+    z-index: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+    top: 0;
+}
+
+#make--horizontal-scrollbar {
+    height: 17px;
+    display: block;
+    position: absolute;
+    left: 70px;
+    z-index: 3;
+    overflow: hidden;
+    overflow-x: auto;
+    max-width: calc(100% - 300px);
+    bottom: 0;
+    & > div {
+        height: 17px;
+    }
+}
+
+.code-modal .ngdialog-content {
+    width: 540px;
+}
+
+.make--overline {
+    position: absolute;
+    width: 30px;
+    right: 225px;
+    bottom: 0;
+    height: 100%;
+    background-color: transparent;
+}
+
+.toolbox--overline {
+    position: absolute;
+    width: 210px;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: white;
+    transition: opacity 250ms;
+    opacity: 0;
+    pointer-events: none;
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.make__trash {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.bloq--shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.bloq:not(.bloq--group) {
+    z-index: 9;
+}
+
+.trashcan {
+    width: 100%;
+    text-align: center;
+    .svg-icon {
+        width: 71.1px;
+        height: 76%;
+        fill: $green;
+    }
+}
+
+.twitter-config-button {
+    float: right;
+    margin-right: 242px;
+    margin-top: 20px;
+    cursor: pointer;
+    color: $black-light;
+    .svg-icon {
+        margin-right: 7px;
+        fill: $black-light;
+        width: 15px;
+        height: 15px;
+    }
+    &.no-margin-right {
+        margin-right: 6px;
+    }
+}
+
+.twitter-config__content {
+    position: absolute;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: $white;
+    min-width: 300px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 8;
+    right: 257px;
+    top: 38px;
+    .form-control:last-child {
+        text-align: left;
+    }
+}
+
+.twitter-code {
+    position: relative;
+    display: inline-block;
+    border-radius: 3px;
+    height: 30px;
+    padding-left: 10px;
+    float: right !important;
+    margin-right: 0 !important;
+    & > * {
+        display: inline-block;
+        vertical-align: -webkit-baseline-middle;
+        margin-top: 4px;
+        color: $black-light;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    .svg-icon {
+        margin-right: 7px;
+        fill: $black-light;
+        width: 15px;
+        height: 15px;
+    }
+}
