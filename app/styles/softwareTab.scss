@@ -19,7 +19,7 @@ $toolboxWidthClosed: 210px;
                 margin-right: 2em;
                 color: #b6bbbe;
                 cursor: pointer;
-                float: left;
+                //float: left;
             }
         }
         .btn--factory-firmware {
@@ -237,7 +237,7 @@ $toolboxWidthClosed: 210px;
     border-radius: 3px;
     height: 30px;
     padding-left: 10px;
-    float: right !important;
+    //float: right !important;
     margin-right: 0 !important;
     & > * {
         display: inline-block;
