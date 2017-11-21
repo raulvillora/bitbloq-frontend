@@ -399,7 +399,8 @@ angular.module('bitbloqApp')
             }
         };
 
-        function fillHardwareSchemas(newProject) {
+        // This function is never used
+        /*function fillHardwareSchemas(newProject) {
             var defered = $q.defer();
             if (newProject.hardware.components) {
                 hardwareService.itsHardwareLoaded().then(function () {
@@ -430,7 +431,7 @@ angular.module('bitbloqApp')
                 defered.resolve(newProject);
             }
             return defered.promise;
-        }
+        }*/
 
         exports.setProject = function (newproject, type, watcher) {
             var defered = $q.defer();
