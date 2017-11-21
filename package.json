@@ -30,6 +30,8 @@
         "url": "https://stash.bq.com/projects/SWROB/repos/bitbloq-angularjs-app"
     },
     "devDependencies": {
+        "@angular/cli": "^1.5.3",
+        "@compodoc/compodoc": "^1.0.4",
         "async": "^1.4.2",
         "autoprefixer": "^6.2.0",
         "bower": "^1.5.2",
@@ -81,10 +83,7 @@
         "npm": ">=2.4.1"
     },
     "scripts": {
-        "clean": "rm -rf node_modules app/bower_components",
-        "reinstall": "npm run clean && npm install",
-        "getbloqs": "bower uninstall bloqs --save && bower install bloqs --save && grunt getbloqs",
-        "getbloqsdev": "bower uninstall bloqs --save && bower install bloqs#dev --save && grunt getbloqs"
+        "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.json"
     },
     "dependencies": {
         "angular-auth0": "^2.0.0",
