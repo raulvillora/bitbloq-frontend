@@ -10,7 +10,7 @@
 angular.module('bitbloqApp')
     .controller('softwareTabCtrl',softwareTabCtrl);
 
-function softwareTabCtrl( $rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
+function softwareTabCtrl ( $rootScope, $scope, $timeout, $translate, $window, bloqsUtils, bloqs, bloqsApi,
         $log, $document, _, ngDialog, $location, userApi, alertsService, web2board, robotFirmwareApi, web2boardOnline, projectService,
         utils) {
 
@@ -1356,4 +1356,4 @@ function softwareTabCtrl( $rootScope, $scope, $timeout, $translate, $window, blo
             bloqsTabsEvent();
             translateChangeStartEvent();
         });
-    });
+}

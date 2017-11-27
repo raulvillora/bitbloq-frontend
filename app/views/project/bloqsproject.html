@@ -83,6 +83,7 @@
                 </li>
                 <!-- Pruebas Tab-->
                  <li data-element="pruebas-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab==3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'prueba' | translate }}" data-tooltip-position="right">
+                        <use xlink:href="#pruebas"></use>
                 </li>
                 <!-- End Pruebas Tab-->
             </ul>
@@ -91,7 +92,7 @@
         <div class="tab--container">
             <div class="tab--make" data-ng-show="currentTab===0" data-ng-include="'views/project/hardwareTab.html'"></div>
             <div class="tab--make" data-ng-show="currentTab===1" data-ng-include="'views/project/softwareTab.html'"></div>
-             <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/project/infoTab.html'"></div>
+            <div class="tab--make" data-ng-show="currentTab===2" data-ng-include="'views/project/infoTab.html'"></div>
             <div class="tab--make" data-ng-show="currentTab===3" data-ng-include="'views/project/pruebasTab.html'"></div>
         </div>
     </div>
