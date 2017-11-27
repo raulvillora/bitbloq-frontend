@@ -10,7 +10,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-Blockly.Blocks['bioblocks_while'] = {
+Blockly.Blocks.bioblocks_while = {
     init : function() {
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
@@ -44,7 +44,7 @@ Blockly.Blocks['bioblocks_while'] = {
 
 //Blockly.Blocks['bioblocks_if'] = jQuery.extend(true, {}, Blockly.Blocks['controls_if']); //make a deep copy of the original blockly if block
 
-Blockly.Blocks['bioblocks_if'] = {
+Blockly.Blocks.bioblocks_if = {
     init : function() {
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
