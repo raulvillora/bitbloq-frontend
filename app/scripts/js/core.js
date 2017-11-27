@@ -1,7 +1,8 @@
 // public/core.js
-var scotchTodo = angular.module('scotchTodo', []);
+'use strict';
+var scotchTodo = angular.module('scotchTodo', []); //Define but never used
 
-function mainController($scope, $http) {
+function mainController($scope, $http) { //Define but never used
     $scope.formData = {};
 
     // when landing on the page, get all todos and show them
