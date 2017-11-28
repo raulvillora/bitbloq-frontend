@@ -1,12 +1,12 @@
 /***************************************************************************************************************************************************************/
 /* Name: step.js																																	  	   */
-/* Developer: Jesús Irimia																																	   */
+/* Developer: Jesï¿½s Irimia																																	   */
 /* Function: It contains the steps of the experiment. Also contains all the functions with the respective containers.	 	                                   */	
 /*																																							   */
 /*																																				               */
 /***************************************************************************************************************************************************************/		
 /***************************************************************************************************************************************************************/
-Blockly.Blocks['step'] = {
+Blockly.Blocks.step = {
   init: function() {
    
 	/*Usual initialization of a common block*/
@@ -15,10 +15,10 @@ Blockly.Blocks['step'] = {
     this.setHelpUrl('http://www.example.com/');
     this.setPreviousStatement(true);
 	this.setNextStatement(true);
-    this.appendDummyInput("step") 
-        .appendField("step")
-        .appendField(new Blockly.FieldTextInput("0"), "step")
-    this.appendStatementInput("inputOfExperiment");     
+    this.appendDummyInput('step') 
+        .appendField('step')
+        .appendField(new Blockly.FieldTextInput('0'), 'step')
+    this.appendStatementInput('inputOfExperiment');     
   }
 };
 

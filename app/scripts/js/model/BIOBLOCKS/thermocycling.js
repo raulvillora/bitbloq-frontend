@@ -78,7 +78,7 @@ Blockly.Blocks.thermocycling = {
 				currentCode= currentCode + ' and ' +currentBlock.getFieldValue('temperature'+i) + currentBlock.getFieldValue('temperature_units'+i);
 			}
 		}
-        currentCode += naturalLanguageTime(this) + ".\n";
+        currentCode += naturalLanguageTime(this) + '.\n';
 		return currentCode;
 	},
 
