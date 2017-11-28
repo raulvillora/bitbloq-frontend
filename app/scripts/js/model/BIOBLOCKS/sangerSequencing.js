@@ -74,10 +74,10 @@ Blockly.Blocks.sangerSequencing = {
 		var currentBlock = block; //local variable created to don't modify continuously another the first variable.
 		var currentCode = code;  //local variable created to don't modify continuously another the first variable.
 
-		if( currentBlock.getFieldValue('singlemultiwells')==1){
+		if( currentBlock.getFieldValue('singlemultiwells')===1){
 			currentCode= currentCode + '                "wells": " ' +currentBlock.getFieldValue('singlewelladdrinput') +'", \n'
 		}
-		if( currentBlock.getFieldValue('singlemultiwells')==2){
+		if( currentBlock.getFieldValue('singlemultiwells')===2){
 			if( currentBlock.getFieldValue('multipleWellAddrInput')!=null){
 				currentCode= currentCode + '                "wells": " ' +currentBlock.getFieldValue('multipleWellAddrInput') +'", \n'
 			}else {
@@ -85,7 +85,7 @@ Blockly.Blocks.sangerSequencing = {
 			}
 		}
 
-		if( currentBlock.getFieldValue('datareference')!=null){
+		if( currentBlock.getFieldValue('datareference')!==null){
 			currentCode= currentCode + '                "data reference": " ' +currentBlock.getFieldValue('datareference') +'" \n'
 		}
 		return currentCode;
@@ -94,10 +94,10 @@ Blockly.Blocks.sangerSequencing = {
 		var currentBlock = block; //local variable created to don't modify continuously another the first variable.
 		var currentCode = code;  //local variable created to don't modify continuously another the first variable.
 
-		if( currentBlock.getFieldValue('singlemultiwells')==1){
+		if( currentBlock.getFieldValue('singlemultiwells')===1){
 			currentCode= currentCode + ' in the single well addressed in ' +currentBlock.getFieldValue('singlewelladdrinput');
 		}
-		if( currentBlock.getFieldValue('singlemultiwells')==2){
+		if( currentBlock.getFieldValue('singlemultiwells')===2){
 			if( currentBlock.getFieldValue('multipleWellAddrInput')!=null){
 				currentCode= currentCode + ' in the individual multiple wells addressed in ' +currentBlock.getFieldValue('multipleWellAddrInput');
 			}else {
@@ -105,7 +105,7 @@ Blockly.Blocks.sangerSequencing = {
 			}
 		}
 
-		if( currentBlock.getInputTargetBlock('datareference')!=null){
+		if( currentBlock.getInputTargetBlock('datareference')!==null){
 			currentCode= currentCode + ' with the data reference ' +currentBlock.getInputTargetBlock('datareference');
 		}
 		currentCode += naturalLanguageTime(this) + '.\n';
