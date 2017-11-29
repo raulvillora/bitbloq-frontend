@@ -71,20 +71,22 @@
                         <use xlink:href="#hardware"></use>
                     </svg>
                 </li>
-                <li data-walkthrough="software-tab" data-element="software-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===1}" data-ng-click="setTab(1); handleTour(5)" data-tooltips="true" data-tooltip="{{ 'software' | translate }}" data-tooltip-position="right">
+                <li data-walkthrough="software-tab" data-element="software-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===1}" data-ng-click="setTab(1); handleTour(5)" data-tooltips="true" data-tooltip="Software" data-tooltip-position="right" role="button" tabindex="1" class="tabs__menu__item selected">
                     <svg class="svg-icon">
-                        <use xlink:href="#software"></use>
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#software"></use>
                     </svg>
-                </li>
+                 </li>
                 <li data-element="info-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===2}" data-ng-click="setTab(2)" data-tooltips="true" data-tooltip="{{ 'project-info' | translate }}" data-tooltip-position="right">
                     <svg class="svg-icon">
                         <use xlink:href="#info"></use>
                     </svg>
                 </li>
                 <!-- Pruebas Tab-->
-                 <li data-element="pruebas-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab==3}" data-ng-click="setTab(3)" data-tooltips="true" data-tooltip="{{ 'prueba' | translate }}" data-tooltip-position="right">
-                        <use xlink:href="#pruebas"></use>
-                </li>
+                <li data-walkthrough="pruebas-tab" data-element="pruebas-tab" data-ng-class="{tabs__menu__item:true, selected:currentTab===3}" data-ng-click="setTab(3); handleTour(5)" data-tooltips="true" data-tooltip="Software" data-tooltip-position="right" role="button" tabindex="3" class="tabs__menu__item selected">
+                    <svg class="svg-icon">
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#pruebas"></use>
+                    </svg>
+                 </li>
                 <!-- End Pruebas Tab-->
             </ul>
         </aside>
