@@ -14,15 +14,11 @@
     "email": "support-bitbloq@bq.com"
   },
   "contributors": [
-    "Irene Sanz <irene.sanz@bq.com>",
-    "Laura del Río <laura.delrio@bq.com>",
-    "Diego Segura <diego.segura@bq.com>",
-    "Tom Calvo <tomas.calvo@bq.com>",
-    "Sergio Morcuende <sergio.morcuende@bq.com> (http://smorcuend.es)"
+    "Raúl Villora Valencia"
   ],
   "repository": {
     "type": "git",
-    "url": "https://stash.bq.com/projects/SWROB/repos/bitbloq-angularjs-app"
+    "url": "https://github.com/raulvillora/bitbloq-backend.git"
   },
   "dependencies": {
     "angular": "~1.3.18",

@@ -76,14 +76,16 @@
         "lodash": "^4.12.0",
         "q": "^1.4.1",
         "time-grunt": "^1.0.0",
-        "tunnel": "0.0.3"
+        "tunnel": "0.0.3",
+        "typedoc": "^0.9.0"
     },
     "engines": {
         "node": ">=0.10.0",
         "npm": ">=2.4.1"
     },
     "scripts": {
-        "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.json"
+        "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./app/",
+        "typedoc": "typedoc"
     },
     "dependencies": {
         "angular": "^1.6.7",
